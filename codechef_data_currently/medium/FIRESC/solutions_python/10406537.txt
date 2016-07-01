@@ -1,0 +1,60 @@
+class unionFind:
+	def __init__(self, noOfClasses):
+		self.sets = [[-1, 1, 1] for i in range(noOfClasses)]
+		self.parentIndex 			= 0
+		self.rankIndex 				= 1
+		self.classElement			= 2
+		self.noOfClasses 			= noOfClasses
+		self.noOfElements			= noOfClasses
+
+	def find(self, element):
+		if self.sets[element][self.parentIndex] == -1:
+			return element
+		self.sets[element][self.parentIndex] = self.find(self.sets[element][self.parentIndex])
+		return self.sets[element][self.parentIndex]
+
+	def union(self, element1, element2):
+		parent1 = self.find(element1)
+		parent2 = self.find(element2)
+
+		if parent1 != parent2:
+			if self.sets[parent1][self.rankIndex] < self.sets[parent2][self.rankIndex]:
+				self.sets[parent1][self.parentIndex] = parent2
+				self.sets[parent2][self.classElement] += self.sets[parent1][self.classElement]
+			elif self.sets[parent1][self.rankIndex] > self.sets[parent2][self.rankIndex]:
+				self.sets[parent2][self.parentIndex] = parent1
+				self.sets[parent1][self.classElement] += self.sets[parent2][self.classElement]
+			else:
+				self.sets[parent1][self.parentIndex] = parent2
+				self.sets[parent2][self.rankIndex] += 1
+				self.sets[parent2][self.classElement] += self.sets[parent1][self.classElement]
+
+			self.noOfClasses -= 1
+
+	def getNoOfClasses(self):
+		return self.noOfClasses
+
+	def getClassElements(self):
+		elements = list()
+		for i in range(self.noOfElements):
+			if self.sets[i][self.parentIndex] == -1:
+				elements.append(self.sets[i][self.classElement])
+		return elements
+
+if __name__ == '__main__':
+	import sys
+	test_cases = int(sys.stdin.readline())
+	mod = 1000000007
+	while test_cases > 0:
+		test_cases -= 1
+		noOfEmp, noOfRel = map(int, sys.stdin.readline().split())
+		uf = unionFind(noOfEmp)
+		for i in range(noOfRel):
+			frnd1, frnd2 = map(int, sys.stdin.readline().split())
+			uf.union(frnd1 - 1, frnd2 - 1)
+		noOfClasses = uf.getNoOfClasses()
+		elements = uf.getClassElements()
+		ways = 1
+		for i in elements:
+			ways = (ways * i) % mod
+		print noOfClasses, ways

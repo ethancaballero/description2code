@@ -1,0 +1,14 @@
+for i in range(int(raw_input())):
+    n,k=map(int,raw_input().split())
+    b=map(int,raw_input().split())
+    b.sort()
+    s=0
+    if k>(n/2):
+        k=n-k
+    for j in range(n):
+        if k!=0:
+            s=s-b[j]
+            k-=1
+        else:
+            s=s+b[j]
+    print s

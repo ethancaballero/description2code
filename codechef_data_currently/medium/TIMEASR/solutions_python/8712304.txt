@@ -1,0 +1,44 @@
+from collections import defaultdict as dd
+ 
+def pre_times():
+	rs=dd(list)
+	for h in xrange(12):
+		ha=0.0+h*30
+		ma=0.0
+		for m in xrange(60):
+ 
+			calculated_angle=min(abs(ha-ma),360-abs(ha-ma))
+			index=int(calculated_angle)
+			rs[index].append({calculated_angle:[h,m]})
+ 
+			ha+=0.5
+			ma+=6.0
+ 
+	return rs
+ 
+def get_actual_time(rs,given_angle):
+	key=int(given_angle)
+	sorted_output=[]
+ 
+	if rs.has_key(key):
+		for valid_time_angle in rs[key]:
+			valid_angle=valid_time_angle.keys()[0]
+			valid_time=valid_time_angle.values()[0]
+ 
+			if abs(valid_angle- given_angle)<1.0/120:
+				sorted_output.append([valid_time[0],valid_time[1]])
+ 
+		for h,m in sorted(sorted_output):
+			print "%02d:%02d"%(h,m)
+ 
+def main(rs):
+	temp = int(raw_input())
+	for i in xrange(temp):
+		angle=float(raw_input())
+		get_actual_time(rs,angle)
+ 
+ 
+if __name__ == '__main__':
+ 
+	rs=pre_times()
+	main(rs)

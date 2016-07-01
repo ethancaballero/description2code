@@ -1,0 +1,47 @@
+/* Codechef Problem code CHRL */
+
+// Given an an array of numbers, reach the end from the start while the maximum step size is restricted to a value so that the product of the visited numbers is minimum
+
+//dp solution - use priority queue to find the minimum of the k values
+
+//take log to make the answer storable and comparable
+
+#include <stdio.h>
+#include <queue>
+#include <math.h>
+
+using namespace std;
+
+static int n, k;
+static int arr[100001];
+static long long int dp[100001];
+
+const int mod = 1000000007;
+
+typedef pair<int, double> P;
+
+
+struct PairComp{
+    bool operator()( P const & left, P const & right) const{
+        return left.second > right.second;
+    }
+};
+
+static priority_queue<P, vector<P>, PairComp> pq;
+
+
+int main(){
+    scanf("%d %d", &n, &k);
+    for(int i=0; i<n; i++)
+        scanf("%d", &arr[i]);
+    pq.push(make_pair(0, log(arr[0])));
+    dp[0] = arr[0];
+    for(int i=1; i<n; i++){
+        while(pq.top().first + k < i)
+            pq.pop();
+        dp[i] = (dp[pq.top().first] * arr[i])%mod;
+        pq.push(make_pair(i, pq.top().second + log(arr[i])));
+    }
+    printf("%lld", dp[n-1]);
+    return 0;
+}

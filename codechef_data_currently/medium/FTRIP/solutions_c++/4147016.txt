@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+		
+using namespace std;
+#define ff first
+#define ss second
+#define pb push_back
+#define mp make_pair
+typedef unsigned long long ull;
+typedef long long int lli;
+typedef unsigned int ui;
+typedef pair<int, int> pii;
+typedef vector<int> vi;
+typedef long double ld;
+#define var(a,b)  __typeof(b) a = b
+#define rep(i,n)  for(int i = 0; (i) < (n); ++i)
+#define rept(i,a,b) for(var(i,a); i < (b); ++i)
+#define tr(v,it)  for(var(it,v.begin());it!=v.end();++it)
+#define fill(a,val) memset(a,val,sizeof(a))
+#define gi(n) scanf("%d",&n)
+#define all(v) v.begin(),v.end()
+#define iinp() input<int>()
+#define linp() input<lli>()
+#define uinp() input<ull>()
+
+#define get getchar_unlocked
+
+//fast function to scan various integer data types
+template <typename T>
+inline T input() {
+	T n = 0;
+	int s = 1;
+	char p = get();
+
+	while((p < '0' || p > '9') && p != EOF && p != '-')
+		p = get();
+
+	if(p == '-'){ s = -1, p = get(); }
+
+	while(p >= '0' && p <= '9') {
+		n = (n << 3) + (n << 1) + (p - '0');
+		p = get();
+	}
+	return n*s;
+}
+
+#define MAXS 1001
+
+double C[MAXS][MAXS];
+
+void initialize() {
+	rep(i, MAXS) {
+		C[i][0] = C[i][i] = 1;
+	}
+
+	rept(i, 1, MAXS) {
+		rept(j, 1, i) {
+			C[i][j] = C[i-1][j] + C[i-1][j-1];
+		}
+	}
+}
+
+int main(int argc, char** argv) {
+#ifdef LOCAL
+    freopen("in", "r", stdin);
+#endif
+
+    int t = iinp();
+    int s, n, m, k;
+
+    initialize();
+
+    while(t--) {
+    	s = iinp();
+	    n = iinp();
+	    m = iinp();
+	    k = iinp();
+
+	    double ans = 0;
+
+	    rept(i, k, m) {
+	    	if(n-i-1 >= 0 && s-m >= n-i-1)
+	    		ans += C[m-1][i]*C[s-m][n-i-1];
+	    }
+
+	    ans /= C[s-1][n-1];
+
+	    cout << ans << endl;
+
+
+    }
+
+
+	return 0;
+}

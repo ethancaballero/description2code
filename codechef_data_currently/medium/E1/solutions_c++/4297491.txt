@@ -1,0 +1,93 @@
+/* @BEGIN_OF_SOURCE_CODE */
+
+#include <stdio.h>
+#include <ctype.h>
+#include <iostream>
+#include <math.h>
+#include <string.h>
+#include <algorithm>
+#include <stdlib.h>
+#include <time.h>
+#include <queue>
+#include <set>
+#include <map>
+#include <string>
+#include <vector>
+#include <utility>
+#include <assert.h>
+#include <sstream>
+using namespace std;
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int,int> ii;
+#define sz(a) int((a).size())
+#define pb push_back
+#define all(c) (c).begin(),(c).end()
+#define tr(c,i) for(typeof((c).begin()) i = (c).begin(); i != (c).end(); i++)
+#define present(c,x) ((c).find() != (c).end())
+#define cpresent(c,x) (find(all(c),x) != (c).end())
+#define PI 3.1415926535
+#define INF 9876543210
+#define MOD 1000000007
+int n;
+char chess[1005][1005];
+int flag[1005][1005];
+int recur(int x,int y)
+{
+    if(x>=0 && x<n && y>=0 && y<n)
+    {
+        int res=0;
+        if(chess[x][y]=='P')
+            res=1;
+        if(flag[x][y]==-1)
+        {
+             //printf("%d %d
+",x,y);
+             res = max(recur(x-2,y+1)+res,max(recur(x-1,y+2)+res,max(recur(x+1,y+2)+res,recur(x+2,y+1)+res)));
+             flag[x][y]=res;
+             return res;
+        }
+        else
+            return flag[x][y];
+    }
+    return 0;
+}
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int tc;
+    scanf("%d",&tc);
+    while(tc--)
+    {
+        int a,b;
+        scanf("%d",&n);
+        memset(flag,-1,sizeof(flag));
+        for(int i=0;i<n;i++)
+        {
+            char str[n];
+            scanf("%s",&str);
+            for(int j=0;j<n;j++)
+            {
+                if(str[j]=='K')
+                    a=i,b=j;
+                chess[i][j]=str[j];
+            }
+        }
+        /*printf("%d %d
+",a,b);
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+                printf("%c",chess[i][j]);
+            printf("
+");
+        }*/
+        printf("%d
+",recur(a,b));
+
+    }
+	return 0;
+}
+
+/* @END_OF_SOURCE_CODE */

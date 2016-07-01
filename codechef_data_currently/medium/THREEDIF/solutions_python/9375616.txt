@@ -1,0 +1,8 @@
+import sys
+M=10**9+7
+t=int(sys.stdin.readline())
+for tc in xrange(t):
+    a=map(int,sys.stdin.readline().split())
+    a.sort()
+    x=(a[0]*(a[1]-1)*(a[2]-2))%M
+    print x

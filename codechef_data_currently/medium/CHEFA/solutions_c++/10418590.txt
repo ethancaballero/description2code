@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long long int maxstones(vector<long long int> v)
+{
+sort(v.begin(),v.end());
+long long int count=0;
+
+for(long int i=v.size()-1;i>=0;i=i-2)
+{
+count+=v[i];
+}
+
+return count;
+}
+
+int main()
+{
+int t=0;cin>>t;
+long int n=0;
+for( int i=0;i<t;i++)
+{
+vector<long long int> v;
+long long int a;
+cin>>n;
+
+for(long int j=0;j<n;j++)
+{
+cin>>a;
+v.push_back(a);
+}
+
+cout<<maxstones(v)<<"
+";
+}
+return 0;
+}

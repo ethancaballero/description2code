@@ -1,0 +1,13 @@
+# codeChef problemCode: CHEFEQ
+for testcases in xrange(int(raw_input() ) ) :
+    N = int( raw_input() )
+    Given = map(int, raw_input().split() )
+    dic = {}
+    for i in Given :
+        dic[i] = 0
+        #print dic
+
+    for i in Given :
+        dic[i] = dic[i] + 1 if dic[i] != 0 else 1
+    print len(Given)-max(dic.values())
+    

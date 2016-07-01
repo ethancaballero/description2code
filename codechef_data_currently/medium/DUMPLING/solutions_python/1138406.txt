@@ -1,0 +1,23 @@
+def gcd(a,b):
+    if a< 0:
+        return gcd(-a,b)
+    if b == 0:
+        return a
+    else:
+        return gcd(b,a%b)
+
+t = int(raw_input())
+
+while t > 0:
+    a,b,c,d,k=raw_input().split(' ')
+    a=int(a)
+    b=int(b)
+    c=int(c)
+    d=int(d)
+    k=int(k)
+    gcd1 = gcd(a,b)
+    gcd2 = gcd(c,d)
+    lcm = gcd1*gcd2/gcd(gcd1,gcd2)
+    ans = 2*(k/lcm)+1
+    print ans
+    t = t - 1

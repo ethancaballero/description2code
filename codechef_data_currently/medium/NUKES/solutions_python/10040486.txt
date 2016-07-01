@@ -1,0 +1,10 @@
+statement = raw_input('')
+a,n,k = statement.split(' ')
+a= int(a)
+n = int(n)
+k = int(k)
+numb = 0
+for i in range(0,k):
+	numb = a%(n+1)
+	print(numb)
+	a =  a //(n+1)

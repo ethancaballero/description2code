@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,n,i,x,l,f,time,temp=0,quo=0,temp2=0,rem;
+	scanf("%d",&t);
+	while(t--)
+	{
+		time=0;
+		scanf("%d",&n);
+		for(i=0;i<n;i++)
+		{
+			scanf("%d %d %d",&x,&l,&f);
+			if(time>=x)
+			{
+				temp=l;
+				temp2=time-x;
+				quo=temp2/f;
+				rem=temp2%f;
+				if(rem!=0)
+				{
+					temp+=(f-rem);
+				}
+			}
+			else
+			{
+				temp=(l+(x-time));
+			}
+			time+=temp;
+		}
+		printf("%d
+",time);
+	}
+	return 0;
+}

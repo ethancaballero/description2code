@@ -1,0 +1,8 @@
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+for _ in xrange(input()):
+    x, y = map(int, raw_input().split())
+    print (x * y) / (gcd(x, y) ** 2)

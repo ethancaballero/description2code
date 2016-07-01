@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define M 1000000007
+int main(){
+	unsigned long long c,a=0,b=1,x;
+	set<unsigned long long> s;
+	string num;
+
+	s.insert(a);
+	s.insert(b);
+	long mx=6666;
+	while(mx--){
+		c=(a%M+b%M)%M;
+		s.insert(c);
+		a=b;
+		b=c;
+		
+	}
+	int t;
+	scanf("%d",&t);
+
+	while(t--){
+		cin>>num;
+		x=0;
+		for(long i=0;i<num.length();i++){
+			x=(x*10+num[i]-'0')%M;
+		}
+		x=x%M;
+		if(s.find(x)==s.end()){
+			printf("NO
+");
+		}
+		else{
+			printf("YES
+");
+		}
+		
+	}
+	return 0;
+}

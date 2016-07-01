@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<string>
+#include<limits.h>
+#include<math.h>
+#define S(n) scanf("%lli",&n);
+#include<iostream>
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%d
+",n);
+using namespace std;
+int main()
+{
+long long int n;
+S(n);
+if(n%6==0||n%6==1||n%6==3)
+    printf("yes
+");
+else
+    printf("no
+");
+return 0;
+}

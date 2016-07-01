@@ -1,0 +1,67 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main ()
+{
+    char c;
+    int n;
+   long long int f;
+    scanf("%d",&n);
+     int d=n-1;
+     while(n!=0)
+     {
+
+
+      cin>>c;
+
+           scanf("%lld",&f);
+           long long int user=0;
+
+               if(c=='P')
+    user=f-1;
+               else
+                user=f+1;
+                if(user < 0)
+                    user=user*(-1);
+
+
+
+        for(int i=1;i<=d;i++)
+        {
+              //cout<<"the no. of user is"<<user<<endl;
+
+           cin>>c;
+
+           scanf("%lld",&f);
+         if(c=='P')
+           f=f-1;
+         else
+            f=f+1;
+         if(f<0)
+            f=f*(-1);
+
+           if( f<=user )
+          {
+              if((!(user %2==0 && f%2==0))&&(!(user %2==1 && f%2==1)))
+              {
+                  user++;
+              }
+          }
+          else
+          {
+              user=f;
+          }
+
+
+
+         //cout<<"hello_loop"<<endl;
+        }
+        //cout<<"hello"<<endl;
+        printf("%lld
+",user);
+        scanf("%d",&n);
+        d=n-1;
+
+    }
+
+}

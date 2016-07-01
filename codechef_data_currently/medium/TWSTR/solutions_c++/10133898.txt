@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e6 + 10;
+const int INF = 1e9 + 10;
+int child[MAXN][27];
+int indexi[MAXN];
+int pr[MAXN];
+int nodecnt = 0;
+
+int v[MAXN];
+string str[MAXN];
+void insert(int ind){
+    int node = 0;
+    int N = str[ind].size();
+    for(int i = 0;i < N;++i){
+        int ch = str[ind][i];
+        if(ch == '-') ch = '{';
+        ch -= 'a';
+
+        if(child[node][ch] == 0){
+            child[node][ch] = ++nodecnt;
+            pr[child[node][ch]] = -INF;
+        }
+        node = child[node][ch];
+        if(pr[node] < v[ind]){
+            pr[node] = v[ind];
+            indexi[node] = ind;
+        }
+    }
+}
+int query(string s){
+    int N = s.size();
+    int node = 0;
+    for(int i = 0;i < N;++i){
+        int ch = s[i];
+        if(ch == '-') ch = '{';
+        ch -= 'a';
+
+        node = child[node][ch];
+        if(node == 0){
+            return 0;
+        }
+    }
+    return indexi[node];
+}
+int main(){
+    memset(child, 0, sizeof child);
+    str[0] = "NO";
+    int N;
+    scanf("%d", &N);
+    for(int i = 1;i <= N;++i){
+        cin >> str[i];
+        scanf("%d", &v[i]);
+        insert(i);
+    }
+    int Q;
+    cin >> Q;
+    while(Q--){
+        string s;
+        cin >> s;
+        cout << str[query(s)] << "
+";
+    }
+    return 0;
+}

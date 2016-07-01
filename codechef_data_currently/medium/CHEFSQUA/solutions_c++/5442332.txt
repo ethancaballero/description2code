@@ -1,0 +1,171 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long int          LL;
+typedef unsigned long long     ULL;
+typedef long double            LD;
+
+
+//ints
+typedef pair<int,int>          PII;      //pair of ints
+typedef vector<int>            VI;       //vector of ints
+typedef vector<PII>            VII;      //vector of pair of ints
+typedef vector<VII>            VVII;     //vector of vector of pairs
+typedef set<int>               SI;       //set of ints
+typedef set<PII>               SII;      //set of pairs
+typedef map<int,int>           MPII;     //map of int
+
+//Long long ints
+typedef pair<LL,LL>            PLL;      //pair of long long int
+typedef vector<LL>             VLL;      //vector of LL
+typedef vector<PLL>            VPLL;     //vector of pair of LL
+typedef vector<VPLL>           VVPLL;    //vector of vector of pair of LL
+typedef set<LL>                SLL;      //set of LL
+typedef map<LL,LL>             MPLL;     //map of LL
+
+
+//char
+typedef pair<int,char>         PCI;      //pair of int,char
+typedef vector<char>           VC;       //vector of char
+typedef vector<PCI>            VCI;      //vector of pair of char
+typedef vector<VCI>            VVCI;     //vector of vector of pairs
+typedef map<int,char>          MPIC;    //map of int,char
+
+//string
+typedef pair<int,string>       PIS;      //pair of int,string
+typedef vector<string>         VS;       //vector of string
+typedef vector<PIS>            VIS;      //vector of pair of int,string
+typedef vector<VIS>            VVIS;     //vector of vector of pairs
+typedef map<string,int>        MPSI;     //map of string & int
+
+
+
+//stl shortcuts
+#define pb                   push_back
+#define ppb                  pop_back
+#define mp                   make_pair
+#define ff                   first
+#define ss                   second
+
+
+#define initial              -1
+#define visited              0
+#define finished             1
+#define nil                  -1
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long int          LL;
+
+typedef pair<int,int>          PII;      //pair of ints
+typedef vector<int>            VI;       //vector of ints
+typedef vector<PII>            VII;      //vector of pair of ints
+typedef vector<VII>            VVII;     //vector of vector of pairs
+typedef set<int>               SI;       //set of ints
+typedef map<int,int>           MPII;     //map of int
+
+
+//stl shortcuts
+#define pb                   push_back
+#define ppb                  pop_back
+#define mp                   make_pair
+#define ff                   first
+#define ss                   second
+
+//constants
+#define PI                   acos(-1.0)
+#define e                    exp(1.0)
+#define EPS                  1e-18
+
+//builtin
+#define count_1(Num)         __builtin_popcount(Num)
+#define gc                   getchar
+#define gcd(a,b)             __gcd(a,b)
+
+#define rep(i,a,b)           for(int i=a;i<=b;++i)
+#define revrep(i,b,a)        for(int i=b;i>=a;--i)
+#define clr(A,n)             for(int z1=0;z1<n;++z1) A[z1]=0
+#define fill(A,n,val)        for(int z1=0;z1<n;++z1) A[z1]=val
+#define foreach(c,itr)       for(__typeof((c).begin()) itr=(c).begin();itr!=(c).end();++itr)
+#define all(zz)              zz.begin(),zz.end()
+#define sz(zz)               (int)zz.size()
+#define test()               int tt;cin>>tt;while(tt--)
+
+
+//debugging macros
+#define SP                   system("pause")
+#define dbg(vari)            cout<<#vari<<" = "<<(vari)<<"
+"
+#define printv(A,n)          cout<<"
+";rep(ti,0,n-1) cout<<ti<<" -- > "<<A[ti]<<"
+"
+#define printvp(Z,n)         cout<<"
+";rep(ti,0,n-1){cout<<ti<<" --> "<<Z[ti].ff<<" "<<Z[ti].ss<<"
+";}
+#define printg(W,n)          cout<<"
+";rep(ti,1,n){cout<<ti<<" --> ";rep(tj,0,sz(W[ti])-1) cout<<"("<<W[ti][tj].ff<<" , "<<W[ti][tj].ss<<")"<<"  ";cout<<"
+";}
+#define printmp(Z)           cout<<"
+";foreach(Z,zt) cout<<(zt->ff)<<" --> "<<(zt->ss)<<"
+"
+#define printset(S)          cout<<"
+";foreach(S,zt) cout<<*zt<<" "<<;cout<<"
+"
+#define dks                  cout<<" ----- I am Here -----"<<"
+"
+
+
+#define MAX                  10000007
+#define MOD                  1000000007
+#define INF                  ((1LL<<31)-1)
+
+
+typedef struct point
+{
+    int x, y;
+}NODE ;
+
+map<pair<int,int> ,bool> MP;
+
+LL dp[MAX];LL dp1[MAX];LL dp2[MAX];LL dp3[MAX];LL dp4[MAX];LL dp5[MAX];
+LL dp6[MAX];LL dptr1[MAX];LL dp2t[MAX];LL dertrp3[MAX];LL dpertr4[MAX];LL dp5ter[MAX];
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    int x1, x2, y1, y2,n;
+    cin>>n;
+    if(n<=2)
+    {
+    		  cout<<(4-n)<<endl;
+    		  return 0;
+    }
+    
+    NODE pt[n];
+    rep(i,0,n-1)
+    {
+        cin>>pt[i].x>>pt[i].y;
+        MP[mp(pt[i].x, pt[i].y)]=true;
+    }
+    
+      int ans=2;
+       rep(i,0,n-1)
+       rep(j,i+1,n-1)
+       {
+                x1 = pt[i].x + (pt[j].y-pt[i].y);
+                x2 = pt[j].x + (pt[j].y-pt[i].y);
+                y1 = pt[i].y - (pt[j].x-pt[i].x);
+                y2 = pt[j].y - (pt[j].x-pt[i].x);
+                
+                if(MP.find(mp(x1,y1))!=MP.end() & MP.find(make_pair(x2,y2))!=MP.end())
+			 {
+			 	cout<<'0'<<endl;
+			 	return 0;
+			 }
+                if(MP.find(make_pair(x1,y1))!=MP.end() | MP.find(make_pair(x2,y2))!=MP.end())
+                ans=1;
+       }
+       cout<<ans<<endl;
+    return 0;
+}

@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#define mod 1000000009 
+using namespace std;
+
+const int maxn = 100000+5;
+char arr[maxn];
+
+int main() {
+	// your code goes here
+	int t;
+	int n,m;
+	cin>>t;
+	while(t--) {
+	    int i = 0;
+	    long long sum = 1;
+
+	    scanf("%d %d",&n,&m);
+	    for(int i=0;i<=n;i++) {
+	        arr[i] = '0';
+	    }
+	    for(i=0;i<m;i++) {
+	        char x;
+	        int y;
+	        scanf(" %c",&x);
+	        scanf("%d",&y);
+	        arr[y] = x;
+	    }
+	    
+        int lastpos = 1;
+        char lastplank = '0';
+	    for(i=1;i<=n;i++) {
+	        if(arr[i] !='0') {
+                if(lastplank!='0' && arr[i]!=lastplank ) {
+                    sum = (sum*(i-lastpos))%mod;
+                }
+                lastplank = arr[i];
+                lastpos = i;
+	        }
+	    }
+	    printf("%lld
+",sum);
+	}
+	return 0;
+}

@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll mx[1000000],omx[1000000],e[1000000],s[1000000];
+vector<ll> v;
+int main()
+{
+    ll t,flag,n,i,x,ans,cur,cont;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=0;i<n;i++)
+        {
+            cin>>x;
+            v.push_back(x);
+        }
+        
+        cur=v[0];
+        ans=v[0];
+        for(i=1;i<n;i++)
+        {
+            cur=max(cur+v[i],v[i]);
+            ans=max(ans,cur);
+        }
+        cont=ans;
+        
+        cur=v[0];
+        ans=v[0];
+        e[0]=v[0];
+        for(i=1;i<n;i++)
+        {
+            cur=max(cur+v[i],v[i]);
+            ans=max(ans,cur);
+            e[i]=cur;
+        }
+        
+        cur=v[n-1];
+        ans=v[n-1];
+        s[n-1]=v[n-1];
+        for(i=n-2;i>=0;i--)
+        {
+            cur=max(cur+v[i],v[i]);
+            ans=max(ans,cur);
+            s[i]=cur;
+        }
+        
+        ans=-10000000000000000LL;
+        for(i=0;i<n;i++)
+        {
+            ans=max(ans,e[i-1]+s[i+1]);
+        }
+        ans=max(ans,cont);
+        
+        cout<<ans<<"
+";
+        
+        fill_n(e,n,0);
+        fill_n(s,n,0);
+        
+        v.clear();
+    }
+    return 0;
+}

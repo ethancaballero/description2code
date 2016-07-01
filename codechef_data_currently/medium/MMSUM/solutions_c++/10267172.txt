@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int test;
+	cin>>test;
+	while(test--)
+	{
+		int n,i;
+		cin>>n;
+		long long int a[n],c[n],s[n];
+		for(i=0;i<n;i++)
+			cin>>a[i];
+		
+		long long int max=-1000000001,sum=0;
+		for(i=0;i<n;i++)
+		{
+			if(a[i]>sum+a[i])
+				sum=a[i];
+			else
+				sum+=a[i];
+				
+			if(max<sum)
+				max=sum;
+				
+			c[i]=sum;
+		}
+		sum=0;
+		for(i=n-1;i>=0;i--)
+		{
+			if(a[i]>sum+a[i])
+				sum=a[i];
+			else
+				sum+=a[i];
+				
+			if(max<sum)
+				max=sum;
+				
+			s[i]=sum;
+		}
+		
+		for(i=1;i<n-1;i++)
+		{
+			if(max < (c[i-1]+s[i+1]))
+				max=c[i-1]+s[i+1];
+		}
+		
+		cout<<max<<endl;
+	}
+	return 0;
+}

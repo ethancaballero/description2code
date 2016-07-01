@@ -1,0 +1,53 @@
+#include <iostream>
+#define M 1000000009
+#define ll long long
+using namespace std;
+ll pow(ll a,ll b)
+{
+	ll result=1;
+	while(b>=1)
+	{
+		if(b%2==1) result=(result*a)%M;
+		b=b>>1;
+		//b=b/2;
+		a=(a*a)%M;
+	}
+	return result;
+}
+
+long long fact(long long n)
+{
+	int i;
+	long long result=1;
+	for(i=2;i<=n;i++)
+		result=(result*i)%M;
+	return result;
+}
+long long inv(long long i)
+{
+	
+	return pow(i,M-2);
+}
+int main() {
+	// your code goes here
+	int k;
+	cin >>k;
+	long long n,i,j;
+	n=pow(2,k);
+	for(i=0;i<n/2-1;i++)
+		cout <<"0
+";
+	long long f=fact(n/2);
+	f=(f*f)%M;
+	f=(f*2)%M;
+	cout <<f<<endl;
+	f=(f*n/2)%M;
+	cout <<f<<endl;
+	for(i=n/2+1,j=2;i<n;i++,j++)
+		{
+			f=((i*f)%M*inv(j))%M;
+			
+		cout <<f<<endl;
+		}
+	return 0;
+}

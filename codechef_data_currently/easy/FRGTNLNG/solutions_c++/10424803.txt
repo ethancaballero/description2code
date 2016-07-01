@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int t,i,swe,j,count=0;
+    scanf("%d",&t);
+    while(t--)
+    {
+        char sw[5000][30],dw[5000][30];
+        int n,k,m;
+        scanf("%d%d",&n,&m);
+        for(i=0;i<n;i++)
+        {
+            scanf("%s",sw[i]);
+        }
+        while(m--)
+        {
+            scanf("%d",&k);
+            for(i=0;i<k;i++)
+            {
+                scanf("%s",dw[count]);
+                count++;
+            }
+        }
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<count;j++)
+            {
+                swe=strcmp(sw[i],dw[j])==0;
+                if(swe==1)
+                    break;
+            }
+            if(swe==1)
+                printf("YES ");
+            else
+                printf("NO ");
+        }
+        count=0;
+        printf("
+");
+    }
+    return 0;
+} 

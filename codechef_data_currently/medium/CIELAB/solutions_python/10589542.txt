@@ -1,0 +1,11 @@
+import sys
+in_str = sys.stdin.readline().split()
+x = int(in_str[0])
+y = int(in_str[1])
+
+diff = x - y
+
+ones_place = diff % 10
+answer = diff - 1 if ones_place == 9 else diff + 1
+
+print answer

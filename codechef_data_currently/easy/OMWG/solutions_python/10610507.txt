@@ -1,0 +1,3 @@
+for t in xrange(int(raw_input())):
+    n, m = map(int, raw_input().split())
+    print 2*n*m - n - m

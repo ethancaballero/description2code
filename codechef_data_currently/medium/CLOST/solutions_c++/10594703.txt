@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+ 
+char a[50000];
+ 
+struct node{
+    int x;
+    int y;
+    int l;
+};
+ 
+node qr[20000];
+ 
+bool cmp(node a,node b){
+    return a.l<b.l;
+}
+ 
+int main()
+{
+    int t,n,q,x,y;
+ 
+    cin>>t;
+ 
+    while(t--)
+    {
+        cin>>n>>q;
+ 
+        for(int i=0;i<n;i++)
+            a[i] = '*';
+ 
+        for(int i=0;i<q;i++){
+            cin>>qr[i].x>>qr[i].y;
+ 
+            qr[i].l = qr[i].y - qr[i].x;
+        }
+ 
+        sort(qr,qr+q,cmp);
+ 
+ 
+ 
+       for(int i=0;i<q;i++)
+       {
+           int r = 0;
+           for(int j=qr[i].x;j<=qr[i].y;j++){
+                if(a[j]=='*'){
+                    if(r==0)
+                        a[j] = '(';
+                    else
+                        a[j] = ')';
+ 
+                    r = 1 - r;
+                }
+           }
+       }
+ 
+       int r = 0;
+           for(int j=0;j<n;j++){
+                if(a[j]=='*'){
+                    if(r==0)
+                        a[j] = '(';
+                    else
+                        a[j] = ')';
+ 
+                    r = 1 - r;
+                }
+           }
+ 
+           for(int i=0;i<n;i++)
+            cout<<a[i];
+ 
+           cout<<endl;
+ 
+    }
+}
+ 

@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define sl(l) scanf("%lld",&l)
+#define pl(l) printf("%lld",l)
+#define mod 1000000007
+ll fact[5005];
+ll ifact[5005];
+
+ll pow(ll a, ll b, ll MOD) {
+ll x = 1, y = a;
+    while(b > 0) {
+        if(b%2 == 1) {
+            x=(x*y);
+            if(x>MOD) x%=MOD;
+        }
+        y = (y*y);
+        if(y>MOD) y%=MOD;
+        b /= 2;
+    }
+    return x;
+}
+
+
+ll modular_inverse(ll n)
+{
+	return pow(n,mod-2,mod);
+}
+
+void preprocess()
+{
+	fact[0]=1;
+	ifact[0]=1;
+	fact[1]=1;ifact[1]=1;
+	for(ll i=2;i<5001;i++)
+	{
+		fact[i] = (fact[i-1]*i)%mod;
+		ifact[i]= (ifact[i-1]*modular_inverse(i))%mod;
+		//printf("%lld %lld
+",fact[i],ifact[i]);
+	}
+
+}
+
+
+ll nCr(ll n,ll r)
+{
+	return ((fact[n]*ifact[r])%mod*ifact[n-r])%mod;
+}
+
+int main()
+{
+
+	//printf("%lld
+",modular_inverse(5));
+	ll n,k;
+	sl(n);sl(k);
+	preprocess();
+	while(n!=0 ||k!=0)
+	{
+		ll ans = (nCr(n-2,k/2) * nCr(n-2,(k-1)/2))%mod;
+		printf("%lld
+",((ans*2)%mod));
+		sl(n);sl(k);
+	}
+	return 0;	
+}

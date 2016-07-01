@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+#define MOD 1000000007
+long long int n,m,c,i,j,a[2000],b[2000],x,s[2000],f[2000][2000],w[2000][2000];
+int main() {
+//long long int n,m,c,i,j,a[2000],b[2000],x,s[2000],f[2000][2000],w[2000][2000];
+cin>>n>>m>>c;
+for(i=0;i<n;++i)
+	{cin>>x;a[x]++;}
+for(i=0;i<m;++i)
+	{cin>>x;b[x]++;}
+for(i=1;i<=c;++i)
+	s[i]=(a[i]*b[i])%MOD;
+for(i=1;i<=c;++i)
+{
+	f[0][i]=s[i];
+	w[0][i]=(w[0][i-1]+f[0][i])%MOD;
+}
+for(i=1;i<=c;++i){
+	for(j=1;j<=c;++j)
+	{
+		f[i][j]=(w[i-1][j-1]*s[j])%MOD;
+		w[i][j]=(w[i][j-1]+f[i][j])%MOD;
+	}
+cout<<w[i][c]<<" ";
+}
+	return 0;
+}

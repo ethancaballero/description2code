@@ -1,0 +1,14 @@
+import sys
+
+f = sys.stdin
+n = int(f.readline().strip())
+
+for i in xrange(n):
+    m = int(f.readline().strip())
+    A = map(int, f.readline().strip().split())
+    N = sum(A)
+    ff = min(A)
+    if ff == 1:
+        print -1
+    else:
+        print N-ff+2

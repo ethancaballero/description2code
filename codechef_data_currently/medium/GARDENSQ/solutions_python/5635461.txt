@@ -1,0 +1,14 @@
+for t in xrange(int(raw_input())):
+    rows, cols = map(int, raw_input().split())
+    garden = [[0 for i in xrange(cols)]for j in xrange(rows)]
+    for i in xrange(rows):
+        garden[i] = raw_input()
+    count = 0
+    limit = rows if rows <= cols else cols
+    for i in xrange(1, limit):     
+        for j in xrange(rows-i):
+            for k in xrange(cols-i):
+                if garden[j][k] == garden[j][k+i] == garden[j+i][k] == garden[j+i][k+i]:
+                    count += 1
+    print count
+ 

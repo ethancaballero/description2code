@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+//	freopen("input.txt","r",stdin);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		int a[n],s,c;
+		
+		for(int i=0;i<n;i++)
+			cin>>a[i];
+		
+		s=a[0];
+		for(int j=s;j>0;j--)
+		{
+			c=0;
+			for(int i=0;i<n;i++)
+			{
+				if(a[i]%j==0)
+					c++;
+			}
+			
+			if(c==n)
+			{
+				for(int i=0;i<n;i++)
+					cout<<a[i]/j<<" ";
+					
+					break;
+			}
+		}
+		cout<<endl;	
+	}
+	return 0;
+}

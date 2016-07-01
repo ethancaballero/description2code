@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+#define pb push_back
+#define mp make_pair
+#define f first
+#define maxn 200005
+#define s second
+#define ll long long int
+#define inf 1000000014
+#define infl (ll)(1e18)
+#define mod 1000000007
+using namespace std;
+int arr[maxn/2];
+int vals[maxn];
+typedef pair<int,int>p;
+int main(int argc, char const *argv[])
+{
+  int t,n,m,k,val;
+  cin>>t;
+  while(t--)
+  {
+    cin>>n>>m>>k;
+    for (int i = 0; i < n; ++i)
+    {
+      scanf("%d",arr+i);
+    }
+    ll imbalance=0ll;
+    for (int i = 0; i < n; ++i)
+    {
+       scanf("%d",&val);
+       arr[i]-=val;
+       imbalance+=arr[i];
+    }
+    sort(arr,arr+n);
+    m+=k;
+    for (int i = 0; i < m; ++i)
+    {
+      scanf("%d",&vals[i]);
+    }
+    sort(vals,vals+m);
+   int ctr=0;
+   int ptr1=n-1;int ptr2=m-1;
+   while(ptr1!=-1&&ptr2!=-1)
+   {
+     if(vals[ptr2]>arr[ptr1])
+     {
+      ptr2--;
+     }
+     else
+     {
+         imbalance-=vals[ptr2];
+         ptr2--;
+         ptr1--;
+
+     }
+   }
+  cout<<imbalance<<"
+";
+  }
+  return 0;
+}

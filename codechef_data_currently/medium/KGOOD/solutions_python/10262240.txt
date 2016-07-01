@@ -1,0 +1,22 @@
+#cnexans
+
+test_cases = int(raw_input())
+
+for case in range(0, test_cases):
+    line = raw_input().strip(' ').split()
+    word = list(line[0].lower())
+    k    = int(line[1])
+
+    unique  = list(set(word))
+    numbers = [len([v for v in word if v == letter]) for letter in unique]
+    total = []
+    for minimum in numbers:
+        c = 0
+        for letter in numbers:
+            if letter - minimum > k:
+                c += letter - minimum - k
+            if letter < minimum:
+                c += letter
+        total.append(c)
+
+    print min(total)

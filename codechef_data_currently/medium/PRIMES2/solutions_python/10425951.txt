@@ -1,0 +1,24 @@
+from math import sqrt
+def SOE(n):
+    L = [0 for i in range(n)]
+    P,d = [],{}
+    for i in range(2,n):
+        if L[i] == 0:
+            P.append(i); d[i] = True
+            for j in range(2*i,n,i):
+                L[j] = 1
+    return P,d
+P, _ = SOE(100)
+P1, _ = SOE(1000)
+P2,d2 = SOE(1000000)
+while True:
+    N = int(raw_input()); flag = 1
+    if N == 0: break
+    for i in P:
+        for j in P1:
+            k = N - (i**3) - (j**2)
+            if d2.get(k): print k,j,i; flag = 0; break
+        if flag == 0: break
+    else: print '0 0 0'
+    
+        

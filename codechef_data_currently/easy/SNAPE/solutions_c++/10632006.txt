@@ -1,0 +1,22 @@
+#include <iostream>
+#include<math.h>
+#include<stdio.h>
+
+using namespace std;
+
+int main()
+{
+        int t, b, l;
+        float mn, mx;
+        scanf("%d", &t);
+        while(t--){
+                scanf("%d%d", &b, &l);
+                mx = sqrt(pow(l, 2) + pow(b, 2));
+                mn = sqrt(pow(l,2) - pow(b,2));
+
+                printf("%.2f %.2f
+", mn, mx);
+
+        }
+    return 0;
+}

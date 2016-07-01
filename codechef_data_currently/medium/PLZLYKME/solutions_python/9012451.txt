@@ -1,0 +1,8 @@
+import sys,math
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    L,D,S,C = map(int, sys.stdin.readline().split())
+    if math.log(1.0+C)*(D-1.0) >= math.log(L) - math.log(S):print "ALIVE AND KICKING"
+    else: print "DEAD AND ROTTING"

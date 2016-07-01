@@ -1,0 +1,29 @@
+total_cases = int(raw_input())
+def convert(a) :
+	if a==0 :
+		return 'sunday'
+	elif a==1:
+		return 'monday'
+	elif a==2:
+		return 'tuesday'
+	elif a==3:
+		return 'wednesday'
+	elif a==4:
+		return 'thursday'
+	elif a==5:
+		return 'friday'
+	elif a==6:
+		return 'saturday'
+while total_cases > 0:
+	total_cases -= 1
+	day = 1
+	year = int(raw_input())
+	if year >= 2001:
+		day = (day + ((year-2001)/4)*5 + (year-2001)%4 - (year-2001)/100 +(year-2001)/400)%7
+	elif year >1900:
+		day = (day + ((year-1889)/4)*5 + (year-1889)%4)%7
+	elif year == 1900:
+		day = 1
+	print convert(day)
+		
+	

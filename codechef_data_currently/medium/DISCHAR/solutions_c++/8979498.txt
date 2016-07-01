@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+#define MOD 1000000007
+
+int main()
+{
+	#ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+    #endif
+    int T;
+    string S;
+    cin >> T;
+    while (T--) {
+        cin >> S;
+        int N = S.length();
+        int M[26] = {0};
+        int C = 0;
+        for (int i = 0; i < N; i++) {
+            if(M[S[i] - 'a'] == 0) {
+                M[S[i] - 'a'] = 1;
+                C++;
+            }
+        }
+        cout << C << "
+";
+    }
+    #ifndef ONLINE_JUDGE
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.
+";
+    #endif
+    return 0;
+}
+

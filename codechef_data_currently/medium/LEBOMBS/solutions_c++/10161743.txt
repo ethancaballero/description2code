@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+int main()
+{   int num, t,count,i;
+    cin>>t;
+while(t--)
+{   count=0;
+    cin>>num;
+    char str[num];
+    cin>>str;
+    if(num==1&&str[0]=='0')
+    count++;
+   else
+   {
+    if(str[0]=='0'&&str[1]=='0')
+        ++count;
+    if(str[num-1]=='0'&&str[num-2]=='0')
+        ++count;
+    for(i=1;i<num-1;++i)
+    {
+        if(str[i]=='0'&&str[i-1]=='0'&&str[i+1]=='0')
+            ++count;
+    }
+   }
+    cout<<count<<endl;
+}
+return 0;
+}

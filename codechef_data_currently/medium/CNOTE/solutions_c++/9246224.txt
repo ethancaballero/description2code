@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main(){
+	
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+	ll t,n,i,k,count,sum=0,x,y,flag=0,left;
+	cin>>t;
+	while(t--){
+		cin>>x>>y>>k>>n;
+		left=x-y;
+		pair<ll,ll> *a;
+		a= new pair<ll,ll> [n];
+		for(i=0;i<n;i++){
+			cin>>a[i].first>>a[i].second;
+		}
+		for(i=0;i<n;i++){
+			if(a[i].first>=left&&a[i].second<=k){
+				flag=1;break;
+			}
+		}
+		if(flag==1){
+			cout<<"LuckyChef"<<endl;
+		}
+		else
+		cout<<"UnluckyChef"<<endl;
+		flag=0;
+	}
+	return 0;
+}

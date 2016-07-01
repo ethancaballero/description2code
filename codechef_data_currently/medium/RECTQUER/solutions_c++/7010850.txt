@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   int N,Q,i,j,k,data;
+   int X1,Y1,X2,Y2,ans;
+   cin>>N;
+   int arr[10][N+1][N+1];
+   for(i=0;i<=N;i++)
+   {
+      for(k=0;k<10;k++)
+         arr[k][0][i]=arr[k][i][0]=0;
+   }
+   for(i=1;i<=N;i++)
+   {
+      for(j=1;j<=N;j++)
+      {
+         cin>>data;
+         data--;
+         for(k=0;k<10;k++)
+            arr[k][i][j]=arr[k][i-1][j]+arr[k][i][j-1]-arr[k][i-1][j-1];
+         arr[data][i][j]++;
+      }
+   }
+   cin>>Q;
+   while(Q--)
+   {
+      cin>>X1>>Y1>>X2>>Y2;
+      for(ans=k=0;k<10;k++)
+      {
+         if(arr[k][X2][Y2]-arr[k][X2][Y1-1]-arr[k][X1-1][Y2]+arr[k][X1-1][Y1-1])
+            ans++;
+      }
+      cout<<ans<<endl;
+   }
+   return 0;
+}

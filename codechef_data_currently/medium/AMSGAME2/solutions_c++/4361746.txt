@@ -1,0 +1,42 @@
+#include<iostream>
+#include<map>
+#include<algorithm>
+using namespace std;
+int gcd(int a,int b)
+{
+   int temp;
+   while(b!=0)
+   {
+     temp=a%b;
+     a=b;
+     b=temp;
+   }
+  return a;
+}
+int T,N;
+int A[110];
+long long int M[62][10010];
+long long int go(int ind,int g){
+    if(ind==N){
+        if(g==1) return 1;
+        else return 0;
+    }
+    if(M[ind][g]!=-1)return M[ind][g];
+    return M[ind][g]=go(ind+1,g)+go(ind+1,gcd(g,A[ind]));
+}
+
+
+int main(){
+    cin>>T;
+    while(T--){
+        cin>>N;
+        for(int i=0;i<N;++i) cin>>A[i];
+        for(int i=0;i<62;i++)
+        for(int j=0;j<10010;j++)
+        M[i][j]=-1;
+        long long int res = 0;
+        for(int i=0;i<N;++i) res+=go(i+1,A[i]);
+        cout<<res<<endl;
+    }
+    return 0;
+}

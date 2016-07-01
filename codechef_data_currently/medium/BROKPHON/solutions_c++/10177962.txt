@@ -1,0 +1,39 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<string.h>
+#include<algorithm>
+ 
+using namespace std;
+
+
+int main() {
+	int T, N, i, ans, prev;
+	cin>>T;
+	while(T--) {
+		cin>>N;
+		
+		unsigned long long int A[N];
+		
+		for(i = 0; i<N; ++i) 
+			cin>>A[i]; 
+	
+		if(A[0] == A[N-1]) {
+			cout<<0<<endl;
+			continue;
+		}
+	
+		ans = 0;
+		prev = -1;
+		for(i = 1; i<N; ++i) {
+			if(A[i] != A[i-1]) {
+				if((i-1) != prev)
+					ans += 2;
+				else
+					++ans;
+				prev = i; 
+			}
+		}
+		cout<<ans<<endl;
+	}
+}

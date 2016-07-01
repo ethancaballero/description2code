@@ -1,0 +1,76 @@
+#include<cstring>
+#include<cstdio>
+#include<cstdlib>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+
+#define SIZE 2002
+#define MOD 1000000000
+
+typedef long long int ll;
+
+ll rows, cols;
+ll a[SIZE][SIZE];
+ll C[2*SIZE+10][2*SIZE+10];
+ll count = 0;
+
+ll Cof(ll n, ll k) {
+  if(k > n) 
+    return 0;
+  if(k == 0) 
+    return 1;
+  if(k == n) 
+    return 1;
+  else 
+    return C[n][k];
+}
+
+void fillC() {
+  ll i, j;
+  for(i=1; i<=4004; i++) {
+    for(j=1; j<=i; j++) {
+      if (i == j || j == 0) {
+        C[i][j] = 1;
+      } else {
+        C[i][j] = (Cof(i-1, j) + Cof(i-1, j-1)) % MOD;
+      }
+    }
+  }
+}
+
+ll dp(ll sum, ll lvl) {
+  //printf("Sum %lld - Level %lld
+", sum, lvl);
+  ll i, j;
+  ll up, right;
+
+  for(i=rows; i>=1; i--) {
+    for(j=cols; j>=0; j--) {
+      if(j == cols) right = 0;
+      else right = a[j+1][i];
+      if (i == rows) up = 1;
+      else up = a[j][i+1];
+      a[j][i] = (up*Cof(j+cols-1, cols-1) + right) % MOD;
+    }
+  }
+  return a[sum][lvl];
+}
+
+int main() {
+  ll T;
+  ll i, j, result;
+  scanf("%lld", &T);
+  fillC();
+  while(T--) {
+    result = 0;
+    scanf("%lld %lld", &rows, &cols);
+    result = dp(0, 1);
+    printf("%lld
+", result % MOD);
+    //printf("Result - %lld
+", result % MOD);
+    //printf("Counts: %lld
+", count);
+  }
+};

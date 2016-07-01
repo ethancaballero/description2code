@@ -1,0 +1,25 @@
+t=int(raw_input())
+while t > 0 :
+    t-=1
+    n,k,e,m = map(int,raw_input().split())
+    l = []
+    for i in xrange(n-1) :
+        x = 0
+        a = map(int,raw_input().split())
+        for j in xrange(e) :
+            x += a[j]
+        l.append(x)
+    l.sort()
+    a = map(int,raw_input().split())
+    x = 0
+    for z in xrange(e-1) :
+        x += a[z]
+    if x > l[n-k-1]  :
+        print '0'
+        continue
+    value = l[n-k-1] - x + 1
+    if value > m :
+        print 'Impossible'
+    else :
+        print value
+    

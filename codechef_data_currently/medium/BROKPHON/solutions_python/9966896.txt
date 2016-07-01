@@ -1,0 +1,13 @@
+T = int(raw_input())
+for _ in xrange(T):
+    N = int(raw_input())
+    A = map(int, raw_input().split())
+    count = 0
+    for i in xrange(1, N-1):
+        if A[i] != A[i-1] or A[i] != A[i+1]:
+            count += 1
+    if A[0] != A[1]:
+        count += 1
+    if A[-1] != A[-2]:
+        count += 1
+    print count

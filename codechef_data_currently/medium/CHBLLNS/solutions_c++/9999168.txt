@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std ;
+#define ll long long int 
+
+int main() {
+    ll i,j,k,n,m,p,t ;
+    char s[100001] ;
+    cin >> t ;
+    while(t--) {
+       ll a[3] ;
+       cin >> a[0] >> a[1] >> a[2] ;
+       cin >> k ;
+       sort(a,a+3) ;
+       i = 0 ;
+       p = 0 ;
+       while(i<3) {
+           if(k <= a[i]) {
+              p += (k-1)*(3-i) + 1 ; 
+              break ;
+           }
+           else {
+                p += a[i]*(3-i) ;
+                k -= a[i] ;
+                for(j=i+1;j<3;j++) a[j] -= a[i] ;
+                a[i] = 0 ;
+                i++ ;
+           }
+       }
+       cout << p << endl ;
+    }
+    return 0 ;
+}

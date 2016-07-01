@@ -1,0 +1,23 @@
+__author__ = 'Deepak'
+import sys
+t=int(sys.stdin.readline())
+while(t>0):
+    b=[]
+    count=0
+    flag=0
+    a= sys.stdin.readline()
+    for k in range(len(a)):
+        if(a[k] in "<>"):
+            if(a[k]=="<"):
+                flag+=1
+            elif(a[k]==">"):
+                if flag==0:
+                    break
+                else:
+                    flag-=1
+                    if flag==0:
+                        count=k+1
+        else:
+            continue
+    print count
+    t-=1

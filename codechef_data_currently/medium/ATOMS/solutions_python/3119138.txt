@@ -1,0 +1,29 @@
+import sys
+
+
+testcases = int(sys.stdin.readline())
+
+for x in xrange(testcases):
+    sets = {}
+    nm = map(int,sys.stdin.readline().split())
+    i = []
+    for y in xrange(nm[1]):
+        tempd = {}
+        temparr = map(int, sys.stdin.readline().split())
+        for z in temparr[1:]:
+            tempd[z] = 1
+        i.append(tempd)
+    for a in xrange(nm[0]):
+        b = []
+        for c in xrange(len(i)):
+            if (a in i[c]):
+                b.append(c)
+        b.sort()
+        sets[tuple(b)] = 1
+    print len(sets)
+
+
+
+
+
+

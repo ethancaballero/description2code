@@ -1,0 +1,8 @@
+T=int(raw_input())
+for i in range(T):
+    s=str(raw_input())
+
+    tot=0
+    for i in s:
+        tot=tot+int(i)
+    print tot

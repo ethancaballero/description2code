@@ -1,0 +1,40 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+ 
+int gcd(int x,int y)
+{
+	if(x%y==0)
+	return y;
+	else
+	gcd(y,x%y);
+}
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int a,b;
+		cin>>a>>b;
+		if((a>0&&b>0)||(a<0&&b<0))
+		{
+			int e=abs(a);
+			int f=abs(b);
+			int j=gcd(e,f);
+			int g=e/j;
+			int h=f/j;
+			cout<<abs(g-h)<<endl;
+		}
+		if((a>0&&b<0)||(a<0&&b>0))
+		{
+			int c=abs(a);
+			int d=abs(b);
+			int r=gcd(c,d);
+			int p=c/r;
+			int q=d/r;
+			cout<<p+q<<endl;
+		}
+	}
+	return 0;
+} 

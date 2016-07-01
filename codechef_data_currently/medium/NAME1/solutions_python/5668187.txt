@@ -1,0 +1,13 @@
+for i in range(input()):
+    a=raw_input().replace(" ","")
+    n=input()
+    s=""
+    flag=0
+    for i in range(n):
+        s=s+raw_input()
+    for i in range(97,123):
+        if s.count(chr(i))>a.count(chr(i)):
+            flag=1
+            break
+    print "NO" if flag else "YES"
+    

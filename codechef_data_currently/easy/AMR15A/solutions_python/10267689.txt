@@ -1,0 +1,9 @@
+n=int(raw_input())
+arr=map(int,raw_input().split())
+e=o=0
+for i in arr:
+    if i%2:
+        o+=1
+    else:e+=1
+if e>o:print "READY FOR BATTLE"
+else:print "NOT READY"

@@ -1,0 +1,21 @@
+t = input()
+for i in range(t):
+    n,k = map(int,raw_input().split())
+    list_n = []
+    list_count = []
+    N = raw_input().split()
+    for j in N:
+        list_n.append(j)
+        list_count.append(0)
+    for l in range(k):
+        K = raw_input().split()
+        for word in K:
+            if(list_n.__contains__(word)):
+                index = list_n.index(word)
+                list_count[index] = 1
+    
+    for count in list_count:
+        if(count == 1):
+            print 'YES',
+        else:
+            print 'NO',

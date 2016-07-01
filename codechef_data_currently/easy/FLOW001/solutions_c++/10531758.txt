@@ -1,0 +1,13 @@
+#include<iostream>
+using namespace std;
+ 
+int main(){
+long t,A,B;
+cin>>t;
+while(t--){
+    	cin>>A>>B;
+	cout<<A+B<<endl;		    
+}
+//system("pause");
+return 0;
+}   

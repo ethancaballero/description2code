@@ -1,0 +1,63 @@
+    #include <iostream>
+    #include <cstring>
+     
+    using namespace std;
+     
+    #define MAX_LEN 1111
+     
+    char s[MAX_LEN];
+     
+    int trim(int a,int b){
+    	while(s[a]=='0' && a<b) a++;
+    	return a;
+    }
+     
+    bool isSmall(int a,int b,int c,int d){
+    	a=trim(a,b);
+    	c=trim(c,d);
+    	while(s[c]=='0' && c<=d) c++;
+    	if(b-a != d-c)
+    		return b-a < d-c;
+     
+    	for (int i = 0; i <= b-a; ++i)
+    	{
+    		if(s[a+i] == s[c+i])
+    			continue;
+    		return s[a+i] < s[c+i];
+    	}
+    	return false;
+    }
+     
+    int main(){
+     
+    	int start,end;
+    	int aS,aE;
+    	int lB;
+    	cin>>s;
+    	lB=-1;
+    	aS=start=0;
+    	aE=end=0;
+    	int len=strlen(s);
+    	for (int i = 0; i < len; ++i)
+    	{
+    		if('A'<=s[i] && s[i]<='Z'){
+    			s[i]='9';
+    			start=lB+1;
+    			lB=i;
+    		}
+    		end=i;
+    		if(isSmall(aS, aE, start, end)){
+    			aS=start;
+    			aE=end;
+    		}
+    	}
+     
+    	aS=trim(aS,aE);
+    	for (int i = aS; i <= aE; ++i)
+    	{
+    		cout<<s[i];
+    	}
+    	cout<<"
+";
+    	return 0;
+    } 

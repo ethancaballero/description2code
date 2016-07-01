@@ -1,0 +1,21 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+#define inf 1000000000
+int main() {
+	// your code goes here
+long long int t,m,i;
+double p,term;
+scanf("%lld",&t);
+while(t--)
+{
+	scanf("%lld %lf",&m,&p);
+	term=1;
+	for(i=0;i<m;++i)
+		term=term*(-p);
+	double ans=(term-1)/((double)(-p-1))*inf;
+	printf("%.15lf %.15lf
+",ans,inf-ans);
+}
+	return 0;
+}

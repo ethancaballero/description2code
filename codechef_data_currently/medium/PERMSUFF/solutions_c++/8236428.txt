@@ -1,0 +1,81 @@
+#include<iostream>
+#include<vector>
+#include<utility>
+#include<algorithm>
+using namespace std;
+bool cmp(pair<long long ,long long> a,pair<long long ,long long> b)
+{
+
+       if(a.first<b.first)
+        return true;
+	else if(a.first==b.first && a.second>=b.second)
+	return true;
+	else
+	return false;  
+
+}
+int main()
+{
+	int t;
+	long long n,m,arr[100009],l,r;
+	pair<long long ,long long>p,A[100009];
+	cin>>t;
+	while(t--)
+	{
+               
+		cin>>n>>m;
+		for(long long i=1;i<=n;i++)
+		{
+			cin>>arr[i];									
+                }
+		for(long long i=1;i<=m;i++)
+		{
+                       cin>>l>>r;
+			p=make_pair(l,r);
+			A[i]=p;								
+                }
+		sort(A+1,A+m+1);
+               /* for(it=v.begin();it!=v.end();it++)
+		{
+			p=*it;
+			cout<<p.first<<" "<<p.second<<"
+";
+		}*/	
+		long long index=1;
+		long long  i;
+		 p=A[1];
+		l=p.first;
+		r=p.second;
+              for(i=2;i<=m;i++)
+              {
+               
+                   p=A[i];
+                   if(p.first>r)
+                   {
+                   
+                     sort(arr+l,arr+r+1);
+                     l=p.first;
+                     r=p.second;
+                   }
+                   else
+                   r=max(r,p.second);   
+              }
+                sort(arr+l,arr+r+1);
+                
+                for(i=1;i<=n;i++)
+                if(arr[i]!=i)
+                break;
+                                  
+              if(i<=n)
+              cout<<"Impossible
+";
+              else
+              cout<<"Possible
+";
+             
+	}
+
+
+	 return 0;
+}
+

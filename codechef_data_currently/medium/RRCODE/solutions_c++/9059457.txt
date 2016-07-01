@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+#include<string>
+using namespace std;
+int main() 
+{
+	int t,n;
+	long long int k,answer,resx,reso,resa;
+	scanf("%d",&t);
+	for(int i=0;i<t;i++)
+	{
+	string s;
+	scanf("%d %lld %lld",&n,&k,&answer);
+	int *arr=(int *)malloc(sizeof(int)*(n+1));
+	for(int j=1;j<n+1;j++)
+	scanf("%d",arr+j);
+	cin>>s;
+	cin.ignore(1000,'
+');
+	if(k==0)
+	cout<<answer<<endl;
+	else
+	if(s=="XOR")
+	{
+	resx=arr[1];
+//	for(int l=1;l<=k;l++)
+	{
+	for(int j=2;j<n+1;j++)
+	{
+	resx=resx^arr[j];
+	}
+	if(k%2==0)
+	cout<<answer<<endl;
+	else
+	{
+	answer=answer^resx;
+	cout<<answer<<endl;
+	}
+	}
+	}//oyuter for
+	else if(s=="AND")
+	{
+	//	for(int l=1;l<=k;l++)
+	{
+	resa=arr[1];
+	for(int j=2;j<n+1;j++)
+	{
+	resa=resa&arr[j];
+	}
+	answer=answer&resa;
+	cout<<answer<<endl;
+	}
+	}
+	else if(s=="OR")
+	{
+//		for(int l=1;l<=k;l++)
+	{
+	reso=arr[1];
+	for(int j=2;j<n+1;j++)
+	{
+	reso=reso|arr[j];
+	}
+	answer=answer|reso;
+	cout<<answer<<endl;
+	}
+	}
+	}
+	return 0;
+} 

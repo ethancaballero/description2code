@@ -1,0 +1,15 @@
+import sys,math
+
+for __ in range(input()) :
+    n , c , q = (map(int,sys.stdin.readline().split()))
+    pos = c
+    for i in range(q) :
+        l , r = map(int,sys.stdin.readline().split())
+        if l == pos :
+            pos = r
+        elif r == pos :
+            pos = l
+        elif l < pos and pos < r :
+            pos -= l
+            pos = r-pos
+    print pos

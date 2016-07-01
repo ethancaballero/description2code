@@ -1,0 +1,41 @@
+// codechef_codes.cpp : Defines the entry point for the console application.
+//
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <cassert>
+#include <cmath>
+#include <time.h>
+#include <cstdlib>
+
+#define boost ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
+#define max(a,b) ((a)>(b)?a:b)
+#define min(a,b) ((a)<(b)?a:b)
+#define min_3(a,b,c) (min((a),min((b),(c))))
+#define INF 1000000007
+
+using namespace std;
+
+
+int main() {
+	boost;
+	int tc;
+	string str;
+	cin >> tc;
+	while (tc--) {
+		cin >> str;
+		long long int sum = 0;
+		for (int i = 1; i < str.length(); i++) {
+			sum += (str[i]-str[i-1]>=0 ?(str[i]-str[i-1]):(26+str[i]-str[i-1]));
+		}
+		sum += 1+str.length();
+		if(sum <= 11*str.length())
+			cout <<"YES"<<endl;
+		else
+			cout <<"NO"<<endl;
+	}
+}

@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	int t;
+	
+	cin >> t;
+	while(t--)
+	{
+	string a;
+	int n;
+	string result;
+	string min;
+	cin >> n;
+	cin >> a;
+	min = a;
+	for(int i = 0;i < n;i++)
+	{
+		char insert = a[i];
+		for(int j = 0;j < n;j++)
+		{
+			string x = a;
+			x.erase(x.begin()+i);
+			if(i != j)
+			{
+				x.insert(x.begin()+j,insert);
+				if(min > x)
+				{
+					min = x;
+				}
+			}
+		}
+	}
+	
+	cout << min << endl;
+	}
+	return 0;
+}

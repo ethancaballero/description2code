@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   long long int V[1005];
+   int N,i,j,k,Q,l,idx;
+   char str[1001][1005],str2[1005];
+   cin>>N;
+   cin.ignore();
+   for(i=0;i<N;i++)
+   {
+      cin>>str[i]>>V[i];
+   }
+   cin>>Q;
+   while(Q--)
+   {
+      cin.ignore();
+      cin>>str2;
+      for(i=0,idx=-1;i<N;i++)
+      {
+         for(l=0;str2[l]&&str[i][l]&&str[i][l]==str2[l];l++);
+         if(str2[l])
+            continue;
+         if(idx==-1||V[idx]<V[i])
+            idx=i;
+      }
+      if(idx==-1)
+         cout<<"NO"<<endl;
+      else
+      cout<<str[idx]<<endl;
+   }
+return 0;
+}

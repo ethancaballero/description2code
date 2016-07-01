@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+#include<string.h>
+int main()
+{
+    int t,l,i,count=0;
+    cin>>t;
+    while(t--)
+    {
+     char a[1010];
+     int j,fh[256]={0},sh[256]={0};
+     scanf("%s",a);
+     l=strlen(a);
+     if(l%2==1)
+     j=(l/2)+1;
+     else
+     j=l/2;
+     for(i=0;i<l/2;i++)
+     fh[a[i]]++;
+     for(i=j;i<l;i++)
+     sh[a[i]]++;
+     //for(i=65;i<123;i++)
+     //printf("%c=%d %c=%d
+",i,fh[i],i,sh[i]);
+     for(i=0;i<256;i++)
+     {
+        if(fh[i]!=sh[i])
+        {
+            cout<<"NO"<<endl;
+            break;
+        }
+        if(i==255)
+        {
+        cout<<"YES"<<endl;
+        break;
+        }
+     }
+    }
+}

@@ -1,0 +1,36 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t!=0)
+    {
+        int n,x,sum=0,j,f,cnt=0;
+        cin>>n>>x;
+        int a[n];
+        for(int i=0;i<n;i++)
+        {cin>>a[i];
+        sum=sum+a[i];
+        }    
+        
+        j=sum/x;
+        f=sum%x;
+        for(int k=0;k<n;k++)
+        {if(a[k]<=f)
+        {cnt=-1;
+        break;}}
+        
+        if(cnt==0)
+        cout<<j<<endl;
+        else
+        cout<<cnt<<endl;
+        
+        
+        
+        
+        t--;
+    }
+    return 0;
+}

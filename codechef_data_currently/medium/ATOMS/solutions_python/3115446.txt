@@ -1,0 +1,37 @@
+def fn():
+    n,m = map(int,raw_input().split())
+    a = []
+    b = []
+    for i in range(n):
+        a.append(0)
+        t = []
+        for j in range(m):
+            t.append(0)
+        b.append(t)
+     
+    
+    for i in range(m):
+        s = map(int,raw_input().split())
+        s = s[1:]
+        for j in s:
+            b[j][i] += pow(2,i)
+    
+    
+    for i in range(n):
+        for j in range(m):     
+           a[i] += b[i][j]
+    
+    a.sort()
+    h = n
+    
+    
+    for i in range(n-1):
+        if a[i] == a[i+1]:
+            
+            h -= 1
+    print h
+            
+    
+t = int(raw_input())
+for i in range(t):
+    fn()

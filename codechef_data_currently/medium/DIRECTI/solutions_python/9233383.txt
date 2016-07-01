@@ -1,0 +1,18 @@
+for t in range(input()):
+    n = input()
+    dir = list()
+    road = list()
+
+    for x in range(n):
+        str = raw_input().split(" on ")
+        if str[0]=="Right":
+            dir.append("Left")
+        elif str[0]=="Left":
+            dir.append("Right")
+        road.append(str[1])
+    dir.append("Begin")
+    dir.reverse()
+    road.reverse()
+    for i in range(0,len(dir)):
+        print "%s on %s" %(dir[i],road[i])
+    print

@@ -1,0 +1,28 @@
+n = int(raw_input())
+for ii in range(n):
+    a=raw_input()
+    
+    j=0
+    buf=''
+    c=len(a)
+    for i in a:
+       if(j==0):
+           j+=1
+           c+=1
+           buf=i
+       else:
+           if((ord(i)-ord(buf))<0):
+               c+=(ord(i)-ord(buf))
+               c+=26
+           else:
+               c+=(ord(i)-ord(buf))
+           buf=i
+    
+    if(c<=(11*len(a))):
+       print "YES"
+    else:
+       print "NO"
+
+
+
+

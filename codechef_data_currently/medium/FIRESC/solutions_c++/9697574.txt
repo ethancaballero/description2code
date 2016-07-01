@@ -1,0 +1,71 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<map>
+#include<set>
+#include<vector>
+#include<cstring>
+#include<queue>
+#include<stack>
+#include<list>
+#include<cstdlib>
+#include<cmath>
+#include<string>
+#include<climits>
+#include<bits/stdc++.h>
+using namespace std;
+#define e printf("
+");
+#define ll long long
+const ll mx=100000;
+const ll mod=1000000007;
+const ll inf=0x3f3f3f3f;
+bool vis[mx+1];
+vector<int> adj[mx+1];
+int ct=0;
+void dfs(int s)
+{
+  ct++;
+  vis[s]=true;
+  vector<int>::iterator it;
+  for(it=adj[s].begin();it!=adj[s].end();it++)
+  {
+    if(!vis[*it])
+     dfs(*it);
+  }
+}
+int main()
+{
+  int i,u,v,n,m,t;
+  ll ans;
+  scanf("%d",&t);
+  while(t--)
+  {
+    ans=1;
+    memset(vis,false,sizeof vis);
+    scanf("%d%d",&n,&m);
+    while(m--)
+    {
+      scanf("%d%d",&u,&v);
+      adj[u].push_back(v);
+      adj[v].push_back(u);
+    }
+    int l=0;
+    for(i=1;i<=n;i++)
+    {
+      if(!vis[i])
+      {
+        l++;
+        ct=0;
+        dfs(i);
+        ans*=ct;
+        ans%=mod;
+      }
+    }
+    printf("%d %lld
+",l,ans);
+    for(i=1;i<=n;i++)
+      adj[i].clear();
+  }
+  return 0;
+}

@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int i,n,count=0,w=0;
+	char a[100000],b[100000];		
+	scanf("%d ",&n);
+	
+	while(n--)
+	{
+		gets(a);
+		int eight=0,three=0,five=0,extra=0,len;
+		i=strlen(a)-1;
+		len=1+i;
+		w=0;
+		 while(a[i]<48 || a[i]>57)
+                        i--;
+                			
+		while(isdigit(a[i]))	
+		{			
+			w=i;
+			i--;			
+			if(a[w]=='8') eight++;
+			else if(a[w]=='5') five++;
+			else if(a[w]=='3') three++;		
+			else
+			extra++;				
+		}			
+		if(eight>=five && five>=three && extra==0)
+		count++;		
+	}
+	cout<<count;
+	return 0;
+}

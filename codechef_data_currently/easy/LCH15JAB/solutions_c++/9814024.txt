@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+#include<stdio.h>
+#include<string.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		
+		int i,ans[26]={0};
+		char str[100];
+	scanf("%s
+",&str);
+	for(i=0;i<strlen(str);i++)
+	ans[str[i]-97]++;
+	sort(ans,ans+26);
+if(ans[25]==(strlen(str)-ans[25]))
+printf("YES
+");
+else printf("NO
+");
+}
+return 0;
+		
+	}
+	

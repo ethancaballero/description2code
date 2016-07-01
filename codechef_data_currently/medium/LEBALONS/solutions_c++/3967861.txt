@@ -1,0 +1,111 @@
+	#include <vector>
+	#include <list>
+	#include <map>
+	#include <set>
+	#include <deque>
+	#include <queue>
+	#include <stack>
+	#include <bitset>
+	#include <algorithm>
+	#include <functional>
+	#include <numeric>
+	#include <utility>
+	#include <sstream>
+	#include <iostream>
+	#include <iomanip>
+	#include <cstdio>
+	#include <cmath>
+	#include <cstdlib>
+	#include <cctype>
+	#include <string>
+	#include <cstring>
+	#include <ctime>
+	#include <string.h>
+	
+	using namespace std;
+	
+	/*typedef long long int64;
+	typedef unsigned long long uint64;*/
+	#define two(X) (1<<(X))
+	#define twoL(X) (((int64)(1))<<(X))
+	#define contain(S,X) (((S)&two(X))!=0)
+	#define containL(S,X) (((S)&twoL(X))!=0)
+	const double pi=acos(-1.0);
+	const double eps=1e-11;
+	/*template<class T> inline void checkmin(T &a,T b){if(b<a) a=b;}
+	template<class T> inline void checkmax(T &a,T b){if(b>a) a=b;}
+	template<class T> inline T sqr(T x){return x*x;}*/
+	typedef pair<int,int> ipair;
+	#define SIZE(A) ((int)A.size())
+	#define LENGTH(A) ((int)A.length())
+	#define MP(A,B) make_pair(A,B)
+	#define PB(X) push_back(X)
+	#define ll long long int
+	#define si(x) scanf("%d",&x)
+	#define sl(x) scanf("%lld",&x)
+	#define pi(x) printf("%d",x)
+	#define nl printf("
+")
+	#define pl(x) printf("%lld",x)
+	
+	long long int repeat(ll a,ll b)
+	{
+	    long long int x=1; 
+	    for(int i=1;i<=b;i++)x=x*a; 
+	    return x;
+	}
+	
+	int main()
+	{
+		int n,m,c,p;
+		ll dpd[100][100],dpn[100][100],hashcolor[100],hashcost[100];
+		int T;
+		si(T);
+		while(T--)
+		{
+			si(n);si(m);
+			ll sum1=0,sum2=0,temp=0;
+			memset(hashcolor,0,sizeof(hashcolor));
+			memset(hashcost,0,sizeof(hashcost));
+			for(int i=0;i<n;i++){
+				si(c);si(p);
+				hashcolor[c]++;
+				hashcost[c]+=p;
+			}
+			vector<int>v;
+			for(int i=0;i<=50;i++){
+				if(hashcolor[i]!=0){
+					v.PB(i);
+				}
+			}
+			int k=v.size();
+			for(int i=0;i<k;i++){
+				for(int j=0;j<=k;j++)dpd[i][j]=0,dpn[i][j]=0;
+			}
+			//calculating the denominator
+			dpd[0][1]=repeat(2,hashcolor[v[0]])-1;
+			for(int i=1;i<k;i++){
+				dpd[i][1]=(repeat(2,hashcolor[v[i]])-1)+dpd[i-1][1];
+				for(int j=2;j<=i+1;j++){
+					dpd[i][j]=dpd[i-1][j-1]*(repeat(2LL,hashcolor[v[i]])-1)+dpd[i-1][j];
+				}
+			}
+			//calculating the numerator
+			dpn[0][1]=repeat(2,hashcolor[v[0]]-1)*hashcost[v[0]];
+			for(int i=1;i<k;i++){
+				dpn[i][1]=hashcost[v[i]]*repeat(2LL,hashcolor[v[i]]-1)+dpn[i-1][1];
+				temp=hashcost[v[i]]*repeat(2LL,hashcolor[v[i]]-1);
+				for(int j=2;j<=i+1;j++){
+					dpn[i][j]=(dpn[i-1][j-1]*(repeat(2LL,hashcolor[v[i]])-1))+(dpd[i-1][j-1]*temp);
+					dpn[i][j]=dpn[i][j]+dpn[i-1][j];
+				}
+			}
+			for(int i=m;i<=k;i++){
+				sum1=sum1+dpn[k-1][i];
+				sum2=sum2+dpd[k-1][i];
+			}
+			if(m==0)sum2++;
+			printf("%0.8lf
+",(double)sum1/(double)sum2);
+		}
+	}

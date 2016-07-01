@@ -1,0 +1,6 @@
+#don't jump to it <VigzMv/>
+n = int(raw_input())
+if(n%6==3 or n%6==1 or n%6==0):
+	print "yes"
+else:
+	print "no"

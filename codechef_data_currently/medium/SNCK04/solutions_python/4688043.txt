@@ -1,0 +1,45 @@
+# code chef -easy -rational numbers -  snck04.py
+
+# find number of lowest terms p/q <1 s.t.  p,q<=n
+
+#  equivalent:  find sum of totients from 2 to n
+
+# max n is 1000000
+
+def main():
+    nMax = 1000000
+    totient = range(nMax+1)
+    totient[1] = 0
+
+    for p in xrange(2, nMax+1):
+        if totient[p] == p:
+            # found a prime
+            for i in xrange(p, nMax+1, p):
+                totient[i] = totient[i]/p * (p-1)
+        # now have totient, accumulate sum to here 
+        totient[p] += totient[p-1]
+
+    #print totient[:10]
+
+##    # now find all sums
+##    for i in xrange(2, nMax+1):
+##        totient[i] += totient[i-1]
+##        # now totient[n] contains sum of totients from 2 to n
+
+    #print totient[:10]
+
+    t = int(raw_input())
+
+    for i in xrange(t):
+        n = int(raw_input())
+        print totient[n]
+
+
+
+if __name__=="__main__":
+    try:
+        import psyco
+        psyco.full()
+    except ImportError:
+        pass
+    main()

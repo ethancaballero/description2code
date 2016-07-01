@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long long int i,k,s;
+
+ double q,ai,bi;
+
+int main()
+{
+    scanf("%lld%lld%lld",&i,&k,&s);
+
+   scanf("%lf%lf",&ai,&bi);
+
+    if(i<k)
+    {
+        if((k-i)%2==0)
+            q=(ai+bi)*pow(2,2*(k-i)-s);
+        else
+            q=(2*sqrt(2)*(ai+sqrt(3)*bi))*pow(2,2*(k-i-1)-s);
+
+    }
+    else if(i==k)
+    {
+        q=(ai+bi)/pow(2,s);
+    }
+    else if(i>k)
+    {
+        if((i-k)%2==0)
+         q=(ai+bi)/pow(2,2*(i-k)+s);
+        else
+         q=(2*sqrt(2)*(ai+sqrt(3)*bi))/pow(2,2*(i-k+1)+s);
+    }
+
+  printf("%lf",q);
+return 0;
+}

@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+typedef long long ll;
+ ll a[105];
+ ll n;
+void fibo(){
+    ll ans;
+    ll n;
+    scanf("%lld",&n);
+    for(int i=1;i<=100;i++)
+    {
+        if(a[i]>n)
+            break;
+        ans=i;
+    }
+    printf("%lld
+",ans);
+}
+int main(){
+a[0]=1LL;a[1]=1ll;
+for(ll i=2;i<=104;i++)
+    a[i]=a[i-1]+a[i-2];
+int t;
+cin>>t;
+while(t--){
+    fibo();
+}
+}

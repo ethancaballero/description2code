@@ -1,0 +1,14 @@
+for i in range(int(raw_input())):
+    a=raw_input()
+    if len(a)%2==0:
+        f=0
+        for i in a:
+            if a.count(i)==(len(a)/2):
+                f=1
+                break;
+        if f==1:
+            print "YES"
+        else:
+            print "NO"
+    else:
+        print "NO"

@@ -1,0 +1,10 @@
+for i in range(int(raw_input())):
+      result=0
+      jewels=raw_input()
+      stones=raw_input()
+      for j in stones:
+          if j in jewels:
+             result+=1
+      print result 
+
+

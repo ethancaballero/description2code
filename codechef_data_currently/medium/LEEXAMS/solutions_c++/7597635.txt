@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct prob{
+	int p,a,b;
+};
+prob arr[55];
+int n;
+bool visited[25];
+double ans=0;
+void recur(int i,double pro)
+{
+	if(pro<=0.000000)
+	return;
+	if(i==n)
+	{
+	ans+=pro;
+	return;
+    }
+	if(!visited[arr[i].a])
+	{
+		visited[arr[i].a]=true;
+		recur(i+1,pro*.01*(arr[i].p));
+		visited[arr[i].a]=false;
+	}
+	if(!visited[arr[i].b])
+	{
+		visited[arr[i].b]=true;
+		recur(i+1,pro*(100-arr[i].p)*.01);
+		visited[arr[i].b]=false;
+	}
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		for(int i=1;i<=16;i++)
+		visited[i]=false;
+		for(int i=0;i<n;i++)
+		scanf("%d%d%d",&arr[i].p,&arr[i].a,&arr[i].b);
+		if(n>16)
+		printf("0
+");
+		else
+	{
+		recur(0,1.0);
+	printf("%.6lf
+",ans);
+	ans=0;
+}
+	}
+}

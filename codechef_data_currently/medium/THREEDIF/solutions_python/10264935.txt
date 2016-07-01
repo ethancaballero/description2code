@@ -1,0 +1,7 @@
+# cook your code here
+it = int(raw_input())
+for i in range(it):
+    r=map(int,raw_input().split())
+    r.sort()
+    m= 1000000007
+    print (r[0]*((r[1]-1)*(r[2]-2))%m)%m

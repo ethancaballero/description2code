@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t,a,b,n;
+	bool f1,f2;
+	scanf("%d",&t);
+	while(t-->0)
+	{
+		f1=f2=false;
+		scanf("%d",&n);
+		while(n-->0)
+		{
+			scanf("%d",&a);
+			scanf("%d",&b);
+			if(!(f1&&f2))
+			{
+				if(a==b)
+					f1=f2=true;
+				else if(a>b)
+					f1=true;
+				else
+					f2=true;
+			}
+		}
+		if(f1&&f2)
+			printf("YES
+");
+		else
+			printf("NO
+");
+	}
+	return 0;
+}

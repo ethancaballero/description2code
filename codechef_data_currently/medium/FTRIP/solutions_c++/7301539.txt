@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+double ncr[1000][1000];
+
+void calncr(){
+    for(int i=0;i<1000;i++){
+        for(int j=0;j<=i;j++){
+            if(j==0||j==i)
+                ncr[i][j]=1;
+            else
+                ncr[i][j]=ncr[i-1][j]+ncr[i-1][j-1];
+        }
+    }
+}
+
+double getncr(long long n,long long r){
+    if(n<r)
+        return 0;
+    return ncr[n][r];
+}
+
+int main(){
+    calncr();
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        long long s,n,m,k;
+        scanf("%lld%lld%lld%lld",&s,&n,&m,&k);
+        double ans=0;
+        for(long long i=k;i<=min(m-1,n-1);i++){
+            double temp=getncr(m-1,i)*getncr(s-m,n-1-i);
+            temp=temp/getncr(s-1,n-1);
+            ans+=temp;
+        }
+        printf("%.6f
+",ans);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

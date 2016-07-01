@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define REP(i,n) for(int i=0;i<n;++i)
+int dp[250][250];
+int a[250][250];
+
+void floyd(int n)
+{
+	REP(i,n)
+		REP(j,n)
+		{
+			dp[i][j]=a[i][j];
+			//if(j==i)
+				//dp[i][j]=0;
+		}
+	REP(k,n)
+		REP(i,n)
+			REP(j,n)
+				dp[i][j]=min(dp[i][j],dp[i][k]+dp[k][j]);
+
+	return;
+}
+
+int main()
+{
+	int n,m,s,g,d;
+	scanf("%d",&n);
+
+	REP(i,n)
+		REP(j,n)
+			scanf("%d",&a[i][j]);
+
+	scanf("%d",&m);
+
+	floyd(n);
+
+	REP(i,m)
+	{
+		scanf("%d%d%d",&s,&g,&d);
+		int t1=dp[s][g]+dp[g][d];
+		int t2=dp[s][d];
+
+		printf("%d %d
+",t1,t1-t2);
+	}
+}

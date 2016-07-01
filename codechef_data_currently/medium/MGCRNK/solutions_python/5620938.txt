@@ -1,0 +1,29 @@
+import sys
+size=2501
+dp=[[ 0 for _ in range(size)] for _ in range(size)]
+#print("Start")
+t=int(raw_input())
+for _ in range(t):
+    n=int(raw_input())
+    arr=[[0 for _ in range(n)] for _ in range(n)]
+    for k in range(n):
+        arr[k]=sys.stdin.readline().split( )
+
+    count=0
+    for i in range(n):
+        for j in range(n):
+            if i==0 and j==0:
+                dp[i][j]=int(arr[i][j])
+            elif i==0 and j != 0:
+                dp[i][j]=dp[i][j-1]+int(arr[i][j])
+            elif j==0 and i != 0 :
+                dp[i][j]=dp[i-1][j]+int(arr[i][j])
+            else:
+                dp[i][j]=max(dp[i-1][j],dp[i][j-1])+int(arr[i][j])
+
+
+    if dp[n-1][n-1] < 0:
+        print "Bad Judges"
+    else:
+        ans= float(dp[n-1][n-1])/float((2*n-3))
+        print "%.6f " %ans

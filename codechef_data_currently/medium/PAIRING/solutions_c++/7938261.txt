@@ -1,0 +1,44 @@
+#include <cstdio>
+#define read(x) scanf("%d",&x)
+
+int c[1500];
+
+int main()
+{
+    int t;
+    read(t);
+    while(t--)
+    {
+        int n,m;
+        read(n);
+        read(m);
+        int *a = new int[m];
+        int *b = new int[m];
+        int *d = new int[m];
+        for(int i = 0; i<=n; ++i)
+            c[i] = 0;
+
+        for(int i = 0; i<m; ++i)
+        {
+            read(a[i]);
+            read(b[i]);
+            d[i] = -1;
+        }
+        int j = 0;
+        for(int i = m-1; i>=0; --i)
+        {
+            if(c[a[i]] == 0 && c[b[i]] == 0)
+            {
+                ++c[a[i]];
+                ++c[b[i]];
+                d[j++] = i;
+            }
+        }
+        for(int i = m-1; i>=0; --i)
+            if(d[i] > -1)
+                printf("%d ",d[i]);
+        printf("
+");
+    }
+    return 0;
+}

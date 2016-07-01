@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+int parent,max_s;
+}p[10005];
+int s[10005];
+int find_r(int k)
+{
+    if(p[k].parent==k)
+        return k;
+        p[k].parent=find_r(p[k].parent);
+    return p[k].parent;
+}
+void union_r(int a,int b)
+{
+    int x=find_r(a);
+    int y=find_r(b);
+    if(x==y)
+       {
+           cout<<"Invalid query!"<<endl;
+        return;
+       }
+    if(p[x].max_s>p[y].max_s)
+        p[y].parent=x;
+    else if(p[x].max_s<p[y].max_s)
+        p[x].parent=y;
+    else
+    {
+     return;
+    }
+}
+int main()
+{
+    int t,n,i,q,r,u,v,w;
+    ios_base::sync_with_stdio(false);
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=1;i<=n;i++)
+            {cin>>s[i];
+             p[i].parent=i;
+             p[i].max_s=s[i];
+            }
+            cin>>q;
+            while(q--)
+            {
+
+
+        cin>>r;
+        if(r==0)
+          {
+           cin>>u>>v;
+           union_r(u,v);
+
+          }
+        else {
+                cin>>w;
+              cout<<find_r(w)<<endl;
+             }
+        }
+    }
+}

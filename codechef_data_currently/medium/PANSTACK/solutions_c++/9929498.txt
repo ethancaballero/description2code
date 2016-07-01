@@ -1,0 +1,58 @@
+#include <iostream>
+#include <stdint.h>
+
+using namespace::std;
+
+#define MOD 1000000007
+#define N 1000
+
+main()
+{
+	int **T = new int*[1 + N];
+	for (int i = 0; i <= N; i++)
+		T[i] = new int[1 + i];
+
+	for (int i = 1; i <= N; i++)
+		T[i][1] = T[i][i] = 1;
+
+	for (int i = 3; i <= N; i++)
+	{
+		for (int j = 2; j < i; j++)
+		{
+			int s = ((uint64_t) T[i - 1][j] * (uint64_t) j) % MOD;
+			s += T[i - 1][j - 1];
+
+			if (s >= MOD)
+				s -= MOD;
+
+			T[i][j] = s;
+		}
+	}
+
+	int *S = new int[1 + N];
+	S[1] = 1;
+
+	for (int i = 2; i <= N; i++)
+	{
+		int x = 0;
+		for (int j = 1; j <= i; j++)
+		{
+			x += T[i][j];
+			if (x >= MOD)
+				x -= MOD;
+		}
+
+		S[i] = x;
+	}
+
+	int num;
+	cin >> num;
+
+	for (int i = 0; i < num; i++)
+	{
+		int x;
+		cin >> x;
+
+		std::cout << S[x] << std::endl;
+	}
+}

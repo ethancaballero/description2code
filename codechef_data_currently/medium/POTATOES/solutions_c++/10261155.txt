@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool prime[3000];
+void seive()
+{
+	for(int i=0;i<3000;i++)
+	prime[i] = true;
+	for(int i=2;i<=sqrt(3000);i++)
+	{
+		if(prime[i] == true)
+		{
+			for(int j=2*i;j<3000;j += i)
+			{
+				prime[j] = false;
+			}
+		}
+	}
+}
+
+int main()
+{
+	seive();
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int x,y;
+		cin>>x>>y;
+		int p;
+		p = x+y;
+		int z = 0;
+		
+		do {
+			
+			z++;
+			p++;
+			
+		}while(prime[p] != true);
+		
+		cout<<z<<endl;
+	}
+	return 0;
+}

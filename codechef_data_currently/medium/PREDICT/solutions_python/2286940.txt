@@ -1,0 +1,9 @@
+import sys
+
+
+t = int(sys.stdin.readline())
+for i in range(0, t):
+    p = float(sys.stdin.readline())
+    if (p < 0.5):
+        p = 1 - p
+    print 10000 * ( (2*p+1)*(1-p) + (2*p-1))

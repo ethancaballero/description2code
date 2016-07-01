@@ -1,0 +1,23 @@
+n=int(raw_input())
+a=map(int,raw_input().split())
+for i in range(len(a)):
+	a[i]-=1
+b=[0]*n
+i=0
+ans=[]
+while (i<n):
+	l=[]
+	temp=a[i]
+	j=i
+	while (b[j]==0):
+		b[j]=1
+		l.append(j+1)
+		j=a[j]
+	i+=1
+	if (len(l)>0):
+		ans.append(l)
+print len(ans)
+for x in ans:
+	for y in x:
+		print y,
+	print x[0]

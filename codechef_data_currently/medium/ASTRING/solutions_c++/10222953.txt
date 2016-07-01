@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <string.h>
+#include <algorithm>
+using namespace std;
+
+int main() 
+{
+	ios_base::sync_with_stdio(false);
+	int t,k,n,temp,count,ind,i;
+	char min;
+	char s[100005];
+	cin>>t;
+	while(t--)
+	{
+		cin>>s>>k;
+		n=strlen(s);
+		temp=n-k;
+		count=0;
+		ind=0;
+		while(count<k)
+		{
+				min=s[ind];
+			for(i=ind+1;i<=temp;i++)
+			{
+				if(s[i]<min)
+				{
+					min=s[i];
+					ind=i;
+				}	
+			}	ind++;
+			
+			temp++;	
+			count++;
+		cout<<min;
+		}
+	   cout<<endl;
+	}
+	return 0;
+}

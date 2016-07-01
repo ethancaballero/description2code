@@ -1,0 +1,10 @@
+t=int(raw_input())
+for i in range(0,t):
+	lis=list(map(int,raw_input().split()))
+	count1=0
+	if 0 in lis:
+		count1=1
+	if sum(lis)==180 and count1==0:
+		print 'YES'
+	else:
+		print 'NO'

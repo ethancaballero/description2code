@@ -1,0 +1,25 @@
+t=input()
+ans=[]
+for x in range(t):
+    n=input()
+    s=raw_input()
+    bol='0'
+    c1=0
+    c2=0
+    for x in range(n):
+        if s[x]=='I':
+            bol='1'
+            c1+=1
+        elif s[x]=='Y':
+            bol='2'
+            c2+=1
+    if c1>=1 and c2>=1:
+        bol='0'
+    ans.append(bol)
+for x in range(t):
+    if ans[x]=='0':
+        print 'NOT SURE'
+    elif ans[x]=='1':
+        print 'INDIAN'
+    else:
+        print 'NOT INDIAN'

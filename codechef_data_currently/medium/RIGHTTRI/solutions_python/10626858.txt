@@ -1,0 +1,18 @@
+import math
+x=input()
+while(x!=0):
+    x=x-1
+    h,a=map(int,raw_input().split())
+    d1=h*h+4*a
+    d2=h*h-4*a
+    if(d2<0):
+        print -1
+        continue
+    d1=math.sqrt(d1)
+    d2=math.sqrt(d2)
+    a=d1+d2
+    b=d1-d2
+    a=a/2
+    b=b/2
+    print b,a,h
+

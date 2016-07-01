@@ -1,0 +1,36 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#include<string>
+using namespace std;
+
+int scanint(){
+	register int c = getchar();
+	int x=0;
+	for(;(c<48 || c>57);c=getchar());
+	for(;c>47 && c<58;c=getchar())
+	{
+		x=(x<<1)+(x<<3)+c-48;
+	}
+	return x;
+}
+
+int main(){
+	int t,c,n,m,x;
+	t = scanint();
+	while(t--){
+		c = scanint();
+		x = 0;
+		while(c--){
+			n = scanint();
+			m = scanint();
+			x = x ^ ((n+m-2)%3);	
+		}
+		if(x)
+			cout<<"MasterChef
+";
+		else
+			cout<<"Football
+";
+	}	
+}

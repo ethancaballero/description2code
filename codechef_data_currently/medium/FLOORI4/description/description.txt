@@ -1,0 +1,29 @@
+  
+Your task is simple. 
+You need to find the value of .
+As the value could be too large, output it modulo M.
+
+Input
+
+The first contains an integer T, denoting the number of the test cases. 
+Then there are T lines, each describing a single test case and contains two space separated integers N and M respectively. 
+Output
+For each test case, output the value of summation modulo M on a separate line.
+Constraints
+
+1 \u2264  M  \u2264 100000 
+
+There are two types of datasets:
+
+ 1 \u2264 N \u2264 106 , 1 \u2264 T \u2264 3000 
+ 106 \u2264 N \u2264 1010 , 1 \u2264 T \u2264 30 
+
+Example
+Input:
+1
+4 1000
+
+Output:
+373
+Explanation
+14*4 + 24*2 + 34*1 + 44*1 = 373 

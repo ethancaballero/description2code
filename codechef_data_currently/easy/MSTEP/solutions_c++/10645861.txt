@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,n,i,j,N,M,x,y,nn,ans;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        int ar[n][n];
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<n;j++)
+            cin>>ar[i][j];
+        }
+        nn=1,ans=0;
+        while(nn<=n*n)
+        {
+            for(i=0;i<n;i++)
+            {
+                for(j=0;j<n;j++)
+                {
+                    if(ar[i][j]==nn)
+                    {
+                        x=i;
+                        y=j;
+                        break;
+                    }
+                }
+            }
+            if(nn!=1)
+            ans+=abs(M-x)+abs(N-y);
+            N=y;
+            M=x;
+            nn++;
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

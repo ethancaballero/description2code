@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<assert.h>
+#define REP(i,a,b) for(i=a;i<b;i++)
+#define rep(i,n) REP(i,0,n)
+
+#define ll long long
+
+ll num[10000000];
+int mask[10000000], num_size;
+int b2i[3000];
+
+/* number of delicious number at most n, using binary search */
+int solve(ll n){
+  int a, b, c;
+  a = 0; b = num_size;
+  while(a<b){
+    c = (a+b)/2;
+    if(num[c] <= n) a = c+1; else b = c;
+  }
+  return a;
+}
+
+int main(){
+  int T; ll L, R;
+  int i, k;
+  int rest, bt, res;
+
+  rep(i,10) b2i[1<<i] = i; /* b2i[2^i] = i, bit to int */
+
+  num_size = 0;
+  REP(i,1,10){
+    num[num_size] = i;  /* current delicious numbers */
+    mask[num_size] = ((1<<10)-1)^(1<<i); /* the set of unused digits */
+    num_size++;
+  }
+
+  /* calculate all delicious numbers using BFS */
+  rep(k,num_size){
+    rest = mask[k]; /* the set of unused digits */
+    while(rest){
+      bt = (rest & -rest);
+      i = b2i[bt]; /* i is one of unused digits */
+
+      num[num_size] = num[k] * 10 + i;
+      mask[num_size] = mask[k]^(1<<i);
+      num_size++;
+
+      rest ^= bt;
+    }
+  }
+
+/*  printf("%d
+",num_size);*/ /* the number of delicious numbers = 8877690 */
+
+  assert( scanf("%d",&T)==1 );
+  assert( 1<=T && T<=200000 );
+  while(T--){
+    assert( scanf("%lld%lld",&L,&R)==2 );
+    assert( 1LL<=L && L<=R && R<=1000000000000000000LL );
+    res = solve(R) - solve(L-1);
+    printf("%d
+",res);
+  }
+
+  return 0;
+}
+

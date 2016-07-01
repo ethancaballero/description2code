@@ -1,0 +1,4 @@
+t = int(raw_input())
+for case in range(t):
+    n,m = map(int, raw_input().split())
+    print n + m - 1

@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<cstdlib>
+#define MOD 1000007
+using namespace std;
+int f(int,int,int);
+int d[21][201][10]={0};
+int x[21][201][10]={0};
+int main()
+{
+    int i,t,w,n,sum,j;
+    for(i=0;i<=9;i++)
+    {
+                     for(j=0;j<201;j++)
+                     {
+                                       d[1][j][i]=-1;
+                                       if(j!=0)
+                                       {
+                                               x[1][j][i]=0;
+                                       }
+                                       else
+                                       {
+                                           x[1][j][i]=1;
+                                       }
+                     }
+   }
+    
+    scanf("%d",&t);
+    while(t--)
+    {
+              sum=0;
+              scanf("%d %d",&n,&w);
+              for(i=1;i<=9;i++)
+              {
+                             sum=(sum+f(n,w,i))%MOD;
+              }
+              printf("%d
+",sum);
+    }
+}
+int f(int n,int w,int k)
+{
+    int i;
+    if(d[n][w][k]==-1)
+    {
+                     return x[n][w][k];
+    }
+    d[n][w][k]=-1;
+   // printf("%d %d %d
+",n,w,k);
+    for(i=0;i<=9;i++)
+    {
+                     if(w-abs(i-k)>=0)
+                     {
+                     //printf("%d %d %d
+",n,w,k);
+                       x[n][w][k]=(x[n][w][k]+f(n-1,w-abs(i-k),i))%MOD;
+                     }    
+    }
+    return x[n][w][k];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,249 @@
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <assert.h>
+
+#define MAX_N 50000
+
+#ifndef ONLINE_JUDGE
+#define ASSERT(x) assert(x)
+#else
+#define ASSERT(x)
+#endif
+
+#define MAX(x,y) ((x)>(y)?(x):(y))
+#define MIN(x,y) ((x)<(y)?(x):(y))
+
+typedef struct {
+	int l, u;
+} range_t;
+
+
+#define IS_DIGIT(x) ((x) >= '0' && (x) <= '9')
+static int parse_uint()
+{
+  int i = 0;
+  char c = getchar_unlocked();
+  while(!IS_DIGIT(c)) c = getchar_unlocked();
+  do {
+    i = (i*10) + c-'0';
+    c = getchar_unlocked();
+  }while(IS_DIGIT(c));
+  return i;
+}
+
+static int make_bitstring(int k, int n, range_t *r, char *str)
+{
+	int n_true = 0;
+	for(int i = 0; i < n; i++){
+		if(r[i].l <= k && k <= r[i].u){
+			n_true++;
+			str[i] = '1';
+		}
+		else {
+			str[i] = '0';
+		}
+	}
+	str[n] = 0;
+	return n_true;
+}
+
+class Solution {
+public:
+	Solution *_next, *_prev;
+	int is_valid;
+	int k;
+
+	Solution *prev() {
+		if(_prev && !_prev->is_valid)
+			_prev = _prev->prev();
+		return _prev;
+	}
+
+	Solution *next() {
+		if(_next && !_next->is_valid)
+			_next = _next->next();
+		return _next;
+	}
+
+	void set_prev(Solution *s){
+		_prev = s;
+	}
+
+	void set_next(Solution *s){
+		_next = s;
+	}
+
+	int solutions_in_range(int a, int b){
+		ASSERT(a <= this->k && this->k <= b && "Search must start within interval.");
+
+		int n = 0;
+		// Scan left.
+		Solution *cur = this;
+		while(cur && cur->k >= a){
+			if(cur->is_valid) n++;
+			cur = cur->prev();
+		}
+
+		// Scan right.
+		cur = this->next();
+		while(cur && cur->k <= b){
+			if(cur->is_valid) n++;
+			cur = cur->next();
+		}
+
+		return n;
+	}
+
+	void exclude_range(int a, int b)
+	{
+		Solution *cur = this;
+		while(cur){
+			if(a <= cur->k && cur->k <= b){
+				cur->is_valid = false;
+			}
+			cur = cur->next();
+		}
+	}
+
+	/*
+	void exclude_range(int a, int b)
+	{
+		ASSERT(a <= this->k && this->k <= b && "Must start within interval.");
+
+		// Scan left.
+		Solution *cur = this;
+		while(cur && cur->k >= a){
+			cur->is_valid = false;
+			cur = cur->prev();
+		}
+
+		// Scan right
+		cur = this;
+		while(cur && cur->k <= b){
+			cur->is_valid = false;
+			cur = cur->next();
+		}
+	}
+	*/
+};
+
+
+int find_solution(int n, range_t *r, char *result_str)
+{
+	int n_solutions = 0;
+	int active_delta[MAX_N+1] = {};
+	Solution s[MAX_N+1];
+	int n_active = 0;
+
+	// Compute how the number of active
+	// intervals changes at each k.
+	for(int i = 0; i < n; i++){
+		active_delta[r[i].l]++;
+		active_delta[r[i].u+1]--;
+	}
+
+	// Find possible solutions.
+	Solution *last = NULL;
+	for(int i = 0; i <= n; i++){
+		n_active += active_delta[i];
+
+		// Set up linked list.
+		s[i].is_valid = n_active == i;
+		s[i].set_prev(last);
+		s[i].k = i;
+		if((i+1) <= n)
+			s[i].set_next(&s[i+1]);
+		else
+			s[i].set_next(NULL);
+
+		if(s[i].is_valid){
+			n_solutions++;
+			last = &s[i];
+		}
+	}
+
+#ifdef ONLINE_JUDGE
+	assert(n_solutions > 0);
+#else
+	if(0 == n_solutions){
+		make_bitstring(-1, n, r, result_str);
+		return 0;
+	}
+#endif
+	/* Start pruning intervals */
+	for(int i = 0; i < n; i++){
+		int lo = r[i].l;
+		int hi = r[i].u;
+
+		if(s[lo].prev() != NULL || s[hi].next() != NULL){
+			// Solutions exist outside interval.
+			// Remove everything in range.
+			// s[lo].exclude_range(lo, hi);
+			s[0].exclude_range(lo, hi);
+			result_str[i] = '0';
+		}
+		else{
+			result_str[i] = '1';
+		}
+	}
+	result_str[n] = 0;
+
+	return n_solutions;
+}
+
+int brute_force(int n, range_t *r, char *best)
+{
+	int n_solutions = 0;
+	char cur[50001];
+	memset(best, '1', n);
+	for(int i = 0; i <= n; i++){
+		int n_ones = make_bitstring(i, n, r, cur);
+		if(n_ones == i){
+			n_solutions++;
+			if(memcmp(cur, best, n) < 0){
+				memcpy(best, cur, n);
+			}
+		}
+	}
+	best[n] = 0;
+	return n_solutions;
+}
+
+void run_test()
+{
+	range_t r[MAX_N];
+	char str[MAX_N+1];
+	int n;
+
+	n = parse_uint();
+	for(int i = 0; i < n; i++){
+		r[i].l = parse_uint();
+		r[i].u = parse_uint();
+	}
+
+	int n_solutions = find_solution(n, r, str);
+
+	printf("%i
+", n_solutions);
+	if(n_solutions > 0){
+		puts(str);
+	}
+}
+
+int main(int argc, char **argv)
+{
+	int n_test, i;
+
+#ifndef ONLINE_JUDGE
+//	freopen("byteisle_big.in","r",stdin);
+#endif
+
+	n_test = parse_uint();
+	for(i = 0; i < n_test; i++){
+		run_test();
+	}
+	return 0;
+}

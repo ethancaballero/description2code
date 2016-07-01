@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<math.h>
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%E
+",n);
+using namespace std;
+int main()
+{
+        int t;
+        s(t)
+        while(t--)
+        {
+            int p,q;
+            s(p)s(q)
+            double l;
+            l=p*p-24*q;
+            l=sqrt(l);
+            l=double(p)-l;
+           // l=l/12;
+           // p(l/12)
+            double h=(double)3*p-2*l;
+           // h=h/2;
+            //p(h/12)
+            double ans=h*(pow(l,2));
+            p(ans/1728);
+        }
+        return 0;
+}

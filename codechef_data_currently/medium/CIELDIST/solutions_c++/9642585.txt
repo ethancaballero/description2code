@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		LL D, Ds, Dt;
+		cin >> Ds >> Dt >> D;
+		if(Ds >= D + Dt){
+			cout << Ds - (D + Dt) << "
+";
+		} else if(Dt >= D + Ds){
+			cout << Dt - (D + Ds) << "
+";
+		} else if(D >= Ds + Dt){
+			cout << D - (Ds + Dt) << "
+";
+		} else cout << "0
+";
+	}
+	return 0;
+}

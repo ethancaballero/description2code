@@ -1,0 +1,12 @@
+STRING = ''.join(map(lambda x: chr(x+97), reversed(range(26))) * 4)
+  
+def shortest_k_string(k):
+ if k < 26: return STRING[103-(k+0):]
+ if k < 51: return STRING[103-(k+1):]
+ if k < 76: return STRING[103-(k+2):]
+ if k < 101: return STRING[103-(k+3):]
+  
+t = int(raw_input())
+for i in range(t):
+ k = int(raw_input())
+ print shortest_k_string(k)

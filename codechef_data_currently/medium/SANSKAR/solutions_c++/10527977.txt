@@ -1,0 +1,79 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+
+using namespace std;
+
+#define ll long long int
+
+ll isSum(ll arr[],ll n,ll sum)
+{
+	if(sum==0)
+		return 1;
+	if(n==0 && sum!=0)
+		return 0;
+
+	if(arr[n-1]>sum || arr[n-1]==0)
+		return isSum(arr,n-1,sum);
+
+	if(isSum(arr,n-1,sum-arr[n-1]))
+	{
+		arr[n-1]=0;
+		return 1;
+	}
+
+	return isSum(arr,n-1,sum);
+}
+	
+int main()
+{
+	ll t,n,i,k,j,sum,f,temp;
+
+	scanf("%lld",&t);
+
+	while(t--)
+	{
+		scanf("%lld %lld",&n,&k);
+
+		ll arr[n];
+		sum=0;
+
+		for(i=0;i<n;i++)
+			scanf("%lld",&arr[i]);
+
+		sort(arr,arr+n);
+
+		for(i=0;i<n;i++)
+			sum+=arr[i];
+
+		if(sum%k!=0)
+			printf("no
+");
+		else
+		{
+			sum/=k;
+			
+			if(arr[n-1]<=sum)
+			{
+				f=1;
+				for(i=0;i<k;i++)
+					if(!isSum(arr,n,sum))
+					{
+						f=0;
+						break;
+					}
+				if(f==1)
+					printf("yes
+");
+				else printf("no
+");
+			}
+			else printf("no
+");
+					
+		}
+
+	}
+
+	return 0;
+}

@@ -1,0 +1,42 @@
+def check_in_sequence(favor, sequence):
+    if len(favor) > len(sequence):
+        return 'No'
+    if favor == []:
+        return 'Yes'
+    if sequence == []:
+        return 'No'
+    
+    if favor[0] == sequence[0]:
+        return check_in_sequence(favor[1:],sequence[1:])
+    else:
+        return check_in_sequence(favor,sequence[1:])        
+            
+   
+def test():
+    test_cases = input()
+    final = []
+    for _ in range(test_cases):
+        sequenceLength = int(raw_input())
+        tmp1 = raw_input().split()
+        favorLength = int(raw_input())
+        tmp2 = raw_input().split()
+        sequence = []
+        favor = []
+        count = 0
+
+        # Get all input and put them to approriate list
+        for index1 in range(sequenceLength):
+            sequence.append(int(tmp1[index1]))
+        for index2 in range(favorLength):
+            favor.append(int(tmp2[index2]))
+
+
+        result = check_in_sequence(favor,sequence)
+        final.append(result)    
+    
+
+    for t in final:
+        print t
+
+
+test()

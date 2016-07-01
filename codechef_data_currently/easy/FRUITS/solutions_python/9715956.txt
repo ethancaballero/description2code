@@ -1,0 +1,5 @@
+for _ in xrange(input()):
+    n, m, k = map(int, raw_input().split())
+    if n < m:
+        n, m = m, n
+    print 0 if ((m + k > n) or m == n) else n - m - k

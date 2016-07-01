@@ -1,0 +1,35 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define pb push_back
+
+int main()
+{
+    int p, c, i, j;
+    string x;
+    cin >> x;
+    long long int dp[2][8];
+    memset(dp, 0, sizeof(dp));
+    p = 0;
+    c = 1;
+    long long int ans = 0;
+    for (i = 0; i < x.size(); ++i) {
+        for (j = 0; j < 8; ++j)
+            dp[c][j] = 0;
+        for (j = 0; j < 8; j++)
+            dp[c][(10*j+x[i])%8] += dp[p][j];
+        if (x[i] != 48)
+            dp[c][x[i]%8]++;
+        else
+            ans++;
+        ans += dp[c][0];
+        c ^= p;
+        p ^= c;
+        c ^= p;
+    }
+    cout << ans << endl;
+    return 0;
+}

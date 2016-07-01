@@ -1,0 +1,36 @@
+
+for _ in xrange(int(raw_input())):
+	n = int(raw_input())
+	l1 = map(int, raw_input().split())
+	l2 = map(int, raw_input().split())
+	s1 = sum(l1)
+	s2 = sum(l2)
+	if n == 1:
+		if s2 > s1:
+			print -1
+		if s2 == s1:
+			print 0
+		if s1 > s2:
+			print s1 - s2
+	elif n == 2:
+		if s1 != s2:
+			print -1
+		else:
+			print abs(l1[0] - l2[0])
+	else:
+		if (s1 - s2 > 0):
+			print -1
+		elif (((s2 - s1) % (n-2)) != 0):
+			print -1
+		else:
+			t = (s2 - s1)/(n-2)
+			pos = True
+			for i in xrange(len(l1)):
+				if ((t -l2[i] + l1[i]) < 0):
+					pos = False
+				elif ((t -l2[i] + l1[i]) % 2) != 0:
+					pos = False
+			if pos:
+				print t
+			else: 
+				print -1

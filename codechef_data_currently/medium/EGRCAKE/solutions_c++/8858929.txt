@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int gcd(int a,int b){
+	if(a>b) return gcd(b,a);
+	if(a==0) return b;
+	if(a==b) return a;
+	else return gcd(a,b%a);
+}
+
+int main(){
+	int t, n, m;
+	cin>>t;
+	while(t-->0){
+		cin>>n>>m;
+		if (n==1) cout<<"Yes"<<endl;
+		else if(m==1) cout<<"Yes"<<endl;
+		else if (m==0) cout<<"No 1"<<endl;
+		else if (gcd(n,m)==1) cout<<"Yes"<<endl;
+		else cout<<"No "<<(n/(gcd(n,m)))<<endl;
+	}
+}

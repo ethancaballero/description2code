@@ -1,0 +1,26 @@
+n,w,l=map(int,raw_input().split())
+a=[]
+d=[]
+for i in range(n):
+    inp=raw_input().split(" ")
+    a.append(int(inp[0]))
+    d.append(int(inp[1]))
+def valid(m):
+    r=w
+    for i in range(n):
+        h=a[i]+m*d[i]
+        if h>=l:
+            r=r-h
+            if r<=0:
+                return True
+    return False
+le=-1
+hg=10**18+11
+while hg-le>1:
+    m=(le+hg)/2
+    if valid(m):
+        hg=m
+    else:
+        le=m
+print hg
+    

@@ -1,0 +1,7 @@
+t=int(raw_input())
+while(t):
+    a,b=map(int,raw_input().split())
+    x=(8.0*(b-a))+1
+    n=int(((x**0.5)+1)/2.0) 
+    print a-n
+    t-=1  

@@ -1,0 +1,51 @@
+#include <iostream>
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+
+
+ typedef unsigned long long int lli;
+using namespace std;
+int prime [100002];
+
+
+int main(){
+    prime[1]=1;
+prime[2]=1;
+
+
+int i,count,k=3,flag=0,d=2;
+for(i=3;(i<=100001 && k<100002);i++){
+     count =0; int n=i; flag=0;
+        d=2;
+     while(n>1){
+        int temp=n;
+        if(n%d==0)count++;
+        while(n%d==0)    n/=d;
+         d++;
+         if(d*d>n && n!=1){
+            count++;
+            break;
+         }
+     }
+       prime[k]=count;
+         k++;
+
+}
+int t;
+cin>>t;
+while(t--){
+  int a,b,k1;
+
+    cin>>a>>b>>k1;
+    count=0;
+for(i=a;i<=b;i++){
+    if(prime[i]==k1)count++;
+}
+    cout<<count<<"
+";
+}
+
+return 0;
+}

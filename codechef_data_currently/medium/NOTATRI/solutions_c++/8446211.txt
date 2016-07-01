@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+int main()
+{
+
+	while(1)
+	{
+		int n,p,k,i,j;
+		scanf("%d",&n);
+		if(n==0) break;
+		int a[n],c=0;
+		for(i = 0; i < n; i++) scanf("%d",&a[i]);
+		sort(a,a+n);
+		for(i = 0; i < n-2; i++)
+		{
+			p = i+2;
+			for(j = i+1; j < n-1 ; j++){
+				k = p;
+				
+			while(k < n && a[i] + a[j] >= a[k] )
+			k++;
+			if(k== n) break;
+			else
+			c = c+(n-k);
+			p=k;
+		    }
+		    
+		}
+		printf("%d
+",c);
+	}
+	return 0;
+}

@@ -1,0 +1,135 @@
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<cstring>
+using namespace std;
+int main()
+{
+    int t,i;
+    string a,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+              int a0=0,a4=0,a5=0,a7=0,c4=0,c7=0,b0=0,b4=0,b5=0,b7=0;
+              cin>>a>>b;
+              for(i=0;i<a.length();i++)
+              {
+              if(a[i]<'4')
+              a0++;
+              else if(a[i]=='4')
+              a4++;
+              else if(a[i]<'7')
+              a5++;
+              else if(a[i]=='7')
+              a7++;
+              }
+              for(i=0;i<b.length();i++)
+              {
+              if(b[i]<'4')
+              b0++;
+              else if(b[i]=='4')
+              b4++;
+              else if(b[i]<'7')
+              b5++;
+              else if(b[i]=='7')
+              b7++;
+              }
+              while(a7>0)
+              {
+              if(b5>0)
+              {
+              b5--;
+              a7--;
+              c7++;
+              }
+              else if(b0>0)
+              {
+              b0--;
+              a7--;
+              c7++;
+              }
+              else if(b4>0)
+              {
+              b4--;
+              a7--;
+              c7++;
+              }
+              else if(b7>0)
+              {
+              a7--;
+              b7--;
+              c7++;
+              }
+              else break;
+              }
+              while(b7>0)
+              {
+              if(a5>0)
+              {
+              a5--;
+              b7--;
+              c7++;
+              }
+              else if(a0>0)
+              {
+              a0--;
+              b7--;
+              c7++;
+              }
+              else if(a4>0)
+              {
+              a4--;
+              b7--;
+              c7++;
+              }
+              else if(a7>0)
+              {
+              a7--;
+              b7--;
+              c7++;
+              }
+              else
+              break;
+              }
+              while(a4>0)
+              {
+              if(b0>0)
+              {
+              b0--;
+              a4--;
+              c4++;
+              }
+              else if(b4>0)
+              {
+              b4--;
+              a4--;
+              c4++;
+              }
+              else
+              break;
+              }
+              while(b4>0)
+              {
+              if(a0>0)
+              {
+              a0--;
+              b4--;
+              c4++;
+              }
+              else if(a4>0)
+              {
+              b4--;
+              a4--;
+              c4++;
+              }
+              else break;
+              }
+              for(i=0;i<c7;i++)
+              printf("7");
+              for(i=0;i<c4;i++)
+              printf("4");
+              printf("
+");
+    }
+    return 0;
+}

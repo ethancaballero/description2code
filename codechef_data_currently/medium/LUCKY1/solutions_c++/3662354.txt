@@ -1,0 +1,60 @@
+#include <iostream>
+#include <map>
+
+
+using namespace std;
+
+#define INF 2147483647
+#define EL cout<<endl
+#define TI freopen("test.inp","rt",stdin)
+
+
+#define FOR(i,a,b) for(int i=a;i<=b;i++) 
+#define FORD(i,a,b) for(int i=a;i>=b;i--) 
+#define REP(i,n) for(int i=0;i<n;i++)
+
+int INP,AM;
+#define BUFSIZE (1<<10)
+char BUF[BUFSIZE+1], *inp=BUF;
+#define GETCHAR(INP) {					if(!*inp) {							fread(BUF,1,BUFSIZE,stdin);			inp=BUF;					}							INP=*inp++;					}
+#define DIG(a) (((a)>='0')&&((a)<='9'))
+#define GN(j) {					    AM=0;\    
+	GETCHAR(INP); while(!DIG(INP) && INP!='-') GETCHAR(INP);	if (INP=='-') {AM=1;GETCHAR(INP);} 	j=INP-'0'; GETCHAR(INP);					while(DIG(INP)){j=10*j+(INP-'0');GETCHAR(INP);}		if (AM) j=-j;}
+
+int x,d=0, ret[100009];//ret[i]= so luong j ma f4(j)+...+f4(i)=f7(j)+...+f7(i)
+long long ret1[100009];
+map<int,int> m;
+
+void xuly()
+{
+     m[0]=1;
+     for(int i=1;i<=100000;i++)
+     {
+        int x=i;
+        while(x)
+        {
+            int c=x%10;
+            if (c==4) d++;else if (c==7) d--;   
+            x=x/10; 
+        }     
+        ret[i]=m[d];
+        ret1[i]=ret1[i-1]+ret[i];
+        m[d]++;
+     }     
+     
+     int t;cin>>t;
+     while(t--)
+     {
+         GN(x);
+         printf("%ld
+",ret1[x]);
+     }
+}
+
+ int main()
+{
+     
+    xuly();
+    
+    return 0;
+}

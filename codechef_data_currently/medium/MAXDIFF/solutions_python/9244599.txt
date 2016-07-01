@@ -1,0 +1,9 @@
+a= int(raw_input())
+for i in range(a):
+    b,c=[int(x) for x in raw_input().split()]
+    d = [int(x) for x in raw_input().split()]
+    d = sorted(d)
+    e = (sum(d[c:])-sum(d[0:c]))
+    f=   (sum(d[b-c:])-sum(d[0:b-c]))
+    print max(e,f)
+    

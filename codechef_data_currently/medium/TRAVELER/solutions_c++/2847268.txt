@@ -1,0 +1,119 @@
+#include<iostream>
+#include<map>
+using namespace std;
+int main()
+{
+    int total;
+    cin>>total;
+    string arr[total];
+    for(int i=0;i<total;i++)
+    {
+            cin>>arr[i];
+    }
+    int routes;
+    cin>>routes;
+    map<string ,int>route;
+    string  src,des;
+    int cost;
+    for(int k=0;k<routes;k++)
+    {
+            cin>>src;
+            cin>>des;
+            cin>>cost;
+            route.insert(pair<string,int>((src+des),cost));
+    }
+    int q;
+    cin>>q;
+
+    for(int l=0;l<q;l++)
+    {
+            int num;
+            cin>>num;
+            string brr[num];
+            int p=0;
+             int ans =0,flag = 0;
+             map<string,int>seen;
+             int flag2= 0;
+            for(int i=0;i<num;i++)
+            {
+                        cin>>brr[i];
+                     if(seen.find(brr[i])==seen.end())
+                     {
+                                                      seen.insert(pair<string,int>(brr[i],1));
+                     }
+                     else
+                     {
+                                             flag2 = 1;
+                     }
+                                  
+             for(int j=0;j<total;j++)
+             {
+                    if(brr[i]==arr[j])
+                    {
+                          p++;
+                          break;
+                    }
+              }
+                 if(i==num-1)
+                {
+                            if(brr[0]==brr[i])
+                            {
+                                              if(num>1)
+                                              {
+                                              flag =1;
+                                              }
+                            }
+                }
+              
+             }
+             if(flag2==0)
+             { 
+              if(flag==0)
+             {  
+               if(p==num)
+               {                      
+                  for(int j=0;j<num -1;j++)
+                    {
+                        string temp = brr[j] + brr[j+1];
+                        if(route.find(temp)!=route.end())
+                          {
+                                            ans = ans +  route[temp];
+                          }
+                        else
+                          {
+               //             cout<<"ans1"<<ans<<endl;
+                                  ans = -1;
+                                  break;
+                          }                      
+                    }
+                 }
+                else
+                {
+             //cout<<"ans2"<<ans<<endl;
+                ans =  -1;   
+                 }
+            
+            if(ans!=-1)
+            {
+                      cout<<ans<<endl;
+            }
+            else
+            {
+                     cout<<"ERROR"<<endl;
+            }
+            }
+            else
+            {
+                 cout<<"ERROR"<<endl;
+            }
+         }
+         else
+         {
+             
+                cout<<"ERROR"<<endl;
+         }
+                   
+    }
+//    system("pause");
+    return 0;
+}

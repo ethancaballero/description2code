@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		double k,ans;
+		scanf("%lf",&k);
+		if(k<0.5)
+		{
+			ans=10000*(k - 2*k*k + (double)1);
+		}
+		else
+		{
+			ans=10000*k*((double)3 - 2*k);
+		}
+		printf("%.6lf
+",ans);
+	}
+	return 0;
+}

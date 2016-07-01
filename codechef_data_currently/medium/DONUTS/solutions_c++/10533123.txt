@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+		ios::sync_with_stdio(false);
+	long long int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m,tmp;
+		cin>>n>>m;
+		vector<int> a;
+		for(int i=0;i<m;i++)
+		{
+			cin>>tmp;
+			a.push_back(tmp);
+		}
+		sort(a.begin(),a.end());
+		int stop,sum=0;
+		for(int i=0;i<m;i++)
+		{
+			sum+=a[i]+1;
+			if(sum>=m)
+			{
+				stop=i;
+				break;
+			}
+		}
+		cout<<m-stop-1<<endl;
+	}
+	return 0;
+}

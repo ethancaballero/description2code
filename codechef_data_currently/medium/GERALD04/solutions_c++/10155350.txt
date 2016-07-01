@@ -1,0 +1,27 @@
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+int main() {
+	int T;
+	cin>>T;
+	while(T--) {
+		int t1_h, t1_m, t2_h, t2_m, dist;
+		scanf("%d:%d", &t1_h, &t1_m);
+		scanf("%d:%d", &t2_h, &t2_m);
+		scanf("%d", &dist);
+
+		int r_t = ((t1_h - t2_h) * 60) + (t1_m - t2_m);
+		
+		if(2*dist <= r_t)
+			printf("%.1f %.1f
+", (float)r_t + dist, (float)r_t);
+		else if(dist <= r_t)
+			printf("%.1f %.1f
+", (float)r_t + dist, (float)(r_t + (2*dist - r_t)/(float)2));
+		else
+			printf("%.1f %.1f
+", (float)r_t + dist, (float)(dist + r_t/(float)2));
+	}
+}

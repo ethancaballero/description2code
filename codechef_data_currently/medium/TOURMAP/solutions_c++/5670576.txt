@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{   
+ int t;
+ cin>>t;
+ while(t)
+ {
+         t--;   
+    map<string , int>st;
+    map<string , int>en;
+    
+    char start[5002][53],end[5002][53];
+    int cost[5000];
+    int total,n,i;
+    scanf("%d",&n);
+    total=0;
+    for(i=1;i<n;i++)
+    {
+      scanf("%s %s %d$",&start[i],&end[i],&cost[i]);
+      total+=cost[i];
+      st[start[i]]=i;
+      en[end[i]]=i;  
+    }
+    int foundstart; 
+    // get the starting point
+    map<string , int>:: iterator it;     
+    for(it=st.begin();it!=st.end();it++)
+    {
+       if(en.find((*it).first)==en.end())
+        {
+           foundstart = (*it).second;
+             break;
+        }
+    }
+     //cout<<foundstart<<endl;  
+    for(i=1;i<n;i++)
+    {
+       cout<<start[foundstart]<<" "<<end[foundstart]<<" "<<cost[foundstart]<<"$"<<endl;
+       foundstart = st[end[foundstart]];
+    }
+    cout<<total<<"$"<<endl;
+    st.clear();
+    en.clear();
+  }
+    return 0;
+}
+    
+    
+    

@@ -1,0 +1,43 @@
+#include<iostream>
+#include<string>
+#include<climits>
+
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    string s;
+    int k,i;
+    cin>>s>>k;
+    int l=s.length();
+    int freq[26]={0};
+    for(i=0;i<l;i++)
+        freq[s[i]-'a']++;
+
+    int j,ans=INT_MAX,ct=0;
+
+    i=0;
+    while(i<26){
+        j=freq[i];
+        if(j!=0){
+                ct=0;
+        for(int g=0;g<26;g++)
+        {
+            if(freq[g]<j)
+                ct+=freq[g];
+            if(freq[g]>j+k)
+                ct+=freq[g]-(j+k);
+        }
+        if(ct<ans)
+            ans=ct;
+        }
+        i++;
+        }
+
+    cout<<ans<<endl;
+}
+    return 0;
+}

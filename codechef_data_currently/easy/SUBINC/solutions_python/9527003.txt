@@ -1,0 +1,32 @@
+def count_subarray(arr):
+	if len(arr) == 0: return 0
+	if len(arr) == 1: return 1
+	# Must have at least 2 elements.
+	subarray_sizes = []
+	start = 0
+
+	for i in range(1, len(arr)):
+		if arr[i-1] > arr[i]: # Decreasing.
+			# Subarray stops at i-1.
+			size = i-1-start
+			subarray_sizes.append(size)
+			start = i # Next subarray starts at i.
+
+	size = i-start
+	subarray_sizes.append(size)
+	plus_one = lambda n: n+1
+	subarray_sizes = [plus_one(n) for n in subarray_sizes]
+	sum_n = lambda n: n*(n+1)/2
+	subarray_count = [sum_n(n) for n in subarray_sizes]
+	return sum(subarray_count)
+
+
+test_case = int(raw_input())
+for i in range(test_case):
+	size = int(raw_input())
+	array = map(int, raw_input().split())
+	total1 = size
+	total2 = count_subarray(array)
+	print total2
+
+exit()

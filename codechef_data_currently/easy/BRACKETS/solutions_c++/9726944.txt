@@ -1,0 +1,50 @@
+#include<iostream>
+#include<string>
+#include<cstdio>
+#include<malloc.h>
+
+
+using namespace std;
+
+
+int count, rolling_count;
+int main()
+{
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		const char* s =  (char*)malloc(100000);
+		scanf( "%s", s);
+		count=0;
+		rolling_count=0;
+		
+		for(char *p = (char*)s;*p!=0;p++)
+		{
+			if(*p == '(')
+			{
+				count++;
+			}
+			else if(*p == ')')
+			{
+				count--;
+			}
+			if(rolling_count < count)
+				rolling_count = count;
+
+		}
+		for(int i =0;i<rolling_count;i++)
+		{
+			cout<<'(';
+		}
+		for(int i =0;i<rolling_count;i++)
+		{
+			cout<<')';
+		}
+		cout<<endl;
+
+
+	}
+	return 0;
+
+}

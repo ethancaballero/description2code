@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define lim 100000
+#define ll long long
+ll a[lim+1];
+bool yes(ll i)
+{
+	ll q1=i;
+	ll q2=i%10;
+	i/=10;
+	while(i>0)
+	{
+		q2=10*q2+i%10;
+		i/=10;
+	}
+	//cout<<q1<<"  "<<q2<<endl;
+	if(q1==q2)
+	return true;
+	return false;
+}
+int main()
+{
+	a[0]=0;
+	
+	for(ll i=1;i<=lim;i++)
+	  {a[i]=0;
+	  	if(yes(i))
+	  	{   //cout<<i<<endl;
+	  		a[i]+=i;
+	  	}
+	  	a[i]+=a[i-1];
+	  }
+	  ll t,l,r;
+	  cin>>t;
+	  while(t--)
+	  {
+	  	cin>>l>>r;
+	  	cout<<a[r]-a[l-1]<<endl;
+	  }
+}

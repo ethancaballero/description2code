@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int l[200],r[200],n,t,m ,x,j;
+void mov(int j ,int c);
+int main (){cin>>t;
+while (t--){m=0;
+ x=0;
+cin>>n;
+for(j=0;j<n;j++){  
+    cin>>l[j]; }
+for(j=0;j<n;j++){ 
+    cin>>r[j];  }
+for(j=0;j<n;j++){  
+if(l[j]*r[j]== x)
+mov(j,m);
+if(l[j]*r[j] >x){
+x= l[j]*r[j];
+m=j;  } }
+cout<<(m+1)<<endl; }
+return 0;}
+void mov(int j, int c){
+if(r[j]>r[c]){
+x=l[j]*r[j];
+m=j;  }}

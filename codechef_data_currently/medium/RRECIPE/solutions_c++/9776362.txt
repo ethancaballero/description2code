@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define mod 10000009ll;
+typedef long long int ll;
+
+#define for0(i,n) for(__typeof(n) i = 0; i < n ; i++)
+
+int n;
+ll ans;
+string s;
+
+int main(int argc, char const *argv[])
+{
+	ios_base::sync_with_stdio(false);
+  
+  #ifndef ONLINE_JUDGE
+  freopen("in.txt","r",stdin);
+  freopen("out.txt","w",stdout);
+  #endif
+
+  cin>>n;
+
+  while(n--)
+  {
+  	ll ans = 1;
+  	cin>>s;
+  	int len = s.size();
+
+  	for0(i , len/2)
+  	{
+  		if (s[i] == '?' && s[len-i-1] == '?')
+  		{
+  			ans = (ans * 26)%mod;
+  		}
+  		else if (s[i] != s[len-i-1] && s[i] != '?' && s[len-i-1] != '?')
+  		{
+  			ans = 0;
+  		}
+  		if (ans == 0)
+  		{
+  			break;
+  		}
+  	}
+	
+	if(len%2 == 1)
+	{
+		if (s[len/2] == '?')
+		{
+			ans = (ans * 26)%mod;
+		}
+	} 	
+
+  	cout<<ans<<endl;
+
+  }
+
+  
+	return 0;
+}

@@ -1,0 +1,7 @@
+# cook your code here
+tc = input()
+while tc:
+    tc -= 1
+    n = input()
+    arr = raw_input()
+    print n*(n-1)/2

@@ -1,0 +1,93 @@
+#define readint(n) c=gc();while(c < '0' || c > '9') {if(c=='-')sign=-1;c = gc();}while(c >= '0' && c <= '9'){n =n*10 +c-48;c=gc();}n=n*sign;sign=1;
+#define gc getchar_unlocked
+#include<stdio.h>
+#include<vector>
+#include<stack>
+#include<iostream>
+using namespace std;
+char c;
+int sign = 1;
+int main()
+	{
+		int t = 0;
+		readint(t);
+
+		while (t--)
+			{
+				int n = 0, m = 0, i, a, b;
+				int graphNo[1003] = { 0 };
+				int currentGraph = 0;
+				int flag[1003] = { 0 };
+				int minNode = 10000, maxNode = -1;
+				vector<int> vec[1003];
+				readint(n);
+				readint(m);
+
+				for (i = 0; i < m; ++i)
+					{
+						a = b = 0;
+						readint(a);
+						readint(b);
+
+						vec[a].push_back(b);
+						vec[b].push_back(a);
+
+					}
+				int current, j;
+				stack<int> node;
+
+				for (j = 0; j < n; ++j)
+					{
+						if (flag[j] == 1)
+							continue;
+						node.push(j);
+						flag[j] = 1;
+						graphNo[j] = currentGraph;
+						while (node.empty() == false)
+							{
+								current = node.top();
+								node.pop();
+								for (i = 0; i < vec[current].size(); ++i)
+									{
+										if (flag[vec[current][i]] == 0)
+											{
+												flag[vec[current][i]] = 1;
+												graphNo[vec[current][i]] =
+														currentGraph;
+												node.push(vec[current][i]);
+
+											}
+
+									}
+
+							}
+						++currentGraph;
+					}
+
+				int q = 0, x, y;
+				readint(q);
+				while (q--)
+					{
+
+						x = y = 0;
+						readint(x);
+						readint(y);
+						if (x == y)
+							printf("YO
+");
+						else
+							{
+
+								if (graphNo[x] == graphNo[y])
+									printf("YO
+");
+								else
+									printf("NO
+");
+
+							}
+					}
+
+			}
+		return 0;
+	}

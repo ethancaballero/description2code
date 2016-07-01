@@ -1,0 +1,18 @@
+import sys
+t = int(sys.stdin.readline().rstrip())
+def ciel(num):
+    cnt = [0]*3
+    for c in num:
+        if c == '8': cnt[0]+=1
+        elif c=='5': cnt[1]+=1
+        elif c=='3': cnt[2]+=1
+        else:
+            return False
+    return cnt[0]>=cnt[1]>=cnt[2]
+count = 0
+while t:
+    a = sys.stdin.readline().rstrip().split()
+    if ciel(a[len(a)-1]):
+        count+=1
+    t-=1
+print count

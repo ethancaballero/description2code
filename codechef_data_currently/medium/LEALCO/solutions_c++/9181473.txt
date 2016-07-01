@@ -1,0 +1,74 @@
+#include <iostream>
+
+using namespace std;
+
+int popcount(int n){
+    int res = 0;
+    while(n > 0){
+        n -= n & -n;
+        res++;
+    }
+    return res;
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--){
+        int n,k,m;
+        cin>>n>>k>>m;
+        int r[n],mr[n];
+        for(int i=0;i<n;i++){
+            cin>>r[i];
+        }
+        if(m == 1){
+            cout<<"-1
+";
+            continue;
+        }
+        int ans = n+1,bi;
+        for(int i=0;i<(1<<n);i++){
+            bi = popcount(i);
+
+            if(ans <= bi){
+                continue;
+            }
+            for(int j=0;j<n;j++){
+                if(i&(1<<j)){
+                    mr[j] = r[j] + 1;
+                }else{
+                    mr[j] = r[j];
+                }
+            }
+            bool isBad = false;
+            for(int j=0;j<=n-k;j++){
+                int maxr = -1;
+                for(int l=j;l<j+k;l++){
+                    if(maxr < mr[l]){
+                        maxr = mr[l];
+                    }
+                }
+                int count = 0;
+                for(int l=j;l<j+k;l++){
+                    if(maxr == mr[l]){
+                        count++;
+                    }
+                }
+                if(count >= m)
+                    isBad = true;
+            }
+            if(isBad == false){
+                ans = bi;
+            }
+        }
+        if(ans == n+1){
+            cout<<"-1
+";
+        }else{
+            cout<<ans<<"
+";
+        }
+    }
+    return 0;
+}

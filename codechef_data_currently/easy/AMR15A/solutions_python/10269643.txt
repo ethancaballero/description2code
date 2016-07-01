@@ -1,0 +1,12 @@
+length=int(raw_input())
+ele=str(raw_input()).split()
+count=0
+for x in ele:
+    if int(x)%2==0:
+        count=count+1
+if count<=len(ele)/2:
+    print "NOT READY"
+else:
+    print "READY FOR BATTLE"
+            
+    

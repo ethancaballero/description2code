@@ -1,0 +1,20 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+ 
+int main() {
+	int a,t,p,s;
+	cin>>t;
+	float h,r;
+	for(a=0;a<t;a++)
+	{
+	    cin>>p>>s;
+	    h=(p-sqrt(p*p-24*s))/12;
+	    r=s*h/2 - (p*h*h)/4+h*h*h;
+	    cout.precision(2);
+	    cout<<fixed;
+	    cout<<r<<endl;
+	}
+	return 0;
+}

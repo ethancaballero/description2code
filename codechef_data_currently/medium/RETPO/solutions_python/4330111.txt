@@ -1,0 +1,16 @@
+testCases = int(raw_input())
+while testCases > 0:
+    x, y = map(int, raw_input().strip().split())
+    steps = 0
+    x = abs(x)
+    y = abs(y)
+    minimum = min(x, y)
+    x = x - minimum
+    y = y - minimum
+    steps = 2 * (minimum)
+    if x > 0:
+        steps += 4 * (x / 2) + 3 * (x % 2)
+    if y > 0:
+        steps += 4 * (y / 2) + (y % 2)
+    print(steps)
+    testCases = testCases - 1

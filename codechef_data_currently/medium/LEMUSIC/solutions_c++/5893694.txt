@@ -1,0 +1,139 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <math.h>
+#include <cstring>
+#include <string>
+#include <string.h>
+#include <queue>
+#include <set>
+#include <stack>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<b;++i)
+#define INT(x) scanf("%d",&x)
+#define LLD(x) scanf("%lld",&x)
+#define CLR(x) memset(x,0,sizeof(x));
+#define F first
+#define S second
+#define PB push_back
+#define MOD 1000000007
+#define MAX 100005
+
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef pair<int,int> PII;
+typedef map<int,int> MII;
+typedef vector<pair<int,int> > VPII;
+typedef vector<int> VI;
+typedef vector<char> VC;
+typedef vector<LL> VLL;
+typedef vector<VI> VVI;
+typedef vector<VLL> VVL;
+
+
+
+inline void FINT(int &x)
+{
+register int c = getchar_unlocked();
+x = 0;
+int neg = 0;
+for(; ((c<48 || c>57) && c != '-'); c = getchar_unlocked());
+if(c=='-') {
+neg = 1;
+c = getchar_unlocked();
+}
+for(; c>47 && c<58 ; c = getchar_unlocked()) {
+x = (x<<1) + (x<<3) + c - 48;
+}
+if(neg)
+x = -x;
+}
+
+
+PII a[MAX];
+bool mark[MAX];
+
+bool comp(PII a, PII b)
+{
+	if(a.F==b.F) return a.S<b.S;
+	
+	return a.F<b.F;
+}
+
+ set<int> s; 
+int main()
+{
+  int test; FINT(test);
+  
+  while(test>0)
+  {
+  	--test;
+    int n; FINT(n);
+    
+    CLR(a);
+    FOR(i,0,n)
+    {
+    	int b,l; FINT(b); FINT(l);
+    
+    	a[i] = PII(l,b);
+    }
+    
+    sort(a,a+n,comp);
+    
+    
+    
+  //cout<<" pair array  = "<<endl;
+    
+  // FOR(i,0,n)
+    //	cout<<a[i].F<<" "<<a[i].S<<endl;
+    	
+    ULL ans=0;
+    
+   
+    s.clear();
+    
+    memset(mark,false,sizeof(mark));
+    
+    FOR(i,0,n)
+    {
+    	if(s.count(a[i].S)==0)
+    	{
+    	
+    		s.insert(a[i].S);
+    		if(!mark[i])
+    		{
+    			ans +=  (ULL)((ULL)(a[i].F)*(ULL)(s.size())) ;
+    			mark[i] = true ; 
+ 		}
+    		  	
+    	}
+    	
+    
+    }
+        
+    FOR(i,0,n)
+    {
+    
+    		if(!mark[i])
+    		{
+    			ans +=  (ULL)((ULL)(a[i].F)*(ULL)(s.size())) ;
+    			mark[i] = true ; 
+ 		}
+    }
+    
+    
+    printf("%llu
+",ans);
+    
+    
+  }
+
+
+
+return 0;
+}

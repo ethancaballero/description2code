@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+		int n,i,j,k,a[100],p=0,d,q,s;
+	cin>>n;
+	 while(n)
+	{
+		cin>>i;
+		for(k=0;k<i;k++)
+		{
+			cin>>a[k];
+		}
+		if(i!=1)
+		{
+		
+for(q=0;q<i-1;q++)
+{
+	for(s=0;s<i-q-1;s++)
+	{
+		  if(a[s+1]<a[s])
+		   {
+		   	  int t=a[s+1];
+		   	a[s+1]=a[s];
+		   	 a[s]=t;
+		   	 
+		   }
+	}
+}
+cout<<a[0]+a[1]<<"
+";
+}
+else cout<<a[0]<<"
+";
+n--;}
+}

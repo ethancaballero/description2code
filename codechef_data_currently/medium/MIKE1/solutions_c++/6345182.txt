@@ -1,0 +1,38 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+
+    int N,M,i,j;
+
+    cin>>N>>M;
+    int A[500][500],L;
+    long long int S=0,T=0;
+
+    for (i=0;i<N;i++)
+        for (j=0;j<M;j++) cin>>A[i][j];
+
+    cin>>L;
+    int x,y;
+    bool oks=true,okt=true;
+    for (i=0;i<L;i++)
+    {
+        cin>>x>>y;
+        x--;
+        y--;
+
+        if ((x<N&&y<M)&&oks) S+=A[x][y];
+        else {S=-1;oks=false;}
+
+        if ((y<N&&x<M)&&okt) T+=A[y][x];
+        else {T=-1;okt=false;}
+    }
+    if (S>T) cout<<S;
+    else cout<<T;
+    //cout<<"
+ S : "<<S<<" T : "<<T;
+    return 0;
+}

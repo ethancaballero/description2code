@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,i,j,k,n=1;
+//	scanf("%d",&t);
+	while(1)
+	{
+		int count = 0;
+		scanf("%d",&n);
+		if(n == 0)
+		{
+			break;
+		}
+		int a[n+1],b[n+1];
+		for(j=1;j<=n;j++)
+		{
+			scanf("%d",&a[j]);
+		}
+		for(j=1;j<=n;j++)
+		{
+			b[a[j]] = j;
+		}
+		for(j=1;j<=n;j++)
+		{
+			if(a[j] != b[j])
+			{
+				count++;
+				break;
+			}
+		}
+		if(count == 0)
+		{
+			printf("ambiguous
+");
+		}
+		else
+		{
+			printf("not ambiguous
+");
+		}
+	}
+	return 0;
+}

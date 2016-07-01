@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define rep(i, begin, end) for (__typeof(end) i = (begin) - ((begin) > (end)); i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+//Works for forward as well as backward iteration
+#define pb push_back
+#define mp make_pair
+#define all(c) (c).begin(),(c).end()
+#define F first
+#define S second
+#define MOD 1000000007
+#define newl cout<<"
+"
+#define newli "
+"
+#define itn int
+#define reutrn return
+typedef long long int lld;
+//-----------------------------------------------------
+lld gcd(lld m, lld n)
+{
+    if(n == 0)
+        return m;
+    return gcd(n, m % n);
+}
+//---------------------------------------------------------
+lld powmod(lld a,lld b)
+{
+    if(b==0)return 1;
+    lld x=powmod(a,b/2);
+    lld y=(x*x)%MOD;
+    if(b%2)
+        return (a*y)%MOD;
+    return y%MOD;
+}
+//-------------------------------------------------------
+
+int main()
+{
+    lld t,n;
+    cin>>t;
+    int a[10005]={0};
+    vector<int> b;
+    int ind=2;
+    b.pb(2);
+    b.pb(3);
+    int co[10001]={0};
+    memset(co,0,sizeof(co));
+    rep(i,4,10003)
+    {
+        int flag=0;
+        for(int j=2;j<=sqrt(i);j++)
+        {
+            if(i%j==0)
+            {
+                flag=1;
+                break;
+            }
+        }
+        if(flag==1)
+            a[i]=0;
+        else
+        {
+            b.pb(i);
+            a[i]=1;
+        }
+    }
+ /*   rep(i,0,15)
+        cout<<b[i]<<" ";
+    cout<<endl;*/
+    rep(i,0,b.size())
+    {
+        rep(j,0,b.size())
+        {
+            int num1=b[i]+2*b[j];
+            if(num1<10001)
+            {
+                    co[num1]++;
+            }
+        }
+    }
+ /*   rep(i,0,20)
+        cout<<co[i]<<" ";
+    cout<<"
+";*/
+
+    while(t--)
+    {
+        lld count=0;
+        cin>>n;
+       /* rep(i,0,b.size())
+        {
+            int num=n-b[i];
+            if(num%2==0)
+            {
+            int ind=lower_bound(all(b),num/2)-b.begin();
+            if(ind!=b.size())
+            {
+                if(b[ind]==num/2)
+                count++;
+            }
+            }
+        }
+        cout<<count<<"
+";*/
+        cout<<co[n]<<"
+";
+    }
+    return 0;
+}

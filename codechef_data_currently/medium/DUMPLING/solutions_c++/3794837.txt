@@ -1,0 +1,31 @@
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+typedef long long ll;
+
+ll gcd(ll a, ll b) {
+    if (b == 0LL) return a;
+    else return gcd(b, a % b);
+}
+
+int main() {
+    int t; ll a, b, c, d, k;
+    scanf("%d", &t);
+    while(t--) {
+        scanf("%lld%lld%lld%lld%lld", &a, &b, &c, &d, &k);
+        ll gcd1 = gcd(max(a, b), min(a, b));
+        ll gcd2 = gcd(max(c, d), min(c, d));
+        ll gcd3 = gcd(max(gcd1, gcd2), min(gcd1, gcd2));
+        // lcm of gcd1 & gcd2 = gcd1 * gcd2 / gcd(gcd1, gcd2)
+        ll s = gcd1 / gcd3;
+        ll t = k / s;
+        t = t / gcd2;
+        t <<= 1;
+        t += 1;
+        printf("%lld
+", t);
+    }
+    return 0;
+}

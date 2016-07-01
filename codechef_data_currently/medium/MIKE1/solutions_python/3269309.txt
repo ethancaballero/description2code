@@ -1,0 +1,45 @@
+def val_at(k,l):
+	return a[k-1][l-1] if not(k>n or l>m) else -1
+
+mn=raw_input()
+
+n=int(mn.split(" ")[0])
+m=int(mn.split(" ")[1])
+
+a=[[0 for x in range(m)] for y in range(n)]
+
+for i in range(n):
+	r=raw_input()
+	a[i]=[int(x) for x in r.split(" ")]
+
+l=int(raw_input())
+
+ij=[]
+
+e1=0
+e2=0
+e1f=False
+e2f=False
+
+for i in range(l):
+	r=raw_input()
+	k=int(r.split(" ")[0])
+	l=int(r.split(" ")[1])
+	
+	s1s=val_at(k,l)
+	
+	if(not e1f): 
+		e1f=(s1s<0)
+		e1=e1+s1s
+	if(e1f):
+		e1=-1	
+
+	s2s=val_at(l,k)
+	
+	if(not e2f):  
+		e2f=(s2s<0)
+		e2=e2+s2s
+	if(e2f):
+		e2=-1	
+
+print max(e1,e2)

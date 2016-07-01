@@ -1,0 +1,38 @@
+ The Chef is given a sequence of N integers A1,  A2, ..., AN. He has to process Q queries on the above sequence. Each query is represented by three integers:
+
+
+L R K => report cardinality of { i : K divides Ai, L \u2264 i \u2264 R }. In other words, how many integers in the subsequence starting at Lth element and ending at Rth element are divisible by K.
+
+
+
+Input
+The first line of the input contains two space separated integer N  and Q.
+The following line contains N space separated integers giving the sequence A1,  A2, ..., AN.
+Then there will be Q lines each containing three space separated integers L R K, representing a query.
+\u00a0
+Output
+For each query output the result in one line.
+Constraints
+
+1 \u2264 N, Q  \u2264 100000 (105)
+1 \u2264 Ai  \u2264 100000 (105)
+ 1 \u2264 L \u2264 R \u2264 N
+1 \u2264 K  \u2264 100000 (105)
+
+\u00a0
+Example
+Input:
+8 5
+3 5 1 4 6 9 12 6
+3 6 2
+3 6 4
+4 8 3
+2 6 7
+8 8 6
+
+Output:
+2
+1
+4
+0
+1

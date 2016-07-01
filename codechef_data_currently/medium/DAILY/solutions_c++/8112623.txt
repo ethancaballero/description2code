@@ -1,0 +1,35 @@
+#include<iostream>
+#include<cstring>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+int fact(int n)
+{
+	int f=1;
+	while(n)
+	{
+		f*=n;
+		n--;
+	}
+	return f;
+}
+
+int main()
+{
+	int X,N,i,ans=0,count;
+	char arr[55];
+	scanf("%d %d",&X,&N);
+	while(N--)
+	{
+		scanf("%s",arr);
+		for(i=0;i<9;i++)
+		{
+			count=arr[4*i]+arr[4*i+1]+arr[4*i+2]+arr[4*i+3]+arr[54-(2*i+1)]+arr[54-(2*i+2)]-6*'0';
+			count = 6-count;
+			if(X>count)continue;
+			ans = ans + fact(count)/(fact(X)*fact(count-X));
+		}
+	}
+	printf("%d",ans);
+	return 0;
+}

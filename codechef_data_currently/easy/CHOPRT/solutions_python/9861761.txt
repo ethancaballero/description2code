@@ -1,0 +1,13 @@
+r=int(raw_input())
+L=[]
+for i in range(r):
+    x=raw_input()
+    l=x.split()
+    if int(l[0])<int(l[1]):
+        L.append('<')
+    elif int(l[0])>int(l[1]):
+        L.append('>')
+    else:
+        L.append('=')
+for i in range(r):
+    print L[i]

@@ -1,0 +1,39 @@
+#### CodeChef
+#### Number Game Revisited
+#### 2016.03.28 Time flies so fast...
+##
+##def primeSubtraction(n):
+##    if n % 4 == 1:
+##        return 'ALICE'
+##    else:
+##        return 'BOB'
+##    
+##
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    num = int(raw_input())
+##    print primeSubtraction(num)
+
+## CodeChef
+## Lucky lucky number
+## 2016.03.28
+    
+
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    num = int(raw_input())
+
+
+def goodOrbad(n):
+    if '010' in n or '101' in n:
+        return 'Good'
+    else:
+        return 'Bad'
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    string = raw_input()
+    print goodOrbad(string)

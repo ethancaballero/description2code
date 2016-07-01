@@ -1,0 +1,10 @@
+k=input()
+area=list()
+for i in xrange(k):
+    a,b,c,d,e,f=[float(x) for x in raw_input().split()]
+    ans=abs((a*(d-f)+c*(f-b)+e*(b-d))/2)
+    area.append(ans)
+area.reverse()
+m= 1+area.index(max(area))
+n= 1+area.index(min(area))
+print len(area)-n+1,len(area)+1-m

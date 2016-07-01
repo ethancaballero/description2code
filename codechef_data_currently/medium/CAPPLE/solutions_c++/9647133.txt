@@ -1,0 +1,25 @@
+//CAPPLE
+#include<bits/stdc++.h>
+using namespace std;
+int cnt[100010];
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int N;
+		cin >> N;
+		memset(cnt, 0, sizeof cnt);
+		for(int i = 0;i < N;++i){
+			int x;
+			cin >> x;
+			++cnt[x];
+		}
+		int ans = 0;
+		for(int i = 100009;i >= 0;--i){
+			if(cnt[i] > 0) ++ans;
+		}
+		cout << ans << "
+";
+	}
+	return 0;
+}

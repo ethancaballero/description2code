@@ -1,0 +1,86 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<cstdio>
+using namespace std;
+
+vector<int>a[100005],b[100005];
+int dist[100005],visited[100005];
+int q[300000], q_st, q_size;
+int main()
+{
+
+int j,s,t;
+int m,n,i,x,y;
+scanf("%d %d",&n,&m);
+
+for(i=0;i<m;i++)
+{
+
+    scanf("%d %d",&x,&y);
+    x--;
+    y--;
+    a[x].push_back(y);
+    b[y].push_back(x);
+
+}
+
+for(i=0;i<n;i++)
+{
+    visited[i]=0;
+    dist[i]=999999;
+}
+
+
+
+q_st=150000; q_size=0;
+q[q_st+q_size++]=0;
+
+
+dist[0]=0;
+
+while(q_size)
+{
+s=q[q_st++];
+q_size--;
+if(visited[s]++) continue;
+    for(i=0;i<a[s].size();i++)
+    {
+        j=a[s][i];
+        if(dist[j]>dist[s])
+            {
+            dist[j]=dist[s];
+            q[--q_st]=j;
+            q_size++;
+            }
+
+    }
+
+    for(i=0;i<b[s].size();i++)
+    {
+
+        j=b[s][i];
+
+            if(dist[j]>dist[s]+1)
+           {
+
+            dist[j]=dist[s]+1;
+            q[q_st+q_size++]=j;
+            }
+
+
+    }
+    }
+
+    if(dist[n-1]==999999)
+        dist[n-1]=-1;
+
+    printf("%d
+",dist[n-1]);
+return 0;
+    }
+
+
+
+
+

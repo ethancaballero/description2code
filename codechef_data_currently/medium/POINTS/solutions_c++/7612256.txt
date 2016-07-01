@@ -1,0 +1,42 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<math.h>
+#include<iomanip>
+using namespace std;
+class myfunct
+{
+    public:
+        bool operator()(const pair< int,int > a,const pair< int,int > b)
+        {
+            if(a.first==b.first)
+                return (a.second>b.second);
+            else
+                return(a.first<b.first);
+        }
+};
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        double q=0;
+        vector< pair< int,int  > >v;
+        int z,i,n,Z;
+        cin>>n;
+        for(i=0;i<n;i++)
+        {
+            cin>>z>>Z;
+            v.push_back(make_pair(z,Z));
+        }
+        sort(v.begin(),v.end(),myfunct());
+        for(i=0;i<n-1;i++)
+        {
+            q+=sqrt(pow(v[i].first-v[i+1].first,2)+pow(v[i].second-v[i+1].second,2));
+        }
+        cout<<setprecision(2)<<fixed<<q<<"
+";
+    }
+    return 0;
+}

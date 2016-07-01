@@ -1,0 +1,62 @@
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int t, n;
+    scanf("%i", &t);
+    while(t--)
+    {
+    	scanf("%i", &n);
+    	char board[n+1][n+1];
+    	int values[n][n], maxval = 1;
+    	memset(values, 0, sizeof(values));
+    	for(int i = 0; i < n; i++)
+    	{
+    		scanf("%s", board[i]);
+    	}
+    	for(int i = 0; i < n; i++)
+    	{
+    		for(int j = 0; j < n; j++)
+    		{
+    			if(i == n-1)
+    			{
+    				if(values[j][i] > maxval)
+    				{
+    					maxval = values[j][i];
+    				}
+    				continue;
+    			}
+    			if(board[j][i] == 'K')
+    			{
+    				values[j][i] = 1;
+    			}
+    			if(!values[j][i])
+    			{
+    				continue;
+    			}
+    			if(j+2 < n && i+1 < n)
+    			{
+    				values[j+2][i+1] = max(values[j+2][i+1], values[j][i]+(board[j+2][i+1] == 'P' ? 1 : 0));
+    			}
+    			if(j-2 >= 0 && i+1 < n)
+    			{
+    				values[j-2][i+1] = max(values[j-2][i+1], values[j][i]+(board[j-2][i+1] == 'P' ? 1 : 0));
+    			}
+    			if(j+1 < n && i+2 < n)
+    			{
+    				values[j+1][i+2] = max(values[j+1][i+2], values[j][i]+(board[j+1][i+2] == 'P' ? 1 : 0));
+    			}
+    			if(j-1 >= 0 && i+2 < n)
+    			{
+    				values[j-1][i+2] = max(values[j-1][i+2], values[j][i]+(board[j-1][i+2] == 'P' ? 1 : 0));
+    			}
+    		}
+    	}
+    	printf("%i
+", maxval-1);
+    }
+    return 0;
+}

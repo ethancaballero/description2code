@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+int max(int a,int b)
+{
+return (a>b)?a:b;
+}
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+long long int n;
+cin>>n;
+long long int w[n],ans;
+for(int i=0;i<n;i++)
+{
+cin>>w[i];
+}
+ans=w[n-1];
+for(int i=n-2;i>=0;i--)
+{
+ans=max(w[i],ans+1);
+}
+cout<<ans<<endl;
+}
+return 0;
+}

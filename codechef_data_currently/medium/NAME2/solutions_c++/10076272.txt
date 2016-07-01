@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool find(string a,string b){
+    int l1=a.length();
+    int l2=b.length();
+    int i=0,j=0;
+    while(i<l1 && j<l2){
+        if(a[i]==b[j]){
+            i++;
+            j++;
+        }
+        else{
+            j++;
+        }
+    }
+    if(j==l2 && i!=l1){
+        return false;
+    }
+    return true;
+    
+}
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string m,w;
+        cin>>m>>w;
+        if(m.length()>w.length() && find(w,m)==1){
+            cout<<"YES"<<endl;
+        }
+        else if(find(m,w)==1){
+            cout<<"YES"<<endl;
+        }
+        else{
+            cout<<"NO"<<endl;
+        }
+        
+    }
+}

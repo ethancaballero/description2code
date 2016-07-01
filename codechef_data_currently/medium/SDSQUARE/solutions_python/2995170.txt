@@ -1,0 +1,40 @@
+#SDSQUARE
+#2013-11-16
+#http://discuss.codechef.com/problems/SDSQUARE
+
+from math import sqrt
+
+def has_perfect_digits(nb):
+    perfect_digit = [0,1,4,9]
+    for digit in str(nb):
+        if (int(digit) in perfect_digit) == False:
+            return False
+    return True
+
+def list_sdsquares(a,b):
+    sdsquares = []
+    for i in range (a,int(sqrt(b))+1):
+        sq = i*i
+        if has_perfect_digits(sq):
+            sdsquares.append(sq)
+    return sdsquares
+
+def count_sdsquares(a,b,list_sdsquares):
+    index = 0
+    count = 0
+    while list_sdsquares[index] < a:
+        index += 1
+    try:
+        while list_sdsquares[index] <= b:
+            count += 1
+            index += 1
+    except IndexError:
+        pass
+    return count
+
+list_sq = list_sdsquares(1,10**10)
+
+t = input()
+for case in range(t):
+    a,b = map(int,raw_input().split())
+    print count_sdsquares(a,b,list_sq)

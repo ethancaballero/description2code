@@ -1,0 +1,32 @@
+#include <iostream>
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+
+
+ typedef unsigned long long int lli;
+using namespace std;
+
+int main(){
+int t;
+cin>>t;
+while(t--){
+
+    lli n,sum=0,min=1000001,i,ans;
+    cin>>n;
+    lli p[n+1];
+    for(i=1;i<=n;i++){
+        cin>>p[i];
+        sum+=p[i];
+        if(p[i]<min) min=p[i];
+    }
+    sum-=min;
+    ans=sum*min;
+    cout<<ans<<"
+" ;
+}
+
+
+return 0;
+}

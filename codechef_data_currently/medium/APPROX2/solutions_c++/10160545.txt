@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main()
+{
+    vector<ll> a(1000);
+    ll t,n,sum,no,k,i,p,j;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>k;
+        for(i=0;i<n;i++)
+            cin>>a[i];
+        no=0;
+        sum=abs(a[0]+a[1]-k);
+        for(i=0;i<n;i++)
+        {
+            for(j=i+1;j<n;j++)
+            {
+                p=abs(a[i]+a[j]-k);
+                if(p==sum)
+                    no++;
+                else if(p<sum)
+                {
+                    no=1;
+                    sum=p;
+                }
+            }
+        }
+        cout<<sum<<" "<<no<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,5 @@
+t=input()
+while t:
+	ds,dt,d=map(int,raw_input().split())
+	print max(0,d-ds-dt,dt-ds-d,ds-dt-d)
+	t=t-1

@@ -1,0 +1,9 @@
+t=int(raw_input())
+for i in range(0,t):
+    s=raw_input()
+    a=[]
+    #a.append(s[0])
+    for p in range(0,len(s)):
+        if s[p] not in a:
+            a.append(s[p])
+    print len(a)

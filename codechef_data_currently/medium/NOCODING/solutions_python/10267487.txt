@@ -1,0 +1,15 @@
+test_case = int(raw_input())
+for t in range(test_case):
+	n = raw_input().strip()
+	s = ''
+	instruction = 2
+	for i in range(1,len(n)):
+		if ord(n[i]) >= ord(n[i-1]):
+			instruction += ord(n[i]) - ord(n[i-1]) + 1
+		else:
+			instruction += 26 + ord(n[i]) - ord(n[i-1]) + 1
+		# print instruction
+	if instruction <= 11* len(n):
+		print 'YES'
+	else:
+		print 'NO'

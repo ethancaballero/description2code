@@ -1,0 +1,18 @@
+NumOfTests = int(raw_input())
+myResults = []
+
+for i in range(0,NumOfTests):
+	NumOfFiles = int(raw_input())
+	myFiles = raw_input()
+	myFiles = myFiles.split()
+	
+	allocated = long(myFiles[0])
+	
+	for j in range(0,NumOfFiles-1):
+		if long(myFiles[j+1]) > long(myFiles[j]):
+			allocated = allocated + (long(myFiles[j+1]) - long(myFiles[j]))
+
+	myResults.extend([long(allocated)])
+
+for i in range(0, NumOfTests):
+	print myResults[i]

@@ -1,0 +1,39 @@
+from sys import stdin
+
+b = stdin.readline().split() 
+no_chef=int(b[0])
+no_mails=int(b[1])
+d={}
+chef={}
+country={}
+
+for i in range(0,no_chef):
+    b = stdin.readline().split()
+    d[b[0]]=b[1]
+    chef[b[0]]=0
+    country[b[1]]=0
+chf=""
+cntry=""
+
+for i in range(0,no_mails):
+    s = stdin.readline().split()
+    #print chef[s[0]],country[d[s[0]]]
+    chef[s[0]]=chef[s[0]]+1
+    country[d[s[0]]]=country[d[s[0]]]+1
+    if i==0:
+        chf=s[0]
+        cntry=d[s[0]]
+    else:
+        if chef[s[0]]>chef[chf]:
+            chf=s[0]
+        elif chef[s[0]]==chef[chf]:
+            if s[0]<chf:
+                chf=s[0]
+        if country[d[s[0]]]>country[cntry]:
+            cntry=d[s[0]]
+        elif country[d[s[0]]]==country[cntry]:
+            if d[s[0]]<cntry:
+                cntry=d[s[0]]
+print cntry
+print chf
+        

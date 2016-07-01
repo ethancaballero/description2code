@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef pair<int,int> II;
+typedef vector< II > VII;
+typedef vector<int> VI;
+typedef vector< VI > VVI;
+typedef long long int ll;
+
+#define PB push_back
+#define MP make_pair
+#define F first
+#define S second
+#define SZ(a) (int)(a.size())
+#define ALL(a) a.begin(),a.end()
+#define SET(a,b) memset(a,b,sizeof(a))
+
+#define si(n) scanf("%d",&n)
+#define dout(n) printf("%d
+",n)
+#define sll(n) scanf("%lld",&n)
+#define lldout(n) printf("%lld
+",n)
+#define fast_io ios_base::sync_with_stdio(false);cin.tie(NULL)
+
+#define TRACE
+
+#ifdef TRACE
+#define trace(...) __f(#__VA_ARGS__,__VA_ARGS__)
+/*template <typename Arg1>
+void __f(const char * name, Arg1&& arg1){
+    cerr << name << " : " << arg1 << std::endl;
+}
+template <typename Arg1, typename... Args>
+void __f(const char* names, Arg1&& arg1, Args&&... args){
+    const char* comma = strchr(names + 1,',');cerr.write(names,comma - names) << " : " << arg1<<" | ";__f(comma+1,args...);
+}*/
+#else
+#define trace(...)
+#endif
+int max(int p,int q)
+{
+    return (p>q)?p:q;
+}
+int min(int p,int q)
+{
+    return (p<q)?p:q;
+}
+
+int main()
+{
+    char a[100005];
+    int t,min1,fre[36],n,k,max1,ans,count,i,j;
+    si(t);
+    while(t--)
+    {
+        cin >> a;
+        si(k);
+        for(i=0;i<26;i++)
+        {
+            fre[i]=0;
+        }
+        n=strlen(a);
+        for(i=0;i<n;i++)
+        {
+            fre[a[i]-'a']++;
+        }
+        min1=INT_MAX;
+        max1=0;
+        for(i=0;i<26;i++)
+        {
+            if(fre[i]!=0)
+            {
+                min1=min(min1,fre[i]);
+            }
+            max1=max(max1,fre[i]);
+        }
+        //dout(min1);
+       // dout(max1);
+        ans=INT_MAX;
+        for(i=min1;i<=max1-k+1;i++)
+        {
+            count=0;
+            for(j=0;j<26;j++)
+            {
+                if((fre[j]>i+k) && fre[j]!=0)
+                {
+                    count+=fre[j]-i-k;
+                }
+                else if(fre[j]<i && fre[j]!=0)
+                {
+                    count+=fre[j];
+                }
+            }
+          //  dout(count);
+            if(count<ans)
+            {
+                ans=count;
+            }
+        }
+        if(ans==INT_MAX)
+        {
+            ans=0;
+        }
+        dout(ans);
+    }
+    return 0;
+}
+

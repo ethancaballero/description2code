@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+int main(){
+    int n,m;
+    cin>>n>>m;
+    int f1=0,f2=0;
+    ll arr[n+1][m+1];
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++) cin>>arr[i][j];
+    }
+    int q;
+    cin>>q;
+    vector<pair<int,int> > fwd,bkw;
+    while(q--){
+        int x,y;
+        cin>>x>>y;
+        if(x>n || y>m || x<1 || y<1){
+            f1=1;
+        }
+        else fwd.push_back(make_pair(x,y));
+        if(x>m || y>n || x<1 || y<1){
+            f2=1;
+        }
+        else bkw.push_back(make_pair(y,x));
+    }
+    ll val1=-1,val2=-1;
+    if(!f1){
+        val1=0;
+        int sz=fwd.size();
+        for(int i=0; i<sz; i++) val1 = val1 + arr[fwd[i].first-1][fwd[i].second-1];
+    }
+    if(!f2){
+        val2=0;
+        int sz=bkw.size();
+        for(int i=0; i<sz; i++) val2= val2 + arr[bkw[i].first-1][bkw[i].second-1];
+    }
+    cout<<max(val1,val2);
+}

@@ -1,0 +1,35 @@
+'''
+Created on 01-Jun-2015
+
+@author: Venkatesh
+'''
+
+
+def read_int_list():
+    return [int(x) for x in raw_input().split()]
+
+
+def get_no_of_squares(mat, m, n):
+    cnt = 0
+    for i in xrange(m):
+        for j in xrange(n):
+            k = 1
+            while (i + k) < m and (j + k) < n:
+                if mat[i][j] == mat[i+k][j] and                    mat[i][j] == mat[i][j+k] and                    mat[i][j] == mat[i+k][j+k]:
+                    cnt += 1
+                k += 1
+    return cnt
+
+
+def main():
+    tc = int(raw_input())
+    for _ in xrange(tc):
+        m, n = read_int_list()
+        mat = []
+        for _ in xrange(m):
+            mat.append(raw_input())
+        print get_no_of_squares(mat, m, n)
+
+
+if __name__ == '__main__':
+    main()

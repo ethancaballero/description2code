@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+long int a[110][110],maxc[100];
+typedef struct
+{
+	long int minr;
+	int minj;
+}min;
+
+min b[100];
+
+int main()
+{
+	int r,c,i,j,jm;
+	long int m,max,value;
+	scanf("%d%d",&r,&c);
+	for(i=0;i<r;i++)
+	{
+		m=100000000;
+		for(j=0;j<c;j++)
+		{
+			scanf("%ld",&a[i][j]);
+			if(a[i][j]<m)
+			{
+			m=a[i][j];
+			jm=j;
+			}
+			b[i].minr=m;
+			b[i].minj=jm;
+		}
+	}
+	for(i=0;i<c;i++)
+	{
+		maxc[i]=0;
+		for(j=0;j<r;j++)
+		{
+			if(a[j][i]>maxc[i])
+			maxc[i]=a[j][i];
+		}
+	}
+	value=0;
+	for(i=0;i<r;i++)
+	{
+		if(b[i].minr==maxc[b[i].minj])
+		{
+			value=b[i].minr;
+			break;
+		}
+		for(j=b[i].minj;j<c;j++)
+		{
+			if(a[i][j]==b[i].minr && j!=b[i].minj && a[i][j]==maxc[j])
+			{
+				value=b[i].minr;
+				goto LOOP;
+			}
+			
+			
+		}
+	}
+LOOP:	if(value==0)
+	printf("GUESS
+");
+	else
+	printf("%ld
+",value);
+	return 0;
+	
+}

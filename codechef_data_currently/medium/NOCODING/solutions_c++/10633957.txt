@@ -1,0 +1,27 @@
+//Removed unnecessary stuff and cleaned the code. Won't affect anything probably
+#include<iostream>
+#include<ctype.h>
+#include<cstring>
+#include<string>
+using namespace std;
+int main(){
+ios::sync_with_stdio(false);
+int t,ch,ch2,ins;
+char x[1001];
+cin>>t;
+while(t--){
+    cin>>x;
+    ch=x[0] - 'a';
+    ins=2;
+    for(int i=1;x[i];i++){
+        ch2=x[i] - 'a';
+        while(ch%26!=ch2){
+            ch=(ch+1)%26;
+            ins++;
+        }
+        ins++;
+    }
+    if(ins<=11*strlen(x)){cout<<"YES"<<endl;}
+    else cout<<"NO"<<endl;
+}
+}

@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int rankk,laddu=0,t,severity,activity;
+    char origin[20];
+    char a[20];
+    cin>>t;
+    while(t)
+    {
+        laddu=0;
+        cin>>activity;
+        cin>>origin;
+        while(activity)
+        {
+
+            cin>>a;
+            if(a[0]=='C'&&a[8]=='W')
+            {
+
+                cin>>rankk;
+                if(rankk<=20)
+                    laddu=laddu+320-rankk;
+                else
+                    laddu=laddu+300;
+            }
+            else if(a[0]=='T')
+                laddu+=300;
+            else if(a[0]=='B')
+            {
+
+                cin>>severity;
+                laddu+=severity;
+            }
+            else
+                laddu+=50;
+            activity-=1;
+        }
+        if(origin[0]=='I')
+            cout<<(laddu/200);
+        else
+            cout<<(laddu/400);
+        cout<<"
+";
+        t=t-1;
+
+    }
+
+
+}

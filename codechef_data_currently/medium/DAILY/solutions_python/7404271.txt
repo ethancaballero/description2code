@@ -1,0 +1,25 @@
+def fac(x):
+	f=1
+	for i in range(2,x+1):
+		f*=i
+	return f
+def ncr(n,r):
+	return fac(n)/(fac(n-r)*fac(r))
+x,n=map(int,raw_input().split())
+a=[0]*7
+for asd in range(n):
+	s=raw_input()
+	a[6-(int(s[0])+int(s[1])+int(s[2])+int(s[3])+int(s[53])+int(s[52]))]+=1
+	a[6-(int(s[4])+int(s[5])+int(s[6])+int(s[7])+int(s[51])+int(s[50]))]+=1
+	a[6-(int(s[8])+int(s[9])+int(s[10])+int(s[11])+int(s[49])+int(s[48]))]+=1
+	a[6-(int(s[12])+int(s[13])+int(s[14])+int(s[15])+int(s[47])+int(s[46]))]+=1
+	a[6-(int(s[16])+int(s[17])+int(s[18])+int(s[19])+int(s[45])+int(s[44]))]+=1
+	a[6-(int(s[20])+int(s[21])+int(s[22])+int(s[23])+int(s[43])+int(s[42]))]+=1
+	a[6-(int(s[24])+int(s[25])+int(s[26])+int(s[27])+int(s[41])+int(s[40]))]+=1
+	a[6-(int(s[28])+int(s[29])+int(s[30])+int(s[31])+int(s[39])+int(s[38]))]+=1
+	a[6-(int(s[32])+int(s[33])+int(s[34])+int(s[35])+int(s[37])+int(s[36]))]+=1
+s=a[x]
+for i in range(x+1,7):
+	temp=ncr(i,x)*a[i]
+	s=s+temp
+print s

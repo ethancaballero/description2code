@@ -1,0 +1,19 @@
+#include <stdio.h>
+ 
+int main () {
+   long long a, r;
+ 
+   scanf("%lld", &a);
+ 
+   r = a % 6;
+   
+   if (r == 0 || r == 1 || r == 3)
+      printf("yes");
+   else
+      printf("no");   
+ 
+   return 0;
+}
+ 
+ 
+ 

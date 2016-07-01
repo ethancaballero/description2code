@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+int main()
+{ ios::sync_with_stdio(false);
+  int t;
+  cin>>t;
+  char c[7];
+  int a[6];
+  while(t--)
+  { for(int i=0;i<6;++i)
+    { cin>>c;
+      if(c[0]=='b')
+      { if(c[2]=='a')
+        { a[i]=1;
+        }
+        else a[i]=2;
+      }
+      else if(c[0]=='r')
+      { a[i]=3;
+      }
+      else if(c[0]=='g')
+      { a[i]=4;
+      }
+      else if(c[0]=='y')
+      { a[i]=5;
+      }
+      else
+      { a[i]=6;
+      }
+    }
+    if(a[0]==a[2]||a[0]==a[3])
+    { if(a[0]==a[4]||a[0]==a[5])
+      { cout<<"YES
+"; continue;
+      }
+    }
+    if(a[1]==a[2]||a[1]==a[3])
+    { if(a[1]==a[4]||a[1]==a[5])
+      { cout<<"YES
+"; continue;
+      }
+      else cout<<"NO
+";
+    }
+    else cout<<"NO
+";
+  }
+}

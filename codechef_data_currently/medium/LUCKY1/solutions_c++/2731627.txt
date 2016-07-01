@@ -1,0 +1,61 @@
+
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#include<stdlib.h>
+#include<vector>
+#include<map>
+#include<stack>
+#include<algorithm>
+#include<set>
+#include<string>
+#include<queue>
+#include<cctype>
+#include<sstream>
+#include<iostream>
+
+using namespace std;
+
+#define PB push_back
+#define FOR(i,a,b) for(i=(a);i<(b);i++)
+#define REP(i,n) for(i=0;i<(n);i++)
+#define ALL(X) (X).begin(),(X).end()
+#define SZ(X) (int) (X).size()
+#define MAX 100001
+
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pi;
+
+int R[MAX],cnt[5*MAX];
+
+int func(int i,int j){
+  int k=0;
+  while(i!=0) { if(i%10==j) k++;i/=10; }
+  return k;
+}
+
+#define x first
+#define y second
+
+int main() {
+  int test,i,j,k,cnt4=0,cnt7=0,N,res=0;
+   cnt[0]++;
+    FOR(i,1,MAX){
+      cnt4+=func(i,4);
+      cnt7+=func(i,7);
+      res+=cnt[cnt4-cnt7];
+      R[i]=res;
+      cnt[cnt4-cnt7]++;
+    }
+  scanf("%d",&test);
+
+  REP(i,test){
+    scanf("%d",&N);
+    printf("%d
+",R[N]);
+    }
+
+return 0;
+  }
+

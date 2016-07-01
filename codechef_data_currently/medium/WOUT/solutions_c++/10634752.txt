@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long arr[1000001];
+long long dp[1000001];
+long long ma[1000001];
+long long mi[1000001];
+int main()
+{
+    long long t,n,i,j,k,a,b,h;
+    scanf("%lld",&t);
+    while(t--)
+    {
+         scanf("%lld",&n);
+          scanf("%lld",&h);
+      //  cin>>n>>h;
+      for(i=0;i<n;i++)
+      {
+          mi[i]=0;
+          ma[i]=0;
+      }
+        k=n;
+        while(k--)
+        {
+             scanf("%lld",&a);
+              scanf("%lld",&b);
+           // cin>>a>>b;
+            ma[a]+=1;
+            mi[b+1]+=1;
+        }
+        long long cur=n;
+        for(i=0;i<n;i++)
+        {
+            cur+=mi[i]-ma[i];
+            arr[i]=cur;
+        }
+        j=0;
+        dp[j]=0;
+        for(i=0;i<h;i++)
+        {
+            dp[j]=dp[j]+arr[i];
+        }
+        for(j=1;j<=n-h;j++)
+        {
+            dp[j]=dp[j-1]+arr[h+j-1]-arr[j-1];
+        }
+        long long ma=dp[0];
+        for(i=1;i<=n-h;i++)
+        {
+            if(dp[i]<ma)
+                ma=dp[i];
+        }
+        cout<<ma;
+        printf("
+");
+      //  cout<<ma<<"
+";
+       // for(i=y;i<=x;i++)
+          //  arr[i]=0;
+    }
+}

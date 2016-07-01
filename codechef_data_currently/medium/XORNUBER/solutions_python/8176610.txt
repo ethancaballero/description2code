@@ -1,0 +1,15 @@
+import sys
+ 
+def main():
+    t=int(raw_input())
+    for i in range(t):
+        num=int(raw_input())
+        if num==1:
+            print 2
+        else:
+            t=num/2
+            if (t^(t+1))==num:
+                print t
+            else:
+                print -1
+main() 

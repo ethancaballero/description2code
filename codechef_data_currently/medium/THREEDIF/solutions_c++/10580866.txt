@@ -1,0 +1,20 @@
+#include<algorithm>
+#include<iostream>
+using namespace std;
+int main()
+{ long long int a[3],t,ans,mod=1000000007,i;
+  cin>>t;
+  while(t--)
+  { ans=1;
+    for(i=0;i<3;i++)
+    cin>>a[i];
+    
+    sort(a,a+3);
+    for(i=0;i<3;i++)
+    
+    {ans=(ans*((a[i]-i)%mod))%mod;
+    }
+    cout<<ans<<endl;
+  }
+  return 0;
+}

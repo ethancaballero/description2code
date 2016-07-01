@@ -1,0 +1,15 @@
+T = int(raw_input())
+for _ in xrange(T):
+    s = raw_input()
+    ans = 0
+    temp = 0
+    ch = 0
+    for i in xrange(len(s)):
+        if s[i]=='.':
+            ch+=1
+        else:
+            if ch>temp:
+                ans+=1
+                temp=ch
+            ch=0
+    print ans

@@ -1,0 +1,17 @@
+n, k = map(int, raw_input().split())
+a = map(int, raw_input().split())
+m = a[0]
+prv = 0
+for i in range(1, n):
+    x = i-k
+    if (x < 0):
+        x = 0
+    if (i <= k):
+    	m = min(m, a[i])
+    else:
+    	if (m == a[x-1]):
+    		m = min(a[x:i])
+    	else:
+    		m = min(m, a[i])
+    a[i] *= min(a[x:i])
+print (a[-1]%1000000007) 

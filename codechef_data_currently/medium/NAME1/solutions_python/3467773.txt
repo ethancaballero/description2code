@@ -1,0 +1,23 @@
+from collections import Counter
+
+cases = int(raw_input())
+
+for _ in xrange(cases):
+    P = ''.join(raw_input().split())
+    childrenCount = int(raw_input())
+
+    C = ''
+    for _ in xrange(childrenCount):
+        C += raw_input()
+
+    impossible = False
+    cCounter = Counter(C)
+    pCounter = Counter(P)
+    for char in cCounter:
+        if cCounter[char] > pCounter[char]:
+            impossible = True
+            print 'NO'
+            break
+
+    if not impossible:
+        print 'YES'

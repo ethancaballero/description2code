@@ -1,0 +1,11 @@
+def isc(a):
+    s=[0]*10
+    for c in a:
+        s[ord(c)-48]+=1
+    return s[3]+s[5]+s[8]==len(a) and s[3]<=s[5]<=s[8]
+n=int(raw_input())
+ans=0
+for i in xrange(n):
+    if isc(raw_input().split()[-1]):
+        ans+=1
+print ans

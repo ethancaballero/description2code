@@ -1,0 +1,7 @@
+for i in range(int(raw_input())):
+    a=map(int,raw_input().split())
+    s=0
+    for j in range(a[0],a[1]+1):
+        if str(j)==str(j)[::-1]:
+            s+=j
+    print s

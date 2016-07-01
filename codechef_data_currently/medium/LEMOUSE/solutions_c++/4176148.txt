@@ -1,0 +1,83 @@
+#include <iostream>   
+#include <sstream>   
+#include <cstdio>   
+#include <cstdlib>   
+#include <cmath>   
+#include <memory>   
+#include <cctype>   
+#include <string>   
+#include <vector>   
+#include <list>   
+#include <queue>   
+#include <deque>   
+#include <stack>   
+#include <map>   
+#include <set>   
+#include <algorithm>   
+using namespace std;  
+   
+#define FOR(i,a,b) for(int (i) = (a); (i) < (b); ++(i))  
+#define RFOR(i,a,b) for(int (i) = (a)-1; (i) >= (b); --(i))  
+#define CLEAR(a) memset((a),0,sizeof(a))  
+#define INF 1000000000  
+#define PB push_back  
+#define ALL(c) (c).begin(), (c).end()  
+#define pi 2*acos(0.0)  
+#define SQR(a) (a)*(a)  
+#define MP make_pair  
+#define MAX 128
+   
+typedef long long Int;  
+
+int n, m, T;
+int A[MAX][MAX];
+char s[MAX];
+int R[MAX][MAX][2];
+
+bool OK(int x, int y)
+{
+	return (x >= 0 && x < n && y >= 0 && y < m);
+}
+
+int main()
+{
+
+	cin >> T;
+	FOR (t,0,T)
+	{
+		cin >> n >> m;
+		FOR (i,0,n)
+		{
+			scanf("%s", s);
+			FOR (j,0,m)
+				A[i][j] = (s[j]-'0');
+		}
+
+		FOR (i,0,n)
+			FOR (j,0,m)
+				FOR (k,0,2)
+					R[i][j][k] = INF;
+
+		R[0][1][0] = A[0][0] + A[0][1] + A[1][0];
+		R[1][0][1] = R[0][1][0];
+
+		FOR (i,0,n)
+			FOR (j,0,m)
+			{
+				if (OK(i, j+1))
+					R[i][j+1][0] = min(R[i][j+1][0], R[i][j][0] + A[i][j+1] + (OK(i+1, j) ? A[i+1][j] : 0) + (OK(i-1, j+1) ? A[i-1][j+1] : 0));
+				if (OK(i+1, j))
+					R[i+1][j][1] = min(R[i+1][j][1], R[i][j][0] + A[i+1][j] + (OK(i, j+1) ? A[i][j+1] : 0));
+
+				if (OK(i, j+1))
+					R[i][j+1][0] = min(R[i][j+1][0], R[i][j][1] + A[i][j+1] + (OK(i+1, j) ? A[i+1][j] : 0));
+				if (OK(i+1, j))
+					R[i+1][j][1] = min(R[i+1][j][1], R[i][j][1] + A[i+1][j] + (OK(i, j+1) ? A[i][j+1] : 0) + (OK(i+1, j-1) ? A[i+1][j-1] : 0));
+			}
+		
+		cout << min(R[n-1][m-1][0], R[n-1][m-1][1]) << endl;
+	}
+
+	return 0;
+} 
+ 

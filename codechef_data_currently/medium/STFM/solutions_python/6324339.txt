@@ -1,0 +1,22 @@
+A=[1]
+l=1
+
+def fact(n):
+	global l
+	if n<=l:
+		return A[n-1]
+	else:
+		while l<n:
+			l+=1
+			A.append(A[-1]*l)
+		return A[n-1]
+
+n,m=map(int,raw_input().split())
+N=[int(i) for i in raw_input().split()]
+s=0
+for x in N:
+	if x<m:
+		s+= ((((x*(x+1))/2)*x)%m + (fact(x+1) - 1)%m)%m
+	else:
+		s+= ((((x*(x+1))/2)*x)%m + (fact(m) - 1)%m)%m
+print s%m

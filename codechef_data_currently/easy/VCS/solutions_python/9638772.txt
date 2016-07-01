@@ -1,0 +1,17 @@
+# cook your code here
+for _ in xrange(input()):
+    N,M,K = map(int,raw_input().split())
+    A = []
+    B = []
+    A = map(int,raw_input().split())
+    B = map(int,raw_input().split())
+    untrack = 0
+    track = 0
+    for i in A:
+        if i in B:
+            track += 1
+    for i in range(1,N+1):
+        if i not in A:
+            if i not in B:    
+                untrack += 1
+    print str(track) + " " + str(untrack)

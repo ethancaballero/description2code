@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		int n,ind=0,flag=-2;
+		cin>>n;
+		int a[n];
+		for (int i=0; i<n; ++i)
+		{
+			cin>>a[i];
+			if(i>0){
+				if(a[i-1]!=a[i]){
+					ind+=(flag!=i-1)?2:1;
+					flag=i;
+				}
+			}
+		}
+		l:
+		cout<<ind<<endl;
+	}
+	return 0;
+}

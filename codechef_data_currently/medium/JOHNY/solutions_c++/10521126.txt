@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  int t, k, n;
+  vector<int> val;
+  scanf("%d", &t);
+
+  for (int i = 0; i < t; ++i) {
+    scanf("%d", &n);
+    val.resize(n);
+
+    for (int j = 0; j < n; ++j) {
+      scanf("%d", &val[j]);
+    }
+
+    scanf("%d", &k);
+
+    int count = 0;
+    for (int j = 0; j < n; ++j) {
+      if (val[j] < val[k-1]) ++count;
+    }
+    printf("%d
+", count + 1);
+  }
+  return 0;
+}

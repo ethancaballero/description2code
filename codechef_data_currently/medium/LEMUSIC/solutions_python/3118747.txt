@@ -1,0 +1,28 @@
+a =int( raw_input() )
+for b in range(a) : 
+    dicj = { }
+    list2 = []
+    score = 0 
+    p = int (raw_input())
+    for kk in range(p):
+        newe = raw_input().split(" ")
+        newe = map (int, newe)
+        if newe[0] in dicj :
+            if dicj[newe[0]] > newe[1]:
+                list2.append(dicj[newe[0]])
+                dicj[newe[0]]=newe[1]
+            else :
+                list2.append(newe[1])
+        else :
+            dicj[newe[0]] = newe[1]
+    listv = dicj.values()
+    listv.sort()
+    count  = 0 
+    for asd in listv:
+        count = count +1
+        score = score + asd * count
+    for ll in list2 :
+        score = score + ll * count
+    print score
+        
+        

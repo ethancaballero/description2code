@@ -1,0 +1,22 @@
+t = int(raw_input())
+for x in range(0,t):
+	r = raw_input()
+	l = list(r)
+	add1 = 0
+	add2 = 0
+	length = len(l)
+	for y in range(0,length):
+		if y%2==0:
+			if l[y]=='+':
+				add1 = add1+1
+			else:
+				add2 = add2+1
+		else:
+			if l[y]=='+':
+				add2 = add2+1
+			else:
+				add1 = add1+1
+	if add1<add2:
+		print add1
+	else:
+		print add2

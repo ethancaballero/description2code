@@ -1,0 +1,89 @@
+import sys
+t = int(sys.stdin.readline().strip())
+for i in range(t):
+
+        ans=0;
+        n, m = map(int, sys.stdin.readline().strip().split())
+
+        if(n>m):
+                q=n
+                n=m
+                m=q;
+            
+        if(n==1):
+         ans=m*(m-1)
+        
+        if(n==2):
+       
+            if(m==2):
+            
+                ans=3*4
+            
+            if(m==3):
+            
+                ans+=4*4
+                ans+=2*5
+            
+            if(m==4):
+            
+                ans=6*8
+            
+            if(m>=5):
+            
+                ans+=8*(m*n-2)
+                ans+=2*(m-4)*(m*n-3)
+            
+       
+        if(n==3):
+        
+            if(m==3):
+            
+                ans+=8
+                ans+=8*6
+            
+            if(m==4):
+            
+                ans+=4*(m*n-3)
+                ans+=2*(m*n-3)
+                ans+=4*(m*n-4)
+                ans+=2*(m*n-3)
+            
+            if(m>=5):
+            
+                 ans+=4*(m*n-3)
+                 ans+=2*(m*n-3)
+                 ans+=4*(m*n-4)
+                 ans+=2*(m*n-3)
+                 ans+=(m-4)*n*(m*n-5)
+
+            
+        
+        if(n==4):
+        
+            if(m==4):
+            
+                ans+=4*(m*n-3)
+                ans+=8*(m*n-4)
+                ans+=4*(m*n-5)
+            
+            if(m>=5):
+            
+                ans+=4*(m*n-3)
+                ans+=8*(m*n-4)
+                ans+=(m-4)*2*(m*n-5)
+                ans+=(m-4)*2*(m*n-7)
+                ans+=4*(m*n-5)
+
+            
+
+        
+        if(n>=5):
+        
+            ans+=(n-4)*(m-4)*(n*m-9)
+            ans+=(2*(n-4)+2*(m-4))*(n*m-5)
+            ans+=(2*(n-4)+2*(m-4))*(n*m-7)
+            ans+=4*(n*m-3)
+            ans+=8*(n*m-4)
+            ans+=4*(n*m-5)
+        
+        print ans

@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+void bubbleSort(int arr[], int len) {
+	int i, j, temp, flag;
+	for(i = len-1; i > 0; i--) {
+		flag = 0;
+		for(j = 1; j <= i; j++) {
+			if(arr[j] < arr[j-1]) {
+				temp = arr[j];
+				flag = 1;
+				arr[j] = arr[j-1];
+				arr[j-1] = temp;	
+			}
+		}
+		if(flag == 0) {
+			return ;
+		}
+	}
+}
+
+bool calc(int notes[], int index, int sum, int len, int M) {
+	if(index == len) {
+		return false;
+	}
+	
+	if(sum == M || (sum+notes[index]) == M)
+		return true;
+		
+	if(calc(notes, index+1, sum, len, M))
+		return true;
+	
+	if(calc(notes, index+1, sum + notes[index], len, M))
+		return true;
+		
+	return false;	
+}
+int main() {
+	int T, N, M, notes[20], i;
+	cin >> T;
+	while(T--) {
+		cin >> N >> M;
+		for(i = 0; i < N; i++)
+			cin >> notes[i];
+			
+		bubbleSort(notes, N);
+		
+		if(calc(notes, 0, 0, N, M))
+			cout << "Yes" << endl;
+		else
+			cout << "No" << endl;
+	}
+}

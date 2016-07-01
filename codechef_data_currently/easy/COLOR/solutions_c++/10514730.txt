@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+	ll t;
+	cin>>t;
+	string str;
+	while(t--)
+	{
+		ll n;
+		cin>>n;
+		cin>>str;
+		ll count1=0;
+		ll count2=0;
+		ll count3=0;
+		for(ll i=0;i<n;i++)
+		{
+			if(str[i]=='R')
+			count1++;
+			else if(str[i]=='B')
+			count2++;
+			else if(str[i]=='G')
+			count3++;
+		}
+		cout<<(n-max(count1,max(count2,count3)))<<endl;
+	}
+}

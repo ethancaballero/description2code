@@ -1,0 +1,18 @@
+t=input()
+while (t>0):
+	n=input()
+	movLength=map(int,raw_input().split())
+	movRate=map(int,raw_input().split())
+	movMul=[r*l for r,l in zip(movLength,movRate)]
+	maxVal=movMul[0]
+	i=1
+	res=1
+	for x in movMul:
+		if (x>maxVal):
+			maxVal=x
+			res=i
+		if (x==maxVal and movRate[i-1]>movRate[res-1]): 
+			res=i
+		i=i+1
+	print res	
+	t=t-1

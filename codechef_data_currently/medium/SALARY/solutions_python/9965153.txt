@@ -1,0 +1,14 @@
+T = int(input())   
+
+while T:
+    N = input()
+    S = map(int,raw_input().split())
+    diff = 0
+    sum = 0
+    S.sort()
+    first = S[0]
+    for i in range(1,N):
+         diff = S[i] - first
+         sum = sum + diff 
+    print sum
+    T -= 1

@@ -1,0 +1,64 @@
+""" CodeChef - Chef and String solution
+	Author : NguyenDatSE <nguyendatse@gmail.com>
+	http://www.codechef.com/problems/CHSTR"""
+from sys import stdin
+ 
+MOD = int(10e8 + 7)
+factorial_c = [1, 1]
+s_substring = [0]
+question_cache = {}
+max_question = 0
+ 
+def substrings(s):
+	for k in xrange(1, len(s)+1):
+		for i in xrange(len(s)-k+1):
+			yield s[i:i+k]
+ 
+def solve(question):
+	if question in question_cache:
+			answer = question_cache[question]
+	else:
+		if question > max_question:
+			answer = 0
+		else:
+			combination = [int(factorial_c[x]/(factorial_c[question]*factorial_c[x - question]))				for x in s_substring if x >= question]
+			question_cache[question] = sum(combination) % MOD
+			answer = question_cache[question]
+	return answer
+ 
+n_test = int(raw_input())
+ 
+for n in xrange(n_test):
+	str_input = stdin.readline().split()
+	s_len = int(str_input[0])
+	q_size = int(str_input[1])
+ 
+	# Precompute factorial
+	if len(factorial_c) <= s_len:
+		curr_len = len(factorial_c)
+		factorial_c.extend([1] * (s_len - curr_len + 1))
+		next_factorial = factorial_c[-1]
+		for n in xrange(curr_len, len(factorial_c)):
+			next_factorial *= n % MOD
+			factorial_c[n] = next_factorial
+ 
+	# Precomputed
+	sub_strs = sorted(list(substrings(stdin.readline()[:s_len])))
+	n = 0
+	s_substring = [0]
+	cur_str = sub_strs[0]
+	for sub_str in sub_strs:
+		if sub_str != cur_str:
+			n = n + 1
+			s_substring.append(1)
+			cur_str = sub_str
+		else:
+			s_substring[n] += 1
+ 
+	max_question = max(s_substring)
+	question_list = [int(stdin.readline()) for i in xrange(q_size)]
+	question_cache = {}
+	all_answer = map(solve, question_list)
+ 
+	print '
+'.join(map(str,all_answer)) 

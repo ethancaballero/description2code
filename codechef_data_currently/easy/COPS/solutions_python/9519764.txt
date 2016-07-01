@@ -1,0 +1,16 @@
+for _ in xrange(input()):
+    m, x, y = map(int, raw_input().split())
+    cop_houses_numbers = map(int, raw_input().split())
+    cop_houses = set([])
+    total_houses = set(xrange(1,101))
+    vacant_houses = set([])
+    for i in cop_houses_numbers:
+        min_house = i - (x * y)
+        max_house = i + (x*y)
+        if min_house < 0:
+            min_house = 0
+        if max_house > 100:
+            max_house = 100
+        temp = set(xrange(min_house, max_house + 1))
+        cop_houses = cop_houses | temp
+    print len(total_houses - cop_houses)

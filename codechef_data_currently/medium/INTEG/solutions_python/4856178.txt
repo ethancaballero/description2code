@@ -1,0 +1,18 @@
+n=input()
+x=raw_input()
+a=[]
+a=map(int,x.split())
+x=input()
+b=[]
+l=len(a)
+for i in range(0,l):
+    if a[i]<0:
+        b.append(a[i])
+r=len(b)
+if r<x:
+    print -sum(b)
+else:
+    b.sort()
+    b.reverse()
+    b=b[r-x:r]
+    print -sum(b)

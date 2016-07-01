@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+    //freopen("inp.txt","r",stdin);
+    int t,a,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d %d",&a,&b);
+        if(a&1 && b&1)
+            printf("Vanka
+");
+        else
+            printf("Tuzik
+");
+    }
+    return 0;
+}

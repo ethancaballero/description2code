@@ -1,0 +1,10 @@
+a=int(raw_input())
+for i in range(a):
+    b = int(raw_input())
+    c = [int(x) for x in raw_input().split()]
+    #c=sorted(c)
+    #l= [x for x in c if x<=b and x>=1 and x>c[c.index(x)-1]]
+    #l.insert(0,c[0])
+    d= len(c)
+    print (d*(d-1))/2
+    

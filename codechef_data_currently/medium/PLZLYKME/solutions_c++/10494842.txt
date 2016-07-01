@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int l,d,s,c;
+		cin>>l>>d>>s>>c;
+		long long int ans=s;
+		for(long long int i=2;i<=d;i++)
+		{
+			ans=ans+ans*c;
+			if(ans>=l)
+			break;
+		}
+		if(ans>=l)
+		{
+			cout<<"ALIVE AND KICKING
+";
+		}
+		else
+		cout<<"DEAD AND ROTTING
+";
+	}
+}

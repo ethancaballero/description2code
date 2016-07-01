@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+#define S(n) scanf("%li",&n);
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%d
+",n);
+using namespace std;
+int main()
+{
+int t;
+s(t)
+while(t--)
+{
+    int x,y;
+    s(x)s(y)
+    int sum=x+y;
+    int temp=sum+1;
+ int count =0;
+ while(count==0)
+ {
+     int c=0;
+     for(int i=2;i*i<=temp;i++)
+        if(temp%i==0){
+               // p(temp)
+        c++;
+         break;
+        }
+    if(c==0){
+        count++;
+       // p(c)
+    }
+    else
+        temp=temp+1;
+ }
+ p(temp-sum)
+}
+return 0;
+}

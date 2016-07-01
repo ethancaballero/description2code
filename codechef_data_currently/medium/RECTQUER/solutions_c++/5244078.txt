@@ -1,0 +1,91 @@
+#include<iostream>
+using namespace std;
+
+int n;
+int q;
+int main()
+{	cin>>n;
+	int mat[n][n];
+	int ten[n][n][11];
+	int act[n+1][n+1][11];
+	for(int i =0 ; i < n ; i++)
+	{	for(int j =0 ; j < n ; j++)
+		{	cin>>mat[i][j];
+			for(int k = 0 ; k < 11 ; k++)
+			{	ten[i][j][k]=0;
+				act[i+1][j+1][k]=0;
+			}
+		}
+	}
+	for(int i = 0 ; i < n+1 ; i++)
+	{	for(int p =0 ; p  <11 ; p++)
+			{	act[0][i][p]=0;
+				act[i][0][p]=0;
+			}
+	}
+	for(int k = 0 ; k < n ; k++)
+	{	int i = k;
+		int j= 0;
+		int tex[11]={0};
+		for( j = 0 ; j < k ; j++)
+		{	tex[mat[i][j]]+=1;
+			for(int u =0 ; u < 11 ; u++)
+			{	if(i==0)
+				{	ten[i][j][u] = tex[u];
+					act[i+1][j+1][u]=ten[i][j][u];
+					
+				}
+				else
+				{	ten[i][j][u]=ten[i-1][j][u]+tex[u];
+					act[i+1][j+1][u]=ten[i][j][u];
+				}
+			}
+			
+		}
+		j= k ;
+		int tez[11]={0};
+		for( i = 0 ; i <= k ; i++)
+		{	tez[mat[i][j]]+=1;
+			for(int u = 0 ; u < 11; u++)
+			{	if(j==0)
+				{	ten[i][j][u]=tez[u];
+					act[i+1][j+1][u]=ten[i][j][u];
+				}
+				else
+				{	ten[i][j][u]=ten[i][j-1][u]+tez[u];
+					act[i+1][j+1][u]=ten[i][j][u];
+				}
+			}
+		
+		}
+		
+	} 
+	cin>>q;
+//	for(int i =0 ; i < q ; i++)
+	/*{	for(int j = 0 ; j < n ; j++)
+		{	for(int u =0 ; u < 11 ; u++)
+			{	cout<<ten[i][j][u]<<" ";
+			}
+	//		cout<<endl;
+		}
+		cout<<endl;
+	}*/
+	for(int t= 0 ; t < q; t++)
+	{	int x1,x2,y1,y2;
+		cin>>x1>>y1>>x2>>y2;
+		int st1[11];
+		x1--;y1--;x2--;y2--;
+		for(int u =0 ; u < 11; u++)
+		{	st1[u]=	act[x2+1][y2+1][u] - act[x1][y2+1][u] - act[x2+1][y1][u]+ act[x1][y1][u];
+	//		cout<<act[x2+1][y2+1][u] <<" "<<act[x1][y2+1][u] <<" "<<act[x2+1][y1][u]<<" "<<act[x1][y1][u]<<" "<<endl;
+		}
+		int count=0;
+		for(int i =1 ; i< 11; i++)
+		{	if(st1[i]!=0)
+			{	count++;
+			}
+		}
+		cout<<count<<endl;
+	}
+	
+}

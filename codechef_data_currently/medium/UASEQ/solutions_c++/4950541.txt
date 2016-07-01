@@ -1,0 +1,46 @@
+#include <cstdio>
+
+long long a[100000];
+int main()
+{
+    int n, K;
+    scanf("%d%d", &n, &K);
+    for (int i = 0; i < n; i ++)
+         scanf("%lld", &a[i]);
+    bool ft = true;
+    long long ansA, ansD;
+    for (int i = 0; i < (K + 2) && i < n; i ++)
+         {
+            for (int j = i + 1; j < (K + 2) && j < n; j ++)
+            {
+                 if ((a[j] - a[i]) % (j - i) != 0) continue;
+                 int tD = (a[j] - a[i]) / (j - i);
+                 int tA = a[j] - j * tD;
+                 int modify = 0;
+                 for (int k = 0; k < n && modify <= K; k ++)
+                 {
+                     int tVal = tA + tD * k;
+                     if (tVal != a[k]) modify ++;
+                 }
+                if (modify > K) continue;
+                if (ft)
+                {
+                  ansA = tA;
+                  ansD = tD;
+                }
+                else if (ansA > tA || (ansA == tA && ansD > tD))
+                {
+                   ansA = tA;
+                   ansD = tD;
+                }
+               ft = false;
+           }
+         }
+    for (int i = 0; i < n; i ++)
+    {
+            if (i) printf(" ");
+            printf("%lld", ansA + ansD * i);
+    }
+    puts("");
+    return 0;
+}

@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+#define gc getchar_unlocked
+inline void inp(int *n )
+{
+*n=0;
+int ch=gc();int sign=1;
+while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=gc();}
+while( ch >= '0' && ch <= '9' )
+*n = (*n<<3)+(*n<<1) + ch-'0', ch=gc();
+*n=*n*sign;
+}
+using namespace std;
+int arr[405],order[405];
+
+bool customer[405];
+
+inline int min_order(int n,int m,int r)
+{
+    int i,d,check=0,flag[405]={0};
+    vector< int > v;
+    for(i=1;i<=n;i++)
+    {
+        if(customer[i])
+        {
+            if(!order[i]) return i;
+            v.push_back(i);
+        }
+    }
+    d=v.size();
+    for(i=r+1;i<=m;i++)
+    {
+        for(int j=0;j<d;j++)
+        {
+            if(v[j]==arr[i]&&!flag[v[j]])
+            {
+                if(++check==d) { v.clear(); return v[j]; }
+                flag[v[j]]=1;
+            }
+        }
+    }
+}
+int main()
+{
+    int t,n,m,i,c,ans,max,temp;
+    //freopen("v.txt", "r", stdin);
+    inp(&t);
+    while(t--)
+    {   ans=0;
+        for(i=1;i<=404;i++)  customer[i]=order[i]=0;
+        inp(&n); inp(&m);
+        c=m; max=0;
+        for(i=1;i<=m;i++)
+        {
+            inp(&arr[i]);
+            order[arr[i]]++;
+            if(max<arr[i]) max=arr[i];
+        }
+        if(n==1)
+        {   temp=arr[1]; ans=1;
+            for(i=2;i<=m;i++)
+            {
+                if(arr[i]!=temp) { ans++; temp=arr[i];}
+            }
+            printf("%d
+",ans);
+            continue;
+        }
+        i=1;
+        while(n>0&&m>0)
+        {
+            if(!customer[arr[i]])
+            {
+              customer[arr[i]]=true;
+              n--;
+              ans++;
+            }
+            order[arr[i]]--;
+            i++;
+            m--;
+        }
+        while(i<=c)
+        {
+            order[arr[i]]--;
+            if(!customer[arr[i]])
+            {
+                customer[min_order(max,c,i)]=false;
+                customer[arr[i]]=true;
+                ans++;
+            }
+           i++;
+        }
+        printf("%d
+",ans);
+    }
+  return 0;
+}

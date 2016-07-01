@@ -1,0 +1,16 @@
+n=int(raw_input())
+arr=[0]*1000001
+input_arr=[]
+for x in raw_input().split():
+    input_arr.append(int(x))
+i=j=0
+while i<n:
+    j=i
+    while j<n:
+        arr[min(input_arr[i:j+1])]+=1
+        j+=1
+    i+=1
+q=int(raw_input())
+while q>0:
+    print str(arr[int(raw_input())])
+    q-=1

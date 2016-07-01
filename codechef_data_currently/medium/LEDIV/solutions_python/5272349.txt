@@ -1,0 +1,27 @@
+from fractions import gcd
+t=input()
+while t>0:
+ s=input()
+ a=[int(i) for i in raw_input().split()]
+ sorted(a)
+ g=a[0]
+ for i in range(s):
+  g=gcd(g,a[i])
+  if g==1:
+   break
+ flag=0
+ if(g!=1):
+  if(g%2==0):
+   flag=1
+   print 2
+  else:
+   for i in xrange(3,int(g**0.5)+1,2):
+    if(g%i==0):
+     flag=1
+     print i
+     break
+  if(flag==0):
+   print g
+ else:
+  print -1
+ t-=1

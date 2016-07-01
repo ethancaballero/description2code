@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+
+
+std::string cell[50];
+int n, m;
+
+int func(int i, int j)
+{
+	int cnt = 0, x;
+	for (x = 1; x<n; x++){
+		if (i + x >= n || j + x >= m)
+			break;
+		if (cell[i][j + x] == cell[i][j] && cell[i + x][j] == cell[i][j] && cell[i + x][j + x] == cell[i][j])
+			cnt++;
+	}
+	return cnt;
+}
+int main()
+{
+	
+	int cnt, test, i, j;
+	std::cin >> test;
+	while (test--)
+	{
+		std::cin >> n >> m;
+		cnt = 0;
+		for (i = 0; i<n; i++)
+			std::cin >> cell[i];
+		for (i = 0; i<n; i++)
+			for (j = 0; j<m; j++)
+				cnt += func(i, j);
+		std::cout << cnt << std::endl;
+	}
+	return 0;
+}

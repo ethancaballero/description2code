@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <algorithm>
+using namespace std;
+int main(){
+int t;
+scanf("%d", &t);
+	double E[100001];
+	double sol[100001];
+	E[1]=0.45;
+	for(int i=2;i<=100000;i++){
+		E[i]=(E[i-1]/10)+0.45;
+	}
+	double sum=0;
+	for(int i=1;i<=100000;i++){
+		sum+=E[i];
+		sol[i]=sum;
+	}
+	while(t--){
+			int num;
+			scanf("%d",&num);
+			printf("%f
+",sol[num]);
+	}
+}

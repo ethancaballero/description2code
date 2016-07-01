@@ -1,0 +1,73 @@
+#include<iostream>
+#include<algorithm>
+#include<math.h>
+#include<iomanip>
+#include<stdio.h>
+#include<limits>
+#include<set>
+#include<vector>
+#include<stack>
+#define pb(x) push_back(x)
+#define ll long long
+#define in(x) scanf("%d",&x)
+#define mod 1000000007
+using namespace std;
+bool prime[100001];
+vector<int>v;
+int factor[100001];
+void fun()
+{
+    for(int i=0;i<100001;i++)
+        prime[i]=1;
+ 
+    for(int i=2;i*i<=100000;i++)
+    {
+        if(prime[i])
+        {
+            for(int j=2*i;j<=100000;j+=i)
+                prime[j]=0;
+        }
+    }
+ 
+    int len=0;
+    for(int i=2;i<100000;i++)
+    {
+        if(prime[i])
+        {
+            v.pb(i);
+            len++;
+        }
+    }
+ 
+ 
+    for(int i=0;i<len;i++)
+    {
+        for(int j=v[i];j<100001;j+=v[i])
+        {
+            factor[j]++;
+        }
+ 
+    }
+ 
+}
+int main()
+{
+    fun();
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int a,b,k;
+        cin>>a>>b>>k;
+        int count=0;
+        for(int i=a;i<=b;i++)
+            if(factor[i]==k)
+                count++;
+ 
+        cout<<count<<endl;
+    }
+ 
+ 
+    return 0;
+}
+ 

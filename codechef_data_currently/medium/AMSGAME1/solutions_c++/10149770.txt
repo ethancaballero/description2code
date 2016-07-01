@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+long int gcd(int p,int q)
+{
+    if((p>=q) && (p%q==0))
+       return q;
+    else
+      return gcd(q,(p%q));
+}
+
+int main() {
+	// your code goes here
+	
+	long int t,n,i,k;
+	cin>>t;
+	while(t--)
+	{
+	    cin>>n;
+	    long int a[n];
+	    for(i=0;i<n;i++)
+	        cin>>a[i];
+	    k=gcd(a[0],a[1]);    
+	    for(i=2;i<n;i++)
+	    {
+	        k=gcd(k,a[i]);
+	        if(k==1)
+	        break;
+	    }
+	    
+	    cout<<k<<endl;
+	}
+	return 0;
+}

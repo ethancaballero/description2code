@@ -1,0 +1,25 @@
+// grouping not specified in the problem
+#include <bits/stdc++.h>
+#include <algorithm>
+using namespace std;
+int n, i, ans, t, k;
+int a[1001];
+
+int main() {
+  cin>>t;
+  while (t--) {
+    scanf("%d %d",&n,&k);
+    for (i=1;i<=n;i++) scanf("%d",a+i);
+    sort(a+1,a+n+1);
+    a[0] = ans = 0;
+    for (i=n;i>=1;i--) ans += (a[i]-a[i-1]-1)*((n-i)/k+1);
+
+    printf("%d
+",ans);
+    //cout<<((n-i)/k+1)<<endl;
+
+  }
+  return 0;
+}
+// 1 2 3 4 5 20 28 37 49 99
+// 50+12+9+8+15

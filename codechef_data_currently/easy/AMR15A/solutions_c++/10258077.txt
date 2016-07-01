@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+ 
+int main() 
+{
+ int n,ctr=0,ctr1=0,i;
+ cin>>n;
+ int arr[n];
+ for(i=0;i<n;i++)
+ {
+  cin>>arr[i];
+  if(arr[i]%2==0)
+  ctr++;
+  else
+  ctr1++;
+  }
+ if(ctr>ctr1)
+ cout<<"READY FOR BATTLE";
+ else
+ cout<<"NOT READY";
+ 
+	return 0;
+}

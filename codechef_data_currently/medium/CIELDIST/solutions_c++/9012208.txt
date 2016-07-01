@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+float ds,dt,d;
+cin>>ds>>dt>>d;
+if(ds+dt<=d)
+cout<<d-ds-dt<<"
+";
+
+else if(ds>=d+dt || dt>=d+ds)
+{
+if(ds>dt)
+cout<<ds-d-dt<<"
+";
+else
+cout<<dt-d-ds<<"
+";
+}
+
+else
+cout<<"0
+";
+}
+return 0;
+}

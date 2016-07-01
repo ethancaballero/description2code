@@ -1,0 +1,10 @@
+for _ in range(input()):
+    n=input()
+    s="abcdefghijklmnopqrstuvwxyz"
+    temp=s[::-1]
+    c=n/25
+    d=n%25
+    if(d==0):
+        print temp*c
+    else:
+        print temp[-(d+1):]+temp*c

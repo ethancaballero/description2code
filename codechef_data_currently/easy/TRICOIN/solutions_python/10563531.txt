@@ -1,0 +1,13 @@
+#chef and its coins
+t=input()
+for i in range(t):
+ n=input()
+ sum=0
+ j=1
+ count=0
+ while sum<=n:
+  sum=sum+j
+  count=count+1
+  j=j+1
+  
+ print count-1 

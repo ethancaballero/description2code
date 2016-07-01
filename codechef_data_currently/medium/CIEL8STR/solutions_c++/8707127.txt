@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+int input()
+{
+    int n=0;
+    char c=getchar_unlocked();
+    while(c < '0' || c >'9') {c=getchar_unlocked();}
+    while(c>='0' && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar_unlocked();
+    }
+    return n;
+}
+
+int main(){
+	string str;
+	cin >> str;
+	long long count = 0;
+	int con = 0;
+	int temp = str.size()-2;
+	for(int i = 0; i < temp; i++){
+		if(((str[i]-48)*100 + (str[i+1]-48)*10 + (str[i+2]-48))%8 == 0){
+			if(str[i] != '0'){
+				count += (con+1);
+			}
+			else{
+				count += (con);
+			}
+		}
+		if(str[i] != '0'){
+			con++;
+			if((str[i]-48)%8 == 0)
+				count++;
+			if(((str[i]-48)*10 + (str[i+1]-48))%8 == 0){
+				count++;
+			}
+		}
+		else{
+			count++;
+		}
+		
+	}
+	
+	if(temp >= 0){
+		if(str[temp] != '0'){
+			if((str[temp]-48)%8 == 0)
+				count++;
+			if(((str[temp]-48)*10 + (str[temp+1]-48))%8 == 0){
+				count++;
+			}
+		}
+		else{
+			count++;
+		}
+	}
+	if((str[temp+1]-48)%8 == 0)
+		count++;
+	cout << count << endl;
+}
+
+
+
+
+
+

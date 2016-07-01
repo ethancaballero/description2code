@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,n,i;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        long long w[n+1];
+        char ca[n], a[n];
+        int b=0;
+        cin>>ca;
+        cin>>a;
+        for(i=0;i<=n;i++)
+            cin>>w[i];
+        for(i=0;i<n;i++)
+            if(ca[i]==a[i])
+               b++;
+               if(b==n)
+               {
+                   cout<<w[n]<<endl;
+               }
+               else
+               {
+                   long long c=0;
+                   for(int i=0; i<=b;i++)
+                    c=max(c,w[i]);
+                   cout<<c<<"
+";
+               }
+    }
+    return 0;
+}

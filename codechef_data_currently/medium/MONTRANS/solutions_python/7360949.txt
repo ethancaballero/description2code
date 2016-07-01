@@ -1,0 +1,35 @@
+test_cases = int(raw_input())
+output=[]
+for i in range(0,test_cases):
+	three_int = map(int,raw_input().split())
+	A = three_int[0]
+	B = three_int[1]
+	C = three_int[2]
+	terms=  []
+	counter=0
+	original_value = A + (B *1.0)/100
+	while counter < 300:
+		if B < C:
+			B = B +100
+			A = A-1
+		if A< 0:
+			break
+		B = B - C
+		temp = A
+		A = B
+		B = temp
+		value = A + (B *1.0/100)
+		if value in terms:
+			break
+		else:
+			terms.append(value)
+		counter = counter +1
+	max_val = original_value
+	max_index=-1
+	for j in range(0,len(terms)):
+		if terms[j] > max_val:
+			max_val = terms[j]
+			max_index = j
+	output.append(max_index+1)
+for d in output:
+	print d

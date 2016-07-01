@@ -1,0 +1,23 @@
+t=int(raw_input())
+
+while t>0:
+        
+     A=raw_input()
+     B=raw_input()
+     flag=0
+     for x in A:
+          for y in B:
+               if x==y:
+                    flag=1
+                    break
+          if flag==1:
+                  break
+
+     if flag==1:
+          print"Yes"
+     else:
+          print"No"
+     t-=1
+
+     
+          

@@ -1,0 +1,31 @@
+def spoon(t):
+	for i in range(t):
+		s = raw_input().split()
+		r = int(s[0])
+		c = int(s[1])
+		m = []
+		f = 0
+		for j in range(r):
+			e = raw_input().lower()
+			if 'spoon' in e:
+				f = 1
+			else:
+				m.append(e.split())
+		if f == 1:
+			print 'There is a spoon!'
+		if f == 0:
+			v = []
+			for j in range(c):
+				st = ''
+				for k in range(r):
+					st = st + m[k][0][j]
+				v.append(st)
+			for j in range(c):
+				if 'spoon' in v[j]:
+					print 'There is a spoon!'
+					f = 1
+					break
+
+		if f == 0 :
+			print 'There is indeed no spoon!' 
+spoon(input())

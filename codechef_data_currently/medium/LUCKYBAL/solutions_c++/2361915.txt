@@ -1,0 +1,77 @@
+/* -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+* File Name : luckybal.cpp
+* Creation Date : 12-07-2013
+* Last Modified : Friday 12 July 2013 03:16:34 PM IST
+* Created By :  Vishal Gupta IIIT-H
+_._._._._._._._._._._._._._._._._._._._._.*/
+                                   
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <cstdio>
+#include <stack>
+#include <vector>
+#include <cstring>
+#include <set>
+#include <map>
+#include <bitset>
+#include <string>
+#include <queue>
+using namespace std;
+
+#define sz(a) int((a).size())
+#define all(c) c.begin(),c.end() //all elements of a container
+#define rall(c) c.rbegin(),c.rend() 
+#define tr(container,it) for(typeof(container.begin()) it = container.begin(); it != container.end(); it++) //traversing a container..works for any type of container
+#define present(container, element) (container.find(element) != container.end())    //used for set...return 1 if el is ps 0 otherwise
+#define cpresent(container, element) (find(all(container),element) != container.end())  //same as present...but is for vectors
+#define INF		INT_MAX
+#define FOR(i,a,b) 	for(int i= (int )a ; i < (int )b ; ++i)
+#define rep(i,n) 	FOR(i,0,n)
+#define si(n) scanf("%d",&n)
+#define pi(n) printf("%d ",n)
+#define pil(n) printf("%d
+",n)
+#define piL(n) printf("%lld ",n)
+#define piLL(n) printf("%lld
+",n)
+#define sl(n) scanf("%lld",&n)
+#define sd(n) scanf("%lf",&n)
+#define ss(n) scanf("%s",n)
+#define PB push_back
+#define MP make_pair
+#define scan(v,n)	vector<int> v;rep(i,n){ int j;si(j);v.PB(j);}
+#define mod (int)(1e9 + 7)
+#define pn printf("
+")
+typedef long long int LL;
+typedef vector <int> VI;
+typedef pair < int ,int > PII;
+typedef vector < PII > VPII;
+template<class T>inline T gcd(T a,T b){return b?gcd(b,a%b):a;}
+char a[110010];
+int main()
+{      
+      int t,T,i;
+      LL ans,c;
+      si(t);
+      rep(T,t)
+      {
+        ss(a);
+	LL len=(LL)strlen(a);
+	ans=((len+1)*len)/2;
+        c=0;
+	rep(i,len)
+	{
+	    if(a[i]=='4')
+	    {
+	     ans-=((c+1)*c)/2;
+	     c=0;
+	    }
+	    else c++;
+	}
+       ans-=((c+1)*c)/2;
+       piLL(ans);
+      }
+      return 0;
+}

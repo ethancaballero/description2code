@@ -1,0 +1,39 @@
+#include <iostream>
+#include<cstring>
+#include<cstdlib>
+using namespace std;
+
+int main() {
+	int t=0,count=0;
+	char a[50];
+	gets(a);
+	t=atoi(a);
+	
+	while(t--)
+	 {	char s[1000];
+        gets(s);
+        int s8=0,s5=0,s3=0,sl=0;
+        int l=strlen(s)-1,i;
+        for(i=l;;i--)
+        {
+        if(s[i]==' ')break;
+        }
+        i++;
+        int x=atoi(s+i);
+        //cout<<x<<"
+";
+        while(x!=0)
+        {
+            
+            if(x%10==8)s8++;
+            else if(x%10==5)s5++;
+            else if(x%10==3)s3++;
+            else sl++;
+            x/=10;
+        }
+        if(sl==0&&s8>=s5&&s5>=s3)count++;
+    }
+	cout<<count<<"
+";
+	return 0;
+}

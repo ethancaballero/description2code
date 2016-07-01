@@ -1,0 +1,68 @@
+/*
+ * Book Exercises (BEX)
+ *
+ * Use a stack to store only the books which might be required.
+ * On empty stack, the first book is always pushed.
+ * Second onwards, we compare number of exercise. If it is lower/equal
+ * than top, than it is pushed (not to be confused with stored).
+ * Note that, books with 0 exercises are not to be considered.
+ * If exercises are greater than the one on top, we just update the top
+ * to tell the number of books above it.
+ */
+#include <stack>
+#include <cstdio>
+#include <cstring>
+
+struct Book
+{
+    char name[16];
+    int booksOnTop;
+    int exercisesLeft;
+    Book()
+    {
+    }
+    Book(char *_name, int _exercisesLeft)
+        : booksOnTop(0), exercisesLeft(_exercisesLeft)
+    {
+        strcpy(name, _name);
+    }
+};
+
+int main()
+{
+    int n, ex;
+    std::stack<Book> nextMin;
+    char name[16];
+
+    scanf("%d", &n);
+
+    while (n--)
+    {
+        scanf("%d", &ex);
+
+        if (ex != -1)
+        {
+            scanf("%s", name);
+            if (ex == 0)
+                continue;
+            if (nextMin.size() == 0)
+                nextMin.push(Book(name, ex));
+            else
+            {
+                Book& b = nextMin.top();
+                if (b.exercisesLeft >= ex)
+                    nextMin.push(Book(name, ex));
+                else
+                    b.booksOnTop++;
+            }
+        }
+        else
+        {
+            Book b = nextMin.top();
+            nextMin.pop();
+            printf("%d %s
+", b.booksOnTop, b.name);
+        }
+    }
+    return 0;
+}

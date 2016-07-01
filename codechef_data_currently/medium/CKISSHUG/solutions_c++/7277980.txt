@@ -1,0 +1,60 @@
+
+#include<stdio.h>
+#include<math.h>
+#define ll long long
+#define M 1000000007
+ll pw(ll a, ll b){
+  ll r;
+  if(b==0) return 1;
+  r = pw(a,b/2);
+  r = (r*r)%M;
+  if(b%2) r = (r*a)%M;
+  return r;
+}
+
+
+
+int main()
+{   long int t;
+   ll int n,k,p;
+
+
+   scanf("%ld",&t);
+    while(t--)
+    {
+       p=1;
+      scanf("%lld",&n);
+
+
+
+       p=pw(2,(n/2) );
+
+
+         if(n%2==0)
+         {
+            k=((2*(p-1))+(p))%1000000007;
+
+         }
+         else{
+
+            k=((2*(p-1))+2*(p))%1000000007;
+
+
+         }
+
+
+
+
+
+      printf("%lld
+",k);
+
+
+
+
+
+
+    }
+
+return 0;
+}

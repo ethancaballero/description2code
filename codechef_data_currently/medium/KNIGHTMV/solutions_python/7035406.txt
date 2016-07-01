@@ -1,0 +1,17 @@
+# cook your code here
+alphas = {"a":0 ,"b": 1,"c": 2,"d": 3,"e": 4,"f": 5,"g": 6,"h": 7}
+nums = ["1", "2", "3" ,"4", "5", "6", "7", "8"]
+
+t = int(raw_input())
+for i in range(t):
+    s = raw_input()
+    
+    if(len(s) != 5):
+        print "Error"
+    else:
+        if((s[0] not in alphas.keys()) or (s[1] not in nums) or (s[2] != '-') or (s[3] not in alphas.keys()) or (s[4] not in nums)):
+            print "Error"
+        elif((abs(alphas[s[0]] - alphas[s[3]]) == 2) and (abs(int(s[1]) - int(s[4])) == 1) or (abs(alphas[s[0]] - alphas[s[3]]) == 1) and (abs(int(s[1]) - int(s[4])) == 2)):
+            print "Yes"
+        else:
+            print "No"

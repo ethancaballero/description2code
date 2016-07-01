@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define siz 500
+int main() {
+int fall, I, i = 0, j, i2, j2, m, n, K, **A, maxi, ct;
+int col[siz], count[siz];
+for (A = (int**) (malloc)(siz * sizeof(int)); i < siz; i++)
+A[i] = (int*) (malloc)(siz * sizeof(int));
+for (I = !!scanf("%d", &fall); I <= fall; I++) {
+for (i = !scanf("%d%d%d", &n, &m, &K); i < n; i++)
+for (j = 0; j < m; scanf("%d", &A[i][j++]))
+;
+for (j = 0; j < m; col[j] = maxi, count[j++] = ct)
+for (maxi = -1 + (i = 0); i < K; i++)
+if (maxi < A[i][j])
+maxi = A[i][j] + (ct = 1) * 0;
+else if (maxi == A[i][j])
+ct++;
+for (printf("Case %d:
+", I + (i = 0)); i + K <= n; i++) {
+for (maxi = -1 + (j = 0); j < K; j++)
+if (maxi < col[j])
+maxi = col[j] + (ct = count[j]) * 0;
+else if (maxi == col[j])
+ct += count[j];
+if (ct == 1)
+printf("%d", maxi);
+else
+printf("%d(%d)", maxi, ct);
+for (j = 1; j + K <= m; j++) {
+if (maxi == col[j - 1])
+ct -= count[j - 1];
+if (!ct)
+for (j2 = j + (maxi = -1) * 0; j2 < j + K - 1; j2++)
+if (maxi < col[j2])
+maxi = col[j2] + (ct = count[j2]) * 0;
+else if (maxi == col[j2])
+ct += count[j2];
+if (maxi < col[j + K - 1])
+maxi = col[j + K - 1] + (ct = count[j + K - 1]) * 0;
+else if (maxi == col[j + K - 1])
+ct += count[j + K - 1];
+if (ct == 1)
+printf(" %d", maxi);
+else
+printf(" %d(%d)", maxi, ct);
+}
+printf("
+");
+if (i + K == n)
+break;
+for (j = 0; j < m; j++) {
+if (col[j] == A[i][j])
+count[j]--;
+if (!count[j]) {
+for (i2 = i - (maxi = -1); i2 < i + K; i2++)
+if (A[i2][j] > maxi)
+maxi = A[i2][j] + (ct = 1) * 0;
+else if (A[i2][j] == maxi)
+ct++;
+col[j] = maxi + (count[j] = ct) * 0;
+}
+if (col[j] < A[i + K][j])
+col[j] = A[i + K][j] + (count[j] = 1) * 0;
+else if (col[j] == A[i + K][j])
+count[j]++;
+}
+}
+printf("
+");
+}
+return 0;
+}

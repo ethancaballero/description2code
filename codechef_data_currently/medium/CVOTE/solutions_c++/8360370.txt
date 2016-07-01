@@ -1,0 +1,111 @@
+#include<bits/stdc++.h>
+#define mod 1000000007
+#define len(a) strlen(a)
+#define ll int
+#define nl printf("
+")
+#define db printf("debug")
+#define yes printf("YES
+")
+#define no printf("NO
+")
+#define pb(a) push_back(a)
+#define po(a) pop_back()
+#define mp(a,b) make_pair(a,b)
+#define set(a,v) memset(a,v,sizeof(a))
+#define sz(v) v.size()
+#define pcase(i) printf("Case #%d: ",i)
+using namespace std;
+# include <stdio.h>
+# include <math.h>
+
+    int n,m,i;
+    string a,b;
+    map<string, string>mp;
+
+    map<string, int>chef_votes;
+    map<string, int>coun_votes;
+
+    vector<pair<int, string> >chef;
+    vector<pair<int, string> >coun;
+    map<string, string>::iterator it;
+
+    map<string, int>::iterator mit;
+
+bool cmp(const pair<int, string>a, const pair<int, string>b)
+{
+    if(a.first == b.first)
+        return a.second < b.second;
+    return a.first> b.first;
+
+}
+void pnt(vector<pair<int, string> >chef)
+{
+    for(int i=0;i<chef.size();i++)
+        cout<<chef[i].first<<" "<<chef[i].second<<"
+";
+}
+int main()
+{
+
+    cin>>n>>m;
+
+    for(i=1;i<=n;i++)
+    {
+        cin>>a>>b;
+        mp[a]=b;
+        chef_votes[a]=0;
+        coun_votes[b]=0;
+    }
+    while(m--)
+    {
+        string country;
+        cin>>a;
+        chef_votes[a]++;
+        it= mp.find(a);
+        country = it->second;
+        coun_votes[country]++;
+    }
+    for(mit= chef_votes.begin();mit!=chef_votes.end();mit++)
+    {
+        int v;
+        a= mit->first;
+        v= mit->second;
+        chef.pb(mp(v,a));
+    }
+     for(mit= coun_votes.begin();mit!=coun_votes.end();mit++)
+    {
+        int v;
+        a= mit->first;
+        v= mit->second;
+        coun.pb(mp(v,a));
+    }
+    /*printf("chef
+");
+    pnt(chef);nl;
+
+    printf("coun
+");
+    pnt(coun);nl;*/
+
+    sort(chef.begin(), chef.end(),cmp);
+    sort(coun.begin(), coun.end(),cmp);
+    /*printf("after sorting
+");
+
+    printf("chef
+");
+    pnt(chef);nl;
+
+    printf("coun
+");
+    pnt(coun);nl;*/
+    cout<<coun[0].second<<"
+"<<chef[0].second<<"
+";
+
+
+
+}
+
+

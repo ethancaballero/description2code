@@ -1,0 +1,52 @@
+//
+//  VCS.cpp
+//  
+//
+//  Created by Aneesh on 03/04/16.
+//
+//
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int t,m,n,k,file;
+    int ignored[101],tracked[101];
+    
+    cin>>t;
+
+    while(t--)
+    {
+        cin>>n>>m>>k;
+        
+        fill_n(ignored,n+1,0);
+        fill_n(tracked,n+1,0);
+        
+        for(int i=0; i<m; i++)
+        {
+            cin>>file;
+            ignored[file] = 1;
+        }
+
+        for(int i=0; i<k; i++)
+        {
+            cin>>file;
+            tracked[file] = 1;
+        }
+        int both=0,neither=0;
+        
+        for(int i=1; i<=n; i++)
+            if(ignored[i] && tracked[i])
+                both++;
+            else if(!ignored[i] && !tracked[i])
+                neither++;
+        
+        cout<<both<<" "<<neither<<endl;
+            
+        
+        
+    }
+
+    return 0;
+}

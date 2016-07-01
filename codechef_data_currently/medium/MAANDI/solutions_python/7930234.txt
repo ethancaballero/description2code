@@ -1,0 +1,39 @@
+
+def getVal(n):
+        while(n>0):
+                if(n%10 == 4 or n%10 ==7):
+                        return True
+                n = n/10
+        return False
+
+
+
+
+t = int(raw_input())
+while (t):
+        n = int(raw_input())
+        count= 0
+        x=1
+        while(x*x < n):
+                if(n%x ==0):
+                        if(getVal(x)):
+                                count= count +1
+                        if(getVal(n/x)):
+                                count= count+1
+                x = x+1
+                if(x*x==n):
+                        if(getVal(x)):
+                                count=count+1
+        t = t-1			
+        print count
+			
+
+
+
+
+
+
+
+
+
+        

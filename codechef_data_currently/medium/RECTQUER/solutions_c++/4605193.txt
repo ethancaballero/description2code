@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long 
+#define sc( x ) scanf(" %d ", &x);
+#define REP(i,n) for( int i = 0 ; i < n ; i++ ) 
+#define FOR(it,v) for( typeof v.begin() it = v.begin(); it != v.end(); it++)
+#define M1(A,n) for( int i = 0 ; i < n ; i++) cout<<A[i]<<char(i + 1 == n ? 10:32)
+#define M2(A,n,m) for( int i = 0 ; i < n ; i++ ) for( int j = 0 ; j< m ; j++ ) cout<<A[ i ][  j ]<<char( j + 1 == m ? 10 : 32)
+#define N 300  
+#define all( v )  v.begin(),v.end()
+#define pb push_back
+typedef vector<int> vi;
+typedef vector< vector<int> >vii;
+int B[ N + 2 ][ N + 2  ][ 11 ] , A[ N + 2 ][ N + 2 ]; 
+
+int main(){
+	int n , xlo , ylo , xhi , yhi , Q ,count;
+	cin>>n;	
+	REP( i , n )
+		REP( j , n )
+			sc( A[ i + 1 ][ j + 1 ]);
+	
+	
+	
+	for( int d = 1 ; d <= 10; d++ )
+		for( int i = 1 ;i <= n ; i++ )
+			for( int j  = 1 ; j <= n ; j++ )
+				B[ i ][ j ][ d ] = B[i - 1 ][ j ][ d ] + B[ i ][ j - 1 ][ d ] - B[ i - 1 ][ j - 1 ][ d ] + ( A[ i ][ j ] == d ? 1:0 );
+
+	cin>>Q;
+	for( int i =  1; i <= Q; i++ ){
+		cin >> xlo >> ylo >> xhi >> yhi;
+		count  = 0;
+		for( int k = 1 ; k <= 10 ; k++ ){
+			if( B[ xhi ][ yhi ][ k ] - B[ xlo - 1  ][ yhi ][ k ] - B[ xhi  ][ ylo - 1 ][ k ] + B[ xlo - 1  ][ ylo - 1 ][ k ] > 0 )
+				count++;
+		}
+		printf( "%d
+", count );
+	}
+
+ return 0;
+}

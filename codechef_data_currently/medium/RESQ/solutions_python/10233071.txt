@@ -1,0 +1,15 @@
+import sys
+import math
+t=int(input())
+while t>0:
+    t=t-1
+    num=int(input())
+    mini=100000007
+    for i in range(1,int(math.sqrt(num))+1):
+        if num%i==0:
+            dif=abs(i-num/i)
+            if mini>dif :
+                mini=dif
+        dif=0
+
+    print(mini)

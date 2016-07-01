@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	long long int n, m, q, mid, total;
+	cin>>n>>m;
+	total = 2 * n - 1;
+	mid = (total + 1) / 2;
+
+	while (m--) {
+		cin>>q;
+		q = q - n - 1;
+		if (q < 1) {
+			cout<<0<<endl;
+		} else if (q > total) {
+			cout<<0<<endl;
+		} else {
+			if (q <= mid) {
+				cout<<q<<endl;
+			} else {
+				q = total + 1 - q;
+				cout<<q<<endl;	
+			}
+		}
+	}
+
+	return 0;
+}

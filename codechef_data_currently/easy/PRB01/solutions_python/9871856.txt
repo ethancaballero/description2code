@@ -1,0 +1,13 @@
+t=input()
+while t>0:
+    a=input()
+    c=0
+    for i in xrange(1,a+1):
+        if a%i==0:
+            c=c+1
+    if c==2:
+        print 'yes'
+    else:
+        print 'no'
+        
+    t=t-1 

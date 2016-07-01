@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int maxs(int n, int m)
+{
+    int k = n*(m+1) + m*(n+1) - 2*(m+n);
+    return k;
+}
+int main()
+{
+    int c,i,n,m;
+    int A[100];
+    cin >> c;
+    for(i=1;i<=c;i++)
+    {
+        cin >> n;
+        cin >> m;
+        A[i-1] = maxs(n,m);
+    }
+    for(i=0;i<c;i++)
+    {
+        cout << A[i] << endl;
+    }
+}

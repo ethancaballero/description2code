@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<string.h>
+#define MOD 1000000007
+
+
+int main(){
+	int tests;
+	long long int i,len=0,level=1,value=1;
+	char str[100002];
+	scanf("%d",&tests);
+	while(tests--){
+		scanf(" %s",str);
+		len = strlen(str);
+		for(i=0;i<len;++i){
+
+			if((level&1)&&str[i] == 'l'){ // for odd level and character 'l'
+				value = (value<<1) % MOD;
+				++level;
+			}
+			else if((level&1)&&str[i] == 'r'){  // for odd level and character 'r'
+				value = ((value<<1)%MOD + 2) % MOD;
+				++level;
+			}
+			else if(!(level&1)&&str[i] == 'l'){ // even level and character 'l'
+				value = ((value<<1)-1)%MOD;
+				++level;
+			}
+			else{ // even level and character 'r'
+				value = ((value<<1)%MOD + 1) % MOD;
+				++level;
+			}
+		}
+		value = value % MOD;
+		printf("%lld
+",value);
+		value=1;level=1;
+	}
+	return 0;
+}

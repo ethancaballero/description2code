@@ -1,0 +1,168 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+using namespace std;
+
+const float maxd = 30000;
+
+int v;//number of vertices
+float key[503];
+int mstSet[503];
+int parent[503];
+
+using namespace std;
+float graph[503][503];
+void printk()
+{
+    for(int i=0; i<v; i++)
+    printf("%.3f
+", key[i]);
+}
+
+void printi(int p[], int x)
+{
+    for(int i=0; i<x; i++)
+    printf("%d
+", p[i]);
+}
+void printgraph(int s)
+{
+    for(int i=0; i<s; i++)
+    {
+        for(int j=0; j<s; j++)
+        printf("%.3f ", graph[i][j]);
+        cout<<endl;
+    }
+}
+
+//for Prim
+int minkey()
+{
+    float min = maxd;
+    int minind;
+    //printk();
+    for(int i=0; i<v; i++)
+    {
+        if(mstSet[i] == 0 && key[i]<min)
+        min = key[i], minind = i;
+
+    }
+    return minind;
+}
+void printMST()
+{
+   printf("Edge   Weight
+");
+   for (int i = 1; i < v; i++)
+      printf("%d - %d    %.3f 
+", parent[i], i, graph[i][parent[i]]);
+}
+void primMST()
+{
+  //initalize all keys to pseudo infinity
+  for(int i=0; i<v; i++)
+  key[i] = maxd, mstSet[i]= 0;
+  //printi(mstSet, v);
+  //include first vertex in MST(inner circlle)
+  key[0] = 0;
+  parent[0] = -1;
+  //for rest v-1 vertices
+  for(int i=0; i<v-1; i++)
+  {
+      //pick min key from set of vertices not included in mstSet
+      int u = minkey();//get vertex with min key value
+    // cout<<u<<" "<<key[u]<<endl;
+      //add picked vertex to MST set
+      mstSet[u] = 1;
+      //printi(mstSet, v);
+      //update key value and parent index of adjacent vertices of picked vertex. Consider
+      //only those vertices which are not in mstSet
+
+      for(int j =0; j<v; j++)
+      {
+          //graph[u][j] is nonzero only for adjacent vertices of u
+          //mstSet[j] is false for vertices not included in MST
+          //update key value only if graph[u][j] < key[j]
+
+          if(graph[u][j] && mstSet[j]==0 && graph[u][j]< key[j])
+          parent[j] = u, key[j] = graph[u][j];
+      }
+  }
+  //printMST();
+
+}
+void findd()
+{
+    float m = -1;
+    int w = 1;
+    int u = parent[w];
+    while(u!= -1)
+    {
+        if(graph[u][w] > m)
+        m = graph[u][w];
+
+        w = u;
+        u = parent[w];
+    }
+    printf("%.3f
+", m);
+    return;
+}
+int main()
+{
+    int t;
+    int cones;
+    int xcone[501];
+    int ycone[501];
+    int r, R;
+    float tmp;
+    scanf("%d", &t);
+
+    while(t--)
+    {
+
+    scanf("%d%d", &r, &R);
+    scanf("%d", &cones);//take in number of cones
+    v = cones + 2; //inner and outer circle are the remaining 2 vertices
+
+    for(int i=0; i<cones; i++)
+    {
+        scanf("%d%d", xcone+i, ycone+i);
+
+    }
+   // printi(xcone, cones);
+   // printi(ycone, cones);
+
+    for(int i=0; i<cones+2; i++)
+    for(int j=0; j<cones+2; j++)
+    graph[i][j] =0;
+    //printgraph(cones+2);
+    //vertex 0 is inner circle
+    //vertex 1 is outer circle
+    graph[0][1] = (float)R- r;
+    graph[1][0] = graph[0][1];
+    //printgraph(cones+2);
+    //filling first and second row
+    for(int i=0; i<cones; i++)
+    {
+        tmp = sqrt((float)(xcone[i]*xcone[i] + ycone[i]*ycone[i]));
+        graph[0][i+2] =  tmp - r;
+        graph[i+2][0] = graph[0][i+2];
+
+        graph[1][i+2] = R - tmp;
+        graph[i+2][1] = graph[1][i+2];
+    }
+    //filling in rest of graph
+    for(int i=0; i<cones-1; i++)
+    {
+        for(int j= i+1; j<cones; j++)
+        {
+            graph[i+2][j+2] = sqrt((float)( (xcone[j] - xcone[i])*(xcone[j]- xcone[i]) + (ycone[j] - ycone[i])*(ycone[j]- ycone[i])));
+            graph[j+2][i+2] = graph[i+2][j+2];
+        }
+    }
+    //printgraph(cones+2);
+    primMST();
+    findd();
+    }
+}

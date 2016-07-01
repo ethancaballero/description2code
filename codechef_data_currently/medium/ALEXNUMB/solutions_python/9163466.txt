@@ -1,0 +1,7 @@
+# your code goes here
+t = input()
+while t != 0 :
+	n = input()
+	numbers = raw_input()
+	print ( n * ( n -1 ) / 2 )
+	t -=1

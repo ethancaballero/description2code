@@ -1,0 +1,73 @@
+# for each number calculate #4 (number of digits 4) and #7 (number of digits 7)
+# for each number n calculate a diff (#4 - #7)
+# for each number n calculate Sn = sum[1 to n](#4 - #7)
+# for l, r are a solution when Sl = Sr 
+# to calculate the number of solutions l, r for l <= r <= n
+#   we can use recursion, since Sn+1 = Sn + # of solutions(l, r = n+1)
+
+import sys
+
+def read_int():
+	return int(sys.stdin.readline())
+
+def count_digits(number):
+	digit_counters = [0 for i in range(10)]
+	
+	# if zero is ever important, add this:
+	# if number == 0: digit_counters[0] = 1
+	
+	while number > 0:
+		digit = number % 10
+		digit_counters[digit] += 1
+		number /= 10
+	
+	return digit_counters
+
+def diff_number_of_digits(number, digit1, digit2):
+	digit_counters = count_digits(number)
+	return digit_counters[digit1] - digit_counters[digit2]
+	
+def build_diff_list(max):
+	# if digit zero is ever important, handle here (in this case we're interested in 4 and 7)
+	current_diff = 0
+	diff_list = [0]
+	
+	for i in xrange(max):
+		current_diff += diff_number_of_digits(i + 1, 4, 7)
+		diff_list.append(current_diff)
+		
+		# if current_diff < 0: raise IndexError("Negative diffs not allowed!")
+		
+	return diff_list
+
+def count_solutions_fast(diff_list):
+	"For each x + 1, the S(x+1) = S(x) + number of k < x that diff_list[k] == diff_list[x]"
+	"Like naive version, but caches the number of k so far for each value of diff_list[x]"
+	"Makes the assumption that the first special digit is smaller than the second one"
+	
+	solution_count_list = [None] * len(diff_list)
+	current_count = 0
+	
+	diff_occurences_count = [0] * (max(diff_list) + 1)
+	
+	for i in xrange(len(diff_list)):
+		current_diff = diff_list[i]
+		new_solutions = diff_occurences_count[current_diff]
+		current_count += new_solutions
+		solution_count_list[i] = current_count
+
+		diff_occurences_count[current_diff] += 1
+		
+	return solution_count_list
+	
+def real_main():
+	diff_list = build_diff_list(100000)
+	fast_solution_count_list = count_solutions_fast(diff_list)
+
+	num_numbers = read_int()
+	for i in xrange(num_numbers):
+		number = read_int()
+		print fast_solution_count_list[number]
+
+		
+real_main()

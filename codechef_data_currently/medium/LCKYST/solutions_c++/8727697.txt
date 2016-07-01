@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long int N, ai, aic;
+	cin >> N;
+
+	while (N--) {
+		cin >> ai;
+
+		int pt = 0, pf = 0;
+
+		aic = ai;
+		while (aic % 2 == 0) {
+			pt++;
+			aic /= 2;
+		}
+
+		aic = ai;
+		while (aic % 5 == 0) {
+			pf++;
+			aic /= 5;
+		}
+
+		while (pf > pt) {
+			ai = ai * 4;
+			pt += 2;
+		}
+
+		cout << ai << endl;
+	}
+
+	return 0;
+} 

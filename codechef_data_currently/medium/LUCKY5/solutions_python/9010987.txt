@@ -1,0 +1,7 @@
+for i in xrange(int(raw_input())): 
+    a = raw_input().strip()
+    
+    count = a.count('4')
+    count += a.count('7')
+    
+    print len(a) - count

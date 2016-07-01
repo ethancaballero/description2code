@@ -1,0 +1,15 @@
+for T in range(int(raw_input())):
+    raw_input()
+    op = 0
+    sal = map(int,raw_input().split())
+    while True:
+        mx = max(sal)
+        idx = sal.index(mx) 
+        sal = [x-mx for x in sal]
+        mn = min(sal)
+        if mn == 0 :
+            break
+        sal = [x+abs(mn) for x in sal]
+        sal[idx] -= abs(mn)
+        op += abs(mn)
+    print op

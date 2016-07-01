@@ -1,0 +1,69 @@
+/*
+ * C++ Program to Find Fibonacci Numbers using Matrix Exponentiation
+ */
+ #include <stdio.h>
+#include <cstring>
+#include <iostream>
+#include <cstdlib>
+#define modulo 1000000007
+
+using namespace std;
+long long int T[1000001];
+int main()
+{
+    long long int t,n,a,b,counter,guess,temp,i;
+
+    scanf("%lld",&t);
+
+    T[1]=1;
+    T[2]=2;
+
+
+    for(i=3;i<1000001;i++)
+    {
+
+        T[i]=T[i-1] + T[i-2];
+        if(T[i]>=modulo)
+        {
+            T[i]=T[i]%modulo;
+        }
+
+    }
+
+    while(t!=0)
+    {
+        scanf("%lld",&n);
+        scanf("%lld",&guess);
+
+        temp=T[n];
+        counter=0;
+        while(temp>0)
+        {
+
+            if(temp%2==1)
+            {
+                counter++;
+            }
+            temp=temp/2;
+        }
+
+        if(counter==guess)
+        {
+            printf("CORRECT
+");
+        }
+        else
+            {
+            printf("INCORRECT
+");
+        }
+t=t-1;
+    }
+
+
+
+
+
+    return 0;
+}
+

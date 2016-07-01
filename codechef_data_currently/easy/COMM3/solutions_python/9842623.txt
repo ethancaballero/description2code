@@ -1,0 +1,27 @@
+#!/usr/bin/python
+from math import sqrt
+N=input()
+for i in range(N):
+	R=input()
+	x,y=map(int,raw_input().split())
+	p,q=map(int,raw_input().split())
+	a,b=map(int,raw_input().split())
+	l=sqrt(((x-p)**2)+((y-q)**2))
+	m=sqrt(((x-a)**2)+((y-b)**2))
+	n=sqrt(((a-p)**2)+((b-q)**2))
+	#print "(%0.2f %0.2f)->(%0.2f %0.2f) = %0.2f  " %(x,y,p,q,l)
+	#print "(%0.2f %0.2f)->(%0.2f %0.2f) = %0.2f  " %(x,y,a,b,m)
+	#print "(%0.2f %0.2f)->(%0.2f %0.2f) = %0.2f  " %(p,q,a,b,n)
+	count=0
+	if l>R:
+		count+=1
+	if m>R:
+		count+=1
+	if n>R:
+		count+=1
+	if count>=2:
+		print "no"
+	else:
+		print "yes"
+
+

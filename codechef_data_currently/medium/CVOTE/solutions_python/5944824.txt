@@ -1,0 +1,35 @@
+n = raw_input()
+
+numChefs = int(n.split(' ')[0])
+numEmails = int(n.split(' ')[1])
+
+chefs = dict()
+countries = dict()
+
+for i in xrange(0, numChefs):
+	name, country = raw_input().split(' ')
+	chefs[name] = [country, 0]
+	countries[country] = 0
+
+for i in xrange(0, numEmails):
+	name = raw_input()
+	chefs[name][1] += 1
+	countries[chefs[name][0]] += 1
+
+# Output country with most...
+mostCountryCount = 0
+mostCountryName = ""
+for cName in countries:
+	if countries[cName] > mostCountryCount or (countries[cName] == mostCountryCount and cName < mostCountryName):
+		mostCountryCount = countries[cName]
+		mostCountryName = cName
+
+mostChefCount = 0
+mostChefName = ""
+for cName in chefs:
+	if chefs[cName][1] > mostChefCount or (chefs[cName][1] == mostChefCount and cName < mostChefName):
+		mostChefCount = chefs[cName][1]
+		mostChefName = cName
+
+print mostCountryName
+print mostChefName

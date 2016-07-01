@@ -1,0 +1,11 @@
+import sys
+
+num_lines = int(input())
+while num_lines > 0:
+    num = int(input())
+    sum = 0
+    while num!=0:
+        sum += num%10;
+        num//=10;
+    print(sum)
+    num_lines -= 1

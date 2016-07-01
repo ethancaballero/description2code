@@ -1,0 +1,15 @@
+def gcd(a,b):
+    if b == 0: return a
+    else: return gcd(b,a%b)
+def AMSGAME1():
+    t = int(raw_input())
+    while t:
+        n = int(raw_input())
+        L = [int(i) for i in raw_input().split()]
+        if n == 1: res = L[0]
+        else:
+            res = gcd(L[0],L[1])
+            for i in range(2,n):
+        	    res = gcd(res,L[i])
+        print res; t-=1
+AMSGAME1()

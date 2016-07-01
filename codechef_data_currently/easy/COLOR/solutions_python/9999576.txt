@@ -1,0 +1,17 @@
+test_cases = input()
+for test_case in range(test_cases):
+    rooms = input()
+    color_config = list(str(raw_input()))
+    r = color_config.count('R')
+    g = color_config.count('G')
+    b = color_config.count('B')
+    if r >= g:
+        if r >= b:
+            print(g+b)
+        else:
+            print(r+g)
+    else:
+        if g > b:
+            print(r+b)
+        else:
+            print(r+g)

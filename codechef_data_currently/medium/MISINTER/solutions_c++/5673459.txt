@@ -1,0 +1,83 @@
+#include<algorithm>
+#include<cstdio>
+#include<cmath>
+#include<iostream>
+#include<string.h>
+#include<set>
+using namespace std;
+int main()
+{
+	int e,f,g,p,d,i,j,k,m,q,n,l1,l2,sum=0,z,test,len,cou,te,l;
+	long long int ans;
+	int a[100003];
+	int b[100004];
+	int c[100004];
+	//int a[73][73];
+	scanf("%d",&test);
+	while(test)
+    {
+        z=1;
+        ans=0;
+        scanf("%d",&n);
+        cou=1;
+        for(i=1;i<=n;i++)
+        {
+            a[i]=i;
+            c[i]=-1;
+        }
+        cou=1;
+        for(i=1;i<=n;i++)
+        {
+            if(i<=n/2)
+            {
+                b[i]=2*i;
+            }
+            else
+            {
+                b[i]=cou;
+                cou=cou+2;
+            }
+        }
+        if(n==1 || n==2)
+        {
+            printf("26
+");
+            test--;
+            continue;
+        }
+        cou=0;
+        ans=1;
+        for(i=1;i<=n;i=i+2)
+        {
+            if(c[i]==-1)
+            {
+                ans = ans*26;
+                ans = ans%1000000007;
+                c[i]=++cou;
+                d= b[a[i]];
+                if(c[d]==-1)
+                {
+                    while(d!=i)
+                    {
+                        if(c[d]==-1)
+                        {
+                            c[d]=cou;
+                            d= b[a[d]] ;
+                        }
+                        else
+                            break;
+                    }
+
+                }
+                else
+                    continue;
+            }
+            else
+                continue;
+        }
+        printf("%lld
+",ans);
+        test-- ;
+    }
+return 0;
+}

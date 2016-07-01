@@ -1,0 +1,34 @@
+class Seive(object):
+	"""program to calculate prime numbers"""
+	def __init__(self, n):
+		self.n_max = n
+		'''
+			Preprocess prime numbers from 2, n in O(n).
+			All Preprocessing is done in this funtion.
+			preffered n_max is 10^6 so , self.n_max = 10**6 			
+		'''
+
+		n+=1
+		a = [ True for i in xrange(n)]
+		a[0] = False;a[1] = False
+		i = 2
+		while i*i < n :
+			j = 2*i
+			while j < n:
+				if a[j] :
+					a[j] = False
+				j +=i
+			i+=1
+		self.a = a
+
+	def take_user_inputs(self):
+		for _ in xrange(int(raw_input().strip())):
+			n = int(raw_input().strip())
+			if self.a[n]:
+				print "yes"
+			else:
+				print "no"
+
+
+primes_object = Seive(10**6)
+primes_object.take_user_inputs()

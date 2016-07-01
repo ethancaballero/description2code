@@ -1,0 +1,39 @@
+#! bin/usr/python
+
+import sys
+
+def __main__():
+    
+    N,K,P=map(int,sys.stdin.readline().split())
+    array=map(int,sys.stdin.readline().split())
+     
+    array2=sorted(array)
+    same_dist_index={}
+     
+    c=1
+    same_dist_index[array2[0]]=c
+    last_dist=array2[0]
+     
+    for i in xrange(1,N):
+     
+            if array2[i]-last_dist <= K:
+                    same_dist_index[array2[i]]=c
+     
+            else:
+                    c+=1
+                    same_dist_index[array2[i]]=c
+     
+            last_dist=array2[i]
+     
+     
+    for pairs in xrange(P):
+            A,B=map(int,sys.stdin.readline().split())
+     
+            if same_dist_index[array[A-1]]==same_dist_index[array[B-1]]:
+                    print "Yes"
+            else:
+                    print "No"
+
+__main__();
+ 
+

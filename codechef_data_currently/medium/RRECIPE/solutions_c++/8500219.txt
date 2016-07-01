@@ -1,0 +1,46 @@
+#include <iostream>
+#include<string.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        int flag=0,palindromes=1;
+        int a,b;
+        if(s.size()%2==0)
+        {
+            b=s.size()/2;
+            a=b-1;
+        }
+        else
+        {
+            a=b=s.size()/2;
+        }
+        for(int i=a,j=b;i>=0,j<s.size();i--,j++)
+        {
+            if(int(s[i])>=97 && int(s[i])<=122 && int(s[j])>=97 && int(s[j])<=122)
+            {
+                if(s[i]!=s[j])
+                    {flag=1;
+                    break;}
+            }
+            if(s[i]=='?' && s[j]=='?')
+            {palindromes*=26;
+            palindromes%=10000009;}
+            if(flag==1)
+                break;
+        }
+        if(flag==1)
+        {
+            palindromes=0;
+        }
+        cout<<palindromes<<"
+";
+    }
+    return 0;
+}

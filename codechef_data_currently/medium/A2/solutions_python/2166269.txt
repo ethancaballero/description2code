@@ -1,0 +1,13 @@
+test = int(raw_input())
+
+for t in range(test):
+	levels = int(raw_input())
+	maxleaf = 0.5
+	leaf = map(int,raw_input().split())
+	for i in range(levels):
+		maxleaf = 2*maxleaf-leaf[i]
+	
+	if maxleaf==0:
+		print "Yes"
+	else:
+		print "No"

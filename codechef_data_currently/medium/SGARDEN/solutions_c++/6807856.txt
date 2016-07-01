@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<math.h>
+void factors(int num,long long int max[100001])
+{
+//    j=0;
+    int temp = 0,i;
+ 
+    for(i=2;i<=num;i++)
+    {
+        temp = 0;
+        while(num%i==0)
+            {
+                temp++;
+                num = num/i;
+            }
+        if(temp>max[i])
+            max[i] = temp;
+    }
+ 
+}
+int main()
+{
+    int t;
+    long long int b[100001],n,x,temp,j,i,k;
+    scanf("%d",&t);
+    while(t--)
+    {
+        long long int max[100001] = {0};
+        long long int lcm=1;
+    scanf("%lld",&n);
+    for(j=1;j<=n;j++)
+    {
+        scanf("%lld",&b[j]);
+    }
+    //printf("%d
+",cycles);
+    for(j=1;j<=n;j++)
+    {
+ 
+        if(b[j]!=0)
+        {
+            int len = 0;
+            x = b[j];
+            b[j] = 0;
+            while(x!=j)
+            {
+                len++;
+                temp = x;
+                x = b[x];
+                b[temp] = 0;
+            }
+            len++;
+            factors(len,max);
+        }
+    }
+    for(i=2;i<=n;i++)
+    {
+        if(max[i]!=0)
+        {
+            for( k=1;k<=max[i];k++)
+                lcm=(lcm*i)%1000000007;
+        }
+    }
+    printf("%lld
+",lcm);
+    }
+ 
+return 0;
+ 
+}
+ 

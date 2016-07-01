@@ -1,0 +1,11 @@
+t = input()
+while(t>0):
+    t -= 1
+    l,r = map(int,raw_input().split())
+    sum = 0
+    for i in range(l,r+1):
+        str_i = str(i)
+        str_i_rev = str_i[::-1]
+        if(str_i == str_i_rev):
+            sum = sum+i        
+    print sum

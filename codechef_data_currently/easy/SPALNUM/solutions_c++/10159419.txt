@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+bool palindrome(int x)
+{
+    int s=0,y=x;
+    while(y>0)
+    {
+        s=s*10;
+        s=(s+y%10);
+    y=y/10;
+}
+if(s==x)
+        return 1;
+else return 0;
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int l,r,s=0;;
+        cin>>l>>r;
+        for(int i=l;i<=r;i++)
+        {
+            if(palindrome(i))
+                s+=i;
+        }
+        cout<<s<<endl;
+    }
+}

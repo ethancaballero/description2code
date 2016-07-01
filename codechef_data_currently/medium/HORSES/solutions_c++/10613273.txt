@@ -1,0 +1,30 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#define max 5000
+void find_min(long[],int );
+using namespace std;
+int main()
+{
+	int i,j,n,T,N;
+	long s[max];
+	cin>>T;
+	for(i=0;i<T;i++){
+		cin>>N;
+		for(j=0;j<N;j++){
+			cin>>s[j];}
+		sort(s,s+N);
+		find_min(s,N);
+	}
+}
+void find_min(long s[],int N)
+{
+	
+	long min,j,k;
+	min=s[1]-s[0];
+	for(j=2;j<N;j++){
+		k=s[j]-s[j-1];
+		if(k<min)
+		min=k;
+	}
+	cout<<min<<endl;
+}

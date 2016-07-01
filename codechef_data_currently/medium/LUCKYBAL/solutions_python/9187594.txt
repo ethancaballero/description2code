@@ -1,0 +1,10 @@
+for i in range(input()):
+    s=raw_input()
+    pos=-1
+    ans=0
+    for j in range(len(s)):
+        if s[j]=='4':
+            pos=j
+        if pos!=-1:
+            ans+=pos+1
+    print ans

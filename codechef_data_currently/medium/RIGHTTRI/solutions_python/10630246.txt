@@ -1,0 +1,13 @@
+def right(A,h):
+	val = (h**2) + (h**4 - 16*(A**2))
+	if val > 0:
+           a = (((h**2) + (h**4 - 16*(A**2))**0.5)/2)**0.5
+	   b = (h**2 - a**2)**0.5
+	   print b,a,h
+	else:
+	    print -1    
+
+t = int(raw_input())
+for i in range(t):
+	h,A = map(int, raw_input().split())
+	right(A,h)

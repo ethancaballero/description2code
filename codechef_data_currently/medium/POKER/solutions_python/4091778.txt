@@ -1,0 +1,181 @@
+#!/usr/bin/python
+# coding=utf8
+import sys
+import math
+from time import time
+from itertools import permutations, combinations
+import collections
+import functools
+from fractions import gcd, Fraction
+import string
+import random
+
+
+# choisi k nombre parmis n
+def choose(n, k):
+    """
+    A fast way to calculate binomial coefficients by Andrew Dalke (contrib).
+    """
+    if 0 <= k <= n:
+        ntok = 1
+        ktok = 1
+        for t in xrange(1, min(k, n - k) + 1):
+            ntok *= n
+            ktok *= t
+            n -= 1
+        return ntok / ktok
+    else:
+        return 0
+
+
+# return list of factors of n (without 1) eg . factors(20) = [2, 2, 5]
+def factors(n):
+    gaps = [1,2,2,4,2,4,2,4,6,2,6]
+    length, cycle = 11, 3
+    f, fs, next = 2, [], 0
+    while f * f <= n:
+        while n % f == 0:
+            fs.append(f)
+            n /= f
+        f += gaps[next]
+        next += 1
+        if next == length:
+            next = cycle
+    if n > 1: fs.append(n)
+    return fs
+
+
+class memoized(object):
+    def __init__(self, func):
+        self.func = func
+        self.cache = {}
+    def __call__(self, *args):
+        if not isinstance(args, collections.Hashable):
+            return self.func(*args)
+        if args in self.cache:
+            return self.cache[args]
+        else:
+            value = self.func(*args)
+            self.cache[args] = value
+            return value
+    def __repr__(self):
+        return self.func.__doc__
+    def __get__(self, obj, objtype):
+        return functools.partial(self.__call__, obj)
+
+
+class timed(object):
+    def __init__(self, func):
+        self.func = func
+    def __call__(self, *args):
+        t1 = time()
+        ret = self.func(*args)
+        dif_time = time() - t1
+        print "%s: returned %s in %f seconds" % (self.func.__name__, ret, dif_time)
+        return ret
+
+
+def comp(f1, f2, *args):
+    t1 = time()
+    r1 = f1(*args) if f1 is not None else None
+    t2 = time()
+    r2 = f2(*args) if f2 is not None else None
+    t3 = time()
+    res = "%5s: %s in %f
+%5s: %s in %f" % (f1.__name__ if f1 is not None else None, r1, t2 - t1, f2.__name__ if f2 is not None else None, r2, t3 - t2)
+    if r1 != r2:
+        dr = "!! DIFFERENT RESULTS !!"
+        res = dr + "
+" + res + "
+" + dr
+    print res
+
+
+def alg(L):
+    order = "AKQJT98765432A"
+    def is_suite(s):
+        assert(len(s) == 5)
+        for i in xrange(len(order)-5 + 1):
+            order_to_check = order[i:i + 5]
+            if all(a in s for a in order_to_check):
+                return i
+        return -1
+
+    # create set of cards per color
+    cards_per_col = {}
+    for col in 'SHDC':
+        s = set([c[0] for c in L if c[1]==col])
+        if len(s) == 5:
+            # check if in order
+            isuite = is_suite(s)
+            if isuite == 0:
+                return "royal flush"
+            elif isuite > 0:
+                return "straight flush"
+        if len(s) > 0:
+            cards_per_col[col] = s
+    # check for 4 of a kind
+    # create set of cards per type
+    cards_per_type = {}
+    for card_type in set(order):
+        nb_type = len([1 for c in L if c[0] == card_type])
+        if nb_type != 0:
+            cards_per_type[card_type] = nb_type
+    for ct, v in cards_per_type.iteritems():
+        if v == 4:
+            return "four of a kind"
+
+    some_has_3 = False
+    some_has_2 = False
+    two_pairs = False
+    for ct, v in cards_per_type.iteritems():
+        if v == 3:
+            if some_has_2:
+                return "full house"
+            some_has_3 = True
+        elif v == 2:
+            if some_has_3:
+                return "full house"
+            if some_has_2:
+                two_pairs = True
+            some_has_2 = True
+
+    for c, v in cards_per_col.iteritems():
+        if len(v) == 5:
+            return "flush"
+
+    s = set([c[0] for c in L])
+    if len(s) == 5:
+        # check if in order
+        isuite = is_suite(s)
+        if isuite >= 0:
+            return "straight"
+
+    if some_has_3:
+        return "three of a kind"
+
+    if two_pairs:
+        return "two pairs"
+    if some_has_2:
+        return "pair"
+
+
+    return "high card"
+
+
+def main():
+    data = sys.stdin
+    nb = int(data.readline())
+    #a, b = map(int,data.readline().split())
+    for icase in xrange(nb):
+        #L = map(int, data.readline().split())  # int
+        #L = map(float, data.readline().split())  # float
+        L = set(data.readline().split())  # string
+        #s = data.readline().strip()
+        #i = int(data.readline().strip())
+        res = alg(L)
+        print res
+
+
+if __name__ == "__main__":
+    main()

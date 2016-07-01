@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+#define MOD 1000000007
+long long int modpowfast(long long int a,long long int b)
+{
+    long long int ans=1;
+    while(b>0)
+    {
+        if(b&1)
+            ans=(ans*a)%MOD;
+        a=a*a%MOD;
+        b=b/2;
+    }
+    return ans;
+}
+int main()
+{
+    long long int t,n,k;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        scanf("%lld %lld",&n,&k);
+        printf("%lld
+",(k*modpowfast(k-1,n-1))%MOD);
+    }
+    return 0;
+}

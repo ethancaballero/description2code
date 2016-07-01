@@ -1,0 +1,20 @@
+# your code goes here
+t = int(raw_input())
+for sc in range(t):
+	n, k = map(int, raw_input().split())
+	lang = raw_input().split()
+	d={}
+	for i in lang:
+		d[i] = 0
+	for phr in range(k):
+		phrase = raw_input().split()
+		for i in phrase[1:]:
+			if i in lang:
+				d[i] += 1
+	ans = ""
+	for i in lang:
+		if d[i] > 0:
+			ans+="YES "
+		else:
+			ans+="NO "
+	print ans.strip()

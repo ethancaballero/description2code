@@ -1,0 +1,22 @@
+for i in xrange(input()):
+	n, k = map(int, raw_input().split())
+	ans = 1
+	messi = 1
+	MOD = 1000000007
+	if n > 2:
+		for i in xrange(n - 2):
+			messi = ans - messi
+			if messi < 0:
+				messi += MOD;
+			ans *= k
+			ans %= MOD
+		
+		ans *= (k - 1)
+		ans %= MOD
+           
+		ans += messi
+		ans %= MOD
+	else:
+		ans = k
+
+	print ans

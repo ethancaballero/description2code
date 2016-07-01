@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sc(a) scanf("%d",&a)
+#define prln(a) printf("%d
+",a)
+#define sc2(a,b) scanf("%d %d",&a,&b)
+#define For(i,a,n) for(int i=a;i<n;i++)
+#define Fore(i,a,n) for(int i=a;i<=n;i++)
+struct Punto
+    {
+    int x,y;
+    Punto(int X=0,int Y=0):x(X),y(Y){};
+    Punto rotI()
+        {
+        return Punto(-y,x);
+        }
+    Punto rotD()
+        {
+        return Punto(y,-x);
+        }
+    bool operator<(const Punto &o) const
+        {
+        if(x!=o.x) return x<o.x;
+        return y<o.y;
+        }
+    };
+Punto operator+(const Punto&a,const Punto&b)
+    {
+    return Punto(a.x+b.x,a.y+b.y);
+    }
+Punto operator-(const Punto&a,const Punto&b)
+    {
+    return Punto(a.x-b.x,a.y-b.y);
+    }
+Punto p[2004];
+int main()
+    {
+    //freopen("in.txt","r",stdin);
+    int n;
+    sc(n);
+    For(i,0,n)
+       sc2(p[i].x,p[i].y);
+    if(n==0) prln(4);
+    else if(n==1) prln(3);
+    else if(n==2) prln(2);
+    else
+        {
+        set<Punto> s(p,p+n);
+        Punto a,b;
+        int ans=4;
+        bool ok1,ok2,found=0;
+        For(i,0,n)
+           {
+            For(j,i+1,n)
+              {
+              a=(p[j]-p[i]).rotI()+p[i];
+              b=(p[i]-p[j]).rotD()+p[j];
+              ok1=s.find(a)!=s.end();
+              ok2=s.find(b)!=s.end();
+              if(ok1 && ok2) {  found =1; ans=0; break; }
+              else if(ok1 || ok2) ans=1;
+
+              a=(p[j]-p[i]).rotD()+p[i];
+              b=(p[i]-p[j]).rotI()+p[j];
+              ok1=s.find(a)!=s.end();
+              ok2=s.find(b)!=s.end();
+              if(ok1 && ok2) {  found =1; ans=0; break; }
+              else if(ok1 || ok2) ans=1;
+              }
+           if(found) break;
+           }
+        prln(min(ans,2));
+        }
+    return 0;
+    }

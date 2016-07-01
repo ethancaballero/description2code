@@ -1,0 +1,25 @@
+    #include<iostream>
+     
+    using namespace std;
+     
+    int main(){
+        int A,B,C,T,sum=0,i;
+        cin>>T;
+       for(i=0;i<T;i++){
+            cin>>A>>B>>C;
+            if(A>0 && B>0 && C>0){
+                sum=A+B+C;
+                if(sum==180){
+                    cout<<"YES"<<endl;
+                }
+                else{
+                    cout<<"NO"<<endl;
+                }
+            }
+     
+            else{
+                cout<<"NO"<<endl;
+            }
+        }
+        return 0;
+    } 

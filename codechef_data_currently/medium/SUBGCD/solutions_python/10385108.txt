@@ -1,0 +1,12 @@
+def gcd(a,b):
+    if b == 0: return a
+    else: return gcd(b,a%b)
+t = int(raw_input())
+while t:
+    N = int(raw_input()); L = [int(i) for i in raw_input().split()]; r = gcd(L[0],L[1])
+    if r is 1: print N; t-=1; continue
+    for i in range(2,N):
+        r = gcd(r,L[i]); 
+        if r is 1: print N; break
+    else: print -1
+    t-=1

@@ -1,0 +1,15 @@
+for t in range(int(raw_input())):
+    n,k=map(int,raw_input().split())
+    dic=raw_input().split()
+    wrd=[]
+    for i in range(k):
+        words=raw_input().split()[1:]
+        wrd.extend(words)
+    for i in dic:
+        if i in wrd:
+            print 'YES',
+        else:
+            print 'NO',
+    print
+
+    

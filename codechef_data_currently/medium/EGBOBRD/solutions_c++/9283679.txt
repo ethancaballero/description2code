@@ -1,0 +1,84 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long int t;
+	scanf("%ld",&t);
+	while(t--)
+	{
+		long long int b,n,k,i,j=0,sum=0,sum1=0,sum2=0,d;
+		scanf("%lld%lld",&n,&k);
+		for(i=0;i<n;i++)
+		{
+			scanf("%lld",&b);
+			if(i==0)
+			{
+			
+				if(b%k==0)
+				{
+					sum=b;
+					
+				}
+				else if((b+1)%k==0)
+				{
+					sum=b+1;
+				}
+				else if((b+1)%k!=0)
+				{
+					sum=b+1;
+					sum1+=(k-(b+1)%k);
+				}	
+			
+				
+				
+			}
+			else 
+			{
+				if(sum1==b)
+				{
+					sum+=b;
+					sum1=0;
+				}
+				else if(sum1<b)
+				{
+					sum+=sum1;
+					b=b-sum1;
+					sum1=0;
+					if((b)%k==0)
+					{
+						sum+=b;
+						
+					}
+					else if((b+1)%k==0)
+					{
+						sum+=b+1;
+					}
+					else if((b+1)%k!=0)
+					{
+						sum+=b+1;
+						sum1+=(k-(b+1)%k);
+					}
+					
+				}
+				else if(sum1>b)
+				{
+					sum+=(b+1);
+					sum1=sum1-(b+1);
+					
+				}
+			}
+			
+		}
+			if(sum%k!=0)
+			{
+				d=(sum/k)+1;
+				
+			}
+			else
+			d=sum/k;
+			printf("%lld
+",d);
+		
+	}
+	return 0;
+}

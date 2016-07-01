@@ -1,0 +1,35 @@
+#include <cstdio>
+#include <cstring>
+#define MAX 1000
+using namespace std;
+
+bool win[MAX+10][MAX+10];
+
+void update_win_positions()
+{
+    int i,j;bool r[MAX+5],c[MAX+5],d[MAX+5];
+    win[0][0]=0;
+    for(i=1;i<=MAX;i++) {r[i]=c[i]=d[i]=0;win[0][i]=win[i][0]=win[i][i]=1;}
+    for(i=1;i<=MAX;i++)
+        for(j=i+1;j<=MAX;j++)
+        {    win[i][j]=win[j][i]=r[i]||c[j]||d[j-i];
+             if(!win[i][j]) r[i]=r[j]=c[j]=d[j-i]=1;
+        }
+}
+
+int main() {
+
+		int t,m,n,p,q;bool winner;
+		update_win_positions();
+		scanf("%i",&t);
+		while(t--)
+		{
+		    scanf("%i%i%i%i",&m,&n,&p,&q);
+		    winner=win[m-p][n-q];
+		    if(winner) printf("Alice
+");
+		    else printf("Bob
+");
+		}
+    return 0;
+}

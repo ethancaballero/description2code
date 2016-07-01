@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+long long int m,n,i;
+cin>>n;
+long long int a[n],ans=1,co=0;
+for(i=0;i<n;i++)
+cin>>a[i];
+sort(a,a+n);
+for(i=n-2;i>=0;i--)
+{
+if(a[i]==a[i+1])
+{
+ans=ans*a[i];
+i--;
+co++;
+}
+if(co==2)
+break;
+}
+if(co==2)
+cout<<ans<<endl;
+else
+cout<<-1<<endl;
+}
+return 0;
+}

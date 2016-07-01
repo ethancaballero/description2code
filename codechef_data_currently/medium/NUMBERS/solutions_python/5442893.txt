@@ -1,0 +1,29 @@
+t=input()
+
+for i in range(t):
+    
+    p=input()
+    d={}
+    q=set([])
+    for j in range(p):
+       s=raw_input()
+       name,number=s.split()
+       number=int(number)
+       
+       if number in q:
+          if number in d: 
+           d.pop(number)
+       else:
+           d[number]=name
+           
+       q.add(number)    
+    if len(d)==0:
+           print "Nobody wins."
+    else:
+           l=[]
+           for key in d:
+               l.append(key)
+           l.sort()
+       
+           print d[l[0]]                
+                                   

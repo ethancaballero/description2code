@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+void primeNumber(int arr[])
+{
+	int i,j;
+	for(i=2;2*i<=10000;i++)
+	arr[2*i]=1;
+	for(i=3;i<=10000;i+=2)
+	{
+		if(arr[i]==0)
+		{
+			for(j=2;i*j<=10000;j++)
+			arr[i*j]=1;
+		}
+	}
+}
+int main()
+{
+	int t,i,j,n,temp,count;
+	cin>>t;
+	int arr[10001]={0};
+	arr[0]=arr[1]=1;
+	primeNumber(arr);
+	int arr2[10001]={0};
+	for(j=3;j<=10000;j++)
+	{
+		count=0;
+	  for(i=2;i<=j;i++)
+      {
+	     	if(arr[i]==0)
+	     	{
+	     		temp=j-i;
+	     		if(temp%2==0&&arr[temp/2]==0)
+	     			count++;
+	     	}
+      }
+      arr2[j]=count;
+    }
+	while(t--)
+	{
+		cin>>n;    
+	     cout<<arr2[n]<<endl;
+	}
+	return 0;
+}

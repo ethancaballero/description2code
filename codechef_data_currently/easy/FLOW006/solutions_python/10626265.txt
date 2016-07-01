@@ -1,0 +1,15 @@
+#Sum Of Digits
+
+def main():
+    T = int(raw_input())
+    while T!=0:
+        T-=1
+        S = 0
+        N = raw_input()
+        for i in range(0, len(N)):
+            #f N
+            S += int(N[i])
+        print S
+
+if __name__ == '__main__':
+    main()

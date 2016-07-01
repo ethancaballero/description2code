@@ -1,0 +1,43 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+#define MAXN 100000
+map<int,int> cache;
+int r[MAXN+1];
+
+int f(int n, int d) {
+    int freq = 0;
+    while(n) {
+        if(n%10==d) freq++;
+        n/=10;
+    }
+    return freq;
+}
+
+void init() {
+    cache[0] = 1;
+    int s4=0, s7=0;
+    long long res = 0;
+    for(int i=1;i<=MAXN;++i) {
+        int c4=f(i,4);
+        int c7=f(i,7);
+        s4+=c4;
+        s7+=c7;
+        res+=cache[s4-s7];
+        r[i] = res;
+        cache[s4-s7]++;
+    }
+}
+
+int main() {
+    init();
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        cout << r[n] << endl;
+    }
+    return 0;
+}

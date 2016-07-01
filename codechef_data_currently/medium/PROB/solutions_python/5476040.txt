@@ -1,0 +1,4 @@
+T = int(raw_input())
+for t in xrange(T):
+    tickets = map(float, raw_input().split(" "))
+    print tickets[0] / ( tickets[0] + tickets[1] )

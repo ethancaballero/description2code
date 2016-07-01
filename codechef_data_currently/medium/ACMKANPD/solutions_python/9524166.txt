@@ -1,0 +1,62 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class Main
+{
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String temp, tokens[];
+		StringBuilder binaryNum = new StringBuilder();
+		List<String> blocks = new ArrayList<String>();
+		int flag = 0, result = 0;
+
+		for(;;)
+		{
+			blocks.clear();
+			do{
+				temp = br.readLine();
+
+				if(temp.charAt(0) == '~')
+					System.exit(0);
+
+				tokens = temp.split(" ");
+				for (int i = 0; i<tokens.length; i++) {
+					blocks.add(tokens[i]);
+				}
+
+			}while(blocks.indexOf("#") == -1);
+
+			if(blocks.indexOf("#") != -1)
+			{
+				blocks.remove(blocks.indexOf("#"));
+				tokens = blocks.toArray(new String[0]);
+				blocks.clear();
+				binaryNum.setLength(0);
+				int al = tokens.length;
+				for (int i = 0; i<al; i++) {
+					int l = tokens[i].length();
+					if( l == 1 )
+						flag = 1;
+					else if( l == 2 )
+						flag = 0;
+					else
+					{
+						for (int j = 0; j < (l-2); j++) {
+							binaryNum.append(flag);
+						}
+					}
+				}
+				
+				result = 0;
+				temp = binaryNum.reverse().toString();
+				int l = temp.length();
+				for (int j = 0; j<l ; j++) {
+					if(temp.charAt(j) == '1')
+						result += (int)Math.pow(2,j);
+				}
+				System.out.println(result);
+			}
+		}
+	}
+}

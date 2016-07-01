@@ -1,0 +1,20 @@
+import sys
+t=int(raw_input())
+for _ in xrange(t):
+    r,g,b,m=map(int,sys.stdin.readline().rstrip().split(' '))
+    R=map(int,sys.stdin.readline().rstrip().split(' '))
+    G=map(int,sys.stdin.readline().rstrip().split(' '))
+    B=map(int,sys.stdin.readline().rstrip().split(' '))
+    rm=max(R)
+    gm=max(G)
+    bm=max(B)
+    A=[]
+    A.append(rm)
+    A.append(gm)
+    A.append(bm)
+    for _ in range(m):
+        A.sort()
+        A[2]/=2
+
+    A.sort()
+    print(A[2])

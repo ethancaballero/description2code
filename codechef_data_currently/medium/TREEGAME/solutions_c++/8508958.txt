@@ -1,0 +1,61 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <cstring>
+
+using namespace std;
+
+#define clr(a) memset(a, 0, sizeof(a))
+#define pb push_back
+typedef long long ll;
+typedef pair<int, int> ii;
+
+const int maxn=10000+11;
+int a[maxn];
+int hocc[maxn];
+vector<int> G[maxn];
+
+int maxh;
+void dfs(int nd,int p, int h){
+	maxh=max(h, maxh);
+	hocc[h]++;
+	for(int i=0; i<G[nd].size(); i++)
+		if(G[nd][i]!=p)	dfs(G[nd][i], nd, h+1);
+}
+
+int main(){
+	ios_base::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--){
+		maxh=0;
+		clr(hocc);
+		int n;
+		cin>>n;
+		for(int i=0; i<=n; i++)	G[i].clear();
+		for (int i = 0; i < n-1; ++i)
+		{
+			int u, v;
+			cin>>u>>v;
+			G[u].pb(v);
+			G[v].pb(u);
+		}
+		dfs(1, -1, 0);
+		int steps=1;
+		hocc[0]=0;
+		int ans=1;
+		while(steps<maxh){
+			if(hocc[maxh]<=0){
+				maxh--;
+				continue;
+			}
+			hocc[maxh]--;
+			steps++;
+			ans+=2;
+		}
+		if(hocc[maxh]>0)
+			ans+=hocc[maxh]<2 ? 1:2;
+
+		cout<<ans<<endl;
+	}
+}

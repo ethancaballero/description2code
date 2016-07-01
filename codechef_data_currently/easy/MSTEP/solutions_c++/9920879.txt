@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{long int ar[500][500],le,size;
+int steps,tst,cas,e[2],ne[2],c,ct,a,b;
+scanf("%d",&cas);
+while(cas--)
+	{
+   tst=0;
+   c=1;
+   ct=2;
+   scanf("%d",&size);
+   for(a=0;a<size;a++)
+   	{
+      for(b=0;b<size;b++)
+      	{
+      	scanf("%d",&ar[a][b]);
+      	}
+    
+      }
+   le=size*size;
+   while(le--)
+   	{
+      for(a=0;a<size;a++)
+   		{
+     		 for(b=0;b<size;b++)
+          {
+          if(ar[a][b]==c)
+          {
+          e[0]=a;
+          e[1]=b;
+          }
+          if(ar[a][b]==ct)
+          {
+          ne[0]=a;
+          ne[1]=b;
+          }
+          }
+         }
+      if(e[0]==ne[0])
+      	steps=fabs((e[1]-ne[1]));
+      else if(e[1]==ne[1])
+      	steps=fabs(e[0]-ne[0]);
+      else
+      	steps=fabs(e[0]-ne[0])+fabs(e[1]-ne[1]);
+      tst=tst+steps;
+      c++;
+      ct++;
+      }
+      printf("%d
+",tst);
+ 
+	}
+	return(0);
+}
+
+
+

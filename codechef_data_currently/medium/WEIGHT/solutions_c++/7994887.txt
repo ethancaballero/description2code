@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+typedef long long ll;
+using namespace std;
+
+#define N 21
+#define W 201
+#define D 10
+#define MOD 1000007
+
+int dp[N][W][D],sum[N][W];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int i,j,k,l,n,w,t;
+    for(i=1;i<D;i++) dp[1][0][i]=1;
+    sum[1][0]=9;
+    for(i=2;i<N;i++) {
+        for(j=0;j<W;j++) {
+            for(k=0;k<D;k++) {
+                for(l=0;l<D;l++){
+                    if(j>=abs(k-l)){
+                        dp[i][j][k]+=dp[i-1][j-abs(k-l)][l];
+                        if(dp[i][j][k]>=MOD) dp[i][j][k]-=MOD;
+                    }
+                }
+                sum[i][j]+=dp[i][j][k];
+                if(sum[i][j]>=MOD) sum[i][j]-=MOD;
+            }
+        }
+    }
+    cin>>t;
+    while(t--) {
+        cin>>n>>w;
+        cout<<sum[n][w]<<'
+';
+    }
+    return 0;
+}

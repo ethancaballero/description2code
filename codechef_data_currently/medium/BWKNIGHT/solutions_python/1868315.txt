@@ -1,0 +1,17 @@
+def main():
+    t = int(raw_input())
+    while t > 0 :
+        t -= 1
+        m, n = raw_input().split()
+        m = int(m)
+        n = int(n)
+        
+        if m > n:
+            m, n = n, m
+        if m == 1 or n == 1:
+            print n * (n - 1)
+        else:
+            print ((m * n) * (m * n - 1) - 4 * ((m - 1) * (n - 2) + (m - 2) * (n - 1)))
+    return 0
+
+main()

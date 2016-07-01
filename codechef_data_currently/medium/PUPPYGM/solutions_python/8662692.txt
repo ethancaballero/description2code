@@ -1,0 +1,10 @@
+t=int(raw_input())
+
+while(t>0):
+    t-=1
+    a,b=[int(i) for i in raw_input().split()]
+    player=True
+    if(b%2==0 or a%2==0):
+        print "Tuzik"
+    else:
+        print "Vanka"

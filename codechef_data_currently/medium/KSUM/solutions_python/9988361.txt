@@ -1,0 +1,22 @@
+
+
+
+
+
+n,k = map(int,raw_input().split(" "))
+
+arr = map(int,raw_input().split())
+
+ans = []
+
+for i in xrange(len(arr)):
+    for j in xrange(i,len(arr)):
+        ans.append(sum(arr[i:j+1]))
+        #print ans
+
+ans.sort()
+ans.reverse()
+ans = ans[:k]
+
+for i in ans:
+    print i,

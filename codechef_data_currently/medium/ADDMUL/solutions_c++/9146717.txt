@@ -1,0 +1,114 @@
+#include<iostream>
+using namespace std;
+#define mod 1000000007
+#define ll long long
+ll n,q;
+struct node
+{
+  ll sum,mul,add;
+};
+node tree[400009]={0};
+ll a[100009];
+void build(ll idx,ll l,ll r)
+{
+  if(l==r)
+    {
+      tree[idx].sum=a[l];
+      tree[idx].add=0;
+      tree[idx].mul=1;
+      return;
+    }
+  ll mid=(l+r)/2;
+  build(2*idx,l,mid);
+  build(2*idx+1,mid+1,r);
+  tree[idx].sum=(tree[2*idx].sum+tree[idx*2+1].sum)%mod;
+  tree[idx].add=0;
+  tree[idx].mul=1;
+}
+void update(ll idx,ll lup,ll rup,ll add,ll mul,ll add_up,ll mul_up,ll l,ll r)
+{
+  if(rup<l || r<lup)//take care of add and mul that were already present in this node
+    {
+      tree[idx].sum=(tree[idx].sum*mul_up+add_up*(r-l+1))%mod;
+      tree[idx].add=(mul_up*tree[idx].add+add_up)%mod;
+      tree[idx].mul=(tree[idx].mul*mul_up)%mod;
+      //cout<<"idx="<<idx<<" sum="<<tree[idx].sum<<" add="<<tree[idx].add<<" mul="<<tree[idx].mul<<endl;
+      return;
+    }
+  if(lup<=l && r<=rup)
+    {
+      tree[idx].sum=(tree[idx].sum*mul+add*(r-l+1))%mod;
+      tree[idx].add=(mul*tree[idx].add+add)%mod;
+      tree[idx].mul=(tree[idx].mul*mul)%mod;
+      //cout<<"idx="<<idx<<" sum="<<tree[idx].sum<<" add="<<tree[idx].add<<" mul="<<tree[idx].mul<<endl;
+      return;
+    }
+  ll mid=(l+r)/2;
+  update(2*idx,lup,rup,  	 (add+mul*tree[idx].add)%mod
+  							,(tree[idx].mul*mul)%mod
+  							,(add_up+mul_up*tree[idx].add)%mod
+  							,(tree[idx].mul*mul_up)%mod
+  							,l,mid);
+  update(2*idx+1,lup,rup,  	 (add+mul*tree[idx].add)%mod
+  							,(tree[idx].mul*mul)%mod
+  							,(add_up+mul_up*tree[idx].add)%mod
+  							,(tree[idx].mul*mul_up)%mod
+  							,mid+1,r);
+  //update(2*idx+1,lup,rup,add+mul*tree[idx].add,tree[idx].mul*mul,add_up+mul_up*tree[idx].add,tree[idx].mul*mul_up,mid+1,r); 
+  tree[idx].sum=(tree[idx*2].sum+tree[idx*2+1].sum)%mod;
+  tree[idx].add=0;
+  tree[idx].mul=1;
+  //cout<<"idx="<<idx<<" sum="<<tree[idx].sum<<" add="<<tree[idx].add<<" mul="<<tree[idx].mul<<endl;
+}
+ll query(ll idx,ll lup,ll rup,ll add,ll mul,ll l,ll r)
+{
+  tree[idx].sum=(tree[idx].sum*mul+add*(r-l+1))%mod;
+  tree[idx].add=(mul*tree[idx].add+add)%mod; 
+  tree[idx].mul=(tree[idx].mul*mul)%mod;
+  if(rup<l || r<lup)
+  {
+  	//cout<<"idx="<<idx<<" sum="<<tree[idx].sum<<" add="<<tree[idx].add<<" mul="<<tree[idx].mul<<endl;
+  	return 0;
+  }
+  if(lup<=l && r<=rup)
+  {
+  	//cout<<"idx="<<idx<<" sum="<<tree[idx].sum<<" add="<<tree[idx].add<<" mul="<<tree[idx].mul<<endl;
+  	return tree[idx].sum;
+  }
+  ll p=0,q=0,mid=(l+r)/2;
+  p=query(2*idx,lup,rup,  (tree[idx].add)%mod , (tree[idx].mul)%mod ,l,mid);
+  q=query(2*idx+1,lup,rup,(tree[idx].add)%mod , (tree[idx].mul)%mod ,mid+1,r);
+  tree[idx].sum=(tree[idx*2].sum+tree[idx*2+1].sum)%mod;
+  tree[idx].add=0;
+  tree[idx].mul=1;
+  //cout<<"idx="<<idx<<" sum="<<tree[idx].sum<<" add="<<tree[idx].add<<" mul="<<tree[idx].mul<<endl;
+  return (p+q)%mod;
+}
+int main()
+{
+  cin>>n>>q;
+  for(int i=1;i<=n;i++)cin>>a[i];
+  build(1,1,n);
+  while(q--)
+    {
+      ll ch,l,r,v;
+      cin>>ch>>l>>r;
+      if(ch!=4)cin>>v;
+      // 1=add,2=mul,3=set,4=query
+      if(ch==1)
+	{//cout<<"update_1 : "<<l<<" "<<r<<" "<<v<<endl;
+	update(1,l,r,v,1,0,1,1,n);}//cout<<endl;}
+      if(ch==2)
+	{//cout<<"update_2 : "<<l<<" "<<r<<" "<<v<<endl;
+	update(1,l,r,0,v,0,1,1,n);}//cout<<endl;}
+	if(ch==3)
+	{
+		update(1,l,r,0,0,0,1,1,n);
+		update(1,l,r,v,1,0,1,1,n);
+	}
+      if(ch==4)
+	{//cout<<"query : "<<l<<" "<<r<<endl;
+	cout<<query(1,l,r,0,1,1,n)<<endl;}
+    }
+  return 0;
+}

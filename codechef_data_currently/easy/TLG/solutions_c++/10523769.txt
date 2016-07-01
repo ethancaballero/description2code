@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,p,q,w,diff,max=0,p1=0,p2=0;
+    cin>>t;
+    while(t--)
+    {
+        cin>>p>>q;
+        p1+=p;
+        p2+=q;
+        if(p1>p2)
+        {diff=p1-p2;
+        if(diff>max)
+            {max=diff;
+            w=1;
+            }
+        }
+        else {diff=p2-p1;
+        if(diff>max)
+          {max=diff;
+          w=2;}}
+    }
+    cout<<w<<" "<<max;
+    return 0;
+}

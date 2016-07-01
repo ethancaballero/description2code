@@ -1,0 +1,14 @@
+cases = int(raw_input())
+
+while(cases):
+	l,r = map(int,raw_input().split())
+
+	ans = 0
+	
+	j = 1
+	while(j <= r):
+		#print j
+		ans += ((r/j)-((l-1)/j))*j
+		j+=2
+	print ans
+	cases-=1

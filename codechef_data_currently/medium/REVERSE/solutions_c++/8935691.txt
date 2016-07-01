@@ -1,0 +1,62 @@
+//rev edge
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<vector<int> > graph,rev_graph;
+vector<int> sp,nodes;
+int start,goal;
+
+bool dfs(int u){
+	if(u==goal) return true;
+	for(int i=0;i<graph[u].size();i++){
+		int v=graph[u][i];
+		if(sp[v]==-1){
+			sp[v]=sp[u];
+			nodes.push_back(v);
+			if(dfs(v))return true;
+		}
+	}
+	return false;
+}
+
+int rev_edge(){
+	nodes.push_back(start);
+	sp[start]=0;
+	while(nodes.size()){
+		for(int i=0;i<nodes.size();i++){
+			int u=nodes[i];
+			if(dfs(u))return sp[goal];
+		}
+		vector<int> tmp;
+		for(int i=0;i<nodes.size();i++){
+			int u=nodes[i];
+			for(int j=0;j<rev_graph[u].size();j++){
+				int v=rev_graph[u][j];
+				if(sp[v]==-1){
+					sp[v]=sp[u]+1;
+					tmp.push_back(v);
+				}
+			}
+		}
+		nodes=tmp;
+	}
+	return -1;
+				
+}
+
+int main(){
+	int n,m;
+	cin>>n>>m;
+	vector<int> v;
+	graph.resize(n,v); rev_graph.resize(n,v);
+	sp.resize(n,-1);
+	for(int i=0;i<m;i++){
+		int x,y;
+		cin>>x>>y;
+		graph[x-1].push_back(y-1);
+		rev_graph[y-1].push_back(x-1);
+	}
+	start=0;goal=n-1;
+	cout<<rev_edge()<<endl;
+}

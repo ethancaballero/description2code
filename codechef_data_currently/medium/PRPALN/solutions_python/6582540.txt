@@ -1,0 +1,25 @@
+import sys
+def pali(let):
+  if let[:]==let[::-1]:
+    return 1
+  else:
+    return 0
+
+aa=[]
+
+num=input()
+for x in range(num):
+  flag=1
+  a=raw_input()
+  for i in range(len(a)):
+    b=a[:i]+a[i+1:]
+    if pali(b)==1:
+      aa.append("YES")
+      flag=0
+      break
+  if flag==1:
+    aa.append("NO")
+    flag=0
+       
+for c in aa:
+  print c

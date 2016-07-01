@@ -1,0 +1,62 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <cstring>
+using namespace std;
+string valid(bool curr[], bool prev[], int n){
+	bool tempz[n];
+	for(int i=0;i<n;i++) {
+		tempz[i]=prev[i];
+	}
+	for(int i=2;i<n;++i)
+		tempz[i]=tempz[i-2]^tempz[i-1]^curr[i-1];
+	if(tempz[0]^tempz[n-2]^tempz[n-1]^curr[n-1]) return "No solution";
+	if(tempz[1]^tempz[n-1]^tempz[0]^curr[0]) return "No solution";
+	string myans="";
+	for(int i=0;i<n;i++) {
+		if(tempz[i]) myans+='1';
+		else myans+='0';
+	}
+	return myans;
+}
+string life(string str){
+	int n = str.length();
+	bool curr[n];
+	bool ans[n];
+	for(int i=0;i<n;i++) {
+			if(str[i]=='1') {curr[i]=1;ans[i]=1;}
+			else {curr[i]=0;ans[i]=0;}
+	}
+	for(unsigned int i=0;i<str.length();i++) {
+			if(str[i]=='1') {curr[i]=1;ans[i]=1;}
+			else {ans[i]=0;curr[i]=0;}
+	}
+	ans[0]=0;ans[1]=0;
+	string str1 = valid(curr,ans,n);
+	ans[0]=0;ans[1]=1;
+	string str2 = valid(curr,ans,n);
+	ans[0]=1;ans[1]=0;
+	string str3 = valid(curr,ans,n);
+	ans[0]=1;ans[1]=1;
+	string str4 = valid(curr,ans,n);
+	int cnt=0;
+	string strans;
+	if(str1!="No solution") { strans=str1; cnt+=1; }
+	if(str2!="No solution") {strans=str2;cnt+=1;}
+	if(str3!="No solution") {strans=str3;cnt+=1;}
+	if(str4!="No solution") {strans=str4;cnt+=1;}
+	if(cnt==1) return strans;
+	else if(cnt>1) return "Multiple solutions";
+	else if(cnt==0) return "No solution";
+	return "bug";
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		string str;
+		cin>>str;
+		string strp = life(str);
+		cout<<strp<<endl;
+	}
+}

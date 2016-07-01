@@ -1,0 +1,21 @@
+#include<iostream>
+//#include<conio.h>
+using namespace std;
+int main()
+{
+//clrscr();
+int T,A,B;
+cin>>T;
+int *result=new int[T];
+for(int i=0;i<T;i++)
+{
+  cin>>A>>B;
+  result[i]=A%B;
+
+}
+for(int j=0;j<T;j++)
+ cout<<"
+"<<result[j];
+//getch();
+return 0;
+}

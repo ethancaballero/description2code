@@ -1,0 +1,19 @@
+import sys
+import math
+import re
+
+def Z(n):
+    count = 0
+    power = 5
+    while power <= n:
+        count += n /  power
+        power *= 5
+
+    return count
+    
+if __name__ == '__main__':
+    T = int(sys.stdin.readline())
+
+    for i in range(T):
+        N = int(sys.stdin.readline())
+        print Z(N)

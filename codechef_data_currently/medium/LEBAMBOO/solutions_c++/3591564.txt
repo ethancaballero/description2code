@@ -1,0 +1,61 @@
+#include <iostream>
+
+#include<stdlib.h>
+using namespace std;
+
+int main()
+{ int j=0,t,p[52],o,r[52],k,sum=0,u,sum1=0,flag=0;
+cin>>t;
+for(int i=0;i<t;i++){
+sum=0;
+sum1=0;
+flag=0;
+
+
+cin>>k;
+for( j=0;j<k;j++){
+cin>>p[j];
+sum=sum+p[j];
+}
+for( j=0;j<k;j++){
+cin>>r[j];
+sum1=sum1+r[j];
+}
+if(k==2)
+{
+if((p[0]-r[0])==(r[1]-p[1]))
+cout<<abs(p[0]-r[0])<<endl;
+else
+cout<<-1<<endl;
+continue;
+}
+
+if(((sum1-sum)%(k-2))==0){
+o=(sum1-sum)/(k-2);
+
+if(o<0){
+cout<<-1<<endl;
+continue;
+}
+for(j=0;j<k;j++){
+u=(o+p[j]-r[j]);
+if(u<0||u%2!=0){
+flag=1;
+break;
+}
+}
+if(flag==1){
+cout<<-1<<endl;
+}
+else{
+cout<<o<<endl;
+}
+}
+else{
+cout<<-1<<endl;
+}
+
+}
+
+    return 0;
+}

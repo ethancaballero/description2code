@@ -1,0 +1,3 @@
+n, m = map(int, raw_input().split())
+for _ in range(m):
+    print max(0, n - abs(2 * n + 1 - int(raw_input())))

@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define all(a)  a.begin(), a.end()
+#define allr(a) a.rbegin(), a.rend()
+#define SL(n) scanf("%lld", &n)
+#define fill(a, x) memset(a, x, sizeof(a));
+#define mod 1000000007
+#define eps 0.000000001
+
+using namespace std;
+typedef long long LL;
+typedef vector <LL> VL;
+typedef map <LL, LL> ML;
+typedef pair<LL, LL> PL;
+typedef vector <PL> VPL;
+
+int a[2505][3];
+int Edges[2505][2505];
+int Cost[2505];
+bool Vis[2505];
+
+int Dist(int x, int y, int a, int b){
+    return (x - a) * (x - a) + (y - b) * (y - b);
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while(T--){
+        int N;
+        cin >> N;
+        fill(a, (int)0);
+        fill(Edges, (int)0);
+        for(int n=1;n<=N;++n){
+            scanf("%d%d", &a[n][0], &a[n][1]);
+        }
+        scanf("%d%d", &a[0][0], &a[0][1]);
+        scanf("%d%d", &a[N+1][0], &a[N+1][1]);
+        for(int n=0;n<=N+1;++n){
+            for(int m=n+1;m<=N+1;++m){
+                Edges[n][m] = Dist(a[n][0], a[n][1], a[m][0], a[m][1]);
+                Edges[m][n] = Dist(a[n][0], a[n][1], a[m][0], a[m][1]);
+            }
+        }
+        fill(Cost, (int)1e9);
+        fill(Vis, (bool)0);
+        Cost[0] = 0;
+        Vis[0] = 1;
+        set<pair<int, int> > Dij;
+        Dij.insert(mp(0, 0));
+        int x, y;
+        while(Dij.sz != 0){
+            pair<int, int> temp;
+            temp = *Dij.begin();
+            Dij.erase(Dij.begin());
+            x = temp.ff;
+            y = temp.ss;
+            for(int n=0;n<=N+1;++n){
+                if(Vis[n] == 0 || Vis[n] == 1 && Cost[n] > x + Edges[y][n]){
+                    if(Vis[n] == 0){
+                        Vis[n] = 1;
+                        Cost[n] = Edges[y][n] + x;
+                    }
+                    else{
+                        Dij.erase(mp(Cost[n], n));
+                        Cost[n] = Edges[y][n] + x;
+                    }
+                    Dij.insert(mp(Cost[n], n));
+                }
+            }
+        }
+        cout << Cost[N+1] << endl;
+    }
+    return 0;
+}

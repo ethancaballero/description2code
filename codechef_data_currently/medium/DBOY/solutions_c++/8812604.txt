@@ -1,0 +1,61 @@
+#include <cstdio>
+#include <algorithm>
+#include <climits>
+using namespace std;
+#define momentai(x) (printf("%s := %d
+",#x,(int)x))
+
+const int lim=505;
+const int bignum=LONG_MAX>>2;
+int dp[2*lim][lim];
+int dist[lim],fuel[lim];
+int T,N;
+
+int main() {
+	scanf("%d",&T);
+	for (int i=0; i<2*lim; ++i) {
+		dp[i][0]=bignum; if (i<lim) dp[0][i]=0;
+	}
+	while (T--) {
+		scanf("%d",&N);
+		for (int i=1; i<=N; ++i) scanf("%d",&dist[i]);
+		for (int i=1; i<=N; ++i) scanf("%d",&fuel[i]);
+		int ans[3];
+		for (int i=1; i<2*lim; ++i) {
+//			if (i<5) printf("%d :: ",i);
+			for (int j=1; j<=N; ++j) {
+				ans[0]=dp[i][j-1];
+				ans[1]=(i>=fuel[j]?dp[i-fuel[j]][j-1]+1:bignum);
+				ans[2]=(i>=fuel[j]?dp[i-fuel[j]][j]+1:bignum);
+				dp[i][j]=*min_element(ans,ans+3);
+				//if (i<5) printf("%d, ",dp[i][j]);
+			}
+			//if (i<5) printf("
+");
+		}
+		int res=0;
+		for (int i=1; i<=N; ++i) {
+			//momentai(i); momentai(dist[i]); momentai(dp[2*dist[i]][N]); printf("
+");
+			res+=dp[2*dist[i]][N];
+		}
+		printf("%d
+",res);
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

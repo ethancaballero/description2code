@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+struct Frog{// struct named frog
+int index;
+int cordinate;// co _ordinate
+}frogs[100005];// n can be 10^5
+int maximumdistance[100005];
+bool fun(const Frog &a, const Frog &b)
+{
+	return a.cordinate < b.cordinate;
+}
+int main()
+{
+    int n,k,p,x;
+    scanf("%d %d %d",&n,&k,&p);
+  for(int i=1;i<=n;i++){
+        scanf("%d",&x);
+    frogs[i].index=i;
+    frogs[i].cordinate=x;
+  }
+  sort(frogs+1,frogs+n+1,fun);
+   maximumdistance[frogs[1].index]=frogs[1].cordinate+k;
+   for(int i=2;i<=n;i++){
+    if(abs(frogs[i].cordinate-frogs[i-1].cordinate)<=k)
+        maximumdistance[frogs[i].index]=maximumdistance[frogs[i-1].index];
+        else
+        maximumdistance[frogs[i].index]=frogs[i].cordinate+k;
+   }
+    //for(int i=1;i<=n;i++){
+   // cout<<"inside for loop"<<endl;
+  // cout<<frogs[i].index<< " "<<frogs[i].cordinate<<" "<<maximumdistance[frogs[i].index]<<endl;
+   // }
+
+   for(int i=1;i<=p;i++){
+        int a,b;
+    scanf("%d %d",&a,&b);// a and b are indices here
+    if(maximumdistance[a]==maximumdistance[b])
+        printf("Yes
+");
+    else
+        printf("No
+");
+   }
+    return 0;
+}

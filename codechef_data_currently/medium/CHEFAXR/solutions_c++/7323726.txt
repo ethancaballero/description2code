@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define ull unsigned long long
+#define pb push_back
+#define ft first
+#define se second
+#define mp make_pair
+
+int main(int argc, char const *argv[]){
+    int t;
+    scanf("%d", &t);
+    while(t--){
+    	int n;
+    	scanf("%d", &n);
+    	int a[n+1][n+1];
+    	for(int i = 0; i <=n; ++i){
+    		for(int j = 0; j < n+1; ++j){
+    			a[i][j]=0;  	
+    		}//for j
+    	}//for i
+    	for(int i = 1; i <=n; ++i){
+    		for(int j = 1; j <=n; ++j){  
+    			scanf("%d", &a[i][j]);	
+    			a[i][j]=a[i][j-1]^a[i][j]^a[i-1][j]^a[i-1][j-1];
+    		}//for j
+    	}//for i
+    	int ma=0;
+    	for(int k = 0; k <n; ++k){
+    		for(int i = 1; i+k <=n; ++i){
+    			for(int p = 0; p <n; ++p){
+    				for(int j = 1; j+p <=n; ++j){ 
+    					ma=max(a[i-1][j-1]^a[i+k][j+p]^a[i+k][j-1]^a[i-1][j+p], ma);
+	    			}//for j
+    			}//for p
+    		}//for i
+    	}//for k
+    	printf("%d
+", ma);
+    }
+	return 0;
+}

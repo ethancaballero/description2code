@@ -1,0 +1,21 @@
+cases = int(raw_input())
+time_d = []
+for i in range(720):
+    h = int(i/60)
+    theta = abs(0.5*(h*60 - 11.0*(i%60)))
+    if theta > 180:
+	theta = 360 - theta
+    time_d.append([i, theta])
+
+for _ in xrange(cases):
+    ans = []
+    angle = float(raw_input())
+    for elem in time_d:
+	if elem[1] >= (angle-0.0083) and elem[1] <= (angle+0.0083):
+	    ans.append(elem[0])
+
+#print time_d
+
+    for e in ans:
+        h, m = divmod(e, 60)
+        print "%02d:%02d" % (h, m)

@@ -1,0 +1,20 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+        int t, n, k, m;
+        scanf("%d", &t);
+
+        while(t--){
+               scanf("%d%d", &n, &k) ;
+                m = 0;
+               for (int i = 2; i<=k; i++){
+                        if (n%i > m) m = n%i;
+               }
+               printf("%d
+", m);
+        }
+    return 0;
+}

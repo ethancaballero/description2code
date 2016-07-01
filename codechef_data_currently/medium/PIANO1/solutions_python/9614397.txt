@@ -1,0 +1,14 @@
+for t in xrange(int(raw_input())):
+	s = raw_input()
+	n = int(raw_input())
+	l=0
+	for c in s:
+		if c=='T':
+			l+=2
+		else:
+			l+=1
+	ans = 0
+	keys = 12*n
+	for i in range(l,keys,l):
+		ans = ans + (keys - i)
+	print ans

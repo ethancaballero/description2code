@@ -1,0 +1,136 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+long long int a[100005];
+
+struct node
+{
+    long long int sfib, sfibm, sfibp;
+}tree[400005];
+
+void multiply(long long int F[2][2], long long int M[2][2]);
+
+void power(long long int F[2][2], long long int n);
+
+/* function that returns nth Fibonacci number */
+long fib(long long int n)
+{
+  long long int F[2][2] = {{1,1},{1,0}};
+  if (n == 0)
+    return 0;
+  power(F, n-1);
+  return F[0][0];
+}
+
+/* Optimized version of power() in method 4 */
+void power(long long F[2][2], long long int n)
+{
+  if( n == 0 || n == 1)
+      return;
+  long long int M[2][2] = {{1,1},{1,0}};
+
+  power(F, n/2);
+  multiply(F, F);
+
+  if (n%2 != 0)
+     multiply(F, M);
+}
+
+void multiply(long long int F[2][2], long long int M[2][2])
+{
+  long long int x =  (F[0][0]*M[0][0] + F[0][1]*M[1][0])%mod;
+  long long int y =  (F[0][0]*M[0][1] + F[0][1]*M[1][1])%mod;
+ long long int z =  (F[1][0]*M[0][0] + F[1][1]*M[1][0])%mod;
+  long long int w =  (F[1][0]*M[0][1] + F[1][1]*M[1][1])%mod;
+
+  F[0][0] = x;
+  F[0][1] = y;
+  F[1][0] = z;
+  F[1][1] = w;
+}
+
+void build(int node,int l,int r)
+{
+   if(l>r) return;
+   if(l==r)
+   {
+       tree[node].sfib = fib(a[l]);
+       tree[node].sfibm = fib(a[l]-1);
+       tree[node].sfibp = fib(a[l]+1);
+       return;
+   }
+   build(node*2,l,(l+r)/2);
+   build(node*2+1,(l+r)/2+1,r);
+   tree[node].sfib = (tree[node*2].sfib+tree[node*2+1].sfib+(tree[node*2].sfibp*tree[node*2+1].sfib)%mod+(tree[node*2].sfib*tree[node*2+1].sfibm)%mod)%mod;
+   tree[node].sfibm = (tree[node*2].sfibm+tree[node*2+1].sfibm+(tree[node*2].sfib*tree[node*2+1].sfib)%mod+(tree[node*2].sfibm*tree[node*2+1].sfibm)%mod)%mod;
+   tree[node].sfibp = (tree[node*2].sfibp+tree[node*2+1].sfibp+(tree[node*2].sfibp*tree[node*2+1].sfibp)%mod+(tree[node*2].sfib*tree[node*2+1].sfib)%mod)%mod;
+}
+
+void update(int node,int l,int r,int pos,int val)
+{
+    if(l>r) return;
+    if(l==r)
+    {
+        tree[node].sfib=fib(val);
+        tree[node].sfibm=fib(val-1);
+        tree[node].sfibp = fib(val+1);
+        return;
+    }
+    int mid=(l+r)/2;
+    if(pos<=mid)
+       update(node*2,l,(l+r)/2,pos,val);
+    else
+        update(node*2+1,(l+r)/2+1,r,pos,val);
+   tree[node].sfib = (tree[node*2].sfib+tree[node*2+1].sfib+(tree[node*2].sfibp*tree[node*2+1].sfib)%mod+(tree[node*2].sfib*tree[node*2+1].sfibm)%mod)%mod;
+   tree[node].sfibm = (tree[node*2].sfibm+tree[node*2+1].sfibm+(tree[node*2].sfib*tree[node*2+1].sfib)%mod+(tree[node*2].sfibm*tree[node*2+1].sfibm)%mod)%mod;
+   tree[node].sfibp = (tree[node*2].sfibp+tree[node*2+1].sfibp+(tree[node*2].sfibp*tree[node*2+1].sfibp)%mod+(tree[node*2].sfib*tree[node*2+1].sfib)%mod)%mod;
+}
+
+node query(int node,int l,int r,int i,int j)
+{
+    if(l>r||i>r||j<l)
+     {
+         struct node s;
+         s.sfib=0;
+         s.sfibm=0; s.sfibp=0;
+         return s;
+     }
+    if(i<=l&&j>=r)
+        return tree[node];
+    struct node q1 = query(node*2,l,(l+r)/2,i,j);
+    struct node q2 = query(node*2+1,(l+r)/2+1,r,i,j);
+    struct node q3;
+    q3.sfib = (q1.sfib+q2.sfib+(q1.sfibp*q2.sfib)%mod+(q1.sfib*q2.sfibm)%mod)%mod;
+    q3.sfibm = (q1.sfibm+q2.sfibm+(q1.sfib*q2.sfib)%mod+(q1.sfibm*q2.sfibm)%mod)%mod;
+    q3.sfibp = (q1.sfibp+q2.sfibp+(q1.sfibp*q2.sfibp)%mod+(q1.sfib*q2.sfib)%mod)%mod;
+    return q3;
+}
+int main()
+{
+    int n,q,x;
+    scanf("%d%d",&n,&q);
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    build(1,0,n-1);
+    //cout<<fib(6)<<" ";
+    char ch;
+    while(q--)
+    {
+        cin>>ch;
+        if(ch=='C')
+        {
+            long long int y;
+            cin>>x>>y;
+            update(1,0,n-1,x-1,y);
+        }
+        else
+        {   int y;
+            cin>>x>>y;
+            struct node ans;
+            ans=query(1,0,n-1,x-1,y-1);
+            printf("%lld
+",ans.sfib);
+        }
+    }
+    return 0;
+}

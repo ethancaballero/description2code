@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+  int t;
+  cin>>t;
+  while(t--)
+  {
+    int s,l;
+    int sum=0;
+    cin>>s;
+    sum = sum + s%10;
+    while(s!=0)
+    {
+        l = s;
+        s = s/10;
+    }
+    sum = sum+l;
+    cout<<sum<<endl;
+  }
+}

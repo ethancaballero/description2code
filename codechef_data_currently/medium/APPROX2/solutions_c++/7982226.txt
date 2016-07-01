@@ -1,0 +1,43 @@
+#include<iostream>
+#include<stdlib.h>
+#include<math.h>
+using namespace std;
+long long brr[1000000];
+int main()
+{
+	int t,min;
+	cin>>t;
+	while(t--)
+	{
+		long long int n,k,i,min=3000000000,p=0,count=0,j;
+		cin>>n>>k;
+		long long int arr[n];
+		for(i=0;i<n;i++)
+		{
+			cin>>arr[i];
+		}
+//		min=abs(arr[0]+arr[1]-k);
+		for(i=0;i<n-1;i++)
+		{
+			for(j=i+1;j<n;j++)
+			{
+				if(abs(arr[i]+arr[j]-k)<=min)
+				{
+					min=abs(arr[i]+arr[j]-k);
+					brr[p]=min;
+					p++;
+				}
+			}
+		}
+		for(i=0;i<p;i++)
+		{
+//			cout<<brr[i];
+			if(brr[i]==min)
+			{
+				count++;
+			}
+		}
+		cout<<min<<" "<<count<<endl;
+	}
+	return 0;
+}

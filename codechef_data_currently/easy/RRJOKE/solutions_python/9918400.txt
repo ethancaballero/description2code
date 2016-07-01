@@ -1,0 +1,10 @@
+t = input()
+for _ in xrange(t):
+    n = input()
+    result = 1
+    raw_input()
+    for l in xrange(2, n + 1):
+        result ^= l
+        raw_input()
+    print result
+

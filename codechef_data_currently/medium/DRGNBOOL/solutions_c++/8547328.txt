@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+   int t,n,m,soint[101][2],sofloat[101][2];
+   scanf("%d",&t);
+   while(t--)
+   {
+       scanf("%d%d",&n,&m);
+       for(int i=0; i<n; i++)
+           scanf("%d%d",&soint[i][0], &soint[i][1]);
+       for(int i=0; i<m; i++)
+           scanf("%d%d",&sofloat[i][0], &sofloat[i][1]);
+       int ans = 0;
+       int sm1 = 0;
+       int sm2 = 0;
+       for(int i=0; i<n; i++)
+       {
+           if(soint[i][1] == -1)
+            continue;
+           sm1 = 0;
+           sm2 = 0;
+           int tmp = soint[i][1];
+           for(int j=i; j<n; j++)
+           {
+               if(soint[j][1] == tmp)
+               {
+                   sm1 += soint[j][0];
+                   soint[j][1] = -1;
+               }
+           }
+           for(int j=0; j<m; j++)
+           {
+               if(sofloat[j][1] == tmp)
+               {
+                   sm2 += sofloat[j][0];
+                   sofloat[j][1] = -1;
+               }
+           }
+           if(sm1 < sm2)
+            ans += sm2 - sm1;
+       }
+       printf("%d
+",ans);
+   }
+   return 0;
+}

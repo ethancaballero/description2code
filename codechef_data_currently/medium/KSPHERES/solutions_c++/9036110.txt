@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+#define MOD 1000000007
+long long int u[1003], l[1003], s[1003], f[1003][1003], w[1003][1003];
+int main(){
+	int n, m, c, tmp;
+	scanf("%d%d%d",&n,&m,&c);
+	for(int i=0;i<n;++i){
+		scanf("%d",&tmp);
+		u[tmp]++;
+	}
+	for(int i=0;i<m;++i){
+		scanf("%d",&tmp);
+		l[tmp]++;
+	}
+	for(int i=1;i<=c;++i){
+		s[i] = ( l[i] * u[i] ) % MOD;
+	}
+	for(int i=1;i<=c;++i){
+		f[0][i] = s[i];
+		w[0][i] = (w[0][i-1] + f[0][i]) % MOD; 
+	}
+	for(int i=1;i<=c;++i){
+		for(int j=1;j<=c;++j){
+			f[i][j] = (w[i-1][j-1] * s[j]) % MOD;
+			w[i][j] = (w[i][j-1] + f[i][j]) % MOD; 
+		}
+		printf("%lld ",w[i][c]);
+	}
+	return 0;
+}

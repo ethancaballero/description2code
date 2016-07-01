@@ -1,0 +1,113 @@
+#include <iostream>
+#include <deque>
+#include<cstdio>
+#define MOD 1000000007
+#define min(a,b) (a<b?a:b)
+long long j=0;
+long long g=0;
+long long A[10000005];
+long long Low[10000005];
+long long Rig[10000005]; 
+using namespace std;
+void printKMax(long long int arr[], long long int n, long long int k)
+{
+    
+    std::deque<long long int>  Qi(k);
+    long long int i;
+    for (i = 0; i < k; ++i)
+    {
+        while ( (!Qi.empty()) && arr[i] <= arr[Qi.back()])
+            Qi.pop_back();  
+ 
+            Qi.push_back(i);
+    }
+ 	//long long j=1;
+ 	//long long g=0;
+    for ( ; i < n; ++i)
+    {
+    
+        //cout << arr[Qi.front()] << " ";
+		Low[++j]= arr[Qi.front()];
+		Rig[g+k]= arr[Qi.front()];
+		g++;
+        while ( (!Qi.empty()) && Qi.front() <= i - k)
+            Qi.pop_front();  
+        while ( (!Qi.empty()) && arr[i] <= arr[Qi.back()])
+            Qi.pop_back();
+ 
+        
+        Qi.push_back(i);
+    }
+ 
+    Low[++j]=arr[Qi.front()];
+    Rig[g+k]=arr[Qi.front()];
+    g++;
+    //cout << arr[Qi.front()];
+}
+int main()
+{
+	long long n,k,q;
+	scanf("%lld %lld %lld",&n,&k,&q);
+	long long a,b,c,d,e,f,r,s,t,m;
+	scanf("%lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld",&a,&b,&c,&d,&e,&f,&r,&s,&t,&m,&A[0]);
+	long long L1,La,Lc,Lm,D1,Da,Dc,Dm;
+	scanf("%lld %lld %lld %lld %lld %lld %lld %lld",&L1,&La,&Lc,&Lm,&D1,&Da,&Dc,&Dm);
+	long long int i;
+	long long o;
+	long long int p=t;
+	for(i=1;i<n;i++)
+	{
+		p=((p%s)*(t%s))%s;
+		if(p<0)
+		p+=s;
+		o=((A[i-1])*(A[i-1]));
+		if(o<0)
+		o+=m;
+		if(p<=r)
+		{
+			A[i]=((a)*(o))%m;
+		
+			A[i]+=((b)*(A[i-1]))%m;
+			
+			A[i]=(A[i]+c)%m;
+					
+		}
+		else
+		{
+			A[i]=((d)*(o))%m;
+			A[i]+=((e)*(A[i-1]))%m;
+			
+			A[i]=(A[i]+f)%m;
+			
+		}
+		if(A[i]<0)
+		A[i]+=m;
+	}
+	printKMax(A,n,k);
+	//for(i=1;i<=j;i++)
+	//printf("%lld ",Low[i]);
+	//printf("
+");
+	//for(i=k;i<=n;i++)
+	//printf("%lld ",Rig[i]);
+	//printf("
+");
+	long long L,R;
+	long long sum=0;
+	long long pro=1;
+	for(i=0;i<q;i++)
+	{
+		L1=(La*L1+Lc)%Lm;
+		D1=(Da*D1+Dc)%Dm;
+		L=L1+1;
+		R=min(L+k-1+D1,n);
+		long long mini=min(Low[L],Rig[R]);
+		sum+=(mini);
+		pro=((pro%MOD)*(mini%MOD))%MOD;
+		if(pro<0)
+		pro+=MOD;
+	}
+	printf("%lld %lld
+",sum,pro);
+	return 0;
+} 

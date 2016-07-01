@@ -1,0 +1,90 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<math.h>
+
+using namespace std;
+
+int i,j,t,h,w;
+
+long long int n,q,l,k,total_sum,r,c,m,query;
+
+string sub[1000000];
+int check[1000000];
+string str;
+
+long long int factorial(long long int u)
+{
+  return (u == 1 || u == 0) ? 1 : factorial(u - 1) * u;
+}
+
+int main(){
+
+   scanf("%d",&t);
+
+
+   while(t>0)
+    {
+        k=0;
+       scanf("%lld %lld",&n,&q);
+
+        cin >> str ;
+
+     //  cout << str << endl;
+
+
+    for(i=0;i<str.length();i++)
+    {
+        for(j=1;j<=str.length()-i;j++)
+        {
+           sub[k]=str.substr(i,j);
+           k++;
+        }
+    }
+
+
+    for(l=0;l<q;l++)
+    {
+
+       for(i=0;i<k;i++)
+        check[i]=1;
+
+        total_sum=0;
+
+        scanf("%lld",&query);
+
+        for(m=0;m<k;m++)
+        {
+            c=0;
+
+            for(r=0;r<k;r++)
+            {
+                if(sub[m].compare(sub[r])==0&& check[r]==1)
+                {
+                    c++;
+                    check[r]=0;
+                }
+
+
+            }
+
+          //   printf("%lld
+",c);
+            if(c>=query)
+            {
+                total_sum=total_sum+factorial(c)/(factorial(c-query)*factorial(query));
+
+            }
+        }
+
+       printf("%lld
+",total_sum);
+    }
+
+    t--;
+
+
+  }
+
+   return 0;
+}

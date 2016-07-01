@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+int main(void) {
+	int t,n,i,j,temp,x,b,k,l,c;
+	cin>>t;
+	while(t--)
+	{
+		int a[1000]={0}; 
+		cin>>n;
+		b=n;
+		i=0,c=0;
+		if(b==0||b==1)
+		cout<<"1"<<endl;
+		else
+		{
+			while(b!=0)
+			{
+				a[i++]=b%10;
+				b/=10;
+				c++;
+			}
+			for(j=n-1;j>1;j--)//j=n-1 but n reduced to 0 while(n!=0)
+			{	
+				temp=0;
+				for(k=0;k<c;k++)
+				{
+					x=a[k]*j;
+					a[k]=(temp+x)%10;
+					temp=(temp+x)/10;//temp=x/10
+				}
+				while(temp!=0)
+				{
+					a[k++]=temp%10;
+					temp/=10;
+					c++;
+				}	
+			}
+			for(l=c-1;l>=0;l--)
+			cout<<a[l];
+			cout<<endl;
+		}	
+	}
+	return 0;
+}

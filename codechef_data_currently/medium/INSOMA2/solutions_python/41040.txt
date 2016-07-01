@@ -1,0 +1,53 @@
+#!/usr/bin/python
+grid = []
+target = ""
+hits = 0
+dim = 0
+
+def search(r, c, string):
+	global hits
+	if len(string) == 1:
+		hits += 1
+		return
+	else:
+		if r > 0 and c > 0:
+			if grid[r - 1][c - 1] == string[1]:
+				search( r - 1, c - 1, string[1:] )
+
+		if r > 0 and c < dim -1:
+			if grid[r - 1][c + 1] == string[1]:
+				search( r - 1, c + 1, string[1:] )
+
+		if r < dim -1 and c > 0:
+			if grid[r + 1][c - 1] == string[1]:
+				search( r + 1, c - 1, string[1:] )
+
+		if r < dim -1 and c < dim -1:
+			if grid[r + 1][c + 1] == string[1]:
+				search( r + 1, c + 1, string[1:] )
+		
+#		for row in range( max((0, r - 1)), min((dim, r + 2))):
+#			if row != r:
+#				for col in range( max((0, c - 1)), min((dim, c + 2))):
+#					if col != c:
+#						if grid[row][col] == string[1]:
+#							search( row, col, string[1:] )
+
+def go():
+	seeds = []
+
+	for row in range(dim):
+		for col in range(dim):
+			if grid[row][col] == target[0]:
+				seeds.append( (row, col) )
+
+	for seed in seeds:
+		search( seed[0], seed[1], target )
+
+	print hits
+
+dim = int( raw_input() )
+for i in range(dim):
+	grid.append( raw_input().replace(" ", "") )
+target = raw_input().strip().replace(" ", "")
+go()

@@ -1,0 +1,24 @@
+#include<iostream>
+#define mx 100000
+using namespace std;
+int main()
+{
+	int t,b1,b2,b3;
+	cin>>t;
+	while(t--)
+	{
+		cin>>b1;
+		cin>>b2;
+		cin>>b3;
+		if(b3>=(b1+b2))
+		cout<<b3-b1-b2<<endl;
+		else if(b1>=(b2+b3))
+		cout<<b1-b2-b3<<endl;
+		else if(b2>=(b1+b3))
+		cout<<b2-b1-b3<<endl;
+		else
+		cout<<"0
+";
+	}
+	return 0;
+}

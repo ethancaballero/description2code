@@ -1,0 +1,13 @@
+t=int(raw_input())
+mod=pow(10,9)+7
+while t>0:
+    n=int(raw_input())
+    a=raw_input().split()
+    for i in range(0,n+1): a[i]=int(a[i])
+    pro=0
+    for x in range(1,n+1):
+        pro+=a[0]*a[x]*pow(2,n-x+1)%mod
+        for i in range(1,x):
+            pro+=a[i]*a[x]*pow(2,n-x+i)%mod
+    print pro%mod
+    t=t-1

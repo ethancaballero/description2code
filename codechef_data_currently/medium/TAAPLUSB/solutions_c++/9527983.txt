@@ -1,0 +1,25 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main(){
+
+int i,t;
+double a[100001];
+a[0]=0;
+a[1]=1;
+for(i = 2; i <= 100000; ++i){
+
+	a[i] = i + (a[i-1]/10);
+
+}
+cin>>t;
+while(t--){
+
+int n;
+cin>>n;
+cout<<fixed<<a[n]*0.45<<endl;
+
+}
+return 0;
+}

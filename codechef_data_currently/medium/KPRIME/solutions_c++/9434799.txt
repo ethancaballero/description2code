@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[100006];//0is prime;
+int countarray[100006];
+ 
+void sieve ()
+{
+	arr[0]=1;
+    arr[1]=1;//0 is for prime
+    for(int i=2;i<=(100006);i++)
+    {
+        if(arr[i]==0)
+        {
+            for(int j=2;i*j<=100006;j++)
+            {
+                arr[i*j]=1;
+            }
+        }
+ 
+    }
+}
+ 
+void modify()
+{
+	countarray[0]=0;
+	countarray[1]=0;
+	 for(int i=2;i<=(100006);i++)
+    {
+        if(arr[i]==0)
+        {
+        	countarray[i]++;
+            for(int j=2;i*j<=100006;j++)
+            {
+                countarray[i*j]++;
+            }
+        }
+ 
+    }
+}
+ 
+ 
+int main()
+{
+sieve();
+modify();
+ 
+	 int  t,n,a,b,k,no;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&a);
+		scanf("%d",&b);
+		scanf("%d",&k);
+		int ans=0;
+		for(int i=a;i<=b;i++)
+		{
+			if(countarray[i]==k)ans++;
+		}
+		printf("%d
+",ans);		
+	}
+	return 0;
+} 

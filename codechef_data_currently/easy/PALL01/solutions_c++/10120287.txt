@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+    int t,num;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int sum=0;
+        scanf("%d",&num);
+        int check=num;
+        while(num!=0)
+        {
+            sum=sum*10;
+            sum=sum+num%10;
+            num=num/10;
+        }
+        if(sum==check)
+            printf("wins
+");
+        else
+            printf("losses
+");
+    }
+    return 0;
+}
+

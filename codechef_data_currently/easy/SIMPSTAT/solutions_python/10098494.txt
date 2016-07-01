@@ -1,0 +1,10 @@
+tc = int(raw_input())
+while tc > 0:
+	tc = tc - 1
+	n, k = map(int, raw_input().split())
+	l = map(int, raw_input().split())
+	l = sorted(l)
+	total, avg = 0, 0.0
+	for i in xrange(k,n-k):
+		total += l[i]
+	print "%.13f" % (total*1.0/(n-2*k))

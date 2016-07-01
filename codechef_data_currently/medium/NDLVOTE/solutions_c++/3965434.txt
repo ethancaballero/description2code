@@ -1,0 +1,30 @@
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+int main()
+{
+	
+	
+	while(1)
+	{
+		int n,c,sum=0,k;
+		char p;
+
+		scanf("%d",&n);
+		if(n==0)
+			break;
+		while(n--)
+		{
+			getchar();
+			scanf("%c %d",&p,&c);
+			c+=(p=='P')?-1:+1;
+			k=abs(c);
+			if(k>=sum)
+				sum=k;
+			else if((sum-k)%2!=0)
+				sum++;
+		}
+		printf("%d
+",sum);
+	}
+}

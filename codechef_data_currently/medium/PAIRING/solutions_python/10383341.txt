@@ -1,0 +1,54 @@
+output = list()
+val = raw_input()
+t = int(val)
+for i in range(t) :
+	pairs = list()
+	avail = list()
+	output1 = list()
+	string1 = raw_input()
+	nums = string1.split()
+	n = int(nums[0])
+	m = int(nums[1])
+	for j in range(m) :
+		string2 = raw_input()
+		num = string2.split()
+		a = int(num[0])
+		b = int(num[1])
+		pairs.append(a)
+		pairs.append(b)
+	output1.append(m-1)
+	spe1 = pairs[-1]
+	spe2 = pairs[-2]
+	avail = range(n)
+	avail.remove(spe1)
+	avail.remove(spe2)
+	c = m-2
+	for j in range(((2*m)-3),-1,-2) :
+		if pairs[j] in avail :
+			if pairs[j-1] in avail :
+				output1.append(c)
+				avail.remove(pairs[j])
+				avail.remove(pairs[j-1])
+		c = c - 1
+	output1.sort()
+	for j in range(len(output1)) :
+		output1[j] = str(output1[j])
+	strfinal = ' '.join(output1)
+	output.append(strfinal)
+for i in range(t) :
+	print output[i]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

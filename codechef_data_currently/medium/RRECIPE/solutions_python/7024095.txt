@@ -1,0 +1,15 @@
+#http://www.codechef.com/problems/RRECIPE
+import sys
+for a in map(str,sys.stdin.read().split())[1:]:
+	n=len(a)
+	ans=1
+	for i in range(0,(n/2)):
+		if(a[i]== a[n-1-i]=='?'):ans=(ans*26)%10000009
+		if (a[i]=='?' or a[n-1-i]=='?'):
+			ans*=1
+		elif(a[i]!=a[n-1-i]):
+			ans=0
+			break
+	if(len(a)%2 and a[(len(a)/2)]=='?'):
+		ans=(ans*26)%10000009
+	print ans

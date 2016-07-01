@@ -1,0 +1,8 @@
+a=list()
+t=int(raw_input())
+for i in range(0,t):
+	x=int(raw_input())
+	a.append(x)
+a.sort()
+for ax in a:
+	print ax

@@ -1,0 +1,133 @@
+//              Without Lazy Propagation
+
+#include<iostream>
+#include<cmath>long long
+#define inf -12345
+using namespace std;
+
+long long  sum;  // Declared globally so that it NEEDN'
+
+void buildSegmentTree(long long  input[],long long  *segmentTreePtr, long long  node,long long  low,long long  high);
+
+long long  getSum(long long  *segmentTreePtr,long long  node,long long  low,long long  high,long long  start, long long  end, long long  *sum);
+
+void increment(long long  input[] , long long  *segmentTreePtr, long long  node , long long  low , long long  high , long long  start , long long  value );
+
+
+void decrement(long long  input[] , long long  *segmentTreePtr, long long  node , long long  low , long long  high , long long  start , long long  value );
+
+
+int  main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    long long  students,queries;
+    cin>>students>>queries;
+    long long  input[students],i,j;
+    for(i=0;i<students;i++)
+        cin>>input[i];
+    long long  sizeofTree=2*pow(2,(ceil(log2(students))))-1;
+    //cout<<sizeofTree<<endl;
+    long long  *segmentTreePtr = new long long[sizeofTree];
+    for(i=0;i<sizeofTree;i++)
+        segmentTreePtr[i]=inf;
+    buildSegmentTree(input,segmentTreePtr,0,0,students-1);
+//    for(i=0;i<sizeofTree;i++)
+//      cout<<segmentTreePtr[i]<<' ';
+//    cout<<endl;
+
+    char crap=cin.get();
+
+    while(queries--){
+
+        string r;
+        long long  a,b,output;
+        sum=0;
+
+        cin>>r;
+        cin>>a>>b;
+
+        if(r[0]=='S'){
+            getSum(segmentTreePtr,0,0,students-1,a,b,&sum);
+            cout<<sum<<endl;
+        }
+        else if(r[0]=='G')
+            increment(input , segmentTreePtr,  0 , 0 , students-1 , a,b);
+        else
+            decrement(input , segmentTreePtr, 0 , 0 , students-1 , a,b);
+    }
+}
+
+void buildSegmentTree(long long  input[],long long  *segmentTreePtr, long long  node,long long  low,long long  high){
+
+    //if(low > high){
+        //cout<<"case 1"<<endl;
+      //  return;
+    //}
+
+    if(low==high){  // ie, we now polong long  to a single node and not a range, hence this node needs to be stored.
+        //cout<<"case 2"<<endl;
+        segmentTreePtr[node]=input[low];
+        //cout<<"segmentTreePtr[node] node "<<node<<" input[low] "<<input[low]<<endl;
+        return;
+    }
+
+    buildSegmentTree(input, segmentTreePtr, node*2+1, low, (low+high)/2); // Build left child
+	buildSegmentTree(input, segmentTreePtr, node*2+2, 1+(low+high)/2, high); // Build right child
+
+	segmentTreePtr[node] = (segmentTreePtr[node*2+1] + segmentTreePtr[node*2+2]); // Build root value}
+
+
+}
+
+long long  getSum(long long  *segmentTreePtr,long long  node,long long  low,long long  high,long long  start, long long  end,long long  *sum1){ // Note that we needed to change the name of the polong long er to sum1 instead of sum since during the recursion we again need to send the address of sum as an attribute.
+
+    if(start<=low&&end>=high){ // Case of COMPLETE OVERLAP
+        *sum1=*sum1+segmentTreePtr[node];
+        return 0; // Since the modification has been done in the root sum, hence we return 0 from here. In case of the first approach in recursion, we would have had to return sum.
+    }
+
+    if (high < start || low > end) // CASE OF NO OVERLAP
+        return 0;
+
+           getSum(segmentTreePtr, 2*node+1, low, (low+high)/2, start, end,&sum );
+           getSum(segmentTreePtr, 2*node+2, (low+high)/2+1, high, start, end,&sum );
+
+
+    return 0;
+}
+
+void increment(long long  input[] , long long  *segmentTreePtr, long long  node , long long  low , long long  high , long long  start , long long  value ){
+
+	if( start < low || start > high) // Current segment is not within range [i, j]
+		return;
+
+  	if(low == high) { // Leaf node
+    		segmentTreePtr[node] += value;
+    		return;
+	}
+
+	increment(input , segmentTreePtr, node*2+1, low, (low+high)/2, start,  value); // Updating left child
+	increment(input , segmentTreePtr, node*2+2, 1+(low+high)/2, high, start, value); // Updating right child
+
+	segmentTreePtr[node] = (segmentTreePtr[node*2+1] + segmentTreePtr[node*2+2]); // Updating root with max value
+
+}
+
+void decrement(long long  input[] , long long  *segmentTreePtr, long long  node , long long  low , long long  high , long long  start , long long  value ){
+
+	if( start < low || start > high) // Current segment is not within range [i, j]
+		return;
+
+  	if(low == high) { // Leaf node
+    		segmentTreePtr[node] -= value;
+    		return;
+	}
+
+	decrement(input , segmentTreePtr, node*2+1, low, (low+high)/2, start,  value); // Updating left child
+	decrement(input , segmentTreePtr, node*2+2, 1+(low+high)/2, high, start, value); // Updating right child
+
+	segmentTreePtr[node] = (segmentTreePtr[node*2+1] + segmentTreePtr[node*2+2]); // Updating root with max value
+
+}

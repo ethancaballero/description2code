@@ -1,0 +1,10 @@
+t = int(raw_input())
+while t>0:
+    n = int(raw_input())
+    if n&(n+1)==0 and n!=1:
+        print n>>1
+    elif n ==1:
+        print 2
+    else:
+        print -1
+    t = t-1 

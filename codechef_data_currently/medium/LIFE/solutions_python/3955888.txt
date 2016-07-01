@@ -1,0 +1,126 @@
+#!/usr/bin/python
+# coding=utf8
+import sys
+import math
+from time import time
+from itertools import permutations, combinations
+import collections
+import functools
+from fractions import gcd
+
+
+class memoized(object):
+    def __init__(self, func):
+        self.func = func
+        self.cache = {}
+    def __call__(self, *args):
+        if not isinstance(args, collections.Hashable):
+            return self.func(*args)
+        if args in self.cache:
+            return self.cache[args]
+        else:
+            value = self.func(*args)
+            self.cache[args] = value
+            return value
+    def __repr__(self):
+        return self.func.__doc__
+    def __get__(self, obj, objtype):
+        return functools.partial(self.__call__, obj)
+
+
+class timed(object):
+    def __init__(self, func):
+        self.func = func
+    def __call__(self, *args):
+        t1 = time()
+        ret = self.func(*args)
+        dif_time = time() - t1
+        print "%s: returned %s in %f seconds" % (self.func.__name__, ret, dif_time)
+        return ret
+
+
+def comp(f1, f2, *args):
+    t1 = time()
+    r1 = f1(*args)
+    t2 = time()
+    r2 = f2(*args)
+    t3 = time()
+    res = "%5s: %s in %f
+%5s: %s in %f" % (f1.__name__, r1, t2 - t1, f2.__name__, r2, t3 - t2)
+    if r1 != r2:
+        dr = "!! DIFFERENT RESULTS !!"
+        res = dr + "
+" + res + "
+" + dr
+    print res
+
+
+def alg():
+    return 0
+
+
+def main():
+    data = sys.stdin
+    nb = int(data.readline())
+    #a, b = map(int,data.readline().split())
+    for icase in xrange(nb):
+        final_state = data.readline().strip()
+        # we make suppositions for the first 2 bits, and the other ones wil
+        # follow
+        length = len(final_state)
+        valid_count = 0
+        sol = None
+        for start in ['00', '01', '10', '11']:
+            initial_state = start
+            for ibit in xrange(2, length):
+                iprev = ibit - 1
+                iprevprev = ibit - 2
+
+                # final_list
+                final_list = [final_state[iprevprev], final_state[iprev], final_state[ibit]]
+                initial_list = [initial_state[iprevprev],initial_state[iprev], '?']
+                # we need to complete the list of initial, from the list of
+                # final
+                #print final_list, initial_list
+                if initial_list[1] == final_list[1]:
+                    # we don't change a change, so last is same as initial
+                    initial_list[2] = initial_list[0]
+                else:
+                    # we want a change, put bit different than left one
+                    initial_list[2] = '1' if initial_list[0] == '0' else '0'
+
+                initial_state += initial_list[2]
+                #print "we want", final_list, "we start from", initial_list, "total cur is", initial_state
+
+            # check if final bit has correct state
+            last_bit_changes = initial_state[length - 2] != initial_state[0]
+            last_bit_final_value = initial_state[length - 1]
+            if last_bit_changes:
+                last_bit_final_value = '0' if last_bit_final_value == '1' else '1'
+            if last_bit_final_value == final_state[length - 1]:
+                # now, check first bit
+                first_bit_changes = initial_state[1] != initial_state[length - 1]
+                first_bit_final_value = initial_state[0]
+                if first_bit_changes:
+                    first_bit_final_value = '0' if first_bit_final_value == '1' else '1'
+                if first_bit_final_value == final_state[0]:
+                    # valid case
+                    valid_count += 1
+                    sol = initial_state
+                    #print start, "works=>", initial_state
+                else:
+                    pass
+                    #print start, "invalid because of bit 0"
+            else:
+                pass
+                #print start,"is invalid for this case because of last bit"
+        res = sol
+        if valid_count == 0:
+            res = "No solution"
+        elif valid_count > 1:
+            res = "Multiple solutions"
+        print res
+
+
+if __name__ == "__main__":
+    main()

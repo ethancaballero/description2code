@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstdio>
+#define ll long long
+using namespace std;
+
+ll t,n,p,q,gr,xr;
+
+ll grundy(ll x, ll y){
+	
+	if(x>y)
+		swap(x,y);
+	
+	if(y%x==0)
+		return (y/x)-1;
+	ll u = grundy(y%x,x);
+	ll v = y/x;
+	if(u==0)
+		return v;
+	if(u<v)
+		return v;
+	else
+		return v-1;
+	return v;
+	
+		
+	
+}
+
+int main() {
+	// your code goes here
+	
+	scanf("%lld",&t);
+	
+	while(t--){
+		xr = 0;
+		scanf("%lld",&n);
+		
+		for(ll i=0;i<n;i++){
+			scanf("%lld %lld",&p,&q);
+			gr = grundy(p,q);
+			//cout << gr <<"xc"<<endl;
+			xr ^= gr;
+		}
+		
+		if(xr)
+			printf("YES
+");
+		else
+			printf("NO
+");
+	
+	}
+	
+	return 0;
+}

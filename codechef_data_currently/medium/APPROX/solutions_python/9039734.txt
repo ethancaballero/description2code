@@ -1,0 +1,16 @@
+def printL( P ) :
+    print ''.join(P)
+for testcases in xrange(int(raw_input() ) ):
+    pres = int(raw_input())
+    num, den = 103993, 33102
+    ans = [ '3' ]
+    if( pres == 0 ):
+        printL(ans) 
+    else :
+        ans.append('.')
+        num = (num % den) * 10
+        for i in xrange( 1, pres+1 ) :
+            quo, rem = divmod(num , den )
+            ans.append(str(quo))
+            num = rem * 10
+        printL(ans)

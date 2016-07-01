@@ -1,0 +1,10 @@
+t= int(input())
+for i in range (t):
+    p= int (input())
+    sum=0
+    for i in range (12):
+        sum = sum + (p/2**(11-i))
+        p= p-(p/2**(11-i)*(2**(11-i)))
+    print sum
+    
+        

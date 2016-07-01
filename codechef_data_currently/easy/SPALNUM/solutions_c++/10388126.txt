@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+
+int isPalindrome(int n){
+         int reverseNum=0;
+         int temp=n;
+         while(n!=0){
+              int lastDig=n%10;
+              reverseNum=reverseNum*10+lastDig;
+              n=n/10;}
+         if(reverseNum==temp){
+               return 1;}
+         else{
+               return 0;} }   
+         
+int main(){
+       int numbers;
+       cin>>numbers;
+       int i=0;
+       while(i<numbers){
+            int lowInt;
+            cin>>lowInt;
+            cout<<" ";
+            int highInt;
+            cin>>highInt;
+            int sumP=0;
+            for(int a=lowInt;a<=highInt;a++){
+                  if(isPalindrome(a)==1){
+                         sumP=sumP+a;} }
+            cout<<sumP<<endl;
+            i=i+1;} }   
+                    

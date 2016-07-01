@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+// #include "testlib.h"	
+using namespace std ;
+
+#define ft first
+#define sd second
+#define pb push_back
+#define all(x) x.begin(),x.end()
+#define pii pair<int,int>
+#define mp make_pair
+
+#define ll long long int
+
+#define pr_vec(v) for(int i=0;i<v.size();i++) cout << v[i] << " " ;
+
+#define f_in(st) freopen(st,"r",stdin)
+#define f_out(st) freopen(st,"w",stdout)
+
+#define fr(i, a, b) for(i=a; i<=b; i++)
+#define fb(i, a, b) for(i=a; i>=b; i--)
+#define ASST(x, l, r) assert( x <= r && x >= l )
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+const int maxn = 105000;
+int A[ maxn ];
+
+void solve() {
+	int n, k;
+	cin >> n >> k;
+	set<pair<ll, pii> > s;
+	ll sum = 0;
+	for(int i=1; i<=n; i++) {
+		cin >> A[i];
+		sum += A[i];
+	}
+	s.insert(mp(sum, mp(1, n)));
+	while( k -- && !s.empty() ) {
+		pair<ll, pii> top = *s.rbegin();
+		cout << top.ft << " 
+"[k == 0];
+		s.erase( top );
+		int l = top.sd.ft;
+		int r = top.sd.sd;
+		if( l != r ) {
+			s.insert(mp(top.ft-A[l], mp(l+1, r)));
+			s.insert(mp(top.ft-A[r], mp(l, r-1)));
+		}
+	}
+}
+
+int main() {
+	solve();
+	return 0;
+}

@@ -1,0 +1,88 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std ;
+
+const int K = 10000000 ;
+const int Nmax = 350 ;
+bool isPrime[K] ;
+int cost[K] ;
+//const int Nmax = 350 ;
+int a[Nmax][Nmax] ;
+bool visited[Nmax][Nmax] ;
+int n ;
+int dx[4] = {1, -1, 0, 0} ;
+int dy[4] = {0, 0, 1,-1};
+
+
+void dfs(int i ,int j)
+     {visited[i][j] = 1 ;
+     //int x , y ;
+       for(int k = 0;k<4;++k)
+         {int x = i+dx[k] ;
+          int y = j+dy[k];
+          if(x<0||x>=n ||y<0 ||y>=n)
+            continue ;
+          if(visited[x][y])
+            continue ;
+          if(isPrime[a[x][y]])
+              continue ;
+          if(a[x][y]%2 !=a[i][j]%2)
+             continue ;
+          
+           dfs(x ,y);
+         }
+     }
+
+
+int main()
+{ isPrime[0] = isPrime[1] = false ;
+  for(int i = 2 ;i<K;++i)
+      isPrime[i] = true ;
+  for(int i = 2 ;i*i<K ;++i)
+  {if(isPrime[i])
+      for(int j = i*i ;j<K;j += i)
+         isPrime[j] = false ;
+  }
+  int primeid = 0 ;
+  for(int i = 0;i<K;++i)
+  {if(isPrime[i])
+     {cost[i] = primeid++ ;
+     //primeid++ ;
+     }
+  else 
+      cost[i] = i/2 + (i%2)*2 ;
+  }
+    
+    
+    
+    int t  ;
+  scanf("%d",&t) ;
+  for(int k = 0;k<t;k++)
+            {
+            scanf("%d",&n);
+            for(int i =0 ;i<n;++i)
+                    for(int j = 0;j<n;++j)
+                             {scanf("%d",&a[i][j]);
+                             visited[i][j] = false ;
+                              }
+            long long int ans = 0 ;
+            for(int i = 0;i<n;++i)
+              for(int j = 0;j<n;++j)
+              {
+                      
+                      if(visited[i][j])
+                        continue ;
+                        int x = a[i][j];
+                      ans += cost[x]; 
+                      //visited[i][j] = true ;
+                      if(!isPrime[x])
+                        dfs(i ,j) ;                      
+                  
+              }
+                
+              printf("%lld
+",ans);
+            }
+ // system("pause");
+  return 0 ;
+}

@@ -1,0 +1,122 @@
+#include <vector>
+#include <string.h>
+#include <stdio.h>
+#include <iterator>
+#include <iostream>
+#include <list> 
+#include <map>
+#define  pb push_back
+using namespace std;
+
+int main() 
+{
+	list<int>  adj[10];
+	char s[100005];
+	vector<int> v;
+	list <int> :: iterator it;
+//	queue <int> q;
+	int i,j,cv,len,flag=0,t;
+	adj[0].pb(4);
+	adj[0].pb(5);
+	adj[0].pb(1);
+	adj[1].pb(0);
+	adj[1].pb(6);
+	adj[1].pb(2);
+	adj[2].pb(1);
+	adj[2].pb(3);
+	adj[2].pb(7);
+	adj[3].pb(4);
+	adj[3].pb(2);
+	adj[3].pb(8);
+	adj[4].pb(0);
+	adj[4].pb(3);
+	adj[4].pb(9);
+	adj[5].pb(8);
+	adj[5].pb(7);
+	adj[5].pb(0);
+	adj[6].pb(9);
+	adj[6].pb(8);
+	adj[6].pb(1);
+	adj[7].pb(9);
+	adj[7].pb(5);
+	adj[7].pb(2);
+	adj[8].pb(5);
+	adj[8].pb(6);
+	adj[8].pb(3);
+	adj[9].pb(4);
+	adj[9].pb(6);
+	adj[9].pb(7);
+	map<int,char> m;
+	m[0]='A';
+	m[1]='B';
+	m[2]='C';
+	m[3]='D';
+	m[4]='E';
+	m[5]='A';
+	m[6]='B';
+	m[7]='C';
+	m[8]='D';
+	m[9]='E';
+	scanf("%d",&t);
+	while(t--)
+{
+	scanf("%s",s);
+	i=0;
+	len=strlen(s);
+	cv=s[i]-65;
+	v.pb(cv);
+	i++;
+	while(i<len)
+	{
+		//cout<<t<<"
+";
+		for(it=adj[cv].begin();it!=adj[cv].end();it++)
+			if(m[*it]==s[i])
+			{
+				v.pb(*it);
+				i++;
+				break;
+				
+			}
+		if(it==adj[cv].end())
+			break;
+		else
+			cv=*it;
+	}
+	if(i==len)
+		for(j=0;j<v.size();j++)
+			printf("%d",v[j]);
+	else
+	{
+		i=0;
+		v.clear();
+		cv=s[i]-65+5;
+		v.pb(cv);
+		i++;
+		while(i<len)
+		{
+	//		cout<<cv;
+			for(it=adj[cv].begin();it!=adj[cv].end();it++)
+				if(m[*it]==s[i])
+				{
+					v.pb(*it);
+					i++;
+					break;
+				}
+			if(it==adj[cv].end())
+				break;
+			else
+				cv=*it;
+		}
+		if(i==len)
+			for(j=0;j<v.size();j++)
+				printf("%d",v[j]);
+		else
+			printf("-1");
+	}
+	printf("
+");
+	v.clear();
+}
+	return 0;
+}

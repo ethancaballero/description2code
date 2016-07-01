@@ -1,0 +1,15 @@
+from sys import stdin,stdout
+t = int(stdin.readline())
+for _ in xrange(t):
+	a = stdin.readline().strip()
+	b = stdin.readline().strip()
+	mn = 0
+	mx = 0
+	for i in xrange(len(a)):
+		if a[i] == '?' or b[i] == '?':
+			mx += 1
+		elif a[i] != b[i]:
+			mx += 1
+			mn += 1
+	stdout.write(str(mn)+" "+str(mx)+"
+")

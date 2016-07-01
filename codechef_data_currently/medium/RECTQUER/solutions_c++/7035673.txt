@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef int ll;
+int main(){
+  ll n,q,x1,x2,y1,y2,e,i,j,k,a[302][302][10]={0},ans=0,g=0;
+  scanf("%d",&n);
+  for(i=1;i<=n;i++){
+     for(j=1;j<=n;j++){ 
+        scanf("%d",&e);
+        for(k=1;k<=10;k++)
+           a[i][j][k]=a[i][j-1][k]+a[i-1][j][k]-a[i-1][j-1][k];
+        a[i][j][e]++;          
+     }
+  }
+
+  scanf("%d",&q);
+  while(q--){
+     scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+     ans=0;
+     for(k=1;k<=10;k++){
+         g=a[x2][y2][k]-a[x1-1][y2][k]-a[x2][y1-1][k]+a[x1-1][y1-1][k];
+         if(g)
+            ans++;
+     } 
+     printf("%d
+",ans);   
+  }
+  return 0;
+}    
+      

@@ -1,0 +1,102 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+//fast input function
+#define x_gc getchar()
+template<typename T> inline void inp(T &n) {n=0;int ch=x_gc,sign=1;while(ch<'0'||ch>'9'){if(ch=='-')sign=-1; ch=x_gc;}while( ch >= '0' && ch <= '9' )n=(n<<3)+(n<<1)+ ch-'0',ch=x_gc;n=n*sign;}
+#define di(x) int x;inp(x)
+#define _ init();
+void init(){
+	#ifndef ONLINE_JUDGE
+		FILE* fp = freopen("in", "r", stdin);
+	#endif
+}
+ 
+#define forall(i,b)       for(int i=0;i<b;i++)
+#define sforall(i,s,b)    for(int i=s;i<b;i++)
+#define fill(a,v)         memset(a, v, sizeof a)
+#define pb push_back
+#define mp make_pair
+#define ll long long
+#define ii pair<int,int>
+#define vi vector<int>
+#define vii vector<ii>
+#define vvi vector<vi>
+set<int>::iterator it;
+
+class Comparator{
+	public:
+		int operator()(const vi& p1, const vi& p2){
+			return p1[0]>=p2[0];
+		}
+};
+
+struct node
+{
+	int future;
+	int parent;
+};
+
+#define MAXN 50001
+int vals[200001];
+node f[MAXN];
+vii offers[MAXN];
+
+int find(int a){
+	if (a != f[a].parent){
+		return f[a].parent = find(f[a].parent);
+	}
+	return a;
+	// while(a != f[a].parent)
+	// 	a = f[a].parent;
+	// return a;
+}
+
+void merge(int a, int b, int c){
+	f[b].parent = a;
+	f[a].future = c;
+}
+
+int main(){_
+	di(tc);while(tc--)
+	{
+		forall(i,MAXN) {
+			f[i].future = i;
+			f[i].parent = i;
+			offers[i].clear();
+		}
+
+		di(n);di(m);
+		forall(i,n){di(a);vals[i] = a;}
+		forall(i,m){
+			di(d);di(a);di(b);
+			offers[d].pb(mp(a,b));
+		}
+		for (int i = MAXN-1; i >= 0; --i)
+		{
+			forall(j, offers[i].size()){
+				int a = offers[i][j].first;
+				int b = offers[i][j].second;
+				int roota = find(a);
+				int rootb = find(b);
+				merge(roota,rootb,max(f[roota].future,f[rootb].future));
+			}
+			forall(j, offers[i].size()){
+				int a = offers[i][j].first;
+				int b = offers[i][j].second;
+				f[a].future = f[find(a)].future;
+				f[b].future = f[find(b)].future;
+			}
+			forall(j, offers[i].size()){
+				int a = offers[i][j].first;
+				int b = offers[i][j].second;
+				f[a].parent = a;f[b].parent = b;
+			}
+		}
+		ll ans = 0;
+		forall(i,n){ans += f[find(vals[i])].future;}
+		printf("%lld
+", ans);
+	}
+	return 0;
+}

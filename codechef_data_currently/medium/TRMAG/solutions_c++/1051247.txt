@@ -1,0 +1,79 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<set>
+#include<map>
+#include<functional>
+#include<string>
+#include<cstring>
+#include<cstdlib>
+#include<queue>
+#include<utility>
+#include<fstream>
+#include<sstream>
+#include<cmath>
+#include<stack>
+#include<cstdio>
+#include <ctime>
+#include<cassert>
+ 
+using namespace std;
+ 
+#define MEM(a,b) memset(a,(b),sizeof(a))
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b)  ((a) < (b) ? (a) : (b))
+#define istr(S) istringstream sin(S)
+#define MP make_pair
+#define pb push_back
+#define inf 1000000000
+#define maxn 1000000
+#define SI(x) scanf("%d",&x)
+#define SL(x) scanf("%l",&x)
+#define SLL(x) scanf("%ll",&x)
+#define SLLU(x) scanf("%llu",&x)
+#define SC(x) scanf("%c",&x)
+#define FOR(i,a,b) for(int (i) = (a); (i) < (b); ++(i))  
+#define RFOR(i,a,b) for(int (i) = (a)-1; (i) >= (b); --(i)) 
+ 
+typedef long long  LL;
+//typedef __int64 LL;
+typedef pair<int,int> pi;
+typedef vector<int> vi;
+typedef vector<string> vs;
+typedef vector<double> vd;
+ 
+ 
+ 
+typedef long long int ll;
+using namespace std;
+ 
+ 
+int main()
+{
+
+int cases,maxsum,dullcount,dull,indx,pagecount,lvstorn,lvs;
+float avgPerLv;
+scanf("%d",&cases);
+while(cases--)
+{
+scanf("%d",&pagecount);
+maxsum=(pagecount*(pagecount+1))/2;//summation of all printed pages
+//cout<<"maxsum"<<maxsum<<endl;
+scanf("%d",&dullcount);
+FOR(i,0,dullcount)
+{
+scanf("%d",&dull);
+maxsum=maxsum-dull;
+}
+//cout<<"maxsum"<<maxsum<<endl;
+scanf("%d",&lvstorn);
+lvs=(pagecount/2)+(pagecount%2);
+//cout<<"lvs"<<lvs<<endl;
+avgPerLv=(float)maxsum / lvs;
+//cout<<"avgPerLv"<<avgPerLv<<endl;
+printf("%0.4f
+",(lvs-lvstorn)*avgPerLv);
+}
+return 0;
+}

@@ -1,0 +1,223 @@
+/*
+codedevloper
+*/
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+#define MAX_BUF 1024
+char buf_in[MAX_BUF],*next_in,buf_out[MAX_BUF],*next_out;
+
+void read_buf() {
+  buf_in[fread(buf_in,1,MAX_BUF-1,stdin)]=0;
+  next_in=buf_in;
+}
+
+void read_char() {
+  next_in++;
+  if (!*next_in)
+    read_buf();
+}
+
+bool read_eof() {
+  return !*next_in;
+}
+
+int read_int() {
+  int x=0;
+
+  while (*next_in<'0' || *next_in>'9')
+    read_char();
+  while (*next_in>='0' && *next_in<='9') {
+    x=10*x+*next_in-'0';
+    read_char();
+  }
+
+  return x;
+}
+
+double read_double() {
+  double x=0.0,p=1.0;
+
+  while ((*next_in<'0' || *next_in>'9') && *next_in!='-')
+    read_char();
+  if (*next_in=='-')
+    return -read_double();
+  while (*next_in>='0' && *next_in<='9') {
+    x=10*x+*next_in-'0';
+    read_char();
+  }
+  if (*next_in=='.') {
+    read_char();
+    while (*next_in>='0' && *next_in<='9') {
+      x=10*x+*next_in-'0';
+      p*=10.0;
+      read_char();
+    }
+  }
+
+  return x/p;
+}
+
+void write_buf() {
+  fwrite(buf_out,1,next_out-buf_out,stdout);
+  next_out=buf_out;
+}
+
+void write_char(char c) {
+  *next_out++=c;
+  if (next_out-buf_out==MAX_BUF)
+    write_buf();
+}
+
+void _write_int(int x) {
+  if (x) {
+    _write_int(x/10);
+    write_char('0'+x%10);
+  }
+}
+
+void write_int(int x) {
+  if (x<0) {
+    write_char('-');
+    x=-x;
+  }
+  if (!x)
+    write_char('0');
+  else
+    _write_int(x);
+}
+
+void write_string(const char *c) {
+  while (*c)
+    write_char(*c++);
+}
+
+void init() {
+  read_buf();
+  next_out=buf_out;
+}
+
+void deinit() {
+  write_buf();
+}
+
+
+
+char a[1005][1005];
+int b[1005][1005];
+
+int main()
+{
+    
+    int n;
+    scanf("%d
+", &n);
+    for (int i=0; i<n; i++) {
+        scanf("%s", a[i]);
+    }
+    memset(b, 0, sizeof b);
+    for (int i=0; i<n; i++) {
+        int cur = 0;
+        int start = 0;
+        int last=start;
+        while (start<n) {
+            while (last<n && a[i][last]=='X') last++;
+            cur = last-start;
+            for (int j=start; j<last; j++) {
+                b[i][j] = max(b[i][j], cur);
+            }
+            start = last+1;
+            last = start;
+        }
+    }
+    for (int j=0; j<n; j++) {
+        int cur = 0;
+        int start = 0;
+        int last=start;
+        while (start<n) {
+            while (last<n && a[last][j]=='X') last++;
+            cur = last-start;
+            for (int i=start; i<last; i++) {
+                b[i][j] = max(b[i][j], cur);
+            }
+            start = last+1;
+            last = start;
+        }
+    }
+    for (int i=0; i<n; i++) {
+        int cur = 0;
+        int start = 0;
+        int last=start;
+        while (start<n && i+start<n) {
+            while (last<n && i+last<n && a[i+last][last]=='X') last++;
+            cur = last-start;
+            for (int j=start; j<last; j++) {
+                b[i+j][j] = max(b[i+j][j], cur);
+            }
+            start = last+1;
+            last = start;
+        }
+    }
+    for (int j=0; j<n; j++) {
+        int cur = 0;
+        int start = 0;
+        int last=start;
+        while (start<n && j+start<n) {
+            while (last<n && j+last<n && a[last][j+last]=='X') last++;
+            cur = last-start;
+            for (int i=start; i<last; i++) {
+                b[i][i+j] = max(b[i][i+j], cur);
+            }
+            start = last+1;
+            last = start;
+        }
+    }
+    for (int i=0; i<n; i++) {
+        int cur = 0;
+        int start = 0;
+        int last = start;
+        while (last<n && i-last>=0) {
+            while (last<n && i-last>=0 && a[i-last][last]=='X')
+                last++;
+            cur = last-start;
+            for (int j=start; j<last; j++) {
+                b[i-j][j] = max(b[i-j][j], cur);
+            }
+            start = last+1;
+            last = start;
+        }
+    }
+    for (int j=1; j<n; j++) {
+        int cur = 0;
+        int start = 0;
+        int last = start;
+        while (last<n && j+last<n) {
+            while (last<n && j+last<n && a[n-1-last][j+last]=='X')
+                last++;
+            cur = last-start;
+            for (int i=start; i<last; i++) {
+                b[n-1-i][j+i] = max(b[n-1-i][j+i], cur);
+            }
+            start = last+1;
+            last = start;
+        }
+    }
+    
+    init();
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(j)write_char(' ');
+            write_int(b[i][j]);
+        }
+        write_char('
+');
+    
+    }
+    deinit();
+}
+/*
+codedevloper
+*/

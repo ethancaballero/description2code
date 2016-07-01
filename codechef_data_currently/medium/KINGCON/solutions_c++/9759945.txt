@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+class graph
+{
+    int time;
+  vector<int> *adj;
+  public:
+  graph(int v)
+  {
+      adj=new vector<int>[v];
+      time=0;
+  }
+  void add_edge(int u,int v)
+  {
+      adj[u].push_back(v);
+      adj[v].push_back(u);
+  }
+  void dfs(int v,vector<bool>& visited,vector<int>& parent,vector<int>& disc,vector<int>& low,vector<bool>& ap)
+  {
+      visited[v]=true;
+      int subtree=0;
+      disc[v]=low[v]=(++time);
+      vector<int>::iterator it;
+      for(it=adj[v].begin();it!=adj[v].end();it++)
+      {
+          if(!visited[*it])
+          {
+              parent[*it]=v;
+              subtree++;
+              dfs(*it,visited,parent,disc,low,ap);
+              low[v]=min(low[v],low[*it]);
+              if((parent[v]!=-1)&&(low[*it]>=disc[v]))
+                ap[v]=true;
+            if((parent[v]==-1)&&(subtree>1))
+            {
+                ap[v]=true;
+            }
+          }
+          else if((*it)!=parent[v])
+          {
+              low[v]=min(low[v],disc[*it]);
+          }
+      }
+  }
+  int num_ap(int n)
+  {
+      int i,ans=0;
+      vector<bool> visited(n),ap(n);
+      vector<int> parent(n,-1),disc(n),low(n);
+      dfs(0,visited,parent,disc,low,ap);
+      for(i=0;i<n;i++)
+      if(ap[i])
+        ans++;
+    return ans;
+  }
+};
+int main() {
+	int i,t,n,m,k,a,b,ans,amount;
+	scanf("%d",&t);
+	while(t--)
+	{
+	    scanf("%d%d%d",&n,&m,&k);
+	    graph g(n);
+	    while(m--)
+	    {
+	        scanf("%d%d",&a,&b);
+	        g.add_edge(a,b);
+	    }
+	     ans=g.num_ap(n);
+	     amount=ans*k;
+	     printf("%d
+",amount);
+	}
+	return 0;
+}

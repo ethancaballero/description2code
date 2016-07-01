@@ -1,0 +1,86 @@
+#include <bits/stdc++.h>
+#define ff first
+#define ss second
+#define sz size()
+#define pb push_back
+#define mp make_pair
+#define pf push_front 
+#define ff first
+#define ss second
+#define SET(a,b) memset(a,b,sizeof(a))
+#define all(c) (c).begin(),(c).end() 
+#define tr(c,i) for(typeof((c).begin() i = (c).begin(); i != (c).end(); i++) 
+#define present(c,x) ((c).find(x) != (c).end()) 
+#define cpresent(c,x) (find(all(c),x) != (c).end()) 
+#define SL(n) scanf("%lld",&n)
+#define PL(n) printf("%lld",n)
+#define SI(n) scanf("%d",&n)
+#define _ ios_base::sync_with_stdio(0);cin.tie(0)
+using namespace std;
+typedef long long int LL;
+class node{
+public:
+	LL ss;
+	LL length;
+};
+typedef vector<LL> VL;
+typedef vector<int> VI; 
+typedef vector<VL> VVL; 
+typedef pair<LL,LL> PLL; 
+typedef stack<node> st;
+typedef queue<node> qu;
+typedef pair<int ,int> II;
+typedef vector<II> VII;
+void FastIO()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(NULL);
+	cout.tie(NULL);
+}
+
+int main()
+{
+	FastIO();
+	LL i,t,n,q,r,p,k,m;
+	multiset<LL> :: iterator it;
+	cin >> t;
+	while(t--){
+		cin >> n >> m >> q >> p >> r >> k;
+		LL total = q+m;
+		LL last=0;
+		multiset<LL> my;
+		for(i=0;i<min(q,n);i++)
+			my.insert(p);
+		LL fr= max(n-q,0LL);
+		q=max(0LL,q-n);
+		for(i=1;i<=k;i++){
+			if(m>0 && i%r==0) q++ , m--;
+			if((my.size()>0 && *my.begin()+last==i) || (fr>0 && q>0)){
+				multiset<LL> temp;
+				temp.clear();
+				for(it=my.begin();it!=my.end();it++){
+					temp.insert(*it-(i-last));
+				}
+				last=i;
+				my=temp;
+			}
+			while(my.size()>0 && *my.begin()==0){
+				my.erase(my.begin());
+			}
+			fr = n-my.size();
+			while(fr>0 && q>0){
+				my.insert(p);
+				fr--;
+				q--;
+			}
+
+		}
+		cout << fr << " " << total - m- q - my.size() << " "<< m << " " << q << endl;
+
+
+	}
+	
+	
+	return 0;
+}
+

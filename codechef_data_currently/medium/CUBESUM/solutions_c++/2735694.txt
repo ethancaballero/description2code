@@ -1,0 +1,79 @@
+#include<iostream>
+#include<math.h>
+#include<algorithm>
+#include<stdio.h>
+#include<string.h>
+#include<set>
+#include<map>
+#include<vector>
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define FORL(i,a,b) for(int i=a;i<=b;i++)
+#define FORI(i,a,b,inc) for(int i=a;i<b;i=i+inc)
+#define FORD(i,a,b) for(int i=a;i>=b;i--)
+#define LL long long
+#define MAX 1000010
+#define MOD 1000000007
+#define pb push_back
+using namespace std;
+LL sum[110][110];
+LL ans[110][110][110];
+LL arr[110][110][110];
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    FOR(i,0,t)
+    {
+              int x,y,z;
+              scanf("%d%d%d",&x,&y,&z);
+              FOR(i,0,x)
+                        FOR(j,0,y)
+                                  FOR(k,0,z)
+                                            scanf("%lld",&arr[i][j][k]);
+              FOR(i,0,x)
+              {
+                        FOR(j,0,y)
+                        {
+                                  FOR(k,0,z)
+                                  {
+                                            sum[j][k] = 0;
+                                            ans[i][j][k] = arr[i][j][k];
+                                            if(i != 0)
+                                                 ans[i][j][k]-= arr[i-1][j][k];
+                                            if(j-1 >= 0)
+                                                 ans[i][j][k]-= sum[j-1][k];
+                                            if(k-1 >= 0)
+                                                 ans[i][j][k]-= sum[j][k-1];
+                                            if(j-1 >= 0 && k-1 >= 0)
+                                                 ans[i][j][k]+= sum[j-1][k-1];
+                                            if(j-1 >= 0)
+                                                 sum[j][k]+= sum[j-1][k];
+                                            if(k-1 >= 0)
+                                                 sum[j][k]+= sum[j][k-1];
+                                            if(j-1 >= 0 && k-1 >= 0)
+                                                 sum[j][k]-= sum[j-1][k-1];
+                                            sum[j][k]+=ans[i][j][k];
+                                            //cout<<i<<" "<<j<<" "<<k<<" "<<sum[j][k]<<" "<<ans[i][j][k]<<endl;
+                                   }
+                        }
+              } 
+              FOR(i,0,x)
+              {
+                        FOR(j,0,y)
+                        {
+                                  FOR(k,0,z)
+                                      printf("%lld ",ans[i][j][k]);
+                                  if(j < y-1)    
+                                       printf("
+"); 
+                        }
+                        printf("
+"); 
+              }
+                                      
+                                                   
+                                  
+    }
+   // system("pause");
+    return 0;
+}

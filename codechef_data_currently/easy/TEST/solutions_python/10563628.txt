@@ -1,0 +1,9 @@
+import sys
+
+while True:
+	line = sys.stdin.readline()
+	if line == '42
+':
+		break
+	else:
+		print line,

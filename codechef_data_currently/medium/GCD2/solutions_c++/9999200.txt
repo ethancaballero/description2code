@@ -1,0 +1,40 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int fun(string s,int b)
+{
+    int l=0;
+    int data=0;
+    while(s[l])
+    {
+        data=data*10+(s[l++]-48);
+        data=data%b;
+    }
+    return data;
+}
+
+int gcd(int a,int b)
+{
+    if(b==0)
+        return a;
+    else
+        return gcd(b,a%b);
+}
+
+int main()
+{
+   int t,len,a,b;
+   string s;
+   cin>>t;
+   while(t--)
+   {
+       cin>>b;
+       cin>>s;
+       if(b==0)
+        cout<<s<<"
+";
+       else
+       cout<<gcd(b,fun(s,b))<<"
+";
+     }
+}

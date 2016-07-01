@@ -1,0 +1,219 @@
+#include <algorithm>
+#include <numeric>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <cstring>
+#include <vector>
+#include <queue>
+#include <set>
+#include <list>
+#include <map>
+#include <cstdio>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <ctime>
+#include <cassert>
+ 
+using namespace std;
+typedef long long LL;
+#define FOR(k,a,b) for(int k(a); k < (b); ++k)
+#define FORD(k,a,b) for(int k(a-1); k >= (b); --k)
+#define REP(k,a) for(int k=0; k < (a); ++k)
+#define ABS(a) ((a)>0?(a):-(a))
+ 
+// #define fread_unlocked fread
+// #define fwrite_unlocked fwrite
+ 
+char *ipos, *opos, InpFile[20000], OutFile[2000];
+inline int readInt()
+{
+	while(*ipos <= 32) ++ipos;
+	int x=0;
+	char c;
+	while( 1 )
+	{
+		c=*ipos++;
+		if (c<=32) return x;
+		x*=10;
+		x+=c-'0';
+	}
+}
+ 
+inline LL readLL()
+{
+	while(*ipos <= 32) ++ipos;
+	LL x=0;
+	char c;
+	while( 1 )
+	{
+		c=*ipos++;
+		if (c<=32) return x;
+		x*=10;
+		x+=c-'0';
+	}
+}
+ 
+ 
+inline void writeLL(LL a)
+{
+	opos+=sprintf(opos,"%lld
+",a);
+}
+ 
+inline void InitIO() {
+	ipos = InpFile; opos = OutFile;
+	fread_unlocked(InpFile,20000,1,stdin);
+// 	FILE* tmpin=fopen("in.txt","r");
+// 	fseek (tmpin , 0 , SEEK_END);
+// 	int size_=ftell(tmpin);
+// 	rewind (tmpin);
+// 	fread(InpFile,size_,1,tmpin);
+// 	fclose(tmpin);
+}
+inline void FlushIO() {
+	fwrite_unlocked(OutFile,opos-OutFile,1,stdout);
+}
+ 
+int main()
+{
+	int T,K,D[20];
+	const LL mod=1000000007;
+	InitIO();
+	T=readInt();
+	LL N,C[100];
+	vector<LL> inverse,act,prev;
+	vector<vector<LL> > mpow;
+	inverse.reserve(20);
+	act.reserve(40);
+	mpow.reserve(100);
+	REP(testCase,T)
+	{
+		N=readLL();
+		K=readInt();
+		REP(i,K)
+		{
+			D[i]=readInt();
+		}
+		sort(D,D+K);
+ 
+		memset(C,0,sizeof(C));
+		REP(i,K)
+			C[D[i]]=1;
+// 		if(K==1)
+// 		{
+// 			if(N%D[0])
+// 				writeLL(0);
+// 			else
+// 				writeLL(1);
+// 			continue;
+// 		}
+		FOR(i,1,80)
+		{
+			REP(j,K)
+			{
+				if(D[j]<i)
+					C[i]+=C[i-D[j]];
+				else
+					break;
+			}
+			C[i]%=mod;
+		}
+		if(N<70)
+		{
+			writeLL(C[N]);
+			continue;
+		}
+		int mMax=D[K-1];
+		inverse.clear();
+		inverse.resize(mMax);
+		act.clear();
+		act.resize(mMax*2);
+		prev.clear();
+		prev.resize(mMax*2);
+		N-=mMax;
+		mpow.clear();
+		mpow.resize(100,vector<LL> (mMax*2));
+		inverse[0]=1;
+		REP(i,K-1)
+		{
+			inverse[D[i]]=-1;
+		}
+		reverse(inverse.begin(),inverse.end());
+		REP(i,K)
+		{
+			mpow[0][D[i]-1]=1;
+		}
+		for(int i=1;(1LL<<i)<N;++i)
+		{
+			REP(j,mMax)
+				REP(u,mMax)
+			{
+				mpow[i][j+u]+=mpow[i-1][j]*mpow[i-1][u];
+				mpow[i][j+u]%=mod;
+			}
+			for(int u=mpow[i].size()-1;u>=mMax;--u)
+			{
+				REP(j,inverse.size())
+				{
+					mpow[i][u-j-1]+=inverse[j]*mpow[i][u];
+					if(mpow[i][u-j-1]>=mod)
+						mpow[i][u-j-1]-=mod;
+					else if (mpow[i][u-j-1]<0)
+						mpow[i][u-j-1]+=mod;
+				}
+				mpow[i][u]=0;
+			}
+		}
+		int depth=0;
+		bool started=false;
+		while(N)
+		{
+			if(N&(1LL<<depth))
+			{
+				if(!started)
+				{
+					act=mpow[depth];
+					started=true;
+				}
+				else
+				{
+					act.swap(prev);
+					fill(act.begin(),act.end(),0);
+					REP(j,mMax)
+					REP(u,mMax)
+					{
+						act[j+u]+=prev[j]*mpow[depth][u];
+						act[j+u]%=mod;
+					}
+					for(int u=act.size()-1;u>=mMax;--u)
+					{
+						REP(j,inverse.size())
+						{
+							act[u-j-1]+=inverse[j]*act[u];
+							if(act[u-j-1]>=mod)
+								act[u-j-1]-=mod;
+							else if (act[u-j-1]<0)
+								act[u-j-1]+=mod;
+						}
+						act[u]=0;
+					}
+				}
+			}
+			N&=~(1LL<<depth);
+			++depth;
+		}
+		LL a=0;
+		REP(i,mMax)
+		{
+			a+=act[i]*C[mMax-i];
+			a%=mod;
+		}
+		writeLL(a);
+	}
+	FlushIO();
+	return 0;
+}
+ 

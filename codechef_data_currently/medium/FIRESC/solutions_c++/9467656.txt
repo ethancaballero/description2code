@@ -1,0 +1,101 @@
+#include<iostream>
+#include<string.h>
+#include<algorithm>
+#include<cmath>
+#include<stdio.h>
+#include<vector>
+#include<list>
+#include<queue>
+using namespace std;
+long long int cc=0,el=0,product=1;
+class graph
+{
+   vector<list<int> >adjlist;
+   public:
+       graph(){}
+       int v()
+       {
+           return adjlist.size();
+       }
+       void addedge(int src,int dest)
+       {
+            adjlist[src].push_back(dest);
+            adjlist[dest].push_back(src);
+       }
+       void total(int n)
+       {
+           adjlist.resize(n+1);
+       }
+ 
+      void elconnectedcomponents()
+       {
+           cc=0; product =1;
+           vector<bool>visited(v(),false);
+           for(int i=1;i<visited.size();i++)
+           {
+			
+               if(visited[i]==true)continue;
+               
+               cc=(cc+1);
+               el=0;
+               queue<int>q;
+               q.push(i);
+               visited[i]=true;
+               el=(el+1)%1000000007;
+               while(!q.empty())
+               {
+                   int current=q.front();
+                   q.pop();
+                   
+                   list<int>::iterator it=adjlist[current].begin();
+                   while(it!=adjlist[current].end())
+                   {
+                       if(visited[*it]==false)
+                       {
+                           q.push(*it);
+                           visited[*it]=true;
+                           el=(el+1)%1000000007;
+                       }
+                       it++;
+                   }
+               }
+              
+               product=((product%1000000007)*(el%1000000007))%1000000007;
+              
+            }
+            
+ 
+       }
+ 
+ 
+ 
+};
+ 
+ 
+ 
+int main()
+{
+    long long int t,n,m;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        cin>>m;
+        graph g;
+        g.total(n);
+ 
+        while(m--)
+        {
+                int x,y;
+                cin>>x>>y;
+                g.addedge(x,y);
+        }
+ 
+        
+       g.elconnectedcomponents();
+       cout<<cc<<" "<< product%1000000007<<endl;
+ 
+ 
+    }
+    return 0;
+}

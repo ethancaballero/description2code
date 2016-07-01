@@ -1,0 +1,32 @@
+import sys
+
+T = map(int, sys.stdin.readline().split())
+iterator = 0
+
+while iterator<T[0]:
+	n,m = map(int, sys.stdin.readline().split())
+	jobList = []
+	jobList = map(int, sys.stdin.readline().split())
+	jobList.sort()
+
+	i = 1
+	j = 0
+	chef = []
+	assistant = []
+	switch = 0
+	while i<(n+1):
+		if j<m and i==jobList[j]:
+			j = j+1
+		else:
+			if switch == 0:
+				chef.append(i)
+				switch = 1
+			else:
+				assistant.append(i)
+				switch = 0
+		i = i+1
+
+	iterator = iterator+1
+
+	print ' '.join(map(str,chef))
+	print ' '.join(map(str,assistant))

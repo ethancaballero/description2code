@@ -1,0 +1,80 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <cmath>
+#include <queue>
+#include <cstdio>
+#include <set>
+#include <map>
+#include <cstdlib>
+#include <cstring>
+#include <stack>
+#include <cassert>
+ 
+typedef unsigned long long ULL;
+typedef long long LL;
+ 
+#define MIN(a,b) (a<b?a:b)
+#define MAX(a,b) (a>b?a:b)
+#define ABS(a) ((a>0)?a:-a))
+ 
+#define SZ(a) ((int)a.size())
+#define PB(a) push_back(a)
+#define FOR(i,a,b) for(int i=(a);i<=(b);i++)
+#define REP(i,n) FOR(i,0,(int)(n-1))
+#define FORD(i,a,b) for(int i=(a);i>=(b);i--)
+#define printv(v) REP(i,SZ(v))printf("%d ",v[i]);
+#define mp(a,b) make_pair(a,b)
+#define PII pair<int,int>
+#define MOD 1000000007
+ 
+using namespace std;
+ 
+double p[11111];
+int a[11111];
+ 
+int main()
+{
+int t;
+scanf("%d",&t);
+while(t--)
+{
+    int n,m,pp;
+    scanf("%d %d %d",&n,&m,&pp);
+    double pr = pp/100.0;
+    FOR(i,1,m) {
+        scanf("%d",&a[i]);
+        p[i] = 1.0;
+    }
+    sort(a+1,a+m+1);
+ 
+    while(n>1)
+    {
+        int j = 1;
+        int i = 1;
+        while(i<=m)
+        {
+            if (a[i]&1 && a[i]+1==a[i+1] && i<m)
+            {
+                p[j] = (p[i] * p[i+1]) + pr * (1-p[i])*(p[i+1]) + pr * (1-p[i+1]) * p[i];
+                a[j] = (a[i]+1)/2;
+                i+=2;
+            }
+            else
+            {
+                p[j] = p[i] * pr;
+                a[j] = (a[i]+1)/2;
+                i++;
+            }
+            j++;
+        }
+        m = j-1;
+        n /= 2;
+    }
+    printf("%.12lf
+",p[1]*100);
+}
+ 
+return 0;
+}

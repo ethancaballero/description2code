@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+ using namespace std;
+ 
+map<char,int> rate;
+class Card{
+public:
+	char rank, suit;
+
+	bool operator<(const Card& other) const{
+		return rate[rank] > rate[other.rank];
+	}
+};
+bool is_straight(Card c[5]){
+	if(c[0].rank=='A' && c[1].rank== '5' && c[2].rank=='4' && c[3].rank=='3' && c[4].rank=='2') return true;
+	for(int i=1 ; i<5 ; i++) if(rate[c[i].rank] != rate[c[i-1].rank]-1) return false;
+	return true;
+}
+bool is_flush(Card c[5]){
+	for(int i=0 ; i<5 ; i++) if(c[i].suit!= c[0].suit) return false;
+	return true;
+}
+int eval(Card c[5]){
+	int a[5]={0};
+	int b[6]={0};
+	for(int i=0 ; i<5 ; i++)
+		for(int j=0 ; j<5 ; j++)
+			if(c[i].rank == c[j].rank) a[i]++;
+		
+	for(int i=0 ; i<5 ; i++) b[a[i]]++;
+	if(b[4]) return 4; // four
+	else if(b[3] && b[2]) return 5; // full
+	else if(b[3]) return 3; // three
+	else if(b[2]>2) return 2; // twopair
+	else if(b[2]) return 1; // two
+	else return 0;
+}
+int main(){
+	for(int i=2; i<10 ; i++) rate[(char)('0'+i)] = i;
+	rate['T'] = 10;
+	rate['J'] = 11;
+	rate['Q'] = 12;
+	rate['K'] = 13;
+	rate['A'] = 14;
+	int t; cin >> t;
+	while(t--){
+		Card c[5];
+		for(int i=0 ; i<5 ; i++) cin >> c[i].rank >> c[i].suit;
+		sort(c,c+5);
+		if(is_straight(c) && is_flush(c) && c[0].rank=='A' && c[1].rank=='K') cout << "royal flush" <<  endl;
+		else if(is_straight(c) && is_flush(c)) cout << "straight flush" << endl;
+		else if(eval(c)==4) cout << "four of a kind" << endl;
+		else if(eval(c)==5) cout << "full house" << endl;
+		else if(is_flush(c)) cout << "flush" << endl;
+		else if(is_straight(c)) cout << "straight" << endl;
+		else if(eval(c)==3) cout << "three of a kind" << endl;
+		else if(eval(c)==2) cout << "two pairs" << endl;
+		else if(eval(c)==1) cout << "pair" << endl;
+		else cout << "high card" << endl;
+	}
+	return 0;
+}

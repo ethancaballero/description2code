@@ -1,0 +1,31 @@
+    import java.io.*;
+     
+    class Balloons{
+    	public static void main(String [] args) throws Exception{
+    		BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
+    		String s;
+    		int a,b;
+			char p;
+    		int t  = Integer.parseInt(cin.readLine());
+    		while(t!=0){
+    			a=0;
+    			b=0;
+    			s = cin.readLine();
+    			int l = s.length();
+    			int i=0;
+    			while(i<l){
+					p=s.charAt(i);
+    				if(p=='a')
+    					a++;
+    				else
+    					b++;
+    				i++;
+    			}
+    			if(a>b)
+    				System.out.println(b);
+    			else
+    				System.out.println(a);
+    			t--;
+    		}
+    	}
+    } 

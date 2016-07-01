@@ -1,0 +1,13 @@
+from sys import stdin
+
+chef="CHEF"
+
+for trial in xrange(int(stdin.readline())):
+    S = map(str,stdin.readline().strip())
+    i = len(S)-4
+    while i>=0:
+        if all(S[i+j]==chef[j] or S[i+j]=="?" for j in range(4)):
+            S[i:i+4] = "CHEF"
+            i-=3
+        i-=1
+    print "".join(S).replace("?","A")

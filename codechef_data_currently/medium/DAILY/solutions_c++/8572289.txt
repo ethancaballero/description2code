@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+void pre()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+}
+ll fact(ll n)
+{
+  ll i,f=1;
+  for(i=1;i<=n;++i)
+    f*=i;
+  return f;
+}
+ll ncr(ll n,ll k)
+{
+  return fact(n)/(fact(n-k)*fact(k));
+}
+int main()
+{
+  pre();
+  ll x,n,i;
+  cin>>x>>n;
+  ll ans=0;
+  for(i=0;i<n;++i)
+  {
+      string car;
+      cin>>car;
+      ll lmu=0,su=53;
+      for(int j=0;j<9;++j)
+      {
+        ll fs=0;
+        if(car[lmu]=='0') ++fs;
+        if(car[lmu+1]=='0') ++fs;
+        if(car[lmu+2]=='0') ++fs;
+        if(car[lmu+3]=='0') ++fs;
+        if(car[su]=='0') ++fs;
+        if(car[su-1]=='0') ++fs;
+        lmu+=4;
+        su-=2;
+        if(fs>=x) ans+=ncr(fs,x);
+      }
+  }
+  cout<<ans<<endl;
+  return 0;
+}

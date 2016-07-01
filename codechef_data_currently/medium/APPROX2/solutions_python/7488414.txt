@@ -1,0 +1,14 @@
+for asd in range(int(raw_input())):
+    n,k=map(int,raw_input().split())
+    a=map(int,raw_input().split())
+    mini=10000000000
+    count=0
+    for i in range (n):
+        for j in range(i+1,n):
+            temp=abs(a[j]+a[i]-k)
+            if(temp==mini):
+                count+=1
+            elif (temp<mini):
+                mini=temp
+                count=0
+    print mini,count+1

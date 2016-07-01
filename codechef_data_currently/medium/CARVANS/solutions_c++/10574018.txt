@@ -1,0 +1,25 @@
+#include <stdio.h>
+using namespace std;
+int main(){
+    int t;
+    for(scanf("%d",&t);t>0;t--){
+        long long n;
+        scanf("%lld",&n);
+        long long lst[n];
+        for(long long i=0;i<n;i++){
+            scanf("%lld",&lst[i]);
+        }
+/*
+        for(int i=0;i<n;i++){
+            printf("%lld
+",lst[i]);
+        }
+*/
+         long long minspeed=lst[0];
+         long long cnt=1;
+        for(long long i=1;i<n;i++){if(minspeed>=lst[i]){minspeed=lst[i];cnt++;}}
+        printf("%lld
+",cnt);
+    }
+    return 0;
+}

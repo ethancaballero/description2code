@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{   
+     int t;
+     cin>>t;
+     while(t--){
+     
+	int n,k,d=0;
+	cin>>n;
+	vector<int> vec;
+	for(int i=0;i<n;i++)
+	{
+		cin>>k;
+		vec.push_back(k);
+	}
+	sort(vec.begin(),vec.end());
+	for(int i=0;i<vec.size();i++)
+	d=d^vec[i];
+	cout<<d<<endl;}
+	return 0;
+}

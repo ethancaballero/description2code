@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t ;
+	cin >> t;
+	int n;
+	int count;
+	while(t--){
+		cin >> n;
+		while(n>1){
+			if(n%10 ==4){
+				count++;
+			}
+			n=n/10;
+		}
+		cout << count << endl;
+		count =0;
+	}
+	return 0;
+}

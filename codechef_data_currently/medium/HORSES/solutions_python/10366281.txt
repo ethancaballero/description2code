@@ -1,0 +1,12 @@
+n=int(raw_input())
+for i in range(n):
+    m= int(raw_input())
+    horses=map(int,raw_input().split())
+    horses.sort()
+    a=[]
+    for j in range(len(horses)-1):
+        
+        a.append(horses[j+1]-horses[j])
+                 
+    a.sort()
+    print a[0]

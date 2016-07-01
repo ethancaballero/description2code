@@ -1,0 +1,43 @@
+#include<stdio.h>
+ 
+ int iput(int n)
+ {
+      int l=0;
+     char c=getchar_unlocked();
+      while(c<'0' && c>'9')
+        c=getchar_unlocked();
+      while(c>='0' && c<='9')
+       {
+        l=(l<<3)+(l<<1)+c-'0';
+        c=getchar_unlocked();
+       }
+    return l;
+ }
+ 
+ 
+ 
+int main() {
+    int t;
+    t=iput(t);
+    while(t--)
+    {
+      long int n;
+      n=iput(n);
+      int f=0,mini=1000112;
+      long int sum=0,x,i;
+      for( i=0;i<n;i++)
+         { x=iput(x);
+          if(x<mini) mini=x;
+           sum+=x;
+            if(x<2)
+              f=1;
+         }
+      sum=sum-mini+2;
+      if(f)
+        printf("-1
+");
+      else printf("%ld
+",sum);
+    }
+	return 0;
+}

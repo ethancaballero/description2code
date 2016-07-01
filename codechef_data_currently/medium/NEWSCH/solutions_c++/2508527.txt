@@ -1,0 +1,63 @@
+#include<stdio.h>
+int max=1000000007;
+void fun(int m,long long int a[2][2])
+{
+     if(m==1)
+     return;
+     int i,j;
+     long long int b[2][2],c[2][2];
+     for(i=0;i<2;i++)
+     {for(j=0;j<2;j++)
+     {b[i][j]=c[i][j]=a[i][j];}}
+     
+     if(m==2)
+     {
+             a[0][0]=(((b[0][0]*c[0][0])%max)+((b[0][1]*c[1][0])%max))%max;
+             a[0][1]=(((b[0][0]*c[0][1])%max)+((b[0][1]*c[1][1])%max))%max;
+             a[1][0]=(((b[1][0]*c[0][0])%max)+((b[1][1]*c[1][0])%max))%max;
+             a[1][1]=(((b[1][0]*c[0][1])%max)+((b[1][1]*c[1][1])%max))%max;
+     }
+     else
+     {
+         fun(m/2,a);
+         fun(2,a);
+         if(m%2!=0)
+         {
+                   c[0][0]=a[0][0];
+                   c[0][1]=a[0][1];
+                   c[1][0]=a[1][0];
+                   c[1][1]=a[1][1];
+                   a[0][0]=(((b[0][0]*c[0][0])%max)+((b[0][1]*c[1][0])%max))%max;
+                   a[0][1]=(((b[0][0]*c[0][1])%max)+((b[0][1]*c[1][1])%max))%max;
+                   a[1][0]=(((b[1][0]*c[0][0])%max)+((b[1][1]*c[1][0])%max))%max;
+                   a[1][1]=(((b[1][0]*c[0][1])%max)+((b[1][1]*c[1][1])%max))%max;
+         }
+     }
+}
+             
+int main()
+{
+    long long int a[2][2],sum;
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+              sum=0;
+              a[0][0]=2;a[0][1]=1;a[1][0]=3;a[1][1]=0;
+              scanf("%d",&n);
+              if(n==2)
+              printf("12
+");
+              else if(n==3)
+              printf("24
+");
+              else
+              {
+              fun(n-3,a);
+              sum=(((24*a[0][0])%max)+((12*a[1][0])%max))%max;
+              printf("%d
+",sum);
+              }
+    }
+    return 0;
+}

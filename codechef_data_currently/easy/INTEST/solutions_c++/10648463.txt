@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	long long int n,k,c;
+	c=0;
+	cin>>n>>k;
+	for(long long int i=0;i<n;i++)
+	{
+		long long int a;
+		cin>>a;
+		if(a%k==0)
+		{
+			c++;
+		}
+	}
+	cout<<c;
+}

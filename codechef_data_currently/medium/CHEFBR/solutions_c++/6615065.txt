@@ -1,0 +1,137 @@
+#include <iostream>
+#include <math.h>
+#include <algorithm>
+#include <stack>
+#include <bitset>
+using namespace std;
+int a[101];
+int start[101]={0};
+int end[101]={0};
+long long int dp[101][101]={0};
+int N;
+#define mod 1000000007;
+bool isbal(int a[],bitset<100> inc,int l=0,int r=N-1)
+{
+	stack <int> mystack;
+	for(int i=l;i<=r;i++)
+	{
+ 
+		if(inc[N-1-i] == 0)
+		{
+			continue;
+		}
+		if(a[i] < 0)
+		{
+ 
+			mystack.push(a[i]);
+		}
+		else
+		{
+			if(mystack.size()>0 && abs(mystack.top()) != a[i])
+			{
+				return false;
+			}
+			else if(mystack.size()==0)
+			{
+				return false;
+			}
+			mystack.pop();
+		}
+ 
+	}
+	if(mystack.size()!=0)
+	{
+		return false;
+	}
+	return true;
+}
+long long int ans = 0;
+int countt=0;
+bitset<100> inc;
+void getans(int a[],int n)
+{
+	//++countt;
+	if(n==0)
+	{
+		if(isbal(a,inc))
+		{
+		    int tem=0;
+		    while(tem<=(N-1) && inc[tem]==0)
+		    {
+		        ++end[N-1-tem];
+		        ++tem;
+		    }
+		    ++start[0];
+			++ans;
+		}
+		inc.set(N-1,0);
+		if(isbal(a,inc))
+		{
+		    int tem=N-1;
+		    while((tem>=0) && inc[tem]==0)
+		    {
+ 
+		        ++start[N-1-tem];
+		        --tem;
+		    }
+            tem=0;
+		    while(tem<=(N-1) && inc[tem]==0)
+		    {
+		        ++end[N-1-tem];
+		        ++tem;
+		    }
+			++ans;
+		}
+		inc.set(N-1,1);
+		return;
+	}
+	getans(a,n-1);
+	inc.set(N-n-1,0);
+	getans(a,n-1);
+	inc.set(N-n-1,1);
+	return;
+}
+ 
+long long int solve(int l,int r)
+{
+    if(l>=r)
+    {
+        return 1;
+    }
+    if(dp[l][r]!=0)
+    {
+        return dp[l][r];
+    }
+    dp[l][r] = solve(l+1,r);
+    int num = a[l];
+    for(int i=l+1;i<=r;i++)
+    {
+        if(a[i]==-num)
+        {
+            dp[l][r]+=(solve(l+1,i-1)*solve(i+1,r));
+            dp[l][r]%=mod;
+        }
+    }
+    return dp[l][r];
+}
+int main()
+{
+ 
+	cin>>N;
+	for(int i=0;i<N;i++)
+	{
+		inc[i]=1;
+		cin>>a[i];
+	}
+	if(N<=20)
+	{
+	    getans(a,N-1);
+	}
+	else
+	{
+	    ans = solve(0,N-1);
+	}
+ 
+	cout<<ans<<endl;
+ 
+}

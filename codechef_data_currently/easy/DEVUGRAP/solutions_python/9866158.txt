@@ -1,0 +1,15 @@
+#!/usr/bin/python
+for i in range(input()):
+	N,K=map(int,raw_input().split())
+	L=map(int,raw_input().split())
+	count=0
+	for n in L:
+		R=n%K
+		if n>K and R>K/2:
+			count+=(K-R)
+		elif n<K:
+			count+=K-n
+		else:
+			count+=R
+	print count
+		

@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+
+
+main()
+ { int T;
+   ll L,D,S,C,ans;
+   ios::sync_with_stdio(false);
+   cin>>T;
+   while(T--)
+
+      {cin>>L>>D>>S>>C;
+
+      /* ans=S*pow((C+1),(D-1));No need to calulate makes overflow*/
+      ans=S;
+       for(ll i=1;i<D;++i)
+       {
+           ans+=ans*C;
+           if(ans>=L)
+            break;
+       }
+       if(ans>=L)
+         cout<<"ALIVE AND KICKING
+";
+       else
+         cout<<"DEAD AND ROTTING
+";
+      }
+ }

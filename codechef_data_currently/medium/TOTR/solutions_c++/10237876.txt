@@ -1,0 +1,59 @@
+// codechef problem name: tourist translations 
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	string trans;
+	cin>>n>>trans;
+	
+	string original = "abcdefghijklmnopqrstuvwxyz";
+	string original1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	
+	map<char,char>alpha;
+	
+	for(int i=0; i!=trans.size(); i++)
+	{
+		alpha[original[i]] = trans[i];
+	}
+	
+	alpha['?'] = '?';
+	alpha['!'] = '!';
+	alpha[','] = ',';
+	alpha['.'] = '.';
+	alpha['_'] = ' ';
+	
+	locale loc;
+	
+	for(int i=0; i!=n; i++)
+	{
+		string temp;
+		cin>>temp;
+		
+		for(int j=0; j!=temp.size(); j++)
+		{
+			if(isalpha(temp[j],loc))
+			{
+				if(!isupper(temp[j],loc))
+				cout<<alpha[temp[j]];
+				else
+				{
+					char temp1 = tolower(temp[j],loc);
+					temp1 = alpha[temp1];
+					temp1 = toupper(temp1,loc);
+					cout<<temp1;
+				}			
+			}
+			else
+			{
+				cout<<alpha[temp[j]];
+			}
+		}
+		
+		cout<<"
+";
+	}
+}

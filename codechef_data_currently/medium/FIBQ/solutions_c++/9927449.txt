@@ -1,0 +1,159 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+ll MOD = 1000000007;
+
+int a[100010];
+ll tree[400010][3];
+
+struct gold3
+{
+    ll a1,a2,a3;
+};
+
+void fib(ll n,ll &x,ll &y)
+{
+  ll temp = 0;
+  if(n == 0)
+  {
+      x = 0;
+      y = 1;
+      return;
+  }
+  if(n == 1)
+  {
+      x = 1;
+      y = 1;
+      return;
+  }
+  fib(n/2,x,y);
+  if(!(n&1))
+  {
+      temp = x;
+      x = (((2*y - x + MOD)%MOD)*x)%MOD;
+      y = (temp*temp + y*y)%MOD;
+  }
+  else
+  {
+      temp = x;
+      x = (x*x + y*y)%MOD;
+      y = (x + (((2*y - temp + MOD)%MOD)*temp)%MOD)%MOD;
+  }
+}
+
+
+ll f(ll n)
+{
+    ll x,y;
+    fib(n,x,y);
+    return x;
+}
+
+void build(int l,int r,int i)
+{
+    if(l == r)
+    {
+        tree[i][0] = f(a[l]);
+        tree[i][1] = f(a[l] - 1);
+        tree[i][2] = f(a[l] + 1);
+        return;
+    }
+
+    int m = l + (r - l)/2;
+    build(l,m,2*i);
+    build(m + 1,r,2*i + 1);
+
+    tree[i][0] = ((tree[2*i][0] + tree[2*i + 1][0])%MOD + ((tree[2*i][0]*tree[2*i + 1][1])%MOD + (tree[2*i][2]*tree[2*i + 1][0])%MOD)%MOD)%MOD;
+    tree[i][1] = ((tree[2*i][1] + tree[2*i + 1][1])%MOD + ((tree[2*i][0]*tree[2*i + 1][0])%MOD + (tree[2*i][1]*tree[2*i + 1][1])%MOD)%MOD)%MOD;
+    tree[i][2] = ((tree[2*i][2] + tree[2*i + 1][2])%MOD + ((tree[2*i][0]*tree[2*i + 1][0])%MOD + (tree[2*i][2]*tree[2*i + 1][2])%MOD)%MOD)%MOD;
+
+}
+
+void update(int s,int e,int l,int val,int i)
+{
+    if(s > l || e < l) return;
+    if(s==e && l==e)
+    {
+        a[l] = val;
+        tree[i][0] = f(val);
+        tree[i][1] = f(val - 1);
+        tree[i][2] = f(val + 1);
+        return;
+    }
+
+    int m = s + (e - s)/2;
+    update(s,m,l,val,2*i);
+    update(m + 1,e,l,val,2*i + 1);
+
+
+    tree[i][0] = ((tree[2*i][0] + tree[2*i + 1][0])%MOD + ((tree[2*i][0]*tree[2*i + 1][1])%MOD + (tree[2*i][2]*tree[2*i + 1][0])%MOD)%MOD)%MOD;
+    tree[i][1] = ((tree[2*i][1] + tree[2*i + 1][1])%MOD + ((tree[2*i][0]*tree[2*i + 1][0])%MOD + (tree[2*i][1]*tree[2*i + 1][1])%MOD)%MOD)%MOD;
+    tree[i][2] = ((tree[2*i][2] + tree[2*i + 1][2])%MOD + ((tree[2*i][0]*tree[2*i + 1][0])%MOD + (tree[2*i][2]*tree[2*i + 1][2])%MOD)%MOD)%MOD;
+}
+
+gold3 query(int s,int e,int l,int r,int i)
+{
+    gold3 ans;
+    if(e < l || r < s)
+    {
+        ans.a1 = ans.a2 = ans.a3 = 0;
+        return ans;
+    }
+    if(l <= s && e <= r)
+    {
+        ans.a1 = tree[i][0];
+        ans.a2 = tree[i][1];
+        ans.a3 = tree[i][2];
+        return ans;
+    }
+
+    int m = s + (e - s)/2;
+
+    gold3 q1 = query(s,m,l,r,2*i);
+    gold3 q2 = query(m + 1,e,l,r,2*i + 1);
+
+    ans.a1 = ans.a2 = ans.a3 = 0;
+    ans.a1 = (ans.a1 + q1.a1)%MOD;
+    ans.a1 = (ans.a1 + q2.a1)%MOD;
+    ans.a1 = (ans.a1 + q1.a1*q2.a2)%MOD;
+    ans.a1 = (ans.a1 + q1.a3*q2.a1)%MOD;
+
+    ans.a2 = (ans.a2 + q1.a1*q2.a1)%MOD;
+    ans.a2 = (ans.a2 + q1.a2*q2.a2)%MOD;
+    ans.a2 = (ans.a2 + q1.a2 + q2.a2)%MOD;
+
+    ans.a3 = (ans.a3 + q1.a1*q2.a1)%MOD;
+    ans.a3 = (ans.a3 + q1.a3*q2.a3)%MOD;
+    ans.a3 = (ans.a3 + q1.a3 + q2.a3)%MOD;
+
+    return ans;
+}
+
+int main()
+{
+    int n,q,x,y;
+    char c;
+    scanf(" %d %d",&n,&q);
+    for(int i = 1; i <= n; i++)
+    {
+        scanf(" %d",&a[i]);
+    }
+    build(1,n,1);
+    while(q--)
+    {
+        scanf(" %c",&c);
+        if(c == 'C')
+        {
+            scanf(" %d %d",&x,&y);
+            update(1,n,x,y,1);
+        }
+        else
+        {
+            scanf(" %d %d",&x,&y);
+            printf("%lld
+",query(1,n,x,y,1).a1);
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,35 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+bool check(int n)
+{
+	int temp=n,temp1=0;
+	while(temp>0)
+	{
+		temp1=temp1*10+temp%10;
+		temp=temp/10;
+	}
+	if(n==temp1)
+	return true;
+	return false;
+}
+
+int main() {
+	int t;
+	scanf("%d",&t);
+	while(t-->0)
+	{
+int l,r,ans=0;
+cin>> l;
+cin>>r;
+for(int i=l;i<=r;i++)
+{
+	if(check(i))
+	{
+		ans=ans+i;
+	}
+}
+cout<<ans<<endl;
+}
+return 0;
+}

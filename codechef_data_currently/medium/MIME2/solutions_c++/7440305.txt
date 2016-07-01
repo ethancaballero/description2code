@@ -1,0 +1,42 @@
+#include <iostream>
+#include <map>
+#include <cstdio>
+#include <string>
+using namespace std;
+
+map<string,string>m;
+int main()
+{
+    int n,q,i,j,flag=0;
+    //map<string,string>::iterator itr;
+    string a,b,c,d,result;
+    scanf("%d%d",&n,&q);
+    for(i=0;i<n;i++)
+    {
+        cin>>a>>b;
+        m[a]=b;
+    }
+
+    for(i=0;i<q;i++)
+    {
+        flag=0;
+        cin>>c;
+            int pos=c.rfind('.');
+            if(pos==string::npos){printf("unknown
+");continue;}
+            if(pos!=string::npos)
+            {
+                string d=c.substr(pos+1);
+                //cout<<d<<endl;
+                //itr=m.find(d);
+                if(m.count(d)){flag=1;result=m[d];}
+            }
+
+        if (flag==0)printf("unknown
+");
+        else
+            cout<<result<<endl;
+    }
+
+    return 0;
+}

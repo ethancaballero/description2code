@@ -1,0 +1,54 @@
+#include <iostream>
+#include <map>
+#include <algorithm>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+string str;
+string a;
+int main() 
+{
+	int n;
+	scanf("%d",&n);
+	while(n--)
+	{
+		cin>>a;
+		char s[2];
+		gets(s);
+		getline(cin,str);
+		int y=0;
+		pair <int,char> c[26]={};
+		
+		for(int i=0;i<str.size();i++)
+		{
+			if(isalpha(str[i]))
+				if(str[i]>='a'&&str[i]<='z')
+					c[str[i]-'a'].first++;
+				else
+					c[str[i]-'A'].first++;
+		}		
+		
+		for(int i=0;i<26;i++)
+			c[i].second=char('a'+i);
+			
+		sort(c,c+26);
+		map <char,char> m;
+		m.clear();
+		for(int i=25;i>=0;i--)
+		{
+			m[c[i].second]=a[i];
+		}
+		for(int i=0;i<str.size();i++)
+		{
+			if(isalpha(str[i]))
+				if(str[i]>='a'&&str[i]<='z')
+					str[i]=m[str[i]];
+				else
+					str[i]=m[str[i]+32]-32;
+			printf("%c",str[i]);
+		}
+		cout<<endl;
+		
+	}
+	return 0;
+}

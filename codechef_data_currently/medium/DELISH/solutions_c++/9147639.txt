@@ -1,0 +1,52 @@
+#include <stdio.h>
+# include <stdlib.h>
+# include <algorithm>
+# define limit (int)1e4
+//# define max(a,b) (((a)>(b))?(a):(b))
+//# define min(a,b) (((a)<(b))?(a):(b))
+//# define abs(a)  (((a)>0)?(a):-(a))
+typedef long long int lli;
+using namespace std;
+int D[limit];
+int N,T;
+lli max_ends_here, min_ends_here;
+lli overall_max_from_left[limit],overall_max_from_right[limit],overall_min_from_left[limit],overall_min_from_right[limit];
+lli maxl_minr,minl_maxr,ans;
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	{
+			scanf("%d",&N);
+			for(int i=0;i<N;i++)	
+				scanf("%d",D+i);
+			overall_max_from_left[0]=overall_min_from_left[0]=max_ends_here= min_ends_here=D[0];
+			for(int i=1;i<N;i++)
+			{
+				max_ends_here=max(max_ends_here,0ll)+D[i];
+				overall_max_from_left[i]=max(overall_max_from_left[i-1],max_ends_here);
+				min_ends_here=min(min_ends_here,0ll)+D[i];
+				overall_min_from_left[i]=min(overall_min_from_left[i-1],min_ends_here);
+			}
+			overall_max_from_right[N-1]=overall_min_from_right[N-1]=max_ends_here= min_ends_here=D[N-1];
+			for(int i=N-2;i>=0;i--)
+			{
+				max_ends_here=max(max_ends_here,0ll)+D[i];
+				overall_max_from_right[i]=max(overall_max_from_right[i+1],max_ends_here);
+				min_ends_here=min(min_ends_here,0ll)+D[i];
+				overall_min_from_right[i]=min(overall_min_from_right[i+1],min_ends_here);
+			}
+			for(int i=0;i<N-1;i++)
+			{
+				maxl_minr=overall_max_from_left[i]-overall_min_from_right[i+1];
+				minl_maxr=overall_max_from_right[i+1]-overall_min_from_left[i];
+				//printf("%d %lld , %lld %lld
+",i,ans,maxl_minr,minl_maxr);
+				ans=(i?max(maxl_minr,ans):maxl_minr);
+				ans=max(ans,minl_maxr);
+			}
+			printf("%lld
+",ans);		
+	}
+	return 0;
+}

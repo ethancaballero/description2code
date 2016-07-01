@@ -1,0 +1,147 @@
+#include<iostream>
+#define mod 1000000007
+using namespace std;
+int main()
+{int t;
+cin>>t;
+while(t--)
+{
+unsigned long long int n;
+cin>>n;
+if (n==1)
+{
+cout<<26<<'
+';
+continue;
+}
+else if (n==2)
+{
+cout<<52<<'
+';
+continue;
+}
+else if (n%2==0)
+{
+unsigned long long int floorn=n/2;
+unsigned long long int base=26;
+unsigned long long int res=1;
+
+while(floorn!=0)
+{
+    if (floorn%2==0)
+    {base=(base*base)%mod;
+    floorn=floorn/2;
+    }
+    else
+    {
+    res=(res*base)%mod;
+    floorn=floorn-1;
+    }
+}
+
+res=((res%mod)-1+mod)%mod;
+res=(26*res)%mod;
+
+unsigned long long int power25=1000000005;
+base=25;
+unsigned long long int res25=1;
+
+while(power25!=0)
+{
+if (power25%2==0)
+    {
+    base=(base*base)%mod;
+    power25=power25/2;
+
+    }
+else
+{
+res25=(res25*base)%mod;
+power25=power25-1;
+}
+}
+
+res=(res*res25)%mod;
+res=(2*res)%mod;
+cout<<res<<'
+';
+
+
+
+
+}
+
+else if (n%2==1)
+{
+
+unsigned long long int floorn=n/2;
+unsigned long long int base=26;
+unsigned long long int res=1;
+
+while(floorn!=0)
+{
+    if (floorn%2==0)
+    {base=(base*base)%mod;
+    floorn=floorn/2;
+    }
+    else
+    {
+    res=(res*base)%mod;
+    floorn=floorn-1;
+    }
+}
+
+res=((res%mod)-1+mod)%mod;
+res=(26*res)%mod;
+
+unsigned long long int power25=1000000005;
+base=25;
+unsigned long long int res25=1;
+
+while(power25!=0)
+{
+if (power25%2==0)
+    {
+    base=(base*base)%mod;
+    power25=power25/2;
+
+    }
+else
+{
+res25=(res25*base)%mod;
+power25=power25-1;
+}
+}
+
+res=(res*res25)%mod;
+res=(2*res)%mod;
+
+unsigned long long int ceiln=n/2+1;
+base=26;
+unsigned long long int res26=1;
+while(ceiln!=0)
+{
+if (ceiln%2==0)
+    {
+    base=(base*base)%mod;
+    ceiln=ceiln/2;
+
+    }
+else
+{
+res26=(res26*base)%mod;
+ceiln=ceiln-1;
+}
+}
+
+res =(res+res26)%mod;
+cout<<res<<'
+';
+
+
+}
+
+
+}
+return 0;
+}

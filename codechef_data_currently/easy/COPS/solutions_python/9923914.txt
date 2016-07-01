@@ -1,0 +1,10 @@
+t = input()
+for _ in xrange(t):
+    m, x, y = map(int, raw_input().split())
+    h = map(int, raw_input().split())
+    n = [1] * 100
+    k = x * y
+    for g in h:
+        for ind in xrange(max(0, g - k - 1), min(100, g + k)):
+            n[ind] = 0
+    print sum(n)

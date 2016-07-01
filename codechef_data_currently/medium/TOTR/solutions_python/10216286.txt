@@ -1,0 +1,27 @@
+output = list()
+string1 = raw_input()
+nums = string1.split()
+n = int(nums[0])
+inp = nums[1]
+trans = list(inp)
+inp2 = "abcdefghijklmnopqrstuvwxyz"
+dicti = list(inp2)
+for i in range(n) :
+	inp1 = raw_input()
+	todo = list(inp1)
+	transed = list()
+	for j in range(len(todo)) :
+		if 	todo[j].isupper() :
+			ind = dicti.index(todo[j].lower())
+			transed.append(trans[ind].upper())
+		elif todo[j].islower() :
+			ind = dicti.index(todo[j])
+			transed.append(trans[ind])
+		elif todo[j] == '_' :
+			transed.append(' ')
+		else :
+			transed.append(todo[j])
+	transstr = ''.join(transed)
+	output.append(transstr)
+for i in range(n) :
+	print output[i]

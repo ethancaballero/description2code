@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int K;
+		cin >> K;
+		string ans = "";
+		int r = K % 25;
+		if(r > 0){
+			for(int i = r;i >= 0;--i){
+				ans += 'a' + i;
+			}
+		}
+		K -= r;
+		K /= 25;
+		while( K-- ){
+			for(int i = 25;i >= 0;--i){
+				ans += 'a' + i;
+			}
+		}
+		cout << ans << "
+";
+	}
+	return 0;
+}

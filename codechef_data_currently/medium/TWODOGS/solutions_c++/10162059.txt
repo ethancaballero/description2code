@@ -1,0 +1,73 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<string.h>
+#include<algorithm>
+ 
+using namespace std;
+
+int min(int a, int b) {
+	if(a<b)
+		return a;
+	else
+		return b;
+}
+
+int max(int a, int b) {
+	if(a>b)
+		return a;
+	else
+		return b;
+}
+ 
+int main() {
+	unsigned long long int N, K;
+	cin>>N>>K;
+	unsigned long long int T[N+1], i;
+	for(i=1; i<N+1; ++i)
+		cin>>T[i];
+
+	unsigned long long int *R, *L;
+	R = new unsigned long long int[1000001];
+	L = new unsigned long long int[1000001];
+
+	for(i = 0; i<1000001; ++i)
+		R[i] = L[i] = -1;
+
+	for(i = 1; i<N+1; ++i)
+		if(L[T[i]] == -1)
+			L[T[i]] = i;
+
+	for(i = N; i>0; --i)
+		if(R[T[i]] == -1)
+			R[T[i]] = i;
+
+	unsigned long long int t1, t2, ans = 1000001, ll, rr, lr, rl;
+	for(i = 1; i<N+1; ++i) {
+
+		t1 = T[i];
+		if(t1 >= K)
+			continue;
+		t2 = K - t1;
+		
+		if(t1 == t2)
+			continue;
+
+		if(L[t2] == -1)
+			continue;
+
+		ll = max(i, L[t2]);
+		rr = max((N - i + 1), (N - R[t2] + 1));
+		lr = max(i,  (N - R[t2] + 1));
+		rl = max((N - i + 1), (L[t2]));
+		
+		ans = min(ans, min(ll, min(rr, min(rl, lr))));
+		
+	}
+	if(ans == 1000001)
+		cout<<-1<<endl;
+	else
+		cout<<ans<<endl;
+	delete(R);
+	delete(L);
+}

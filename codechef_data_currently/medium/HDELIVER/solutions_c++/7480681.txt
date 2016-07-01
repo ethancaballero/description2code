@@ -1,0 +1,62 @@
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+#define ri(x) scanf("%d",&x)
+#define rl(x) scanf("%lld",&x)
+int parent[110],rank[110];
+void reset()
+{
+	for(int i=0;i<=110;i++)
+	{
+		parent[i]=i;
+		rank[i]=0;
+	}
+}
+int find(int i)
+{
+	if(parent[i]==i)
+	return i;
+	else
+	return parent[i]=find(parent[i]);
+}
+int main()
+{
+	int t;
+	ri(t);
+	while(t--)
+	{
+		int n,m,x,y;
+		ri(n),ri(m);
+		reset();
+		for(int i=0;i<m;i++)
+		{
+			ri(x),ri(y);
+			x=find(x);y=find(y);
+			if(x!=y)
+			{
+				if(rank[x]>rank[y])
+				parent[y]=x;
+				else
+				{
+				parent[x]=y;
+				if(rank[x]==rank[y])
+				rank[y]+=1;				
+				}
+			}
+		}
+		int q;
+		ri(q);
+		while(q--)
+		{
+			ri(x),ri(y);
+			if(find(x)==find(y))
+			printf("YO
+");
+			else
+			printf("NO
+");
+		}
+		
+	}
+}

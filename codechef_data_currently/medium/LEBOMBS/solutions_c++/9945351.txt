@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+
+int main() {
+	int t , n;
+	cin>>t;
+	while(t--) {
+		cin>>n;
+		int b = 0;
+		char* before = new char[n];
+		char* after  = new char[n];
+		
+		cin>>before;
+		memset(after , '0',n);
+		
+		for(int i = 0 ; i<n ; i++) {
+			if(i== 0 ) {
+				if(before[i] == '1')
+					after[i] = after[i+1] = '1';
+			}
+			else if(i == n-1) {
+				if(before[i] == '1' )
+					after[i-1] = after[i] ='1';
+			}
+			else {
+				if(before[i] == '1')
+					after[i-1] = after[i] = after[i+1] = '1' ;
+			}
+			
+		}
+		
+		/*for(int i = 0 ; i<n ; i++ ) {
+				cout<<after[i];
+			*/
+			
+			for(int i=0 ; i<n ; i++) {
+				if(after[i] == '0') 
+					b++;
+			
+		}
+		cout<<b<<endl;
+	
+	}
+	return 0;
+}

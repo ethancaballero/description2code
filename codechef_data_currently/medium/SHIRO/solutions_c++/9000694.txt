@@ -1,0 +1,56 @@
+#include <iostream>
+
+using namespace std;
+float dp(int *no,float *pr,int n)
+{
+   float dp[10001]={0},ans=0.0;
+//   memset
+dp[0]=1;
+   int i,j,tt,k=0;
+    for(i=1;i<=n;i++)
+    {
+         k+=no[i];
+     for(j=k;j>=0;j--)
+     {
+         if(j-no[i]>=0)
+           dp[j]=dp[j-no[i]]*pr[i]+dp[j]*(1-pr[i]);
+         else
+           dp[j]=dp[j]*(1-pr[i]);
+         }
+    }
+
+    tt=(k+1)/2;
+    for(i=tt;i<=k;i++)
+        ans+=dp[i];
+    return ans;
+}
+int main()
+{
+    //cout << "Hello world!" << endl;
+    int tst,k=0,n,no[101],i;
+    float pr[101],a;
+    cin>>tst;
+
+    //scanf("%d",&tst);
+    while(tst--)
+    {
+      cin>>n;
+      for(i=1;i<=n;i++)
+            {cin>>no[i];
+            k+=no[i];
+            }
+      for(i=1;i<=n;i++)
+           {cin>>a;
+             pr[i]=a/100;
+             }
+   cout<<dp(no,pr,n)<<"
+";
+
+
+
+    }
+
+
+
+    return 0;
+}

@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,i,j,x,k,l;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>x;
+		int arr[x],s=0,t=0;
+		for(j=0;j<x;j++)
+		cin>>arr[j];
+		for(j=0;j<x-1;j++)
+		{
+			if(arr[j]>arr[j+1])
+			s++;
+		}
+		for(j=0;j<x;j++)
+		{
+			for(k=j+1;k<x;k++)
+			{
+				if(arr[j]>arr[k])
+				t++;
+			}
+		}
+		if(s==t)
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+	}
+}

@@ -1,0 +1,69 @@
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+typedef long long LL;
+
+const int MAXN = 43;
+
+LL cnt[MAXN],cost[MAXN];
+LL ways[MAXN][MAXN],dp[MAXN][MAXN];
+
+int tc;
+int N,M;
+int color,price;
+
+int main (){
+   scanf("%d",&tc);
+
+   while(tc--){
+	  for(int i = 0;i < MAXN;++i){
+		 cnt[i] = cost[i] = 0LL;
+	  }
+
+	  for(int i = 0;i < MAXN;++i){
+		  for(int j = 0;j < MAXN;++j){
+			  dp[i][j] = ways[i][j] = 0LL;
+		  }
+	  }
+
+   	  scanf("%d %d",&N,&M);
+
+   	  for(int i = 1;i <= N;++i){
+   	  	scanf("%d %d",&color,&price);
+   	  	cnt[color]++;
+   	  	cost[color] = cost[color] + price;
+   	  }
+
+   	  ways[0][0] = 1LL;
+
+   	  for(int i = 1;i <= N;++i){
+		ways[i][0] = 1LL;  
+		  
+   	  	for(int j = 1;j <= i;++j){
+   	  	  ways[i][j] = ways[i - 1][j] + ways[i - 1][j - 1] * ((1LL << cnt[i]) - 1LL) * 1LL; 
+   	  	}
+   	  }
+
+   	  for(int i = 1;i <= N;++i){
+   	  	for(int j = 1;j <= i;++j){
+   	  	  dp[i][j] = dp[i - 1][j] + dp[i - 1][j - 1] * ((1LL << (cnt[i])) - 1LL) + ways[i - 1][j - 1] * (1LL << (cnt[i] - 1LL)) * cost[i];
+   	  	}
+   	  }
+
+   	  LL num,den;
+   	  num = den = 0LL;
+
+   	  for(int i = M;i <= N;++i){
+   	  	num = num + dp[N][i];
+   	  	den = den + ways[N][i];
+   	  }
+
+   	  double ans = (double)num/(den * 1.00);
+   	  printf("%.9lf
+",ans);
+   }
+    
+   return 0;
+}

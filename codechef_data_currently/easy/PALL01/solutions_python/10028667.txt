@@ -1,0 +1,29 @@
+#https://www.codechef.com/problems/PALL01
+#The Block Game 
+#!/usr/bin/env python
+
+def cl(s):
+	flag=0
+	if len(s)%2==0:
+		pass
+	if len(s)%2!=0:
+		s=list(s)
+		del s[len(s)/2]
+		''.join(s)
+
+	pall(s, flag)
+
+def pall(s, flag):
+	for i in range(len(s)):
+		if s[i]!=s[len(s)-(i+1)]:
+			flag+=1
+			break
+	if flag>0:
+		print 'losses'
+	else:
+		print 'wins'
+
+t=input()
+while t!=0:
+	t-=1
+	cl(raw_input())

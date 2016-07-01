@@ -1,0 +1,65 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<utility>
+#include<queue>
+#include<string.h>
+
+#define pii pair< int, int >
+#define pb push_back
+using namespace std;
+
+const int MAX=100005;
+const int INF=0x3f3f3f3f;
+int n,m;
+
+vector< pii > adj[MAX];
+int d[MAX];
+
+void dijkstra(int start){
+    int u,v,i,c,w;
+    priority_queue< pii, vector< pii >, greater< pii> > Q;
+
+    memset(d,0x3f,sizeof(d));
+    Q.push(pii(0,start));
+    d[start]=0;
+
+    while(!Q.empty()){
+        u = Q.top().second;
+        c = Q.top().first;
+        Q.pop();
+
+        if(d[u]<c)
+            continue;
+
+        for(i=0;i<adj[u].size();i++){
+            v=adj[u][i].first;
+            w=adj[u][i].second;
+
+            if(d[v]>d[u]+w){
+                d[v]=d[u]+w;
+                Q.push(pii(d[v],v));
+            }
+        }
+
+    }
+}
+
+int main(){
+    int x,y,i,ans;
+    scanf("%d%d",&n,&m);
+    for(i=0;i<m;i++){
+        scanf("%d%d",&x,&y);
+        adj[x].pb(make_pair(y,0));
+        adj[y].pb(make_pair(x,1));
+    }
+    dijkstra(1);
+    if(d[n]==INF)
+        printf("-1
+");
+    else
+        printf("%d
+",d[n]);
+
+    return 0;
+}

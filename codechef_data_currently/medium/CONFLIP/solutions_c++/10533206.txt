@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<limits.h>
+#include<algorithm>
+#define P(n) printf("%li
+",n);
+#define p(n) printf("%d
+",n);
+#define s(n) scanf("%d",&n);
+#define S(n) scanf("%li",&n);
+using namespace std;
+int main()
+{
+int t;
+s(t)
+while(t--)
+{
+    int g;
+    s(g)
+    while(g--){
+    int m,q;
+    long int n;
+    s(m)S(n)s(q)
+    long int head,tail;
+    if(m==1)
+    {
+        head=n/2;
+        tail=n/2+n%2;
+    }
+    else
+    {
+        head=n/2+n%2;
+        tail=n/2;
+    }
+    if(q==1)
+        P(head)
+        else
+        P(tail)
+    }
+}
+return 0;
+}

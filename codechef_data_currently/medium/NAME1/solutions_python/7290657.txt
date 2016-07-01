@@ -1,0 +1,18 @@
+st=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+t=input()
+son=""
+r=0
+for i in xrange(0,t):
+	pa=raw_input()
+	son=""
+	r=0
+	m=input()
+	for j in xrange(0,m):
+		son+=raw_input()
+	for k in st:
+		if(pa.count(k)<son.count(k)):
+			print "NO"
+			r=1;
+			break;
+	if(r==0):
+		print "YES"

@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+int get_time()
+{
+  int h,m;
+  scanf("%d:%d",&h,&m);
+ 
+  return h*60+m;
+}
+ 
+int main() {
+ 
+	int t;
+	cin>>t;
+ 
+	while(t--){
+	int t1=get_time();
+	int t2=get_time();
+ 
+	int dist;
+	float case1,case2;
+ 
+	cin>>dist;
+ 
+	case1=t1-t2+dist;
+ 
+	if(t1-t2>=2*dist)
+	{
+	    case2=t1-t2;
+ 
+	}
+	else
+	{
+	   case2=dist+(t1-t2)/2.0;
+ 
+	}
+	cout<<fixed;
+	cout<<setprecision(1)<<case1<<" ";
+	cout<<setprecision(1)<<case2;
+	cout<<endl;
+ 
+ 
+	}
+ 
+	return 0;
+}  

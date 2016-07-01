@@ -1,0 +1,14 @@
+N, D = map(int,raw_input().split())
+L = [0] * N
+j = 0
+count = 0
+for i in range(N):
+    L[i] = int(raw_input())
+L.sort() 
+while j < (N-1):
+    if L[j+1]-L[j] <= D:
+        count += 1
+        j += 2
+    else:
+        j += 1
+print count

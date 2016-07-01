@@ -1,0 +1,68 @@
+//chef and math BF
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define MOD 1000000007
+ 
+long long int find_sol(vector<long long int> &fib, long long int x, int k, int i)
+{
+    if(x<0)
+        return 0;
+ 
+    if(k==0)
+    {
+        if(x==0)
+        {
+            return 1;
+        }
+ 
+        return 0;
+    }
+
+    if(x>0 && k>0 && i>=0 && x<=k*fib[i])
+    {
+        return (find_sol(fib,x,k,i-1)+find_sol(fib,x-fib[i],k-1,i))%MOD;
+    }
+
+    return 0;
+}
+ 
+int main()
+{
+    //freopen("in.in","r",stdin);
+    //freopen("out.out","w",stdout);
+    int i,j,k,q,n;
+    long long int x,y,z;
+    long long int result;
+ 
+    vector<long long int> fib;
+    fib.push_back(1);
+    fib.push_back(2);
+ 
+    x=1;
+    y=2;
+ 
+    while((x+y)<1000000000)
+    {
+        fib.push_back(x+y);
+ 
+        x=y;
+        y=fib[fib.size()-1];
+    }
+ 
+    n=fib.size();
+ 
+    cin>>q;
+ 
+    while(q--)
+    {
+        cin>>x>>k;
+        result=0;
+ 
+        result=find_sol(fib,x,k,n-1);
+       
+        cout<<result<<endl;
+    }
+ 
+    return 0;
+}

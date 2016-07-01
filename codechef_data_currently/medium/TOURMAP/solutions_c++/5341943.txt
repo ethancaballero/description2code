@@ -1,0 +1,58 @@
+#include<iostream>
+#include<algorithm>
+#include<map>
+#include<string>
+
+using namespace std;
+
+int main()
+{
+	long long int cost, answer, no, tc, len, i;
+	string from, to, c, temp;
+	pair <string,int> p;
+	map<string, int > check;
+	map<string, pair<string , int > > m;
+	// per iteration logic
+	cin>>tc;
+	while(tc--){
+		cin>>no;
+		cost = 0;
+		answer = 0;
+		for( i = 0; i < no-1; i++){
+			cin>>from>>to>>cost>>c;
+			//cout<<cost;
+			answer += cost;
+			if(check.find(from) != check.end()){
+				check.erase(from);
+			}
+			else check[from] = 1;
+			if(check.find(to) != check.end()){
+				check.erase(to);
+			}
+			else check[to] = 1;
+			
+			p.first = to;
+			p.second = cost;
+			m[from] = p;
+		}
+
+		map <string, int> :: iterator it = check.begin();
+		temp = it->first;
+		if(m.find(temp) == m.end()){
+			it++;
+			temp = it->first;
+		}
+
+		for( i = 0; i<no-1; i++){
+			p = m[temp];
+			cout<<temp<<" "<<p.first<<" "<<p.second<<"$"<<endl;
+			temp = p.first;
+		}
+		cout<<answer<<"$"<<endl;
+
+		check.clear();
+		m.clear();
+
+	}
+	return 0;
+}

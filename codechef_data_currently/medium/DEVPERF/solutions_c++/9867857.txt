@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int t,n,m,i,j,k;
+    int xmin,xmax,ymin,ymax;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d %d",&n,&m);
+        char a[n][m+1];
+        
+        k=0;
+        xmin=ymin=1001; xmax=ymax=0;
+        for(i=0;i<n;++i) scanf(" %s",a[i]);
+
+        for(i=0;i<n;++i){
+            for(j=0;j<m;++j){
+                if(a[i][j]=='*'){
+                    if(xmin>i) xmin=i;
+                    if(ymin>j) ymin=j;
+ 
+                    if(xmax<i) xmax=i;
+                    if(ymax<j) ymax=j;
+                    k++;
+                }
+            }
+        }
+        if(k==0) printf("0
+");
+        else if(k==1) printf("1
+");
+        else printf("%d
+",max(xmax-xmin+1,ymax-ymin+1)/2+1);    
+    }
+    return 0;
+} 

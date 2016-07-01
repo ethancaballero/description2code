@@ -1,0 +1,37 @@
+#include<string>
+#include<iostream>
+using namespace std;
+int gcd(int a,int b)
+{
+	if(b==0)
+	return a;
+	else
+	gcd(b,a%b);
+}
+int rem(int m,string s)
+{
+	int p=0,len=s.size();
+	for(int i=0;i<len;i++)
+		p=((p*10)%m + (s[i]-'0')%m)%m;
+	return p;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int a;
+		string s;
+		cin>>a>>s;
+		if(a==0)
+			cout<<s<<endl;
+		else
+		{
+		int b=rem(a,s);
+		int ans=gcd(a,b);
+		cout<<ans<<endl;
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,39 @@
+#include <cstdio>
+#include <iostream>
+
+using namespace std;
+const long long MOD = 1e9 + 7;
+
+long long mpow(long long a, long long b)
+{
+    long long ret = 1;
+    a %= MOD;
+    while(b)
+    {
+        if(b & 1) ret = (ret * a) % MOD;
+        b >>= 1;
+        a = (a * a) % MOD;
+    }
+    return ret;
+}
+
+int main()
+{
+    int t;
+    long long n, m, q, k, ans;
+    for(scanf("%d", &t);t--;)
+    {
+        scanf("%lld %lld %lld %lld", &n, &m, &q, &k);
+        if(m <= q)
+            printf("0
+");
+        else
+        {
+            ans = ((m - q) * (mpow(q + 1, n) - 2*mpow(q, n) + mpow(q - 1, n))) % MOD;
+            if(ans < 0) ans += MOD;
+            printf("%lld
+", ans);
+        }
+    }
+    return 0;
+}

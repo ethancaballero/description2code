@@ -1,0 +1,30 @@
+#include<iostream>
+#include<set>
+#include<iterator>
+using namespace std;
+
+int main(){
+    
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    
+    int n,i;
+    cin>>n;
+
+    multiset<int> s;
+
+    for(i=0;i<n;i++){
+        int temp;
+        cin>>temp;
+        s.insert(temp);
+
+    }
+
+    multiset<int>::iterator it;
+
+    for(it=s.begin();it!=s.end();it++)
+        cout<<*it<<endl;
+
+
+
+}

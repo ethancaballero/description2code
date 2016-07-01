@@ -1,0 +1,28 @@
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+long long f[100000];
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	
+	for(int i=1; i<=100000; i+=2)
+		for(int j=i; j <= 100000; j += i)
+			f[j] += i;
+
+	while(t--)
+	{
+		int l,r;
+		long long sum = 0LL;
+		scanf("%d %d",&l,&r);
+		for(int i=l;i<=r;i++)
+			sum = sum + f[i];
+		printf("%lld
+",sum );
+	}
+	return 0;
+}

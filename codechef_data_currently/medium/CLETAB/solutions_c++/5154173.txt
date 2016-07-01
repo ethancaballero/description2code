@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int test;
+    cin>>test;
+    for(int i=0;i<test;i++){
+        int arr[401]={0},cache[401]={0};
+        int n,m;
+        cin>>n>>m;
+        for(int k=1;k<=m;k++){
+            cin>>arr[k];
+        }
+        int cachesize=0,count=0;
+        for(int k=1;k<=m;k++){
+            if( cache[arr[k]]==0){
+                count++;
+                if(cachesize<n){
+                    cachesize++;
+                }else{
+                    int maxindex=0,maxelement=0;
+                    for(int p=1;p<=400;p++){
+                        if(cache[p]!=0){
+                            if(cache[p]>maxindex){
+                                maxindex=cache[p];
+                                maxelement=p;
+                            }
+                        }
+                    }
+                    cache[maxelement]=0;
+                }
+            }
+            for(int p=k+1;p<=m;p++){
+                if(arr[p]==arr[k]){
+                    cache[arr[k]]=p;
+                    break;
+                }else{
+                    cache[arr[k]]=m+1;
+
+                }
+            }
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}

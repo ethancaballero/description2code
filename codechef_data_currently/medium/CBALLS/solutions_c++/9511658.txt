@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e4 + 3;
+bool prime[N];
+ 
+int main() {
+    memset(prime, true, sizeof prime);
+    prime[0] = prime[1] = false;
+    for (int i = 1; i * i < N; ++i) {
+        if (prime[i]) {
+            for (int j = i * i; j < N; j += i)
+                prime[j] = false;
+        }
+    }
+    ios_base::sync_with_stdio(0);
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; ++i) {
+            cin >> a[i];
+        }
+        int ans = 1e9;
+        for (int i = 2; i < 10000; ++i) {
+            if (prime[i]) {
+                int need = 0, last = 0;
+                for (int j = 0; j < n; ++j) {
+                    int now_need = max((a[j] + i - 1) / i * i - a[j],
+                        last - a[j]);
+                    need += now_need;
+                    last = a[j] + now_need;
+                }
+                ans = min(ans, need);
+            }
+        }
+        cout << ans << '
+';
+    }
+}

@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+
+
+using namespace std;
+ char a[100005];
+
+ int main(){
+
+    cin.getline(a,100005);
+
+    int i,c,ch,che,chef;
+    c=ch=che=chef=0;
+
+    for(i=0;i<strlen(a);i++){
+        if(a[i]=='C'){
+            c++;
+        }
+        else if(a[i]=='H'){
+            if(c>0){c--; ch++;}
+        }
+        else if(a[i]=='E'){
+            if(ch>0){ch--; che++;}
+        }
+        else if(a[i]=='F'){
+            if(che>0){che--; chef++;}
+        }
+    }
+    cout<<chef;
+    return 0;
+}

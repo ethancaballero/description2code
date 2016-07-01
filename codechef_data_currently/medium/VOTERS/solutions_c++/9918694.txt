@@ -1,0 +1,83 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n1,n2,n3,i,j;
+    cin>>n1>>n2>>n3;
+    int a[n1+1],b[n2+1],c[n3+1];
+    for(i=0;i<n1;i++)
+        cin>>a[i];
+    for(i=0;i<n2;i++)
+        cin>>b[i];
+    for(i=0;i<n3;i++)
+        cin>>c[i];
+    int d[n1+n2];
+    int m,k,f=0;
+    i=0,j=0,k=0;
+    int e[n1+n2+n3];
+    while(i<n1&&j<n2)
+    {
+        if(a[i]<b[j])
+        {
+            d[k]=a[i];
+            i++;
+            k++;
+        }
+        else if(a[i]>b[j])
+        {
+            d[k]=b[j];
+            k++;
+            j++;
+        }
+        else
+        {
+            e[f]=a[i];
+            i++;
+            j++;
+            f++;
+        }
+    }
+    if(i!=(n1-1))
+    {
+        for(m=i;m<n1;m++)
+        {
+            d[k]=a[m];
+            k++;
+        }
+    }
+    if(j!=(n2-1))
+    {
+        for(m=j;m<n2;m++)
+        {
+            d[k]=b[m];
+            k++;
+        }
+ 
+    }
+    int n=k;int g;
+    i=0,j=0;
+    while(i!=n&&j!=n3)
+    {
+        if(d[i]<c[j])
+        {
+            i++;
+        }
+        else if(d[i]>c[j])
+        {
+            j++;
+        }
+        else if(d[i]=c[j])
+        {
+            e[f]=d[i];
+            i++;
+            j++;
+            f++;
+        }
+    }
+    sort(e,e+f);
+    cout<<f<<endl;
+    for(g=0;g<f;g++)
+        cout<<e[g]<<endl;
+}
+ 

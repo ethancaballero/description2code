@@ -1,0 +1,38 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#include<queue>
+#include<stack>
+#include<string>
+#include<algorithm>
+#include<vector>
+#define S(x) scanf("%d",&x)
+#define SL(x) scanf("%lld",&x)
+#define SS(s) scanf("%s",&s)
+#define LL long long
+using namespace std;
+int main()
+{
+	int t,i,j,k,arr[1050];
+	S(t);
+	while(t--)
+	{
+		int n;
+		S(n);
+		S(k);
+		for(i=1;i<=n;i++)
+		{
+			S(arr[i]);
+		}
+		sort(arr+1,arr+n+1);
+		int ans=0;
+		arr[0]=0;
+		for(i=n;i>0;i--)
+		{
+			ans+=(arr[i]-arr[i-1]-1)*((n-i)/k+1);
+		}
+		printf("%d
+",ans);
+	}
+	return 0;
+}

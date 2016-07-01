@@ -1,0 +1,11 @@
+#https://www.codechef.com/problems/SIMPSTAT
+#Simple Statistics 
+#!/usr/bin/env python
+
+
+t=input()
+while t!=0:
+	t-=1
+	n,k = map(int,raw_input().split())
+	nos = sorted(map(int, raw_input().split()))[k:n-k]
+	print "%.6f"%(float(sum(nos))/float(len(nos)))

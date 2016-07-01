@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+
+int search(int a[],int n)
+{
+    int min=n+1;
+    int pos=-1;
+    int i=1;
+    for(i=1;i<=n;i++)
+    if(a[i]!=0 && a[i]<min){
+     min=a[i];
+     pos=i;
+    }
+  return pos;
+}
+
+
+int main()
+{
+   int t,n,temp,brk,x,count=0;
+       cin>>n;
+       int a[n+2],b[n+1][n+1];
+       a[0]=0;
+       for(int i=1;i<=n;i++)
+        cin>>a[i];
+       while(1){
+            temp=search(a,n);
+            if(temp==-1)
+                break;
+            int i=0;
+            brk=a[temp];
+            b[count][i++]=a[temp];
+       while(a[temp]!=0)
+       {
+            x=temp;
+            temp=a[temp];
+            if(a[temp]!=0 && a[temp]!=brk)
+            b[count][i++]=a[temp];
+            a[x]=0;
+       }
+       b[count][i++]=brk;
+       b[count][i]=0;
+       count++;
+   }
+   cout<<count<<"
+";
+   for(int i=0;i<count;i++)
+   {
+       int j=0;
+       while(b[i][j])
+       {
+           cout<<b[i][j++]<<" ";
+       }
+       cout<<"
+";
+
+   }
+
+
+}

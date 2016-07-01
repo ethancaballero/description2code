@@ -1,0 +1,25 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+
+int main()
+{
+	long long n, m;
+	scanf("%lld %lld", &n, &m);
+	long long q, first = n+2, last = 3*n;
+	long long mid = (first + last)/2;
+	while(m--)
+	{
+		scanf("%lld", &q);
+		if( q<first || q>last )
+			printf("0
+");
+		else if( q<=mid )
+			printf("%lld
+", q-first+1);
+		else
+			printf("%lld
+", last-q+1);
+	}
+	return 0;
+}

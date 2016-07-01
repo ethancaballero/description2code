@@ -1,0 +1,13 @@
+for t in range(int(raw_input())):
+        a=raw_input()
+        dic={}
+        for i in a:
+                if i not in dic:
+                        dic[i]=1
+                else:
+                        dic[i]+=1
+        lst=sorted(dic.values(),reverse=True)
+        if lst[0]==sum(lst[1:]):
+                print 'YES'
+        else:
+                print 'NO'

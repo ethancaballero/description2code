@@ -1,0 +1,16 @@
+T=input()
+for i in xrange(T):
+    data=raw_input().split(' ')
+    N=int(data[0])
+    K=int(data[1])
+    r=K
+    m=0
+    nm=r
+    for j in xrange(1,N-1):
+        if j==N-2:
+           r=(m*K+nm*(K-1))%1000000007
+        else:
+            m=nm
+            r=(r*K)%1000000007
+            nm=r-m
+    print(r)

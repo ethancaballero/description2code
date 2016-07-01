@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cstdio>
+#include <math.h>
+
+using namespace std;
+
+int main() {
+  int t, p, s;
+  scanf("%d", &t);
+
+  for (int i = 0; i < t; ++i) {
+    scanf("%d %d", &p, &s);
+
+    float h1 = (0.5*p + sqrt(0.25*p * p - 6 * s)) / 6.;
+    double vol1 = h1 * h1 * h1 - 0.25*p * h1 * h1 + 0.5*s*h1;
+
+    float h2 = (0.5*p - sqrt(0.25*p * p - 6 * s)) / 6.;
+    double vol2 = h2 * h2 * h2 - 0.25*p * h2 * h2 + 0.5*s*h2;
+
+    printf("%0.2f
+", std::max(vol1, vol2));
+  }
+
+  return 0;
+}

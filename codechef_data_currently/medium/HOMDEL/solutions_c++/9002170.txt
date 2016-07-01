@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int n,m,s,g,d;
+	
+	scanf("%d",&n);
+	int mat[n][n];
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			scanf("%d",&mat[i][j]);
+		}
+	}
+	for(int k=0;k<n;k++){
+		for(int i=0;i<n;i++){
+			for(int j=0;j<n;j++){
+				if(mat[i][j]>(mat[i][k]+mat[k][j])){
+					mat[i][j]=mat[i][k]+mat[k][j];
+				}
+			}
+		}
+	}
+	scanf("%d",&m);
+	while(m--){
+		scanf("%d %d %d",&s,&g,&d);
+		long x=mat[s][g]+mat[g][d];
+		printf("%d %d
+",x,x-mat[s][d]);
+	}
+	return 0;
+}

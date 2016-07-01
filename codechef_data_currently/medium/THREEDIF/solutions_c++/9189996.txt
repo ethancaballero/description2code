@@ -1,0 +1,27 @@
+#include<iostream>
+#include<algorithm>
+#define m 1000000007
+using namespace std;
+ 
+ 
+int main()
+{
+	long long unsigned int arr[3],i,j,k,t;
+	cin>>t;
+	while(t--)
+	{
+		for(i=0;i<3;i++)
+		cin>>arr[i];
+		
+		sort(arr,arr+3);
+	
+		i=arr[0]%m;
+		j=(arr[1]-1)%m;
+		k=(arr[2]-2)%m;
+		
+		cout<<(i*j)%m*k%m<<endl;
+		
+	}
+	
+	return 0;
+}

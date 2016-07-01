@@ -1,0 +1,102 @@
+    #include<bits/stdtr1c++.h>
+    using namespace std;
+    typedef long long LL;
+     
+    int n;
+    LL m,k;
+    LL arr[(int)(1e5)+10];
+    LL mod=(LL)1e9+7;
+    int main() {
+    #ifndef ONLINE_JUDGE
+    freopen("2.in", "r", stdin);
+    //freopen("2.out","w",stdout);
+    #endif // ONLINE_JUDGE
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+     
+    cin>>n>>m>>k;
+    LL a;
+     
+     
+    priority_queue<LL,vector<LL> , greater<LL> > qm,q1;
+     
+    for(int i=0;i<n;i++)
+    {
+    cin>>a;
+    if(a>m)
+    arr[i]=0;
+    else{
+    LL t=m-a;
+    arr[i]=t/k +1;
+    }
+    if(arr[i]){
+    //cout<<arr[i]<<" ";
+    //qx.push(arr[i]);
+    qm.push(arr[i]);
+    q1.push(arr[i]);
+    }
+    }
+    //cout<<endl;
+    LL m1=0,m2=0;
+    /*while(qx.size()>1)
+    {
+    LL a=qx.top();qx.pop();
+    LL b=qx.top();qx.pop();
+    m1+=min(a,b);
+    m1%=mod;
+    if(abs(a-b))
+    qx.push(abs(a-b));
+    }*/
+    LL d=0;
+    LL s=0;
+    while(q1.size())
+    {
+    LL a=q1.top();q1.pop();
+    //cout<<d<<" "<<s<<" "<<a<<endl;
+    LL mi=min(s,a);
+    s-=mi;
+    a-=mi;
+    if(a)
+    {
+    LL k=min(d,a/2);
+    d-=k;
+    d+=k*2;
+    a-=k*2;
+    }
+    d+=mi;
+    s+=a;
+    //cout<<d<<" "<<s<<endl;
+    }
+    m1=d;
+    s=0;
+    d=0;
+    while(qm.size()>1)
+    {
+    LL a=qm.top();qm.pop();
+    //cout<<d<<" "<<s<<" "<<a<<endl;
+    LL mi=min(s,a);
+    s-=mi;
+    a-=mi;
+    if(a)
+    {
+    LL k=min(d,a/2);
+    d-=k;
+    d+=k*2;
+    a-=k*2;
+    }
+    d+=mi;
+    s+=a;
+    }
+    a=qm.top();
+    m2=d + min(s,a);
+    /*
+    if(m1==m2)
+    cout<<1<<endl;
+    else
+    cout<<2<<endl;*/
+    cout<<((m1-m2+mod)%mod+1)%mod<<endl;
+     
+    return 0;
+     
+    }

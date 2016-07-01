@@ -1,0 +1,63 @@
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define si(x) scanf("%d",&x)
+#define pri(x) printf("%d",x)
+#define sll(x) scanf("%lld",&x)
+#define pll(x) printf("%lld",x)
+#define sstr(s) scanf("%s",s)
+#define pstr(s) printf("%s",s)
+#define nl printf("
+")
+#define ll long long int
+
+int main()
+{
+    int t;
+    si(t);
+    while(t--) {
+	int n,k,ans=0;
+	si(n); si(k);
+	char s[n+1];
+	int flip[n+1];
+	memset(flip,0,sizeof(flip));
+	sstr(s);
+	if(s[0]=='G') flip[0]=0;
+	else {
+	    flip[0]=1;
+	    if(k<n)
+	    flip[0+k]--;
+	    ans++;
+	}
+	for(int i=1;i<n;++i) {
+	    if(s[i]=='R') {
+		if((flip[i-1]+flip[i])%2==0) {
+		    flip[i]+=flip[i-1]+1;
+		    if(i+k<n)
+		    flip[i+k]--;
+		    ans++;
+		}
+		else {
+		    flip[i]=flip[i-1]+flip[i];
+		}
+	    }
+	    else {
+		if((flip[i-1]+flip[i])%2) {
+		    flip[i]+=flip[i-1]+1;
+		    if(i+k<n)
+		    flip[i+k]--;
+		    ans++;
+		}
+		else {
+		    flip[i]=flip[i-1]+flip[i];
+		}
+
+		//	    cout<<s<<endl;
+	    }
+	}
+	pri(ans); nl;
+    }
+    return 0;
+}

@@ -1,0 +1,40 @@
+#### Codechef
+#### Minimun and Maximum
+#### 2016.03.08. Tue
+##
+##testCase = int(raw_input())
+##
+##for i in xrange(testCase):
+##    sa = int(raw_input())  ## the size of array A
+##    array = map(int,raw_input().strip().split())
+##
+##    minimum = min(array)
+##    print minimum * (sa - 1)
+
+
+
+    
+## Codechef
+## Chef and Two Strings
+## 2016.03.08. Tue
+
+testCase = int(raw_input())
+
+for i in xrange(testCase):
+    s1 = raw_input()
+    s2 = raw_input()
+    miN = 0
+    maX = 0
+
+    for i in xrange(len(s1)):
+        if (s1[i] != '?' and s2[i] != '?') and (s1[i] != s2[i]):
+            maX += 1
+            miN += 1
+
+        elif s1[i] == '?' or s2[i] == '?':
+            maX += 1
+
+    print miN, maX
+    
+                
+        

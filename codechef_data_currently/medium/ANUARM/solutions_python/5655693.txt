@@ -1,0 +1,11 @@
+for _ in range(int(raw_input())):
+  (n,m) = map(int, raw_input().split())
+  array = map(int, raw_input().split())
+  maximum = minimum = array[0]
+  for i in array[1:]:
+    if maximum<i:
+      maximum=i
+    elif minimum>i:
+      minimum=i
+  print ' '.join(str(maximum-i) for i in range(minimum+(maximum-minimum)/2+1)),
+  print ' '.join(str(i-minimum) for i in range(minimum+(maximum-minimum)/2+1, n))

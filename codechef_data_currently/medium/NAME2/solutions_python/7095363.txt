@@ -1,0 +1,26 @@
+def fun(a,b):
+    s=0
+    if a==b:
+        return "YES"
+    else:
+     for i in range(0,len(b),1):
+        if s==len(a)-1:
+            return "YES"
+            break
+        elif len(b)-i<len(a)-s:
+            return "NO"
+            break
+        elif(b[i]==a[s]):
+            s+=1
+c=input("")
+x=list()
+for i in range(0,c,1):
+    b=raw_input("")
+    v=b.rsplit()
+    if len(v[0])>len(v[1]):
+        x.append(fun(v[1],v[0]))
+    else:
+        x.append(fun(v[0],v[1]))
+
+for i in x:
+    print i

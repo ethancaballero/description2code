@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#define maxn 400003
+typedef long long ll;
+using namespace std;
+
+int main() {
+    int t;
+    scanf("%d",&t);
+    int m;
+    double p;
+
+    while(t--) {
+        scanf("%d %lf",&m, &p);
+        double total = 1000000000.0;
+
+        double pw = pow( -1* p, m);
+
+        double ans = (pw - 1)/ (-p-1);
+        ans *= total;
+
+
+        printf("%lf %lf
+", ans, total - ans);
+    }
+}

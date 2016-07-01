@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+int reverse(int n)
+{
+	int s=0,p=1,r;
+	while(n!=0)
+	{
+		r=n%10;
+		s=s*p+r;
+		p=10;
+		n=n/10;
+	}
+	return s;
+}
+int main()
+{
+	int t,i,sum;
+	cin>>t;
+	while(t--)
+	{
+		int l,r;
+		cin>>l>>r;
+		sum=0;
+		for(i=l;i<=r;i++)
+		{
+		if(i==reverse(i))
+	     sum=sum+i;
+	     }
+	     cout<<sum<<endl;
+	 }
+	
+	return 0;
+}

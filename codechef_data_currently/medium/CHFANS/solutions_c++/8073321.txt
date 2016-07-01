@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+#define ll long long
+int gcd(int a,int b){
+	if(a==0) return b;
+	else return gcd(b%a,a);
+}
+int main(){
+	int t;
+	cin>>t;
+	int a,b;
+	while(t--){
+		cin>>a>>b;
+		int c = min(abs(double(a)),abs(double(b)));
+		int e = max(abs(double(a)),abs(double(b)));
+		int d = gcd(c,e);
+		a  = a/d;
+		b = b/d;
+		cout<<abs(double(a-b))<<endl;
+	}
+}

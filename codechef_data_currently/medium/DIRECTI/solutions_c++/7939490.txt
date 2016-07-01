@@ -1,0 +1,60 @@
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+
+class direc
+{
+	public:
+		string lorr, road;
+		direc()
+		{}
+		direc(string s, string d)
+		{
+			lorr=s;
+			road=d;
+		}
+};
+
+main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		stack<direc> s;
+		char c[100];
+		cin.getline(c, 100);
+		cin.getline(c, 100);
+		string r((c+6));
+		for(int i=0;i<n-1;i++)
+		{
+			cin.getline(c, 100);
+			string d;
+			if(c[0]=='L')
+			{
+				d="Right ";
+				s.push(direc(d, r));
+				string r1((c+5));
+				r=r1;
+			}
+			else
+			{
+				d="Left ";
+				s.push(direc(d, r));
+				string r1((c+6));
+				r=r1;
+			}
+		}
+		cout<<"Begin "<<r<<endl;
+		for(int i=0;i<n-1;i++)
+		{
+			direc temp=s.top();
+			s.pop();
+			cout<<temp.lorr<<temp.road<<endl;
+		}
+		cout<<endl;
+	}
+}

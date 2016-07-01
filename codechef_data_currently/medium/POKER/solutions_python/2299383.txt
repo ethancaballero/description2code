@@ -1,0 +1,67 @@
+royal = 'ajklm'
+straight = 'abcdefghijklm'
+cases = int(raw_input())
+while(cases > 0):
+    hand = raw_input().split()
+    c1 = hand[0]
+    c2 = hand[1]
+    c3 = hand[2]
+    c4 = hand[3]
+    c5 = hand[4]
+    n1 = c1[0]
+    n2 = c2[0]
+    n3 = c3[0]
+    n4 = c4[0]
+    n5 = c5[0]
+    nums = n1+n2+n3+n4+n5
+    flush = 0
+    if(c1[1] == c2[1] == c3[1] == c4[1] == c5[1]):
+        flush = 1
+    nums = nums.replace('A' , 'a')
+    nums = nums.replace('2' , 'b')
+    nums = nums.replace('3' , 'c')
+    nums = nums.replace('4' , 'd')
+    nums = nums.replace('5' , 'e')
+    nums = nums.replace('6' , 'f')
+    nums = nums.replace('7' , 'g')
+    nums = nums.replace('8' , 'h')
+    nums = nums.replace('9' , 'i')
+    nums = nums.replace('T' , 'j')
+    nums = nums.replace('J' , 'k')
+    nums = nums.replace('Q' , 'l')
+    nums = nums.replace('K' , 'm')
+    num = sorted(nums)
+    nums = num[0]+num[1]+num[2]+num[3]+num[4]
+    royal_f = 0
+    if nums == royal:
+        royal_f = 1
+    if royal_f and flush:
+        print "royal flush"
+        cases -= 1
+    elif straight.find(nums) != -1 and flush:
+        print "straight flush"
+        cases -= 1
+    elif nums.count(nums[0]) == 4 or nums.count(nums[1]) == 4:
+        print "four of a kind"
+        cases -= 1
+    elif (nums.count(nums[0]) + nums.count(nums[2])) == 5 or (nums.count(nums[0]) + nums.count(nums[3])) == 5:
+        print "full house"
+        cases -= 1
+    elif flush:
+        print "flush"
+        cases -= 1
+    elif straight.find(nums) != -1:
+        print "straight"
+        cases -= 1
+    elif nums.count(nums[0]) == 3 or nums.count(nums[1]) == 3 or nums.count(nums[2]) == 3:
+        print "three of a kind"
+        cases -= 1
+    elif (nums.count(nums[0]) + nums.count(nums[2])) == 4 or (nums.count(nums[1]) + nums.count(nums[3])) == 4 or (nums.count(nums[0]) + nums.count(nums[3])) == 4:
+        print "two pairs"
+        cases -= 1
+    elif nums.count(nums[0]) == 2 or nums.count(nums[1]) == 2 or nums.count(nums[2]) == 2 or nums.count(nums[3]) == 2:
+        print "pair"
+        cases -= 1
+    else:
+        print "high card"
+        cases -= 1

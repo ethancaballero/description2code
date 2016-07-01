@@ -1,0 +1,39 @@
+  Oh, no! Chef\u2019s in trouble. He\u2019s got himself stuck in a cave (we don\u2019t know how) and is looking for a way out. The bigger problem is that he needs to get his tractor out of the cave (don't ask why Chef owns a tractor!). He currently faces a large block of height N cells and length N cells, and needs to get his tractor across this block. The block is made up of vertical columns of soil, each of which is one cell long. Each column has a continuous vertical gap, with the ith column having its gap from the lith cell to the hith cell (starting from the bottom, 0-indexing). That is, in the ith column, there is no soil from the lith cell to the hith cell (both inclusive). Chef can build additional gaps by clearing some cells of soil. His tractor has height H, and therefore, he needs to build a horizontal corridor of height H passing through all the columns. That is, some consecutive H rows must have no soil. Please see the figures in the example and explanation sections for more details.
+Chef is able to clear one cell of soil by spending one unit of energy. Chef is smart, and will figure out a way to build the horizontal corridor while spending the minimum possible amount of energy. To estimate how many of his tasty dishes he will still be able to cook for you tonight, find out what is the minimum possible energy he needs to spend.
+Input
+First line of input contains one integer T - number of test cases. T test cases follow.
+Each test case starts with two integers N and H \u2013 size of the cave and height of the tractor, respectively. In each of the next N lines are two integers li and hi, respectively indicating lowest and highest number of cell for the gap in the ith column.
+Output
+One integer \u2013 minimum energy required.
+Constraints
+
+1 \u2264 T \u2264 103
+1 \u2264 N \u2264 106
+1 \u2264 sum of N over all test cases \u2264 106
+1 \u2264 H \u2264 N
+0 \u2264 li \u2264 hi < N
+
+Example
+Input:
+2
+4 3
+1 2
+1 2
+1 2
+1 2
+5 2
+2 3
+1 2
+2 3
+1 2
+2 3
+
+Output:
+4
+2
+
+Explanation
+In the second case, the figure describes the initial map, where white cells denote empty cells and brown cells denote soil cells.
+
+When we removed soil in two cells as the following figure, then we can make a corridor of height 2, adn this is the optimal way to make a corridor.
+

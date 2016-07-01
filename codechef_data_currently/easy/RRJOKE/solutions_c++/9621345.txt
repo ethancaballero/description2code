@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   int n;
+   int t,a,b,xor1;
+   cin>>t;
+   while(t--)
+   {
+     xor1=0;
+     cin>>n;
+     for(int i=1;i<=n;i++){
+        cin>>a>>b;
+        xor1^=i;
+     }
+     cout<<xor1<<"
+";
+   }
+   return 0;
+} 

@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <utility>
+#include <map>
+#include <queue>
+#include <set>
+#include <string>
+#include <cstring>
+#include <cassert>
+#define rf freopen("in.in", "r", stdin)
+#define wf freopen("out.out", "w", stdout)
+#define rep(i, s, n) for(int i=int(s); i<=int(n); ++i)
+using namespace std;
+const int mx = 1e5+10, mod = 1e9+7;
+
+int t, n;
+string words[11];
+map< string, set<int> > mp;
+map< string, set<int> >::iterator it;
+
+int main()
+{
+	//rf;// wf;
+	
+	scanf("%d", &t);
+	while(t--)
+	{
+		mp.clear();
+
+		scanf("%d", &n);
+		rep(i, 1, n)
+			cin >> words[i];
+
+		rep(i, 1, n)
+		{
+			rep(j, 0, words[i].size()-1)
+			{
+				string subs = "";
+				for(int k = j; k+1; --k)
+					subs = words[i][k]+subs,
+					mp[subs].insert(i);
+			}
+		}
+
+		string ans = ""; int opl = 0;
+		for(it = mp.begin(); it!=mp.end(); ++it)
+		{
+			if(it->second.size() == n and it->first.size() > opl)
+				ans = it->first, opl = ans.size();
+		}
+
+		cout << ans << '
+';
+	}
+	return 0;
+}

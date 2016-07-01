@@ -1,0 +1,7 @@
+for i in range(int(raw_input())):
+	a = set(raw_input())
+	b = set(raw_input())
+	if a & b == set([]):
+		print 'No'
+	else:
+		print 'Yes'

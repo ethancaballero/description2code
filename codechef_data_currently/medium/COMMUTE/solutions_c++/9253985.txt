@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		int x,l,f,t,ff;
+		for(int i=0;i<n;i++)
+		{
+			cin>>x>>l>>f;
+			if(i==0)
+			t=x+l;
+			else
+			{
+				if(x<t)
+				{
+				while(x<t)
+				x=x+f;
+				t=x+l;
+				}
+				else if(x>=t)
+				t=x+l;
+				/*else if(f<t)
+				{
+					ff=f;
+					while(ff<t)
+					ff=ff+f;
+					t=ff+l;
+				}*/
+			}
+		}
+		cout<<t<<endl;
+	}
+	return 0;
+}
+ 

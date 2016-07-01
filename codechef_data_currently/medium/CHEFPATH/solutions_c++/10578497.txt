@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   long  int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int s,d;
+        cin>>s>>d;
+          if(min(s,d)==1&&max(s,d)==2)
+            cout<<"Yes"<<endl;
+       else  if((min(s,d)>1)&&(d%2==0||s%2==0))
+            cout<<"Yes"<<endl;
+        else
+            cout<<"No"<<endl;
+    }
+
+}

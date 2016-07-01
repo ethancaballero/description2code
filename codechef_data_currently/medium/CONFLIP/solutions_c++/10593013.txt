@@ -1,0 +1,37 @@
+#include<iostream>
+#include <algorithm>
+using namespace std;
+#define size 1000
+
+int main()
+{
+	int t,g,i,n,q;
+	cin>>t;
+	while(t--)
+	{
+		cin>>g;
+		while(g--)
+		{
+			cin>>i>>n>>q;
+			if(n%2==0)
+			{
+				cout<<n/2<<"
+";
+			}
+			else
+			{
+				if(i==q)
+				{
+					cout<<(n-1)/2<<"
+";
+				}
+				else
+				{
+					cout<<(n+1)/2<<"
+";
+				}
+			}
+		}
+	}
+	return 0;
+}

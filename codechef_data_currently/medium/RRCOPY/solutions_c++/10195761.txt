@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n,t,i;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        int a[n],b[100005]={0};
+        int sum=0;
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+            b[a[i]]=1;
+        }
+        for(i=0;i<100005;i++)
+        {
+            sum=sum+b[i];
+        }
+        cout<<sum<<endl;
+
+    }
+}

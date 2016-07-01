@@ -1,0 +1,21 @@
+import sys
+
+N, M = sys.stdin.readline().strip().split()
+N = int(N)
+M = int(M)
+
+arr = [int(x) for x in sys.stdin.readline().strip().split()]
+#print arr
+
+shift = 0
+for m in xrange(M):
+	q, r = sys.stdin.readline().strip().split() 
+	r = int(r)
+	if q == 'C':
+		shift += r
+	elif q == 'A':
+		shift -= r
+	else:
+		sys.stdout.write('{0}
+'.format(arr[(r+shift)%len(arr) - 1]))
+

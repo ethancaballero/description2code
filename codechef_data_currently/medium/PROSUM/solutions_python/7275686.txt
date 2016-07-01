@@ -1,0 +1,11 @@
+for _ in xrange(int(raw_input())):
+    n=int(raw_input())
+    A=[]
+    A=map(int,raw_input().split())
+    c2=0;cg=0
+    for value in A:
+        if value==2:
+            c2+=1
+        elif value>2:
+            cg+=1
+    print c2*cg+cg*(cg-1)/2

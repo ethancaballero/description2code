@@ -1,0 +1,53 @@
+#include<iostream>
+using namespace std;
+class Binomia{
+	unsigned long long int n,k;
+	public:
+		Binomia()
+		{
+			unsigned long long int lower_limit,fact1;
+			cin>>n>>k;
+			if(k>n)
+			cout<<"0"<<endl;
+			else
+			{
+			lower_limit=k<(n-k)?(n-k):k;
+			if(lower_limit==k)
+			k=(n-k);
+			fact1=fact(lower_limit+1,n,k);
+			cout<<fact1<<endl;
+		   }
+		}
+		unsigned long long int fact(unsigned long long int l,unsigned long long int h,unsigned long long int k)
+		{
+			unsigned long long int ans=1;
+			unsigned long long int j,i,x,y,w;
+		     for(i=l,j=1;i<=h&&j<=k;i++,j++)
+		     {
+		     	 x=i;
+				 w=j;
+		     	 y=gcd(ans,w);
+		     	 ans/=y;
+				 w/=y;
+		     	 x/=w;
+                 ans*=x;
+		     }
+		     return ans;
+		}
+		unsigned long long int gcd(unsigned long long int a,unsigned long long int b)
+		{
+			if(b==0)
+			return a;
+			return gcd(b,a%b);
+		}
+};
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		Binomia b;
+	}
+	return 0;
+}

@@ -1,0 +1,40 @@
+import sys
+
+def check_prime(n):
+    for i in range(2,int(n**0.5)+1):
+        if n%i==0:
+            return False
+    return True
+
+def get_prime_numbers(n):
+	primes = [2]
+	for i in xrange(3,100,2):
+		is_prime = check_prime(i)
+		if is_prime:
+			primes.append(i)
+	return primes
+
+primes3 = get_prime_numbers(100)
+primes2 = get_prime_numbers(1000)
+
+def get_numbers(n):
+	for p3 in primes3:
+		cube = p3 * p3 * p3
+		if cube < n:
+			for p2 in primes2:
+				sq = p2 * p2
+				if sq + cube < n:
+					p1 = n - cube - sq
+					if p1 >0:
+						if check_prime(p1):
+							return (p1,p2,p3)
+
+	return (0,0,0)
+
+
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	n = num
+	(p1,p2,p3) = get_numbers(num)
+	print "%s %s %s" % (p1, p2, p3)
+	num = int(sys.stdin.readline().rstrip())

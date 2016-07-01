@@ -1,0 +1,10 @@
+K,N = map(int,raw_input().split()); L = []
+for i in range(K): L.append(raw_input())
+for i in range(N):
+    s = raw_input()
+    if len(s) >= 47: print 'Good'; continue
+    for j in range(K):
+        if L[j] in s: print 'Good'; break
+    else:
+        print 'Bad'
+    

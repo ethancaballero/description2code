@@ -1,0 +1,59 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include<string>
+#define ll long long
+#define M 1000000007
+using namespace std;
+
+
+ll modular_pow(ll b,ll exp, int mod)
+{
+    ll res=1;
+    while (exp>0)
+    {
+        if (exp%2==1)
+            res=(res*b)%mod;
+        exp=exp>>1;
+        b=(b*b)%mod;
+    }
+    return res;
+}
+
+int main(){
+   /*ll ncr[301][301];
+	ncr[0][0]=1;ncr[1][0]=1;ncr[1][1]=1;
+	int i,j;
+	for(i=2;i<301;i++)
+    {
+        ncr[i][0]=ncr[i][i]=1;
+        for(j=1;j<i;j++)
+            ncr[i][j]=(ncr[i-1][j-1]+ncr[i-1][j])%M;
+    }
+*/
+//number of sequences made in range of [a,b] is (b-a+1)^N;
+     int t;
+     ll n,m,q,k;
+    cin>>t;
+    while(t--){
+        cin>>n>>m>>q>>k;
+        if(m<=q) cout<<0<<endl;
+        else{
+           ll sum1=modular_pow(q+1,n,M);
+           ll sum2=2*modular_pow(q,n,M);
+           sum2%=M;
+           ll sum3=modular_pow(q-1,n,M);
+           ll sum=(sum1-sum2+sum3)%M;
+           if(sum<0) sum=(sum+M)%M;
+
+           sum=sum*(m-q);
+           sum%=M;
+
+           cout<<sum<<endl;
+        }
+
+    }
+return 0;
+}

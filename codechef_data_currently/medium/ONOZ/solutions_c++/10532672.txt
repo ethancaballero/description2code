@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdio>
+#include <sstream>
+#include <algorithm>
+
+using namespace std;
+
+bool isPalin(int n) {
+  string s;
+  stringstream out;
+  out<< n;
+  s = out.str();
+  string orig_s = s;
+  reverse(s.begin(), s.end());
+  return s == orig_s;
+}
+
+int main() {
+  int t, h, m;
+
+  scanf("%d", &t);
+  
+  for(int i = 0; i < t; ++i) {
+    scanf("%d %d", &h, &m);
+
+    int res = 0;
+    for(int j = 1; j < h; ++j)  {
+      for (int k = 1; k < m; ++k) { 
+	if (isPalin(j) && isPalin(k) && (j % 10) == (k % 10)) {
+	  ++res;
+	}
+      }
+    }
+    printf("%d
+", res + 1);
+  }
+
+  return 0;
+}

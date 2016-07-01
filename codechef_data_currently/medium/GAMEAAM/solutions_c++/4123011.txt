@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+
+typedef long long LL;
+
+
+int T,N;
+LL X,Y;
+
+
+int main(){
+    cin>>T;
+    while(T--){
+        cin>>N;
+        LL xr = 0;
+        while(N--){
+            cin>>X>>Y;
+            LL t1 = (X*X-Y*Y)/(X*Y);
+            if(t1<0) t1 = -t1;
+            xr ^=t1;
+        }
+        if(xr) cout<<"YES
+";
+        else cout<<"NO
+";
+    }
+    return 0;
+}

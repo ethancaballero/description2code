@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+#define mod 1000000007
+int arr[1001][1001];
+int combination(int N,int r)
+{
+	if(N==r)
+	return 1;
+	if(r==0)
+	return 1;
+	if(arr[N][r]!=0)
+	return arr[N][r];
+	arr[N][r]=((combination((N-1),r-1))%mod+(combination(N-1,r)%mod))%mod;
+	return arr[N][r];
+} 
+int main()
+{
+    int test,N;
+    cin>>test;
+    while(test--)
+    {
+        cin>>N;
+        int ipt[N],sum=0;
+        int x=1,i;
+        for(i=0;i<N;i++)
+        cin>>ipt[i];
+        if(N%2==0)
+	{
+		for(i=0;i<N/2;i++)
+		sum=(sum+combination(N,i))%mod;
+		cout<<sum<<endl;
+	}
+	else
+	{
+		for(i=0;i<=N/2;i++)
+		sum=(sum+combination(N,i))%mod;
+		cout<<sum<<endl;
+	}
+    }
+	return 0;
+} 

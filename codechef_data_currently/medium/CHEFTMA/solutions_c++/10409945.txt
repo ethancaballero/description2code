@@ -1,0 +1,51 @@
+#include<cstdio>
+#include<algorithm>
+#include<iostream>
+using namespace std;
+
+
+int main(){
+	int t;
+	long long n,k,m,first,second,ans = 0,i,len;
+	cin>>t;
+	while(t>0){
+		cin>>n>>k>>m;
+		len = k+m;
+		long long int*a = (long long int*)calloc(sizeof(long long int),n);
+		long long int*b = (long long int*)calloc(sizeof(long long int),n);
+		long long int*white = (long long int*)calloc(sizeof(long long int),len);
+		// int*black = (int*)calloc(sizeof(int),m);
+		long long int*diff = (long long int*)calloc(sizeof(long long int),n);
+		for(i = 0; i < n ;i++)
+			cin>>a[i];
+		for(i = 0; i < n ;i++)
+			{cin>>b[i];
+				diff[i] = a[i]-b[i];
+			}
+			// qsort(diff, n, sizeof(long long int), cmpfunc);	
+			sort(diff,diff+n);
+
+		for(i = 0; i < len ;i++)
+			cin>>white[i];
+		sort(white,white+len);
+		// qsort(white, len, sizeof(long long int), cmpfunc);
+
+		first = n-1, second = len-1, ans = 0;
+		while((first >= 0) && (second >= 0) && (diff[first]!=0) ){
+			if(diff[first]>= white[second]){
+				diff[first] = diff[first] - white[second];
+				first--;
+				second--;
+			}
+			else if(white[second] > diff[first]){
+				second--;
+			}
+		}
+
+		 for( i = 0; i< n ;i++)
+		 	ans = ans + diff[i];
+		cout<<ans<<endl;
+				t--;
+	}
+	return 0;
+}

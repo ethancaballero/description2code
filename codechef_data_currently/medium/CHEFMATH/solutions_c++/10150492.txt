@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int mod = (1e9)+7;
+
+long long f[52];
+
+
+int getIdx(long long x) {
+    
+    int low = 0;
+    int high = 45;
+    
+    while (low <= high) {
+        int mid = (low + high)/2;
+        if (f[mid] == x) {
+            return mid;
+        } else if (f[mid] > x) {
+            high = mid - 1;
+        } else if (f[mid] < x) {
+            low  = mid + 1;
+        }
+    }
+    
+    
+    return -1;
+}
+
+long long rec(int X, int y, int K) {
+    long long ans = 0 ;
+    
+    if (X < 0 ) {
+       return 0;
+    }
+    
+    if (X == 0 && K == 0 ) {
+        return 1;
+    }
+    
+    if ( K == 0 ) {
+        return 0;
+    }
+
+    
+    for (int i = 0; i <= 43 ; i++) {
+        long long fib = f[i];
+        
+        if (K *  fib < X) {
+            continue;
+        }
+        
+        if ( fib <= y ) {
+            long long v = X - fib;
+            long long a = rec(v, fib, K-1);
+            ans += a;
+        } else {
+            break;
+        }
+    }
+
+    return ans;
+}
+void precompute() {
+   f[0] = 1;
+   f[1] = 2;
+
+   for (int i = 2 ; i < 52; i++) {
+      f[i] = f[i-2] + f[i-1];
+   }
+   
+}
+
+
+int main() {
+   precompute();
+   
+   int X, K;
+   int q;
+   scanf("%d", &q);
+   while (q--) {
+      scanf("%d %d", &X, &K);
+      
+      
+      long long ans = 0;
+      for (int i = 0 ; i <= 43; i++) {
+          long long fib = f[i];
+          if (K * fib < X) {
+              continue;
+          }
+
+         long  long v = rec(X - fib, fib,  K-1);
+         ans += v;
+      }
+      
+      printf("%lld
+", ans);
+   }
+	return 0;
+}

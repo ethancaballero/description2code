@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<algorithm>
+#include<limits.h>
+#include<math.h>
+#define S(n) scanf("%li",&n);
+#include<iostream>
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%d
+",n);
+using namespace std;
+int main()
+{
+    int t;
+    s(t)
+    while(t--)
+    {
+        int n,k;
+        s(n)s(k)
+       long int a[n];
+        for(int i=0;i<n;i++)
+            S(a[i])
+            sort(a,a+n);
+            int d1=0,d2=0;
+            if(k>n/2)
+                k=n-k;
+            for(int i=0;i<k;i++)
+                d1=d1+a[i];
+            for(int i=k;i<n;i++)
+                d2=d2+a[i];
+            if(d1-d2<0)
+                p(d2-d1)
+                else
+                p(d1-d2)
+    }
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long LL;
+const LL MOD = 1e9 + 7;
+const int MAXN = 1e3 + 10;
+
+LL dp[MAXN][12];
+int main(){
+    for(int j = 1;j <= 10;++j){
+        LL p = j;
+        dp[0][j] = 0;
+        for(int i = 1;i < MAXN;++i){
+            dp[i][j] = (p - dp[i - 1][j] + MOD) % MOD;
+            p = (p * j) % MOD;
+        }
+    }
+    int t;
+    cin >> t;
+    while(t--){
+        int N, K;
+        cin >> N >> K;
+        cout << dp[N - 1][K] << "
+";
+    }
+
+    return 0;
+}

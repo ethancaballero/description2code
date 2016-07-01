@@ -1,0 +1,41 @@
+#include<cstdio>
+#include<utility>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+ int n,p;
+ long int k,data;
+
+ vector< pair<long int , int> >a;
+scanf("%d %ld %d",&n,&k,&p);
+long int ans[n+1];
+for(int i = 1;i<=n;i++){
+
+    scanf("%ld",&data);
+    a.push_back(make_pair(data,i));
+
+}
+sort(a.begin(),a.end());
+ans[a[0].second]=1;
+for(int i =1;i<n;i++){
+if(a[i].first - a[i-1].first <=k )ans[a[i].second]=ans[a[i-1].second];
+else{
+    ans[a[i].second]=ans[a[i-1].second]+1;
+}
+
+}
+int f1,f2;
+for(long int i=0;i<p;i++){
+    scanf("%d %d",&f1,&f2);
+    if(ans[f1]==ans[f2])printf("Yes
+");
+    else printf("No
+");
+}
+
+return 0;
+
+
+}

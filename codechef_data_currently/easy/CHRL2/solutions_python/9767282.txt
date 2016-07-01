@@ -1,0 +1,15 @@
+s=raw_input()
+c=h=e=f=0
+for i in s:
+	if i=='C':
+		c+=1
+	elif i=='H' and c:
+		c-=1
+		h+=1
+	elif i=='E' and h:
+		h-=1
+		e+=1
+	elif i=='F' and e:
+		e-=1
+		f+=1
+print f	

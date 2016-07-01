@@ -1,0 +1,12 @@
+def ValidTriangle(a, b, c):
+    if a == 0 or b == 0 or c == 0:
+        return "NO"
+    elif a+b+c == 180:
+        return "YES"
+    else:
+        return "NO"
+
+cases = int(raw_input())
+for i in range(cases):
+    a, b, c = map(int, raw_input().split())
+    print ValidTriangle(a, b, c)

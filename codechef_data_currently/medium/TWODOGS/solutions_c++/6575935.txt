@@ -1,0 +1,45 @@
+#include<cstdio>
+#include<map>
+using namespace std;
+int mi(int,int);
+int main()
+{
+    int n,k,ma,y=0,i,x,m,a[500000];
+    map<int,int> b;
+    scanf("%d%d",&n,&k);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+        x=mi(i+1,n-i);
+        if(b[a[i]]==0||(b[a[i]]>x))
+            b[a[i]]=x;
+    }
+    ma=n;
+    for(i=0;i<n;i++)
+    {
+        x=k-a[i];
+        if(x==a[i])
+            continue;
+        if(b[x]>0)
+        {
+            if(b[a[i]]>b[x])
+                m=b[a[i]];
+            else
+                m=b[x];
+            if(ma>m)
+                ma=m;
+            y=1;
+        }
+    }
+    if(y==0)
+        printf("-1");
+    else
+        printf("%d",ma);
+}
+int mi(int x,int y)
+{
+    if(x<y)
+        return x;
+    else
+        return y;
+}

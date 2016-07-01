@@ -1,0 +1,30 @@
+#include <stdio.h>
+using namespace std;
+ int func( int a,int b)
+{
+	if(b == 0) return a;
+	else return func(b,a%b);
+}
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n;
+		scanf("%d",&n);
+		 int arr[n];
+ 
+		for(int i=0;i<n;i++)scanf("%d",&arr[i]);
+ 
+		if(n == 1) printf("%d
+",arr[0]);
+        else{
+			for(int i=n-2;i>=0;i--)
+            {
+                arr[i] = func(arr[i+1],arr[i]);
+			}
+			printf("%d
+",arr[0]);
+		}
+	}
+	return 0;
+}

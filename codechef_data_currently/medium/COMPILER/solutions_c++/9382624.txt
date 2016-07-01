@@ -1,0 +1,27 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main() {
+	int t,count,l,i;
+	string s;
+	scanf("%d",&t);
+	while(t--){
+	    cin>>s;
+	    count=l=0;
+	    //printf("%d %d %d ",count,l,r);
+	    for(i=0;i<s.length();i++){
+	        if(s[i]=='<'){
+	            l++;
+	        }
+	        else if(s[i]=='>'){
+	            l--;
+	            if(l==0 && i+1>count) count=i+1;
+	            else if(l<0) break;
+	        }
+	    }
+	    printf("%d
+",count);
+	}
+	return 0;
+}

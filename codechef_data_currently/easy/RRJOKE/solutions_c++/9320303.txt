@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+typedef unsigned long ul;
+int main()
+{
+	/*ul t,n,*a,i,min;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		min = 100001;
+		a = new ul[n];
+		for(i=0;i<n;i++)
+		{
+			cin>>a[i];
+			if(a[i] < min)
+			{
+				min = a[i];
+			}
+		}
+		min = min * (n-1);
+		cout<<min<<endl;
+	}*/
+	int t,n,x,y,h,ans,m,i;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		m = n;
+		while(n--)
+			cin>>x>>y;
+		ans=1;
+		for( i=2 ; i<=m ; i++)
+			ans = ans^i;
+		cout<<ans<<endl;
+	}
+	return 0;
+}

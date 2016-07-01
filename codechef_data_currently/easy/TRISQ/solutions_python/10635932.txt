@@ -1,0 +1,25 @@
+#Small Factorial
+
+from math import *
+
+def main():
+    T = int(raw_input())
+    for z in range(0, T):
+        #T-=1
+        B = int(raw_input())
+        S = B-2
+        if S >= 2:
+            if S%2 == 0:
+                i = S/2
+            else:
+                i = (S-1)/2
+            #print i
+            T = 0
+            for j in reversed(range(1 ,i+1)):
+                T += j
+            print T
+        else:
+            print '0'
+
+if __name__ == '__main__':
+    main()

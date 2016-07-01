@@ -1,0 +1,56 @@
+#include <iostream>
+#include<string>
+#include<map>
+struct place
+{
+    char a[52];
+    char b[52];
+    int cost;
+} p[5000];
+ 
+using namespace std;
+ 
+int main() {
+    int t;
+    string s;
+    cin>>t;
+    while(t--)
+    {
+        map<string,string>mymap1,mymap2;
+        map<string,int>mymap3;
+        map<string,string>::iterator it1,it2;
+        int sum=0,n,i,j;
+        char ch;
+         cin>>n;
+         --n;
+         for(i=0;i<n;i++)
+         {
+             cin>>p[i].a>>p[i].b>>p[i].cost>>ch;
+             //cout<<p[i].a <<p[i].b <<p[i].cost <<endl;
+             mymap1[p[i].a]=p[i].b;
+             mymap2[p[i].b]=p[i].a;
+             mymap3[p[i].a]=p[i].cost;
+             sum+=p[i].cost;
+             
+         }
+         
+         for(i=0;i<n;i++)
+        {
+            it1=mymap2.find(p[i].a);
+            if(it1==mymap2.end())
+            break;
+        }
+           s=p[i].a;
+          for(i=0;i<n;i++)
+        {
+            cout<<s<<" "<<mymap1[s]<<" "<<mymap3[s]<<"$"<<endl;
+            s=mymap1[s];
+        }
+       cout<<sum<<"$"<<endl;
+        
+    }
+    
+        
+        return 0;
+}
+ 

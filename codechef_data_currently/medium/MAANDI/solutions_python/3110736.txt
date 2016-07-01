@@ -1,0 +1,22 @@
+def main():
+    t = int(raw_input())
+    j = 0
+    while j < t:
+        print(overluckyDividers(int(input())))
+        j += 1
+
+
+def overluckyDividers(n):
+    import math
+    i = 1
+    summ = 0
+    for i in range(1,int(math.floor(math.sqrt(n))) +1 ):
+        if n % i == 0:
+            if '4' in str(i) or '7' in str(i):
+                summ += 1
+            if '4' in str(n/i) or '7' in str(n/i):
+                summ += 1
+    return summ
+
+if __name__ == '__main__':
+    main()

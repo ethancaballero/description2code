@@ -1,0 +1,34 @@
+#include<iostream>
+#include<cstdio>
+//#include<conio.h>
+#include<iomanip>
+using namespace std;
+
+
+int main()
+{
+    int test_case;
+    cin>>test_case;
+    while(test_case--)
+    {
+          int N;   //tot no of pages
+          cin>>N;
+          int tot=(N*(N+1))/2;
+          int F,waste;   //pages absent
+          cin>>F;   
+          for(int i=0;i<F;i++)
+          {
+                  cin>>waste;
+                  tot-=waste;           //tot holds the total countable sum
+          }
+          int T;    //no of pages torn
+          cin>>T;
+          if(N%2) N++;
+          N/=2;
+          double ans=(double)tot-T*((double)tot/(double)N);
+          printf("%.4lf
+",ans);
+    }
+    //getch();
+    return 0;
+} 

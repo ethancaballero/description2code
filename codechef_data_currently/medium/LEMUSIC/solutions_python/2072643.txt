@@ -1,0 +1,30 @@
+#!/usr/bin/python
+from operator import itemgetter
+
+for t in range(0, int(raw_input())):
+    data = []
+    
+    for count in range(0, int(raw_input())):
+        line = raw_input().split()
+        
+        data.append(map(int, line))
+    
+    data.sort(key=itemgetter(0, 1))
+    
+    result = 0
+    tempResult = 0
+    mins = []
+    for i in range(0, len(data)):
+        if i == 0 or data[i][0] != data[i-1][0]:
+            mins.append(data[i][1])
+        else:
+            tempResult += data[i][1]
+
+    mins.sort()
+    
+    for i in range(0, len(mins)):
+        result += mins[i] * (i + 1)
+    
+    result += tempResult * len(mins)
+    
+    print result

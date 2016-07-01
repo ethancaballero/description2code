@@ -1,0 +1,24 @@
+from string import ascii_lowercase
+t= input()
+while t:
+    t-=1
+    p = raw_input()
+    p = p[:p.find(' ')] + p[p.find(' ')+1:]
+    n = input()
+    child = ''
+    while n:
+        n-=1
+        child+=raw_input()
+    left = ascii_lowercase
+    flag=1
+    for l in child:
+        if l in left:
+            if child.count(l) <= p.count(l):
+                left = left[:left.find(l)] + left[left.find(l)+1:]
+            else:
+                flag=0
+                break
+    if flag:
+        print 'YES'
+    else:
+        print 'NO'

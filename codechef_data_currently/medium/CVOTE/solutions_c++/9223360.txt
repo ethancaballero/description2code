@@ -1,0 +1,53 @@
+#include<iostream>
+#include<map>
+#include<string>
+#include<stdio.h>
+#include<algorithm>
+#include<vector>
+using namespace std;
+bool comp(pair<string,int> a,pair<string,int> b)
+{
+	return(a.second>b.second);
+}
+int main()
+{
+	int n,m;
+	cin>>n>>m;
+	char chef[11],cntry[11];
+	map<string,string>chef_cntry;
+
+	vector<pair<string,int> > chef_pnt;
+	map<string,int>chef_point;
+	vector<pair<string,int> > cntry_pnt;
+	map<string,int>cntry_point;
+	map<string,int>::iterator it;
+	for(int i=0;i<n;i++)
+	{
+		scanf("%s %s",&chef,&cntry);
+		chef_cntry.insert(pair<string,string>(chef,cntry));
+		chef_point.insert(pair<string,int>(chef,0));
+		it=cntry_point.find(cntry);
+		if(it==cntry_point.find(cntry))
+		cntry_point.insert(pair<string,int>(cntry,0));
+	}
+	for(int i=0;i<m;i++)
+	{
+		scanf("%s",&chef);
+		chef_point[chef]++;
+		cntry_point[chef_cntry[chef]]++;
+		
+	}
+	for(it=chef_point.begin();it!=chef_point.end();it++)
+	{
+		chef_pnt.push_back(*it);
+	}
+	for(it=cntry_point.begin();it!=cntry_point.end();it++)
+	{
+		cntry_pnt.push_back(*it);
+	}
+	stable_sort(chef_pnt.begin(),chef_pnt.end(),comp);
+	stable_sort(cntry_pnt.begin(),cntry_pnt.end(),comp);
+	printf("%s
+%s",(cntry_pnt[0].first).c_str(),(chef_pnt[0].first).c_str());
+	return 0;
+}

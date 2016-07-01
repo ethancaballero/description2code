@@ -1,0 +1,60 @@
+#include<iostream>
+#include<stack>
+#include<cstring>
+#include<cstdio>
+using namespace std;
+
+struct book
+{
+long long int data;
+long long int ctr;
+char name[16];
+};
+
+int main()
+{
+long long int n,exercise;
+char bookname[16];
+book b;
+stack <book> s;
+scanf("%lld",&n);
+while(n--)
+{
+
+scanf("%lld",&exercise);
+if(exercise!=-1)
+{
+scanf("%s",bookname);
+if(exercise==0)continue;
+if(s.empty())
+{
+b.data=exercise;
+b.ctr=0;
+strcpy(b.name,bookname);
+s.push(b);
+}
+
+else
+{
+if(exercise>s.top().data)
+s.top().ctr++;
+
+else
+{
+b.data=exercise;
+b.ctr=0;
+strcpy(b.name,bookname);
+s.push(b);
+}
+}
+}
+else
+{
+printf("%lld %s
+",s.top().ctr,s.top().name);
+s.pop();
+}
+}
+return 0;
+}
+

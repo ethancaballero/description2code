@@ -1,0 +1,21 @@
+for _ in xrange(input()):
+    s = raw_input()
+    operators = ['(','+','-','/','*','%','^']
+    output_queue = []
+    operator_stack = []
+    for i in s:
+        if i in operators:
+            operator_stack.append(i)
+        elif i == ')':
+            j = len(operator_stack) - 1
+            while operator_stack[j] != '(':
+                output_queue.append(operator_stack.pop())
+                j -= 1
+            operator_stack.pop()
+        else:
+            output_queue.append(i)
+
+    temp = ""
+    for j in output_queue:
+        temp += j
+    print temp

@@ -1,0 +1,59 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n,test;
+	cin>>test;
+	while(test--){
+		
+	int flag[102];
+	float prob[102];
+	float dp[102][5002];
+
+	cin>>n;
+	int i,j,s=0;
+	
+	for(i=0;i<n;i++)
+	{
+		cin>>flag[i];
+		s+= flag[i];
+	}
+	
+	for(i=0;i<n;i++){
+		cin>>prob[i];
+		prob[i]/=100;
+	}
+	
+	// dp[i][j] denotes probability of : at i'th flags, Abra has j flags
+	
+	dp[0][0]=1-prob[0];
+	
+	for(i=1;i<=s;i++){
+		dp[0][i]=0;
+	}
+	
+	dp[0][flag[0]]=prob[0];
+	
+	for(i=1;i<n;i++){
+		for(j=0;j<=s;j++){
+			dp[i][j]= dp[i-1][j]*(1-prob[i]);
+			
+			if(j>=flag[i])
+			dp[i][j] += (dp[i-1][j-flag[i]])*prob[i] ;
+		}
+	}
+	
+	float ans=0;
+	
+	for(i=(s+1)/2;i<=s;i++){
+	//	cout<<dp[n-1][i]<<endl;
+		ans+= dp[n-1][i];
+	}
+	
+	printf("%.6f
+", ans);
+	}
+	return 0;
+}

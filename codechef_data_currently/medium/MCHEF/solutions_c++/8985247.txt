@@ -1,0 +1,73 @@
+#include<iostream>
+#include<stdio.h>
+long long maxm(long long a, long long b)
+{
+	if(a>b) return a;
+	return b;
+}
+//long long a[100005],sol[100005][505];
+static int /*neg[100005],minm[100005],*/l,r,c;
+long long tot=0;
+int len=0;
+int main()
+{
+    int t,n,m,k,i,j;
+    scanf("%d",&t);
+    while(t--)
+    {   tot=0;
+        len=0;
+        scanf("%d%d%d",&n,&k,&m);
+        long long a[n+1],sol[n+1][k+1];
+        int neg[n+1],minm[n+1];
+        for(i=0;i<n;i++)
+        {
+            scanf("%lld",&a[i]);
+            tot+=a[i];
+            if(a[i]<0)
+            {  // printf("yo %d
+",a[i]);
+                neg[len++]=i;
+                minm[i]=10000;
+            }
+        }
+
+     //    for(i=0;i<len;i++)
+       // {
+            //printf("%lld  %d
+",a[neg[i]],minm[neg[i]]);
+       // }
+    //    printf("%lld  %dyo
+",a[1],minm[1]);
+  //      printf("%d
+",len);
+        for(i=0;i<m;i++)
+        {
+            scanf("%d%d%d",&l,&r,&c);
+            l--;r--;
+            for(j=0;j<len;j++)
+            {
+                if(neg[j]<=r&&neg[j]>=l&&minm[neg[j]]>c)
+                {
+                    minm[neg[j]]=c;
+                }
+            }
+        }
+     /*   for(i=0;i<len;i++)
+        {
+            printf("%lld  %d
+",-a[neg[i]],minm[neg[i]]);
+        }*/
+        for(i=0;i<=len;i++)
+        {
+            for(j=0;j<=k;j++)
+            {
+                if(i==0||j==0) sol[i][j]=0;
+                else if(minm[neg[i-1]]>j) sol[i][j]=sol[i-1][j];
+                else sol[i][j]=maxm(sol[i-1][j],sol[i-1][j-minm[neg[i-1]]]-a[neg[i-1]]);
+            }
+        }
+        printf("%lld
+",tot+sol[len][k]);
+    }
+    return 0;
+}

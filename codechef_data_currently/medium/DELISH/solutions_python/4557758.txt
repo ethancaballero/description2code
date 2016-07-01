@@ -1,0 +1,62 @@
+from math import fabs
+
+def max_subarray(A):
+    
+    max_ending_here = max_so_far = A[0]
+    for x in A[1:]:
+        max_ending_here = max(x, max_ending_here + x)
+        max_so_far = max(max_so_far, max_ending_here)
+    return max_so_far
+
+def min_subarray(A):
+    max_ending_here = max_so_far = A[0]
+    for x in A[1:]:
+        max_ending_here = min(x, max_ending_here + x)
+        max_so_far = min(max_so_far, max_ending_here)
+    return max_so_far
+
+def dessert_wizzard(L):
+    if len(L) == 2: return int(fabs(L[1] - L[0]))
+    prefix_max = [0] * len(L)
+    prefix_min = [0] * len(L)
+    suffix_max = [0] * len(L)
+    suffix_min = [0] * len(L)
+    max_ending_here = max_so_far = L[0]
+    prefix_max[0] = L[0]
+    for x in range(1, len(L) - 1):
+        max_ending_here = max(L[x], max_ending_here + L[x])
+        max_so_far = max(max_so_far, max_ending_here)
+        prefix_max[x] = max_so_far
+    prefix_min[0] = L[0]    
+    min_ending_here = min_so_far = L[0]
+    for x in range(1, len(L) - 1):
+        min_ending_here = min(L[x], min_ending_here + L[x])
+        min_so_far = min(min_so_far, min_ending_here)
+        prefix_min[x] = min_so_far
+        
+    K = L[::-1]
+    max_ending_here = max_so_far = K[0]
+    suffix_max[len(L) - 1] = K[0]
+    for x in range(1, len(K) - 1):
+        max_ending_here = max(K[x], max_ending_here + K[x])
+        max_so_far = max(max_so_far, max_ending_here)
+        suffix_max[len(L) - x - 1] = max_so_far
+    min_ending_here = min_so_far = K[0]
+    suffix_min[len(L) - 1] = K[0]
+    for x in range(1, len(K) - 1):
+        min_ending_here = min(K[x], min_ending_here + K[x])
+        min_so_far = min(min_so_far, min_ending_here)
+        suffix_min[len(L) - x - 1] = min_so_far
+   
+    m = max(fabs(prefix_max[0] - suffix_min[1]), fabs(prefix_min[0] - suffix_max[1]))
+    for x in range(1, len(L) - 1):
+        val = max(fabs(prefix_max[x] - suffix_min[x + 1]), fabs(prefix_min[x] - suffix_max[x + 1]))
+        if val > m: m = val
+    return int(m)
+
+
+t = int(raw_input())
+for i in range(t):
+    raw_input()
+    print dessert_wizzard([int(x) for x in raw_input().split()])
+    

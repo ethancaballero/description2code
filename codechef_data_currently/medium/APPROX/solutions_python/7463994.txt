@@ -1,0 +1,16 @@
+s='415926530119026040722614947737296840070086399613316'
+t=int(raw_input())
+for i in xrange(t):
+    n=int(raw_input())
+    if n==0:
+        print 3
+        continue
+    c=(n-1)/len(s)
+    x=''
+    for j in xrange(c):
+        x+=s
+    k=(n-1)%len(s)
+    for j in xrange(k):
+        x+=s[j]
+    print '3.1'+x
+    

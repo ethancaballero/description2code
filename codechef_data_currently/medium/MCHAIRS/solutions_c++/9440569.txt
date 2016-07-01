@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int  modular_pow_faster(long long int  base,long long int   exponent, long long int  m)
+{
+    if (m== 1) return 0;
+    long long int  result = 1;
+    while(exponent>0)
+    {
+       if (exponent %2 == 1)
+          result = (result * base)%m;
+
+        exponent = exponent /2;
+        base = (base * base)%m;
+    }
+
+
+    return result;
+}
+int main()
+{
+	long long int  t,n,a[100005];
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld",&n);
+		cout<< modular_pow_faster(2,n,1000000007)%1000000007-1<<endl;
+	}
+	return 0;
+}

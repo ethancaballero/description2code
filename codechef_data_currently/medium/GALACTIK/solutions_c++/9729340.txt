@@ -1,0 +1,87 @@
+#include<iostream>
+using namespace std;
+
+#define MAX 20000
+#define MAX2 30000
+
+int cost[100001], final_cost[100001];
+int A[100001];
+
+void init_set(int n)
+{
+    for(int i=1;i<=n;i++)
+        A[i] = i;
+}
+
+int find_set(int x)
+{
+    if(A[x] != A[A[x]])
+        A[x] = find_set(A[x]);
+    return A[x];
+}
+
+void union_set(int x, int y)
+{
+    A[find_set(x)] = find_set(y);
+}
+
+int calculate(int n)
+{
+    int ans=0, count=0, sum=0, min_cost=MAX2, flag=0;
+
+    for(int i=1;i<=n;i++)
+        final_cost[i] = MAX2;
+
+    for(int i=1;i<=n;i++)
+    {
+        int t = find_set(i);
+        final_cost[t] = min(cost[i], final_cost[t]);
+    }
+
+    for(int i=1;i<=n;i++)
+    {
+        if(final_cost[i] == MAX)
+            flag = 1;
+
+        if(final_cost[i] != MAX2)
+        {
+            sum += final_cost[i];
+            min_cost = min(min_cost, final_cost[i]);
+            count++;
+        }
+    }
+    ans = min_cost*(count-1) + sum - min_cost;
+    if(flag)
+    {
+        if(count == 1)
+            ans = 0;
+        else if(count > 1)
+            ans = -1;
+    }
+    return ans;
+}
+
+
+int main()
+{
+    int n, m, x, y;
+    cin>>n>>m;
+
+    init_set(n);
+
+    for(int i=1;i<=m;i++)
+    {
+        cin>>x>>y;
+        union_set(x, y);
+    }
+
+    for(int i=1;i<=n;i++)
+    {
+        cin>>x;
+        cost[i] = (x>=0)?x:MAX;
+    }
+
+    cout<<calculate(n)<<endl;
+    return 0;
+}
+

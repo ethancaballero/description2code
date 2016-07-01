@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    vector<long long int> a;
+    long long int n,x,sum,i,index,t;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        a.resize(n);
+        x=10000000;
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+            if(x>a[i])
+            {
+                x=a[i];
+                index=i;
+            }
+        }
+        sum=0;
+        for(i=0;i<n;i++)
+        {
+            if(i==index)
+                continue;
+            sum+=(a[i]*x);
+        }
+        cout<<sum<<endl;
+    }
+    return 0;
+}

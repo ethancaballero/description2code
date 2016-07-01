@@ -1,0 +1,53 @@
+#include<iostream>
+using namespace std;
+ 
+int Search(int a[],int n,int m){
+          for(int i=0;i<n;i++){
+               if(a[i]==m){
+                   return 1;} }
+          return 0;}
+ 
+ 
+ 
+ 
+ 
+ 
+int main(){
+        int numbers;
+        cin>>numbers;
+        int s=0;
+        while(s<numbers){
+             int n;
+            
+             cin>>n;
+             int m;
+             
+             cin>>m;
+             int b[m];
+             int c[n-m];
+             int k=0;
+             for(int j=0;j<m;j++){
+                  cin>>b[j];}
+ 
+             for(int i=0;i<n;i++){
+                  int index=i;
+                  if(Search(b,m,index+1)==1){
+                           continue;}
+                  else{
+                       c[k]=index+1;
+                       k=k+1;} }
+            int p=0;
+            while(p<(n-m)){
+                 cout<<c[p]<<" ";
+                 p=p+2;}
+            int q=1;
+            cout<<endl;
+            if((n-m)>1){
+            while(q<(n-m)){
+                  cout<<c[q]<<" ";
+                  q=q+2;}
+            cout<<endl; }
+            else{
+                cout<<endl;
+            }
+            s=s+1;} }

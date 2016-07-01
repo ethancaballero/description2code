@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int noOfElements;
+long long totalSum;
+
+void generateRankList()
+{
+	long long int total = noOfElements;
+	total = (total * (noOfElements + 1)) / 2;
+	long long int diff = total - totalSum;
+	int rank = noOfElements;
+	int count = 0;
+	while(diff>0 && rank>0)
+        {
+            if (rank-1>=diff) diff=0;
+            else
+            {
+                diff = diff - rank + 1;
+            }
+            rank--;
+            count++;
+        }
+	cout<<count<<endl;
+}
+
+void readInp()
+{
+	cin>>noOfElements>>totalSum;
+}
+
+void calc()
+{
+	generateRankList();
+}
+
+int main(int argc, char const *argv[])
+{
+	int noOftests;
+	cin>>noOftests;
+	for(int i=0; i<noOftests; i++){
+		readInp();
+		calc();
+	}
+	return 0;
+}

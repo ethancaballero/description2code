@@ -1,0 +1,94 @@
+    #include<iostream>
+    #include<vector>
+    #include<set>
+    #include<map>
+    #include<queue>
+    #include<deque>
+    #include<stack>
+    #include<list>
+    #include<complex>
+    #include<string>
+    #include<utility>
+    #include<numeric>
+    #include<iterator>
+    #include<algorithm>
+    #include<cstdio>
+    #include<cstdlib>
+    #include<cmath>
+    #include<cctype>
+    #include<climits>
+    #include<ctime>
+    #include<cstring>
+    #define ALL(c) c.begin(), c.end()
+    #define TR(c, it) for(typeof(c.begin()) it = c.begin(); it != c.end(); it++)
+    #define FOR(i, j, n) for(int (i) = (j); i < n; i++)
+    #define MAX(a, b) ((a) > (b) ? (a) : (b))
+    #define gc getchar_unlocked
+    #define ll long long int
+    #define ull unsigned long long int
+    #define inf INT_MAX
+    #define mininf INT_MIN
+    #define pb push_back
+    #define mp make_pair
+    #define time QueryPerformanceCounter
+    #define qp QuadPart
+    #define LI LARGE_INTEGER
+    #define PI 3.14159265358979323846264338327950288
+    using namespace std;
+    inline void ifast(ll &x)
+    {
+    register int c = gc();
+    x = 0;
+    int neg = 0;
+    for(; ((c<48 || c>57) && c != '-'); c = gc());
+    if(c=='-')
+    {
+    neg = 1;
+    c = gc();
+    }
+    for(; c>47 && c<58 ; c = gc())
+    {
+    x = (x<<1) + (x<<3) + c - 48;
+    }
+    if(neg)
+    x = -x;
+    }
+    int main()
+    {
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+    int k, q;
+    scanf("%d %d", &k, &q);
+    ll a[k+1], b[k+1];
+    FOR(i, 1, k+1)
+    ifast(a[i]);
+    // scanf("%lld", &a[i]);
+    FOR(i, 1, k+1)
+    ifast(b[i]);
+    // scanf("%lld", &b[i]);
+    sort(a+1, a+k+1);
+    sort(b+1, b+k+1);
+    vector<ll> sum(100001);
+    int temp, idx, in = 0;
+    FOR(i, 1, k+1)
+    {
+    temp = 10001/i;
+    idx = min(temp, k);
+    FOR(j, 1, idx+1)
+    sum[in++] = a[i] + b[j];
+    }
+    sum.resize(in);
+    sort(sum.begin(), sum.end());
+    FOR(i, 0, q)
+    {
+    ll temp;
+    // scanf("%lld", &temp);
+    ifast(temp);
+    printf("%lld
+", sum[temp-1]);
+    }
+    }
+    return 0;
+    } 

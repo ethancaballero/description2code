@@ -1,0 +1,18 @@
+def bsearch(a,num,low,high):
+	if low>high:return -1
+	mid=(low+high)/2
+	if a[mid]==num:return mid
+	if a[mid]>num:
+		return bsearch(a,num,low,mid-1)
+	if a[mid]<num:
+		return bsearch(a,num,mid+1,high)	
+
+t=input()
+while t>0:
+	n=input()
+	a=[int(x) for x in raw_input().strip().split()]
+	ind=input()
+	num=a[ind-1]
+	a.sort()
+	print 1+bsearch(a,num,0,n-1)
+	t-=1

@@ -1,0 +1,7 @@
+# cook your code here
+t=int(raw_input())
+
+for i in range(t):
+    n=int(raw_input())
+    c=(n/2)+1
+    print c

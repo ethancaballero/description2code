@@ -1,0 +1,46 @@
+#! /usr/bin/env python
+##
+#     File Name           :     ssolve.py
+#     Created By          :     Anton Kundenko anton@algotradinghub.com
+#     Creation Date       :     22-05-2014 17:08
+#     Description         :      
+##
+
+def fn():
+    n,m = map(int, raw_input().split())
+    tnum,tcost = [0 for i in range(41)], [0 for i in range(41)]
+    for i in range(n):
+        a,b = map(int, raw_input().split())
+        tnum[a]+=1
+        tcost[a]+=b
+
+    num, cost = [], []
+    for i in range(41):
+        if tnum[i]:
+            num.append(tnum[i])
+            cost.append(tcost[i])
+    dpd = [[0 for i in range(41)] for i in range(41)]
+    dpn = [[0 for i in range(41)] for i in range(41)]
+    k = len(num)
+    for i in range(k+1):
+        dpd[i][0] = 1
+    
+    for i in range(1,k+1):
+        for j in range(1,k+1):
+            dpd[i][j] = dpd[i-1][j] + dpd[i-1][j-1]*(pow(2,num[i-1])-1)
+     
+    for i in range(1,k+1):
+        for j in range(1,k+1):
+            dpn[i][j] = dpn[i-1][j] + dpn[i-1][j-1]*(pow(2,num[i-1])-1) + dpd[i-1][j-1]*cost[i-1]*pow(2,num[i-1]-1)
+     
+    d, n = 0, 0.0
+     
+    for j in range(m,k+1):
+        d += dpd[k][j]
+        n += dpn[k][j]
+     
+    print '{0:.9f}'.format(n/d)
+     
+t = int(raw_input())
+for i in range(t):
+    fn()

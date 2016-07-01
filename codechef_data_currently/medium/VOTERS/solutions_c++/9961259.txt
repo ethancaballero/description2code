@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   int n1,n2,n3,a=0,b=0,c=0;
+   cin>>n1>>n2>>n3;
+   int a1[n1],b1[n2],c1[n3];
+   for(int i=0;i<n1;i++)
+    cin>>a1[i];
+   for(int i=0;i<n2;i++)
+    cin>>b1[i];
+   for(int i=0;i<n3;i++)
+    cin>>c1[i];
+   int count=0;
+   int m[100050];
+   while((a<n1 && b<n2)||(b<n2 && c<n3)||(c<n3 && a<n1))
+   {
+       if(((a<n1)  && (b<n2) && (a1[a]==b1[b]))||((b<n2)&& (c<n3) && (b1[b]==c1[c]))||((a<n1) && (c<n3)&&(a1[a]==c1[c])))
+       {
+           if((a1[a]==b1[b])&&(b1[b]==c1[c]))
+           {
+               m[count++]=a1[a];
+               a++;
+               b++;c++;
+           }
+           else if(a1[a]==b1[b])
+           {
+               m[count++]=a1[a];
+               a++;
+               b++;
+           }
+           else if(b1[b]==c1[c])
+           {
+               m[count++]=b1[b];
+               b++;
+               c++;
+           }
+           else if(a1[a]==c1[c])
+           {
+               m[count++]=a1[a];
+               a++;
+               c++;
+           }
+
+       }
+       else
+       {
+            if(a<n1 && b<n2 && c<n3)
+            {
+                if(a1[a]<b1[b] && a1[a]<c1[c])
+                {
+                    a++;
+                }
+                else if(b1[b]<c1[c] && b1[b]<a1[a])
+                {
+                    b++;
+                }
+                else
+                {
+                     c++;
+                }
+            }
+            else if(a<n1 && b<n2)
+            {
+                if(a1[a]<b1[b])
+                    a++;
+                else
+                    b++;
+            }
+            else if(b<n2 && c<n3)
+            {
+                if(b1[b]<c1[c])
+                    b++;
+                else
+                    c++;
+            }
+            else if(c<n3 && a<n1)
+            {
+                if(a1[a]<c1[c])
+                    a++;
+                else
+                    c++;
+            }
+       }
+   }
+   cout<<count<<"
+";
+   for(int i=0;i<count;i++)
+    cout<<m[i]<<"
+";
+   return 0;
+}

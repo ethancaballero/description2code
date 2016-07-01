@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+long int mo=1000000007;
+int main()
+{
+    long int i,n,c=1,d=2,t;
+    scanf("%ld",&t);
+    while(t--)
+    {
+        d=2;
+        c=1;
+        scanf("%ld",&n);
+        long int b[n+1],a[n+1],counter=0;
+        if(n%2==0)
+        {
+            for(i=1;i<=n/2;i++)
+            {
+                a[(n/2)+i]=c;
+                a[i]=d;
+                d=d+2;
+                c=c+2;
+            }
+        }
+        else
+        {
+            for(i=1;i<=n/2;i++)
+            {
+                a[(n/2)+i]=c;
+                a[i]=d;
+                d=d+2;
+                c=c+2;
+            }
+            a[n]=n;
+        }
+
+
+        for(i=1;i<=n;i++)
+        {
+            b[i]=0;
+        }
+
+        for(i=1;i<=n;i++)
+        {
+            if(b[i]==0)
+            {
+
+                b[i]=1;
+                counter++;
+                d=a[i];
+                while(b[d]!=1)
+                {
+                    b[d]=1;
+                    d=a[d];
+                }
+            }
+        }
+        long long int f=1;
+        for(i=1;i<=counter;i++)
+        {
+            f=f*(26);
+
+            if(f>mo)
+                f=f%mo;
+        }
+        printf("%lld
+",f);
+        counter=0;
+    }
+    return 0;
+}

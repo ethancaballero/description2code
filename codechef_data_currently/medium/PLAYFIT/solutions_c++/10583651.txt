@@ -1,0 +1,39 @@
+#include<stdio.h>
+#define max(a,b) (a>b?a:b)
+#define min(a,b) (a<b?a:b)
+#define getcx getchar_unlocked
+    
+inline void inp(int &n)
+    {
+    n=0;
+    int ch=getcx();
+    while( ch < '0' || ch > '9' ){ ch=getcx();}
+ 
+    while( ch >= '0' && ch <= '9' )
+    n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+    }
+ 
+int main()
+{
+	int t;
+	inp(t);
+	while(t--)
+	{
+		int minm=1000001,i=0,j=0,n,arr1[100000],curr,ans=-1;
+		inp(n);
+		while(n--)
+		{
+			inp(curr);
+			minm=min(minm,curr);
+			ans=max(ans,curr-minm);
+		}
+		
+		if(ans>0)
+		printf("%d
+",ans);
+		else
+		printf("UNFIT
+");
+	}
+	return 0;
+}  

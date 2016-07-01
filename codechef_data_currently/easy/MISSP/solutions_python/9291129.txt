@@ -1,0 +1,9 @@
+for i in range(int(raw_input())):
+    j = int(raw_input())
+    a = []
+    for i in range(j):
+        a.append(int(raw_input()))
+    for i in a:
+        if a.count(i)%2 != 0:
+            print i
+            break

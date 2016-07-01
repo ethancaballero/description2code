@@ -1,0 +1,16 @@
+for i in range(input()):
+	line = raw_input()
+	# print 'line = "' + line + '"'
+	if len(line) == 5 and line[2] == '-' and line[0] >= 'a' and line[0] <= 'h' and line[1] >= '1' and line[1] <= '8' and line[3] >= 'a' and line[3] <= 'h' and line[4] >= '1' and line[4] <= '8':
+		a = ord(line[3]) - ord(line[0])
+		b = ord(line[4]) - ord(line[1])
+		if a < 0:
+			a = -a
+		if b < 0:
+			b = -b
+		if (a == 1 and b == 2) or (a == 2 and b == 1):
+			print 'Yes'
+		else:
+			print 'No'
+	else:
+		print 'Error'

@@ -1,0 +1,11 @@
+T = int(raw_input())
+while T:
+    n,m = map(int,raw_input().split()); L = []
+    for i in range(m): L.append(map(int,raw_input().split()))
+    F = [m-1]; d = {L[m-1][0]:True,L[m-1][1]:True}
+    for i in range(m-2,-1,-1):
+        if L[i][0] not in d and L[i][1] not in d: 
+            F.append(i); d.update({L[i][0]:True,L[i][1]:True})
+    for i in F[::-1]: print i,
+    print 
+    T -= 1

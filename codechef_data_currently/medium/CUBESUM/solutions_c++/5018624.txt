@@ -1,0 +1,51 @@
+#include<iostream>
+
+using namespace std;
+
+
+int a[105][105][105];
+int main()
+{
+    int t,x, y,z, i, j, k;
+
+    cin>>t;
+
+    while(t--)
+    {
+        cin>>x>>y>>z;
+
+        for(i=1; i<=x; i++)
+            for(j=1; j<=y; j++)
+                for(k=1; k<=z; k++)
+                    cin>>a[i][j][k];
+
+        for(i=x; i>0; i--)
+        {
+            for(j=y; j>0; j--)
+            {
+                for(k=z; k>0; k--)
+                {
+                    a[i][j][k] = a[i][j][k] - a[i-1][j][k] - a[i][j-1][k] - a[i][j][k-1] - a[i-1][j-1][k-1] + a[i-1][j-1][k] + a[i][j-1][k-1] + a[i-1][j][k-1];
+
+                }
+            }
+        }
+
+        for(i=1; i<=x; i++)
+        {
+            for(j=1; j<=y; j++)
+            {
+                for(k=1; k<=z; k++)
+                {
+                    cout<<a[i][j][k]<<" ";
+                }
+                cout<<"
+";
+            }
+        }
+
+    }
+
+
+    return 0;
+}

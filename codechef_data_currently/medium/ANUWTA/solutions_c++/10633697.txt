@@ -1,0 +1,13 @@
+#include<iostream>
+using namespace std;
+int main(){
+ios::sync_with_stdio(false);
+int t;
+long long int n,ans; //WA just beacuse of you.
+cin>>t;
+while(t--){
+    cin>>n;
+    ans=n+(n*(n+1)/2);
+    cout<<ans<<endl;
+}
+}

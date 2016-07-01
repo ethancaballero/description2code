@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>
+int maxi(int r,int b,int g)
+{
+    if((r>=b)&&(r>=g))
+        return r;
+    else if(b>=g)
+        return b;
+    else
+        return g;
+}
+int main ()
+{
+    int t,j,n,i,re,r,b,g,k;
+    scanf("%d",&t);
+    for(j=0;j<t;j++)
+    {
+        scanf ("%d",&n);
+        char c[n];
+        scanf("%s",c);
+         r=0,b=0,g=0;
+    for(i=0;i<n;i++)
+    {
+        if( c[i] == 'R')
+            r++;
+        else if(c[i ]== 'B')
+            b++;
+        else if (c[i] == 'G')
+            g++;
+    }
+        re=n-maxi(r,b,g);
+        printf("%d
+",re);
+    }
+    return 0;
+}

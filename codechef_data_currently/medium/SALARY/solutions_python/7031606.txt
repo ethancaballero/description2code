@@ -1,0 +1,10 @@
+t=int(raw_input())
+while t:
+	t-=1
+	n=int(raw_input())
+	ar=map(int,raw_input().strip().split())
+	ar.sort(reverse=True)
+	ans=0
+	for i in range(n-1):
+		ans+=(i+1)*(ar[i]-ar[i+1])
+	print ans

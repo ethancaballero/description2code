@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <queue>
+using namespace std;
+ 
+typedef vector<int> vi_t;
+int main()
+{
+	int N;
+	cin >> N;
+	for (int test = 0; test < N; ++test)
+	{
+		int n, m, q, p, r, k;
+		cin >> n >> m >> q >> p >> r >> k;
+		vi_t pas(m + q, 0);
+		pas[q] = r;
+		for (int i = q; i < m + q; ++i)
+		{
+			pas.at(i) = (i ? pas.at(i - 1) : 0) + r;
+		}
+		priority_queue<int, vi_t, greater<int> > cr;
+		for (int i = 0; i < n; ++i)
+			cr.push(0);
+		int complete = 0;
+		int inuse_car = 0;
+		if (n)
+		for (int pi = 0; (pi < m + q) && (pas.at(pi) <= k); ++pi)
+		{
+			int first_car = cr.top(); cr.pop();
+			int all_ready = 0;
+			all_ready = max(first_car, pas.at(pi));
+			cr.push(all_ready + p);
+			if (all_ready + p <= k)
+				++complete;
+			else if (all_ready  <= k)
+				++inuse_car;
+		}
+		int free_cars = 0;
+		while(!cr.empty())
+		{
+			if (cr.top() <= k)
+				++free_cars;
+			cr.pop();
+		}
+		cout << free_cars << " " << complete << " ";
+		int still_in_museum = max(0, m - k / r);
+		int in_queue = q + m - still_in_museum - complete - inuse_car;
+		cout << still_in_museum << " " << in_queue << endl;
+		//cout << " 0 0 0 0" <<endl;
+	}
+	return 0;
+}

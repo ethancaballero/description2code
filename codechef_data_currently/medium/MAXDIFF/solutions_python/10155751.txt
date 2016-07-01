@@ -1,0 +1,8 @@
+t=input()
+while t>0:
+    n,k=map(int,raw_input().split())
+    a=raw_input().split()
+    a=[int(x) for x in a]
+    a.sort()
+    print max(abs(sum(a[:k])-sum(a[k:])),abs(sum(a[n-k:])-sum(a[:n-k])))
+    t-=1    

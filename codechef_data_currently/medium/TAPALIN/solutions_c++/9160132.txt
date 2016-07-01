@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+typedef long long ll;
+#define MOD 1000000007
+using namespace std;
+unsigned long long int fastpow(int base, int p) {
+	int q = 1;
+	for(;p;)
+	{
+	  if(p%2) q = (ll(q)*base)%MOD;
+	  if(p/=2) base = (ll(base)*base)%MOD;
+	}
+     return q; 
+ }
+ 
+int main() {
+int tc,n;
+ 
+    scanf("%d",&tc);
+    while(tc--) {
+ll ans,po_w,pow_2;
+scanf("%d",&n);
+ if(n%2==0) {
+ int k = (n/2);
+ po_w = ((fastpow(26,k)- 1)*(fastpow(25,MOD-2)))%MOD;
+ ans = (52 * po_w)%MOD;
+ cout<<ans<<endl;
+}
+else{
+int k = (n/2)+1;
+pow_2 = fastpow(26,k);
+po_w = ((pow_2 - 1)*(fastpow(25,MOD-2)))%MOD;
+ans = ((52 * po_w) - (pow_2))%MOD;
+printf("%llu
+",ans);
+}
+ 
+}
+return 0;
+}  

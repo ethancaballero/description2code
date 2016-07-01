@@ -1,0 +1,9 @@
+for i in range(int(raw_input())):
+    length = int(raw_input())
+    Dic = {}
+    for j in raw_input():
+        if j not in Dic.keys():
+            Dic[j] = 1
+        else:
+            Dic[j] += 1
+    print length - max(Dic.values())

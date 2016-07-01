@@ -1,0 +1,18 @@
+#include<stdio.h>
+#define m 1000000007
+int main()
+{
+    int t;
+    int i, j;
+    scanf("%d", &t);
+    unsigned long long int a[3], temp, res;
+    while(t--)
+    {
+        scanf("%llu%llu%llu",&a[0],&a[1],&a[2]);
+        for(i=0;i<3;i++) for(j=0;j<3-i-1;j++) if(a[j]>a[j+1]) (temp=a[j],a[j]=a[j+1],a[j+1]=temp);
+        printf("%d
+",((((a[0]%m))*((a[1]-1)%m))%m * ((a[2]-2)%m)) %m);
+    }
+    return 0;
+}
+  

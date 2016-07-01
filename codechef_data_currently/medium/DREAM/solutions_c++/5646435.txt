@@ -1,0 +1,54 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#define ll long long int
+using namespace std;
+struct chef
+{
+    ll t;
+    int num;
+};
+bool comp(chef c1,chef c2)
+{
+    if(c1.t<c2.t)
+        return true;
+    else if(c1.t>c2.t)
+        return false;
+    else
+    {
+        return (c1.num<c2.num);
+    }
+}
+ int main()
+ {
+     int n,k,i,j;
+     ll count;
+     chef * C;
+     scanf("%d %d",&n,&k);
+     C=new chef[n+1];
+     for(i=0;i<n;i++)
+     {
+         scanf("%lld",&C[i].t);
+         C[i].num=i+1;
+     }
+     count=0;
+     sort(C,C+n,comp);
+     for(i=0;i<n;)
+     {
+         count++;
+         for(j=i+1;j<n;j++)
+         {
+             if(C[i].t==C[j].t&&(C[j].num-C[i].num)<k)
+                continue;
+             else
+             {
+                 break;
+             }
+         }
+         if(j==n&&!(C[i].t==C[j-1].t&&(C[j-1].num-C[i].num)<=k))
+            count++;
+            i=j;
+     }
+     printf("%lld
+",count);
+ }

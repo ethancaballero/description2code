@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int l,flag,i,j,k,m,n,t,a,b,c,count=0;
+	char str[150];
+	scanf("%d",&n);
+	while(n--)
+	{
+		scanf(" %[^
+]s",str);
+		l=strlen(str);
+		i=l-1;
+
+		while(str[i]<'0' || str[i]>'9')
+			i--;
+		a=0;
+		b=0;
+		c=0;
+                flag=0;
+		while(str[i]>='0' && str[i]<='9')
+		{
+			if(str[i]!='8' && str[i]!='3' && str[i]!='5')
+			{
+				flag=1;
+				break;
+			}
+			if(str[i]=='8')
+				a++;
+
+			else if(str[i]=='5')
+				b++;
+
+			else if(str[i]=='3')
+				c++;
+                        i--;
+		}
+
+		if(flag!=1) 
+		{
+			if(a>=b && b>=c)
+				count++;
+		}
+	}
+	printf("%d
+",count);
+}

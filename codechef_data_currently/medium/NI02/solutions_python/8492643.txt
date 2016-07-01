@@ -1,0 +1,109 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <queue>
+#include <functional>
+#include <utility>
+#include <vector>
+#include <climits>
+#define ll long long int
+#define PII pair<ll, ll>
+#define f first
+#define s second
+#define F(i,a,b) for(ll i = (ll)(a); i <= (ll)(b); i++)
+#define RF(i,a,b) for(ll i = (ll)(a); i >= (ll)(b); i--)
+#define inf LONG_MAX
+using namespace std;
+vector<PII> list[2505];
+bool visited[2505];
+ll dist[2505];
+PII a[2505];
+
+void initialize()
+{
+	for(ll i=0;i<2505;i++)
+	{
+		visited[i]=false;
+		dist[i]=inf;
+	}
+}
+
+void vclear()
+{
+	for(ll i=0;i<2505;i++)
+	list[i].clear();
+}
+
+ll Calc(PII x,PII y)
+{
+	return pow(x.f-y.f,2)+pow(x.s-y.s,2);
+}
+
+
+void Dijkstra(ll x)
+{ 
+	priority_queue<PII,vector<PII>,greater<PII> > q;
+	PII P;
+	dist[x]=0;
+	q.push(make_pair(0,x));
+	while(!q.empty())
+	{
+		P=q.top();
+		q.pop();
+		ll k=P.s;
+		
+		if(visited[k]==true)
+		continue;
+		
+		
+		for(ll i=0;i<list[k].size();i++)
+		{
+			if(!visited[list[k][i].s]&&dist[list[k][i].s]>dist[k]+list[k][i].f)
+			{
+			dist[list[k][i].s]=dist[k]+list[k][i].f;
+			q.push(make_pair(dist[list[k][i].s],list[k][i].s));
+			}
+		}
+		
+		visited[k]=true;
+	}
+
+}
+
+int main() {
+	// your code goes here
+	
+	ll i,n,j,z;
+	scanf("%lld",&z);
+	while(z--)
+	{
+	
+	initialize();
+	scanf("%lld",&n);
+	
+	F(i,1,n)
+	scanf("%lld %lld",&a[i].f,&a[i].s);
+	
+	scanf("%lld %lld %lld %lld",&a[0].f,&a[0].s,&a[n+1].f,&a[n+1].s);
+	
+	for(i=0;i<=n+1;i++)
+	{
+	  for(j=0;j<=n+1;j++)
+	  {
+	  	if(i==j)
+	  	continue;
+	  	
+	  	list[i].push_back(make_pair(Calc(a[j],a[i]),j));
+	  	
+	  }
+	}
+
+	
+Dijkstra(0);
+printf("%lld
+",dist[n+1]);
+vclear();
+}
+
+	return 0;
+}

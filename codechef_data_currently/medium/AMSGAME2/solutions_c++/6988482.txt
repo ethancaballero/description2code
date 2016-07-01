@@ -1,0 +1,35 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+long long int ans=0,dp[65][10005];
+int n,i,j,arr[10005];
+int gcd(int a,int b)
+{	return b==0?a:gcd(b,a%b); }
+long long int fun(int i,int j)
+{
+	if(i==n)
+		return (j==1);
+	if(dp[i][j]>=0)
+		return dp[i][j];
+	dp[i][j]=fun(i+1,j)+fun(i+1,gcd(j,arr[i]));
+	return dp[i][j];
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		for(i=0;i<n;i++)
+			scanf("%d",&arr[i]);
+		//for(i=0;i<=n;i++)
+		//	for(j=0;j<10005;j++)
+		//		dp[i][j]=-1;
+		memset(dp,-1,sizeof(dp));
+		ans=fun(0,0);
+		printf("%lld
+",ans);
+	}
+}

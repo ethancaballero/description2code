@@ -1,0 +1,38 @@
+def timeDifference(time1,time2,dist):
+	[hour1,minute1] = time1.split(":")
+	hour1 = int(hour1)
+	minute1 = int(minute1)
+	totalTime1 = hour1 * 60 + minute1
+	[hour2,minute2] = time2.split(":")
+	hour2 = int(hour2)
+	minute2 = int(minute2)
+	totalTime2 = hour2 * 60 + minute2
+	timeDif = abs(totalTime1-totalTime2)
+	if(2*dist<=timeDif):
+		print str(float(timeDif+dist))+" "+str(float(timeDif))
+		
+	elif(dist<=timeDif):
+		ans=(2*dist-timeDif)/2.0;
+		print str(float(timeDif+dist))+" "+str(float(timeDif+ans))
+	else:
+		print str(float(timeDif+dist))+" "+str(float(dist+timeDif/2.0))
+		
+	
+	
+	
+	
+def main():
+	
+	t=raw_input()
+	t=int (t)
+	for t in range(0,t):
+		time1=raw_input()
+		time2=raw_input()
+		dist=raw_input()
+		dist=int (dist)
+	
+		timeDifference(time1,time2,dist)
+
+if __name__ == '__main__':
+	main()
+

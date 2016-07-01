@@ -1,0 +1,33 @@
+r,c=[int(x) for x in raw_input().split()]
+a=[[0 for x in xrange(c)] for y in xrange(r)]
+minr=[100000000000 for x in xrange(r)]
+maxc=[0 for x in xrange(c)]
+
+for i in range(r):
+	a[i]=[int(x) for x in raw_input().split()]
+
+for i in range(r):
+	for j in range(c):
+		if(a[i][j]<minr[i]):
+			minr[i]=a[i][j]
+		if(a[i][j]>maxc[j]):
+			maxc[j]=a[i][j]
+#print 'a'
+#for x in range(r):
+#	print minr[x]
+#print 'b'
+#for x in range(c):
+#	print maxc[x]
+
+check=0
+
+for i in range(r):
+	for j in range(c):
+		if(a[i][j]==minr[i] and a[i][j]==maxc[j]):
+			print a[i][j]
+			check=1
+			break
+	if check==1:
+		break
+if check==0:
+	print 'GUESS'

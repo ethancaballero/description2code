@@ -1,0 +1,21 @@
+def read_mapped(func=lambda x:x):
+    return map(func, raw_input().split(" "))
+def read_int():
+    return int(raw_input())
+
+T = read_int()
+
+for case in xrange(T):
+    n, k = read_mapped(int)
+    a = read_mapped(int)
+    low = 20000000000
+    low_c = 0
+    for i in xrange(len(a)):
+        for j in xrange(i+1, len(a)):
+            currr = abs(a[i]+a[j]-k)
+            if currr<low:
+                low = currr
+                low_c = 1
+            elif currr==low:
+                low_c += 1
+    print low, low_c

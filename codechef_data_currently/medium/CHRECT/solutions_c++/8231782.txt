@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+using namespace std;
+
+int main()
+{
+	int T,N,M,K;
+	int val;
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d%d%d",&N,&M,&K);
+		if(M<N)
+		{
+			M=M+N;
+			N=M-N;
+			M=M-N;
+		}
+		
+		if(N==1&&M<=2)
+			printf("0
+");
+		else if(N==1)
+			printf("%d
+",K);
+		else
+		{
+				printf("%d
+",(K+1)/2);
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef pair< int , int > pii;
+typedef long long LL;
+#define fr first
+#define se second
+#define EPS 1e-8
+#define INF 10000*10000*10000LL
+stringstream ss;
+#define two(x) ( 1LL<<x )
+LL mod = 1000000007LL;
+
+/**************************Code****************************/
+
+int ok( LL a )
+{
+	while( a )
+	{
+		int x = a % 10;
+		if( x != 0 && x != 1 && x != 4 && x != 9 )
+			return 0;
+		a /= 10;
+	}
+	return 1;
+}
+
+int main()
+{
+	vector < LL > all;
+	for( int i = 1 ; i < 100010 ; i ++ )
+		if( ok( i * 1LL * i ) )
+			all.push_back( i * 1LL * i );
+	int t;
+	LL a, b;
+	cin >> t;
+	while( t -- )
+	{
+		cin >> a >> b;
+		cout << upper_bound( all.begin(), all.end(), b ) - lower_bound( all.begin(), all.end(), a-1 ) << endl;
+	}
+	return 0;
+}

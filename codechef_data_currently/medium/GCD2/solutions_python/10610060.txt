@@ -1,0 +1,18 @@
+def gcd(a,b):
+    if(b==0):
+        return a
+    else:
+        return gcd(b,a%b)
+ 
+      
+cases=int(raw_input())
+for i in range(cases):
+    a,b=map(str,raw_input().split())
+    a=int(a);
+    ans=0;
+    if a==0:
+        print b
+    else:
+        for i in b:
+            ans=(ans*10 + int(i))%a
+        print gcd(a,ans)

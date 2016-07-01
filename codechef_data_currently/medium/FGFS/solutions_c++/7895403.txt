@@ -1,0 +1,66 @@
+ /* Author: happywu 
+ *  File: FGFS.cpp
+ *  Create Date: 2015-08-23
+ */
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#include<queue>
+#include<vector>
+#include<cstdlib>
+#include<time.h>
+#include<map>
+#include<set>
+using namespace std;
+typedef long long LL;
+const int maxn = 200010;
+set<int> y2;
+set<int>::iterator it;
+map<int,int> dic2;
+map<int,int> ::iterator it2;
+int n,m,T,k;
+struct node{
+	int l,r,p;
+	bool operator<(const node&rhs)const{
+		return (p!=rhs.p)?p<rhs.p:r<rhs.r;
+	}
+}a[maxn];
+inline int read(){
+	static int r, sign;
+	static char c;
+	r = 0, sign = 1;
+	do c = getchar(); while(c != '-' && (c < '0' || c > '9'));
+	if( c == '-')sign = -1, c = getchar();
+	while( c >= '0' && c <='9') r = r*10 +(int)(c - '0'), c = getchar();
+	return sign * r;
+}
+int main(int argc, char* argv[]){
+ 
+	T=read();
+	while(T--){
+		n=read();k=read();
+		for(int i=0;i<n;i++){a[i].l=read();a[i].r=read();a[i].p=read();}
+		if(n==0||n==1){
+			printf("%d
+",n);
+			continue;
+		}
+		sort(a,a+n);
+		int ans=1,cur=0;
+		for(int i=1;i<n;i++){
+			if(a[i].p!=a[i-1].p||(a[i].p==a[i-1].p&&a[i].l>=a[cur].r)){
+				ans++;
+				cur=i;
+			}
+		}
+		printf("%d
+",ans);
+	}
+	return 0;
+}
+
+
+
+

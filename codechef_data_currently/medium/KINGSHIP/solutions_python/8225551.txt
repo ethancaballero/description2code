@@ -1,0 +1,11 @@
+import sys
+
+t = input()
+for k in range(t):
+	n = input()
+	p = map(int, sys.stdin.readline().split())
+	p.sort()
+	c = 0
+	for i in range(1,len(p)):
+		c+=p[i]*p[0]
+	print c

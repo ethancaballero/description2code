@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void fun(vector<long long int> &v,long long int n)
+{
+	vector<long long int> v2;
+	while(n)
+	{
+		v2.push_back(n&1);
+		n=n>>1;
+	}
+	long long int i;
+	for(i=v2.size()-1;i>=0;i--)
+	{
+		v.push_back(v2[i]);
+	}
+	
+}
+
+int main()
+{
+	long long int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int i,j;
+		cin>>i>>j;
+		vector<long long int> v1,v2;
+		fun(v1,i);			
+		fun(v2,j);
+		long long int k;
+		for(k=0;k<v1.size() && k<v2.size();k++)
+		{
+			if(v1[k]!=v2[k])
+			break;
+		}
+		cout<<v1.size()+v2.size()-2*(k)<<"
+";
+}
+}

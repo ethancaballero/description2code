@@ -1,0 +1,19 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+int main()
+{
+	int t,ls,b;
+	cin>>t;
+	while(t--)
+	{
+		cin>>b>>ls;
+		double x=sqrt(pow(ls,2)+pow(b,2));
+		double y=sqrt(pow(ls,2)-pow(b,2));
+		cout<<y<<" "<<x<<endl;
+}
+
+	return 0;
+}

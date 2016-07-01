@@ -1,0 +1,23 @@
+#include<cstdio>
+using namespace std;
+int main() { 
+int T;
+int Ds,Dt,D;
+ scanf("%d",&T);
+  while(T--) {
+   scanf("%d%d%d",&Ds,&Dt,&D); 
+   if(D>=(Ds+Dt))
+    printf("%d
+",D-(Ds+Dt));
+	else if(Ds>=D+Dt)
+	printf("%d
+",Ds-(D+Dt));
+	else if(Dt>=D+Ds)
+	printf("%d
+",Dt-(D+Ds)); 
+	 else
+	  printf("0
+");
+  }
+	return 0;
+ }

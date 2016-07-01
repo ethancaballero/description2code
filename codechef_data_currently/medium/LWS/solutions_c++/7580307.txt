@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<iostream>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<map>
+#include<set>
+#include<sstream>
+#include<cmath>
+#include<assert.h>
+using namespace std;
+#define ll long long
+#define ull unsigned long long
+#define pi acos(-1)
+#define inf 1000000007
+#define mod 1000000007
+#define pii pair<int,int>
+#define vi vector<int>
+#define all(x) x.begin(),x.end()
+#define mp make_pair
+#define pb push_back
+#define x first
+#define y second
+#define N 1000010
+ 
+#define DBG(vari) cerr<<#vari<<"="<<(vari)<<endl;
+#define FOREACH(i,t) for(typeof(t.begin()) i=t.begin();i!=t.end();i++)
+ 
+int n,dp[2][26][26];char s[2001];
+ 
+int main()
+{
+	int i,j,k,T,m;
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%s",s);
+		n=strlen(s);
+		memset(dp,0,sizeof(dp));
+		int now=0;
+		for(i=0;i<n;i++,now^=1)
+		{
+			int x=s[i]-'a';
+			memcpy(dp[1-now],dp[now],sizeof(dp[now]));
+			for(j=0;j<=x;j++)
+			for(k=0;k<26;k++)
+			dp[1-now][x][k]=max(dp[1-now][x][k],dp[now][j][k]+1);
+			for(j=0;j<26;j++)
+			for(k=x;k<26;k++)
+			dp[1-now][j][x]=max(dp[1-now][j][x],dp[now][j][k]+1);
+		}
+		int ans=0;
+		for(i=0;i<26;i++)
+		for(j=0;j<26;j++)
+		ans=max(ans,dp[now][i][j]);
+		printf("%d
+",ans);
+	}
+	return 0;
+} 

@@ -1,0 +1,10 @@
+import sys
+def solution(n):
+ return n/2+1
+
+t=input()
+i=0
+while i<t:
+ n=input()
+ print solution(n)
+ i=i+1

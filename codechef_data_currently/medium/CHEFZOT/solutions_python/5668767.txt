@@ -1,0 +1,14 @@
+n = int(raw_input())
+a = raw_input().split()
+i=0
+maximum = 0
+while i!=n:
+  count = i
+  while i!=n and a[i]!='0':
+    i+=1
+  count = i-count
+  if count>maximum:
+    maximum = count
+  if i!=n:
+    i+=1
+print maximum

@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+unsigned long long int gcd(unsigned long long int A,unsigned long long int B)
+{
+   if(B==0)
+      return A;
+   return gcd(B,A%B);
+}
+int main()
+{
+   int T;
+   unsigned long long int A,B,C,D,K,hcf,lcm;
+   cin>>T;
+   while(T--)
+   {
+      cin>>A>>B>>C>>D>>K;
+      A=gcd(A,B);
+      C=gcd(C,D);
+      hcf=gcd(A,C);
+      A=A/hcf;
+      if(A>K/C)
+         cout<<1<<endl;
+      else
+         cout<<K/(A*C)*2+1<<endl;
+   }
+   return 0;
+}

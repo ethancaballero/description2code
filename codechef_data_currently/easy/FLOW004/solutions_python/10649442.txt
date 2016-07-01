@@ -1,0 +1,11 @@
+n = int(raw_input())
+
+for i in range(n):
+	key = int(raw_input())
+	last = key%10
+	reverse = 0
+	while key:
+		reverse = reverse*10 + key%10
+		key /= 10
+	first = reverse%10
+	print first + last

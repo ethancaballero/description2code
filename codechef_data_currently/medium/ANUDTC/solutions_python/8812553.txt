@@ -1,0 +1,22 @@
+t=int(raw_input())
+while t>0:
+    n=int(raw_input())
+    s=''
+    if 360%n==0:
+        s+='y '
+    else:
+        s+='n '
+
+    if n<=360:
+        s+='y '
+    else:
+        s+='n '
+
+    if n<=26:
+        s+='y '
+    else:
+        s+='n '
+
+    print s
+    t=t-1
+    

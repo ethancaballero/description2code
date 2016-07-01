@@ -1,0 +1,22 @@
+from sys import stdin,stdout
+def write(s):
+	stdout.write(str(s))
+	stdout.write('
+')
+n1,n2,n3 = map(int,stdin.readline().split())
+l1 = []
+l2 = [] 
+l3 = []
+l = set()
+for _ in xrange(n1):
+	l1.append(int(stdin.readline()))
+for _ in xrange(n2):
+	l2.append(int(stdin.readline()))
+for _ in xrange(n3):
+	l3.append(int(stdin.readline()))
+l |= (set(l1) & set(l2)) | (set(l2) & set(l3)) | (set(l1) & set(l3))
+write(len(l))
+k = list(l)
+k.sort()
+for i in k:
+	write(i)

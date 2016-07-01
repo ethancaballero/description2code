@@ -1,0 +1,14 @@
+for t in xrange (int(raw_input())):
+	n = int(raw_input())
+	a = map(int, raw_input().split())
+	c = 0
+	for i in range(n):
+		s = 0
+		p = 1
+		for j in range(i, n):
+			s+=a[j]
+			p*=a[j]
+			if (p==s):
+				c+=1
+	print c
+			

@@ -1,0 +1,40 @@
+#include<stdio.h>
+
+int  primecheck(int num)
+{
+    int i;
+    for(i=2;i<=num/2;i++)
+    {
+        if(num%i==0)
+            return 0;
+    }
+        return 1;
+}
+
+int main()
+{
+    long int t,x,y;
+    int sum;
+    scanf("%ld",&t);
+
+    while(t--)
+    {
+        scanf("%ld %ld",&x,&y);
+
+        sum=x+y+1;
+        for(sum=x+y+1;;sum++)
+        {
+
+            if(primecheck(sum))
+            {
+                printf("%d
+",sum-x-y);
+                break;
+
+            }
+        }
+
+    }
+    return 0;
+
+}

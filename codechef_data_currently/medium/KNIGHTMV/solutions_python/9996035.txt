@@ -1,0 +1,28 @@
+t=int(raw_input())
+l=['1','2','3','4','5','6','7','8']
+for i in xrange(t):
+    s=raw_input()
+    if len(s)!=5:
+        print 'Error'
+        continue
+    if s[2]!='-':
+        print 'Error'
+        continue
+    if ord(s[0])<97 or ord(s[0])>104:
+        print 'Error'
+        continue
+    if ord(s[3])<97 or ord(s[3])>104:
+        print 'Error'
+        continue
+    if s[1] not in l:
+        print 'Error'
+        continue
+    if s[4] not in l:
+        print 'Error'
+        continue
+    if abs(ord(s[0])-ord(s[3]))==1 and abs(int(s[1])-int(s[4]))==2:
+        print 'Yes'
+    elif abs(ord(s[0])-ord(s[3]))==2 and abs(int(s[1])-int(s[4]))==1:
+        print 'Yes'
+    else:
+        print 'No'

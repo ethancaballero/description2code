@@ -1,0 +1,15 @@
+a=int(raw_input())
+for i in range(a):
+    b,c,d=[int(x) for x in  raw_input().split()]
+    e=[int(x) for x in  raw_input().split()]
+    e=sorted(e)
+    e.append(100)
+    f=0
+    j=0
+    z=0
+    while(j!=len(e)-1):
+        z+=max(e[j]-c*d-f-1,0)
+        f=e[j]+c*d
+        j+=1
+    z+=max(100-f,0)
+    print z

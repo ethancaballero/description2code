@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+using namespace std;
+inline unsigned long int fastread()
+    {
+      unsigned long int i=0;
+      char c=gc();
+      while(c<'0' || c>'9')
+        c=gc();
+      for(;c>='0' && c<='9';c=gc())
+        i=(i<<3)+(i<<1)+c-'0';
+      return i;
+    }
+ int main()
+ {
+     long int t;
+     t=fastread();
+     //scanf("%li",&t);
+     while(t--)
+     {
+         long int n;
+         n=fastread();
+         //scanf("%li",&n);
+         char a[n];
+         scanf("%s",&a);
+        // printf("%s",a);
+        long long int co=0;
+         for(int i=0;i<sizeof(a);i++)
+            if(a[i]=='1')
+                co++;
+              //unsigned long long  int total=co*(co+1)/2;
+            printf("%llu
+",(co*(co+1))/2);
+     }
+ }

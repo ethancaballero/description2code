@@ -1,0 +1,66 @@
+#include<iostream>
+#include<math.h>
+#include<cstdio>
+#include<algorithm>
+#define ll long long
+#define print(a) printf("%lld
+",a)
+#define gc getchar
+
+using namespace std;
+
+void scan(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+
+ll a[1000002];
+int n,c;
+
+void update(int index,int key){
+    while(index<=n){
+        a[index]+=key;
+        index+=(index & -index);
+    }
+
+}
+ll query(int index){
+    ll ans=0;
+while(index>0){
+    ans+=a[index];
+    index-=(index & -index);
+}
+return ans+c;
+}
+
+
+int main(){
+int m,u,v,k,p;
+scan(n);
+scan(m);
+scan(c);
+while(m--){
+char ch;
+ch=getchar();
+while(ch!='S' && ch!='Q'){
+    ch=getchar();
+}
+if(ch=='S'){
+    scan(u);
+    scan(v);
+    scan(k);
+    update(u,k);
+    update(v+1,-1*k);
+}
+else {
+    scan(p);
+    print(query(p));
+
+}
+}
+return 0;
+}

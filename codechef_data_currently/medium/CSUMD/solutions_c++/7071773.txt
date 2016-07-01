@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define sd(x) scanf("%d",&x)
+#define ss(x) scanf("%s",x)
+#define lld long long int
+#define slld(x) scanf("%lld",&x)
+
+
+struct matrix{
+
+    lld a[2][2];
+};
+
+matrix mult(matrix a,matrix b,lld m)
+{
+        matrix ans;
+        ans.a[0][0]=((a.a[0][0]*b.a[0][0])%m+(a.a[0][1]*b.a[1][0])%m+m)%m;
+        ans.a[0][1]=((a.a[0][0]*b.a[0][1])%m+(a.a[0][1]*b.a[1][1])%m+m)%m;
+        ans.a[1][0]=((a.a[1][0]*b.a[0][0])%m+(a.a[1][1]*b.a[1][0])%m+m)%m;
+        ans.a[1][1]=((a.a[1][0]*b.a[0][1])%m+(a.a[1][1]*b.a[1][1])%m+m)%m;
+        return ans;
+}
+/*
+matrix pow(matrix a,lld n,lld m)
+{
+    if(n==0)
+    return a;
+
+    if(n%2==1)
+    {
+       x=a*pow(a,n/2,m);
+    }
+    else
+    {
+        return pow(a,n/2,m);
+    }
+}*/
+
+matrix power(lld b,lld m)
+{
+    matrix ans,a1;
+    ans.a[0][0]=1;ans.a[0][1]=0;ans.a[1][1]=1;ans.a[1][0]=0;
+    a1.a[0][0]=2;a1.a[1][0]=2;a1.a[0][1]=1;a1.a[1][1]=0;
+    while(b!=0)
+    {
+        if(b%2==1)
+        ans=mult(a1,ans,m);
+        a1=mult(a1,a1,m);
+        b=b/2;
+    }
+    return ans;
+}
+
+
+int main()
+{
+    lld t,n,k,ans,ans1,m=1000000007;
+	slld(t);
+	while(t--)
+	{
+        slld(n);
+        if(n==1)
+        printf("1
+");
+        else if(n==2)
+        printf("3
+");
+        else
+        printf("%lld
+",(3*power(n-2,m).a[0][0]+1*power(n-2,m).a[1][0])%m);
+	}
+
+	return 0;
+}

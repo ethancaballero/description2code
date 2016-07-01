@@ -1,0 +1,46 @@
+	#include<iostream>
+	#define mod 1000000007
+	long long int modular(long long int base,long long int power)
+	{
+		long long int result=1;
+		while(power>0)
+		{
+			if(power%2==1)
+				result=(result*base)%mod;
+			base=(base*base)%mod;
+			power/=2;
+		}
+			return result;
+	}	
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int hsh[100005]={0};
+			int a;
+			int n;
+			cin>>n;
+			for(int i=0;i<n;i++)
+			{
+				cin>>a;
+				hsh[a]++;
+			}
+			int max=0;
+			for(int i=100000;i>0;i--)
+			{
+				if(hsh[i]>max)
+				{
+					max=hsh[i];
+					break;
+				}
+			}
+			long long int ans=modular(2,max)-1;
+			if(ans<0)
+				ans+=mod;
+			cout<<ans<<endl;
+			t--;
+		}	
+	}

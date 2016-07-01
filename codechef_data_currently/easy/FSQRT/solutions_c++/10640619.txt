@@ -1,0 +1,16 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+    long long int t,i,j,answer,num;
+    cin>>t;
+    for(i=1;i<=t;i++)
+    {   
+        
+        cin>>num;
+        answer=sqrt(num);
+        cout<<answer<<endl;
+    }
+}
+

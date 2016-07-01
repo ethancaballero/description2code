@@ -1,0 +1,6 @@
+L=[]
+M = 1000000007
+for T in range(int(raw_input())):
+	L = map(int,raw_input().split())
+	L.sort()
+	print (L[0]*(L[1]*(L[2]-2)-L[2]+2))%M

@@ -1,0 +1,7 @@
+for _ in xrange(input()):
+    p, s = map(int, raw_input().split())
+    l1 = (p + (p ** 2 - (4 * 6 * s)) ** 0.5) / (2 * 6)
+    l2 = (p - (p ** 2 - (4 * 6 * s)) ** 0.5) / (2 * 6)
+    v1 = round(l1 * l1 * (p/4 - (2 * l1)), 2)
+    v2 = round(l2 * l2 * (p/4 - (2 * l2)), 2)
+    print v1 if v1 > v2 else v2

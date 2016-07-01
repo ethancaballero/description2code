@@ -1,0 +1,77 @@
+#include<string>
+#include<iostream>
+#include<utility>
+#include<vector>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--){
+		int n,d;
+		cin>>n>>d;
+		//d--;
+		getchar();
+		string a,b;
+		getline(cin,a);
+		getline(cin,b);
+		bool flag=true;
+		int countA[26]={0};
+		int countB[26]={0};
+		for(int i=0;i<n;i++)
+			countA[a.at(i)-97]++;
+		for(int i=0;i<n;i++)
+			countB[b.at(i)-97]++;
+		for(int i=0;i<26;i++)
+		{
+			if(countA[i]!=countB[i])
+			{
+				flag=false;
+				break;
+			}
+		}
+		if(!flag){
+			cout<<"No
+";
+			continue;
+		}
+		for(int i=0;i<n;i++)
+		{
+			if(a.at(i)==b.at(i))
+				continue;
+			else{
+				bool tFlag=false;
+				for(int j=i+d;j<n;j+=d)
+				{
+					if(a.at(i)==b.at(j))
+					{
+						tFlag=true;
+						for(int k=j;k>i;k-=d)
+						{
+							char temp=b.at(k);
+							b[k]=b[k-d];
+							b[k-d]=temp;
+						}
+						break;
+					}
+				}
+				if(!tFlag)
+				{
+					flag=false;
+					break;
+				}
+			}
+		}
+		if(!flag){
+			cout<<"No
+";
+		}
+		else{
+			cout<<"Yes
+";
+		}
+		
+	}
+	return 0;
+}

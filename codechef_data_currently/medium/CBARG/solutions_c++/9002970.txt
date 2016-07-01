@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int t;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		long long int n,i,a,sum=0,d=0;
+		scanf("%lld",&n);
+		for(i=0;i<n;i++)
+		{
+			scanf("%lld",&a);
+			if(a>d)
+			{
+				sum+=a-d;
+				d=a;
+			}
+			else
+			d=a;
+		}
+		printf("%lld
+",sum);
+	}
+	return 0;
+}

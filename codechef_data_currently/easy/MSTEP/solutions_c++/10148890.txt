@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int a[2][250000];
+        int n;
+        int f,i,j,k,l;
+        cin>>n;
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                cin>>f;
+                a[0][f-1]=j;
+                a[1][f-1]=i;
+            }
+        }
+        k=0;
+        for(i=0;i<(n*n)-1;i++)
+        {
+            k+=abs(a[0][i]-a[0][i+1])+abs(a[1][i]-a[1][i+1]);
+        }
+        cout<<k<<endl;
+    }
+    return 0;
+}

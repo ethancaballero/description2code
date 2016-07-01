@@ -1,0 +1,26 @@
+from math import sqrt
+from fractions import gcd
+
+num = int(raw_input())
+
+for _ in xrange(num):
+    _ = int(raw_input())
+    numeros = map(int,raw_input().split())
+    minimo =min(numeros)
+    mdc = minimo
+    #print numeros, minimo
+    for numero in numeros:
+        mdc = gcd(mdc, numero)
+
+    if mdc < 2:
+            print -1
+    else:
+
+        for i in xrange(2,int(sqrt(mdc))+ 1):
+
+            if mdc % i == 0:
+                print i
+                break
+        else:
+            print mdc
+

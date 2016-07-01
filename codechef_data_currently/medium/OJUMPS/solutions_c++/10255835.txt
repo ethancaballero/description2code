@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int a;
+	cin>>a;
+//	long long int sum = 0;
+	int p;
+	p = a%6;
+	if(p == 2 || p == 4 || p == 5)
+	cout<<"no";
+	else
+	cout<<"yes";
+	
+//	cout<<p;
+	return 0;
+}

@@ -1,0 +1,95 @@
+
+// #include<abhi.944>
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long int ll;
+
+#ifndef ONLINE_JUDGE
+	#define TRACE
+#endif
+
+inline int two(int n) { return 1 << n; }
+inline int test(int n, int b) { return (n>>b)&1; }
+inline void set_bit(int & n, int b) { n |= two(b); }
+inline void unset_bit(int & n, int b) { n &= ~two(b); }
+inline int last_bit(int n) { return n & (-n); }
+inline int ones(int n) { int res = 0; while(n && ++res) n-=n&(-n); return res; }
+
+//setbase - cout << setbase (16); cout << 100 << endl; Prints 64
+//setfill -   cout << setfill ('x') << setw (5); cout << 77 << endl; prints xxx77
+//setprecision - cout << fixed << setprecision (4) << f << endl; Prints x.xxxx
+
+const long double PI=3.1415926535897932384626;
+const ll MAX=1000000000+7;
+
+#define ps printf(" ")
+#define pn printf("
+")
+#define sc(n) scanf("%lld",&n)
+#define pf(n) printf("%lld",n)
+#define fora(it, x) for(__typeof((x).begin()) it=(x).begin();it!=(x).end();it++)
+#define sz size()
+#define ff first
+#define ss second
+#define pb push_back //pop_back
+#define fill(a,val) memset(a,val,sizeof(a))
+
+#ifdef TRACE
+    #define trace(x)            cerr<<"--hai--"<<x<<endl;
+    #define trace1(x)           cerr<<__FUNCTION__<<":"<<__LINE__<<": "#x" = "<<x<<endl;
+    #define trace2(x,y)         cerr<<__FUNCTION__<<":"<<__LINE__<<": "#x" = "<<x<<" | "#y" = "<<y<<endl;
+    #define trace3(x,y,z)       cerr<<__FUNCTION__<<":"<<__LINE__<<": "#x" = "<<x<<" | "#y" = "<<y<<" | "#z" = "<<z<<endl;
+    #define trace4(a,b,c,d)     cerr<<__FUNCTION__<<":"<<__LINE__<<": "#a" = "<<a<<" | "#b" = "<<b<<" | "#c" = "<<c<<" | "#d" = "<<d<<endl;
+#else
+    #define trace(x)
+    #define trace1(x)
+    #define trace2(x,y)
+    #define trace3(x,y,z)
+    #define trace4(a,b,c,d)
+#endif
+
+int t;
+string a[105];
+
+void solve()
+{
+	string ans="";
+
+	multiset<char> mp(a[0].begin(),a[0].end());
+	for(int i=0;i<t;i++)
+	{
+		multiset<char> by(a[i].begin(),a[i].end());
+		multiset<char> store;
+		set_intersection(mp.begin(),mp.end(),by.begin(),by.end(),std::inserter(store,store.begin()));
+		
+		mp=store;
+	}
+
+	fora(it,mp)
+	{
+		ans+=(*it);
+	}
+
+	if(ans=="")
+	cout<<"no such string"<<endl;
+	else
+	cout<<ans<<endl;
+}
+
+int main()
+{
+	cin>>t;
+
+	for(int i=0;i<t;i++)
+	{
+		cin>>a[i];
+
+		sort(a[i].begin(),a[i].end());
+	}
+
+	solve();
+
+	return 0;
+}

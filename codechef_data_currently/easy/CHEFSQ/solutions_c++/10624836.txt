@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+long long int a[1000],b[1000],t,n,m,i,j,k=0;
+cin>>t;
+while(t--)
+{
+cin>>n;
+for(i=0;i<n;i++)
+{cin>>a[i];
+}cin>>m;
+for(i=0;i<m;i++)
+{cin>>b[i];}
+
+
+for(i=0;i<m;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                if(b[i]==a[j])
+                {
+                    k++;
+                    break;
+                }
+            }
+        }
+
+if(k==m)
+{cout<<"Yes"<<endl;}
+else
+{cout<<"No"<<endl;}
+j=i=m=n=k=0;
+}
+
+	// your code goes here
+	return 0;
+}

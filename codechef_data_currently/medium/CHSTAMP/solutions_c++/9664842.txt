@@ -1,0 +1,183 @@
+#include <stdio.h>
+#include <map>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+#define VPII vector<pair<int, int> >
+#define REP(i,N) for(int i=0; i<(N); i++)
+#define RREP(i,N) for(int i=(N)-1; i>=0; i--)
+#define max(a,b) ((a)>(b)?(a):(b))
+#define DEBUG 0
+
+const int N = 200001;
+const int M = 50001;
+
+void printArray(int a[], int length)
+{
+  REP(i, length)
+    {
+      printf("(%d, %d)", i, a[i]);
+    }
+
+  printf("
+");
+}
+
+void printVPII(VPII m)
+{
+  VPII::iterator it = m.begin();
+  for(; it != m.end(); it++)
+    {
+      printf("(%d, %d)", it->first, it->second);
+    }
+
+  printf("
+");
+}
+
+int getComponent(int parents[], int vertex)
+{
+  if(parents[vertex] == vertex) return vertex;
+
+  return parents[vertex] = getComponent(parents, parents[vertex]);
+}
+
+void join(int parents[], int best_today[], int x, int y)
+{
+  int xc = getComponent(parents, x);
+  int yc = getComponent(parents, y);
+  
+  int best = max(best_today[xc], best_today[yc]);
+
+  best_today[xc] = best;
+  parents[xc] = parents[yc] = xc;
+
+  if(DEBUG)
+    {
+      printf("joining %d & %d. Components: %d %d, best: %d
+", x, y, xc, yc, best);
+      //printMII(parents);
+    }
+  
+}
+
+int main(int argv, char** argc)
+{
+  int T;
+
+  VPII trans[M];
+  int best_overall[M], best_today[M], parents[M];
+  int stamps[M];
+  
+  scanf("%d", &T);
+
+  while(T--)
+    {
+      int n, m;
+      long long int sum =0;
+      scanf("%d %d", &n, &m);
+
+      REP(i,M)
+	{
+	  trans[i].clear();
+	  best_overall[i] = i;
+	  parents[i] = i;
+	  stamps[i] = 0;
+	}
+
+      int ii;
+
+      REP(i,n)
+	{
+	  scanf("%d", &ii);
+	  stamps[ii]++;
+	}
+
+      REP(i, m)
+	{
+	  int D, A, B;
+	  scanf("%d %d %d", &D, &A, &B);
+
+	  trans[D].push_back(make_pair(A,B));
+	}
+
+      if(DEBUG)
+	{
+	  printf("printing transactions
+");
+	  
+	  REP(i,M)
+	    {
+	      if(trans[i].size())
+		{
+		  printf("day %d
+", i);
+		  printVPII(trans[i]);
+		}
+	    }
+	}
+
+      
+      for(int i=M-1; i > 0; i--)
+	{
+	  VPII today_trans = trans[i];
+
+	  if(today_trans.size() <= 0)
+	    continue;
+	  
+	  if(DEBUG)
+	    {
+	      printf("DAY %d
+", i);
+	      printVPII(today_trans);
+	    }
+
+	  for(VPII::iterator itt = today_trans.begin(); itt != today_trans.end(); itt++)
+	    {
+	      int cur_from = itt->first, cur_to = itt->second;
+	      best_today[cur_from] = best_overall[cur_from];
+	      best_today[cur_to] = best_overall[cur_to];
+	      parents[cur_from] = cur_from;
+	      parents[cur_to] = cur_to;
+	    }
+	  
+	  for(VPII::iterator itt = today_trans.begin(); itt != today_trans.end(); itt++)
+	    {
+	      int cur_from = itt->first, cur_to = itt->second;
+	      join(parents, best_today, cur_from, cur_to);
+	    }
+
+	  for(VPII::iterator itt = today_trans.begin(); itt != today_trans.end(); itt++)
+	    {
+	      int cur_from = itt->first, cur_to = itt->second;
+	      best_overall[cur_from] = best_today[getComponent(parents, cur_from)];
+	      best_overall[cur_to] = best_today[getComponent(parents, cur_to)];
+	    }
+	}
+
+      if(DEBUG)
+	{
+	  printf("best_overall
+");
+	  printArray(best_overall, M);
+	 	  
+	  printf("parents
+");
+	  printArray(parents, M);
+	}
+            
+      REP(i,M)
+	{
+	  if(stamps[i] > 0)
+	    sum += best_overall[i] * stamps[i];
+	}
+      
+      printf("%lld
+", sum);
+      
+    }
+
+  return 0;
+}

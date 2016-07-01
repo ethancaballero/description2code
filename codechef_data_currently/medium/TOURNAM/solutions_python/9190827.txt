@@ -1,0 +1,62 @@
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+using namespace std;
+
+int A[10001], m;
+double p;
+
+int findPower(int n) {
+    int power=0;
+    while(n /= 2)
+        power++;
+    return power;
+}
+
+double prob(int first, int last)
+{
+    int *lower = lower_bound(A, A+m, first);
+    int *upper = upper_bound(A, A+m, last);
+    if(first == last-1) {
+        if(binary_search(lower, upper, first)) {
+            if(!binary_search(lower, upper, last))
+                return p;
+            else
+                return 1;
+        }
+        else if(binary_search(lower, upper, last))
+            return p;
+        else
+            return 0;
+    }
+    double up, down = up = 0;
+    int middle = (first-1+last)/2;
+    if(lower_bound(lower, upper, middle+1) != upper) {
+        down = prob(middle+1, last);
+        //cout<<down<<" ";
+    }
+    if(upper_bound(lower, upper, middle) != lower) {
+        up = prob(first, middle);
+        //cout<<up<<endl;
+    }
+    return (up*down + (1-up)*down*p + (1-down)*up*p);
+}
+
+int main()
+{
+    int t, n, k, i;
+    cin>>t;
+
+    while(t--) {
+        cin>>n>>m>>p;
+        //k = findPower(n);
+        p /= 100;
+        for(i=0; i<m; i++)
+            cin>>A[i];
+        sort(A, A+m);
+        printf("%.8f
+", (prob(1, n)*100));
+    }
+
+    return 0;
+}

@@ -1,0 +1,41 @@
+#include<iostream>
+#include<stdio.h>
+#include<cstring>
+using namespace std;
+int depth[1000000];
+int exercise[1000000];
+char name[1000000][16];
+int main()
+{
+    char c[16];
+    int n,t,top=-1;
+    scanf("%ld",&n);
+    while(n--)
+    {
+        scanf("%d",&t);
+        if(t!=-1 && t!=0)
+        {
+            if(top==-1 || exercise[top]>=t)
+            {
+                top++;
+                exercise[top]=t;
+                scanf("%s",name[top]);
+                depth[top]=0;
+            }
+            else
+            {
+                depth[top]++;
+                scanf("%s",c);
+            }
+        }
+        else if(t==0)
+            scanf("%s",c);
+        else
+        {
+            printf("%d %s
+",depth[top],name[top]);
+            top--;
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	int n,m;
+	cin>>n>>m;
+	string a;
+	cin>>a;
+	//cout<<a<<endl;
+	int arr[n];
+	memset(arr,0,sizeof(arr));
+	int cnt[10];
+	memset(cnt,0,sizeof(cnt));
+	arr[0] = 0;
+	cnt[a[0]-'0']++;
+	for(int i=1;i<a.length();i++)
+	{
+		int tem = a[i] - '0';
+		for(int j=0;j<tem;j++)
+			arr[i] += (tem - j)*cnt[j];
+		for(int j=tem+1;j<=9;j++)
+			arr[i] += (j - tem)*cnt[j];
+		cnt[a[i]-'0']++;
+	}
+	for(int i=0;i<m;i++)
+	{
+		int temp;
+		cin>>temp;
+		cout<<arr[temp-1]<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define sf(x) scanf("%lld",&(x))
+#define mod 1000000007
+lli fast_exp(lli a,lli n)
+{
+	if(n==0)
+	return 1;
+	if(n==1)
+	return a;
+	lli t=fast_exp(a,n/2);
+	if(n%2==0)
+	{
+		return (t*t)%mod;
+	}
+	else
+	{
+		return (((t*t)%mod)*a)%mod;
+	}
+}
+int main()
+{
+	int t;
+	lli n,value;
+	scanf("%d",&t);
+	while(t--)
+	{
+		sf(n);
+		value=fast_exp(3,n);
+		if(n%2==0)
+		{
+			printf("%lld
+",value+3);
+		}
+		else
+		{
+			printf("%lld
+",value-3);
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+

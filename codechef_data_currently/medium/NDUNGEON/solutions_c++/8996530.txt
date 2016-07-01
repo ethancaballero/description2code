@@ -1,0 +1,63 @@
+#include <iostream>
+#include <queue>
+#include <algorithm>
+#include <vector>
+const int INF = 1 << 15;
+using namespace std;
+int arr[70][70];
+int dist[70][70];
+bool vis[70][70];
+int M, N;
+
+void update(int x, int y) {
+	if (x < 0 || y < 0) return;
+	vis[x][y] = 1;
+	int d = dist[x][y] + arr[x][y];
+	if (x + 1 < M && dist[x + 1][y] > d) {
+		dist[x + 1][y] = d;
+	}
+	if (y + 1 < N && dist[x][y + 1] > d) {
+		dist[x][y + 1] = d;
+	}
+	if (x > 0 && dist[x - 1][y] > d) {
+		dist[x - 1][y] = d;
+	}
+	if (y > 0 && dist[x][y - 1] > d) {
+		dist[x][y - 1] = d;
+	}
+}
+
+int main()
+{
+	cin >> M >> N;
+	
+	for (int i = 0; i < M; i++) {
+		for (int j = 0; j < N; j++) {
+			cin >> arr[i][j];
+			dist[i][j] = INF;
+		}
+	}
+	int a, b, T;
+	cin >> a >> b >> T;
+	
+	dist[0][0] = 0;
+	
+	for (int k = 0; k < M * N; k++) {
+		int x = -1, y = -1;
+		for (int i = 0; i < M; i++) {
+			for (int j = 0; j < N; j++) {
+				if (!vis[i][j] && (x == -1 || dist[x][y] > dist[i][j])) {
+					x = i;
+					y = j;
+				}
+			}
+		}
+		update(x, y);
+	}
+	
+	int ans = T - dist[a - 1][b - 1] - arr[a - 1][b - 1];
+	if (ans < 0) cout << "NO";
+	else cout << "YES
+" << ans;
+	return 0;
+}

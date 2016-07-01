@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    int H,M;
+    cin>>t;
+    while(t--)
+    {
+        cin>>H;
+        cin>>M;
+
+        int cnt=1;
+        for(int i=1;i<H;i++)
+        {
+            for(int j=1;j<M;j++)
+            {
+                if((i==j && i<10 && j<10) || i==j*10+j || j==i*10+i || ((i%10==j%10) && (i/10==j/10) && i%10==j/10))
+                {
+                    cnt++;
+                    
+                }
+            }
+        }
+        cout<<cnt;
+        cout<<endl;
+    }
+    return 0;
+}

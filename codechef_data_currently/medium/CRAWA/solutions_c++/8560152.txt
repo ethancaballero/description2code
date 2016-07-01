@@ -1,0 +1,56 @@
+#include<iostream>
+#include<cstdlib>
+int main(){
+    int t;
+    //int direction[4][6]={{0,1,1,-1,0,1},{1,-1,1,-1,-1,0},{1,-1,1,1,0,-1},{1,1,1,1,1,0}}; //比對;正負;位移
+    std::cin>>t;
+    for(int k=0;k<t;k++){
+        long int x,y;
+        std::cin>>x>>y;
+		if(x==0&&y==0){
+		std::cout<<"YES
+";
+		continue;
+		}
+        long int point_x[2],point_y[2],sq;
+        point_x[0]=abs(x);
+        point_y[0]=abs(y);
+        if(point_x[0]>point_y[0]){
+            sq=point_x[0];
+        if(sq%2==0){
+            sq=sq-2;
+        }else{
+            sq=sq-1;
+        }
+        }else{
+            sq=point_y[0];
+            if(sq%2==0){
+                sq=sq-2;
+            }else{
+                sq=sq-1;
+            }
+        }
+        point_x[0]=sq+1;
+        point_y[0]=0-sq;
+        point_x[1]=sq+2;
+        point_y[1]=0-(sq+2);
+		long int now_x=point_x[0],now_y=point_y[0];
+		int ans=0;
+		if(x==point_x[0]&&y<=(-1*point_y[1])&&y>=point_y[0])
+			ans=1;
+		else if(x==-1*point_x[1]&&y<=(-1*point_y[1])&&y>=point_y[1])
+			ans=1;
+		else if(y==-1*point_y[1]&&x>=(-1*point_x[1])&&x<=point_x[0])
+			ans=1;
+		else if(y==point_y[1]&&x>=(-1*point_x[1])&&x<=point_x[1])
+			ans=1;
+		if(ans==1){
+		std::cout<<"YES
+";
+		}else{
+		std::cout<<"NO
+";
+		}
+    }
+	return 0;
+}

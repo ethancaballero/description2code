@@ -1,0 +1,45 @@
+	#include<iostream>
+	#include<algorithm>
+	#include<string.h>
+	#include<stdio.h>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			char a[100005];
+			
+			cin>>a;
+			int l=strlen(a);
+			int count1=0;
+			int count2=0;
+			for(int i=0;i<l;i++)
+			{
+				if(i%2==0)
+				{	
+					// first is plus
+					if(a[i]=='-')
+						count1++;
+					// first is minus
+					if(a[i]=='+')
+						count2++;
+				}
+				else
+				{
+					// first is plus
+					if(a[i]=='-')
+						count2++;
+					// first is minus
+					if(a[i]=='+')
+						count1++;
+
+				}	
+			}	
+			int min1=min(count1,count2);
+
+			cout<<min1<<endl;
+			t--;
+		}	
+	}

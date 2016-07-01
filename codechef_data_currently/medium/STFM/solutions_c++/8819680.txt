@@ -1,0 +1,58 @@
+using namespace std;
+#include<bits/stdc++.h>
+
+#define BG begin()
+#define ED end()
+#define st first
+#define nd second
+#define PB push_back
+#define PF push_front
+#define FOR(i,a,b) for (long long i=a;i<b;i++)
+#define FORE(i,a,b) for (long long i=a;i<=b;i++)
+#define FORD(i,a,b) for (long long i=a;i>=b; i--)
+#define TR(c, it) for(typeof((c).begin()) it=(c).begin(); it!=(c).end(); it++)
+#define PI 2 * acos(0)
+#define ri(n)({    int neg=0;    n=0;    char ch;    for(ch=getchar(); ch<'0' || ch>'9'; ch=getchar()) if (ch=='-') neg=1-neg;    n=ch-48;    for(ch=getchar(); ch>='0' && ch<='9'; ch=getchar()) n=(n<<3)+(n<<1)+ch-48;    if (neg) n=-n;})
+
+typedef long long ll;
+typedef long double ld;
+typedef unsigned long long ull;
+typedef pair<int,int> II;
+typedef pair<int,II> III;
+typedef pair<ll,ll> LL;
+const ll INF=1000000000+7;
+const double esp=1e-13;
+
+int n,m;
+ll ans,x;
+ll f[10000000+10],mu[10000000+10];
+
+ll get(ll n){
+    ll b[10];
+    b[1]=b[2]=n;
+    b[3]=n+1;
+    FORE(i,1,3)
+    if (b[i]%2==0){
+        b[i]/=2;
+        break;
+    }
+    FORE(i,1,3) b[i]%=m;
+    return b[1]*b[2]%m*b[3]%m;
+}
+
+int main(){
+ //   freopen("STFM.inp", "r", stdin);
+ //   freopen("STFM.out", "w", stdout);
+    ri(n); ri(m);
+    f[0]=1;
+    FORE(i,1,m){
+        f[i]=f[i-1]*i%m;
+        mu[i]=(mu[i-1]+f[i]*i)%m;
+    }
+    ans=0;
+    while (n--){
+        ri(x);
+        ans=(ans+get(x)+mu[min(x,(ll)m)])%m;
+    }
+    cout << ans;
+}

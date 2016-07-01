@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t;
+    int n,m;
+    long long int sum=0;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+       sum=2*m*n-m-n;
+        cout<<sum<<"
+";
+    }
+}

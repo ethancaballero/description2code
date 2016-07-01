@@ -1,0 +1,22 @@
+## CodeChef
+## Greedy puppy
+## 2016.03.17
+
+def maxRemainder(n,k):
+    maximum = 0
+    select = 0 
+    for i in xrange(1,k+1):
+        remainder = n % i
+        if remainder > maximum:
+            maximum = remainder
+            select = i
+
+    return select
+            
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    n, k = map(int, raw_input().strip().split())
+    choose =  maxRemainder(n,k)
+    print n % choose

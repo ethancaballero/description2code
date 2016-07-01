@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#define ll long long
+using namespace std;
+
+ll count[10];
+ll t,n,m,p;
+ll fact[20];
+
+void factcal(){
+	fact[0] = 1;
+	
+	for(ll i=1;i<=19;i++)
+		fact[i] = i*fact[i-1];
+}
+
+int main() {
+	// your code goes here
+	factcal();
+	scanf("%lld",&t);
+	
+	while(t--){
+		scanf("%lld",&n);
+		m = n;
+		memset(count,0,sizeof count);
+		p = 0;
+		ll ct = 0;
+		while(m>0){
+			count[m%10]++;
+			p *= 10;
+			p += m%10;
+			m /= 10;
+			ct++;
+		}
+		ll rank = 0;
+
+		while(p>0){
+			ll tmp = p%10;
+			
+			ll tm = 1;
+			for(ll k=0;k<10;k++){
+				tm *= fact[count[k]];
+			}
+			tm = fact[ct]/tm;
+			//cout << tm << endl;
+			ll tp;
+			for(ll k=0;k<tmp;k++){
+				tp = tm*count[k];
+				tp /= ct;
+				//cout << tp <<"dc"<<endl;
+				rank += tp;
+			}
+			count[tmp]--;
+			p/=10;
+			ct--;
+		}
+		
+		printf("%lld
+",rank+1);
+		
+	}
+	
+	return 0;
+}

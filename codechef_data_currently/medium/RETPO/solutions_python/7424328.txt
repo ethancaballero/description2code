@@ -1,0 +1,17 @@
+T = int(raw_input())
+while(T>0):
+    T = T-1
+    arr = map(int, raw_input().split())
+    x = abs(arr[0])
+    y = abs(arr[1])
+    count = 0
+    if(abs(x-y)%2==0):
+        count = 2*min(x,y) + 2*(abs(x-y))
+    else:
+        if(x>y):
+            count = 2*min(x,y) + 2*(abs(x-y)) + 1
+        elif(x<y):
+            count = 2*min(x,y) + 2*(abs(x-y)) - 1
+    print count
+
+

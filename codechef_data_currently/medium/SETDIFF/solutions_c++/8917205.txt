@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+#define mod 1000000007
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+		long long int arr[100005];
+		int n;
+		cin>>n;
+		for(int i=0;i<n;i++){
+			cin>>arr[i];
+		}
+		vector<long long int> list(arr,arr+n);
+		sort(list.begin(),list.end());
+		long long int p=0;
+		long long int q=0;
+		for(int i=0;i<n;i++){
+			p = (2*p + list[i])%mod;
+			q = (2*q + list[n-1-i])%mod;
+		}
+		cout<<(q+mod-p)%mod<<endl;
+	}
+	
+	return 0;
+}

@@ -1,0 +1,9 @@
+# cook your code here
+import math 
+for _ in xrange(input()):
+    val = []
+    N = input()
+    for i in xrange(1,int(math.sqrt(N))+1):
+        if N%i == 0:
+            val += [abs(N/i - i)]
+    print min(val)

@@ -1,0 +1,40 @@
+## Codechef
+## Chef and Wildcard Matching
+## 2016.03.12
+##def yesOrno(stringX, stringY):
+##    for i in xrange(len(stringX)):
+##        if stringX[i] != '?' and stringY[i] != '?' and stringX[i] != stringY[i]:
+##            return 'No'
+##        else:
+##            pass
+##    return 'Yes'
+##
+##
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    stringX = raw_input()
+##    stringY = raw_input()
+##
+##    print yesOrno(stringX,stringY)
+
+
+## Codechef
+## Piece and cake
+## 2016.03.12
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    string = raw_input()
+    dic = dict()
+    for i in xrange(len(string)):
+        if string[i] not in dic:
+            dic[string[i]] = 1
+        else:
+            dic[string[i]] += 1
+
+    if max(dic.values()) * 2 == sum(dic.values()):
+        print 'YES'
+    else:
+        print 'NO'

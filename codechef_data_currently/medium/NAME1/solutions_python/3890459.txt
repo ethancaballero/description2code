@@ -1,0 +1,22 @@
+from collections import Counter
+test=int(raw_input())
+for i in range(test):
+    z=0
+    string=raw_input().split()
+    s=string[0]+string[1]
+    c=int(raw_input())
+    k=''
+    for i in range(c):
+        string=raw_input()
+        k=k+string
+    s1=Counter(s)
+    k1=Counter(k)
+    for char in k1:
+        if k1[char]>s1[char]:
+            z=1
+            print 'NO' 
+            break
+    if z==0:
+        print 'YES'
+        
+        

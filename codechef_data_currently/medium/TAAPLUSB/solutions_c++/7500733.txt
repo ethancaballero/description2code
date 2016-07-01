@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+double ans[100010];
+double sum[100010];
+int main()
+{
+	ll i,n,t;
+	std::ios_base::sync_with_stdio(false);
+	for(i=1;i<=100001;i++)
+	{
+		ans[i]=ans[i-1]*0.10+0.45;
+		sum[i]=ans[i]+sum[i-1];
+	}
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		cout<<fixed<<setprecision(6)<<sum[n]<<endl;
+	}
+}

@@ -1,0 +1,81 @@
+#include <cstdlib>
+#include <iostream>
+#include <stdio.h>
+#define gc getchar_unlocked
+
+void scanint(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+using namespace std;
+
+int main(){
+	
+	int T;
+	string s;
+	int** mat;
+	int size;
+	int temp;
+	int startx, starty;
+	cin >> T;
+	for(int i = 0; i < T; i++){
+		cin >> size;
+		mat = (int**)malloc(size*sizeof(int*));
+		for(int j = 0; j < size; j++){
+			mat[j] = (int*)malloc(size*sizeof(int));
+		} 
+		for(int j = 0; j < size; j++){
+			for(int k = 0; k < size; k++){
+				mat[j][k] = 0;
+			}
+		}
+		for(int j = 0; j < size; j++){
+			cin >> s;
+			for(int k = 0; k < size; k++){
+				if(s[k] == 'P')
+					mat[j][k] = 1;
+				else if(s[k] == 'K'){
+					//mat[j][k] = 2;
+					startx = j;
+					starty = k;
+				}
+			}
+		}
+		
+		for(int j = size-2; j >= starty; j--){
+			for(int k = 0; k < size; k++){
+				temp = 0;
+				if(j+1 < size){
+					if(k+2 < size){
+						temp = max(mat[k+2][j+1], temp);
+					}
+					if(k-2 >= 0){
+						temp = max(mat[k-2][j+1], temp);
+					}
+				}
+				if(j+2 < size){
+					if(k+1 < size){
+						temp = max(mat[k+1][j+2], temp);
+					}
+					if(k-1 >= 0){
+						temp = max(mat[k-1][j+2], temp);
+					}
+				}
+				mat[k][j] += temp;
+			}
+		}
+		
+		cout << mat[startx][starty] << endl;
+		for(int j = 0; j < size; j++){
+			delete(mat[j]);
+		}
+		delete(mat);
+	}
+
+}
+
+

@@ -1,0 +1,18 @@
+chef = list("CHEF") 
+for _ in range(int(raw_input())):
+  s=list(raw_input())
+  l = len(s)-1
+  while l>2:
+    if (s[l]=='F' or s[l]=='?') and (s[l-1]=='E' or s[l-1]=='?') and (s[l-2]=='H' or s[l-2]=='?') and (s[l-3]=='C' or s[l-3]=='?'):
+      s[l-3:l+1]= chef
+      l-=4
+    elif s[l]=='?':
+      s[l]='A'
+      l-=1
+    else:
+      l-=1
+  while l>=0:
+    if s[l]=='?':
+      s[l]='A'
+    l-=1
+  print "".join(s)

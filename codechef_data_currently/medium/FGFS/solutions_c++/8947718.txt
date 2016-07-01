@@ -1,0 +1,58 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+using namespace std;
+typedef long int li;
+class comp{
+	public:
+		long int si;
+		long int fi;
+		long int pref;
+		comp(){
+			
+		}
+		comp(li s,li f,li p){
+			si = s;
+			fi = f;
+			pref = p;
+		}
+};
+struct comparable{
+	bool operator()(const comp &o1,const comp &o2){
+		return o1.pref!=o2.pref?o1.pref<o2.pref:o1.fi<o2.fi;
+	}
+}compare;
+
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n;
+		long int k;
+		scanf("%d%ld",&n,&k);
+		comp arr[100005];
+		li s,f,p;
+		for(int i=0;i<n;i++){
+			scanf("%ld%ld%ld",&s,&f,&p);
+			arr[i] = comp(s,f,p);
+		}
+		sort(arr,arr+n,compare);
+		long int ans=0;
+		int ind = 0;
+		int con = -1;
+		for(int i=0;i<n;i++){
+			if(con<arr[i].pref){
+				con = arr[i].pref;
+				ind = i;
+				ans++;
+			}
+			if(arr[i].si>=arr[ind].fi){
+				ans++;
+				ind = i;
+			}
+		}
+		printf("%ld
+",ans);
+	}
+	return 0;
+}

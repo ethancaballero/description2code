@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+#define lli long long int
+using namespace std;
+void fun(vector<lli>p[],lli src,lli visited[],lli flag,lli mark[])
+{
+	visited[src]=1;
+
+	vector<lli>::iterator it;
+        mark[src]=flag;
+	it=p[src].begin();
+	while(it!=p[src].end())
+	{
+		if(visited[*it]==0){
+			fun(p,*it,visited,flag,mark);
+		}
+		it++;
+	}
+}
+
+int main()
+{
+	lli i,j,k,m,n,t,p,q,a,b,flag;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld%lld",&n,&m);
+		lli visited[n],mark[n];
+		vector<lli>p[n];
+		while(m--)
+		{
+			scanf("%lld%lld",&a,&b);
+			p[a].push_back(b);
+			p[b].push_back(a);
+		}
+		for(i=0;i<n;i++)
+			mark[i]=0;
+
+		for(i=0;i<n;i++)
+			visited[i]=0;
+		flag=0;
+		for(i=0;i<n;i++)
+		{
+			if(visited[i]==0)
+			{
+				fun(p,i,visited,flag,mark);
+				flag++;
+			}
+		}
+		scanf("%lld",&q);
+		while(q--)
+		{
+			scanf("%lld%lld",&a,&b);
+
+			if(mark[a]==mark[b])
+				printf("YO
+");
+			
+                        else
+				printf("NO
+");
+		}
+	}
+}

@@ -1,0 +1,60 @@
+import copy
+for i in range(int(raw_input())):
+    l , r = [int(x) for x in raw_input().split()]
+    s  = 0    
+    l = l-1
+    if l < 10:
+        if r < 10:
+            s = (r*(r+1))/2 - (l*(l+1))/2
+            print s
+            continue
+        else:
+            hi = copy.deepcopy(r)
+            lo = copy.deepcopy(l)
+            exphi = 0
+            while hi > 9:
+                hi /= 10
+                exphi += 1
+            explo = 0
+            while lo > 9:
+                lo /= 10
+                explo += 1
+            su = 0
+            t = 0
+            tt = 0
+            for i in range(1 , exphi+1):
+                t = pow(10 , i) - 1
+                su = (su + (((t*(t+1))/2)-(tt*(tt+1)/2))*i)%1000000007 
+                tt = t 
+            diff = (((r*(r+1))/2 - (t*(t+1))/2)*(exphi+1))%1000000007
+            su = (su+diff)%1000000007
+            print su - (l*(l+1))/2
+            continue
+    hi = copy.deepcopy(r)
+    lo = copy.deepcopy(l)
+    exphi = 0
+    while hi > 9:
+        hi /= 10
+        exphi += 1
+    explo = 0
+    while lo > 9:
+        lo /= 10
+        explo += 1
+    su = 0
+    t = 0
+    tt = 0
+    for i in range(1 , exphi+1):
+        t = pow(10 , i) - 1
+        su = (su + (((t*(t+1))/2)-(tt*(tt+1)/2))*i)%1000000007 
+        tt = t
+    diff = ((((r*(r+1))/2) - ((t*(t+1))/2))*(exphi+1))%1000000007
+    su = (su+diff)%1000000007
+    suu = 0
+    tt = 0
+    for i in range(1 , explo+1):
+        t = pow(10 , i) - 1
+        suu = (suu + ((t*(t+1)/2) - (tt*(tt+1)/2))*i)%1000000007 
+        tt = t
+    diff = ((((l*(l+1))/2) - ((t*(t+1))/2))*(explo+1))%1000000007
+    suu = (suu+diff)%1000000007
+    print (su - suu)%1000000007

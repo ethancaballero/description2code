@@ -1,0 +1,103 @@
+/*
+ * Problem : 
+ * Author : Hwhitetooth
+ * Date : 
+ * Result : 
+ */
+
+#include <iostream>
+#include <sstream>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+#include <cctype>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <list>
+#include <map>
+#include <set>
+#include <algorithm>
+
+using namespace std;
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef long double LD;
+
+const int N = 100 + 10;
+const double EPS = 1e-10;
+const int INF = 1e4;
+
+double a[N][N];
+int n, m;
+int testCases;
+
+int gauss(double a[N][N], int n, int m) {
+	int cur = 0;
+	for (int j = 0; j < n; ++ j) {
+		int k = -1;
+		for (int i = cur; i < n; ++ i) {
+			if (fabs(a[i][j]) > EPS && (k == -1 || fabs(a[i][j]) > fabs(a[k][j]))) {
+				k = i;
+			}
+		}
+		if (k == -1) {
+			continue;
+		}
+		for (int i = 0; i < n; ++ i) {
+			swap(a[cur][i], a[k][i]);
+		}
+		double tmp = a[cur][j];
+		for (int i = 0; i < n; ++ i) {
+			a[cur][i] /= tmp;
+		}
+		for (int i = cur + 1; i < n; ++ i) {
+			tmp = a[i][j];
+			for (int k = 0; k < n; ++ k) {
+				a[i][k] -= a[cur][k] * tmp;
+			}
+		}
+		++ cur;
+	}
+	return cur;
+}
+
+int main() {
+	srand(time(NULL));
+	scanf("%d", &testCases);
+	while (testCases --) {
+		memset(a, 0, sizeof a);
+		scanf("%d%d", &n, &m);
+		while (m --) {
+			static int u, v;
+			scanf("%d%d", &u, &v);
+			-- u;
+			-- v;
+			if (u > v) {
+				swap(u, v);
+			}
+			if (a[u][v] == 0) {
+				a[u][v] = rand() % INF;
+				a[v][u] = -a[u][v];
+			}
+		}
+/*
+		for (int i = 0; i < n; ++ i) {
+			for (int j = 0; j < n; ++ j) {
+				printf("%f ", a[i][j]);
+			}
+			printf("
+");
+		}
+*/
+		int rank = gauss(a, n, n);
+		printf("%s
+", rank == n ? "YES" : "NO");
+	}
+	return 0;
+}

@@ -1,0 +1,11 @@
+from sys import stdin as ip
+for _ in xrange(int(ip.readline())):
+    n=int(ip.readline())
+    li=[]
+    for i in xrange(n):
+        li.append(list(map(int,ip.readline().split())))
+    ans=1
+    for i in xrange(2,n+1):
+        ans^=i
+    print ans
+        

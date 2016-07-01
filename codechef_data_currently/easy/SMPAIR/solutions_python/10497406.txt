@@ -1,0 +1,8 @@
+t=input()
+for i in range(t):
+	a=input()
+	l=map(int,raw_input().split())
+	mi=min(l)
+	l.remove(mi)
+	mini=min(l)
+	print mi+mini

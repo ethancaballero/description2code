@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        char a[100005];
+        cin>>a;
+        int c =0;
+        int al = strlen(a);
+        for(int i=0;i<al;i++){
+            if(a[i] =='4' || a[i]=='7')
+                continue;
+            c++;
+        }
+        cout<<c<<endl;
+    }
+}

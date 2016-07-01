@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long mx[111111];
+int a[111111];
+int main()
+{
+	int t;
+	cin >> t;
+	while (t --> 0)
+        {
+		int n;
+		cin >> n;
+		for(int i = 0; i < n; ++i)
+			cin >> a[i];
+		if (*max_element(a, a+n) < 0)
+			cout <<*max_element(a, a+n) << "
+";
+		else
+            {
+			mx[0] = a[0];
+			for(int i = 1; i < n; ++i)
+            mx[i] = max(1ll*a[i], mx[i-1]+a[i]);
+			long long ans = *max_element(mx, mx+n);
+			long long pp = 0;
+			for(int i = n-1; i >= 2; --i)
+			{
+				pp = max(pp+a[i], 1ll*a[i]);
+				ans = max(ans, pp);
+				ans = max(ans, pp + a[i-1] + mx[i-2]);
+				ans = max(ans, pp + mx[i-2]);
+			}
+			cout << ans << "
+";
+		    }
+	   }
+	return 0;
+}

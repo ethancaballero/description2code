@@ -1,0 +1,28 @@
+def solution():
+	T = raw_input('')
+	answers = []
+	for i in range(0,int(T)):
+		length = int(raw_input(''))
+		string = raw_input('')
+		numb_of_ones = no_of_ones(string)
+		#print numb_of_ones
+		ways = 0
+		for i in range(1,numb_of_ones+1):
+			ways = ways + numb_of_ones
+			numb_of_ones = numb_of_ones - 1
+			#print '**',ways
+		#print ways
+		answers.append(ways)
+	for i in answers:
+		print "%d"%(i)
+
+def no_of_ones(string):
+	ones = 0
+	#print string
+	for i in string:
+		if i == '1':
+			ones += 1
+	#print ones
+	return ones
+
+solution()

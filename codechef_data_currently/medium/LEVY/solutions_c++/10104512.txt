@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e4 + 10;
+vector<int> primes;
+bool sieve[MAXN];
+int ans[MAXN];
+int dead[MAXN];
+void go(){
+    memset(sieve, 1, sizeof sieve);
+    sieve[0] = sieve[1] = false;
+    for(int i = 2;i * i < MAXN;++i){
+        if(sieve[i]){
+            for(int j = i * i;j < MAXN;j += i){
+                sieve[j] = false;
+            }
+        }
+    }
+    for(int i = 2;i < MAXN;++i){
+        if(sieve[i])
+            primes.push_back(i);
+    }
+    int sz = primes.size();
+    memset(dead, 0, sizeof dead);
+    memset(ans, 0, sizeof ans);
+    for(int i = 0;i < sz && (2 * primes[i] < MAXN);++i){
+        dead[2 * primes[i]] = 1;
+    }
+    for(int i = 1;i < MAXN;++i){
+        for(int j = 0;j < sz && primes[j] <= i;++j){
+            ans[i] += dead[i - primes[j]];
+        }
+    }
+}
+
+
+int main(){
+    go();
+    int t;
+    scanf("%d", &t);
+    while(t--){
+        int N;
+        scanf("%d", &N);
+        printf("%d
+", ans[N]);
+    }
+
+    return 0;
+}

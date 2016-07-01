@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define fastScan ios_base::sync_with_stdio(0); cin.tie(NULL);
+    
+ 
+int main()
+{
+ fastScan;
+ int t;
+ cin>>t;
+ while(t--){
+     int n,i,j=1,top[100001]={0},k;
+     cin>>n;
+     int arr[n];
+     for(i=0;i<n;i++)
+       cin>>arr[i];
+     
+     top[0]=arr[0];
+     for(i=1;i<n;i++){
+         if(arr[i]>=top[j-1]){
+           top[j]=arr[i];
+           j++;
+         }
+         else{
+             int start=0,end=j;
+        while(start<end){
+            int mid=start+(end-start)/2;
+            if(top[mid]>arr[i])end=mid;
+            else start=mid+1;
+        }
+        top[end]=arr[i];
+             
+         }
+     }
+     cout<<j<<" ";
+     for(i=0;i<j;i++)
+       cout<<top[i]<<" ";
+       cout<<endl;
+ }
+ return 0;
+} 

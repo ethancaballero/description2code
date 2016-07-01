@@ -1,0 +1,15 @@
+t = int(raw_input())
+for i in range(t):
+    n, d = raw_input().split()
+    n, d = int(n), int(d)
+    arr = raw_input().split()
+    arr = map(int, arr)
+    arr.sort()
+    ans = 0
+    count = 0
+    for j in range(n-1, 0, -1):
+        if(arr[j] != -999999 and abs(arr[j]-arr[j-1]) < d):
+            ans += arr[j] + arr[j-1]
+            arr[j] = -999999
+            arr[j-1] = -999999
+    print ans

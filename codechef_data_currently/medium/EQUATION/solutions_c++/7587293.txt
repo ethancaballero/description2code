@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lint long long
+lint comb(lint n)
+{
+    if(n<0) return 0;
+    else return ((n+3)*(n+2)*(n+1))/6;
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        lint n,a,b,c;
+        scanf("%lld%lld%lld%lld",&n,&a,&b,&c);
+        lint ans=comb(n)-comb(n-a-1)-comb(n-b-1)-comb(n-c-1)+comb(n-a-b-2)+comb(n-b-c-2)+comb(n-c-a-2)-comb(n-a-b-c-3);
+        printf("%lld
+",ans);
+    }
+}

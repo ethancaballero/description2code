@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using  namespace std;
+#define ll long long
+#define M 1000000007
+int c[1001][1001];
+ int i=0,j=0;
+int main() {
+	int t,n,ans;
+
+	for(i=0;i<1001;i++){                    // how to precompute nCk
+    for(j=0;j<1001;j++){
+	if(i>=j){
+	if(j==0)
+	c[i][j]=1;
+	else
+	c[i][j]=(c[i-1][j-1]+c[i-1][j])%M;
+	}
+	}
+	}
+
+
+	scanf("%d",&t);
+	for(i=0;i<t;i++){
+	cin>>n;
+	for(j=0;j<n;j++){
+	scanf("%*d");
+	}
+ll ans=0;
+for(j=n/2+1;j<=n;j++){
+ans=(ans+c[n][j])%M;
+}
+cout<<ans<<endl;
+	
+	}
+
+	return 0;
+}

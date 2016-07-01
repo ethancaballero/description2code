@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int ntc;
+    cin>>ntc;
+    while(ntc--)
+    {
+        int sz;
+        cin>>sz;
+        int a[sz];
+        for(int i=0;i<sz;i++)
+        {
+            cin>>a[i];
+        }
+        //local inversions
+        int li = 0;
+        for(int i=0;i<sz-1;i++)
+        {
+            if(a[i]>a[i+1])
+            {
+                ++li;
+            }
+        }
+        int inv = 0;
+        for(int j=sz-1;j>0;j--)
+        {
+            for(int i=j-1;i>=0;i--)
+            {
+                if(i<j && a[i]>a[j])
+                {
+                    ++inv;
+                }
+            }
+        }
+        if(inv==li)
+        {
+            cout<<"YES"<<endl;
+        }
+        else
+        {
+            cout<<"NO"<<endl;
+        }
+    }
+}

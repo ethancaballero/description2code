@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	   long long int n,k;
+	   cin>>n>>k;
+	   long long int a,b;
+	   if(k!=0)
+	{
+	   a=n/k;
+	   b=n%k;
+}
+else
+{
+	a=0;
+	b=n;
+}
+	   cout<<a<<" "<<b<<"
+";
+	}
+}

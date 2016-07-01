@@ -1,0 +1,96 @@
+#include<iostream>
+#include<cstdio>
+#include<assert.h>
+using namespace std;
+
+
+typedef long long int64;
+
+//constants
+const int max_n = 200005;
+const int max_a = 101;
+const int MOD = 1000000007;
+
+//global variables
+int a[max_n];
+int64 dp[max_a];
+
+int64 pow(int64 a, int n)
+{
+    if(n == 0) return 1;
+
+    int64 x = (pow(a, n/2)*pow(a, n/2))%MOD;
+    if(n&1)
+    {
+        return (a*x)%MOD;
+    }
+    else
+    {
+        return x % MOD;
+    }
+}
+
+
+int main()
+{
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt","r",stdin);
+    //freopen("output.txt","w",stdout);
+    #endif
+
+
+    int t, n;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int64 total_num_ap = 0;
+
+        scanf("%d", &n);
+        for(int i=0; i<n; i++)
+        {
+            scanf("%d", &a[i]);
+        }
+
+        //count number of AP subsequences
+
+        int target;
+        int64 total_seq = pow(2LL, n);
+        //cout<<total_seq<<endl;
+
+        //loop through all possible r
+        for(int r = -99; r <= 99; r++)
+        {
+            //initialize
+            for(int i=1; i<= max_a; i++)
+            {
+                dp[i] = 0;
+            }
+
+            //add first element
+            dp[a[0]]++;
+
+
+            //loop over n
+            for(int i=1; i<n; i++)
+            {
+
+
+                target = a[i] - r;
+                total_num_ap += dp[target];
+                if(total_num_ap >= MOD) total_num_ap -= MOD;
+                dp[a[i]] += dp[target] + 1;
+                if(dp[a[i]] >= MOD) dp[a[i]] -= MOD;
+            }
+        }
+        total_num_ap += n + 1;
+        if(total_num_ap >= MOD)total_num_ap -= MOD;
+
+        int64 num_non_ap = total_seq - total_num_ap;
+        if(num_non_ap < 0) num_non_ap += MOD;
+
+        printf("%lld
+", num_non_ap);
+
+    }
+    return 0;
+}

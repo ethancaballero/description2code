@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int gcd(int a,int b)
+{
+    if(a>b)
+       {
+           if(a%b==0)
+            return b;
+            else
+                gcd(a%b,b);
+       }
+    else
+    {
+        if(b%a==0)
+            return a;
+        else
+            gcd(b%a,a);
+    }
+}
+int main()
+{
+    int t,g;
+    long long int l,b;
+    cin>>t;
+    while(t--)
+    {
+        cin>>l>>b;
+        g=gcd(l,b);
+        cout<<(l*b)/(g*g)<<endl;
+    }
+    
+} 

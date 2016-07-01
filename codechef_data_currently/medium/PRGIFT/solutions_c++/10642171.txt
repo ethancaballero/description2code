@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,k,n,x,c,i,p;
+    scanf("%d",&t);
+    while(t--)
+    {
+        c=0;p=0;
+        scanf("%d%d",&n,&k);
+        for(i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            if(x%2==0)
+                c++;
+            else
+                p++;
+        }
+        if(k==0&&p==0)
+            printf("NO
+");
+        else
+        {
+        if(c>=k)
+            printf("YES
+");
+        else
+            printf("NO
+");
+        }
+    }
+    return 0;
+}

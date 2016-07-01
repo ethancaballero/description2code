@@ -1,0 +1,12 @@
+n=int(raw_input())
+
+a=[]
+
+for i in range(n):
+	t=int(raw_input())
+	a.append(t)
+
+a.sort()
+
+for i,val in enumerate(a):
+	print val	

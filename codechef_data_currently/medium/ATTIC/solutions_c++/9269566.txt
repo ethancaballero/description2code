@@ -1,0 +1,47 @@
+#include<iostream>
+#include<string>
+using namespace std;
+/*int func(string s)
+{ int count=0;
+	for(int i=0;i<s.length();i++)
+	{
+		
+	}
+}*/
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		string s;
+		cin>>s;
+		int capacity=1,days=0;
+		int tin=0;int k=0;
+		while(tin==0)
+		{
+			for(;k<s.length();k++)
+			{int yo=0;
+				if(s[k]=='.')
+				{ 
+					for(int i=k;s[i] =='.';i++ )
+					{
+						if(s[i]=='.')
+						yo++;
+					}
+				}
+				if(capacity<yo+1)
+				{
+					capacity=yo+1;
+					days++;
+				}
+				if(yo>=1)
+				k=k+yo-1;
+				if(k==s.length()-1)
+				tin++;
+			}
+		}
+		
+		cout<<days<<endl;
+	}
+}

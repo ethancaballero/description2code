@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,k,term,quo,temp,i;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&k);
+		printf("3");
+		if(k!=0)
+		{
+			printf(".");
+			temp=(103993%33102)*10;
+			for(i=1;i<=k;i++)
+			{
+				term=temp/33102;
+				printf("%d",term);
+				temp=(temp%33102)*10;
+			}
+		}
+		printf("
+");
+	}
+	return 0;
+}

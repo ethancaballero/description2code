@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+
+int input()
+{
+    int n=0;
+    char c=getchar();
+    while(!('0'<=c && c<='9'))
+    {
+        c=getchar();
+    }
+    while('0'<=c && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar();
+    }
+    return n;
+}
+ int main()
+ {
+     int t;
+     int a,n,min,d,d1;
+     t=input();
+     while(t--)
+     {
+         n=input();
+         a=input();
+         if(n==1)
+            printf("UNFIT
+");
+         else{
+            min=a;d=0;d1=0;
+            n--;
+            while(n--)
+            {
+                a=input();
+                if(a>min)
+                {
+                    d=a-min;
+                    if(d>d1)
+                        d1=d;
+
+                }
+                else
+                    min=a;
+            }
+            if(d1>0)
+                printf("%d
+",d1);
+            else
+                printf("UNFIT
+");
+         }
+     }
+     return 0;
+ }

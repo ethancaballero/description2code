@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define rep(i,n) for(i=0;i<n;i++)
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	ll t,n,i,j,mx,c;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		ll a[100000];
+		rep(i,n)
+			cin>>a[i];
+		mx=0;
+		ll min=a[0];
+		for(i=1;i<n;i++)
+		{
+			c = (a[i]-min);
+			if(c>mx)
+				mx=c;
+			if(a[i]<min)
+				min = a[i];
+		}
+		if(n==1)
+			mx = 0;
+		if(mx>0)
+			cout<<mx<<endl;
+		else 
+			cout<<"UNFIT
+";
+	}
+	return 0;
+} 

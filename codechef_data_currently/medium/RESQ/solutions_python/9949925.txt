@@ -1,0 +1,14 @@
+import math
+T = int(raw_input())
+
+while T:
+        num = int(raw_input())
+        n = int(math.sqrt(num))
+        min = num
+        for i in range(n,0,-1):
+                if num % i == 0:
+                        if (num/i) - i < min:
+                                min = (num/i) - i
+                                break
+        print min
+        T -= 1

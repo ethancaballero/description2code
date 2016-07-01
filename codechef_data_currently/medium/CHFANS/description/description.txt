@@ -1,0 +1,31 @@
+ 
+Chef is studying Rotational Motion in physics. Here is preparing for Engineering Entrance exam. He's stuck in a problem. Which states that "Two fans, each with a single blade are rotating one above the other, about the same axis of rotation and both blades have the same length. Consider the blade as a rod. Both the fans are rotating indefinitely. 
+Fans can rotate in either clockwise or anticlockwise direction. There is a dot marked on the blade of both the fans and the dot is marked at the same distance from the center of rotation.
+You're be given speeds of the fans. 
+Clockwise rotation - positive speed. 
+Anticlockwise rotation - negative speed.
+
+Help Chef to find the number of distinct points the dots will coincide on the circumference of rotation.
+
+Input
+First line consists of T Test cases.
+Each of the next T lines consists of Two numbers S1 and S2 which describes the speed of rotation of both the fans respectively
+Output
+Print T lines with each containing the required answer.
+Constraints
+1 \u2264 T \u2264 100
+S1 \u2260 S2
+S1,S2 \u2260 0
+-100000 \u2264 S1,S2 \u2264 100000.
+Example
+Input:
+3
+1 2
+6 5
+1 -2
+
+Output:
+1
+1
+3
+\u00a0

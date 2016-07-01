@@ -1,0 +1,20 @@
+for _ in xrange(input()):
+	a = list(raw_input())
+	b = list(raw_input())
+	a.sort()
+	b.sort()
+	la, lb = len(a), len(b)
+	i, j, ans = 0, 0, 0  
+	while(i<la and j<lb):
+		oa = ord(a[i])
+		ob = ord(b[j])
+		if(oa == ob):
+			ans += 1
+			i += 1
+			j += 1
+		elif(oa<ob):
+			i+=1
+		elif(oa>ob):
+			j+=1
+	print ans
+	

@@ -1,0 +1,49 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int t, n;
+	cin >> t;
+	int arry[200];
+	int temp;
+	int digit;
+	for (int i = 0; i <t; i++)
+	{
+		temp = 0;
+		digit = 0;
+		cin >> n;
+		int no = n;
+		while (n != 0)
+		{
+			arry[digit] = n % 10;
+			n = n / 10;
+			digit++;
+		}
+		n = no - 1;
+		while (n > 1)
+		{
+			
+			for (int j = 0; j < digit; j++)
+			{
+				int x = arry[j] * n + temp;
+				arry[j] = x % 10;
+				temp = x / 10;
+			}
+
+			while (temp != 0)
+			{
+				digit++;
+				arry[digit - 1] = temp % 10;
+				temp = temp / 10;
+			}
+
+			n = n - 1;
+		}
+
+		for (int k = digit- 1; k >= 0; k--)
+			cout << arry[k];
+		cout << endl;
+	}
+}

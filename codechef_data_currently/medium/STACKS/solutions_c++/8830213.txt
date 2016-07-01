@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+ll a[100005];
+vector<ll> top;
+
+int main(){
+	int t;
+	cin>>t;
+	int n;
+	while(t--){
+		cin>>n;
+		for(int i=0;i<n;i++){
+			cin>>a[i];
+		}
+		
+		top.clear();
+		for(int i=0;i<n;i++){
+			int x=a[i];
+			int idx=upper_bound(top.begin(), top.end(), x) - top.begin();
+			if(idx!=top.size()){
+				top[idx]=x;
+			}
+			else{
+				top.push_back(x);
+			}
+		}
+		int len=top.size();
+		cout<<len<<" ";
+		for(int i=0;i<len;i++){
+			cout<<top[i]<<" ";
+		}
+		cout<<"
+";
+	}
+}

@@ -1,0 +1,21 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#include<iomanip>
+#include<stdlib.h>
+using namespace std;
+
+double p,s,t,ans,h;
+int main()
+{
+    cin>>t;
+    while(t--)
+    {
+        cin>>p>>s;
+        h=(p-sqrt(p*p-24*s))/12;
+        ans=s*h/2-h*h*p/4 +h*h*h;
+        cout<<setprecision(2)<<fixed<<ans<<"
+";
+    }
+    return 0;
+}

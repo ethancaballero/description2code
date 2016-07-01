@@ -1,0 +1,7 @@
+T = int(raw_input())
+while T:
+    N,K = map(int,raw_input().split())
+    if K == 0: print K,N
+    else: print N / K , N % K
+    T -= 1
+    

@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MAX 1003
+
+int S, N, M, K;
+double dp[MAX][MAX];
+
+void preprocess()
+{
+	for(int i = 0; i < MAX; i++)
+	{
+		dp[i][0] = dp[i][i] = 1.0;
+		for(int j = 1; j <i; j++)
+			dp[i][j] = dp[i-1][j] + dp[i-1][j-1];
+	}
+}
+
+void solve()
+{
+	double num = 0, den = dp[S-1][N-1];
+	for(int k = max(K, N-1 + M-S); k <= min(N-1, M-1); k++)
+		num = num + dp[M-1][k] * dp[S-M][N-1-k];
+	printf("%.6lf
+", num/den);
+}
+
+int main()
+{
+	preprocess();
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		cin>>S>>N>>M>>K;
+		solve();
+	}
+}

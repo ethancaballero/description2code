@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    vector<long int> v;
+    long int i,t,n,d;
+    long long int sum;
+    scanf("%ld",&t);
+    while(t--)
+    {
+        scanf("%ld%ld",&n,&d);
+        v.resize(n);
+        for(i=0;i<n;i++)
+            scanf("%ld",&v[i]);
+        sort(v.begin(),v.end());
+        sum=0;
+        for(i=n-2;i>=0;)
+        {
+            if(v[i+1]-v[i]<d)
+            {
+                sum+=(v[i+1]+v[i]);
+                i-=2;
+            }
+            else
+                i--;
+        }
+        printf("%lld
+",sum);
+    }
+    return 0;
+}

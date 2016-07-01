@@ -1,0 +1,6 @@
+for _ in range(int(input())):
+    a,b=map(int,raw_input().strip().split())
+    if(b==0):
+        print '0',a
+    else: 
+        print a//b,a%b

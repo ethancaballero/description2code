@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sd(x)           scanf("%d",&x)
+#define sld(x)          scanf("%lld",&x)
+#define ll              long long
+#define mod             1000000007
+#define mp              make_pair
+#define FF              first
+#define SS              second
+#define xx              first
+#define yy              second.first
+#define zz              second.second
+#define pb              push_back
+#ifndef ONLINE_JUDGE
+#define gc getchar
+#else
+#define gc getchar_unlocked
+#endif
+#define N 112345
+int bit[N];
+int query(int idx)
+{
+int s=0;
+while(idx>0)
+{
+    s+=bit[idx];
+    idx-=(idx&(-idx));
+}
+return s;
+}
+void update(int idx)
+{
+while(idx<N)
+{
+    bit[idx]++;
+    idx+=(idx&(-idx));
+}
+}
+int main()
+{
+    int t;
+    sd(t);
+    while(t--)
+    {
+    memset(bit,0,sizeof(bit));
+    int n,k;
+    sd(n);
+    sd(k);
+    string str;
+    cin>>str;
+    int ans=0;
+    for(int i=1;i<=n;i++)
+    {
+     int j=query(i-1)-query(i-k);
+     j+=(str[i-1]=='R'?1:0);
+     if(j&1)
+     {
+         update(i);
+         ans++;
+     }
+    }
+    cout<<ans<<endl;
+    }
+    return 0;
+}
+
+

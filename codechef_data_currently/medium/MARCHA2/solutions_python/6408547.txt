@@ -1,0 +1,17 @@
+t=int(raw_input())
+while t>0:
+	t-=1
+	raw_input()
+	n=map(int,raw_input().split())
+	s=1.0
+	for l in n:
+		s-=l
+		if s<0:
+			print "No"
+			break
+		s*=2.0
+	else:
+		if s==0:
+			print "Yes"
+		else:
+			print "No"

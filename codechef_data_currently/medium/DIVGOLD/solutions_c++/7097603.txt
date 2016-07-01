@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+typedef long long ll;
+string modify(string s,ll rem,ll ins)
+{
+	//if(s[rem]=='B' && ins==(s.length()-1)) cout<<"got"<<endl;
+	ll i;
+	string ans="";
+	if(rem<ins)
+	{
+		//if(s[rem]=='B' && ins==(s.length()-1)) cout<<"got n here."<<endl;
+		ans+=s.substr(0,rem);
+		//if(s[rem]=='B' && ins==(s.length()-1)) cout<<"added: "<<s.substr(0,rem)<<endl;
+		ans+=s.substr(rem+1,ins-rem-1);
+		//if(s[rem]=='B' && ins==(s.length()-1)) cout<<"added: "<<s.substr(rem+1,ins-rem-1)<<endl;
+		ans+=s[rem];
+		ans+=s.substr(ins,s.length()-ins);
+	}
+	else
+	{
+		ans+=s.substr(0,ins);
+		ans+=s[rem];
+		ans+=s.substr(ins,rem-ins);
+		ans+=s.substr(rem+1,s.length()-rem-1);
+	}
+	return ans;
+}
+int main()
+{
+	ll t,n,i,j,k;
+	string s,best,temp;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld",&n);
+		cin>>s;
+		best=s;
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<=n;j++)
+			{
+				if(j==i) continue;
+				temp=modify(s,i,j);
+				if(temp<best) best=temp;
+			}
+		}
+		cout<<best<<endl;
+	}
+	return 0;
+}

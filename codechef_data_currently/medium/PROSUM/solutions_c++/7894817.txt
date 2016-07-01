@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+	long long int i,t,n,x;
+	long long int count,two,j;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		count=0;
+		two=0;
+		scanf("%lld",&n);
+		for(i=0;i<n;i++)
+		{
+			scanf("%lld",&x);
+			if(x>2)
+			count++;
+			else if(x==2)
+			two++;
+		}
+		
+		j= ((count*(count-1))/2 + (two*count));
+		printf("%lld
+",j);
+	}
+	return 0;
+	
+}

@@ -1,0 +1,127 @@
+#include <map>
+#include <set>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <limits>
+#include <algorithm>
+#include <functional>
+#include <queue>
+#include <cmath>
+#include <utility>
+#include <cstring>
+#include <cstdlib>
+ 
+using namespace std;
+ 
+int K,N;
+ 
+unsigned long long Perms[10000002];
+unsigned long long MOD = 1000000009;
+ 
+unsigned long long binomialCoeff(int n, int k)
+{
+    
+	unsigned long* C = (unsigned long*)calloc(k+1, sizeof(unsigned long));
+ 
+    int i, j;
+	unsigned long long res;
+ 
+    C[0] = 1;
+ 
+    for(i = 1; i <= n; i++)
+    {
+        for(j = min(i, k); j > 0; j--)
+		{
+            C[j] = C[j] + C[j-1];
+			C[j] = C[j]%MOD;
+		}
+    }
+ 
+    res = C[k];  // Store the result before freeing memory
+	res = res%MOD;
+    free(C);  // free dynamically allocated memory to avoid memory leak
+ 
+    return res;
+}
+ typedef unsigned long long ull;
+
+ /* This function return the gcd of a and b followed by
+    the pair x and y of equation ax + by = gcd(a,b)*/
+pair<int, pair<int, int> > extendedEuclid(int a, int b) {
+    int x = 1, y = 0;
+    int xLast = 0, yLast = 1;
+    int q, r, m, n;
+    while(a != 0) {
+        q = b / a;
+        r = b % a;
+        m = xLast - q * x;
+        n = yLast - q * y;
+        xLast = x, yLast = y;
+        x = m, y = n;
+        b = a, a = r;
+    }
+    return make_pair(b, make_pair(xLast, yLast));
+}
+ 
+int modInverse(int a, int m) {
+    return (extendedEuclid(a,m).second.first + m) % m;
+}
+
+int main(int argc, char* argv[])
+{
+	Perms[0] = 1;
+	Perms[1] = 1;
+	for (int i = 2 ; i <= 10000002; i++)
+		Perms[i] = ((ull)i*Perms[i-1]) % MOD;
+	cin>>K;
+	if (K == 1)
+	{
+		printf("2
+");
+		printf("2
+");
+		return 0;
+	}
+	N = 1;
+	for (int i = 1; i <= K; i++)
+		N = N << 1;
+ 
+	unsigned long long halfNf = ((ull)2*Perms[N/2])%MOD;
+	for (int i = 1; i < N; i++)
+	{
+		if (i < N/2 )
+		{
+			printf("0
+");
+			continue; 
+		}
+		unsigned long long r = halfNf;
+		
+		if (i == N/2)
+		{
+			r = (r * Perms[N/2])%MOD;
+			printf("%llu
+",r);
+			continue;
+		}
+		unsigned long long a = 1;
+		a = modInverse(Perms[i-N/2],MOD);
+		a = (a*Perms[N/2])%MOD;
+		a = (N*a)%MOD;
+
+		ull t = Perms[i-1];
+		/*while (ano <= i-1)
+		{
+			t = t*ano;
+			if (t >= MOD ) t %=MOD;
+			ano++;
+		}*/
+		a = (a*t)%MOD;
+		printf("%llu
+",a);
+	}
+	printf("%llu
+",Perms[N]);
+	return 0;
+}  

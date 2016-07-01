@@ -1,0 +1,117 @@
+#include<iostream>
+#include<stdio.h>
+ 
+using namespace std;
+ int n,m,k,r=0,g=0,count=0,max1=-1;
+int a[25][20005]={0};
+int fn[20005]={0},fm[25][25]={0};
+ 
+int fun(int x,int c,int mm[])
+{
+    mm[x]=c;
+    if(x==m)
+    {
+        g++;
+        count=0;
+        for(int i=1;i<=m;i++)
+        {
+           if(mm[i])
+           {
+               count++;
+              // cout<<i<<" ";
+ 
+           }
+ 
+        }
+        //cout<<endl;
+        if(max1<count)
+        max1=count;
+ 
+    }
+    else
+    {
+        int f=1;
+        for(int i=1;i<=x;i++)
+        {
+            if(mm[i])
+            {
+                if(!fm[i][x+1])
+                 f=0;
+ 
+            }
+ 
+        }
+         if(f==1)
+         fun(x+1,1,mm);
+         fun(x+1,0,mm);
+    }
+ 
+}
+ 
+int main()
+{
+ 
+    scanf("%d",&n);scanf("%d",&m);
+ 
+    for(int i=1;i<=m;i++)
+    {
+        scanf("%d",&k);
+        a[i][0]=k;
+        for(int j=1;j<=k;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+ 
+    for(int i=1;i<=m;i++)
+    {
+        fm[i][i]=1;
+        for(int j=1;j<=a[i][0];j++)
+        {
+            fn[a[i][j]]=1;
+        }
+        for(int p=1;p<=m;p++)
+        {
+                int f=0;
+ 
+                for(int j=1;j<=a[p][0];j++)
+                {
+                    if(fn[a[p][j]]==1)
+                    {
+                        f=0;
+                        break;
+                    }
+ 
+ 
+                    f=1;
+                }
+                if(f==1)
+                {
+                   fm[i][p]=1;
+                }
+ 
+        }
+ 
+        for(int i=0;i<=n;i++)
+        fn[i]=0;
+ 
+        }
+      /* for(int i=1;i<=m;i++)
+        {
+        for(int j=1;j<=m;j++)
+        cout<<fm[i][j]<<" ";
+        cout<<endl;
+        }*/
+ 
+ 
+       int mm[25]={0};
+ 
+           fun(1,1,mm);
+           fun(1,0,mm);
+ 
+ 
+        printf("%d",max1);
+ 
+ 
+ return 0;
+}

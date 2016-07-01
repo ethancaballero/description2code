@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int arr[100001];
+int size[100001];
+
+int root(int i)
+{
+    while(arr[i]!=i)
+    {
+        i=arr[i];
+    }
+    return i;
+}
+void funion(int a,int b)
+{
+    int root_a=root(a);
+    int root_b=root(b);
+    if(root_a==root_b)
+    return;
+    if(size[root_a]>=size[root_b])
+    {
+        arr[root_b]=root_a;
+        size[root_a]+=size[root_b];
+    }
+    else
+    {
+        arr[root_a]=root_b;
+        size[root_b]+=size[root_a];
+    }
+}
+
+int main() {
+	int t,a,b,n,m,i;
+	scanf("%d",&t);
+	while(t--)
+	{
+	    
+	    scanf("%d %d",&n,&m);
+	    for(i=1;i<=n;i++)
+	    {
+	    arr[i]=i;
+	    size[i]=1;
+	    }
+	    int i;
+	    for(i=0;i<m;i++)
+	    {
+	        scanf("%d %d",&a,&b);
+	        
+	        funion(a,b);
+	        
+	    }
+	    int ans1=0;
+	    long long int ans2=1;
+	    for(i=1;i<=n;i++)
+	    if(arr[i]==i)
+	    {
+	        ans1++;
+	        ans2=(ans2*size[i])%1000000007;
+	    }
+	    
+	    
+	    printf("%d %lld
+",ans1,ans2);
+	}
+	return 0;
+}

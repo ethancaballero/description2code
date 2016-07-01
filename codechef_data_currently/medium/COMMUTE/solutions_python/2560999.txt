@@ -1,0 +1,17 @@
+T = int(raw_input(''))
+
+for i in range(T):
+    n = int(raw_input(''))
+    reach_time = 0
+    travel_time = 0
+    for j in range(n):
+        x, l, f = map(int, raw_input('').split(' '))
+        if reach_time <= x:
+            travel_time += x - reach_time
+            travel_time += l
+        else:
+            if (reach_time - x) % f != 0:
+                travel_time += f - ((reach_time - x) % f)
+            travel_time += l
+        reach_time = travel_time
+    print travel_time

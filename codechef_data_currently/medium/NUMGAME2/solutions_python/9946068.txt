@@ -1,0 +1,9 @@
+T = int(raw_input())
+
+while T:
+        num = int(raw_input())
+        if num % 4 == 1:
+                print "ALICE"
+        else:
+                print "BOB"
+        T -= 1

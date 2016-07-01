@@ -1,0 +1,16 @@
+def possibility(L, D, S, C):
+	d = 1
+	l = S
+	if l>=L:
+		return "ALIVE AND KICKING"
+	while d < D:
+		l = l + C*l
+		if l >= L:
+			return "ALIVE AND KICKING"
+		d += 1
+	return "DEAD AND ROTTING"
+
+T=int(raw_input())
+for _ in range(T):
+	L, D, S, C = map(int, raw_input().split())
+	print possibility(L, D, S, C)

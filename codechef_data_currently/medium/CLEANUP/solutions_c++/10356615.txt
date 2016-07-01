@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+# define MAX 1001
+int main() 
+{
+	int total[MAX];
+	int i,n,m,q,x;
+	cin>>q;
+	
+	for(i=0;i<MAX;i++)
+	total[i] = 0;
+	
+	for(int l = 1;l<=q;l++)
+	{
+	cin>>n>>m;
+	for(i=0;i<m;i++)
+	{
+	cin>>x;
+	total[x-1] = -1;
+	}
+	int flag=1;
+	for(i=0;i<n;i++)
+	{
+	if(total[i] != -1 && flag == 1)
+	{
+	total[i] = 1;
+	flag = 2;
+	}
+	else if(total[i] != -1 && flag == 2)
+	{
+    total[i] = 2;
+	flag =1;
+	}
+	}
+	for(i=0;i<n;i++)
+	{
+	if(total[i] == 1)
+	cout<<i+1<<" ";
+	}
+	cout<<"
+";
+	for(i=0;i<n;i++)
+	{
+	if(total[i] == 2)
+	cout<<i+1<<" ";
+	}
+	for(i=0;i<MAX;i++)
+	total[i] = 0;
+	cout<<"
+";
+	}
+	return(0);
+}

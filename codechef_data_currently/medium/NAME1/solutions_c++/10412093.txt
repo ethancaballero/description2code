@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int main()
+{
+int t,n,i,l,a[26],flag;
+char p[40001],s[40001];
+scanf("%d",&t);
+while(t--)
+{
+memset(a,0,26*sizeof(int));
+getchar();
+flag=1;
+gets(p);
+l=strlen(p);
+for(i=0;i<l;i++){
+if(p[i]!=' ')
+++a[p[i]-97];}
+scanf("%d",&n);
+while(n--){
+scanf("%s",s);
+l=strlen(s);
+for(i=0;i<l;i++)
+a[s[i]-97]--;}
+for(i=0;i<26;++i)
+if(a[i]<0)
+{flag=0;
+break;}
+if(flag)
+printf("YES
+");
+else printf("NO
+");
+}
+return 0;
+}

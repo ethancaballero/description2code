@@ -1,0 +1,9 @@
+t=int(raw_input())
+for i in range(t):
+    
+    x=raw_input().split()
+    if x[0]==x[2]==x[4] or x[0]==x[3]==x[4] or x[0]==x[2]==x[5] or x[0]==x[3]==x[5] or x[1]==x[2]==x[4] or x[1]==x[3]==x[4] or x[1]==x[2]==x[5] or x[1]==x[3]==x[5] :
+        print 'YES'
+    
+    else :
+        print 'NO'

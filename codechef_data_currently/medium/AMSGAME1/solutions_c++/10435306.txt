@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int gcd(int a,int b){
+    if(b>a) return gcd(b,a);
+    return b==0?a:gcd(b,a%b);
+}
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    int a[n],i;
+	    for(i=0;i<n;i++)
+	    cin>>a[i];
+	    int g=a[0];
+	    for(i=1;i<n;i++)
+	    {
+	        g=gcd(g,a[i]);
+	    }
+	    cout<<g<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,9 @@
+T = input()
+for i in range(T):
+	N = input()
+	n = N/2
+	sums = 0
+	sums = 3*(pow(2,n,1000000007) - 1)
+	if N%2 != 0:
+		sums += pow(2,n,1000000007)
+	print "%d"%((sums+1+1000000007)%1000000007)

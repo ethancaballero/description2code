@@ -1,0 +1,32 @@
+#include <iostream>
+#include<algorithm>
+using namespace std;
+ 
+int main() {
+	int i,t;
+	string s;
+	cin>>t;
+	while(t--)
+	{
+		int sum=0;
+		cin>>s;
+		int k=s[0]-97;
+		k=k+97;
+		for(i=0;i<s.size();i++)
+		{
+			if(s[i]>=k){
+			sum=sum+s[i]-k+1;
+			k=s[i];
+			}
+			else{
+			sum=sum+26-(k-s[i])+1;
+			k=s[i];
+			}
+		}
+		if(sum+1<=11*s.size())
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+	}
+	return 0;
+} 

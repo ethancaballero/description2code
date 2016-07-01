@@ -1,0 +1,14 @@
+seq = "abcdefghijklmnopqrstuvwxyz"
+for _ in range(input()):
+        str = raw_input().strip()
+        a = str[0]
+        idx = seq.index(a)
+        count = 2
+
+        for i in str[1:] :
+                while i != seq[idx]:
+                        count += 1
+                        idx = (idx + 1)% 26
+                count += 1
+
+        print 'YES' if count <= 11 * len(str) else 'NO'

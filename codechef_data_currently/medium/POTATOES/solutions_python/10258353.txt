@@ -1,0 +1,17 @@
+t=int(raw_input())
+for y in xrange(0,t):
+    n,k=map(int,raw_input().split())
+    s=n+k
+    answer=0
+    for x in xrange(s+1,2004):
+        prime = True
+        for i in xrange(2,x):
+            if (x % i)==0:
+                prime = False
+                break
+        if prime:
+            answer=x
+            break
+                
+  
+    print answer-s

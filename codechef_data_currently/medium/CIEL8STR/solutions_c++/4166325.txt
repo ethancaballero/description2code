@@ -1,0 +1,48 @@
+// Only_love97
+
+using namespace std;
+#include<bits/stdc++.h>
+
+#define BG begin()
+#define ED end()
+#define SZ size()
+#define st first
+#define nd second
+#define PB push_back
+#define FOR(i,a,b) for (int i=(a),_b=(b);i<_b;i++)
+#define FORE(i,a,b) for (int i=(a),_b=(b);i<=_b;i++)
+#define FORD(i,a,b) for (int i=(a),_b=(b);i>=_b;i--)
+#define ri(n)({    int neg=0;    n=0;    char ch;    for(ch=getchar(); ch<'0' || ch>'9'; ch=getchar()) if (ch=='-') neg=1-neg;    n=ch-48;    for(ch=getchar(); ch>='0' && ch<='9'; ch=getchar()) n=(n<<3)+(n<<1)+ch-48;    if (neg) n=-n;})
+
+typedef long long ll;
+typedef pair<int,int> II;
+const int INF=1000000000+7;
+const double esp=1e-13;
+const double pi=3.141592653589;
+
+char s[1000000+10];
+int a[1000000+10],n,d;
+ll ans,dem;
+
+int main()
+{
+
+ //   freopen("CIEL8STR.inp", "r", stdin);
+ //   freopen("CIEL8STR.out", "w", stdout);
+    cin >> (s+1);
+    n=strlen(s+1);
+    FORE(i,1,n) a[i]=(int) s[i]-48;
+    ans=0;
+    FORE(i,1,n)
+    if ( a[i]%8==0) ans++;
+    FOR(i,1,n)
+    if (a[i] && (a[i]*10+a[i+1])%8==0) ans++;
+    dem=0;
+    FORE(i,2,n)
+    {
+        if (a[i-2]) dem++;
+        d=a[i-2]*100+a[i-1]*10+a[i];
+        if (d%8==0) ans+=dem;
+    }
+    cout << ans;
+}

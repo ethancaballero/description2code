@@ -1,0 +1,25 @@
+for _ in xrange(input()):
+	n = input()
+	lis = map(int,raw_input().split())
+	kad = [0 for i in xrange(n)]
+	rkad = [0 for i in xrange(n)]
+	sum1 = sum2 = 0
+	max1 = -10**9 - 1
+	for i in xrange(n):
+		sum1 += lis[i]
+		max1 = max(sum1,max1)
+		kad[i] = sum1
+		if sum1 < 0:
+			sum1 = 0
+		sum2 += lis[-1-i]
+		max1 = max(sum2,max1)
+		rkad[-1-i] = sum2
+		if sum2 < 0:
+			sum2 = 0
+
+	for i in xrange(1,n-1):
+		max1 = max(max1,kad[i-1] + rkad[i+1])
+
+	# print kad
+	# print rkad
+	print max1

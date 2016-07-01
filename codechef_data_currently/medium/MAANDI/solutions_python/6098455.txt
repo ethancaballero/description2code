@@ -1,0 +1,19 @@
+import math
+
+def overlucky(n):
+    if n.find('4')!=-1 or n.find('7')!=-1:
+        return True
+    return False
+
+t=int(raw_input().strip())
+while t:
+    t-=1
+    n=int(raw_input())
+    rs=0
+    for i in xrange(1,int(math.sqrt(n))+1):
+        if n%i==0:
+            if overlucky(str(i)):
+                rs+=1
+            if n/i!=i and overlucky(str(n/i)):
+                rs+=1
+    print rs

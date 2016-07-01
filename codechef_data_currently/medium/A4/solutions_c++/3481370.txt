@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+using namespace std;
+
+long long firstkdig(long long n, int k) {
+    long double x;
+    long long y;
+    x = n*log10l(n);
+    y = powl(10,x-floor(x)+k-1);
+    return y;
+}
+
+long long lastkdig(long long n, int k) {
+    long long mod = pow(10,k);
+    long long m=n;
+    n = n%mod;
+    long long res=1;
+    while(m) {
+        if(m&1) res = (res*n)%mod;
+        n = (n*n)%mod;
+        m>>=1;
+    }
+    return res;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        long long n;
+        int k;
+        cin >> n >> k;
+        cout << firstkdig(n, k) << " ";
+        printf("%0*lld
+",k,lastkdig(n,k));
+    }
+    return 0;
+}

@@ -1,0 +1,29 @@
+# cook your code here
+
+def solve(n,A):
+    
+    Q = [A[0]] + [0 for x in range(n-1)] 
+    #Q[i] = normal maximal subarray of the array A[0...i] including the element i.
+    
+    R = [0 for x in range(n)] 
+    #R[i] = special maximal subarray of the array A[0...i] excluding the element i.
+    
+    S = [A[0]] + [0 for x in range(n-1)] 
+    #S[i] = special maximal subarray of the array A[0...i] including the element i.
+   
+    
+    
+    for i in range(1,n):
+        Q[i] = max(A[i]+Q[i-1],A[i])
+        R[i] = max(R[i-1],S[i-1]) if (i>1) else S[i-1]
+        S[i] = max(Q[i-1],S[i-1]+A[i],A[i])
+    return max(R[n-1],S[n-1])
+    
+
+
+T = int(raw_input())
+
+for i in range(T):
+    n = int(raw_input())
+    X = map(int,raw_input().strip().split(" "))
+    print solve(n,X)

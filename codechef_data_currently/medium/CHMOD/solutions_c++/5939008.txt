@@ -1,0 +1,77 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+#define gc getchar_unlocked
+int ar[100003][25];
+
+int pr[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+int mod;
+int scan_f()
+{
+	int n=0;
+	char p=gc();
+	while(p<'0' || p>'9')p=gc();
+	while(p>='0' && p<='9'){n=(n<<3)+(n<<1)+p-48;p=gc();}
+	return n;
+}
+long long pow(int a,int b)
+{
+	if(b==0) return 1;
+	if(b==1) return a;
+
+	long long tmp=(long long)a*a;
+	if(tmp>=mod) tmp=tmp%mod;
+	if(b&1) return (a*pow(tmp,b>>1))%mod;
+	return  pow(tmp,b>>1);
+
+
+}
+
+int main()
+{
+
+	int n,tmp; scanf("%d",&n);
+
+
+	for(int i=1;i<=n;++i)
+	{ //printf("here ");
+		tmp=scan_f();
+		for(int j=0;j<25;++j) ar[i][j]=ar[i-1][j];
+		for(int j=0;j<25;++j)
+		{// printf("
+here  loop");
+			while(tmp%pr[j]==0)
+			{//printf("
+here  loop  inside  %d %d",tmp,pr[j]);
+				ar[i][j]++;
+				//printf("adding  %d  %d
+",);
+				tmp=tmp/pr[j];
+			}
+		}
+	}
+	//printf("
+here  jj");
+	int t;
+	scanf("%d",&t); ++t;
+	while(--t)
+	{
+		int b; long long a;
+
+		a=scan_f();b=scan_f();mod=scan_f();
+		long long ans=1;
+		for(int i=0;i<25;++i)
+		{
+			int tmp=ar[b][i]-ar[a-1][i];  if(tmp<0) tmp=0;
+		//	printf(" 
+hereh is %d  %d   ",tmp,pr[i]);
+			ans=ans*pow(pr[i],tmp);
+			if(ans>=mod) ans%=mod;
+
+		}
+		if(ans>=mod) ans%=mod;
+		printf("%lld
+",ans);
+
+	}
+}

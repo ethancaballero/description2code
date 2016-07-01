@@ -1,0 +1,93 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <cmath>
+#include <list>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cassert>
+#include <climits>
+#include <functional>
+#include <bitset>
+ 
+#define pb push_back
+#define mp make_pair
+#define all(x) x.begin(),x.end()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define print(x) cout<<#x<<" is "<<x<<endl;
+#define inf 2000000000
+#define eps 1e-8
+#define fill(x,y) memset(x,y,sizeof(x))
+#define Size(x) (int(x.size()))
+#define FOR(k,a,b) for(typeof(a) k=(a); k < (b); ++k)
+typedef long long ll;
+using namespace std;
+
+#define dim 2
+#define MOD 1000000007
+
+struct matrix{
+    int a[dim][dim];
+};
+
+matrix mul(matrix x, matrix y)
+{
+    matrix res;
+    FOR(a,0,dim) FOR(b,0,dim) res.a[a][b]=0;
+    FOR(a,0,dim) FOR(b,0,dim) FOR(c,0,dim){
+        res.a[a][c]+=(x.a[a][b]*ll(y.a[b][c]))%MOD;
+        res.a[a][c]%=MOD;
+    }
+    return res;
+}
+
+matrix pow(matrix m, int n)
+{
+    if(n==1)
+        return m;
+    matrix u = mul(m, m);
+    u=pow(u,n/2);
+    if(n&1) u = mul(u,m);
+    return u;
+}
+
+matrix p, rp, c, a;
+
+int main()
+{
+    int T;
+    cin >> T;
+    while(T--){
+        FOR(a,0,dim)FOR(b,0,dim) p.a[a][b] = 0;
+        p.a[0][0]=p.a[1][0]=2;
+        p.a[0][1]=1;p.a[1][1]=0;
+        c.a[0][0] = 3; c.a[0][1] = 1;
+
+        int n;
+        cin >> n;
+        if(n==1)
+        {
+            cout << 1 << endl;
+            continue;
+        }
+        if(n==2)
+        {
+            cout << 3 << endl;
+            continue;
+        }
+        int rs = n-2;
+        
+        rp = pow(p,rs);
+        a = mul(c,rp);
+        cout << (a.a[0][0])<<endl;
+
+    }
+    
+}
+

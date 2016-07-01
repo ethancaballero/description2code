@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+ long long t,d,s,c,i,j,l;
+ cin>>t;
+ while(t--)
+ {
+   cin>>l>>d>>s>>c;
+   j=s;
+   for(i=1;i<d;i++)
+   {
+   j=s+s*c;
+   s=j;
+   if(j>=l)
+   break;
+   }
+   if(j>=l)
+   cout<<"ALIVE AND KICKING
+";
+   else
+   cout<<"DEAD AND ROTTING
+";
+ }
+ return 0;
+ }

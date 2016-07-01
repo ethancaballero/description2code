@@ -1,0 +1,6 @@
+t=input()
+a=[]
+for i in range(0,t):
+    a.append(map(int,raw_input().split(' ')))
+for i in range(0,t):
+    print a[i][0]%a[i][1]

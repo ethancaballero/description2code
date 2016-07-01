@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cstdio>
+#include <iomanip>
+#include <cmath>
+#include <string.h>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <stack>
+
+#include <set>
+
+#include <map>
+
+
+#define ll long long int
+#define fsentak for(int i=0;i<n;i++)
+#define fsentak1 for(int i=0;i<(n-1);i++)
+#define s(t) scanf("%d",&t)
+#define sc(n) scanf("%d",&n)
+#define sl(lln) scanf("%lld",&n)
+#define sa(my) scanf("%d",&my[i])
+#define MAX_INT 99999
+#define MIN_INT -99999
+using namespace std;
+
+
+
+
+
+    
+
+using namespace std;
+int main()
+{
+    
+    int t;
+    sc(t);
+    
+    int n,m;
+    
+    while(t--)
+    {
+        scanf("%d %d",&n,&m);
+        int bada=MIN_INT;
+        int chota=MAX_INT;
+        int a;
+        
+        
+        for(int i=0;i<m;i++)
+        {
+            scanf("%d",&a);
+            bada=max(bada,a);
+            chota=min(chota,a);
+            
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            printf("%d ",max(abs(i-bada),abs(i-chota)));
+            
+        }
+        printf("
+");
+        
+        
+        
+    }
+}
+
+
+
+

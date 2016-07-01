@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int main(){
+	int t,i,c[26],count;
+	cin>>t;
+	while(t--){
+		string s;
+		cin>>s;
+		for(int j=0;j<26;++j)
+			c[j]=0;
+		i=0,count=0;
+		while(i!=s.size()){
+			if(c[int(s[i]-'a')]==0){
+				count++;
+				c[int(s[i]-'a')]=1;
+			}
+			i++;
+		}
+		cout<<count<<endl;
+	}
+	return 0;
+}

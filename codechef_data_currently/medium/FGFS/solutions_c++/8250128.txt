@@ -1,0 +1,97 @@
+#include<cstdio>
+#include<iostream>
+#include<list>
+#include<vector>
+#include<queue>
+#include<stdarg.h>
+#include<cstdlib>
+#include<cmath>
+#include<algorithm>
+#include<string>
+#include<set>
+#include<map>
+
+using namespace std;
+
+#define lli long long int
+//#define DEBUG 1
+
+#define SPACE(a) #a << " " << a << " " <<
+#define print1(a) cout << SPACE(a) endl;
+#define print2(a, b) cout << SPACE(a) SPACE(b) endl;
+#define print3(a, b, c) cout << SPACE(a) SPACE(b) SPACE(c) endl;
+#define print4(a, b, c, d) cout << SPACE(a) SPACE(b) SPACE(c) SPACE(d) endl;
+#define print5(a, b, c, d, e) cout << SPACE(a) SPACE(b) SPACE(c) SPACE(d) SPACE(e) endl;
+#define print6(a, b, c, d, e, f) cout << SPACE(a) SPACE(b) SPACE(c) SPACE(d) SPACE(e) SPACE(f) endl;
+#define print7(a, b, c, d, e, f, g) cout << SPACE(a) SPACE(b) SPACE(c) SPACE(d) SPACE(e) SPACE(f) SPACE(g) endl;
+#define print8(a, b, c, d, e, f, g, h) cout << SPACE(a) SPACE(b) SPACE(c) SPACE(d) SPACE(e) SPACE(f) SPACE(g) SPACE(h) endl;
+#define print9(a, b, c, d, e, f, g, h, i) cout << SPACE(a) SPACE(b) SPACE(c) SPACE(d) SPACE(e) SPACE(f) SPACE(g) SPACE(h) SPACE(i) endl;
+
+#define GET_MACRO(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, NAME, ...) NAME
+#if defined DEBUG
+#define print(...) GET_MACRO(_0, ##__VA_ARGS__, print9, print8, print7, print6, print5, print4, print3, print2, print1, print0)(__VA_ARGS__)
+#else
+#define print(...) ;
+#endif
+
+#define gc getchar_unlocked
+inline void scanint(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+struct timespan
+{
+    int s,f,p;
+};
+
+bool cmp(timespan ts1, timespan ts2)
+{
+    return (ts1.f < ts2.f);
+}
+
+long long int computesAns(vector<timespan> & v)
+{
+    long int ans = 1LL;
+    int y = 0;
+    for(int x = 1; x < v.size(); x++)
+    {
+        if(v[x].s >= v[y].f)
+        {ans++;
+            y = x;}
+    }
+    return ans;
+} 
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    lli T, N, K;
+    lli s,f,c;
+    map<lli, vector<timespan> >::iterator iter;
+    cin >> T;
+    timespan temp;
+
+    while (T--){
+        cin >> N >> K;
+        map<lli, vector<timespan> > mapa;
+        for (lli n=0; n<N; n++) {
+            cin >> temp.s >> temp.f >> c;
+            mapa[c].push_back(temp);
+        }
+
+        long long int answer = 0LL;
+        for(iter = mapa.begin(); iter != mapa.end(); iter++)
+        {
+            int k =  iter->first;
+            vector<timespan> v = iter->second;
+            sort(v.begin(), v.end(),cmp);
+            answer = answer + computesAns(v);
+        }
+        cout << answer << endl;
+    }
+}
+

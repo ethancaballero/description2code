@@ -1,0 +1,49 @@
+#include<iostream>
+#include<list>
+#include<algorithm>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	list<char> l;
+	list<char> ::iterator p;
+	string s[n];
+	for(int i=0;i<n;i++){
+		cin>>s[i];
+	}
+	for(int i=0;i<s[0].length();i++){
+		l.push_back(s[0][i]);
+	}
+	int k=1;
+	while(k!=n){
+		p=l.begin();int x=s[k].length();
+		while(p!=l.end()){
+		int f=0;
+		for(int i=0;i<x;i++){
+			if(s[k][i]==*p){
+			 	f=1;
+			 	for(int j=i+1;j<x;j++){
+					s[k][j-1]=s[k][j];
+				}
+				x--;
+				break;
+			}
+		}
+		if(f==0){
+			p=l.erase(p);
+		}
+		else
+		p++;
+		}
+		k++;
+	}
+	l.sort();
+	p=l.begin();
+	while(p!=l.end()){
+		cout<<*p;
+		p++;
+	}
+	if(l.empty()){
+		cout<<"no such string";
+	}
+}

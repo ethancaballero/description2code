@@ -1,0 +1,32 @@
+import math
+c1=math.sqrt(2)-math.sqrt(6)
+c2=math.sqrt(2)+math.sqrt(6)
+z=raw_input().split()
+i=int(z[0])
+k=int(z[1])
+s=int(z[2])
+z=raw_input().split()
+a_i=int(z[0])
+b_i=int(z[1])
+if(i<=k):
+    diff=k-i
+    if(diff%2==0):
+        a_k=math.pow(16,diff/2)*a_i
+        b_k=math.pow(16,diff/2)*b_i
+    else:
+        temp_a_k=math.pow(16,diff/2)*a_i
+        temp_b_k=math.pow(16,diff/2)*b_i
+        a_k=temp_a_k*c1 + temp_b_k*c2
+        b_k=temp_a_k*c2 - temp_b_k*c1
+else:
+    diff=i-k
+    if(diff%2==0):
+        a_k=a_i/math.pow(16,diff/2)
+        b_k=b_i/math.pow(16,diff/2)
+    else:
+        temp_a_k=a_i/math.pow(16,diff/2+1)
+        temp_b_k=b_i/math.pow(16,diff/2+1)
+        a_k=temp_a_k*c1 + temp_b_k*c2
+        b_k=temp_a_k*c2 - temp_b_k*c1
+ans=(a_k+b_k)/math.pow(2,s)
+print ans

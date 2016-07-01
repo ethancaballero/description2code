@@ -1,0 +1,20 @@
+t = input()
+while t > 0:
+    inp = map(int, raw_input().split())
+    M = inp[0]
+    x = inp[1]
+    y = inp[2]
+    coveredHouses = []
+    copHouses = map(int, raw_input().split())
+    for cop in copHouses:
+        lrange = cop - x * y
+        hrange = cop + x * y
+        coveredHouses.append(range(lrange, hrange + 1))
+    coveredHouses = sum(coveredHouses, [])
+    coveredHouses.sort()
+    while coveredHouses[0] <= 0:
+        list.pop(coveredHouses, 0)
+    while coveredHouses[len(coveredHouses) - 1] >= 101:
+        list.pop(coveredHouses, len(coveredHouses) - 1)
+    print len(list(set(range(1, 101)) - set(coveredHouses)))
+    t -= 1

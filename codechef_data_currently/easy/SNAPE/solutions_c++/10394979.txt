@@ -1,0 +1,21 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	   int b,ls;
+	   cin>>b>>ls;
+	   float rs_max = b*b + ls*ls;
+	   rs_max=sqrt(rs_max);
+	   float rs_min=ls*ls-b*b;
+	   rs_min=sqrt(rs_min);
+	   cout<<rs_min<<" "<<rs_max<<"
+";
+	}
+
+	return 0;
+}

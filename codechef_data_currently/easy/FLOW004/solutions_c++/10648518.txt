@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+   long int t,i,a,sum=0,rem=0,l,f,s=0;
+    cin>>t;
+    for(i=0;i<t;i++)
+    {
+        cin>>a;
+        l=a%10;
+        while(a!=0)
+        {
+            rem=a%10;
+            s=(s*10)+rem;
+            a/=10;
+        }
+        f=s%10;
+        sum=l+f;
+        cout<<sum<<endl;
+        rem=0;
+        sum=0;
+        s=0;
+    }
+    return 0;
+}

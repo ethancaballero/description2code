@@ -1,0 +1,12 @@
+from math import log
+T=input()
+for t in range(T):
+    x,k=raw_input().split()
+    x=float(x)
+    k=float(k)
+    haha=int(log(k,2))
+    if pow(2,haha)==k:
+        haha-=1
+    subsegnum=pow(2,(haha))
+    subsegsize=x/subsegnum
+    print float((subsegsize/2)+(k-pow(2,haha))*subsegsize)

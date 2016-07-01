@@ -1,0 +1,50 @@
+
+
+
+
+a=int(raw_input())
+dict={}
+k=[]
+o=[]
+
+for i in range(a):
+    
+    x,y,z=raw_input().split(" ")
+    x=int(x)
+    y=int(y)
+    z=int(z)
+    k=[x,y,z]
+    dict[i]=k
+for i in range(a):
+    l=bin(dict[i][1])[2:].zfill(dict[i][0])
+    m=bin(dict[i][2])[2:].zfill(dict[i][0])
+    #l='{0:dict[i][0]b}'.format(l)
+    #m='{0:dict[i][0]b}'.format(m)
+    #print (l)
+    #print (m)
+    countl=0
+    countm=0
+    for j in range(dict[i][0]):
+        #print (l[j])
+        #print (m[j])
+        if(l[j]=='1'):
+            countl+=1
+        if(m[j]=='1'):
+            countm+=1
+    #print (countl)
+    #print (countm)
+    if(countl+countm>dict[i][0]):
+        N=((dict[i][0]-countl)+(dict[i][0]-countm))
+    else:
+        N=countl+countm
+    #[:N+1]=['1']*N
+    #print (o)
+    #o=o+['0']*(dict[i][0]-N)
+    #int(bin(" ".join(o)))
+    x=(2**(dict[i][0])-1)-(2**(dict[i][0]-N)-1)
+    #print (2**(N+1))
+    #rint (2**(dict[i][0]-N))
+    
+    print (x)
+    #print (int("1111",2))
+ 

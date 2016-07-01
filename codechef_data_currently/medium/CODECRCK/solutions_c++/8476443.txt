@@ -1,0 +1,47 @@
+#include <map>
+#include <cmath>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+const double x = sqrt(2);
+const double y = sqrt(3);
+long long i, k, s;
+double a_i, b_i;
+ 
+double calc()
+{
+	if (i == k) {
+		return (a_i + b_i) * pow(2.0, -s);
+	}
+	if (i < k) {
+		long long t = (k - i) / 2;
+		long long j = i + 2 * t;
+		double a_j = a_i, b_j = b_i;
+		if (j != k) {
+			a_j = x * (a_i + b_i) - x * y * (a_i - b_i);
+			b_j = x * (a_i - b_i) + x * y * (a_i + b_i);
+		}
+		return (a_j + b_j) * pow(2.0, 4 * t - s);
+	} else {
+		long long t = (i - k + 1) / 2;
+		long long j = i - 2 * t;
+		double a_j = a_i, b_j = b_i;
+		if (j != k) {
+			a_j = x * (a_i + b_i) - x * y * (a_i - b_i);
+			b_j = x * (a_i - b_i) + x * y * (a_i + b_i);
+		}
+		return (a_j + b_j) * pow(2.0, - 4 * t - s);
+	}
+}
+ 
+int main()
+{
+	scanf("%lld%lld%lld", &i, &k, &s);
+	scanf("%lf%lf", &a_i, &b_i);
+	printf("%.6lf
+", calc());
+	return 0;
+}

@@ -1,0 +1,12 @@
+test=int(input())
+alpha=[chr(i) for i in xrange(47,127)]
+while test>0:
+    test-=1
+    total=0
+    main=list(str(raw_input()))
+    reference=list(str(raw_input()))
+    for y in alpha:
+        total=min(main.count(y),reference.count(y))+total
+    print total
+    
+

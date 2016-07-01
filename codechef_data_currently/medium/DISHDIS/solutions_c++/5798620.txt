@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+#define F first
+#define S second
+using namespace std;
+int t,i,j,k,n,m,dp[103][103];
+pair<int,int> x[103];
+int main()
+{
+    cin>>t;
+    while(t--)
+    {
+        memset(dp,0,sizeof dp); dp[0][0]=1;
+        cin>>n>>m;
+        for(i=1;i<=m;i++)cin>>x[i].S>>x[i].F;
+        sort(&x[1],&x[m+1]);
+        for(i=1;i<=m;i++)
+        {
+            for(j=x[i].S;j<=x[i].F&&j<=n;j++)
+            {
+                for(k=n-j;k>=0;k--)
+                {
+                    dp[i][k+j]=(dp[i][k+j]+dp[i-1][k])%1000000007;
+                }
+            }
+        }
+        //for(i=0;i<=m;i++){for(j=0;j<=n;j++)cout<<dp[i][j]<<" "; cout<<endl;}
+        cout<<dp[m][n]<<endl;
+    }
+}

@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+#define MAX 10000000
+#define MOD 1000000007
+#define S(x) scanf("%lld",&x)
+#define Ss(x) scanf("%s",x)
+#define Ps(x) printf("%s
+",x)
+#define P(x) printf("%lld
+",x)
+using namespace std;
+typedef long long ll;
+int main() {
+	ll t,n;
+
+	for(S(t);t--;){
+		S(n);
+		P(2*n + ((n-1)*n)/2);
+	}
+	//for(ll i=0; i<=8; i++)P(ans[i]);
+
+	return 0;
+}

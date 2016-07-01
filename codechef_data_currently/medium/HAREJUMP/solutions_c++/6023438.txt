@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long lint;
+#define mod 1000000007
+struct matrix
+{
+    lint a[16][16];
+    matrix()
+    {
+        for(int i=1;i<=15;i++)
+        {
+            for(int j=1;j<=15;j++)
+            {
+                if(j==1)
+                {
+                    a[i][j]=0;
+                    continue;
+                }
+                if(i==j-1)
+                {
+                    a[i][j]=1;
+                    continue;
+                }
+                a[i][j]=0;
+            }
+        }
+    }
+};
+matrix matmul(matrix x, matrix y)
+{
+    matrix res;
+    for(int i=1;i<=15;i++)
+    {
+
+        for(int j=1;j<=15;j++)
+        {
+            lint sum=0;
+            for(int k=1;k<=15;k++)
+            {
+                sum=(sum+x.a[i][k]*y.a[k][j])%mod;
+            }
+            res.a[i][j]=sum;
+        }
+    }
+    return res;
+}
+matrix power(matrix m, lint n)
+{
+    if(n==1)
+        return m;
+    matrix x=power(m, n/2);
+    matrix r=matmul(x,x);
+    if(n&1)
+        r=matmul(r,m);
+    return r;
+}
+int main()
+{
+    int test;
+    scanf("%d", &test);
+    while(test--)
+    {
+        lint n, k, num;
+        matrix m, ans;
+        scanf("%lld %lld", &n, &k);
+        for(int i=1;i<=k;i++)
+        {
+            scanf("%lld",&num);
+            m.a[num][1]=1;
+        }
+        ans=power(m, n);
+        printf("%lld
+", (ans.a[1][1]+mod)%mod);
+    }
+    return 0;
+}

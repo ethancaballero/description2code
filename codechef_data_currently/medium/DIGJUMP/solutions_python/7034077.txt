@@ -1,0 +1,39 @@
+import sys
+
+s = raw_input().strip()
+
+digits = [[]    for i in xrange(10)]
+dist = [-1] * (len(s))
+used = [False] * 10
+
+for i in xrange(len(s)):
+    digits[int(s[i])].append(i)
+
+dist[0] = 0
+q = [0]
+
+while True:
+    v = q.pop(0)
+    cur = dist[v]
+
+    if v == len(s)-1:
+        print cur
+        sys.exit()
+    
+    if cur != 0 and dist[v-1] == -1:
+        dist[v-1] = cur + 1
+        q.append(v-1)
+        
+    if dist[v+1] == -1:
+        dist[v+1] = cur + 1
+        q.append(v+1)
+
+    if not used[int(s[v])]:
+        used[int(s[v])] = True
+        for i in digits[int(s[v])]:
+            if dist[i] == -1:
+                dist[i] = cur + 1
+                q.append(i)
+            
+    
+

@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+int A[101],P[101];
+double dp[101][10001];
+ 
+int main(int argc, char **argv)
+{
+	int T,N,sum,i,j;
+	double ans;
+	
+	for(scanf("%d",&T);T>0;T--)
+	{
+		scanf("%d",&N);
+		sum=0;
+		for(i=1;i<=N;i++)
+		{
+			scanf("%d",&A[i]);
+			sum+=A[i];
+		}
+		for(i=1;i<=N;i++)
+		{
+			scanf("%d",&P[i]);
+		}
+		
+		for(i=0;i<=N;i++)
+		{
+			for(j=0;j<=sum;j++)
+			{
+				dp[i][j]=0;
+			}
+		}
+		dp[0][0]=1.0;
+		for(i=1;i<=N;i++)
+		{
+			for(j=0;j<=sum;j++)
+			{
+				if(A[i]>j)
+				{
+					dp[i][j]=((dp[i-1][j]*(100-P[i]))/100);
+				}
+				else
+				{
+					dp[i][j]=((dp[i-1][j]*(100-P[i]))/100)+((dp[i-1][j-A[i]]*P[i])/100);
+				}
+			}
+		}
+		ans=0;
+		for(j=sum;(j*2)>=sum;j--)
+		{
+			ans+=dp[N][j];
+		}
+		printf("%lf
+",ans);
+	}
+	
+	return 0;
+}

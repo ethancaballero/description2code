@@ -1,0 +1,62 @@
+//
+//  COPS.cpp
+//  
+//
+//  Created by Aneesh on 03/04/16.
+//
+//
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    long long int t;
+    int m,x,y;
+    int a[101];
+    int police[10];
+    cin>>t;
+    
+    while(t--)
+    {
+        cin>>m>>x>>y;
+        fill_n(a,101,0);
+        
+        int houses=x*y;
+        int safe=0;
+        for(int i=0; i<m; i++)
+        {
+         cin>>police[i];
+            
+            for(int j=police[i]; (j>0 && j>=police[i]-houses); j--)
+                if(a[j] != 1)
+                    a[j] = 1;
+            
+            for(int k=police[i]+1; (k<=100 && k<=police[i]+houses); k++)
+                if(a[k] != 1)
+                    a[k] = 1;
+            
+            
+            
+        }
+        for(int j=1; j<=100; j++)
+                if(!a[j])
+                    safe++;
+        
+
+        cout<<safe<<endl;
+        
+        
+                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    return 0;
+}

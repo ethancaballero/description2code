@@ -1,0 +1,77 @@
+#include<cstdio>
+#include<cmath>
+typedef long long int ll;
+using namespace std;
+int prime[]={2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
+int np=25,ppow[25][100],cf[25][100001],a[100001];
+void generate(){
+	int i,j,a,c;
+	for(j=0;j<np;j++)
+		ppow[j][0]=0;
+	for(i=2;i<=100;i++){
+		a=i;
+		for(j=0;j<np;j++){
+			c=0;
+			while(a%prime[j]==0){
+				c++;
+				a/=prime[j];
+			}
+			ppow[j][i-1]=c;
+			if(a==1)
+				break;
+		}
+	}
+}
+inline void set(){
+	for(int i=0;i<np;i++){
+		for(int j=0;j<100001;j++)
+			cf[i][j]=0;
+	}
+}
+ll modpow(ll a,ll b,ll m){
+	if(b==0)
+		return 1%m;
+	ll x=a,ans=1;
+	while(b){
+		if(b&1) 
+			ans=(ans*x)%m;
+		b>>=1;
+		x=(x*x)%m;
+	}
+	return ans;
+}
+inline ll getn(){
+	ll n=0,c=getchar();
+	while(!(c>='0' && c<='9'))
+		c=getchar();
+	while(c>='0' && c<='9')
+		n=(n<<3)+(n<<1)+c-48,c=getchar();
+	return n;
+}
+int main(){
+	ll i,j,n,t;
+	generate();
+	set();
+	n=getn();
+	for(i=0;i<n;i++){
+		a[i]=getn();
+		for(j=0;j<np;j++)
+			cf[j][i]+=ppow[j][a[i]-1];
+		if(i>0)
+			for(j=0;j<np;j++)
+				cf[j][i]+=cf[j][i-1];
+	}
+	t=getn();
+	while(t--){
+		ll cnt,l,r,m,ans=1;
+		l=getn();
+		r=getn();
+		m=getn();
+		for(j=0;j<np;j++){
+			cnt=cf[j][r-1]-cf[j][l-2];
+			ans=(ans*modpow(prime[j],cnt,m))%m;	
+		}
+		printf("%lld
+",ans);
+	}
+}

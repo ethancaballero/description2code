@@ -1,0 +1,89 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t,x,y;
+	cin>>t;
+	while(t--)
+	{
+		cin>>x>>y;
+		if((x==0&&y==0)||(x==1&&y==0))
+		{
+			cout<<"YES"<<"
+";
+			continue;
+		}
+		else
+		if(x==0&&y%2==0)
+		{
+			cout<<"YES
+";
+			continue;
+		}
+		else
+		if(y==0)
+		{
+			if(x>0&&x%2!=0)
+			{
+			cout<<"YES
+";
+			continue;
+		   }
+		   if(x<0 && x%2==0)
+		   {
+		   	cout<<"YES
+";
+		   	continue;
+		   }  
+		}
+		else
+		if(x>0 && y>0)
+		{
+		if((x%2!=0&&y<=x+1)||(y%2==0&&y>x))
+		{
+			cout<<"YES
+";
+			continue;
+		}
+	   }
+	   else
+		if(x>0&&y<0)
+		{
+			y=y*-1;
+			if((y%2==0&&x<=y+1)||(x%2!=0&&x>y))
+			{
+				cout<<"YES
+";
+				continue;
+			}
+			y=y*-1;
+		}
+		else
+		if(x<0&&y>0)
+		{
+			x=x*-1;
+			if((y%2==0&&x<=y)||(x%2==0&&y<=x))
+			{
+				cout<<"YES
+";
+				continue;
+			}
+			x=x*-1;
+		}
+		else
+		if(x<0 && y<0)
+		{
+			x=x*-1;
+			y=y*-1;
+			if((y%2==0&&x<=y)||(x%2==0&&y<=x))
+			{
+				cout<<"YES
+";
+				continue;
+			}
+		}
+		cout<<"NO
+";
+	}
+	return 0;
+}

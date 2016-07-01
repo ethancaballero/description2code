@@ -1,0 +1,90 @@
+ 
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+#include<cmath>
+#include<cstring>
+#include<cstdlib>
+#include<utility>
+#include<vector>
+#include<bitset>
+#include<deque>
+#include<map>
+#include<list>
+#include<set>
+#include<stack>
+#include<queue>
+#define vi vector<int> 
+#define vc vector<char> 
+#define pb push_back
+#define mp make_pair
+#define I vector<int>::iterator  
+#define rI vector<int>::iterator 
+#define ss(a) scanf("%s",a)
+#define si(a) scanf("%d",&a)
+#define sl(a) scanf("%ld",&a)
+#define pi(a) printf("%d ",a)
+#define pl(a) printf("%ld ",a)
+#define ps(a) printf("%s ",a)
+#define For(i,n) for(i=0;i<n;i++)
+#define fOR(i,n) for(i=1;i<=n;i++)
+#define nl printf("
+")
+#define MAX 
+//set<int> sx, sy;
+using namespace std;
+ 
+#define gc getchar_unlocked
+void readInt(int &x)
+{
+register int c = gc();
+x = 0;
+for(;(c<48 || c>57);c = gc());
+for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+ 
+struct data{
+	int s;
+	int f;
+	int p;
+};
+ 
+bool operator<(data const &a,data const &b)
+{ 
+    if(a.p!=b.p) 
+        return a.p<b.p; 
+    else if(a.p==b.p)
+        return a.f<b.f;
+}
+ 
+int main()
+{
+	int t;
+	readInt(t);
+	while(t--){
+		int n,k,i;
+		readInt(n);readInt(k);
+		data arr[n];
+		for(i=0;i<n;i++){
+			readInt(arr[i].s);
+			readInt(arr[i].f);
+			readInt(arr[i].p);	
+		}
+		if(n==0||n==1){
+			printf("%d
+",n);
+			continue;
+		}
+		sort(arr,arr+n);
+		int cnt=1;
+		int cur=0;
+		for(i=1;i<n;i++){
+			if((arr[i].p!=arr[i-1].p)||(arr[i].p==arr[i-1].p&&arr[i].s>=arr[cur].f)){
+				cur=i;cnt++;
+			}
+		}
+		printf("%d
+",cnt);			
+	}	
+	return 0;
+}

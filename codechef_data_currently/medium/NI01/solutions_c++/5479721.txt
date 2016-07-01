@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+#define VAR(a,b) __typeof(b) a=(b)
+#define FOR(i,a,b) for (int _n(b), i(a); i < _n; i++)
+#define FORD(i,a,b) for(int i=(a),_b=(b);i>=_b;--i)
+#define FOREACH(it,c) for(VAR(it,(c).begin());it!=(c).end();++it)
+#define REP(i,n) FOR(i,0,n)
+#define ALL(c) (c).begin(), (c).end()
+#define SORT(c) sort(ALL(c))
+#define REVERSE(c) reverse(ALL(c))
+#define UNIQUE(c) SORT(c),(c).resize(unique(ALL(c))-(c).begin())
+#define INF 1000000000
+#define X first
+#define Y second
+#define pb push_back
+#define SZ(c) (c).size()
+typedef pair<int, int> PII;
+typedef vector<int> VI;
+typedef vector<PII> VPII;
+typedef vector<VI> VVI;
+typedef long long LL;
+#define MOD 1000000007
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m,q,p,r,k;
+		cin>>n>>m>>q>>p>>r>>k;
+		int car=n,wandering=m,waiting=q,comp=0;
+		priority_queue<int,VI,greater<int> > pq;
+		for(int i=0;i<=k;i++)
+		{
+			if(i%r==0&&i)
+			{
+				if(wandering)
+				{
+					wandering--;
+					waiting++;
+				}
+			}
+			while(!pq.empty()&&pq.top()<=i)
+			{
+				car++;
+				comp++;
+				pq.pop();
+			}
+			while(car&&waiting)
+			{
+				car--;
+				waiting--;
+				pq.push(i+p);
+			}
+		}
+		cout<<car<<" "<<comp<<" "<<" "<<wandering<<" "<<waiting<<endl;
+	}
+	return 0;
+}
+
+			 
+
+
+

@@ -1,0 +1,9 @@
+t = input()
+
+for i in range(t):
+    n, k = map(int,raw_input().split())
+    max = 0
+    for i in range(1,k+1):
+        if(n%i > max):
+            max = n%i
+    print max

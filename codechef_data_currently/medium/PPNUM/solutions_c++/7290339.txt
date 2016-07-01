@@ -1,0 +1,36 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+long long int nod(long long int n)
+{
+	long long int i=0;
+	while(n)
+	{
+		n/=10;
+		i++;
+	}
+	return i;
+}
+int main()
+{
+	long long int test,l,r;
+	cin>>test;
+	while(test--)
+	{
+		cin>>l>>r;
+		long long int z=0,v,ans=0;
+		while(l<=r)
+		{
+			z=pow(10,nod(l))-1;
+			if(z<r)
+			v=z;
+			else
+			v=r;
+			ans+=(nod(l)*(l+v)*(v-l+1)/2);
+			l=v+1;			
+		}
+		cout<<ans%1000000007<<"
+";
+	}
+	return 0;
+} 

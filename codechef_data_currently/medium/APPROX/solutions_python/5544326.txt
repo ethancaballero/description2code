@@ -1,0 +1,16 @@
+import sys
+t=int(sys.stdin.readline())
+while t!=0:
+    r=103993%33102
+    k=int(sys.stdin.readline())
+    if k==0:
+        print 3
+    else:
+        s='3.'
+        for i in range (0,k):
+            r=r*10
+            s+=str(r/33102)
+            r=r%33102
+        s=str(s)
+        print s
+    t-=1

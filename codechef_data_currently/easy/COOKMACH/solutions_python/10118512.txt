@@ -1,0 +1,13 @@
+from math import log
+t = input()
+for i in range(t):
+    a,b = map(int,raw_input().split())
+    operation = 0
+    while(a&(a-1)):
+        a = a >> 1
+        operation+=1
+    if(a<b):
+        operation+=int(log((b/a),2))
+    if(a>b):
+        operation+=int(log((a/b),2))
+    print operation

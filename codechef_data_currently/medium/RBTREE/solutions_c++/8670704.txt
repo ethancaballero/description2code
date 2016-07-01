@@ -1,0 +1,127 @@
+#include<iostream>
+//#include<conio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<vector>
+using namespace std;
+vector<long long int> v1,v2;
+//vector<int>::iterator it;
+long long int lca(long long int x,long long int y)
+{
+	long long int s1,s2,ret;
+	while(x>=1)
+	{
+		v1.push_back(x);
+		x/=2;
+	}
+	
+	while(y>=1)
+	{
+		v2.push_back(y);
+		y/=2;
+	}
+	
+	s1=v1.size()-1;
+	s2=v2.size()-1;
+	ret=-1;
+	while(s1>=0 && s2>=0)
+	{
+		if(v1[s1]!=v2[s2])
+		{
+			ret=v1[s1+1];
+			break;
+		}
+		else
+		{
+			s1--;
+			s2--;
+		}
+	}
+	return ret;
+}
+long long int rd=0,blk=0;
+void calc(long long int x,long long int y)
+{
+				long long int lev1,lev2,dif;
+				lev1=(floor)(log(x)/log(2));
+				
+	            lev2=(floor)(log(y)/log(2));
+	            dif=abs(lev2-lev1)+1;
+	            //cout<<lev1<<lev2<<dif<<endl;
+	            if(dif%2==0)
+	            {
+	            	rd+=(dif/2);
+					blk+=(dif/2);
+	            }
+	            else
+	            {
+	            	if(lev1%2==0)//black ends
+	            	{
+	            		blk+=((dif/2)+1);
+	            		rd+=(dif/2);
+	            	}
+	            	else
+	            	{
+	            		rd+=((dif/2)+1);
+	            		blk+=(dif/2);
+	            	}
+	            }
+}
+int main()
+{
+	long long int q,cmn,x,y,rlev,inv=0;
+	char a,b;
+	cin>>q;
+	while(q--)
+	{
+		cin>>a>>b;
+		rd=blk=0;
+		if(b!='i')
+		{
+			cin>>x>>y;
+			cmn=lca(x,y);
+			//cout<<cmn<<endl;
+			if(cmn==-1)
+			{
+				
+				calc(x,y);
+			}
+			else
+			{
+				calc(cmn,y);
+			//	cout<<rd<<' '<<blk<<endl;
+				calc(cmn,x);
+			//	cout<<rd<<' '<<blk<<endl;
+				//subtract once for ret
+				rlev=(floor)(log(cmn)/log(2));
+			//	cout<<rlev<<endl;
+				if(rlev%2==0)
+				blk--;
+				else
+				rd--;
+			}
+			  if(inv==0)
+			  {
+			  //	cout<<"this";
+			   if(b=='r')
+			   cout<<rd<<endl;
+			   else if(b=='b')
+			   cout<<blk<<endl;
+			  }
+			  else if(inv==1)
+			  {
+			   if(b=='b')
+			   cout<<rd<<endl;
+			   else if(b=='r')
+			   cout<<blk<<endl;
+			  }
+		}
+		else
+		{
+			inv=(!inv);
+			//cout<<"inv="<<inv<<endl;
+		}
+	}
+	//getch();
+	return 0;
+}

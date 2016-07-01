@@ -1,0 +1,13 @@
+t = input()
+for i in range(t):
+    n = input()
+    root_n = int(n**0.5)
+    count = 0
+    for j in range(2,root_n+1):
+        if(n%j == 0):
+            count = 1
+            break
+    if(count == 0):
+        print "yes"
+    else:
+        print "no"

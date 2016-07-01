@@ -1,0 +1,174 @@
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <cstdio>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> adj[1005];
+int match[1005], p[1005], Base[1005];
+bool Used[1005], blossom[1005];
+
+int lca (int a, int b)
+{
+    bool Track[1005];
+	for(int i=0; i<=1000; i++)
+    {
+        Track[i]=0;
+    }
+	while(1)
+    {
+		a = Base[a];
+		Track[a] = true;
+		if (match[a] == -1)
+		{
+		    break;
+		}
+		a = p[match[a]];
+	}
+	while(1)
+    {
+		b = Base[b];
+		if (Track[b])
+		{
+		    return b;
+		}
+		b = p[match[b]];
+	}
+}
+
+void mark_path(int v, int b, int children)
+{
+	while (Base[v] != b)
+    {
+		blossom[Base[v]] = blossom[Base[match[v]]] = true;
+		p[v] = children;
+		children = match[v];
+		v = p[match[v]];
+	}
+
+	return ;
+}
+
+int find_path (int root , int n)
+{
+	memset (Used, 0, sizeof Used);
+	memset (p, -1, sizeof p);
+
+	for (int i=0; i<n; i++)
+    {
+		Base[i] = i;
+    }
+
+    queue<int> Q;
+    Q.push(root);
+	Used[root] = true;
+
+	//int qh=0, qt=0;
+	//q[qt++] = root;
+
+	while(!(Q.empty()))//while (qh < qt)
+	{
+		int v = Q.front();//q[qh++];
+		Q.pop();
+
+		for (int i=0; i<adj[v].size(); i++)
+        {
+			//int to = adj[v][i];
+			int node=adj[v][i];
+
+			if (Base[v] == Base[node] || match[v] == node)
+            {
+                continue;
+            }
+			if (node == root || match[node] != -1 && p[match[node]] != -1)
+            {
+				int curbase = lca (v, node);
+				memset (blossom, 0, sizeof blossom);
+				mark_path (v, curbase, node);
+				mark_path (node, curbase, v);
+				for (int i=0; i<n; ++i)
+				{
+					if (blossom[Base[i]])
+                    {
+						Base[i] = curbase;
+						if (!Used[i])
+						{
+							Used[i] = true;
+							Q.push(i);
+						}
+					}
+				}
+			}
+			else if (p[node] == -1)
+            {
+				p[node] = v;
+				if (match[node] == -1)
+				{
+					return node;
+				}
+				node=match[node];
+				Used[node] = true;
+				Q.push(node);
+			}
+		}
+	}
+	return -1;
+}
+
+
+int main()
+{
+    int t,n,m,x,y,ok;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d %d",&n,&m);
+
+        for (int i=0; i<n; i++)
+        {
+            adj[i].clear();
+            match[i]=-1;
+        }
+
+        for (int i=1; i<=m; i++)
+        {
+            scanf("%d %d",&x,&y);
+            x--;
+            y--;
+            adj[x].push_back(y);
+            adj[y].push_back(x);
+        }
+
+
+        for (int i=0; i<n; i++)
+        {
+            if (match[i] == -1)
+            {
+                int v = find_path (i,n);
+                while (v != -1)
+                {
+                    int pv = p[v];
+                    int ppv = match[pv];
+
+                    match[v] = pv;
+                    match[pv] = v;
+                    v = ppv;
+                }
+            }
+        }
+        ok = 1;
+        for (int i=0;i<n;i++)
+        {
+            if (match[i] == -1)
+            {
+                ok = 0;
+            }
+        }
+        if (ok) cout << "YES
+"; else cout << "NO
+";
+    }//end of test cases
+}//end of main

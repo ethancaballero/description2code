@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int T, A, D;
+	unsigned long long R, L, i, sum, tempsum;
+	cin >> T;
+	while (T)
+	{
+		sum = 0;
+		cin >> A >> D >> L >> R;
+		//sum = ((R - L+1) % 9 * A % 9) % 9;
+		//tempsum = ((((R - L)*(R + L) + 3 * L - R - 2) / 2) % 9 * D % 9) % 9;
+		//sum = (sum + tempsum);
+		for (i = L; i <= R; i++)
+		{
+			tempsum = A + (i - 1)*D;
+			if (tempsum % 9 == 0)
+				sum = sum + 9;
+			else
+				sum = sum + tempsum%9;
+		}
+		cout << sum << endl;
+		T--;
+	}
+	return 0;
+}

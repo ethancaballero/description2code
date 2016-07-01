@@ -1,0 +1,17 @@
+for t in range(int(raw_input())):
+    x,y,k,n=map(int,raw_input().split())
+    flag=0
+    N=[]
+    M=[]
+    for i in range(n):
+        K=map(int,raw_input().split())
+        N.append(K[0])
+        M.append(K[1])    
+    for i in range(n):
+        if N[i]>=(x-y) and M[i]<=k:
+            flag=1
+            break
+    if flag==1:
+        print "LuckyChef"
+    else:
+        print "UnluckyChef"

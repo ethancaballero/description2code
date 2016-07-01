@@ -1,0 +1,42 @@
+import sys
+ff = sys.stdin
+
+T = int(ff.readline().strip())
+
+
+def nth_number(A1,D, n) :
+    return A1 + (n-1)*D
+
+
+def F(x):
+    '''
+    Look at the module documentation
+    :param x: int
+    :return: digit sum of the integer reduced to a value < 10
+    '''
+    return (x - 1) % 9 + 1
+
+for tc in xrange(T):
+    A1,D,L,R = [int(x) for x in ff.readline().split()]
+    cache = []
+    # digit_sum_l_th_number = F(nth_number(A1,D,L))
+    # cache.append(digit_sum_l_th_number)
+
+    periodic_sum = 0
+    for num in xrange(L ,R+1):
+        digit_sum_l_th_number = F(nth_number(A1,D,num))
+
+        if digit_sum_l_th_number in cache :
+            #
+            break
+        periodic_sum += digit_sum_l_th_number
+        cache.append(digit_sum_l_th_number)
+
+    cycle_length = len(cache)
+    summation = periodic_sum * ((R - L + 1) / cycle_length) + sum(cache[:(R - L + 1) % cycle_length])
+    print(summation)
+    # print('cache:{}'.format(cache))
+    # print('num: {}',num)
+
+
+

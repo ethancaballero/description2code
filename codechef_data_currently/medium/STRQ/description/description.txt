@@ -1,0 +1,43 @@
+  Chef likes strings a lot but moreover he likes good strings. Chef calls a string str a good string if str starts and ends at different characters. For eg : strings such as abab , baccba , abc are all good strings whereas strings like aba, baab , baacaab are not good at all .
+Today, Chef has a special string P consisting of lower case letters "c" , "h" , "e" and "f" only. Chef wants to make some queries about his string P.
+Each of chef's query has the following form a b L R. For a given query, Chef wants to count the number of good strings which starts at letter a and ends at letter b such that starting index Si and ending index Ei of a chosen substring satisfies L <= Si < Ei <= R.
+NOTE
+Two substrings P1 and P2 are considered to be different if either S1 != S2 or E1 != E2 where S1,E1 and S2,E2 are the starting and ending index of string P1 and string P2 respectively.
+Chef is not able to accomplish this task efficiently. Can you help him ?
+Input
+First line of the input contains a string P denoting the chef's special string. Next line of the input contains a single integer Q denoting the number of chef's queries. Next Q lines of the input contains four space separated parameters where the first two parameters are characters denoting a and b respectively and rest two are integers denoting L and R respectively.
+
+Output
+For each chef's query, print the required answer.
+Constraints
+
+1 <= |P| <= 106
+1 <= Q <= 106
+1 <= L <= R <= |P|
+P,a,b belongs to the set of lower case letters [c,h,e,f] and a != b.
+All test files are strictly according to constraints.
+
+Example
+
+Input
+checfcheff
+5
+c h 1 10
+c f 1 10
+e c 1 10
+c f 1 5
+c f 6 10
+
+Output
+4
+8
+2
+2
+2
+Explanation
+
+Q1 : good strings are ch , checfch , cfch , ch 
+Q2 : good strings are checf , checfchef , checfcheff , cf , cfchef , cfcheff , chef , cheff
+
+Warning
+Large test data set, Prefer to use faster input\/output methods .

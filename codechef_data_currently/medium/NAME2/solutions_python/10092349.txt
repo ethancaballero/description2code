@@ -1,0 +1,17 @@
+def is_subsequence(male, female):
+	if len(male) >= len(female):
+		f = 0
+		for i in range(len(male)):
+			if male[i] == female[f]:
+				f += 1
+			if f == len(female): return True
+		return False
+	return False
+
+test_case = int(raw_input())
+for t in range(test_case):
+	male, female = map(str, raw_input().split())
+	if is_subsequence(male, female) or is_subsequence(female, male):
+		print 'YES'
+	else:
+		print 'NO'

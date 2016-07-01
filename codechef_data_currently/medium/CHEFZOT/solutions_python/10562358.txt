@@ -1,0 +1,17 @@
+n=input()
+arr=map(int,raw_input().split())
+i=0;maxp=0;mapl=0
+while(i<n):
+	p=1;l=i
+	while(i<n):
+		if(arr[i]==0):
+			break
+		p=p*arr[i]
+		i+=1
+	if(p>maxp):
+		maxp=p
+		maxl=i-l
+	elif(p==maxp  and maxl<i-l):
+		maxl=i-l
+	i+=1
+print maxl

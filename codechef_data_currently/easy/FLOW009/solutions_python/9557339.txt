@@ -1,0 +1,15 @@
+import math
+t = int(raw_input())
+for i in range(0,t):
+    text = raw_input()
+    arr = []
+    arr += text.split(" ")
+    total = 0.0
+    arr[0] = int(arr[0])
+    arr[1] = int(arr[1])
+    if arr[0] > 1000 :
+       total = arr[0] * arr[1]
+       total = format(total - total * 0.1,'.6f')
+       print(total)
+    else:
+       print(format(arr[0] * arr[1],'.6f')) 

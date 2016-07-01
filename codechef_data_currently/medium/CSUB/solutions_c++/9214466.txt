@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+unsigned long long int arr[100005];
+void calc()
+{
+	arr[1]=1;
+	for(int i=2;i<100004;i++)
+	{
+		arr[i]=i+arr[i-1];
+	}
+}
+int main()
+{
+	int t,n,count;
+	char ch;
+	calc();
+	cin>>t;
+	while(t--)
+	{
+	cin>>n;
+	count=0;
+	for(int i=0;i<n;i++)
+	{
+		cin>>ch;
+		if(ch=='1')
+		count++;
+	}
+	cout<<arr[count]<<endl;
+	
+	}
+	
+	return 0;
+}

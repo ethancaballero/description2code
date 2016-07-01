@@ -1,0 +1,45 @@
+#include <stdio.h>
+typedef unsigned long long ull;
+const int MOD=1000000007,MAX=1001;
+struct binomial{
+public:
+	static ull table[MAX][MAX];
+	ull Choose(ull,ull);
+	binomial()
+	{
+		table[2][1]=2;
+		table[2][2]=1;
+	}
+};
+ull binomial::table[MAX][MAX]={0};
+ull binomial::Choose(ull n,ull k)
+{
+	if(k==0) return 1;
+	if(k==n) return 1;
+	if(table[n][k]==0)
+		table[n][k] = (Choose(n-1,k)+Choose(n-1,k-1))%MOD;
+	return table[n][k];
+}
+int T,N;
+char c;
+ull res;
+int main()
+{
+	scanf("%d",&T);
+	binomial B;
+	while (T--)
+	{
+		scanf("%d
+",&N);
+		while ((c=getchar_unlocked())!='
+'&&c!=EOF) { }
+		int M=(N+1)>>1;
+		res=0;
+		for (int i = 0; i < M; i++)
+		{
+			res=(res+B.Choose(N,i))%MOD;
+		}
+		printf("%llu
+",res);
+	}
+}

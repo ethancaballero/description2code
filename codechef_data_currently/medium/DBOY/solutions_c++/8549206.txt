@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cstdio>
+#include<climits>
+using namespace std;
+int main()
+{
+    int t,n,h[501],k[501];
+    scanf("%d",&t);
+    while(t--)
+    {
+       scanf("%d",&n);
+       for(int i=0; i<n; i++)
+        scanf("%d",&h[i]);
+       for(int i=0; i<n; i++)
+        scanf("%d",&k[i]);
+       int dp[1001];
+       for(int i=0; i<=1000; i++)
+        dp[i] = INT_MAX;
+       dp[0] = 0;
+       for(int i=0; i<=1000; i++)
+       {
+           for(int j=0; j<n; j++)
+           {
+               if(i >= k[j])
+               {
+                   if(dp[i-k[j]] != INT_MAX)
+                    dp[i] = min(dp[i],dp[i-k[j]]+1);
+               }
+           }
+       }
+       int ans = 0;
+       for(int i=0; i<n; i++)
+        ans += dp[2*h[i]];
+       printf("%d
+",ans);
+    }
+   return 0;
+}

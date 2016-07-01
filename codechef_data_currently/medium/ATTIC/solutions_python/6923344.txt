@@ -1,0 +1,21 @@
+t=int(raw_input())
+for J in range(t):
+    arr=raw_input()
+    max=0
+    x=0
+    count=0
+    i=0
+    while i<len(arr)-1:
+        if(arr[i]=='.'):
+            count=0
+            while arr[i]=='.':
+                count+=1
+                i+=1
+                
+        else:
+            i+=1
+        #print count    
+        if(count>max):
+            x+=1
+            max=count
+    print x

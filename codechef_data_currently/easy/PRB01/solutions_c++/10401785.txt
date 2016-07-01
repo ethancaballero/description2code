@@ -1,0 +1,22 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+   int n;
+   cin>>n;
+   while(n-->0)
+   {
+       int x;
+       cin>>x;
+       int c=0;
+        for(int i=2;i<x;i++)
+            if(x%i==0)
+                c++;
+        if(c!=0)
+            cout<<"no"<<endl;
+        else cout<<"yes"<<endl;
+   }
+   return 0;
+}
+

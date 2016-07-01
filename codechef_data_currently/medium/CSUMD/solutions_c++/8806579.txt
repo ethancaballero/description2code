@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+#define endl "
+"
+
+#define MOD 1000000007
+const int len = 8 * 4;
+
+void matmul(ll a[2][2], ll b[2][2], ll ans[2][2]){
+	int i, j, k;
+	for(i=0;i<2;i++){
+		for(j=0;j<2;j++){
+			ans[i][j] = 0;
+			for(k=0;k<2;k++)
+				ans[i][j] = (ans[i][j] + (a[i][k]*b[k][j])%MOD)%MOD;
+		}
+	}
+}
+
+void mul(ll a[2][2], ll b[2], ll c[2], int n){
+	ll ans[2][2] = {{1, 0}, {0, 1}};
+	ll curr[2][2], tem[2][2];
+	memmove(curr, a, len);
+	if(n&1)
+		memmove(ans, curr, len);
+	while((n = n>>1) > 0){
+		int set = (n & 1);
+		matmul(curr, curr, tem);
+		memmove(curr, tem, len);
+		if(set){
+			matmul(ans, curr, tem);
+			memmove(ans, tem, len);
+		}
+	}
+	memmove(a, ans, len);
+	c[0] = ((a[0][0]*b[0])%MOD + (a[0][1]*b[1])%MOD)%MOD;
+	c[1] = ((a[1][0]*b[0])%MOD + (a[1][1]*b[1])%MOD)%MOD;
+}
+
+ll func(int n){
+	if(n <= 1)
+		return 1;
+	if(n == 2)
+		return 3;
+	ll mat[2][2] = {{2, 2}, {1, 0}};
+	ll base[2] = {6, 2};
+	ll res[2] = {6, 2};
+	mul(mat, base, res, n-3);
+	return (res[0] + res[1])%MOD;
+}
+
+int main() {
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		ll n;
+		scanf("%lld", &n);
+		printf("%lld
+", func(n));
+	}
+	return 0;
+}

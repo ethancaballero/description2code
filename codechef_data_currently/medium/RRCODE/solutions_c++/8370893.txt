@@ -1,0 +1,94 @@
+/* Author : Anurag El Dorado */
+
+/* Libraries */
+#include <bits/stdc++.h>
+#include <time.h>
+using namespace std;
+
+//MACRO DEFINITIONS
+/* Data Types */
+#define lld long long int
+#define llu unsigned long long int
+
+/* Input */
+#define sd(var) scanf("%d", &var)
+#define slld(var) scanf("%lld", &var)
+#define sllu(var) scanf("%llu", &var)
+
+/* Output */
+#define print_arr(a, n) cout << #a << " : "; for (int I = 0; I < n; I++) { cout << a[I] << " "; } cout << endl;	//Array till n elements
+#define print_v(v) 	cout << #v << " : "; for (long long int I = 0; I != v.size(); I++) { cout << v[I] << " "; } cout << endl;	//Vector
+#define p2d(a, r, c) cout << #a << endl; for (int I = 0; I < r; I++) {	for (int J = 0; J < c; J++) {	cout << a[I][J] << " ";	} cout << endl;	} cout << endl;
+
+//Single Variables
+#define pr(x) cout << x << endl;
+#define pdln(x) printf("%d
+", x);	//printf with new line
+#define pd(x) printf("%d ", x);	//printf without new line
+
+/* Output and Debugging */
+#define deb(x) cout << #x << " = " << x << endl;
+#define debb(x, y) cout << #x << " = " << x << "	" << #y << " = " << y << endl;
+#define debbb(x, y, z) cout << #x << " = " << x << "	" << #y << " = " << y << "	" << #z << " = " << z << endl;
+
+/* MOD  value*/
+#define MOD 1000000007
+
+/* Timing */
+#define TIMEIT cout << "TIME VARIABLE REINITIALISED
+"; clock_t start_time_ = clock();
+#define TIMEUP cout << "Time: " << (clock() - start_time_) / (double)(CLOCKS_PER_SEC) << "s" << endl;
+
+/* OTHERS */
+#define MARKER -1
+//END MACRO DEFINITIONS
+
+//UTILITY FUNCTIONS
+
+//END UTILITY FUNCTIONS
+
+int main() {
+	int tc;
+	int i, j, k;
+	int n, m;
+	int count;
+	int pos, ans;
+	string opr;
+	int xorr, andd, orr;
+	
+	cin >> tc;
+
+	while (tc--) {
+		cin >> n >> k >> ans;
+		xorr = ans;	andd = ans;	orr = ans;
+		int a[n];
+		for (i = 0; i < n; i++) {
+			cin >> a[i];
+			xorr ^= a[i];
+			andd &= a[i];
+			orr  |= a[i];
+		}
+		cin >> opr;
+		
+		if (k == 0) {
+			cout << ans << endl;
+			continue;
+		}
+		
+		if (opr == "XOR") {
+			if (k % 2) {
+				cout << xorr << endl;
+			} else {
+				cout << ans  << endl;
+			}
+		} else if (opr == "AND") {
+			cout << andd << endl;
+		} else if (opr == "OR") {
+			cout << orr << endl;
+		}
+		
+	}
+
+
+	return 0;
+}

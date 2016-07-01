@@ -1,0 +1,12 @@
+# Valid triangles
+
+if __name__ == '__main__':
+	T = input()
+
+	for i in range(T):
+		x,y,z = map(int,raw_input().split())
+		
+		if x+y+z == 180 :
+			print "YES"
+		else:
+			print "NO"

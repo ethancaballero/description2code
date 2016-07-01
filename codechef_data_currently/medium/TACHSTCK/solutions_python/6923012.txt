@@ -1,0 +1,18 @@
+arr=raw_input().split(" ")
+n=int(arr[0])
+d=int(arr[1])
+inte=[]
+count=0
+for i in range(n):
+    inte.append(int(raw_input()))
+inte.sort()
+#print inte    
+i=0
+while i<n-1:
+   
+    if (inte[i+1]-inte[i])<=d:
+        count+=1
+        i+=2
+    else:
+        i+=1
+print count        

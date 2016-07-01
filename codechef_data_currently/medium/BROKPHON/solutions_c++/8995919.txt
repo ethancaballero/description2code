@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+using namespace std;
+
+main()
+{ int t; int a=0;  int n,s=0,c=0; int f=0;
+scanf("%d", &t);
+while(t--)
+{
+	scanf("%d",&n);
+   for(int i=0;i<n;i++)
+   { scanf("%d",&a); c++;
+   	if(i==0)f=a;
+   	if(a!=f)
+      { if(c!=1) s+=2;
+      	else s++;
+         c=0;
+      }
+      f=a;
+   }
+printf("%d 
+",s);s=0;
+}
+}

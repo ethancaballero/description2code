@@ -1,0 +1,83 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<cstring>
+#include<algorithm>
+#include<set>
+#include<cmath>
+#include<bitset>
+#include<map>
+#define test(t) while(t--)
+#define cin(n) scanf("%d",&n)
+#define cout(n) printf("%d
+",n)
+#define rep(i,a,n) for(i=a;i<=n;i++)
+#define vi vector<int>
+#define vii vector< vector<int> >
+#define vpii vector< pair<int,int> >
+#define mii map<int,int>
+#define pb push_back
+#define mp make_pair
+#define imax (int) 1000000007
+#define ill long long
+#define gc getchar_unlocked
+
+using namespace std;
+#define maxl 20
+
+const double EPS=1e-12;
+double dist(pair<double,double> a,pair<double,double> b)
+{
+    return sqrt((a.first-b.first)*(a.first-b.first)+(a.second-b.second)*(a.second-b.second));
+}
+pair<double,double>a[2007];
+int n,a1,b,c;
+double y(double x)
+{
+    return -1.0*((a1*x+c)/b);
+}
+double cost(double x)
+{
+    pair<double,double> k=make_pair(x,y(x));
+    double dista=0.0;
+    for(int i=0;i<n;i++)
+        dista+=dist(k,a[i]);
+    return dista;
+}
+double ternary(double lt,double rt)
+{
+    int iter=64;
+    double ltt,rtt;
+    while(iter--)
+    {
+        ltt=(2.0*lt+rt)/3.0;
+        rtt=(lt+2.0*rt)/3.0;
+        if(cost(ltt)<cost(rtt))
+            rt=rtt;
+        else
+            lt=ltt;
+    }
+    return (lt+rt)/2.0;
+}
+int main()
+{
+    int t,m,i,j,k,l,flag;
+    double xmin,xmax,xsol;
+    cin>>t;
+    while(t--){
+    cin>>n;
+    xmin=100000.00;
+    xmax=-1.00;
+    cin>>a1>>b>>c;
+    for(i=0;i<n;i++)
+    {
+        cin>>a[i].first>>a[i].second;
+        xmin=xmin>a[i].first?a[i].first:xmin;
+        xmax=xmax<a[i].first?a[i].first:xmax;
+    }
+    xsol=ternary(xmin,xmax);
+    printf("%.9lf
+",(cost(xsol))+EPS);
+    }
+    return 0;
+}

@@ -1,0 +1,18 @@
+t = int(raw_input())
+while t>0 :
+    t -= 1
+    n = int(raw_input())
+    s1 = raw_input()
+    s2 = raw_input()
+    a = map(int,raw_input().split())
+    max_a = counter = 0
+    b = True
+    for i in xrange(n) :
+        if s1[i] == s2[i] :
+            counter += 1
+            max_a = max(max_a,a[counter])
+    if counter == n :
+        print a[n]
+    else :
+        max_a = max(max_a,a[0])
+        print max_a

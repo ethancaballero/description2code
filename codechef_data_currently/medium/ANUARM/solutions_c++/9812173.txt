@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+#define MAX 10000000
+#define MOD 1000000007
+#define S(x) scanf("%lld",&x)
+#define Ss(x) scanf("%s",x)
+#define Ps(x) printf("%s
+",x)
+#define P(x) printf("%lld
+",x)
+using namespace std;
+typedef long long ll;
+int main() {
+	ll t,n,m;
+
+	for(S(t);t--;){
+		S(n);S(m);
+		ll val,mx=-1,mn=MOD; ll ans[n];
+		for(ll i=0; i<m; i++){
+			S(val); mx = max(mx,val); mn = min(mn,val);
+		}
+		for(ll i=0; i<n; i++){
+			ans[i] = max(abs(i-mx),abs(i-mn));
+			cout<<ans[i]<<" ";
+		}
+		cout<<endl;
+	}
+	//for(ll i=0; i<=8; i++)P(ans[i]);
+
+	return 0;
+}

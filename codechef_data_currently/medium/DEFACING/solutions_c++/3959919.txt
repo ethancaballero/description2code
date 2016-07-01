@@ -1,0 +1,249 @@
+#include<cstdio>
+#include<vector>
+
+using namespace std;
+
+
+int digitsS,digitsM,MM[10],great[10],total[10],score[10],gMax,totalindex,current[10],currentindex,currentDec[10];
+
+vector< vector<short> > conversions(10);
+
+
+void prepareData(int S,int M)
+{
+	int tempS,tempM,l=0,i,j,k;
+	tempS=S;
+	tempM=M;
+	digitsS=0;
+	digitsM=0;
+	current[0]=0;
+//	total[l++]=0;
+	while(tempM)
+	{
+		MM[digitsM]=tempM%10;
+		tempM=tempM/10;
+		digitsM++;
+	}
+	while(tempS)
+	{
+		score[digitsS]=tempS%10;
+		tempS=tempS/10;
+		digitsS++;
+	}
+
+
+	for(i=0,j=digitsM-1;i<j;i++,j--)
+	{
+		k=MM[i];
+		MM[i]=MM[j];
+		MM[j]=k;
+	}	
+	for(i=0,j=digitsS-1;i<j;i++,j--)
+	{
+		k=score[i];
+		score[i]=score[j];
+		score[j]=k;
+	}	
+
+
+
+	for(int i=0;i<=digitsM-digitsS;i++)
+	{
+		tempS=0;
+		for(int j=0;j<digitsS;j++)
+			tempS=tempS*10+MM[i+j];	
+		total[l++]=tempS;
+	}
+	l=0;
+	for(int i=0;i<digitsM-digitsS;i++)
+	{
+		current[i+1]=current[i]*10+MM[i];
+		currentDec[i+1]=current[i+1]-1;
+	}
+	for(int i=0;i<digitsM-digitsS;i++)
+	{
+		tempM=digitsM;
+		while((--tempM)>i)
+		{
+			current[i+1]*=10;
+			currentDec[i+1]*=10;
+		}		
+ 	}
+}
+
+int algo(int sIndex,int mIndex,int result,int flag)
+{
+	int total1=0,tempResult=0,j,status;
+	vector<short> numbers;	
+	if(sIndex==digitsS)
+	{
+//		printf("%d	%d	%d
+",current[currentindex],total[totalindex],result);
+//		total1=current[currentindex]+result;
+		if(result==total[totalindex])
+		{
+			for(j=mIndex;j<digitsM;j++)
+			{
+				tempResult=tempResult*10+MM[j];
+				result*=10;
+			}
+	//		total1+=tempResult;
+		}				
+		else
+		{
+			for(j=mIndex;j<digitsM;j++)
+			{
+				tempResult=tempResult*10+9;
+				result*=10;
+			}
+//			total1+=tempResult;
+		}
+		total1=current[currentindex]+result+tempResult;	
+		if(gMax<total1)
+			gMax=total1;
+		return 0;
+	}
+	else
+	{
+		if(flag==0)
+		{
+			numbers=conversions[score[sIndex]];
+			for(unsigned int i=0;i<numbers.size();i++)		
+			{
+				tempResult=result;
+				if(numbers[i]==MM[mIndex])
+				{
+					tempResult=tempResult*10+numbers[i];
+					status=algo(sIndex+1,mIndex+1,tempResult,0);	
+					if(status!=-1)
+						return 1;
+//					if(status==1||status==0)
+						
+					
+				}
+				else if(numbers[i]>MM[mIndex])
+				{	
+					continue;
+					
+
+				}
+				else
+				{
+					result=result*10+numbers[i];
+					algo(sIndex+1,mIndex+1,result,1);
+					return 1;
+				}
+			}
+				return -1;		
+		}
+		else
+		{
+			result=result*10+great[score[sIndex]];
+			algo(sIndex+1,mIndex+1,result,1);
+			return 1;
+		}
+	}
+}
+
+
+int main()
+{
+int a[10][7],i,j,k,status,segment,T,S,M,result,tempM;
+for(i=0;i<10;i++)
+	for(segment=0;segment<7;segment++)
+		a[i][segment]=1;
+a[0][6]=0;
+a[1][0]=a[1][3]=a[1][4]=a[1][5]=a[1][6]=0;
+a[2][2]=a[2][5]=0;
+a[3][4]=a[3][5]=0;
+a[4][3]=a[4][4]=a[4][0]=0;
+a[5][1]=a[5][4]=a[6][1]=a[7][3]=a[7][4]=a[7][5]=a[7][6]=a[9][4]=0;
+for(i=0;i<10;i++)
+{
+	for(j=9;j>=0;j--)
+	{
+		for(k=0;k<7;k++)
+		{
+			if(a[j][k]==0 && a[i][k]==1)
+				break;
+		}
+		if(k==7)
+			conversions[i].push_back(j);
+		
+	}			
+}
+great[1]=great[3]=great[4]=great[5]=great[7]=great[9]=9;
+great[0]=great[2]=great[6]=great[8]=8;
+scanf("%d",&T);
+while(T-->0)
+{
+	scanf("%d%d",&S,&M);
+	prepareData(S,M);
+	if(S==0)
+	{
+		for(i=0;i<digitsM;i++)
+		{
+			if(MM[i]==8||MM[i]==0)
+				break;
+		}	
+		if(i!=digitsM||MM[digitsM-1]==0||M==0)
+			gMax=M;
+		else
+		{	
+//			add=M/10;
+			gMax=0;	
+			for(i=0;i<digitsM-1;i++)
+				gMax=gMax*10+MM[i];
+			if(MM[digitsM-1]<8)
+				gMax=gMax*10+0;
+			else
+				gMax=gMax*10+8;
+//			return add;
+		}	
+
+	}
+	else
+
+	{
+		gMax=0;	
+//		for(i=0;i<digitsS;i++)
+//			printf("%d
+",score[i]);
+		totalindex=0;
+		currentindex=0;	
+		for(i=0;i<=digitsM-digitsS;i++)
+		{
+//					result=0;	
+			status=algo(0,i,0,0);
+	//		printf("status%d
+",status);
+			if(status==-1 && i!=0)
+			{
+	//			printf("status%d
+",status);
+				result=currentDec[i];
+				tempM=0;
+				for(int j=0;j<digitsS;j++)
+				{
+					tempM=tempM*10+great[score[j]];
+			//		printf("%d	%d
+",score[j],great[score[j]]);
+				}
+				for(k=i+digitsS;k<digitsM;k++)
+					tempM=tempM*10+9;
+//				printf("%d	%d
+",gMax,result);	
+				result+=tempM;
+				if(gMax<result)
+					gMax=result;
+			}			
+			//calculate total-1
+			totalindex++;
+			currentindex++;
+		}
+	}
+			printf("%d
+",gMax);
+
+}
+}	

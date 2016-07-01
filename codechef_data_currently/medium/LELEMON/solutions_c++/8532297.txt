@@ -1,0 +1,100 @@
+#pragma warning(disable:4786)
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<set>
+#include<map>
+#include<functional>
+#include<string>
+#include<cstring>
+#include<cstdlib>
+#include<queue>
+#include<utility>
+#include<fstream>
+#include<sstream>
+#include<cmath>
+#include<stack>
+#include<assert.h>
+using namespace std;
+
+#define MEM(a, b) memset(a, (b), sizeof(a))
+#define CLR(a) memset(a, 0, sizeof(a))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define ABS(X) ( (X) > 0 ? (X) : ( -(X) ) )
+#define S(X) ( (X) * (X) )
+#define SZ(V) (int )V.size()
+#define FORN(i, n) for(i = 0; i < n; i++)
+#define FORAB(i, a, b) for(i = a; i <= b; i++)
+#define ALL(V) V.begin(), V.end()
+
+typedef pair<int,int> PII;
+typedef pair<double, double> PDD;
+typedef vector<int> VI;
+
+#define IN(A, B, C) assert( B <= A && A <= C)
+
+//typedef int LL;
+//typedef __int64 LL;
+
+VI V[101];
+int cnt[101];
+
+int main()
+{
+	int T, n, m, i, j, a, c, v;
+	int ans;
+
+	scanf("%d", &T);
+	IN(T, 1, 10);
+
+	while( T-- )
+	{
+		scanf("%d %d", &n, &m);
+
+		IN(n, 1, 100);
+		IN(m, 1, 10000);
+		CLR(cnt);
+
+		//count the number of times we enter into a room
+		FORAB(i, 1, m)
+		{
+			scanf("%d", &a);
+			IN(a, 0, n-1);
+
+			cnt[a]++;
+		}
+
+		ans = 0;
+		FORN(i, n)
+		{
+			scanf("%d", &c);
+
+			IN(c, 1, 100);
+			
+			V[i].clear();
+			FORN(j, c)
+			{
+				scanf("%d", &v);
+				IN(v, 1, 100000);
+
+				V[i].push_back( v );
+			}
+
+			//for each room sort the lemonade sizes in descending ordeer
+			sort( ALL(V[i]), greater<int>() );
+
+			//take cnt[i] largests.
+			FORN(j, MIN(V[i].size(), cnt[i]))
+				ans += V[i][j];
+
+		}
+
+		printf("%d
+", ans);
+	}
+
+
+	return 0;
+}

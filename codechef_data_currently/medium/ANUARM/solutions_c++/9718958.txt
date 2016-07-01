@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdlib>
+#include <algorithm>
+#include <climits>
+using namespace std;
+
+int main() {
+	int t,m,n,i,mini,maxi,temp,ans;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d %d",&n,&m);
+		mini=INT_MAX;
+		maxi=INT_MIN;
+		for(i=0;i<m;i++)
+		{
+			scanf("%d",&temp);
+			if(temp>maxi)
+			{
+				maxi=temp;
+			}
+			if(temp<mini)
+			{
+				mini=temp;
+			}
+		}
+		for(i=0;i<n;i++)
+		{
+			ans=max(abs(i-maxi),abs(i-mini));
+			printf("%d ",ans);
+		}
+		printf("
+");
+	}
+	return 0;
+}

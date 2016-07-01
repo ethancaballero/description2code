@@ -1,0 +1,23 @@
+def main():
+	n,m=raw_input().split(" ")
+	n=int(n)
+	m=int(m)
+	count=0
+	arr=[int (x) for x in raw_input().split()]
+	for i in range(0,m):
+		c,d=raw_input().split(" ")
+		d=int(d);
+		if(c=='R'):
+			print arr[(count+d-1)%n]
+		elif(c=='C'):
+			count+=d
+			count%=n
+		else:
+			count-=d
+			count+=n
+			count%=n
+	return 0
+
+if __name__ == '__main__':
+	main()
+

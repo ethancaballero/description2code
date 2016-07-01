@@ -1,0 +1,30 @@
+n,m=map(int,raw_input().split(' '))
+name={}
+for i in xrange(n):
+    k=raw_input()
+    name[(k.split(' ')[0])]=k.split(' ')[1]
+v={}
+v1={}
+for i in xrange(m):
+    k=raw_input()
+    if k in v:
+	v[k]+=1
+	v1[name[k]]+=1
+    else:
+	v[k]=1
+	if name[k] in v1:
+	    v1[name[k]]+=1
+	else:
+	    v1[name[k]]=1
+m=max(v.values())
+m1=max(v1.values())
+r='zzzzzzzzzz'
+r1='zzzzzzzzzz'
+for i in v:
+    if v[i]==m and i<r:
+	r=i
+for i in v1:
+    if v1[i]==m1 and i<r1:
+	r1=i
+print r1
+print r	

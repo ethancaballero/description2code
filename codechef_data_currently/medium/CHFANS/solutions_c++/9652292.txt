@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+int pos(int x);
+int gcd(int a, int b);
+int main()
+{
+	int t, a, b, diff, g;
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+		cin>>a>>b;
+		if(a>b)
+		diff=a-b;
+		else
+		diff=b-a;
+		a=pos(a);
+		b=pos(b);
+		g=gcd(a,b);
+		cout<< diff/g<<endl;
+		
+	}
+}
+int gcd(int a, int b)
+{
+	int min, max;
+	min=((a<b)?a:b);
+	for(int j=min;j>0;j--)
+	{
+		if(a%j==0 && b%j==0)
+		{
+			return j;
+		}
+	}
+}
+int pos(int x)
+{
+	if(x>0)
+	return x;
+	else
+	return -x;
+}

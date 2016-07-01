@@ -1,0 +1,20 @@
+
+def GetGCD(a, b): 
+    while b:
+        a, b = b, a%b
+
+    return a
+
+def GetAbs(a):
+    if a < 0:
+        return a*(-1)
+
+    return a
+
+n = input()
+
+while n > 0:
+    x, y = map(int, raw_input().split())
+
+    print(GetAbs((x-y)/GetGCD(x,y)))
+    n = n - 1

@@ -1,0 +1,20 @@
+for x in xrange(input()):
+	nkem = map(int, raw_input().strip().split())
+	numbers = []
+	for y in xrange(nkem[0]-1):
+		numbers.append(sum(map(int,raw_input().strip().split())))
+	my_number = sum(map(int,raw_input().strip().split()))
+
+	numbers.sort()
+
+	i_need = (numbers[-nkem[1]]-my_number)+1
+	
+	if(i_need<0):
+		i_need = 0
+
+	if(i_need<=nkem[3]):
+		print str(i_need)+"
+"
+	else:
+		print "Impossible
+"

@@ -1,0 +1,26 @@
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+using namespace std;
+int main(){
+	unsigned int m, n, i, mx;
+	int count;
+	char l[1000005];
+	scanf("%d
+",&m);
+	while (m--){
+		mx = 0;
+		count = 0;
+		gets(l);
+		n = strlen(l);
+		for(i=0;i<n;i++){
+			if (l[i]=='>') count -= 1;
+			else count += 1;
+			if (count < 0) break;
+			if (count == 0) mx = i + 1;
+		}
+		printf("%d
+", mx);
+	}
+	return 0;
+}

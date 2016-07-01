@@ -1,0 +1,91 @@
+    #include<iostream>
+    #include<vector>
+    #include<algorithm>
+    #include<cstdio>
+    using namespace std;
+    typedef long long LL;
+    #define INF 1000000007
+    #define loop(x,y,z) for(int i=x;i<y;i=i+z)
+    #define get getchar_unlocked
+    inline int INP( )
+    {
+    int n = 0 , s = 1 ; char p = get( ) ;
+    if(p == '-') s = -1 ;
+    while((p < '0' || p > '9') && p != EOF && p != '-')
+    p = get( ) ;
+    if(p == '-') s=-1 , p=get( );
+    while(p >= '0' && p <= '9')
+    n = (n << 3) + (n << 1) + (p - '0'), p = get( ) ;
+    return n * s ;
+    }
+    void fun()
+    {
+    return;
+    }
+    int main()
+    { int t,n,x;
+    LL len_chef,len_girl;
+    fun();
+    t=INP();
+    while(t--)
+    {	
+    vector <int> chef , girl;
+    int one=0;
+    LL sum=0;
+    LL count=0;
+    n=INP();
+    loop(0,n,1)
+    {
+    x=INP();
+    if(x==1)continue;
+    if(x==2)
+    x=4;
+    chef.push_back(x);
+    }
+    loop(0,n,1)
+    {
+    x=INP();
+    if(x==1){
+    one++;
+    continue;}
+    girl.push_back(x);
+    }
+    len_chef=chef.size();
+    len_girl=girl.size();
+    sum+=len_chef*one;
+    if(len_girl==0){
+    printf("%lf
+",sum/double(n));continue;}
+    if(len_chef==0){
+    puts("0.000000");continue;}
+    sort(chef.begin(),chef.end());
+    sort(girl.begin(),girl.end());
+    int i=0,j=0,three=0;
+    if(chef[0]==3){
+    while(chef[i]==3) i++;
+    while(girl[j]==2)j++;
+    while(girl[j]==3){
+    j++;
+    three++;}
+    }
+    sum+=i*(len_girl-three);
+    // all the cases till 3 in chef gifts are done
+    //code for remaning numbers
+    j=0;
+    for(;i<len_chef;i++)
+    {
+    for(;j<len_girl;j++)
+    {
+    if(girl[j]<=chef[i])
+    count++;
+    else
+    {
+    sum+=(len_girl-count);
+    break;
+    }
+    }
+    }
+    printf("%lf
+",sum/double(n));
+    }
+    } 

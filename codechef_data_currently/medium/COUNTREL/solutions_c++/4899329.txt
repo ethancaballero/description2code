@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdio>
+#define mod 100000007
+ 
+using namespace std;
+ 
+long long int fast_exp(long long int base,long long int exp,long long int modulo)
+{
+if(exp==0) return 1;
+long long int new_base = (base*base) % modulo ;
+if(exp & 1) return (base * fast_exp(new_base,exp>>1,modulo)) % modulo;
+return fast_exp(new_base,exp>>1,modulo);
+}
+ 
+int main()
+{
+int t; long long int n=0,ans;
+ 
+cin>>t;
+ 
+while(t--)
+{
+cin>>n;
+ans = ( (fast_exp(3,n,mod<<1)+1) - fast_exp(2,n+1,mod<<1) ) % (mod<<1) + (mod<<1);
+ans = ans % (mod<<1);
+ans = ans>>1;
+cout<<ans<<' ';
+ans = (fast_exp(4,n,mod<<1) + 3 * fast_exp(2,n,mod<<1) - (fast_exp(3,n+1,mod<<1)+1)) % (mod<<1) + (mod<<1) ;
+ans = ans % (mod<<1);
+ans = ans>>1;
+cout<<ans<<'
+';
+}
+ 
+return 0;
+}

@@ -1,0 +1,12 @@
+t = input()
+for _ in xrange(t):
+    n = input()
+    a = map(int , raw_input().split())
+    ex = .5
+    for k in range(n):
+        ex = 2*ex - a[k]
+
+    if not ex:
+        print 'Yes'
+    else:
+        print 'No'

@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int l[105],r[105];
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		int pro;
+		int ans=0;
+		int ind=0,rat=0; 
+		for(int i=0;i<n;i++)
+			cin>>l[i];
+		for(int i=0;i<n;i++)
+			cin>>r[i];
+		for(int i=0;i<n;i++)
+		{
+			int pro=l[i]*r[i];
+			if(pro>ans)
+			{
+				ans=pro;
+				ind=i;
+				rat=r[i];
+			}
+			else if(pro==ans)
+			{
+				if(r[i]>rat)
+				{
+					rat=r[i];
+					ans=pro;
+					ind=i;
+				}
+			}
+		}
+		cout<<ind+1<<endl;
+	}
+	return 0;
+}	

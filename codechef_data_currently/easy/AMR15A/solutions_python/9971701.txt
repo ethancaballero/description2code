@@ -1,0 +1,39 @@
+import math
+import sys
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+n=input()
+li=parseIntList(raw_input())
+ev=0
+odd=0
+for i in li:
+ if i%2==1: odd+=1
+ else: ev+=1
+if ev>odd: print 'READY FOR BATTLE'
+else: print 'NOT READY'
+
+
+  
+  
+ 
+ 
+ 
+
+  
+ 
+
+  
+  
+ 
+ 
+ 
+
+  
+ 

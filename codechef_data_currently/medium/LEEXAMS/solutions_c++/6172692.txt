@@ -1,0 +1,58 @@
+/* Written by Filip Hlasek 2015 */
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <set>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <cassert>
+
+#define FOR(i,a,b) for(int i=(a);i<=(b);i++)
+#define FORD(i,a,b) for(int i=(a);i>=(b);i--)
+#define REP(i,b) for(int i=0;i<(b);i++)
+
+using namespace std;
+
+#define MAXN 111111
+long double P[MAXN];
+int A[MAXN], B[MAXN];
+int N;
+
+int main(int argc, char *argv[]) {
+  int T;
+  scanf("%d", &T);
+  while (T--) {
+    scanf("%d", &N);
+    REP(i, N) {
+      scanf("%Lf%d%d", P + i, A + i, B + i);
+      // assert(A[i] <= 15 && B[i] <= 15 && A[i] >= 1 && B[i] >= 1 && P[i] >= 0 && P[i] <= 100);
+      P[i] /= 100.0;
+    }
+    long double ans = 0;
+    if (N < 20) {
+      REP(mask, 1 << N) {
+        set<int> s;
+        long double p = 1;
+        REP(i, N) {
+          if (mask & (1 << i)) {
+            p *= P[i];
+            s.insert(A[i]);
+          }
+          else {
+            p *= 1 - P[i];
+            s.insert(B[i]);
+          }
+        }
+        if (s.size() == N) ans += p;
+      }
+    }
+    printf("%.15Lf
+", ans);
+  }
+  return 0;
+}

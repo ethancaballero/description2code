@@ -1,0 +1,28 @@
+min_area = -1;
+min_index = -1;
+max_area = -1;
+max_index = -1;
+T = input();
+for x in xrange(0,T):
+	values = raw_input();
+	arr = values.split();
+	x1 = int(arr[0]);
+	x2 = int(arr[1]);
+	y1 = int(arr[2]);
+	y2 = int(arr[3]);
+	z1 = int(arr[4]);
+	z2 = int(arr[5]);
+	area = abs(((x1-z1)*(y2-x2) - (x1-y1)*(z2-x2))/2.0);
+	if(min_area == -1):
+		min_area = area;
+		min_index = x+1;
+		max_area = area;
+		max_index = x+1;
+	if(min_area >= area):
+		min_area = area;
+		min_index = x+1;
+	if(max_area <= area):
+		max_area = area;
+		max_index = x+1;
+print min_index,max_index;
+		

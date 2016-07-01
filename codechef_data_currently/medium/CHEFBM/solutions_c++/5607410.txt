@@ -1,0 +1,93 @@
+#include <iostream>
+#include <stdio.h>
+#include <map>
+#include <algorithm>
+#include <vector>
+#include <cstring>
+using namespace std;
+
+typedef long long LL;
+typedef pair<int,int> PII;
+typedef map<int,int> MII;
+
+
+vector<PII> matrix[100005];
+map<PII,int> mapping;
+PII temp_pair;
+PII temp_pair1;
+int main()
+{
+
+    int n,m,p;
+    cin>>n>>m>>p;
+
+    for(int i=0;i<p;++i)
+    {
+        int row,col;
+        cin>>row>>col;
+        temp_pair = make_pair(row,col);
+        mapping[temp_pair] += 1;
+
+      if(col<m)
+        {
+            if(mapping.count(make_pair(row,col+1))==0)
+                mapping[make_pair(row,col+1)] = 0;
+
+        }
+
+    }
+
+    for(map<PII,int>::iterator it=mapping.begin();it!=mapping.end();++it)
+    {
+        temp_pair = it->first;
+        matrix[temp_pair.first].push_back(make_pair(temp_pair.second,it->second));
+    }
+
+    for(int i=1;i<=m;++i)
+    {
+        sort(matrix[i].begin(),matrix[i].end());
+    }
+
+
+    for(int i=1;i<=n;++i)
+    {
+
+        int ans = m-1;
+
+        if(matrix[i].size()==0)
+        {
+            cout<<ans<<endl;
+            continue;
+        }
+
+        for(int j=matrix[i].size()-1;j>=0;--j)
+        {
+            temp_pair  = make_pair(i,matrix[i][j].first);
+            temp_pair1 = make_pair(i,matrix[i][j].first-1);
+
+            //cout<<"temp_pair = "<<temp_pair.first<<" "<<temp_pair.second<<endl;
+           //cout<<"mapping temp_pair = "<<mapping[temp_pair]<<endl;
+           // cout<<"temp_pair1 = "<<temp_pair1.first<<" "<<temp_pair1.second<<endl;
+           // cout<<"mapping temp_pair1 = "<<mapping[temp_pair1]<<endl;
+
+        if(mapping[temp_pair] + matrix[i][j].first < mapping[temp_pair1] + matrix[i][j].first-1  )
+        {
+            ans = -1;
+            break;
+        }
+
+        }
+        if(ans==-1)
+        {
+             cout<<ans<<endl;
+        }
+        else
+        {
+            ans = m+mapping[make_pair(i,m)] - mapping[make_pair(i,1)]-1;
+            cout<<ans<<endl;
+        }
+
+    }
+
+    return 0;
+}

@@ -1,0 +1,23 @@
+T=int(raw_input())
+for i in range(T):
+	N=int(raw_input())
+	a=[]
+	for j in range(N):
+		b=[]
+		b = [int(k) for k in raw_input().split()]
+		a.append(b)
+	
+	j=N-2
+	while j>=0:
+		k=0
+		while k<=j:
+			if a[j+1][k]>=a[j+1][k+1]:
+				a[j][k]=a[j][k] + a[j+1][k]
+			elif a[j+1][k]<a[j+1][k+1]:
+				a[j][k]=a[j][k] + a[j+1][k+1]
+			k=k+1
+		j=j-1
+	
+	print a[0][0]
+		
+			

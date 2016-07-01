@@ -1,0 +1,42 @@
+    #include <queue>
+    #include <iostream>
+    using namespace std;
+    typedef pair<int,int> dii;
+
+    int abs(int x){
+    if(x<0)
+    return -x;
+    else return x;
+    }
+
+    int main(){
+    int n;
+    cin>>n;
+    priority_queue<dii, vector<dii>, less<dii> > young;
+    priority_queue<dii, vector<dii>, greater<dii> > old;
+    int sy = 0, so = 0;
+    for(int i=0; i<n; i++){
+    int a,r;
+    cin>>a>>r;
+    if(old.empty() || a < old.top().first){
+    young.push(make_pair(a,r));
+    sy+=r;
+    }
+    else {
+    old.push(make_pair(a,r));
+    so+=r;
+    }
+
+    if(young.size()>old.size()+1){
+    pair<int,int> p = young.top();
+    young.pop(); old.push(p);
+    so += p.second; sy-=p.second;
+    } else if(young.size() < old.size()){
+    pair<int,int> p = old.top();
+    old.pop(); young.push(p);
+    sy += p.second; so-=p.second;
+    }
+    cout<<abs(sy-so)<<endl;
+    }
+    return 0;
+    }

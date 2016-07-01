@@ -1,0 +1,12 @@
+ Little Johnny wants to play with his friends today. But his babysitter won't let him go! After a lot of begging, the heartless nanny gives him her brand new electronic puzzle and says: "If you solve the puzzle then you are free to go". Not being aware of Little Johnny's IT skills, the nanny leaves the kid alone.
+Rapidly, Little Johnny sends you an e-mail asking for your help.
+The puzzle consists of three hexagons as shown in the figure. Each vertex is painted black or white. Some of them belong to just one hexagon and some of them belong to more than one. Exactly four of them are painted black, and the other nine are white. The goal is to make the shared vertexes black by means of allowed moves: rotating a hexagon 60 degrees clockwise or counter-clockwise.
+Can you help Little Johnny?
+Input
+Input starts with an integer T, the number of puzzles to solve (1<=T<=100). T lines follow, each one having 13 binary digits, corresponding to the top-down, left to right labeling of the vertexes in the puzzle. A '0' means the i-th vertex is painted white, while a '1' means it is painted black.
+Output
+For each test case output M on a single line, the minimum number of moves required to solve the puzzle. Then print M lines, each one describing a move in the following manner: two space separated integers H and C, the rotated hexagon (upper left is 0, upper right is 1, lower one is 2) and the direction (0 for counter-clockwise, 1 for clockwise).
+If there is more than one solution, any will suffice.
+Example 1
+
+Input:10000000101011Output:32 02 01 1

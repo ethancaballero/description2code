@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+#include<string.h>
+int main() {
+	// your code goes here
+	char s1[101],s2[101];
+	int i,j,k;
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int p=0,d=0,r=0,q=0;
+	    cin>>s1>>s2;
+	    for(i=0;i<strlen(s1);i++)
+	    {
+	        if((s1[i]!=s2[i])&&s1[i]!='?'&&s2[i]!='?')p++;
+	        if(s1[i]=='?'&&s2[i]=='?')
+	        {s1[i]='1'; s2[i]='1';q++;}
+	        if(s1[i]=='?'||s2[i]=='?')
+	        d++;
+	        r=p+d+q;
+	   }
+	   cout<<p<<" "<<r<<endl;
+	}
+	return 0;
+}

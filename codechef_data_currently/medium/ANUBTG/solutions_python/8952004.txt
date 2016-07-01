@@ -1,0 +1,13 @@
+import sys
+t=int(raw_input(""))
+while t:
+    n=int(raw_input(""))
+    l=list(map(int,sys.stdin.readline().split()))
+    l.sort(reverse=True)
+    s=0
+    for i in range(0,n):
+        if i%4<2:
+            s+=l[i]
+    print s
+    t-=1
+        

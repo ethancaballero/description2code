@@ -1,0 +1,54 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+	int T,activities,rank,severity,laddus;
+	char origin[11],activity[16];
+	cin>>T;
+	while(T>0)
+	{
+		cin>>activities;
+		cin>>origin;
+		laddus=0;
+		while(activities>0)
+		{
+			cin>>activity;
+			if(strcmp(activity,"CONTEST_WON")==0)
+				cin>>rank;
+			else if(strcmp(activity,"BUG_FOUND")==0)
+				cin>>severity;
+
+				if(strcmp(activity,"CONTEST_WON")==0)
+				{
+					laddus+=300;
+					if(rank<=20)
+						laddus+=(20-rank);
+				}
+				else if(strcmp(activity,"TOP_CONTRIBUTOR")==0)
+				{
+					laddus+=300;
+				}
+				else if(strcmp(activity,"BUG_FOUND")==0)
+				{
+					laddus+=severity;
+				}
+				else if(strcmp(activity,"CONTEST_HOSTED")==0)
+				{
+					laddus+=50;
+				}
+			activities--;
+		}
+
+		if(strcmp(origin,"INDIAN")==0)
+		{
+			cout<<laddus/200<<endl;
+		}
+		else if(strcmp(origin,"NON_INDIAN")==0)
+		{
+			cout<<laddus/400<<endl;
+		}
+		T--;
+	}
+	return 0;
+}

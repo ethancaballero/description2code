@@ -1,0 +1,43 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,s,m,n,k,i,j,l;
+    scanf("%d",&t);
+    while(t--)
+    {
+
+        scanf("%d %d",&n,&k);
+        m=k;
+        int a[n+1];
+
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d",&a[i]);
+
+        }
+       int dp[n+1][1024];
+
+      dp[0][0]=1;
+      for(j=1;j<=1023;j++)
+        dp[0][j]=0;
+
+      for(i=1;i<=n;i++)
+      {
+          for(j=0;j<=1023;j++)
+          {
+              l=a[i]^j;
+
+              dp[i][j]=dp[i-1][j] || dp[i-1][l];
+              s=dp[i][j]*(j^k);
+              if(s>m)
+                m=s;
+          }
+
+      }
+      printf("%d
+",m);
+
+}
+}

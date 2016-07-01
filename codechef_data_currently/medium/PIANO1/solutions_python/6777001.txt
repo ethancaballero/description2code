@@ -1,0 +1,19 @@
+def main():
+	t=int(input())
+	while t>0:
+		t-=1
+		s=raw_input()
+		n=int(input())
+		k=0
+		for i in s:
+			if i=='S':
+				k+=1
+			else:
+				k+=2
+		ans=0
+		i=1
+		while (12*n>=k*i):
+			ans+=(12*n-k*i)
+			i+=1
+		print ans
+main() 

@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string>
+#include <stdlib.h>
+#include <cstdio>
+#include <sstream>
+#include <map>
+#include <iostream>
+using namespace std;
+int main()
+{
+	int t,n,m,no_item,item,ans;
+	scanf("%d",&t);
+	//ostringstream convert; 
+	while(t > 0)
+	{
+		scanf("%d",&n);
+		scanf("%d",&m);
+		string str[n];
+		for (int i = 1; i <= m; ++i)
+		{
+			scanf("%d",&no_item);
+			for (int j = 0; j < no_item; ++j)
+			{
+				scanf("%d",&item);
+				ostringstream convert;
+				convert << i;
+				str[item] = str[item] + convert.str();
+				// convert i to string.
+			}
+		}
+		map<string, int> atoms;
+		for (int i = 0; i < n; ++i)
+		{
+			atoms[str[i]] = 1;
+		}
+		ans = atoms.size();
+		printf("%d
+",ans);
+		t--;
+	}
+	return 0;
+}

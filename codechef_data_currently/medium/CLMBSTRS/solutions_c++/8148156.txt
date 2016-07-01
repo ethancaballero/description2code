@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define MOD 1000000007
+int fib[1000001];
+int number_of_ones(int a)
+{
+	int cnt=0;
+	while(a>0)
+	{
+		if(a&1)
+			cnt++;
+		a>>=1;
+	}
+	return cnt;
+}
+int main()
+{
+	fib[0]=1;
+	fib[1]=1;
+	int t;
+	for(t=2;t<1000001;t++)
+		fib[t]=(fib[t-1]+fib[t-2])%MOD;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,g;
+		scanf("%d%d",&n,&g);
+		if(number_of_ones(fib[n])==g)
+			printf("CORRECT
+");
+		else
+			printf("INCORRECT
+");
+	}
+	return 0;
+}

@@ -1,0 +1,61 @@
+#include <cstdio>
+#include <vector>
+#include <string.h>
+#include <iostream>
+ 
+using namespace std;
+ 
+typedef long long int64;
+#define SIZE(A) ((int)A.size())
+ 
+const int maxn=10000+5;
+const int64 MODE=1000000007;
+ 
+int n;
+vector<int> G[maxn];
+int C[maxn];
+int64 R=0;
+ 
+void DFS(int key,int father)
+{
+	C[key]=1;
+	for (int i=SIZE(G[key])-1;i>=0;i--)
+	{
+		int s=G[key][i];
+		if (s!=father)
+		{
+			DFS(s,key);
+			C[key]+=C[s];
+		}
+	}
+	R=(R+(int64)key*(int64)C[key])%MODE;
+	for (int i=SIZE(G[key])-1;i>=0;i--)
+	{
+		int s=G[key][i];
+		if (s!=father)
+			R=(R+(int64)key*C[s]*(C[key]-C[s]))%MODE;
+	}
+}
+int main()
+{
+	int testcase;
+	for (scanf("%d",&testcase);testcase>0;testcase--)
+	{
+		scanf("%d",&n);
+		for (int i=0;i<n;i++) G[i].clear();
+		for (int i=0;i<n-1;i++)
+		{
+			int a,b;
+			scanf("%d%d",&a,&b);
+			a--;
+			b--;
+			G[a].push_back(b);
+			G[b].push_back(a);
+		}
+		R=0;
+		DFS(0,-1);
+		R=(R+(int64)n*(int64)n)%MODE;
+		cout<<R<<endl;
+	}
+	return 0;
+}  

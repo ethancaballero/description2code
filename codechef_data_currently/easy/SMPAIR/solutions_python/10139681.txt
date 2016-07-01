@@ -1,0 +1,5 @@
+for testcases in xrange(int(raw_input())):
+	dummy = raw_input()
+	l=map(int,raw_input().split())
+	l.sort()
+	print int(l[0])+int(l[1])		

@@ -1,0 +1,18 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+ 
+int main()
+{
+int x;
+float y;
+cin>>x;
+cin>>y;
+if(x%5==0 && x<=(y-0.50))
+{ 
+  cout<<y-x-0.50;
+}  
+else
+  cout<<y-0.00;
+return 0;      
+} 

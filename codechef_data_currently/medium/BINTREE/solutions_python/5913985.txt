@@ -1,0 +1,17 @@
+import sys
+n=int(raw_input())
+while n>0:
+    count=0
+    m=sys.stdin.readline()
+    i,j=m.split()
+    i=int(i)
+    j=int(j)
+    while i!=j:
+        if i>j:
+            i/=2
+        elif i<j:
+            j/=2
+        count+=1
+    n-=1
+    print str(count)        
+

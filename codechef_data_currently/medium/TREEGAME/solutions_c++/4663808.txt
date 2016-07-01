@@ -1,0 +1,89 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<queue>
+
+using namespace std;
+int n;
+
+
+int BFS(vector<vector<int> > &adjList)
+{
+    vector<bool> visited(n+1,false);
+    queue<int> q;
+    q.push(1);
+    q.push(-99);
+    visited[1]=true;
+    int count=0;
+    vector<int> nodecount;
+    nodecount.push_back(0);
+    while(!q.empty())
+    {
+        int u=q.front();
+        //cout<<u<<" - ";
+        q.pop();
+        if(u==-99)
+        {
+            nodecount.push_back(count);
+            count=0;
+            if(!q.empty())
+            {
+                q.push(-99);
+            }
+            continue;
+        }
+        count++;
+        int size=(int)adjList[u].size();
+        for(int i=0;i<size;i++)
+        {
+            int v=adjList[u][i];
+            if(!visited[v])
+            {
+                q.push(v);
+                visited[v]=true;
+            }
+        }
+    }
+    //cout<<endl;
+    int size=nodecount.size();
+    vector<int> sum(size+1,0);
+    int ans;
+    for(int i=size-1;i>0;i--)
+    {
+        sum[i]=nodecount[i]+sum[i+1];
+        if(i<=sum[i])
+        {
+            //cout<<"i "<<i<<" "<<sum[i]<<endl;
+            ans=sum[i+1]*2;
+            //cout<<"ans "<<ans<<endl;
+            if(sum[i+1]!=i)
+            {
+                ans+=(i-sum[i+1])*2-1;
+                //cout<<"yo ans "<<ans<<endl;
+            }
+            break;
+        }
+    }
+    return ans;
+}
+
+int main()
+{
+    //freopen("TREEGAME.txt","r",stdin);
+    ios_base::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+       cin>>n;
+       vector<vector<int> >  adjList(n+1);
+       for(int i=0;i<n-1;i++)
+       {
+           int u,v;
+           cin>>u>>v;
+           adjList[u].push_back(v);
+           adjList[v].push_back(u);
+       }
+       cout<<BFS(adjList)<<endl;
+    }
+}

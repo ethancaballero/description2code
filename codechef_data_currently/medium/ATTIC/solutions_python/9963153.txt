@@ -1,0 +1,17 @@
+T = int(input())   
+
+while T:
+    S = raw_input()
+    max = 0
+    days =0
+    cnt = 0
+    for i in S:
+        if i == '.':
+            cnt = cnt +1
+        else:
+            if cnt > max:
+                days +=1
+                max = cnt
+            cnt = 0 
+    print days
+    T -= 1

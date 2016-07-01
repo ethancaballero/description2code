@@ -1,0 +1,22 @@
+#!/usr/bin/python
+def HCF(L):
+	x=sorted(L)[0]
+	hcf=1
+	for i in range(2,x+1):
+		flag=True
+		for j in L:
+			if j%i!=0:
+				flag=False
+				break
+		if flag and i>hcf:
+			hcf=i
+	return hcf	
+if __name__=='__main__' :
+	N=input()
+	for i in range(N):
+		X=map(int,raw_input().split())
+		hcf=HCF(X[1:])
+		for j in X[1:]:
+			print j/hcf,
+		print
+	

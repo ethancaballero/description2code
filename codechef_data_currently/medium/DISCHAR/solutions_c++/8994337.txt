@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t,cnt;
+	cin>>t;
+	int a[26];
+	int i;
+	string str;
+	while(t--)
+	{
+		cin>>str;
+		cnt=0;
+		for(i=0;i<26;i++)
+		a[i]=0;
+		for(i=0;i<str.size();i++)
+		{
+		if(a[(int)(str[i]-'a')]==0)
+		{
+		cnt++;
+		a[(int)(str[i]-'a')]=1;
+		}
+		}
+		cout<<cnt<<endl;
+
+	}
+
+return 0;
+}

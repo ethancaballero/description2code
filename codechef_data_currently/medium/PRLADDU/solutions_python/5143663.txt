@@ -1,0 +1,16 @@
+# Devajit Asem
+# PRLADDU
+t = int(raw_input())
+def display(a):
+    for i in a:
+        print i,
+    print 
+for i in range(t):
+    n = int(raw_input())
+    D = map(int,raw_input().split())
+    c=0
+    k=0
+    for i in xrange(n):
+        c+=D[i]
+        k+=abs(c)
+    print k

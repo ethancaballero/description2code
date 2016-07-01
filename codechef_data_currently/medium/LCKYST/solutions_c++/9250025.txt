@@ -1,0 +1,26 @@
+#include<stdio.h>
+long long int a[100004];
+int main()
+{
+	long long int i,n;
+	scanf("%lld", &n);
+	for ( i = 0;i<n;i++)
+	{
+		scanf("%lld",&a[i]);
+	}
+	for (i = 0; i < n; i++)
+	{
+		if (a[i] % 10 == 5)
+		{
+			a[i] *= 4;
+		}
+	}
+	for (i = 0; i < n; i++)
+	{
+		printf("%lld
+", a[i]);
+	}
+	getchar();
+	getchar();
+	return 0;
+}

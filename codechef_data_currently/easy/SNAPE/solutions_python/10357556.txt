@@ -1,0 +1,10 @@
+from __future__ import division
+import math
+t=int(raw_input())
+for i in range(0,t):
+	lis=list(map(int,raw_input().split()))
+	b=lis[0]
+	l=lis[1]
+	rmax=math.sqrt(l**2 + b**2)
+	rmin=math.sqrt(l**2 - b**2)
+	print rmin,rmax

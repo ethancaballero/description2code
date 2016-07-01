@@ -1,0 +1,20 @@
+def main():
+    from sys import stdin
+    data = stdin.readlines()
+
+    MOD = 10000009
+    for line in data[1:]:
+        line = line.strip()
+        ways = 1
+        N = len(line)
+        for i in xrange( int((N+1)/2)):
+            c1, c2 = line[i], line[-i-1]
+            if c1 == '?' and c2 == '?':
+                #We could fix any alphabet for this pair, so 26 ways
+                ways = (ways * 26) % MOD
+            elif c1 != '?' and c2 != '?' and c1 != c2:
+                # No way whole string can be a palindrome
+                ways = 0
+
+        print ways
+main()

@@ -1,0 +1,120 @@
+#include <cstdio>
+#include <cstring>
+
+const int MAX = 100003;
+int T, N, tree[4*MAX], todo[4*MAX], diff[MAX], a[MAX], b[MAX];
+char s[MAX];
+
+inline void propagate(int node)
+{
+	if (!todo[node]) return;
+	todo[2*node+0] = todo[node];
+	todo[2*node+1] = todo[node];
+	todo[node] = 0;
+}
+inline int val(int node, int b, int e)
+{
+	return todo[node] ? 0 : tree[node];
+}
+inline void combine(int node, int b, int e)
+{
+	tree[node] = val(2*node+0, b, (b+e)/2)+val(2*node+1, (b+e)/2+1, e);
+}
+void update(int node, int b, int e, int i, int j)
+{
+	if (e < i || j < b)
+		return;
+	if (i <= b && e <= j)
+		todo[node] = 1;
+	else
+	{
+		propagate(node);
+		update(2*node+0, b, (b+e)/2, i, j);
+		update(2*node+1, (b+e)/2+1, e, i, j);
+		combine(node, b, e);
+	}
+}
+
+int query(int node, int b, int e, int i, int j)
+{
+	if (e < i || j < b)
+		return 0;
+	if (i <= b && e <= j)
+		return val(node, b, e);
+	else
+	{
+		propagate(node);
+		int res =  query(2*node+0, b, (b+e)/2, i, j)
+		          +query(2*node+1, (b+e)/2+1, e, i, j);
+		combine(node, b, e);
+		return res;
+	}
+}
+
+void init(int node, int b, int e, int x)
+{
+	if (e < x || x < b)
+		return;
+	if (x <= b && e <= x)
+		tree[node] = 1;
+	else
+	{
+		init(2*node+0, b, (b+e)/2, x);
+		init(2*node+1, (b+e)/2+1, e, x);
+		combine(node, b, e);
+	}
+}
+
+int main()
+{
+	scanf("%d", &T);
+	while (T--)
+	{
+		memset(tree, 0, sizeof tree);
+		memset(todo, 0, sizeof todo);
+		memset(diff, 0, sizeof diff);
+		scanf("%d
+", &N);
+		
+		for (int i = 0; i < N; i++)
+		{
+			gets(s);
+			int p;
+			a[i] = 0;
+			for (p = 0; s[p] >= '0' && s[p] <= '9'; p++)
+				a[i] = a[i]*10 + s[p]-'0';
+			
+			b[i] = 0;
+			for (p++; s[p] >= '0' && s[p] <= '9'; p++)
+				b[i] = b[i]*10 + s[p]-'0';
+			
+			diff[a[i]]++;
+			diff[b[i]+1]--;
+		}
+		int res = 0, sum = 0;
+		for (int i = 0; i <= N; i++)
+		{
+			sum += diff[i];
+			if (sum == i)
+			{
+				res++;
+				init(1, 0, N, i);
+			}
+		}
+		printf("%d
+", res);
+		for (int i = 0; i < N; i++)
+		{
+			int cur = query(1, 0, N, a[i], b[i]);
+			if (res == cur)
+				printf("1");
+			else
+			{
+				printf("0");
+				res -= cur;
+				update(1, 0, N, a[i], b[i]);
+			}
+		}
+		puts("");
+	}
+}

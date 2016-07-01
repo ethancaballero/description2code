@@ -1,0 +1,14 @@
+t = int(raw_input())
+
+for T in range(t):
+  n = int(raw_input())
+  cache = {}
+  cnt = 0
+  a = map(int, raw_input().split())
+
+  for num in a:
+    if num not in cache:
+      cnt += 1
+      cache[num] = 0
+
+  print(cnt)

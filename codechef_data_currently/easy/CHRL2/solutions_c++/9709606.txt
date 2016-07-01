@@ -1,0 +1,27 @@
+#include<iostream>
+#include<cstring>
+#include<string.h>
+using namespace std;
+int main()
+{
+string s;
+getline(cin,s);
+int i,l;
+i=0;
+l=s.length()-1;
+int c=0,h=0,e=0,f=0;
+while(i<=l)
+{
+  if(s[i]=='C')
+  c++;
+  else if(s[i]=='H' && h<c)
+       h++;
+   else if(s[i]=='E' && e<h)
+       e++;
+     else if(s[i]=='F' && f<e)
+       f++;
+i++;
+}
+cout<<f<<endl;
+return 0;
+}  

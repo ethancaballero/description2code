@@ -1,0 +1,6 @@
+from sys import stdin, stdout
+t=int(input())
+for i in range(t):
+    A,B = map( int, stdin.readline().rstrip().split() )
+    c=A%B
+    print(c)

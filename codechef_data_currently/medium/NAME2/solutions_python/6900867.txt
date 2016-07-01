@@ -1,0 +1,25 @@
+t=int(raw_input())
+for i in range(t):
+    s1=[]
+    j=0
+    i=0
+    arr=raw_input().split(" ")
+    if len(arr[0])>len(arr[1]):
+        temp=arr[0]
+        arr[0]=arr[1]
+        arr[1]=temp
+    while i< len(arr[0]):
+        if(j<len(arr[1])):
+            if(arr[0][i]==arr[1][j]):
+                j+=1
+                i+=1
+            else:
+                j+=1
+        else:
+            break
+    if i==len(arr[0]):
+        print "YES"
+    else:
+        print "NO"
+    #print arr[0]
+    #print arr[1]

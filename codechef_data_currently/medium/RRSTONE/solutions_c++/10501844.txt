@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+   long  long int t,n,k,i,j,p;
+    long long int a[100006];
+        cin>>n>>k;
+
+       for(i=0;i<n;i++)
+       {
+        cin>>a[i];
+       }
+        p=*max_element(a,a+n);
+        j=*min_element(a,a+n);
+       if(k==0)
+       {
+           for(i=0;i<n;i++)
+           cout<<a[i]<<" ";
+       }
+       else if(k%2!=0)
+       {
+           for(i=0;i<n;i++)
+           cout<<p-a[i]<<" ";
+       }
+       else if(k%2==0)
+       {
+           for(i=0;i<n;i++)
+           cout<<a[i]-j<<" ";
+       }
+   cout<<"
+";
+
+    return 0;
+}

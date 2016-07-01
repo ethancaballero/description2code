@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int r[18],temp[18],n,k,m;
+bool chk() {
+	int i,j;
+	for (i=0 ; i <= n-k ; i++) {
+		int lol = -1;
+		int c=0;
+		for ( j=i ; j < i+k ; j++) {
+			lol=max(lol,temp[j]);
+		}
+		for (j=i ; j < i+k ; j++) {
+			if (temp[j]==lol)
+				c++;
+		}
+		if (c >= m) return false;
+	}
+	return true;
+}
+int main() {
+    int t,i,j;
+    scanf("%d",&t);
+    while (t--) {
+    	scanf("%d%d%d",&n,&k,&m);
+		for (i=0 ; i < n ; i++) scanf("%d",r+i);
+		if(m==1){
+			printf("-1
+");
+			continue;
+		}
+		int ans = 125;
+		for (i=0 ; i < (1<<n) ; i++) {
+			int bitcount=0;
+			for (j=0 ; j < n ; j++) {
+				if (i&(1<<j)) {
+					temp[j]=r[j]+1;
+					bitcount++;
+				} else temp[j]=r[j];
+			}
+			if (chk()) {
+				//agar bacha ja skta hai to bacho
+				ans = min(ans,bitcount);
+			}
+		}
+		if (ans==125) // arrest pakka
+			printf("-1
+");
+		else printf("%d
+",ans);
+	}
+	return 0;
+} 

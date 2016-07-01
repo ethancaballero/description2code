@@ -1,0 +1,48 @@
+#include <iostream>
+#include<string>
+#include<string.h>
+#include<limits.h>
+#include<vector>
+#include<queue>
+#include<cstdio>
+#define ll long
+
+using namespace std;
+
+
+int main()
+{
+   char s[111111],m='z';
+   ll i,k,t,l=0,r=0,n;
+   //freopen("input.txt","r",stdin);
+   cin>>t;
+   while(t--)
+   {
+       cin>>s;
+       cin>>k;
+       n=strlen(s);
+       l=0;r=n-k;m='z';
+
+
+       while(k>0 )
+       {
+           //cout<<"L"<<" "<<l<<" "<<"R"<<" "<<r<<endl;
+           for(i=l;i<=r;i++)
+            {
+                if(s[i]<m)
+                {m=s[i];l=i;}
+            }
+           cout<<m;
+           k--;
+               r++;
+           l++;
+           m='z';
+
+       }
+
+       cout<<endl;
+   }
+
+   return 0;
+}
+

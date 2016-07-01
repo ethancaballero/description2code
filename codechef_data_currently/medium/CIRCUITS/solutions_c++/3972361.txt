@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+int ckt[100][3];
+double prob[100];
+
+double calc(int n, double test) {
+    for(int i=0;i<n;++i) {
+        if ( ckt[i][0]==0) {
+            prob[i] = test;
+        } else {
+            double p1 = prob[ckt[i][1]-1];
+            double p2 = prob[ckt[i][2]-1];
+            if ( ckt[i][0]==1 ) prob[i]=p1+p2-p1*p2;
+            else prob[i] = p1*p2;
+        }
+    }
+    return prob[n-1];
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        for(int i=0;i<n;++i) {
+            cin >> ckt[i][0];
+            if(ckt[i][0]) cin >> ckt[i][1] >> ckt[i][2];
+        }
+        double low=0, high=1;
+        while(high-low>1e-7) {
+            double mid=(low+high)/2;
+            if (calc(n,mid)<0.5) low = mid;
+            else high = mid;
+        }
+        printf("%.5f
+",(low+high)/2);
+    }
+    return 0;
+}

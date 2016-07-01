@@ -1,0 +1,69 @@
+// song Dreamtide - What You Believe In
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#define MAX (1 << 22)
+#define ll long long int
+using namespace std;
+ 
+ll num[22],sum;
+int dp[MAX][8];
+int n;
+ 
+int solve(int mask,int k,ll r){
+	//cout << mask << " " << k << " " << r << endl; 
+	if(k == 0){
+		if(mask != (1 << n) - 1) return 0;
+		//if(r != 0) return 0;
+		return 1;
+	}
+			
+	/*if(mask == (1 << n) - 1){
+		if(r == 0 && k == 1) return 1;
+		return 0;
+	}*/
+	
+	if(dp[mask][k] != -1) return dp[mask][k];
+	
+	if(r == 0) return (dp[mask][k] = solve(mask,k - 1,sum));
+	
+	dp[mask][k] = 0;
+	for(int i = 0;i < n;i++){
+		if((mask&(1 << i)) != 0) continue;
+		if(r < num[i]) continue;
+		dp[mask][k] = max(dp[mask][k],solve((mask|(1 << i)),k,r - num[i]));
+	}
+	return dp[mask][k];
+}
+ 
+int main(){
+	int t,x;
+	int k;
+	scanf("%d",&t);
+	while(t--){
+		scanf("%d %d",&n,&k);
+		ll acum = 0; 
+		for(int i = 0;i < n;i++){
+			scanf("%lld",&num[i]);
+			acum += num[i];
+		}
+		if((acum % ((ll)k)) != 0ll || n < k) printf("no
+");
+		else if(acum == 0) printf("yes
+");
+		else{
+			sum = acum/((ll)k);
+			memset(dp,-1,sizeof dp);
+			bool flag = solve(0,k,sum);
+			if(flag) printf("yes
+");
+			else printf("no
+");
+		}
+		
+	}
+	return 0;
+}
+ 

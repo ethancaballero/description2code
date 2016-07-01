@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define m 1000000007
+long long mulmod(long long  a,long long b,long long  c)
+{
+	 long long int x=1,y=a;
+	while(b>0)
+	{
+	 if(b%2==1)
+	 {
+         x=(x*y)%c;
+	 }
+
+	
+	y=(y*y)%c;
+	b=b/2;
+}
+	return x;
+}
+int main()
+{   
+	int t,n;
+	scanf("%d",&t);
+	while(t--)
+	{
+
+		scanf("%d",&n);
+		int p= mulmod(3,n,m);
+		if(n%2==0)
+		{
+			p=p+3;
+		}
+		else
+		{
+			p=p-3;
+		}
+		printf("%d
+",p);
+	}
+	return 0;
+}

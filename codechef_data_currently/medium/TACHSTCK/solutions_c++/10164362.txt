@@ -1,0 +1,73 @@
+#include<iostream>
+using namespace std;
+long int a[100000];
+void merge(long int,long int,long int);
+void merge_sort(long int low,long int high)
+{
+ long int mid;
+ if(low<high)
+ {
+  mid=(low+high)/2;
+  merge_sort(low,mid);
+  merge_sort(mid+1,high);
+  merge(low,mid,high);
+ }
+}
+void merge(long int low,long int mid,long int high)
+{
+ long int h,i,j,b[100000],k;
+ h=low;
+ i=low;
+ j=mid+1;
+
+ while((h<=mid)&&(j<=high))
+ {
+  if(a[h]<=a[j])
+  {
+   b[i]=a[h];
+   h++;
+  }
+  else
+  {
+   b[i]=a[j];
+   j++;
+  }
+  i++;
+ }
+ if(h>mid)
+ {
+  for(k=j;k<=high;k++)
+  {
+   b[i]=a[k];
+   i++;
+  }
+ }
+ else
+ {
+  for(k=h;k<=mid;k++)
+  {
+   b[i]=a[k];
+   i++;
+  }
+ }
+ for(k=low;k<=high;k++) a[k]=b[k];
+}
+int main()
+{
+ long int n,d,count=0,i;
+ cin>>n>>d;
+ for(i=0;i<n;i++)
+ cin>>a[i];
+ merge_sort(0,n-1);
+ for(i=0;i<n-1;i++)
+ {
+   if(a[i+1]-a[i]<=d)
+   {
+   count++;
+   i++;
+   }
+ }
+cout<<count;
+return 0;
+}
+ 

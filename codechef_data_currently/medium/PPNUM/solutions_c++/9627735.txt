@@ -1,0 +1,32 @@
+#include <iostream>
+#include <algorithm>
+#include <math.h>
+#include <cstdio>
+using namespace std;
+typedef long long ll;
+ll big=1000000007;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        ll  l,r;
+        scanf("%lld %lld",&l,&r);
+        ll res=0;
+        ll  a=1;ll  b=9;
+       for(int i=0;i<10;i++){
+        ll  u=max(l,a);
+       ll v=min(r,b);
+        if(u<=v){
+            ll  sum=(v+u)*(v-u+1)/2;
+       res+=int(i+1)*(sum%big);
+            res%=big;
+        }
+        a=a*10;
+        b=b*10+9;
+       }
+       printf("%lld
+",res);
+    }
+    return 0;
+}

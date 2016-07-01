@@ -1,0 +1,25 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+int t,cake,cut,len;
+cin>>t;
+while(t--)
+{
+    cin>>cake;
+    cut=sqrt(cake);
+    while(cut)
+    {
+        if(cake%cut==0)
+        {
+            len=cake/cut;
+            cout<<len-cut<<endl;
+            break;
+        }
+        --cut;
+    }
+}
+return 0;
+}

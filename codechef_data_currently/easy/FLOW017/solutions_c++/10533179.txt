@@ -1,0 +1,23 @@
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+#include <algorithm>
+using std::sort;
+
+int main()
+{
+	int T;
+	cin >> T;
+	
+	for(int i = 0; i < T; i++)
+	{
+		long A,B,C;
+		cin >> A >> B >> C;
+		
+		long list[3] = {A,B,C};
+		sort(list, list + 3);
+		
+		cout << list[1] << endl;
+	}
+}

@@ -1,0 +1,17 @@
+import sys
+
+f = sys.stdin
+c = int(f.readline().strip())
+
+
+for i in xrange(c):
+    n = int(f.readline().strip())
+    divisores = []
+    j = 1
+    while j <= n:
+        if n%j == 0:
+            divisores.append(j)
+        j += 1
+    print sum(divisores)
+    
+            

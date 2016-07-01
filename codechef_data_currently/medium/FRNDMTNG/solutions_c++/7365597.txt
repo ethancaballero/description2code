@@ -1,0 +1,86 @@
+#include<iostream>
+using namespace std;
+ 
+int main()
+ {
+  ios::sync_with_stdio(false);
+  int t;
+  double T1,T2,t1,t2;
+  double total1,total2;
+  double area1,area2,total,prob;
+  cin>>t;
+  while(t--)
+   {
+    cin>>T1>>T2>>t1>>t2;
+	total=T1*T2;
+ 
+	if(T2>=T1)
+	 {
+	  total2=0.5*T1*T1;
+	  total1=total-total2;
+	 }
+	else if(T1>T2)
+	 {
+	  total1=0.5*T2*T2;
+	  total2=total-total1;
+	 }
+	    
+	if(t1==0 && t2==0 )
+	 cout<<"0.000000
+";
+	/*else if(t1==0)
+	 {
+	  area2=0;
+	  if(t2<T1)
+	   {
+	    if(T1-t2<=T2)
+		 area2=(double)(0.5*(T1-t2)*(T1-t2));
+		else 
+		 area2=(double)(0.5*T2*((2*T1)-(2*t2)-T2));  
+	   }
+	  //cout<<total2<<" "<<area2<<endl; 
+	  prob=(total2-area2)/total;
+	  //printf("%7lf
+",prob);
+	  cout<<prob<<endl;
+	 }
+	else if(t2==0)
+	 {
+	  area1=0;
+	  if(t1<=T2)
+	   {
+	    if(T2-t1<=T1)
+		 area1=(double)(0.5*(T2-t1)*(T2-t1));
+		else 
+		 area1=(double)(0.5*T1*((2*T2)-(2*t1)-T1)); 
+	   }
+	  prob=(total1-area1)/total;
+	  //printf("%7lf
+",prob);
+	  cout<<prob<<endl;
+	 }*/  
+	else
+	 {
+	  area1=area2=0;
+	  if(t1<=T2)
+	   {
+	    if(T2-t1<=T1)
+		 area1=(double)(0.5*(T2-t1)*(T2-t1));
+		else 
+		 area1=(double)(0.5*T1*((2*T2)-(2*t1)-T1)); 
+	   }
+	  if(t2<T1)
+	   {
+	    if(T1-t2<=T2)
+		 area2=(double)(0.5*(T1-t2)*(T1-t2));
+		else 
+		 area2=(double)(0.5*T2*((2*T1)-(2*t2)-T2));  
+	   }
+	   prob=(total-area1-area2)/total;
+	   //printf("%7lf
+",prob);	    
+	   cout<<prob<<endl;
+	 } 
+   }
+  return 0;
+ }

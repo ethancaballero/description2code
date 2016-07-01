@@ -1,0 +1,28 @@
+from __future__ import division
+from fractions import gcd
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+def solve(p, N):
+    m = 1
+    cycle_dict = {}
+    for i in range(N):
+        if i in cycle_dict:
+            cnt = cycle_dict[i]
+        else:
+            nums = [i]
+            while p[nums[-1]] != i:
+                nums.append(p[nums[-1]])
+            cnt = len(nums) % (10 ** 9 + 7)
+            for n in nums:
+                cycle_dict[n] = cnt 
+        m = lcm(m, cnt)
+    return m
+
+T = int(raw_input())
+for case in range(T):
+    N = int(raw_input())
+    p = map(int, raw_input().split())
+    p = [i - 1 for i in p]
+    print solve(p, N) % (10 ** 9 + 7)

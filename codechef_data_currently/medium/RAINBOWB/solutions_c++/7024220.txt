@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+#define modulo 1000000007
+
+int main()
+{
+    long long int number, x, i, j, array[6];
+    cin >> number;
+    if (number < 13) {
+        cout << "0" << endl;
+        return 0;
+    }
+    x = (number-13)/2;
+    array[0] = x+1;
+    array[1] = x+2;
+    array[2] = x+3;
+    array[3] = x+4;
+    array[4] = x+5;
+    array[5] = x+6;
+    i = 6;
+    while (i > 1) {
+        j = 0;
+        while (j < 6) {
+            if (array[j] % i == 0) {
+                array[j] /= i;
+                break;
+            }
+            j++;
+        }
+        i--;
+    }
+    long long int answer = 1;
+    for (i = 0; i < 6; i++)
+        answer = (answer * array[i])%modulo;
+    cout << answer << endl;
+    return 0;
+}

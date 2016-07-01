@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,d;
+    cin>>t;
+    while(t--)
+    {
+        long long int n,s;cin>>n;
+       s=2*n;
+       s+=((n-1)*(n))/2;
+        cout<<s<<endl;
+    }
+    return 0;
+}

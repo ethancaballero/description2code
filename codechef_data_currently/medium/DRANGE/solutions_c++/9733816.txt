@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	int T;
+	scanf("%d", &T);
+	while(T--) {
+		int n, m, i, j, w, x, y, z, mm = INT_MAX, mx = INT_MIN;
+		scanf("%d%d", &n, &m);
+		int A[n+1], D[n];
+		for(i = 1; i <= n; i++) A[i] = i;
+		for(i = 1; i < n; i++) D[i] = 1;
+		for(i = 0; i < m; i++) {
+			scanf("%d%d%d%d", &w, &x, &y, &z);
+			if(w == 2) {
+				D[x-1] -= z;
+				D[y] += z;
+			} else if(w == 1){
+				D[x-1] += z;
+				D[y] -= z;
+			}
+		}
+		for(i = 1; i <= n; i++) {
+			A[i+1] = A[i] + D[i];
+		}
+		for(i = 1; i <= n; i++){
+			mm = min(mm, A[i]);
+			mx = max(mx, A[i]);
+		}
+		printf("%d
+", mx-mm);
+	}
+	return 0;
+}

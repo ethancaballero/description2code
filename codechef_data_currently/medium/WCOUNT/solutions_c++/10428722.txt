@@ -1,0 +1,95 @@
+#include<iostream>
+#include<cstring>
+#include<cassert>
+#include<cstdio>
+#include<cmath>
+
+using namespace std;
+
+// Input macros
+#define s(n)                        scanf("%d",&n)
+#define ss(n)                       scanf("%s",n)
+
+#define forall(i,a,b)               for(int i=a;i<b;i++)
+#define fill(a,v)                   memset(a, v, sizeof a)
+using namespace std;
+
+typedef long long LL;
+
+char line[1000];
+int freq[60];
+int nums[1005];
+
+
+int primes[] = { 2, 3, 5, 7};
+int counts[4];
+
+int get(char c)
+{
+    if('a' <= c && c <= 'z') return c - 'a';
+    else           return c - 'A' + 26;
+}
+
+LL MOD = 1000000007;
+
+void normalize(int N, int k)
+{
+    while(N > 0 && N % primes[k] == 0)
+    {
+        N /= primes[k];
+        counts[k] ++;
+    }
+}
+
+void solve()
+{
+    ss(line);
+    
+    fill(freq, 0);
+    int L = strlen(line);
+    assert(1 <= L && L <= 500);
+    
+    forall(i, 0, L)
+        freq[get(line[i])] ++;
+
+    forall(i, 0, 52)
+        assert(freq[i] <= 10);
+    
+    fill(counts, 0);
+    
+    forall(i, 0, 52)
+        forall(j, 1, freq[i]+1)
+        forall(k, 0, 4)
+            normalize(j, k);
+
+    forall(i, 1, L+1)
+        nums[i] = i;
+        
+    forall(k, 0, 4)
+    {
+        forall(i, 1, L+1)
+        {
+            if(counts[k] <= 0) break;
+            while( counts[k] > 0 && nums[i] % primes[k] == 0)
+            {
+                nums[i] /= primes[k];
+                counts[k]--;
+            }
+        }
+        assert(counts[k] == 0);
+    }
+    
+    LL ans = 1LL;
+    forall(i, 1, L+1)
+        ans = ( ans * (LL)nums[i]) % MOD;
+    printf("%lld
+", ans);
+}
+
+int main()
+{
+    int T; s(T);
+    assert(1 <= T && T <= 500);
+    for(int testnum=1;testnum<=T;testnum++)
+        solve();
+}

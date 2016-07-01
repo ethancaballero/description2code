@@ -1,0 +1,43 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+ 
+int main(){
+     int i,j,t,n, k, e, m;
+    cin>>t;
+    while(t--){
+        cin>>n>>k>>e>>m;
+        long long  score[n-1],sum=0,sc,temp;
+        for(i=0;i<n-1;i++){
+            sum=0;
+            for(j=0;j<e;j++){
+                cin>>sc;
+                sum+=sc;
+            }
+            score[i]=sum;
+        }sum=0;
+         for(j=0;j<e-1;j++){
+             cin>>sc;
+             sum+=sc;
+         }
+          //score[i]=sum; 
+          sort(score,score+n-1);
+          //for(i=0;i<n-1;i++)
+        // std::cout << score[i] <<" ";
+        // cout<<sum<<" ";
+         
+          temp=score[n-k-1];
+          //cout<<temp<<" ";
+         
+          sum=temp-sum+1;
+          if(sum<0)
+          sum=0;
+          if(sum<=m)
+          cout << sum <<"
+";
+          else
+          cout<<"Impossible"<<"
+";
+    }
+    return 0;
+}

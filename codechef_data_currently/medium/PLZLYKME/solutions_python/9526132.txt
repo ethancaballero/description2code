@@ -1,0 +1,12 @@
+for t in range(int(raw_input())):
+    l,d,s,c=map(int,raw_input().split())
+    i=s
+    while d>1:
+        d=d-1
+        i=i+i*c
+        if i>=l:
+            break
+    if i>=l:
+        print "ALIVE AND KICKING"
+    else:
+        print "DEAD AND ROTTING"

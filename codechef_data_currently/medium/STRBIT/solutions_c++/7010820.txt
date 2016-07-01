@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define sd(t) scanf("%d",&t)
+#define maxsize 100001
+int tree[3*maxsize];
+int lazy[3*maxsize];
+int arr[maxsize];
+
+void build(int t,int i,int j){
+    if(i==j){
+        if(arr[i]==1)
+            tree[t]=1;
+        else
+            tree[t]=0;
+        return;
+    }
+    int mid=(i+j)/2;
+    build(2*t,i,mid);
+    build(2*t+1,mid+1,j);
+    tree[t]=tree[2*t]+tree[2*t+1];
+}
+
+void update(int t,int i,int j,int l,int r){
+    if(lazy[t]!=0){
+        tree[t]=(j-i+1)-tree[t];
+        if(i!=j){
+            lazy[2*t]=(lazy[2*t]+1)%2;
+            lazy[2*t+1]=(lazy[2*t+1]+1)%2;
+        }
+        lazy[t]=0;
+    }
+    if(j<l||r<i)
+        return;
+    if(l<=i&&j<=r){
+        tree[t]=(j-i+1)-tree[t];
+        if(i!=j){
+            lazy[2*t]=(lazy[2*t]+1)%2;
+            lazy[2*t+1]=(lazy[2*t+1]+1)%2;
+        }
+        return;
+    }
+    int mid=(i+j)/2;
+    update(2*t,i,mid,l,r);
+    update(2*t+1,mid+1,j,l,r);
+    tree[t]=tree[2*t]+tree[2*t+1];
+}
+
+int query(int t,int i,int j,int l,int r){
+    if(j<l||i>r)
+        return 0;
+    if(lazy[t]!=0){
+        tree[t]=(j-i+1)-tree[t];
+        if(i!=j){
+            lazy[2*t]=(lazy[2*t]+1)%2;
+            lazy[2*t+1]=(lazy[2*t+1]+1)%2;
+        }
+        lazy[t]=0;
+    }
+    if(l<=i&&j<=r)
+        return tree[t];
+    int mid=(i+j)/2;
+    return query(2*t,i,mid,l,r)+query(2*t+1,mid+1,j,l,r);
+}
+
+int main(){
+    int t,n,k,ans;
+    string str;
+    scanf("%d",&t);
+    while(t--){
+        for(int i=0;i<maxsize;i++)
+            arr[i]=0;
+        for(int i=0;i<3*maxsize;i++)
+            tree[i]=lazy[i]=0;
+        scanf("%d%d",&n,&k);
+        cin>>str;
+        for(int i=1;i<=n;i++){
+            if(str.at(i-1)=='R')
+                arr[i]=1;
+        }
+        ans=0;
+        build(1,1,n);
+        for(int i=1;i<=n;i++){
+            if(query(1,1,n,i,i)==1){
+                update(1,1,n,i,min(i+k-1,n));
+                ans++;
+            }
+        }
+        printf("%d
+",ans);
+    }
+}

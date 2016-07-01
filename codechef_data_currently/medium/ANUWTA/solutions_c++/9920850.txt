@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long t;
+	cin>>t;
+	while(t!=0)
+	{
+	long long int n;
+	cin>>n;
+	long long int sum=n*(n+1)/2;
+	cout<<sum+n<<"
+";
+	t--;
+	}
+	return 0;
+}

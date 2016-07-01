@@ -1,0 +1,32 @@
+#include<cstdio>
+using namespace std;
+#define ull unsigned long long
+
+ull arr[100000 + 5];
+
+int main(){
+    int n;
+    int i, j, k, l;
+    scanf("%d", &n);
+    for(i=0; i<n; i++) scanf("%llu", &arr[i]);
+    if(n>=130) printf("Yes
+");
+    else{
+        bool ans = false;
+        for(i=0; i<n-3; i++){
+            for(j=i+1; j<n-2; j++){
+                for(k=j+1; k<n-1; k++){
+                    for(l=k+1; l<n; l++){
+                        if((arr[i]^arr[j]^arr[k]^arr[l]) == 0)
+                            ans = true;
+                    }
+                }
+            }
+        }
+        if(ans) printf("Yes
+");
+        else printf("No
+");
+    }
+    return 0;
+}

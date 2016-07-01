@@ -1,0 +1,7 @@
+a,n,k=map(int,raw_input().split())
+s=""
+while k:
+    k-=1
+    s=s+str(a%(1+n))+" "
+    a=a/(n+1)
+print s.strip()

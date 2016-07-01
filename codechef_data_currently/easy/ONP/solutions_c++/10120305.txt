@@ -1,0 +1,28 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+     
+    int main()
+    {
+        int T;
+        cin>>T;
+        while(T--)
+        {
+            string input;
+            cin>>input;
+            stack<char> s;
+            for(int i=0;i<input.length();i++)
+                if(input.at(i)=='(');
+                else if(input.at(i)==')')
+                {
+                cout<<s.top();
+                 s.pop();
+                   }
+                else if(isalpha(input.at(i)))
+                    cout<<input.at(i);
+                else
+                    s.push(input.at(i));
+     
+                    cout<<endl;
+    }
+    return 0;
+    } 

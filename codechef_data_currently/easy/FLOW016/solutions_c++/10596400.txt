@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int l,h,i,t,n,a,b,f1=0;
+    while(f1==0)
+    {
+        cin>>t;
+        if(t>=1 && t<=1000)
+            f1=1;
+    }
+    while(t--)
+    {
+        f1=0;
+        while(f1==0)
+        {
+            cin>>a>>b;
+            if(a>=1 && b>=1 && a<=1000000 && b<=1000000)
+                f1=1;
+        }
+        if(a%b==0)
+            h=b;
+        else if(b%a==0)
+            h=a;
+        else
+        {
+           if(a>b)
+            n=b/2;
+           else
+            n=a/2;
+           for(i=1;i<=n;i++)
+           {
+            if(a%i==0 && b%i==0)
+                h=i;
+           }
+        }
+        l=a*b/h;
+        cout<<h<<" "<<l<<endl;
+    }
+    return 0;
+}

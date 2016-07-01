@@ -1,0 +1,152 @@
+#include <bits/stdc++.h>
+
+#define FOR(i, a, b) for (i = (a); i <= (b); i++)
+#define REP(i, a) for (i = 0; i < (a); i++)
+#define ALL(v) (v).begin(), (v).end()
+#define SET(a, x) memset((a), (x), sizeof(a))
+#define SZ(a) ((int)(a).size())
+#define CL(a) ((a).clear())
+#define SORT(x) sort(ALL(x))
+#define mp make_pair
+#define pb push_back
+
+#define filer() freopen("in.txt","r",stdin)
+#define filew() freopen("out.txt","w",stdout)
+
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long llu;
+
+const int mod = 1000000007;
+const ll fib[2][2] = {{1,1},{1,0}};
+const ll I[2][2] = {{1,0},{0,1}};
+const ll inv[2][2] = {{0,1},{1,-1}};
+
+void copy(const ll from[2][2], ll to[2][2]){
+    for ( int i = 0 ; i < 2 ; i++ )
+        for ( int j = 0 ; j < 2 ; j++ )
+            to[i][j] = from[i][j];
+}
+void print(const ll arr[2][2]){
+    for ( int i = 0 ; i < 2 ; i++ ){
+        for ( int j = 0 ; j < 2 ; j++ ) printf("%lld ", arr[i][j]);
+        puts("");
+    }
+}
+
+void addI(ll one[2][2]){
+    for ( int i = 0 ; i < 2 ; i++ )
+        one[i][i] = (one[i][i] + 1) % mod;
+}
+
+void subI(ll one[2][2]){
+    for ( int i = 0 ; i < 2 ; i++ )
+        one[i][i] = (one[i][i] + mod - 1) % mod;
+}
+
+void multiply(const ll one[2][2], const ll two[2][2], ll res[2][2]){
+    ll tmp[2][2];
+    for ( int i = 0 ; i < 2 ; i++ )
+        for ( int j = 0 ; j < 2 ; j++ ){
+            tmp[i][j] = 0;
+            for ( int k = 0 ; k < 2 ; k++ ){
+                tmp[i][j] += one[i][k] * two[k][j];
+                tmp[i][j] %= mod;
+            }
+        }
+    copy(tmp, res);
+}
+
+void bigMod(const ll b[2][2], int p, ll res[2][2]){
+    ll tmp[2][2], pwr[2][2];
+    
+    copy(b, pwr);
+    copy(I, tmp);
+    
+    while (p) {
+        if (p&1) multiply(tmp, pwr, tmp);
+        multiply(pwr, pwr, pwr);
+        p >>= 1;
+    }
+    
+    copy(tmp, res);
+}
+
+const int SIZE = 100005;
+inline int child(int index, bool isRight){ return (index << 1) + 1 + isRight; }
+
+ll tree[SIZE][2][2];
+int lo, hi;
+
+void update(int index, int left, int right, int v) {
+    if ( hi < left || lo > right ) return;
+    if ( left == right ){
+        bigMod(fib, v, tree[index]);
+        addI(tree[index]);
+        //print(tree[index]);
+        return;
+    }
+
+    int mid = (left + right)/2, lc = child(index, 0), rc = child(index, 1);
+    update(lc, left, mid, v);
+    update(rc, mid + 1, right, v);
+    
+    multiply(tree[lc], tree[rc], tree[index]);
+}
+
+void query(int index, int left, int right, ll res[2][2]){
+    if ( hi < left || lo > right ) return;
+    if ( lo <= left && right <= hi ){
+        multiply(res, tree[index], res);
+        return;
+    }
+
+    int mid = (left + right)/2, lc = child(index, 0), rc = child(index, 1);
+    query(lc, left, mid, res);
+    query(rc, mid + 1, right, res);
+}
+
+void update(int N, int index, int v){
+    lo = hi = index;
+    update(0, 1, N, v);
+}
+
+ll query(int N, int left, int right){
+    ll res[2][2];
+    
+    copy(I, res);
+    lo = left, hi = right;
+    query(0, 1, N, res);
+    subI(res);
+    multiply(res, inv, res);
+    return res[0][0];
+}
+
+int main(){
+    clock_t clockSt = clock();
+
+    // insert logic here
+    int N, M, lo, hi;
+    char q[3];
+    scanf("%d%d", &N, &M);
+    for ( int i = 1 ; i <= N ; i++ ){
+        scanf("%d", &lo);
+        update(N, i, lo);
+    }
+    while (M--){
+        scanf("%s%d%d", q, &lo, &hi);
+        switch(q[0]){
+            case 'C':
+                update(N, lo, hi);
+                break;
+            case 'Q':
+                printf("%lld
+", query(N, lo, hi));
+                break;
+        }
+    }
+    // logic ends here
+
+    return 0;
+}

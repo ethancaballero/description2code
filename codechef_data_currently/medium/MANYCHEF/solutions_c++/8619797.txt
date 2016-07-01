@@ -1,0 +1,57 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+
+int i,t;
+string ans,s;
+cin>>t;
+while(t--)
+{
+
+cin>>s;
+
+ans=s;
+
+for(i=0;i<s.size();i++)
+{
+    ans[i]=s[i];
+    if(s[i]=='?')
+        ans[i]='A';
+}
+
+
+for(i=s.size()-1;i>=0;i--)
+{
+    if(i-3>=0)
+    {
+        if((s[i]=='F'||s[i]=='?')&&(s[i-1]=='E'||s[i-1]=='?')&&(s[i-2]=='H'||s[i-2]=='?')&&(s[i-3]=='C'||s[i-3]=='?'))
+        {
+            ans[i]='F';
+            ans[i-1]='E';
+            ans[i-2]='H';
+            ans[i-3]='C';
+
+            i=i-3;
+        }
+
+    }
+    else
+    {
+        break;
+    }
+}
+
+for(i=0;i<s.size();i++)
+{
+    cout<<ans[i];
+}
+
+cout<<endl;
+}
+
+return 0;
+
+}

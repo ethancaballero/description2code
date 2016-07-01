@@ -1,0 +1,126 @@
+using namespace std;
+#include<bits/stdc++.h>
+#define getchar_unlocked() getchar()
+int val[4][1000010];
+int a[4][4][1000010];
+char str[1000010];
+inline int inp()
+{
+    register long long r=0,c;
+    for(c=getchar_unlocked(); c<=32; c=getchar_unlocked());
+    if(c=='-')
+        return -inp();
+    for(; c>32; r=(r<<1)+(r<<3)+c-'0',c=getchar_unlocked());
+    return r;
+}
+inline char inp1()
+{
+    register char r=0,c;
+    for(c=getchar_unlocked(); c<=32; c=getchar_unlocked());
+    if(c=='-')
+        return -inp();
+    for(; c>32; r=(r<<1)+(r<<3)+c-'0',c=getchar_unlocked());
+    return r;
+}
+int value(char ch)
+{
+	switch(ch)
+	{
+		case 'c':
+		return 0;
+		case 'h':
+		return 1;
+		case 'e':
+		return 2;
+		case 'f':
+		return 3;
+	}
+}
+char rev(int p)
+{
+	switch(p)
+	{
+		case 0:
+		return 'c';
+		case 1:
+		return 'h';
+		case 2:
+		return 'e';
+		case 3:
+		return 'f';
+	}
+
+}
+int main()
+{
+	scanf("%s",str);
+	int m,k;
+	m=inp();
+	int n=strlen(str);
+	int j;
+	int i;
+	for(i=0;i<4;i++)
+		for(j=0;j<n;j++)
+		val[i][j]=0;
+	char ch=str[0];
+	j=value(str[0]);
+	val[j][0]=1;
+	for(i=0;i<4;i++)
+		for(j=0;j<4;j++)
+			for(k=0;k<n;k++)
+			a[i][j][k]=0;
+	for(i=1;i<n;i++)
+	{
+		j=value(str[i]);
+		val[j][i]=1;
+		val[0][i]+=val[0][i-1];
+		val[1][i]+=val[1][i-1];
+		val[2][i]+=val[2][i-1];
+		val[3][i]+=val[3][i-1];
+	}
+	char ch1,ch2;
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			if(i!=j)
+			{
+				ch1=rev(i);
+				ch2=rev(j);
+				for(k=1;k<n;k++)
+				{
+				if(str[k]==ch2){
+				a[i][j][k]=val[i][k];
+				}
+				a[i][j][k]+=a[i][j][k-1];
+				}
+			}
+		}
+	}
+	/*for(k=0;k<n;k++)
+	cout<<a[0][1][k]<<" ";
+	cout<<endl;*/
+
+	int l,r;
+	long long  sum=0;
+	int p;
+	while(m--)
+	{
+		ch1=getchar();
+		ch=getchar();
+		ch2=getchar();
+		ch=getchar();
+		l=inp();
+		r=inp();
+		j=value(ch1);
+		p=value(ch2);
+		if(l==1)
+		sum=a[j][p][r-1];
+		else
+		//sum=a[j][p][r-1]-val[j][l-2]*val[p][r-1];
+		sum=a[j][p][r-1]-a[j][p][l-1]-(val[p][r-1]-val[p][l-1])*val[j][l-2];
+		printf("%d
+",sum);
+		}
+		return 0;
+}

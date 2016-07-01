@@ -1,0 +1,15 @@
+t = input()
+for i in range(t):
+    n = input()
+    N = map(int,raw_input().split())
+    f = input()
+    F = map(int,raw_input().split())
+    count = 0
+    for j in F:
+        if N.__contains__(j):
+            count+=1
+    if(count == f):
+        print "Yes"
+    else:
+        print "No"
+            

@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+#include<set>
+#include<vector>
+#include<map>
+#include<algorithm>
+#include<stack>
+#include<queue>
+#define rep(i,n)  for(int i=0;i<n;i++)
+#define pb(x)  push_back(x)
+#define mp    make_pair
+#define  VI    vector<int>
+#define  VLI   vector<long long >
+int main()
+{
+    long long int n;
+    int t;
+    string s;
+    cin>>t;
+    while(t--)
+    {
+        cin>>s;
+        n=s.size();
+        long long ans=n*(n+1)/2;
+        long long int ct=0;
+        rep(i,n)
+        {
+         if(s[i]=='7')ct++;
+         else {ans-=ct*(ct+1)/2;ct=0;}
+        }
+          ans-=ct*(ct+1)/2;
+    cout<<ans<<endl;
+    }
+}

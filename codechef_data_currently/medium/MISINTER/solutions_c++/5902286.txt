@@ -1,0 +1,38 @@
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <cstring>
+using namespace std;
+long long int MOD=1000000007;
+long long int calc(int a, int b){
+	long long int res=1;
+	for(int i=1;i<=b;i++){
+		res=(res*a)%MOD;
+	}
+	return res;
+}
+int main(){
+	int t;scanf("%d",&t);
+	int n;
+	while(t--){
+		scanf("%d",&n);
+		int p[n+1];
+		for(int i=2;i<=n;i=i+2) p[i]=i/2;
+		for(int i=1;i<=n;i=i+2) p[i]=(n/2)+(i+1)/2;
+		bool flag[n+1];
+		for(int i=1;i<=n;i++) flag[i]=false;
+		int ct=0;
+		for(int i=1;i<=n;i++){
+			if(flag[i]) continue;
+			int temp=i;
+			while(true){
+				flag[temp]=true;
+				if(p[temp]==i){break;}
+				temp=p[temp];
+			}
+			ct++;
+		}
+		printf("%lld
+",calc(26,ct));
+	}	
+}

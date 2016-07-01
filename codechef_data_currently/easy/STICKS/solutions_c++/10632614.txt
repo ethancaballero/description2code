@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+int compare(const void* a,const void* b){
+	return(*(int*)a - *(int*)b); 
+}
+using namespace std;
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n;
+		scanf("%d",&n);
+		int arr[n];
+		int flag=0;
+		int tracker[1001]={0};
+		for(int i=0;i<n;i++){
+			scanf("%d",&arr[i]);
+			tracker[arr[i]]++;
+		}
+		int area;
+		for(int i=1000;i>=1;i--){
+			if(flag==1 && tracker[i]>1){
+				flag=2;
+				area*=i;
+				break;
+			}
+			if(tracker[i]>1 && tracker[i]<4){
+				area=i;
+				flag=1;
+			}
+			if(tracker[i]>3){
+				flag=2;
+				area=i*i;
+				break;
+			}
+			//printf("THe value of area is %d
+",area);
+		}
+		if(flag==2)
+			printf("%d
+",area);
+		else
+			printf("-1
+");
+		//qsort(arr,n,sizeof(int),compare);
+		
+	}
+	return 0;
+}

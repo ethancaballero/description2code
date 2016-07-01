@@ -1,0 +1,79 @@
+#include<iostream>
+#include<algorithm>
+#include<limits.h>
+#include<vector>
+using namespace std;
+vector<bool> flag(10001);
+int main(){
+	flag[1]=true;
+	long long int j,i=0;
+	for(i=2;i<=100;i++){
+	if(!flag[i]){
+	
+	for(j=2;i*j<10001;j++){
+	flag[i*j]=true;	
+	}	
+	}
+	
+	}
+//	int count=0;
+//	for(i=0;i<10001;i++){
+//		if(!flag[i]){
+//		
+//		cout<<i<<" ";
+//		count=count+1;
+//	}
+//	}
+//	cout<<endl;
+//	cout<<count<<endl;;
+//	
+	long long int t,n,min,x,c,curr;
+	cin>>t;
+	while(t--){
+	min=INT_MAX;
+	x=0;
+	cin>>n;
+	vector<int> arr(n);
+	for(i=0;i<n;i++){
+		cin>>arr[i];
+	}
+//	sort(arr.begin(),arr.end());
+	
+	i=2;
+	while(i<10001){
+	x=0;
+	if(flag[i]){
+		i=i+1;
+		continue;
+	}	
+	else{
+	curr=0;
+	for(j=0;j<n;j++){
+	if(curr<arr[j]){
+	curr=((arr[j]+i-1)/i)*i;
+	
+	}	
+	x=x+curr-arr[j];
+	
+	}
+	
+	if(min>x)
+	min=x;
+	
+	}
+	i=i+1;
+	}	
+		
+		
+	cout<<min<<endl;
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	return 0;
+}

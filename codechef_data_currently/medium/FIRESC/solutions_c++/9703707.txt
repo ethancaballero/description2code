@@ -1,0 +1,53 @@
+/* CREATED BY GAURAV CHAUHAN (default911) */
+#include<bits/stdc++.h>
+#define mod 1000000007
+using namespace std;
+vector<int> adj[100001];
+long long cnt;
+bool visited[100001];
+void DFS(int i){
+    visited[i]=true;
+    cnt++;
+    vector<int>::iterator it;
+    for(it=adj[i].begin(); it!=adj[i].end(); ++it){
+        if(!visited[*it])
+            DFS(*it);
+    }
+    return;
+}
+int main()
+{
+    int t;
+    for(scanf("%d", &t); t--; )
+    {
+        int n, m;
+        scanf("%d %d", &n, &m);
+        for(int i=0; i<n; i++)
+            adj[i].clear();
+        for(int i=0; i<m; i++)
+        {
+            int v, w;
+            scanf("%d %d", &v, &w);
+            v--;
+            w--;
+            adj[v].push_back(w);
+            adj[w].push_back(v);
+        }
+        int cgrp=0;
+        long long captain=1;
+        for(int i=0; i<n; i++)
+            visited[i]=false;
+        for(int i=0; i<n; i++){
+            if(!visited[i]){
+                cgrp++;
+                cnt=0;
+                DFS(i);
+                captain*=cnt;
+                captain%=mod;
+            }
+        }
+        printf("%d %lld
+", cgrp, captain);
+    }
+    return 0;
+}

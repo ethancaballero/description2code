@@ -1,0 +1,24 @@
+ 
+t=int(raw_input())
+while(t):
+    a,b=raw_input().split()
+    #b=raw_input().split()
+    r=sorted(a)
+    s=sorted(b)
+    if(r==s):
+        flag=1
+    else:
+        
+            x=list(set(r))
+            y=list(set(s))
+            if x==y:
+                flag=0;
+            else:
+                flag=1
+         
+    if(flag==1):
+        print "YES",
+    else:
+        print "NO",
+    t=t-1
+ 

@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <math.h>
+#define M 100001
+double f[M][37];//We can only increase N up to 99999 and k up to 36
+using namespace std;
+void fun()
+{
+    for(int n=0;n<=M;n++)
+        f[n][0]=(double)n;
+
+        for(int i=1;i<37;i++)
+            f[0][i]=0;
+
+
+
+
+    for(int n=1;n<=M;n++){
+        for(int k=1;k<=36;k++){
+            f[n+1][k]=(n/(double)(n+1))*f[n][k]+(1/(double)(n+1))*f[n][k-1];
+        }
+    }
+
+
+}
+
+
+int main()
+{
+    fun();
+   int t;
+   scanf("%d",&t);
+   while(t--){
+    int n,k;
+    scanf("%d %d",&n,&k);
+    if(k>36){
+        printf("0.000000
+");
+    }
+    else{
+        printf("%8f
+",f[n][k]);
+    }
+
+   }
+   return 0;
+}

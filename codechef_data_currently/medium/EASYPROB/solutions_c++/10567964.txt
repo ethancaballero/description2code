@@ -1,0 +1,8 @@
+#include<iostream>
+#define P Power
+#define R return
+#define E else if
+#define C std::cout
+#define I int
+void M(I);void F(I x){if(x==1){C<<"2(0)";}E(x==0){C<<"0";}E(x){M(x);}}void M(I x){while(x){if(x==0){R;}E(x==1){C<<"2(0)";R;}E(x==2){C<<"2";R;}E(x==3){C<<"2+2(0)";R;}E(x==4){C<<"2(2)";R;}C<<"2(";I i=1,P=0;while(2*i<=x){i*=2;P++;}x-=i;F(P);if(x){C<<")+";}else{C<<")";}}}I main(){I a[]={137,1315,73,136,255,1384,16385};I i=0;for(I i=0;i<7;i++){C<<a[i]<<"=";M(a[i]);C<<"
+";}R 0;}

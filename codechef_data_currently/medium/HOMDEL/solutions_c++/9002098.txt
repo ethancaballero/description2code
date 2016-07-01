@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cstdlib>
+#include<cstring>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+	int n;
+	cin>>n;int i,j,k,l,m;
+	 int a[n][n];
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			cin>>a[i][j];
+		}
+	}
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			for(k=0;k<n;k++)
+			{
+				a[j][k]=min(a[j][k],a[j][i]+a[i][k]);
+			}
+		}
+	} 
+	int s,g,d;
+	cin>>m;
+	for(i=0;i<m;i++)
+	{
+		cin>>s>>g>>d;
+		k=a[s][g]+a[g][d];
+		l=a[s][d];
+		cout<<k<<" "<<k-l<<"
+";
+	}
+}

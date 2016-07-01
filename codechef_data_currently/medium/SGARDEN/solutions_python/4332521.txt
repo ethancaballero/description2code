@@ -1,0 +1,76 @@
+import fractions
+primes = []
+
+
+def init_primes(n):
+    is_prime = [True] * (n + 1)
+    is_prime[0] = False
+    is_prime[1] = False
+    for i in xrange(2, n + 1):
+        if is_prime[i]:
+            for j in xrange(i * i, n + 1, i):
+                    is_prime[j] = False
+    global primes
+    primes = [i for i in xrange(n + 1) if is_prime[i]]
+
+
+#init_primes(10000)
+
+
+def factors(n):
+    f = []
+    assert n > 0
+    for p in primes:
+        q, r = divmod(n, p)
+        exponent = 0
+        while r == 0:
+            exponent += 1
+            n = q
+            q, r = divmod(n, p)
+        f.append(exponent)
+        if n == 1:
+            break
+    return f + [0] * (len(primes) - len(f))
+
+
+
+def lcmmod(m, *numbers):
+    prime_factorizations = []
+    for n in numbers:
+        prime_factorizations.append(factors(n))
+
+    max_indices = []
+    for i in xrange(len(primes)):
+        max_index = max([prime_factorizations[j][i] for j in xrange(len(prime_factorizations))])
+        max_indices.append(max_index)
+
+    result = 1
+    for i, p in enumerate(primes):
+        result *= (p ** max_indices[i]) % m
+        result %= m
+    return result % m
+
+
+def lcm(a, b):
+    return a * b / fractions.gcd(a, b)
+
+
+cases = int(raw_input())
+for _ in xrange(cases):
+    N = int(raw_input())
+    perm = map(lambda x: int(x) - 1, raw_input().split())
+    visited = [False] * N
+    cycle_lens = []
+    for i in xrange(N):
+        if not visited[i]:
+            visited[i] = True
+            next_pos = perm[i]
+            l = 1
+            while i != next_pos:
+                next_pos = perm[next_pos]
+                visited[next_pos] = True
+                l += 1
+            cycle_lens.append(l)
+
+    #print lcmmod(1000000007, *cycle_lens)
+    print reduce(lcm, cycle_lens) % 1000000007

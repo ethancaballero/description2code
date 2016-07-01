@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+   long long t,i,j,c;
+   cin>>t;
+   while(t--)
+   {
+       cin>>i>>j;
+       c=0;
+       while(i!=j)
+       {
+          if(i<j)
+          {
+              j=j/2;
+              c++;
+          }
+          else if(j<i)
+          { 
+          i=i/2;
+           c++;
+          }
+       }
+       cout<<c<<endl;
+   }
+return 0;
+}

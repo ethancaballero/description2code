@@ -1,0 +1,19 @@
+cases=int(raw_input())
+mazes=[]
+while cases:
+    mazes.append(raw_input())
+    cases-=1
+for i in mazes:
+    x,y=i.split()
+    x,y=int(x),int(y)
+    if x==1 and y==2:
+        print "Yes"
+    elif x==2 and y==1:
+        print "Yes"
+    elif x==1 or y==1:
+        print "No"
+    else:
+        if x%2!=0 and y%2!=0:
+            print "No"
+        else:
+            print "Yes"

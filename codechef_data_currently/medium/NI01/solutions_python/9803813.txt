@@ -1,0 +1,62 @@
+#include<iostream>
+#include<vector>
+int min(int a,int b)
+{
+    return a<b?a:b;
+}
+int max(int a,int b)
+{
+    return a>b?a:b;
+}
+using namespace std;
+int main()
+{
+    int readycar[51],readytime[5101];
+    int totalpeople,waitcars,carnext,ridden,riding,ready,cars,wander,waiting,p,r,k;
+    int t;
+    cin>>t;
+
+    for(int i=0;i<t;i++)
+    {
+	cin>>cars>>wander>>waiting>>p>>r>>k;
+	ridden=riding=0;
+		if (cars == 0){
+		    int movedToReady = min(wander, k/r);
+		    cout<<"0 0 " << wander - movedToReady <<" "<<waiting + movedToReady<<endl;
+		    continue;
+		}
+	for(int j=0;j<cars;j++)
+	    readycar[j]=0;
+	totalpeople=wander+waiting;
+	for(int j=0;j<waiting;j++)
+	    readytime[j]=0;
+	for(int j=waiting;j<totalpeople;j++)
+	    readytime[j]=(j-waiting+1)*r;
+	carnext=0;
+	for(int j=0;j<totalpeople;j++)
+	{
+	    ready=readytime[j];
+	    if(ready>k)
+		break;
+	    if(ready<readycar[carnext])
+	    {
+		ready=readycar[carnext];
+	    }
+
+		readycar[carnext]=ready+p;
+		carnext=(carnext+1)%cars;
+		if(ready+p<=k)
+		    ridden++;
+		else if(ready<=k)
+		    riding++;
+	}
+		waitcars=0;
+		for(int l=0;l<cars;l++)
+		    if(readycar[l]<=k)
+			waitcars++;
+//	cout << "Hello, " << "I am " << "a C++ statement";
+		cout << waitcars << " "<<ridden << " "<< max(0,wander-k/r) <<" "<< waiting+min(wander,k/r)-ridden-riding << endl;
+    }
+
+return 0;
+}

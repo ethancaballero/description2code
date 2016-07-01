@@ -1,0 +1,120 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define f(i,a,b) for(i=a;i<b;i++)
+#define si(a) scanf("%d",&a);
+#define slli(a) scanf("%lld",&a);
+#define MOD 1000000007
+#define MAX 100005
+#define pb(a) push_back(a)
+char arr[1005];
+void compare(int length,int &max_length,int beg,int &max_beg,int last,int &max_last)
+{
+	int i,j,k;
+	char a,b,c;
+	f(j,0,length)
+	{
+		a=arr[beg+j];
+		b=arr[max_beg+j];
+
+		if(!(a>='0' && a<='9'))
+			a='9';
+
+		if(!(b>='0' && b<='9'))
+			b='9';
+
+		if(a>b)
+		{
+			max_beg=beg;
+			max_last=last;
+			break;
+		}
+		else if(b>a)
+			break;
+	}
+}
+int main()
+{
+	int start,length,current,i,j,k,m,n,t,l,max_length,max_beg,max_last,beg,last;
+	scanf(" %s",arr);
+	l=strlen(arr);
+	start=0;
+	while(arr[start]=='0')
+		start++;
+	max_length=0;
+	for(i=start;i<l;i++)
+	{
+		current=i;
+		if(arr[current]>='A' && arr[current]<='Z')
+		{
+			beg=current;
+			for(j=current-1;j>=start;j--)
+			{
+				if(arr[j]>='A' && arr[j]<='Z')
+					break;
+				beg--;
+			}
+			last=current;
+			for(j=current+1;j<l;j++)
+			{
+				if(arr[j]>='A' && arr[j]<='Z')
+					break;
+				last++;
+			}
+			length=last-beg+1;
+			if(length>max_length)
+			{
+				max_length=length;
+				max_beg=beg;
+				max_last=last;
+			}
+			if(length==max_length)
+			{
+				compare(length,max_length,beg,max_beg,last,max_last);
+			}
+		}
+	}
+	j=0;
+
+	while(arr[j]=='0' && j<l)
+		j++;
+
+	current=j;//cout<<"current = "<<current<<endl;
+	for(i=current;i<l;i++)
+	{
+		length=0;
+		if(arr[i]>='0' && arr[i]<='9')
+		{
+			beg=i;
+			while(arr[i]>='0' && arr[i]<='9' && i<l)
+			{
+				i++;
+				length++;
+				last=i;
+			}
+		}
+		if(length > max_length)
+		{
+			max_length=length;
+			max_beg=beg;
+			max_last=last;
+		}
+		else if(length==max_length)
+		{
+			compare(length,max_length,beg,max_beg,last,max_last);
+		}
+
+	}
+if(current==l)
+printf("0");
+
+else
+	for(j=max_beg;j<max_length+max_beg;j++)
+	{
+		if(arr[j]>='0' && arr[j]<='9')
+			printf("%c",arr[j]);
+		else
+			printf("9");
+	}cout<<endl;
+
+}

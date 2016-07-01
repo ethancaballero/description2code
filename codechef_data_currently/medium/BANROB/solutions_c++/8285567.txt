@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+double power(double p,long long int m)
+{
+    double a=1.00;
+    while(m)
+    {
+        if(m&1)
+            a=a*p;
+        m>>=1;
+        p=p*p;
+    }
+    return a;
+}
+int main()
+{
+    long int t;
+    scanf("%ld",&t);
+    while(t--)
+    {
+     double p,a=1000000000.000000,amount=0.00000,ans=0.000000;
+     long long int m;
+     scanf("%lld %lf",&m,&p);
+     ans=(m%2==0)?power(p,m):(-1)*p*power(p,m-1);
+    amount=(double)(a*(1-ans))/(1+p);
+    printf("%0.2lf %0.2lf
+",amount,a-amount);
+    }
+    return 0;
+}

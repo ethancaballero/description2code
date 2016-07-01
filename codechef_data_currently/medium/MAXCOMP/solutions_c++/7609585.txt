@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std ;
+
+struct node{
+int start;
+int end;
+int compensation;
+
+}array[10000];
+
+int compare(const void * p1,const void *p2)
+{
+   struct node * a = (struct node *)p1;
+    struct node * b = (struct node *)p2;
+
+    if(a->start==b->start)
+    {
+      return a->end - b->end;
+    }
+
+    return a->start - b->start;
+
+}
+
+
+int main()
+{
+  int t;
+  cin>>t;
+  int N;
+  long long ans;
+
+  while(t--){
+   cin>>N;
+   for(int i=0;i<N;i++)
+   {
+        cin>>array[i].start>>array[i].end>>array[i].compensation;
+
+   }
+   qsort(array,N,sizeof(struct node),compare);
+
+   int maximum[N+1];
+
+   maximum[0]=array[0].compensation;
+int maxi;
+   for(int i=1;i<N;i++)
+   {
+      maxi = INT_MIN;
+     for(int j=i-1;j>=0;j--)
+     {
+       if(array[j].end<=array[i].start)
+       maxi = max(maxi,maximum[j]);
+
+     }
+     if(maxi!=INT_MIN)
+     maximum[i] = array[i].compensation + maxi;
+     else
+        maximum[i]=array[i].compensation;
+
+   }
+   maxi = INT_MIN;
+   for(int i = 0;i<N;i++)
+   {
+      maxi = max(maxi,maximum[i]);
+
+   }
+
+   cout<<maxi<<endl;
+
+
+  }
+
+return 0;
+}

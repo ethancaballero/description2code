@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int t,n[100001],l,r,i,d,sum=0;
+
+int main()
+{
+for( i=1;i<=100000;i+=2)
+{
+    for(d=i;d<=100000;d+=i)
+        n[d]+=i;
+}
+   cin>>t;
+   while(t--)
+   {
+      // n=0;
+      sum=0;
+       cin>>l>>r;
+       for(int i=l;i<=r;i++)
+        sum+=n[i];
+        cout<<sum<<endl;
+   }
+}

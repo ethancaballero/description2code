@@ -1,0 +1,8 @@
+test=raw_input()
+test=int(test)
+ 
+for i in range(test):
+	n=raw_input()
+	n=int(n)
+	ans=2*n*(n-1)*(n-1)+n*(n-1)*(n-2)+2*n*(n-1)*(n-2)*(n-2)
+	print ans

@@ -1,0 +1,16 @@
+#__author__ = 'prag_007'
+"""reference : editorial"""
+import sys
+for i in range(int(sys.stdin.readline())):
+    l, r = map(int, sys.stdin.readline().split())
+    ans, v = 0, 2
+    while v <= r:
+        temp = v
+        while temp <= r:
+            if l <= temp <= r:
+                ans += 1
+            temp *= 3
+        v *= 2
+    if l <= 1 <= r:
+        ans += 1
+    print (ans)

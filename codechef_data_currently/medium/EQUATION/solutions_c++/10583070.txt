@@ -1,0 +1,22 @@
+#include<iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+int main()
+{long long int t,i,j,a,b,c,n,count;
+ cin>>t;
+ while(t--)
+ { count=0;
+   cin>>n>>a>>b>>c;
+   for(i=0;i<=a;i++)
+   { for(j=0;j<=b;j++)
+     { if((i+j)>n)
+       break;
+       else
+       count+=min(n-i-j+1,c+1);
+     }
+   }
+   cout<<count<<endl;
+ }
+ return 0;
+}

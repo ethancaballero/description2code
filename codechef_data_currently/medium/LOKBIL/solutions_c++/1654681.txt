@@ -1,0 +1,214 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cctype>
+#include <string>
+#include <cstring>
+#include <ctime>
+#include <stdarg.h>
+#include <cassert>
+#include <fstream>
+
+using namespace std;
+
+//make macros available for redefinition.
+#undef LOCAL
+#undef DEBUG
+#undef CONSOLE
+#undef INFILE
+#undef OUTFILE
+
+#define LOCAL
+
+#ifdef LOCAL
+#define INFILE
+//#define DEBUG
+#define CONSOLE
+//#define OUTFILE
+#endif
+
+#ifdef ONLINE_JUDGE //enough for codechef and codeforces
+#undef LOCAL
+#undef INFILE
+#undef OUTFILE
+#undef CONSOLE
+#undef DEBUG
+#endif
+//otherwise uncomment following lines
+/*
+#undef LOCAL
+#undef INFILE
+#undef OUTFILE
+#undef CONSOLE
+#undef DEBUG
+*/
+
+
+#ifdef LOCAL
+#define getcha getchar
+#endif
+#ifndef LOCAL
+#ifdef _MSC_VER
+#define getcha getchar
+#else
+#define getcha getchar_unlocked
+#endif
+#endif
+
+#define ll long long
+
+#define PR(id) printf("The value of " #id " is %d
+", id)
+#define glue(a,b) a ## b
+
+#ifdef CONSOLE
+#include<conio.h>
+#endif
+
+int scan() {
+	int t = 0;
+	char c = getcha();
+	while(c<'0' || c>'9') c = getcha();
+	while(c>='0' && c<='9') {
+		t = 10 * t + c - 48;
+		c = getcha();
+	}
+	return t;
+}
+
+ll scanl() {
+	ll t=0;
+	char c = getcha();
+	while(c<'0' || c>'9') c = getcha();
+	while(c>='0' && c<='9') {
+		t = 10 * t + c - 48;
+		c = getcha();
+	}
+	return t;
+}
+
+/* ADD PROGRAM LOGIC HERE */
+
+int depth[101];
+bool visited[101];
+int su[101];
+list<int> q;
+int n;
+vector<vector<int> > fr;
+char buf[1<<20];
+
+void bfs(int a) {
+	q.clear();
+	q.push_back(a);
+	for(int i=1; i<=n; i++) {
+		depth[i] = visited[i] = 0;
+	}
+	visited[a] = 1;
+	while(q.size()>0) {
+		int x = q.front();
+		q.pop_front();
+		for(int i=0; i<fr[x].size(); i++) {
+			if(!visited[fr[x][i]]) {
+				visited[fr[x][i]] = 1;
+				depth[fr[x][i]] = depth[x]+1;
+				q.push_back(fr[x][i]);
+			}
+		}
+	}
+}
+
+void go() {
+	int t;
+	scanf("%d",&t);
+	while(t--) {
+		scanf("%d",&n);
+		string s;
+		getline(cin,s);
+		fr.clear();
+		vector<int> temp;
+		fr.push_back(temp);
+		for(int i=1; i<=n; i++) {
+			//getline(cin,s);
+			cin.getline(buf,1<<20);
+			vector<int> temp2;
+			/*
+			int a = -1;
+			while(true) {
+				int b = s.find(" ",a+1);
+				if(s.find(" ",a+1)==string::npos || b==s.length()-1) break;
+				temp2.push_back(atoi(s.substr(a+1,b-a-1).c_str()));
+				a = b;
+			}
+			if(s.find_last_of(" ")==string::npos) a = -1;
+			else a = s.find_last_of(" ");
+			temp2.push_back(atoi(s.substr(a+1).c_str()));
+			*/
+			istringstream in(buf);
+			int b;
+			while(in>>b) temp2.push_back(b);
+			fr.push_back(temp2);
+		}
+		//for(int i=1; i<=n; i++) {
+		//	for(int j=0; j<fr[i].size(); j++) {
+		//		printf("%d ",fr[i][j]);
+		//	}
+		//	printf("
+");
+		//}
+		for(int i=1; i<=n; i++) {
+			bfs(i);
+			su[i] = 0;
+			for(int j=1; j<=n; j++) {
+				su[i]+=depth[j];
+			}
+		}
+		int mini = 1;
+		for(int i=2; i<=n; i++) {
+			if(su[i]<su[mini]) mini = i;
+		}
+		printf("%d %.6lf
+",mini,su[mini]/(double)n);
+	}
+}
+
+/*  */
+
+int main() {
+
+#ifdef INFILE
+	freopen("in.txt","r",stdin);
+#endif
+#ifdef OUTFILE
+	freopen("out.txt","w",stdout);
+#endif
+
+	//call function here.
+	go();
+
+
+#ifdef DEBUG
+	printf("
+END
+");
+#endif
+#ifdef CONSOLE
+	_getch();
+#endif
+
+	return 0;
+}

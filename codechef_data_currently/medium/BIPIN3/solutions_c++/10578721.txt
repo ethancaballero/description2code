@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+
+long long int df(long long int g,long long int d)
+{
+    if(g==0)
+        return 1;
+
+
+
+
+       long long   int  tr=df(g/2,d);
+       long long   int k=g%2;
+       long long int f=((tr%mod)*(tr%mod))%mod;
+    if(k==0)
+        return f;
+        else
+         return (f*d)%mod;
+}
+
+int main()
+{
+   long  int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int n,s=1,d;
+        cin>>n>>d;
+
+        s=df(n-1,d-1);
+
+        s=(s*d)%mod;
+        cout<<s<<endl;
+    }
+}

@@ -1,0 +1,117 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+typedef vector<int> vi; 
+typedef vector<vi> vvi; 
+typedef pair<int,int> ii; 
+typedef long long ll;
+#define sz(a) int((a).size()) 
+#define pb push_back 
+#define all(c) (c).begin(),(c).end() 
+#define tr(c,i) for(typeof((c).begin()) i = (c).begin(); i != (c).end(); i++) 
+#define present(c,x) ((c).find(x) != (c).end()) 
+#define cpresent(c,x) (find(all(c),x) != (c).end()) 
+#define mp make_pair                    
+#define go(i,n) for(int i=0;i<n;i++)
+#define go3(i,j,n) for(int i=j;i<n;i++)
+//#define mod 5
+#define mod 1000000009
+ 
+int n,m;
+ 
+int pw(int x,int t=mod-2){
+  if(!t) return 1;
+ 
+  int ret = pw(x, t>>1);
+  ret=(ret*1ll*ret) % mod;
+ 
+  if(t&1) ret = (ret*1ll*x) %mod;
+ 
+ return ret; 
+}
+ 
+int a[105][105];
+bool g[105][105];
+ 
+int gr(){
+ return rand();
+}
+  
+int solve(){
+ 
+  int r;
+  bool p;
+ 
+  for(int i=0;i<n;i++) {
+  p = 0;
+    for(int j=i;j<n;j++)
+     if(a[j][i]) {
+       if(i!=j){
+         for(int k=i;k<n;k++)
+         swap(a[i][k],a[j][k]);
+       }
+      p=1;
+      break;
+     }
+  if(!p) return 0;
+ 
+   for(int j=i+1;j<n;j++)
+   {
+     r = (pw(a[i][i]) * 1ll * a[j][i] ) % mod;
+     for(int k=i;k<n;k++)
+       a[j][k] = (a[j][k] - (a[i][k] * 1ll * r) % mod + mod) % mod;
+   }
+   //print();
+  }
+  int ret = 1;
+ 
+  for(int i=0;i<n;i++)
+   ret = (ret * 1ll * a[i][i]) % mod;
+ 
+  return ret;
+}
+ 
+ 
+ 
+ 
+
+int main(){
+  
+  srand(135324ll);
+ int T;
+ cin>>T;
+ while(T--){
+  cin>>n>>m;
+  int x,y;
+  memset(g,0,sizeof g);
+ 
+  for(int i=0;i<m;i++)
+   {
+    scanf("%d%d",&x,&y);
+    x--; y--;
+    g[x][y] = g[y][x] = 1;
+   }
+   bool ver = 0;
+ 
+ 
+   for(int i=0;i<10;i++)
+   {
+   memset(a,0,sizeof a);
+    
+     for(int i1=0;i1<n;i1++)
+     for(int j1=i1;j1<n;j1++)
+      if(g[i1][j1] > 0)
+       {
+        a[i1][j1] = gr();  
+        a[j1][i1] = (mod - a[i1][j1] + mod) % mod;
+        if(a[i1][j1] < 0) throw;
+       }
+    //print();
+    ver |= (solve() > 0 );
+   }
+   cout<< ( ver ? "YES" : "NO") <<endl;
+ }
+ 
+   
+return 0;} 

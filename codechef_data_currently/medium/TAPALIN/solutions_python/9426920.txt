@@ -1,0 +1,15 @@
+# your code goes here
+from sys import stdin, stdout
+MOD = 10**9 + 7
+DEN = pow(25, MOD-2, MOD)
+t = int(stdin.readline())
+while t:
+	t -= 1
+	n = int(stdin.readline())
+	s = (n+1)/2
+	num = ((2*26) * (pow(26, s, MOD) - 1) % MOD) % MOD
+	ans = (num * DEN) % MOD
+	if n%2:
+		ans = (ans - pow(26, s, MOD)) % MOD
+	stdout.write(str(ans)+'
+')

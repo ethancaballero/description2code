@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstdio>
+
+#define ll long long
+
+using namespace std;
+
+void Calc(ll n,ll m)
+{
+	ll a=0,b=n*m-1,base=10000000000000LL;
+	b*=n;
+	a=b/base; b%=base;
+	a*=m; b*=m; a+=b/base; b%=base;
+	if (n>1&&m>2)
+	{
+		b-=(n-1)*(m-2)*4;
+		if (b<0) b+=base,a--;
+	}
+	if (n>2&&m>1)
+	{
+		b-=(n-2)*(m-1)*4;
+		if (b<0) b+=base,a--;
+	}
+	if (a>0)
+	{
+		cout << a;
+		for(ll step=base/10;step>=10&&step>b;step/=10)
+			cout << 0;
+	}
+	cout << b << '
+';
+}
+
+
+int main()
+{
+	int T,n,m;
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d%d",&n,&m);
+		Calc(n,m);
+	}
+	return 0;
+}

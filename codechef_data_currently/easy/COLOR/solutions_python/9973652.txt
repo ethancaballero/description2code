@@ -1,0 +1,43 @@
+t=int(raw_input())
+
+while t>0:
+    raw_input()
+    S=raw_input()
+    l=len(S)
+    r=0
+    g=0
+    b=0
+    for x in S:
+        if x=="R":
+            r+=1
+        elif x=="G":
+            g+=1
+        else:
+            b+=1
+    if g==0 and b==0 or  g==0 and r==0 or r==0 and b==0:
+        print 0
+    elif b==0 :
+        if r>=g:
+            print g
+        else:
+            print r 
+
+    elif g==0 :
+        if r>=b:
+            print b
+        else:
+            print r  
+            
+    elif r==0 :
+        if b>=g:
+            print g
+        else:
+            print b
+
+    else:
+    
+        n=max(r,g,b)
+        res=l-n
+        print res
+
+    t-=1                                      

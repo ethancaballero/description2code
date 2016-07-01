@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int hcf(int a,int b)
+{
+    if(a%b==0)
+    return b;
+    else
+    return(hcf(b,a%b));
+}
+int main()
+{   int num, t,first,second,h,i;
+    cin>>t;
+while(t--)
+{
+    cin>>num;
+    cin>>first;
+    for(i=1;i<num;++i)
+    {   cin>>second;
+        h=hcf(first,second);
+        second=h;
+        first=second;
+    }
+    cout<<h<<endl;
+}
+return 0;
+}

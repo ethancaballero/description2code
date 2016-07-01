@@ -1,0 +1,28 @@
+import math
+test=int(raw_input())
+i=maxindex=minindex=maxarea=minarea=0
+while(test>0):
+	indices=map(int,raw_input().split())
+	x1=indices[0]
+	y1=indices[1]
+	x2=indices[2]
+	y2=indices[3]
+	x3=indices[4]
+	y3=indices[5]
+	area=math.fabs(0.5*((x1*(y2-y3))+(x2*(y3-y1))+(x3*(y1-y2))))
+	#print "Area no. ",i," ",area
+	if(i==0):
+		maxarea=area
+		minarea=area
+		maxindex=minindex=i
+	else:
+		if(area>=maxarea):
+			maxarea=area
+			maxindex=i
+		if(area<=minarea):
+			minarea=area
+			minindex=i
+	i+=1
+	test-=1
+#print 'Max_Area ',maxarea,'Min_Area ',minarea
+print minindex+1,maxindex+1

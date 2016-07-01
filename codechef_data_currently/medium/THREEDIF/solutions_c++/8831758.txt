@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		long long int a[3],sum,d,max=1000000007,i;
+		for(i=0;i<3;i++)
+		scanf("%lld",&a[i]);
+		sort(a,a+3);
+		sum=((((a[0]%max)*((a[1]-1)%max))%max)*((a[2]-2)%max))%max;
+		printf("%lld
+",sum);
+		
+	}
+	return 0;
+}

@@ -1,0 +1,136 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+int trp[100005][105];
+
+ll mpow(ll n,ll a,ll mod)
+{
+    ll trp_ans=1;
+    while(n)
+    {
+        if(n%2) trp_ans=(trp_ans*a)%mod;
+        a=(a*a)%mod;
+        n/=2;
+    }
+    return trp_ans%mod;
+}
+int prime_factor[123][123];
+void factor()
+{
+    memset(prime_factor,0,sizeof(prime_factor));
+    prime_factor[1][1]=1,prime_factor[2][1]=1,prime_factor[2][2]=1,prime_factor[3][1]=1,prime_factor[3][3]=1;
+    for(int i=4;i<=100;i++)
+    {
+        int cnt=0;
+        int temp=i;
+        while(temp%2==0)
+        {
+            temp/=2;
+            cnt++;
+        }
+        prime_factor[i][2]=cnt;
+        for(int j=3;j<=sqrt(temp);j+=2)
+        {
+            cnt=0;
+            while(temp%j==0)
+            {
+                temp/=j;
+                cnt++;
+            }
+            prime_factor[i][j]=cnt;
+        }
+        if(temp>2) prime_factor[i][temp]=1;
+    }
+}
+int trp1[100011];
+int main()
+{
+    factor();
+//    for(int i=1;i<=10;i++)
+//    {
+//        for(int j=1;j<=10;j++) cout<<prime_factor[i][j]<<" ";
+//        cout<<endl;
+//    }
+    vector<int> V;
+    bool prime_number[101];
+    memset(prime_number,true,sizeof(prime_number));
+    prime_number[1]=false;
+    for(int i=2;i<=sqrt(101);i++) if(prime_number[i]) for(int j=i*i;j<=100;j+=i) prime_number[j]=false;
+    int jj=1;
+    int hashing[101];
+    memset(hashing,0,sizeof(hashing));
+    for(int i=1;i<=100;i++)
+    {
+       if(prime_number[i])
+       {
+           V.push_back(i);
+           hashing[i]=jj;
+           jj++;
+       }
+
+    }
+//    for(int i=0;i<=100;i++) cout<<hashing[i]<<" ";
+//    cout<<endl;
+    ll n;
+    //cin>>n;
+    //n=readInt();
+    scanf("%lld",&n);
+
+    memset(trp1,0,sizeof(trp1));
+    memset(trp,0,sizeof(trp));
+
+    for(int i=1;i<=n;i++)
+    {
+        //trp1[i]=readInt();
+        scanf("%lld",&trp1[i]);
+    }
+    for(int i=1;i<=n;i++)
+    {
+        ll temp1=trp1[i];
+        for(int j=1;j<=temp1;j++)
+        {
+            if(prime_factor[temp1][j]>0)
+            {
+                int pp=hashing[j];
+                //cout<<pp<<endl;
+
+                trp[i][pp]+=prime_factor[temp1][j];
+            }
+        }
+        for(int j=1;j<=100;j++)
+        {
+            trp[i][j]+=trp[i-1][j];
+        }
+    }
+//    for(int i=1;i<=n;i++)
+//    {
+//        for(int j=1;j<=10;j++) cout<<trp[i][j]<<" ";
+//        cout<<endl;
+//    }
+    ll T;
+    //T=readInt();
+    scanf("%lld",&T);
+    //cin>>T;
+    while(T--)
+    {
+        ll l,r,m;
+        //int l=readInt(),r=readInt(),m=readInt();
+         scanf("%lld%lld%lld",&l,&r,&m);
+        //cin>>l>>r>>m;
+        ll trp_ans=1;
+        for(ll i=1;i<=25;i++)
+        {
+           if(trp[r][i]-trp[l-1][i]>0)
+           {
+                //cout<<i<<" "<<trp[r][i]-trp[l-1][i]<<endl;
+                trp_ans= (trp_ans*mpow((ll)(trp[r][i]-trp[l-1][i]),(ll)V[i-1],(ll)m))%m;
+                trp_ans%=m;
+                if(trp_ans==0) break;
+           }
+        }
+        trp_ans%=m;
+        printf("%lld
+",trp_ans);
+    }
+
+}

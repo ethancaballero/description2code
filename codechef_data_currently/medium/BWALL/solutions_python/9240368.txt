@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int mod = 1e9+7;
+int t,n;
+struct mat {
+	int val[3][3];
+	mat(){
+		for(int i =0;i<3;i++){
+			for(int  j =0;j<3;j++)   val[i][j] = i == j;           
+		}
+	}
+};
+int m[3][3] = {
+          1,4,2,
+		  1,0,0,
+		  0,1,0
+		  };
+mat operator *( const mat &a,const mat &b  ){
+  	  mat res;
+	  for(int i =0;i<3;i++){
+  		for(int j =0;j<3;j++){
+  			ll sum = 0ll;
+  			for(int k = 0;k<3;k++){
+  				 sum += (ll)a.val[i][k]*b.val[k][j];
+			  }
+			  res.val[i][j] = sum%mod;
+		  }
+	  }
+	  return res;
+  }		  
+mat pow(const mat &base , int x){
+	mat res;
+	mat tmp(base);
+	for( ;x ; x>>=1){
+		if(x&1)   res  = res*tmp;
+		tmp = tmp*tmp;
+	}
+	return res;
+}		  
+int solve(int n){
+	mat base;
+	for(int i = 0;i<3;i++){
+		for(int j =0;j<3;j++)  base.val[i][j] = m[i][j];
+	}
+	return pow(base,n).val[0][0];
+}
+int main(){
+	cin>>t;
+	while(t--){
+		cin>>n;
+		printf("%d
+",solve(n));
+	}
+}

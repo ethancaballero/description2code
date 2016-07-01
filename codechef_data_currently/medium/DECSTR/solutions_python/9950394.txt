@@ -1,0 +1,9 @@
+s=''.join(list(map(chr, range(122, 96, -1))))
+tc=int(raw_input().strip())
+for _ in range(tc):
+	n=int(raw_input().strip())
+	r=(n%25)*(-1)-1
+	if(r==-1):
+		print s*(n/25)
+	else:
+		print s[(n%25)*(-1)-1:]+s*(n/25)

@@ -1,0 +1,26 @@
+n, q, l = map(int, raw_input().strip().split())
+trees = []
+for i in xrange(n):
+    h, s = map(int, raw_input().strip().split())
+    trees.append((h, s))
+
+def good(t):
+    remain = q
+    for h, s in trees:
+        height = h + s*t
+        if height >= l:
+            remain -= height
+            if remain <= 0:
+                return True
+    return False
+
+L = -1
+R = 10**18+11
+while R - L > 1:
+    M = L + R >> 1
+    if good(M):
+        R = M
+    else:
+        L = M
+
+print R

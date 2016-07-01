@@ -1,0 +1,29 @@
+cases=int(raw_input())
+while cases:
+	a=raw_input();
+	length=len(a)
+	
+	if length!=5:
+		print "Error"
+	else:
+		A=ord(a[0])
+		B=ord(a[1])	
+		C=ord(a[2])	
+		D=ord(a[3])	
+		E=ord(a[4])	
+	
+		if A<97 or A>104 or D<97 or D>104 or B<49 or B>56 or E<49 or E>56 or C != 45:
+			
+			print "Error"
+		else:
+			if abs(A-D)==1 and abs(B-E)==2:
+				print "Yes"
+			elif abs(A-D)==2 and abs(B-E)==1:
+				print "Yes"
+			else:
+				print "No"
+		
+	
+	cases-=1	
+	
+	

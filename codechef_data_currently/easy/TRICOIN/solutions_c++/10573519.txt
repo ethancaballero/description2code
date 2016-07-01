@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,i,p,j,t;
+	cin>>t;
+	for(j=0;j<t;j++)
+	{
+		cin>>n;
+		int s=0;
+		p=n;
+		for(i=0;i<=n;i++)
+		{
+			if((i+1)<=p)
+			{
+				s++;
+				p=p-(i+1);
+			}
+			else
+			break;
+		}
+		cout<<s<<endl;
+	}
+}

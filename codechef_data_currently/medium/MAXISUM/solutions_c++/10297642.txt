@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<stdlib.h>
+main()
+{
+int N,T;
+long long int K;
+scanf("%d",&T);
+while(T--)
+	{
+	scanf("%d %lld",&N,&K);
+	long long int a[100001],b[100001];
+	for(int i=0;i<N;i++)
+		scanf("%lld",&a[i]);
+	for(int j=0;j<N;j++)
+		scanf("%lld",&b[j]);
+	long long int max=abs(b[0]);
+	int pos=0;
+	long long int sum=0;
+	for (int k=0;k<N;k++)
+	{
+		if(abs(b[k])>=max)
+ 		{
+ 			pos=k;
+ 			max=abs(b[k]);
+		}
+	}
+	for(int k=0;k<N;k++)
+ 	{
+ 		if(k==pos)
+		{
+ 			if(b[k]<0)
+			{
+				sum=sum+((a[k]-K)*b[k]);
+			}
+			else
+				sum=sum+((a[k]+K)*b[k]);
+		}
+	else
+		sum=sum+(a[k]*b[k]);
+	}
+printf("%lld
+",sum);
+}
+}

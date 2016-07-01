@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+
+#define tfi "omwg.inp"
+#define tfo "omwg.out"
+
+using namespace std;
+int m,n;
+
+void xuly()
+{
+    scanf("%d%d", &n, &m);
+    if(n>m) swap(n,m);
+    int res = 2*(n*n - n) ;
+    res = res + 2*(m-n)*(n-1) + m-n;
+    printf("%d
+", res);
+}
+
+void doc()
+{
+    int t;
+    scanf("%d", &t);
+    for(int i=1; i<=t; i++) xuly();
+}
+
+int main()
+{
+    //freopen(tfi,"r",stdin);
+    //freopen(tfo,"w",stdout);
+    doc();
+}

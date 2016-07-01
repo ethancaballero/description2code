@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+map <string,int> c;
+map <string,string> both;
+map <string,int> ctry;
+int main()
+{
+	int n,m,i;
+	char chef[15],country[15];
+	cin>>n>>m;
+	for(i=0;i<n;i++)
+	{
+		cin>>chef>>country;
+		c.insert(make_pair(chef,0));
+		both.insert(make_pair(chef,country));
+		ctry.insert(make_pair(country,0));
+	}
+	for(i=0;i<m;i++)
+	{
+		cin>>chef;
+		c[chef] += 1;
+		ctry[both[chef]] += 1;
+	}
+	map <string,int>::iterator it;
+	int max = 0;
+	string key;
+	for(it=ctry.begin();it!=ctry.end();it++)
+	{
+		if(max < it->second)
+		{
+			max = it->second;
+			key = it->first;
+		}
+	}
+	cout<<key<<endl;
+	max = 0;
+	for(it=c.begin();it!=c.end();it++)
+	{
+		if(max < it->second)
+		{
+			max = it->second;
+			key = it->first;
+		}
+	}
+	cout<<key<<endl;
+	return 0;
+}

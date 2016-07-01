@@ -1,0 +1,18 @@
+t = input()
+for _ in range(t):
+    n =input()
+    count = 0
+    # pattern 1
+    count += n * (n - 1) * (n - 1)
+    # pattern 2
+    count += n * (n - 1) * (n - 1)
+    # pattern 3
+    count += n * (n - 1) * (n - 2)
+    # pattern 4
+    count += n * (n - 1) * (n - 2) * (n - 2)
+    # pattern 5
+    count += n * (n - 1) * (n - 2) * (n - 2)
+    print count
+        
+     
+ 

@@ -1,0 +1,21 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main(){
+  int t,n,m,a;
+  cin>>t;
+  while(t--){
+   cin>>n>>m;
+   int max_v=0,min_v=9999999;
+   for(int i=0;i<m;i++){
+    cin>>a;
+    max_v=max(max_v,a);
+    min_v=min(min_v,a);
+   }
+   for(int i=0;i<n;i++){
+     cout<<max(i-min_v,max_v-i)<<" ";
+   }
+   cout<<endl;
+  }
+  return 0;
+}

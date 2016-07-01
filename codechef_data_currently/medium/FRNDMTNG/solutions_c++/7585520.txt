@@ -1,0 +1,30 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+using namespace std;
+int main()
+{
+	double t1,t2,T1,T2;
+    long t;
+    cin>>t;
+    while(t--)
+    {   
+	 double ans=0;
+    	cin>>T1>>T2>>t1>>t2;
+    double a1=0,a2=0,b1=0,b2=0,temp;
+		 {
+        if(t1<T2) 
+     a1=(T2-t1)*(T2-t1);   
+if(t2<T1) 
+     a2=(T1-t2)*(T1-t2);   
+if((T1-t2)>T2) 
+     b2=((T1-T2-t2)*(T1-T2-t2));  
+if((T2-t1)>T1) 
+     b1=((T2-T1-t1)*(T2-T1-t1));   
+temp=((double)a1+a2-b1-b2)/((T1)*(T2)*2.0);
+}
+		ans=1-temp;
+        	printf("%.6lf
+",ans);
+    }
+} 

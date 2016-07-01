@@ -1,0 +1,42 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#define ll long long
+
+using namespace std;
+
+int main()
+{
+	
+	ll n,m,max,val1,num,x,count,y;
+	cin>>n>>m;
+	
+	max=3*n;
+	val1=2*n;
+	while(m--)
+	{
+		cin>>num;
+		if(num>max||num<n+1)
+		cout<<"0
+";
+		else
+		{
+			if(num>2*n)
+			{
+				x=2*n;
+				y=num-2*n;
+				count=n-y+1;
+				cout<<count<<"
+";
+			}
+			else
+			{
+				x=num-n;
+				cout<<x-1<<"
+";
+			}
+			
+		}
+	}
+	return 0;
+}

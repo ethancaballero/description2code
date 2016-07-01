@@ -1,0 +1,72 @@
+#include<iostream>
+#include<queue>
+#include<algorithm>
+
+#define lli long long int
+using namespace std;
+
+main()
+{	int t;
+
+typedef pair<lli, lli> P;
+priority_queue< P, vector<P>, greater<P> > pq;
+
+	lli k,q,a[20001],b[20001],x;
+	lli ptr[20001],ans[10001],index;
+	cin>>t;
+	while(t--)
+	{	pq=priority_queue<P, vector<P>, greater<P> > ();
+		cin>>k>>q;
+	
+		for(int i=1;i<=k;i++)
+		{
+			cin>>a[i];
+		}
+		
+		for(int i=1;i<=k;i++)
+		{
+			cin>>b[i];
+		}
+		
+		sort(a+1,a+k+1);
+		sort(b+1,b+k+1);
+
+		for(int i=1;i<=k;i++)
+		ptr[i]=1;
+		
+		
+			for(int j=1;j<=k;j++)
+			{
+				pq.push(make_pair(a[j]+b[ptr[j]],j));
+			}
+			
+			
+			
+		/*	while(!pq.empty())
+			{
+				cout<<pq.top().first<<endl;
+				pq.pop();
+			}*/
+		
+		for(int i=1;i<=k*k && i<=10000;i++)
+		{	
+		ans[i]=pq.top().first;
+		int index=pq.top().second;
+		pq.pop();
+		ptr[index]++;
+		if(ptr[index]<=k)
+		pq.push(make_pair(a[index]+b[ptr[index]],index));
+		}
+		//for(int i=1;i<=k*k;i++)
+		//cout<<ans[i]<<" ";
+		for(int i=0;i<q;i++)
+		{
+			cin>>x;
+			cout<<ans[x]<<endl;
+		}
+	
+	}
+	
+	
+	return 0;
+}

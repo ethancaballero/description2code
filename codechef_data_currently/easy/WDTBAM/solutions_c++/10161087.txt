@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	 while(t--)
+	 {
+	 	int n,count=0,i,ct;
+	 	cin>>n;
+	 	string a,b;
+	 	int c[n+1];
+
+	    	cin>>a;
+
+			cin>>b;
+	
+		for(i=0;i<=n;i++)
+			cin>>c[i];
+			
+		for(i=0;i<n;i++)
+		{
+			if(a[i]==b[i])
+				count++;
+		}
+		
+		if(count==n)
+		cout<<c[count]<<endl;
+		
+		else
+		{
+			ct=c[0];
+			
+			for(i=0;i<count+1;i++)
+			{
+				if(c[i]>ct)
+				ct=c[i];
+			}
+			
+			cout<<ct<<endl;
+		}
+	 }
+}
+
+/*
+3
+5
+ABCDE
+EBCDA
+0 10 20 30 40 50
+4
+CHEF
+QUIZ
+4 3 2 1 0
+8
+ABBABAAB
+ABABABAB
+100 100 100 100 100 100 100 100 100
+*/

@@ -1,0 +1,43 @@
+#include<cstdio>
+#include<iostream>
+#include<cmath>
+using namespace std;
+typedef unsigned long long int ull;
+int main()
+{
+    int t;
+    ull i,j,ma,n,tt,k,s;
+    scanf("%d",&t);
+    while(t--)
+    { ma=0;
+        scanf("%llu %llu",&n,&k);
+        ull a[n];
+
+        for(i=0;i<n;i++)
+        {
+            scanf("%llu",&a[i]);
+
+        }
+        tt=pow(2,n);
+        for(i=0;i<tt;i++)
+        {
+            s=k;
+            for(j=0;j<n;j++)
+            {
+                if(i & (1<<j))
+                {
+                    s=s^a[j];
+                }
+
+            }
+            if(s>ma)
+            {
+                ma=s;
+            }
+        }
+        printf("%llu
+",ma);
+
+
+    }
+}

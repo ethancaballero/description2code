@@ -1,0 +1,57 @@
+'''
+Created on 31-May-2015
+
+@author: venkat
+'''
+
+def read_int_list():
+    return [int(x) for x in raw_input().split()]
+
+
+def get_min_count_and_str(inp_str, n, k):
+    if k == 1:
+        start_zero, start_one = "0", "1"
+        cnt_z, cnt_o = 0, 0
+        for ind in xrange(n):
+            if inp_str[ind] != start_zero:
+                cnt_z += 1
+            if inp_str[ind] != start_one:
+                cnt_o += 1
+            start_one = "0" if start_one == "1" else "1"
+            start_zero = "0" if start_zero == "1" else "1"
+        if cnt_o < cnt_z:
+            return cnt_o, "10" * (n/2) + ("1"  if n % 2 == 1 else "")
+        else:
+            return cnt_z, "01" * (n/2) + ("0"  if n % 2 == 1 else "")
+    else:
+        result = list(inp_str)
+        cnt, ans = 1, 0
+        for ind in xrange(1, n):
+            if inp_str[ind] == inp_str[ind-1]:
+                cnt += 1
+                if cnt > k:
+                    cnt = 0
+                    ans += 1
+                    if ind+1 < n and inp_str[ind] == inp_str[ind+1]:
+                        result[ind] = "1" if inp_str[ind] == "0" else "0"
+                    else:
+                        result[ind-1] = "1" if inp_str[ind] == "0" else "0"
+            else:
+                cnt = 1
+        return ans, "".join(result)
+
+
+def main():
+    """ Starting point
+    """
+    tc = int(raw_input())
+    for _ in xrange(tc):
+        n, k = read_int_list()
+        inp_str = raw_input()
+        cnt, exp_str = get_min_count_and_str(inp_str, n, k)
+        print cnt
+        print exp_str
+
+if __name__ == '__main__':
+    main()
+   

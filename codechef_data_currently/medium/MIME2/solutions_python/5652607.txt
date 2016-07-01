@@ -1,0 +1,11 @@
+n,m=map(int, raw_input().split())
+files = {}
+for i in range(n):
+    a, files[a]=raw_input().split()
+for i in range(m):
+    s = raw_input().split()[0]
+    if s.find('.')!=-1:
+        s = s.split('.').pop()
+        print files[s] if s in files else "unknown"
+    else:
+        print "unknown"

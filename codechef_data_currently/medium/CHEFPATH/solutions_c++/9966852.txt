@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+main()
+{
+    long long int n,t,m;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+        if(((n%2!=0) && (m%2!=0))|| (n==1 && m!=2) || (n!=2 && m==1))
+                cout<<"No
+";
+        else
+                cout<<"Yes
+";
+
+    }
+    return 0;
+}

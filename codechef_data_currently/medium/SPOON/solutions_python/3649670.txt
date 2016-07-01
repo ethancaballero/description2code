@@ -1,0 +1,35 @@
+def main():
+ 
+	T = int(raw_input())
+	 
+	for i in range(T):
+		R,C = map(int,raw_input().split())
+		found = False
+		A = []
+		 
+		for i in range(R):
+			row = raw_input().strip().lower()
+		 
+			if(C >= 5 and "spoon" in row):
+				found = True
+		 
+			A.append(row)
+		 
+		if(not found and R >= 5):
+			AT = transpose(A)
+			for r in AT:
+				r = "".join(r)
+				if("spoon" in r):
+					found = True
+	 
+		if(found):
+			print "There is a spoon!"
+		else:
+			print "There is indeed no spoon!"
+		 
+		 
+	 
+def transpose(A):
+	return zip(*A)
+	 
+main()

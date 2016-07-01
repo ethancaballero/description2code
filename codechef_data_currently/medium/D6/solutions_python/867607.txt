@@ -1,0 +1,33 @@
+def solve(points):
+    s_points = set(points)
+    count = 0
+    for i in xrange(len(points) - 1):
+        a = points[i][0]
+        b = points[i][1]
+        for j in xrange(i + 1, len(points)):
+            c = points[j][0]
+            d = points[j][1]
+            if a > c or (a == c and d <= b): 
+                _a, _b, _c, _d = c, d, a, b
+            else:
+                _a, _b, _c, _d = a, b, c, d
+            if _d <= _b: continue
+            dx = _d - _b
+            dy = _c - _a
+            q1 = (_a + _d - _b, _b - _c + _a)
+            q2 = (_c + _d - _b, _d - _c + _a)
+            if q1 in s_points and q2 in s_points:
+                count += 1
+    return count
+
+cases = []
+tests_num = int(raw_input())
+for t in xrange(tests_num):
+    n = int(raw_input())
+    points = []
+    for n in xrange(n):
+        points.append(tuple([int(v) for v in raw_input().split()]))
+    cases.append(points)
+ 
+for case in cases:
+    print solve(case) 

@@ -1,0 +1,33 @@
+t=input()
+fin=[]
+for i in range(t):
+    mov=raw_input()
+    l=raw_input().split()
+    r=raw_input().split()
+    l=map(int,l)
+    r=map(int,r)
+    lr=[a*b for a,b in zip(l,r)]
+    m=max(lr)
+    ma=[z for z,x in enumerate(lr) if x==m]
+    if len(ma)>1:
+         m=max(r)
+         ma=[z for z,x in enumerate(r) if x==m]
+         if len(ma)>1:
+             fin.append(ma[0]+1)
+         else:
+             fin.append(ma[0]+1)
+    else:
+        fin.append(ma[0]+1)
+for i in fin:
+    print i
+
+             
+             
+   
+    
+        
+        
+        
+    
+    
+    

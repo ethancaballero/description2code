@@ -1,0 +1,15 @@
+mod = 10 ** 9 + 7
+def powmod(n, p):
+    res = 1
+    while p > 0:
+        if p % 2 == 0:
+            n = n * n % mod
+            p /= 2
+        else:
+            res = res * n % mod
+            p -= 1
+    return res
+t = int(raw_input())
+for i in xrange(t):
+    n, k = map(int, raw_input().split())
+    print k * powmod(k - 1, n - 1) % mod

@@ -1,0 +1,32 @@
+
+import java.io.*;
+import java.lang.*;
+class balloon
+{
+public static void main (String[] args)throws IOException
+{
+    
+    BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+    int t=Integer.parseInt(br.readLine());
+    while(t>0)
+    {
+        String s;
+        s=br.readLine();
+        int a=0,b=0,i;
+        for(i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)=='a')
+                a++;
+            else
+                b++;
+
+        }
+            if(a>b)
+                System.out.println(b);
+            else
+                System.out.println(a);
+        t--;
+    }
+}
+
+}

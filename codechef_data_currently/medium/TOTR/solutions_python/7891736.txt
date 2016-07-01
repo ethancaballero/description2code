@@ -1,0 +1,14 @@
+T, s = str(raw_input()).split()
+alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+s += s.upper()
+for _ in range(int(T)):
+    k = str(raw_input())
+    ans = ''
+    for i in k:
+        if i in alpha:
+            ans += s[alpha.index(i)]
+        elif i == "_":
+            ans += " "
+        else:
+            ans += i
+    print ans

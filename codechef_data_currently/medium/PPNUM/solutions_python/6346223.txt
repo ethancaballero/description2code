@@ -1,0 +1,25 @@
+import math
+
+
+number_of_tests = int(raw_input())
+
+modulus = long(1000000007)
+
+for x in xrange(number_of_tests):
+    left, right = map(int, raw_input().split())
+    
+    result = 0
+    bottom = left
+
+    while bottom <= right:
+        if bottom > 0:
+            length_of_bottom = int(math.log10(bottom)) + 1
+        elif bottom == 0:
+            length_of_bottom = 1
+        else:
+            length_of_bottom = int(math.log10(-bottom)) + 2
+        top = min((10 ** length_of_bottom) - 1, right)
+        result = result + (bottom + top) * length_of_bottom * (top - bottom + 1) / 2
+        bottom = top + 1
+
+    print result % modulus

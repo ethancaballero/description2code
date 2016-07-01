@@ -1,0 +1,28 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--)
+	{long int n;
+	cin>>n;
+	long int a[n];
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+		sort(a,a+n);
+		long int i=n-1;
+		long int sum=0;
+		while(i>0){
+			if(a[i]!=a[i-1]){
+				sum++;	
+			}
+			i--;
+		}
+		cout<<sum+1<<endl;
+		
+	}
+	
+	return 0;
+}

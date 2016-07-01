@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<string.h>
+int main(){
+	int t;
+	long long int n,na,count=0;
+	int a[100002];
+	scanf("%d", &t);
+	while(t--){
+		memset(a,0,sizeof(a));
+		count = 0;
+		scanf("%lld", &n);
+		while(n--){
+			scanf("%lld", &na);
+			if(a[na] == 0){
+				count++;
+				a[na]=1;
+			}
+		}
+		printf("%lld
+", count);
+	}
+	return 0;
+}

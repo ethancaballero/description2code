@@ -1,0 +1,74 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int a[100001],b[100001][2];
+struct node{
+int l,r;
+}c[100001];
+bool comp(node x, node y)
+{
+    return x.l<y.l;
+}
+/*bool cmp(node x, node y) {
+	if(x.L/sq != y.L/sq) {
+		// different blocks, so sort by block.
+		return x.L/sq < y.L/sq;
+	}
+	// same block, so sort by R value
+	return x.R < y.R;
+}*/
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,q;
+        cin>>n>>q;
+        for(int i=0;i<n;i++)
+            cin>>a[i];
+        for(int i=0;i<q;i++)
+            cin>>c[i].l>>c[i].r;
+        sort(c,c+q,comp);
+        //for(int i=0;i<q;i++)
+          //  cout<<c[i].l<<"  "<<c[i].r<<endl;
+        int j=0;
+        b[0][0]=c[0].l;
+        b[0][1]=c[0].r;
+        for(int i=1;i<q;i++)
+        {
+           if(c[i].l<=c[i-1].r)
+           {
+               b[j][1]=max(b[j][1],c[i].r);
+               c[i].r=b[j][1];
+           }
+           else
+           {
+               b[++j][0]=c[i].l;
+               b[j][1]=c[i].r;
+           }
+        }
+        //for(int i=0;i<=j;i++)
+          //  cout<<b[i][0]<<"  "<<b[i][1]<<endl;
+        int flag=0;
+        for(int i=0;i<=j;i++)
+        {
+            for(int z=b[i][0]-1;z<=b[i][1]-1;z++)
+            {
+                if(!(a[z]>=b[i][0]&&a[z]<=b[i][1]))
+                {
+                    flag=1;
+                    break;
+                }
+
+            }
+            if(flag==1)
+                break;
+        }
+        if(flag==1)
+            cout<<"Impossible"<<endl;
+        else
+            cout<<"Possible"<<endl;
+    }
+    return 0;
+}

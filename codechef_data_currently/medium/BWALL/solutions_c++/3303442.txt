@@ -1,0 +1,98 @@
+#include<stdio.h>
+
+#define mod 1000000007
+#define l long long int
+
+using namespace std;
+
+struct matrix{
+    l a[4][4];
+};
+
+//function for multiplication of 2 matrices
+struct matrix mat_mul(matrix m1,matrix m2)
+{
+    matrix c;
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+        {
+            c.a[i][j]=0;
+            for(int k=0;k<4;k++)
+                c.a[i][j]=(c.a[i][j]+(m1.a[i][k]*m2.a[k][j])%mod)%mod;
+        }
+    return c;
+}
+//function for calculating the nth power of matrix
+struct matrix mat_power(matrix m,l n)
+{
+    if(n==1)
+        return m;
+    struct matrix temp=mat_mul(m,m);
+    temp=mat_power(temp,n/2);
+    if(n&1)
+        return mat_mul(temp,m);
+    else
+        return temp;
+
+}
+
+
+int main()
+{
+        int t;
+        scanf("%d",&t);
+
+        l n,ans=0;
+        struct matrix init;
+        init.a[0][0]=1;
+        init.a[0][1]=4;
+        init.a[0][2]=2;
+        init.a[0][3]=0;
+        init.a[1][0]=1;
+        init.a[1][1]=0;
+        init.a[1][2]=0;
+        init.a[1][3]=0;
+        init.a[2][0]=0;
+        init.a[2][1]=1;
+        init.a[2][2]=0;
+        init.a[2][3]=0;
+        init.a[3][0]=0;
+        init.a[3][1]=0;
+        init.a[3][2]=1;
+        init.a[3][3]=0;
+
+        int base[]={33,11,5,1};
+        while(t--)
+        {
+        ans=0;
+        scanf("%lld",&n);
+        if(n<=4)
+        {
+            if(n==1)
+                printf("1
+");
+            if(n==2)
+                printf("5
+");
+            if(n==3)
+                printf("11
+");
+            if(n==4)
+                printf("33
+");
+        continue;
+        }
+        matrix f=mat_power(init,n-4);
+        /*for(int i=0;i<4;i++)
+            {
+                for(int j=0;j<4;j++)
+                cout<<f.a[i][j]<<" ";
+                cout<<"
+";
+            }*/
+       for(int i=0;i<4;i++)
+            ans=(ans+(f.a[0][i]*base[i])%mod)%mod;
+        printf("%lld
+",ans);
+          }
+}

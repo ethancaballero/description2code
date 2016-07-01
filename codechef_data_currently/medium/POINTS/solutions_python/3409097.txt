@@ -1,0 +1,24 @@
+from operator import itemgetter
+import math
+
+cases = int(raw_input())
+
+for _ in xrange(cases):
+    raw_input() # discard empty line
+    pointCount = int(raw_input())
+
+    points = []
+    for _ in xrange(pointCount):
+        points.append(map(int, raw_input().split()))
+
+    points.sort(key=itemgetter(1), reverse=True)
+    points.sort(key=itemgetter(0))
+
+    dist = 0
+    for i in xrange(1,len(points)):
+        p1 = points[i-1]
+        p2 = points[i]
+        xd = p1[0] - p2[0]
+        yd = p1[1] - p2[1]
+        dist += math.sqrt(xd*xd + yd*yd)
+    print "%.2f" % (dist)

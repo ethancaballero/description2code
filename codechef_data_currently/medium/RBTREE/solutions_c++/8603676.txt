@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <map>
+#include <cstdlib>
+#include <cstring>
+#include <stack>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+#define pb push_back
+#define clr(a) memset(a, 0, sizeof(a))
+#define forl(i,l,u) for(int i=(l);i<(u);i++)
+#define forn(i,n) forl(i,0,n)
+
+typedef long long ll;
+typedef pair<int, ll> il;
+
+int geth(int x){
+	if(x==1)
+		return 0;
+	return geth(x>>1)+1;
+}
+
+int lca(int x, int y){
+	int xh=geth(x), yh=geth(y);
+	if(xh<yh)
+		swap(xh, yh), swap(x,y);
+	while(xh>yh)
+		xh--, x/=2;
+	while(x!=y)
+		x/=2, y/=2;
+	return x;
+}
+
+int main(){
+	ios::sync_with_stdio(false);cin.clear();
+	int t;
+	bool inv=false;
+	cin>>t;
+	string qr;
+	while(t--){
+		cin>>qr;
+		if(qr=="Qi"){
+			inv=!inv;
+		}else{
+			int x, y;
+			cin>>x>>y;
+			int z=lca(x, y);
+			int xh=geth(x), yh=geth(y), zh=geth(z);
+			int r=(xh-zh+1)/2 + (yh-zh+1)/2;
+			int b=xh + yh - 2*zh + 1 - r;
+			if(zh%2==1 ^ inv)
+				swap(b, r);
+			if(qr=="Qr")
+				cout<<r<<endl;
+			else
+				cout<<b<<endl;
+		}
+	}
+}

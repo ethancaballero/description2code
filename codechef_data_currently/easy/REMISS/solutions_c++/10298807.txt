@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+#define ll long long
+
+int main()
+{   ll n;
+    cin>>n;
+    while(n--)
+    {   ll a,b;
+        cin>>a>>b;
+        if(a>b)
+            cout<<a<<" ";
+        else
+            cout<<b<<" ";
+        cout<<a+b<<"
+";
+    }
+    return 0;
+}

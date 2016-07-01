@@ -1,0 +1,23 @@
+################################################
+### http://www.codechef.com/problems/TAPALIN ###
+################################################
+def pow(b,e,m):
+    r=1
+    while e>0:
+        if e%2==1:
+            r=(r*b)%m
+        e=e>>1
+        b=(b*b)%m
+    return r
+def cal(n,m):
+    from math import ceil
+    c=280000002
+    a=pow(26, int(ceil(n/2)), m)
+    if(n%2==0):
+        return ((52*(a-1)%m)*c)%m
+    else:
+        return ((52*(((a-1)*c)%m))%m+(a*26)%m)%m
+c=int(raw_input())
+m=1000000007
+for z in range(c):
+    print cal(int(raw_input()),m)

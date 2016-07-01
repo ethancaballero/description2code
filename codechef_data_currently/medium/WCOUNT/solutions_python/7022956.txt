@@ -1,0 +1,15 @@
+import math
+n=int(raw_input())
+for i in range(0,n):
+	s=raw_input()
+	d={}
+	denum=1
+	for a in s:
+		if a in d:
+			d[a]+=1
+		else:
+			d[a]=1
+	for j in d:
+		if d[j]>1:
+			denum*=math.factorial(d[j])
+	print (math.factorial(len(s))/denum)%1000000007

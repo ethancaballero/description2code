@@ -1,0 +1,59 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<string.h>
+#include<algorithm>
+ 
+using namespace std;
+ 
+int main() {
+	int T;
+	cin>>T;
+	while(T--) {
+		string R, S;
+		cin>>R>>S;
+		
+		
+		bool actual, chef;
+		
+		int len1, len2, count1[26], count2[26], i;
+		for(i = 0; i<26; ++i)
+			count1[i] = count2[i] = 0;
+		
+		len1 = R.length();
+		len2 = S.length();
+		
+		for(i = 0; i<len1; ++i)
+			++count1[R[i]-'a'];
+
+		for(i = 0; i<len2; ++i)
+			++count2[S[i]-'a'];
+
+		bool f = true;
+		for(i = 0; i<26 && f; ++i)
+			if(count1[i] != count2[i])
+				f = false;
+		
+		if(f)
+			actual = true;
+		else
+			actual = false;
+
+		f = true;
+		for(i = 0; i<26 && f; ++i)
+			if(!(((count1[i]>0) && (count2[i]>0)) || ((count1[i] ==0) && (count2[i]==0))))
+				f = false;
+		
+		if(f)
+			chef = true;
+		else
+			chef = false;
+		
+		if(chef == actual)
+			cout<<"YES"<<endl;
+		else
+			cout<<"NO"<<endl;
+	}
+
+
+}

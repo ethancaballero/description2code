@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_v) (int)(_v).size()
+#define all(_v) (_v).begin(),(_v).end()
+#define Geti(_v) (scanf("%d",&(_v)));
+#define pii pair<int,int>
+typedef long long ll;
+const int INF = 100000000;
+const ll MOD = 1e9 + 9;
+
+const int maxn = 100010;
+int arr[maxn];
+map < int,int > freq;
+
+int main() {
+	int t; scanf("%d",&t);
+	
+	while (t --) {
+		int n; Geti(n);
+		for (int i = 0; i < n; i ++) Geti(arr[i]);
+
+		freq.clear();
+		
+	    for (int i = 0; i < n; i ++) freq[arr[i]] ++;
+
+		priority_queue < int, vector <int>, less<int> > pq;
+		for (map <int,int> :: iterator it = freq.begin(); it != freq.end(); it ++) pq.push(it -> second);
+
+		int ans = 0;
+		while (!pq.empty()) {
+			int aa = pq.top();
+			pq.pop();
+			if(pq.empty()) {
+				ans += aa;
+				break;
+			}
+			int bb = pq.top(); pq.pop();
+			ans ++;
+			aa --; bb --;
+			if(aa > 0) pq.push(aa);
+			if(bb > 0) pq.push(bb);
+		}
+
+		printf("%d
+",ans);
+	}
+	
+	return 0;
+}

@@ -1,0 +1,13 @@
+import math
+t = int(raw_input())
+for h in range(t):
+	n = int(raw_input())
+	
+	a = int(math.sqrt(n))
+	
+	for h in range(a,0,-1):
+		if n%h == 0:
+			break
+	print n/h - h
+	
+	

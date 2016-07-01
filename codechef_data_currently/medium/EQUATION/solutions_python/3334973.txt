@@ -1,0 +1,13 @@
+def nCr(n):
+        if(n>=0): return ( (n+1) * (n+2) * (n+3) )/6
+        else: return 0
+
+def main():
+        cases = int(raw_input())
+
+        for i in range(cases):
+                N,A,B,C = map(int,raw_input().split())
+                solution = nCr(N) - nCr(N-A-1) - nCr(N-B-1) - nCr(N-C-1) + nCr(N-A-B-2) + nCr(N-A-C-2) + nCr(N-B-C-2) - nCr(N-A-B-C-3)
+                print solution
+
+main()

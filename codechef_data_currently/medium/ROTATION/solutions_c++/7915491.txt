@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,m;
+	scanf("%d%d",&n,&m);
+	int i,a[100009],start=0,ind;
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+	char c;
+	for(i=0;i<m;i++)
+	{
+		scanf(" %c%d",&c,&ind);
+		if(c=='R')
+			printf("%d
+", a[(start+ind-1)%n]);
+		else if(c=='C')
+			start=(start+ind)%n;
+		else
+			start=(start-ind+n)%n;
+	}
+	return 0;
+}

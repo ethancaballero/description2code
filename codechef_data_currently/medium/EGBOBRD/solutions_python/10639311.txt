@@ -1,0 +1,17 @@
+import math
+t=int(raw_input())
+for i in range(t):
+    n,k=map(int,raw_input().split())
+    x=list(map(int,raw_input().split()))
+    counter,rem=0,0
+    for j in range(n):
+        if(rem>0):
+                rem-=1
+        if x[j]<=rem:
+            rem-=x[j]
+        elif x[j]>rem:
+            temp=counter
+            counter+=int(math.ceil((x[j]-rem)/float(k)))
+            #print ((x[j]-rem)/k)
+            rem=((counter-temp)*k)-(x[j]-rem)
+    print counter

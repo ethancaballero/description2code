@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+main()
+{
+	int tc;
+	scanf("%d",&tc);
+	while(tc--)
+	{
+		int n,p,cnt,found,num,i,j,k,l;
+		scanf("%d %d",&n,&p);
+		char s1[n+5][n][n],s2[n+5][n][n];
+		int a[n+2][n+2][n+2];
+		memset(a,0,sizeof(a));
+		scanf("%s",s1);
+		scanf("%s",s2);
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				for(k=0;k<n;k++)
+				{
+					if(s1[i][j][k]==s2[i][j][k])a[i+1][j+1][k+1]=1;
+					a[i+1][j+1][k+1]=a[i+1][j+1][k+1]+a[i][j+1][k+1]+a[i+1][j][k+1]+a[i+1][j+1][k]+a[i][j][k]-a[i][j][k+1]-a[i][j+1][k]-a[i+1][j][k];
+				}
+			}
+		}
+		if(a[n][n][n]==0 && p>0)
+		{
+			printf("-1
+");continue;
+		}
+		for(i=n;i>=0;i--)
+		{
+			found=0,cnt=0;
+			num=(int)(ceil((1.0*i*i*i*p)/100));
+			for(j=1;j+i-1<=n;j++)
+			{
+				for(k=1;k+i-1<=n;k++)
+				{
+					for(l=1;l+i-1<=n;l++)
+					{
+						if((a[j+i-1][k+i-1][l+i-1]-a[j-1][k+i-1][l+i-1]-a[j+i-1][k-1][l+i-1]-a[j+i-1][k+i-1][l-1]+a[j-1][k-1][l+i-1]+a[j-1][k+i-1][l-1]+a[j+i-1][k-1][l-1]-a[j-1][k-1][l-1])>=num)
+						{
+							found=1;
+							cnt++;
+						}
+					}
+				}
+			}
+			if(found)
+			{
+				printf("%d %d
+",i,cnt);break;
+			}
+		}
+	}
+}

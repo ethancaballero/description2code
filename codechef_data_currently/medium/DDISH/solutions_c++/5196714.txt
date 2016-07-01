@@ -1,0 +1,90 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+ 
+using namespace std;
+ 
+int delcount[11];
+int comb[9][9];
+ 
+int count(char *n) {
+  int cnt = strlen(n);
+  if (cnt == 1 && n[cnt-1] == '0') return 0;
+ 
+  if (cnt > 10)
+    return delcount[10];
+ 
+  int res = delcount[cnt-1];
+ 
+  int seen = 0;
+  for (int i = 0; i < cnt; i++) {
+    int d = (n[i] - '0');
+    for (int k = (i == 0) ? 1 : 0; k < d; k++) {
+      if ((seen & (1 << k)) == 0) {
+        res += comb[9-i][cnt-1-i];
+      }
+    }
+    if ((seen & (1 << d)) != 0)
+      return res;
+    seen |= 1 << d;
+  }
+  res++;  // n is del itself (otherwise not counted) 
+ 
+  return res;
+}
+ 
+void csm1(char *s) {
+  int len = strlen(s);
+  
+  int i = len - 1;
+  while (i >= 0) {
+    if (s[i] == '0') {
+      s[i] = '9';
+    }
+    else {
+      s[i]--;
+      break;
+    }
+    i--;
+  }
+ 
+  if (s[0] == '0' && len > 1) {
+    for (i = 0; i < len; i++) {
+      s[i] = s[i+1];
+    }
+  }
+}
+ 
+int main() {
+  // # of del num: [#digits]
+  delcount[0] = 0;
+  delcount[1] = 9;
+  int p = 9;
+  for (int i = 2; i <= 10; i++) {
+    p *= 11 - i;
+    delcount[i] = p + delcount[i-1];
+  }
+ 
+  // # of del num: [#availabledigits][#openpositions]
+  // d >= p (otherwise there would be no del numbers)
+  for (int d = 0; d <= 9; d++) {
+    comb[d][0] = 1;
+    for (int p = 1; p <= d; p++) {
+      comb[d][p] = (d-(p-1)) * comb[d][p-1];
+    }
+  }
+ 
+  int tc;
+  cin >> tc;
+  
+  while (tc--) {
+    char l[21], r[21];
+    scanf("%s %s", l, r);
+    csm1(l);
+ 
+    printf("%d
+", count(r) - count(l));
+  }
+  
+  return 0;
+}

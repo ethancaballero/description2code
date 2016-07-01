@@ -1,0 +1,17 @@
+x = input()
+for i in range(x):
+	a = [j for j in raw_input()]
+	b = [j for j in raw_input()]
+	l = []
+	for j in range(len(a)):
+		if a[j] != b[j]:
+			l.append('B')
+		elif a[j] == b[j]:
+			if a[j] == 'B':
+				l.append('W')
+			else:
+				l.append('B')
+	s = ""
+	for j in l:
+		s+=j
+	print s

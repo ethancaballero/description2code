@@ -1,0 +1,17 @@
+t=input()
+for i in range(t):
+    n=input()
+    prev_row=[]
+    first_element=input()
+    prev_row.append(first_element)
+    for j in range(1,n):
+        row=[int(k) for k in raw_input().split()]
+        
+        for l in range(1,len(row)-1):
+            row[l]+=max(prev_row[l],prev_row[l-1])
+        row[len(row)-1]+= prev_row[len(row)-2]
+        row[0]+=prev_row[0]
+      
+        prev_row=row
+        
+    print max(prev_row)

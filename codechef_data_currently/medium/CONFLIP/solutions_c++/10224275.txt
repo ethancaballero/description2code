@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t,g,i,n,q,ans;
+	cin>>t;
+	while(t--)
+	{
+	cin>>g;
+	while(g--)
+	{
+	cin>>i>>n>>q;
+	if(i==q)
+	{
+	ans=n/2;
+	}
+	else
+	{
+	ans=n-n/2;
+	}
+	cout<<ans<<endl;
+	}
+	}
+	return 0;
+}

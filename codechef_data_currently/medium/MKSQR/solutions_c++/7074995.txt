@@ -1,0 +1,26 @@
+#include <iostream>
+#include<cstdio>
+using namespace std;
+ 
+int main() {
+	// your code goes here
+	int T;scanf("%d",&T);int N;int X,Y;
+	while(T-->0)
+	{
+	bool upflag=false;bool downflag=false;
+       scanf("%d",&N);
+       while(N-->0)
+       {
+           scanf("%d",&X);scanf("%d",&Y);
+           if(!(upflag&&downflag)){
+           if(Y>X){upflag=true;}
+           else {downflag=true;}}
+       }
+       if(upflag&&downflag)
+	  printf("YES
+");
+	  else printf("NO
+");
+    }
+	return 0;
+} 

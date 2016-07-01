@@ -1,0 +1,10 @@
+t=input()
+b=[]
+for i in range(0,t):
+    b.append(input())
+for i in range(0,t):
+    n=0
+    while (b[i]-2)>0:
+    	n=n+((b[i]-2)/2)
+    	b[i]=b[i]-2
+    print n  

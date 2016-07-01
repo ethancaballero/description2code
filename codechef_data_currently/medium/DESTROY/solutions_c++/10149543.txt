@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pii pair<long long,long long>
+struct comp
+{
+	bool operator() (const pii &a,const pii &b)
+	{
+		if(a.second<b.second)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+};
+long long arr[100005];
+priority_queue < pii , vector < pii > , comp > pq;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		while(!pq.empty())
+		{
+			pq.pop();
+		}
+		int i,j;
+		int n;
+		scanf("%d",&n);
+		for(i=0;i<n;i++)
+		scanf("%lld",&arr[i]);
+		sort(arr,arr+n);
+		int co=1;
+		for(i=1;i<n;i++)
+		{
+			if(arr[i]==arr[i-1])
+			{
+				co++;
+			}
+			else
+			{
+				pq.push(make_pair(arr[i-1],co));
+				co=1;
+			}
+		}
+		long long q1,q2,p1,p2;
+		pq.push(make_pair(arr[i-1],co));
+		co=0;
+		while(!pq.empty())
+		{
+			p1=pq.top().first;
+			q1=pq.top().second;
+			pq.pop();
+			if(pq.empty())
+			{
+				co+=q1;
+				break;
+			}
+			p2=pq.top().first;
+			q2=pq.top().second;
+			pq.pop();
+			q1--;
+			q2--;
+			co++;
+			if(q1==0)
+			{
+				
+			}
+			else
+			{
+				pq.push(make_pair(p1,q1));
+			}
+			if(q2==0)
+			{
+				
+			}
+			else
+			{
+				pq.push(make_pair(p2,q2));
+			}
+		}
+		printf("%d
+",co);
+	}
+	return 0;
+} 

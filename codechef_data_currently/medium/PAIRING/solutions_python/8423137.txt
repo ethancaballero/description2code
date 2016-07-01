@@ -1,0 +1,20 @@
+for t in range(int(raw_input())):
+	n,m=map(int,raw_input().split())
+	c=[True]*n
+	l=[]
+	for x in xrange(m):
+		a,b=map(int,raw_input().split())
+		l.append((x,a,b))
+	l=sorted(l,reverse=True)
+	ans=[]
+	for i in l:
+		if (c[i[1]]==False or c[i[2]]==False):
+			continue
+		else:
+			ans.append(i[0])
+			c[i[1]]=False
+			c[i[2]]=False
+	for i in sorted(ans):
+		print i,
+	print ""
+		

@@ -1,0 +1,14 @@
+t=input()
+
+for i in range(0,t):
+	n=input()
+	lis=list(raw_input().split())
+	for j in range(0,n):
+		lis[j]=int(lis[j])
+	k=input()
+	ser=lis[k-1]
+	lis.sort()
+	for j in range(0,n):
+		if ser==lis[j]:
+			print j+1
+			break

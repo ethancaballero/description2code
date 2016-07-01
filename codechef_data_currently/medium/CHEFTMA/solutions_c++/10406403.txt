@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n,k,m,i,sum;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+      cin>>n>>k>>m;
+      int a[n],b[n],c[k+m];
+      for(i=0;i<n;i++)
+      {
+          cin>>a[i];
+      }
+      for(i=0;i<n;i++)
+      {
+          cin>>b[i];
+      }
+      for(i=0;i<k;i++)
+      {
+          cin>>c[i];
+      }
+      for(i=k;i<k+m;i++)
+      {
+          cin>>c[i];
+      }
+      for(i=0;i<n;i++)
+      {
+        a[i]=a[i]-b[i];
+      }
+      sort(c,c+m+k);
+      sort(a,a+n);
+      int j=m+k-1;
+        for(int i=n-1;i>=0;i--)
+        {
+           while(j>=0)
+            {
+              if(c[j]<=a[i])
+              {
+                  a[i]=a[i]-c[j];
+                  j--;
+                  break;
+              }
+              j--;
+            }
+        }
+        sum=0;
+        for(int y=0;y<n;y++)
+        {
+            sum+=a[y];
+        }
+        cout<<sum<<endl;
+      }
+      return 0;
+}

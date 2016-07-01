@@ -1,0 +1,37 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    int main()
+    {
+    	int test_cases,n;
+    	cin>>test_cases;
+    	long long int count,i,j,min_diff,k,b;
+    	while(test_cases--)
+    	{
+    		count=0;
+    		min_diff=2000000000;
+    		cin>>n>>k;
+    		long long int a[n];
+    		for(i=0;i<n;i++)
+    			cin>>a[i];
+    		for(i=0;i<n;i++)
+    		{
+    			for(j=i+1;j<n;j++)
+    			{
+    				if(a[i] + a[j]>k)
+    					b=a[i]+a[j]-k;
+    				else
+    					b=k-a[i]-a[j];
+    				
+    				if(min_diff==b)
+    					count++;	
+    				if(min_diff>b)
+    				{
+    					min_diff=b;
+    					count=1;
+    				}
+    			}
+    		}
+    		cout<<min_diff<<" "<<count<<endl;
+    	}
+    	return 0;
+    } 

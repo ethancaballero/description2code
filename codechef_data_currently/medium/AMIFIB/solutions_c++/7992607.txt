@@ -1,0 +1,39 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+	char str[1000];
+	long long int t,f[5000],n,i;
+	int z;
+	f[0]=0;
+	f[1]=1;
+	for(i=2;i<=5000;i++)
+	f[i]=f[i-1]+f[i-2];
+	cin>>t;
+	while(t--)
+	{
+		z=0;
+		n=0;
+		cin>>str;
+		for(i=0;i<strlen(str);i++)
+		{
+			n=n*10;
+			n=n+(str[i]-'0');
+			//cout<<"n "<<n<<endl;
+		}
+		for(i=0;i<=5000;i++)
+		{
+			if(n==f[i])
+			{
+				z=1;
+				break;
+			}
+		}
+		if(z==1)
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+	}
+	return 0;
+}

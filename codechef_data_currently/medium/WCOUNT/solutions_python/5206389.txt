@@ -1,0 +1,25 @@
+t=input()
+f={1:1}
+def fact(n):
+    global f
+    for i in range(2,n+1):
+        f[i]=i*f[i-1]
+    return f[n]    
+while(t>0):
+    t-=1
+    s=raw_input()
+    l=len(s)
+    d={}
+    a=[]
+    for i in range(l):
+        if(s[i] in d):
+            d[s[i]]+=1
+        else:
+            d[s[i]]=1
+    if(l not in f):
+        fact(l)
+    p=1
+    for i in d:
+        p=p*f[d[i]]
+    print (f[l]/p)%1000000007
+        

@@ -1,0 +1,54 @@
+#include <cstdio>
+#include <climits>
+#define MAX_N_VALUE 10000
+#define SQRT_MAX_N_VALUE 100
+
+int arr[MAX_N_VALUE + 2];
+bool sieve_arr[MAX_N_VALUE + 2];
+
+int sieve() {
+    sieve_arr[0] = sieve_arr[1] = false;
+    for (int i = 2; i <= MAX_N_VALUE; i++)
+        sieve_arr[i] = true;
+    for (int i = 2; i <= SQRT_MAX_N_VALUE; i++) {
+        sieve_arr[i] = true;
+        for (int j = i * i; j <= MAX_N_VALUE; j += i) {
+            sieve_arr[j] = false;
+        }
+    }
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    sieve();
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+        for (int i = 0; i < n; i++) {
+            scanf("%d", arr + i);
+        }
+        int minimum_extra_ball_count = INT_MAX;
+        for (int i = 2; i <= MAX_N_VALUE; i++) {
+            if (sieve_arr[i]) {
+                int cur_prime = i;
+                int cur_multiple = i;
+                int extra_ball_count = 0;
+                for (int j = 0; j < n; ++j) {
+                    if (arr[j] <= cur_multiple) {
+                        extra_ball_count += cur_multiple - arr[j];
+                    } else {
+                        int rem = arr[j] % i; // This is how much arr[j] is less than multiple of i
+                        cur_multiple = ((arr[j] + i - 1) / i) * i;
+                        extra_ball_count += cur_multiple - arr[j];
+                    }
+                }
+                if (extra_ball_count < minimum_extra_ball_count)
+                    minimum_extra_ball_count = extra_ball_count;
+            }
+        }
+        printf("%d
+", minimum_extra_ball_count);
+    }
+    return 0;
+}

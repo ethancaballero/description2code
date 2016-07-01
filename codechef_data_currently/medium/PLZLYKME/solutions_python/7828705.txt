@@ -1,0 +1,17 @@
+# your code goes here
+t = int(raw_input())
+for _ in range(t):
+	l,d,s,c = map(int,raw_input().split())
+	su = s
+	j = 1
+	while j < d:
+		j += 1
+		su = su*(1+c)
+		
+		if su >= l:
+			break
+		
+	if su >= l:
+		print "ALIVE AND KICKING"
+	else:
+		print "DEAD AND ROTTING"

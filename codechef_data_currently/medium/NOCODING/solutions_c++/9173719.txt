@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{int t,count,diff,l,i;
+ char a[1002];
+scanf("%d",&t);
+while(t--)
+{scanf("%s",a);
+ l=strlen(a);
+ count=2;
+ for(i=1;i<l;i++)
+ {diff=a[i]-a[i-1];
+  if(diff>0)
+  count+=diff;
+  else if(diff<0)
+  count=count+diff+26;
+  count+=1;
+ }
+ if(count<=(11*l))
+ printf("YES
+");
+ else
+ printf("NO
+");
+ }
+ return 0;
+}

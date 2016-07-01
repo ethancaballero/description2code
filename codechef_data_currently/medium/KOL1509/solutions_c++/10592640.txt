@@ -1,0 +1,154 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define pii pair<int,int>
+#define pil pair<int,long long>
+#define pli pair<long long,int>
+#define pll pair<long long,long long>
+#define pb push_back
+#define mk make_pair
+#define sd(x) scanf("%d", &x)
+#define pd(x) printf("%d
+",x)
+#define pdl(x) printf("%lld
+",x)
+#define sdl(x) scanf("%lld", &x)
+#define eps 1e-12
+#define maxn 100009
+using namespace std;
+struct point
+{
+	ll x,y;
+	point() {}
+	point(ll x,ll y): x(x),y(y) {}
+	point(const point& p): x(p.x),y(p.y) {}
+	point operator + (const point& p) const {return point(x+p.x,y+p.y);}
+	point operator - (const point& p) const {return point(x-p.x,y-p.y);}
+};
+bool operator < (const point& xx,const point& yy)
+{
+	return mk(xx.x,xx.y)<mk(yy.x,yy.y);
+}
+inline ll dot_product(point xx,point yy)
+{
+	return (xx.x*yy.x)+(xx.y*yy.y);
+}
+inline ll cross_product(point xx,point yy)
+{
+	return (xx.x*yy.y)-(xx.y*yy.x);
+}
+inline ll sqdist(point xx,point yy)
+{
+	return dot_product(xx-yy,xx-yy);
+}
+inline long double dist(point xx,point yy)
+{
+	return sqrt(sqdist(xx,yy));
+}
+inline bool anti(point xx,point yy)
+{
+	if(cross_product(xx,yy)>0)
+	{
+		return true;
+	}
+	return false;
+}
+point lowbot;
+inline bool compare(point xx,point yy)
+{
+	if(cross_product(xx-lowbot,yy-lowbot)==0)
+	{
+		return sqdist(lowbot,xx)<sqdist(lowbot,yy);
+	}
+	return cross_product(xx-lowbot,yy-lowbot)>0;
+}
+inline vector<point> convex_hull(vector<point> v)
+{
+	int id=0;
+	lowbot=v[0];
+	for(int i=1;i<v.size();i++)
+	{
+		if((lowbot.y>v[i].y)||(lowbot.y==v[i].y&&(lowbot.x>v[i].x)))
+		{
+			id=i;
+			lowbot=v[id];
+		}
+	}
+	swap(v[0],v[id]);
+	sort(v.begin()+1,v.end(),compare);
+	vector<point> ans;
+	ans.pb(v[0]);
+	ans.pb(v[1]);
+	for(int i=2;i<v.size();i++)
+	{
+		while(ans.size()>=2)
+		{
+			if(!anti(ans[ans.size()-1]-ans[ans.size()-2],v[i]-ans[ans.size()-1]))
+			{
+				ans.pop_back();
+			}
+			else
+			{
+				break;
+			}
+		}
+		ans.pb(v[i]);
+	}
+	return ans;
+}
+inline long double polyarea(vector<point> poly)
+{
+	int m=poly.size();
+	long double ans=0.0;
+	for(int i=0;i<m;i++)
+	{
+		ans+=(poly[i].x*poly[(i+1)%m].y-(poly[i].y*poly[(i+1)%m].x));
+	}
+	return fabs(ans);
+}
+int main()
+{
+	int t;
+	sd(t);
+	while(t--)
+	{
+		int n;
+		sd(n);
+		int a[n];
+		for(int i=0;i<n;i++)
+		{
+			sd(a[i]);
+		}
+		set<pll> s;
+		int maxx[n],minn[n];
+		maxx[n-1]=minn[n-1]=a[n-1];
+		for(int i=n-2;i>=0;i--)
+		{
+			maxx[i]=max(maxx[i+1],a[i]);
+			minn[i]=min(minn[i+1],a[i]);
+		}
+		vector<point> v;
+		for(int i=0;i<n-1;i++)
+		{
+			point p1=point(a[i],maxx[i+1]);
+			point p2=point(a[i],minn[i+1]);
+			if(s.insert(mk(p1.x,p1.y)).second)
+			{
+				v.pb(p1);
+			}
+			if(s.insert(mk(p2.x,p2.y)).second)
+			{
+				v.pb(p2);
+			}
+		}
+		if(v.size()<=2)
+		{
+			printf("0
+");
+			continue;
+		}
+		vector<point> hull=convex_hull(v);
+		ll fans=polyarea(hull);
+		pdl(fans);
+	}
+}

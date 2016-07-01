@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+#define gc getchar
+using namespace std;
+typedef long long int ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+struct rule
+{
+    char c,p;
+};
+int main()
+{
+    ll t,n,i,j,k,p,l;
+    string s,ns;
+    t=read_int();
+    while(t--)
+    {
+        n=read_int();
+        rule arr[n];
+        char x,y;
+        for(i=0;i<n;i++)
+        {
+            cin>>x>>y;
+            arr[i].c=x;
+            arr[i].p=y;
+        }
+        cin>>s;
+        ns=s;
+        l=s.length();
+        for(i=0;i<n;i++)
+        {
+            x=arr[i].c;
+            y=arr[i].p;
+            for(j=0;j<l;j++)
+            {
+                if(s[j]==x)
+                    ns[j]=y;
+            }
+        }
+        i=0;
+        while(i<l)
+        {
+            if(ns[i]=='0')
+                ns[i]=' ';
+            else
+                break;
+            i++;
+        }
+        j=i;
+        while(i<l)
+        {
+            if(ns[i]=='.')
+                break;
+            i++;
+        }
+        if(i==l)
+        {
+            if(j==i)
+                cout<<0;
+            else
+            {
+               for(k=j;k<i;k++)
+                 cout<<ns[k];
+            }
+        }
+        else
+        {
+            for(k=l-1;k>=i;k--)
+            {
+                if(ns[k]=='0')
+                    ns[k]=' ';
+                else
+                {
+                    if(ns[k]=='.')
+                        k--;
+                    break;
+                }
+            }
+            if(k<j)
+                cout<<0;
+            for(p=j;p<=k;p++)
+               cout<<ns[p];
+        }
+        cout<<'
+';
+    }
+    return 0;
+}

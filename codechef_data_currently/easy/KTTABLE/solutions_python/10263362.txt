@@ -1,0 +1,24 @@
+line=[]
+f=int(raw_input())
+i=0
+while(i<3*f):
+	m=raw_input()
+	line.append(m)
+	i+=1
+	
+for i in range(int(f)):
+	sr_arr=[int(x) for x in line[3*i+1].split()]
+	tr_arr=[int(x) for x in line[3*i+2].split()]
+	temp1=0
+	out=0
+	j=0
+	for sr in sr_arr:	
+		moment=(sr-temp1)
+		temp1=sr
+		if(moment>=tr_arr[j]):
+			out+=1
+		j+=1	
+
+	print(str(out))
+		
+				

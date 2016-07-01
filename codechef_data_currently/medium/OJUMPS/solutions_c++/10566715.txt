@@ -1,0 +1,13 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    long long int n;
+    cin>>n;
+    int k=n%6;
+    if(k==0||k==1||k==3||k==6)
+        cout<<"yes"<<endl;
+    else
+        cout<<"no"<<endl;
+    return 0;
+}

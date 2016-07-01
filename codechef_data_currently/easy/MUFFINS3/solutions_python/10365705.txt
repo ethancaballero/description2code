@@ -1,0 +1,7 @@
+def maxRem(inp):
+	return (inp/2)+1
+if __name__=="__main__":
+	T = int(raw_input())
+	for ii in xrange(T):
+		N = int(raw_input())
+		print maxRem(N)

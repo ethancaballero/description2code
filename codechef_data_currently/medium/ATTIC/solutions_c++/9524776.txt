@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+    using  namespace std;
+    char a[1000001];
+    int main()
+    {
+        int i,k,max,days,t,len;
+        char ch;
+        cin>>t;
+        while(t--)
+        {
+            max=0;
+            days=0;
+            cin>>a;
+            len = strlen(a);
+            for(i=1;i<len-1;i++)
+            {
+                k=0;
+                if(a[i]=='.')
+                    while(a[i]=='.')
+                    {
+                        k++;
+                        i++;
+                    }
+                   if(k>max)
+                   {
+                       max=k;
+                       days++;
+                   }
+
+            }
+            cout<<days<<"
+";
+
+
+        }
+
+        return 0;
+    }

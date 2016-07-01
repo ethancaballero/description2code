@@ -1,0 +1,14 @@
+import re
+def processZombieData(line):
+    x = re.split(" ", line)
+    N = int(x[0]); K = int(x[1])
+    prod = K
+    for r in range(N-1):
+        prod = (prod*(K-1))%(10**9+7)
+
+    return prod
+if __name__ == '__main__':
+    T = int(raw_input())
+    for t in range(T):
+        line = raw_input()
+        print processZombieData(line)

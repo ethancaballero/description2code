@@ -1,0 +1,12 @@
+#i gotta learn to cook /VigzMv
+for i in range(int(raw_input())):
+    a,b = map(int, raw_input().split())
+    count = 0
+    while a != b:
+        if b % a == 0:
+            a *= 2
+            count += 1
+        else:
+            a /= 2
+            count += 1
+    print count 

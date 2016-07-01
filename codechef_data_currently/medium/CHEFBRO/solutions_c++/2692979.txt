@@ -1,0 +1,26 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int tc;
+    cin>>tc;
+    while(tc--)
+    {
+        int c,result=0;
+        cin>>c;
+        while(c--)
+        {
+            int n,m;
+            cin>>n>>m;
+            result=result^((n+m-2)%3);
+        }
+        if(result)
+            cout<<"MasterChef
+";
+        else
+            cout<<"Football
+";
+    }
+    return 0;
+}

@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int  a[3005],i,x,j,t,n,k;
+	cin>>t;
+	for(i=0;i<t;i++)
+	{
+		cin>>n;
+		
+		for(j=0;j<3005;j++)
+		a[j]=0;
+		
+		
+		for(j=0;j<n;j++)
+		{
+		cin>>x;
+	    a[x]++;
+		}
+		int p,c,oper=0;
+		j=0;
+		k=3002;
+		while(1)
+		{
+			while(a[j]==0)
+			j++;
+			
+			while(a[k]==0)
+			k--;
+			
+			if(k==j)
+			{
+				cout<<oper<<endl;
+				break;
+			}
+			else if(k==j+1)
+			{
+				cout<<"-1"<<endl;
+				break;
+			}
+			
+			
+			c=(a[j]>a[k])?a[k]:a[j];
+			oper=oper+c;
+		
+			p=(k+1-j)/2;
+		
+			a[j+p]=a[j+p]+c;
+		
+			a[k-p]=a[k-p]+c;
+		
+			a[j]=a[j]-c;
+			a[k]=a[k]-c;
+		
+		
+		}
+		
+		
+	}
+	
+	
+	
+	return 0;
+}

@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n,q,i,j,num[100002],l,r,k;
+    vector<int>pos[100002];
+    scanf("%d%d",&n,&q);
+    for(i=0;i<n;i++)
+        scanf("%d",&num[i]);
+    for(i=0;i<n;i++)
+    {
+        for(j=1;j*j<=num[i];j++)
+        {
+            if(num[i]%j==0)
+            {
+                pos[j].push_back(i);
+                if(j*j!=num[i])
+                    pos[num[i]/j].push_back(i);
+            }
+        }
+    }
+    while(q--)
+    {
+        scanf("%d%d%d",&l,&r,&k);
+        l--,r--;
+        printf("%d
+",(int)(upper_bound(pos[k].begin(), pos[k].end(), r) - lower_bound(pos[k].begin(), pos[k].end(), l)));
+    }
+    return 0;
+}

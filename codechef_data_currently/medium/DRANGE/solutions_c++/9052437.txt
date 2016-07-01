@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// my choco pie
+#define pb push_back
+#define VI vector<int>
+#define VL vector<long long int >
+
+// my fastest car series
+#define scan(x) scanf("%d",&x)
+#define print(x) printf("%d
+",x)
+#define scanll(x) scanf("%lld",&x)
+#define printll(x) printf("%lld
+",x)
+#define ms(x) memset(x,0,sizeof(x))
+
+// data pies
+#define ll long long int
+#define li long int
+#define ff float
+#define db double
+
+// loopi loops
+#define rep(i,a,b) for(i=a;i<b;i++)
+#define repr(i,a,b) for(i=a;i>=b;i--)
+
+// debugger
+#define print_v(x) for(int i=0;i<x.size();i++) cout << x[i] << " "
+
+#define MOD 1000000007
+int arr[1000000];
+int d[1000000];
+int main(){
+	int t;
+	scan(t);
+	while(t--){
+		int n,m;
+		scan(n);
+		scan(m);
+		int i;
+		arr[0] = 1;
+		rep(i,1,n){
+			arr[i] = i+1;
+			d[i] = 1;
+		}
+		int w,x,y,z;
+		rep(i,0,m){
+			scan(w);scan(x);scan(y);scan(z);
+			if(w==2){
+				z=-z;
+			}
+			d[x-1]+=z;
+			d[y]-=z;
+		}
+		int max = arr[0];
+		int min = arr[0];
+		rep(i,1,n){
+			arr[i] = arr[i-1] + d[i];
+			if(arr[i]>max){
+				max = arr[i];
+			}
+			if(arr[i]<min){
+				min = arr[i];
+			}
+		}
+		print(max-min);
+	}
+	return 0;
+}

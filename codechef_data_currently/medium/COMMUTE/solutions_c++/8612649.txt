@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+main()
+{
+int x[1000],y[1000],f[1000],n,sum,t;
+cin>>t;
+for(int z=0;z<t;z++)
+{
+cin>>n;
+for(int i=0;i<n;i++)
+cin>>x[i]>>y[i]>>f[i];
+sum=x[0]+y[0];
+for(int i=1;i<n;i++)
+{
+if (sum<= x[i])
+  sum += (x[i]-sum);
+    else
+    {
+        int d = x[i];
+        while (d < sum)
+            d += f[i];
+        sum += d - sum;
+        }
+        sum += y[i];
+		}
+   cout << sum << endl;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

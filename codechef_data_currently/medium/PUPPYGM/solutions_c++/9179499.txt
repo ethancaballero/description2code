@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t,a,b;
+cin>>t;
+while(t--)
+{
+cin>>a>>b;
+if(a%2==0)
+cout<<"Tuzik"<<"
+";
+else
+{
+if(b%2==0)
+cout<<"Tuzik"<<"
+";
+else
+cout<<"Vanka"<<"
+";
+}
+}
+}

@@ -1,0 +1,9 @@
+for i in range(int(raw_input())):
+    a,b,c = map(int,raw_input().split())
+    if (a > 0 and a < 180) and (b > 0 and b < 180) and (c > 0 and c < 180):
+        if (a + b + c) == 180:
+            print "YES"
+        else:
+            print "NO"
+    else:
+        print "NO"

@@ -1,0 +1,8 @@
+t=int(raw_input())
+while t>0:
+	n=int(raw_input())
+	if ((n%4)==1):
+		print 'ALICE'
+	else:
+		print 'BOB'
+	t=t-1;

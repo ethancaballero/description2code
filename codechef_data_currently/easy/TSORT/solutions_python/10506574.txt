@@ -1,0 +1,17 @@
+import sys
+
+lstIn = raw_input().split()
+dicCounter = {}
+for i in xrange(int(lstIn[0])):
+	iInput = (int(raw_input().split()[0]))
+	
+	if iInput in dicCounter:
+		dicCounter[iInput] += 1
+	else:
+		dicCounter[iInput] = 1
+
+for i, el in enumerate(dicCounter):
+	for j in xrange(dicCounter[el]):
+		print str(el)
+
+sys.exit()

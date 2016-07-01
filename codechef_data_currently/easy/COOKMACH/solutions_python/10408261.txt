@@ -1,0 +1,56 @@
+#count =0
+def f1(a):
+	if a%2==0:
+		return a/2
+	else:
+		return (a-1)/2
+
+def f2(a):
+	return 2*a
+
+def less(a,b,count):
+	pp=0
+	qq=0
+	if a==b:
+		return count
+	else:
+		while pp!=-1:
+			if 2**pp==a:
+				qq=1
+			elif 2**pp>a:
+				break
+			if qq==1:
+				break
+			pp+=1
+		if qq==0:
+			a=f1(a)
+			count+=1
+		else:
+			a=f2(a)
+			count+=1
+		return less(a,b,count)
+
+if __name__=='__main__':
+	t=int(raw_input())
+	for i in range(0,t):
+		q=list(map(int,raw_input().split()))
+		a=q[0]
+		b=q[1]
+		count=0
+		if a<=b:
+			count1=less(a,b,count)
+			count=count1
+		elif a>b:
+			count2=0
+			while a>=b:
+				a=f1(a)
+				if a==b:
+					count2+=1
+					break
+				else:
+					count2+=1
+			count1=less(a,b,count)
+			count=count1+count2
+
+		print count
+

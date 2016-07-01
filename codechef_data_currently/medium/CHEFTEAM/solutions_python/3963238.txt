@@ -1,0 +1,24 @@
+import sys
+t=int(input())
+for i in range(t):
+    line = sys.stdin.readline()
+    x=line.split(' ')
+    n=int(x[0])
+    k=int(x[1])
+    if(n<k):
+        print "0"
+    elif(n==k):
+        print "1"
+    else :   
+        num=1
+        den=1
+        if(k<n-k):
+            k=n-k
+        for i in range(k+1,n+1):
+            num=num*i
+        for l in range(1,n-k+1):
+            den=den*l
+        ans=num/den
+        print ans
+    t=t-1
+    

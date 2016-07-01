@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+	char c;
+	int freq;
+};
+bool cmp(node a,node b)
+{
+	if(a.freq==b.freq)return a.c<b.c;
+	return a.freq<b.freq;
+}
+main()
+{
+	int tc;
+	scanf("%d",&tc);
+	while(tc--)
+	{
+		string s1;
+		char freq[150010],s[150010],temp[150010];int i;node arr[30];
+		scanf("%s",freq);
+		scanf(" %[^
+]s",s);
+		strcpy(temp,s);
+		int n=strlen(s);
+		for(i=0;i<n;i++)if(temp[i]<='Z' &&temp[i]>='A')temp[i]+=32;
+		for(i=0;i<26;i++){arr[i].c='a'+i;arr[i].freq=0;}
+		for(i=0;i<n;i++)
+		{
+			if(temp[i]>='a' && temp[i]<='z')
+			arr[temp[i]-'a'].freq++;
+		}
+		sort(arr,arr+26,cmp);
+		//for(i=0;i<26;i++)printf("%c
+",arr[i].c);
+		char rep[26];
+		for(i=0;i<26;i++)
+		{
+			rep[arr[i].c-'a']=freq[i];
+		}//for(i=0;i<26;i++)printf("%c
+",rep[i]);
+		for(i=0;i<n;i++)
+		{
+			if(s[i]>='a' && s[i]<='z')printf("%c",rep[temp[i]-'a']);
+			else if(s[i]>='A' && s[i]<='Z')printf("%c",rep[temp[i]-'a']-32);
+			else printf("%c",temp[i]);
+		}
+		printf("
+");
+	}
+}

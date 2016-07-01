@@ -1,0 +1,17 @@
+test=int(raw_input())
+while test>0:
+	test-=1
+	n,d=map(int,raw_input().split())
+	arr=map(int,raw_input().split())
+	#arr=arr[::-1]
+	arr=sorted(arr,reverse=True)
+	ans=0
+	i=0
+	while i<n-1:
+		if (arr[i]-arr[i+1])<d:
+			ans+=arr[i]+arr[i+1]
+			i+=2
+		else:
+			i+=1
+	print ans
+		

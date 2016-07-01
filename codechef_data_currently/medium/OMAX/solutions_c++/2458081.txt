@@ -1,0 +1,68 @@
+#include <cstdio>
+#include <cassert>
+#include <algorithm>
+using namespace std;
+
+int mat[77][77], M, N;
+int sums[78][78];
+int lookup[77][77];
+int dp[3003][3003];
+inline int inrect(int r1, int r2, int c1, int c2){
+	return sums[r2+1][c2+1]+sums[r1][c1]-sums[r2+1][c1]-sums[r1][c2+1];
+}
+
+bool read(){
+	scanf("%d %d", &M, &N);
+	if(M==0 && N==0)
+		return false;
+	for(int i=0; i<M; i++)
+	for(int j=0; j<N; j++)
+		scanf("%d", &mat[i][j]);
+	return true;
+}
+
+int solve(){
+	for(int i=0; i<M; i++)
+	for(int j=0; j<N; j++){
+		sums[i+1][j+1]=sums[i][j+1]+sums[i+1][j]-sums[i][j]+mat[i][j];
+		dp[lookup[i][i]][lookup[j][j]]=mat[i][j];
+		if(i>0)
+			dp[lookup[i-1][i]][lookup[j][j]]=min(min(mat[i-1][j]+mat[i][j], mat[i-1][j]), mat[i][j]);
+		if(j>0)
+			dp[lookup[i][i]][lookup[j-1][j]]=min(min(mat[i][j-1]+mat[i][j], mat[i][j-1]), mat[i][j]);
+	}
+	for(int di=1; di<M; di++)
+	for(int i=di; i<M; i++)
+	for(int j=0; j<N; j++)
+		dp[lookup[i-di][i]][lookup[j][j]]=min(min(dp[lookup[i-di+1][i]][lookup[j][j]], dp[lookup[i-di][i-1]][lookup[j][j]]), inrect(i-di, i, j, j));
+	for(int dj=1; dj<N; dj++)
+	for(int j=dj; j<N; j++)
+	for(int i=0; i<M; i++)
+		dp[lookup[i][i]][lookup[j-dj][j]]=min(min(dp[lookup[i][i]][lookup[j-dj+1][j]], dp[lookup[i][i]][lookup[j-dj][j-1]]), inrect(i, i, j-dj, j));
+	for(int di=1; di<M; di++)
+	for(int i=di; i<M; i++)
+	for(int dj=1; dj<N; dj++)
+	for(int j=dj; j<N; j++)
+		dp[lookup[i-di][i]][lookup[j-dj][j]]=min(min(
+			min(dp[lookup[i-di+1][i]][lookup[j-dj][j]], dp[lookup[i-di][i-1]][lookup[j-dj][j]]),
+			min(dp[lookup[i-di][i]][lookup[j-dj+1][j]], dp[lookup[i-di][i]][lookup[j-dj][j-1]])),
+			inrect(i-di, i, j-dj, j));
+	int res=-100000000;
+	for(int a=0; a<M; a++)
+	for(int b=a+2; b<M; b++)
+	for(int c=0; c<N; c++)
+	for(int d=c+2; d<N; d++)
+		res=max(res, inrect(a, b, c, d)-dp[lookup[a+1][b-1]][lookup[c+1][d-1]]);
+	return res;
+}
+
+int main(){
+	int cnt=0;
+	for(int i=0; i<77; i++)
+	for(int j=i; j<77; j++)
+		lookup[i][j]=cnt++;
+	while(read())
+		printf("%d
+", solve());
+	return 0;
+}

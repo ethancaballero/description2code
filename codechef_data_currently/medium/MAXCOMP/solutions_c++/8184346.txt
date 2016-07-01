@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n;
+		scanf("%d",&n);
+		int i,ans[49]={},p[49][49]={},s,e,c;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d%d%d",&s,&e,&c);
+			p[s][e]=max(p[s][e],c);
+		}
+		for(e=0;e<49;e++)
+		{
+			for(s=0;s<e;s++)
+				ans[e]=max(ans[e],ans[s]+p[s][e]);
+		}
+		printf("%d
+", ans[48]);
+	}
+	return 0;
+}

@@ -1,0 +1,28 @@
+#include <stdio.h>
+void counting_sort(int *A,int *B,int k,int size){
+int *C =new int[k+1];
+for(int i=0;i<=k;i++)
+C[i] = 0;
+for(int j=1;j<=size;j++)
+C[A[j]] =C[A[j]]+1;
+for(int i=1;i<=k;i++)
+C[i] = C[i]+C[i-1];
+for(int j=size;j>=1;j--){
+B[C[A[j]]] = A[j];
+C[A[j]] = C[A[j]] - 1;
+}
+}
+int main(int argc, char const *argv[])
+{
+int size;
+scanf("%d",&size);
+int *A = new int[size+1];
+int *B = new int[size+1];
+for(int i=1;i<=size;i++)
+scanf("%d",&A[i]);
+counting_sort(A,B,1000000,size);
+for(int i=1;i<=size;i++)
+printf("%d
+",B[i] );
+return 0;
+}

@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+using namespace std;
+double a[2001][2];
+int n,d[11]={5,4,3,2,1,0,-1,-2,-3,-4,-5};
+double func(double x,double y)
+{
+       double ans=0.0;
+       for(int i=0;i<n;i++)
+       {
+                      ans=ans+sqrt((a[i][0]-x)*(a[i][0]-x)+(a[i][1]-y)*(a[i][1]-y));
+       }
+       //printf("%0.6f
+",ans);
+       return ans;
+} 
+int main()
+{
+    int x,y,i,t;
+    float A,B,C;
+    double max,mix,miy,may,lx,ly,rx,ry,xi,yi;
+    scanf("%d",&t);
+    while(t--)
+    {
+            scanf("%d",&n);
+            scanf("%f %f %f",&A,&B,&C);
+            scanf("%d %d",&x,&y);
+            if(!n) break;
+            a[0][0]=double(x);
+            a[0][1]=double(y);
+            mix=a[0][0];max=a[0][0];may=a[0][1];miy=a[0][1];
+            for(i=1;i<n;i++)
+            {
+                      scanf("%d %d",&x,&y);
+                      a[i][0]=double(x);
+                      a[i][1]=double(y);
+                      if(a[i][0]>max) max=a[i][0];
+                      if(a[i][0]<mix) mix=a[i][0];
+                      if(a[i][1]>may) may=a[i][1];
+                      if(a[i][1]<miy) miy=a[i][1];
+            }
+            lx=5001;
+            rx=-5001;
+           for(i=0;i<100;i++)
+           {
+                   if(func(lx,(-C-A*lx)/B)>func(rx,(-C-A*rx)/B)) lx=(rx+2*lx)/3;
+                   else rx=(lx+2*rx)/3;
+                   //printf("%f %f
+",lx,rx);
+           }
+           printf("%0.6f
+",func(lx,(-C-A*lx)/B));
+           //printf("%f",pow(2,32));
+           
+    }
+    return 0;
+}          
+
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+def solve(n):
+	i=1
+	ans=0
+	while i*i<=n:
+		if(n%i==0):
+			ans+=i
+			if(n/i!=i):
+				ans+=(n/i)
+		i+=1
+	return ans
+def main():
+	test=int(input())
+	while test>0:
+		test-=1
+		n=int(input())
+		print solve(n)
+main() 

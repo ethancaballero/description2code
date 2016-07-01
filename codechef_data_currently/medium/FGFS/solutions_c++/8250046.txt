@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <math.h>
+#include <iostream>
+#include <map>
+using namespace std;
+
+struct timespan
+{
+    int s,f,p;
+};
+
+bool cmp(timespan ts1, timespan ts2)
+{
+    return (ts1.f < ts2.f);
+}
+
+long long int computesAns(vector<timespan> & v)
+{
+    long int ans = 1LL;
+    int y = 0;
+    for(int x = 1; x < v.size(); x++)
+    {
+        if(v[x].s >= v[y].f)
+        {ans++;
+            y = x;}
+    }
+    return ans;
+} 
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int N,K;
+        cin >> N >> K;
+        map<int, vector<timespan> > mapa;
+        map<int,vector<timespan> >::iterator iter;
+        for(int i = 0; i < N; i++)
+        {
+            timespan ts;
+            cin >> ts.s >> ts.f >> ts.p;
+            mapa[ts.p].push_back(ts);
+        }
+        long long int answer = 0LL;
+        for(iter = mapa.begin(); iter != mapa.end(); iter++)
+        {
+            int k =  iter->first;
+            vector<timespan> v = iter->second;
+            sort(v.begin(), v.end(),cmp);
+            answer = answer + computesAns(v);
+        }
+        cout << answer << endl;
+    }
+    return 0;
+}

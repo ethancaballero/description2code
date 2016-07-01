@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+char A[100001];
+char B[100001];
+int main()
+{
+	int t;
+	scanf("%d",&t);
+    while(t--)
+    {
+       scanf("%s %s",A,B);
+       int a=strlen(A);
+       int i;
+       for(i=0;i<a;i++)
+       {
+         if(A[i]!=B[i])
+         {
+         printf("%c",'B');
+         }
+         else if(A[i]=='W')
+         {
+         printf("%c",'B');
+         }
+         else 
+         {
+         printf("%c",'W');
+         }
+       }
+       printf("
+");
+    }
+    return 0;
+}

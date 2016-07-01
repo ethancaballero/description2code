@@ -1,0 +1,46 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+
+ int main()
+{
+    int t,x=0,k=0;
+    int output;
+    cin>>t;
+    while(t--)
+    {output=1;
+       cin>>x;
+       if(x==1)
+       {
+           output=1;
+       }
+       else{
+       for(k=2;k<=x-1;k++)
+       {
+           if(x%k==0)
+           {
+               output=0;
+           }
+       }}
+       if(output==1)
+       cout<<"yes"<<"
+";
+       else cout<<"no"<<"
+";
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

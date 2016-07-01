@@ -1,0 +1,10 @@
+import math 
+t=input()
+ans=[]
+for x in range(t):
+    num=input()
+    ans.append(int(math.sqrt(num)))
+for x in range(t):
+    print ans[x]
+    
+    

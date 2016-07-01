@@ -1,0 +1,46 @@
+#include<bits/stdc++.h> //_Shaffi
+using namespace std;
+#define sc scanint
+#define sl scanlong
+#define gc getchar
+typedef unsigned long long ull;
+ 
+void scanint(int &x);
+void scanlong(ull &x);
+ 
+void scanint(int &x)
+{
+        int flag=0;
+        register int c = gc();
+        if(c == '-') flag=1;
+	x = 0;
+	for(;(c<48 || c>57);c = gc());
+	for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+        if(flag == 1)x=-x;
+}
+ 
+void scanlong(ull &x)
+{
+        int flag=0;
+        register int c = gc();
+        if(c == '-') flag=1;
+	x = 0;
+	for(;(c<48 || c>57);c = gc());
+	for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+        if(flag == 1)x=-x;
+}
+int main()
+{
+    int t; sc(t);
+    while(t--)
+    {
+        int n,i; sc(n); vector<int>arr;
+        for(i=0;i<n;i++)
+        {
+            int a; sc(a); arr.push_back(a);
+        }
+        sort(arr.begin(),arr.end());
+        arr.erase(unique(arr.begin(),arr.end()),arr.end());
+        cout<<arr.size()<<endl;
+    }
+}

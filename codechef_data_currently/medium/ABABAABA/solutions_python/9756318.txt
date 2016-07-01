@@ -1,0 +1,28 @@
+for t in xrange(int(raw_input())):
+	s = raw_input()
+	n = len(s)
+	if (n==2):
+		if (s=="AB" or s=="BA"):
+			print -1
+		else:
+			print s[0]
+	elif (n==3):
+		if (s=="AAA" or s=="BBB"):
+			print -1
+		else:
+			if (s=="AAB" or s=="ABA" or s=="BAA"):
+				print "A"
+			else:
+				print "B"
+	else:
+		pos = s.find("ABBA")
+		if (pos != -1):
+			print s[:pos+1]+s[pos+2:]
+		else:
+			pos = s.find("BAAB")
+			if (pos != -1):
+				print s[:pos+1]+s[pos+2:]
+			else:
+				print -1
+			
+		

@@ -1,0 +1,30 @@
+data = []
+idx = 0
+
+def ni():
+    global data, idx
+    ret = data[idx]
+    idx += 1
+    return ret
+
+def main():
+
+    from sys import stdin
+    global data, idx
+    data = map(int, stdin.read().split())
+    idx = 0
+
+    T = ni()
+    for t in xrange(T):
+        N = ni()
+        speed = [ni() for n in xrange(N)]
+        free = 1       
+        for n in xrange(1, N):
+            if speed[n] > speed[n-1]:
+                speed[n] = speed[n-1]
+
+            else:
+                free += 1
+        print free
+
+main()

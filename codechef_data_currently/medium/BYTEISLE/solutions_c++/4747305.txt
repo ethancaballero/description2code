@@ -1,0 +1,114 @@
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+ 
+#define maxn 50002
+#define maxk 65536
+ 
+using namespace std;
+ 
+template <class T> T min(T& a, T& b){return((a < b) ? a : b);}
+template <class T> T max(T& a, T& b){return((a > b) ? a : b);}
+template <class T> T abs(T& x){return((x < 0) ? -(x) : x);}
+ 
+struct event{int x, typ;};
+struct list{int max; bool f;};
+ 
+int n, num, curk;
+event sm[maxn * 2];
+list tree[maxk * 2];
+int bord[maxn][2];
+ 
+bool cmp(const event& a, const event& b){return(a.x < b.x || a.x == b.x && a.typ > b.typ);}
+ 
+int init(int n, int k){
+	for(int i = 0; i < 2 * k; ++i)
+		tree[i].max = tree[i].f = 0;
+	return 0;
+}
+ 
+int update_seg(int l, int r, int ll, int rr, int v){
+	if(max(l, ll) <= min(r, rr) && !tree[v].f){
+		if(l <= ll && r >= rr){
+			tree[v].f = true;
+			tree[v].max = 0;
+			return 0;
+		}
+		update_seg(l, r, ll, (ll + rr) / 2, v * 2);
+		update_seg(l, r, (ll + rr) / 2 + 1, rr, v * 2 + 1);
+		tree[v].max = max(tree[v * 2].max, tree[v * 2 + 1].max);
+	}
+	return 0;
+}
+ 
+int get_seg(int l, int r, int ll, int rr, int v, int &res){
+	if(max(l, ll) <= min(r, rr)){
+		if(tree[v].f)return 0;
+		if(l <= ll && r >= rr){
+			res = max(res, tree[v].max);
+			return 0;
+		}
+		get_seg(l, r, ll, (ll + rr) / 2, v * 2, res);
+		get_seg(l, r, (ll + rr) / 2 + 1, rr, v * 2 + 1, res);
+	}
+	return 0;
+}
+ 
+int add_event(int x, int typ){
+	sm[num].x = x;
+	sm[num++].typ = typ;
+	return 0;
+}
+ 
+int obr(){
+	scanf("%d", &n);
+	curk = 2;
+	while(curk < (n + 1))curk *= 2;
+	init(n + 1, curk);
+	num = 0;
+	for(int i = 0; i < n; ++i){
+		scanf("%d%d", &bord[i][0], &bord[i][1]);
+		add_event(bord[i][0], 1);
+		add_event(bord[i][1], -1);
+	}
+	sort(sm, sm + num, cmp);
+	int l (0),
+		cur (0);
+	for(int i = 0; i <= n; ++i){
+		while(l < num && sm[l].x == i && sm[l].typ == 1){
+			++cur;
+			++l;
+		}
+		if(cur == i)tree[curk + i].max = 1;
+		while(l < num && sm[l].x == i && sm[l].typ == -1){
+			--cur;
+			++l;
+		}
+	}
+	for(int i = curk - 1; i > 0; --i)tree[i].max = max(tree[i * 2].max, tree[i * 2 + 1].max);
+	int res (0);
+	for(int i = 0; i <= n; ++i)res += tree[i + curk].max;
+	printf("%d
+", res);
+	for(int i = 0; i < n; ++i){
+		int cur_max (0);
+		if(bord[i][0] != 0)get_seg(1, bord[i][0], 1, curk, 1, cur_max);
+		if(bord[i][1] != n)get_seg(bord[i][1] + 2, n + 1, 1, curk, 1, cur_max);
+		if(cur_max){
+			printf("0");
+			update_seg(bord[i][0] + 1, bord[i][1] + 1, 1, curk, 1);
+		}
+		else printf("1");
+	}
+	printf("
+");
+	return 0;
+}
+ 
+int main(){
+	int t (0);
+	scanf("%d", &t);
+	for(int i = 0; i < t; ++i)
+		obr();
+	return 0;
+}

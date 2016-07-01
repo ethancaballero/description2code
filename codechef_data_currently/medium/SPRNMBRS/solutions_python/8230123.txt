@@ -1,0 +1,44 @@
+p=[-1,1]
+i=2
+while i<=1000000000000000000:
+	j=1
+	while i*j<=1000000000000000000:
+		p.append(i*j)
+		j*=3
+	i=i*2
+ 
+p.append(1000000000000000001)
+p=sorted(p)
+t=input()
+for test in xrange(t):
+	s=raw_input().split(" ")
+	a=(int)(s[0])
+	b=(int)(s[1])
+	l=len(p)
+	start=0
+	end=l-1
+	first=0
+	second=0
+	while start<=end:
+		mid=(start+end)/2
+		if(p[mid]<a):
+			start=mid+1
+			first=mid
+		else:
+			end=mid-1
+	start=0
+	end=l-1
+	while start<=end:
+		mid=(start+end)/2
+		if(p[mid]>b):
+			end=mid-1
+			second=mid
+		else:
+			start=mid+1
+	first+=1
+	second-=1
+	#print(a)
+	#print(b)
+	#print(p[first])
+	#print(p[second])
+	print(second-first+1)

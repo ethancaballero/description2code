@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+#define M 1000000007
+using namespace std;
+#define gc getchar_unlocked
+inline int scan() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+int ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+void modmul(long long mat1[3][3],long long mat2[3][3])
+{
+long long temp[3][3];
+for(int i=0;i<3;i++) for(int j=0;j<3;j++)
+{
+temp[i][j]=0;
+for(int k=0;k<3;k++)
+temp[i][j]+=((mat1[i][k]*mat2[k][j])%M);
+}
+for(int i=0;i<3;i++) for(int j=0;j<3;j++) mat1[i][j]=(temp[i][j]%M);
+}
+long long int solve(long long int n)
+{ if(n==1)return 2;
+if(n==2)return 4;
+n-=2;
+long long int a[3][3];
+long long int b[3][3];
+memset(a,0,sizeof(sizeof(int))*3*3);
+a[0][0]=a[1][1]=a[2][2]=1;
+b[0][0]=b[0][1]=b[0][2]=1;
+b[1][0]=1;
+b[1][1]=0;b[1][2]=0;
+b[2][0]=0;b[2][1]=1;
+b[2][2]=0;
+while(n)
+{
+if(n%2==1)
+{
+modmul(a,b);
+}
+modmul(b,b);
+n>>=1;
+}
+return (a[0][0]*4+a[0][1]*2+a[0][2]*1)%M;
+}
+long long int expmod(int a,long long b)
+{
+long long x=1,y=a;
+while(b>0)
+{
+if(b&1) x=(x*y)%M;
+y=(y*y)%M;
+b>>=1;
+}
+return x;
+}
+int main()
+{
+long long int t;
+scanf("%lld",&t);
+while(t--)
+{
+long long int n;
+scanf("%lld",&n);
+long long int ans=expmod(2,n);
+ans-=solve(n);
+ans+=M;
+ans%=M;
+printf("%lld
+",ans);
+}
+}

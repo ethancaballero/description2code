@@ -1,0 +1,41 @@
+#include<stdio.h>
+inline int inp()
+    {
+    int noRead=0;
+    char p=getchar_unlocked();
+    for(;p<33;){p=getchar_unlocked();};
+    while(p>32)
+    {
+    noRead = (noRead << 3) + (noRead << 1) + (p - '0');
+    p=getchar_unlocked();
+    }
+    return noRead;
+    };
+int main()
+{
+    int T,n,f,t;
+    long long int s;
+    double c;
+    T=inp();//scanf("%d",&T);
+    while(T--)
+    {
+              n=inp();//scanf("%d",&n);
+              f=inp();//scanf("%d",&f);
+              s=(n*(n+1))/2;
+              while(f--)
+              {
+                        t=inp();//scanf("%d",&t);
+                        s=s-t;
+              }
+              t=inp();//scanf("%d",&t);
+              if(n%2==0)
+              n=n/2;
+              else
+              n=(n+1)/2;
+              s=s*(n-t);
+              c=((double)(s))/n;
+              printf("%.4lf
+",c);
+    }
+    return 0;
+}

@@ -1,0 +1,5 @@
+lis=[]
+for _ in xrange(input()):
+    lis.append(input())
+for i in sorted(lis):
+    print i

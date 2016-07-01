@@ -1,0 +1,73 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+string grid[500];
+int l[500][500], r[500][500], t[500][500], b[500][500];
+
+int main() {
+    int prime[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41,
+    43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
+    109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179,
+    181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241};
+    int test, rnum, cnum;
+    cin >> test;
+    while(test--) {
+        cin >> rnum >> cnum;
+        for(int i=0;i<rnum;++i) cin >> grid[i];
+
+        l[0][0] = t[0][0] = 0;
+        for(int i=1;i<cnum;++i) {
+            t[0][i] = 0;
+            if(grid[0][i-1]=='^' && grid[0][i]=='^') l[0][i] = l[0][i-1]+1;
+            else l[0][i] = 0;
+        }
+        for(int i=1;i<rnum;++i) {
+            l[i][0] = 0;
+            if(grid[i-1][0]=='^' && grid[i][0]=='^') t[i][0] = t[i-1][0]+1;
+            else t[i][0] = 0;
+            for(int j=1;j<cnum;++j) {
+                if(grid[i][j-1]=='^' && grid[i][j]=='^') l[i][j] = l[i][j-1]+1;
+                else l[i][j] = 0;
+                if(grid[i-1][j]=='^' && grid[i][j]=='^') t[i][j] = t[i-1][j]+1;
+                else t[i][j] = 0;
+            }
+        }
+
+        r[rnum-1][cnum-1] = b[rnum-1][cnum-1] = 0;
+        for(int i=cnum-2;i>=0;--i) {
+            b[rnum-1][i] = 0;
+            if(grid[rnum-1][i+1]=='^' && grid[rnum-1][i]=='^') r[rnum-1][i] = r[rnum-1][i+1]+1;
+            else r[rnum-1][i] = 0;
+        }
+        for(int i=rnum-2;i>=0;--i) {
+            r[i][cnum-1] = 0;
+            if(grid[i+1][cnum-1]=='^' && grid[i][cnum-1]=='^') b[i][cnum-1] = b[i+1][cnum-1]+1;
+            else b[i][cnum-1] = 0;
+            for(int j=cnum-2;j>=0;--j) {
+                if(grid[i][j+1]=='^' && grid[i][j]=='^') r[i][j] = r[i][j+1]+1;
+                else r[i][j] = 0;
+                if(grid[i+1][j]=='^' && grid[i][j]=='^') b[i][j] = b[i+1][j]+1;
+                else b[i][j] = 0;
+            }
+        }
+
+        int p;
+        int count=0, in;
+        bool flag = false;
+        for(int i=0; i<rnum; ++i) {
+            for(int j=0; j<cnum; ++j) {
+                p = min(min(l[i][j],r[i][j]),min(t[i][j],b[i][j]));
+                flag = false;
+                for(in=0;in<53;++in) {
+                    if(prime[in]<=p) flag = true;
+                    else break;
+                }
+                if(flag) count += in;
+            }
+        }
+        cout << count << endl;
+    }
+    return 0;
+}

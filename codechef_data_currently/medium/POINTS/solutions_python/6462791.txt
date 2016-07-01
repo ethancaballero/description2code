@@ -1,0 +1,32 @@
+def calDist(p1, p2):
+	if p1[0]==p2[0]:
+		return abs(p1[1]-p2[1])
+	elif p1[1]==p2[1]:
+		return abs(p1[0]-p2[0])
+	else:
+		return ((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)**0.5
+
+def distTraveled(points, n):
+	dist = 0
+	last = None
+	for x in sorted(points.keys()):
+		for y in sorted(points[x], reverse=True):
+			if last:
+				dist += calDist(last, (x,y))
+			last = (x,y)
+
+	return "%.2f" % dist
+
+
+t=int(raw_input())
+for _ in range(t):
+	raw_input()
+	n=int(raw_input())
+	points = {}
+	for _ in range(n):
+		x, y = map(int, raw_input().split())
+		if x in points:
+			points[x].append(y)
+		else:
+			points[x] = [y]
+	print distTraveled(points, n)

@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 999999
+#define maxi 100002
+vector<pair<int,int> > v;
+long long int par[maxi],ranki[maxi],cost[maxi];
+ long long total=0;
+ long long int n,m,x,y,z;
+void reset()
+{
+    for(int i=1;i<=n;i++)
+    {
+        ranki[i]=1;
+        par[i]=i;
+    }
+}
+int findset(int x)
+{
+    if(x!=par[x])
+        par[x]=findset(par[x]);
+    return par[x];
+}
+void unionf(int x,int y)
+{
+    long long int px,py;
+    px=findset(x);
+    py=findset(y);
+    if(px!=py)
+        {
+            if(ranki[px]>ranki[py])
+            {
+                par[py]=px;
+                if(cost[px]>cost[py])
+                    cost[px]=cost[py];
+            }
+            else if(ranki[py]>ranki[px])
+            {
+                par[px]=py;
+                if(cost[py]>cost[px])
+                    cost[py]=cost[px];
+            }
+            else
+            {
+                par[px]=py;
+                if(cost[py]>cost[px])
+                    cost[py]=cost[px];
+                ranki[py]++;
+            }
+        }
+}
+int main()
+{
+    long long ans=0,mini=9999999,sum=0,ctr=0,nco=0;
+    scanf("%lld%lld",&n,&m);
+    if(n==1)
+    {
+        printf("0");
+        return 0;
+        //exit(1);
+    }
+    reset();
+    for(int i=0;i<m;i++)
+    {
+        scanf("%lld%lld",&x,&y);
+        v.push_back(make_pair(x,y));
+    }
+    for(int i=1;i<=n;i++)
+    {
+        scanf("%lld",&z);
+        if(z<0)
+            z+=inf;
+        if(z<mini)
+            mini=z;
+        cost[i]=z;
+    }
+    for(int i=0;i<v.size();i++)
+    {
+        pair<int,int> temp=v[i];
+        unionf(temp.first,temp.second);
+    }
+    for(int i=1;i<=n;i++)
+    {
+        if(i==findset(i))
+        {
+            if(cost[i]>10000)
+                ctr=-1;
+            nco++;
+            sum+=cost[i];
+        }
+    }
+    //printf("%lld
+",ctr);
+    if(nco==1)
+        printf("0");
+    else
+    {if(ctr==-1)
+        printf("-1");
+    else{
+        ans=(nco-2)*mini+sum;
+    printf("%lld",ans);}}
+    return 0;
+}

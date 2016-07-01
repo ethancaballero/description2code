@@ -1,0 +1,47 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#define F(i,x,y) for(i=x;i<y;i++)
+#define S(n) scanf("%lld",&n)
+#define s(n) scanf("%d",&n)
+#define P(n) printf("%lld
+",n)
+#define p(n) printf("%d
+",n)
+#define LLI long long int
+#define R return 0
+using namespace std;
+int main()
+{
+		int n1,n2,n3,i,count=0; s(n1); s(n2); s(n3);
+		int a[n1],b[n2],c[n3];
+		vector<int>x(10000000);
+		x[0]=0;
+		F(i,0,n1)
+		{
+			s(a[i]);
+			x[a[i]]++;
+			
+		}
+		F(i,0,n2)
+		{
+			s(b[i]);
+			x[b[i]]++;
+		}
+		F(i,0,n3)
+		{
+			s(c[i]);
+			x[c[i]]++;
+		}
+		F(i,0,10000000)
+		{
+			if(x[i]>1)
+			count++;
+		}
+		p(count);
+		F(i,0,10000000)
+		{
+			if(x[i]>1)
+			p(i);
+		}
+	R;
+}

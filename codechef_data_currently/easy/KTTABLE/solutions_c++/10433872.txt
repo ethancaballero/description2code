@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int t;
+	cin >> t;
+	
+	while(t-->0)
+	{
+		int n; cin >> n;
+		int timePt[n+1];
+		timePt[0] = 0;
+		for(int i=1; i<=n; i++)
+			cin >> timePt[i];
+		int countr = 0;
+		for(int i=0; i<n; i++)
+		{
+			int curr; cin >> curr;
+			if(timePt[i+1]-timePt[i] >= curr)
+				countr++;
+		}
+		
+		cout << countr << endl;
+	}
+}

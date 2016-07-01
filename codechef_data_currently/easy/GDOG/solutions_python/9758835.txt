@@ -1,0 +1,11 @@
+import sys
+t=int(raw_input())
+i=0
+while i < t:
+    n,k=map(int,sys.stdin.readline().split(' '))
+    m=0
+    for a in xrange(1,(k+1)):
+       if m<(n%a):
+           m=n%a
+    print m
+    i+=1

@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+#define inf 100000000000
+using namespace std;
+long long int mabs(long long int h)
+{
+    if(h < 0){return -h;}else {return h;}
+}
+long long int a[100001],b[100001],temp[8];
+int main()
+{
+    long long int n,k,t,m1=0,m2=0,p,l,total = 0;
+    cin>>t;
+    while(t--)
+    {
+        total = 0;
+
+        cin>>n>>k;
+    for(long long int i = 0 ; i < n ; ++i)
+    {
+        cin>>a[i];
+
+    }
+    for(long long int i = 0 ; i < n ; ++i)
+    {
+        cin>>b[i];
+
+    }
+
+    for(long long int i = 0 ; i < n ; ++i)
+    {
+        total += (a[i]*b[i]);
+    }
+    sort(b , b+n);
+    
+    temp[0] = total + k*b[0];
+    temp[1] = total +k*(-b[0]);
+    
+    temp[2] = total +k*b[n-1];
+    temp[3] = total + k*(-b[n-1]);
+    
+    for(int v = 0 ; v < 4 ; ++v)
+    {
+        if(total < temp[v]){total = temp[v];}
+    }
+
+    cout<<total<<endl;
+    }
+    return 0;
+}

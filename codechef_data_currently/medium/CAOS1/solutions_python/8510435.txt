@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+for _ in xrange(int(raw_input())):
+	r, c = map(int, raw_input().split())
+	graph = [raw_input() for _ in xrange(r)]
+	monster = 0
+	for i in xrange(r):
+		for j in xrange(c):
+			if graph[i][j] == '^':
+				top,down,left,right = 0,0,0,0
+				for k in xrange(i+1,r):
+					if graph[k][j] == '^':
+						down += 1
+					else:
+						break
+				for k in xrange(i-1, -1, -1):
+					if graph[k][j] == '^':
+						top += 1
+					else:
+						break
+				for k in xrange(j+1,c):
+					if graph[i][k] == '^':
+						right += 1
+					else:
+						break
+				for k in xrange(j-1, -1, -1):
+					if graph[i][k] == '^':
+						left += 1
+					else:
+						break
+				if min(min(top,down),min(left,right)) > 1:
+					monster += 1
+	print monster

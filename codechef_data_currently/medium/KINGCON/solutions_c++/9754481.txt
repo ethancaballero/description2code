@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+bool visited[3003];
+int discovery[3003];
+int low[3003];
+int parent[3003];
+int dfs_counter = 0;
+int art[3003];
+
+void find_art(vector<int> graph[],int v)
+{
+	visited[v] = true;
+	discovery[v] = low[v] = ++dfs_counter;
+	
+	int size = graph[v].size();
+	
+	for(int i=0;i<size;i++)
+	{
+		int w = graph[v][i];
+		if(!visited[w])
+		{
+			parent[w] = v;
+			find_art(graph,w);
+			low[v] = min(low[v],low[w]);
+			
+			if(parent[v]!=-1 && low[w]>=discovery[v])
+			{	
+			//	cout<<v<<"   "<<w<<'
+';
+			//	cout<<v<<'
+';
+				art[v] = 1;
+			}
+		}
+		else if(w!=parent[v])
+				low[v] = min(low[v], discovery[w]);
+	}
+}
+	
+
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	
+	int T;
+	
+	cin>>T;
+	
+	while(T--)
+	{
+		long long n,m,k;
+		
+		cin>>n>>m>>k;
+		
+		fill(visited,visited+n,false);
+		fill(discovery,discovery+n,-1);
+		fill(low,low+n,-1);
+		fill(parent,parent+n,-1);
+		fill(art,art+n,0);
+		dfs_counter = 0;
+		
+		vector<int> graph[n];
+		
+		while(m--)
+		{
+			int u,v;
+			cin>>u>>v;
+			graph[u].push_back(v);
+			graph[v].push_back(u);
+		}
+		
+		find_art(graph,0);
+		
+		long long count = 0;
+		for(int i=0;i<n;i++)
+			if(parent[i]==0)
+				count++;
+		
+		long long articulations = 0;
+		
+		if(count>=2)
+			articulations++;
+		
+		for(int i=1;i<n;i++)
+			if(art[i])
+				articulations++;
+		
+		cout<<articulations*k<<'
+';
+	}
+	
+	return 0;
+}
+		
+		
+		
+		
+		
+		

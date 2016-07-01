@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct book
+{
+    int a;
+    int b;
+    char nam[20];
+};
+int main()
+{
+    long int n;
+    char name[20];
+    scanf("%ld",&n);
+    stack<book > q;
+    book s;
+    int t=100001;
+    while(n--)
+    {
+        int c=0,x;
+        scanf("%d",&x);
+        if(x>0)
+        {
+            scanf("%s",&name);
+            strcpy(s.nam,name);
+            s.a=x;
+            if(x<t)
+            t=x;
+            s.b=t;
+            q.push(s);
+        }
+        else if(x==-1)
+        {
+            while(q.top().a!=t)
+            {
+                q.pop();
+                c++;
+            }
+            printf("%d %s
+",c,q.top().nam);
+            q.pop();
+            if(!q.empty())
+                t=q.top().b;
+            else
+                t=100001;
+        }
+        else
+        {
+            scanf("%s",&name);
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,37 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   int res, ans;
+   cout<<"1
+";
+   cout<<"3 1 1 2
+";
+   cout<<"3 3 3 4
+";
+   
+   cin>>res;
+   switch(res) {
+        case 0:
+            ans = 5;
+            break;
+        case 1:
+            ans = 2;
+            break;
+        case 2:
+            ans = 1;
+            break;
+        case -1:
+            ans = 4;
+            break;
+        case -2:
+            ans = 3;
+            break;
+   }
+   cout<<"2
+";
+   cout<<ans<<endl;
+   return 0;
+}

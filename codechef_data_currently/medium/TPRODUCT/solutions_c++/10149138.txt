@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1 << 16;
+const int MOD = 1e9 + 7;
+typedef long long LL;
+LL v[MAXN];
+LL p[MAXN][140];
+inline int getMax(int x, int y){
+	if(p[x][0] > p[y][0])
+		return x;
+	else if(p[x][0] < p[y][0])
+		return y;
+	else {
+		for(int i = p[x][0];i >= 1;--i){
+			if(p[x][i] > p[y][i])
+				return x;
+			else if(p[x][i] < p[y][i])
+				return y;
+		}
+		return x;
+	}
+}
+inline void mul(int des, int src, LL val){
+	LL carry = 0;
+	p[des][0] = 0;
+	for(int i = 1;i <= p[src][0];++i){
+		++p[des][0];
+		LL z = carry + val * p[src][i];
+		p[des][p[des][0]] = z % 10;
+		carry = z/10;
+	}
+	while(carry){
+		++p[des][0];
+		p[des][p[des][0]] = carry % 10;
+		 carry /= 10;	
+	}
+}
+int main(){
+	int h;
+	while(scanf("%d", &h) != EOF && h != 0){
+		int n = (1 << h) - 1;
+		for(int i = 1;i <= n;++i){
+			scanf("%lld", &v[i]);
+		}
+		for(int i = n - (1 << (h - 1)) + 1;i <= n;++i){
+			p[i][0] = 0;
+			while(v[i] > 0){
+				++p[i][0];
+				p[i][p[i][0]] = v[i] % 10;
+				v[i] /= 10;
+			}
+		}
+		for(int i = n - (1 << (h - 1));i >= 1;--i){
+			int ind = getMax((i << 1), (i << 1) + 1);
+			mul(i, ind, v[i]);
+		}
+		LL ans = 0;
+		for(int i = p[1][0];i >= 1;--i){
+			ans = ans * 10 + p[1][i];
+			ans %= MOD;
+		}
+		printf("%lld
+", ans);
+	}
+	return 0;
+}

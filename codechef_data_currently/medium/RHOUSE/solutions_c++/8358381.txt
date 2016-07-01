@@ -1,0 +1,104 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int __sign;
+int __ch;
+inline int S( int &x )
+{
+	x=0;
+	while((__ch<'0' || __ch>'9') && __ch!='-' && __ch!=EOF) __ch=getchar_unlocked();
+	if (__ch=='-')
+		__sign=-1 , __ch=getchar_unlocked();
+	else
+		__sign=1;
+	do
+		x=(x<<3)+(x<<1)+__ch-'0';
+	while((__ch=getchar_unlocked())>='0' && __ch<='9');
+	x*=__sign;
+	return x;
+}
+ struct node
+{
+	int cost;
+	int x;
+	int y;
+	node(){}
+	node(int a,int b,int c)
+	{
+		x=a;
+		y=b;
+		cost=c;
+	}
+};
+bool cmp(const node &n1,const node &n2)
+{
+	return n1.cost >n2.cost;
+}
+int parent[100007];
+vector<node>v;
+char A[100007];
+void make_set(int i)
+{
+	parent[i]=i;
+}
+int find_set(int x)
+{
+	if(parent[x]==x)
+		return x;
+	return parent[x]=find_set(parent[x]);
+}
+int join_set(int x,int y)
+{
+	x=find_set(x);
+	y=find_set(y);
+	return parent[x]=y;
+}
+int main()
+{
+	int tc;
+//	cin>>tc;
+	S(tc);
+	while(tc--)
+	{
+		int N,M;
+		v.clear();
+	//	cin>>N>>M;
+		S(N);
+		S(M);
+	//	cin>>A;
+		scanf("%s",A);
+		make_set(0);
+		for(int i=0;A[i];i++)
+		{
+			make_set(i+1);
+			if(A[i]=='R')
+				join_set(i+1,0);
+		}
+		int a,b,c;
+		for(int i=1;i<=M;i++)
+		{
+	//		cin>>a>>b>>c;
+			S(a);
+			S(b);
+			S(c);
+			v.push_back(node(a,b,c));
+ 
+		}
+		sort(v.begin(),v.end(),cmp);
+		long long int total=0;
+                 for(int i=v.size()-1;i>=0;i--)
+		 {
+			 if(v[i].cost<0||find_set(v[i].x)!=find_set(v[i].y))
+			 {
+				 join_set(v[i].x,v[i].y);
+				 total+=v[i].cost;
+			 }
+		 }
+		 printf("%lld
+",total);
+		}
+	
+return 0;
+}

@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long mod=1000000007;
+long long fibo[100005];
+long long mexp(long long p,long long q)
+{
+    long long x,y,z,w,n;
+    long long haha[][2]={{1,0},{0,1}};
+    for(int i=p;i<=q;i++)
+    {
+        long long res[][2]={{1,1},{1,0}};
+        long long m[][2]={{1,1},{1,0}};
+        n=fibo[i];
+        n--;
+        while(n>0)
+        {
+            if(n%2==1)
+            {
+                w=((res[0][0]*m[0][0])%mod+(res[0][1]*m[1][0])%mod)%mod;
+                x=((res[0][0]*m[0][1])%mod+(res[0][1]*m[1][1])%mod)%mod;
+                y=((res[1][0]*m[0][0])%mod+(res[1][1]*m[1][0])%mod)%mod;
+                z=((res[1][0]*m[0][1])%mod+(res[1][1]*m[1][1])%mod)%mod;
+                res[0][0]=w;
+                res[0][1]=x;
+                res[1][0]=y;
+                res[1][1]=z;
+                n-=1;
+            }
+            else
+            {
+                w=((m[0][0]*m[0][0])%mod+(m[0][1]*m[1][0])%mod)%mod;
+                x=((m[0][0]*m[0][1])%mod+(m[0][1]*m[1][1])%mod)%mod;
+                y=((m[1][0]*m[0][0])%mod+(m[1][1]*m[1][0])%mod)%mod;
+                z=((m[1][0]*m[0][1])%mod+(m[1][1]*m[1][1])%mod)%mod;
+                m[0][0]=w;
+                m[0][1]=x;
+                m[1][0]=y;
+                m[1][1]=z;
+                n=n/2;
+            }
+        }
+        res[0][0]+=1;
+        res[1][1]+=1;
+        w=((haha[0][0]*res[0][0])%mod+(haha[0][1]*res[1][0])%mod)%mod;
+        x=((haha[0][0]*res[0][1])%mod+(haha[0][1]*res[1][1])%mod)%mod;
+        y=((haha[1][0]*res[0][0])%mod+(haha[1][1]*res[1][0])%mod)%mod;
+        z=((haha[1][0]*res[0][1])%mod+(haha[1][1]*res[1][1])%mod)%mod;
+        haha[0][0]=w;
+        haha[0][1]=x;
+        haha[1][0]=y;
+        haha[1][1]=z;
+    }
+    haha[0][0]-=1;
+    haha[1][1]-=1;
+    int inv[][2]={{0,1},{1,-1}};
+    w=inv[0][0]*haha[0][0]+inv[0][1]*haha[1][0];
+    return w;
+}
+int main()
+{
+    long long n,ans,b,k,t,m,x,y;
+    cin>>n>>m;
+    for(int i=0;i<n;i++)cin>>fibo[i];
+    while(m--)
+    {
+        char p;
+        cin>>p>>x>>y;
+        if(p=='C')
+            fibo[x-1]=y;
+        else
+        {
+            cout<<mexp(x-1,y-1)<<endl;
+        }
+    }
+    return 0;
+}
+

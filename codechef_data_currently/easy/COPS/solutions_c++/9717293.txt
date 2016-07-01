@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+long long t,m,x,y,i,j,k,z,mini,maxi,flag;
+cin>>t;
+while(t--)
+{
+    cin>>m>>x>>y;
+    z=x*y;
+    flag=0;
+    long long a[101]={0};
+    for(j=1;j<=m;j++)
+    {
+        cin>>k;
+        maxi=k+z;
+        mini=k-z;
+        if(mini<=0)
+            mini=1;
+        if(maxi>=100)
+            maxi=100;
+        for(k=mini;k<=maxi;k++)
+            a[k]=1;
+    }
+    for(k=1;k<=100;k++)
+     {
+            if(a[k]==0)
+                flag++;
+     }
+    cout<<flag<<endl;
+    }
+return 0;
+}

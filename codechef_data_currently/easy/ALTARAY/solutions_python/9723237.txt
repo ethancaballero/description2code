@@ -1,0 +1,16 @@
+for tc in xrange(input()):
+	n=input()
+	l=list(map(int,raw_input().split()))
+	dp=[0]*n
+	dp[n-1]=1
+	for i in xrange(n-2,-1,-1):
+		if l[i+1] > 0 and l[i] < 0:
+			dp[i]=1+dp[i+1]
+		elif l[i+1] < 0 and l[i] > 0:
+			dp[i]=1+dp[i+1]
+		else:
+			dp[i]=1
+	for i in dp:
+		print i,
+	print
+	

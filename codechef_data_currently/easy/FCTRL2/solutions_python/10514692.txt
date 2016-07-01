@@ -1,0 +1,16 @@
+# cook your code here
+store=[0] * 103
+def fact(N):
+    if(N==1) :
+        store[N]=1;
+        return 1;
+    if(store[N]==0) :
+        store[N]=N*fact(N-1);
+    return store[N];
+    
+T=int(raw_input());
+
+while T>0 :
+    N=int(raw_input());
+    print fact(N)
+    T=T-1

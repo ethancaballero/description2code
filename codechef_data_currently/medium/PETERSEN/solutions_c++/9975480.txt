@@ -1,0 +1,117 @@
+using namespace std;
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#define ll long long
+#define input freopen("input.in","r",stdin);
+#define output freopen("output.out","w",stdout);
+#define e printf("
+");
+#define all(it,v) for(it=(v).begin();it!=(v).end();it++)
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define pii pair<int,int>
+typedef vector<vector<ll> > mat;
+const ll mx=1000000;
+const ll mod=1000000007;
+const ll inf=0x3f3f3f3f;
+vector<int> g[10];
+
+string s("ABCDEABCDE");
+
+string str;
+string ans;
+void ae(int u,int v)
+{
+  g[u].push_back(v);
+  g[v].push_back(u);
+}
+void pre()
+{
+   ae(0,1);
+   ae(0,4);
+   ae(1,2);
+   ae(2,3);
+   ae(3,4);
+
+   ae(0,5);
+   ae(4,9);
+   ae(3,8);
+   ae(2,7);
+   ae(1,6);
+
+   ae(5,7);
+   ae(6,8);
+   ae(5,8);
+   ae(6,9);
+   ae(9,7);
+
+}
+void solve(int u)
+{
+  int i,j,v,w,n=str.size();
+  string s1;
+  s1.push_back(u+'0');
+  for(i=1;i<n;i++)
+  {
+    for(j=0;j<g[u].size();j++)
+    {
+      w=g[u][j];   
+      if(s[w]==str[i])
+      {
+        s1.push_back(w+'0');
+        u=w;
+        break;
+      }
+    }
+  }
+  
+  if(s1.size()==str.size())
+  ans=min(s1,ans);
+}
+int main()
+{
+  pre();
+  int t,i;
+  cin>>t;
+  while(t--)
+  {
+    rep(k,0,1000000)
+   ans.push_back(9+'A');
+    cin>>str;
+    for(i=0;i<10;i++)
+    {
+      if(str[0]==s[i])
+        {
+          solve(i);
+        }
+    }
+    if(count(ans.begin(),ans.end(),9+'A')==1000000)
+      cout<<"-1";
+    else
+    {
+      for(i=0;i<ans.size();i++)
+        cout<<ans[i];
+    }
+    ans.clear();
+    e
+  }
+  return 0;
+}

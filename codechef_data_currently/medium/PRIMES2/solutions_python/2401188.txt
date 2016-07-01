@@ -1,0 +1,30 @@
+from sys import stdin
+
+def sieve(n,isP=False):
+    A=[0,0]+[1 for i in range(n-1)]
+    s=int(n**.5)
+    for i in xrange(2,s+1):
+        if A[i]==1:
+            for j in xrange(i*i,n+1,i): A[j]=0
+    if isP: return A
+    else: return [i for i, p in enumerate(A) if p]
+
+
+primesP3 = sieve(100)
+primesP2 = sieve(1000)
+isPrime = sieve(1000000,True)
+
+def goldbach(N):
+    for P3 in primesP3:
+        for P2 in primesP2:
+            P1 = N-P3**3-P2**2
+            if P1>0:
+                if isPrime[P1]:
+                    return "%s %s %s" % (P1,P2,P3)
+    return "%s %s %s" % (0,0,0)
+
+N = int(stdin.readline())
+
+while N!=0:
+    print goldbach(N)
+    N = int(stdin.readline())

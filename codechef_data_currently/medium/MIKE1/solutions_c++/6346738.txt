@@ -1,0 +1,33 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int main(){
+    int n,m;
+    cin>>n;
+    cin>>m;
+    int a[n][m];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>a[i][j];
+        }
+    }
+    int l;
+    cin>>l;
+
+    typedef long long int ll;
+    ll sum1=(ll)0,sum2=(ll)0;
+    for(int i=0;i<l;i++){
+        int j,k;
+        cin>>j;
+        cin>>k;
+        if((j<=n) && (k<=m) && sum1!=-1){
+            sum1+=(ll)a[j-1][k-1];
+        }
+        else sum1 = -1;
+        if(k<=n && j<=m && sum2!=-1)sum2+=(ll)a[k-1][j-1];
+        else sum2 = -1;
+    }
+    cout<<max(sum1,sum2);
+    return 0;
+}

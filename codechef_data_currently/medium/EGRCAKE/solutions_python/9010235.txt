@@ -1,0 +1,17 @@
+def gcd(x, y):
+    while y != 0:
+        (x, y) = (y, x % y)
+    return x
+
+if __name__ == '__main__':
+	t = input()
+	for i in xrange(t):
+		x = raw_input()
+		n = int(x.split()[0])
+		m = int(x.split()[1])
+		l = gcd(n, m)
+		if l == 1:
+			print 'Yes'
+		else:
+			c = n/l
+			print 'No'+' '+str(c)

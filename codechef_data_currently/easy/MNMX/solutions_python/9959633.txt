@@ -1,0 +1,7 @@
+t=eval(raw_input())
+for k in range(t):
+	n=eval(raw_input())
+	arr=[0 for i in range(n)]
+	arr=map(int,raw_input().split(' '))
+	x=min(arr)
+	print x*(n-1)

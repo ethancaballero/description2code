@@ -1,0 +1,62 @@
+// ...............................$$.....................................//
+//BIG OH
+//prob-we have given two array and we have tp find the nth smallest sum
+#include<cstdio>
+#include <iostream>
+#include<limits.h>
+#include<stdio.h>
+#include<sstream>
+#include<stdlib.h>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#include<map>
+#include<set>
+#include<list>
+#include<stack>
+#include<queue>
+#include<iomanip>
+#include<ctype.h>
+#include<complex>
+#include<utility>
+#include<functional>
+#include<bitset>
+#include<numeric>
+#include<cassert>
+#include<limits>
+using namespace std;
+#define ll long long
+#define gc getchar_unlocked
+#define mod 1000000007
+
+int read() {int nm=0;char ch=gc(); while(ch<'0'||ch>'9') ch=gc(); while(ch>='0'&&ch<='9') {nm=(nm<<1)+(nm<<3)+ch-'0';ch=gc();} return nm;}
+
+int main()
+{
+  int n,k;
+  n=read();
+  k=read();
+  pair<int ,int > P[n+1];
+  for(int i=0;i<n;i++)
+  {
+     int temp=read();
+     P[i].first=temp;
+     P[i].second=i;
+    // or we can do P[i]=make_pair(temp,i);
+  }
+  sort(P,P+n);
+  int ans=0;
+  for(int i=0;i<n;)
+  {
+     ans++;
+     int j=i+1;
+     while(j<n)
+     {
+        if(P[i].first==P[j].first && P[j].second-P[i].second<k) j++;
+        else break;
+     }
+     i=j;
+   }
+   printf("%d
+",ans);
+}

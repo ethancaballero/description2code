@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+ 
+#define MAX 1111111
+ 
+char a[256], s[MAX], x, y;
+int n, len, i, j, k;
+ 
+int main() {
+
+int t;
+scanf("%d", &t);
+while (t--) {
+memset(a, 0, sizeof(a));
+scanf("%d", &n);
+while (n--) {
+scanf(" %c %c", &x, &y);
+a[x] = y;
+}
+scanf("%s", s);
+len = strlen(s);
+	for (i = 0; i < len; i++)
+        if (a[s[i]]) s[i] = a[s[i]];
+i = 0;
+j = len - 1;
+ 
+while (i <= j && s[i] == '0') i++;
+ 
+if (i <= j) {
+for (k = i; k <= j; k++)
+if (s[k] == '.') break;
+if (k <= j) {
+while (i <= j && s[j] == '0') j--;
+}
+}
+if (i > j) s[j = i] = '0';
+else if (i == j && s[i] == '.') s[i] = '0';
+	else if (s[j] == '.') j--;
+ 
+s[j + 1] = 0;
+printf("%s
+", s + i);
+}
+return 0;
+}

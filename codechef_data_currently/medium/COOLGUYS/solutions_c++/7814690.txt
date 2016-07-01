@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+#define ll long long int
+ll n;
+ll gcd(ll x,ll y)
+{
+    return(!y?x:gcd(y,x%y));
+}
+ll getUp(ll n)
+{
+    ll to=(ll)(sqrt(n));
+    ll res=0;
+    for(int i=1;i<=to;i++)
+        res+=(n/i);
+    res<<=1;
+    return res-to*to;
+}
+void solve(ll n)
+{
+    ll up=getUp(n);
+    ll down=n*n;
+    //cout<<up<<" "<<down<<endl;
+    ll g=gcd(up,down);
+    up/=g;down/=g;
+    cout<<up<<"/"<<down<<endl;
+    return;
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+cin.tie(0);
+int tt;
+cin>>tt;
+while(tt--)
+{
+    cin>>n;
+    solve(n);
+}
+return 0;
+}

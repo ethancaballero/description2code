@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string s;
+        cin>>s;
+        int maxlength=0;
+        int days=0;
+        int length=s.length();
+        for(int i=0;i<length;i++){
+            int length1=0;
+            int flag=1;
+            while(s[i]=='.'){
+                length1++;
+                flag=0;
+                i++;
+            }
+            if(length1>maxlength){
+                maxlength=length1;
+                days++;
+            }
+            if(flag==0){
+                i--;
+            }
+            
+        }
+        cout<<days<<endl;
+    }
+}

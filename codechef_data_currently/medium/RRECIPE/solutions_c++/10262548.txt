@@ -1,0 +1,43 @@
+//run time error
+#include<iostream>
+#include<string.h>
+# define m 10000009
+using namespace std;
+int main()
+{
+	
+	 long long int n,i,l;
+	 int t;
+	char str[1000001];
+	cin>>t;
+	while(t--)
+	{
+		long long int p=1;
+		cin>>str;
+		n=strlen(str);
+		if(n%2!=0)
+		{
+			if(str[n/2]=='?')
+			p=p*26;
+		}
+		for(i=0;i<=(n/2-1);i++)
+		{
+			//cout<<"poiu"<<i<<n-i-1;
+			//cout<<"tyui"<<str[i]<<str[n-i-1];
+			if((str[i]!=str[n-i-1])&&(str[i]!='?')&&(str[n-i-1]!='?'))
+			{
+			//	cout<<"hu";
+				p=0;
+				break;
+			}
+			else if((str[i]=='?')&&(str[n-i-1]=='?'))
+			{
+				p=(p*26)%m;
+			//	cout<<"cnbn"<<str[i]<<str[n-i-1];
+			}
+			
+		}
+		cout<<p<<endl;
+	}
+	return 0;
+}

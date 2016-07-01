@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<string.h>
+int main(){
+	int a,b,j,first , last,sum,t;
+	scanf("%d",&t);
+	while(t--){
+	
+	scanf("%d",&a);
+	b=a;
+	//printf("%d",a/10);
+	for(j=0;j<=b;j++){
+		//printf("ret");
+		if(b/10==0)
+		break;
+		
+		b=b/10;
+		//printf("%d
+",b);
+		//printf("%d
+",a);
+	}
+	first=b;
+	///printf("%d
+",first);
+	last=a%10;
+	//printf("%d
+",last);
+	sum=first+last;
+	printf("%d
+",sum);
+}
+}
+	

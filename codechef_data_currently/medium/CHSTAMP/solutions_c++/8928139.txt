@@ -1,0 +1,113 @@
+#include<bits/stdc++.h>
+#define S(n) scanf("%d", &(n))
+#define P(n) printf("%d", (n))
+#define SL(n) scanf("%lld", &(n))
+#define PL(n) printf("%lld", (n))
+#define pb push_back
+#define mp make_pair
+#define ll long long
+#define DEBUG cout<<"HELLO"
+#define SP printf(" ")
+#define NL printf("
+")
+#define N 106
+#define M 1000000007
+using namespace std;
+int maximum_val[50002];
+set<int>nodes[50002];
+map<int, vector<int> >g[50002];
+int visited[50002];
+vector<int>has;
+int maximum;
+
+void dfs(int u, int day)
+{
+    visited[u]=1;
+    has.pb(u);
+    //maximum = max(maximum, u);
+    maximum = max(maximum, maximum_val[u]);
+
+    for(int i=0;i<g[day][u].size();i++)
+    {
+        int v = g[day][u][i];
+        if(visited[v]==0)
+        {
+            dfs(v, day);
+        }
+    }
+
+}
+set<int>::iterator it;
+void initialise()
+{
+    for(int i=0;i<=50000;i++)
+    {
+        nodes[i].clear();
+        g[i].clear();
+    }
+}
+int main()
+{
+        //freopen("input.in", "r", stdin);
+
+	int tc = 1;
+	S(tc);
+	for(int t=1;t<=tc;t++)
+	{
+	    initialise();
+	    int n,m;
+	    S(n);S(m);
+	    int a[n+1];
+	    for(int i=1;i<=n;i++)S(a[i]);
+	    while(m--)
+        {
+            int day, u, v;
+            S(day);S(u);S(v);
+            nodes[day].insert(u);
+            nodes[day].insert(v);
+            g[day][u].pb(v);
+            g[day][v].pb(u);
+        }
+
+
+        for(int i=1;i<=50000;i++)maximum_val[i] = i;
+
+        for(int i=50000;i>=1;i--)
+        {
+            if(nodes[i].empty())continue;
+            for(it = nodes[i].begin();it!=nodes[i].end();it++)
+            {
+                visited[*it] = 0;
+            }
+            for(it = nodes[i].begin();it!=nodes[i].end();it++)
+            {
+                if(visited[*it]==0)
+                {
+                    has.clear();
+                    maximum=-1;
+                    dfs(*it, i);
+
+                    for(int i=0;i<has.size();i++)
+                    {
+                        //maximum_val[has[i]] = max(maximum_val[has[i]], maximum);
+                        maximum_val[has[i]] = maximum;
+                    }
+
+                }
+
+            }
+
+        }
+
+        ll ans=0;
+        for(int i=1;i<=n;i++)
+        {
+            ans+=maximum_val[a[i]];
+        }
+        PL(ans);NL;
+
+
+	}
+
+
+}

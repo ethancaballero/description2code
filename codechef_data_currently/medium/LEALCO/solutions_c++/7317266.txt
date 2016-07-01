@@ -1,0 +1,79 @@
+#include<iostream>
+#define sc(x) scanf("%d",&x)
+ 
+using namespace std;
+ 
+	
+bool isbad(int B[],int n,int k,int m)
+{
+	int maxi=0,z,j;
+	long long c=0;
+	for(j=0;j<=n-k;j++)
+	{
+		maxi=0;
+		c=0;
+		for(z=j;z<=j+k-1;z++)
+		{
+			if(B[z]>maxi)
+			maxi=B[z];
+		}
+		for(z=j;z<=j+k-1;z++)
+		{
+			if(B[z]==maxi)
+			{c++;}
+		}
+		if(c>=m)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}	
+ 
+int popcount(long long x) {
+	int res = 0;
+	while (x > 0) {
+		x -= x & -x;
+		++res;
+	}
+	return res;
+}
+ 
+int main ()
+{
+	int t,n,k,m,j,i;
+    long long p,q,cnt=0,ans;
+    int A[20],B[20];
+ 
+	sc(t);
+	for(i=0;i<t;i++)
+	{
+		sc(n);sc(k);sc(m);
+		ans=n+1;
+		for(j=0;j<n;j++)
+		{
+			sc(A[j]);
+		}
+		if(m==1){ans=-1;cout<<ans<<endl;continue;}
+ 
+		for(p=0;p<(1<<n);p++)
+		{
+			cnt=popcount(p);
+			if(cnt>=ans)continue;
+			for(j=0;j<n;j++)
+			{
+				if(p&(1<<j))
+				B[j]=A[j]+1;
+				else B[j]=A[j];
+			}
+			if(!isbad(B,n,k,m))
+			{
+				ans=cnt;
+			}
+		}
+		if(ans==n+1)ans=-1;
+		//label:
+		cout<<ans<<endl;
+	}
+	return 0;
+}  

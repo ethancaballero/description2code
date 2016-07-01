@@ -1,0 +1,29 @@
+from __future__ import division
+t=int(raw_input())
+for case in range(t):
+    w=raw_input()
+    w=w.split(' ')
+    x=float(w[0])
+    k=int(w[1])
+    x=x/2.0
+    p=1
+    b=0
+    while 1 :
+        p=p*2.0
+        if p>=k:
+                break
+        x=x/2.0
+    if k==1:
+        print "{0:.9f}".format(x)
+        b=1
+    else :
+        if p==k:
+                print "{0:.9f}".format(x/2.0)
+                b=1
+        p=p/2.0
+        c=x*2.0
+        while p!=k:
+                p=p+1
+                x=x+c
+    if b==0:
+        print "{0:.9f}".format(x)

@@ -1,0 +1,22 @@
+import math
+a = input()
+while (a > 0):
+    b = input()
+    z = 0
+    i = 1
+    while (i*i < b):
+        if (b%i == 0):
+            if ('4' in str(i)) or ('7' in str(i)):
+                z = z+1
+            if ('4' in str(b/i)) or ('7' in str(b/i)):
+                z = z+1
+            else:
+                i = i
+            i = i+1
+        else:
+            i = i+1
+    if (i*i == b):
+        if ('4' in str(i)) or ('7' in str(i)):
+            z = z+1
+    print z
+    a = a-1

@@ -1,0 +1,31 @@
+#include <cstdio>
+
+#define mod 1000007
+#define abs(x) ((x)<0 ? -(x) : (x))
+
+int main()
+{
+    int dp[21][201][10] = {}; // [digit count][weight][last dig]
+    //initialize for 2 digit numbers
+    for(int first=1; first<10; first++)
+        for(int sec=0; sec<10; sec++) dp[2][abs(sec-first)][sec]++;
+
+    for(int digits=3; digits<21; digits++)
+        for(int weight=0; weight<201; weight++)
+            for(int ldig=0; ldig<10; ldig++)
+                for(int k=0; k<10; k++) if(weight - abs(ldig-k) >= 0) {
+                    dp[digits][weight][ldig] += dp[digits-1][weight - abs(ldig-k)][k];
+                    dp[digits][weight][ldig] %= mod;
+                }
+
+    int t;
+    scanf("%d", &t);
+    while(t--) {
+        int n, w;
+        scanf("%d %d", &n, &w);
+        int ans = 0;
+        for(int i=0; i<10; i++) ans = (ans + dp[n][w][i])%mod;
+        printf("%d
+", ans);
+    }
+}

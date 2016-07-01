@@ -1,0 +1,106 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <math.h>
+#include <climits>
+#include <string>
+#include <cstring>
+
+#define LL long long int
+#define UINT unsigned int
+#define MOD 1000000007
+#define MAX 100001
+
+using namespace std;
+
+inline int fastread() {
+	int i=0;
+	char c=getchar_unlocked();
+	while(c<'0')
+		c = getchar_unlocked();
+	while(c>='0' && c<='9') {
+		i = (i<<3)+(i<<1)+c-'0';
+		c = getchar_unlocked();
+	}
+	return i;
+}
+
+LL fact[MAX];
+LL inv_fact[MAX];
+LL letters[26];
+int len;
+
+inline void init() {
+	fact[0]=fact[1]=inv_fact[0]=inv_fact[1]=1;
+	for(int i=2;i<MAX;i++) {
+		inv_fact[i]=((MOD-MOD/i)*(inv_fact[MOD%i]))%MOD;
+	}
+	for(int i=2;i<MAX;i++) {
+		fact[i]=(fact[i-1]*i)%MOD;
+		inv_fact[i]=(inv_fact[i-1]*inv_fact[i])%MOD;
+	}
+}
+
+LL solve() {
+	// similar
+	LL sim=1;
+	
+	// single swap
+	for(int i=0;i<26;i++) 
+		for(int j=0;j<i;j++) 
+			sim = (sim+letters[i]*letters[j])%MOD;
+	
+	//cout<<sim<<endl;
+	
+	// double swap all different
+	for(int i=0;i<26;i++) 
+		for(int j=0;j<i;j++)
+			for(int k=0;k<j;k++)
+				for(int l=0;l<k;l++)
+					sim = (sim+((3*letters[i]*letters[j])%MOD) *(letters[k]*letters[l])%MOD)%MOD;
+	//cout<<sim<<endl;
+	
+	// double swap 1 common
+	for(int i=0;i<26;i++)
+		for(int j=0;j<26;j++)
+			if(i!=j)
+				for(int k=0;k<j;k++)
+					if(i!=k)
+						sim =(sim+((letters[i]*(letters[i]-1))%MOD)*(letters[j]*letters[k])%MOD)%MOD;
+	//cout<<sim<<endl;
+	// double swap same twice
+	for(int i=0;i<26;i++)
+		for(int j=0;j<i;j++)
+			sim = (sim+((letters[i]*(letters[i]-1)/2)%MOD) * ((letters[j]*(letters[j]-1)/2)%MOD))%MOD;
+	//cout<<sim<<endl;
+	// swap same letter after first swap
+	for(int i=0;i<26;i++)
+		for(int j=0;j<i;j++)
+			for(int k=0;k<j;k++)
+				sim = (sim+((2*letters[i]*letters[j])%MOD)*letters[k])%MOD;
+	//cout<<sim<<endl;
+	LL perm=fact[len];
+	//cout<<perm <<endl;
+	for(int i=0;i<26;i++) perm =(perm*inv_fact[letters[i]])%MOD;
+	//cout<<perm <<" "<<sim<<endl;
+	LL ans = ( (perm*perm)%MOD - (perm*sim)%MOD)%MOD;
+	//cout<<ans<<endl;
+	return ans<0?ans+MOD:ans;
+	
+}
+
+int main() {
+	init();
+	int t=fastread();
+	while(t--) {
+		for(int i=0;i<26;i++) letters[i]=0;
+		string s;
+		cin>>s;
+		len = s.size();
+		for(int i=0;i<len;i++) letters[s[i]-'a']++;
+		
+		cout<<solve()<<endl;
+	}
+
+	return 0;
+}

@@ -1,0 +1,90 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t;
+	scanf("%d",&t);
+	while(t--) {
+		int n;
+		scanf("%d",&n);
+		int tl[3]; int tr[3]; int bl[3]; int br[3];
+		int x,y,ymax,ymin;
+		scanf("%d%d",&x,&y);
+		tl[0] = x; tl[1] = y; tl[2] = 1;
+		tr[0] = x; tr[1] = y; tr[2] = 1;
+		bl[0] = x; bl[1] = y; bl[2] = 1;
+		br[0] = x; br[1] = y; br[2] = 1;
+		ymax = y; ymin = y; 
+		for(int i = 2; i <= n; i++) {
+			scanf("%d%d",&x,&y);
+			if(x < tl[0]) {
+				tl[0] = x; tl[1] = y; tl[2] = i;
+				bl[0] = x; bl[1] = y; bl[2] = i;
+			}
+			if(x > tr[0]) {
+				tr[0] = x; tr[1] = y; tr[2] = i;
+				br[0] = x; br[1] = y; br[2] = i;
+			}
+			if(x == tl[0]) {
+				if(y > tl[1]) {
+					tl[1] = y; tl[2] = i;
+				}
+				if(y < bl[1]) {
+					bl[1] = y; bl[2] = i;
+				}
+			}
+			if(x == tr[0]) {
+				if(y > tr[1]) {
+					tr[1] = y; tr[2] = i;
+				}
+				if(y < br[1]) {
+					br[1] = y; br[2] = i;
+				}
+			}
+			if(y < ymin) 
+				ymin = y;
+			if(y > ymax)
+				ymax = y;
+		}
+		
+		if(ymax == tl[1]) {
+			printf("%d
+",1);
+			printf("%d %s
+",tl[2],"SE");
+		} else if(ymax == tr[1]) {
+			printf("%d
+",1);
+			printf("%d %s
+",tr[2],"SW");
+		} else if(ymin == bl[1]) {
+			printf("%d
+",1);
+			printf("%d %s
+",bl[2],"NE");
+		} else if(ymin == br[1]) {
+			printf("%d
+",1);
+			printf("%d %s
+",br[2],"NW");
+		} else {
+			printf("%d
+",2);
+			if(tl[1] > br[1]) {
+				printf("%d %s
+",tl[2],"SE");
+				printf("%d %s
+",br[2],"NW");
+			} else {
+				printf("%d %s
+",bl[2],"NE");
+				printf("%d %s
+",tr[2],"SW");
+			}
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,30 @@
+#include<stdio.h>
+int main()
+{
+    int t,i,j,k;
+    long long int n,arr[100005];
+
+    scanf("%d",&t);
+
+    while(t--)
+    {
+        scanf("%lld",&n);
+
+        for(int i=0;i<n;i++)
+        {
+            scanf("%lld",&arr[i]);
+        }
+
+        long long int minel=arr[0];
+
+        for(int i=1;i<n;i++)
+        {
+            if(minel>arr[i])
+            minel=arr[i];
+        }
+
+        printf("%lld
+",minel*(n-1));
+    }
+    return 0;
+}

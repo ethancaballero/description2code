@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+int A[1000000],B[1000000],leader[100000],cost[100000];
+int getLeader(int N)
+{
+   if(leader[N]==N)
+      return N;
+   leader[N]=getLeader(leader[N]);
+   return leader[N];
+}
+int main()
+{
+   int T,N,M,i,a,b;
+   long long int ans,minimum;
+   cin>>N>>M;
+   for(i=0;i<M;i++)
+      cin>>A[i]>>B[i];
+   for(i=0;i<N;i++)
+   {
+      leader[i]=i;
+      cin>>cost[i];
+   }
+   for(i=0;i<M;i++)
+   {
+      a=getLeader(A[i]-1);
+      b=getLeader(B[i]-1);
+      if(cost[b]>=0)
+      {
+         if(cost[a]>cost[b]||cost[a]<0)
+            leader[a]=b;
+         else
+            leader[b]=a;
+      }
+      else
+         leader[b]=a;
+   }
+   bool lessCost=false;
+   for(ans=i=0,a=0;i<N;i++)
+   {
+      if(leader[i]==i)
+      {
+         a++;
+         ans+=cost[i];
+         if(cost[i]<0)
+            lessCost=true;
+         else if(minimum>cost[i])
+            minimum=cost[i];
+      }
+   }
+   if(a==1)
+      cout<<0<<endl;
+   else if(lessCost)
+      cout<<-1<<endl;
+   else
+      cout<<ans+minimum*(a-2)<<endl;
+return 0;
+}

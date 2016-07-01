@@ -1,0 +1,124 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<stdlib.h>
+#include<stdio.h>
+#define mod 1000000000
+using namespace std;
+int inv[2005];
+#define ll long long int
+ll powe(ll x, ll n)
+{
+	if(!n)
+		return 1;
+	ll ans = powe(x, n/2);
+	ans = (ans * ans) % mod;
+	if(n & 1)
+		ans  = (ans * x) % mod;
+	return ans;
+}
+pair<int, pair<int,int> > extendedEuclid(int a, int b) {
+     int x = 1, y = 0;
+    int xLast = 0, yLast = 1;
+    int q, r, m, n;
+    while(a != 0) {
+        q = b / a;
+        r = b % a;
+        m = xLast - q * x;
+        n = yLast - q * y;
+        xLast = x, yLast = y;
+        x = m, y = n;
+        b = a, a = r;
+    }
+    return make_pair(b, make_pair(xLast, yLast));
+}
+ 
+int modInverse(int a, int m) {
+    return (extendedEuclid(a,m).second.first + m) % m;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	long long int a[4005];int h[4005][3];
+	int g[3];
+	g[0]=2;
+	g[1]=5;
+	int pm=2;
+	a[0]=a[1]=1;
+	for(int i=2;i<=4001;i++)
+	{
+		//cout<<i<<"
+";
+		long long int num=(i*a[i-1]);
+		for(int j=0;j<pm;j++)
+		{
+			int count=0;
+			if(num%g[j]==0)
+			{
+				while(num%g[j]==0&&num)
+				{
+					//cout<<num<<"
+";
+					count++;
+					num/=g[j];
+				}
+			}
+			h[i][j]=count+h[i-1][j];
+		}		
+		a[i]=num%mod;
+	}
+	while(t--)
+	{
+		long long int comp[2004],comp2[2005];
+		int n,m;
+		long long int ans;
+		cin>>n>>m;
+		//cout<<"yeah
+";
+		for(int i=0;i<=m;i++)
+		{				
+			//cout<<"
+SS = "<<ss<<"
+";
+			ans=(((a[m+i-1])*(modInverse(a[i],mod)))%mod);
+			//cout<<"
+ans = "<<ans<<"
+";
+			
+			ans=(((ans)*(modInverse(a[m-1],mod)))%mod);	
+			//cout<<"
+ans = "<<ans<<"
+";
+			for(int j=0;j<2;j++)
+			{
+				int ml=powe(g[j],h[m+i-1][j]-h[i][j]-h[m-1][j]);
+				//cout<<"
+ml = "<<ml<<"
+";
+				ans=(((ans)*(ml))%mod);
+			}			
+			comp[i]=ans;
+			comp2[i]=comp[i];
+		}
+		for(int i=0;i<(n-1);i++)
+		{
+			for(int j=1;j<=m;j++)
+			{
+				comp2[j]=(((comp2[j-1])+(comp2[j]))%mod);
+			}
+			for(int j=0;j<=m;j++)
+			{
+				comp2[j]=(((comp2[j])*(comp[j]))%mod);
+			}
+			
+		}
+		ans=0;
+		for(int i=0;i<=m;i++)
+		{
+			ans=(((ans)+(comp2[i]))%mod);	
+		}
+		cout<<ans<<"
+";
+	}
+} 

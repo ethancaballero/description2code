@@ -1,0 +1,7 @@
+t=int(input())
+for i in range(t):
+	n=int(input())
+	result=0
+	string=raw_input()
+	n=string.count('1')
+	print n*(n+1)/2

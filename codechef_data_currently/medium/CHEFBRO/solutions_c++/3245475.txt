@@ -1,0 +1,64 @@
+#include<cstdio>
+#include<iostream>
+
+using namespace std;
+int sg[1010][1010];
+int main()
+{
+    int t,i,j,C,m,n,ans=0,count;
+
+    //printf("ishaan");
+    for(i=1;i<=1001;i++)
+    {
+        for(j=1;j<=1001;j++)
+        {
+
+            if(i==1 && j==1)
+			{
+				sg[i][j]=0;
+				continue;
+			}
+			int mex[10]={0};
+
+			if(i-1>0)
+				mex[sg[i-1][j]]=2;
+			if(i-2>0)
+				mex[sg[i-2][j]]=2;
+			if(i-1>0 && j-1>0)
+				mex[sg[i-1][j-1]]=2;
+			if(i-2>0 && j-2>0)
+				mex[sg[i-2][j-2]]=2;
+			if(j-1>0)
+				mex[sg[i][j-1]]=2;
+			if(j-2>0)
+				mex[sg[i][j-2]]=2;
+
+
+            count=0;
+            while(mex[count])
+                count++;
+
+            sg[i][j]=count;
+
+        }
+    }
+    scanf("%d",&t);
+    while(t--)
+    {
+        ans=0;
+        scanf("%d",&C);
+        for(i=0;i<C;i++)
+        {
+            //cin>>n>>m;
+            scanf("%d%d",&n,&m);
+            ans=ans^sg[n][m];
+        }
+        if(ans)
+            printf("MasterChef
+");
+        else
+            printf("Football
+");
+    }
+    return 0;
+}

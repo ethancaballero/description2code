@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   int T,R,C,i,j,ans;
+   char str[51][51];
+   cin>>T;
+   while(T--)
+   {
+      cin>>R>>C;
+      cin.ignore();
+      for(i=0;i<R;i++)
+      cin.getline(str[i],C+1);
+      for(ans=0,i=2;i<R-2;i++)
+      for(j=2;j<C-2;j++)
+      if(str[i][j]!='#'&&str[i+1][j]=='^'&&str[i+2][j]=='^'&&str[i-1][j]=='^'&&str[i-2][j]=='^'&&str[i][j+1]=='^'&&str[i][j+2]=='^'&&str[i][j-1]=='^'&&str[i][j-2]=='^')
+      ans++;
+      cout<<ans<<endl;
+   }
+   return 0 ;
+}

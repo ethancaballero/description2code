@@ -1,0 +1,113 @@
+#include <bits/stdc++.h>
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+
+using namespace std;
+
+
+#define ll long long
+#define ff first
+#define ss second
+#define mpa make_pair
+#define MOD 1000000007
+#define pb push_back
+#define lld I64d
+#define MXN 1000000
+
+
+pair<int, int> Arr[MXN];
+int A;
+int B;
+int C;
+int N;
+
+void inp()
+{
+	scanf("%d", &N);
+	
+	scanf("%d%d%d", &A, &B, &C);
+	
+	for(int i = 0; i < N; ++i) {
+		scanf("%d%d", &Arr[i].ff, &Arr[i].ss);
+	}
+}
+
+/*
+double get(double x)
+{
+	// Ax + By + C = 0
+	// By = -(Ax + C)
+	// y = -(Ax + C)/B
+	
+	double y = -((A*x) + C)/B;
+	return y;
+}
+*/
+
+
+double get( double &x1 ) {
+	//ax+by=c
+	// y = (-c - ax)/b
+	double y1 = -C;
+	if(!B) {
+		y1=x1;
+		x1=-C/((double)A);
+		return y1;
+	}
+	return (y1 - (x1*A))/B;
+}
+
+double dis(int x1, int y1, int x2, int y2)
+{
+	return sqrt(((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2)));
+}
+
+double f(double X, double Y)
+{
+	double Dist = 0.0;
+	
+	for(int i = 0; i < N; ++i) {
+		Dist += sqrt((X - Arr[i].ff) * (X - Arr[i].ff) + (Y - Arr[i].ss) * (Y - Arr[i].ss));
+	}
+	
+	return Dist;
+}
+
+void solve()
+{
+	double low = -5000;
+	double hi = 5000;
+	
+	double v1 = 0.0;
+	double v2 = 0.0;
+	
+	while(hi - low >= 1e-6) {
+		double m1 = low + (hi - low)/3;
+		double m2 = hi - (hi - low)/3;
+		
+		double m1y = get(m1);
+		double m2y = get(m2);
+		
+		v1 = f(m1, m1y);
+		v2 = f(m2, m2y);
+		if(v1 < v2)
+			hi = m2;
+		else
+			low = m1;
+	}
+	
+	printf("%.6lf
+", v1);
+}
+
+int main()
+{
+	int T;
+	scanf("%d", &T);
+	
+	while(T--) {
+		inp();
+		solve();
+	}
+	
+	return 0;
+}

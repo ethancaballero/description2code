@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        char a[12];
+        char b[12];
+        scanf("%s",a);
+        scanf("%s",b);
+        int i;
+        int c=0;
+        for(i=0;a[i]!=0;i++)
+        {
+            if(a[i]!=b[i]&& a[i]!='?'&& b[i]!='?')
+            {
+                c=1;
+                break;
+            }
+        }
+        if(c==0)
+            cout<<"Yes
+";
+        else
+            cout<<"No
+";
+    }
+    return 0;
+}

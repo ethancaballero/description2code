@@ -1,0 +1,105 @@
+#!/usr/bin/python
+# coding=utf8
+import sys
+import math
+from time import time
+from itertools import permutations, combinations
+import collections
+import functools
+from fractions import gcd, Fraction
+import string
+import random
+import bisect
+
+
+class timed(object):
+    def __init__(self, func):
+        self.func = func
+    def __call__(self, *args):
+        t1 = time()
+        ret = self.func(*args)
+        dif_time = time() - t1
+        print "%s: returned %s in %f seconds" % (self.func.__name__, ret, dif_time)
+        return ret
+
+
+def comp(f1, f2, *args):
+    t1 = time()
+    r1 = f1(*args) if f1 is not None else None
+    t2 = time()
+    r2 = f2(*args) if f2 is not None else None
+    t3 = time()
+    res = "%5s: %f
+%5s: %f
+" % (f1.__name__ if f1 is not None else None, t2 - t1, f2.__name__ if f2 is not None else None, t3 - t2)
+    res += "res1: %s
+res2: %s
+" % (r1, r2)
+    if r1 != r2:
+        dr = "!! DIFFERENT RESULTS !!"
+        res = dr + "
+" + res + "
+" + dr
+    print res
+
+
+def alg(L, queries):
+    length = len(L)
+
+    def foo(q):
+        count = 0
+        for i in xrange(length):
+            for j in xrange(i, length):
+                if min(L[i:j + 1]) == q:
+                    count += 1
+        return count
+
+    r = ""
+    for q in queries:
+        r += str(foo(q)) + "
+"
+    return r
+
+
+def alg2(L, queries):
+    length = len(L)
+
+    def foo(q):
+        count = 0
+        for i in xrange(length):
+            for j in xrange(i, length):
+                if min(L[i:j + 1]) == q:
+                    count += 1
+        return count
+
+    r = []
+    for q in queries:
+        r.append(str(foo(q)))
+
+    return '
+'.join(r)
+
+
+def main():
+    #random.seed(0)
+    #N = 50
+    #Q = 10
+    #L = [random.randint(1, 1000000) for _ in xrange(N)]
+    #queries = [random.randint(1, 1000000) for _ in xrange(Q)]
+    #comp(alg2, alg, L, queries)
+    #sys.exit(1)
+    #import cProfile
+    #cProfile.runctx('alg()', globals(), locals())
+    data = sys.stdin
+    size = int(data.readline())
+    L = map(int, data.readline().split())  # int
+    nbq = int(data.readline())
+    queries = []
+    for q in xrange(nbq):
+        queries.append(int(data.readline()))
+    res = alg2(L, queries)
+    print res
+
+
+if __name__ == "__main__":
+    main()

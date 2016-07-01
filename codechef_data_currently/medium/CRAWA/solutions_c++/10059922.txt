@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int x, y;
+        scanf("%d%d", &x, &y);
+        bool is = false;
+        if(x == 0 && y == 0){
+            is = true;
+        }
+
+        if(x > 0 && (x - 1) % 2 == 0){
+            int turn = 2 * x - 1;
+            int y0 = -(turn - 1)/2;
+            int y1 = (-y0 + 2);
+            if(y0 <= y && y <= y1) is = true;
+        }
+
+        if(x < 0 && (-x) % 2 == 0){
+            int turn = 2 * (-x) - 1;
+            int y0 = -(turn + 1)/2;
+            int y1 = (turn + 1)/2;
+            if(y0 <= y && y <= y1) is = true;
+        }
+        if(y > 0 && y % 2 == 0){
+            int turn = 2 * y - 2;
+            int x1 = turn/2;
+            int x0 = -(x1 + 1);
+            if(x0 <= x && x <= x1) is = true;
+        }
+        if(y < 0 && (-y) % 2 == 0){
+            int turn = 2 * (-y);
+            int x0 = -turn / 2;
+            int x1 = -x0 + 1;
+            if(x0 <= x && x <= x1) is = true;
+        }
+        if(is)
+            printf("YES
+");
+        else printf("NO
+");
+    }
+    return 0;
+}

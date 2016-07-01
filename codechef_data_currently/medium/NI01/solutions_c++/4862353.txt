@@ -1,0 +1,101 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+int a[60];
+int as[60];
+int main()
+{
+    int t,n,m,p,q,r,k,i,b,c,d,j,cr,c1;
+    scanf("%d",&t);
+    while(t--)
+    {
+        cr=0;c1=0;
+        scanf("%d%d%d%d%d%d",&n,&m,&q,&p,&r,&k);
+        for(i=0;i<=n;i++)
+        {
+            a[i]=-1;
+            as[i]=-1;
+        }
+        if(q<=n)
+        {
+            for(i=1;i<=q;i++)
+            {
+                a[i]=1;
+                as[i]=p;
+            }
+            q=0;
+        }
+        else
+        {
+            for(i=1;i<=n;i++)
+            {
+                a[i]=1;
+                as[i]=p;
+            }
+            q=q-n;
+        }
+        for(i=1;i<=k;i++)
+        {
+            for(j=1;j<=n;j++)
+            {
+                if(as[j]==i)
+                {
+                    a[j]=-1;
+                    as[j]=-1;
+                    cr++;
+                //    printf("cr=%d with i=%d
+",cr,i);
+                }
+            }
+            if(i%r==0)
+            {
+                if(m>0)
+                {
+                    q++;
+                    m--;
+                    //printf("q=%d
+",q);
+                }
+            }
+            if(q>0)
+            {
+                for(j=1;j<=n;j++)
+                {
+                    if(as[j]==-1)
+                    {
+                        a[j]=1;
+                        as[j]=i+p;
+                        q--;
+                    //    printf("q=%d with j=%d
+",q,j);
+                    }
+                    if(q<=0)
+                    break;
+                }
+            }
+        }
+        /*printf("cr=%d
+",cr);
+        for(j=1;j<=n;j++)
+            {
+                if(as[j]==k+1)
+                {
+                    a[j]=-1;
+                    as[j]=-1;
+                    cr++;
+                }
+            }*/
+        c1=0;
+        for(i=1;i<=n;i++)
+        {
+            if(as[i]==-1)
+            c1++;
+        }
+        printf("%d %d %d %d
+",c1,cr,m,q);
+
+    }
+
+
+    return 0;
+}

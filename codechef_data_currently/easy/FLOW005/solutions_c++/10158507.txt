@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t,a[]={1,2,5,10,50,100};
+cin>>t;
+while(t--)
+{
+	long int n;
+	cin>>n;
+	int count=0;
+	for(int i=5;i>=0;i--)
+	{
+		count+=(n/a[i]);
+		n=n%a[i];
+	}
+	cout<<count<<endl;
+}
+return 0;
+}

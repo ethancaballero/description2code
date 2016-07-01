@@ -1,0 +1,63 @@
+	#include<iostream>
+	#include<math.h>
+	#include<algorithm>
+	#include<stdio.h>
+	#define mod 1000000009
+	using namespace std;
+	int main()
+	{
+		int t;
+		scanf("%d",&t);
+		while(t>0)
+		{
+			int n,m;
+			scanf("%d",&n);
+			scanf("%d",&m);
+			char arr[1000009];
+			int temp;
+			int ma=1;
+			char ch;
+			for(int i=1;i<=n;i++)
+				arr[i]='a';
+			for(int i=1;i<=m;i++)
+			{
+				ch=getchar();
+				scanf("%c",&ch);
+				scanf("%d",&temp);
+				arr[temp]=ch;
+				ma=max(ma,temp);
+			}
+
+			int flag=0;
+			int index=-1;
+			long long int combination,pro=1;
+			for(int i=1;i<=ma;i++)
+			{
+				if(arr[i]!='a' && flag==0)
+				{
+					flag=1;
+					index=i;
+				}
+				else if(flag==1)
+				{
+					while(i<=ma && arr[i]=='a')
+					{
+						i++;
+					}	
+					if(i<=ma)
+					{
+						if(arr[i]!=arr[index])
+						{
+							combination=i-index;
+							pro=(pro*combination)%mod;
+						}
+						index=i;
+					}
+					
+				}	
+			}
+			printf("%lld
+",pro);
+			t--;		
+		}	
+	}	

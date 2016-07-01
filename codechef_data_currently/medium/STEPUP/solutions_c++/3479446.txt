@@ -1,0 +1,77 @@
+#include <iostream>
+#include <list>
+#include <map>
+using namespace std;
+
+#define maxn 10001
+
+list<int> adj[maxn];
+int f[maxn];
+bool leaf[maxn];
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        int n, m, a, b;
+        cin >> n >> m;
+        for(int i=0;i<=n;++i) {
+            adj[i].clear();
+            f[i] = 0;
+            leaf[i] = true;
+        }
+        for(int i=0;i<m;++i) {
+            cin >> a >> b;
+            adj[a].push_back(b);
+            leaf[b] = false;
+        }
+        // apply bfs with leaf as start point
+        bool possible = true;
+        int value=0;
+        for(int i=1; i<=n && possible; ++i) {
+            if(leaf[i]) {
+                list<pair<int,int> > queue;
+                list<int>::iterator beg, end;
+                map<int,bool> visited;
+                queue.push_back(make_pair(i,1));
+                int cur, val = 0;
+                while(!queue.empty()) {
+                    cur = queue.front().first;
+                    val = queue.front().second;
+                    queue.pop_front();
+                    if(visited[cur]) {
+                        possible = false;
+                        break;
+                    }
+
+                    visited[cur] = true;
+                    if(f[cur]<val) {
+                        f[cur] = val;
+                        ++val;
+                        beg = adj[cur].begin();
+                        end = adj[cur].end();
+                        while(beg!=end) {
+                            queue.push_back(make_pair(*beg,val));
+                            ++beg;
+                        }
+                        --val;
+                    }
+                }
+                value = max(value,val);
+            }
+        }
+        if(possible) {
+            possible = false;
+            for(int i=1;i<=n;++i) {
+                if(leaf[i]) {
+                    possible = true;
+                    break;
+                }
+            }
+            if(possible) cout << value << endl;
+            else cout << "IMPOSSIBLE" << endl;
+        }
+        else cout << "IMPOSSIBLE" << endl;
+    }
+    return 0;
+}

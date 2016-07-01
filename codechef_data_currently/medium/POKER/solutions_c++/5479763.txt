@@ -1,0 +1,162 @@
+#include <stdio.h>
+ 
+int main ()
+{
+    int dataset;
+    scanf ("%d", &dataset);
+    getchar ();
+ 
+    while ( dataset-- ) {
+        char input [20];
+ 
+        gets (input);
+ 
+        int rank [14] = {0};
+        int suit [4] = {0};
+ 
+        for ( int i = 0; i < 13; i += 3 ) {
+            if ( input [i] >= 50 && input [i] <= 57 )
+                rank [input [i] - 48]++;
+            else if ( input [i] == 'A' )
+                rank [1]++;
+            else if ( input [i] == 'T' )
+                rank [10]++;
+            else if ( input [i] == 'J' )
+                rank [11]++;
+            else if ( input [i] == 'Q' )
+                rank [12]++;
+            else if ( input [i] == 'K' )
+                rank [13]++;
+        }
+ 
+        for ( int i = 1; i < 14 ; i += 3 ) {
+            if ( input [i] == 'S' )
+                suit [0]++;
+            else if ( input [i] == 'H' )
+                suit [1]++;
+            else if ( input [i] == 'D' )
+                suit [2]++;
+            else if ( input [i] == 'C' )
+                suit [3]++;
+        }
+ 
+        bool flag = false;
+ 
+        switch (true) {
+            case 1 :
+                if ( (suit [0] == 5 || suit [1] == 5 || suit [2] == 5 || suit [3] == 5)
+                && (rank [1] && rank [10] && rank [11] && rank [12] && rank [13]) ) {
+                    printf ("royal flush
+");
+                    break;
+                }
+ 
+            case 2 :
+                if ( suit [0] == 5 || suit [1] == 5 || suit [2] == 5 || suit [3] == 5 ) {
+ 
+                    for ( int i = 1; i <= 9; i++ ) {
+                        if ( rank [i] && rank [i + 1] && rank [i + 2] && rank [i + 3] && rank [i + 4]) {
+                            printf ("straight flush
+");
+                            flag = true;
+                        }
+                    }
+ 
+                    if ( flag )
+                        break;
+                }
+ 
+            case 3 :
+                for ( int i = 1; i <= 13; i++ ) {
+                    if ( rank [i] == 4 ) {
+                        printf ("four of a kind
+");
+                        flag = true;
+                    }
+                }
+ 
+                if ( flag )
+                    break;
+ 
+            case 4 :
+                for ( int i = 1; i <= 13; i++ ) {
+                    for ( int j = 1; j <= 13; j++ ) {
+                        if ( rank [i] + rank [j] == 5 && (rank [i] - rank [j] == 1 || rank [i] - rank [j] == -1) ) {
+                            printf ("full house
+");
+                            flag = true;
+                            i = j = 13;
+                        }
+                    }
+                }
+ 
+                if ( flag )
+                    break;
+ 
+            case 5 :
+                if ( suit [0] == 5 || suit [1] == 5 || suit [2] == 5 || suit [3] == 5 ) {
+                    printf ("flush
+");
+                    break;
+                }
+ 
+            case 6 :
+                for ( int i = 1; i <= 9; i++ ) {
+                    if ( rank [i] && rank [i + 1] && rank [i + 2] && rank [i + 3] && rank [i + 4]) {
+                        printf ("straight
+");
+                        flag = true;
+                    }
+                }
+ 
+                if ( flag )
+                    break;
+ 
+            case 7 :
+                for ( int i = 1; i <= 13; i++ ) {
+                    if ( rank [i] == 3 ) {
+                        printf ("three of a kind
+");
+                        flag = true;
+                    }
+                }
+ 
+                if ( flag )
+                    break;
+ 
+            case 8 :
+                for ( int i = 1; i <= 13; i++ ) {
+                    for ( int j = 1; j <= 13; j++ ) {
+                        if ( i != j && rank [i] + rank [j] == 4 && (rank [i] - rank [j] == 0) ) {
+                            printf ("two pairs
+");
+                            flag = true;
+                            i = j = 13;
+                        }
+                    }
+                }
+ 
+                if ( flag )
+                    break;
+ 
+            case 9 :
+                for ( int i = 1; i <= 13; i++ ) {
+                    if ( rank [i] == 2 ) {
+                        printf ("pair
+");
+                        flag = true;
+                    }
+                }
+ 
+                if ( flag )
+                    break;
+ 
+            default :
+                printf ("high card
+");
+        }
+ 
+    }
+ 
+    return 0;
+}

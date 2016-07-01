@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+ int arr[5000001];
+int main()
+{
+    int t;
+    cin>>t;
+   
+      memset(arr,0,5000001);
+        for(int i=2;i*i<=5000000;i++)
+        {  if(arr[i]!=-1)
+              for(int j=i*2;j<=5000000;j=j+i)
+                   arr[j]=-1;
+        }
+    while(t--)
+    { int flag=0;
+        int n;
+        cin>>n;
+ 
+ 
+        for(int i=2;i<5000001;i++)
+        {
+            if(arr[i]!=-1)
+                if(i%4==1)
+                  if(n%i==0)
+            {
+                cout<<"YES
+";flag=1;break;
+            }
+        }
+ 
+        if(flag==0){cout<<"NO
+";}
+   } /**/
+   return 0;
+}
+ 

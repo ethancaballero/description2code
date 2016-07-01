@@ -1,0 +1,20 @@
+t=int(raw_input())
+while t:
+        s1=raw_input()
+        s2=raw_input()
+        l1=list(s1)
+        c1={}
+        for x in l1:
+                if c1.has_key(x):
+                        c1[x]+=1
+                else:
+                        c1[x]=1
+        l2=list(s2)
+        c=0
+        for x in l2:
+                if c1.has_key(x) and c1[x]>0:
+                        c1[x]-=1
+                        c+=1
+        print c
+        t=t-1
+

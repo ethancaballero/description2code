@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+int nexp(unsigned long long int num,int base){
+    int ans=0;
+    while(num%base==0){
+        ans++;
+        num=num/base;
+    }
+    return ans;
+}
+ 
+int main()
+{
+unsigned long long int n,l;
+int pow5, pow2, req;
+scanf("%llu", &n);
+
+ 
+while(n--){
+    scanf("%llu",&l);
+    pow5 = nexp(l,5);
+    pow2 = nexp(l,2);
+  
+    while(pow5>pow2){
+    	l*=4;	pow2+=2;
+    }
+    printf("%llu
+",l);    
+}
+return 0;
+} 

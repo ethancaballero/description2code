@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+#define gc getchar
+using namespace std;
+typedef long long ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll i,k,s;
+    double a_i,b_i,val;
+    cin>>i>>k>>s;
+    cin>>a_i>>b_i;
+    if((k-i)%2==0)
+    {
+        val=a_i+b_i;
+        val=val*pow(2.0,(2*(k-i)-s));
+    }
+    else
+        val=sqrt(2)*(a_i+sqrt(3)*b_i)*pow(2.0,2*(k-i)-s-1);
+    printf("%lf",val);
+    return 0;
+}

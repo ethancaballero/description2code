@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+int main() {
+	// your code goes here
+    int k,l,m,ind;
+    int max;
+    int final;
+    cin>>k;
+    while(k--)
+    {
+        max =0;
+        ind=0;
+        final=0;
+        cin>>l;
+        for(int i=0;i<l;i++)
+        {
+            cin>>m;
+            if(m+i>max )
+            {
+                max = m+i;
+            }
+            if(l>max)
+            max = l;
+            
+        }
+        cout<<max<<endl;
+    }
+	return 0;
+}

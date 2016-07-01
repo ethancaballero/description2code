@@ -1,0 +1,7 @@
+from __future__ import division
+t=input()
+while(t>0):
+	a,b,c,d=map(int,raw_input().strip().split())
+	print a/(a+b)
+	t-=1
+	

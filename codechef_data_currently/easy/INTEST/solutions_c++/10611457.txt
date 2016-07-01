@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+	int n,k;
+
+	scanf("%d %d",&n,&k);
+
+	int ti;
+	int count = 0;
+	for(int i=0; i<n; i++){
+		scanf("%d",&ti);
+		if(ti % k == 0){
+			count++;
+		}
+	}
+	printf("%d
+",count);
+	return 0;
+}

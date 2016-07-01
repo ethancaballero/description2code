@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int n,q,k;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++)
+	  cin>>a[i];
+	cin>>q;
+	while(q--)
+	{
+		cin>>k;
+		int count=0,min;
+		for(int i=0;i<n;i++)
+		 {
+		 	min=a[i];
+		 	for(int j=i;j<n;j++)
+		   {
+		   	   if(a[j]<min)
+		   	      min=a[j];
+		   	   if(min==k)
+				  count++;   
+		   }
+		 }
+		 cout<<count<<endl;
+	  }  
+}

@@ -1,0 +1,12 @@
+for _ in range(input()):
+    l=input()
+    s=raw_input()
+    ans=s
+    for i in range(l):
+        rem=s[:i]+s[i+1:]
+        #print rem
+        for j in range(l):
+            t=rem[:j]+s[i]+rem[j:]
+            if t<ans:
+                ans=t
+    print ans

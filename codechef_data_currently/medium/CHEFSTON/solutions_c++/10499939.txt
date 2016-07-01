@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int test;
+	cin>>test;int t;int i;
+	for(t=0;t<test;t++)
+	{
+		 long long n,k;
+		 cin>>n>>k;
+		 long long a[n];long long b[n];
+		 for(i=0;i<n;i++)
+		 {
+		 cin>>a[i];	
+		 }
+		 for(i=0;i<n;i++)
+		 {
+		 	cin>>b[i];
+		 }
+		 long long result=0;
+		 for(i=0;i<n;i++)
+		 {
+		 result=max(result,(long long)(k/a[i])*b[i]);	
+		 }
+	cout<<result<<"
+";
+	}//test
+	
+	return 0;
+}//main

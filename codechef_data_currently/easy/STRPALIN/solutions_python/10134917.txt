@@ -1,0 +1,21 @@
+T=input()
+for i in range(T):
+    A=raw_input()
+    B=raw_input()
+    Ca={}
+    Cb={}
+    for i in range(97,123,1):
+        Ca[chr(i)]=0
+        Cb[chr(i)]=0
+    for a in A:
+        Ca[a]=1
+    for b in B:
+        Cb[b]=1
+    found=False
+    for i in range(97,123,1):
+        if Ca[chr(i)]==1 and Cb[chr(i)]==1:
+            print "Yes"
+            found=True
+            break
+    if not found:
+        print "No"

@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long int a[100005],b[100005];
+
+int main(){
+	long long int k,t,i,n;
+	long long int pos,gsum=0,prod,ggsum;
+	long long int totsum =0;
+	cin>>t;
+	while(t--){
+		cin>>n>>k;
+		for(i=1;i<=n;i++)
+			cin>>a[i];
+		for(i=1;i<=n;i++)
+			cin>>b[i];
+
+		gsum = pos = 0;
+		gsum = INT_MIN;
+		for(i=1;i<=n;i++){
+			if(b[i]==0)
+				continue;
+			if(a[i]>=0 && b[i]>=0 || a[i]<0 && b[i] <0)
+				prod =(abs(a[i]) + k)*(abs(b[i]));
+			else if(a[i] >=0 )
+				prod = (a[i] - k)*b[i];
+			else 
+				prod = (a[i] + k) *b[i];
+
+			if(gsum < (prod-(a[i]*b[i]))){
+				gsum = prod - (a[i]*b[i]);
+				pos = i;
+			}
+		}
+
+		totsum = 0;
+		for(i=1;i<=n;i++){
+			if(pos == i)
+				totsum += gsum + a[i]*b[i];
+			else 
+				totsum += a[i] * b[i];
+
+		}
+		cout<<totsum<<endl;
+	}
+	return 0;
+}

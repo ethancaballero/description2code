@@ -1,0 +1,13 @@
+# codechef
+# Enormous Input Test
+
+n,k=map(int,raw_input().split())
+L=[]
+for i in range(n):
+    e=int(raw_input())
+    L.append(e)
+count=0
+for elem in L:
+    if elem%k==0:
+        count=count+1
+print count

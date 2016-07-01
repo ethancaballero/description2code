@@ -1,0 +1,186 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+long long int mod=1000000007;
+
+long int arr[100006];
+
+
+
+
+struct tree{
+    long long int M[2][2];
+}t[400024];
+
+
+void fibo(tree &t,long int power)
+{   long long int f[2][2]={{1,1},{1,0}};
+    long long int copy[2][2];
+    tree res;
+
+   /* t.M[0][0]=1;
+    t.M[0][1]=1;
+    t.M[1][0]=1;
+    t.M[1][1]=0;*/
+
+    res.M[0][0]=1;
+    res.M[0][1]=0;
+    res.M[1][0]=0;
+    res.M[1][1]=1;
+
+    /*if(power==0){
+     printf("%ld",t.M[0][0]);
+     return;
+    }*/
+
+    while(power>0)
+    {
+        if(power&1)
+        {
+          t.M[0][0]=((res.M[0][0]*f[0][0])%mod+(res.M[0][1]*f[1][0])%mod)%mod;
+          t.M[0][1]=((res.M[0][0]*f[0][1])%mod+(res.M[0][1]*f[1][1])%mod)%mod;
+          t.M[1][0]=((res.M[1][0]*f[0][0])%mod+(res.M[1][1]*f[1][0])%mod)%mod;
+          t.M[1][1]=((res.M[1][0]*f[0][1])%mod+(res.M[1][1]*f[1][1])%mod)%mod;
+
+          res.M[0][0]=t.M[0][0];
+          res.M[0][1]=t.M[0][1];
+          res.M[1][0]=t.M[1][0];
+          res.M[1][1]=t.M[1][1];
+          power--;
+
+        }
+
+        copy[0][0]=((f[0][0]*f[0][0])%mod+(f[0][1]*f[1][0])%mod)%mod;
+        copy[0][1]=((f[0][0]*f[0][1])%mod+(f[0][1]*f[1][1])%mod)%mod;
+        copy[1][0]=((f[1][0]*f[0][0])%mod+(f[1][1]*f[1][0])%mod)%mod;
+        copy[1][1]=((f[1][0]*f[0][1])%mod+(f[1][1]*f[1][1])%mod)%mod;
+
+        f[0][0]=copy[0][0];
+        f[0][1]=copy[0][1];
+        f[1][0]=copy[1][0];
+        f[1][1]=copy[1][1];
+
+        power/=2;
+
+
+    }
+
+    //printf("
+%ld
+",t.M[0][0]);
+}
+
+
+void buildtree(int node,int i,int j)
+{
+    if(i>j)
+     return;
+    if(i==j)
+    {
+        fibo(t[node],arr[i]);
+        return;
+    }
+
+    long int mid=(i+j)/2;
+    buildtree(node*2+1,i,mid);
+    buildtree(node*2+2,mid+1,j);
+    /*temp[0][0]=(t[node*2+1].M[0][0]*t[node*2+2].M[0][0])+(t[node*2+1].M[0][1]*t[node*2+2].M[1][0])%mod;
+    temp[0][1]=(t[node*2+1].M[0][0]*t[node*2+2].M[0][1])+(t[node*2+1].M[0][1]*t[node*2+2].M[1][1])%mod;
+    temp[1][0]=(t[node*2+1].M[1][0]*t[node*2+2].M[0][0])+(t[node*2+1].M[1][1]*t[node*2+2].M[1][0])%mod;
+    temp[1][1]=(t[node*2+1].M[1][0]*t[node*2+2].M[0][1])+(t[node*2+1].M[1][1]*t[node*2+2].M[1][1])%mod;
+    //multiply with base matrix again
+    temp2[0][0]=temp[0][0]+temp[0][1];
+    temp2[0][1]=temp[0][0];
+    temp2[1][0]=temp[1][0]+temp[1][1];
+    temp2[1][1]=temp[1][0];*/
+
+    t[node].M[0][0]=(t[node*2+1].M[0][0]+t[node*2+2].M[0][0]+(t[node*2+1].M[0][0]*t[node*2+2].M[0][0])%mod+(t[node*2+1].M[0][1]*t[node*2+2].M[1][0])%mod)%mod;
+    t[node].M[0][1]=(t[node*2+1].M[0][1]+t[node*2+2].M[0][1]+(t[node*2+1].M[0][0]*t[node*2+2].M[0][1])%mod+(t[node*2+1].M[0][1]*t[node*2+2].M[1][1])%mod)%mod;
+    t[node].M[1][0]=(t[node*2+1].M[1][0]+t[node*2+2].M[1][0]+(t[node*2+1].M[1][0]*t[node*2+2].M[0][0])%mod+(t[node*2+1].M[1][1]*t[node*2+2].M[1][0])%mod)%mod;
+    t[node].M[1][1]=(t[node*2+1].M[1][1]+t[node*2+2].M[1][1]+(t[node*2+1].M[1][0]*t[node*2+2].M[0][1])%mod+(t[node*2+1].M[1][1]*t[node*2+2].M[1][1])%mod)%mod;
+
+    return;
+}
+
+
+tree query(int node,int first,int last,int i,int j)
+{
+    tree P,Q,R;
+
+    if(first>j||last<i||first>last){
+        tree s;
+        s.M[0][0]=0;
+        s.M[0][1]=0;
+        s.M[1][0]=0;
+        s.M[1][1]=0;
+        return s;
+    }
+
+
+    if(first>=i&&last<=j)
+     return t[node];
+
+    int mid=(first+last)/2;
+    P=query(node*2+1,first,mid,i,j);
+    Q=query(node*2+2,mid+1,last,i,j);
+
+    R.M[0][0]=(P.M[0][0]+Q.M[0][0]+((P.M[0][0]*Q.M[0][0])%mod+(P.M[0][1]*Q.M[1][0])%mod))%mod;
+    R.M[0][1]=(P.M[0][1]+Q.M[0][1]+((P.M[0][0]*Q.M[0][1])%mod+(P.M[0][1]*Q.M[1][1])%mod))%mod;
+    R.M[1][0]=(P.M[1][0]+Q.M[1][0]+((P.M[1][0]*Q.M[0][0])%mod+(P.M[1][1]*Q.M[1][0])%mod))%mod;
+    R.M[1][1]=(P.M[1][1]+Q.M[1][1]+((P.M[1][0]*Q.M[0][1])%mod+(P.M[1][1]*Q.M[1][1])%mod))%mod;
+    return R;
+
+}
+
+
+void update(int node,int x,int first,int last,long int val)
+{
+    if(first>last||first>x||last<x)
+     return;
+
+    if(first==last&&first==x)
+    {
+        fibo(t[node],val);
+        return;
+    }
+
+    int mid=(first+last)/2;
+    update(node*2+1,x,first,mid,val);
+    update(node*2+2,x,mid+1,last,val);
+
+    t[node].M[0][0]=(t[node*2+1].M[0][0]+t[node*2+2].M[0][0]+(t[node*2+1].M[0][0]*t[node*2+2].M[0][0])%mod+(t[node*2+1].M[0][1]*t[node*2+2].M[1][0])%mod)%mod;
+    t[node].M[0][1]=(t[node*2+1].M[0][1]+t[node*2+2].M[0][1]+(t[node*2+1].M[0][0]*t[node*2+2].M[0][1])%mod+(t[node*2+1].M[0][1]*t[node*2+2].M[1][1])%mod)%mod;
+    t[node].M[1][0]=(t[node*2+1].M[1][0]+t[node*2+2].M[1][0]+(t[node*2+1].M[1][0]*t[node*2+2].M[0][0])%mod+(t[node*2+1].M[1][1]*t[node*2+2].M[1][0])%mod)%mod;
+    t[node].M[1][1]=(t[node*2+1].M[1][1]+t[node*2+2].M[1][1]+(t[node*2+1].M[1][0]*t[node*2+2].M[0][1])%mod+(t[node*2+1].M[1][1]*t[node*2+2].M[1][1])%mod)%mod;
+}
+
+
+int main() {
+      //freopen("a.txt", "r", stdin);
+      //freopen("b.txt", "w", stdout);
+	int N,M,i,l;
+	long int r;
+	char Q;
+	scanf("%d%d",&N,&M);
+	for(i=0;i<N;i++)
+	 scanf("%ld",arr+i);
+	buildtree(0,0,N-1);
+	/*for(i=0;i<5;i++)
+	 printf("%ld ",t[i].M[0][1]);*/
+	for(i=0;i<M;i++)
+	{   cin>>Q;
+	    scanf("%d%ld",&l,&r);
+	    if(Q=='Q')
+	    {
+	        tree res=query(0,0,N-1,l-1,r-1);
+	        printf("%lld
+",res.M[1][0]);
+	    }
+	    else{
+	       update(0,l-1,0,N-1,r);
+	       /*for(i=0;i<5;i++)
+	        printf("%ld ",t[i].M[0][1]);*/
+	    }
+	}
+	return 0;
+}

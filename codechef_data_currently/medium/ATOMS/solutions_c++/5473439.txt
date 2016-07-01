@@ -1,0 +1,187 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <algorithm>
+#include <math.h>
+#include <string.h>
+#include <stack>
+#include <queue>
+#include <map>
+#define s(a) scanf("%d",&a)
+#define sl(a) scanf("%ld",&a)
+#define ss(a) scanf("%s",a)
+#define sll(a) scanf("%lld",&a)
+#define p(a) printf("%d
+",a)
+#define pl(a) printf("%ld
+",a)
+#define pll(a) printf("%lld
+",a)
+#define p2(a,b) printf("%d %d
+",a,b)
+#define pc(a) printf("%c
+",a)
+#define pf(a) printf("%f
+",a)
+#define plf(a) printf("%lf
+",a)
+#define ps(a) printf("%s
+",a)
+#define ps1(a) printf(a)
+#define f(n) for(long long i=0;i<n;i++)
+#define f1(n) for(long long i=1;i<n;i++)
+#define fe(n) for(long long i=0;i<=n;i++)
+#define ll long long
+#define M 1000000007
+#ifndef ONLINE_JUDGE
+    #define gc getchar
+#else
+    #define gc getchar_unlocked
+#endif
+using namespace std;
+
+//Russian Peasant Method For Long Long Multiplications
+long long int mulmod(long long int a,long long int b,long long int c)
+{
+    long long int x = 0,y=a%c;
+    while(b > 0)
+    {
+        if(b%2 != 0)
+        {
+            x = (x+y)%c;
+        }
+        y = (y*2)%c;
+        b /= 2;
+    }
+    return x%c;
+}
+
+//Calculating Large Powers Of A Number
+unsigned long long int func(unsigned long long int x,unsigned long long int n)
+{
+    if(n==0)
+    {
+        return 1;
+    }
+    else if(n==1)
+    {
+        return x%M;
+    }
+    else if(n%2==0)
+    {
+        return func((x*x)%M,n/2)%M;
+    }
+    else
+    {
+        return (x*(func((x*x)%M,(n-1)/2))%M)%M;
+    }
+}
+
+//gcd of a number
+ll int gcd(ll int a,ll int b)
+{
+    if(b==0)
+    return a;
+    else
+    return gcd(b,a%b);
+}
+
+int max(int a,int b)
+{
+    return a>b?a:b ;
+}
+
+int min(int a,int b)
+{
+    return a<b?a:b ;
+}
+
+int abs(int a)
+{
+    return a<0?-a:a ;
+}
+
+int fastread()
+{
+int input;
+char c=0;
+while (c<33) c=gc();
+input=0;
+while (c>33)
+{
+input=input*10+c-'0';
+c=gc();
+}
+return input;
+}
+
+void input()
+{
+    freopen("input.txt","r",stdin);
+}
+
+void output()
+{
+    freopen("output.txt","w",stdout);
+}
+
+bool isPowerOfTwo (ll int x)
+{
+  return x && (!(x&(x-1)));
+}
+
+int main()
+{
+    int cases;
+    s(cases);
+    while(cases--)
+    {
+        int v[101][31]={0};
+        int visited[101]={0};
+        int n,m,num;
+        s(n);s(m);
+        f(m)
+        {
+          int a;
+          s(a);
+          for(int j=0;j<a;j++)
+          {
+              s(num);
+              v[num][i]=1;
+          }
+        }
+        int cnt=0;
+        for(int i=0;i<n-1;i++)
+        {
+            if(visited[i]==1)
+                continue;
+            visited[i]=1;
+            for(int j=i+1;j<n;j++)
+            {
+                int flag=0;
+                for(int k=0;k<m;k++)
+                {
+                    if(v[i][k]==v[j][k])
+                    {
+                       continue;
+                    }
+                    else
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+                if(flag==0)
+                {
+                    visited[j]=1;
+                }
+            }
+            cnt++;
+        }
+        if(visited[n-1]==0)
+            cnt++;
+        p(cnt);
+    }
+    return 0;
+}

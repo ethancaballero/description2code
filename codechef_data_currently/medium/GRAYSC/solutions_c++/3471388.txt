@@ -1,0 +1,24 @@
+#include<stdio.h>
+int main()
+{unsigned long long n,i,j,k,l;unsigned long long arr[67];
+scanf("%llu",&n);
+if(n>=68)
+{printf("Yes
+");
+return 0;
+}
+for(i=0;i<n;i++)
+scanf("%llu",&arr[i]);
+for(i=0;i<n-3;i++)
+for(j=i+1;j<n-2;j++)
+for(k=j+1;k<n-1;k++)
+for(l=k+1;l<n;l++)
+if(!(arr[i]^arr[j]^arr[k]^arr[l]))
+{printf("Yes
+");
+return 0;}
+
+
+printf("No
+");
+return 0;}

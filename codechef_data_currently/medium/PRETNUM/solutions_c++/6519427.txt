@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int self[1000002];
+int nodiv[1000002],isprm[1000002];
+main()
+{
+	int tc;long long i,l,r,j;
+	scanf("%d",&tc);//=(int *)malloc(1000001*sizeof(int));
+	memset(isprm,0,sizeof(isprm));
+	isprm[1]=1;
+	vector<int> prime;
+	for(i=2;i<=1000;i++)
+	{
+		if(!isprm[i])
+		{
+			prime.push_back(i);
+			for(j=i*i;j<1000001;j+=i)
+			isprm[j]=1;
+		}
+	}
+	for(i=1001;i<1000001;i++)
+	if(!isprm[i])prime.push_back(i);
+	//for(i=0;i<30;i++)printf("%d
+",prime[i]);
+	while(tc--)
+	{
+		scanf("%lld %lld",&l,&r);
+		long long int temp;
+		//int nodiv[1000002];//=(long long *)malloc(1000002*sizeof(long long));
+		fill(nodiv,nodiv+1000002,1);
+		//long long int self[1000002];//=(long long *)malloc(sizeof(long long)*1000002);
+		for(i=l;i<=r;i++){self[i-l]=i;}//printf("hre1
+");
+		for(i=0;i<prime.size() && prime[i]*prime[i]<=r;i++)
+		{//printf("1st
+");
+			for(j=(ceil(((1.0*l)/prime[i]))*prime[i]);j<=r;j+=prime[i])
+			{//printf("2nd
+");
+				int cnt=0;temp=self[j-l];
+				while(temp%prime[i]==0)
+				{
+					cnt++;temp/=prime[i];//printf("%d %d
+",temp,cnt);
+				}
+				self[j-l]=temp;
+				nodiv[j-l]*=cnt+1;
+			}
+		}//printf("hre2
+");
+		int cnt=0;
+		for(i=l;i<=r;i++)
+		{
+			if(self[i-l]!=1)nodiv[i-l]*=2;
+			if(!isprm[nodiv[i-l]])cnt++;
+			//printf("%d
+",nodiv[i-l]);
+		}
+		printf("%d
+",cnt);
+	}
+}

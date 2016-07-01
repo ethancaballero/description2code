@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int d1,d2,d;
+		double ans;
+		cin>>d1>>d2>>d;
+		if(d1==d2&&d2==d)
+		ans=0;
+		if(d1+d2==d)
+		ans=0;
+		else if(d1+d2>d)
+		{
+			if(d1>=d2+d)
+			ans=d1-d-d2;
+			else if(d2>=d1+d)
+			ans=d2-d-d1;
+			else
+			ans=0;
+		}
+		else
+		{
+			ans=d-(d1+d2);
+		}
+		cout<<ans<<"
+";
+	}
+}

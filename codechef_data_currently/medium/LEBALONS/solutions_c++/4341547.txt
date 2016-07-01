@@ -1,0 +1,70 @@
+#include <cstdio>
+#include <cstring>
+#define color 40
+
+using namespace std;
+
+struct balloons
+{
+    int colors;long int cost;
+    balloons()
+    {
+        colors=cost=0;
+    }
+    void reset()
+    {
+        colors=cost=0;
+    }
+};
+
+long long int amount=0,num[color+10][color+10],den[color+10][color+10],numerator,denominator;
+balloons balloon[color+10];
+
+int main()
+{
+    int t,n,minim,i,j,col;
+
+    double ans;
+    memset(num,0,sizeof(num)); memset(den,0,sizeof(den));
+
+    scanf("%i",&t);
+
+    while(t--)
+    {
+        scanf("%i%i",&n,&minim);
+
+        for(i=1;i<=color;i++) balloon[i].reset();
+
+        while(n--)
+        {
+            scanf("%i%lld",&col,&amount);
+            balloon[col].colors++;
+            balloon[col].cost+=amount;
+        }
+
+        for(i=1;i<=color;i++) { den[0][i]=num[0][i]=num[i][0]=0; den[i][0]=1;}
+        den[0][0]=1;
+
+        for(i=1;i<=color;i++)
+            for(j=1;j<=color;j++)
+                    den[i][j] = den[i-1][j] + den[i-1][j-1] * ((1<<balloon[i].colors)-1);
+
+        for(i=1;i<=color;i++)
+            for(j=1;j<=color;j++)
+                num[i][j] = num[i-1][j] + num[i-1][j-1] * ((1<<balloon[i].colors)-1) + den[i-1][j-1] * balloon[i].cost * ((1<<balloon[i].colors)>>1);
+
+        numerator=denominator=0;
+
+        for(i=minim;i<=color;i++)
+        {
+                numerator += num[color][i];
+                denominator += den[color][i];
+        }
+
+        ans = (double)numerator/(double)denominator;
+
+        printf("%0.9lf
+",ans);
+    }
+    return 0;
+}

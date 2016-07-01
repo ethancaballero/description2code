@@ -1,0 +1,27 @@
+import sys
+import math
+
+t= int(sys.stdin.readline())
+while(t>0) :
+	t = t-1
+	l,r = sys.stdin.readline().split(' ')
+	l = int(l)
+	r = int(r)
+	cat1 = int(math.log10(l));
+	cat2 = int(math.log10(r));
+	if cat1==cat2:
+		sum =  (r*(r+1)/2 - (l*(l-1)/2))*(cat1+1);
+		print sum%1000000007
+	else:
+		cat1 = cat1+1
+		num1 = pow(10,cat1);
+		num2 = pow(10,cat2);
+		sum1 = (((num1-1)*num1)/2 - (l*(l-1))/2)*cat1;
+		sum2 = ((r*(r+1))/2 - ((num2-1)*num2)/2)*(cat2+1);
+		sum3 = 0;
+		for i in range(cat1, cat2):			
+			num1 = pow(10,i);
+			num2 = pow(10,i+1);
+			sum3 +=  (num2*(num2-1)/2 - (num1*(num1-1)/2))*(i+1);
+		print (sum1+sum2+sum3)%1000000007
+	

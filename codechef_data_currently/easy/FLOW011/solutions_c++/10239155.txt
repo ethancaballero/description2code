@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	float gs,bs,hra,da;
+	cin >> t;
+	while(t--)
+	{
+		cin >> bs;
+		if(bs<1500)
+		{
+			gs= bs + ( 0.1 * bs ) + ( 0.9 * bs );
+			cout << gs <<"
+";
+		}
+		else
+		{
+			gs= bs + 500 + ( 0.98 * bs );
+			cout << gs <<"
+";
+		}
+	}
+return 0;
+}

@@ -1,0 +1,21 @@
+t=int(input())
+while t>0:
+    T1,T2,t1,t2=map(int,raw_input().split())
+    A=T1*T2
+    if T1==0 or T2==0 or (t1==0 and t2==0):
+        print "0"
+        continue
+    x=0
+    y=0
+    if t1<T2:
+        x=0.5*(T2-t1)**2
+    if t2<T1:
+        y=0.5*(T1-t2)**2
+    if T1<T2-t1:
+        x-=0.5*(T2-t1-T1)**2
+    if T2<T1-t2:
+        y-=0.5*(T1-t2-T2)**2
+    a=A-x-y
+    print "%.6f"%(a/A)
+        
+    t-=1

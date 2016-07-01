@@ -1,0 +1,18 @@
+while True:
+    flag=0
+    n=int(raw_input())
+    if n==0:
+        break
+    else:
+        a=[]
+        s=str(raw_input())
+        s=s.split(' ')
+        for i in range(0,n):
+            a.append(int(s[i]))
+        for i in range(0,n):
+            if a[a[i]-1] != i+1:
+                flag=1
+                print "not ambiguous"
+                break
+        if not flag:
+            print "ambiguous"

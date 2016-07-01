@@ -1,0 +1,21 @@
+def rev_num(a):
+    num=0
+    revnum=0
+    temp=a
+    while temp!=0:
+        temp=temp/10
+        num=num+1
+    for i in range(num-1):
+        revnum=revnum+(a%10)*(10**(num-1-i))
+        if a>9:
+            a=a/10
+    return revnum+a
+
+#Main region of our program    
+n=int(input())
+res=[]
+for i in range(n):
+    a=int(input())
+    res.append(rev_num(a))
+for i in range(n):
+    print res[i]

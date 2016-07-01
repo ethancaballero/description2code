@@ -1,0 +1,20 @@
+from __future__ import print_function
+t=int(raw_input())
+i=0
+while(i<t):
+    d={}
+    s=raw_input()
+    for a in s:
+        try:
+            d[a]+=1
+        except:
+            d[a]=1
+   # print (d)
+    l=len(s)
+    for a in d.keys():
+        if d[a]==l-d[a]:
+            print ("YES")
+            break
+    else:
+        print ("NO")
+    i+=1

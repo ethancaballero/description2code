@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+#define M 1000000007
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+using namespace std;
+typedef long long ll;
+typedef pair<int,int> pii;
+vector<int> edges[3010];
+int d[3010],low[3010],p[3010],tim;
+bool vis[3010],ap[3010];
+void dfs(int u)
+{
+	vis[u]=1;
+	d[u]=low[u]=++tim;
+	int ch=0;
+	for(int i=0;i<edges[u].size();i++)
+	{
+		int v=edges[u][i];
+		if(!vis[v])
+		{
+			ch++;
+			p[v]=u;
+			dfs(v);
+			low[u]=min(low[u],low[v]);
+			if(p[u]==-1 && ch>1)
+				ap[u]=1;
+			if(p[u]!=-1 && low[v]>=d[u])
+				ap[u]=1;
+		}
+		else if(v!=p[u])
+			low[u]=min(low[u],d[v]);
+	}
+}
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	int t,n,m,k,a,b;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m>>k;
+		for(int i=0;i<n;i++)
+			edges[i].clear();
+		while(m--)
+		{
+			cin>>a>>b;
+			edges[a].pb(b);
+			edges[b].pb(a);
+		}
+		tim=0;
+		memset(vis,0,sizeof(vis));
+		memset(ap,0,sizeof(ap));
+		p[0]=-1;
+		dfs(0);
+		int ans=0;
+		for(int i=0;i<n;i++)
+			if(ap[i])
+				ans++;
+		cout<<ans*k<<'
+';
+	}
+	return 0;
+}

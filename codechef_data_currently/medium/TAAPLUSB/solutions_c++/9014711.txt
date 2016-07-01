@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// my choco pie
+#define pb push_back
+#define VI vector<int>
+#define VL vector<long long int >
+
+// my fastest car series
+#define scan(x) scanf("%d",&x)
+#define print(x) printf("%d
+",x)
+#define scanll(x) scanf("%lld",&x)
+#define printll(x) printf("%lld
+",x)
+#define ms(x) memset(x,0,sizeof(x))
+
+// data pies
+#define ll long long int
+#define li long int
+#define ff float
+#define db double
+
+// loopi loops
+#define rep(i,a,b) for(i=a;i<b;i++)
+#define repr(i,a,b) for(i=a;i>=b;i--)
+
+// debugger
+#define print_v(x) for(int i=0;i<x.size();i++) cout << x[i] << " "
+
+#define MOD 1000000007
+int main(){
+	double arr[100005];
+	double sum[100005];
+	sum[1] = 0.45;
+	arr[1] = 0.45;
+	int i=0;
+	rep(i,2,100001){
+		arr[i] = (0.45 + (arr[i-1]/10));
+		sum[i] = sum[i-1] + arr[i];
+	}
+	int t;
+	scan(t);
+	while(t--){
+		int n;
+		scan(n);
+		printf("%.9lf
+",sum[n]);
+	//	cout<<sum[n]<<endl;
+	}
+	return 0;
+}

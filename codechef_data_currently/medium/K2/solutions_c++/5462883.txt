@@ -1,0 +1,81 @@
+#include<iostream>
+#include<math.h>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#define gc getchar_unlocked
+using namespace std;
+void fastin(int &x)
+{
+	register int a=gc();
+	x=0;
+	for(;a<48 || a>57;a=gc());
+	for(;a>47 && a<58;a=gc())
+		x=(x<<1)+(x<<3)+a-48;	
+}
+void fastin(long long int &x)
+{
+	register int a=gc();
+	x=0;
+	for(;a<48 || a>57;a=gc());
+	for(;a>47 && a<58;a=gc())
+		x=(x<<1)+(x<<3)+a-48;	
+}
+
+int main()
+{
+	int t,flag,bit,root;
+	long long n,rev,copy,i,base;
+	fastin(t);
+	while(t--)
+	{
+		fastin(n);
+		root=sqrt(n);
+		flag=0;
+		if(n>2)
+		{
+			for(i=2;i<=root;i++)
+			{
+				copy=n;rev=0;
+				while(copy>0)
+				{
+					rev=((rev*i)+copy%i);
+					copy/=i;
+				}
+				//cout<<rev<<" rev
+";
+				if(rev==n) 
+				{
+					printf("%lld
+",i);
+					flag=1;
+					break;
+				}
+			}
+			if(flag==0)
+			{
+				
+				for(bit=(n/((root)+1));bit>=1;bit--)
+				{
+					base=n/bit-1;
+					if(bit<base && n%bit==0 && n/base==n%base)
+					{
+						printf("%lld
+",base);
+						flag=0;
+						break;
+					}
+					
+				}
+				
+			}
+			
+		}
+		else if(n==1) printf("2
+");
+		else printf("3
+");
+	}
+	return 0;
+	
+}

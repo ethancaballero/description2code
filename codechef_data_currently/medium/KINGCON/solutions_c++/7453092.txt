@@ -1,0 +1,74 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<limits.h>
+#include<cstring>
+using namespace std;
+vector<int> v[3002];
+int globaldepth[3002];
+int lowpoint[3002];
+int depth;
+int count;
+void dfs(int source,int parent)
+{
+	++depth;
+	int childcount=0;
+	globaldepth[source]=depth;
+	int lowPoint=SHRT_MAX;
+	int bicomponent=0;
+	for(int i=0;i<v[source].size();i++)
+	{
+		int neighbour=v[source][i];
+		if(globaldepth[neighbour]==-1)
+		{
+			dfs(v[source][i],source);
+			childcount++;
+			if(lowpoint[neighbour]>=depth)
+				bicomponent=1;
+			else
+				lowPoint=min(lowPoint,lowpoint[neighbour]);
+		}
+		if(neighbour!=parent)
+			lowPoint=min(lowPoint,globaldepth[neighbour]);
+	}
+	if(parent==-1)
+	{
+		if(childcount>=2)
+			count++;
+		return;
+	}
+	if(bicomponent)
+	{
+		count++;
+	}
+	lowpoint[source]=min(lowPoint,depth);
+	--depth;
+}
+int main()
+{
+	int T;
+	scanf("%d",&T);
+	int N,M,K;
+	while(T--)
+	{
+		scanf("%d %d %d",&N,&M,&K);
+		for(int i=0;i<N;i++)
+		{
+			v[i].clear();
+		}
+		memset(globaldepth,-1,sizeof(globaldepth));
+		memset(lowpoint,SHRT_MAX,sizeof(lowpoint));
+		int p,q;
+		for(int i=0;i<M;i++)
+		{
+			scanf("%d %d",&p,&q);
+			v[p].push_back(q);
+			v[q].push_back(p);
+		}
+		depth=0;
+		count=0;
+		dfs(0,-1);
+		printf("%d
+",K*count);
+	}
+}

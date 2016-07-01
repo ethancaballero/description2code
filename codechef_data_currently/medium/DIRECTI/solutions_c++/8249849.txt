@@ -1,0 +1,39 @@
+	#include<iostream>
+	#include<stdio.h>
+	#include<string.h>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n;
+			cin>>n;
+			char a[40][10];
+			char b[40][50],ch;
+			for(int i=0;i<n;i++)
+			{	
+				cin>>a[i];
+				ch=getchar();
+				gets(b[i]);
+		
+			}	
+			for(int i=0;i<n;i++)
+			{
+				if(i==0)
+					cout<<a[0]<<" ";
+				else
+				{	
+					if(strcmp(a[n-i],"Right")==0)
+						cout<<"Left ";
+					else
+						cout<<"Right ";
+				}
+				cout<<b[n-1-i];
+				cout<<endl;
+			}	
+			t--;
+
+		}	
+	}

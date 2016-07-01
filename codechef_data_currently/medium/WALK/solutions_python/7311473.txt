@@ -1,0 +1,13 @@
+test_cases= int(raw_input())
+output=[]
+for test in range(0,test_cases):
+	N = int(raw_input())
+	W = map(int,raw_input().split())
+	count= -1
+	for i in range(N-1,-1,-1):
+		count = count+1	
+		if count < W[i]:
+			count=W[i]
+	output.append(count)
+for j in output:
+	print j

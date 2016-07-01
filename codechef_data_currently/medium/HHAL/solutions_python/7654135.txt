@@ -1,0 +1,17 @@
+def isPalindrome(s):
+	i = 0
+	j = len(s)-1;
+	while (i<j):
+		if (s[i] != s[j]):
+			return False;
+		i+=1;
+		j-=1;
+	return True;
+
+t = int(raw_input())
+for j in xrange(t):
+	s = raw_input();
+	if isPalindrome(s) == True:
+		print 1;
+	else:
+		print 2;

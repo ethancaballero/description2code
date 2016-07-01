@@ -1,0 +1,43 @@
+#include<stdio.h>
+ 
+int main(){
+            int n,count=0,maxcount=0,j;
+            scanf("%d",&n);
+            int arr[n],i,sum[n*n];
+            for(i=0;i<n;i++)
+                scanf("%d",&arr[i]);
+               // cin>>arr[i];
+            for(i=0;i<n*n;i++)
+                sum[i]=0;
+            int k=0;
+            for(i=0;i<n;i++){
+                for(j=0;j<n;j++){
+                    if(i!=j){
+                    sum[k]=arr[i]+arr[j];
+                    k++;
+                }
+                }
+            }
+//            for(i=0;i<n*n;i++)
+//                cout<<sum[i]<<' ';
+//                cout<<endl;
+            for(i=0;i<n*n;i++){
+                count=0;
+                for(j=0;j<n*n;j++){
+                    //if(i!=j){
+                    if(sum[i]==sum[j]&&sum[i]!=0){
+                        count++;
+                        if(count>maxcount){
+          //                  cout<<count<<' '<<maxcount<<' '<<sum[i]<<endl;
+                            maxcount=count;
+                        }
+                    }
+                    else continue;
+                }
+                //}
+            }
+            //cout<<count<<' '<<maxcount<<endl;
+            printf("%d
+",maxcount);
+    return 0;
+} 

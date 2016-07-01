@@ -1,0 +1,8 @@
+test = input()
+for t in xrange(test):
+	n, k = map(int,raw_input().split())
+	w = map(int, raw_input().split())
+	w.sort()
+	if(2*k >= n):
+		k = n-k
+	print sum(w)-2*sum(w[:k])

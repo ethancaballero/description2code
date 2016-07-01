@@ -1,0 +1,21 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+ 
+int main()
+{
+    long t;
+    cin>>t;
+    while(t--)
+    {
+        double a=0; cin>>a;
+        double k=a;
+        if((1-a)>a)
+        k=1-a;
+        std::cout << std::fixed << std::setprecision(6);
+        double price=10000*k;
+        double ans = price + (price*2*(1-k));
+        cout<<ans<<endl;
+    }
+    return 0;
+} 

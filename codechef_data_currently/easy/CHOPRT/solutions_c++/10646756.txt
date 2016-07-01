@@ -1,0 +1,20 @@
+#include<iostream>
+int main()
+{
+	using namespace std;
+	long int t,i;
+	cin>>t;
+	for(i=0;i<t;i++)
+	{
+		long int a,b;
+		cin>>a;
+		cin>>b;
+		if(a<b)
+			cout<<"<"<<endl;
+		else if(a>b)
+			cout<<">"<<endl;
+		else
+			cout<<"="<<endl;
+	}
+	return 0;
+}

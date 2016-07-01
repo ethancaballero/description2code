@@ -1,0 +1,21 @@
+#include<stdio.h>
+int t,n ,c, k ,a[50],i;
+main(){
+	scanf("%d",&t);
+	while(t--){
+		scanf("%d%d",&n,&k);
+		c=0;
+		for(i=0;i<n;i++){
+			scanf("%d",&a[i]);
+			if(!(a[i]%2))		c++;
+		}
+		if(!k&&c==n)	c=-1;
+		if(c>=k)	
+			printf("YES
+");
+		else
+			printf("NO
+");	
+	}
+	return 0;
+}

@@ -1,0 +1,19 @@
+# cook your code here
+# cook your dish here
+
+test = raw_input()
+test = int(test)
+t = 0 
+while t < test:
+   t += 1
+   n = raw_input()
+   n = int(n)
+   i  = 0 
+   while i < n:
+       x = raw_input()
+       i += 1
+   ans = n 
+   while n > 0:
+        n -= 1
+        ans ^= n
+   print ans    

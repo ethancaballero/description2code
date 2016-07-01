@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long 
+int main()
+{
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+		ll l,d,s,c,tmp;
+		cin>>l>>d>>s>>c;
+		tmp=s;
+		for(int i=2;i<=d;i++)
+		{
+			if(tmp>=l)
+				break;
+			tmp+=tmp*c;
+		}
+		puts(tmp>=l?"ALIVE AND KICKING":"DEAD AND ROTTING");
+	}
+	return 0;
+}

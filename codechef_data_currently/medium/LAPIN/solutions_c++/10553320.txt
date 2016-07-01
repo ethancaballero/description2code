@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main(){
+int t;
+cin>>t;
+string s;
+while(t--){
+    cin>>s;
+    int mid=(s.length()/2);
+    int p2;
+    (s.length()%2==0) ? (p2=mid) : (p2=mid+1);
+    int flag=0;
+    for(int i=0;i<mid;i++){
+        int c1=0,c2=0;
+        for(int j=0;j<mid;j++){
+            if(s[i]==s[j]) c1++;
+        }
+        for(int j=p2;j<(s.length());j++){
+            if(s[i]==s[j]) c2++;
+        }
+        if(c1!=c2) {flag=1;break;}
+    }
+    if(flag==1) cout<<"NO"<<endl;
+    else cout<<"YES"<<endl;
+}
+}

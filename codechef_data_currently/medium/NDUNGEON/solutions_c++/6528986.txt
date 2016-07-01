@@ -1,0 +1,59 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+int m,n;
+#define MAX 1000000007
+bool inbound(int a,int b)
+{
+return (a>=1 && a<=m && b>=1 && b<=n);
+}
+struct cell
+{
+int cost,x,y;
+};
+struct cmp  
+ {  
+   bool operator()( cell l,cell r)  
+   {  
+       return l.cost > r.cost;  
+   }  
+ };
+int main()
+{
+int i,j,a,b,k,t,c[73][73];
+priority_queue<cell,vector<cell>,cmp> minheap;
+cell d[73][73],tmp;
+cin>>m>>n;
+for(i=1;i<=m;i++)
+	for(j=1;j<=n;j++)
+		{
+		cin>>c[i][j];
+		d[i][j].x=i;
+		d[i][j].y=j;
+		d[i][j].cost=MAX;
+		}
+cin>>a>>b>>t;
+d[1][1].cost=c[1][1];
+minheap.push(d[1][1]);
+while(!minheap.empty())
+	{
+	tmp=minheap.top();
+	minheap.pop();
+	//cout<<tmp.cost<<" "<<tmp.x<<" "<<tmp.y<<endl;
+	for(i=-1;i<=1;i++)
+		for(j=-1;j<=1;j++)
+			{
+				if( (i+j==1||i+j==-1) && inbound(tmp.x+i,tmp.y+j) && d[tmp.x+i][tmp.y+j].cost>d[tmp.x][tmp.y].cost+c[tmp.x+i][tmp.y+j])
+					{
+						d[tmp.x+i][tmp.y+j].cost=d[tmp.x][tmp.y].cost+c[tmp.x+i][tmp.y+j];
+						minheap.push(d[tmp.x+i][tmp.y+j]);
+					}
+			}
+	}
+if(d[a][b].cost<=t)
+	cout<<"YES
+"<<t-d[a][b].cost<<endl;
+else
+	cout<<"NO
+";
+}

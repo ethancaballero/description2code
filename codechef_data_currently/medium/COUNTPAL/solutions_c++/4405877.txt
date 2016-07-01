@@ -1,0 +1,75 @@
+/*
+ * main.cpp
+ *
+ *  Created on: Jul 30, 2014
+ *      Author: haha
+ */
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#define MOD 1000000007
+char str[1001];
+int mat[1001][1001];
+bool pal[1001][1001];
+bool is_palin(int s, int e) {
+	if (s == e)
+		return 1;
+	if (e == s + 1) {
+		if (str[s] == str[e]) {
+			pal[s][e] = 1;
+			return 1;
+		} else
+			return 0;
+	}
+
+	if (pal[s + 1][e - 1] && str[s] == str[e]) {
+		pal[s][e] = 1;
+		return true;
+	} else {
+		pal[s][e] = 0;
+		return false;
+	}
+
+}
+
+using namespace std;
+
+int main(int argc, char **argv) {
+	int len, i, j;
+	long long sum;
+	gets(str);
+	len = strlen(str);
+
+	for (i = 0; i < len; i++)
+		mat[i][i] = pal[i][i] = 1;
+
+	if (len < 2) {
+		cout << len << endl;
+		return 0;
+	}
+
+	for (i = len - 2; i >= 0; i--) {
+		sum = 0;
+		for (j = i; j < len - 1; j++) {
+			if (is_palin(i, j)) {
+				sum += (long long) mat[j + 1][len - 1];
+				sum %= MOD;
+			}
+		}
+		if (is_palin(i, len - 1)) {
+			sum++;
+			sum %= MOD;
+		}
+		mat[i][len - 1] = sum;
+	}
+
+	cout << mat[0][len - 1] << endl;
+
+	/*for (i = 0; i < len; i++) {
+	 for (j = 0; j < len; j++)
+	 cout << mat[i][j] << "	";
+	 cout << endl;
+	 }
+	 */
+	return 0;
+}

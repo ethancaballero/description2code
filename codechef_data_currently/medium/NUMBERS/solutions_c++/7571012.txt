@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
+#define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
+#define s(n)                        scanf("%d",&n)
+#define p(n)			    printf("%d
+",n)
+#define sl(n)                       scanf("%lld",&n)
+#define pl(n)			    printf("%lld
+",n)
+#define ll long long int
+pair<int,string>a[100005];
+
+int main()
+{
+    int t;
+    s(t);
+    while(t--)
+    {
+        ll n,fl,i;
+        sl(n);
+		for(int i=1;i<=n;i++)
+		cin>>a[i].second>>a[i].first;
+		sort(a+1,a+n+1);
+		for(i=1;i<=n;i++)
+            {
+			fl=0;
+			if(i==1||a[i].first!=a[i-1].first)fl+=1;
+			if(i==n||a[i].first!=a[i+1].first)fl+=2;
+			if(fl==3){
+				cout<<a[i].second<<endl;
+				break;
+			}
+		}
+		if(fl!=3)cout<<"Nobody wins."<<endl;
+	}
+    return 0;
+}

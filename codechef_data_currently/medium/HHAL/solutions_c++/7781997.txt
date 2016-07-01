@@ -1,0 +1,26 @@
+    #include<stdio.h>
+    #include<string.h>
+    int main()
+    {
+    	int t;
+    	scanf("%d",&t);
+    	char s[100001];
+    	while(t--)
+    	{
+    		scanf("%s",s);
+    		int l=strlen(s);
+    		int i,k=l-1;
+    		for(i=0;i<l/2;i++)
+    		{
+    			if(s[i]!=s[k-i])
+    			break;
+    		}
+    		if(i==l/2)
+    		printf("1
+");
+    		else
+    		printf("2
+");
+    	}
+    	return 0;
+    }  

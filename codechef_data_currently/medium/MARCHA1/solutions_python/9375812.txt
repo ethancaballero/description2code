@@ -1,0 +1,30 @@
+def weight(v, n):
+    for i in range(2**n):
+        temp = bin(i)
+        temp = temp[temp.find('b') + 1:]
+        temp2 = '0'* (n-len(temp))
+        v.append(temp2+temp)
+test_case = int(raw_input())
+for t in range(test_case):
+    n, m = map(int, raw_input().split())
+    notes = []
+    for i in range(n):
+        notes.append(int(raw_input()))
+    for n in notes:
+        if n > m:
+            del notes[notes.index(n)]
+    v = []
+##    print 'new length of notes = ', len(notes)
+    weight(v, len(notes))
+##    print v
+    total = []
+    for i in v:
+        count = 0
+        for j in range(len(notes)):
+            count += notes[j]*int(i[j])
+        total.append(count)
+        if m in total:
+            print 'Yes'
+            break
+    if not m in total:
+        print 'No'

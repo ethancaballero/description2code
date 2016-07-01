@@ -1,0 +1,38 @@
+// https://www.codechef.com/problems/ROTATION
+
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+#define M 100009
+
+int X[M];
+int n, m, d;
+char q;
+
+int main()
+{
+	cin >> n >> m;
+	for(int i = 0; i < n; ++i)cin >> X[i];
+	int p = 0;
+	for(int i = 0; i < m; ++i)
+	{
+		cin >> q >> d;
+		if(q == 'C')
+		{
+			p = (p + d) % n;
+		}		
+		if(q == 'A')
+		{
+			p = (p - d + n) % n;
+		}
+		if(q == 'R')
+		{
+			int idx = (p + d - 1 + n) % n;
+			cout << X[idx] << endl;
+		}
+	}
+	return 0;
+}

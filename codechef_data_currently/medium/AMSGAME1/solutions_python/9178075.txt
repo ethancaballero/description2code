@@ -1,0 +1,16 @@
+for t in xrange(int(raw_input())):
+	n=int(raw_input())
+	l=map(int,raw_input().split())
+
+	ans=0
+	for num in l:
+
+		while(num!=0 and ans!=0):
+			if ans>num:
+				ans=ans%num
+			else:
+				num=num%ans
+
+		ans+=num
+
+	print ans

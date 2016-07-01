@@ -1,0 +1,66 @@
+/*
+NAME :- KUNAL ACHARYA (Kaoski)
+SOL  :-
+ALGO :-
+*/
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include<queue>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include<string>
+#include<cstring>
+#define MAX 10005 
+using namespace std;
+class vector_{
+    int x,y;
+public:
+    vector_(){x=0,y=0;}
+    vector_(int a,int b){x=a,y=b;}
+    int operator*(vector_ a) {return x*a.x+y*a.y;}
+    int operator^(vector_ a) {return abs(x*a.y-y*a.x);}
+    };
+int main()
+{
+//freopen("in.txt","r",stdin);
+//freopen("out.txt","w",stdout);
+int n,t,i,j,k;
+int grundy[MAX];
+bool mex[MAX];
+memset(grundy,0,sizeof(grundy));
+for(i=2;i<MAX;i++)
+{
+                  memset(mex,false,sizeof(mex));
+                  for(j=0;j<=(i-2-j);j++)
+                  mex[grundy[j]^grundy[i-2-j]]=true;
+                  for(j=0;j<MAX;j++)
+                  if(!mex[j])
+                  break;
+                  grundy[i]=j;
+}
+scanf("%d",&t);
+while(t--)
+{
+          scanf("%d",&n);
+          printf("%s
+",grundy[n]?"Arjuna":"Bhima");
+}
+//fclose(stdin);
+//fclose(stdout);
+//system("pause");
+return 0;
+}

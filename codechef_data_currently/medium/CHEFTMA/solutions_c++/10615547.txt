@@ -1,0 +1,49 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <vector>
+#include <map>
+#include <cmath>
+#include <cstring>
+#include <numeric>
+using namespace std;
+
+#define MOD 1000000007
+#define llu long long unsigned
+#define lld long long
+#define ld long
+
+int scan_d()    {int ip=getchar_unlocked(),ret=0,flag=1;for(;ip<'0'||ip>'9';ip=getchar_unlocked())if(ip=='-'){flag=-1;ip=getchar_unlocked();break;}for(;ip>='0'&&ip<='9';ip=getchar_unlocked())ret=ret*10+ip-'0';return flag*ret;}
+void println_d(int n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=10;char output_buffer[11];output_buffer[10]='
+';do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<11);}
+
+int main()    {
+    int t;
+    t = scan_d();
+    while(t--)    {
+        int n=scan_d(), k=scan_d(), m=scan_d();
+        std::vector<int> v;
+        for(int i=0; i<n; i++)
+            v.push_back(scan_d());
+        for(int i=0; i<n; i++)
+            v[i]-=scan_d();
+        sort(v.begin(), v.end(), greater<int>());
+        std::vector<int> t;
+        for(int i=0; i<m+k; i++)
+            t.push_back(scan_d());
+        sort(t.begin(), t.end(), greater<int>());
+        int index = 0;
+        for(int i=0; i<n; i++)    {
+            while(index<m+k && t[index]>v[i])
+                index++;
+            if(index==m+k)
+                break;
+            else{
+                v[i]-=t[index];
+                index++;
+            }
+        }
+        println_d(accumulate(v.begin(), v.end(), 0));
+    }
+    return 0;
+}

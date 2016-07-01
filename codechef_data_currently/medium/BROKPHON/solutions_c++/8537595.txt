@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long n,a;
+		cin>>n;
+		std::vector<long> foo;
+		std::set<long>myset;
+		std::set<long>::iterator it;
+		for(int i=0;i<n;i++)
+		{
+			cin>>a;
+			foo.push_back(a);
+		}
+		for(int i=1;i<n;i++)
+		{
+			if(foo[i]!=foo[i-1])
+			{
+				myset.insert(i);
+				myset.insert(i-1);
+			}
+		}
+		cout<<myset.size()<<endl;
+
+	}
+}

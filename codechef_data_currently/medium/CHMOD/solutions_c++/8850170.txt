@@ -1,0 +1,64 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+using namespace std;
+int exp(int a, int b,int m){
+   long long rez=1;
+    if(b>0){
+        rez=exp(a,b/2,m);
+        rez=(rez*rez)%m;
+        if(b%2==1) rez=(rez*a)%m;
+    }
+
+    return rez;
+}
+int pr[26]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+int a[110][26];
+int n,t,l,r,m,a2[100010][26],nn[100010];
+long long rz;
+int main(){
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++){
+        scanf("%d",&nn[i]);
+    }
+    for(int i=1;i<=100;i++){
+        int f=0;
+        int br=i;
+        while(br>=pr[f]){
+            if(br%pr[f]==0){
+                a[i][f]++;
+                br=br/pr[f];
+            }
+            else{f++;}
+        }
+    }
+
+    for(int i=1;i<=n;i++){
+        for(int i2=0;i2<=25;i2++){
+            a2[i][i2]=a2[i-1][i2]+a[nn[i]][i2];
+        }
+    }
+   /* for(int i=1;i<=n;i++){
+        for(int i2=0;i2<=25;i2++){
+            printf("%d ",a2[i][i2]);
+        }
+        printf("
+");
+    }*/
+
+    scanf("%d",&t);
+    for(int i=1;i<=t;i++){
+        scanf("%d %d %d",&l,&r,&m);
+        rz=1;
+        for(int i2=0;i2<=25;i2++){
+            rz=(rz*exp(pr[i2],a2[r][i2]-a2[l-1][i2],m))%m;
+            //printf("%lld ",a2[r][i2]-a[l-1][i2]);
+        }
+        printf("%lld
+",rz);
+
+    }
+
+
+return 0;
+}

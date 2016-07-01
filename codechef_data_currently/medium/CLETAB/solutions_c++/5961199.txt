@@ -1,0 +1,81 @@
+/*input
+2
+2 5
+1 2 3 2 1
+3 2
+4 1
+*/
+
+
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+
+bool flag[501];
+
+int findremoval(int *a,int m,int i,int maxm)
+{
+	int j,save;
+	bool temparr[maxm+2];
+	for(j=0;j<=maxm;j++)
+		temparr[j]=false;
+	for(j=i+1;j<m;j++)
+	{
+		if(flag[a[j]]&&!temparr[a[j]])
+			save=a[j];
+		temparr[a[j]]=true;
+	}
+	for(j=1;j<=maxm;j++)
+	{
+		if(flag[j]&&!temparr[j])
+			break;
+	}
+	if(j!=maxm+1){
+		save=j;
+	}
+	return save;
+
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,m;
+		scanf("%d%d",&n,&m);
+		int i,maxm=0;
+		int a[m];
+		for(i=0;i<m;i++)
+		{
+			scanf("%d",&a[i]);
+			if(a[i]>maxm)
+				maxm=a[i];
+		}
+		for(i=0;i<=maxm;i++)
+			flag[i]=false;
+		int clean=0;
+		int freeit=n;
+		for(i=0;i<m;i++)
+		{
+			if(freeit==0&&flag[a[i]]==false)
+			{
+				int removal=findremoval(a,m,i,maxm);
+				flag[a[i]]=true;
+				flag[removal]=false;
+				clean++;
+			}
+			else if(freeit>0&&flag[a[i]]==false)
+			{
+				freeit--;
+				flag[a[i]]=true;
+				clean++;
+			}
+		}
+		printf("%d
+",clean);
+	}
+	return 0;
+}

@@ -1,0 +1,100 @@
+/*
+ * For i>=14,x(i) =[ dp(i) dp(i-1) dp(i-2) ........  dp(i-14) ]
+ * x(i+1) = M * x(i)
+ *  */
+# include <stdio.h>
+//# include <vector>
+//# include <algorithm>
+//# include <map>
+using namespace std;
+int T,k;
+typedef unsigned long long int uli;
+uli N;
+# define base 1000000007ULL 
+# define lenmax 15
+//vector <int> move;
+void printer(uli mat[lenmax][lenmax])
+{
+	for(int i=0;i<lenmax;i++)
+	{
+		for(int j=0;j<lenmax;j++)
+			printf("%3llu ",mat[i][j]);
+		printf("
+");
+	}
+}
+void copy(uli from[lenmax][lenmax],uli to[lenmax][lenmax])
+{
+	for(int i=0;i<lenmax;i++)
+		for(int j=0;j<lenmax;j++)
+			to[i][j]=from[i][j];
+}
+void mul(uli A[lenmax][lenmax], uli B[lenmax][lenmax], uli C[lenmax][lenmax])
+{
+	uli temp;
+	for(int i=0;i<lenmax;i++)
+		for(int j=0;j<lenmax;j++)
+		{
+			C[i][j]=0;
+			for(int l=0;l<lenmax;l++)
+			{
+				temp=((uli) A[i][l]*B[l][j])%base;
+				C[i][j]=((uli)C[i][j]+temp)%base;
+			}
+		}
+}
+void power(uli result[lenmax][lenmax] ,uli mat[lenmax][lenmax] ,uli exp)
+{
+	/*
+	 * result = mat ^(exp)
+	 * No change in mat
+	 */ 
+	// assume exp>=1
+	if(exp==1)
+	{
+		copy(mat,result);
+		/*printf("%llu :
+",exp);
+		printer(result);*/	
+		return;
+	}
+	uli temp[lenmax][lenmax];
+	power(temp,mat,exp/2);
+	mul(temp,temp,result);
+	if(exp%2)
+	{
+		copy(result,temp);
+		mul(temp,mat,result);
+	}
+	/*printf("%llu :
+",exp);
+	printer(result);*/	
+}
+int main()
+{
+	int t;
+	scanf("%d",&T);
+	uli M[lenmax][lenmax],r[lenmax][lenmax];
+	for(int i=1;i<lenmax;i++)
+	{
+		for(int j=0;j<lenmax;j++)
+			M[i][j]=0;
+		M[i][i-1]=1;
+	}
+	while(T--)
+	{
+		for(int i=0;i<lenmax;i++)
+			M[0][i]=0;
+		scanf("%llu",&N);
+		scanf("%d",&k);
+		for(int i=0;i<k;i++)
+		{
+			scanf("%d",&t);
+			M[0][t-1]++;
+		}
+		power(r,M,N);
+		printf("%llu
+",r[0][0]);
+	}
+	return 0;
+}

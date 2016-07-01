@@ -1,0 +1,79 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <cmath>
+#include <sstream>
+#include <string>
+#include <set>
+#include <map>
+#include <assert.h>
+using namespace std;
+
+typedef unsigned long long ll;
+typedef vector<ll> vi;
+typedef pair<ll, ll> pii;
+typedef vector<pii> vp;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+
+const int N = 110;
+const ll M = 1000000009LL;
+const int K = 3;
+const int LIT = 2500;
+const int INF = 1 << 30;
+const double eps = 1e-6;
+const ll MOD = 1000000007LL;
+const int dir[][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+#define mp make_pair
+#define pb push_back
+#define fst first
+#define snd second
+
+int n;
+vi v;
+
+void init() {
+  v = vi(n);
+  for (int i = 0; i < n; i++) scanf("%llu", &v[i]);
+}
+
+bool cal() {
+  int LIT = 100;
+  if (n > LIT) {
+    return true;
+  }
+  
+  for (int i1 = 0; i1 < n; i1++) {
+    for (int i2 = i1 + 1; i2 < n; i2++) {
+      for (int i3 = i2 + 1; i3 < n; i3++) {
+        for (int i4 = i3 + 1; i4 < n; i4++) {
+          ll x = v[i1] ^ v[i2] ^ v[i3] ^ v[i4];
+          if (!x) {
+            return true;
+          }
+        }
+      }
+    }
+  }
+  return false;
+}
+
+void solve() {
+  printf("%s
+", cal() ? "Yes" : "No");
+}
+
+int main() {
+  int T;
+  // cin >> T;
+  //for (int tcase = 1; tcase <= T; tcase++) {
+  while (cin >> n) {
+    init();
+    solve();
+  }
+}

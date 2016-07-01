@@ -1,0 +1,50 @@
+t=int(raw_input())
+ans=[]
+for i in range(t):
+  ast=[]
+  time=1000
+  e=raw_input().split()
+  xe,ye=map(int,e[:2])
+  de=e[2]
+  n=int(raw_input())
+  for i in range(n):
+    a=raw_input().split()
+    xa,ya=map(int,a[:2])
+    da=a[2]
+    ast.append((xa,ya,da))
+  if de=='U':
+    for k in ast:
+      if k[1]>ye and ((k[0]>xe and k[2]=='L') or (k[0]<xe and k[2]=='R')):
+	if abs(k[0]-xe)==abs(k[1]-ye):
+	  time=min(time,abs(k[0]-xe)/1.0)
+      elif k[1]>ye and k[0]==xe and k[2]=='D':
+	time=min(time,abs(k[1]-ye)/2.0)
+  elif de=='D':
+    for k in ast:
+      if k[1]<ye and ((k[0]>xe and k[2]=='L') or (k[0]<xe and k[2]=='R')):
+	if abs(k[0]-xe)==abs(k[1]-ye):
+	  time=min(time,abs(k[0]-xe)/1.0)
+      elif k[1]<ye and k[0]==xe and k[2]=='U':
+	time=min(time,abs(k[1]-ye)/2.0)
+  elif de=='R':
+    for k in ast:
+      if k[0]>xe and ((k[1]>ye and k[2]=='D') or (k[1]<ye and k[2]=='U')):
+	if abs(k[0]-xe)==abs(k[1]-ye):
+	  time=min(time,abs(k[0]-xe)/1.0)
+      elif k[0]>xe and k[1]==ye and k[2]=='L':
+	time=min(time,abs(k[0]-xe)/2.0)
+  else:
+    for k in ast:
+      if k[0]<xe and ((k[1]>ye and k[2]=='D') or (k[1]<ye and k[2]=='U')):
+	if abs(k[0]-xe)==abs(k[1]-ye):
+	  time=min(time,abs(k[0]-xe)/1.0)
+      elif k[0]<xe and k[1]==ye and k[2]=='R':
+	time=min(time,abs(k[0]-xe)/2.0)
+	  
+  if time==1000:
+    ans.append("SAFE")
+  else:
+    ans.append(time)
+    
+for an in ans:
+  print an

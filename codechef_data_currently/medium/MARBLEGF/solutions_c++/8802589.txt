@@ -1,0 +1,137 @@
+#include <iostream>
+#include <cstdio>
+#include <iomanip>
+#include <cmath>
+#include <string.h>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <stack>
+
+#include <set>
+
+#include <map>
+
+
+#define ll long long int
+#define fsentak for(int i=0;i<n;i++)
+#define fsentak1 for(int i=0;i<(n-1);i++)
+#define s(t) scanf("%d",&t)
+#define sc(n) scanf("%d",&n)
+#define sl(lln) scanf("%lld",&n)
+#define sa(my) scanf("%d",&my[i])
+using namespace std;
+ll my[1000005];
+ll GetSum(ll BitTree[],int n,int index)
+{
+    index+=1;
+    ll sum=0;
+    
+    while(index>0)
+    {
+        
+        sum+=BitTree[index];
+        index-= index & (-index);
+        
+        
+        
+    
+    }
+    return sum;
+    
+}
+
+void UpdateVal(ll BitTree[],int n,int index,ll val)
+{
+    index+=1;
+    while(index<=n)
+    {
+        
+        
+        BitTree[index]+=val;
+        
+        index+=index & (-index);
+        
+    }
+}
+
+
+ll *ConstructTree(ll arr[],int n)
+{
+    ll *BitTree=new ll[n+1];
+    for(int i=1;i<=n;i++)
+        BitTree[i]=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        UpdateVal(BitTree,n,i,arr[i]);
+        
+    }
+    
+    return BitTree;
+    
+}
+
+
+int main()
+{
+    
+   // int arr[]={1,2,3,4,5,6,7,8,9,10};
+    //int n=sizeof(arr)/sizeof(arr[0]);
+   //
+    
+    
+    ll n,q;
+    cin >>n >>q;
+    
+    
+    fsentak{
+        cin >>my[i];
+        
+    }
+    
+    
+    
+    ll *BitTree=ConstructTree(my,n);
+    
+    char a;
+    int b,c;
+    
+    
+    while(q--)
+    {
+        cin >>a >>b >>c;
+        if(a=='S')
+        {
+            
+            if(b==0)
+                cout <<GetSum(BitTree,n,c) <<endl;
+            
+                
+                
+            else
+                cout << abs(GetSum(BitTree,n,c)- GetSum(BitTree,n,b-1)) <<endl;
+                
+            
+                       
+            
+        }
+        else if(a=='G')
+        {
+            my[b]+=c;
+          //  cin >>b >>c;
+            UpdateVal(BitTree,n,b,c);
+            
+        }
+        
+        else if(a=='T')
+        {
+            my[b]-=c;
+          //  cin >>b >>c;
+            UpdateVal(BitTree,n,b,c*(-1));
+            
+        }
+    }
+    
+
+}

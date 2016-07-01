@@ -1,0 +1,10 @@
+from sys import stdin as ip
+for _ in xrange(int(ip.readline())):
+    s=raw_input()
+    l=len(s)
+    if l%2!=0:
+        l/=2
+        print "YES" if sorted(s[:l])==sorted(s[l+1:]) else "NO"
+    else:
+        l/=2
+        print "YES" if sorted(s[:l])==sorted(s[l:]) else "NO"

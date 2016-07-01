@@ -1,0 +1,23 @@
+t= int(raw_input())
+while(t>0):
+    t-=1
+    s=raw_input()
+    maxi=0
+    count=0
+    flag=0
+    days=0
+    for i in range (0,len(s)):
+        if s[i]=='.':
+            count+=1
+            flag=1
+        else:
+            if(count>maxi):
+                maxi=count
+                count=0
+                days+=1
+                flag=0
+            else:
+                count=0
+    print(days)
+                    
+            

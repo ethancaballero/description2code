@@ -1,0 +1,23 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+ 
+int main(){
+long t;
+float Q,P;
+cin>>t;
+while(t--){
+    	cin>>Q>>P;
+	if(Q<1000){
+		cout<<fixed<<setprecision(6)<<Q*P;
+	}
+	else{
+		cout<<fixed<<setprecision(6)<<Q*P*0.9;
+	}
+	cout<<endl;
+			    
+}
+//system("pause");
+return 0;
+}   
+ 

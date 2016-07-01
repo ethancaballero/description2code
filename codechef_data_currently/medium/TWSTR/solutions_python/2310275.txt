@@ -1,0 +1,35 @@
+'''
+Created on Jul 2, 2013
+
+@author: psgada
+'''
+import sys
+from operator import itemgetter
+
+def find_matching_recipe():
+    num_recipes = int(sys.stdin.readline().strip())
+    recipe_list = []
+    for i in range(0, num_recipes):
+        recipe = sys.stdin.readline().strip().split()
+        recipe[1] = int(recipe[1])
+        recipe_list.append(recipe)
+        
+    recipe_list.sort(cmp=None, key=itemgetter(1), reverse=True)
+    
+    num_queries = int(sys.stdin.readline().strip())
+    
+    for i in range(0, num_queries):
+        query = sys.stdin.readline().strip()
+        
+        len_query = len(query)
+        found = False
+        
+        for j in range(0, num_recipes):
+            if recipe_list[j][0][0:len_query] == query:
+                print recipe_list[j][0]
+                found = True
+                break
+        if not found:
+            print "NO"
+            
+find_matching_recipe()

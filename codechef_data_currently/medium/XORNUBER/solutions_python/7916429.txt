@@ -1,0 +1,11 @@
+from math import log
+for _ in xrange(int(raw_input())):
+    n = int(raw_input())
+    if n == 1:
+        print 2
+        continue
+    m = int(log(n+1, 2))
+    if n == 2 ** m - 1:
+        print n/2 
+    else:
+        print -1

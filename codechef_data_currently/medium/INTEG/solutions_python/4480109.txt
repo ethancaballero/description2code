@@ -1,0 +1,14 @@
+n = int(raw_input())
+num_list = raw_input().split()
+num = []
+count = 0
+for i in num_list:
+	num.append(int(i))
+	if int(i) < 0:
+		count += 1
+x = int(raw_input())
+only_negs = [i for i in num if i < 0]
+if x < count:
+	print -1*sum(sorted(only_negs)[:x:])
+else:
+	print -1*sum(only_negs)

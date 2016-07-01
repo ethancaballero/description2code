@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,c=0;
+        cin>>n;
+        char s[n];
+       cin>>s;
+        int a[1001]={};
+        if(s[0]=='1')
+            {
+                a[0]=a[1]=1;
+            }
+        for(int i=1;i<n-1;i++ )
+        {
+            if(s[i]=='1')
+                a[i]=a[i-1]=a[i+1]=1;
+        }
+        if(s[n-1]=='1')
+            a[n-1]=a[n-2]=1;
+        for(int i=0;i<n;i++ )
+        {
+            if(a[i]==0)
+                c++;
+        }
+        cout<<c<<endl;
+    }
+}

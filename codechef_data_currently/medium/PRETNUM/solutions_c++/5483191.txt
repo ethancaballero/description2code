@@ -1,0 +1,264 @@
+#include <algorithm>
+#include <limits>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
+
+#define pow2ll(x) (1LL << (x))
+
+#define MAX_PRIME 1000000
+#define RANGE_SIZE 1000001
+
+using namespace std;
+
+vector<int> primes;
+int num_primes[MAX_PRIME + 1];
+bool prime[MAX_PRIME + 1];
+bool v[RANGE_SIZE];
+
+int skip_whitespace()
+{
+	int ch;
+	while (true) {
+		ch = getchar_unlocked();
+		if (ch != ' ' && ch != '
+')
+			break;
+	}
+	return ch;
+}
+
+template<typename T>
+T read_unsigned_integer()
+{
+	T result = (T) 0;
+	int ch = skip_whitespace();
+	while (ch >= '0' && ch <= '9') {
+		result = 10 * result + (ch - '0');
+		ch = getchar_unlocked();
+	}
+	return result;
+}
+
+template<typename T>
+T read_signed_integer()
+{
+	T result = (T) 0;
+	bool flip = false;
+	int ch = skip_whitespace();
+	if (ch == '-') {
+		flip = true;
+		ch = skip_whitespace();
+	}
+	while (ch >= '0' && ch <= '9') {
+		result = 10 * result + (ch - '0');
+		ch = getchar_unlocked();
+	}
+	return flip ? -result : result;
+}
+
+template<typename T>
+int get_lower_exp(T n)
+{
+	int e = 0;
+	T k = (T) 1;
+	n >>= 1;
+	while (k <= n) {
+		k <<= 1;
+		++e;
+	}
+	return e;
+}
+
+template<typename T>
+T ipow(T x, int e)
+{
+	T result = 1;
+	T base = x;
+
+	if (e > 0) {
+		while (true) {
+			if (e & 1) {
+				result *= base;
+			}
+			e >>= 1;
+			if (e <= 0)
+				break;
+			base *= base;
+		}
+	}
+
+	return result;
+}
+
+template<typename T>
+T i_lsqrt(T n)
+{
+	int e = get_lower_exp(n);
+	T left = 1, right = ((T) 1) << (e / 2 + 1);
+	while (left < right) {
+		T mid = left + (right - left + 1) / 2;
+		T sqm = mid * mid;
+		if (sqm == n)
+			return mid;
+		else if (sqm < n)
+			left = mid;
+		else
+			right = mid - 1;
+	}
+	return left;
+}
+
+template<typename T>
+T i_usqrt(T n)
+{
+	int e = get_lower_exp(n);
+	T left = 1, right = ((T) 1) << (e / 2 + 1);
+	while (left < right) {
+		T mid = left + (right - left) / 2;
+		T sqm = mid * mid;
+		if (sqm == n)
+			return mid;
+		else if (sqm < n)
+			left = mid + 1;
+		else
+			right = mid;
+	}
+	return left;
+}
+
+template<typename T>
+T i_lkrt(T n, int k)
+{
+	int e = get_lower_exp(n);
+	T left = 1, right = ((T) 1) << (e / k + 1);
+	while (left < right) {
+		T mid = left + (right - left + 1) / 2;
+		T sqm = ipow(mid, k);
+		if (sqm == n)
+			return mid;
+		else if (sqm < n)
+			left = mid;
+		else
+			right = mid - 1;
+	}
+	return left;
+}
+
+template<typename T>
+T i_ukrt(T n, int k)
+{
+	int e = get_lower_exp(n);
+	T left = 1, right = ((T) 1) << (e / k + 1);
+	while (left < right) {
+		T mid = left + (right - left) / 2;
+		T sqm = ipow(mid, k);
+		if (sqm == n)
+			return mid;
+		else if (sqm < n)
+			left = mid + 1;
+		else
+			right = mid;
+	}
+	return left;
+}
+
+void build_primes(int limit)
+{
+	int sqlim = i_lsqrt(limit);
+
+	primes.push_back(2);
+	fill(prime + 2, prime + limit + 1, true);
+	for (int j = 4; j <= limit; j += 2)
+		prime[j] = false;
+
+	for (int i = 3; i <= sqlim; i += 2)
+		if (prime[i]) {
+			primes.push_back(i);
+			for (int j = i * i; j <= limit; j += i)
+				prime[j] = false;
+		}
+	for (int i = (sqlim + 1) | 1; i <= limit; i += 2)
+		if (prime[i])
+			primes.push_back(i);
+	for (int i = 1; i <= limit; i++)
+		num_primes[i] = num_primes[i - 1] + prime[i];
+}
+
+bool is_odd_prime(long long n)
+{
+	for (size_t i = 1; i < primes.size(); i++) {
+		long long p = primes[i];
+		if (p * p > n)
+			break;
+		if (n % p == 0)
+			return false;
+	}
+	return true;
+}
+
+int count_large_primes(long long l, long long r)
+{
+	int result = 0;
+
+	if (l <= r) {
+		fill(v, v + (r - l + 1), false);
+		long long sr = i_lsqrt(r);
+		for (size_t i = 0; i < primes.size(); i++) {
+			int p = primes[i];
+			if (p > sr)
+				break;
+			long long x = (l + p - 1) / p * p;
+			for (long long y = x; y <= r; y += p)
+				v[y - l] = true;
+		}
+		for (long long i = 0; i <= r - l; i++)
+			if (!v[i])
+				result++;
+	}
+
+	return result;
+}
+
+int solve_problem()
+{
+	long long l, r;
+
+	l = read_unsigned_integer<long long>();
+	r = read_unsigned_integer<long long>();
+
+	int result;
+	if (l > MAX_PRIME) {
+		result = count_large_primes(l, r);
+	} else {
+		long long sr = min<long long>(MAX_PRIME, r);
+		result = num_primes[sr] - num_primes[l - 1];
+		result += count_large_primes(max(MAX_PRIME + 1LL, l | 1), r);
+	}
+
+	for (int i = 2; pow2ll(i) <= r; i++)
+		if (prime[i + 1]) {
+			long long x = i_ukrt(l, i), y = i_lkrt(r, i);
+			result += num_primes[y] - num_primes[x - 1];
+		}
+
+	printf("%d
+", result);
+
+	return 0;
+}
+
+int main()
+{
+	int num_tests;
+
+	build_primes(MAX_PRIME);
+
+	num_tests = read_unsigned_integer<int>();
+	for (int i = 0; i < num_tests; i++)
+		solve_problem();
+
+	return 0;
+}

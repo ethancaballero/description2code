@@ -1,0 +1,14 @@
+for _ in range(input()):
+	s=raw_input()
+	c=days=i=m=0
+	while i<len(s):
+		c=0
+		while s[i]=='.':
+			c+=1
+			i+=1
+		if s[i]=='#':
+			i+=1
+		if c>m:
+			days+=1
+		m=max(c,m)	
+	print days	

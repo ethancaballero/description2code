@@ -1,0 +1,18 @@
+def is_prime(x, memo):
+        if x in memo:
+                return memo[x]
+        for x_ in range(2, (x // 2) + 1):
+                if x % x_ == 0:
+                        memo[x] = False
+                        return False
+        memo[x] = True
+        return True
+
+num_input = int(raw_input())
+m = {}
+for i in range(num_input):
+        curr_plants = sum(int(s) for s in raw_input().split())
+        j = 1
+        while not is_prime(j + curr_plants, m):
+                j += 1
+        print j

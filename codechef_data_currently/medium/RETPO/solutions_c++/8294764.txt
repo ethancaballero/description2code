@@ -1,0 +1,23 @@
+	#include<iostream>
+	#include<algorithm>
+	using namespace std;
+	int val(int a,int b)
+	{
+		return (((a&1)? (2*a+1):(2*a))+((b&1)? (2*b-1):(2*b)));
+	}	
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int a,b;
+			cin>>a>>b;
+			a=abs(a);
+			b=abs(b);
+			int min1=min(a,b);
+			cout<<2*min1+val(a-min1,b-min1)<<endl;
+			t--;
+		}	
+	}
+

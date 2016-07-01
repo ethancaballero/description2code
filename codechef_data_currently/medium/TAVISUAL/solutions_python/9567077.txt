@@ -1,0 +1,9 @@
+tst = input()
+for t in range(tst):
+	n, c, q = map(int, raw_input().split()) 
+	for i in range(q):
+		l, r = map(int, raw_input().split())
+		if(l<=c and c<=r):
+			c = l+r-c
+	
+	print c

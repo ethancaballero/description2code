@@ -1,0 +1,71 @@
+ 
+CodeChef has received an order from the President of Mithai country for his son's birthday cake. The president is a person of very high temper and CodeChef doesn't want to tick him him, so he had to prepare a cake exactly as described by the President's son. He asked for a cake with N layers and each layer has to be of a type specified by him. The type of layer is represented by a lowercase letter from the English alphabet.
+
+
+CodeChef asked his sous Chef, Jalebi Bai, to make this cake, who was very sleepy due to a very long and tiring journey to a planet far far away earlier.
+Due to tiredness, Jalebi Bai screwed up the the layers while baking the cake. Thankfully, it has the same number of layers as required, but any of the layers may or may not be the same as described in the order. CodeChef is really worried because of this, as making a new cake will cost him a huge amount of money.
+
+At this point of time, Samosa Bhai comes to the rescue. He has a layer swapper (patent pending) which can swap the layers of a cake without ruining the cake. This swapper has a limitation that it can swap layers separated exactly by distance D only, meaning there should be exactly D-1 layers in between the two layers to be swapped.
+
+
+You have to tell if the cake made by Jalebi Bai can be changed into the cake described by the President's son using Samosa Bhai's swapper.
+
+Input
+The first line contains T, the number of test cases.
+The first line of each test case contains N and D.
+The next line contains a lowercase string A representing the cake described by the President's son.
+The next line contains a lowercase string B representing the cake made by Jalebi Bai.
+Output
+For each test case, output "Yes" [without quotes] if it is possible to transform the cake B into cake A using the layer swapper. Otherwise, output "No" [without quotes].
+Constraints
+
+1 \u2264 T \u2264 20000
+1 \u2264 N \u2264 105
+1 \u2264 D \u2264 105
+Size of String A = Size of String B = N
+1 \u2264 Sum of N \u2264 105
+All characters are from 'a' to 'z' in string A and B.
+
+Example
+Input:
+5
+4 2
+qnyu
+ynqu
+4 1
+fbnc
+nbcf
+5 2
+abcde
+edacb
+5 2
+abcde
+edabc
+3 1
+eff
+bae
+
+Output:
+Yes
+Yes
+No
+Yes
+No
+
+Explanation
+Example case 1. Swap layer 'y' with 'q'.
+Example case 2. Follow the following swap order:
+
+Swap Layer 'f' with 'c', The cake will now be "nbfc"
+Swap Layer 'n' with 'b', The cake will now be "bnfc"
+Swap Layer 'n' with 'f', The cake will now be "bfnc"
+Swap Layer 'f' with 'b', The cake will now be "fbnc"
+
+
+Example case 4. Follow the following swap order:
+
+Swap Layer 'b' with 'd', The cake will now be "ebadc"
+Swap Layer 'a' with 'e', The cake will now be "abedc"
+Swap Layer 'e' with 'c', The cake will now be "abcde"
+
+

@@ -1,0 +1,49 @@
+#include<iostream>
+#include<algorithm>
+ 
+using namespace std;
+ 
+long long int a[1000000],arr[10000000];
+ 
+int main()
+{
+	long long int i,j,k,t,m,n,p,sum,r,in;
+	
+	
+		cin>>n>>k;
+		
+		
+		for(i=0;i<n;i++)
+		cin>>a[i];
+		
+		in=0;
+		
+		for(i=0;i<n;i++)
+    	{
+    		sum=0;
+    		
+    		for(j=i;j<n;j++)
+    		{
+    			sum=sum+a[j];
+    			arr[in]=sum;
+    			in++;
+    			
+    		}
+    	}
+		
+		sort(arr,arr+in);
+		reverse(arr,arr+in);
+		
+		//for(i=0;i<k;i++)
+		//{
+		//	cout<<arr1[i]<<" ";
+		//}
+		//cout<<endl;
+		for(i=0;i<k;i++)
+		{
+			cout<<arr[i]<<" ";
+		}
+		cout<<endl;
+	
+	
+} 

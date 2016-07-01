@@ -1,0 +1,45 @@
+#include <iostream>
+#include<set>
+#include<map>
+using namespace std;
+map<string,set<int> >m; 
+map<string,set<int> >::iterator it;
+int main() {    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+
+    int t;cin>>t;
+    while(t--)
+    {
+     
+        int n;cin>>n;
+        string s[n+1];
+        int i,j,k,z;
+        for(i=0;i<n;i++)cin>>s[i];
+           m.clear();
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<s[i].size();j++)
+            {
+                for(k=0;k<s[i].size();k++)
+                {
+                    string temp=s[i].substr(j,s[i].size()-k+1);
+                    m[temp].insert(i);
+                }
+            }
+        }
+        int size=0;
+        string ans="";
+        for(it=m.begin();it!=m.end();it++)
+        {
+            if(it->second.size()==n&&it->first.size()>size)
+            {
+                ans=it->first;
+                size=it->first.size();
+            }
+            
+        }
+        cout<<ans<<"
+";
+    }
+	// your code goes here
+	return 0;
+}

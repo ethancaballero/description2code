@@ -1,0 +1,10 @@
+import sys
+t=int(raw_input())
+i=0
+while(i<t):
+    a=map(int,sys.stdin.readline().split(" "))
+    if (a[0]+a[1]+a[2])==180 and a.count(0)==0:
+        print "YES"
+    else:
+        print "NO"
+    i+=1

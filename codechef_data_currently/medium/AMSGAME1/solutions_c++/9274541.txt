@@ -1,0 +1,28 @@
+#include <iostream>
+#include<algorithm>
+#include<stdio.h>
+ 
+using namespace std;
+ 
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+ 
+int main()
+{
+    int T,n,a[100000],gcd1,gcd2;
+    scanf("%d",&T);
+    while(T--){
+        scanf("%d",&n);
+ 
+    for(int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    int result = a[0];
+    for(int i = 0; i < n; i++){
+    result = gcd(result, a[i]);
+    }
+    cout << result << endl;
+}
+    return 0;
+}

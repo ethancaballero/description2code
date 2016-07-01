@@ -1,0 +1,20 @@
+import sys,math
+
+for __ in range(input()) :
+    n , s = map(int,sys.stdin.readline().split())
+    if n*(n+1)/2 == s :
+        print 0
+    elif  n == s :
+        print n-1
+    else :
+        # n*(n+1)/2 = s
+        # (n**2+n)/2= s
+        # n**2+n = 2*s
+        # n**2+n-2*s = 0
+        # solving this , we can get
+        # (1+sqrt(1+4*2*s))/2
+        # negate this root from n
+        s -= n
+        rt = 1.0+((1+(2*4*s))**0.5)
+        rt /= 2
+        print int(math.ceil(n-rt))

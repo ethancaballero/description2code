@@ -1,0 +1,40 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+#include<vector>
+#include<set>
+ 
+using namespace std;
+ 
+#define ll long long
+#define llu unsigned long long
+#define MOD 1000000007
+#define MAXN 200000
+ 
+int a[MAXN+1];
+ll sum[MAXN+1];
+ 
+int main()
+{
+    int n,b,q,i,id;
+    scanf("%d%d",&n,&b);
+    for(i=0;i<n;i++)
+     scanf("%d",&a[i]);
+     scanf("%d",&q);
+    sum[b-1] = 1;    
+    for(i=b-2;i>=0;i--)
+    {
+       ll tmp = (i+a[i]+1>=n)?sum[i+1]:(sum[i+1] - sum[i+a[i]+1]+MOD)%MOD;
+       sum[i]  = (tmp + sum[i+1])%MOD;
+    }
+    while(q--)
+    {
+              scanf("%d",&id);
+              id--;
+              printf("%lld
+",(sum[id]-sum[id+1]+MOD)%MOD);
+    }
+    return 0;
+}

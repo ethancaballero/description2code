@@ -1,0 +1,16 @@
+t = int(raw_input().strip())
+while(t>0):
+	n,d=map(int,raw_input().strip().split(" "))
+	arr = map(int,raw_input().strip().split(" "))
+	#arr = list(set(arr))
+	arr = sorted(arr,reverse=True)
+	i=0
+	sumn = 0
+	while(i<n-1):
+		if((arr[i]-arr[i+1])<d):
+			sumn += arr[i]+arr[i+1]
+			i+=2
+		else:
+			i+=1
+	print sumn
+	t-=1

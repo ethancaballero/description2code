@@ -1,0 +1,43 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+
+int main() 
+{
+    int t,n,c,k,j,i;
+    scanf("%d",&t);
+    for(i=0;i<t;i++)
+    {c=0;
+        scanf("%d%d",&n,&k);
+        int a[n];
+        for(j=0;j<n;j++)
+        {
+            scanf("%d",&a[j]);
+        }
+        for(j=0;j<n;j++)
+        {
+            
+            if(a[j]%2==0)
+            {
+                c++;
+            }
+            
+        }
+        if(c==n&&k==0)
+        {
+             printf("NO
+");
+        }
+       else if(c>=k)
+        {
+            printf("YES
+");
+        }
+        else
+        {
+            printf("NO
+");
+        }
+    }
+    return 0;
+}

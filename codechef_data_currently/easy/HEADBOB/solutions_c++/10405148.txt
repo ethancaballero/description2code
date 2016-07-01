@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int x,n,i,j;
+	string s;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		int count=0,c=0;
+		cin>>x;
+		cin>>s;
+		for(j=0;j<s.length();j++)
+		{
+			if(s[j]=='Y')
+			count=1;
+			if(s[j]=='I')
+			c=1;
+		}
+		if(count==1)
+		cout<<"NOT INDIAN"<<endl;
+		else if(c==1)
+		cout<<"INDIAN"<<endl;
+		else
+		cout<<"NOT SURE"<<endl;
+	}
+}

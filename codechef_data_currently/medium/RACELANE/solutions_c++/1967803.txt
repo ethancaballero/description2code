@@ -1,0 +1,37 @@
+#include<iostream>
+ 
+using namespace std;
+ 
+int main()
+{
+    long int t;
+    cin>>t;
+    while(t--)
+    {
+        long int b,s,e,l,i,d[502][10],j,count=0,done[500]={0};
+        cin>>b;
+        for(i=0;i<501;i++)
+        for(j=0;j<10;j++)
+        d[i][j]=0;
+        while(b--)
+        {
+            cin>>s>>e>>l;
+            for(i=s;i<=e;i++)
+            d[i][l]=1;
+        }
+        for(i=0;i<501;i++)
+        {
+        for(j=0;j<9;j++)
+        {
+            if(d[i][j] && d[i][j+1])
+            {
+                //cout<<j<< " ";
+            count++;
+            break;
+            }
+        }
+        }
+        cout<<(500-count)<<endl;
+    }
+    return 0;
+} 

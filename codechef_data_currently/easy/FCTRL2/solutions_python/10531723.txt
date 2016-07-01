@@ -1,0 +1,8 @@
+import math as m
+t=input()
+ans=[]
+for x in range(t):
+    a=input()
+    ans.append(m.factorial(a))
+for x in range(t):
+    print(ans[x])

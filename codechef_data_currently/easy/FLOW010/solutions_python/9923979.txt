@@ -1,0 +1,11 @@
+t = input()
+for _ in xrange(t):
+    c = raw_input()
+    if c in ('B', 'b'):
+        print "BattleShip"
+    elif c in ('C', 'c'):
+        print "Cruiser"
+    elif c in ('D', 'd'):
+        print "Destroyer"
+    else:
+        print "Frigate"

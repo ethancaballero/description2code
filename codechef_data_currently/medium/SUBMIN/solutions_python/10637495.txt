@@ -1,0 +1,43 @@
+n=int(raw_input())
+a=map(int,raw_input().split())
+q=int(raw_input())
+for i in range(q):
+	qu=int(raw_input())
+	d={}
+	s=0
+	# s_l=0
+	# s_g=0
+	for j in range(n):
+		# print j
+		if(a[j]==qu):
+			# print "j_found",j
+			for m in range(j,-1,-1):
+				if(a[m]>=a[j]):
+					# print "m_found",m
+					if(((m,j) in d.keys())==False):
+						# s+=1
+						# s_l+=1
+						d[(m,j)]=1
+				else:
+					break
+			for n_new in range(j,n,1):
+				if(a[n_new]>=a[j]):
+					# print "n_new_found",n_new
+					if(((j,n_new) in d.keys())==False):
+						# s+=1
+						# s_l+=1
+						d[(j,n_new)]=1
+					d_new=dict(d)
+					for key_n in d_new:
+						if(key_n[1]==j):
+							# print "key_n[0]_found",key_n[0]
+							if(((key_n[0],n_new) in d.keys())==False):
+								# s+=1
+								# s_l+=1
+								d[(key_n[0],n_new)]=1
+				else:
+					break
+	for key_s in d:
+		# print key_s,
+		s+=1
+	print s

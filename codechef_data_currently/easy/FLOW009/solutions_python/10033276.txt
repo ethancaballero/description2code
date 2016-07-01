@@ -1,0 +1,12 @@
+#Total Expenses 
+#https://www.codechef.com/problems/FLOW009
+
+t=input()
+while t!=0:
+	t-=1
+	q, p =map(int,raw_input().split())
+	if q>1000:
+		q=q-(0.1*q)
+		print "%.6f"%(q*p)
+	else:
+		print "%.6f"%(q*p)

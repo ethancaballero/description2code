@@ -1,0 +1,84 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <vector>
+#include <string.h>
+
+using namespace std ;
+
+#define ip(x){cin >> x ;}
+#define op(x){cout << x ;}
+#define opn(x){cout << "
+" ;}
+
+int C[100][100];
+int matrix[100][100];
+int N;
+int maxim=0;
+int T_cases;
+
+int maxi(int a,int b)
+{
+	if(a>b)
+		return a;
+	else
+		return b;
+}
+
+int compute_ctable()
+{
+	
+	for(int i=1;i<=N;i++)
+	{
+		for(int j=1;j<=N;j++)
+		{
+			C[i][j]=matrix[i][j]^C[i-1][j]^C[i-1][j-1]^C[i][j-1];
+		}
+	}
+}
+
+int compute_max()
+{
+	for(int x1=1;x1<=N;x1++)
+	{
+		for(int x2=x1;x2<=N;x2++)
+		{
+			for(int y1=1;y1<=N;y1++)
+			{
+				for(int y2=y1;y2<=N;y2++)
+				{
+					int temp=C[x2][y2]^C[x1-1][y1-1]^C[x1-1][y2]^C[x2][y1-1];
+					maxim=maxi(maxim,temp);
+				}
+			}		
+		}
+	}
+}
+
+int main()
+{
+
+	cin>>T_cases;
+	while(T_cases--)
+	{
+		maxim=0;
+		memset(C,0,100*100*sizeof(int));
+		memset(matrix,0,100*100*sizeof(int));
+		cin >>N;
+		for(int i=1;i<=N;i++)
+		{
+			for(int j=1;j<=N;j++)
+			{
+				cin >> matrix[i][j];
+			}
+		}
+
+		compute_ctable();
+		compute_max();
+		cout << maxim<<"
+";
+
+	}
+	
+}

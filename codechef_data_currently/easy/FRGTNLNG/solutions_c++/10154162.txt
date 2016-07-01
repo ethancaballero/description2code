@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+    int t,l,n,i,k;
+    cin>>t;
+    while (t--)
+    {
+        cin>>n>>k;
+        char w[n][20];int m[n];
+        for(i=0;i<n;i++)
+        {
+            cin>>w[i];
+            m[i]=0;
+        }
+        int a;
+        while(k--)
+        {
+            cin>>l;char p[l][20];
+            for(i=0;i<l;i++)
+            {
+                cin>>p[i];
+                for (a=0;a<n;a++)
+                  if(strcmp(p[i],w[a])==0)
+                     m[a]=1;
+            }
+
+        }
+        for(i=0;i<n;i++)
+           if(m[i])
+            cout<<"YES ";
+            else   cout<<"NO ";
+    }
+     cout<<endl;
+    return 0;
+}

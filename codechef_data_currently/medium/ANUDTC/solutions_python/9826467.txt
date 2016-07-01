@@ -1,0 +1,77 @@
+import sys
+
+test_cases = 0
+current_case_index = 1
+
+
+cases = int(raw_input())
+
+for i in range(cases):
+
+    line = raw_input()
+
+    num_pieces = int(line)
+
+    flag = 0
+
+    if 360 % num_pieces == 0:
+        sys.stdout.write('y ')
+    else:
+        sys.stdout.write('n ')
+
+    if num_pieces <= 360:
+        sys.stdout.write('y ')
+    else:
+        sys.stdout.write('n ')
+
+    if num_pieces * (num_pieces + 1) / 2 <= 360:
+        flag = 1
+
+    if flag:
+        sys.stdout.write('y
+')
+    else:
+        sys.stdout.write('n
+')
+
+
+
+# with open("input.txt", 'r') as f:
+#     for line_number, line_string in enumerate(f.readlines()):
+#
+#         # print "Line {}: {}".format(line_number, line_string)
+#
+#         if line_number == 0:
+#             test_cases = int(line_string)
+#             # print "Cases: {}
+".format(test_cases)
+#
+#         elif line_number == current_case_index:
+#
+#             num_pieces = int(line_string)
+#
+#             flag = 0
+#
+#             if 360 % num_pieces == 0:
+#                 sys.stdout.write('
+y')
+#             else:
+#                 sys.stdout.write('
+n')
+#
+#             if num_pieces < 361:
+#                 sys.stdout.write('y')
+#             else:
+#                 sys.stdout.write('n')
+#
+#             if num_pieces * (num_pieces + 1) / 2 <= 360:
+#                 flag = 1
+#
+#             if flag:
+#                 sys.stdout.write('y')
+#             else:
+#                 sys.stdout.write('n')
+#
+#
+#
+#             current_case_index += 1

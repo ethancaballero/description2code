@@ -1,0 +1,25 @@
+from sys import stdin
+from math import log
+
+MOD = 10**9+7
+H = int(stdin.readline())
+
+while H!=0:
+    V = map(int,stdin.readline().split())
+    tree = []
+    P = [V[2**(H-1)-1+j] for j in xrange(2**(H-1))]
+    logP = [log(V[2**(H-1)-1+j]) for j in xrange(2**(H-1))]
+    for i in xrange(H-2,-1,-1):
+        tempP = [V[2**i-1+j] for j in xrange(2**i)]
+        logtempP = [log(V[2**i-1+j]) for j in xrange(2**i)]
+        for j in xrange(2**i):
+            if logP[2*j] > logP[2*j+1]:
+                logtempP[j] = logtempP[j]*logP[2*j]
+                tempP[j] = (tempP[j]*P[2*j])%MOD
+            else:
+                logtempP[j] = logtempP[j]*logP[2*j+1]
+                tempP[j] = (tempP[j]*P[2*j+1])%MOD
+        P = tempP
+        logP = logtempP
+    print P[0]
+    H = int(stdin.readline())

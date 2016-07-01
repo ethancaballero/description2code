@@ -1,0 +1,32 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    long long int n, tmp, x;
+    char ch;
+    cin >> n;
+    while (n != 0) {
+        tmp = 0;
+        while (n--) {
+            cin >> ch >> x;
+            if (ch == 'P')
+                x--;
+            else
+                x++;
+            x = abs(x);
+            if (tmp < x)
+                tmp += (x-tmp);
+            else if (tmp % 2 == 0 && x % 2 == 1)
+                tmp++;
+            else if (tmp % 2 == 1 && x % 2 == 0)
+                tmp++;
+        }
+        cout << tmp << endl;
+        cin >> n;
+    }
+    return 0;
+}

@@ -1,0 +1,41 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+//double sum[40][100001];
+double ans[41][100001];
+double sum;
+int main() {
+	int T,N,K;
+	cin>>T;
+	for(int i=0;i<=32;i++)
+	{
+	    sum = 0;
+	    for(int j=1;j<=100000;j++)
+	    {
+	        
+	        if(i==0)
+	        {
+	            ans[i][j] = j;
+	        }
+	        else
+	        {
+	            sum+= ans[i-1][j-1];
+	            ans[i][j] = sum/j;
+	        }
+	    }
+	}
+	//cout<<"kfjg";
+	while(T--)
+	{
+	    scanf("%d %d",&N,&K);
+	    if(K>32)
+	    {
+	        printf("0.000000000
+");
+	        continue;
+	    }
+	    printf("%lf
+",ans[K][N]);
+	}
+	return 0;
+}

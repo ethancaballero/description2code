@@ -1,0 +1,14 @@
+for i in xrange(int(raw_input())):
+    n = int(raw_input())
+    
+    ans = ['n', 'n', 'n']
+    
+    if(360 % n == 0):
+        ans[0] = 'y'
+    if(n <= 360):
+        ans[1] = 'y'
+    if(n * (n + 1) / 2 < 360):
+        ans[2] = 'y'
+        
+    print ' '.join(ans)
+    

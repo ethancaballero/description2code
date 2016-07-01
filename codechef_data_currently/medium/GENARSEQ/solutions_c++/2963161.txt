@@ -1,0 +1,161 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <algorithm>
+#include <assert.h>
+#include <string.h>
+#include <vector>
+
+using namespace std;
+
+typedef unsigned long long ll;
+
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+
+char digit_lut[201] = "00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899";
+
+#define N 2000000
+unsigned char *forbidden;
+
+static char *fmt_uint(int x, char *s){
+  char b[16], *p = b+16;
+
+  if(x < 100){  
+    if(x < 10) { s[0] = '0' + x;                                 s[1] = 0; return s+1; }
+    else       { s[0] = digit_lut[x*2]; s[1] = digit_lut[x*2+1]; s[2] = 0; return s+2; }
+  }
+
+  do {
+    char *d = digit_lut + (x%100)*2;
+    *(--p) = d[1]; *(--p) = d[0];
+    x /= 100;
+  } while(x >= 10);
+
+  if(x){ *(s++) = '0' + x; }
+  while(p != b+16){ *(s++) = *(p++); *(s++) = *(p++);  }
+
+  *s = 0;
+  return s;
+}
+
+#define IS_DIGIT(x) ((x) >= '0' && (x) <= '9')
+
+static int parse_uint(char *buf, char **end_ptr)
+{
+  int i = 0;
+  while(!IS_DIGIT(*buf)) buf++;
+  while(1){
+    int k = *buf-'0';
+    if(k < 0 || k > 9) break;
+    i = (i*10) + k;
+    buf++;
+  }
+  *end_ptr = buf;
+  return i;
+}
+
+void check(vector<int> &seq, int a, int b)
+{
+  int i,j,k;
+
+  if(b>a){
+    int tmp=a;
+    a=b;
+    b=tmp;
+  }
+
+  for(i=0;i<seq.size();i++){
+    for(j=0;j<i;j++){
+      for(k=0;k<=j;k++){
+	if(seq[i]==a*seq[j]-b*seq[k]){
+	  printf("violation at %d %d %d: %d %d %d
+",k,j,i,seq[k],seq[j],seq[i]);
+	  abort();
+	}
+      }
+    }
+  }
+}
+
+void genarseq(int a, int b, int n)
+{
+  int i;
+  vector<int> seq;
+  int x;
+  char buf[10000];
+  char *bufptr;
+
+  bufptr=buf;
+
+  x=0;
+  for(i=0;i<n;i++){
+    int j;
+
+    x++;
+
+    // find next element in sequence
+    while(forbidden[x]){
+      x++;
+    }
+
+    assert(x<N);
+    seq.push_back(x);
+
+    // printf("%d ",x);
+    bufptr=fmt_uint(x, bufptr);
+    bufptr[0]=' ';
+    bufptr++;
+
+    // update list of forbidden elements
+    for(j=0;j<seq.size();j++){
+      int z=a*x-b*seq[j];
+
+      if(z>0)
+	forbidden[z]=1;
+      
+      z=a*seq[j]-b*x;
+      if(z>0)
+	forbidden[z]=1;
+    }
+  }
+  bufptr[0]=0;
+  printf("%s
+",buf);
+
+  //check(seq,a,b);
+}
+
+int main(int argc, const char **argv)
+{
+  int t,n,a,b;
+  int i;
+  char input[1024];
+  char *eptr;
+
+  forbidden=(unsigned char *) malloc(N+1);
+
+  scanf("%d",&t);//t=1000;
+  fgets(input,100,stdin);
+  for(i=0;i<t;i++){
+    memset(forbidden, 0, (N+1));
+    fgets(input,100,stdin);
+    a=parse_uint(input,&eptr);
+    b=parse_uint(eptr,&eptr);
+    n=parse_uint(eptr,&eptr);
+
+    //a=rand()%50+1;
+    //b=rand()%50+1;
+    //a=2;b=2;
+    //n=1000;
+    //a=2;b=1;n=1000;
+
+    //printf("a:%d b:%d n:%d
+",a,b,n);
+
+    genarseq(a,b,n);
+  }
+
+  free(forbidden);
+
+  return 0;
+}

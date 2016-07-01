@@ -1,0 +1,7 @@
+__author__ = 'William'
+
+
+T = int(raw_input()) #probability shouldn't change since you don't know what was taken out
+for q in range(T):   #t3 are irrelevant to winning or losing
+    T1,T2,T3,T4 = map(int, raw_input().split())
+    print float(T1)/(T1+T2)

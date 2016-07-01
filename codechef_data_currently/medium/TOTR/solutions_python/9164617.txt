@@ -1,0 +1,14 @@
+d={}
+n,m=raw_input().split()
+n=int(n);
+for i in xrange(26):
+    d[chr(97+i)]=m[i]
+d['?']='?';d['_']=' ';d['.']='.';d[',']=',';d['!']='!'
+for _ in xrange(n):
+    b=raw_input()
+    s=''
+    for i in b:
+        if i.isupper():
+            s+=(d[i.lower()]).upper()
+        else:s+=(d[i])
+    print s

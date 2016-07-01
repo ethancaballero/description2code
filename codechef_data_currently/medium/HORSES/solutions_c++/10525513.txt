@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{int t;
+cin>>t;
+while(t--)
+{int n;
+cin>>n;
+vector<long> hs(n);
+for(int i=0;i<n;i++)
+   cin>>hs[i];
+ long mindiff=long(abs(hs[1]-hs[0]));
+for(int i=0;i<n;i++)
+ for(int j=i+1;j<n;j++)
+   {if(mindiff>long(abs(hs[i]-hs[j])))
+     {mindiff=long(abs(hs[i]-hs[j]));
+     }
+   }
+cout<<mindiff<<endl;
+}
+
+
+}
+

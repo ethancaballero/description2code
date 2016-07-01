@@ -1,0 +1,67 @@
+import sys
+
+# scans a line for integers
+def scan_integers_in_line():
+    return map(int, sys.stdin.readline().split())
+
+#global set DS
+set_ac = []
+
+# union set DS (union function)
+def merge_set_ac(root1, root2):
+    global set_ac
+    set_ac[root2] = root1
+
+# union set DS (find function)
+def find_root_set_ac (root):
+    global set_ac
+
+    if set_ac[root] == root:
+        return root
+    set_ac[root] = find_root_set_ac(set_ac[root])
+    return set_ac[root]
+
+def solve():
+    global set_ac
+
+    n = scan_integers_in_line()[0]
+    scores = scan_integers_in_line()
+    num_queries = scan_integers_in_line()[0]
+
+    set_ac = range(n)
+
+    while num_queries > 0:
+
+        query_list = scan_integers_in_line()
+
+        if query_list[0] == 1:
+            print find_root_set_ac(query_list[1] - 1) + 1
+        else:
+
+            root1 = find_root_set_ac(query_list[1] - 1)
+            root2 = find_root_set_ac(query_list[2] - 1)
+
+            if root1 == root2:
+                print 'Invalid query!'
+            else:
+                score_difference = scores[root1] - scores[root2]
+
+                if score_difference < 0:
+                    root1, root2 = root2, root1
+
+                if score_difference != 0:
+                    merge_set_ac(root1, root2)
+
+        num_queries -= 1
+
+    return
+
+def main():
+    sys.setrecursionlimit(10010)
+    testCases = scan_integers_in_line()[0]
+    while testCases:
+        solve()
+        testCases -= 1
+
+if __name__ == '__main__':
+    main()

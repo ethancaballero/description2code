@@ -1,0 +1,43 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+#include<vector>
+#include<cmath>
+#include<cstring>
+#include<queue>
+#include<map>
+#include<set>
+using namespace std;
+double arr[7];
+int main()
+{
+    int t,n;
+    arr[1]=0.45;
+  arr[2]=0.945;
+  arr[3]=1.4445;
+  arr[4]=1.94445;
+  arr[5]=arr[4]+.499995;
+  arr[6]=arr[5]+.4999995;
+   arr[7]=arr[6]+.49999995;
+    for(scanf("%d",&t);t>0;--t)
+    {
+    
+     //cin>>n;
+     scanf("%d",&n);
+     if(n<=7)
+     printf("%.6f
+",arr[n]);
+     else
+     {
+       if(n%2)
+       printf("%d.444444
+",(n-1)/2);
+       else
+       printf("%d.944444
+",(n-1)/2);
+     }
+     //cout<<arr[n]<<endl;
+    }
+    //system("pause");
+    return 0;
+}

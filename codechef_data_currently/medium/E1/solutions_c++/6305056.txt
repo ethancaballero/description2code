@@ -1,0 +1,156 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <stdlib.h>
+#include <math.h>
+#include <set>
+#include <assert.h>
+#include <cstring>
+#include <string>
+#include <string.h>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <time.h>
+#include <climits>
+
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<b;++i)
+#define FORR(i,a,b) for(int i=a;i>=b;--i)
+#define FORC(it,container) for(typeof(container.begin()) it=container.begin();it!=container.end();++it)
+#define INT(x) scanf("%d",&x)
+#define LLD(x) scanf("%lld",&x)
+#define STR(x) scanf("%s",x)
+#define CHAR(x) scanf("%c",&x)
+#define PINT(x) printf("%d
+",x)
+#define PLLD(x) printf("%lld
+",x)
+#define CLR(x) memset(x,0,sizeof(x));
+#define F first
+#define S second
+#define PB push_back
+
+const int INF = INT_MAX;
+const int MAX = 10001;
+const int MOD = 1e9 + 7;
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef pair<int,int> PII;
+typedef map<int,int> MII;
+typedef vector<pair<int,int> > VPII;
+typedef vector<int> VI;
+typedef vector<char> VC;
+typedef vector<LL> VLL;
+typedef vector<VI> VVI;
+typedef vector<VLL> VVL;
+typedef set<int> SI;
+typedef set<char> SC;
+
+char c[1005][1005];
+char a[1005][1005];
+int dp[1005][1005];
+int val(char ch)
+{
+	if(ch=='.') return 0;
+	else if(ch=='K') return 0;
+
+	else if(ch=='P') return 1;
+
+
+	cout<<" not evaluted "<<endl;
+
+	exit(0);
+	
+
+}
+
+int n;
+
+bool inrange(int x,int y)
+{
+	return (x>=0 && x<n && y>=0 && y<n);
+}
+
+
+int dfs(int x,int y)
+{
+
+	if(y>n-1) return 0;
+
+	if(dp[x][y]>-1 && inrange(x,y))
+		return dp[x][y];
+
+	int ans=0;
+
+	int i,j;
+		
+	i = x-2;
+        j = y+1;
+	if(inrange(i,j))
+		ans = max(ans,dfs(i,j)+a[i][j]);
+
+
+	i = x-1;
+        j = y+2;
+	if(inrange(i,j))
+		ans = max(ans,dfs(i,j)+a[i][j]);
+
+	i = x+2;
+        j = y+1;
+	if(inrange(i,j))
+		ans = max(ans,dfs(i,j)+a[i][j]);
+
+	i = x+1;
+        j = y+2;
+	if(inrange(i,j))
+		ans = max(ans,dfs(i,j)+a[i][j]);
+
+	
+	dp[x][y] = ans;
+
+
+	return ans;
+
+}
+
+
+int main()
+{
+
+int test; INT(test);
+
+while(test--)
+{
+
+	 INT(n);
+
+	CLR(c); CLR(a);
+
+	FOR(i,0,n)
+		STR(c[i]);
+
+	int x,y;
+
+	FOR(i,0,n)
+		FOR(j,0,n)
+		{
+			a[i][j] = val(c[i][j]);
+			
+			if(c[i][j]=='K')
+				x=i,y=j;
+
+
+			dp[i][j] = -1;			
+		}
+
+		PINT(dfs(x,y));	
+
+}
+
+	
+return 0;
+}

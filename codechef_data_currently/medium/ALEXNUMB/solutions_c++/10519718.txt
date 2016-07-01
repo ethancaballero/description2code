@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	long long int n,i,x,j;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		int a;
+		cin>>x;
+		for(j=0;j<x;j++)
+		cin>>a;
+		cout<<x*(x-1)/2<<endl;
+	}
+}

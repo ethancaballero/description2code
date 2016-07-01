@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+using namespace std;
+string s;
+typedef long long ll;
+const ll bigno=1000000007;
+int main()
+{
+	ll t,no,level,n,i;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		cin>>s;
+		n=s.length();
+		no=1;
+		for(i=0;i<n;i++)
+		{
+			level=i+2;
+			if(s[i]=='l')
+			{
+				if(level%2==0)
+					no=((no%bigno)*2)%bigno;
+				else if(level%2!=0)
+					no=(2*(no%bigno))%bigno-1;
+			}
+			if(s[i]=='r')
+			{
+				if(level%2==0)
+					no=((2*(no%bigno))%bigno+2)%bigno;
+				else if(level%2!=0)
+					no=((2*(no%bigno))%bigno+1)%bigno;
+			}
+		}
+		printf("%lld
+",no%bigno);
+	}
+	return 0;
+}

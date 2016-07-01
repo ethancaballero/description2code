@@ -1,0 +1,14 @@
+n,k=raw_input().split()
+n=int(n)
+k=int(k)
+
+count=0
+c=0
+a = []
+while count<n :
+	t=int(raw_input())
+	a.append(t)
+	if t%k == 0:
+		c+=1
+	count+=1
+print c	

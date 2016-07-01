@@ -1,0 +1,15 @@
+t=int(raw_input())
+while t>0:
+	a=raw_input()
+	arr=a.split(' ')
+	n=int(arr[0])
+	m=int(arr[1])
+	
+	nm=n*m
+	pos=nm*(nm-1)
+	cand=2*(2*(n-2)*(m-1)+2*(m-2)*(n-1))
+	if cand<0:
+		cand=0
+	ans=pos-cand
+	print ans
+	t=t-1

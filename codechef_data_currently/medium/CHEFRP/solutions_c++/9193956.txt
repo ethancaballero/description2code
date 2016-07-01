@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<algorithm>
+long long int a[100004];
+using namespace std;
+int main()
+{
+	long long int t, n, flag, i, sum;
+	scanf("%lld", &t);
+	while (t--)
+	{
+		sum = 0;
+		flag = 0;
+		scanf("%lld", &n);
+		for (i = 0; i < n; i++)
+		{
+			scanf("%lld", &a[i]);
+			if (a[i] < 2)
+				flag = 1;
+		}
+		sort(a, a + n);
+		for (i = n - 1; i >= 1; i--)
+		{
+			sum += a[i];
+		}
+		sum += 2;
+		if (flag)
+			printf("-1
+");
+		else
+			printf("%lld
+", sum);
+	}
+	getchar();
+	getchar();
+	return 0;
+}

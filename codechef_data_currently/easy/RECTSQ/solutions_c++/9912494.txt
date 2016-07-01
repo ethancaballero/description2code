@@ -1,0 +1,34 @@
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+using namespace std;
+/*int rect(int n,int m)
+{
+    if(n>m)
+        return 1+rect(n-m,m);
+    else if(n<m)
+        return 1+rect(n,m-n);
+    else
+        return 1;
+}*/
+int main()
+{
+    int t;
+    scanf("%i",&t);
+    while(t--)
+    {
+        int n,m,c=0;
+        scanf("%i%i",&n,&m);
+        //c=rect(n,m);
+        int a=m,b=n;
+        while(m!=0)
+        {
+            int x=m;
+            m=n%m;
+            n=x;
+        }
+        printf("%i
+",(a*b)/(n*n));
+    }
+	return 0;
+}

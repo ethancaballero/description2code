@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+#define LSOne(S) (S & (-S))
+using namespace std;
+
+typedef long long ll;
+
+// B1 and B2 are two fenwick trees
+// Original array entries are assumed to be 0
+// and only updates are stored.
+//1 based indexing
+
+ll BIT[1000005],n;
+
+
+
+
+void update(ll x, ll val) //add val at index x
+{
+      for(; x <= n; x += x&-x)
+        BIT[x] += val;
+}
+
+ll query(ll x) // returns sum of first x elements in the array
+{
+     ll sum = 0;
+     for(; x > 0; x -= x&-x)
+        sum += BIT[x];
+     return sum;
+}
+
+
+int main()  {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
+	ll m,c,i,u,v,k,p;
+	char ch;
+	
+	//scanf("%lld %lld %lld",&n,&m,&c);
+	cin>>n>>m>>c;
+	
+	//for(i=1;i<=n;i++)
+	//update(i,c); //Point update using range_update function
+	
+	
+	while(m--)
+	{
+	  //scanf(" %c",&ch);
+	  cin>>ch;
+	  
+	  if(ch=='S')
+	  {
+	  // scanf("%lld %lld %lld",&u,&v,&k);
+	   cin>>u>>v>>k;
+	   
+	   update(u,k);
+	   update(v+1,-k);   
+      }
+      
+      else
+      {
+       //scanf("%lld",&p);
+       //printf("%lld
+",query(p)+c);
+       cin>>p;
+       cout<<query(p)+c<<"
+";
+       }
+	
+	}
+	
+	
+	
+    return 0;
+}

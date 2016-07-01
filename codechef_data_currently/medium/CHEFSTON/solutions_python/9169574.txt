@@ -1,0 +1,8 @@
+for t in xrange(int(raw_input())):
+	n, k = map(int, raw_input().split())
+	a = map(int, raw_input().split())
+	b = map(int, raw_input().split())
+	m = 0
+	for i in xrange(n):
+		m = max(m, k/a[i] * b[i])
+	print m

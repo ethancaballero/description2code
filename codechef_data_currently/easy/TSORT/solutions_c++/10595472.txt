@@ -1,0 +1,25 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<sstream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+long long int a[1000000],t;
+cin>>t;
+for(int i=0;i<t;i++)
+{
+cin>>a[i];
+cout<<"
+";
+}
+sort(a,a+t);
+for(int s=0;s<t;s++)
+{
+cout<<a[s];
+cout<<"
+";
+}
+return 0;
+} 

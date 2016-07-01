@@ -1,0 +1,63 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+int event[49][49];
+int dp[50];
+int rec(int i)
+{
+    if(i>=48)
+    {
+        return dp[48];
+    }
+    else if(dp[i]!=-1 && i>=0)
+    {
+        return dp[i];
+    }
+    else
+    {
+        int p,m=0;
+        for(int j=i;j<=48;j++)
+        {
+            for(int k=j+1;k<=48;k++)
+            {
+                p=event[j][k]+rec(k);
+                if(m<p)
+                    {
+                        m=p;
+                    }
+            }
+        }
+        dp[i]=m;
+        return dp[i];
+    }
+}
+int main()
+{
+    int i,j,c,test;
+    scanf("%d",&test);
+    while(test--)
+    {
+        for(i=0;i<49;i++)
+        {
+        dp[i]=-1;
+        for(j=0;j<49;j++)
+        {
+            event[i][j]=0;
+        }
+        }
+    dp[48]=0;
+    int n;
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%d %d %d",&i,&j,&c);
+        if(event[i][j]<c)
+        {
+            event[i][j]=c;
+        }
+    }
+    printf("%d
+",rec(0));
+    }
+    return 0;
+}

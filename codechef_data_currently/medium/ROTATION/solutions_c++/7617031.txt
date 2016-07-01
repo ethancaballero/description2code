@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[1000005];
+int main()
+{
+	int n,m;
+	scanf("%d%d",&n,&m);
+	for(int i=0;i<n;i++)
+	scanf("%d",&arr[i]);
+	int pos=0;
+	while(m--)
+	{
+		char c;
+		int s;
+		cin>>c;
+		scanf("%d",&s);
+		if(c=='C')
+		{
+			pos+=(n-s);
+			pos=pos%n;
+		}
+	else if(c=='A')
+		{
+		pos+=(s);
+		pos=pos%n;
+	}
+		else if (c=='R')
+		{
+		  	if((s-1)>=pos)
+		  	printf("%d
+",arr[s-1-pos]);
+		  	else
+		  	printf("%d
+",arr[n+s-1-pos]);
+		}
+	}
+}

@@ -1,0 +1,12 @@
+T = int(raw_input())
+while(T>0):
+    T = T-1
+    N = int(raw_input())
+    P = map(int, raw_input().split())
+    minP = P[0]
+    cost = 0
+    for i in range(0,N):
+        cost = cost + P[i]
+        if(P[i]<minP):
+            minP = P[i]
+    print (cost-minP)*minP

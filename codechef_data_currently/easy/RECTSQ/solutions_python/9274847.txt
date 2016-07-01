@@ -1,0 +1,15 @@
+a=int(raw_input())
+for i in range(a):
+    c=[int(x) for x  in raw_input().split()]
+    d=min(c)
+    e=True
+    while(e):
+        if c[0]%d==0 and c[1]%d==0:
+            e=False
+            break
+        d-=1
+    print (c[0]/d)*(c[1]/d)
+        
+            
+            
+            

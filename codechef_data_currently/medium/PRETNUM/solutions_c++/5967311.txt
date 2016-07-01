@@ -1,0 +1,97 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#define ll long long int
+using namespace std;
+ vector<bool>prime(1010000,1);
+ ll A[100010];
+ bool p[1000010];
+ int powmod(ll base,ll a,ll b,bool p[])
+ {
+     int cnt=0;
+     int y=1;
+     ll res=base;
+     int exp=33;
+     while(res<=b)
+     {
+         res=res*base;
+         y++;
+         if(res>=a&&res<=b&&p[y+1])
+            cnt++;
+     }
+     return cnt;
+ }
+ int main()
+ {
+     double m;
+     m=pow(10,12);
+ll a,b,j,temp,i,size,countl,fact,count;
+     int t;
+     size=0;
+     ll n=(ll)(sqrt(m))+1;
+     for(i=0;i<=n;i++)
+        p[i]=1;
+     p[0]=p[1]=0;
+     for(i=2;i<=(ll)(sqrt(n))+1;i++)
+     {
+         if(p[i]==1)
+         {
+         //    cout<<i<<" ";
+             for(j=i*i;j<=n;j=j+i)
+             {
+                 p[j]=0;
+             }
+         }
+     }
+ scanf("%d",&t);
+ ll cnt,q;
+ while(t>0)
+ {
+     t--;
+     countl=0;
+     scanf("%lld %lld",&a,&b);
+     cnt=0;
+        q=(long long int)(sqrt(b));
+        for(i=2;i<=q;i++)
+        {
+            if(p[i]==1)
+            {
+                A[cnt++]=i;
+            }
+        }
+        ll p1,s;
+     for(i=0;i<cnt;i++)
+        {
+            p1=A[i];
+            s=a/p1;
+            s=s*p1;
+                for(j=s;j<=b;j=j+p1)
+                {
+                    if(j<a)
+                        continue;
+                    else
+                    {
+                        if(p1!=j)
+                        prime[j-a]=false;
+                    }
+                }
+        }
+        for(i=0;i<(b-a+1);i++)
+        {
+            if(prime[i]==1&&(i+a)!=1)
+                countl++;
+                prime[i]=true;
+        }
+        ll d;
+        for(i=0;i<cnt;i++)
+        {
+                countl+=powmod(A[i],a,b,p);
+                if(A[i]*A[i]>b)
+                    break;
+        }
+     printf("%lld
+",countl);
+ }
+ }

@@ -1,0 +1,21 @@
+import sys
+T=int(sys.stdin.readline())
+for count1 in range(0,T):
+    a=raw_input()
+    b=a.split()
+    N=int(b[0])
+    K=int(b[1])
+    A=sys.stdin.readline().split()
+    result=10**10
+    for count2 in range(0,N):
+        for count3 in range(count2+1,N):
+            temp_result=abs(int(A[count2])+int(A[count3])-K)
+            if(result>temp_result):
+                result=temp_result
+    flag=0
+    for count2 in range(0,N):
+        for count3 in range(count2+1,N):
+            temp_result=abs(int(A[count2])+int(A[count3])-K)
+            if(temp_result==result):
+                flag+=1
+    print(str(result)+" "+str(flag))

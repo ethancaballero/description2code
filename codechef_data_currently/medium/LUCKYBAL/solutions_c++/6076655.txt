@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+int main()
+{
+    //freopen("input.txt", "r", stdin);
+    int tcase;
+    scanf("%d", &tcase);
+    ll n, ans;
+    string str;
+    int t, i;
+    for(t=1; t<=tcase; t++)
+    {
+        cin >> str;
+        ans = str.length();
+        ans = ans * (ans + 1);
+        ans /= 2;
+        ll upto =  0;
+        for(i=0; i<str.length(); i++)
+        {
+            if(str[i] == '7') upto++;
+            else
+            {
+                ans -= (((upto+1)*upto)/2);
+                upto = 0;
+            }
+        }
+        ans -= (((upto+1)*upto)/2);
+        cout << ans << endl;
+    }
+    return 0;
+}

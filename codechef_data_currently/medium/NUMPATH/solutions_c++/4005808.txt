@@ -1,0 +1,51 @@
+/**
+ * The answer is dependent on the number of edges on the last trusted chef
+ * So, get the answer and add it to the current node, to save time.
+ */
+#include <iostream>
+
+using namespace std;
+
+#define md 1000000007
+#define maxn 200333
+
+int n, a[maxn], i, ans[maxn];
+long long tree[maxn];
+
+void update(int idx, long long val){
+	while (idx <= n){
+		tree[idx] += val;
+		if (tree[idx] >= md) tree[idx] -= md;
+		idx += (idx&-idx);
+	}
+}
+
+int read(int idx){
+	long long res = 0;
+	while (idx > 0){
+		res += tree[idx];
+		if (res >= md) res -= md;
+		idx -= (idx&-idx);
+	}
+	return res;
+}
+
+
+int main(){
+	int t;
+	cin >> n >> t;
+	for (i = 1; i <= n; i++) cin >> a[i];
+	update(t, 1);
+	for (i = t - 1; i > 0; i--){
+		int r = min(n, i + a[i]);
+		ans[i] = read(r);
+		update(i, ans[i]);
+	}
+	int n1;
+	cin >> n1;
+	for (i = 1; i <= n1; i++){
+		int x;
+		cin >> x;
+		cout << ans[x] << endl;
+	}
+}

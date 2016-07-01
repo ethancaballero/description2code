@@ -1,0 +1,3 @@
+for cases in xrange(int(raw_input())):
+    a,b,c,d = map(int, raw_input().split())
+    print "%.6f"%(a/(a+b+0.0))

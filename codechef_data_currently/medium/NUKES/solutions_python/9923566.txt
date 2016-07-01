@@ -1,0 +1,23 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+particles,capacity,chambers=parseIntList(raw_input())
+res=[]
+for i in range(0,chambers):
+ res.append(particles%(capacity+1))
+ particles/=capacity+1
+printBS(res)
+ 
+  	
+ 
+ 
+
+  
+ 

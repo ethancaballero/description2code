@@ -1,0 +1,56 @@
+# include <bits/stdc++.h>
+# define mod 1000000007
+# define rep(i,a,b) for(i=a;i<=b;i++)
+# define repd(i,a,b) for(i=a;i>=b;i--)
+# define saaf(h) (h).clear()
+# define pb push_back
+# define mp make_pair
+
+using namespace std;
+typedef long long ll;
+
+ll fac[521],inv[521]={1, 1, 500000004, 166666668, 41666667, 808333339, 301388891, 900198419, 487524805, 831947206, 283194722};
+
+ll power(ll a, ll b) {
+	if (b==0)
+		return 1;
+		
+	ll x = power(a,b/2);
+	if(b&1)
+		return (((x%mod)*(x%mod))*(a%mod))%mod;
+	return ((x%mod)*(x%mod))%mod;
+}
+
+char s[521];
+
+int main () {
+	int t,i;
+	fac[0]=fac[1]=1;
+	for (i=2 ; i <= 520 ; i++ ) {
+		fac[i]=(fac[i-1]*i)%mod;
+//		if(i<=10)
+//			inv[i]=power(fac[i],mod-2);
+//		if (i <= 10) {
+//			printf("%d %d
+",fac[i],inv[i]);
+//		}
+	}
+	scanf("%d",&t);
+	while (t--) {
+		int h[256]={0};
+		scanf("%s",s);
+		int n= strlen(s);
+		for ( i=0 ; i < n ; i++ ) {
+			h[s[i]]++;
+		}
+		ll ans = fac[n];
+		for (i='A'; i <= 'z' ; i++ ) {
+			if (h[i] > 1) {
+				ans = ((ans%mod)*(inv[h[i]]%mod))%mod;
+			}
+		}
+		printf("%lld
+",ans);
+	}
+	return 0;
+}

@@ -1,0 +1,73 @@
+#include<iostream>
+#include <algorithm>
+using namespace std;
+#define size 101
+void swap (long long int* a,long long int* b )
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+int partition (long long int arr[], int l, int h)
+{
+    int x = arr[h];
+    int i = (l - 1);
+ 
+    for (int j = l; j <= h- 1; j++)
+    {
+        if (arr[j] <= x)
+        {
+            i++;
+            swap (&arr[i], &arr[j]);
+        }
+    }
+    swap (&arr[i + 1], &arr[h]);
+    return (i + 1);
+}
+void quickSortIterative (long long int arr[], int l, int h)
+{
+    int stack[ h - l + 1 ];
+    int top = -1;
+    stack[ ++top ] = l;
+    stack[ ++top ] = h;
+    while ( top >= 0 )
+    {
+        h = stack[ top-- ];
+        l = stack[ top-- ];
+        int p = partition( arr, l, h );
+        if ( p-1 > l )
+        {
+            stack[ ++top ] = l;
+            stack[ ++top ] = p - 1;
+        }
+        if ( p+1 < h )
+        {
+            stack[ ++top ] = p + 1;
+            stack[ ++top ] = h;
+        }
+    }
+}
+int main()
+{
+	int t,k,n,i,song;
+	long long int a[size];
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		for(i=1;i<=n;i++)
+		cin>>a[i];
+		cin>>k;
+		song = a[k];
+		quickSortIterative(a,1,n) ;
+		for(i=1;i<=n;i++)
+		{
+			if(a[i]==song)
+			{
+				cout<<i<<"
+";
+				break;
+			}
+		}
+	}
+}

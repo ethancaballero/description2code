@@ -1,0 +1,15 @@
+output = list()
+string1 = raw_input()
+n = int(string1)
+for i in range(n) :
+	inp1 = raw_input()
+	todo = list(inp1)
+	for j in range(len(todo)-1,-1,-1) :
+		if (j>=3 and (todo[j-3]=='C' or todo[j-3]=='?') and (todo[j-2]=='H' or todo[j-2]=='?') and (todo[j-1]=='E' or todo[j-1]=='?') and (todo[j]=='F' or todo[j]=='?')) :
+			todo[j-3:j+1] = 'CHEF'
+		elif todo[j] == '?' :
+			todo[j] = 'A'
+	transstr = ''.join(todo)
+	output.append(transstr)
+for i in range(n) :
+	print output[i]

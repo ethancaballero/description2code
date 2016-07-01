@@ -1,0 +1,13 @@
+t=input()
+while t:
+	n=input()
+	l=map(int,raw_input().split())
+	l.sort(reverse=True)
+	k=l[0::2]
+	p=l[1::2]
+	j=sum(k[::2])
+	i=sum(p[::2])
+	print i+j
+	t=t-1
+		
+		

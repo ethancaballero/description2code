@@ -1,0 +1,8 @@
+import math
+
+n = int(input())
+for i in range(n): 
+    x,y = map(float, raw_input().split())
+    maxnum = math.sqrt(math.pow(x,2) + math.pow(y, 2))  
+    minnum = math.sqrt(abs(math.pow(x,2) - math.pow(y, 2)))
+    print '%1.5f %1.5f' %(abs(minnum), abs(maxnum))

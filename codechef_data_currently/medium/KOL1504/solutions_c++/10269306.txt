@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+long int t;
+cin>>t;
+
+vector<long int> visited('z'+2);
+while(t--)
+{
+long int n;
+long int d;
+cin>>n>>d;
+string s1;
+string s2;
+
+cin>>s1;
+cin>>s2;
+int flag=1;
+
+for(long int i=0;i<d && flag && i<n;i++)
+{
+for(long int j=i;j<n;j=j+d) visited[int(s1.at(j))]++;
+
+
+for(long int j=i;j<n;j=j+d)
+{
+if(visited[int(s2.at(j))]>0) visited[int(s2.at(j))]--;
+else
+{
+flag=0;
+break;
+}
+}
+for(long int j=i;j<n;j=j+d) visited[int(s1.at(j))]=0;
+}
+if(flag) cout<<"Yes"<<endl;
+else cout<<"No"<<endl;
+}
+return 0;
+}
+

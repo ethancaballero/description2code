@@ -1,0 +1,11 @@
+from fractions import gcd
+for i in range(input()):
+	n=input()
+	a=map(int, raw_input().split())
+	ans=a[0]
+	for j in a:
+		ans=gcd(ans, j)
+	if ans==1:
+		print n
+	else:
+		print -1

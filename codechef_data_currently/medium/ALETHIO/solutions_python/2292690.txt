@@ -1,0 +1,24 @@
+def main():
+	s=str(raw_input())
+	alp="abcdefghijklmnopqrstuvwxyz";
+	alp=alp.upper()
+	lis=list(s)
+	ans=0;
+	sf="".join(lis)
+	for i in range(len(sf)):
+		sub=""
+		fg=False
+		for j in range(0,len(sf)):
+			if i+j>=len(sf):
+				break;
+			if (lis[i+j] in alp) and not fg :
+				fg=True;
+				sub+="9"
+			elif (lis[i+j] in alp) and fg:
+				break;
+			else:
+				sub+=lis[i+j]
+		if not sub=="" and int(sub)>ans:
+			ans=int(sub)
+	print ans
+main()

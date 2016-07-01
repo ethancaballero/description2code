@@ -1,0 +1,80 @@
+/*
+ID : monyetc1
+PROG :
+LANG : C++
+*/
+#include<fstream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<algorithm>
+#include<string.h>
+#include<vector>
+#include<utility>
+#include<iostream>
+#include<math.h>
+#include<stack>
+#include<queue>
+#include<set>
+using namespace std;
+
+#define pb push_back
+#define mp make_pair
+#define fi first
+#define se second
+#define INF 1000000000
+#define LL long long int
+#define EPS 1e-11
+#define PI 3.14159265359
+
+int mat[12][12] , tc , n , m , a, b , c, vis[12] , occ[500];
+
+void rec(int u , int dist)
+{
+    if (u == n)
+    {
+        occ[dist]++;
+        return;
+    }
+    
+    for (int v = 1; v<=n; v++)
+    {
+        if (mat[u][v] < INF && vis[v] == -1)
+        {
+            vis[v] = 1;
+            rec(v , dist + mat[u][v]);
+            vis[v] = -1;
+        }
+    }
+}
+
+int main(void)
+{
+    scanf("%d",&tc);
+    for (int cases = 1; cases<=tc; cases++)
+    {
+        scanf("%d%d",&n,&m);
+        
+        for (int i = 1; i<=n; i++)
+        for (int j = 1; j<=n; j++) mat[i][j] = INF;
+        memset(vis,-1,sizeof(vis));
+        memset(occ,0,sizeof(occ));
+        
+        for (int i = 1; i<=m; i++)
+        {
+            scanf("%d%d%d",&a,&b,&c);
+            mat[a][b] = mat[b][a] = c;
+        }
+        
+        rec(1,0);
+        for (int i = 0; i<500; i++)
+        {
+            if (occ[i] > 0) 
+            {
+                  printf("%d
+",occ[i]);
+                  break;
+            }
+        }    
+    }
+
+}

@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int h[1000000];
+int main()
+{
+    int t,a,i;
+    i=-1;
+    cin>>t;
+    while(t--)
+    {
+    	cin>>a;
+    	while(a>0)
+    	{
+    		i++;
+    		h[i]=a%10;
+    		a=a/10;
+    	}
+    	cout<<(h[0]+h[i])<<endl;
+    	i=-1;
+    }
+	return 0;
+}

@@ -1,0 +1,11 @@
+for t in xrange(int(raw_input())):
+    n = int(raw_input())
+    s = raw_input().strip()
+    ans = s
+    for i in range(n):
+        c = s[i]
+        x = s[:i]+s[i+1:]
+        for j in range(n):
+            temp = x[:j]+c+x[j:]
+            ans = min(ans, temp)
+    print ans

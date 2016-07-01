@@ -1,0 +1,32 @@
+import sys
+t=int(raw_input())
+for _ in xrange(t):
+    n,m=map(int,sys.stdin.readline().rstrip().split(' '))
+    sl={}
+    sf={}
+    for i in xrange(n):
+        c,d=map(int,sys.stdin.readline().rstrip().split(' '))
+        if d in sl :
+            sl[d]+=c
+        else:
+            sl[d]=c
+
+    for i in xrange(m):
+        c,d=map(int,sys.stdin.readline().rstrip().split(' '))
+        if d in sf :
+            sf[d]+=c
+        else:
+            sf[d]=c
+
+    #print sf
+    #print sl
+    ans=0
+    for c in sf:
+        #print(c)
+        if c not in sl:
+            ans+=sf[c]
+        if (sf[c]-sl[c]) > 0:
+            ans+=(sf[c]-sl[c])
+            #print ans
+
+    print ans

@@ -1,0 +1,7 @@
+t = int(input())
+for test in xrange(t):
+    n = int(input())
+    res = 0
+    for x in xrange(n):
+        res ^= int(input())
+    print res

@@ -1,0 +1,26 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int k;
+        cin>>k;
+        int num=k/25;
+        string s="abcdefghijklmnopqrstuvwxyz";
+        if(k%25>0)
+        for(int i=k%25;i>=0;i--)
+            cout<<s[i];
+        while(num>0)
+        {
+            for(int i=25;i>=0;i--)
+            cout<<s[i];
+            num--;
+        }
+        cout<<endl;
+    }
+    return 0;
+}

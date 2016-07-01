@@ -1,0 +1,23 @@
+def up(c, r, count1):
+    while c != r:
+        c *= 2
+        count1 += 1
+    return c, count1
+
+
+for _ in xrange(input()):
+    current, required = map(int, raw_input().split())
+    count = 0
+    if current == required:
+        print 0
+    else:
+        while required != current:
+            if required % current == 0:
+                current, count = up(current, required, count)
+            else:
+                if current % 2 == 0:
+                    current /= 2
+                else:
+                    current = (current - 1) / 2
+                count += 1
+        print count

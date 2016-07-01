@@ -1,0 +1,26 @@
+using namespace std; 
+#include<iostream> 
+int main() 
+{ 
+int test,n,f,tore,i,temp; 
+double sum,num; 
+scanf("%d",&test); 
+while(test--) 
+{ 
+scanf("%d",&n); 
+sum=(n*(n+1))/2; 
+if(n%2)n++; 
+scanf("%d",&f); 
+for(i=1;i<=f;i++) 
+{ 
+scanf("%d",&temp); 
+sum=sum-temp;                 
+} 
+scanf("%d",&tore); 
+sum=sum*(1-((2*tore)/(double)n)); 
+printf("%0.4lf
+",sum);             
+} 
+//system("pause"); 
+return 0;    
+}

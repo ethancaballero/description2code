@@ -1,0 +1,77 @@
+#include <iostream>
+#include <complex>
+#include <vector>
+#include <algorithm>
+
+#include <cassert>
+
+using namespace std;
+
+#define ASSERT(A,a,b) assert(a <= A && b >= A)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+
+typedef complex<int> CPX;
+typedef vector<CPX> VC;
+
+int cross(CPX const &a, CPX const &b) {
+    return imag(conj(a)*b);
+}
+
+bool isCircle(CPX &a, CPX &b, CPX &c) {
+    if(cross(b-a, c-a) == 0) return false;
+    // if(cross(a-b, c-b) == 0) return false;
+    // if(cross(a-c, b-c) == 0) return false;
+    return true;
+}
+
+int det(CPX &a, CPX &b, CPX &c) {
+    return norm(a)*cross(b,c) - norm(b)*cross(a,c) + norm(c)*cross(a,b);
+}
+
+int getSign(CPX &a, CPX &b, CPX &c) {
+    CPX t = (a+b)/2;
+    int v = -det(a,b,c) + det(t,b,c) - det(t,a,c) + det(t,a,b);
+    assert(v != 0);
+    if(v < 0) return -1;
+    return 1;
+}
+
+int main() {
+    int T;
+    cin >> T;
+    ASSERT(T,1,10);
+    while(T--) {
+        int N;
+        cin >> N;
+        ASSERT(N,4,30);
+        VC A(N);
+        FOR(i,0,N) {
+            int x,y;
+            cin >> x >> y;
+            ASSERT(x,-50,50);
+            ASSERT(y,-50,50);
+            A[i] = CPX(2*x,2*y);
+        }
+        FOR(i,0,N) FOR(j,0,i) assert(A[i] != A[j]);
+        double r,t;
+        r = t = 0;
+        FOR(i,0,N) FOR(j,i+1,N) FOR(k,j+1,N) {
+            //cout << "trying " << A[i] << " " << A[j] << " " << A[k] << endl;
+            if(isCircle(A[i],A[j],A[k])) {
+                //cout << "  is a circle" << endl;
+                int sgn = getSign(A[i],A[j],A[k]);
+                int a = -det(A[i],A[j],A[k]);
+                FOR(l,0,N) {
+                    if(l == i || l == j || l == k) continue;
+                    int v = a + det(A[l],A[j],A[k]) - det(A[l],A[i],A[k]) + det(A[l],A[i],A[j]);
+                    //cout << "  with " << A[l] << " gives " << v*sgn << endl;
+                    if(v*sgn >= 0) r++;
+                }
+            }
+            t += N-3;
+            //cout << r << " " << t << endl;
+        }
+        cout << r/t << endl;
+    }
+    return 0;
+}

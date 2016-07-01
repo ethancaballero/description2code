@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define rep(i,i1,n) for(int i=i1;i<n;i++)
+#define PB push_back
+#define MP make_pair
+#define ALL(c) (c).begin(),(c).end()
+#define F first
+#define S second
+#define MOD 1000000007
+#define si1(c) scanf("%d",&c);
+#define sll1(c) scanf("%lld",&c);
+#define pri1(c) printf("%d
+",c);
+#define prll1(c) printf("%lld
+",c);
+#define newl cout<<"
+"
+typedef long long ll;
+//-----------------------------------------------------
+ll powmod(ll a,ll b)
+{
+    if(b==0)return 1;
+    ll x=powmod(a,b/2);
+    ll y=(x*x)%MOD;
+    if(b%2)
+        return (a*y)%MOD;
+    return y%MOD;
+}
+//-------------------------------------------------------
+int prime[100010];
+int ans[100010];
+int dp[100010][5];
+void sieve()
+{
+    for(int i=2;i<=100010;i++)
+    {
+        if(prime[i]!=-1)
+        {
+            for(int j=i*2;j<100010;j=j+i)
+            {
+                prime[j]=-1;
+            }
+        }
+    }
+}
+void func()
+{
+   // ans[1]=0;ans[2]=1;ans[3]=1;
+    rep(i,1,100010)
+    {
+        int count1=0;
+        for(int j=1;j*j<=i;j++)
+        {
+            if(i%j==0)
+            {
+                if(prime[j]==j)
+                count1++;
+                if(prime[i/j]==i/j&&j!=i/j)
+                    count1++;
+            }
+        }
+        ans[i]=count1;
+    }
+}
+int main()
+{
+    rep(i,0,100010)
+        prime[i]=i;
+    prime[0]=-1;
+    prime[1]=-1;
+    sieve();
+    memset(ans,0,sizeof(ans));
+    memset(dp,0,sizeof(dp));
+    func();
+    rep(i,1,6)
+    {
+        rep(j,0,100010)
+        {
+            if(ans[j]==i)
+                dp[j][i]=dp[j-1][i]+1;
+            else
+                dp[j][i]=dp[j-1][i];
+        }
+    }
+    int t;                                          
+    si1(t);
+    while(t--)
+    {
+        int a,b,k;
+        si1(a);
+        si1(b);
+        si1(k);
+        pri1(dp[b][k]-dp[a-1][k]);
+    }
+    return 0;
+}

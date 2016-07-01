@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+    int main () {
+    	int t, n , k ;
+    	cin>>t;
+    	while(t--) {
+    		int dp[1024] = {0};
+    		cin>>n>>k;
+    		int a;
+    		int i , j;
+    		for(i = 1 ; i <= n ; i++) {
+    			cin>>a;
+    			for(j = 0 ; j < 1024 ; j++) {
+    				if(dp[j]) {
+    					dp[j^a] = 1 ;
+    				}
+    			}
+    			dp[a] = 1 ;
+    		}
+    		int maxsum = k ;
+    		for(j = 0 ; j < 1024 ; j++) {
+    			if(dp[j])
+                maxsum= max(maxsum, j ^ k);
+    		}
+    		printf("%d
+" , maxsum);
+    	}
+        return 0;
+    }

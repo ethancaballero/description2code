@@ -1,0 +1,16 @@
+# your code goes here
+from sys import stdin, stdout
+t=int(input())
+for i in range(t):
+  n=int(input())
+  a=map( int, stdin.readline().rstrip().split() )
+  k=int(input())
+  b=a[k-1]
+  a=sorted(a)
+  for j in range(n):
+    if a[j]==b:
+      print(j+1)
+      break
+  
+  
+  

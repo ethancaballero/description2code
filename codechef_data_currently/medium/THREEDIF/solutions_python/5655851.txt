@@ -1,0 +1,3 @@
+for _ in range(int(raw_input())):
+  a,b,c=sorted(map(int, raw_input().split()))  
+  print a%1000000007*(b-1)%1000000007*(c-2)%1000000007 if b-1>0 and c-2>0 else 0

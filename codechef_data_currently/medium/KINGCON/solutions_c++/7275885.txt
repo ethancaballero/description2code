@@ -1,0 +1,99 @@
+#include<bits/stdc++.h>
+#define lli long long int
+#define li long int
+#define max 1000000000
+#define max1 1000000
+#define mod 1000000007
+#define nil -1
+#define init 1
+#define visi 2
+#define fini 3
+#define fr(i, n) for(i=0; i<n; i++)
+#define sc(n) scanf("%d",&n);
+#define pt(n) printf("%d",n);
+using namespace std; 
+vector<vector<int> >graph;
+//lli adj[max1][max1];
+//void create_graph();
+//void dfs(lli v)
+void aputil(int u, bool visited[], int parent[] ,int disc[], int low[], bool ap[])
+{
+	//printf("R");
+	static int time = 0;
+	int children = 0;
+	visited[u] = true;
+	disc[u] = low[u] = ++time;
+	vector<int>:: iterator i;
+	for(i = graph[u].begin(); i!=graph[u].end(); ++i)
+	{
+		int v= *i;
+		//printf("R");
+		if(visited[v]==false)
+		{
+			//printf("R");
+			children++;
+			parent[v] = u;
+		//	printf("%d	   %d   ",u,v);
+			aputil(v, visited ,parent, disc ,low, ap);
+			//low[u]=low[u]>low[v]?low[v]:low[u];
+			low[u]=min(low[u], low[v]);
+			if(parent[u]==nil && children>1)
+			{   //printf("%d %d %d",u,children,v);
+				ap[u]=true;}
+			if(parent[u]!=nil && low[v]>=disc[u])
+			{   //printf("%d 		",u);
+				ap[u]=true;}
+		}
+		else if(v!=parent[u])
+		   //low[u]=low[u]>disc[v]?disc[v]:low[u];
+		   low[u]=min(low[u], disc[v]);
+		   //printf("R");}
+	}
+}
+ 
+int main()
+{
+    int t, n, m, k, i;
+    scanf("%d",&t);
+    while(t--)
+    {
+              int count=0, cost=0;
+              scanf("%d%d%d",&n,&m,&k);
+              graph=vector<vector<int> > (n);
+              while(m--)
+              {
+                        int a, b;
+                        scanf("%d%d",&a,&b);
+                        graph[a].push_back(b);
+                        graph[b].push_back(a);
+              }
+              bool *visited=new bool[n];
+              bool *ap=new bool[n];
+              int *parent=new int[n];
+              int *disc=new int[n];
+              int *low=new int[n];
+              for(int i=0; i<n ;i++)
+              {
+              	 visited[i]=false;
+              	 parent[i]=nil;
+              	 ap[i]=false;
+              }
+              for(int i=0; i<n; i++)
+              {
+              	//printf("R");
+              	 if(visited[i]==false)
+              	 {//printf("R");
+              	 	aputil(i, visited, parent, disc ,low, ap);}
+              }
+              for(int i=0; i<n; i++)
+              {
+              	 if(ap[i]==true)
+              	   count++;
+              	   //printf("%d",i);}
+              }
+              cost=count*k;
+              printf("%d
+",cost);
+    }
+    return 0;
+}

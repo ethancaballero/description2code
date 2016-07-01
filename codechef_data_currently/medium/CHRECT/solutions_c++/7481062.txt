@@ -1,0 +1,45 @@
+#include<iostream>
+#include<cmath>
+#include<cstdio>
+#define gc getchar
+typedef long long int ll;
+using namespace std;
+const ll mod=1000000007;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll t,n,m,k;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m>>k;
+        if( m<=2 && n==1)
+            cout<<0<<'
+';
+        else if(n==2&&m==1)
+            cout<<0<<'
+';
+        else if(n==1||m==1)
+            cout<<k<<'
+';
+        else
+        {
+            if(k%2==0)
+                cout<<k/2<<'
+';
+            else
+                cout<<k/2+1<<'
+';
+        }
+    }
+    return 0;
+}

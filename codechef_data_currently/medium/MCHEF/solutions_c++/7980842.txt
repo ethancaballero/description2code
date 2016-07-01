@@ -1,0 +1,64 @@
+#include<cstdio>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+long long int cou[100005][505];
+long long int arr[100005],brr[100005],cost[100005];
+long long int min(long long int a,long long int b) { return (a <= b)? a : b; }
+long long int knap(long long int,long long int);
+struct decide
+{
+	long long int left,right,cod;
+}dou[100001];
+bool comp(const decide &a1 ,const decide &b1)
+{
+	return a1.cod<b1.cod;
+}
+int main()
+{
+	long long int t,i,j,k,n,m,temp;
+	long long int s,sum;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		sum=0;
+		for(i=0;i<100000;i++)
+		cost[i]=2000;
+		scanf("%lld%lld%lld",&n,&k,&m);
+		for(i=0;i<n;i++)
+		scanf("%lld",&arr[i]);
+		for(i=0;i<m;i++)
+		scanf("%lld%lld%lld",&(dou[i].left),&(dou[i].right),&(dou[i].cod));
+		sort(dou,dou+m,comp);
+		for(i=0;i<m;i++)
+		{
+			for(j=dou[i].left-1;j<dou[i].right;j++)
+			{
+				if(cost[j]==2000)
+				cost[j]=dou[i].cod;
+			}
+		}
+		for(i=0;i<n;i++)
+		sum+=arr[i];
+		s=knap(k,n);
+		printf("%lld
+",sum-s);
+	}
+}
+	long long int knap(long long int k, long long int n)
+	{
+		long long int i, w;
+   for (i = 0; i <= n; i++)
+   {
+       for (w = 0; w <= k; w++)
+       {
+           if (i==0 || w==0)
+               cou[i][w] = 0;
+           else if (cost[i-1] <= w)
+                 cou[i][w] = min(arr[i-1] + cou[i-1][w-cost[i-1]],  cou[i-1][w]);
+           else
+                 cou[i][w] = cou[i-1][w];
+       }
+   }
+   return cou[n][k];
+}     

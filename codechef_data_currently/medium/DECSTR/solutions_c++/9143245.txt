@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int k;
+        cin>>k;
+        int p=k/25,r=k%25,i,a;
+        for (i=0;i<=r;i++){
+            if (r==0)
+                break;
+            a=97+r-i;
+            cout<<(char)a;
+        }
+        for (i=0;i<p;i++){
+            cout<<"zyxwvutsrqponmlkjihgfedcba";
+        }
+        cout<<endl;
+    }
+    return 0;
+}

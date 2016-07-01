@@ -1,0 +1,46 @@
+#include<stdio.h>
+ 
+# define mod 1000000007
+ 
+int scan()
+{
+        int t=0;
+        char c;
+        c=getchar_unlocked();
+        while(c<'0' || c>'9')
+        c=getchar_unlocked();
+        while(c>='0' && c<='9')
+        {
+                t=(t<<3)+(t<<1)+c-'0';
+                c=getchar_unlocked();
+        }
+        return(t);
+}
+ 
+ 
+int main()
+{
+    int t;
+    t=scan();
+ 
+    while(t--)
+    {
+        int n,k;
+        n=scan();
+        k=scan();
+ 
+        long long int messi[1009];
+        messi[2]=k%mod;
+        messi[3]=k*(k-1)%mod;
+        int i;
+        for(i=4;i<=n;i++)
+          {
+              messi[i]=((messi[i-2]*k)+(messi[i-1]*(k-1)))%mod;
+          }
+ 
+        printf("%lld
+",messi[n]);
+    }
+ 
+    return 0;
+}

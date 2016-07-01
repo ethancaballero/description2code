@@ -1,0 +1,39 @@
+#include<iostream>
+#include<stdio.h>
+#include <cmath>
+#include<algorithm>
+#include <numeric>
+#define for(a,b) for(int i=a;i<b;i++)
+using namespace std;
+int r[101],g[101],b[101];
+int main()
+{
+int cas;
+cin>>cas;
+int maxi;
+while(cas--)
+{
+    int R,G,B,M,sm[3]={0};
+    cin>>R>>G>>B>>M;
+    for(0,R)
+        {cin>>r[i];
+        if(r[i]>sm[0])
+        sm[0]=r[i];}
+    for(0,G)
+        {cin>>g[i];
+        if(g[i]>sm[1])
+        sm[1]=g[i];}
+    for(0,B)
+        {cin>>b[i];
+        if(b[i]>sm[2])
+        sm[2]=b[i];}
+    for(0,M)
+    {
+        sort(sm,sm+3);
+        sm[2]=sm[2]/2;
+    }
+    sort(sm,sm+3);
+    cout<<sm[2]<<endl;
+
+}
+}

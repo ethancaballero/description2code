@@ -1,0 +1,31 @@
+import math
+
+def indices(c):
+    idx = [i for i in xrange((c-1)*4+1, c*4+1)]
+    start = 37 + (9-c)*2
+    idx += [j for j in xrange(start, start+2)]
+    return idx
+
+def choose(free, friends):
+    numerator = 1
+    for i in xrange(free, free-friends, -1):
+        numerator *= i
+    return numerator / math.factorial(friends)
+
+friends, cars = map(int, raw_input().split(" ")) 
+ways = 0
+for _ in xrange(cars):
+    seats = [c for c in raw_input()]
+    for c in xrange(1,10, 1):
+        idx = indices(c)
+        free_seats = 0
+        for i in idx:
+            if seats[i-1] == '0':
+                free_seats += 1
+
+        ways += choose(free_seats, friends)
+
+print ways
+
+
+    

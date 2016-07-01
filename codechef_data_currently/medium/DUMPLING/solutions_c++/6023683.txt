@@ -1,0 +1,29 @@
+#include<iostream>
+
+using namespace std;
+
+long long gcd(long long a,long long b)
+{
+	if(b==0)
+	return a;
+	else 
+	return gcd(b, a%b);
+}
+
+int main()
+{
+	unsigned long long t,a,b,c,d,k,q,r,count=0;
+	cin>>t;
+	while(t--)
+	{
+		cin>>a>>b>>c>>d>>k;
+		q=gcd(a,b);
+		r=gcd(c,d);
+		count=(k/(q/gcd(q,r)))/r;
+		//cout<<q<<" "<<r<<" ";
+		cout<<count*2+1<<endl;
+			
+	}
+	
+}
+		

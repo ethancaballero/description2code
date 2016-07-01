@@ -1,0 +1,94 @@
+//      go_on
+#include <bits/stdc++.h>
+using namespace std;
+
+
+//      LOOPS AND MEM
+#define mz(a) memset(a,0,sizeof(a))
+#define md(a,m,n) memset(a,-1,sizeof(a[0][0])*m*n);
+#define mmin1(a) memset(a,-1,sizeof(a))
+#define minf(a) memset(a,MEMSET_INF,sizeof(a));
+#define f(i,a,n) for(int i=a;i<=n;++i)
+#define fs(i,a,n) for(int i=a;i<n;++i)
+#define fl(i,n,a) for(int i=n;i>=a;--i)
+
+
+//       I/O
+#define i(n) cin>>n
+#define is(n) scanf("%s",n)
+#define s(n) scanf("%d",&n)
+#define sl(n) scanf("%lld",&n)
+#define o(n) cout<<n
+#define p(n) printf("%d",n)
+#define pl(n) printf("%lld",n)
+#define os cout<<" "
+#define on cout<<"
+"
+
+
+//       CONTAINERS
+typedef vector <int> vi;
+typedef pair<int, int> pii;
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define all(a)  a.begin(),a.end()
+//#define fv(i,v) for(auto i = v.begin();i !=v.end(); ++i)
+
+
+//        DEF AND INIT
+#define ll long long int
+#define M (ll)(1e9+7)
+#define eps 1e-15
+#define N (ll)(1e4+5)
+//vector<pair<int, pii> >v;
+//map<string,int> MP;
+//map<string,int>::iterator it;
+/*
+        freopen("in", "r", stdin);
+        freopen("out", "w", stdout);
+*/
+
+int a[N],b[N];
+priority_queue<int, vector<int>, std::greater<int> >pq;
+int main()
+{
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    int t,n,k1,k2,k3;
+    int sum=0;
+    i(t);
+    while(t--)
+    {
+        i(n);i(k1);i(k2);i(k3);
+        f(i,1,n)    i(a[i]);
+        f(i,1,n)
+        {
+            sum=0;
+            f(j,i,n)
+            {
+                sum+=a[j];
+                if(pq.size()>=k3)
+                {
+                    if(pq.top()<sum)
+                    {
+                        pq.pop();
+                        pq.push(sum);
+                    }
+                }
+                else    pq.push(sum);
+            }
+        }
+        int k=k3;
+        while(!pq.empty())
+        {
+            b[k--]=pq.top();
+            pq.pop();
+        }
+        o(b[k1]);os;o(b[k2]);os;o(b[k3]);on;
+    }
+
+
+
+    return 0;
+}

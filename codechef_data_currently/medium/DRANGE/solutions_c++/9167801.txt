@@ -1,0 +1,70 @@
+	#include<iostream>
+	#include<stdio.h>
+	using namespace std;
+	inline int inp()
+    {
+    int n=0;
+    char p=getchar_unlocked();
+    while(p>='0'&&p<='9')
+    {
+    n = (n<< 3) + (n<< 1) + (p - '0');
+    p=getchar_unlocked();
+    };
+    return n;
+    };
+	int main()
+	{
+		int t;
+		t=inp();
+		while(t>0)
+		{
+			int n,m;
+			n=inp();m=inp();
+			int arr[1000005];
+			for(int i=1;i<=n;i++)
+			{
+				arr[i]=1;
+			}	
+			int num,x,y,z,max,min;
+			int temp[20005];
+			int index=-1;
+			while(m>0)
+			{
+
+				
+				num=inp();x=inp();y=inp();z=inp();
+				index++;
+				temp[index]=x;
+				index++;
+				temp[index]=y;
+
+				if(num==1)
+				{
+					arr[x]+=z;
+					if(y+1<=n)
+						arr[y+1]-=z;
+				}	
+				else
+				{
+					arr[x]-=z;
+					if(y+1<=n)
+						arr[y+1]+=z;
+				}
+				m--;
+			}
+
+				min=arr[1];
+				max=arr[1];
+				for(int i=2;i<=n;i++)
+				{
+					arr[i]+=arr[i-1];
+					if(min>arr[i])
+						min=arr[i];
+					if(max<arr[i])
+						max=arr[i];
+				}
+			printf("%d
+",max-min);
+			t--;
+		}	
+	}

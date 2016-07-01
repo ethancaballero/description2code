@@ -1,0 +1,19 @@
+import itertools
+T = int(raw_input())
+for i in range(T):
+	str1 = raw_input()
+	str2 = raw_input()
+	str1 = str1.replace(' ', '')
+	str2 = str2.replace(' ', '')
+	if len(str1)!=len(str2):
+		print 'No'
+		continue
+	l = len(str1)
+	count=0
+	for a,b in itertools.izip(str1,str2):
+		if a==b or a=='?' or b=='?':
+			count+=1
+	if count==l:
+		print 'Yes'
+	else:
+		print 'No'

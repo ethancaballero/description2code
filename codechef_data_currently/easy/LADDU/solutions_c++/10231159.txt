@@ -1,0 +1,68 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    int t,i;
+    cin>>t;
+    int ran;
+    int sev;
+    while(t--)
+    {
+        long long int n,ct=0,cc=0,cw=0,b=0;
+        long long int points;
+        long long int bonus=0,sum=0;
+        string origin;
+        cin>>n>>origin;
+        string act;
+        while(n--)
+        {
+           cin>>act;
+           if(act=="CONTEST_WON")
+           {
+               cin>>ran;
+           }
+           if(act=="BUG_FOUND")
+           {
+               cin>>sev;
+           }
+           if(act=="TOP_CONTRIBUTOR")
+            {
+                ct++;
+            }
+            if(act=="CONTEST_HOSTED")
+            {
+                cc++;
+            }
+            if(act==("CONTEST_WON"))
+            {
+                cw++;
+                if(ran>=20)
+                {
+                    bonus=bonus;
+                }
+                else
+                {
+                    bonus=bonus+20-ran;
+                }
+            }
+            if(act==("BUG_FOUND"))
+            {
+                b++;
+                sum=sum+sev;
+            }
+
+        }
+        points=ct*300+cc*50+cw*300+bonus+sum;
+       // cout<<ct<<" "<<cc<<" "<<cw<<" "<<bonus<<" "<<sum<<endl;
+       // cout<<points<<endl;
+        if(origin=="INDIAN")
+        {
+            cout<<points/200<<endl;
+        }
+        else if(origin=="NON_INDIAN")
+        {
+             cout<<points/400<<endl;
+        }
+    }
+}

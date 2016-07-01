@@ -1,0 +1,61 @@
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+int car[55],mark[55],cnt=0;
+int n,w,m,p,r,k,cf;
+void func(int x)
+{
+    int i;
+    for(i=1; i<=n; i++)
+    {
+        if(x-car[i]==p && mark[i]==1)
+        {
+            cnt++;
+            mark[i]=0;
+            cf++;
+        }
+        if(mark[i]==0)
+        {
+            if(w)
+            {
+                car[i]=x;
+                mark[i]=1;
+                cf--;
+                w--;
+            }
+        }
+    }
+}
+
+
+
+int main()
+{
+    int t,i;
+    scanf("%d",&t);
+    while(t--)
+    {
+        cnt=0;
+
+        scanf("%d %d %d %d %d %d",&n,&m,&w,&p,&r,&k);
+        cf=n;
+        
+        for(i=1; i<=n; i++)
+        {
+            car[i]=0;
+            mark[i]=0;
+        }
+        for(i=1; i<=k; i++)
+        {
+            if(i%r==0 && m>0)
+            {
+                m--;
+                w++;
+            }
+            func(i);
+        }
+        printf("%d %d %d %d 
+",cf,cnt,m,w);
+    }
+    return 0;
+}

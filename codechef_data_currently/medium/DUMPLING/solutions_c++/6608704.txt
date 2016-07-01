@@ -1,0 +1,27 @@
+#include<iostream>
+#include<stdint.h>
+using namespace std;
+uint64_t gcd(uint64_t a,uint64_t b)
+{
+    return a%b==0?b:gcd(b,a%b);
+}
+int main()
+{
+int T;
+cin>>T;
+for(int t=0;t<T;t++)
+{
+    uint64_t A,B,C,D,K,d1,d2,d,T,S,R,ans;
+    cin>>A>>B>>C>>D>>K;
+    d1=gcd(A,B);
+    d2=gcd(C,D);
+    d=gcd(d1,d2);
+    S=d1/d;
+    R=K/S;
+    T=R/d2;
+    ans=2*T+1;
+    cout<<ans<<endl;
+
+}
+
+}

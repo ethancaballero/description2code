@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<math.h>
+int checkp(int num)
+{
+int j,flag=0;
+for(j=2;j<=sqrt(num);j++)
+{
+if(num%j==0)
+{
+flag=1;
+break;
+}
+}
+if(flag)
+return 0;
+else
+return 1;
+}
+int main()
+{
+int t,arr[10001],i,save[10001],fl[10001];
+arr[0]=0;fl[0]=0;
+arr[1]=0;fl[1]=0;
+for(i=2;i<10001;i++)
+{
+fl[i]=0;
+if(checkp(i))
+{
+arr[i]=1;
+continue;
+}
+arr[i]=0;
+}
+//for(i=0;i<10001;i++)
+// printf("%d ",arr[i]);
+scanf("%d",&t);
+while(t--)
+{
+int n;
+scanf("%d",&n);
+int k,count=0;
+if(fl[n]!=1)
+{
+for(k=1;k<n;k++)
+{
+if(arr[k]==1)
+{
+if((n-k)%2==0)
+{
+int xx=(n-k)/2;
+if(arr[xx]==1)
+count++;
+}
+}
+}
+save[n]=count;
+fl[n]=1;
+}
+printf("%d
+",save[n]);
+}
+return 0;
+} 

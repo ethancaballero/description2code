@@ -1,0 +1,29 @@
+ Problem Statement
+Levy's conjecture, named after Hyman Levy, states that all odd integers greater than 5 can be represented as the sum of an odd prime number and an even semiprime. To put it algebraically, 2n + 1 = p + 2q always has a solution in primes p and q (not necessary to be distinct) for n > 2. (Source: Wikipedia)
+In this problem, given a positive integer N (not necessary to be odd integer greater than 5). Your task is to calculate how many distinct ordered pairs (p, q) such that N = p + 2q, where p and q are primes.
+Input
+The first line of input contains an integer T, denoting the number of test cases. Then T test cases follow.
+Each test case consists of exactly one line containing an integer N.
+Constraints
+
+1 \u2264 T \u2264 100000 (105)
+1 \u2264 N \u2264 10000 (104)
+
+Output
+For each test case, output the number of ordered pairs (p, q) of primes such that N = p + 2q.
+Example
+
+Input:
+3
+2
+7
+11
+
+Output:
+0
+1
+2
+Explanation
+Case #1: There are no ordered pairs (p, q) such that p + 2q = 2.
+Case #2: There is only one ordered pair (p, q) = (3, 2) such that p + 2q = 7.
+Case #3: There are two ordered pairs (p, q) = (7, 2), (5, 3) such that p + 2q = 11.

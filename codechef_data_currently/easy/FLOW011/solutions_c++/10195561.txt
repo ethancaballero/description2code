@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    int a;
+    for(int i=0;i<t;i++){
+        cin>>a;
+        if(a<1500) {
+            cout<< a*2<<endl;
+        } else {
+            cout<< a+(0.98)*a+500<<endl;
+        }
+    }
+}

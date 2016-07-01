@@ -1,0 +1,277 @@
+import sys
+from string import split
+
+def flush(cards):
+    i1=cards[0]
+    for i in range(1,5):
+        if i1!=cards[i]:
+            return False
+    return True
+
+def straight(cards):
+    seq=['A','K','Q','J','T','9','8','7','6','5','4','3','2']
+    if 'A' in cards:
+        if 'K' in cards and 'Q' in cards and 'J' in cards and 'T' in cards:
+            return True
+        elif '2' in cards and '3' in cards and '4' in cards and '5' in cards:
+            return True
+        else:
+            return False
+    Min=13
+    Max=-1
+    for x in range(5):
+        i=seq.index(cards[x])
+        if i<Min:
+            Min=i
+        if i>Max:
+            Max=i
+    if Max-Min!=4:
+        return False
+    if seq[Min+1] in cards and seq[Min+2] in cards and seq[Min+3] in cards:
+        return True
+    else:
+        return False
+
+def fourofakind(cards):
+    a=cards[0]
+    b=cards[1]
+    counta=0
+    countb=0
+    for i in range(5):
+        if a==cards[i]:
+            counta+=1
+        if b==cards[i]:
+            countb+=1;
+    if counta==4 or countb==4:
+        return True
+    else:
+        return False
+        
+def triplet(cards):
+    a=cards[0]
+    b=cards[1]
+    c=cards[2]
+    counta=0
+    countb=0
+    countc=0
+    for i in range(5):
+        if a==cards[i]:
+            counta+=1
+        if b==cards[i]:
+            countb+=1;
+        if c==cards[i]:
+            countc+=1;
+    if counta==3 or countb==3 or countc==3:
+        return True
+    else:
+        return False
+    
+def pair(cards):
+    count=[0 for i in range(5)]
+    Count=0
+    for i in range(5):
+        for j in range(5):
+            if cards[i]==cards[j]:
+                count[i]+=1;
+    if 2 in count:
+        for i in range(5):
+            if count[i]==2:
+                Count+=1
+        if Count==2:
+             return True
+    return False
+                    
+def twopairs(cards):
+    count=[0 for i in range(5)]
+    Count=0
+    for i in range(5):
+        for j in range(5):
+            if cards[i]==cards[j]:
+                count[i]+=1;
+    if 2 in count:
+        for i in range(5):
+            if count[i]==2:
+                Count+=1
+        if Count==4:
+            return True
+    return False
+
+def hand(cards):
+    isflush= flush(cards[1])
+    isstraight=straight(cards[0])
+    if isflush and isstraight and 'A' in cards[0] and 'K' in cards[0]:
+        return 10
+    if isflush and isstraight:
+        return 9
+    if isflush:
+        return 6
+    if isstraight :
+        return 5
+    if fourofakind(cards[0]):
+        return 8
+    istriplet=triplet(cards[0])
+    ispair=pair(cards[0])
+    if istriplet and ispair:
+        return 7
+    if istriplet:
+        return 4
+    if twopairs(cards[0]):
+        return 3
+    if ispair:
+        return 2
+    return 1
+        
+def cardSort(y,z):
+    seq=['A','K','Q','J','T','9','8','7','6','5','4','3','2']
+    l=len(y)
+    x=['' for i in range(l)]
+    for i in range(0,l-1):
+        for j in range(0,l-1-i):
+            if seq.index(y[j])>seq.index(y[j+1]):
+                temp=y[j]
+                y[j]=y[j+1]
+                y[j+1]=temp
+                temp=z[j]
+                z[j]=z[j+1]
+                z[j+1]=temp
+    for i in range(l):
+        x[i]=y[i]+z[i]
+    return x
+    
+def forAll():
+    n=int(sys.stdin.readline())
+    output=[]
+    cards=[[] for i in range(n)]
+    for i in range(n):
+        x=(sys.stdin.readline()).split()
+        y=[]
+        z=[]
+        for j in x:
+            y.append(j[0])
+            z.append(j[1])
+        cards[i].append(y)
+        cards[i].append(z)
+    for i in range(n):
+        output.append(inwords(hand(cards[i])))
+    for i in range(n):
+        print output[i]
+
+def equals(x,y):
+    if x==y:
+        return True
+    else:
+        return False
+
+def inwords(n):
+    if n==10:
+        return "royal flush"
+    elif n==9:
+        return "straight flush"
+    elif n==8:
+        return "four of a kind"
+    elif n==7:
+        return "full house"
+    elif n==6:
+        return "flush"
+    elif n==5:
+        return "straight"
+    elif n==4:
+        return "three of a kind"
+    elif n==3:
+        return "two pairs"
+    elif n==2:
+        return "pair"
+    elif n==1:
+        return "high card"
+    
+def selectBest():
+    n=int(sys.stdin.readline())
+    output=[[] for i in range(n)]
+    cards=[[] for i in range(n)]
+    cards1=[[[] for j in range(21)] for i in range(n)]
+    k=[[] for i in range(n)]
+    for i in range(n):
+        x=(sys.stdin.readline()).split()
+        x1=[]
+        for t in x:
+            x1.append(t)
+        y=[]
+        z=[]
+        for t in x:
+            y.append(t[0])
+            z.append(t[1])
+        x=cardSort(y,z)
+        k[i].append([x[0],x[1],x[2],x[3],x[4]])
+        k[i].append([x[0],x[1],x[2],x[3],x[5]])
+        k[i].append([x[0],x[1],x[2],x[3],x[6]])
+        k[i].append([x[0],x[1],x[2],x[4],x[5]])
+        k[i].append([x[0],x[1],x[2],x[4],x[6]])
+        k[i].append([x[0],x[1],x[2],x[5],x[6]])
+        k[i].append([x[0],x[1],x[3],x[4],x[5]])
+        k[i].append([x[0],x[1],x[3],x[4],x[6]])
+        k[i].append([x[0],x[1],x[3],x[5],x[6]])
+        k[i].append([x[0],x[1],x[4],x[5],x[6]])
+        k[i].append([x[0],x[2],x[3],x[4],x[5]])
+        k[i].append([x[0],x[2],x[3],x[4],x[6]])
+        k[i].append([x[0],x[2],x[3],x[5],x[6]])
+        k[i].append([x[0],x[2],x[4],x[5],x[6]])
+        k[i].append([x[0],x[3],x[4],x[5],x[6]])
+        k[i].append([x[1],x[2],x[3],x[4],x[5]])
+        k[i].append([x[1],x[2],x[3],x[4],x[6]])
+        k[i].append([x[1],x[2],x[3],x[5],x[6]])
+        k[i].append([x[1],x[2],x[4],x[5],x[6]])
+        k[i].append([x[1],x[3],x[4],x[5],x[6]])
+        k[i].append([x[2],x[3],x[4],x[5],x[6]])
+
+        for j in range(21):
+            y=[]
+            z=[]
+            for t in k[i][j]:
+                y.append(t[0])
+                z.append(t[1])
+            cards1[i][j].append(y)
+            cards1[i][j].append(z)
+        
+        for j in range(21):
+            if x1[0] in k[i][j] and x1[1] in k[i][j]:
+                cards[i].append(k[i][j])
+        for j in range(21):
+            if (x1[0] in k[i][j] or x1[1] in k[i][j])  and not(x1[0] in k[i][j] and x1[1] in k[i][j]):
+                cards[i].append(k[i][j])
+        for j in range(21):
+            if not(x1[0] in k[i][j] or x1[1] in k[i][j]):
+                cards[i].append(k[i][j])
+        
+    for i in range(n):
+        for j in range(21):
+            x=hand(cards1[i][j])
+            output[i].append(x)
+
+    for i in range(n):
+        a=max(output[i])
+        index=output[i].index(a)
+        tmp=0
+        for j in range(10):
+            if equals(cards[i][j],k[i][index]):
+                print "Both cards Included : ",  k[i][index]
+                print inwords(a)
+                tmp=1
+                break
+        if tmp==0:
+            for j in range(10) :
+                if equals(cards[i][j+10],k[i][index]):
+                    print "One card Included : ", k[i][index]
+                    print inwords(a)
+                    tmp=1
+                    break
+        if tmp==0:
+            if equals(cards[i][20],k[i][index]):
+                print "No card Included : ", k[i][index]
+                print inwords(a)
+                tmp=1
+                break
+        if tmp==0:
+            print "Error"
+                                        
+#selectBest()
+forAll()

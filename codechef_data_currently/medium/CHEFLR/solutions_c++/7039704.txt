@@ -1,0 +1,48 @@
+#include<iostream>
+#define M 1000000007
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int i;
+		long long int k=1,j=1;
+		char s[100004];
+		scanf("%s",s);
+		for(i=0;s[i];i++)
+		{
+			if(s[i]=='l')
+			{
+				if(j%2==0)
+				{
+				k=(2*k%M-1+M)%M;
+				j=1;
+			    }
+				else
+				{
+				
+				k=2*k%M;
+				j=2;
+			   }
+			}
+			else
+			{
+				if(j%2==0)
+				{
+				k=(2*k%M+1)%M;
+				j=1;
+			    }
+				else
+				{
+				k=(2*k%M+2)%M;
+				j=2;
+			    }
+			}
+			k=k%M;
+		}
+		cout<<k<<endl;
+	}
+	return 0;
+}

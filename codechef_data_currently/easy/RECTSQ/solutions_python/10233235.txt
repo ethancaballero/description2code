@@ -1,0 +1,42 @@
+def main():
+	n=input()
+	lt=[]
+	for i in range(n):
+		a,b=raw_input().split()
+		a,b=int(a),int(b)
+		d=gcd(a,b)
+		if(a%d==0 and b%d==0):
+			lt.append((a*b)/(d*d))
+		else:
+			lt.append(a*b)
+	for i in range(n):
+		print lt[i]
+'''
+def gcd(a, b):
+	if(a>b):
+		mi=b
+		ma=a
+	else:
+		mi=a
+		ma=b
+	print mi,ma
+	if(ma%mi==0):
+		#print mi
+		return mi
+	else:
+		gcd(mi,ma%mi)
+
+'''
+
+def gcd(a, b):
+    """Calculate the Greatest Common Divisor of a and b.
+
+    Unless b==0, the result will have the same sign as b (so that when
+    b is divided by it, the result comes out positive).
+    """
+    while b:
+        a, b = b, a%b
+    return a
+
+if __name__ == '__main__':
+	main()

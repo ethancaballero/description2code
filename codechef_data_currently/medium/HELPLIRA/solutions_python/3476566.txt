@@ -1,0 +1,18 @@
+triangleCount = int(raw_input())
+
+max_area = 0
+max_index = 0
+min_area = 0
+min_index = -1
+for i in xrange(triangleCount):
+    x1, y1, x2, y2, x3, y3 = map(int, raw_input().split())
+    doubledArea = abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1))
+    if doubledArea >= max_area:
+        max_area = doubledArea
+        max_index = i
+
+    if doubledArea <= min_area or min_index == -1:
+        min_area = doubledArea
+        min_index = i
+
+print min_index + 1, max_index + 1

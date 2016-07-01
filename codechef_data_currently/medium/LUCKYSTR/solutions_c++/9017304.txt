@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+void prefix(const string& s,int n,vector<int>& p)
+{
+	int i,j;
+	p[0]=0;
+	j=0;
+	i=1;
+	while(i<n)
+	{
+		if(s[i]==s[j])
+		{
+			p[i]=j+1;
+			i++;
+			j++;
+		}
+		else
+		{
+			if(j)
+			{
+				j=p[j-1];
+			}
+			else
+				i++;
+		}
+	}
+	
+}
+bool kmp(char root[],const string& test,vector<int>& p,int len,int n)
+{
+	int i,j,c;
+	j=0;
+	for(i=0;i<len;)
+	{
+		if(root[i]==test[j])
+		{
+			c=j+1;
+			if(c==n)
+			{
+				return(true);
+			}
+			i++;
+			j++;
+		}
+		else
+		{
+			if(j)
+			{
+				j=p[j-1];
+				c=j;
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
+	return false;
+}
+int main()
+{
+	int i,k,n,j,len,st;
+	bool flag;
+	char test[51];
+	scanf("%d%d",&k,&n);
+	vector<string> v(k);
+	for(i=0;i<k;i++)
+	{
+		cin>>v[i];
+	}
+	for(i=0;i<n;i++)
+	{
+		cin>>test;
+		len=strlen(test);
+		if(len>=47)
+		{
+			flag=true;
+		}
+		else
+		{
+			for(j=0;j<k;j++)
+			{
+				st=v[j].length();
+				vector<int> pre(st);
+				prefix(v[j],st,pre);
+				flag=kmp(test,v[j],pre,len,st);
+				if(flag)
+				{
+					break;
+				}
+			}
+		}
+		if(flag)
+		{
+			printf("Good
+");
+		}
+		else
+			printf("Bad
+");
+	}
+	return 0;
+}

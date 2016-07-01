@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string.h>
+#include <string>
+using namespace std;
+
+int main(){
+	long long int l,i,t,count,sum,rsum;
+	char s[100005]; 
+	cin>>t;
+	while(t--){
+		cin>>s;
+		l=strlen(s);
+		count=0;
+		sum=0;
+		rsum=((l)*(l+1))/2;
+		for(i=0;i<l;++i){
+		  if(s[i]=='7')
+		   {
+		   	count++;
+		   	//sum
+		   }
+		  else{
+		  	sum+=((count)*(count+1))/2;
+		  	count=0;
+		  }	
+		}
+	   sum+=((count)*(count+1))/2;
+	 rsum-=sum;
+	 cout<<rsum<<endl;
+    } 
+
+        return 0;
+	}

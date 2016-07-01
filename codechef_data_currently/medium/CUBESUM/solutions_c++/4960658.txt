@@ -1,0 +1,43 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+main() {
+    int t;
+    cin>>t;
+    while (t--) {
+        int x,y,z;
+        cin>>x>>y>>z;
+        int a[x][y][z], b[x][y][z];
+        for (int i=0; i<=x-1; i++) {
+            for (int j=0; j<=y-1; j++) {
+                for (int k=0; k<=z-1; k++) {
+                    cin>>b[i][j][k];
+                    a[i][j][k]=0;
+                }
+            }  
+        }
+        for (int i=0; i<=x-1; i++) {
+            for (int j=0; j<=y-1; j++) {
+                for (int k=0; k<=z-1; k++) {
+                    a[i][j][k]+=b[i][j][k];
+                    if (i!=0) a[i][j][k]-=b[i-1][j][k];
+                    if (j!=0) a[i][j][k]-=b[i][j-1][k];
+                    if (k!=0) a[i][j][k]-=b[i][j][k-1];
+                    if (i!=0 && j!=0) a[i][j][k]+=b[i-1][j-1][k];
+                    if (j!=0 && k!=0) a[i][j][k]+=b[i][j-1][k-1];
+                    if (k!=0 && i!=0) a[i][j][k]+=b[i-1][j][k-1];
+                    if (i!=0 && j!=0 && k!=0) a[i][j][k]-=b[i-1][j-1][k-1];
+                }
+            }  
+        }
+        for (int i=0; i<=x-1; i++) {
+            for (int j=0; j<=y-1; j++) {
+                for (int k=0; k<=z-1; k++) {
+                    cout<<a[i][j][k]<<" ";
+                }
+                cout<<endl;
+            }  
+        }
+    }
+    system("pause");
+}

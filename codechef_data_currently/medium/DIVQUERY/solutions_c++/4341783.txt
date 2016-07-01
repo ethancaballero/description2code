@@ -1,0 +1,41 @@
+/*
+jai shree ram _/\_
+A hacker from NITP
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define mod 1000000007
+typedef set<string> ss;
+typedef vector<unsigned long> vs;
+typedef map<int,char> msi;
+vs p[100002];
+int main()
+{
+	ios_base::sync_with_stdio(false); cin.tie(0);
+	unsigned long n,k,l,r,i,j,q,a;
+	cin>>n>>q;
+	for(i=1;i<=n;i++)
+	{
+		cin>>a;
+		for(j=1;j*j<=a;j++)
+		{
+			if(a%j==0){
+			p[j].push_back(i);
+			if(a!=j*j)
+			p[a/j].push_back(i);
+		}
+		}
+	}
+	for(i=1;i<=100000;i++)
+	if(p[i].size()>1)
+	sort(p[i].begin(),p[i].end());
+	while(q--)
+	{
+		cin>>l>>r>>k;
+		cout<<upper_bound(p[k].begin(),p[k].end(),r)-lower_bound(p[k].begin(),p[k].end(),l)<<"
+";
+	}
+	return 0;
+}

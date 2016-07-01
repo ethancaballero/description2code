@@ -1,0 +1,15 @@
+t = input()
+for i in range(t):
+    n = input()
+    count = 0
+    dict =  {}
+    for j in range(n):
+        doll = input()
+        if dict.has_key(doll):
+            value = dict[doll]
+            dict[doll] = value+1
+        else:
+            dict[doll] = 1
+    for key,value in dict.iteritems():
+        if value%2 == 1:
+            print key

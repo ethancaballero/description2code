@@ -1,0 +1,4 @@
+t=int(raw_input())
+for z in range (t):
+	n=int(raw_input())
+	print (n*(n+3))/2

@@ -1,0 +1,12 @@
+import math
+t=int(raw_input())
+while t>0:
+    p,s=map(int,raw_input().split())
+    x=(p-math.sqrt(pow(p,2)-24*s))/12
+    v=x*x*(p/4-2*x)
+    print"%.2f"%round(v,2)
+    t=t-1
+
+
+
+    

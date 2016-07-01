@@ -1,0 +1,13 @@
+# include <iostream>
+using namespace std;
+int main()
+{
+	long long int a , d;
+	int b ,c = 0;
+	cin >> b >> a;
+	while ( b-- ){
+		cin >> d;
+		if ( d % a == 0) c++;
+	}
+	cout << c;
+}

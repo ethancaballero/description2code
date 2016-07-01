@@ -1,0 +1,99 @@
+# include<stdio.h>
+# include <algorithm>
+# define limit 100
+# define infinite (int)1e3
+int n,m,T,x;
+char arr[limit][limit];
+char shadow[limit][limit];
+int cost[limit][limit][2],count;// 0 if you came from top, 1 if you came from left
+char nbd[][2]={{1,0},{0,1},{-1,0},{0,-1}};
+bool isvalid(int x,int y)
+{
+	if(x<0||x>=n||y<0||y>=m)
+		return false;
+	return true;
+}
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d%d",&n,&m);
+		int i=0,j=0;
+		scanf("%c",&x); // for newline
+		/*if(x=='
+')
+				printf("%d : yes
+",i);
+		else
+			printf("%d : no
+",i);*/
+		scanf("%c",arr[i]+j);
+		//arr[i][j]+=(0-'0');
+		for(j=1;j<m;j++)
+		{
+			scanf("%c",arr[i]+j);
+			//arr[i][j]+=(0-'0');
+			//arr[i][j]+=arr[i][j-1];
+		}
+		for(i=1;i<n;i++)
+		{
+			scanf("%c",&x); // for newline
+			j=0;
+			scanf("%c",arr[i]+j);
+			//arr[i][j]+=(0-'0');
+			//arr[i][j]+=arr[i-1][j];
+			for(j=1;j<m;j++)
+			{
+				scanf("%c",arr[i]+j);
+				//arr[i][j]+=(0-'0');
+				//arr[i][j]+=std::min(arr[i-1][j],arr[i][j-1]);
+			}
+		}
+		for(i=0;i<n;i++)
+			for(j=0;j<m;j++)
+			{
+				cost[i][j][0]=cost[i][j][1]=infinite;
+				count =0;
+				for(int k=0;k<4;k++)
+					if(isvalid(i+nbd[k][0],j+nbd[k][1]))
+						count+=(arr[i+nbd[k][0]][j+nbd[k][1]]-'0');
+				shadow[i][j]=count;
+			}
+		
+		for(i=0;i<n;i++)
+			for(j=0;j<m;j++)
+			{
+				if(isvalid(i-1,j))
+				{
+					cost[i][j][0]=cost[i-1][j][0];
+					x=cost[i-1][j][1];
+					if(isvalid(i,j-1)&&arr[i][j-1]=='1')
+						x--;
+					cost[i][j][0]=std::min(cost[i][j][0],x);
+					if(arr[i-1][j]=='1')
+						cost[i][j][0]--;
+					cost[i][j][0]+=shadow[i][j];
+				}
+				if(isvalid(i,j-1))
+				{
+					cost[i][j][1]=cost[i][j-1][1];
+					x=cost[i][j-1][0];
+					if(isvalid(i-1,j)&&arr[i-1][j]=='1')
+						x--;
+					cost[i][j][1]=std::min(cost[i][j][1],x);
+					if(arr[i][j-1]=='1')
+						cost[i][j][1]--;
+					cost[i][j][1]+=shadow[i][j];
+				}
+				if(!i&&!j)// i=j=0
+					cost[i][j][0]=cost[i][j][1]=(arr[i][j]-'0')+shadow[i][j];
+			}
+				
+					
+		printf("%d
+",std::min(cost[n-1][m-1][0],cost[n-1][m-1][1]));		
+	}
+	return 0;
+}
+	

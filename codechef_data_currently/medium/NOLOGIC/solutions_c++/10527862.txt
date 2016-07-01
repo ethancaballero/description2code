@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <string>
+#include <cctype>
+#include <algorithm>
+#include <map>
+#include <set>
+
+using namespace std;
+void io() {ios_base::sync_with_stdio(0);}
+
+int main() {
+  io();
+
+
+  int t;
+  cin >> t;
+  cin.get();
+  while (t--) {
+    string s;
+    getline(cin,s); 
+
+    vector<bool> ar(26,false);
+
+    for (int i = 0; i < s.size(); ++i) {
+      if ('a' <= s[i] && s[i] <= 'z') {
+	ar[s[i] - 'a'] = true;
+      }
+      if ('A' <= s[i] && s[i] <= 'Z') {
+	ar[s[i] - 'A'] = true;
+      }
+    }
+
+    
+    bool flag = true;
+    for (char c = 'a'; c <= 'z'; ++c) {
+      if (!ar[c-'a']) {
+	cout << c << '
+';
+	flag = false;
+	break;
+      }
+    }
+
+    if (flag)
+      cout << "~
+";
+  }
+
+
+  return 0;
+}

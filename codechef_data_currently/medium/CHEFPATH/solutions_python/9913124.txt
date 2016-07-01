@@ -1,0 +1,11 @@
+T=int(raw_input())
+for i in range(T):
+    NM=map(int,raw_input().split(' '))
+    if min(NM)==1 and max(NM)==2:
+ 	print "Yes"
+    elif NM[0]==1 or NM[1]==1:
+    	print "No"
+    elif NM[0]%2 ==0 or NM[1]%2 ==0:
+        print "Yes"
+    else:
+        print "No" 

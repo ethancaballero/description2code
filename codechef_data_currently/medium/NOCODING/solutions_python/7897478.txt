@@ -1,0 +1,15 @@
+for _ in range(int(raw_input())):
+    a = 'abcdefghijklmnopqrstuvwxyz'
+    l = str(raw_input())
+    count = 2
+    for i in range(1, len(l)):
+        n = a.index(l[i])
+        m = a.index(l[i-1])
+        if n >= m:
+            count += n - m + 1
+        else:
+            count += 26 + (n - m) + 1
+    if count > 11 * len(l):
+        print "NO"
+    else:
+        print "YES"

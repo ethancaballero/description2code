@@ -1,0 +1,67 @@
+#include<iostream>
+#include<math.h>
+#include<stdlib.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    int n;
+    cin>>n;
+    int H[n+1];
+    int D[n+1];
+    for(int i=1;i<=n;i++) cin>>H[i];
+    for(int j=1;j<=n;j++) cin>>D[j];
+    int d=0,h=0;
+    for(int i=1;i<=n;i++)
+    {
+        d+=D[i];
+        h+=H[i];
+    }
+    if(n<=2)
+    {
+        if(n==1)
+        {
+         if(H[1]>=D[1]) cout<<H[1]-D[1]<<endl;
+         else cout<<"-1
+";
+        }
+        else
+        {
+            if(D[1]-H[1] == -D[2]+H[2])
+            {
+            if(abs(D[1]-H[1])%2==0)
+            {
+                cout<<abs(D[1]-H[1])/2<<endl;
+            }
+            else  cout<<abs(D[1]-H[1])<<endl;
+            }
+            else cout<<"-1
+";
+        }
+
+    }
+    else
+    {
+        float S=(d-h)/(n-2);
+        if(S>=0 and S==(int)S )
+        {
+            bool temp=false;
+            for(int i=1;i<=n and !temp;i++)
+            {
+               float x= ( (float)(H[i]+(int)S - D[i]) ) / 2.0;
+               if(x>=0 and x==(int)x ) continue;
+               else temp=true;
+
+            }
+            if(temp) cout<<"-1
+";
+            else cout<<S<<endl;
+        }
+        else cout<<"-1
+";
+    }
+    }
+}

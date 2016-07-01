@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+  int t,n,a[101],i,j,c,d;
+  cin>>t;
+  while(t--)
+  { cin>>n;
+    c=0;d=0;
+    for(i=0;i<n;i++)
+    cin>>a[i];
+    for(i=0;i<n-1;i++)
+    {
+        for(j=i;j<n;j++)
+        {
+            if(a[i]>a[j])
+            c++;
+        }
+    }
+    for(i=0;i<n-1;i++)
+    {
+        if(a[i]>a[i+1])
+        d++;
+    }
+   // cout<<c<<" "<<d<<endl;
+    if(c==d)cout<<"YES
+";
+    else cout<<"NO
+";
+  }
+  return 0;
+}

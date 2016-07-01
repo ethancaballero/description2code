@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+#define pb push_back
+int main(void)
+{
+    int t; scanf("%d",&t);
+    while(t--)
+    {
+        int n,k,ans;
+        scanf("%d %d %d",&n,&k,&ans);
+        
+        vector<int> arr;
+        for(int i=0;i<n;i++)
+        {
+            int temp; scanf("%d",&temp);
+            arr.pb(temp);
+        }
+        
+        string op; cin>>op;
+        if(k!=0)
+        {
+        if(op=="AND")
+        {
+            for(int i=0;i<n;i++)
+            {
+                ans=ans & arr[i];
+            }
+        }
+        else if(op=="OR")
+        {
+            for(int i=0;i<n;i++)
+            {
+                ans=ans | arr[i];
+            }
+        }
+        else if(op=="XOR")
+        {
+             int tmp=0;
+             for(int i=0;i<n;i++)
+             {
+                 tmp= tmp ^ arr[i];
+             }
+             if(k%2!=0)
+             {
+                 ans=ans^tmp;
+             }
+             else
+             {  
+                 ans=ans;
+             }
+        }
+        }
+        printf("%d
+",ans);
+    }
+    return 0;
+}

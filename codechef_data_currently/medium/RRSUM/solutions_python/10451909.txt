@@ -1,0 +1,8 @@
+N,M = map(int,raw_input().split())
+while M:
+    q = int(raw_input())
+    L,U = N + 2,3*N
+    if q < L or q > U: print 0
+    elif q >= L and q <= 2*N + 1: print q - L + 1
+    elif q > 2*N + 1 and q <= U: print U - q + 1
+    M-=1 

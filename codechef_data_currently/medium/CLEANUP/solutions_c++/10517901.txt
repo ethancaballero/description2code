@@ -1,0 +1,44 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int t,m,n,i,j,a[1000],p,q,c[1000],d;
+    scanf("%d",&t);
+    while(t--)
+    {
+        d=0;q=0;
+        cin>>n>>m;
+        for(i=0;i<m;i++)
+        {
+            cin>>a[i];
+        }
+        for(i=1;i<=n;i++)
+        {   p=0;
+            for(j=0;j<m;j++)
+            {
+                if(a[j]==i)
+                    p=1;
+            }
+            if(p==0)
+            {
+                q++;
+                if(q%2==1)
+                {
+                    cout<<i<<" ";
+                }
+                else
+                {
+                    c[(q/2)-1]=i;
+                    d++;
+                }
+            }
+        }
+        cout<<endl;
+        for(i=0;i<d;i++)
+            cout<<c[i]<<" ";
+        cout<<endl;
+    }
+    return 0;
+}

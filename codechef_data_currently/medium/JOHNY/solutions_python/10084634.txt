@@ -1,0 +1,20 @@
+T=int(raw_input())
+ans=[]
+for i in range(T):
+    N=int(raw_input())
+    play_list=[]
+    temp_ans=1
+    raw_ans=raw_input()
+    raw_ans=raw_ans.split(' ')
+    for j in range(N):
+        play_list.append(int(raw_ans[j]))
+    play_list=[int(j) for j in play_list]
+    K=int(raw_input())
+    temp=play_list[K-1]
+    for l in play_list:
+            if(temp>l):
+                    temp_ans=temp_ans+1
+    ans.append(temp_ans)
+for k in ans:
+    print k
+		

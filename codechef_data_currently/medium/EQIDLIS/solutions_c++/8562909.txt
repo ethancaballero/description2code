@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+#include<algorithm>
+#include<cmath>
+#include<cstdio>
+int main() {
+int t;
+cin>>t;
+while(t--)
+{int n;
+cin>>n;
+int a[n],c=0;
+int count=0;
+for(int i=0;i<n;i++)
+{scanf("%d",&a[i]);
+c=c+a[i];}
+if(c%n!=0)
+cout<<"-1
+";
+else
+{int j,k, max=0,min=5000;
+
+for(int i=0;i<n;i++)
+{
+	if(max<a[i])
+    {
+    	max=a[i];
+    	j=i;
+    }
+
+if(min>a[i])
+{
+	min=a[i];
+	k=i;
+}
+}
+
+while(max!=min)
+{
+count++;
+int p=ceil((max-min)/2);
+a[j]=a[j]-p;
+a[k]=a[k]+p;
+max=0,min=5000;
+for(int i=0;i<n;i++)
+{
+	if(max<a[i])
+    {
+    	max=a[i];
+    	j=i;
+    }
+
+if(min>a[i])
+{
+	min=a[i];
+	k=i;
+}
+}
+
+}
+cout<<count<<"
+";
+}
+	
+}
+	return 0;
+}

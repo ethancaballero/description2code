@@ -1,0 +1,9 @@
+for _ in range(input()):
+	n=int(input())
+	s=map(int,raw_input().split())
+	sum=0
+	s.sort()
+	for i in range(n-1,-1,-2):
+		sum+=s[int(i)]
+	print sum	
+	

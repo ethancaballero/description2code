@@ -1,0 +1,47 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main(){
+	int t,r,c,i,j,flag;
+ 
+	scanf("%d",&t);
+	while(t--){
+		scanf("%d %d",&r,&c);
+		getchar();
+		char str[r][c+1];
+		for(i = 0 ; i < r ; i++ ){
+			for(j = 0; j <= c ; j++){
+				str[i][j] = getchar();
+			}
+		}
+		flag=0;
+ 
+		for(i=0;i<r;i++){
+			for(j=0;j<c-4;j++){
+				if((str[i][j]=='s'||str[i][j]=='S')&&(str[i][j+1]=='p'||str[i][j+1]=='P')&&(str[i][j+2]=='o'||str[i][j+2]=='O')&&(str[i][j+3]=='o'||str[i][j+3]=='O')&&(str[i][j+4]=='n'||str[i][j+4]=='N')){
+					flag=1;
+					break;
+				}
+			}
+			if(flag)
+					break;
+		}
+		for(j=0;j<c;j++){
+			for(i=0;i<r-4;i++){
+				if((str[i][j]=='s'||str[i][j]=='S')&&(str[i+1][j]=='p'||str[i+1][j]=='P')&&(str[i+2][j]=='o'||str[i+2][j]=='O')&&(str[i+3][j]=='o'||str[i+3][j]=='O')&&(str[i+4][j]=='n'||str[i+4][j]=='N')){
+					flag=1;
+					break;
+				}
+			}
+			if(flag)
+					break;
+		}
+		if(flag)
+			printf("There is a spoon!
+");
+		else
+			printf("There is indeed no spoon!
+");
+	}
+	return 0;
+}

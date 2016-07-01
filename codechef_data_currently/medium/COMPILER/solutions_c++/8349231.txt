@@ -1,0 +1,25 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main(){
+ int t;
+ cin>>t;
+ string s;
+ while(t--){
+  cin>>s;
+  int n=s.size();
+  int d=0,val=0;
+  for(int i=0;i<n;i++){
+   if(s[i]=='<')
+    d++;
+    else
+    d--;
+   if(d<0)
+   break;
+   if(d==0)
+   val=i+1; 
+ }
+  cout<<val<<endl;
+ }
+ return 0;
+}

@@ -1,0 +1,44 @@
+    #include<iostream>
+    #include<vector>
+    #include<algorithm>
+
+    using namespace std;
+   
+    int main()
+    {
+        int n;
+        cin>>n;
+        while(n!=0)
+        {
+            vector<int> a;
+            int temp;
+            int max=0;
+            for(int i=0;i<n;i++)
+            {
+                cin>>temp;
+                a.push_back(temp);
+            }    
+               
+        
+            sort(a.begin(),a.end());
+            int count=0;
+            for(int i=n-1;i>1;i--)
+            {
+                int j=0;
+                int k=i-1;
+                while(j<k)
+                {
+                    if(a[k]+a[j]<a[i])
+                    {
+                        count=count+k-j;
+                        j++;
+                    }
+                    else
+                        k--;
+                }    
+            } 
+            cout<<count<<endl;
+            cin>>n;
+        }  
+        return 0;  
+    }

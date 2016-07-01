@@ -1,0 +1,23 @@
+t=int(raw_input())
+for i in range(0,t):
+	n=int(raw_input())
+	q=raw_input()
+	p=list(q)
+	county=0
+	countn=0
+	counti=0
+	#print p
+	for j in range(0,len(p)):
+		if p[j]=='Y':
+			county+=1
+		elif p[j]=='N':
+			countn+=1
+		elif p[j]=='I':
+			counti+=1
+	#print counti,countn,county
+	if counti>0 and countn>=0 and county==0:
+		print 'INDIAN'
+	elif countn>=0 and county>0 and counti==0:
+		print 'NOT INDIAN'
+	else:
+		print 'NOT SURE'

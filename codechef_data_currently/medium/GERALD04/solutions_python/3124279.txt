@@ -1,0 +1,17 @@
+n = int(input())
+
+for i in xrange(n):
+    a,b = [int(x) for x in raw_input().split(':')]
+    t1 = a * 60  + b
+    c,d = [int(x) for x in raw_input().split(':')]
+    t2 = c * 60  + d
+    dist = float(input())
+    one = two = 0.0
+    one = (t1 - t2) + dist
+    if (2*dist) <= (t1-t2):
+        two = t1-t2
+    else:
+        two = dist
+        two += ((dist - (dist - (t1-t2)))/2)
+    print ("%0.1f %0.1f") %(one,two)
+        

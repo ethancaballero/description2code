@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+#define gc getchar
+typedef long long int ll;
+using namespace std;
+int read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+int ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+ll sprime[100005];
+ll gcd(ll a,ll b)
+{
+    if(b==0)
+        return a;
+    return gcd(b,a%b);
+}
+void sieve()        //finding smallest prime factor for each no.
+{
+    ll i,j;
+    for(i=2;i<=100000;i++)
+        sprime[i]=i;
+    for(i=2;i<=320;i++)
+    {
+        if(sprime[i]==i)
+        {
+            for(j=i*2;j<=100000;j+=i)
+                sprime[j]=min(sprime[j],i);
+        }
+    }
+}
+int main()
+{
+    ll t,n,i,gc,x;
+    sieve();
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        gc=0;
+        for(i=0;i<n;i++)
+        {
+            cin>>x;
+            if(gc==0)
+                gc=x;
+            else
+                gc=gcd(gc,x);
+        }
+        if(gc>1)
+            cout<<sprime[gc]<<'
+';
+        else
+            cout<<-1<<'
+';
+    }
+    return 0;
+}

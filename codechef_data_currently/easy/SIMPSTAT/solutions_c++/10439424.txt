@@ -1,0 +1,30 @@
+#include<iostream>
+#include<algorithm>
+#include<iomanip>
+#include<cstdio>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        double sum=0.00;
+        int n,k;
+        scanf("%d %d",&n,&k);
+        int a[n];
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&a[i]);
+           // sum+=a[i];
+        }
+        sort(a,a+n);
+        for(int i=k;i<n-k;i++)
+        {
+            sum+=a[i];
+        }
+        //cout<<setprecision(7)<<fixed<<sum/(n-(2*k))<<endl;
+        printf("%.7lf 
+",sum/(n-(2*k)));
+    }
+}

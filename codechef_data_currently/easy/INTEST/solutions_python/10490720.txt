@@ -1,0 +1,7 @@
+s=map(int,raw_input().split())
+c=0
+for i in range(0,s[0],1):
+    num=input()
+    if num%s[1]==0:
+        c+=1
+print c        

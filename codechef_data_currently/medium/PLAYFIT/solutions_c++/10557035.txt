@@ -1,0 +1,30 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+
+int main()
+{
+    int T;
+    cin >> T;
+    while(T-->0)
+    {
+        int N, a, max=-1e9, min=1e9, b, posa, posb;
+        cin >> N;
+        int ans=0;
+        cin >> a;
+        for(int i=1;i<N;i++)
+        {
+            cin >> b;
+            if(b>a)
+            {
+                ans=std::max(b-a, ans);
+            }
+            else
+                a = b;
+        }
+        ans>0?printf("%d
+", ans):printf("UNFIT
+");
+    }
+}

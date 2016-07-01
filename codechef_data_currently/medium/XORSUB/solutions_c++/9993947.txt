@@ -1,0 +1,69 @@
+#include <iostream>
+#include <cstdio>
+#include <stdbool.h>
+using namespace std;
+ 
+bool tbl[1024];
+int X[1024];
+ 
+void init()
+{
+    for(int i =0 ;i<1024;i++)
+    {
+        tbl[i]=false;
+        X[i]=0;
+    }
+}
+ 
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        init();
+ 
+    int n,k;
+    scanf("%d%d",&n,&k);
+    int A[n],i,p=0;
+    for( i= 0;i<n;i++)
+    {
+        scanf("%d",&A[i]);
+        if(tbl[A[i]]==false)
+        {
+            tbl[A[i]]=true;
+            X[p++]=A[i];
+        }
+    }
+    int j=0,z;
+    for(j=0;j<p;j++)
+    {
+        for(z=j+1;z<p-1;z++)
+        {
+            int ne = X[j]^X[z];
+            if(tbl[ne]==false)
+            {
+ 
+                X[p++]=ne;
+                tbl[ne]=true;
+ 
+ 
+            }
+        }
+ 
+ 
+    }
+    int ma=k;
+    for(i=0;i<p;i++)
+    {
+        if((k^X[i])>ma)
+            ma=k^X[i];
+    }
+    printf("%d
+",ma);
+ 
+ 
+    }
+    return 0;
+}
+ 

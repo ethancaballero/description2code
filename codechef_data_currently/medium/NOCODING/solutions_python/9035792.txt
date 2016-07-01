@@ -1,0 +1,15 @@
+# cook your code here
+import string
+
+charset = string.ascii_lowercase
+for testcases in xrange(int(raw_input() ) ) :
+    Str = raw_input()
+    pos = charset.find(Str[0])
+    ins = 1
+    for i in xrange(len(Str)) :
+        temp = charset.find(Str[i])
+        ins += (temp - pos + 26) % 26
+        pos = temp
+    ins += len(Str)
+    print "YES" if ( ins <= ( len(Str) * 11 ) ) else "NO"
+    

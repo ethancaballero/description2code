@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+#define ll long long
+#include <math.h>
+
+int main()
+{   ll t;
+    cin>>t;
+    while(t--)
+    {   ll a,b,s=1,i;
+        cin>>a>>b;
+        for(i=0;i<a-1;++i)
+        {   s*=(b-1);
+            if(s>1000000007)
+                s%=1000000007;
+        }
+        s*=b;
+        s%=1000000007;
+        cout<<s<<"
+";
+    }
+    return 0;
+}

@@ -1,0 +1,14 @@
+import string
+dic = list(string.ascii_lowercase)
+n=input()
+while n > 0 :
+    t = input()
+    if t < 27 :
+        print string.ascii_lowercase[0:t]
+    else :
+        a = string.ascii_lowercase
+        a *= t/26
+        b = a[0:t % 26]
+        a += b
+        print a
+    n -= 1

@@ -1,0 +1,101 @@
+def ins(x,i):
+	if i=='2':
+		x[0]=1
+	if i=='3':
+		x[1]=1
+	if i=='4':
+		x[2]=1
+	if i=='5':
+		x[3]=1
+	if i=='6':
+		x[4]=1
+	if i=='7':
+		x[5]=1
+	if i=='8':
+		x[6]=1
+	if i=='9':
+		x[7]=1
+	if i=='T':
+		x[8]=1
+	if i=='J':
+		x[9]=1
+	if i=='Q':
+		x[10]=1
+	if i=='K':
+		x[11]=1
+	if i=='A':
+		x[12]=1
+
+def poker():
+	t=int(raw_input())
+	for i in range(t):
+		pri=0
+		s=[]
+		d=[]
+		h=[]
+		c=[]
+		p=[]
+		for j in range(13):
+			s.append(0)
+			d.append(0)
+			h.append(0)
+			c.append(0)
+		x=raw_input().split()
+		for j in range(5):
+			if (x[j][1])=='H':
+				ins(h,x[j][0])
+			if (x[j][1])=='S':
+				ins(s,x[j][0])
+			if (x[j][1])=='D':
+				ins(d,x[j][0])
+			if (x[j][1])=='C':
+				ins(c,x[j][0])
+		for j in range(13):
+			p.append(s[j]+h[j]+c[j]+d[j])
+		if (sum(s[8:])==5 or sum(h[8:])==5 or sum(d[8:])==5 or sum(c[8:])==5):
+			print("royal flush")
+			pri=1
+		for j in range(8):
+			if ((pri==0) and ((sum(s[j:j+5])==5 or sum(h[j:j+5])==5 or sum(d[j:j+5])==5 or sum(c[j:j+5])==5))):
+				print("straight flush")
+				pri=1
+		if ((pri==0) and ((s[12]==1 and sum(s[:4])==4) or (d[12]==1 and sum(d[:4])==4) or (h[12]==1 and sum(h[:4])==4) or (c[12]==1 and sum(c[:4])==4))):
+			print("straight flush")
+			pri=1
+		if pri==0:
+			for j in range(13):
+				if (p[j]==4):
+					print("four of a kind")
+					pri=1
+		if ((pri==0) and (3 in p) and (2 in p)):
+			print("full house")
+			pri=1
+		if ((pri==0) and ((sum(s)==5) or (sum(h)==5) or (sum(c)==5) or (sum(d)==5))):
+			print("flush")
+			pri=1
+
+		if (pri==0 and max(p)==1):
+			for j in range(9):
+				if (sum(p[j:j+5])==5):
+					print("straight")
+					pri=1
+			if p[12]==1 and sum(p[:4])==4:
+				print("straight")
+				pri=1
+
+		if (pri==0 and 3 in p):
+			print("three of a kind")
+			pri=1
+		count=0
+		if (pri==0):
+			for j in range(13):
+				if p[j]==2:
+					count=count+1
+			if count ==2:
+				print("two pairs")
+			elif count == 1:
+				print("pair")
+			else:
+				print("high card")
+if __name__=="__main__":
+	poker()

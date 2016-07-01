@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,q,max=0,rc,x,i,j;char str[10];
+	cin>>n>>q;
+	int row[n+1],col[n+1],maxrow=0,maxcol=0;
+	for(i=1;i<=n;i++)
+	row[i]=col[i]=0;
+	while(q--)
+	{
+		cin>>str>>i>>x;
+		if(!strcmp(str,"RowAdd"))
+		{
+			row[i]+=x;
+			if(row[i]>maxrow)
+			maxrow=row[i];
+		}
+		else
+		{
+			col[i]+=x;
+			if(col[i]>maxcol)
+			maxcol=col[i];
+		}
+		
+	}
+	cout<<maxcol+maxrow<<endl;
+}

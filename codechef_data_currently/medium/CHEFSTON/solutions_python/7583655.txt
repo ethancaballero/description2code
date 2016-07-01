@@ -1,0 +1,17 @@
+from sys import stdin,stdout 
+tc=int(raw_input())
+while tc!=0:
+    n,k = map(int,raw_input().split())
+    s1 = raw_input()
+    s2 = raw_input()
+    lista = map(int,s1.split())
+    listb = map(int,s2.split())
+    i=0
+    profit=0
+    while i<n:
+        temp = (k/lista[i])*listb[i]
+        if temp>profit:
+            profit=temp
+        i+=1
+    print profit
+    tc-=1 

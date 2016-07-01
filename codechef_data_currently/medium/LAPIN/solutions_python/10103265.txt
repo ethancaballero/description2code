@@ -1,0 +1,33 @@
+for i in range(int(raw_input())):
+     t=raw_input()
+     le=len(t)
+     if le%2!=0:
+         s1=t[:le/2]
+         s2=t[le/2+1:]
+         ctr=0
+         if ''.join(sorted(s1))==''.join(sorted(s2)):
+             for char in s1:
+                 if char in s2:
+                     ctr+=1
+                 else:
+                     break
+         else:
+             print 'NO'
+
+         if le==ctr*2+1:
+             print 'YES'
+     else:
+         s1=t[:le/2]
+         s2=t[le/2:]
+         ctr=0
+         if ''.join(sorted(s1))==''.join(sorted(s2)):
+             for char in s1:
+                 if char in s2:
+                     ctr+=1
+                 else:
+                     break
+         else:
+             print 'NO'
+
+         if le==ctr*2:
+             print 'YES'

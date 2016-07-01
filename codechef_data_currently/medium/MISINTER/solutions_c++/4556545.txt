@@ -1,0 +1,44 @@
+#include <cstdio>
+#include <cstring>
+using namespace std;
+
+const int mod = 1000000007;
+
+int main()
+{
+	int t, n;
+	scanf("%d", &t);
+	while(t--)
+	{
+		scanf("%d", &n);
+		int exp = 0, lowest = 1, arr[n+1];
+		memset(arr, 0, sizeof(arr));
+		if(n % 2)
+		{
+			exp++;
+			n--;
+		}
+		while(lowest <= n)
+		{
+			exp++;
+			while(!arr[lowest-1])
+			{
+				arr[lowest-1] = 1;
+				lowest = (2 * lowest) % (n+1);
+			}
+			while(arr[lowest-1])
+			{
+				lowest++;
+			}
+		}
+		long long out = 1;
+		while(exp--)
+		{
+			out *= 26;
+			out %= mod;
+		}
+		printf("%d
+", out);
+	}
+    return 0;
+}

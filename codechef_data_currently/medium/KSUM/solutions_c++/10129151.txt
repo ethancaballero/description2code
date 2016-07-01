@@ -1,0 +1,32 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+#include<functional>
+using namespace std;
+int main()
+{
+    long long int n,k,i,j,m=0,sum=0,z;
+    scanf("%lld%lld",&n,&k);
+    z=(n*(n+1))/2;
+    long long int a[n],l[z];
+    for(i=0;i<n;i++)
+    {
+        scanf("%lld",&a[i]);
+    }
+    for(i=0;i<n;i++)
+    {
+        for(j=i;j<n;j++)
+        {
+            sum+=a[j];
+            l[m]=sum;
+            m++;
+        }
+        sum=0;
+    }
+    sort(l,l+m,greater<int>());
+    for(i=0;i<k;i++)
+    {
+        printf("%lld ",l[i]);
+    }
+    return 0;
+}

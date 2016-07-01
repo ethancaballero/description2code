@@ -1,0 +1,13 @@
+d = {14:10,12:9,6:8,10:7,8:6,4:6,2:6}
+
+for i in range(int(raw_input())):
+    x,y,z =map(float,raw_input().split())
+    t = 0
+    if x>50:
+        t += 8
+    if y<0.7:
+        t +=4
+    if z>5600:
+        t +=2 
+    print d[t] if t in d else 5
+    

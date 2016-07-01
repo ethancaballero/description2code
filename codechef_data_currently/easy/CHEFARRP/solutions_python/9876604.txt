@@ -1,0 +1,14 @@
+#!/usr/bin/python
+for tc in range(input()):
+	N=input()
+	L=map(int,raw_input().split())
+	prod=1;sum=0;count=0
+	for i in range(N):
+		sum=0;prod=1
+		for j in range(i+1)[::-1]:
+			sum+=L[j]
+			prod*=L[j]	
+			if sum==prod:
+				count+=1
+	print count
+		

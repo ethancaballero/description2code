@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+
+#define ll int 
+#define s(a) scanf("%d",&a)
+#define mod 1000000009
+#define fr(i,n) for(i=0;i<n;i++)
+
+using namespace std;
+
+struct node
+{
+  int no_replace,w_replace,get;
+}arr[1020];
+bool cmp(node a,node b)
+{
+   return a.get<b.get;
+}
+int main()
+{
+  ll t;
+  s(t);
+  while(t--)
+  {
+  ll n,k,m,i,j,ans=0;
+  s(n); s(m); s(k);
+  ll initial_c[n+2],gain[n+2][m+2],cost[n+2][m+2];
+  
+     fr(i,n)
+     {
+        s(initial_c[i]);
+     }
+  fr(i,n)
+  fr(j,m)
+  s(gain[i][j]);
+  
+  fr(i,n)
+  fr(j,m)
+  s(cost[i][j]);
+  
+  fr(i,n)
+  {
+     arr[i].no_replace = gain[i][initial_c[i]-1]-cost[i][initial_c[i]-1];
+  }
+  
+  ll maxi;
+  fr(i,n)
+  {
+         maxi=INT_MIN;
+         fr(j,m)
+         {
+              if(initial_c[i]-1!=j)
+              maxi = max(maxi,gain[i][j]-cost[i][j]);
+         }
+         if(maxi!=INT_MIN)
+         {
+            arr[i].w_replace=maxi;
+            arr[i].get=maxi-arr[i].no_replace;
+         }
+         else
+         {
+            arr[i].w_replace=maxi;
+            arr[i].get=maxi;
+         }
+  }
+  
+  sort(arr,arr+n,cmp);
+  
+  for(i=n-1;i>=n-k;i--)
+  {
+     if(arr[i].get>0)
+     ans+=arr[i].w_replace;
+     else
+     break;
+  }
+  for(j=i;j>=0;j--)
+  {
+     ans+=arr[j].no_replace;
+  }  
+  
+  cout<<ans<<endl;
+  } 
+  return 0;
+}

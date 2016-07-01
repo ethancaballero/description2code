@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll res;
+vector<ll> adj[100009];
+bool visited[100009];
+ll cost[100009],f[100009];
+void dfs(ll i)
+{
+    if(visited[i])
+    {
+        return;
+    }
+    if(cost[i]<res&&cost[i]>=0)
+    {
+        res=cost[i];
+    }
+    visited[i]=true;
+    for(ll j=0;j<adj[i].size();j++)
+    {
+        if(!visited[adj[i][j]])
+        {
+            dfs(adj[i][j]);
+        }
+    }
+}
+int main()
+{
+    ll n,m,i,x,y,cnt;
+    bool flag=false;
+    cin>>n>>m;
+    for(i=1;i<=m;i++)
+    {
+        cin>>x>>y;
+        adj[x].push_back(y);
+        adj[y].push_back(x);
+    }
+    for(i=1;i<=n;i++)
+    {
+        cin>>cost[i];
+    }
+    cnt=0;
+    for(i=1;i<=n;i++)
+    {
+        if(!visited[i])
+        {
+            cnt++;
+            res=INT_MAX;
+            dfs(i);
+            f[cnt]=res;
+            if(res==INT_MAX)
+            {
+                flag=true;
+            }
+        }
+    }
+    ll sum=0;
+    res=INT_MAX;
+    for(i=1;i<=cnt;i++)
+    {
+        sum+=f[i];
+        if(f[i]<res)
+        {
+            res=f[i];
+        }
+    }
+    sum-=res;
+    if(cnt==1)
+        cout<<0;
+    else if(flag&&cnt!=1)
+        cout<<-1;
+    else
+        cout<<res*(cnt-1)+sum;
+    return 0;
+}

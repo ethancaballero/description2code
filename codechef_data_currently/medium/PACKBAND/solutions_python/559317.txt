@@ -1,0 +1,41 @@
+n = input()
+for i in range(0,n):
+    p = input()
+    box = []
+    band = []
+    t = raw_input()
+    t = t.split()
+    for j in range(0,p):
+        box.append(4*int(t[j]))
+    q = input()
+    for k in range(0,q):
+        a = raw_input()
+        b = a.split()
+        band.append((2*22.0/7*int(b[0]),2*22.0/7*int(b[1])))
+    box = sorted(box,reverse=True)
+    band = sorted(band,key=lambda band:band[0],reverse=True)
+    band_e = sorted(band,key=lambda band:band[1],reverse=True)
+    count=0
+    exi=0
+    while len(box)!=0 and len(band)!=0 and len(band_e)!=0:
+        while len(band)!=0 and len(box)!=0 and box[0]<band[0][0]:
+            band_e.remove(band.pop(0))
+            if len(band)==0:
+                exi=1
+                break
+        if exi==1:
+            break
+        if box[0]>band_e[0][1]:
+            box.pop(0)
+        else:
+            t = 0
+            while t<len(band):
+                if band[t][1]>=box[0]:
+                    count=count+1
+                    band_e.remove(band.pop(t))
+                    break
+                t= t+1
+            box.pop(0)
+    print count
+    
+                

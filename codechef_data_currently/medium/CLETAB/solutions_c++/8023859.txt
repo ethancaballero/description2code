@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+#define gc getchar
+using namespace std;
+typedef long long ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll t,n,m,i,j,mfar,far,x,p,f,v,ind;
+    cin>>t;
+    ll allot[402],cnt[402];
+    while(t--)
+    {
+        cin>>n>>m;
+        ll c[m],ct=0;
+        ll a[202];
+        memset(allot,0,sizeof(allot));
+        memset(cnt,0,sizeof(cnt));
+        for(i=0;i<m;i++)
+        {
+            cin>>c[i];
+            cnt[c[i]]++;
+        }
+        for(i=0,j=0;i<m;i++)
+        {
+            if(j<n && allot[c[i]]==0)
+            {
+               cnt[c[i]]--;
+               allot[c[i]]=1;
+               ct++;
+               a[j]=c[i];
+               j++;
+            }
+            else if(j==n && allot[c[i]]==0)
+            {
+                f=0;
+                for(p=0;p<n;p++)
+                {
+                    if(cnt[a[p]]==0)
+                    {
+                        a[p]=c[i];
+                        allot[c[i]]=1;
+                        cnt[c[i]]--;
+                        ct++;
+                        f=1;
+                        break;
+                    }
+                }
+                if(f!=1)
+                {
+                    for(x=0,mfar=0;x<n;x++)
+                    {
+                        for(p=i+1;p<m;p++)
+                        {
+                            if(a[x]==c[p])
+                            {
+                                far=p;
+                                break;
+                            }
+                        }
+                        if(mfar==0)
+                        {
+                            mfar=far;
+                            v=a[x];
+                            ind=x;
+                        }
+                        else if(far>mfar)
+                        {
+                            mfar=far;
+                            v=a[x];
+                            ind=x;
+                        }
+                    }
+                    cnt[c[i]]--;
+                    a[ind]=c[i];
+                    allot[c[i]]=1;
+                    allot[v]=0;
+                    ct++;
+                }
+            }
+            else if(allot[c[i]]==1)
+                cnt[c[i]]--;
+        }
+        cout<<ct<<'
+';
+    }
+    return 0;
+}

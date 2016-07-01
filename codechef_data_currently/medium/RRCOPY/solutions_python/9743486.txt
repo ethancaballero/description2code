@@ -1,0 +1,14 @@
+testcase=input()
+while testcase>0:
+	testcase=testcase-1
+	arsi=input()
+	listt=[]
+	listt= [0] * 100002
+	inp=raw_input();
+	i1=inp.split(" ");
+	count=0;
+	for index in range(len(i1)) :
+		if listt[int(i1[index])] == 0 :
+			count=count+1
+			listt[int(i1[index])]=1
+	print count

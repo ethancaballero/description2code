@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+int T;
+cin>>T;
+while(T--)
+{
+   float Base,Left,Right,Mid,temp;
+   cin>>Base>>Left; temp=Base/2;
+   cout<<sqrt(Left*Left-Base*Base)<<" "<<sqrt(Left*Left+Base*Base)<<endl;
+}
+    return 0;
+
+}

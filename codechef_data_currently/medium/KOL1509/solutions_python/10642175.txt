@@ -1,0 +1,127 @@
+
+/*
+._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._
+	ABHINANDAN AGARWAL
+	MNNIT ALLAHABAD
+	CSE
+._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._
+*/
+#include<bits/stdc++.h>
+using namespace std;
+#define pc putchar_unlocked
+#define gc getchar_unlocked
+typedef long long ll;
+typedef unsigned long long llu;
+#define mp make_pair
+#define pb push_back
+#define sc(x) scanf("%d",&x)
+#define sc2(x,y) scanf("%d%d",&x,&y)
+#define scstr(x) scanf("%s",x)
+#define pd(x) printf("%d",x)
+#define pstr(x) printf("%s",x)
+#define newl() printf("
+")
+#define fl(i,n) for (i=0;i<n;i++)
+#define fle(i,n) for (i=1;i<=n;i++)
+#define fla(i,a,n) for (i=a;i<n;i++)
+#define mem(a,i) memset(a,i,sizeof(a))
+#define fi first
+#define se second
+typedef pair<int,int> pii;
+typedef pair<int,pair<int,int> > piii ;
+typedef pair<ll,ll> pll;
+#define wl(n) while (n--)
+#define MOD 1000000007
+//-------------
+ 
+ll A[100010];
+int n,p=0;
+ll mx[100010];
+ll mn[100010];
+pll hull[200010];
+ll orient(pll a,pll b,pll c)
+{
+	//printf("passed %lld %lld %lld %lld %lld %lld -
+",a.fi,a.se,b.fi,b.se,c.fi,c.se);
+	return (a.fi*b.se+b.fi*c.se+c.fi*a.se)-(b.fi*a.se+c.fi*b.se+a.fi*c.se);
+}
+pll pps[100010];
+void mkhull()
+{
+	int i=1,j,k=0;
+	//hull[k++]=mp(A[0],mx[1]);
+	for (i=0;i<n;i++)
+	{	
+		if (pps[i].se==n-1)
+			continue;
+		ll x;
+		while (k>=2&&(x=orient(hull[k-2],hull[k-1],mp(pps[i].fi,mx[pps[i].se+1])))>=0)
+		{
+			k--;
+		}	
+		//printf("For i:%d x:%lld
+",i,x);
+		hull[k++]=mp(pps[i].fi,mx[pps[i].se+1]);
+ 
+	}	
+	/*fla(i,0,k)
+		printf("%lld %lld --- >
+",hull[i].fi,hull[i].se);*/
+	int t=k;
+	for (i=n-1;i>=0;i--)
+	{
+		if (pps[i].se==n-1)
+			continue;
+		while (k>t&&orient(hull[k-2],hull[k-1],mp(pps[i].fi,mn[pps[i].se+1]))>=0) k--;
+		hull[k++]=mp(pps[i].fi,mn[pps[i].se+1]);
+	}
+	if (hull[k-1]!=hull[0])
+		{
+			hull[k]=hull[0];
+			k++;
+		}
+	p=k;
+}
+int main()
+{
+	int t;
+	sc(t);		
+	wl(t)
+	{
+		int i,j;
+		sc(n);
+		fla(i,0,n)
+		{	scanf("%lld",&A[i]);
+			pps[i]=mp(A[i],(ll)i);
+		}
+		sort(pps,pps+n);	
+		mx[n-1]=mn[n-1]=A[n-1];
+		mx[n]=INT_MIN;mn[n]=INT_MAX;
+		for (i=n-2;i>=0;i--)
+		{
+			mx[i]=max(mx[i+1],A[i]);
+			mn[i]=min(mn[i+1],A[i]);
+		}
+		mkhull();
+		ll ans=0;
+		/*for (i=0;i<p;i++)
+		{
+			printf("%lld %lld --| 
+",hull[i].fi,hull[i].se);
+		}*/
+		for (i=0;i<p-1;i++)
+		{
+			ans+=hull[i].fi*hull[i+1].se;
+		}
+		for (i=1;i<p;i++)
+		{
+			ans-=hull[i].fi*hull[i-1].se;
+		}
+		printf("%lld
+",abs(ans));
+ 
+	}
+ 
+	return 0;
+ 
+} 

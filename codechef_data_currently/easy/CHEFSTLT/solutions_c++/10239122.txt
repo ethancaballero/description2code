@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+	string a,b;
+	cin>>a;
+	cin>>b;
+	int len=a.length(),min=0,max=0;
+	for(int i=0;i<len;i++)
+	{
+		if(a[i]=='?' || b[i]=='?' || a[i]!=b[i])
+		max++;
+		if((a[i]!='?' && b[i]!='?') && (a[i]!=b[i]))
+		min++;
+	}
+	cout<<min<<" "<<max<<endl;
+}
+return 0;
+}

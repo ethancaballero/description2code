@@ -1,0 +1,32 @@
+# cook your code here
+
+def getModuloOf(a, two):
+    i=1;
+    b = int(two[:i]);
+    while(b<a and i<len(two)):
+        i=i+1;
+        b=int(two[:i]);
+    if(b<a or i==len(two)):
+        return b%a;
+    else:
+        rem=b%a;
+        s=str(rem)+two[i:];
+        return getModuloOf(a,s);
+        
+def findHCF(a, b):
+    if(a==0):
+        return b;
+    return findHCF(b%a,a);
+
+t=int(raw_input());
+#waste=raw_input();
+while(t>0):
+    a,two = raw_input().split(' ');
+    a=int(a);
+    if(a==0):
+        print two;
+    else:
+        b=getModuloOf(a,two);
+        ans=findHCF(b,a);
+        print ans;
+    t=t-1;

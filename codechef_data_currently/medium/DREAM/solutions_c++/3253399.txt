@@ -1,0 +1,40 @@
+#include<iostream>
+#include<cstdio>
+#include<map>
+#define gc getchar_unlocked
+using namespace std;
+int a[100002];
+void scanint(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+int main()
+{
+	int N,K,ans=0;
+	map< int, int> mymap;
+	scanint(N);
+	scanint(K);
+	//scanf("%d %d",&N,&K);
+	for(int i=0;i<N;i++)
+	{
+		scanint(a[i]);
+		//scanf("%d",&a[i]);
+	}
+	int temp;
+    for(int i=0;i<N;i++)
+	{
+		temp=a[i];
+		if(mymap.count(temp)==0 || i>mymap[temp])
+		{
+			++ans;
+			mymap[temp]=i+K-1;
+		}
+	}
+	printf("%d",ans); 
+    //system("pause");
+    return 0;
+}        

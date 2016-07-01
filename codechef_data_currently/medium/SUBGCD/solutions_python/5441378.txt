@@ -1,0 +1,31 @@
+def gcd(a, b):
+	if b == 0:
+		return a
+	else:
+		return gcd(b, a % b)
+
+def gcd_list(l):
+	if len(l) == 1:
+		return l[0]
+	
+	g = gcd(l[0], l[1])
+	for i in range(2, len(l)):
+		g = gcd(g, l[i])
+	return g
+		
+def subgcc(l, n):
+	g = gcd_list(l)
+	if g == 1:
+		return n
+	else:
+		return -1
+	
+
+def main():
+	cases = raw_input()
+	for v in range(int(cases)):
+		n = raw_input()
+		l = [int(i) for i in raw_input().split()]
+		print subgcc(l, n)
+
+if  __name__ =='__main__':main()

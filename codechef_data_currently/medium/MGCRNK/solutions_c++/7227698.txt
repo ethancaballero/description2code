@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+int s[105][105],t,n;
+int x[105][105];
+int main() {
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		for(int i=1;i<=n;i++)
+		{	
+			for(int j=1;j<=n;j++)
+			cin>>s[i][j];
+		}
+		memset (x, 0, sizeof(x));
+		for(int i=2;i<=n;i++)
+		{
+			x[1][i]=(x[1][i-1] + s[1][i]);
+			x[i][1]=(x[i-1][1] + s[i][1]);
+		}
+		for(int i=2;i<=n;i++)
+		{	
+			for(int j=2;j<=n;j++)
+			{
+				if(i==n && j==n)
+				{
+					x[i][j]=max(x[i-1][j],x[i][j-1]);
+					break;
+				}	
+				int t1=(x[i][j-1] + s[i][j]);
+				int t2=(x[i-1][j] + s[i][j]);
+				x[i][j]=max(t1,t2);
+			}
+		}
+		if(x[n][n]>=0)
+		{
+			double temp=2*n-3;
+			temp = x[n][n]/temp;
+			printf("%f
+",temp);
+		}
+		else
+		cout<<"Bad Judges"<<endl;
+	}
+	// your code goes here
+	return 0;
+}

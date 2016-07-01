@@ -1,0 +1,14 @@
+arr = [0]*(1000000)
+arr[0] = 1
+arr[1] = 2
+for i in range(2,1000000):
+    arr[i] = (arr[i-1] + arr[i-2])%1000000007
+cases = int(raw_input())
+while cases:
+    cases -= 1
+    n,g = [int(x) for x in raw_input().split()]
+    t = arr[n-1]
+    if g == str(bin(t)).count('1'):
+        print "CORRECT"
+    else:
+        print "INCORRECT"

@@ -1,0 +1,41 @@
+for cas in xrange(input()):
+    n = input()
+    pts = []
+    for i in xrange(n):
+        x, y = map(int, raw_input().strip().split())
+        pts.append((x, y))
+
+    minx = min(x for x, y in pts)
+    maxx = max(x for x, y in pts)
+    miny = min(y for x, y in pts)
+    maxy = max(y for x, y in pts)
+
+    for i in xrange(n):
+        if pts[i] == (minx, miny):
+            print "1
+%d NE" % (i+1)
+            break
+        if pts[i] == (minx, maxy):
+            print "1
+%d SE" % (i+1)
+            break
+        if pts[i] == (maxx, miny):
+            print "1
+%d NW" % (i+1)
+            break
+        if pts[i] == (maxx, maxy):
+            print "1
+%d SW" % (i+1)
+            break
+    else:
+        mini = min(xrange(n), key=lambda i: pts[i])
+        maxi = max(xrange(n), key=lambda i: pts[i])
+
+        if pts[mini][1] < pts[maxi][1]:
+            print "2
+%d NE
+%d SW" % (mini+1, maxi+1)
+        else:
+            print "2
+%d SE
+%d NW" % (mini+1, maxi+1)

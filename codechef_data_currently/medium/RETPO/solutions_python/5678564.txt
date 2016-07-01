@@ -1,0 +1,28 @@
+import sys
+
+def swap(i,j,a = []):
+	temp = a[i]
+	a[i] = a[j]
+	a[j] = temp
+
+def main():
+	t = input()
+	while(t>0):
+		a = map(int, raw_input().split())
+		if(a[0]<0):
+			a[0] = 0-a[0]
+		if(a[1]<0):
+			a[1] = 0-a[1]
+		if(a[0]>=a[1]):
+			l = (2*a[1])+(2*(a[0]-a[1]))
+			if((a[0]-a[1])%2 == 1):
+				l = l+1
+		else:
+			l = (2*a[0])+(2*(a[1]-a[0]))
+			if((a[1]-a[0])%2 == 1):
+				l = l-1
+		print l
+		t = t-1
+
+if __name__ == '__main__':
+	main()

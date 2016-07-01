@@ -1,0 +1,21 @@
+T = int(raw_input())
+
+for i in range(T):
+    w, K = raw_input().split()
+    K = int(K)
+    frecs = {}
+    for c in w:
+        if c not in frecs: frecs[c] = 1
+        else: frecs[c] += 1
+    frecs = sorted(frecs.values())
+    
+    output = 99999999999
+    aux = 0
+    for j in range(frecs[0], frecs[-1] + 1):
+        aux = 0
+        for f in frecs:
+            if f < j: aux += f
+            else: aux += max(f - (j + K), 0)
+        if aux < output: output = aux
+    #
+    print output

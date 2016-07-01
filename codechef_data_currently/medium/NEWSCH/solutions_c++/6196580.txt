@@ -1,0 +1,110 @@
+/**
+                                                ooooooo
+                                                o         ooooooo   ooooooo   o ooooo  ooooooo
+                                                ooooooo    oooooo    oooooo    o    o  o
+                                                      o    o    o    o    o    o    o  o
+                                                ooooooo    ooooooo   ooooooo   o    o  ooooooo
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+#define loop(i,n) for(i=0;i<n;i++)
+#define loop1(i,n) for(i=1;i<=n;i++)
+#define loop3(i,n,k) for(i=n;i<=k;i++)
+#define loopr(i,n,k) for(i=n;i>=k;i--)
+#define pvn(n) cout<<n<<"
+"
+#define pvw(n) cout<<n<<" "
+#define pvpn(n,x) cout<< std::fixed;cout<< std::setprecision(x)<<n<<"
+"
+#define pvpw(n,x) cout<< std::fixed;cout<< std::setprecision(x)<<n<<" "
+#define pw cout<<" "
+#define pn cout<<"
+"
+#define TZ(n) __builtin_ctz(n)
+#define LZ(n) __builtin_clz(n)
+#define CSB(n) __builtin_popcount(n)
+
+#define MAX 1000000007
+#define pi  3.1415926535
+#define exp  2.7182818284
+
+typedef long long int LL;
+typedef long int L;
+typedef long double LD;
+typedef unsigned long long int ULL;
+typedef vector<LL> VLL;
+typedef vector<L> VL;
+typedef vector<int> VI;
+typedef vector<char> VC;
+typedef vector<string> VS;
+typedef vector<float> VF;
+typedef vector<double> VD;
+typedef pair<LL,LL> PLL;
+
+const LL INF=1000000000;
+
+vector<vector<LL> > MatrixMultiplication(vector<vector<LL> > T,vector<vector<LL> > f,LL p,LL q,LL r)
+{
+    LL i,j,k;
+    vector<vector<LL> > T1(p,vector<LL> (r,0));
+    loop(i,p)
+    {
+        loop(j,r)
+        {
+            loop(k,q)
+            {
+                T1[i][j]+=T[i][k]*f[k][j];
+                T1[i][j]%=MAX;
+            }
+        }
+    }
+    return T1;
+}
+
+vector<vector<LL> > MatrixExponentiation(vector<vector<LL> > T,LL m)
+{
+    if(m==1)
+        return T;
+    if(m%2==0)
+    {
+        vector<vector<LL> > T1=MatrixExponentiation(T,m/2);
+        return MatrixMultiplication(T1,T1,2,2,2);
+    }
+    else
+    {
+         vector<vector<LL> > T1=MatrixExponentiation(T,m/2);
+         return MatrixMultiplication(MatrixMultiplication(T1,T1,2,2,2),T,2,2,2);
+    }
+}
+
+LL cal(LL n)
+{
+    LL i,j,k,l;
+    vector<vector<LL> > T(2,vector<LL>(2)),f(2,vector<LL>(1)),T1(2,vector<LL>(1));
+    f[0][0]=12;
+    f[1][0]=24;
+    T[0][0]=0;T[0][1]=1;T[1][0]=3;T[1][1]=2;
+    T=MatrixExponentiation(T,n-3);
+    T1=MatrixMultiplication(T,f,2,2,1);
+    return T1[1][0];
+}
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    LL i,j,t,k,l,m,n;
+    cin>>t;
+    while(t--)
+    {
+        assert(n!=1);
+        cin>>n;
+        if(n==2)
+            pvn("12");
+        else if(n==3)
+            pvn("24");
+        else
+            pvn(cal(n));
+    }
+    return 0;
+}

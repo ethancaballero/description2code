@@ -1,0 +1,55 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <string>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+#include <cmath>
+using namespace std;
+
+#define MAX 1003
+
+char s[MAX][MAX];
+bool X[MAX][MAX], Y[MAX][MAX];
+
+int main(int argc, char const *argv[])
+{
+	int t;
+	scanf("%d", &t);
+	while(t--) {
+		int n;
+		scanf("%d", &n);
+
+		for(int i = 0; i < n; i++) {
+			scanf("%s", s[i]);
+		}
+
+		for(int j = 0; j < n; j++) {
+			bool ok = true;
+			for(int i = n - 1; i >= 0; i--) {
+				if(s[i][j] == '#') ok = false;
+				Y[i][j] = ok;
+			}
+		}
+
+		for(int i = 0; i < n; i++) {
+			bool ok = true;
+			for(int j = n - 1; j >= 0; j--) {
+				if(s[i][j] == '#') ok = false;
+				X[i][j] = ok;
+			}
+		}
+
+		int ans = 0;
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				if(X[i][j] && Y[i][j]) ans++;
+			}
+		}
+		printf("%d
+", ans);
+	}
+	return 0;
+} 

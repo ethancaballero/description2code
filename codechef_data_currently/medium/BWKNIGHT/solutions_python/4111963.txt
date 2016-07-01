@@ -1,0 +1,30 @@
+from random import *
+
+i = int(raw_input())
+i = i+1
+for j in range(1,i):
+
+#	n = input()#int(raw_input())
+	num=raw_input()
+	n = 0
+	m = 0
+
+	for i in range(len(num)):
+	    if num[i] == ' ':
+        	break
+
+	n = int(num[:i])
+	m = int(num[i+1:])
+	if m==1 or n==1:
+		op =  0
+	elif m==2 and n > 2:
+		op = 4 *(n-2)
+	elif n == 2 and m >2:
+		op = 4*(m-2)
+	elif m==3:
+		op = 8*(n-2) + 4*(n-1)
+	elif n == 3:
+		op = 8*(m-2) + 4*(m-1)
+	else:
+		op = n*m*8 - 12*n - 12*m +16;
+  	print (m*n)*(m*n -1) - op

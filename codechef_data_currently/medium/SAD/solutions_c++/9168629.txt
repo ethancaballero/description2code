@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int matrix[100][100];
+
+int main() {
+	int r, c;
+	cin >> r >> c;
+	for(int i = 0; i < r; i ++) {
+	    for(int j = 0; j < c; j ++) {
+	        cin >> matrix[i][j];
+	    }
+	}
+	int *max_sol = new int[c];
+	for(int i = 0; i < c; i ++) {
+	    max_sol[i] = INT_MIN;
+	}
+	int *min_sol = new int[r];
+	for(int i = 0; i < r; i ++) {
+	    min_sol[i] = INT_MAX;
+	}
+	for(int i = 0; i < r; i ++) {
+	    for(int j = 0; j < c; j ++) {
+	        if(matrix[i][j] > max_sol[j]) {
+	            max_sol[j] = matrix[i][j];
+	        }
+	    }
+	}
+	for(int i = 0; i < c; i ++) {
+	    for(int j = 0; j < r; j ++) {
+	        if(matrix[j][i] < min_sol[j]) {
+	            min_sol[j] = matrix[j][i];
+	        }
+	    }
+	}
+	int i, j;
+	for(i = 0; i < c; i ++) {
+	    for(j = 0; j < r; j ++) {
+	        if(max_sol[i] == min_sol[j]) {
+	            cout << max_sol[i] << endl;
+	            break;
+	        }
+	    }
+	    if(j != r) {
+	        break;
+	    }
+	}
+	if(i == c) {
+	    cout << "GUESS" << endl;
+	}
+	return 0;
+}

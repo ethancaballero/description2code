@@ -1,0 +1,28 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+	int t;
+	scanf("%d",&t);
+	while(t-->0)
+	{
+		int n;
+		scanf("%d",&n);
+		if(n<1500)
+		{
+		printf("%g
+",n+n*0.1+n*0.9);
+		}
+		else
+		{
+		//std::cout>>(n+500+n*0.98)>>endln;
+		printf("%g
+",(n+500+n*0.98));
+		}
+		
+	}
+	// your code goes here
+	return 0;
+}

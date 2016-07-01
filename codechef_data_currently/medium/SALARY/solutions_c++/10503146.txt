@@ -1,0 +1,19 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n,i,j,x;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>x;
+		int arr[x],diff=0;
+		for(j=0;j<x;j++)
+		cin>>arr[j];
+		sort(arr,arr+x);
+		for(j=1;j<x;j++)
+		diff=diff+(arr[j]-arr[0]);
+		cout<<diff<<endl;
+	}
+}

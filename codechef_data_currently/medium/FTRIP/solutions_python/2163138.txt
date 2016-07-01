@@ -1,0 +1,30 @@
+def choose(n, k,f):
+    if 0 <= k <= n:
+        return f[n]/f[n-k]/f[k]
+    else:
+        return 0
+
+t = int(raw_input())
+
+f = [1]
+for i in xrange(1,1001):
+  f.append(f[i-1]*i)
+
+while (t>0):
+ t = t-1
+ a = raw_input()
+ aa = a.split()
+ s=0
+ n=0
+ m=0
+ k=0
+ s,n,m,k = [int(i) for i in a.split(' ')]
+ ans = 0
+ for i in xrange(k, n):
+   if( i > m-1 ):
+     break
+   if( (s-m) < (n-i-1) ):
+     continue
+   ans +=  choose(s-m,n-i-1,f) * choose(m-1,i,f)
+ ans /= float(choose(s-1,n-1,f))
+ print '%.7f'%ans

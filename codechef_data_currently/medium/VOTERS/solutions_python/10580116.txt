@@ -1,0 +1,39 @@
+listmp=list(raw_input().split())
+n1=int(listmp[0])
+n2=int(listmp[1])
+n3=int(listmp[2])
+
+lis1=[]
+lis2=[]
+lis3=[]
+dic={}
+
+for i in range(0,n1):
+	lis1.append(input())
+	dic[lis1[i]]=0
+for i in range(0,n2):
+	lis2.append(input())
+	dic[lis2[i]]=0
+for i in range(0,n3):
+	lis3.append(input())
+	dic[lis3[i]]=0
+
+for i in range(0,n1):
+	dic[lis1[i]]+=1
+for i in range(0,n2):
+	dic[lis2[i]]+=1
+for i in range(0,n3):
+	dic[lis3[i]]+=1
+
+lisfinal=[]	
+for i in dic:
+	if dic[i]>=2:
+		lisfinal.append(i)
+lisfinal.sort()
+print len(lisfinal)
+for i in range(0,len(lisfinal)):
+	print lisfinal[i]
+	
+
+
+	

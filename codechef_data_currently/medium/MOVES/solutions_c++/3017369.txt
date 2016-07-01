@@ -1,0 +1,74 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+
+#define MOD 1000000007
+#define LL long long int
+//Standard method for fast nCr
+
+int fact[5001],invfact[5001];
+
+LL power_mod(LL a,LL n,LL m)
+{
+    LL MO=m;
+    LL result=1;
+    a=a%MO;
+    while(n>0){
+        if(n&1) {
+            LL temp=result*a;
+            if(temp>MO)
+                temp=temp%MO;
+            result=temp;
+        }
+        n>>=1;
+        // n=n%MOD;
+        LL temp=a*a;
+        if(temp>MO)
+            temp=temp%MO;
+        a=temp;
+    }
+    return result%MO;
+}
+
+/*It's a fact from number theory that
+
+  x * (x^(M-2)) = 1 (mod M)
+
+if M is prime.  So x^(M-2) is the multiplicative inverse of x (mod
+M).  It follows by identities of modulo arithmetic that
+
+  n!/(r!(n-r)!) = n! * inv(r!) * inv( (n-r)! )  (mod M) */
+
+int inverse(int x){
+	return power_mod(x, MOD-2, MOD);
+}
+
+void pre(){
+	fact[0]=1;
+	for(int i=1; i<=5000; i++)
+		fact[i]=(long long)i*fact[i-1]%MOD;
+	invfact[5000]=inverse(fact[5000]);
+	for(int i=5000; i>0; i--)
+		invfact[i-1]=(long long)i*invfact[i]%MOD;
+}
+
+int nCr(int n, int r){
+	if(r>n || r<0)
+		return 0;
+	return (long long)((long long)fact[n]*invfact[r]%MOD)*invfact[n-r]%MOD;
+}
+
+int main(){
+	pre();
+	int n, k;
+	while(true){
+            scanf("%d%d",&n,&k);
+            if(n == 0 && k == 0) {
+                break;
+            }
+            int res = 2ll*nCr(n-2, (k)/2)*nCr(n-2, (k-1)/2)%MOD;
+            printf("%d
+", res);
+	}
+}
+

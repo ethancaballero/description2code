@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+
+int main() 
+{
+	int n,l,i,d,max,j;
+	string s1,s2;
+	char b,c;
+	int a[1000];
+	cin>>n;
+	while(n>0)
+	{
+	    d=0;
+	    cin>>l;
+	    cin>>s1;
+	    cin>>s2;
+	    for(i=0;i<=l;i++)
+	    cin>>a[i];
+	    max=a[0];
+	    for(i=0;i<l;i++)
+	    {
+	        b=s1.at(i);
+	        c=s2.at(i);
+	        if(b==c)
+	        {
+	            d++;
+	        }
+	        if(d==l)
+	        max=a[d];
+	        else
+	        {
+	            for(j=0;j<=d;j++)
+	            {
+	                if(a[j]>max)
+	                max=a[j];
+	            }
+	        }
+	    }
+	    cout<<max<<endl;
+	    n--;
+	}
+	return 0;
+}

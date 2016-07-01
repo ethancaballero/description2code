@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+/*void sort3(long long int l[]){
+    long long int i;long long int temp;
+    for(i=0;i<2;i++){
+        if(l[i]>l[i+1]){
+            temp=l[i];
+            l[i]=l[i+1];
+            l[i+1]=temp;
+        }
+    }
+    if(l[0]>l[1]){
+        temp=l[0];
+        l[0]=l[1];
+        l[1]=temp;
+    }
+}*/
+main(){
+    long long int i,cases,nr,ng,nb,m;
+    cin>>cases;
+    while(cases--){
+        cin>>nr>>ng>>nb>>m;
+        long long int r[nr],g[ng],b[nb]; long long int l[3];
+        memset(l,0,sizeof(l));
+        for(i=0;i<nr;i++){
+            cin>>r[i];
+            if(i==0) l[0]=r[0];
+            if(i>0){
+                if(r[i]>l[0]) l[0]=r[i];
+            }
+        }
+        for(i=0;i<ng;i++){
+            cin>>g[i];
+            if(i==0)    l[1]=g[0];
+            if(i>0){
+                if(g[i]>l[1]) l[1]=g[i];
+            }
+        }
+        for(i=0;i<nb;i++){
+            cin>>b[i];
+            if(i==0)    l[2]=b[0];
+            if(i>0){
+                if(b[i]>l[2]) l[2]=b[i];
+            }
+        }
+        for(i=0;i<m;i++){
+         sort(l,l+3);
+         l[2]/=2;
+        }
+        sort(l,l+3);
+        //cout<<l[0]<<" "<<l[1]<<" "<<l[2]<<endl;
+        cout<<l[2]<<endl;
+    }
+}

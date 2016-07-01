@@ -1,0 +1,23 @@
+import sys
+
+for __ in range(input()) :
+    n , k , ans = map(int,sys.stdin.readline().split())
+    lists = map(int,sys.stdin.readline().split())
+    op = raw_input().strip()
+    if k==0 :
+        print ans
+        continue
+    if op == "XOR" :
+        temp = ans
+        if k&1 :
+            for i in lists :
+                ans ^= i
+        print ans
+    if op == "AND" :
+        for i in lists :
+            ans &= i
+        print ans
+    if op == "OR" :
+        for i in lists :
+            ans |= i
+        print ans

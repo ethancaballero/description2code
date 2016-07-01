@@ -1,0 +1,9 @@
+def f(n):
+	if (n>=0):
+		return ((n+3)*(n+2)*(n+1))/6
+	else:
+		return 0
+t=int(raw_input())
+for df in range (t):
+	n,a,b,c=map(int,raw_input().split())
+	print f(n)-f(n-a-1)-f(n-b-1)-f(n-c-1)+f(n-a-b-2)+f(n-b-c-2)+f(n-a-c-2)-f(n-a-b-c-3)

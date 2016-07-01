@@ -1,0 +1,16 @@
+import sys
+
+t = input()
+for i in range(t):
+	points = []
+	dummy = map(int, sys.stdin.readline().split())
+	n = input()
+	for j in range(n):
+		x,y = map(int, sys.stdin.readline().split())
+		points.append((x,y))
+	ys = sorted(points,key=lambda x:x[1],reverse=True)
+	xs = sorted(ys,key=lambda x:x[0])
+	d = 0
+	for k in range(1,len(xs)):
+		d = d+pow((xs[k][0]-xs[k-1][0])**2+(xs[k][1]-xs[k-1][1])**2,0.5)
+	print '%.2f'%d

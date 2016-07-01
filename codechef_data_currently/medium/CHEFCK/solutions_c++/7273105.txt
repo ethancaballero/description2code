@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<iostream>
+#include<deque>
+#include<algorithm>
+#include<math.h>
+using namespace std;
+long long A[10000005],minOfWindow[10000005];
+int main()
+{
+	long long N,K,i,Q,a,b,c,d,e,f,r,s,t,m;
+	long long L1,L,R,La,Lc,Lm,D1,Da,Dc,Dm;
+	cin>>N>>K>>Q;
+	cin>>a>>b>>c>>d>>e>>f>>r>>s>>t>>m>>A[1];
+	cin>>L1>>La>>Lc>>Lm>>D1>>Da>>Dc>>Dm;
+//cout<<"goo1
+";
+	long long value=t;
+	for(long long x = 2;x<= N;++x)
+{
+	value=(value*t)%s;
+	if(value  <= r)        
+		A[x] = (a*A[x-1]*A[x-1] + b*A[x-1] + c) % m;
+	else
+		A[x] = (d*A[x-1]*A[x-1] + e*A[x-1] + f) % m;
+	//cout<<"gooo2
+";
+}
+	deque <long long> q;
+	for(i=1;i<=N;++i)
+	{
+		while(!q.size()==0 && q.back()>A[i])
+		{
+			q.pop_back();
+		}
+		q.push_back(A[i]);
+		if(i>K && A[i-K]==q.front())
+			q.pop_front();
+		if(i>=K)
+		{
+			minOfWindow[i-K]=q.front();
+		}
+//	cout<<"goo3
+";
+}
+	long long sum=0,pro=1,ans;
+	for (i = 1 ;i<= Q;++i)
+	{
+	L1 = (La * L1 + Lc) % Lm;
+	D1 = (Da * D1 + Dc) % Dm; 
+	L = L1 + 1;
+	R = min(L + K - 1 + D1, N);
+	ans=min(minOfWindow[L-1],minOfWindow[R-K]);
+	sum+=ans;
+	pro=(pro*ans)%1000000007;
+	}
+	printf("%lld %lld
+",sum,pro);
+	return 0;
+}
+
+
+

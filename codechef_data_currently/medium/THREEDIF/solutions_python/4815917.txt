@@ -1,0 +1,15 @@
+
+def solve(n1, n2, n3):
+	m1 = min(min(n1,n2),n3)
+	m3 = max(max(n1,n2),n3)
+	if m1 == n1: m2 = n2 if m3 == n3 else n3
+	if m1 == n2: m2 = n1 if m3 == n3 else n3
+	if m1 == n3: m2 = n1 if m3 == n2 else n2
+
+	r = (((m1*m2)-m1)*(m3-2))%1000000007
+	print r
+
+n = int(raw_input())
+for i in xrange(n):
+	n1, n2, n3 = map(int,raw_input().split())
+	solve(n1,n2,n3)

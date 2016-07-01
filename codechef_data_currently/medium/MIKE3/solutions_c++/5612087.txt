@@ -1,0 +1,39 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+#define MMAX 21
+#define NMAX 20001
+bitset<NMAX> offer[NMAX];
+int ans,M;
+void MIS(int ID, int taken)
+{
+    if(ID==M)
+    {
+        ans = max(ans,taken);
+        return;
+    }
+    if(ans>=taken+M -ID)return ;
+    MIS(ID+1,taken);
+    if((offer[20] & offer[ID]).count()) return;
+	offer[20] ^= offer[ID];
+	MIS(ID + 1, taken + 1);
+	offer[20] ^= offer[ID];
+}
+int main()
+{
+    int N, T, V;
+    cin>>N>>M;
+    for(int i = 0;i<M;i++)
+    {
+        cin>>T;
+        for(int j = 1;j<=T;j++)
+        {
+            cin>>V;
+            offer[i].set(V);
+        }
+    }
+    MIS(0,0);
+    cout<<ans<<"
+";
+    return 0;
+}

@@ -1,0 +1,4 @@
+a = input()
+for b in range(a):
+    c = raw_input()
+    print int(c[::-1])

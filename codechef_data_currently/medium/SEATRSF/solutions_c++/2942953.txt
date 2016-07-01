@@ -1,0 +1,121 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <algorithm>
+
+using namespace std;
+typedef long long ll;
+#define read(x) scanf("%lld",&x)
+
+ll n,m,q,k;
+ll mod = 1e9 + 7;
+int num[1000];
+int total = 0;
+
+bool correct(int mn, int mx)
+{
+	int ok = 0;
+	for(int i = 0 ; i < n; i++)
+	{
+		if(num[i] == mn)
+		{
+			ok++;
+			break;
+		}
+	}
+	for(int i = 0 ; i < n; i++)
+	{
+		if(num[i] == mx)
+		{
+			ok++;
+			break;
+		}
+	}
+	return ok == 2;
+}
+
+void checker(int pos, int mn, int mx)
+{
+	if(pos == n)
+	{
+		if(correct(mn,mx))
+		{
+			total++;
+			for(int i = 0; i < n; i++)
+				cout << num[i] << " ";
+			cout << endl;
+		}
+		return;
+	}
+	for(int i = mn; i <= mx; i++)
+	{
+		num[pos] = i;
+		checker(pos + 1,mn,mx);
+	}
+}
+
+
+void solve2()
+{
+	total = 0;
+	int mn = 0;
+	for(int mn = 1;mn + q <= m;mn++)
+	{
+		checker(0,mn,mn + q);
+		cout << "----------------" << endl;
+	}
+}
+
+ll power(ll a, ll p)
+{
+	if(p == 1)return a%mod;
+	if(p == 0)return 1;
+
+	ll res = power(a,p/2);
+	res = (res*res)%mod;
+	if(p&1)
+		res = (res*a)%mod;
+
+	return res;
+}
+
+ll solve()
+{
+	ll aux = power(k,n);
+	//cout << aux << endl;
+	aux = (aux + power(k - 2,n))%mod;
+	//cout << power(k - 2,n) << endl;
+	aux = (aux - (2*power(k - 1,n))%mod)%mod;
+	//cout << 2*power(k - 1,n - 1)  << endl;
+	//cout << aux << endl;
+	return (aux + mod)%mod;
+}
+
+int main()
+{
+	ll t;
+	read(t);
+	while(t--)
+	{
+		read(n),read(m),read(q),read(k);
+		if(q >= m)
+		{
+			cout << 0 << endl;
+			continue;
+		}
+		k = q + 1;
+		ll res = ((m - q)*solve())%mod;
+		/*
+		solve2();
+		if(total != res )
+		{
+			cout << "no" << endl;
+			cout << res << " " << total << endl;
+		}
+		*/
+		printf("%d
+",(int)res);
+	}
+
+	return 0;
+}

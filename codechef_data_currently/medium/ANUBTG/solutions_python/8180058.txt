@@ -1,0 +1,13 @@
+for t in range(int(raw_input())):
+	n = int(raw_input())
+	cost = map(int,raw_input().split())
+	cost.sort()
+	flag = 0
+	ans = 0
+	for i in reversed(cost):
+		if(flag==0 or flag ==1):
+			ans = ans + i
+			flag = (flag + 1)%4
+		else:
+			flag = (flag + 1)%4
+	print ans

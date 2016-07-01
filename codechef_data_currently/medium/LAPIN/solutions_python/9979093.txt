@@ -1,0 +1,19 @@
+from collections import Counter
+def LAPIN():
+	t = int(raw_input())
+	while t:
+		s = raw_input(); l = len(s)
+		if l % 2 == 0:
+			c1 = Counter(s[:l/2]); c2 = Counter(s[l/2:])
+			for i in 'abcdefghijklmnopqrstuvwxyz':
+				if c1[i] != c2[i]: print 'NO'; break
+			else: print 'YES'
+		else:
+			c1 = Counter(s[:l/2]); c2 = Counter(s[l/2+1:])
+			for i in 'abcdefghijklmnopqrstuvwxyz':
+				if c1[i] != c2[i]: print 'NO'; break
+			else: print 'YES'
+		t-=1
+if __name__ == '__main__': LAPIN()
+				
+			

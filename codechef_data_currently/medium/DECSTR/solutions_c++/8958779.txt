@@ -1,0 +1,32 @@
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+int main(){
+    int T,N,j=0,floop=0,sloop;
+    scanf("%d",&T);
+    char a[26]={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    while(T--){
+        scanf("%d",&N);
+
+            floop = N/25;
+            sloop = N%25;
+
+
+            if(sloop!=0){
+            for(int i=sloop;i>=0;i--){
+                printf("%c",a[i]);
+            }
+        }
+        for(j=0;j<floop;j++){
+            for(int i=25;i>=0;i--){
+                printf("%c",a[i]);
+            }
+        }
+        printf("
+");
+
+    }
+    return 0;
+}

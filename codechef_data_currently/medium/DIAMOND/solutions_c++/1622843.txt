@@ -1,0 +1,43 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+//#include<iomanip>
+using namespace std;
+
+double p[2000][2000];
+
+int main()
+{
+	int T;
+	scanf("%d", &T);
+	//memset(p, 0, sizeof(p));
+	//cout << fixed;
+	//cout << setprecision(6);
+	p[0][0] = 1.0;
+	for (int i = 1; i < 2000; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			if (j == 0)
+				p[i][j] = 0.5 + 0.5*(1-p[i-1][j]);
+			else if (i == j)
+				p[i][j] = 0.5 + 0.5*(1-p[i-1][j-1]);
+			else
+				p[i][j] = 0.5*(1-p[i-1][j-1]) + 0.5*(1-p[i-1][j]);
+		}
+	}
+	for (int t = 0; t < T; t++)
+	{
+		int N, a;
+		scanf("%d", &N);
+		double result = 0.0;
+		for (int i = 0; i < N; i++)
+		{
+			scanf("%d", &a);
+			result += a*p[N-1][i];
+		}
+		printf("%f
+", result);
+	}
+	return 0;
+}

@@ -1,0 +1,61 @@
+def get_houses():
+	houses = []
+	for house in range(1,101):
+		houses.append(house)
+	return houses
+	
+def get_inputs():
+    m, x, y = raw_input().split(' ')
+    return int(m), int(x), int(y)
+
+def get_cops_houses(m):
+    house_numbers = raw_input().split(' ')
+    cops_house_numbers = []
+    for house in house_numbers:
+        house_number = int(house)
+        cops_house_numbers.append(house_number)
+    cops_house_numbers.sort()
+    return cops_house_numbers
+
+def get_joined_ranges(cops_house_numbers, max_search):
+    joined_ranges = []
+    for house_number in cops_house_numbers:
+        upper = house_number + max_search
+        lower = house_number - max_search
+        if lower <= 0:
+            lower = 1
+        if upper > 100:
+            upper = 100
+        joined_ranges.append([lower, upper])
+    return joined_ranges
+
+
+    
+def raid_house(house_range, houses):
+	for house in range(house_range[0]-1, house_range[1]):
+		if houses[house] != 0:
+			houses[house] = 0
+	return houses
+    
+def get_unraided_houses(houses):
+	unraided = 0
+	for house in houses:
+		if house != 0:
+			unraided += 1
+	return unraided
+	
+if __name__ == "__main__":
+	test_cases = int(raw_input())
+	for test in range(test_cases):
+		m, x, y = get_inputs()
+		cops_house_numbers = get_cops_houses(m)
+		#print cops_house_numbers
+		max_search = x * y
+		joined_ranges = get_joined_ranges(cops_house_numbers, max_search)
+		#print joined_ranges
+		#print joined_ranges
+		houses = get_houses()
+		for house_range in joined_ranges:
+			houses = raid_house(house_range, houses)
+		#print houses
+		print get_unraided_houses(houses)

@@ -1,0 +1,28 @@
+import sys
+import operator
+sys.setrecursionlimit(10000000)
+
+dp = {}
+def min_path(streets, n, k):
+    if n == len(streets) - 1:
+        return streets[-1]
+    if dp.get(n, 0):
+        return dp[n]
+    m = min(n + k + 1, len(streets))
+    if m == len(streets):
+        dp[n] = streets[n] * streets[-1]
+        return dp[n]
+    r = xrange(n + 1, m)
+    for j in r:
+        dp[j] = min_path(streets, j, k)
+    dp[n] = streets[n] * min([dp[j] for j in r])
+    return dp[n]
+
+n, k = map(int, raw_input().split())
+streets = map(int, raw_input().split())
+if k == n:
+    print streets[0] * streets[-1]
+elif k == 1:
+    print reduce(operator.mul, streets)
+else:
+    print min_path(streets, 0, k) % 1000000007

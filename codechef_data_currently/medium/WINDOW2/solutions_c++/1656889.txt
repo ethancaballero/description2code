@@ -1,0 +1,153 @@
+#include<algorithm>
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<fstream>
+#include<iomanip>
+#include<bitset>
+#include<deque>
+#include<queue>
+#include<string>
+#include<map>
+#include<set>
+#include<cstring>
+#include<sstream>
+#include<cmath>
+#include<ctime>
+using namespace std;
+
+#define MOD 1000000080798150871ULL
+
+unsigned long long NCK[1001][1001];
+
+void precalc()
+{
+	NCK[0][0] = NCK[1][0] = NCK[1][1] = NCK[2][0] = NCK[2][2] = 1;
+	NCK[2][1] = 2;
+	for (int i = 3; i <= 1000; i++)
+	{
+		NCK[i][0] = NCK[i][i] = 1;
+		NCK[i][1] = NCK[i][i-1] = i;
+		for (int j = 2; j <= i-2; j++)
+		{
+			NCK[i][j] = NCK[i-1][j-1]+NCK[i-1][j];
+			if (NCK[i][j] >= MOD)
+				NCK[i][j] -= MOD;
+		}
+	}
+}
+
+unsigned long long nck(int n, int k)
+{
+	if (n < k)
+		return 0;
+	else
+		return NCK[n][k];
+}
+
+int main()
+{
+	precalc();
+	int T;
+	scanf("%d", &T);
+	for (int t = 0; t < T; t++)
+	{
+		int N, M, L, K;
+		scanf("%d %d %d %d", &N, &M, &L, &K);
+		//cout << nck(N,M) << endl;
+		//continue;
+		int a, b, c, temp;
+		int c1 = 0, c2 = 0, c3 = 0, c12 = 0, c23 = 0, c31 = 0, c123 = 0;
+		unsigned long long ans;
+		switch(M)
+		{
+			case 1: for (int i = 0; i < N; i++)
+					{
+						scanf("%d", &a);
+						if (a == 1)
+							c1++;
+					}
+					if (K > 1)
+						ans = 0;
+					else
+						ans = nck(c1, L);
+					break;
+
+			case 2: for (int i = 0; i < N; i++)
+					{
+						scanf("%d", &temp);
+						a = temp/10;
+						b = temp%10;
+						if (a == 1 && b == 1)
+						{
+							c1++;
+							c2++;
+							c12++;
+						}
+						else if (a == 1)
+							c1++;
+						else if (b == 1)
+							c2++;
+						else
+							;
+					}
+					if (K == 1)
+						ans = (nck(c1,L)+nck(c2,L))%MOD;
+					else if (K == 2)
+						ans = nck(c12,L);
+					else
+						ans = 0;
+					break;
+
+			case 3: for (int i = 0; i < N; i++)
+					{
+						scanf("%d", &temp);
+						a = temp/100; temp -= a*100;
+						b = temp/10;
+						c = temp%10;
+						if (a == 1)
+						{
+							if (b == 1 && c == 1)
+							{
+								c1++; c2++; c3++; c12++; c23++; c31++; c123++;
+							}
+							else if (b == 1)
+							{
+								c1++; c2++; c12++;
+							}
+							else if (c == 1)
+							{
+								c1++; c3++; c31++;
+							}
+							else
+								c1++;
+						}
+						else
+						{
+							if (b == 1 && c == 1)
+							{
+								c2++; c3++; c23++;
+							}
+							else if (b == 1)
+								c2++;
+							else if (c == 1)
+								c3++;
+							else
+								;
+						}
+					}
+					if (K == 1)
+						ans = (nck(c1,L)+nck(c2,L)+nck(c3,L))%MOD;
+					else if (K == 2)
+						ans = (nck(c12,L)+nck(c23,L)+nck(c31,L))%MOD;
+					else
+						ans = nck(c123,L);
+					break;
+
+			default:break;
+		}
+		printf("%llu
+", ans);
+	}
+	return 0;
+}

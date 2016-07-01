@@ -1,0 +1,179 @@
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <cstdio>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> adj[1005];
+int Partner[1005], Parent[1005], Base[1005];
+bool Used[1005], blossom[1005];
+
+int lca (int a , int b)
+{
+    bool Track[1005];
+	for(int i=0; i<=1000; i++)
+    {
+        Track[i]=0;
+    }
+	while(1)
+    {
+		a=Base[a];
+		Track[a]=true;
+		if (Partner[a]==-1)
+		{
+		    break;
+		}
+		a=Parent[Partner[a]];
+	}
+	while(1)
+    {
+		b=Base[b];
+		if(Track[b]==true)
+		{
+		    return b;
+		}
+		b=Parent[Partner[b]];
+	}
+}
+
+void mark_path(int v, int b, int children)
+{
+	while (Base[v]!=b)
+    {
+		blossom[Base[v]]=true;
+        blossom[Base[Partner[v]]]=true;
+
+		Parent[v]=children;
+		children=Partner[v];
+
+		v=Parent[Partner[v]];
+	}
+	return ;
+}
+
+int AugmentingPath(int root , int n)
+{
+	memset (Used, 0, sizeof(Used));
+	memset (Parent, -1, sizeof(Parent));
+
+	for (int i=0; i<n; i++)
+    {
+		Base[i] = i;
+    }
+
+    queue<int> Q;
+    Q.push(root);
+	Used[root] = true;
+
+	while(!(Q.empty()))
+	{
+		int v = Q.front();
+		Q.pop();
+
+		for (int i=0; i<adj[v].size(); i++)
+        {
+			int node=adj[v][i];
+
+			if (Base[v] == Base[node] || Partner[v] == node)
+            {
+                continue;
+            }
+			if (node == root || Partner[node] != -1 && Parent[Partner[node]] != -1)
+            {
+				int curbase = lca (v, node);
+				memset (blossom, 0, sizeof blossom);
+				mark_path (v, curbase, node);
+				mark_path (node, curbase, v);
+				for (int i=0; i<n; ++i)
+				{
+					if (blossom[Base[i]])
+                    {
+						Base[i] = curbase;
+						if (!Used[i])
+						{
+							Used[i] = true;
+							Q.push(i);
+						}
+					}
+				}
+			}
+			else if (Parent[node] == -1)
+            {
+				Parent[node] = v;
+				if (Partner[node] == -1)
+				{
+					return node;
+				}
+				node=Partner[node];
+				Used[node] = true;
+				Q.push(node);
+			}
+		}
+	}
+	return -1;
+}
+
+void Solve(int n)
+{
+    int GParent,GGParent;
+    for (int i=0; i<n; i++)
+    {
+        if (Partner[i]==-1)
+        {
+            int v=AugmentingPath(i,n);
+            while(v!=-1)
+            {
+                GParent=Parent[v];
+                GGParent=Partner[GParent];
+
+                Partner[v]=GParent;
+                Partner[GParent]=v;
+                v=GGParent;
+            }
+        }
+    }
+
+    return ;
+}
+
+int main()
+{
+    int t,n,m,x,y,ok;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d %d",&n,&m);
+
+        for (int i=0; i<n; i++)
+        {
+            adj[i].clear();
+            Partner[i]=-1;
+        }
+
+        for (int i=1; i<=m; i++)
+        {
+            scanf("%d %d",&x,&y);
+            x--;
+            y--;
+            adj[x].push_back(y);
+            adj[y].push_back(x);
+        }
+
+        Solve(n);
+
+        ok = 1;
+        for (int i=0;i<n;i++)
+        {
+            if(Partner[i]==-1)
+            {
+                ok=0;
+            }
+        }
+        if (ok) cout << "YES
+"; else cout << "NO
+";
+    }//end of test cases
+}//end of main

@@ -1,0 +1,46 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<vector>
+#include<cmath>
+#define ll long long
+using namespace std;
+int main()
+{
+	long long int t,n,k,l,i,j,m,step,temp,tsum;
+	char in[1000];
+	ll c3,c5,c8,rest;
+	ll cnt=0;
+	gets(in);
+    t=atoi(in);
+	while(t)
+    {
+    gets(in);
+    j=strlen(in)-1;         
+    c3=0,c8=0,c5=0,rest=0;
+    
+    while(in[j]<48 || in[j]>57){
+    --j;
+    }
+      while((in[j] >= '0' && in[j] <= '9') && rest==0)
+       {    
+        if(in[j] == '3')
+        ++c3;
+        else if(in[j] == '8')
+        ++c8;
+        else if(in[j] == '5')
+        ++c5;
+        else ++rest;
+	    --j;
+	
+       }
+       
+           if(c8>=c5 && c5>=c3 && rest==0)
+           ++cnt;
+
+    --t;
+    }
+     printf("%lld",cnt);
+	return 0;
+}

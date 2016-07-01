@@ -1,0 +1,70 @@
+#include <iostream>
+
+using namespace std;
+
+
+void mark(int kp[][11],int s,int e,int l)
+{
+    int i;
+    for (i=s;i<=e;i++)
+    {
+        kp[i][l]=1;
+
+
+    }
+
+
+
+}
+
+int main()
+{
+    int b;
+    int kp[501][11];
+    int i,j;
+    int s,e,l;
+    int count;
+    int t;
+    cin>>t;
+    while (t--)
+    {
+
+
+
+    cin>>b;
+
+
+   for (i=0;i<501;i++)
+   {
+       for (j=0;j<10;j++)
+       {
+         kp[i][j]=0;
+       }
+
+   }
+
+   for (i=0;i<b;i++)
+   {
+       cin>>s>>e>>l;
+       mark(kp,s,e,l);
+   }
+   count=0;
+   for (i=0;i<501;i++)
+   {
+       for (j=0;j<9;j++)
+       {
+           if (kp[i][j]==1 && kp[i][j+1]==1)
+           {
+               count++;
+               break;
+           }
+
+
+       }
+   }
+
+  cout<<500-count<<endl;
+    }
+
+    return 0;
+}

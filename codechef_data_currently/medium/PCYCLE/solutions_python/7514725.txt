@@ -1,0 +1,35 @@
+from copy import copy
+
+def a_find(n,p,q,ans):
+	if len(ans) == 0:
+		return 1
+	else:
+		for i in range(n):
+			if p[i] == q[0]:
+				return i+1
+
+def gen_cycle(n,p,q,ans):
+	t = []
+	yes = True
+	a = a_find(n,p,q,ans)
+	t.append(a)
+	while yes == True:
+		t.append(p[a-1])
+		q.remove(p[a-1])
+		a = t[-1]
+		if a == t[0]:
+			yes = False
+	return q,t
+
+n  = int(raw_input())
+p = map(int,raw_input().split())
+q = copy(p)
+
+ans = []
+while len(q) > 0:
+	q,k = gen_cycle(n,p,q,ans)
+	ans.append(k)
+	
+print len(ans)
+for i in ans:
+	print " ".join(map(str,i))

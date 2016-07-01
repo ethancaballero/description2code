@@ -1,0 +1,90 @@
+#include <iostream>
+#include<bits/stdc++.h>
+#define pb push_back
+using namespace std;
+int max_level=0,l,ans,n,x,y;
+vector<int> v[100009];
+int level[100009];
+bool visited[100009];
+
+void bfs(int n)
+{
+	queue<int>q;
+	q.push(1);
+	q.push(-1);
+	l=0;
+	int i,j;
+	//cout<<"hii";
+	visited[1]=true;
+	while(!q.empty())
+	{
+		i=q.front();
+		q.pop();
+		if(i==-1)
+		{
+			
+			if(q.size()>0)
+			q.push(-1);
+			l++;
+			continue;
+		}
+		max_level=l;
+		level[l]++;
+		for(j=0;j<(int)v[i].size();j++)
+		{
+			if(!visited[v[i][j]])
+			{
+				q.push(v[i][j]);
+				visited[v[i][j]]=true;
+			}
+			
+		}
+	}
+	return;
+}
+int main()
+{
+	int t,i;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		for(i=0;i<=n;i++)
+		{
+			v[i].clear();
+			level[i]=0;
+			visited[i]=false;
+		}
+		for(i=0;i<n-1;i++)
+		{
+			cin>>x>>y;
+			v[x].pb(y);
+			v[y].pb(x);
+		}
+		
+		bfs(1);
+		int highest_level=max_level;
+		int lowest_level=0;
+		bool turn=true;
+		ans=0;
+	//	cout<<"hi"<<endl;
+		while(highest_level>=lowest_level)
+		{
+			if(turn)
+			{
+				lowest_level++;
+				ans++;
+			}
+			else
+			{
+				level[highest_level]--;
+				if(level[highest_level]==0)
+				highest_level--;
+				ans++;
+			}
+			turn=(!turn);
+		}
+		cout<<ans<<endl;
+	}
+	return 0;
+}

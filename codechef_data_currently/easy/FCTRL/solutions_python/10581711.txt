@@ -1,0 +1,17 @@
+x = input()
+i=1
+while i<=x :
+    y = input()
+    sum1=0
+    sum2=0
+    c1=2
+    c2=5
+    while y/c1 > 0 :
+        sum1+=y/c1;
+        c1*=2
+    while y/c2 > 0 :
+        sum2+=y/c2;
+        c2*=5
+       
+    print min(sum1,sum2)  
+    i=i+1 

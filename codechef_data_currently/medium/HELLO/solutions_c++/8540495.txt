@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t,u,n,m;
+	double d,c,r;
+	
+	scanf("%d",&t);
+	while(t--){
+		scanf("%lf %d %d",&d,&u,&n);
+		double min=d*u;
+		int ans=0;
+		for(int i=1;i<=n;i++){
+			scanf("%d %lf %lf",&m,&r,&c);
+			double now=(m*r*u)+c;
+			if(m*min>now){
+				min=now/m;
+				ans=i;
+			}
+		
+			
+		}
+		printf("%d
+",ans);
+	}
+	return 0;
+}

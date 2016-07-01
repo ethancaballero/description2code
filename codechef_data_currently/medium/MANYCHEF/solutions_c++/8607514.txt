@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	int i,n,t,j,count;
+	string a;
+	cin>>t;
+	
+	while(t--)
+	{
+		cin>> a;
+		
+		for(j=a.length()-1; j>=3; j--)
+		{
+			count =0;
+			//cout << count;
+			
+		//	cout << a[j]<<" "<<a[j+1]<<" "<<a[j+2]<<" "<<a[j+3]<<endl;
+		
+				if(((a[j] == 'F')||(a[j]=='?')) &&((a[j-1] == 'E')|| (a[j-1]=='?'))&& ((a[j-2] =='H')||(a[j-2]=='?')) && ((a[j-3] == 'C')|| (a[j-3]=='?')))
+				{
+					count = 1;
+					a[j]='F';
+					a[j-1]='E';
+					a[j-2]='H';
+					a[j-3]='C';
+					//cout << count;
+				}
+			
+			if(count ==1)
+				j = j-3;
+		}
+		
+		for(i=0;i<a.length();i++)
+		{
+			if(a[i]=='?')
+				a[i] = 'A';
+		}
+		
+		cout << a <<endl;
+	}
+}

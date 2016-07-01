@@ -1,0 +1,26 @@
+t = input()
+while(t>0):
+    t -= 1
+    string = raw_input()
+    if len(string)%2 == 0:
+        dict = {}
+        for i in string:
+            if dict.has_key(i):
+                count = dict[i]
+                dict[i] = count+1
+            else:
+                dict[i] = 1
+        
+        values = dict.values()
+        values.sort()
+        greatest = values.pop()
+        sum = 0
+        for i in values:
+            sum = sum+i
+        if(greatest-sum == 0):
+            print "YES"
+        else:
+            print "NO"
+    
+    else:
+        print "NO"

@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+typedef long long ll;
+int main()
+{
+    ll t,r,c,i,j,m,r1,c1;
+    cin>>t;
+    while(t--)
+    {
+        cin>>r>>c;
+        char a[r][c];
+        for(i=0;i<r;i++)
+        {
+            for(j=0;j<c;j++)
+            {
+                cin>>a[i][j];
+            }
+        }
+        r1=r-2;
+        c1=c-2;
+        m=0;
+        for(i=2;i<r1;i++)
+        {
+            for(j=2;j<c1;j++)
+            {
+                if(a[i][j]=='^' && a[i][j-1]=='^' && a[i][j-2]=='^' && a[i][j+1]=='^' && a[i][j+2]=='^' && a[i-1][j]=='^' && a[i-2][j]=='^' && a[i+1][j]=='^' && a[i+2][j]=='^')
+                  m++;
+            }
+        }
+        cout<<m<<'
+';
+    }
+    return 0;
+}

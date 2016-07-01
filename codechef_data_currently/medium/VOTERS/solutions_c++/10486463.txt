@@ -1,0 +1,26 @@
+#include<iostream>
+#include<list>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	list<int> list1;
+	int a,b,j,c,i;
+	cin>>a>>b>>c;
+	int R[a+b+c];
+	for(i=0;i<a+b+c;i++)
+		cin>>R[i];
+	sort(R,R+a+b+c);
+	for(i=0;i<a+b+c;i++)
+	{
+		if(R[i]==R[i+1])
+		list1.push_back(R[i]);
+	}
+	list<int> ::iterator itr1=list1.begin();
+	list<int> ::iterator itr2=list1.end();
+	list<int> ::iterator itr;
+	list1.unique();
+	cout<<list1.size()<<endl;
+	for(itr=itr1;itr!=itr2;itr++)
+	cout<<*itr<<endl;
+}

@@ -1,0 +1,7 @@
+for _ in xrange(int(input())):
+    n,c,q=map(int,raw_input().split())
+    for i in xrange(q):
+        l,r=map(int,raw_input().split())
+        if(c>=l and c<=r):
+            c=r-c+l
+    print c

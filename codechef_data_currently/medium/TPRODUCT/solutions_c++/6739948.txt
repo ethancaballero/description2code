@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+int main()
+{
+    ll h,a[32800],i,ans;
+    double b[32800];
+    int n;
+    while((scanf("%d",&n)) && n!=0)
+    {
+        h=(1<<(n))-1;
+        for(i=1;i<=h;i++)
+        {
+            scanf("%lld",&a[i]);
+            b[i]=a[i];
+        }
+        if(n==1)
+        {
+            printf("%lld
+",a[1]);
+            continue;
+ 
+        }
+ 
+ 
+        ans=h/2;
+        for(i=ans;i>=1;i--)
+        {
+ 
+                if(b[2*i]>b[2*i+1])
+                {
+                    a[i] *=a[2*i];
+                    b[i] *=b[2*i];
+ 
+                }
+                else
+                {
+                    a[i] *=a[2*i+1];
+                    b[i] *=b[2*i+1];
+                }
+                a[i] %=1000000007;
+        }
+ 
+        printf("%lld
+",a[1]);
+    }
+ 
+    return 0;
+} 

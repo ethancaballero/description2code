@@ -1,0 +1,33 @@
+def toint(number_list):
+    for i, digit in enumerate(number_list):
+        if ord(digit) <= Z and ord(digit) >= A:
+            number_list[i] = '9'
+    return int(''.join(number_list))
+
+S = raw_input()
+current_max = 0
+
+A = ord('A')
+Z = ord('Z')
+for start in xrange(len(S)):
+    number = []
+    num_chars = 0
+    for i in xrange(start, len(S)):
+        c = S[i]
+        if c == '0' and i == start:
+            break
+
+        if ord(c) <= Z and ord(c) >= A:
+            num_chars += 1
+
+        if num_chars > 1:
+            break
+
+        number.append(c)
+
+    if number:
+        n = toint(number)
+        if n > current_max:
+            current_max = n
+
+print current_max

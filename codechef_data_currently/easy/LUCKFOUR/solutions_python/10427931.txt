@@ -1,0 +1,8 @@
+t=input()
+for i in range(t):
+	a=raw_input()
+	co = 0
+	for j in range(len(a)):
+		if(a[j]=='4'):
+			co = co+1
+	print co

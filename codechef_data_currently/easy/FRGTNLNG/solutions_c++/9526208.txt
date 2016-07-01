@@ -1,0 +1,34 @@
+#include <iostream>
+#include <set>
+#include <vector>
+using namespace std;
+
+int main() {
+	vector<string> fl;
+	set<string> ph;
+	vector<string>::iterator itr;
+	int t,n,k,tt;
+	string str;
+	cin>>t;
+	while(t--){
+		fl.erase(fl.begin(),fl.end());
+		ph.erase(ph.begin(),ph.end());
+		cin>>n>>k;
+		while(n--){
+			cin>>str;
+			fl.push_back(str);
+		}
+		while(k--){
+			cin>>tt;
+			while(tt--){
+				cin>>str;
+				ph.insert(str);
+			}
+		}
+	for(itr = fl.begin();itr!=fl.end();itr++)
+		if(ph.find(*itr)!=ph.end()) cout<<"YES ";
+		else cout<<"NO ";
+	cout<<endl;
+	}
+	return 0;
+}

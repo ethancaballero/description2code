@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+int  main() 
+{
+	int n,nn;
+	long long min=2000000002,max=-2000000002;
+	long unsigned int k;
+		cin>>n>>k;
+		nn=n;
+		long long int a[n] ;
+		if (k==0)
+		{while (nn--) cin>>a[nn] ;
+		nn=n;
+		while (nn--) cout<<a[nn]<<" ";} 
+		else if (k%2==1)
+		{
+			while (nn--) 
+		{
+			cin>>a[nn] ;
+			if (a[nn]>max) max=a[nn] ;
+		}
+		nn=n;
+		while (nn--) cout<<max-a[nn]<<" ";
+		} 
+		else 
+		{
+			while (nn--) 
+		{
+			cin>>a[nn] ;
+			if (a[nn] <min) min=a[nn] ;
+		}
+		nn=n;
+		while (nn--) cout<<a[nn]-min<<" ";
+		}
+		cout <<"
+";
+}

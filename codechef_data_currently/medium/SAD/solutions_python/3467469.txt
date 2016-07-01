@@ -1,0 +1,24 @@
+rows, cols = map(int, raw_input().split())
+
+costs = []
+for _ in xrange(rows):
+    costs.append(map(int, raw_input().split()))
+
+rowMin = []
+for r in xrange(rows):
+    rowMin.append(min(costs[r]))
+
+colMax = []
+for c in xrange(cols):
+    colMax.append(costs[0][c])
+    for r in xrange(1, rows):
+        if costs[r][c] > colMax[c]:
+            colMax[c] = costs[r][c]
+
+for r in xrange(rows):
+    for c in xrange(cols):
+        v = costs[r][c]
+        if v == rowMin[r] and v == colMax[c]:
+            print v
+            exit()
+print 'GUESS'

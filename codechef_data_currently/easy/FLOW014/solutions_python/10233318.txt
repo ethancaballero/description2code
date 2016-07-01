@@ -1,0 +1,29 @@
+t = input()
+#print t
+
+while t > 0:
+
+    numbers = map(str, raw_input().split())
+    #print numbers
+
+    h = int(numbers[0])
+    #print h
+    cc = float(numbers[1])
+    #print cc
+    ts = int(numbers[2])
+    #print ts
+
+    if (h > 50) and (cc < 0.7) and (ts > 5600):
+        print 10
+    elif (h > 50) and (cc < 0.7):
+        print 9
+    elif (cc < 0.7) and (ts > 5600):
+        print 8
+    elif (h > 50) and (ts > 5600):
+        print 7
+    elif (h > 50) or (cc < 0.7) or (ts > 5600):
+        print 6
+    else:
+        print 5
+        
+    t -= 1

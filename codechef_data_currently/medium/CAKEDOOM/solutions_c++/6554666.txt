@@ -1,0 +1,89 @@
+//Md. Ahsan Kabir Shohagh
+#include<bits/stdc++.h>
+using namespace std;
+#define sz 100000
+#define pb(a) push_back(a)
+#define ll long long
+#define ull unsigned long long
+#define fread freopen("input.txt","r",stdin)
+#define fwrite freopen("output.txt","w",stdout)
+#define inf (1<<29)
+#define mem(abc,z) memset(abc,z,sizeof(abc))
+#define PI acos(-1)
+int n,k;
+string s;
+//use path dp
+int dp[102][10][10];
+
+int rec(int pos,int prev,int first){
+   if(pos==n) return 1;
+   int &ret=dp[pos][prev][first];
+   if(ret!=-1) return ret;
+   ret=0;
+   if(s[pos]=='?'){
+      for(int i=0;i<k;i++){
+         if(i!=prev && !(pos==n-1 && first==i)){ //i bosano jabe kina
+            ret|=rec(pos+1,i,(first==k)?i:first);
+         }
+      }
+   }
+   else {
+      if(s[pos]-'0'!=prev && !(pos==n-1 && first==s[pos]-'0')) ret|=rec(pos+1,s[pos]-'0',(first==k)?s[pos]-'0':first);
+   }
+   return ret;
+}
+string res;
+void pathDp(int pos,int prev,int first){
+   if(pos==n) return;
+   if(s[pos]=='?'){
+     for(int i=0;i<k;i++){
+         if(i!=prev && !(pos==n-1 && first==i)){ //i bosano jabe kina
+            if(rec(pos+1,i,(first==k)?i:first)){
+                res+=(char)(i+'0');
+                pathDp(pos+1,i,(first==k)?i:first);
+                return;
+            }
+         }
+      }
+   }
+   else {
+     res+=s[pos];
+     pathDp(pos+1,s[pos]-'0',(first==k)?s[pos]-'0':first);
+   }
+   return;
+}
+int main(){
+   int t;
+   scanf("%d",&t);
+   while(t--){
+      cin>>k>>s;
+      n=s.size();
+      if(n==1){
+        if(s[0]=='?') s[0]='0';
+        cout<<s<<endl;
+        continue;
+      }
+      if(k==1){
+        if(n>1) puts("NO");
+        else cout<<s<<endl;
+        continue;
+      }
+      if(k==2 && n%2==1 && n>1){
+        puts("NO");
+        continue;
+      }
+      mem(dp,-1);
+      res.clear();
+      if(rec(0,k,k)){
+         pathDp(0,k,k);
+         cout<<res<<endl;
+      }
+      else puts("NO");
+   }
+   return 0;
+}
+/*
+1
+2
+??1?
+*/

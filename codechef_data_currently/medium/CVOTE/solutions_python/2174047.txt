@@ -1,0 +1,34 @@
+
+import sys
+import operator
+N , M = map(int,sys.stdin.readline().split())
+
+dict = {}
+vote = {}
+frcnt = {}
+for i in range(N) :
+	name , cntry = map(str,sys.stdin.readline().split())
+	#print name
+	dict[name] = cntry
+	vote[name] = 0
+	frcnt[cntry] = 0
+for i in range(M) :
+
+	name = raw_input()
+	vote[name]+=1
+	frcnt[dict[name]]+=1
+
+ans = max(vote.iteritems(), key = operator.itemgetter(1))[0]
+q = vote[ans]
+ansc = max(frcnt.iteritems() , key = operator.itemgetter(1))[0]
+w = frcnt[ansc]
+
+for t in vote :
+	if vote[t] == q and t < ans :
+		ans = t
+for aa in frcnt :
+	if frcnt[aa] == w and aa < ansc :
+		ansc = aa
+
+print ansc
+print ans

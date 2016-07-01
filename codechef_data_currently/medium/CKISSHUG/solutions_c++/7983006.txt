@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+inline long long powr(int,int);
+long long mod =  1000000007;
+
+main(){
+	short T;
+	cin >> T;
+	while(T--){
+		long long in,x,y,z;
+		cin >> in;
+		
+		x= powr (2, (int)ceil((in+1)/2.0 )) % mod ; 
+		y= powr (2, (int)floor((in+1)/2.0)) % mod; 
+		z= (x+y-2) % mod;
+		
+		cout<< z <<"
+";
+	}
+}
+
+inline long long powr(int x,int n){
+	long long temp;
+	if(n==0)
+		return 1LL;
+	else if (n == 1)
+		return (long long)x;
+	temp = powr(x,n/2);
+	if(n%2==0)
+		return ((temp%mod)*(temp%mod))%mod;
+	else
+		return ((temp%mod)*(temp%mod)*x%mod)%mod;
+}

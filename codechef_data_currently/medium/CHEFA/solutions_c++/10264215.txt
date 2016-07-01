@@ -1,0 +1,21 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{  unsigned long long t,num,i,sum;
+cin>>t;
+while(t--)
+{
+    cin>>num;
+    sum=0;
+   unsigned long long array[num];
+    for(i=0;i<num;++i)
+        cin>>array[i];
+    sort(array,array+num,greater<int>());
+    for(i=0;i<num;i+=2)
+        sum+=array[i];
+    cout<<sum<<"
+";
+}
+    return 0;
+}

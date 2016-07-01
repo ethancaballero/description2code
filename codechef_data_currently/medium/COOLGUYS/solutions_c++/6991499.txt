@@ -1,0 +1,30 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+#define mod 1000000007LL
+
+int main()
+{
+    ll t, n, ans, k, i, p, q, r;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        ans = 0;
+        k = sqrt(n);
+        for (i = 1; i <= k; i++)
+            ans += (n/i);
+        for (i = 1; i < k; i++) {
+            ans += i*(n/i - n/(i+1));
+        }
+        ans += i*(n/i - k);
+        p = ans;
+        q = n*n;
+        r = __gcd(p,q);
+        cout << p/r << "/" << q/r << endl;
+    }
+    return 0;
+}

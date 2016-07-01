@@ -1,0 +1,48 @@
+#define DEBUG 0
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <algorithm>
+using namespace std;
+
+double dist(double x1, double y1, double x2, double y2) {
+  return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+}
+
+int main(void) {
+  int tc, i, j, r, R, n, p[500][2], smallest;
+  double a[501];
+  bool done[501];
+
+  scanf("%d", &tc);
+  while(tc--) {
+    memset(done, false, sizeof(done));
+    scanf("%d%d%d", &r, &R, &n);
+    a[n]=R-r;
+    for(i=0;i<n;i++) {
+      scanf("%d%d", &p[i][0], &p[i][1]);
+      a[i]=dist(p[i][0],p[i][1],0,0)-r;
+    }
+    while(1) {
+      for(i=0;i<=n&&done[i];i++);
+      smallest=i;
+      for(i++;i<=n;i++)
+        if(!done[i]&&a[i]<a[smallest])
+          smallest=i;
+      if(DEBUG)
+        printf("smallest=%d
+", smallest);
+      if(smallest>=n)
+        break;
+      done[smallest]=true;
+      for(i=0;i<n;i++)
+        if(!done[i])
+	  a[i]=min(a[i],max(a[smallest],dist(p[i][0],p[i][1],p[smallest][0],p[smallest][1])));
+      a[n]=min(a[n],max(a[smallest],R-dist(p[smallest][0],p[smallest][1],0,0)));
+    }
+    printf("%.3lf
+", a[n]);
+  }
+  return 0;
+}

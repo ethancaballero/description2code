@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		int n,k;
+		cin>>n>>k;
+		int operation = 0;
+		for(int i = 0;i<n;i++){
+			int  a;
+			cin>>a;
+			int rem  = a%k;
+			int other = k-rem;
+			if(a<k){
+				rem=k-a;
+				other = k-a;
+			} 
+			if(other<=rem){
+			operation+=other;
+	//		cout<<"other "<<other<<endl;	
+			}else
+			{
+				//cout<<"rem"<<rem<<endl;
+				operation+=rem;
+			}
+	//cout<<"operation  "<<operation<<endl;
+		}
+		cout<<operation<<endl;
+	}
+}

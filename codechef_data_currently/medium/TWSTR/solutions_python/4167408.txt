@@ -1,0 +1,35 @@
+def main():
+    n = input()
+    rec = []
+    pri = []
+    while n:
+        n-=1
+        i=0
+        r = raw_input().split()
+        t = int(r[-1])
+        r = r[0]
+        if pri:
+            for p in pri:
+                if p<t:
+                    pri.insert(i,t)
+                    rec.insert(i,r)
+                    break
+                else:
+                    i+=1
+        else:
+            pri.insert(i,t)
+            rec.insert(i,r)
+        if i == len(pri):
+            pri.append(t)
+            rec.append(r)
+    q = input()
+    while q:
+        q-=1
+        st = raw_input()
+        ans = 'NO'
+        for r in rec:
+            if st == r[:len(st)]:
+                ans = r
+                break
+        print ans
+main()

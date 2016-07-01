@@ -1,0 +1,117 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <numeric>
+#include <map>
+#include <cassert>
+#include <queue>
+#include <set>
+using namespace std;
+ 
+//BEGIN_CODETEMPLATE
+//END_CODETEMPLATE
+ 
+bool prime[20];
+ 
+void genPrime()
+{
+	memset(prime, true, sizeof(prime));
+	prime[0] = prime[1] = false;
+	for(int i=2 ; i<20 ; i++)
+		if(prime[i])
+			for(int j=i*i ; j<20 ; j+=i)
+				prime[j] = false;
+}
+ 
+int hash(int arr[3][3])
+{
+	int r = 0;
+	for(int i=0 ; i<3 ; i++)
+		for(int j=0 ; j<3 ; j++)
+			r = 10 * r + arr[i][j];
+	return r;
+}
+ 
+void unhash(int s, int arr[3][3])
+{
+	for(int i=2 ; i>=0 ; i--)
+		for(int j=2 ; j>=0 ; j--)
+		{
+			arr[i][j] = s % 10;
+			s /= 10;
+		}
+}
+ 
+int main()
+{
+	genPrime();
+ 
+	queue<int> Q;
+	queue<int> C;
+	map<int,int> cache;
+ 
+	Q.push(123456789);
+	C.push(0);
+	cache[123456789] = 0;
+ 
+	while(Q.size())
+	{
+		int s = Q.front();
+ 
+		int arr[3][3];
+		unhash(s, arr);
+ 
+		for(int i=0 ; i<3 ; i++)
+			for(int j=0 ; j<3 ; j++)
+				for(int di=-1 ; di<=1 ; di++)
+					for(int dj=-1 ; dj<=1 ; dj++)
+						if((di && !dj) || (!di && dj))
+						{
+							int ni = i + di;
+							int nj = j + dj;
+ 
+							if(ni>=0 && ni<3 && nj>=0 && nj<3)
+							{
+								int sum = arr[i][j] + arr[ni][nj];
+								if(prime[sum])
+								{
+									swap(arr[i][j], arr[ni][nj]);
+									int next = hash(arr);
+									if(!cache.count(next))
+									{
+										Q.push(next);
+										C.push(C.front() + 1);
+										cache[next] = C.front()+1;
+									}
+									swap(arr[i][j], arr[ni][nj]);
+								}
+							}
+						}
+ 
+		Q.pop();
+		C.pop();
+	}
+ 
+	int t;
+	cin >> t;
+ 
+	while(t--)
+	{
+		int arr[3][3];
+		for(int i=0 ; i<3 ; i++)
+			for(int j=0 ; j<3 ; j++)
+				cin >> arr[i][j];
+ 
+		int s = hash(arr);
+ 
+		if(!cache.count(s))
+			cout << -1 << endl;
+		else
+			cout << cache[s] << endl;
+	}
+ 
+	return 0;
+}

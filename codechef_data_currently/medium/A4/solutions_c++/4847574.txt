@@ -1,0 +1,167 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string>
+#include <math.h>
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <deque>
+#include <map>
+#include <list>
+#include <cstdlib>
+using namespace std;
+
+//2009 March Long Contest, MARCHA4 The Rise and Fall of Power codechef.com
+//Disable warning messages C4996.
+#pragma warning(disable:4996)
+
+#define INPUT_FROM 0
+#if INPUT_FROM
+#define fromc from
+#else
+#define fromc cin
+#endif
+
+//long long fr(vector<long long>&, long long);
+
+int main(int argc, char **argv)
+{
+	//ifstream from;
+	const long long nmin=1, nmax=1000000000, kmin=1, kmax=9, ns=5;
+	long long test, cases, n, m, mt, res, rt, i, j, k, t, ax;
+	long long r0, r1, q, x, m0, k0, kt, x0, x1, x2, x3, x4;
+	//char ch;
+	//string sres[2]={"YES", "NO"};
+	//string s, st, sr;
+	long double dt, xt, dtt, xt0, xt1;
+
+
+	//if(INPUT_FROM) from.open("test.txt");
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+
+	static long long vn[9]={1,4,27,256,3125,46656,823543,16777216,387420489};
+	//static int vv[nmax][nmax];
+	//vector<vector<long long> > va(nmax), vb(nmax);
+	vector<long long> v0(ns), v1(ns);
+	//deque<long long> dq, dq0, dq1;
+	//map<long long, long long> mi;
+	//map<long long, long long>::iterator it;
+	//typedef map<string, long long>::const_iterator CI;
+
+
+	scanf("%lld
+", &cases);
+	//fromc>>cases;
+	for(test=1;test<=cases;test++){
+		scanf("%lld %lld
+", &n, &k);
+
+		q=1;t=0;
+		while(t<k){
+			q*=10; t++;
+		}
+
+		if(n<=9){
+			rt=vn[n-1];
+			m=1+(long long)log10((long double)rt);//number of digits
+			r0=rt; t=0;
+			while(t<m-k){
+				r0/=10;	t++;
+			}
+			r1=rt%q;
+		}else{
+			r1=1;x=n%q;rt=n;
+			while(rt>0){
+				if(rt & 1) r1=(r1*x)%q;
+				x=(x*x)%q;
+				rt=(rt>>1);
+			}
+
+			kt=nmax;k0=kt/10;
+			v0[0]=v0[1]=v0[4]=0;
+			dt=(long double)n;
+			rt=n;t=1;
+			while(rt>=10){
+				dt/=10.0; rt/=10; t*=10;
+			}
+			v0[2]=rt;
+			while(rt>0){
+				rt/=10; t*=10;
+			}
+			t/=10;
+			v0[3]=n-v0[2]*t;
+			while(t<kt){
+				v0[3]*=10; t*=10;
+			}
+
+			//see Knut 1.2.2 - exercise 24
+			rt=n; xt0=0.0; dtt=(long double) n;
+			while(rt>0){
+				rt>>=1; dtt/=2.0;
+				x0=v0[4]*v0[4];
+				x1=2*v0[3]*v0[4];
+				x2=2*v0[2]*v0[4]+v0[3]*v0[3];
+				x3=2*v0[2]*v0[3];
+				x4=v0[2]*v0[2];
+				t=x0; v1[4]=t%kt;
+				t/=kt; t+=x1; v1[3]=t%kt;
+				t/=kt; t+=x2; v1[2]=t%kt;
+				t/=kt; t+=x3; v1[1]=t%kt;
+				t/=kt; v1[0]=t+x4;
+				if(v1[0]>=10){
+					for(i=ns-1;i>0;i--){//till v0.size()-1
+						v1[i]/=10; v1[i]+=(v1[i-1]%10)*(k0);
+					}
+					v1[0]/=10; xt0+=(dtt-rt);
+				}
+				v0[0]=v0[1]=0;
+				for(i=2;i<ns;i++) v0[i]=v1[i-2];
+			}
+
+			//while(dtt>0.0000000000000001L){
+			while(dtt>0.000000000001L){
+				dtt/=2.0;
+				x0=v0[4]*v0[4];
+				x1=2*v0[3]*v0[4];
+				x2=2*v0[2]*v0[4]+v0[3]*v0[3];
+				x3=2*v0[2]*v0[3];
+				x4=v0[2]*v0[2];
+				t=x0; v1[4]=t%kt;
+				t/=kt; t+=x1; v1[3]=t%kt;
+				t/=kt; t+=x2; v1[2]=t%kt;
+				t/=kt; t+=x3; v1[1]=t%kt;
+				t/=kt; v1[0]=t+x4;
+				if(v1[0]>=10){
+					for(i=ns-1;i>0;i--){
+						v1[i]/=10; v1[i]+=(v1[i-1]%10)*(k0);
+					}
+					v1[0]/=10; xt0+=dtt;
+				}
+				v0[0]=v0[1]=0;
+				for(i=2;i<ns;i++) v0[i]=v1[i-2];
+			}
+
+			xt0-=(long long)xt0;
+			dtt=pow(10,xt0);
+			for(i=0;i<k-1;i++) dtt*=10.0;
+			r0=(long long) dtt;
+		}
+
+		q/=10;
+		if(r1<q){
+			printf("%lld ", r0);
+			while(r1<q){
+				printf("0");
+				q/=10;
+			}
+			if(r1!=0) printf("%lld", r1);
+			printf("
+");
+		}else printf("%lld %lld
+", r0, r1);
+	}
+
+	return 0;
+}
+

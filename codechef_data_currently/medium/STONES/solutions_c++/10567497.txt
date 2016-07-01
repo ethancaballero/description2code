@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+
+int main() {
+ int t, cnt;
+ char j[105], s[105];
+ scanf("%d", &t);
+ while(t--) {
+  cnt=0;
+  scanf("%s
+%s", &j, &s);
+  for(int k=0; k<strlen(s); k++) for(int i=0; i<strlen(j); i++)   if(s[k]==j[i]) { cnt++; break; }
+  printf("%d
+", cnt);
+ }
+ return 0;
+}

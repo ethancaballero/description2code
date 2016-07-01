@@ -1,0 +1,8 @@
+x = input()
+a = 0 
+
+while (a < x):
+   num = int(input())
+   result = num / 2 +1
+   print result
+   a = a + 1

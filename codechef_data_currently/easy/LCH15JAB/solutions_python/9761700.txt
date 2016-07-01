@@ -1,0 +1,24 @@
+t = int(raw_input())
+
+while t:
+
+	s = raw_input()
+
+	for i in s:
+		a = s
+		flag = False
+		a = a.replace(i,'')
+		count = s.count(i)
+
+		if len(a) == count:
+			flag = True
+			break
+			
+
+
+	if flag:
+		print 'YES'
+	else:
+		print 'NO'
+
+	t -= 1

@@ -1,0 +1,121 @@
+#include <iostream>
+#include <map>
+#include <iterator>
+#include <string>
+
+std::string checkHand(std::map<char, int>& m, std::map<char, int>& f)
+{
+        std::string res = "";
+        if (f.size() == 1) {
+                res = "flush";
+        }
+        std::map<char, int>::const_iterator i = m.begin();
+        if (m.size() == 2) {
+                if (i->second == 1 || i->second == 4) {
+                        return "four of a kind";
+                }
+                if (i->second == 2 || i->second == 3) {
+                        return "full house";
+                }
+        }
+        if (m.size() == 3) {
+                if (i->second == 3) {
+                        return "three of a kind";
+                }
+                if (i->second == 2) {
+                        return "two pairs";
+                }
+
+                std::map<char, int>::const_iterator j = i;
+                ++j;
+                if (j->second == 2) {
+                        return "two pairs";
+                }
+                return "three of a kind";
+        }       
+        if (m.size() == 4) {
+                return "pair";
+        }
+        int a[13] = {0};
+        for (i; i != m.end(); ++i) {
+                if (std::isdigit(i->first)) {
+                        int x = int(i->first) - int('0');
+                        a[x - 2] = 1;        
+                } else {
+                        char c = i->first;
+                        switch(c) {
+                                case 'A': a[12] = 1;
+                                          break;
+                                case 'K': a[11] = 1;
+                                          break;
+                                case 'Q': a[10] = 1;
+                                          break;
+                                case 'J': a[9] = 1;
+                                          break;
+                                case 'T': a[8] = 1;
+                                          break;
+                                default: 
+                                        std::cout << "wrong!!!!" << std::endl;
+                                        break;
+                        }
+                }
+        }
+      /*  for (int v = 0; v < 13; ++v) {
+                std::cout << a[v] << " ";
+        }
+        std::cout << std::endl;*/
+        int k = 0;
+        while (a[k] == 0 && k < 13) {
+                ++k;
+        }
+        int p = k;
+        while (a[p] != 0 && p < 13) {
+                ++p;        
+        }
+    //   std::cout << k << "--" << p << std::endl;
+        if (k == p - 5) {
+                if (res == "flush") {
+                        if (p == 13) {
+                                return "royal flush";
+                        }
+                        return "straight flush";
+                }
+                return "straight";
+        }
+        if (k == 0 && p == 4) {
+                if (a[12] == 1) {
+                        if (res == "flush") {
+                                return "straight flush";
+                        }
+                        return "straight";
+                }
+        }
+        if (res == "flush") {
+                return "flush";
+        }
+        return "high card";
+}
+
+int main()
+{
+        int t;
+        std::cin >> t;
+        std::string a;
+        std::map<char, int> f;
+        std::map<char, int> m;
+        std::getline(std::cin, a);
+        for (int i = 0; i < t; ++i) {
+                m.clear();
+                f.clear();
+                std::getline(std::cin, a);
+                        for (int q = 0; q < a.size(); q += 3) {
+                                ++m[a[q]];
+                        }
+                        for (int q = 1; q < a.size(); q += 3) {
+                                ++f[a[q]];
+                        }
+                std::cout << checkHand(m, f) << std::endl;
+                //std::cout << m.size() << f.size() << std::endl;
+        }
+        return 0;
+}

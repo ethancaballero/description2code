@@ -1,0 +1,30 @@
+import sys
+t=int(raw_input())
+for i in range(0,t):
+    list = {}
+    z = int(input())
+    for j in range(0,z):
+        temp=[int(x) for x in sys.stdin.readline().rstrip().split()]
+        list[j]=temp
+    #data collected now lets process the data and give output
+    #print (list)#here list is a dictionary
+    item=1
+    step=0
+    cordinatestart=[]
+    for j,val in list.items():
+        if item in val:
+            cordinatestart=[int(j),val.index(item)]
+            break
+    #print (cordinatestart)
+    #now that we got cordinate where to start need to move forwaRD
+    item=2
+    while(item<=z*z):
+        for j, val in list.items():
+            if item in val:
+                cord=[int(j),val.index(item)]
+                step+=abs(cordinatestart[0]-cord[0])+abs(cordinatestart[1]-cord[1])
+                cordinatestart[0]=cord[0]
+                cordinatestart[1]=cord[1]
+                item+=1
+                break
+    print step

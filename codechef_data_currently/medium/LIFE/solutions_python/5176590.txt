@@ -1,0 +1,92 @@
+def com(x):
+	if(x==0):
+		x=1
+	else:
+		x=0
+	return x
+
+def check(x,y,i,n):	#sets value of i+1 th index
+	if(x[i]!=y[i]):
+		y[(i+1)%n]=com(y[(i-1+n)%n])
+	else:
+		y[(i+1)%n]=y[(i-1+n)%n]
+
+class life:
+	
+	def __init__(self,t):
+		self.testCases=t
+		self.sequence=''
+		self.arr=[]
+		self.sol=0
+
+	def Input(self):
+		while(self.testCases):
+			self.sol=0
+			res=[]
+			sequence=raw_input()
+			self.arr='e'.join(sequence).split('e')
+			for j in self.arr:
+				self.arr[self.arr.index(j)]=int(j)
+			n=len(self.arr) 
+			#Now arr contains required function
+			#n -> array length
+			#4 cases 
+			tem=[0]*n
+			tem[n-1]=0
+			for j in range(0,n):
+				check(self.arr,tem,j,n)
+			
+			if(tem[0]==0 and tem[n-1]==0):
+				
+				res.append(tem[:])
+				self.sol+=1
+
+			#case2 
+			tem[0]=0 
+			tem[n-1]=1
+			
+			for j in range(0,n):
+				check(self.arr,tem,j,n)
+			
+			if(tem[0]==0 and tem[n-1]==1):
+				
+				res.append(tem[:])
+				self.sol+=1
+			
+			#case3
+			tem=[1]*n
+			tem[n-1]=0
+			for j in range(0,n):
+				check(self.arr,tem,j,n)
+			
+			if(tem[n-1]==0 and tem[0]==1):
+				
+				res.append(tem[:])
+				self.sol+=1
+
+			#case4
+			tem[0]=1
+			tem[n-1]=1
+
+			for j in range(0,n):
+				check(self.arr,tem,j,n)
+			
+			if(tem[n-1]==1 and tem[0]==1):
+				
+				res.append(tem[:])
+				self.sol+=1
+
+			if(self.sol==0):
+				print "No solution"
+			elif(self.sol>1):
+				print "Multiple solutions"
+			else:
+				for j in res[0]:
+					res[0][res[0].index(j)]=chr(ord('0')+j)
+				print ''.join(res[0])
+
+			self.testCases=self.testCases-1
+
+t=input()
+a=life(t)
+a.Input()

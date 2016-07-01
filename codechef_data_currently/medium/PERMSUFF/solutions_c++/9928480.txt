@@ -1,0 +1,94 @@
+using namespace std;
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#define ll long long
+#define input freopen("input.in","r",stdin);
+#define output freopen("output.out","w",stdout);
+#define e printf("
+");
+#define all(it,v) for(it=(v).begin();it!=(v).end();it++)
+#define pii pair<ll,ll>
+typedef vector<vector<ll> > mat;
+const ll mx=100000;
+const ll mod=1000000007;
+const ll inf=0x3f3f3f3f;
+int ar[mx+1];
+vector<pair<int,int> > v,p;
+void solve()
+{
+  
+  int i,j,n,x,y,k,l,r;
+  cin>>n>>k;
+  for(i=0;i<n;i++)
+  	cin>>ar[i];
+  while(k--)
+  {
+  	cin>>x>>y;
+  	x--;y--;
+  	v.push_back(make_pair(x,y));
+  }
+  sort(v.begin(),v.end());
+  int N=v.size();
+ 
+  p.push_back(v[0]);
+  
+  for(i=1;i<N;i++)
+  {
+  	int k=p.size();
+    if(p[k-1].second>=v[i].first)
+    	p[k-1].second=max(p[k-1].second,v[i].second);
+    else
+    	p.push_back(v[i]);
+  }
+  for(i=0;i<p.size();i++)
+  	{
+  		l=p[i].first;
+  		r=p[i].second;
+  		l=min(l,r);
+  		r=max(l,r);
+  		sort(ar+l,ar+r+1);
+  	}	
+  for(i=0;i<n;i++)
+  { 
+    if(ar[i]!=(i+1))
+    {
+    	cout<<"Impossible
+";
+    	return ;
+    }
+  }	
+  cout<<"Possible
+";
+  return ;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		v.clear();
+		p.clear();
+		solve();
+	}
+	return 0;
+}

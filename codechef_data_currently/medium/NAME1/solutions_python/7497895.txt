@@ -1,0 +1,16 @@
+for _ in xrange(int(raw_input())):
+	a,b=raw_input().split()
+	n=int(raw_input())
+	count=0
+	y=""
+	for i in xrange(n):
+		y=y+(raw_input())
+	x=(a+b)
+	for i in xrange(97,123):
+		if y.count(chr(i))>x.count(chr(i)):
+			count=1
+			break
+	if count:
+		print "NO"
+	else:
+		print "YES"

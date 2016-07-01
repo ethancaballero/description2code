@@ -1,0 +1,2 @@
+for i in range(int(raw_input())):
+    print int(''.join(reversed(str(int(raw_input())))))

@@ -1,0 +1,45 @@
+#include<stdio.h>
+int main()
+{
+    char str[100];
+    int i,t,m=0,n=0;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%s",&str);
+        for(i=0;i<strlen(str);i++)
+        {
+            if(str[i]=='a')
+            {
+                m++;
+            }
+            else if(str[i]=='b')
+            {
+                n++;
+            }
+
+        }
+        if(m==0||n==0)
+        {
+            printf("0
+");
+        }
+        else if(m>n)
+        {
+            printf("%d
+",n);
+        }
+        else if(m<n)
+        {
+            printf("%d
+",m);
+        }
+        else if(m==n)
+        {
+            printf("%d
+",m);
+        }
+        m=0;n=0;
+    }
+    return 0;
+}

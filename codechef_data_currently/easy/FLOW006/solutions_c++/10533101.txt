@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,i,o=0;
+    long int n;
+    cin>>t;
+    for(i=0;i<t;i++)
+    {
+        o=0;
+        cin>>n;
+        while(n)
+        {
+            o+=n%10;
+            n/=10;
+        }
+        cout<<o<<"
+";
+    }
+}
+

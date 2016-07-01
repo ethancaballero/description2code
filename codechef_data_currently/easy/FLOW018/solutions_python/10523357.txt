@@ -1,0 +1,13 @@
+def fact(n):
+    if n==1 or n==0:
+        return 1
+    else:
+        return n*fact(n-1)
+t=input()
+ans=[]
+for x in range(t):
+    num=input()
+    ans.append(fact(num))
+for x in range(t):
+    print ans[x]
+        

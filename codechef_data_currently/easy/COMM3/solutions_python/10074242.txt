@@ -1,0 +1,31 @@
+
+def distance(x1,y1,x2,y2):
+    dist = ((x1-x2)**2 + (y1-y2)**2)**0.5
+    return dist
+
+
+t = input()
+for i in range(t):
+    r = input()
+    chef_x,chef_y = map(int,raw_input().split(' '))
+    head_server_x,head_server_y = map(int,raw_input().split(' '))
+    sous_chef_x,sous_chef_y = map(int,raw_input().split(' '))
+    
+    chef_head_server_distance = distance(chef_x,chef_y,head_server_x,head_server_y)
+    chef_sous_chef_distance = distance(chef_x,chef_y,sous_chef_x,sous_chef_y)
+    sous_chef_head_server_distance = distance(sous_chef_x, sous_chef_y, head_server_x, head_server_y)
+    
+    communicate = 0
+    
+    if(chef_head_server_distance <= r):
+        communicate+=1
+    if(chef_sous_chef_distance <= r):
+        communicate+=1
+    if(sous_chef_head_server_distance <= r):
+        communicate+=1
+        
+    if(communicate >= 2):
+        print "yes"
+    else:
+        print "no"
+    

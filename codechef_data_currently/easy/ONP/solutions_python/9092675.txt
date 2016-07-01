@@ -1,0 +1,24 @@
+test = int(raw_input())
+while(test):
+	exp = raw_input()
+	#end = len(exp)
+	#print end
+	stack = []
+	i = 0
+	str = ''
+	while(i < len(exp)):
+		#print exp[i]
+		if(exp[i].isalpha()):
+			str = str+exp[i]
+		#	print "from is alpha"
+		#	print str
+		elif(exp[i]==')'):
+			while(stack[len(stack)-1] != '('):
+					str	= str+stack.pop()
+					#print str
+			stack.pop()
+		else:	
+			stack.append(exp[i])
+		i+=1
+	print str
+	test-=1

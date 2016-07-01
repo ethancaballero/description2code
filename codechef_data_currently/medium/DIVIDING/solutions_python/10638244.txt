@@ -1,0 +1,13 @@
+N=int(raw_input())
+
+s1=N*(N+1)/2
+
+s2=0
+
+l=map(int,raw_input().split())
+for i in l:
+    s2=s2+int(i)
+if s1==s2:
+    print "YES"
+else:
+    print "NO"

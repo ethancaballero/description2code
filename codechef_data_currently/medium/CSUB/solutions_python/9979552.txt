@@ -1,0 +1,4 @@
+for _ in range(input()):
+        input()
+        n = raw_input().strip().count('1')
+        print n * (n+1)/2

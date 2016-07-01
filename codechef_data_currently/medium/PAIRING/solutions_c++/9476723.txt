@@ -1,0 +1,62 @@
+#include <iostream>
+
+
+using namespace std;
+
+int main()
+{
+
+	int T;
+	cin>>T;
+	while(T>0)
+	{
+		int n,m;
+		cin>>n>>m;
+		int level[m];//// >=10000
+		int pair[n]; //// >=1000
+		int current_level=-1;
+		int input[2][m];
+		
+		for(int i=0;i<m;i++)
+		{
+			level[i]=-1;
+		}
+		
+		for(int i=0;i<n;i++)
+		{
+			pair[i]=-1;
+		}
+		
+		for(int i=0;i<m;i++)
+		{
+ 		int a,b;
+ 		cin>>a>>b;
+ 		input[0][i]=a;
+ 		input[1][i]=b;
+		}
+		
+		for(int j=m-1;j>=0;j--)
+		{
+			int k,l;
+			k=input[0][j];
+			l=input[1][j];
+			if((pair[k]==-1)&&(pair[l]==-1))
+			{
+				pair[k]=l;
+				pair[l]=k;
+				current_level++;
+				level[current_level]=j;
+				
+			}
+		}
+		
+		for(int i=current_level;i>=0;i--)
+		{
+			cout<<level[i]<<" ";
+		}
+		cout<<endl;
+		
+	T--;
+	}
+	return 0;
+}

@@ -1,0 +1,53 @@
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+typedef unsigned long long ULL;
+
+const int maxn = 1000505;
+const ULL p = 1000003;
+
+ULL fact[maxn];
+
+inline int iread() {
+	int f = 1, x = 0; char ch = getchar();
+	for(; ch < '0' || ch > '9'; ch = getchar()) f = ch == '-' ? -1 : 1;
+	for(; ch >= '0' && ch <= '9'; ch = getchar()) x = x * 10 + ch - '0';
+	return f * x;
+}
+
+inline ULL qpow(ULL x, ULL n) {
+	ULL res = 1;
+	for(ULL t = x; n; n >>= 1, t = t * t % p) if(n & 1) res = res * t % p;
+	return res;
+}
+
+inline ULL inv(ULL x) {
+	return qpow(x, p - 2);
+}
+
+inline int bf(ULL n, ULL m) {
+	return fact[n] * inv(fact[m]) % p * inv(fact[n - m]) % p;
+}
+
+inline int C(ULL n, ULL m) {
+	ULL res = 1;
+	for(ULL nn = n / p, mm = m / p; n && m && res; n = nn, m = mm, nn /= p, mm /= p)
+		(res *= bf(n - nn, m - mm)) %= p;
+	return res;
+}
+
+int main() {
+	fact[0] = 1;
+	for(int i = 1; i <= 1000005; i++) (fact[i] = fact[i - 1] * i) %= p;
+
+	ULL n, L, R;
+	for(int T = iread(); T; T--) {
+		n = iread(); L = iread(); R = iread();
+		printf("%llu
+", (C(n + R - L + 1, n) - 1 + p) % p);
+	}
+	return 0;
+}

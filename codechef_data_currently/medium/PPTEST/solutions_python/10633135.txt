@@ -1,0 +1,38 @@
+def check(w,n,arr,stock):
+	#print "func"
+	#print "w,n",w,n
+	if(w<0):
+		#print "return----"
+		return -arr[n][1]
+	if(stock[w][n]>=0 or w==0 or n==0):
+		return stock[w][n]
+	#print "return"
+	#print "w,n,c1",w-arr[n-1][0],n-1,c1
+	#print "w,n,c2",w,n-1,c2
+	#if(stock[w][n]!=-1):
+		#return stock[w][n]
+	#else:
+		#stock[w][n]= 
+	stock[w][n]= max(check(w-arr[n-1][0],n-1,arr,stock)+arr[n-1][1],check(w,n-1,arr,stock))
+	return stock[w][n]
+	#print "max1",max1
+
+t=input()
+while(t):
+	t-=1
+	n,w=map(int,raw_input().split())
+	arr=[];stock=[[-1 for i in range(n+1)]for j in range(w+1)]
+	i=0
+	while(i<n):
+		stock[0][i]=0
+		a=map(int,raw_input().split())
+		arr.append([a[2],a[0]*a[1]])
+		i+=1
+	i=0
+	while(i<w):
+		stock[i][0]=0
+		i+=1
+	if(n>0):
+		print max(check(w-arr[n-1][0],n-1,arr,stock)+arr[n-1][1],check(w,n-1,arr,stock))
+	else:
+		print 0

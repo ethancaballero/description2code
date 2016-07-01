@@ -1,0 +1,42 @@
+    #include<stdio.h>
+    #include<math.h>
+
+    int main(){
+    int N;
+    scanf("%d",&N);
+    while(N--){
+    int n,m,q,p,r,k;
+    scanf("%d %d %d %d %d %d",&n,&m,&q,&p,&r,&k);
+    int cars[100000];
+    int i,j;
+    for(i=0;i<n;i++)
+    cars[i] = 0;
+    cars[0]=0;
+    int cf=n;
+    int count=0;
+    for(i=0;i<=k;i++){
+    if(i>=r&&i%r==0&& m>0){
+    q++;
+    m--;
+    }
+    if(i>=p){
+    cf += cars[i-p];
+    count+=cars[i-p];
+    }
+    if(cf>q){
+    cars[i]=q;
+    cf=cf-q;
+    q=0;
+    }
+    else{
+    cars[i]=cf;
+    q = q-cf;
+    cf=0;
+    }
+    }
+
+    printf("%d %d %d %d
+",cf,count,m,q);
+    }
+    return 0;
+    }

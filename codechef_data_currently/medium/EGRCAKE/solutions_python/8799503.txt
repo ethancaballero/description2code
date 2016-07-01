@@ -1,0 +1,14 @@
+# cook your code here
+from fractions import gcd
+ 
+t = int(raw_input())
+ 
+while(t):
+    t-=1
+    n, m = map(int,raw_input().split())
+    g = gcd(n, m)
+ 
+    if g == 1:
+        print "Yes"
+    else:
+        print "No " + str(n / g)

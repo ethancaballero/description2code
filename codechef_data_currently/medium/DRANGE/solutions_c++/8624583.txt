@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+
+using namespace std;
+
+int input()
+{
+    int n=0;
+    char c=getchar_unlocked();
+    while(c < '0' || c >'9') {c=getchar_unlocked();}
+    while(c>='0' && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar_unlocked();
+    }
+    return n;
+}
+
+int main(){
+	int T, N, M;
+	int w,x,y,z;
+	int mi, Ma, start;
+	scanf("%d", &T);
+	int D[1000010];
+	while(T--){
+		start = 1;
+		scanf("%d", &N);
+		scanf("%d", &M);
+		memset(D,0,sizeof(D));
+		while(M--){
+			scanf("%d %d %d %d", &w, &x, &y, &z);
+			if(w == 1){
+				if(x == 1){
+					start += z;
+				}
+				D[x-2] += z;
+				D[y-1] -= z;
+			}
+			else{
+				if(x == 1){
+					start -= z;
+				}
+				D[x-2] -= z;
+				D[y-1] += z;
+			}
+		}
+		mi = start;
+		Ma = start;
+		for(int i = 0; i < N-1; i++){
+			start += (D[i]+1);
+			if(start < mi){
+				mi = start;
+			}
+			else if(start > Ma){
+				Ma = start;
+			}
+		}
+		cout << (Ma - mi) << endl;
+	}
+}
+
+
+
+

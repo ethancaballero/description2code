@@ -1,0 +1,83 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll id[100000], cnt, sz[100000] ,mx[100000];
+map<ll,ll> mp;  //use this map to map indexes with data.
+ll s[100000];
+void init(ll N)
+{
+    cnt = N;
+	for(ll i=1; i<=N; i++)
+    {
+        id[i] = i;
+	}
+}
+ll find(ll p)
+{
+    if(id[p]==p)
+        return p;
+    else
+    {
+        id[p]=find(id[p]);
+        return id[p];
+    }
+}
+// Replace sets containing x and y with their union.
+void merge(ll x, ll y)
+{
+    ll i = find(x);
+    ll j = find(y);
+    if (i == j)
+    {
+        cout<<"Invalid query!
+";
+        return;
+    }
+    // make smaller root point to larger one
+        if(s[i]<s[j])
+        {
+            id[i]=j;
+        }
+        else if(s[j]<s[i])
+        {
+            id[j]=i;
+        }
+    cnt--;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ll t,n,q,i,type,x,y;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=1;i<=n;i++)
+        {
+            cin>>s[i];
+            mp[s[i]]=i;
+        }
+        init(n);
+        cin>>q;
+        while(q--)
+        {
+            cin>>type;
+            if(type==0)
+            {
+                cin>>x>>y;
+                merge(x,y);
+            }
+            else
+            {
+                cin>>x;
+                cout<<find(x)<<"
+";
+            }
+        }
+        //destroy();
+        mp.clear();
+    }
+    return 0;
+}

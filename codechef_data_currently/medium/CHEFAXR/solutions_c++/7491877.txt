@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long a[75][75];
+int main()
+{
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		for(int i=1;i<=n;i++)
+		{
+			for(int j=1;j<=n;j++)
+			{
+				cin>>a[i][j];
+				a[i][j]^=a[i-1][j]^a[i-1][j-1]^a[i][j-1];
+			}
+	}
+	long long ans=0;
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=n;j++)
+		{
+			for(int k=1;k<=i;k++)
+			{
+				for(int l=1;l<=j;l++)
+				{
+					ans=max(ans,a[i][j]^a[k-1][j]^a[i][l-1]^a[k-1][l-1]);
+				}
+			}
+		}
+    }	
+	cout<<ans<<endl;
+}
+}

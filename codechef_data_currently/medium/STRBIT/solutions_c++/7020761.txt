@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+#define maxn 100000+3
+using namespace std;
+
+char s[maxn];
+int n, k;
+bool visited[maxn];
+void solve() {
+	int len = strlen(s);
+	memset(visited, false, sizeof(visited));
+	int val = 0;
+	int ans = 0;
+	for(int i=0; i<len; i++) {
+		val ^= visited[i];
+		if( (s[i] == 'G') == val) {
+			val ^= 1;
+			visited[min(n,i+k)] ^= 1;
+		//	cout<<i<<" "<<min(n,i+k)<<"
+";
+			ans++;
+		}
+	}
+	
+	cout<<ans<<"
+";
+}
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--) {
+		cin>>n>>k;
+		cin>>s;
+		solve();
+	}
+	return 0;
+}

@@ -1,0 +1,19 @@
+# your code goes here
+x = input()
+for i in range(x):
+   count = 0
+   y = raw_input()
+   z = raw_input()
+   l1 = len(y)
+   l2 = len(z)
+   if(l1!=l2):
+      print "No
+"
+      break
+   for j in range(l1):
+      if(y[j]!=z[j] and y[j]!='?' and z[j]!='?'):
+         print "No"
+         count = count + 1
+         break
+   if(count==0):
+      print "Yes"

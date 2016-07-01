@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(void)
+{
+	char str[100001],q,w,a;
+	long long int t,i,j,k,l,m,n,p=0;
+	cin>>t;
+	while(t--)
+	{
+		cin>>m;
+		cin>>str;
+		for(i=0;str[i];i++)
+		{
+			if(str[i]==49)
+			p++;
+		}
+		if(p==0)
+		cout<<0<<endl;
+		else
+		{
+			n=(p*(p+1))/2;
+			cout<<n<<endl;
+		}
+		p=0;
+		n=0;
+	}
+}

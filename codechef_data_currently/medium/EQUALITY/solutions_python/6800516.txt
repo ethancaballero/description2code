@@ -1,0 +1,14 @@
+# cook your code here
+t=int(raw_input())
+while(t):
+	t-=1
+	n=int(raw_input())
+	
+	a=map(int,raw_input().strip().split())
+	s=sum(a)/(n-1)
+	
+	for i in a:
+		print s-i,
+	print ""
+
+	

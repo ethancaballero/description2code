@@ -1,0 +1,31 @@
+n = input()
+a = []
+m = raw_input().split()
+total = 0
+for i in range(n):
+    k = int(m[i])
+    if k < 0:
+        a.append(k)
+        total += -k
+X = input()
+if X >= len(a):
+    print total
+else:
+    a.sort()
+    ans = bar = 0; last = len(a)-1
+    while True:
+        j = None
+        for i in xrange(last,-1,-1):
+            if a[i] < bar:
+                j = i; break
+        if j is None:
+            break
+        if j+1 >= X:           
+            ans += X * (bar-a[j])
+            bar -= bar - a[j]  
+        else:
+            for i in xrange(j+1):
+                ans += bar - a[i]
+            break
+        last = j-1
+    print ans

@@ -1,0 +1,15 @@
+import bisect
+def precompute(arr):
+    for i in range(1,61):
+        for j in range(40):
+            arr.append((2**i)*(3**j))
+    return sorted(arr)
+arr = precompute([])
+for testCases in range(input()):
+    a, b = map(int,raw_input().split())
+    correction = 0
+    if a == 1:
+    	correction = 1
+    right = bisect.bisect_right(arr,b)
+    left = bisect.bisect_left(arr,a)
+    print right - left + correction

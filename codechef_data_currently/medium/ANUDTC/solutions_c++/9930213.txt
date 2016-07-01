@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+#include<algorithm>
+
+int main() 
+{
+int T,i,n;
+cin>>T;
+while(T--)
+{
+    cin>>n;
+    
+    if(n<=360)
+    {
+    if((360%n)==0)
+		cout<<"y ";
+	else
+		cout<<"n ";
+	cout<<"y ";
+	if(n<=26)
+		cout<<"y
+";
+	else
+		cout<<"n
+";
+    }
+    else
+    {
+        cout<<"n n n
+";
+    }
+    
+    
+}
+ 
+return 0;
+} 

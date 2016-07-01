@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e3 + 10;
+int parent[MAXN];
+int findP(int x){
+    return (parent[x] == x?x:(parent[x] = findP(parent[x])));
+}
+void merge(int x, int y){
+    int px = findP(x);
+    int py = findP(y);
+    parent[px] = py;
+}
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int N, M;
+        scanf("%d%d", &N, &M);
+        for(int i = 0;i < N;++i){
+            parent[i] = i;
+        }
+        while(M--){
+            int x, y;
+            scanf("%d%d", &x, &y);
+            merge(x, y);
+        }
+        int q;
+        scanf("%d", &q);
+        while(q--){
+            int x, y;
+            scanf("%d%d", &x, &y);
+            if(findP(x) == findP(y)){
+                printf("YO
+");
+            } else {
+                printf("NO
+");
+            }
+        }
+    }
+    return 0;
+}

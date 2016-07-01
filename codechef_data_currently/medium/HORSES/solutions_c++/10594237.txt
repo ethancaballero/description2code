@@ -1,0 +1,34 @@
+#include<iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+int main()
+{
+    int T;
+    cin>>T;
+    int N;
+    int *S;
+
+    for(int i=0;i<T;i++)
+    {
+
+        cin>>N;
+        S=new int[N];
+
+        for(int j=0;j<N;j++)
+            cin>>S[j];
+        vector <int> vec(S,S+N);
+        sort(vec.begin(), vec.end());
+        int result=vec[1]-vec[0];
+        for(int k=1;k<N-1;k++)
+        {
+            if(vec[k+1]-vec[k]<result)
+            {
+             result=vec[k+1]-vec[k];
+            }
+        }
+        cout<<result<<"
+";
+    }
+    return 0;
+}

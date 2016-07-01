@@ -1,0 +1,12 @@
+a = input()
+for b in range(a):
+    c = input()
+    dict1 = {}
+    for f in range(1000000):
+        dict1[f] = 0
+    for d in range(c):
+        e = input()
+        dict1[e] += 1
+    for g in dict1:
+        if dict1[g] != 0 and dict1[g] % 2 != 0:
+            print g

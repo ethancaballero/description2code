@@ -1,0 +1,25 @@
+n,q=map(int,raw_input().split())
+
+arr=[]
+key=-2
+for i in range(n):
+	a,b=raw_input().split()
+	arr+=[(a,b)]
+for s in range(q):
+	t=raw_input()
+	t=t.split()[0]
+	found=0
+	
+	x=t.split('.')
+	if len(x)==1:
+		print 'unknown'
+	else:
+		x=x[-1]
+		for j in range(n):
+			if arr[j][0]==x:
+				print arr[j][1]
+				found=2
+				break
+		if found!=2:
+			print "unknown"
+		

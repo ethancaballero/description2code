@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+int coun[100000];
+int main(){
+    int t;
+    int n;
+    int i,j;
+    int a;
+    int m;
+    int ans;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d",&n);
+        for(i = 0; i < 100000; i++)
+        coun[i] = 0;
+        for(i = 0; i < n; i++){
+            scanf("%d",&a);
+            coun[a-1]++;
+        }
+        m = coun[0];
+        for(i = 1; i < 100000; i++){
+            if(m < coun[i])
+            m = coun[i];
+        }
+        ans = n-m;
+        cout<<ans<<"
+";
+    }
+    return 0;
+}

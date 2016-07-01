@@ -1,0 +1,21 @@
+for _ in range(input()):
+        str = list(raw_input())
+        if len(str) == 1 and '?' in str:
+                print 26
+                continue
+        if len(str) == 1 and '?' not in str:
+                print 1
+                continue
+        if len(str) %2 == 0:
+                mid = int(len(str)/2)
+        else:
+                mid = int((len(str)+1)/2)
+        mul = 1
+        for i in xrange(mid):
+                if str[i] == '?' and str[-1*(i+1)] == '?':
+                        mul = (mul * 26) % 10000009
+                elif str[i] != '?' and str[-1*(i+1)] != '?' and str[i] != str[-1*(i+1)]:
+                        mul = 0
+                        break
+
+        print mul

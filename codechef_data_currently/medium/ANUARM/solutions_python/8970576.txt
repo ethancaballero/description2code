@@ -1,0 +1,11 @@
+for testcases in xrange( int( raw_input() ) ) :
+    N, M = map(int, raw_input().split() )
+    maxpos = [0]*N
+    posarr = map(int, raw_input().split() )
+    maxi = max(posarr)
+    mini = min(posarr)
+    for i in xrange( N ) :
+        maxpos[i] = max(abs(i - maxi), abs(i- mini), maxpos[i] )
+    for elem in maxpos :
+        print elem, ' ', 
+    print ''

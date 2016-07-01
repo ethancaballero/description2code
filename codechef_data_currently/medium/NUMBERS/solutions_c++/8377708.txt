@@ -1,0 +1,61 @@
+	#include<iostream>
+	#include<map>
+	#include<stdio.h>
+	#define get getchar_unlocked
+	#define put putchar_unlocked
+ 	using namespace std;
+	inline int inp()
+	{
+	
+		int n=0, c=get(),f=1;
+		while(c!='-'&&(c<'0'||c>'9')) c=get();
+		if(c=='-'){f=-1;c=get();}
+		 
+		while(c>='0'&&c<='9'){n=(n<<3)+(n<<1)+c-'0',c=get();}
+		return n*f;
+	 
+	}
+
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n;
+			n=inp();
+			multimap<int ,string> mymap;
+			string a;
+			int num;
+			for(int i=0;i<n;i++)
+			{
+				cin>>a;
+				num=inp();
+				mymap.insert(make_pair(num,a));
+			}	
+			multimap<int,string>::iterator it=mymap.begin();
+			int count;
+			while(1==1)
+			{	
+				num=it->first;
+				a=it->second;
+				count=1;
+				it++;
+				while(mymap.end()!=it && it->first==num )  			
+				{
+					
+					it++;
+					count++;
+				}
+				if(count==1 || it==mymap.end())
+					break;
+			}	
+			if(it==mymap.end())
+				cout<<"Nobody wins.
+";
+			else 
+				cout<<a<<endl;
+			t--;
+		}	
+		return 0;
+	}

@@ -1,0 +1,25 @@
+# cook your code here
+import numpy as np
+
+for _ in range(int(raw_input())):
+    N = int(raw_input())
+    A = list()
+    for i in range(N):
+        temp = list(map(int, raw_input().split()))
+        A.append(temp)
+    A = np.array(A)
+#    print A
+    Aprev = np.where(A == 1)
+    x = Aprev[0][0]
+    y = Aprev[1][0]
+#    print x,y
+    Sum = 0
+    for i in range(2,N*N+1):
+        curr = np.where(A == i)
+        cx = curr[0][0]
+        cy = curr[1][0]
+#        print 'found ',i,' at index ',cx,cy
+        Sum += abs(x-cx) + abs(y-cy)
+        x = cx
+        y = cy
+    print Sum

@@ -1,0 +1,8 @@
+for _ in range(int(input())):
+    n=int(input())
+    mystr='0'+raw_input()+'0'
+    count=0 
+    for x in range(1,n+1):
+        if(mystr[x-1]=='1' or mystr[x]=='1' or mystr[x+1]=='1'):
+            count+=1
+    print n-count  

@@ -1,0 +1,21 @@
+import sys
+n = int(raw_input())
+while n != 0:
+    expr = raw_input()
+    stack = []
+    for i in range(1, len(expr)-1):
+        if (ord(expr[i]) >= 97 and ord(expr[i]) <= 122):
+            sys.stdout.write(expr[i])
+        else:
+            if ord(expr[i]) == 41:
+                e = stack.pop()
+                sys.stdout.write(e)
+            elif ord(expr[i]) == 40:
+                continue
+            else:
+                stack.append(expr[i])
+    while len(stack) > 0:
+        sys.stdout.write(stack.pop())
+    sys.stdout.write("
+")
+    n -= 1

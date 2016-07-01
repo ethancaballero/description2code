@@ -1,0 +1,30 @@
+def check(s):
+    l = len(s)
+    if l%2 == 0:
+        a = l/2-1
+        b = l/2
+    else:
+        a = int(l/2)-1
+        b = int(l/2)+1
+    m = {}
+    for c in s[:a+1]:
+        if c in m.keys():
+            m[c] += 1
+        else:
+            m[c] = 1
+    for c in s[b:]:
+        if c not in m.keys():
+            return False
+        if m[c] < 1:
+            return False
+        m[c] -= 1
+    return True
+
+N = int(raw_input())
+
+for _ in range(N):
+    s = raw_input().rstrip()
+    if check(s):
+        print "YES"
+    else:
+        print "NO"

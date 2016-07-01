@@ -1,0 +1,30 @@
+#include<cstdio>
+#include<iostream>
+#include<cmath>
+#define maxm 1000000000
+using namespace std;
+double gp(double p , int  m)
+{
+    double ans=0.0;
+    ans= pow(-p,m) -1;
+    ans= ans/ (-p-1);
+    return ans;
+}
+int main()
+{
+        int t,m;
+        double val=0.0 , p;
+        #ifndef ONLINE_JUDGE
+    freopen("i_p","r",stdin);
+#endif
+        cin >> t;
+        while(t--)
+        {   val=0.0;
+            cin >> m;
+            cin >> p;
+            val = gp(p,m)*maxm;
+            printf("%lf %lf
+",val,maxm-val);
+        }
+        return 0;
+}

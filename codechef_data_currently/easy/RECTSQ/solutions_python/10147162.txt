@@ -1,0 +1,16 @@
+a = input()
+def gcd(x, y):
+   """This function implements the Euclidian algorithm
+   to find G.C.D. of two numbers"""
+
+   while(y):
+       x, y = y, x % y
+
+   return x
+def lcm(x, y):
+   lcm = (x*y)//gcd(x,y)
+   return lcm
+
+for b in range(a):
+    c = raw_input().split()
+    print (lcm(int(c[0]),int(c[1])))/(gcd(int(c[0]),int(c[1])))

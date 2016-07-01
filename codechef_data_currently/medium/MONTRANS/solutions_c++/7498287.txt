@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+ using namespace std;
+
+int main(){
+	int t; cin >> t;
+	while(t--){
+		int a,b,c,i,ans=0; cin >> a >> b >> c;
+		pair<int,int> maxi = make_pair(a,b);
+		for(i=1; i<10000 ; i++){
+			if(a==0 && b<c)break;
+			if(b>=c) b-=c;
+			else {a--; b+=100-c;}
+			swap(a,b);
+			if(make_pair(a,b) > maxi){
+				maxi = make_pair(a,b);
+				ans = i;
+			}
+		}
+		cout << ans << endl;
+	}
+	return 0;
+}

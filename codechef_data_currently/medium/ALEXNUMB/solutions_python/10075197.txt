@@ -1,0 +1,16 @@
+import sys
+a =  int(raw_input())
+while a>0:
+    n = int(raw_input())
+    b=[0]*n
+    i=0
+    l=0
+    b=map(int,sys.stdin.readline().split())
+    while i<(n-1):
+        if(b[i]==b[i+1]):
+            l+=1
+        i+=1
+    n=n-l
+    m=((n-l)*(n-l-1))/2
+    print m
+    a-=1

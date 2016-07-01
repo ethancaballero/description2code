@@ -1,0 +1,7 @@
+# cook your code here
+from math import floor
+cases = int(raw_input())
+for i in range(0, cases):
+    coins = int(raw_input())
+    
+    print int(floor((-1 + (1+8*coins)**0.5)/2.0))

@@ -1,0 +1,17 @@
+t = int(raw_input())
+for i in xrange(t):
+    n,k = map(int, raw_input().split())
+    num = map(int , raw_input().split())
+    mi = abs(num[0] + num[1] - k)
+    c =0
+    for j in xrange(n-1):
+        for g in xrange(j+1, n):
+            temp = abs(num[j] + num[g] - k)
+            if temp < mi:
+                mi = temp
+                c = 1
+            else:
+                if temp == mi:
+                    c += 1
+    print mi,c
+    

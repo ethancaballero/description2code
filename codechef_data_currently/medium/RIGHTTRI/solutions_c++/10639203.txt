@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long double H,h,b,s;
+        cin>>H>>s;
+        long double a[3];
+        a[0]=b=(sqrt(4*s+H*H)+sqrt(H*H-4*s))/2.0;
+        a[1]=h=(sqrt(4*s+H*H)-sqrt(H*H-4*s))/2.0;
+        a[2]=H;
+        sort(a,a+3);
+        if(b+h>H){
+        for(int i=0;i<=2;i++){
+            cout<<fixed;
+            cout<<setprecision(8)<<a[i]<<" ";}
+            cout<<endl;
+        }
+        else{
+            cout<<"-1"<<endl;}
+    }
+}
+
+
+
+
+
+
+

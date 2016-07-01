@@ -1,0 +1,11 @@
+t = input()
+a = [100,50,10,5,2,1]
+for i in range(t):
+    n = 0
+    j = 0
+    rps = input()
+    while rps>0:
+        n+=int(rps/a[j])
+        rps = rps%a[j]
+        j+=1
+    print n

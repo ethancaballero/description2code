@@ -1,0 +1,38 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	
+	while(t--)
+	{
+		long int n;
+		cin>>n;
+		
+		long long a[n+1];
+		
+		
+		for(long int i=0;i<n;i++)
+		{
+			cin>>a[i];
+		}
+		
+		vector<long long > myvector (a,a+n);
+		
+		sort(myvector.begin(), myvector.end());
+		
+		long long sum =0;
+		
+		for(long int i=n-1;i>=0;i=i-2)
+		{
+			sum = sum + myvector[i];	
+		}
+		
+		cout<<sum<<endl;
+	}
+}

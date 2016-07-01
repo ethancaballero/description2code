@@ -1,0 +1,5 @@
+import math
+n = int(raw_input())
+for i in range(n):
+	key = int(raw_input())
+	print int(math.sqrt(key))

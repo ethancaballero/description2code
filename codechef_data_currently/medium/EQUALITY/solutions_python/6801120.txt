@@ -1,0 +1,13 @@
+T=int(raw_input());
+for t in range(T) :
+	N=int(raw_input());
+	A=[long(i) for i in raw_input().split()];
+	total=0;
+	for i in A :
+		total=total+i;
+	numsum=total/(N-1);
+	original=[];
+	for i in range(N) :
+		original.append(str(numsum-A[i]));
+	out=" ".join(original);
+	print out;

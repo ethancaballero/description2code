@@ -1,0 +1,111 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <iomanip>
+#include <queue>
+#define ni(v) scanf("%d",&v)
+#define nlli(v) scanf("%lld",&v)
+#define nis(a,b) scanf("%d %d",&a,&b)
+#define REP(i,n) for(int i=0;i<n;i++)
+#define REP2(i,n) for(int i=n-1;i>=0;i--)
+#define rep(i,a,b) for(int i=a;i<b;i++)
+
+using namespace std;
+
+typedef long long int lli;
+typedef vector<pair<int,int> > vp;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<float> vf;
+typedef vector<vector<float> > vvf;
+typedef vector<lli> vlli;
+typedef pair<int,int> pii;
+typedef pair<pii,int> dpii;
+
+class Prioritize
+{
+    public:
+        int operator() (dpii& p1, dpii& p2 )
+        {
+            return p1.second > p2.second;
+        }
+};
+
+int main() {
+    int M,N,a,b,T;
+    nis(N,M);
+
+    vvi Rooms(N,vi(M,0));
+    vvi D(M,vi(N,99999));
+    vector<vector<bool> > visited(M,vector<bool>(N,false));
+
+    REP(i,N) {
+        REP(j,M) {
+            ni(Rooms[i][j]);
+        }
+    }
+
+    nis(a,b); ni(T);
+    a--; b--;
+
+    // Djisktra
+    int minTime;
+    priority_queue<dpii,vector<dpii>,Prioritize> Q;
+    Q.push(make_pair(make_pair(0,0),0));
+    D[0][0] = 0;
+
+    while(!Q.empty()) {
+        dpii top = Q.top();
+        // cout << "(" << top.first.first << ", " << top.first.second << ") : " << top.second << "
+";
+        Q.pop(); 
+        visited[top.first.first][top.first.second] = true;
+
+        if(top.first.first == b && top.first.second == a) {
+            minTime = top.second;
+            break;
+        } else {
+
+            // cout << Rooms[top.first.first][top.first.second] + top.second << "
+";
+            if(top.first.first > 0 && D[top.first.first-1][top.first.second] > top.second + Rooms[top.first.second][top.first.first] && !visited[top.first.first-1][top.first.second]) {
+                D[top.first.first-1][top.first.second] =  Rooms[top.first.second][top.first.first] + top.second;
+                Q.push(make_pair(make_pair(top.first.first-1,top.first.second), D[top.first.first-1][top.first.second]));
+            }
+
+            if(top.first.first < M-1 && D[top.first.first+1][top.first.second] > top.second + Rooms[top.first.second][top.first.first] && !visited[top.first.first+1][top.first.second]) {
+                D[top.first.first+1][top.first.second] =  Rooms[top.first.second][top.first.first] + top.second;
+                Q.push(make_pair(make_pair(top.first.first+1,top.first.second), D[top.first.first+1][top.first.second]));
+            }
+
+            if(top.first.second > 0 && D[top.first.first][top.first.second-1] > top.second + Rooms[top.first.second][top.first.first] && !visited[top.first.first][top.first.second-1]) {
+                D[top.first.first][top.first.second-1] =  Rooms[top.first.second][top.first.first] + top.second;
+                Q.push(make_pair(make_pair(top.first.first,top.first.second-1), D[top.first.first][top.first.second-1]));
+            }
+
+            if(top.first.second < N-1 && D[top.first.first][top.first.second+1] > top.second + Rooms[top.first.second][top.first.first] && !visited[top.first.first][top.first.second+1]) {
+                D[top.first.first][top.first.second+1] =  Rooms[top.first.second][top.first.first] + top.second;
+                Q.push(make_pair(make_pair(top.first.first,top.first.second+1), D[top.first.first][top.first.second+1]));
+            }
+        }
+    }
+
+    // REP(i,N) {
+    //     REP(j,M) {
+    //         cout << "i : " << i << ", j : " << j << " :: ";
+    //         cout << Rooms[i][j] << " ";
+    //     }
+
+    //     cout << "
+";
+    // }
+    // cout << Rooms[b][a] << "
+";
+    if(minTime + Rooms[a][b] > T) cout << "NO";
+    else cout << "YES
+" << (T - minTime - Rooms[a][b]);
+
+    return 0;
+}

@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,count=0;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int a,b,c,d,e,f;
+        int x,y,z;
+        scanf("%d%d%d%d%d%d",&a,&b,&c,&d,&e,&f);
+        x=((a-c)*(a-c))+((b-d)*(b-d));
+        y=((c-e)*(c-e))+((f-d)*(f-d));
+        z=((a-e)*(a-e))+((b-f)*(b-f));
+        if((x-y-z)==0)
+        count++;
+        if(y-x-z==0)
+        count++;
+        if(z-y-x==0)
+        count++;
+    }
+    printf("%d",count);
+}

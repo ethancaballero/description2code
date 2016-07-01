@@ -1,0 +1,82 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int t,n,m,q,p,r,k,c_ride[51],pc_count,c_wait,p_wait,y;
+	cin>>t;
+	while(t>0) {
+		cin>>n>>m>>q>>p>>r>>k;
+		pc_count = 0;
+		y=r;
+		c_wait = n;
+		p_wait = q;
+		for(int i=0; i<n; i++)
+			c_ride[i]=0;
+		if(c_wait<=p_wait) {
+			p_wait-=c_wait;
+			c_wait=0;
+			for(int i=0; i<n; i++)
+				c_ride[i]=1;
+		}
+		else
+		{
+			c_wait-=p_wait;
+			p_wait=0;
+			for(int i=0; i<q; i++)
+				c_ride[i]=1;
+		}
+		for(int i=1; i<=k; i++) {
+		 for(int j=0; j<n; j++) {
+				if(c_ride[j] != p && c_ride[j] != 0)
+					c_ride[j]++;
+				else if(c_ride[j] == p) {
+					c_ride[j] = 0 ;
+					pc_count++;
+					c_wait++;
+				}
+			}
+			if (i==y) {
+				y+=r;
+				if(m) {
+					m--;
+					p_wait++;
+				}
+			}
+			if(c_wait<=p_wait) {
+				int count = 0;
+				if(c_wait) {
+					p_wait-=c_wait;
+					for(int i=0; i<n; i++) {
+						while(count != c_wait) {
+							if(c_ride[i]==0) {
+								c_ride[i]=1;
+								count++;
+							}
+							break;
+						}
+					}
+				}
+				c_wait=0;
+			}
+			else
+			{
+				int count = 0;
+				if(p_wait) {
+					c_wait-=p_wait;
+					for(int i=0; i<n; i++) {
+						while(count != p_wait) {
+							if(c_ride[i]==0) {
+								c_ride[i]=1;
+								count++;
+							}
+							break;
+						}
+					}
+				}
+				p_wait=0;
+			}
+		}
+		t--;
+		cout<<c_wait<<" "<<pc_count<<" "<<m<<" "<<p_wait<<endl;
+	}
+	return 0;
+}

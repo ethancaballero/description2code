@@ -1,0 +1,44 @@
+def wrapper():
+    return 0
+
+def firstFalse(B):
+    for i in range(0, len(B)):
+        if(B[i] == False):
+            return i
+
+def pCycle(A, B, res, counter):
+    temp = ''
+    index = firstFalse(B)
+    i = index
+    temp = temp + str(index + 1) + ' '
+    if(A[i] == index + 1):
+        B[i] = True
+    while(A[i] != index + 1):
+        temp = temp + str(A[i]) + ' '
+        B[i] = True
+        i = A[i] - 1
+    B[i] = True
+    temp = temp + str(index + 1)
+    counter = counter + 1
+    res.append(temp)
+    return (B , res , counter)
+
+counter = 0
+N = int(raw_input())
+A = []
+B = []
+res = []
+the_string = raw_input()
+for i in range(0, N):
+    A.append(0)
+    B.append(False)
+A[:] = the_string.split()
+for i in range(0, N):
+    A[i] = int(A[i])
+while(False in B):
+    B , res , counter = pCycle(A, B, res, counter)
+print counter
+for i in range(0, len(res)):
+    print res[i]
+
+wrapper()

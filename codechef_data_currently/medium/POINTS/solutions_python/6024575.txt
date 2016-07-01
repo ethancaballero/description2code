@@ -1,0 +1,14 @@
+t = int(raw_input())
+from math import sqrt
+for _ in xrange(t):
+    raw_input() # discard blank line
+    n = int(raw_input())
+    p = [map(int, raw_input().split()) for _ in xrange(n)]
+    p.sort(key=lambda p:(p[0], -p[1]))
+    def dist(p1, p2):
+        return sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+    sdist = 0
+    for i, p2 in enumerate(p, 1):
+       if i != len(p):
+           sdist += dist(p2, p[i])
+    print "%.2f" % sdist

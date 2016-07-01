@@ -1,0 +1,10 @@
+t = input()
+for i in range(t):
+    N = input()
+    n = raw_input()
+    if 'Y' in n:
+        print "NOT INDIAN"
+    elif 'I' in n:
+        print "INDIAN"
+    else:
+        print "NOT SURE"

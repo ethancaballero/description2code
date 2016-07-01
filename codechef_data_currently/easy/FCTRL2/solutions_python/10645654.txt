@@ -1,0 +1,17 @@
+# Small Factorials
+# Practice : Beginner (5)
+# CodeChef
+
+# Aditya Vamsikrishna
+# 30th June 2016
+
+# 2nd submission || 
+
+import math
+
+n = int(raw_input())
+
+for i in range(n):
+	val = int(raw_input())
+	fact = math.factorial(val)
+	print fact

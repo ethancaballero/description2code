@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e6 + 10;
+int A[MAXN];
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int N;
+        scanf("%d", &N);
+        for(int i = 1;i <= N;++i){
+            scanf("%d", &A[i]);
+        }
+        for(int i = N;i >= 2;--i){
+            if(A[i] < A[i - 1]){
+                int temp = A[i];
+                A[i] = A[i - 1];
+                A[i - 1] = temp;
+            }
+        }
+        bool is = true;
+        for(int i = 2;i <= N;++i){
+            is &= (A[i] >= A[i - 1]);
+        }
+        if(is){
+            printf("YES
+");
+        } else{
+            printf("NO
+");
+        }
+    }
+    return 0;
+}

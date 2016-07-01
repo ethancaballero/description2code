@@ -1,0 +1,5 @@
+t=input()
+a=[]
+for i in range(0,t):
+    a.append(map(int,raw_input().split(' ')))
+    print max(a[i][0],a[i][1]),a[i][0]+a[i][1]

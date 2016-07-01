@@ -1,0 +1,39 @@
+import sys
+
+def count(S):
+    s = S
+    for i in range(len(s)):
+        if s[i] >= 'A' and s[i] <= 'Z':
+            s = s.replace(s[i], '9')
+            break
+    return int(s)
+
+def calc(S):
+    s = 0
+    t = 0
+    numChars = 0
+    res = 0
+    while True:
+        while s < len(S) and numChars < 2:
+            c = S[s]
+            s += 1
+            if c >= 'A' and c <= 'Z':
+                numChars += 1
+        if numChars < 2:
+            res = max(res, count(S[t:]))
+            break
+        res = max(res, count(S[t:s - 1]))
+        if s >= len(S):
+            break
+        c = S[t]
+        t += 1
+        if c >= 'A' and c <= 'Z':
+            numChars -= 1
+    return res
+
+def solve(f, output):
+    output.write('{0}
+'.format(calc(f.readline())))
+    
+if __name__ == '__main__':
+    solve(sys.stdin, sys.stdout)

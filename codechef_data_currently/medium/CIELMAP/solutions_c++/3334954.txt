@@ -1,0 +1,59 @@
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+#include<algorithm>
+
+int outer(int x1, int y1, int x2, int y2){
+  return x1*y2-x2*y1;
+}
+
+bool iscross(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4){
+  int o1, o2;
+  o1 = outer(x2-x1, y2-y1, x3-x1, y3-y1);
+  o2 = outer(x2-x1, y2-y1, x4-x1, y4-y1);
+  if( (o1<0 && o2>0) || (o1>0 && o2<0) ) return false;
+  o1 = outer(x4-x3, y4-y3, x1-x3, y1-y3);
+  o2 = outer(x4-x3, y4-y3, x2-x3, y2-y3);
+  if( (o1<0 && o2>0) || (o1>0 && o2<0) ) return false;
+  return true;
+}
+
+int dist(int dx, int dy){
+  return dx*dx+dy*dy;
+}
+
+int main(){
+  int i,j,k;
+  int t, n, x[1000], y[1000];
+  int d[4];
+  int res;
+  scanf("%d",&t);
+  while(t--){
+    scanf("%d",&n);
+    for(int i=0;i<n;++i) scanf("%d%d",x+i,y+i);
+
+    res = 0;
+    if(n==4){
+      for(int i=0;i<n;++i) d[i] = i;
+      do{
+        if( iscross(x[d[0]], y[d[0]], x[d[2]], y[d[2]], x[d[1]], y[d[1]], x[d[3]], y[d[3]]) ) continue;
+        for(int i=0;i<n;++i) {
+          k = dist(x[d[i]]-x[d[(i+1)%4]], y[d[i]]-y[d[(i+1)%4]]);
+          if(res<k) res = k;
+        }
+      }while(std::next_permutation(d,d+n));
+    } else {
+      for(int i=0;i<n;++i) {
+        for(int j=i+1;j<n;++j) {
+            k = dist(x[i]-x[j], y[i]-y[j]);
+            if(res < k) res = k;
+        }
+      }
+    }
+
+    printf("%.10f
+", sqrt(res));
+  }
+
+  return 0;
+}

@@ -1,0 +1,13 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		long long A, B, C, D;
+		cin >> A >> B >> C >> D;
+		printf("%.6lf
+", (A * 1.0)/(A + B));
+	}
+	return 0;
+}

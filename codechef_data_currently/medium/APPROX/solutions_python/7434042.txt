@@ -1,0 +1,22 @@
+def fun(n):
+    a=103993
+    b=33102
+    if n==0:
+        return "3"
+    else:
+        s="3."
+        d=a/b
+        a=(a-b*d)*10
+        for i in range(0,n,1):
+            d=a/b
+            a=(a-b*d)*10
+            s=s+str(d)
+        return s
+x=input()
+m=list()
+for i in range(0,x,1):
+    a=input()
+    b=fun(a)
+    m.append(b)
+for i in m:
+    print i

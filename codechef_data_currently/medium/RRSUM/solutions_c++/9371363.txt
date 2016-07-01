@@ -1,0 +1,26 @@
+    #include<iostream>
+    using namespace std;
+    int main()
+    {
+    	long long int n,m;
+    	cin>>n>>m;
+    	long long q;
+    	for(long long int i=0;i<m;i++)
+    	{
+    		cin>>q;
+    		if(q<(n+2)||q>(3*n))
+    			cout<<0;
+    		else
+    		{
+    			long long int a,b,mid;
+    			mid=2*n+1;
+    			if(q<=mid)
+    			cout<<q-n-1;
+    			else
+    			cout<<3*n-q+1;
+
+    		}
+    		cout<<endl;
+    	}
+    	return 0;
+    }

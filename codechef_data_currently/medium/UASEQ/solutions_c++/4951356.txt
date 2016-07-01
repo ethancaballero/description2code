@@ -1,0 +1,94 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <cctype>
+#include <cassert>
+
+#define S(x) scanf("%d", &x)
+#define SS(x) scanf("%s", &x)
+#define MOD 1000000007
+
+using namespace std;
+
+long long int a[100007];
+pair <long long int, long long int> r;
+
+#define gc getchar_unlocked
+
+long long int read_int() {
+	char c = gc();
+	while(c<'0' || c>'9') c = gc();
+	long long int ret = 0;
+	while(c>='0' && c<='9') {
+		ret = 10 * ret + c - 48;
+		c = gc();
+	}
+	return ret;
+}
+
+void input() {
+	#ifndef ONLINE_JUDGE
+	freopen("C:\Users\ronish\OneDrive\Documents\in.txt","r",stdin);
+	#endif
+}
+
+int main(int argc, char const *argv[])
+{
+	input();
+	r.first = 999999999;
+	r.second = 999999999;
+	int n, k, d, a0;
+	cin >> n >> k;
+	for (int i = 0; i < n; ++i)
+	{
+		a[i] = read_int();
+	}
+	for (int i = 0; i < k + 2; ++i)
+	{
+		for (int j = i + 1; j < k + 2; ++j)
+		{
+			if ((a[i] - a[j]) % (j - i) == 0) {
+				d = (a[j] - a[i]) / (j - i);
+				a0 = a[i] - d * i;
+				//cout << i << " " << a0 << endl;
+				int c = 0;
+				if (a0 < r.first || (a0 == r.first && d < r.second)) 
+				{
+					for (int x = 0; x < n; x++) {
+						if (a[x] != a0 + d * x) c++;
+					}
+					if (c <= k) {
+						r.first = a0;
+						r.second = d;
+					}
+				}
+			} 
+		}
+	}
+	a0 = r.first;
+	d = r.second;
+	//cout << a0 << " " << d << endl;
+	for (int x = 0; x < n; x++) {
+		cout << a0 + d * x << " ";
+	}
+	cout << endl;
+	return 0;
+}

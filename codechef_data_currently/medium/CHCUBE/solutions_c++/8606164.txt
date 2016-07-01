@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{ int t;
+  scanf("%d",&t);
+  while(t--)
+  {   int i,j,k,p=0;
+      char fr[2][10],to[2][10],l[2][10];
+      scanf("%s%s%s%s%s%s",fr[0],fr[1],l[0],l[1],to[0],to[1]);
+  	  
+  	  for(i=0;i<2;i++)
+  	  for(j=0;j<2;j++)
+  	  for(k=0;k<2;k++)
+  	  if(strcmp(fr[i],l[j])==0 && strcmp(fr[i],to[k])==0 && strcmp(l[j],to[k])==0)
+  	  { p=1;
+        break;
+  	  }
+  	  
+  	  if(p==1)
+  	  printf("YES
+");
+  	  else
+  	  printf("NO
+");
+  }
+	  return 0;
+}

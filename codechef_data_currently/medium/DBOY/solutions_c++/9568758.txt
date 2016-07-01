@@ -1,0 +1,47 @@
+# include <stdio.h>
+# include <vector>
+# include <algorithm>
+# define lenmax 500
+# define inf (int)1e8
+using namespace std;
+# define vit vector<int>::iterator 
+int T,N,x,maxi,sum;
+vector<int> H,K,dp;
+vit it;
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	{
+		dp.clear();
+		dp.push_back(0);
+		sum=0;
+		K.clear();
+		H.clear();
+		maxi=-1;
+		scanf("%d",&N);
+		for(int i=0;i<N;i++)
+		{
+			scanf("%d",&x);
+			H.push_back(x);
+			maxi=max(x,maxi);
+		}
+		for(int i=0;i<N;i++)
+		{
+			scanf("%d",&x);
+			K.push_back(x);
+		}
+		sort(K.begin(),K.end());
+		for(int i=1;i<=2*maxi;i++)
+		{
+			dp.push_back(inf);
+			for( it=K.begin();it!=K.end()&&(*it)<=i;it++)
+				dp[i]=min(dp[i],dp[i-*it]+1);
+		}
+		for	(int i=0;i<N;i++)
+			sum+=dp[2*H[i]];
+		printf("%d
+",sum);
+	}
+	return 0;
+}

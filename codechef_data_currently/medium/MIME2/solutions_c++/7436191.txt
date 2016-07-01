@@ -1,0 +1,48 @@
+# include<map>
+# include<stdio.h>
+# include<string.h>
+# include<iostream>
+using namespace std;
+main()
+{
+	int i,n,q,l,j,k,f;
+	char h[1000];
+	scanf("%d%d",&n,&q);
+	map<string,string > my;
+	string t,g;
+	for(i=0;i<n;i++)
+	{
+		
+		cin >> t >> g;
+		my[t]=g;
+	}
+	//string h;
+	for(f=0;f<q;f++)
+	{
+		cin >> t;
+		l=t.length();
+		for(i=l-1;i>=0;i--)
+		{
+			if(t[i]=='.')
+			break;
+		}
+		if(i<0)
+		printf("unknown
+"); 
+		else
+		{
+			k=0;
+			for(j=i+1;j<=l;j++,k++)
+			h[k]=t[j];
+			//cout << h << "
+";
+			if(my[h]!="")
+			cout << my[h] << "
+";
+			else
+			printf("unknown
+"); 
+		}
+	}
+return 0;
+}

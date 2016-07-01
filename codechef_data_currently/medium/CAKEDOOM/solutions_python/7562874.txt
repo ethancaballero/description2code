@@ -1,0 +1,29 @@
+for _ in xrange(input()):
+    k = input()
+    A = list(raw_input().strip())
+    n = len(A)
+    if k == 1:
+        print [0, 'NO'][n > 1]
+    elif k == 2:
+        if n % 2 and n != 1:
+            print 'NO'
+        else:
+            X = map(str, [j % 2 for j in xrange(n)])
+            Y = map(str, [1 - (j % 2) for j in xrange(n)])
+            if all([x == y or x == '?' for x, y in zip(A, X)]):
+                print ''.join(X)
+            elif all([x == y or x == '?' for x, y in zip(A, Y)]):
+                print ''.join(Y)
+            else:
+                print 'NO'
+    else:
+        if any([x == y and x != '?' for x, y in zip(A, A[1:] + [A[0]])]) and n > 1:
+            print 'NO'
+        else:
+            for i in xrange(n):
+                if A[i] == '?':
+                    for x in ['0', '1', '2']:
+                        if (A[i - 1] != x and x != A[(i + 1) % n]):
+                            A[i] = x
+                            break
+            print ''.join(A)

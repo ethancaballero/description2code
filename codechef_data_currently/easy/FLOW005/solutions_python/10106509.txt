@@ -1,0 +1,13 @@
+# cook your code here
+t=int(raw_input())
+for i in range(t):
+    sum=0
+    x=int(raw_input())
+    # l=map(int,raw_input().split())
+    # l.sort()
+    l=[100,50,10,5,2]
+    for i in l:
+        sum+=x//i
+        x=x%i
+    sum+=x
+    print sum

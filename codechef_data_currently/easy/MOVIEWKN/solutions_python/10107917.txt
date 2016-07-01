@@ -1,0 +1,23 @@
+# cook your dish here
+def func(l,r):
+    index,maxval = 0,0
+    for i in range(len(l)):
+        if(l[i]*r[i]>maxval):
+            maxval = l[i]*r[i]
+            index = i
+        elif(l[i]*r[i]==maxval):
+            if(r[i]>r[index]):
+                maxval = l[i]*r[i]
+                index = i
+            else:
+                pass
+        else:
+            pass
+    return index+1
+
+t = int(input())
+for i in range(t):
+    n = int(input())
+    l = map(int, raw_input().split())
+    r = map(int, raw_input().split())
+    print func(l,r)

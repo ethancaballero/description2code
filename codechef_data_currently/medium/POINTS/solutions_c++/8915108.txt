@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+void merge(long long int *x,long long int *y,long long int beg,long long int mid,long long int end)
+{
+	int i,j,k,b[mid-beg+1],c[end-mid],count=0,by[mid-beg+1],cy[end-mid];
+	for(i=0;i<mid-beg+1;i++)
+	{
+		b[i]=x[beg+i];
+		by[i]=y[beg+i];
+	}
+	for(i=0;i<end-mid;i++)
+	{
+		c[i]=x[mid+i+1];
+		cy[i]=y[mid+i+1];
+	}
+	for(i=0,j=0,k=beg;i<mid-beg+1 && j<end-mid;)
+	{
+		if(b[i]<c[j])
+		{
+			x[k]=b[i];
+			y[k]=by[i];
+			i++;
+		}
+		else if(b[i]==c[j])
+		{
+			if(by[i]>cy[j])
+			{
+				x[k]=b[i];
+				y[k]=by[i];
+				i++;
+			}
+			else
+			{
+				x[k]=c[j];
+				y[k]=cy[j];
+				j++;
+			}
+		}
+		else
+		{
+			x[k]=c[j];
+			y[k]=cy[j];
+			j++;
+		}
+		k++;
+	}
+	while(i<mid-beg+1)
+	{
+		x[k]=b[i];
+		y[k]=by[i];
+		k++;
+		i++;
+	}
+	while(j<end-mid)
+	{
+		x[k]=c[j];
+		y[k]=cy[j];
+		k++;
+		j++;
+	}
+}
+void mergesort(long long int *x,long long int *y,long long int beg,long long int end)
+{
+	long long int mid;
+	if(beg<end)
+	{	
+
+		int mid=(end+beg)/2;
+		mergesort(x,y,beg,mid);
+		mergesort(x,y,mid+1,end);
+		merge(x,y,beg,mid,end);
+	}
+};
+int main()
+{
+	long long int i,j,n,t,x[100005],y[100005];
+	double path;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		path=0;
+		scanf("%lld",&n);
+		for(i=0;i<n;i++)
+			scanf("%lld%lld",&x[i],&y[i]);
+		mergesort(x,y,0,n-1);
+		for(i=1;i<n;i++)
+			path+=sqrt(((x[i]-x[i-1])*(x[i]-x[i-1]))+((y[i]-y[i-1])*(y[i]-y[i-1])));
+		printf("%0.2lf
+",path);	
+	}
+	return 0;
+}

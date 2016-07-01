@@ -1,0 +1,13 @@
+# your code goes here
+n = int(raw_input())
+arr = map(int, raw_input().split())
+# arr.sort()
+extra = 0
+ans = 0
+sum = 0
+for i in arr:
+	sum += i
+sum += (sum%2)
+sum /= 2
+ans = max(sum,n)
+print ans

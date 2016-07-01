@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	long long  n, k;
+	cin >> n >> k;
+	int counter = 0;
+	while (n--)
+	{
+		long long  x;
+		cin >> x;
+		if (x%k == 0)
+			counter++;
+	}
+	cout << counter << endl;
+}

@@ -1,0 +1,36 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+int main()
+{
+    int t,r,i,a[3],b[3],p;
+    double c[3];
+    scanf("%d",&t);
+    while(t--)
+    {
+        p=0;
+        scanf("%d",&r);
+        for(i=0;i<3;i++)
+        {
+            cin>>a[i]>>b[i];
+        }
+        c[0]=sqrt(pow((a[0]-a[1]),2)+pow((b[0]-b[1]),2));
+        c[1]=sqrt(pow((a[1]-a[2]),2)+pow((b[1]-b[2]),2));
+        c[2]=sqrt(pow((a[2]-a[0]),2)+pow((b[2]-b[0]),2));
+        for(i=0;i<3;i++)
+        {
+            if(c[i]<=r)
+            {
+                p++;
+            }
+        }
+        if(p>1)
+            cout<<"yes
+";
+        else
+            cout<<"no
+";
+    }
+    return 0;
+}

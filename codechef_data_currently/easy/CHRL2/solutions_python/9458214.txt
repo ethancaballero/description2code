@@ -1,0 +1,26 @@
+# problem Cooking Machine (COOKMACH)
+# author code_hard123
+import math
+author = 'Dipjal Chhetri'
+s = raw_input()
+n = len(s)
+ans = 0
+p = 0
+q = 0
+r = 0
+ans = 0
+for i in range(n):
+  if s[i]=='C':
+    p += 1
+  elif s[i] == 'H':
+    if q < p :
+      q += 1
+  elif s[i] == 'E':
+    if r < q :
+      r += 1
+  elif s[i] == 'F':
+    if ans < r :
+      ans += 1
+print ans
+
+

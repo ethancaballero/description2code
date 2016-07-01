@@ -1,0 +1,27 @@
+def helper(arr, target):
+    if target < 0:
+        return False
+    #print arr
+    #print target
+    if len(arr) == 0:
+        return False
+    if sum(arr) == target:
+        return True
+    if target in arr:
+        return True
+    return helper(arr[1:], target) or helper(arr[1:], target-arr[0])
+
+T = int(raw_input())
+
+for _ in range(T):
+    [n, m] = [int(x) for x in raw_input().rstrip().split(" ")]
+    notes = [0] * n
+    for i in range(n):
+        notes[i] = int(raw_input())
+    if sum(notes) < m:
+        print "No"
+    else:
+        if helper(notes, m):
+            print "Yes"
+        else:
+            print "No"

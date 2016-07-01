@@ -1,0 +1,85 @@
+#include <cstdio>
+#include <bits/stdc++.h>
+#include <string>
+#include <cstring>
+#include <iostream>
+using namespace std;
+int graph[105][105];
+int len[105];
+int n;
+int dist[105];
+int q[105];
+int BFS(int u)
+{
+	int head,tail,curr,sum=0;
+	head=0;
+	tail=1;
+	memset(dist,n,sizeof dist);
+	q[head]=u;
+	dist[u]=0;
+	while(tail<n)
+	{
+		curr=q[head];
+		for(int j=0;j<len[curr];j++)
+		{
+			int v=graph[curr][j];
+			if(dist[v]>dist[curr]+1)
+			{
+				dist[v]=dist[curr]+1;
+				sum+=dist[v];
+				q[tail]=v;
+				tail++;
+			}
+		}
+		head++;
+	}
+	return sum;
+}
+int main()
+{
+	int t;
+	char *pch;
+	char l[405];
+	gets(l);
+	t=atoi(l);
+	while(t--)
+	{
+	    gets(l);
+		n=atoi(l);
+		memset(len,0,sizeof len);
+		for(int i=0;i<n;i++)
+		{
+			char edges[406];
+			gets(edges);
+			pch=strtok(edges," ");
+			while(pch!=NULL)
+			{
+				graph[i][len[i]]=atoi(pch)-1;
+				len[i]++;
+				pch=strtok(NULL," ");
+			}
+		}
+		int ans=n*n;
+		int fr=0;
+		if(n==2)
+			printf("1 0.500000
+");
+		else
+		{
+			for(int i=0;i<n;i++)
+			{
+				if(len[i]>1)
+				{
+					int m=BFS(i);
+					if(m<ans)
+					{
+						fr=i;
+						ans=m;
+					}
+				}
+			}
+			printf("%d %f
+",fr+1,(float)ans/n);
+		}
+	}
+} 

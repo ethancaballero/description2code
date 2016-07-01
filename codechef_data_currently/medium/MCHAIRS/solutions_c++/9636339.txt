@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+long long int power(long long int a,long long int b)
+{
+    if(b==0)
+        return 1;
+        if(b==1)
+            return a;
+    else
+    {
+        long long int temp=power(a,b/2);
+        if(b%2==0)
+            return ((temp%mod)*(temp%mod))%mod;
+        else
+            return ((temp%mod)*(temp%mod)*(a%mod))%mod;
+    }
+
+}
+int main()
+{
+
+    int t;
+    long long int n,ans;
+    cin>>t;
+    while(t!=0)
+    {
+        cin>>n;
+        ans=power(2,n);
+        ans--;
+        cout<<ans<<endl;
+
+
+        t--;
+    }
+
+
+
+
+
+
+
+
+    return 0;
+}

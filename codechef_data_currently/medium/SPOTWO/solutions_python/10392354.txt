@@ -1,0 +1,32 @@
+'''
+from __future__ import division
+from math import sqrt
+N,A,index = int(raw_input()),[],1
+def euclideanDist(x1,y1,x2,y2):
+    return sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+while N:
+    L = [int(i) for i in raw_input().split()];
+    a,b,c = euclideanDist(L[0],L[1],L[2],L[3]),euclideanDist(L[2],L[3],L[4],L[5]),euclideanDist(L[0],L[1],L[4],L[5])
+    s = (a + b + c) / 2
+    area = sqrt(s*(s-a)*(s-b)*(s-c)); A.append((area,index)); index+=1; N-=1
+A.sort(key=lambda x: x[0])
+print A[0][1],A[-1][1]
+'''
+def modular_exponentiation(base,power,modulus):
+    res = 1
+    while power:
+        if power % 2 == 1: res = ( res * base ) % modulus
+        base = (base * base) % modulus; power >>= 1
+    return res
+def decimal_to_binary(n):
+    s = ''
+    while n:
+        s = str(n%2) + s; n/=2
+    return int(s)
+def SPOTWO():
+    t = int(raw_input())
+    while t:
+        N = int(raw_input())
+        print modular_exponentiation(2,2*decimal_to_binary(N),int(1e9)+7)
+        t-=1
+SPOTWO()

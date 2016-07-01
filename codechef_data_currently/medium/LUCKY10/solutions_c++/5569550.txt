@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <string>
+#include <cmath>
+#include <queue>
+#include <set>
+
+using namespace std;
+int main()
+{
+	int t;string a,b;
+	scanf("%d",&t);
+	while(t--)
+	{
+		cin>>a>>b;
+		int s1,s2,f1,f2,g1,g2,s,f,l1,l2;
+		s1=s2=f1=f2=g1=g2=l2=l1=0;
+		for(int i=0;i<a.size();i++)
+		{
+			if(a[i]=='7')s1++;
+			if(b[i]=='7')s2++;
+			if(a[i]=='4')f1++;
+			if(b[i]=='4')f2++;
+			if(a[i]>'7' && a[i]<='9')g1++;
+			if(a[i]>'4' && a[i]<='7')l1++;
+			if(b[i]>'7' && b[i]<='9')g2++;
+			if(b[i]>'4' && b[i]<='7')l2++;
+		}
+		int l,m,fin7=0;
+		if(g1>g2){l=g1;m=g2; l2-=(l-m);}
+		else {m=g1;l=g2; l1-=(l-m);}
+		if(s1+s2 > a.size()-l)fin7=a.size()-l;
+		else {fin7=s1+s2; l1-=fin7; l2-=fin7;}
+		int big,av=a.size()-l-fin7;
+		if(l1>l2)big=l1;
+		else big=l2;
+		if(big<0)big=0;
+		if(f1+f2 > av-big)av-=big;
+		else av=f1+f2;
+		for(int i=0;i<fin7;i++)cout<<'7';
+		for(int i=0;i<av;i++)cout<<'4';
+		cout<<endl;
+	}
+}
+		

@@ -1,0 +1,94 @@
+#include<iostream>
+//#include<conio.h>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long int h,t,m,k=0,l=1,q,v,w;
+	cin>>t;
+	while(t--)
+	{ k=0,l=1,v=1,w=0; 
+	cin>>h>>m;
+		/*if(h>10&&m>10)
+		{
+			
+		}
+		else
+		{*/
+		   if(h==0&&m==0)
+		   {
+		    cout<<l<<endl;
+		     continue;
+	       }
+			while(k<h)
+ 			{   
+ 		    	if(k<m)
+ 			     {
+ 			       l++;	
+				 }
+				if(k<9)
+				{
+				 k++;
+				 //cout<<"k"<<k<<endl;
+			    }
+				else if(k==9)
+				{
+					k=k+2;
+					//cout<<"k"<<k<<endl;
+				}
+				else if(k>=11)
+				{
+					k=k+11;
+					//cout<<"k"<<k<<endl;
+				}		
+			}
+			
+			q=11;
+			if(h<=m)
+			{  
+				while(v<h&&v<=9)
+				{ 	//cout<<"v== "<<v<<"q= "<<q<<endl;
+					if(q<m)
+					{
+						w++;
+						if(q<h)
+						{
+							w++;
+						}
+						q=q+11;
+								
+					//	cout<<w<<endl;
+					}
+					else
+					break;
+					v++;
+					//cout<<"v== "<<v<<"q= "<<q<<endl;
+				}
+			}
+			else if(m<h)
+			{
+				while(v<m&&v<=9)
+				{
+					if(q<h)
+					{
+						w++;
+						if(q<m)
+						{
+							w++;
+						}
+						q=q+11;
+						
+						//cout<<w<<endl;
+					}
+					else
+					break;
+					v++;
+							//cout<<"v= "<<v<<"q= "<<q<<endl;
+				}
+			}
+			//cout<<w<<endl;
+			cout<<l-1+w<<endl;
+		}
+  //getch();
+  return 0;
+	}

@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+void print_day(int m)
+{
+     switch(m)
+     {
+       case 0:cout<<"sunday
+";break;
+       case 1:cout<<"monday
+";break;
+       case 2:cout<<"tuesday
+";break;
+       case 3:cout<<"wednesday
+";break;
+       case 4:cout<<"thursday
+";break;
+       case 5:cout<<"friday
+";break;
+       case 6:cout<<"saturday
+";break;
+     }
+}
+
+int main()
+{
+  int t,n;
+  cin>>t;
+  int odd;
+  while(t--)
+  {
+      odd=1;
+      cin>>n;
+      n=n-1;
+      n=n%400;
+      if(n>=300)
+      {
+          n=n-300;
+          odd+=1;
+      }
+      if(n>=200)
+      {
+          n=n-200;
+          odd+=3;
+      }
+      if(n>=100)
+      {
+          n=n-100;
+          odd+=5;
+      }
+      odd+=(n+(n/4));
+      odd%=7;
+      print_day(odd);
+
+  }
+
+}

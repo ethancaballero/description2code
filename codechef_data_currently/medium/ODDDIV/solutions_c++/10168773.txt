@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll f[1000001];
+int main()
+{
+    ll t,l,r,i,d,s;
+    cin>>t;
+    for(i=1;i<100001;i+=2)
+            for(d=i;d<100001;d+=i)
+              f[d]+=i;
+    while(t--)
+    {
+        s=0;
+        cin>>l>>r;
+        for(i=l;i<=r;i++)
+            s+=f[i];
+        cout<<s<<"
+";
+    }
+    return 0;
+}

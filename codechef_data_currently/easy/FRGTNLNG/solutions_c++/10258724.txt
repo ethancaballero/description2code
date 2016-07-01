@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <cassert>
+#include <cmath>
+#include <time.h>
+#include <cstdlib>
+
+#define boost ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
+#define max(a,b) ((a)>(b)?a:b)
+#define min(a,b) ((a)<(b)?a:b)
+#define min_3(a,b,c) (min((a),min((b),(c))))
+#define INF 1000000007
+
+using namespace std;
+
+
+int main() {
+	boost;
+	int tc,n,k,l;
+	bool found;
+	vector<string> vst,vst_1;
+	string str;
+	cin >> tc;
+	while (tc--) {
+		vst.clear();
+		vst_1.clear();
+		cin >> n>>k;
+		for (int i = 0; i < n; i++) {
+			cin >> str;
+			vst.push_back(str);
+		}
+		for (int i = 0; i < k; i++) {
+			cin >> l;
+			for(int j = 0 ; j < l ; j++){
+				cin >> str;
+				vst_1.push_back(str);
+			}
+		}
+		
+		for (int i = 0; i < n; i++) {
+		found = false;
+			for (int j = 0; j < vst_1.size(); j++) {
+				if (vst[i].find(vst_1[j]) != std::string::npos) {
+					found = true;
+					break;
+				}
+			}
+		if(found == true)
+			cout << "YES ";
+		else
+			cout << "NO ";
+		}
+		cout << endl;
+	}
+	
+}

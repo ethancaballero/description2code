@@ -1,0 +1,22 @@
+a,n,k = 0,0,0
+answer = ''
+#def mth():
+#	global a,n,k
+#	print a,n,k
+			
+
+numbers = map(int, raw_input().split())
+a = numbers[0]
+n = numbers[1]
+k = numbers[2]
+n += 1
+#print a,n,k
+count = 0
+while k != 0:
+		temp = a%n
+		answer += str(temp) + ' '
+		count += 1
+		a /= n
+		k -= 1
+answer = answer[:-1]
+print answer

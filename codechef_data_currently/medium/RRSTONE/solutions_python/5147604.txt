@@ -1,0 +1,14 @@
+import os
+
+[n,k] = [int(x) for x in raw_input().split()]
+l     = [int(x) for x in raw_input().split()]
+
+if k > 0:
+    m=max(l)
+    l = [ m - x for x in l]
+    if k % 2 == 0:
+        m = max(l)
+        l = [ m - x for x in l] 
+
+print ' '.join([str(x) for x in l])
+

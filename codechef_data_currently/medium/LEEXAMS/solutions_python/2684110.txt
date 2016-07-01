@@ -1,0 +1,27 @@
+import sys
+def solve(i, ld, pf):
+    if i == n:
+        return pf
+    ans = 0
+    for (l,P) in [(A[i], p[i]), (B[i], 100-p[i])]:
+        if ld[l-1] == True:
+            continue
+        ld[l-1] = True
+        ans += solve(i+1, ld, pf*P/100.0)
+        ld[l-1] = False
+    return ans
+    
+for i in range(int(sys.stdin.readline())):
+    n = int(sys.stdin.readline())
+    l = [False] * 16;
+    p = []
+    A, B = [], []
+    for j in range(n):
+        P, a, b = map(int, sys.stdin.readline().split(' '))
+        p.append(P)
+        A.append(a)
+        B.append(b)
+    if n<=16:
+        print solve(0, l, 1)
+    else:
+        print 0

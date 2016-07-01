@@ -1,0 +1,120 @@
+#include<cstdio>
+#include<cstdlib>
+
+struct points
+{
+	int x;
+	int y;
+}pts[100000],temp[100000];
+
+
+void readint(int &a)
+{
+    register int c; 
+	bool sign = false;
+
+    a = 0;
+    do c = getchar_unlocked(); while(c < '-');
+
+	if(c == '-'){ sign = true;  c = getchar_unlocked(); }
+
+	do{
+		a = (a << 1) + (a << 3) + c - '0';
+		c = getchar_unlocked();
+	}while(c >= '0');
+
+	if(sign)a = -a;
+}
+
+void printint(int a)
+{
+	char s[11];
+	int t = -1;
+	
+	do{
+		s[++t] = a % 10 + '0';
+		a /= 10;
+	}while(a > 0);
+	
+	while(t >= 0)putchar_unlocked(s[t--]);
+	putchar_unlocked('
+');
+}
+
+void merge(int l,int m,int r)
+{
+	int i = l,j = m + 1,k = 0;
+
+	while(i <= m && j <= r)
+		if(pts[i].x < pts[j].x || pts[i].x == pts[j].x && pts[i].y < pts[j].y)temp[k++] = pts[i++];
+		else temp[k++] = pts[j++];
+
+	while(i <= m)temp[k++] = pts[i++];
+	while(j <= r)temp[k++] = pts[j++];
+
+	k = 0;
+	for(i = l; i <= r; i++)pts[i] = temp[k++];
+}
+
+void msort(int l,int r)
+{
+	if(l >= r)return;
+	int m = (l + r) >> 1;
+	msort(l,m);
+	msort(m + 1,r);
+	merge(l,m,r);
+}
+
+int main()
+{
+	int N;
+	register int i,j;
+	register unsigned cnt,pair;
+
+	readint(N);//scanf("%d",&N);
+
+	while(N != 0)
+	{
+		for(i = 0; i < N; i++)
+		{
+			//scanf("%d%d",&(pts[i].x),&(pts[i].yh));
+			readint((pts+i)->x);
+			readint((pts+i)->y);
+
+
+		}
+
+		msort(0,N-1);
+		
+		j  = 0;
+		for(i = 1; i < N; i++)
+		{
+			if(pts[i].x == pts[i-1].x)
+			{
+				pts[j].x = pts[i-1].y;
+				pts[j].y = pts[i].y;
+				i++;
+				j++;
+			}
+		}
+		msort(0,j-1);
+
+		cnt = 0;
+		pair = 1;
+
+		for(i = 1; i < j; i++)
+		{
+			if(pts[i].x == pts[i-1].x && pts[i].y == pts[i-1].y)pair++;
+			else
+			{
+				cnt += ( pair * (pair - 1) ) >> 1;
+				pair = 1;
+			}
+		}
+		cnt += ( pair * (pair - 1) ) >> 1;
+		printint(cnt);//printf("%d
+",cnt);
+		readint(N);//scanf("%d",&N);
+	}
+	return 0;
+}

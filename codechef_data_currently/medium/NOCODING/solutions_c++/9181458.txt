@@ -1,0 +1,29 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+      char word[1000];
+      cin>>word;
+      int n=strlen(word);
+      int i=n+1,a,b,c,d;
+      for(a=0;a<(n-1);a++)
+      {
+      	word[a+1]<word[a] ? i=i+(122-word[a])+(word[a+1]-97)+1 : i ;
+      	word[a+1]>word[a] ? i=i+(word[a+1]-word[a]) : i ;
+      }
+      if(i<=(n*11))
+      {
+      	cout<<"YES"<<endl;
+      }
+      else
+      {
+      	cout<<"NO"<<endl;
+      }
+	}
+return 0;
+}

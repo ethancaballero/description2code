@@ -1,0 +1,15 @@
+def msena():
+    a=input()
+    l=raw_input()
+    l=l.split()
+    ev,od=0,0
+    for i in range(len(l)):
+        if int(l[i])%2==0:
+            ev=ev+1
+        else:
+            od=od+1
+    if ev>od:
+        print "READY FOR BATTLE"
+    else:
+        print "NOT READY"
+msena()

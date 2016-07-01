@@ -1,0 +1,27 @@
+from time import sleep
+t=input()
+sleep(5)
+while t:
+	t-=1
+	n,s=raw_input().split(' ')
+	n=int(n)
+	pts=0
+	for i in range(n):
+		ls=raw_input().split(' ')
+		if len(ls)==1:
+			if ls[0]=="TOP_CONTRIBUTOR":
+				pts+=300
+			else:
+				pts+=50
+		else:
+			if ls[0]=="CONTEST_WON":
+				pts+=300
+				if int(ls[1])<=20:
+					pts+=20-int(ls[1])
+			else:
+				pts+=int(ls[1])
+	#print "pts",pts
+	if s=="INDIAN":
+		print pts/200
+	else:
+		print pts/400

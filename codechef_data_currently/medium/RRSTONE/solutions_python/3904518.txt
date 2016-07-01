@@ -1,0 +1,20 @@
+import sys    
+n, k = map(int,sys.stdin.readline().split())
+A = map(int,sys.stdin.readline().split())
+
+if k == 0:
+    for i in A:
+        print i,
+else:
+    if k%2==1:
+        MAX = max(A)
+        for i in A:
+            print (MAX - i),
+    if k%2==0:
+        MAX = max(A)
+        for i in xrange(len(A)):
+            A[i]= MAX - A[i]
+        MAX = max(A)
+        for i in xrange(len(A)):
+            A[i] = MAX - A[i]
+            print A[i], 

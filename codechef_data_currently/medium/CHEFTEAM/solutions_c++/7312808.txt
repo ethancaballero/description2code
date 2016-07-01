@@ -1,0 +1,37 @@
+#include <iostream>
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+unsigned long long  gcd(unsigned long long  int a, unsigned long long int b){
+	
+	if(b==0) return a;
+	else if(b==1) return 1;
+	else return gcd(b, a%b);
+}
+unsigned long long int f(unsigned long long int n,unsigned long long int r)
+{
+if(r>n)
+return 0;
+    long long int i,ans=1,c,nu,d;
+    for(i=r-1;i>=0;i--){
+   c= gcd(n-i,r-i);
+   nu=(n-i)/c;
+   d=(r-i)/c;
+   ans=(ans/d)*nu;
+}
+return ans;
+}
+
+
+int main() {
+	unsigned long long int n,k,t,j,ans;
+	scanf("%llu",&t);
+	while(t--){
+	scanf("%llu%llu",&n,&k);
+    ans=f(n, ((k<n-k)?k:n-k));	
+	printf("%llu
+",ans);
+	
+	}
+	return 0;
+}

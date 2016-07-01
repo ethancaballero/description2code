@@ -1,0 +1,126 @@
+#include <cstdio>
+#include <algorithm>
+
+#define MAX_NODES (int)1e5
+#define MOD (int)(1e9+7)
+/* 
+* Set For Union Find Algorithm
+*/
+
+class Set
+{
+	public:
+		
+	int *array;
+	int *size;
+
+	// Constructor
+	Set (int N)
+	{
+		array = new int [N];
+		size  = new int [N];
+
+		for (int i=0;i<N;i++)
+		{
+			array[i] = i;
+			size[i] = 1;
+		}	
+	}
+
+	// Destructor
+	~Set ()
+	{
+		delete [] array;
+		delete [] size;
+	}
+
+	// Finds The Root Of An Element
+	int root (int element)
+	{
+		while (array[element] != element)
+		{
+			array[element] = array[array[element]];
+			element = array[element];
+		}
+
+		return element;
+	}
+
+	// Does The Union Of Two Sets a and b
+	void w_union (int a,int b)
+	{
+		int root_a = root (a);
+		int root_b = root (b);
+
+		if (size[root_a] < size[root_b])
+		{
+			array[root_a] = array[root_b];
+			size[root_b] += size[root_a];
+		}
+		else
+		{
+			array[root_b] = array[root_a];
+			size[root_a] += size[root_b];
+		}
+	}
+
+	// Finds Whether a and b are in the same set or not
+	bool find (int a,int b)
+	{
+		return root (a) == root (b);
+	}
+
+};
+
+long long cc[MAX_NODES];
+
+int main ()
+{
+	int T;
+	int N,M;
+	int from,to;
+	long long answer_1,answer_2;
+
+	scanf ("%d",&T);
+
+	while (T--)
+	{
+		scanf ("%d",&N);
+		scanf ("%d",&M);
+
+		Set s(N);
+
+		for (int i=0;i<M;i++)
+		{
+			scanf ("%d",&from);
+			scanf ("%d",&to);
+
+			from--;
+			to--;
+
+			s.w_union (from,to);
+		}
+
+		std::fill (cc,cc+N,0);
+
+		for (int i=0;i<N;i++)
+			cc[s.root(i)]++;
+
+		answer_1 = 0;
+		answer_2 = 1;
+
+		for (int i=0;i<N;i++)
+		{
+			if (cc[i] > 0)
+			{
+				answer_1++;
+				answer_2 = ((answer_2%MOD)*cc[i])%MOD;
+			}
+		}
+
+		printf ("%lld %lld
+",answer_1,answer_2);
+	}
+
+	return 0;
+}

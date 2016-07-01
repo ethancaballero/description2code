@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+const long MOD =1000000007;
+/*
+ * Compute n choose m
+ *
+ */
+long bc[5010][5010];
+long nCm(void)
+{
+    for(int i =0;i<5010; i++)
+        bc[i][0]=1;
+
+    for(int j =0;j<5010; j++)
+        bc[j][j]=1;
+
+    for(int i=1;i<5010; i++)
+    {
+        for(int j=1;j<=i; j++)
+        {
+            bc[i][j]=(bc[i-1][j-1]+ bc[i-1][j])%MOD;
+        }
+    }
+}
+int main()
+{
+    nCm();
+    while(1)
+    {
+        int N;
+        int K;
+        long long res;
+        cin >>N>>K;
+        if (N==0 && K==0)
+            break;
+        //char *str = new char[100];
+        //cout<<traverse(N,K,0,0, str, 0)<<endl;
+        res =(2*bc[N-2][(int)ceil((K/2.0)-1)])%MOD;
+        res = (res*bc[N-2][(int)floor(K/2)])%MOD;
+        cout <<res<<endl;
+    }
+}

@@ -1,0 +1,64 @@
+#include<iostream>
+#include<vector>
+#include<climits>
+#include<algorithm>
+#include<string>
+#include<cstdio>
+#include<climits>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int type;
+        cin>>type;
+        string str;
+        cin>>str;
+        string GB = "G", BG = "B";
+        int len = str.size(), i, bswaps = 0, gswaps = 0, price = INT_MAX;
+        for(i=1;i<len;i++){
+            if(GB[i-1] == 'G')
+                GB += 'B';
+            else
+            if(GB[i-1] == 'B')
+                GB += 'G';
+            if(BG[i-1] == 'B')
+                BG += 'G';
+            else
+            if(BG[i-1] == 'G')
+                BG += 'B';
+        }
+
+        for(i=0;i<len;i++){
+            if(str[i] != GB[i]){
+                if(str[i] == 'B' && GB[i] == 'G')
+                    bswaps++;
+                else
+                if(str[i] == 'G' && GB[i] == 'B')
+                    gswaps++;
+            }
+        }
+        //cout<<bswaps<<" "<<gswaps<<endl;
+        if((bswaps == gswaps))
+            price = bswaps;
+        bswaps = gswaps = 0;
+         for(i=0;i<len;i++){
+            if(str[i] != BG[i]){
+                if(str[i] == 'B' && BG[i] == 'G')
+                    bswaps++;
+                else
+                if(str[i] == 'G' && BG[i] == 'B')
+                    gswaps++;
+            }
+        }
+        //cout<<bswaps<<" "<<gswaps;
+        if((bswaps == gswaps)){
+            if(bswaps < price)
+                price = bswaps;
+        }
+        if(price == INT_MAX)
+            price = -1;
+        cout<<price<<endl;
+    }
+}

@@ -1,0 +1,80 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<climits>
+#include<cstring>
+using namespace std;
+#define INF INT_MAX
+#define ll long long
+ll dp[1001][1001];
+ll kt[501];
+ll ht[501];
+int main()
+{
+  ll i,j,k,l,t,n,mx,ct;
+  scanf("%lld",&t);
+  while(t--)
+  {
+  	ct=0;
+  	mx=-1;
+  	memset(dp,0,sizeof dp);
+  	scanf("%lld",&n);
+  	for(i=1;i<=n;i++)
+  	{
+  	  scanf("%lld",&ht[i]);
+		mx=max(mx,ht[i]);	
+  	}
+  	for(i=1;i<=n;i++)
+  	{
+  	  scanf("%lld",&kt[i]);	
+  	}
+  	mx*=2;
+  	dp[0][0]=0;
+  	for(i=1;i<=mx;i++)
+  	{
+  		dp[0][i]=INF;
+  	}
+  	for(i=1;i<=n;i++)
+  	{
+  		for(j=0;j<=mx;j++)
+  		{
+  			dp[i][j]=dp[i-1][j];
+  			if(kt[i]<=j)
+  			{
+  				dp[i][j]=min(dp[i][j],1+dp[i][j-kt[i]]);
+  			}
+  		}
+  	}
+  	/*for(i=0;i<=10;i++)
+  	{
+  		for(j=0;j<=10;j++)
+  		{
+  			cout<<dp[i][j]<<" ";
+  		}
+  		cout<<"
+";
+  	}*/
+  	for(i=1;i<=n;i++)
+  	{
+  		ct+=dp[n][ht[i]*2];
+  	}
+  	printf("%lld
+",ct);
+  }
+  return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

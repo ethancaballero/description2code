@@ -1,0 +1,23 @@
+import math
+
+
+t = int(raw_input())
+
+
+for case in xrange(t):
+    i, j = map(int, raw_input().split(" "))
+    route = []
+    steps = 0
+    while i>=1:
+        route.append(i)
+        i = i/2
+        steps+=1
+    # print route
+
+    steps2 = 0
+    while j>=1:
+        if j in route:
+            break
+        j = j/2
+        steps2+=1
+    print(route.index(j)+steps2)

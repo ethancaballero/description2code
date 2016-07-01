@@ -1,0 +1,95 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+#include<utility>
+#include<cmath>
+#include<queue>
+#include<climits>
+using namespace std;
+
+
+pair<int,int> pa;
+
+
+int dis(pair<int,int> x,pair<int,int> y)
+{
+int x1 = x.first, y1 = x.second;
+int x2 = y.first, y2 = y.second;
+
+return( ((x1-x2)*(x1-x2)) + ((y1-y2)*(y1-y2)) );
+}
+
+
+int main()
+{
+int t,n,i,j;
+
+scanf("%d",&t);
+while(t--)
+{
+vector< pair<int,int> > a;
+scanf("%d",&n);
+for(i=0;i<n+2;i++)
+{
+scanf("%d%d",&pa.first,&pa.second);
+a.push_back(pa);
+}
+
+
+
+
+int dist[2502],vis[2502];
+priority_queue<pair<int,int>, vector<pair<int,int> >, greater<pair<int,int> > > q;
+
+dist[n] = 0;
+for(i=0;i<n+2;i++)
+{
+if(i!=n) dist[i] = INT_MAX;
+pa.first = dist[i];
+pa.second = i;
+q.push(pa);
+vis[i] = 0;
+}
+
+
+
+
+while(!q.empty())
+{
+pair<int,int> te;
+pa = q.top();
+q.pop();
+int v = pa.second;
+if(vis[v] == 1) continue;
+vis[v] = 1;
+
+for(i=0;i<n+2;i++)
+{
+int qw = dis(a[v],a[i]);
+if(vis[i] == 0 && dist[v]+ qw < dist[i])
+{
+dist[i] = dist[v] + qw;
+te.first = dist[i];
+te.second = i;
+q.push(te);
+}
+
+}
+
+
+
+}
+
+
+printf("%d
+",dist[n+1]);
+
+}
+
+
+
+
+
+return 0;
+}

@@ -1,0 +1,10 @@
+from __future__ import print_function
+from sys import stdin
+t=int(stdin.readline())
+for i in range(0,t):
+	n=int(stdin.readline())
+	l=map(int,stdin.readline().split())
+	k=sum(l)/(n-1);
+	for x in l:
+		print(k-x,end=" ")
+	print()

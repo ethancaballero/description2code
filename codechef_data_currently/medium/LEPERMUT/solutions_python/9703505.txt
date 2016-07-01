@@ -1,0 +1,18 @@
+# cook your code here
+for _ in xrange(input()):
+    n = input()
+    val1 = 0
+    val2 = 0
+    arr = []
+    arr = map(int,raw_input().split())
+    for i in xrange(n):
+        if i+1<n:
+            if arr[i] > arr[i+1]:
+                val2 += 1 
+        for j in xrange(i+1,n):
+            if arr[i] > arr[j]:
+                val1 += 1 
+    if val1 == val2:
+        print "YES"
+    else:
+        print "NO"

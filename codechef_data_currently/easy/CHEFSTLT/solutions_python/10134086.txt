@@ -1,0 +1,18 @@
+import math
+T= int(raw_input()) # number of cases
+for i in range(T):
+    minnum=0
+    extra=0
+    first= str(raw_input()) # number of cases
+    second= str(raw_input()) # number of cases
+    for x in range(0,len(first)):
+        if first[x]!=second[x] and first[x]!="?" and second[x]!="?":
+                minnum=minnum+1
+                
+        if first[x]=="?" or second[x]=="?":
+            extra=extra+1
+            
+                
+    print str(minnum)+" "+ str(extra+minnum)
+            
+    

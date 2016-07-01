@@ -1,0 +1,6 @@
+from fractions import gcd
+t = int(input())
+for test in xrange(t):
+	n = int(input())
+	inp = map(int,raw_input().split())
+	print reduce(gcd,inp)

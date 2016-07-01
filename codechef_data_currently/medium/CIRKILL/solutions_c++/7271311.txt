@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#define sl(l) scanf("%d",&l)
+typedef  int ll;
+using namespace std;
+#define eps 1e-7
+template<class T>inline T sqr(T x) {return x*x;}
+ll x[31];
+ll y[31];
+int main()
+{
+	ll t;
+	sl(t);
+	while(t--)
+	{
+		double cnt=0;
+		ll n,ans=0;
+		sl(n);
+		for(ll i=0;i<n;i++)sl(x[i]),sl(y[i]);
+		for(ll i=0;i<n;i++)for(ll j=i+1;j<n;j++)for(ll k=j+1;k<n;k++)
+		{
+			double a1 = (x[i]-x[j]);
+			double b1 = (y[i]-y[j]);
+			double c1= ((x[i]*x[i]-x[j]*x[j])+(y[i]*y[i]-y[j]*y[j]))/2.0;
+
+			double a2 = (x[i]-x[k]);
+			double b2 = (y[i]-y[k]);
+			double c2= ((x[i]*x[i]-x[k]*x[k])+(y[i]*y[i]-y[k]*y[k]))/2.0;
+
+			double det = a1*b2-a2*b1;
+			//printf("%f %f %f %f %f %f %f
+",a1,b1,c1,a2,b2,c2,det);
+			if(fabs(det)<=eps)continue;
+			double cx = (b2*c1-c2*b1)/det;
+			double cy = (a1*c2-a2*c1)/det;
+
+			double r = sqr(cx-x[i])+sqr(cy-y[i]);
+			//printf("%f
+",r);
+
+			for(ll m=0;m<n;m++)if(m!=i && m!=j && m!=k && sqr(cx-x[m])+sqr(cy-y[m])<=eps+r)cnt++;
+			
+
+		}
+			double total = n*(n-1)*(n-2)*(n-3)/6;
+			printf("%.18lf
+",cnt/total);
+	}
+	return 0;
+}

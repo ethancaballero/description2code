@@ -1,0 +1,52 @@
+import math
+import collections
+
+def prime_factors(n):
+    """Yields prime factors of a positive number."""
+    assert n > 0
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            n //= d
+            yield d
+        d += 1
+    if n > 1:  # to avoid 1 as a factor
+        assert d <= n
+        yield n
+
+
+def is_triple(hypotenuse):
+    """return (a, b, c) if Pythagrean Triple, else None"""
+    # We have :
+    # a = m^2 - n^2, b = 2mn , c = m^2 + n^2 with m > n > 0
+    # c >= 2 * n^2
+    # 0 < n <= sqrt(c/2)
+    if hypotenuse:
+        factor = 1
+        for prime, power in collections.Counter(prime_factors(hypotenuse)).iteritems():
+            if prime % 4 != 1:
+                factor *= prime ** power
+        c = hypotenuse / factor
+        c_sqr = c ** 2
+        for n in xrange(1, int(math.ceil(math.sqrt(c/2)))):
+            m = math.sqrt(c - n ** 2)
+            if m == int(m):
+                m = int(m)
+                #return factor*(m*m - n*n), 2*m*n*factor, hypotenuse
+		return "YES"
+    return "NO"
+
+if __name__ == "__main__":
+   #print is_triple(5)
+   #print is_triple(13)
+   #print is_triple(12)
+
+   cases = int(raw_input())
+   for _ in xrange(cases):
+	h = int(raw_input())
+        print is_triple(h)
+
+
+
+
+

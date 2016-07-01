@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--) {
+        int n;
+        scanf("%d",&n);
+        vector<int> a(n+1);
+        vector<int> b(n+1);
+        for(int i=0;i<n;i++) {
+            scanf("%d",&a[i]);
+        }
+        for(int i=0;i<n;i++) {
+            scanf("%d",&b[i]);
+        }
+        int cont = 0;
+        if(a[0]>=b[0]) {
+            cont++;
+        }
+        for(int i=1;i<n;i++) {
+            if((a[i]-a[i-1]) >= b[i]) {
+                cont++;
+            }
+        }
+        printf("%d
+",cont);
+    }
+    return 0;
+}

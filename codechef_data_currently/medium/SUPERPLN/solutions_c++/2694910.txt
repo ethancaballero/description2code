@@ -1,0 +1,72 @@
+#include<iostream>
+#include<map>
+#include<cmath>
+#include<bitset>
+#include<new>
+#include<utility>
+#include<stdio.h>
+#include<algorithm>
+#include<stdlib.h>
+#include<complex>
+#include<valarray>
+#include<queue>
+#include<cstring>
+using namespace std;
+
+#define f first
+#define s second
+#define pb push_back
+#define ll long long
+#define ULL unsigned long long
+#define mp make_pair
+#define MOD 1000000007
+#define mm map<int,map<int,bool> >
+#define mv map<int,vector<int,bool> >
+#define cp complex<double>
+#define mpp map<pair<pair<int,int>,int > ,bool >
+#define INF (1<<30)
+#define MAX (1+(1<<20))
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+	int n;
+	cin>>n;
+	map<int,pair<pair<int,int>,bool> > v[10001];
+	map<int,pair<pair<int,int>,bool> > :: iterator it;
+	for(int i=0;i<n;i++)
+	{
+	    int c1,t1,c2,t2;
+	    scanf("%d %d %d %d",&c1,&t1,&c2,&t2);
+	    v[c1][t1]=mp(mp(c2,t2),0);
+	}
+	int sc,st,dc,dt;
+	scanf("%d %d %d %d",&sc,&st,&dc,&dt);
+	int ans=0,flag=0;
+	while(1)
+	{
+	    if(sc==dc && st<=dt)
+		break;
+	    it=v[sc].lower_bound(st);
+	    if(it==v[sc].end() || (*it).s.s==1)
+	    {
+		flag=1;
+		break;
+	    }
+	    (*it).s.s=1;
+	    sc=(*it).s.f.f;
+	    st=(*it).s.f.s;
+	    ans++;
+	}
+	if(!flag)
+	    printf("Yes %d
+",ans);
+	else
+	    printf("No
+");
+    }
+    return 0;
+}

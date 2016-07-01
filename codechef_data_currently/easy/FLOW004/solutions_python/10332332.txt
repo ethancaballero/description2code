@@ -1,0 +1,6 @@
+t = int(raw_input())
+j = 0
+while j<t :
+    a = raw_input()
+    print int(a[0]) + int(a[len(a)-1])
+    j+=1  

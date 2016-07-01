@@ -1,0 +1,3 @@
+T = int(raw_input())
+for _ in xrange(T):
+    print len(set(str(raw_input())))

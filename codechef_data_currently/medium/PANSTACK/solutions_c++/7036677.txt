@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+#define M 1000000007
+int main()
+{
+   int T,N,i,j;
+   long long int arr[1001][1001],ans[1001];
+   arr[1][1]=1;
+   ans[1]=1;
+   for(i=2;i<1001;i++)
+   {
+      ans[i]=0;
+      for(j=1;j<=i;j++)
+      {
+         arr[i][j]=j*arr[i-1][j]%M;
+         if(j-1!=0)
+            arr[i][j]=(arr[i][j]+arr[i-1][j-1])%M;
+         ans[i]=(ans[i]+arr[i][j])%M;
+      }
+   }
+   cin>>T;
+   while(T--)
+   {
+      cin>>N;
+      cout<<ans[N]<<endl;
+   }
+   return 0;
+}

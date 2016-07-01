@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main()
+{
+    ll r,c,min,max,temp,ans=-1,i,j,flag=0,k;
+
+    cin >>r >> c;
+
+    ll a[r][c];
+
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+         {
+             cin >> a[i][j];
+         }
+    }
+
+    
+    for(i=0;i<r;i++)
+    {
+       min=1000000001;
+      
+       for(j=0;j<c;j++)
+       {
+           if(min>a[i][j])
+           {
+               min=a[i][j];
+           }
+       }
+
+       
+       for(j=0;j<c;j++)
+       {    
+            if(a[i][j]==min)
+            {
+                 temp=j;
+                 //cout<<"index==="<<temp<<endl;
+                 max=-1;
+                 for(k=0;k<r;k++)
+                 {
+        
+                      if(max<a[k][temp])
+                       {
+                          max=a[k][temp];
+                       }
+                 }
+
+            }
+            //cout<<"max---"<<max<<endl;
+            if(min==max)
+            {
+               ans=min;
+            }
+        }
+
+     }
+
+     if(ans==-1)
+     {
+         cout <<"GUESS" << endl;
+     }
+
+     else
+     {
+         cout << ans << endl;
+     }
+
+     return 0;
+}
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

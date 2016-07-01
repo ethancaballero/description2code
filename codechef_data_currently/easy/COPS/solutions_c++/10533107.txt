@@ -1,0 +1,39 @@
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+#include <stdlib.h>
+
+int main()
+{
+	int T; //number of test casees
+	cin >> T;
+	
+	for(int i = 0; i < T; i++)
+	{
+		int M, //number of houses occupied by cops
+			x, //maximum speed of cops (houses per minute)
+			y; //cops will search for y minutes
+		cin >> M >> x >> y;
+		
+		int copHouses[M]; //houses which have cops
+		for(int j = 0; j < M; j++)
+		{
+			int h;
+			cin >> h;
+			copHouses[j] = h;
+		}
+		
+		int count = 0;
+		for(int j = 1; j <= 100; j++)
+		{
+			bool safe = true;
+			for(int k = 0; k < M; k++)
+				safe = safe && (abs(copHouses[k] - j) > x*y);
+			if(safe)
+				count++;
+		}
+		
+		cout << count << endl;
+	}
+}

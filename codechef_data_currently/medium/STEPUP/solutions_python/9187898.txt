@@ -1,0 +1,19 @@
+for i in range(input()):
+    n,m=map(int,raw_input().split())
+    cansolve=True
+    max=0
+    l=[ 0 for i in range(n+2)]
+    for k in range(m):
+        s,d=map(int,raw_input().split())
+        if l[s]==0:l[s]=1
+        if l[d]==0:l[d]=l[s]+1
+        if l[d]<l[s]:
+            cansolve=False
+        if max<l[d]:
+            max=l[d]
+    if cansolve:
+        print max
+    else:
+        print "IMPOSSIBLE"
+     
+

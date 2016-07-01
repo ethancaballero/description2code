@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int x,i,f;
+        int time=0;
+        while(n--)
+        {
+
+            cin>>x>>i>>f;
+            if(time<=x)
+            {
+                time=x+i;
+            }
+            else if(time>x)
+            {
+
+                    time=time + ((f-time%f)+x)%f+ i;
+            }
+
+        }
+        cout<<time<<endl;
+
+
+    }
+}

@@ -1,0 +1,8 @@
+from sys import stdin as ip
+for _ in xrange(int(ip.readline())):
+    s=raw_input()
+    j=raw_input()
+    ct=0
+    for i in set(s):
+        ct+=j.count(i)
+    print ct

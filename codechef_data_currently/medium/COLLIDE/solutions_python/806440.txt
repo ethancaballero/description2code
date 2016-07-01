@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+def main():
+    T = int(raw_input())
+    for t in xrange(T):
+        XE, YE, DIRE = raw_input().split()
+        XE, YE = int(XE), int(YE)
+        N = int(raw_input())
+        C = 'SAFE'
+        for n in xrange(N):
+            XA, YA, DIRA = raw_input().split()
+            XA, YA = int(XA), int(YA)
+            if   DIRE == DIRA: continue
+            if   DIRE == 'U' and YA - YE > 0:
+                 if   DIRA == 'D':
+                      if (XE == XA           ) and (C == 'SAFE' or C > (YA-YE)/2.): C = (YA-YE)/2.  # XE, YE+k == XA, YA-k
+                 elif DIRA == 'L':
+                      if (XA -  XE == YA - YE) and (C == 'SAFE' or C > (YA-YE)):    C = (YA-YE)     # XE, YE+k == XA-k, YA
+                 elif DIRA == 'R':
+                      if (XE -  XA == YA - YE) and (C == 'SAFE' or C > (YA-YE)):    C = (YA-YE)     # XE, YE+k == XA+k, YA
+            elif DIRE == 'D' and YE - YA > 0:
+                 if   DIRA == 'U':
+                      if (XE == XA           ) and (C == 'SAFE' or C > (YE-YA)/2.): C = (YE-YA)/2.  # XE, YE-k == XA, YA+k
+                 elif DIRA == 'L':
+                      if (XA -  XE == YE - YA) and (C == 'SAFE' or C > (YE-YA)):    C = (YE-YA)     # XE, YE-k == XA-k, YA
+                 elif DIRA == 'R':
+                      if (XE -  XA == YE - YA) and (C == 'SAFE' or C > (YE-YA)):    C = (YE-YA)     # XE, YE-k == XA+k, YA
+            elif DIRE == 'L' and XE - XA > 0:
+                 if   DIRA == 'U':
+                      if (YE -  YA == XE - XA) and (C == 'SAFE' or C > (XE-XA)):    C = (XE-XA)     # XE-k, YE == XA, YA+k
+                 elif DIRA == 'D':
+                      if (YA -  YE == XE - XA) and (C == 'SAFE' or C > (XE-XA)):    C = (XE-XA)     # XE-k, YE == XA, YA-k
+                 elif DIRA == 'R':
+                      if (YE == YA           ) and (C == 'SAFE' or C > (XE-XA)/2.): C = (XE-XA)/2.  # XE-k, YE == XA+k, YA
+            elif DIRE == 'R' and XA - XE > 0:
+                 if   DIRA == 'U':
+                      if (YE -  YA == XA - XE) and (C == 'SAFE' or C > (XA-XE)):    C = (XA-XE)     # XE+k, YE == XA, YA+k
+                 elif DIRA == 'D':
+                      if (YA -  YE == XA - XE) and (C == 'SAFE' or C > (XA-XE)):    C = (XA-XE)     # XE+k, YE == XA, YA-k
+                 elif DIRA == 'L':
+                      if (YE == YA           ) and (C == 'SAFE' or C > (XA-XE)/2.): C = (XA-XE)/2.  # XE+k, YE == XA-k, YA
+        if C == 'SAFE': print C
+        else:           print '%.1f' % C
+
+main()

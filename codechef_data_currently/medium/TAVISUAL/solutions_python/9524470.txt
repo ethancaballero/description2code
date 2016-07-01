@@ -1,0 +1,10 @@
+t=input()
+while t:
+	n,c,q=map(int,raw_input().split())
+	while q:
+		l,r=map(int,raw_input().split())
+		if l<=c and c<=r:
+			c=r-c+l
+		q=q-1
+	print c
+	t=t-1

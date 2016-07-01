@@ -1,0 +1,20 @@
+#Chef And Remissness
+
+def main():
+    T = int(raw_input())
+    while T!=0:
+        T-=1
+        A, B = raw_input().split()
+        A = int(A)
+        B = int(B)
+        if A > B:
+            mini = A
+        elif B > A:
+            mini = B
+        elif A == B:
+            mini = A
+        maxi = A + B
+        print str(mini) + " " + str(maxi)
+
+if __name__ == '__main__':
+    main()

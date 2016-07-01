@@ -1,0 +1,148 @@
+/* Program created by Shantanu Tripathi(SHAAN)
+   IPG_2014079
+   ABV-IIITM,Gwalior */
+#include <cmath>
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <list>
+#include <deque>
+#include <map>
+#include <set>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#include <cstring>
+#include <string>
+#include <utility>
+#include <iomanip>
+#include <limits>
+#include <cstdlib>
+using namespace std;
+#define _ ios::sync_with_stdio(false); cin.tie(0);
+#define f0(i,n) for(int i=0;i<n;i++)
+#define f1(i,n) for(int i=1;i<=n;i++)
+#define fk(i,k,n) for(int i=k;i<=n;i++)
+#define ll long long
+#define l long
+#define sc1(x) scanf("%d",&x)
+#define sc2(x,y) scanf("%d%d",&x,&y)
+#define sc3(x,y,z) scanf("%d%d%d",&x,&y,&z)
+
+#define scll1(x) scanf("%lld",&x)
+#define scll2(x,y) scanf("%lld%lld",&x,&y)
+#define scll3(x,y,z) scanf("%lld%lld%lld",&x,&y,&z)
+
+#define pr1(x) printf("%d
+",x)
+#define pr2(x,y) printf("%d %d
+",x,y)
+#define pr3(x,y,z) printf("%d %d %d
+",x,y,z)
+
+#define prll1(x) printf("%lld
+",x)
+#define prll2(x,y) printf("%lld %lld
+",x,y)
+#define prll3(x,y,z) printf("%lld %lld %lld
+",x,y,z)
+#define max(a,b) (((a)>(b))?(a):(b))
+#define min(a,b) (((a)<(b))?(a):(b))
+
+#define max3(a,b,c) ((max(a,b)>(c))?max(a,b):c)
+#define min3(a,b,c) ((min(a,b)<(c))?min(a,b):c)
+typedef vector<int> vi;
+typedef vector<l> vl;
+typedef vector<ll> vll;
+typedef vector<bool> vb;
+typedef vector<vi > matrix;
+typedef pair<int ,int> pi;
+typedef pair<l,l> pl;
+typedef pair<ll,ll> pll;
+typedef vector<pi > vpi;
+typedef vector<pll > vpll;
+#define sz(a) int((a).size())
+#define pb push_back
+#define mp make_pair
+#define all(c) (c).begin(),(c).end()
+#define tr(c,i) for(typeof((c).begin()) i = (c).begin(); i != (c).end(); i++)
+#define present(c,x) ((c).find(x) != (c).end())
+#define apresent(c,x) (find(all(c),x) != (c).end())
+inline bool ispalindrome(string s) { for(int i=0,j=s.size()-1;i<=j;i++,j--) if(s[i]!=s[j]) return false; return true; }
+inline bool ispalindrome(vi s) { for(int i=0,j=s.size()-1;i<=j;i++,j--) if(s[i]!=s[j]) return false; return true; }
+#define ispalin(x) ispalindrome(x)
+inline ll gcd(ll a,ll b) {  return ((b==0)?a:gcd(b,a%b)); }
+inline ll modexp(ll a,ll b,ll m) { ll d=1; while(b>0) { if(b&1) d=(d*a)%m; a=(a*a)%m; b=b>>1; } return d; }
+//#define MAX 10000007
+/*
+vb isprime(MAX+1,1);
+void sieve() {
+isprime[0]=isprime[1]=0;
+int i,j,sq=sqrt(MAX);
+for(i=4;i<=MAX;i+=2) isprime[i]=0;
+for(i=3;i<=sq;i+=2) if(isprime[i]) for(j=i*i;j<=MAX;j+=(i+i)) isprime[j]=0;  }  */
+/*
+vi small(MAX+1);
+void smallprime(){
+int i,j,sq=sqrt(MAX);
+small[0]=small[1]=0;
+for(i=2;i<=MAX;i++) small[i]=(i&1)?i:2;
+for(i=3;i<=sq;i+=2) if(small[i]==i) for(j=2*i;j<=MAX;j+=i) if(small[j]==j) small[j]=i;  }  */
+/*
+void factorization(ll n)
+{
+	ll temp=small[n],prod=1,count=0;
+	while(n>1)
+	{
+		if(temp==small[n]) count++;
+		else{
+		// cout<<temp<<"^"<<count<<" ";
+		// prod*=(count+1);
+		temp=small[n];
+		count=1;
+		}
+		n/=small[n];
+	}
+		// cout<<temp<<"^"<<count<<" "<<endl;
+		// prod*=(count+1);
+}    */
+
+void solve(int* arr, ll sum, int k, int n)
+{
+	int low = 1;
+	int high= n;
+	set<pair<ll, pi > >pqueue;
+	pqueue.insert(mp(sum,mp(low,high)));
+	while(k-- && !pqueue.empty())
+	{
+		pair<ll, pi>  p = *pqueue.rbegin();
+		pqueue.erase(p);
+		sum = p.first;
+		cout<< sum<<endl;
+		low = p.second.first;
+		high = p.second.second;
+		if(low!=high)
+		{
+			pqueue.insert(mp(sum-arr[low],mp(low+1,high)));
+			pqueue.insert(mp(sum-arr[high],mp(low,high-1)));
+		}
+	}
+	
+}
+int main()
+{
+	int n,k;
+	cin>>n>>k;
+	int arr[100050];
+	ll sum=0;
+	f1(i,n) 
+	{
+	cin>>arr[i];
+	sum+=arr[i];
+    }
+    solve(arr, sum, k, n);
+	return 0;
+}
+
+
+

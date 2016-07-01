@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+#define ll long long
+
+int main()
+{   ll t;
+    cin>>t;
+    while(t--)
+    {   int a;
+        cin>>a;
+        cout<<a/2+1<<"
+";
+    }
+    return 0;
+}

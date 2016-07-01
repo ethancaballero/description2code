@@ -1,0 +1,67 @@
+//codechef problem : DIVGOLD
+//by Nitish Kumar
+//user id : nk17kumar
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll ;
+typedef unsigned int ui;
+#define br printf("
+")
+#define loop(i,k,n) for(int i=k;i<n;i++)
+#define loopr(i,k,n) for(int i=k;i>=n;i--)
+#define arrin(arrname,size) loop(i,0,size) cin>>arrname[i]
+#define fastinput() ios_base::sync_with_stdio(false)
+#define mod 1000000007
+#define F first
+#define S second
+#define mp make_pair
+#define pb push_back
+#define sz(x) ((int)(x).size())
+#define each(it,o) for(it=(o).begin(); it != (o).end(); ++ it)
+#define all(o) (o).begin(), (o).end()
+#define pq priority_queue 
+int main()
+{
+	fastinput();
+    int t;cin>>t;
+	while(t--)
+	{
+	  int l; 
+	  cin>>l;
+	  string s,store[5000],tmp;
+	  cin>>s;
+	  int k=0;
+	  store[k++]=s;
+	  loop(pos,0,l)
+	  { 
+	  	loop(i,0,l)
+	  	{ 
+	  		 if(i==pos)
+	  		 continue;
+	  		 else if(pos>i)
+	  		{  // cout<<pos<<" "<<i<<" "<<s.substr(0,i)<<"  "<<s[pos]<<"  "<<s.substr(i,pos-i)<<"  "<<s.substr(pos+1,l-pos)<<endl;
+	  			tmp=s.substr(0,i)+s[pos]+s.substr(i,pos-i)+s.substr(pos+1,l-pos);
+	  			 store[k++]=tmp;
+	  		//	cout<<tmp<<endl;
+			  }
+			  else
+			  { 
+			  //cout<<pos<<" "<<i<<" "<<s.substr(0,pos)<<"  "<<s.substr(pos+1,i-pos)<<"  "<<s[pos]<<"  "<<s.substr( (i+1==l)?i:i+1,l-i)<<endl;
+			  	tmp=s.substr(0,pos)+s.substr(pos+1,i-pos)+s[pos]+s.substr(i+1,l-i);
+	  			store[k++]=tmp;
+	  		//	cout<<tmp<<endl;
+			  }
+		}
+		
+		  }
+	  
+	  sort(store,store+k);
+	  printf("%s
+",store[0].c_str());
+}
+	  
+	  
+	   
+    
+    return 0;
+}

@@ -1,0 +1,19 @@
+using namespace std;
+#include<iostream>
+#include<stdlib.h>
+
+int main()
+{
+int n,s1,s2,w=0,l=0,i,a=0,b=0;
+cin>>n;
+for(i=0;i<n;i++) {
+cin>>s1>>s2;
+a = a+s1;
+b= b+s2;
+if(abs(a-b)>l) {
+l = abs(a-b);
+w = a>b?1:2;
+}
+}
+cout<<w<<" "<<l;
+}

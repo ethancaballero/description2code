@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int ips;
+    cin>>ips;
+    while(ips--)
+    {
+        long int fact=1,data;
+        cin>>data;
+        for(int i=data;i>=1;i--)
+        {
+            fact=fact*i;
+        }
+        cout<<fact<<endl;
+    }
+}

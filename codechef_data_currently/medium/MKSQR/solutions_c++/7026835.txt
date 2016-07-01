@@ -1,0 +1,37 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define s(x) scanf("%d", &x)
+
+int main()
+{
+    int t, n, x, y, pos, neg, zero;
+    s(t);
+    while (t--) {
+        pos = 0;
+        neg = 0;
+        zero = 0;
+        s(n);
+        while (n--) {
+            s(x);
+            s(y);
+            x -= y;
+            if (x < 0)
+                neg++;
+            else if (x > 0)
+                pos++;
+            else
+                zero++;
+        }
+        if (zero)
+            puts("YES");
+        else if (neg && pos)
+            puts("YES");
+        else
+            puts("NO");
+    }
+    return 0;
+}

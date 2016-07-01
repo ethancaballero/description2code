@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef pair<int,int> pii;
+typedef pair<long long,long long> pll;
+typedef vector<int> vi;
+typedef pair<double,double> pdd;
+typedef vector<long long> vll;
+typedef vector<pii> vpii;
+typedef vector<pll> vpll;
+typedef vector<pdd> vpdd;
+
+#define f first
+#define s second
+#define mp make_pair
+#define pb push_back
+#define MOD 1000000007
+#define ll long long
+ll GCD(ll a, ll b)
+{
+    return b? GCD(b,a%b) : a;
+}
+bool chk(string first, string second)
+{
+    string t1 = first + second;
+    string t2 = second + first;
+    return t1 < t2;
+}
+struct sort_pred
+{
+    bool operator()(const pair<int,int> &left, const pair<int,int> &right)
+    {
+        return left.second < right.second;
+    }
+};
+long long POW(long long Base, long long Exp)
+{
+    long long y,ret=1;
+    y=Base;
+    while(Exp)
+    {
+        if(Exp&1)
+            ret=(ret*y)%MOD;
+        y = (y*y)%MOD;
+        Exp/=2;
+    }
+    return ret%MOD;
+}
+
+vll A,B,C,Res,Mark;
+string str,str1,s1,s2;
+set<string> st;
+stack<ll> chlo;
+vpll Rec;
+map <string, ll> Reg;
+string ItoS(ll n)
+{
+	ll num = n;
+	ll tmp;
+	string ans ="";
+	while(num)
+	{
+		tmp = num%10;
+		ans = ans + (char)('0'+tmp);
+		num/=10;
+	}
+	reverse(ans.begin(),ans.end());
+	
+	return ans;
+}
+bitset<100*1000+7> Magic;
+int main() 
+{
+	ll i,j,n,k,m,x,y,z,tmp1,tmp2,tmp3,ind,Max;
+	int t;
+    cin>>t;
+    for(int tc=1; tc<=t; tc++)
+    {
+        cin>>n>>m;
+        
+        A.resize(n);
+        
+        Magic.reset();
+        Magic[0]=1;
+        
+        for(i=0; i<n; i++)
+        {
+        	cin>>A[i];
+        }
+        //sort(A.begin(),A.end());
+        for(i=0; i<n; i++)
+        {
+        	Magic = Magic | (Magic<<A[i]);
+        }
+        
+       	if(Magic[m])
+       				printf("Yes
+");
+       	else
+       				printf("No
+");
+    }
+	return 0;
+}

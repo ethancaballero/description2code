@@ -1,0 +1,9 @@
+# codeChef problemCode: CHEFEQ
+for testcases in xrange(int(raw_input() ) ) :
+    N = int( raw_input() )
+    Given = map(int, raw_input().split() )
+    maxc = 0
+    for elem in set(Given) :
+        c = Given.count(elem)
+        maxc = max(maxc, c )
+    print len(Given)-maxc

@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct sort_pred
+{
+    bool operator()(const pair<double,double> &left, const pair<double,double> &right)
+    {
+        return (left.first < right.first?true:(left.first==right.first?(left.second>right.second?true:false):false));
+    }
+};
+typedef pair<double,double> pairdbl;
+#define mp(a,b) make_pair(a,b)
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n;
+        scanf("%d",&n);
+        pair<double,double> arr[n];
+        int i=0;
+        double x,y;
+        while(i<n)
+        {
+            cin>>x>>y;
+          //  cout<<x<<y<<endl;
+            arr[i]=mp(x,y);
+            i++;
+        }
+        sort(arr,arr+n,sort_pred());
+        i=0;
+        double sum=0;
+        while(i<n-1)
+        {
+            sum+=sqrt((arr[i+1].first-arr[i].first)*(arr[i+1].first-arr[i].first)+((arr[i+1].second-arr[i].second)*(arr[i+1].second-arr[i].second)));
+            i++;
+        }
+        cout<<setprecision(2)<<fixed<<sum<<endl;
+    }
+    return 0;
+}

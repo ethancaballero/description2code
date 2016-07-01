@@ -1,0 +1,25 @@
+for i in range(int(raw_input())):
+	n,k,e,m = map(int, raw_input().split())
+ 
+	summ = []
+	j = 0
+	for x in range(n-1):
+		a = map(int, raw_input().split())
+ 
+		summ.append(sum(a))
+ 
+	b = map(int, raw_input().split())
+	bb = sum(b)
+ 
+	summ.sort(reverse=True)
+ 
+	marks = summ[k-1] - bb
+	if marks < 0:
+		marks = 0
+	else:
+		marks = marks + 1
+	
+	if marks <= m:
+		print marks
+	else:
+		print "Impossible"

@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+int main()
+{int a,n;
+cin>>n;
+for(int i=0;i<n;i++)
+{int s=0;
+cin>>a;
+if(a>=100)
+{s+=a/100;
+a=a%100;}
+if(a>=50)
+{s+=a/50;
+a=a%50;}
+if(a>=10)
+{s+=a/10;
+a=a%10;}
+if(a>=5)
+{s+=a/5;
+a=a%5;}
+if(a>=2)
+{s+=a/2;
+a=a%2;}
+if(a==1)
+{s+=a/1;
+a=a%1;}
+if(a==0)
+{cout<<s<<endl;}
+}
+return 0;
+}

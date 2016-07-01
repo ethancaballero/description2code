@@ -1,0 +1,111 @@
+# include <bits/stdc++.h>
+
+# define INF 0x7f7f7f
+# define EPS 1e-9
+# define MOD 1000000007
+
+# define LL long long int
+# define ULL unsigned LL 
+# define PL pair <LL,LL>
+# define VPL vector < PL >
+# define VL vector <LL>
+# define VVL vector < VL >
+# define pb push_back
+# define mp make_pair 
+# define tr(c,it) for(typeof(c.begin()) it = c.begin(); it != c.end(); it++) 
+# define ff first
+# define ss second 
+# define pc putchar_unlocked
+
+# define F(i,a,b) for (i=a; i<b; i++)
+# define REP(i,n) F(i,0,n)
+
+
+#define ok if(debug)
+#define trace1(x) ok cerr << #x << ": " << x << endl;
+#define trace2(x, y) ok cerr << #x << ": " << x << " | " << #y << ": " << y << endl;
+#define trace3(x, y, z) ok cerr << #x << ": " << x << " | " << #y << ": " << y << " | " << #z << ": " << z << endl;
+#define trace4(a, b, c, d)  ok cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " 								<< #d << ": " << d << endl;
+#define trace5(a, b, c, d, e) ok cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " 									 << #d << ": " << d << " | " << #e << ": " << e << endl;
+#define trace6(a, b, c, d, e, f) ok cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " 									<< #d << ": " << d << " | " << #e << ": " << e << " | " << #f << ": " << f << endl;
+
+
+using namespace std;
+
+int debug=1;
+//const int LIM=1e7+5;
+
+/* MAIN PROGRAM STARTS HERE */
+
+int lmb(LL n)
+	{
+	LL n1=n; LL ret=0; while(n1=n1>>1) ret++; return ret;
+	}
+	
+	
+LL** mul(LL** A,LL** B)
+	{
+	LL i,j,k;
+	LL** C=new LL*[3];
+	REP(i,3) C[i]=new LL[3];
+	REP(i,3)
+		REP(j,3)
+			{
+			C[i][j]=0;
+			REP(k,3)
+				C[i][j]=(C[i][j]+(A[i][k]*B[k][j])%MOD)%MOD;
+			}
+	return C;
+	}
+	
+LL** multiply(LL** A,LL n)
+	{
+	LL i,j,k;
+	LL** C=new LL*[3];
+	REP(i,3) C[i]=new LL[3];
+	if (!n)
+		{
+		REP(i,3) REP(j,3) C[i][j]=(i==j)?1:0;
+		return C;
+		}	
+	C=multiply(A,n/2);
+	if (n&1)
+		C=mul(mul(C,C),A);
+	else 
+		C=mul(C,C);
+	return C;
+	}
+	 
+
+int main()
+	{
+	ios_base::sync_with_stdio(0);
+	//cin.tie(0);
+	
+	LL T,n,i,j,k,l,m,x,y,z;
+	cin>>T;
+	LL D[3][3]={{1,4,2},{1,0,0},{0,1,0}};
+	
+	
+	while (T--)
+		{
+		cin>>n;
+		LL** A=new LL*[3];
+		REP(i,3) A[i]=new LL[3];
+	
+		REP(i,3) REP(j,3) A[i][j]=D[i][j];
+	
+		if (n==1) cout<<1<<endl;
+		else if (n==2) cout<<5<<endl;
+		else
+			{
+			LL** C=new LL*[3];
+			REP(i,3) C[i]=new LL[3];
+			C=multiply(A,n-1);
+			LL ans=(C[1][0]*5+C[1][1]*1+C[1][2]*1)%MOD;
+			cout<<ans<<endl;
+			}
+		}
+	
+	return 0;
+	}

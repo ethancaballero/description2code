@@ -1,0 +1,23 @@
+import sys
+
+m =  10000009
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    str = sys.stdin.readline().strip()
+    l = str.__len__()
+    ways = 1
+    if l == 1:
+        if str[0] == '?': print 26
+        else: print 1
+    else:
+        if l%2 == 1: l = (l+1)/2
+        else: l/=2
+        for i in range(0, l):
+            if (str[i] != str[-1*(i + 1)]) and (str[i] != '?' and str[-1 * (i + 1)] != '?'):
+                ways = 0
+                break
+            elif (str[i] == str[-1*(i+1)]) and (str[i] == '?' and str[-1 * (i + 1)] == '?'):
+                ways  = (ways * 26)%m
+        print ways

@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main()
+{
+    int t,f,g;
+    cin>>t;
+    string s;
+    while(t--){
+    	cin>>s;f=0;g=-1;
+    	for(int i=0;i<s.length();i++){
+    		if(s[i]=='(')
+    		f++;
+    		if(s[i]==')')
+    		f--;
+    		if(g<f)
+    		g=f;
+		}
+		for(int i=0;i<g;i++){
+			cout<<'(';
+		}
+		for(int i=0;i<g;i++){
+			cout<<')';
+		}
+		cout<<endl;
+	}
+    return 0;
+}

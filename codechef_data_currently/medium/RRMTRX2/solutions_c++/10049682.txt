@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+const LL MOD = 1e7 + 7;
+LL A[50][59];
+int main(){
+    int N, M;
+    cin >> N >> M;
+    for(int i = 1;i <= N;++i){
+        for(int j = 1;j <= M;++j){
+            cin >> A[i][j];
+        }
+    }
+    LL ans = 1;
+    for(int j = 1;j <= M;++j){
+        LL sum = 0;
+        for(int i = 1;i <= N;++i){
+            sum += A[i][j];
+        }
+        sum %= MOD;
+        sum += MOD;
+        sum %= MOD;
+        ans *= sum;
+        ans %= MOD;
+    }
+    printf("%lld
+", ans);
+    return 0;
+}

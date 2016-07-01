@@ -1,0 +1,6 @@
+t=int(raw_input())
+while t:
+	b=int(raw_input())
+	n=b/2
+	print (n*(n-1))/2
+	t-=1

@@ -1,0 +1,48 @@
+#include<cstdio>
+using namespace std;
+int main()
+{
+	int t,i,n,x,a[100],sum,c,f,m;
+	scanf("%d",&t); //no of test cases
+	while(t--)
+	{   
+		f=0;
+		sum=0;
+	    scanf("%d",&n); //no of bank notes
+	    scanf("%d",&x); //cost of single sweet
+	    for(i=0;i<n;i++)
+	    {
+	    	scanf("%d",&a[i]);
+	    	sum+=a[i];
+	    }
+	    c=sum%x;
+        m=sum/x;
+	    if(c==0)
+	    {
+	    	printf("%d
+",m );
+        
+	    }
+	    else 
+	    {
+	    	for(i=0;i<n;i++)
+	    	{
+	    		if((sum-a[i])/x == m)
+	    		{   f=1;
+	    			printf("%d
+",-1 );
+	    			break;
+
+	    		}
+	    	}
+	    	if(f==0)
+	    	{
+	    		printf("%d
+",m);
+	    	}
+
+	    }
+
+	}
+	return 0;
+}

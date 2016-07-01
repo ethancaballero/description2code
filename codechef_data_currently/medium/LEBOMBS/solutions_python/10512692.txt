@@ -1,0 +1,20 @@
+T = int(raw_input())
+while T:
+    N = int(raw_input()); s = raw_input(); L = list(s)
+    if len(L) == 1:
+        if L[0] == '1': print 0
+        else: print 1
+        T-=1; continue
+    for i in range(len(L)):
+        if i == 0 and L[i] == '1':
+            if L[i+1] == '0': L[i+1] = 'D'
+            L[i] = 'D'
+        elif i == len(L) - 1 and L[i] == '1':
+            if L[i-1] == '0': L[i-1] = 'D'
+            L[i] = 'D'
+        elif L[i] == '1':
+            if L[i-1] == '0': L[i-1] = 'D'
+            if L[i+1] == '0': L[i+1] = 'D'
+            L[i] = 'D'
+    print L.count('0')
+    T-=1

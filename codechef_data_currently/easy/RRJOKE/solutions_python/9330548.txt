@@ -1,0 +1,6 @@
+for i in range(int(raw_input())):
+    m = 0
+    for j in range(int(raw_input())):
+        t = map(int,raw_input().split())
+        m = m^(j+1)
+    print m 

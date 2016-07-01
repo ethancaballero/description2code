@@ -1,0 +1,63 @@
+#include<iostream>
+#define infinite 10000001
+using namespace std;
+int mini(int a,int b)
+{
+   if(a>b)
+      return b;
+   return a;
+}
+int main()
+{
+   int T;
+   int n,m,i,j,k;
+   cin>>T;
+   while(T--)
+   {
+      cin>>n>>m;
+      cin.ignore();
+      int arr[n+2][m+2],fromLeft[n+2][m+2],fromTop[n+2][m+2];
+      char a[n+2][m+2];
+      for(i=1;i<=n;i++)
+      cin.getline(a[i]+1,m+1);
+      for(i=1;i<=n;i++)
+      for(j=1;j<=m;j++)
+      arr[i][j]=0;
+      for(i=1;i<=n;i++)
+      {
+         for(j=1;j<=m;j++)
+         {
+            if(a[i][j]=='0')
+            continue;
+            arr[i][j]++;
+            arr[i-1][j]++;
+            arr[i+1][j]++;
+            arr[i][j-1]++;
+            arr[i][j+1]++;
+         }
+      }
+      for(i=0;i<=n;i++)
+      {
+         fromLeft[i][0]=infinite;
+         fromTop[i][0]=infinite;
+         a[i][0]='0';
+      }
+      for(j=0;j<=m;j++)
+      {
+         fromLeft[0][j]=infinite;
+         fromTop[0][j]=infinite;
+         a[0][j]='0';
+      }
+      fromLeft[0][1]=fromTop[0][1]=fromLeft[1][0]=fromTop[1][0]=a[1][1]-'0';
+      for(i=1;i<=n;i++)
+      {
+         for(j=1;j<=m;j++)
+         {
+            fromLeft[i][j]=arr[i][j]-(a[i][j]-'0')-(a[i][j-1]-'0')+mini(fromLeft[i][j-1],fromTop[i][j-1]-(a[i-1][j]-'0'));
+            fromTop[i][j]=arr[i][j]-(a[i][j]-'0')-(a[i-1][j]-'0')+mini(fromLeft[i-1][j]-(a[i][j-1]-'0'),fromTop[i-1][j]);
+         }
+      }
+      cout<<mini(fromLeft[n][m],fromTop[n][m])<<endl;
+   }
+return 0;
+}

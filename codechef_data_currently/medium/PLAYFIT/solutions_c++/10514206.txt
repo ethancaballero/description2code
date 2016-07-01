@@ -1,0 +1,43 @@
+#include <iostream>
+#include <algorithm>
+ 
+using namespace std;
+ 
+ 
+ 
+ 
+int main()
+{
+	int t,j,k,a[100000];
+	cin>>t;
+	while(t--)
+	{
+		int n,max=-1;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	j=0;
+	max=0;
+	int diff;
+	for(k=0;k<n;k++)
+	{
+		diff=a[k]-a[j];
+		if(diff>max && diff>0)
+		max=diff;
+		else if(diff<0)
+		j=k;
+	
+	}
+	if(max==0)
+	cout<<"UNFIT"<<endl;
+	else 
+	cout<<max<<endl;
+	}
+	
+	
+ 
+	return 0;
+} 

@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+const int MAXN = 1e5 + 10;
+LL A[MAXN];
+int main(){
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		LL N, K;
+		scanf("%lld%lld", &N, &K);
+		for(int i = 0;i < K;++i){
+			scanf("%lld", &A[i]);
+		}
+		A[K] = N + 1;
+		sort(A, A + K);
+		++K;
+		LL minEle = (A[0] * (A[0] - 1))/2;
+		for(int i = 0;i < K;++i){
+			if(minEle < A[i]){
+				break;
+			}
+			if(i + 1 < K){
+				minEle += (A[i + 1] * (A[i + 1] - 1)) / 2 - (A[i] * (A[i] + 1))/2;
+			}
+		}
+		if(minEle & 1)
+			printf("Mom
+");
+		else printf("Chef
+");
+	}
+	return 0;
+}

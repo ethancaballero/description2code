@@ -1,0 +1,40 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+typedef long long ll;
+
+ll gcd(ll a, ll b)
+{
+	if (b == 0)
+		return a;
+	else
+		return gcd(b, a % b);
+}
+
+void func(ll n)
+{
+	ll sqn = n * n,  q = n, g;
+	int i, sqrtn = (int) sqrt(n);
+
+	for (i = 2; i <= sqrtn; ++i)
+		q += (n / i);
+	q += q;
+	q -= sqrtn * sqrtn;
+	g = gcd(q, sqn);
+	cout<< q/g<<"/"<< sqn/g;
+}
+
+
+int main()
+{
+    int t;
+    ll n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        func(n);
+        cout<<endl;
+    }
+}

@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		if(n==1)
+		cout<<"2
+";
+		else
+		{
+			
+			if((n&(n+1))==0)
+			{
+				cout<<(n>>1)<<endl;
+			}
+			else
+			cout<<"-1
+";		
+		}
+		
+	}
+	
+	return 0;
+}

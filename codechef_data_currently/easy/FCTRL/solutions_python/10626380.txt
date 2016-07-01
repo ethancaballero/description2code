@@ -1,0 +1,8 @@
+noOfInputs = int(raw_input())
+for x in range(noOfInputs):
+    varInput = int(raw_input())
+    flag = 0
+    while varInput:
+        varInput /= 5
+        flag += varInput
+    print flag

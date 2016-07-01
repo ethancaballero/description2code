@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define M 10000007
+
+using namespace std;
+
+int main(){
+ll n,m,i,j;
+cin>>n>>m;
+ll a[n][m];
+for(i=0;i<n;i++){
+    for(j=0;j<m;j++){
+        cin>>a[i][j];
+    }
+}
+ll ans=1;
+for(i=0;i<m;i++){
+        ll sum=0;
+    for(j=0;j<n;j++){
+        sum+=a[j][i];
+    }
+    if(sum<0) sum=sum+M;
+ans=(ans*sum)%M;
+}
+cout<<ans<<endl;
+
+return 0;
+}

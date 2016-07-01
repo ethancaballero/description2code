@@ -1,0 +1,12 @@
+t=input()
+for i in range(t):
+    s=input()
+    l=raw_input()
+    l=l.split()
+    prev=0
+    alloc=0
+    for d in l:
+        if int(d)>prev:
+            alloc+=int(d)-int(prev)
+        prev=int(d)
+    print alloc

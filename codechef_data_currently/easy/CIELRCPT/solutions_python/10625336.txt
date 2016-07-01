@@ -1,0 +1,41 @@
+#Ciel and Receipt
+
+menu = []
+#n = 0
+
+def menu_create():
+    global menu
+    for i in range(1, 13):
+        menu.append(int(2**(i-1)))
+
+def carry(num):
+    global menu
+    for i in reversed(menu):
+        #print i 
+        if int(num) > int(i):
+            return (num - i)
+
+def find(num, n):
+    global menu
+    if num == 0:
+        #print n
+        return n
+    if num in menu:
+        n+=1
+        return find(0, n)
+    else:
+        n+=1
+        return find(carry(num), n)
+
+def Main():
+    T = int(raw_input())
+    while(T!=0):
+        p = int(raw_input())
+        print find(p, 0)
+        T-=1
+
+if __name__ == '__main__':
+    menu_create()
+    Main()
+        
+        

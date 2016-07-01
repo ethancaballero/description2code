@@ -1,0 +1,34 @@
+//Sep13 CAO1
+#include<cstdio>
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	int t,r,c,i,j,x,y,ans;
+	char str[55][55];
+	bool flag;
+	scanf("%d",&t);
+	while(t--){
+		scanf("%d%d",&r,&c);
+		for(i=0;i<r;i++)
+			scanf("%s",&str[i]);
+		
+		
+		ans=0;
+		for(i=2;i<(r-2);i++){
+			for(j=2;j<(c-2);j++){
+				//counting the number of L,R,T,B
+				flag = true;
+				for(x=-2;x<=2;x++)
+					if(str[i+x][j] != '^' || str[i][j+x] != '^')
+							flag=false;
+				if(flag)
+					ans++;				
+			}
+		}
+		printf("%d
+",ans);	
+	} 
+
+}

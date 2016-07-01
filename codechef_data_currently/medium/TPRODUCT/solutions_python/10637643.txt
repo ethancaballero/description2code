@@ -1,0 +1,28 @@
+import math
+t=int(raw_input())
+while t!=0:
+    a=[]
+    b=[]
+    nodes=2**t-1
+    x=list(map(int,raw_input().split()))
+    a.append(0)
+    b.append(0)
+    for i in range(len(x)):
+        a.append(x[i])
+        b.append(0)
+#    print a
+#    print b
+    for i in range(len(a)-1,0,-1):
+#        print i
+        if (2*i<=(len(a)-1) and 2*i+1<=(len(a)-1)):
+            b[i]=max(a[i]*b[2*i],a[i]*b[2*i+1])
+#	elif (2*i<=len(a)-1):
+#	    b[i]=a[i]*b[2*i]
+#	elif (2*i+1<=len(a)-1):
+#	    b[i]=a[i]*b[2*i+1]
+	else:
+	    b[i]=a[i]
+#    print a
+#    print b
+    print b[1]%1000000007    
+    t=int(raw_input())

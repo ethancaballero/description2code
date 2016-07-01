@@ -1,0 +1,17 @@
+'''
+Created on 08-Dec-2015
+https://www.codechef.com/problems/RIGHTRI
+@author: Lenovo
+'''
+count=0
+for _ in xrange(input()):
+    x1,y1,x2,y2,x3,y3=map(int, raw_input().split())
+    dx1 = x2-x1;
+    dy1 = y2-y1;
+    dx2 = x3-x1;
+    dy2 = y3-y1;
+    dx3 = x3-x2;
+    dy3 = y3-y2;
+    if dx1*dx2+dy1*dy2 == 0 or dx1*dx3+dy1*dy3 == 0 or dx2*dx3+dy2*dy3 == 0 :
+        count+=1
+print count

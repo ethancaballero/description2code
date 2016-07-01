@@ -1,0 +1,78 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <queue>
+using namespace std;
+
+#define ll long long
+
+ll D[10000000];
+int cnt = 0;
+
+void generate() {
+    cnt = 0;
+    queue<ll> d;
+    queue<ll> used;
+    while (!d.empty()) d.pop();
+    while (!used.empty()) used.pop();
+    for (int i=1; i<=9; i++) {
+        d.push(i);
+        used.push(1<<i);
+    }
+    while (!d.empty()) {
+        ll u = used.front(); used.pop();
+        ll x = d.front(); d.pop();
+        D[cnt++] = x;
+        ll _u = ~u;
+        for (int i=0; i<=9; i++) {
+            if (_u&(1<<i)) {
+                d.push(10*x+i);
+                used.push(u|(1<<i));
+            }
+        }
+    }
+}
+
+int search(long long x) {
+    int l=0;
+    int r=cnt-1;
+    while (l<r) {
+        int m = (l+r)/2;
+        if (x==D[m]) return m;
+        else if (x<D[m]) r=m;
+        else l=m+1;
+    }
+    return l;
+}
+
+/* number of delicious number at most n, using binary search */
+int solve(ll n){
+  int a, b, c;
+  a = 0; b = cnt;
+  while(a<b){
+    c = (a+b)/2;
+    if(D[c] <= n) a = c+1; else b = c;
+  }
+  return a;
+}
+
+int main()
+{
+    long long l, r;
+    generate();
+    //printf("%d
+", cnt);
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%lld%lld", &l, &r);
+        //int c1 = search(l-1);
+        //int c2 = search(r);
+        //printf("%d
+", c2-c1);
+        int res = solve(r) - solve(l-1);
+        printf("%d
+",res);
+    }
+    return 0;
+}

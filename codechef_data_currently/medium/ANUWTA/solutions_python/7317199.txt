@@ -1,0 +1,4 @@
+t=int(raw_input())
+for i in xrange(t):
+    x=int(raw_input())
+    print x*(x+3)/2

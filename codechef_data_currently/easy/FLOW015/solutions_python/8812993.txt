@@ -1,0 +1,24 @@
+import sys
+from sys import stdin
+
+def main():
+    for i in xrange(int(stdin.readline().strip())):
+        year = int(stdin.readline().strip())
+        if year < 2001:
+            diff = 2000 - year
+        else:
+            diff = year - 2001
+        
+        leap = diff / 4 - diff/100 + diff/400
+        normal = diff - leap
+        odd = (leap*2 + normal) % 7
+        if year < 2001:
+            day = (abs(odd-6))%7
+        else:
+            day = (odd+1)%7
+        days = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+        print days[day]   
+    
+
+if __name__ == '__main__':
+    main()

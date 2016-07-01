@@ -1,0 +1,10 @@
+t=input()
+ans=[]
+for x in range(t):
+    temp=raw_input()
+    num=temp.split()
+    num=[int(z) for z in num]
+    num.sort()
+    ans.append(num[1])
+for x in range(t):
+    print ans[x]

@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t,n,i,j,k;
+    cin >> t;
+
+    while(t--)
+    {
+        cin >> n;
+        long long a[n],b[n];
+
+        for(j=0;j<n;j++)
+        {
+            cin >> a[j] ;
+        }
+
+        for(k=0;k<n;k++)
+        {
+            cin >> b[k];
+        }
+        int ns=0;
+        if(a[0]>=b[0])
+        {
+            ns = ns+1;
+        }
+
+        for(i=1;i<n;i++)
+        {
+            if(a[i]-a[i-1]>=b[i])
+                {
+                    ns = ns+1;
+                }
+        }
+        cout << ns <<endl;
+
+    }
+
+    return 0;
+}

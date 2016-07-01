@@ -1,0 +1,71 @@
+#include <iostream>
+#include <stdio.h>
+#include <utility>
+#include <algorithm>
+#include <cstring>
+#include <vector>
+#include <map>
+#include <set>
+#include <queue>
+#include <math.h>
+#include <cstdio>
+ 
+#define FOR(i,x,y) for(int i=(x);i<(y);i++)
+#define RFOR(i,x,y) for(int i=(x);i>=(y);i--)
+#define MIN(x,y) ((x)<(y)?(x):(y))
+#define MAX(x,y) ((x)>(y)?(x):(y))
+#define ABS(x) ((x)>0?(x):-(x))
+#define SQ(x) ((x)*(x))
+#define mset(x,y) memset(x,y,sizeof(x))
+
+typedef long long int lli;
+typedef long double ld;
+
+using namespace std;
+
+int ways[30][10][210];
+
+void init()
+{
+	mset(ways,0);
+	for(int j=0;j<10;j++)
+			ways[1][j][0]=1;
+	// for(int i=0;i<10;i++)
+	// for(int j=0;j<10;j++)
+	// {
+	// 	if(i+j<10) ways[2][i][j]=1;
+	// 	if(i-j>=0) ways[2][i][j]=1;
+	// }
+	for(int i=2;i<25;i++)
+		for(int j=0;j<10;j++)
+			for(int k=0;k<210;k++)
+			{
+				for(int l=1;l<10;l++)
+				if(k-l>=0)
+				{
+					if(j+l<10) ways[i][j][k]+=ways[i-1][j+l][k-l];
+					if(j-l>=0) ways[i][j][k]+=ways[i-1][j-l][k-l];
+				}
+				ways[i][j][k]+=ways[i-1][j][k];
+				ways[i][j][k]%=1000007;
+			}
+}
+int main()
+{
+    //freopen("inp.txt","r",stdin);
+    int t,n,w;
+    scanf("%d",&t);
+    init();
+    int sum;
+    while(t--)
+    {
+    	scanf("%d%d",&n,&w);
+    	sum=0;
+    	for(int i=1;i<10;i++) sum+=ways[n][i][w];
+    	sum%=1000007;
+    	printf("%d
+",sum);
+    }
+    return 0;
+    
+}

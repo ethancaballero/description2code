@@ -1,0 +1,61 @@
+#include <cstdio>
+typedef long long LL;
+const int MOD = 1000000007;
+
+template <int n>
+void matcopy(LL a[n][n], LL b[n][n])
+{
+    for(int i=0 ; i<n ; i++)
+	for(int j=0 ; j<n ; j++)
+	    a[i][j] = b[i][j];
+}
+
+template <int n>
+void matmul(LL a[n][n], LL b[n][n])
+{
+    LL c[n][n];
+    for(int i=0 ; i<n ; i++)
+    {
+	for(int j=0 ; j<n ; j++)
+	{
+	    c[i][j] = 0;
+	    for(int k=0 ; k<n ; k++)
+		c[i][j] += ( a[i][k] * b[k][j] ) %  MOD;
+	    c[i][j] %= MOD;
+	}
+    }
+    matcopy<n>(a,c);
+}
+
+template <int n>
+void matexp(LL a[n][n], int e)
+{
+    if(e==1) return;
+    if(e&1)
+    {
+	LL c[n][n];
+	matcopy<n>(c,a);
+	matexp(a,e-1);
+	matmul(a,c);
+    }
+    else
+    {
+	matexp(a,e/2);
+	matmul(a,a);
+    }
+}
+
+int main()
+{
+    int tc,n;
+    scanf("%d",&tc);
+    while(tc--)
+    {
+	scanf("%d",&n);
+	LL M[3][3] = { {1,4,2}, {1,0,0}, {0,1,0} };
+	LL A[3][1] = { {1}, {4}, {2} };
+	matexp<3>(M,n);
+	printf("%lld
+",M[0][0]);
+    }
+}

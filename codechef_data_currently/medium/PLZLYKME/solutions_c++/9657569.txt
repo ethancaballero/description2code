@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long int power(long long int a,long long int b)
+{
+    if(b==0)
+        return 1;
+    long long int temp;
+    temp=power(a,b/2);
+    if(b%2==0)
+        return temp*temp;
+    else
+        return temp*temp*b;
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t!=0)
+    {
+
+        long long int l,d,s,c,i;
+        cin>>l>>d>>s>>c;
+       for(i=1;i<d;i++)
+       {
+           s=s+s*c;
+           if(s>=l)
+            break;
+       }
+        if(s>=l)
+            cout<<"ALIVE AND KICKING"<<endl;
+        else
+            cout<<"DEAD AND ROTTING"<<endl;
+
+        t--;
+    }
+    return 0;
+}

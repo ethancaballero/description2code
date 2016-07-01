@@ -1,0 +1,129 @@
+t = input()
+
+while(t>0):
+    t = t-1
+    s = raw_input()
+    length = len(s)
+    if(length==2):
+        print "YES"
+        continue
+    
+    freq = [0]*26
+    
+    for x in (s):
+        pos=ord(x)
+        freq[pos-97] = freq[pos-97]+1
+
+  
+    evenfreq=0
+    oddfreq=0
+    diffcharfreq=0
+    for x in range(0,26):
+        if(freq[x]==0):
+            continue;
+        if(freq[x]%2==0):
+            evenfreq=evenfreq+1
+        if(freq[x]%2==1):
+            oddfreq=oddfreq+1
+        if(freq[x]>0):
+            diffcharfreq = diffcharfreq+1
+
+
+    if(diffcharfreq==1):
+        print "YES"
+        continue
+
+    if(diffcharfreq==length):
+        print "NO"
+        continue
+
+
+    if(oddfreq>=3):
+        print "NO"
+        continue
+
+    flag=0
+
+    i=0
+    j=length-1
+    si=0
+    li=0;
+    while(i<=j):
+        if(s[i]==s[j]):
+            i=i+1
+            j=j-1
+        else:
+            flag=1
+            si=i
+            li=j
+            break
+
+
+    sic=si
+    lic=li
+    siflag=0
+    liflag=0
+    if(flag==1):
+        #si wala deleted
+        si=si+1
+        while(si<=li):
+            if(s[si]!=s[li]):
+                siflag=1
+                break
+            else:
+                si=si+1
+                li=li-1
+
+        if(siflag==0):
+            print "YES"
+            continue
+            
+        #lic wala deleted
+        lic = lic -1
+       # print "lic = "+lic
+       # print "sic = "+sic
+        while(sic<=lic):
+            if(s[sic]!=s[lic]):
+                liflag=1
+                break
+            else:
+                sic=sic+1
+                lic=lic-1
+                
+
+        if(liflag==0):
+            print "YES"
+            continue
+
+        if(siflag==1):
+            print "NO"
+            continue
+        if(liflag==1):
+            print "NO"
+            continue
+            
+    else:
+        pflag=0
+        if(flag==0):
+            if(length%2==1):
+                pi=0
+                pj=length-1
+                while(pi<pj):
+                    if(s[pi]==s[pj]):
+                        pi=pi+1
+                        pj=pj-1
+                    else:
+                        pflag=1
+
+                if(pflag==0):
+                    print "YES"
+                    continue
+
+            if(length%2==0):
+                t1=length/2
+                t2=(length-2)/2
+
+                if(s[t1]==s[t2]):
+                    print "YES"
+                    continue
+                    

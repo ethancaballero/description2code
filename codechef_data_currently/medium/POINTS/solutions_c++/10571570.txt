@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+#include<vector>
+#include<math.h>
+#include<cmath>
+using namespace std;
+bool compare1( pair<int,int> p1,const pair<int,int> p2)
+{
+        if(p1.first < p2.first) return true;
+        if(p1.first == p2.first) return p1.second > p2.second;
+        return false;
+}
+int main()
+{
+	vector<pair<int,int> > v;
+	int t;
+	cin>>t;
+
+	while(t--)
+	{
+		v.clear();
+		int n;
+		cin>>n;
+		for(int i=0;i<n;i++)
+		{
+			int x,y;
+			cin>>x>>y;
+			v.push_back(pair<int,int>(x,y));
+		}
+	sort(v.begin(),v.end(),compare1);
+    float a,b,sum=0.0;
+	for(int i=0;i<n-1;i++)
+	{
+		a=abs(v[i+1].first-v[i].first);
+
+		b=abs(v[i+1].second-v[i].second);
+
+		sum+=sqrt(a*a+b*b);
+	}
+	printf("%0.2f
+",sum);
+
+	}
+	return 0;
+}

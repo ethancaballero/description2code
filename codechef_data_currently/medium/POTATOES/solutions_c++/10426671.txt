@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+bool prime(ll n)
+{
+ll i;
+for(i=2;i<=sqrt(n);i++)
+{
+if(n%i==0)return false;
+}
+return true;
+}
+int main()
+{
+ll t;
+cin>>t;
+while(t--){
+ll a,b;
+cin>>a>>b;
+ll c=1;
+ll p=a+b+c;
+while(!prime(p))
+{
+p++;
+c++; 
+}
+cout<<c<<endl;
+}
+
+return 0;
+}

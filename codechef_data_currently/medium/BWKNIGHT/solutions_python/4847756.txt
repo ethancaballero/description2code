@@ -1,0 +1,18 @@
+t=int(raw_input().strip())
+while(t):
+    t-=1
+    n,m=map(int,raw_input().strip().split())
+    ans=m*n*(m*n-1);
+    if(n>=4 and m>=4):
+        ans-=8*(m+n-4)+4*(3*m+3*n-20)+(m-4)*(n-4)*8
+        print(ans)
+    if(m>n):
+        m,n=n,m
+    if(m==1):
+        print(ans)
+    if(m==3):
+        ans-=8*(n-1)+4*(n-3)
+        print(ans)
+    if(m==2):
+        ans-=4*(n-2)
+        print(ans)

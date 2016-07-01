@@ -1,0 +1,93 @@
+/*Useful info
+__builtin_popcount(n) counts number of active bits.
+__builtin_popcountl(n) for long and ll for long long*/
+
+//My shortcuts
+#include<bits/stdc++.h>
+#define ll long long int
+#define sf(n) scanf("%d",&n);
+#define sfl(n) scanf("%lld",&n);
+#define sful(n) scanf("%llu",&n);
+#define pf(n) printf("%d",n);
+#define pfl(n) printf("%lld",n);
+#define pful(n) printf("%llu",n);
+#define ps printf(" ");
+#define pn printf("
+");
+#define str(a) printf("%s",a);
+#define cut(n,val) memset(n,val,sizeof(n));
+#define pub push_back()
+#define ln size()
+#define mpr make_pair()
+#define bpop(n) __builtin_popcount(n)
+const long long int mod=1e9+7;
+using namespace std;
+//Functions->
+void def(ll ans)
+{
+    if(ans%2==0)
+    {   
+       str("Mom");pn;
+    }
+    else
+    {
+       str("Chef");pn;
+    }
+}
+//Driver program->
+int main()
+{
+    int t;
+    sf(t);
+    while(t--)
+    {
+        int n,k;
+        sf(n);sf(k);
+        
+        int a[k+2],i;
+        for(i=0;i<k;i++)
+        sf(a[i]);
+        
+        sort(a,a+k);
+        
+        ll su[k+2];
+        ll ans;
+        ll dat=0;
+        bool st=false;
+        for(i=0;i<k;i++)
+        {
+            //str("LOOP
+");
+            su[i]=(ll)(a[i]*(a[i]+1))/2;
+            su[i]=su[i]-(ll)a[i]-dat;
+            dat+=(ll)a[i];
+         
+            if(su[i] <(ll)a[i])
+            {
+                //str("LOOP_IF
+");
+               ans=(ll) a[i];
+               st=true;
+                break;
+            }
+        }
+        
+        if(st==true)
+        {
+          //str("STR_TRUE
+");
+          def(ans);
+        }
+        else
+        {
+            //str("STR_FALSE
+");
+            su[i]=(ll)(n*(n+1))/2;
+            su[i]-=dat;
+            ans=su[i]+1;
+            
+            def(ans);
+        }
+    }
+    return 0;
+}

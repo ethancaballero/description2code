@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int i,n,sum,p;
+		sum=p=0;
+		cin>>n;
+		for(i=1;sum<n;i++)
+		{
+			
+			sum+=i;
+			if(sum<=n)
+			p++;
+				}
+				cout<<p<<endl;
+
+	}
+	
+}

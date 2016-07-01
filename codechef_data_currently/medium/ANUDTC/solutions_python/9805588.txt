@@ -1,0 +1,31 @@
+# cook your code here
+import math
+it =  int(raw_input())
+a=''
+b=''
+c=''
+
+while it>0:
+    p=int(raw_input())
+   
+    if  (360.0/p).is_integer():
+        a='y '
+    else:
+        a='n '
+    if  p<=360:
+        b='y '
+    else:
+       b='n '
+       
+    if (p*(p+1)/2)<=360:
+        c='y '
+    else:
+        c='n '
+           
+    print a+b+c
+    it=it-1
+
+
+
+
+

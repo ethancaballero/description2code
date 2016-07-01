@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+#define ll int
+using namespace std;
+string txt;
+ll num[1050000][4];
+ll tot[1050000][4][4];
+int posi(char algo)
+{
+    if (algo=='c')
+        return 0;
+    if (algo=='h')
+        return 1;
+    if (algo=='e')
+        return 2;
+    if (algo=='f')
+        return 3;
+}
+void func()
+{
+    ll pos,ant,ant2,antot;
+    for(int a=0; a<4; a++)
+    {
+        for(int b=0; b<4; b++)
+        {
+            if (a!=b)
+            {
+                ant=0;
+                antot=0;
+                for(int c=0; c<txt.size(); c++)
+                {
+                    pos=posi(txt[c]);
+                    ant+=((pos==a)?1:0);
+                    tot[c+1][a][b]=antot;
+                    if (pos==b)
+                    {
+                        tot[c+1][a][b]+=ant;
+                    }
+                        antot=tot[c+1][a][b];
+                    num[c+1][a]=ant;
+                }
+            }
+        }
+    }
+}
+int main()
+{
+    cin>>txt;
+    int casos;
+    scanf("%d",&casos);
+    func();
+    string a,b;
+    int iz,der,posa,posb,calnumb,resp;
+    while(casos--)
+    {
+        cin>>a>>b>>iz>>der;
+        posa=posi(a[0]);
+        posb=posi(b[0]);
+        calnumb=num[der][posb]-num[iz-1][posb];
+	resp=tot[der][posa][posb]-tot[iz-1][posa][posb];
+        cout<<resp-calnumb*num[iz-1][posa]<<endl;
+    }
+} 

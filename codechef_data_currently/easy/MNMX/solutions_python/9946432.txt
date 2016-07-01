@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 16 12:29:47 2016
+
+@author: matteoarno
+"""
+
+t = int(raw_input())
+
+for i in range(t):
+    n = int(raw_input())
+    vec = map(int, raw_input().split())
+    minimum = min(vec)
+    print minimum * (len(vec) - 1)

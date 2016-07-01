@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		char str[1000001];
+		long long int count,pos,days=0,max=0,i,j;
+		scanf("%s",str);
+		for(i=0;i<strlen(str);i++)
+		{
+			if(str[i]=='.')
+			{	
+				for(j=i+1;j<strlen(str);j++)
+					if(str[j]=='#')
+					{
+						count=j-i;
+						i=j;
+						break;
+					}
+				if(count>max)
+				{
+					days++;
+					max=count;
+				}
+			}
+		}
+		printf("%ld
+",days);
+	}
+	return 0;
+} 

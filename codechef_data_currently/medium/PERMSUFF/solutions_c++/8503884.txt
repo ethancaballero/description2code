@@ -1,0 +1,77 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> ii;
+
+const int maxn=100000+11;
+ii p[maxn];
+int a[maxn];
+
+bool check(int l, int r){
+	//cerr<<"check for "<<l<<" "<<r; 
+	for(int i=l; i<=r; i++){
+		//cerr<<a[i]<<" ";
+		if(l<=i+a[i] && i+a[i]<=r)	continue;
+		else return false;
+	}
+	return true;
+}
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		bool valid=true;
+		int n, m;
+		cin>>n>>m;
+		for(int i=1; i<=n; i++){
+			int num;
+			cin>>num;
+			a[num]=i-num;
+		}
+		for(int i=0; i<m; i++){
+			cin>>p[i].first>>p[i].second;
+		}
+		sort(p, p+m);
+
+		for(int i=1; i<p[0].first; i++)
+			if(!check(i, i)){
+				valid=false;
+				break;
+			}
+
+		int l=p[0].first, r=p[0].second;
+		for(int i=0; i<m && valid; i++){
+			if(r>=p[i].first){
+				r=max(r, p[i].second);
+			}else{
+				if(!check(l, r)){
+					valid=false;
+					continue;
+				}
+				for(int j=r+1; j<p[i].first; j++)
+					if(!check(j, j)){
+						valid=false;
+						break;
+					}
+				l=p[i].first, r=p[i].second;
+			}
+		}
+		if(valid && !check(l, r)){
+			valid=false;
+		}
+		for(int j=r+1; j<=n; j++)
+			if(!check(j, j)){
+				valid=false;
+				break;
+			}
+		if(valid)
+			cout<<"Possible"<<endl;
+		else
+			cout<<"Impossible"<<endl;
+	}
+}

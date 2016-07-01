@@ -1,0 +1,41 @@
+#include <iostream>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+
+
+    int t;
+    cin>>t;
+    while(t--)
+    {vector<int> v;
+    vector<int>::iterator i;
+        int n,m,sum=0;
+        cin>>n>>m;
+        int num,max=-1;
+        for(int j=0;j<n;j++)
+        {
+            cin>>num;
+            v.push_back(num);
+            if(num>max)
+                max=num;
+        }
+        for(i=v.begin();i!=v.end();i++)
+        {
+            *i=max-*i;
+            sum+=*i;
+        }
+        if(sum>m)
+            cout<<"No"<<endl;
+        else
+        {
+            if((m-sum)%n==0)
+                cout<<"Yes"<<endl;
+            else
+                cout<<"No"<<endl;
+        }
+    }
+    return 0;
+}

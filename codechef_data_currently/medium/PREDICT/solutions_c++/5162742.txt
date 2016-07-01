@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+double winning_amt(double p)
+{
+	return p*(2*(1-p)+1);
+}
+void solve()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		double p;
+		cin>>p;
+		double ans=max(winning_amt(p)*10000,winning_amt(1-p)*10000);
+		printf("%.9lf
+",ans);
+	}
+}
+int main()
+{
+	solve();
+	return 0;
+}
+
+

@@ -1,0 +1,37 @@
+#include <cstdio>
+#include <iostream>
+using namespace std;
+int main()
+{
+	int n;
+	ios::sync_with_stdio(0);
+	cin>>n;
+	long mi[50][50];
+	long a[n];
+	for(int i = 0;i<n;i++)cin>>a[i];
+
+	for(int i = 0;i<n;i++)
+		{
+			mi[i][i] = a[i];
+		for(int j = i+1;j<n;j++)
+		{
+				
+			mi[i][j] = min(a[j],mi[i][j-1]);
+		}
+		} 
+	int q;
+	cin>>q;
+	long k;
+	int count = 0;
+	while(q--)
+	{
+		cin>>k;
+		count = 0;
+		for(int i  = 0;i<n;i++)
+		{
+			for(int j = i;j<n;j++)
+				if(mi[i][j]==k)count++;
+		}
+		cout<<count<<endl;
+	}
+}

@@ -1,0 +1,11 @@
+for test_cases in range(input()):
+    n = input()
+    arr = map(int,raw_input().split())
+    flag = True
+    for i in arr:
+        if i < 2:
+            flag = False
+    if not flag:
+        print '-1'
+    else:
+        print sum(arr)-min(arr)+2 

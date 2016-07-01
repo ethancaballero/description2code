@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	map<int,int> hash; //actually we want to map one element of one array to another
+	int n;
+	int res=0;
+	int key;
+	int a[100];
+	cin>>n;
+	for(int i=0;i<n;i++)
+	cin>>a[i];
+	for(int i=0;i<n;i++)
+		for(int j=i+1;j<n;j++)
+		{
+		key=a[i]+a[j];
+		hash[key]++;
+		if(hash[key]>res)
+		res=hash[key];
+	}	
+	cout<<2*res;
+}

@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#define MOD 1000000007
+using namespace std;
+long long int  power(long long int a,long long int b)
+    {
+    long long int x = 1,y = a;
+    while(b)
+    {
+    if(b%2)
+    {
+    x = (x*y)%MOD;
+    }
+    y = (y*y)%MOD;
+    b /= 2;
+    }
+    return x;
+    }
+int main()
+{
+    int t;
+    long long int a,b,res,m,n,q,k;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%lld%lld%lld%lld",&n,&m,&q,&k);
+         if(q>=m || (n==1 && q!=0))
+         printf("0
+");
+         else
+        {
+             a=(power(q+1,n)+power(q-1,n))%MOD;
+             b=(2*power(q,n))%MOD;
+             res=(a-b)%MOD+MOD;
+             res=((m-q)*res)%MOD;
+             printf("%lld
+",res);
+        }
+    }
+    return 0;
+}

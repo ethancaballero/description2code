@@ -1,0 +1,20 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t,i;float fact=1,a;
+    cin>>t;
+    while(t--)
+    {
+        cin>>a;
+        for(i=1;i<=a;i++)
+        {
+            fact*=i;
+        }
+        cout<<fact<<endl;
+        fact=1;
+    }
+    return 0;
+}

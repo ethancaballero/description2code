@@ -1,0 +1,208 @@
+# include <iostream>
+# include <fstream>
+# include <sstream>
+# include <algorithm>
+# include <cstdio>
+# include <cmath>
+# include <numeric>
+# include <cstdlib>
+# include <cstring>
+# include <vector>
+# include <list>
+# include <set>
+# include <map>
+# include <stack>
+# include <queue>
+# include <cctype>
+# include <climits>
+# include <complex>
+
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> pii;
+typedef long long int lli;
+typedef pair<long long int,long long int> pll;
+typedef vector<int> vi;
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define rof(i,a,b) for(int i=a;i>b;i--)
+#define pb push_back
+#define mp make_pair
+#define inf 1000000000
+#define mod 1000000007
+#define mst(a,b) memset(a,b,sizeof(a))
+#define pi (double)(3.141592653589793)
+vector<int> x,y,z,x3,y3;
+int mp1[1010][1010],mp2[1010][1010];
+struct union_find{
+int num[1000010],p[1000010];
+
+void init(int n)
+{
+    for(int i=0;i<=n;i++)
+        p[i]=i,num[i]=1;
+}
+int finds(int x)
+{
+    if(x!=p[x])
+        return (p[x]=finds(p[x]));
+    else
+        return p[x];
+
+}
+bool _union(int x,int y)
+{
+    x=finds(x);
+    y=finds(y);
+    if(x==y)return false;
+    if(num[x]>=num[y])
+    {
+        num[x]+=num[y];
+        p[y]=x;
+    }
+    else
+    {
+        num[y]+=num[x];
+        p[x]=y;
+    }
+    return true;
+}
+};
+int main(){
+    struct union_find U;
+int t,n,m,x1,x2,y1,y2,q;
+cin>>t;
+while(t--)
+{
+    x.clear();
+     y.clear();
+      z.clear();
+       x3.clear();
+        y3.clear();
+    mst(mp1,0);
+    mst(mp2,0);
+    scanf("%d %d %d",&n,&m,&q);
+    rep(i,0,q)
+    {
+    int type;
+    scanf("%d",&type);
+    if(type==1)
+    {
+
+        scanf("%d %d",&x1,&y1);
+
+        if(mp1[x1-1][y1-1]==0)
+           { mp1[x1-1][y1-1]=1;
+            x.pb(x1-1);
+            y.pb(y1-1);
+            z.pb(type);}
+    }
+    else if(type==2)
+    {
+        scanf("%d %d",&x1,&y1);
+        if(mp2[x1-1][y1-1]==0)
+          {  mp2[x1-1][y1-1]=1;
+            x.pb(x1-1);
+            y.pb(y1-1);
+            z.pb(type);}
+    }
+    else if(type==3)
+    {
+        scanf("%d %d %d %d",&x1,&y1,&x2,&y2);
+           x.pb(x1-1);
+            y.pb(y1-1);
+            x3.pb(x2-1);
+            y3.pb(y2-1);
+            z.pb(type);
+    }
+    else
+        z.pb(4);
+
+
+    }
+    U.init(n*m);
+    rep(i,0,n)
+    {
+       rep(j,0,m-1)
+       {
+           if(!mp1[i][j])
+           {
+           //cout<<i*m+j<<" "<<i*m+j+1<<endl;
+               U._union(i*m+j,i*m+j+1);
+           }
+       }
+    }
+    rep(i,0,n-1)
+    {
+       rep(j,0,m)
+       {
+           if(!mp2[i][j])
+           {
+          // cout<<i*m+j<<" "<<i*m+m+j<<endl;
+               U._union(i*m+j,i*m+m+j);
+           }
+       }
+    }
+    int maxi=-1;
+    rep(i,0,n*m)
+U.finds(i);
+    rep(i,0,n*m)
+    {
+    //cout<<U.num[i]<<" ";
+   // cout<<U.p[i]<<" ";
+     maxi=max(maxi,U.num[i]);
+    }
+   // cout<<maxi;
+    lli ans=0;
+    int last1=x.size()-1,last2=x3.size()-1;
+    for(int i=z.size()-1;i>=0;i--)
+    {
+        if(z[i]==4)
+         {
+         ans+=maxi;
+         //cout<<maxi<<endl;
+         }
+        else if(z[i]==3)
+        {
+            if(U.finds(x[last1]*m+y[last1])==U.finds(x3[last2]*m+y3[last2]))
+                ans++;
+                last1--,last2--;
+
+        }
+        else if(z[i]==1)
+        {
+      //   rep(i,0,n*m)
+   // cout<<U.p[i]<<" ";
+    //cout<<endl;
+       // cout<<x[last1]<<" "<<y[last1]<<endl;
+            U._union(x[last1]*m+y[last1],x[last1]*m+y[last1]+1);
+            
+            maxi=max(maxi,U.num[U.finds(x[last1]*m+y[last1])]);
+
+           // rep(i,0,n*m)
+    //cout<<U.p[i]<<" ";
+   // cout<<U.num[U.finds(x[last1]*m+y[last1])]<<endl;
+            last1--;
+        }
+        else
+        {
+            
+            U._union(x[last1]*m+y[last1],(x[last1]+1)*(m)+y[last1]);
+            
+          maxi=max(maxi,U.num[U.finds(x[last1]*m+y[last1])]);
+            last1--;
+        }
+    }
+    // rep(i,0,n*m)
+   // cout<<U.num[i]<<" ";
+    printf("%lld
+",ans);
+
+
+}
+
+
+
+  return 0;
+    }

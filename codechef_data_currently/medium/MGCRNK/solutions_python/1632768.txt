@@ -1,0 +1,30 @@
+import sys
+
+def main():
+  for (n, s) in testcases():
+    ans = best_score(n, s)
+    if ans < 0:
+      print "Bad Judges"
+    else:
+      print "{0:.6f}".format(float(ans) / (2*n-3))
+
+def testcases(cin = sys.stdin):
+  nc = int(cin.next())
+  for _ in xrange(nc):
+    n = int(cin.next())
+    s = [map(int, cin.next().split()) for _ in xrange(n)]
+    yield (n, s)
+
+def best_score(n, s):
+  for j in xrange(1, n):
+    s[0][j] += s[0][j-1]
+
+  for i in xrange(1, n):
+    s[i][0] += s[i-1][0]
+    for j in xrange(1, n):
+      s[i][j] += max(s[i-1][j], s[i][j-1])
+
+  return s[n-1][n-1]
+
+if __name__ == "__main__": sys.exit(main())
+

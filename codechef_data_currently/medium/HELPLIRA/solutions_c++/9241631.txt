@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	double x1,y1,x2,y2,x3,y3;
+	int imax=1,imin=1;
+	double max,min,area;
+	cin>>x1>>y1>>x2>>y2>>x3>>y3;
+	area=abs(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2));
+	area=area/2;
+	max=area;
+	min=area;
+	for(int i=2;i<=n;i++)
+	{
+	   cin>>x1>>y1>>x2>>y2>>x3>>y3;	
+	   area=abs(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2));
+	   area=area/2;
+	   if(area>=max)
+	   {
+	   	max=area;
+	   	imax=i;
+	   }
+	   if(area<=min)
+	   {
+	   	min=area;
+	   	imin=i;
+	   }
+	}
+	cout<<imin<<" "<<imax<<endl;
+	return 0;
+}

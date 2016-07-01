@@ -1,0 +1,74 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+
+inline void scanint(int* x)
+{
+	register char c = getchar_unlocked();
+	bool mark=0;
+	*x = 0;
+	for(; (c<48)||(c>57);c = getchar_unlocked()){if(c==45)mark=true;}
+	for(; (c>47)&&(c<58);c = getchar_unlocked())
+		*x = (int)((((*x)<<1) + ((*x)<<3)) + c - 48);
+		
+		if(mark==true)*x=-1* (*x);
+}
+
+int X[2000],Y[2000],A,B,C,n;
+
+inline double ps(double x, double x0, double y, double y0)
+{
+    return sqrt(pow(x - x0, 2) + pow(y - y0, 2));
+}
+
+inline double dist(double x)
+{
+	double ret=0;
+	double y= (double)(-1.0*((double)C + ((double)A)*x))/(double)B;
+
+
+	for(int i=0;i<n;i++)
+	{
+		ret+= ps(x,X[i],y,Y[i]);
+		//cout<<x<<" "<<X[i]<<" "<<y<<" "<<Y[i]<<endl;
+	//cout<<ret<<" ";
+	}
+	return ret;
+}
+
+void tsearch(double xh,double xl)
+{
+	double m1,m2;
+	
+	for(int i=0;i<200;i++)
+	{
+		m1=(2*xl+xh)/3.0 ; m2=(xl + 2*xh)/3.0;
+		
+		 if(dist(m1) > dist(m2)) xl = m1; else xh = m2;
+		
+	}
+	
+
+ printf("%0.6f
+",dist(xl));
+}
+
+int main() {
+	int t,i;
+	scanint(&t);
+	
+	
+	
+	while(t--)
+	{
+		scanint(&n);
+		scanint(&A);scanint(&B);scanint(&C);
+		
+		for(i=0;i<n;i++){scanint(&X[i]);scanint(&Y[i]);}
+	
+	//cout<<ps(3,1,0.4,3);
+  //cout<<dist(3);
+	tsearch(-5000.0,5000.0);
+	}
+	return 0;
+}

@@ -1,0 +1,65 @@
+#include <iostream>
+#include <map>
+#include<stdlib.h>
+#include<stdio.h>
+
+using namespace std;
+
+int main()
+{
+    map<int , int> old , young;
+
+    int n , age , rating , old_rating , young_rating;
+
+    scanf("%d",&n);
+    old_rating = young_rating = 0;
+    while(n--)
+    {
+//        cout<<"Age = ";
+
+        scanf("%d",&age);
+//        cout<<"Rating = ";
+
+        scanf("%d",&rating);
+
+        if( old.size() == young.size())
+        {
+            if( ( !old.empty() ) && ( (old.begin()->first) < age) )   // if empty ADD to Young group Directly
+            {
+                old[age] = rating;
+                old_rating += rating;
+
+                age = ( old.begin() )->first;               // removing from old
+                rating = ( old.begin() )->second;
+                old_rating -= rating;
+
+                old.erase(age);
+            }
+            young[age] = rating;        // adding to young
+            young_rating += rating;
+        }
+        else
+        {
+//            cout<<"
+Young end = "<<young.end()->first;
+            if( ( young.rbegin() )->first > age)
+            {
+                young[age] = rating;
+                young_rating += rating;
+
+                age = ( young.rbegin() )->first;
+                rating = ( young.rbegin() )->second;
+                young_rating -= rating;
+
+                young.erase(age);
+            }
+            old[age] = rating;
+            old_rating += rating;
+        }
+
+        printf("%d
+",abs(old_rating - young_rating));
+    }
+
+    return 0;
+}

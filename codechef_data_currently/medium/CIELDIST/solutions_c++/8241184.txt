@@ -1,0 +1,27 @@
+	#include<iostream>
+	#include<stdio.h>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int d,ds,dt;
+			cin>>ds>>dt>>d;
+			float ans;
+			if(d>=ds+dt)
+				ans=d-ds-dt;
+			else if(ds>=d+dt)
+				ans=ds-d-dt;
+			else if(dt>=d+ds)
+				ans=dt-d-ds;
+			else 
+				ans=0;
+			printf("%0.2f
+",ans);
+			t--;
+
+
+		}	
+	}

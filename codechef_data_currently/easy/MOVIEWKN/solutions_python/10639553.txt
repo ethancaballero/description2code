@@ -1,0 +1,15 @@
+for i in range(int(raw_input())):
+    n=int(raw_input())
+    l=map(int,raw_input().split())
+    r=map(int,raw_input().split())
+    ch=0;
+    ii=0;   
+        
+    for m in range(n):
+        if l[m]*r[m]>ch:
+            ch=l[m]*r[m]
+            ii=m;
+        if l[m]*r[m]==ch:
+            if(r[m]>r[ii]):
+                ii=m
+    print ii+1

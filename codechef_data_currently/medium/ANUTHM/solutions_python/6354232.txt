@@ -1,0 +1,9 @@
+t = input()
+for _ in xrange(t):
+    n,m = map(int, raw_input().split())
+    if n == 1:
+        print float(m)
+    elif m == 1:
+        print float(n)
+    else :
+        print float(n+m-1)

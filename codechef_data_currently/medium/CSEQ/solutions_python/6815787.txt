@@ -1,0 +1,109 @@
+p=1000003
+
+'''
+
+calculating modulo inverse of 'a' using Euclid's Extended Lemma
+'''
+
+def invert_mod(a):
+	n=1
+	old=0
+	q=p
+	r=0
+	h=0
+
+	pos=0
+
+	while a>0:
+		r=q%a
+		q=q/a
+		h=q*n+old
+		old=n
+		n=h
+		q=a
+		a=r
+		if pos==0:
+			pos=1
+		else:
+			pos=0
+
+	if(pos):
+		return old
+	else:
+		return p-old
+
+'''
+Calculating C(n,k)--- No of ways of selecting k from n things
+'''
+
+def cal(n,k):
+	if(n<k):
+		return 0
+	elif(n==k):
+		return 1
+	elif(n==0):
+		return 0
+
+	num=1
+
+	for i in xrange(0,k):
+		num=(num*(n-i))%p
+
+	denom=1
+
+	for i in xrange(1,k+1):
+		denom=(denom*i)%p
+
+	return (num*invert_mod(denom))%p
+
+
+t=input()
+
+for test in xrange(t):
+	
+	n,l,r=map(int,raw_input().split())
+	
+	d=r-l+1	
+	# d stands for number of numbers to be considered for selection
+
+	a=[0,0]
+	b=[0,0]
+	
+	y=n+d
+
+	j=0
+	s=0
+
+	while y!=0:
+		a[j]=y%p
+		y=y/p
+		j=j+1
+	
+	k=0
+
+	if n>=d:
+		y=d
+		while y!=0:
+			b[k]=y%p
+			y=y/p
+			k=k+1
+		s=cal(a[0],b[0])
+
+		if(s!=0):
+			s=(s*cal(a[1],b[1]))%p
+	else :
+		y=n
+                while y!=0:
+                        b[k]=y%p
+                        y=y/p
+                        k=k+1
+                s=cal(a[0],b[0])
+
+                if(s!=0):
+                        s=(s*cal(a[1],b[1]))%p
+
+	s=(s-1+p)%p
+
+	print s
+
+			

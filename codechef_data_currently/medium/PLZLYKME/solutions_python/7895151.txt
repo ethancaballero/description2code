@@ -1,0 +1,13 @@
+t=input()
+for _ in xrange(t):
+    e=[int(x) for x in raw_input().split()]
+    l,d,s,c=e[0],e[1],e[2],e[3]
+    r=s
+    for i in xrange(1,d):
+        r=r+(c*r)
+        if r>=l:
+            break
+    if r>=l:
+        print "ALIVE AND KICKING"
+    else:
+        print "DEAD AND ROTTING"

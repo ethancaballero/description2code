@@ -1,0 +1,19 @@
+import sys,math
+
+test_cases = int(sys.stdin.readline())
+
+def solve_test_case():
+    n = int(sys.stdin.readline())
+    i = 1
+    result = 0
+    while i < math.sqrt(n):
+        if (n % i == 0):
+            result += i
+            result += n/i
+        i = i+1
+    if i == math.sqrt(n):
+        result += i
+    print result
+
+for i in range(test_cases):
+    solve_test_case()

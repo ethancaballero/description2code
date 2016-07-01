@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+double prob[2005][2005];
+int main()
+{
+    double ans;
+    long long int t,n,a;
+    //memset(prob,0,sizeof(prob));
+    for(int i=1;i<=2001;i++)
+    {
+        for(int j=1;j<=i;j++)
+        {
+            prob[i][j]=1-0.5*(prob[i-1][j]+prob[i-1][j-1]);
+        }
+    }
+    scanf("%lld",&t);
+    while(t--)
+    {
+        scanf("%lld",&n);
+        ans=0;
+        for(int i=1;i<=n;i++)
+        {
+            scanf("%lld",&a);
+            ans=ans+prob[n][i]*a;
+        }
+        printf("%lf
+",ans);
+    }
+    return 0;
+}

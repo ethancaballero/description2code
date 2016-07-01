@@ -1,0 +1,62 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+     
+     
+     
+     
+     
+    int main()
+    {
+     int t,rmax=0,rmin,cmin,cmax=0;
+     int rf,rl,cf,cl,n,m; 
+     scanf("%d",&t);
+     while(t--)
+     {
+     rmax=0;cmax=0;
+      scanf("%d %d",&n,&m);
+      int i,j;
+      char dp[n+105][m+105];
+      
+      rmin=n-1;
+      cmin=m-1;
+      int count=0;
+     
+       if(m!=0){
+      for(i=0;i<n;i++)
+      {
+       
+        scanf("%s",dp[i]);
+        
+       }}
+       
+      
+      for(i=0;i<n;i++)
+     {
+       for(j=0;j<m;j++)
+        {      if(dp[i][j]=='*')
+              {
+                 count++;
+                 if(i<rmin){rmin=i;}
+                 if(i>rmax){rmax=i;}
+                  if(j<cmin){cmin=j;}
+                  if(j>cmax){cmax=j;} 
+              } 
+        } 
+    }
+        
+     
+       rf=(int)((abs)(rmax-rmin));cf=(int)((abs)(cmax-cmin));
+       rl=max(rf,cf);
+       //rl=ceil(rl/2);
+       if(rl%2!=0)rl=(int)((rl/2)+1);
+       else rl=(int)(rl/2);
+     // printf("%d %d %d %d
+",rmin,rmax,cmin,cmax);
+       if(count==0)printf("0
+");
+       else printf("%d
+",rl+1);
+     }
+    return 0;
+    }  
+

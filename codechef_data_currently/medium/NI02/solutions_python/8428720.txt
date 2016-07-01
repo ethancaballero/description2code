@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+ #define ll long long int
+ #define REP(i,n) for(i=0;i<n;i++)
+ #define RREP(i,a,b) for(i=a;i<b;i++)
+ #define pii pair<int,int>
+ #define pb(x) push_back(x)
+ #define FILL(a,x) memset(a,x,sizeof(a))
+ #define trav(v,it) for(auto it=v.begin();it!=v.end();it++)
+ #define all(c) (c).begin(),(c).end()
+ #define present(c,x) ((c).find(x) != (c).end()) 
+ #define cpresent(c,x) (find(all(c),x) != (c).end()) 
+ #define INF 1000000000
+ using namespace std; 
+ vector <pii> G;
+
+ int main()
+ {
+ 	int i,n,t,visited[2505],xd,yd,pos,a,b,x,y,k;
+ 	ll val[2505],val1[2505];
+ 	cin>>t;
+ 	while(t--)
+ 	{
+ 		REP(i,2505) visited[i]=0;
+ 		REP(i,2505) val[i]=10000000;
+ 		REP(i,2505) val1[i]=0;
+ 		cin>>n;
+ 		REP(i,n) cin>>x>>y,G.pb(pii(x,y));
+ 		cin>>a>>b>>xd>>yd;
+ 		G.pb(pii(xd,yd));
+ 		val[n+1]=INF;
+ 		k=-1;
+ 		while(1)
+ 		{pos=n+1; 			
+ 		REP(i,n+1)
+ 		{
+ 			if(!visited[i])
+ 			{val[i]=min(val[i],val1[k+1]+(ll)(G[i].first-a)*(G[i].first-a)+(G[i].second-b)*(G[i].second-b));
+ 			//cout<<i<<"  "<<val[i]<<endl;
+ 			if(val[i]<val[pos])
+ 				pos=i;}
+ 		}
+ 		//cout<<pos<<endl;
+ 		visited[pos]=1;
+ 		val1[pos+1]=val[pos];
+ 		k=pos;
+ 		a=G[pos].first,b=G[pos].second;
+ 		if(pos==n)
+ 			break;
+ 		}
+ 		cout<<val[n]<<endl;
+ 	G.clear();
+ 	}	
+ 	return 0;
+ }

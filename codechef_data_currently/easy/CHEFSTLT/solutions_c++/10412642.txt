@@ -1,0 +1,22 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int i,n,j;
+	string s,p;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		int c=0,count=0;
+		cin>>s>>p;
+		for(j=0;j<s.length();j++)
+		{
+			if(s[j]=='?'||p[j]=='?')
+			c++;
+			else if(s[j]!=p[j])
+			count++;
+		}
+		cout<<count<<" "<<count+c<<endl;
+	}
+}

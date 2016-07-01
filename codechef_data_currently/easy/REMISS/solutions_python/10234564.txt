@@ -1,0 +1,6 @@
+t = input()
+for i in range(t):
+    num = raw_input().split()
+    a = int(num[0])
+    b = int(num[1])
+    print max(a, b), a + b

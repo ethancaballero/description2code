@@ -1,0 +1,69 @@
+/*
+ID : monyetc1
+PROG :
+LANG : C++
+*/
+#include<fstream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<algorithm>
+#include<string.h>
+#include<vector>
+#include<utility>
+#include<iostream>
+#include<math.h>
+#include<stack>
+#include<queue>
+#include<set>
+using namespace std;
+
+#define pb push_back
+#define mp make_pair
+#define fi first
+#define se second
+#define INF 1000000000
+#define LL long long int
+#define EPS 1e-11
+#define PI 3.14159265359
+
+char peta[55][55];
+int r,c,tc,le,ri,to,bo , occ[55],ans;
+
+int main(void)
+{
+     //freopen("input.txt","r",stdin);
+     //freopen("output.txt","w",stdout);
+     
+     scanf("%d",&tc);
+     for (int cases = 1; cases<=tc; cases++)
+     {
+         scanf("%d%d",&r,&c);
+         for (int row = 0; row<r; row++) scanf("%s", peta[row]);
+         
+         ans = 0;
+         for (int i = 0; i<r; i++)
+         for (int j = 0; j<c; j++)
+         {
+             if (peta[i][j] == '^')
+             {
+                 int ptr = 1;
+                 le = ri = to = bo = 0;
+                 while (i - ptr >= 0 && peta[i-ptr][j] == '^') {to++; ptr++;}
+                 ptr = 1;
+                 while (j + ptr < c  && peta[i][j+ptr] == '^') {ri++; ptr++;} 
+                 ptr = 1;
+                 while (i + ptr < r  && peta[i+ptr][j] == '^') {bo++; ptr++;}
+                 ptr = 1;
+                 while (j - ptr >= 0 && peta[i][j-ptr] == '^') {le++; ptr++;}
+                 
+                 int mini = min(min(le,ri) , min(to,bo));
+                 if (mini >= 2) ans++;
+             }
+         }
+         printf("%d
+",ans);
+     }
+
+
+
+}

@@ -1,0 +1,146 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<stack>
+#include<queue>
+#include<algorithm>
+#define all(c) c.begin(),c.end()
+#define tr(c,it) for(typeof(c.begin()) it=c.begin();it!=c.end();it++)
+#define sz(c) c.size()
+#define pb push_back
+#define mp make_pair
+#define inf 1000001
+//#define gc() getchar_unlocked()
+//#define pc(x) putchar_unlocked(x)
+#define ll long long int
+using namespace std;
+
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int,int> pii;
+typedef map<int,int> mii;
+
+
+/*
+static inline int fastio()
+{
+    int x=0;
+    char c=gc();
+    while(c<'0'||c>'9')
+    {
+        c=gc();
+    }
+    while(c>='0'&&c<='9')
+    {
+        x=(x<<1)+(x<<3)+c-'0';
+        c=gc();
+    }
+    return x;
+}
+
+
+static inline void fastWrite(ll x)
+{
+
+  char s[21];
+  int i=0;
+  do
+  {
+      s[i++]=x%10+'0';
+      x/=10;
+  }while(x);
+  --i;
+  while(i>=0)
+  {
+      pc(s[i--]);
+  }
+  pc('
+');
+
+}
+
+
+
+
+int gcd(int x,int y)
+{
+return(y?gcd(y,x%y):x);
+}
+
+int f(int x,int y)
+{
+    int cnt=0;
+    for(int i=x;i<=y;i++)
+    {
+        if(!(i%x))
+            cnt++;
+    }
+    return cnt;
+} */
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int T;
+    int N;
+    int H[51];
+    int D[51];
+    int Hsum,Dsum;
+    int ans;
+    cin>>T;
+    while(T--)
+    {
+        cin>>N;
+        int i;
+        Hsum=0;Dsum=0;
+        for(i=0;i<N;i++)
+            {cin>>H[i];Hsum+=H[i];}
+        for(i=0;i<N;i++)
+            {cin>>D[i];Dsum+=D[i];}
+        bool not_two=N!=2;
+        if(not_two)
+        {
+            ans=(Dsum-Hsum)/(N-2);
+            if(ans<0||((Dsum-Hsum)%(N-2))!=0)
+            {
+                cout<<"-1"<<endl;
+                continue;
+            }
+            bool printed=false;
+            for(i=0;i<N;i++)
+            {
+
+                if(ans+H[i]-D[i]<0||(ans+H[i]-D[i])%2!=0)
+                {
+
+                    cout<<"-1"<<endl;
+                    printed=true;
+                    break;
+                }
+            }
+
+            if(!printed)
+            {
+
+                cout<<ans<<endl;
+                continue;
+            }
+        }
+        else{
+        if((H[0]-D[0])!=(D[1]-H[1]))
+            cout<<"-1"<<endl;
+            else
+        cout<<abs(D[1]-H[1])<<endl;
+    }
+    }
+    return 0;
+}
+
+
+
+
+
+

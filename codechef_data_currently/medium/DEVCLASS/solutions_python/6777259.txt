@@ -1,0 +1,46 @@
+def func(typ,k,bg):
+    count=0
+    if typ==0:
+        for i in range(len(k)):
+            if k[i]!=bg[i]:
+                count+=1
+        return count/2
+    if typ==1 or typ==2:
+        b=[]
+        g=[]
+        for i in range(len(k)):
+            if k[i]!=bg[i]:
+                if k[i]=='B':
+                    b.append(i)
+                else:
+                    g.append(i)
+        for i in range(len(b)):
+            count=count+abs(b[i]-g[i])
+        return count
+for i in range(input()):
+    typ=input()
+    k=raw_input()
+    b= k.count("B")
+    g= k.count("G")
+    bg=''
+    gb=''
+    for j in range(len(k)/2):
+        bg=bg+'BG'
+        gb=gb+'GB'
+    if len(k)%2==1:
+        bg=bg+'B'
+        gb=gb+'G'
+    
+    if b==g:
+        v1=func(typ,k,bg)
+        v2=func(typ,k,gb)
+        print min(v1,v2)
+    elif b==g+1:
+        v1=func(typ,k,bg)
+        print v1
+    elif g==b+1:
+        v2=func(typ,k,gb)
+        print v2
+    else:
+        print -1
+ 

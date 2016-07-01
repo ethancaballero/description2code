@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+// 2nd try: better math done
+int main()
+{
+    std::ios_base::sync_with_stdio(false);
+    int t_num;
+    cin >> t_num;
+    for (int t = 0; t < t_num; t++) {
+        unsigned long long int num_bigger_2 = 0;
+        unsigned long long int num_equal_2 = 0;
+        unsigned long long int result = 0;
+        unsigned long long int n;
+        cin >> n;
+        for (unsigned long long int i = 0; i < n; i++) {
+            unsigned long long int temp;
+            cin >> temp;
+            if (temp == 2)
+                num_equal_2++;
+            else if (temp > 2)
+                num_bigger_2++;
+        }
+        result = num_equal_2*num_bigger_2 + num_bigger_2*(num_bigger_2 - 1)/2;
+        cout << result << endl;
+    }
+    return 0;
+}

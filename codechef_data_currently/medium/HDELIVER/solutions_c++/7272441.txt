@@ -1,0 +1,128 @@
+#include<stdio.h>
+#include<queue>
+#include<string.h>
+using namespace std;
+vector<int> adj[101];
+queue<int> q;
+bool vis[101][101];
+int bfs(int s,int p)
+{
+    vis[s][p]=1;
+    q.push(s);
+    while(!q.empty())
+    {
+        int x=q.front();
+        q.pop();
+        int i,len=adj[x].size();
+        for(i=0;i<len;i++)
+        {
+            if(vis[adj[x][i]][p]==0)
+            {
+                vis[adj[x][i]][p]=1;
+                q.push(adj[x][i]);
+            }
+        }
+    }
+}
+
+int main()
+{
+    int t;
+    //cin>>t;
+    scanf("%d",&t);
+    while(t--)
+    {   int q1[3001],q2[3001];
+        int n,m,a,b;
+      //  cin>>n>>m;
+        scanf("%d%d",&n,&m);
+        int i;
+        for(i=0;i<m;i++)
+        {
+            //cin>>a>>b;
+            scanf("%d%d",&a,&b);
+            adj[a].push_back(b);
+            adj[b].push_back(a);
+        }
+        int qr;
+      //  cin>>qr;
+        scanf("%d",&qr);
+      /*  for(i=0;i<qr;i++)
+        {
+           // cin>>a>>b;
+           scanf("%d%d",&q1[i],&q2[i]);
+         //   ini();
+        }*/
+        int p=0;
+        int c=0;
+        for(i=0;i<n;i++)
+        {
+            if(vis[i][p]==0)
+            {   c++;
+                if(c==2)
+                {
+                    c=1;
+                    p++;
+                }
+                bfs(i,p);
+            }
+
+        }int j;
+      //  printf("%d  %d",vis[0][0],vis[2][0]);
+        for(i=0;i<qr;i++)
+        {
+            scanf("%d%d",&a,&b);
+            for(j=0;j<=p;j++)
+            {
+                if(vis[a][j]==1&&vis[b][j]==1)
+                {
+                    printf("YO
+");
+                    break;
+                }
+                else if(vis[a][j]==0&&vis[b][j]==1)
+                {
+                    printf("NO
+");
+                    break;
+                }
+                else if(vis[a][j]==1&&vis[b][j]==0)
+                {
+                    printf("NO
+");
+                    break;
+                }
+            }
+            if(j==p+1)  printf("NO
+");
+
+        }
+     /*   char an[3001][3];
+        for(i=0;i<n;i++)
+        {
+            if(vis[i]==0)
+            {
+                bfs(i);
+                for(int j=0;j<qr;j++)
+                {   if(!i) strcpy(an[j],"YO");
+                    if(vis[q1[j]]!=vis[q2[j]]) strcpy(an[j],"NO");
+                }
+            }
+        }*/
+        for(i=0;i<101;i++)
+        {
+            adj[i].clear();
+            for(j=0;j<=p;j++)
+            {
+                vis[i][j]=0;
+            }
+        }
+        while(!q.empty()) q.pop();
+  /*      for(i=0;i<qr;i++)
+        {
+            printf("%s
+",an[i]);
+
+        }*/
+    }
+    return 0;
+}

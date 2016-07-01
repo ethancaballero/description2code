@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+struct node
+{
+    long long num;
+    int three;
+    int five;
+    int eight;
+};
+
+node* define (long long a,int b,int c,int d)
+{
+    node* n = new node();
+    n->num=a;
+    n->three=b;
+    n->five=c;
+    n->eight=d;
+    return n;
+}
+
+int main()
+{
+    int k=0;
+    queue <node*> arr;
+    arr.push(define(3,1,0,0));
+    arr.push(define(5,0,1,0));
+    arr.push(define(8,0,0,1));
+    while(k<50000)
+    {
+        node* n=arr.front();
+        long long j = (n->num)*10;
+        int five=n->five;int eight=n->eight;int three=n->three;
+        if(five<=eight && three<=five)
+        {
+            //cout<<n->num<<endl;
+            printf("%lld
+",n->num);
+            k++;
+        }
+        arr.push(define(j+3,three+1,five,eight));
+        arr.push(define(j+5,three,five+1,eight));
+        arr.push(define(j+8,three,five,eight+1));
+        arr.pop();
+    }
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    long long int t,n,a[100009]={0},out,i,c;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        c=1;
+        out=0;
+        scanf("%lld",&n);
+        for(i=0;i<n;i++)
+            scanf("%ld",&a[i]);
+        for(i=0;i<n;i++)
+        {
+            if(a[i+1]>=a[i])
+                c++;
+            else
+            {
+                out+=c*(c+1)/2;
+                c=1;
+            }
+        }
+        printf("%lld
+",out);
+    }
+    return 0;
+}

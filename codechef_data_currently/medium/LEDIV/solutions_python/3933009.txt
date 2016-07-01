@@ -1,0 +1,24 @@
+from fractions import gcd
+import sys
+import math
+
+def get_divisor(num_gcd):
+	sq_root = int(math.sqrt(num_gcd)) + 1
+	factor = num_gcd
+	for i in xrange(2,sq_root):
+		if num_gcd % i == 0:
+			return i
+
+	return factor
+
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	num_tests = int(sys.stdin.readline().rstrip())
+	tests = [int(s) for s in sys.stdin.readline().rstrip().split()] 
+	num_gcd = reduce(gcd,tests)
+	if num_gcd == 1:
+		print -1
+	else:
+		print get_divisor(num_gcd)
+	
+	num -= 1

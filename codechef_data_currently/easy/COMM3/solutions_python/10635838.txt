@@ -1,0 +1,26 @@
+import math as m
+def leng(a,c,b,d):
+    return m.sqrt(((a-c)**2)+((b-d)**2))
+t=input()
+ans=[]
+for i in range(t):
+    n=input()
+    x1,y1=raw_input().split()
+    x2,y2=raw_input().split()
+    x3,y3=raw_input().split()
+    d1=leng(int(x1),int(x2),int(y1),int(y2))
+    d2=leng(int(x1),int(x3),int(y1),int(y3))
+    d3=leng(int(x3),int(x2),int(y3),int(y2))
+    l=[d1,d2,d3]
+    l.sort()
+    if l[0]<=n and l[1]<=n and l[0]+l[1]>=l[2]:
+        ans.append('yes')
+    else:
+        ans.append('no')
+for i in range(t):
+    print ans[i]
+            
+    
+       
+       
+    

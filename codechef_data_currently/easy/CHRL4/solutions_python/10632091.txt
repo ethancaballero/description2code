@@ -1,0 +1,62 @@
+n, k = map(int, raw_input().split())
+
+assert 1 <= n <= 100000
+assert 1 <= k <= n
+
+A = map(int, raw_input().split())
+
+assert len(A) == n
+
+INF = float('inf')
+MOD = 1000000007
+
+dp = [0 for _ in xrange(100005)]
+tree = [0 for _ in xrange(400009)]
+
+def build(node, start, end):
+    if(start == end):
+        dp[start] = A[start]
+        tree[node] = A[start]
+        return 
+
+    mid = (start + end)/2
+    build(2*node, start, mid)
+    build(2*node+1, mid+1, end)
+
+    tree[node] = min(tree[2*node], tree[2*node+1])
+
+build(1, 0, n-1)
+
+def update(node, start, end, x, val):
+    if(start > end or start > x or end < x):
+        return 
+
+    if(start == end and end == x):
+        dp[x] = val
+        tree[node] = val
+        return 
+
+    mid = (start + end)/2
+    update(2*node, start, mid, x, val)
+    update(2*node+1, mid+1, end, x, val)
+
+    tree[node] = min(tree[2*node], tree[2*node+1])
+
+def query(node, start, end, l, r):
+    if(start > end or start > r or end < l):
+        return INF
+
+    if(l <= start and end <= r):
+        return tree[node]
+
+    mid = (start + end)/2
+    q1 = query(2*node, start, mid, l, r)
+    q2 = query(2*node+1, mid+1, end, l, r)
+
+    return min(q1, q2)
+
+for i in xrange(1, n):
+    q = query(1, 0, n-1, max(i-k, 0), i-1)
+    update(1, 0, n-1, i, q*A[i])
+
+print dp[n-1]%MOD

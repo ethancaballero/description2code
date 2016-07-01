@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{   int gtime,t,dist,time1,time2;
+float avg;
+cin>>t;
+while(t--){
+//   string t1,t2;
+   char t1[7],t2[7];
+   cin>>t1>>t2;
+		scanf("%d",&dist);
+		time1=((t1[0]-'0')*10+(t1[1]-'0'))*60+(t1[3]-'0')*10+t1[4]-'0';
+		time2=((t2[0]-'0')*10+(t2[1]-'0'))*60+(t2[3]-'0')*10+t2[4]-'0';
+		gtime=time1-time2;
+		cout<<gtime+dist<<".0 ";
+		if(gtime>=dist*2)
+            avg=gtime;
+        else
+            avg=gtime/2.0+dist;
+         printf("%.1f
+",avg);
+}
+return 0;
+}

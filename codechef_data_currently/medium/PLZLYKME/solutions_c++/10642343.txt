@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define MOD 1000000007             //10^9+7
+#define nl printf("
+")
+#ifdef ONLINE_JUDGE
+    #define g getchar_unlocked
+    #define p putchar_unlocked
+#else
+   #define g getchar
+   #define p putchar
+#endif
+ 
+ 
+ 
+inline ll int rd()
+{
+    ll x=0;
+    int sign=1;
+    char c;
+    while(((c=g())<'0'||c>'9')&&c!='-');
+    if(c=='-')
+    sign=-1,c=g();
+    while(c>='0'&&c<='9')
+    x=(x<<3)+(x<<1)+c-48,c=g();
+    return sign*x;
+}
+ 
+int main() {
+   ll t;
+   cin>>t;
+   while(t--)
+   {
+       double l,d,s,c,ans;
+       l=rd();
+       d=rd();
+       s=rd();
+       c=rd();
+       ans=s*(pow((1+c),(d-1)));
+      if(ans>=l)
+        {
+            printf("ALIVE AND KICKING
+");
+        }
+        else
+        {
+            printf("DEAD AND ROTTING
+");
+        }
+   }
+	// your code goes here
+	return 0;
+}

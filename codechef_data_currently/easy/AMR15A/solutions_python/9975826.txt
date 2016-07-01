@@ -1,0 +1,9 @@
+raw_input()
+a=[int(x) for x in raw_input().split()]
+even=[c for c in a if c%2==0]
+N=len(a)
+E=len(even)
+if E>(N-E):
+    print"READY FOR BATTLE"
+else:
+    print"NOT READY"

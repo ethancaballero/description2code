@@ -1,0 +1,25 @@
+import sys
+
+def main():
+    for i in xrange(int(sys.stdin.readline())):
+        k = int(raw_input())
+        leaves = map(int, sys.stdin.readline().split())
+        leaves.reverse()
+        if leaves == [1]:
+            print "Yes"
+            continue
+        branches = 0
+        flag = True
+        for j in leaves[:-1]:
+            branches, md = divmod(branches+j,2)
+            if not md == 0:
+                print "No"
+                flag = False
+                break
+        if flag:
+            if branches == 1 and leaves[-1] == 0:
+                print "Yes"
+            else:
+                print "No"
+
+main()

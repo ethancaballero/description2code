@@ -1,0 +1,18 @@
+for t in range(int(raw_input())):
+	d,u,n = tuple(map(lambda x: float(x),raw_input().split()))
+	p=[]
+	n = int(n)
+	for i in range(n):
+		p.append(tuple(map(lambda x: float(x),raw_input().split())))
+	plan=0
+	price=u*d
+	# print
+	# print "price:",price
+	# print "p:",p
+	for j,i in enumerate(p):
+		temp = i[1]*u + i[2]/i[0]
+		# print "temp_price:",temp
+		if temp < price:
+			plan = j+1
+			price = temp
+	print plan

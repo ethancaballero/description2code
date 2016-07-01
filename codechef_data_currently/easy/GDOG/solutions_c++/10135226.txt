@@ -1,0 +1,24 @@
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
+int max_people(int N, int K) {
+	int max=0,i;
+	for (i = 1; i <= K; i++) {
+		if(N%i > max)
+			max = N%i;
+	}
+	return max;
+	 }
+
+int main()
+{
+	int testcase,i,N,K;
+	cin >> testcase;
+	for (i = 0; i < testcase; i++) {
+			cin>>N>>K;
+			cout<<max_people(N,K)<<endl;
+	}
+    return 0;
+}

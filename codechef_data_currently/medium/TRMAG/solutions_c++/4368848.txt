@@ -1,0 +1,37 @@
+#include <stdio.h>
+ 
+char *fstart; 
+const int BUF = 5000000;
+char buf [BUF];   
+int outat; 
+ 
+void get_int ( int* n)	{ 
+	while ( *fstart != 0 && !( '0' <= *fstart && *fstart <= '9')) 
+		fstart++; 
+	*n = 0; 
+	while ( '0' <= *fstart && *fstart <= '9')	{ 
+		*n = ( ( *n) << 3) + ( ( *n) << 1) + *fstart-'0', ++fstart; 
+	} 
+} 
+ 
+void take_input()	{ 
+	int sz = fread ( buf, sizeof ( char), BUF, stdin); 
+	buf [sz] = 0; 
+	fstart = buf;  
+	outat = 0;
+}
+ 
+int main ()	{
+	take_input ();
+	int t, n, a, f, temp, i;
+	for ( get_int ( & t); t--; )	{
+		get_int ( & n), get_int ( & f);
+		a = ( n * ( n + 1)) >> 1;
+		for ( i = 0; i < f; i++)
+			get_int ( & temp), a -= temp;
+		get_int ( & f), n = ( n >> 1) + ( n & 1);		
+		printf ( "%.4lf
+", 1.0 * a * ( n - f) / n);	
+	}
+	return 0;
+} 

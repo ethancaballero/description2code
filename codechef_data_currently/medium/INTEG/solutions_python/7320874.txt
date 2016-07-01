@@ -1,0 +1,20 @@
+n=int(raw_input())
+l=list(map(int,raw_input().split()))
+x=int(raw_input())
+if x==0:
+    print 0
+else:
+    y=[]
+    p=0
+    for i in l:
+        if i<0:
+            y.append(i)
+            p+=i
+    if len(y)<x:
+        print abs(p)
+    else:
+        y.sort(reverse=True)
+        y=y[len(y)-x:len(y)]
+        print abs(sum(y))
+
+    

@@ -1,0 +1,32 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+int reverse(int k,int l)
+{
+    int result=0;
+    while(l--)
+    {
+        result = result*2+k%2 ;
+        k=k/2;
+    }
+    return result;
+}
+
+int main() {
+	// your code goes here
+	int k;
+	int num;
+	string s;
+	cin>>k;
+	while(k--)
+	{
+	    cin>>num;
+	    cin>>s;
+	    for(int i=0;i<s.length();i++)
+	    {
+	        cout<<s[reverse(i,num)];
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}

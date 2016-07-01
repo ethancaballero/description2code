@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector <int> ad[100004];
+int vis[100004],win[100004];
+int bty;
+long long ans1=0,ans2=0;
+
+int dfs(int u){
+    vis[u]=1;
+    int I=win[u];
+    for(int i=0;i<ad[u].size();++i){
+        if(vis[ad[u][i]]==0){
+            I+=dfs(ad[u][i]);
+        }
+    }
+    if(I)
+        ++ans2;
+    return I;
+}
+int main(){
+    int T,N,M;
+    scanf("%d %d",&N,&M);
+    for(int i=0;i<N;++i)
+        scanf("%d",&win[i]);
+    for(int i=0;i<M;++i){
+        int a,b;
+        scanf("%d %d",&a,&b);
+        ad[a-1].push_back(b-1);
+        ad[b-1].push_back(a-1);
+    }
+    for(int i=0;i<N;++i){
+        if(vis[i]==0 && win[i]){
+            bty=dfs(i);
+            if(bty==1)
+                ans2--;
+            ans1=ans1+(((long long)bty*(bty-1))/2);
+        }
+    }
+    printf("%lld %lld
+",ans1,ans2);
+    return 0;
+}

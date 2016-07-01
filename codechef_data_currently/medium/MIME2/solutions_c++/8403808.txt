@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int n,q;
+	scanf("%d %d",&n,&q);
+	map<string,string> m;
+	string f,l;
+	for(int i=0;i<n;i++){
+		cin>>f>>l;
+		m[f]=l;
+	}
+	for(int i=0;i<q;i++){
+		cin>>f;
+		int index=f.find_last_of(".");
+		if(index==-1){
+			printf("unknown
+");
+		}
+		else{
+			l=f.substr(index+1);
+			if(m.find(l)!=m.end()){
+				cout<<m[l]<<endl;
+			}
+			else{
+					printf("unknown
+");
+			}
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,7 @@
+n = int(raw_input())
+array = map(int, raw_input().split())
+
+if sum(array) == n * (n + 1) / 2:
+    print "YES"
+else:
+    print "NO"

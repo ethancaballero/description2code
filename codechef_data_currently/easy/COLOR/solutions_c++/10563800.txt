@@ -1,0 +1,26 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n,i,j,k,x;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>x;
+		string s;
+		int arr[3]={0};
+		cin>>s;
+		for(j=0;j<x;j++)
+		{
+			if(s[j]=='R')
+			arr[0]++;
+			if(s[j]=='G')
+			arr[1]++;
+			if(s[j]=='B')
+			arr[2]++;
+		}
+		sort(arr,arr+3);
+		cout<<arr[0]+arr[1]<<endl;
+	}
+}

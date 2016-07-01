@@ -1,0 +1,28 @@
+def wrapper(A, B):
+    i = 0
+    j = 0
+    for i in range(0, len(A)):
+        if(j < len(B)):
+            if(A[i] == B[j]):
+                j += 1
+        else:
+            return True
+    if(j >= len(B)):
+        return True
+    return False
+
+T = int(raw_input())
+while(T > 0):
+    temp = raw_input()
+    male, female = temp.split()
+    if(len(male) <= len(female)):
+        if(wrapper(female, male)):
+            print "YES"
+        else:
+            print "NO"
+    else:
+        if(wrapper(male, female)):
+            print "YES"
+        else:
+            print "NO"
+    T = T - 1

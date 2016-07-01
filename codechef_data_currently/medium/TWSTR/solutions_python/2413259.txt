@@ -1,0 +1,19 @@
+from sys import stdin
+
+N = int(stdin.readline())
+recipes = {}
+for i in xrange(N):
+    S,V = map(str,stdin.readline().strip().split())
+    recipes[int(V)] = S
+sorted_recipes = sorted(recipes,reverse=True)
+
+Q = int(stdin.readline())
+for i in xrange(Q):
+    S = stdin.readline().strip()
+    found=False
+    for recipe in sorted_recipes:
+        if recipes[recipe][:len(S)] == S:
+            print recipes[recipe]
+            found=True
+            break
+    if not found: print "NO"

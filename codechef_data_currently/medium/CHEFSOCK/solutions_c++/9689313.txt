@@ -1,0 +1,10 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main(){
+	long long int tot,jack,sock;
+	scanf("%lld %lld %lld",&jack, &sock, &tot);
+	long long num = (tot-jack) / sock;
+	if(num%2) printf("Unlucky Chef");
+	else printf("Lucky Chef");
+}

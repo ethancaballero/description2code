@@ -1,0 +1,10 @@
+a = 42
+b = []
+while a == 42:
+	b.append(int(raw_input()))
+	if b[-1] == a:
+		b.pop(-1)
+		break
+		
+for i in b:
+	print i	

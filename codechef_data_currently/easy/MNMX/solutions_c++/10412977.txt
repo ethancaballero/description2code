@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	list<int> list1;
+	int n,i,j,m,p,x,a;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>m;
+		for(j=0;j<m;j++)
+		{
+			cin>>x;
+			list1.push_back(x);
+		}
+		list1.sort();
+		a=list1.size();
+		list<int> ::iterator itr=list1.begin();
+		p=*itr;
+		cout<<p*(a-1)<<endl;
+		list1.clear();
+	}
+}

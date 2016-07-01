@@ -1,0 +1,30 @@
+import sys
+
+
+max_num = 100001
+max_k = 6
+p = [0] * max_num
+kp = [[0 for i in range(6)] for j in range(max_num)]
+
+
+ 
+def precompute():
+    for i in range(2, max_num):
+        if p[i] == 0:
+            for j in range(i, max_num, i):
+                p[j] += 1
+                  
+    for i in range(2, max_num):
+        for j in range(1, max_k):
+#             print i, j, len(kp), len(kp[0])
+            kp[i][j] = kp[i-1][j] + (1 if p[i] == j else 0)
+              
+              
+if __name__ == "__main__":
+    precompute()
+    s = raw_input()
+    t = map(int, s.split())[0] 
+      
+    for i in range(t):
+        a, b, k = map(int, sys.stdin.readline().strip().split())
+        print kp[b][k] - kp[a-1][k]

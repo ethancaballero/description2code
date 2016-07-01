@@ -1,0 +1,92 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int a;
+   printf("1
+");
+   fflush(stdout);
+   printf("2 1 2
+");
+   fflush(stdout);
+   printf("2 3 4
+");
+   fflush(stdout);
+   scanf("%d",&a);
+   if(a==0)
+   {
+          printf("2
+");
+           fflush(stdout);
+          printf("5
+");
+           fflush(stdout);
+   }
+   else if(a==1)
+   {
+       printf("1
+");
+        fflush(stdout);
+       printf("1 1
+");
+        fflush(stdout);
+       printf("1 2 
+");
+        fflush(stdout);
+       scanf("%d",&a);
+       if(a==1)
+       {
+           printf("2
+");
+            fflush(stdout);
+           printf("1
+");
+            fflush(stdout);
+       }
+       else
+       {
+           printf("2
+");
+            fflush(stdout);
+           printf("2
+");
+            fflush(stdout);
+       }
+
+   }
+   else if(a==-1)
+   {
+       printf("1
+");
+        fflush(stdout);
+       printf("1 3
+");
+        fflush(stdout);
+       printf("1 4 
+");
+        fflush(stdout);
+       scanf("%d",&a);
+      if(a==1)
+       {
+           printf("2
+");
+            fflush(stdout);
+           printf("3
+");
+            fflush(stdout);
+       }
+       else
+       {
+           printf("2
+");
+            fflush(stdout);
+           printf("4
+");
+            fflush(stdout);
+       }
+   }
+
+
+
+}

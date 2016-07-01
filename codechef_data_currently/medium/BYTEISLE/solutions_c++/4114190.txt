@@ -1,0 +1,47 @@
+#include <iostream>
+#include <set>
+using namespace std;
+
+#define MAXN 50002
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        int n, low[MAXN], high[MAXN], diff[MAXN]={0};
+        cin >> n;
+        for(int i=0;i<n;++i) {
+            cin >> low[i] >> high[i];
+            diff[low[i]]++;
+            diff[high[i]+1]--;
+        }
+        set<int> possible; // contains all the possible number of byteknights
+        int ans=0,count=0;
+        for(int i=0;i<=n;++i) {
+            count += diff[i];
+            // this may be possible number of byteknights
+            // because they always tell correct
+            // and byteknaves always tell wrong
+            if(count==i) {
+                ans++;
+                possible.insert(i);
+            }
+        }
+        cout << ans << endl;
+
+        // since we are starting from the starting index
+        // we are sure to get lexicographically small output
+        // because of checking for the condition
+        for(int i=0;i<n;++i) {
+            if(low[i]<=*possible.begin() && *possible.rbegin()<=high[i])
+                cout << 1;
+            else {
+                cout << 0;
+                // they have to be erased because byteknave always lies
+                possible.erase(possible.lower_bound(low[i]),possible.upper_bound(high[i]));
+            }
+        }
+        cout << endl;
+    }
+    return 0;
+}

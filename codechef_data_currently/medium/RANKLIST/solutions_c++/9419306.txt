@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#include<stdint.h>
+using namespace std;
+ 
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--){
+    	int64_t n,s;
+    	cin>>n>>s;
+    	
+    	s-=n;
+    	int64_t ans = n;
+    	for(int i=1;i<n;i++){
+    	    if(i <= s){
+    	        s-=i;
+    	        continue;
+    	    }
+    	    else{
+    	        ans = i;
+    	        break;
+    	    }
+    	}
+    	if(ans == n && s > 0){
+    	    cout<<1<<"
+";
+    	}
+    	else{
+    	//cout<<ans<<"
+";
+    	cout<<n-ans<<"
+";
+    	}
+    	
+    	
+    	    
+    }
+    return 0;
+}
+ 

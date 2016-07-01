@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   int diff,sock,n;
+   long long int jacket,money;
+   cin>>jacket>>sock>>money;
+   diff=money-jacket;
+   n=(diff/sock);
+   if(n%2==0)
+        cout<<"Lucky Chef";
+   else
+        cout<<"Unlucky Chef";
+   
+   return 0;          
+}

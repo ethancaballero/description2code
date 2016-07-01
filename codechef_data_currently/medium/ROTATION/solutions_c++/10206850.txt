@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define sz 1000005
+int a[sz],start,siz;
+
+int main()
+{
+    int n,m;
+	cin>>n>>m;
+	
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	
+	start=0; siz=n;
+	
+	for(int i=0; i<m;i++)
+	{
+		char ch;
+		int k;
+		cin>>ch>>k;
+		if(ch=='C')//rotate clockWise
+		{
+			start = (start + k)%siz;
+		}
+		else if(ch=='R') //tell the kth element in array
+		{
+			cout<<a[(start+k-1)%siz]<<"
+";
+		}
+		else if(ch=='A') // rotate anticlockwise
+		{
+			start= (start-k+siz)%siz;
+		}
+	}
+    return 0;
+}

@@ -1,0 +1,98 @@
+#include <cstdio>
+#include <algorithm>
+#include <vector>
+#include <cstring>
+#include <cassert>
+#include <set>
+
+using namespace std;
+
+typedef long long LL;
+
+/* Matrix Exponentiation */
+
+#define MS 105
+#define MOD 100000007
+#define MOD2 100000006
+
+int sz, tmul[MS][MS], tpow[MS][MS];
+//Use MOD2 Here because we have to find (a^x)%MOD
+
+//(a^x) % Mod == (a^(x % (Mod - 1)) % Mod. if Mod is Prime
+/*Actually,
+((A^n) % M) != (A^(n%M))%M .
+
+
+((A^n) % M) = (A^(n%phi(M)))%M
+
+And for M being Prime phi(M) = M-1
+*/
+void mat_mul(int ab[MS][MS], int a[MS][MS], int b[MS][MS])
+{
+	for(int i=0;i<sz;i++) for(int j=0;j<sz;j++)
+	{
+		LL x = 0;
+		for(int k=0;k<sz;k++)
+			x = x + (1ll*a[i][k]*b[k][j]);
+		if(x>=MOD2) x%=MOD2;
+		tmul[i][j] = x;
+	}
+
+	for(int i=0;i<sz;i++) for(int j=0;j<sz;j++) ab[i][j] = tmul[i][j];
+}
+
+void mat_pow(int R[MS][MS], int A[MS][MS], int P, int s)
+{
+	sz = s;
+	for(int i=0;i<sz;i++) for(int j=0;j<sz;j++)
+		R[i][j]=(i==j), tpow[i][j] = A[i][j];
+	while(P)
+	{
+		if(P&1) mat_mul(R,R,tpow);
+		if((P>>=1)) mat_mul(tpow,tpow,tpow);
+	}
+}
+
+/* End of Matirx Exponentiation */
+
+int A[MS][MS], R[MS][MS], tax[MS];
+
+int modpow(LL a,LL P)
+{
+	LL r = 1;
+	for(;P>0;P>>=1)
+	{
+		if(P&1) r = (r*a)%MOD;
+		a = (a*a)%MOD;
+	}
+	return r;
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	assert(t>0 && t<=3);
+	while(t--)
+	{
+		int slot1, slot2, K, N;
+		scanf("%d %d %d %d %d", &tax[0], &slot1, &slot2, &K, &N);
+		--N;
+		int m = slot1 + slot2;
+		for(int i=1;i<=slot1;i++) tax[i] = tax[i-1] + 1;
+		for(int i=slot1+1;i<=m;i++) tax[i] = (2*tax[i-1])%MOD;
+		if(N<=m) printf("%d
+",tax[N]);
+		else
+		{
+			memset(A,0,sizeof A);
+			for(int i=0;i<K;i++) A[0][i] = A[i+1][i] = 1;
+			mat_pow(R,A,N-m,K);
+			LL ans = 1;
+			for(int i=0;i<K;i++) ans = ( ans * modpow(tax[m-i],R[0][i]) ) % MOD;
+			printf("%lld
+",ans);
+		}
+	}
+	return 0;
+}

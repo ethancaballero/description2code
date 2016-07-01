@@ -1,0 +1,18 @@
+def pow2(n):
+    if(n<=0): return 1
+    tmp = pow2(n/2)
+    tmp %= 1000000007
+    tmp *= tmp
+    tmp %= 1000000007
+    if(n%2!=0):tmp*=2%1000000007;
+    tmp%=1000000007
+    return tmp
+    
+
+t = input()
+while(t>0):
+    t-=1
+    n = input()
+    ans = pow2(n) - 1
+    ans %= 1000000007
+    print ans

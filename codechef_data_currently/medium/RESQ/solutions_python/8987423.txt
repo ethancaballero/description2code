@@ -1,0 +1,11 @@
+import sys, math
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    a = int(sys.stdin.readline())
+    a_sqrt = int(math.sqrt(a))
+    for i in range(a_sqrt, 0, -1):
+        if a%i == 0:
+            print abs(i - (a/i))
+            break

@@ -1,0 +1,126 @@
+'''
+Predictopus
+
+Problem code: PREDICT
+
+Chef Datta likes betting in Indian Premier League very much.
+
+He has 10000 rupees. Today the match is between team A and team B.
+The winning probability of team A is PA, and hence winning
+probability of team B is PB = 1 - PA.
+
+Datta is free to bet any integral amount of money on any of the
+two teams as long as the total amount of money bet is at most
+10000 rupees.
+
+Help him know the expected amount of money he will eventually have
+if today he places his bet(s) optimally.
+
+Rules of the game:
+
+If team X with winning probability PX actually wins and someone
+bets M rupees on this team, he will gain (2*(1-PX)) * M rupees.
+
+If team X with winning probability PX actually loses and someone
+bets N rupees on this team, he will just lose N rupees.
+
+Input
+
+First line contains single integer T, the number of testcases.
+Then T lines follow, each line contains PA the probability that
+team A wins.
+
+Output
+
+For each test case output single line containing the expected
+amount of money Datta will eventually have today if he places his
+bet(s) optimally. Your answer will be accepted if the absolute
+error is less than 10-6.
+
+Constraints
+
+1 <= T <= 100001 (10^5+1)
+0.0 <= PA <= 1.0
+PA has at most 5 digits after the decimal point.
+
+Example
+
+Input:
+1
+0.510
+
+Output:
+10098
+
+
+Example bet:
+
+Look at the following situation:
+
+A = 51%
+B = 49%
+Bet A = 6000
+Bet B = 4000
+
+If chef Datta bets 6,000 on team A and 4,000 on team B, the
+expected amount of money he will have after the bet is settled is
+10,018. Apparently that is not the best he can do ;)
+
+Author:         mkagenius
+Tester:         tuananh93
+Date Added:     22-04-2013
+Time Limit:     1 sec
+Source Limit:   50000 Bytes
+'''
+
+from sys import stdin,stderr
+
+def solve(P):
+    # A - bet A
+    # B - bet B
+    # E = (A + 2*(1-P) * A) * P + (B + 2*P * B) * (1-P) + 10000 - (A+B)
+    # E = 3*P*A + B(1+P) - 2*P*P(A+B) + 10000 - (A+B)
+    #
+    # Based on assumption of we should always deploy all the money,
+    # where A+B = 10000
+    #
+    # E = 30000*P + B*(1-2*P) - 20000*P*P
+    #
+    # when P > 50%, B*(1-2*P) become negative
+    if P >= 0.5:
+        A,B = 10000,0
+    else:
+        A,B = 0,10000
+    ans = 30000 * P + B * (1-2*P) - 20000 * P*P
+    return ans
+
+def check_test(A, B, data='', case=[0]):
+    print
+    print "test %d:" % case[0]
+    print A
+    if abs(A-B) > 1e-9:
+        if data:
+            print data
+        print '>>>', A
+        print '<<<', B
+        print "!!!!!!!! FAIL !!!!!!!!"
+    else:
+        print ":::::::) OK"
+    case[0] += 1
+
+def unit_test():
+    A, ans = 0.510, 10098
+    check_test(solve(A), ans, A)
+
+    A, ans = 0.490, 10098
+    check_test(solve(A), ans, A)
+
+def output():
+    for case in xrange(1, int(stdin.next()) + 1):
+        A = float(stdin.next().strip())
+        ans = solve(A)
+        print "%.6f" % ans
+
+if __name__ == '__main__':
+#    unit_test()
+    output()

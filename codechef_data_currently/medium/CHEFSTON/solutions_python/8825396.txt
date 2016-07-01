@@ -1,0 +1,11 @@
+for _ in range(input()):
+	n,k=map(int,raw_input().split())
+	a=map(int,raw_input().split())
+	b=map(int,raw_input().split())
+	s,j=[0]*n,0
+	for i in range(n):
+		tot=k//a[i]
+		s[i]=tot*b[i]
+	#print s	
+	print max(s)	
+		

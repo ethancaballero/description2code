@@ -1,0 +1,70 @@
+/* 
+ * File:   main.cpp
+ * Author: SCORPIUS
+ *
+ * Created on October 20, 2012, 12:30 AM
+ */
+ 
+#include <cstdlib>
+#include <stdio.h>
+#include <vector>
+using namespace std;
+ 
+/*
+ * 
+ */
+#define pb push_back
+vector <double> arr[2000];
+inline int inp()
+{
+int noRead=0;
+char p=getchar_unlocked();
+for(;p<33;){p=getchar_unlocked();};
+while(p>32)
+{
+noRead = (noRead << 3) + (noRead << 1) + (p - '0');
+p=getchar_unlocked();
+}
+return noRead;
+};
+int main() {
+    int t, max = 1;
+    double ans;
+    arr[0].pb(1);
+    scanf("%d", &t);
+    while (t--) {
+        ans = 0;
+        int n, j, k, v;
+        scanf("%d", &n);
+        if (n > max) {
+            for (j = max; j < n; j++) {
+                arr[j].pb(1 - arr[j - 1][0] / 2);
+                for (k = 1; k < (j / 2)+(j & 1); k++)
+                    arr[j].pb(1 - (arr[j - 1][k - 1] + arr[j - 1][k]) / 2);
+                if (!(j & 1)) arr[j].pb(1 - arr[j - 1][k - 1]);
+            }
+            max = n;
+        }
+        for (j = 0; j < ((n - 1) / 2)+(!(n & 1)); j++) {
+           // scanf("%d", &v);
+            v=inp();
+            ans += v * arr[n - 1][j];
+        }
+        if (n & 1) {
+            //scanf("%d", &v);
+            v=inp();
+            ans += v * arr[n - 1][j];
+        }
+        j--;
+        while (j >= 0) {
+            //scanf("%d", &v);
+            v=inp();
+            ans += v * arr[n - 1][j];
+            j--;
+        }
+        printf("%lf
+", ans);
+    }
+ 
+    return 0;
+}

@@ -1,0 +1,53 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include<map>
+#include<algorithm>
+using namespace std;
+struct song
+{
+	long long L;
+	long long B;
+};
+bool compare(const struct song &s1,const struct song &s2)
+{
+	return(s1.L<s2.L);
+}
+int main()
+{
+	long long t,p;
+	long N;
+	long long sweet=0;
+	cin>>t;
+	while(t--)
+	{
+		p=0;
+		sweet=0;
+		struct song s[100003];
+		scanf("%ld",&N);
+		for(long i=0;i<N;i++)
+		{
+			cin>>s[i].B;
+			cin>>s[i].L;
+		}
+		sort(s,s+N,compare);
+		map<long long,int> ss;
+		for(long i=0;i<N;i++)
+		{
+			if(ss[s[i].B]==0)
+			{
+				p++;
+				ss[s[i].B]=1;
+				sweet+=p*(s[i].L);
+	            s[i].L=0;
+				
+			}
+		}
+		for(long i=0;i<N;i++)
+		{
+			sweet+=p*(s[i].L);
+		}
+		cout<<sweet<<endl;
+		ss.clear();
+	}
+
+}

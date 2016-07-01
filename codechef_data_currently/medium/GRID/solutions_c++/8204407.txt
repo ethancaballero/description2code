@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int tc;
+    scanf("%d",&tc);
+    while(tc--)
+    {
+        int n;
+        scanf("%d",&n);
+        long long int ans;
+        bool v[n+10],row;
+
+        for (int j=0;j<n+10;j++)   v[j]=true;
+
+        char g[n+10][n+10];
+        for (int i=0;i<n;i++)
+           scanf("%s",g[i]);
+
+        ans=0;
+        for (int i=n-1;i>=0;i--)
+        {
+            row=true;
+            for (int j=n-1;j>=0;j--)
+            {
+                if (g[i][j]=='.')
+                {
+                    if (v[j] && row)
+                        ans++;
+                }
+                else
+                {
+                    row=v[j]=false;
+                }
+            }
+        }
+        printf("%lld
+",ans);
+    }
+    return 0;
+}

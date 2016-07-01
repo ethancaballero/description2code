@@ -1,0 +1,14 @@
+# cook your code here
+import sys
+import math
+
+test_cases = int(sys.stdin.readline())
+
+while test_cases > 0:
+    [n,s]= sys.stdin.readline().rstrip().split(' ')
+    n = int(n)
+    s = int(s)
+    k = math.floor((math.sqrt(1 + 8*(s-n)) - 1)/2)
+    print int(n - k - 1)
+    test_cases = test_cases - 1
+    

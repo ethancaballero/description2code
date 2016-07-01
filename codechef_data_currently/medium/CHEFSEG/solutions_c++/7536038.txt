@@ -1,0 +1,51 @@
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <utility>
+#include <queue>
+#include <cmath>
+#include <functional>
+using namespace std;
+
+int N,M;
+int T;
+
+
+inline void _scanf( int &n )
+{
+    n = 0;
+    int ch = getchar_unlocked(); int sign = 1;
+    while( ch < '0' || ch > '9' )
+    {
+        if(ch == '-')
+            sign = -1;
+        ch = getchar_unlocked();
+    }
+    while( ch >= '0' && ch <= '9' )
+        n = (n << 3) + (n << 1) + ch - '0', ch = getchar_unlocked();
+    n = n * sign;
+}
+
+
+int main() {
+    scanf("%d", &T);
+    for(;T>0;T--) {
+        _scanf(N);
+        _scanf(M);
+        int pot = 1;
+        while(pot <=  M)
+            pot *= 2;
+        double num = 1.00000;
+        int curr = pot/2;
+        num += 2 * (M - curr);
+        double ans = (num / pot) * N;
+        if(T!=0) printf("%.7f
+", ans);
+        else printf("%.7f", ans);
+    }
+    return 0;
+}

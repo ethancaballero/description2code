@@ -1,0 +1,8 @@
+t=int(raw_input())
+while t:
+	x=raw_input().split()
+	m=int(x[0])
+	n=int(x[1])
+	ans=((m*(n-1))+(n*(m-1)))
+	print ans
+	t-=1

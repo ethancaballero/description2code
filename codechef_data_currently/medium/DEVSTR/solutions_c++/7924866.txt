@@ -1,0 +1,82 @@
+//Md. Ahsan Kabir Shohagh
+#include<bits/stdc++.h>
+using namespace std;
+#define sz 100000
+#define pb(a) push_back(a)
+#define ll long long
+#define ull unsigned long long
+#define fread freopen("input.txt","r",stdin)
+#define fwrite freopen("output.txt","w",stdout)
+#define inf (1<<29)
+#define mem(abc,z) memset(abc,z,sizeof(abc))
+#define PI acos(-1)
+#define quick ios_base::sync_with_stdio(0)
+
+int main(){
+   int t,n,k,ans,ans2;
+   string s,s2,s3;
+   cin>>t;
+   while(t--){
+     cin>>n>>k>>s;
+     ans=0;
+     if(k==1){
+        ans=ans2=0;
+        s2=s3="";
+        for(int i=0;i<n;i++) {
+            s2+=((i&1)?'0':'1');
+            s3+=((i&1)?'1':'0');
+        }
+        for(int i=0;i<n;i++){
+            if(s2[i]!=s[i]){
+                ans++;
+            }
+            if(s3[i]!=s[i]){
+                ans2++;
+            }
+        }
+        if(ans>ans2) {
+            cout<<ans2<<"
+"<<s3<<endl;
+        }
+        else  cout<<ans<<"
+"<<s2<<endl;
+        continue;
+     }
+     for(int i=0;i<n;i++){
+        int st=i,c=1;
+        while(st+1<n && s[st+1]==s[i]){
+            c++;
+            st++;
+        }
+        if(c%(k+1)==0){
+            ans+=(c/(k+1));
+            for(int j=i+k;j<=st;j+=(k+1)){
+                s[j]=(char)((s[j]-'0')^1+'0');
+            }
+            s[st]=(char)((s[st]-'0')^1+'0');
+            s[st-1]=(char)((s[st-1]-'0')^1+'0');
+        }
+        else {
+            ans+=(c/(k+1));
+            for(int j=i+k;j<=st;j+=(k+1)){
+                s[j]=(char)((s[j]-'0')^1+'0');
+            }
+        }
+        if(i!=st) i=st;
+     }
+     cout<<ans<<"
+"<<s<<endl;
+   }
+   return 0;
+}
+/*
+4
+2 1
+11
+2 2
+11
+4 1
+1001
+5 1
+00000
+*/

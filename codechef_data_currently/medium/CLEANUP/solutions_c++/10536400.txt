@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m,x;
+		cin>>n>>m;
+		int a[n],b[n-m];
+		for(int i=0;i<n;i++)
+			a[i]=0;
+		for(int i=0;i<m;i++)
+		{
+			cin>>x;
+			a[x-1]=1;
+		}
+		for(int i=0,j=0;i<n;i++)
+		{
+			if(a[i] == 0)
+			{
+				b[j] = i + 1;
+				j++;
+			}
+		}
+		for(int i=0;i<n-m;i+=2)
+			cout<<b[i]<<" ";
+		cout<<endl;
+		for(int i=1;i<n-m;i+=2)
+			cout<<b[i]<<" ";
+		cout<<endl;
+	}
+	return 0;
+}

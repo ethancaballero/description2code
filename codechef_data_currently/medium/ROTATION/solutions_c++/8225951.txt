@@ -1,0 +1,42 @@
+//#include <iostream>
+#include<stdio.h>
+//using namespace std;
+inline int scan()
+{
+	int n=0,c=getchar_unlocked();
+	 while(c<'0'||c>'9')
+       c=getchar_unlocked();
+     while(c>='0'&&c<='9')
+       n=(n<<3)+(n<<1)+c-'0',c=getchar_unlocked();
+    return n;
+}
+int main() 
+{
+	int N,M,D,j,i;
+	char c;
+	N=scan();
+	M=scan();
+	int A[N];
+	for(i=0;i<N;i++)
+	A[i]=scan();
+	i=0;
+	while(M--)
+	{
+		c=getchar_unlocked();
+		//scanf("%c",&c);
+		D=scan();
+		if(c=='R')
+		{
+			j=(i+D-1)%N;
+			printf("%d
+",A[j]);
+		}
+		 else if(c=='A')
+          i=(i-D+N)%N;
+        else if(c=='C')
+           i=(i+D)%N;
+	}
+	
+	// your code goes here
+	return 0;
+} 

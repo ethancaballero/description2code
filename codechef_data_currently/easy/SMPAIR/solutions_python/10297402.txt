@@ -1,0 +1,6 @@
+t = input()
+for x in range(t):
+	n = int(raw_input())
+	b = map(int,raw_input().split())
+	b = sorted(b)
+	print b[0] + b[1]

@@ -1,0 +1,29 @@
+def find(mat,r):
+
+    for i in xrange(r):
+        if 'spoon' in mat[i] :
+            return True
+    return False
+
+t = int(raw_input())
+
+for ab in xrange(t):
+    r, c = map(int,raw_input().split())
+    mat = []
+    mat1 = []
+    for i in xrange(r):
+        a = raw_input()
+        a = a.replace('','')
+        a = a.lower()
+        mat.append(a)
+
+    for i in xrange(c):
+        a = ''
+        for j in xrange(r):
+            a += mat[j][i]
+        mat1.append(a)
+
+    if find(mat,r) or find(mat1,c):
+        print "There is a spoon!"
+    else :
+        print "There is indeed no spoon!"

@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cmath>
+#define ll unsigned long long
+using namespace std;
+ll gcd(ll a, ll b)
+{
+	if (b == 0)
+		return a;
+	return gcd(b, a % b);
+}
+ll ncr(ll n, ll k)
+{
+	if (n < k)
+		return 0;
+	ll num = 1, den = 1, nm, dn, g, ans = 1;
+	if (k > (n / 2))
+		k = n - k;
+	for (int i = k; i; i--)
+	{
+		nm = n - k + i;
+		dn = i;
+		g = gcd(nm, dn);
+		nm /= g;
+		dn /= g;
+		g = gcd(num, dn);
+		num /= g;
+		dn /= g;
+		g = gcd(den, nm);
+		den /= g;
+		nm /= g;
+		num *= nm;
+		den *= dn;
+	}
+	return num / den;
+}
+int main()
+{
+#ifndef ONLINE_JUDGE
+	freopen("../input.txt", "r", stdin);
+	//freopen("../output.txt","w",stdout);
+#endif
+	int t;
+	ll n, k;
+	scanf("%d", &t);
+	while (t--)
+	{
+		scanf("%llu %llu", &n, &k);
+		ll ans = ncr(n, k);
+		printf("%llu
+", ans);
+	}
+	return 0;
+}

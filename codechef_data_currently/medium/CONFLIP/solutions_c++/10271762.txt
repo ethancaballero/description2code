@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+int main(){
+int t;
+cin>>t;
+while(t--){
+    long g;
+    cin>>g;
+    while(g--){
+        long i,n,q;
+        cin>>i>>n>>q;
+        long odd=((n-1)/2)+1;
+        long even=n-odd;
+        if(i==q)
+            cout<<even<<endl;
+        else
+            cout<<odd<<endl;
+       /* if(i==1){
+            if(q==1)
+                cout<<even<<endl;
+            else
+                cout<<odd<<endl;
+
+        }
+        else{
+            if(q==2)
+                cout<<even<<endl;
+            else
+                cout<<odd<<endl;
+        }*/
+    }
+
+
+
+
+}
+
+
+}

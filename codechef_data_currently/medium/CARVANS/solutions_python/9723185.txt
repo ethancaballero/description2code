@@ -1,0 +1,24 @@
+## CodeChef
+## Carvans
+## 2016.03.23
+
+def maxSpeed(cars, maxSpeeds):
+    minSpeed = maxSpeeds[0]
+    j = 1
+    for i in xrange(cars-1):
+        if minSpeed > maxSpeeds[i+1]:
+            minSpeed = maxSpeeds[i+1]
+            j += 1
+        else:
+            pass
+    
+    return j    
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    cars = int(raw_input())  # the number of cars
+    maxSpeeds = map(int,raw_input().strip().split())  ## the maximum speed of cars
+    theNumberOfSpeeds = maxSpeed(cars,maxSpeeds)
+
+    print theNumberOfSpeeds

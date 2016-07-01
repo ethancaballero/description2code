@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<iostream>
+#define mod 1000000007
+
+using namespace std;
+long long int y[3][3];
+
+void mat_power(int a[3][3], int n)
+{
+
+    long long int x[3][3],temp[3][3];
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+        {
+            y[i][j] = 0;
+            x[i][j] = a[i][j];
+        }
+      y[0][0] = y[1][1] = y[2][2] = 1;
+    while(n > 0)
+    {
+        if(n&1)
+        {
+            for(int i=0; i <3 ; i++)
+            {
+                for(int j=0; j< 3; j++)
+                {
+                     temp[i][j] = ((y[i][0]*x[0][j])%mod + (y[i][1]*x[1][j])%mod + (y[i][2]*x[2][j])%mod)%mod;
+                }
+            }
+            for(int i=0; i <3 ; i++)
+            {
+                for(int j=0; j< 3; j++)
+                {
+                     y[i][j] = temp[i][j];
+                }
+            }
+
+        }
+        for(int i=0; i <3 ; i++)
+            {
+                for(int j=0; j< 3; j++)
+                {
+                     temp[i][j] = ((x[i][0]*x[0][j])%mod + (x[i][1]*x[1][j])%mod + (x[i][2]*x[2][j])%mod)%mod;
+                }
+            }
+            for(int i=0; i <3 ; i++)
+            {
+                for(int j=0; j< 3; j++)
+                {
+                     x[i][j] = temp[i][j];
+                }
+            }
+        n /= 2;
+    }
+
+}
+int main()
+{
+    int a[3][3] = {{1,4,2},{1,0,0},{0,1,0}};
+    int ans[3] = {11,5,1};
+    int t,n;
+
+    scanf("%d",&t);
+    while(t-- >0)
+    {
+        long long int result = 0;
+        scanf("%d",&n);
+        if(n == 1)
+            result = ans[2];
+        else if(n == 2)
+            result = ans[1];
+        else{
+        mat_power(a,n-3);
+        for(int i=0; i <3 ; i++)
+            {
+                result += (y[0][i]*ans[i])%mod ;
+            }
+        }
+        printf("%lld
+",result%mod);
+
+    }
+    return 0;
+}

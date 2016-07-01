@@ -1,0 +1,16 @@
+t = int(raw_input())
+ganesh = [""]*t
+def nd(a):
+    alpha = "abcdefghijklmnopqrstuvwxyz"
+    while a:
+        if a<=len(alpha):
+            return alpha[:a]
+        else:
+            alpha = alpha+alpha
+        
+for i in range(t):
+    k = int(raw_input())
+    ganesh[i]=nd(k)
+ 
+for j in range(t):
+    print ganesh[j]

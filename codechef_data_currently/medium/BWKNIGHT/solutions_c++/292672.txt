@@ -1,0 +1,169 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+
+#ifndef ONLINE_JUDGE
+int AA=(int)freopen("input.txt","r",stdin);
+int BB=(int)freopen("output.txt","w",stdout);
+#endif
+
+#define ll long long
+
+using namespace std;
+
+int dx[]={-2,-2,-1,-1,1,1,2,2},
+	dy[]={-1,1,-2,2,-2,2,-1,1};
+
+int f[100][100]={0};
+int n=4,m=5;
+ll ans=0;
+
+void calc()
+{
+	for(int i=2;i<2+n;i++)
+	{
+		for(int j=2;j<2+m;j++)
+		{
+			f[i][j]=1;
+			for(int t=0;t<8;t++)
+				f[i+dx[t]][j+dy[t]]=1;
+			for(int x=2;x<2+n;x++)
+				for(int y=2;y<2+m;y++)
+					if (f[x][y]==0) ans++;
+			f[i][j]=0;
+			for(int t=0;t<8;t++)
+				f[i+dx[t]][j+dy[t]]=0;
+		}
+	}
+}
+
+ll solve(ll N,ll M)
+{
+	return (N-4)*(M-4)*(N*M-9)+4*(2*N*M-8)+8*(N*M-4)+2*(N+M-8)*(2*N*M-12);
+}
+
+int base=10000000;
+
+vector <int> operator +(const vector <int> & a,const vector <int> & b)
+{
+	vector <int> res;
+	int r,p=0,l1=a.size(),l2=b.size();
+	for(int i=0;i<l1||i<l2;i++)
+	{
+		r=p;
+		if (i<l1) r+=a[i];
+		if (i<l2) r+=b[i];
+		p=r/base;
+		res.push_back(r%base);
+	}
+	if (p>0) res.push_back(p);
+	return res;
+}
+
+vector <int> operator *(const vector <int> & a,ll b)
+{
+	vector <int> res;
+	ll r,p=0,l1=a.size();
+	for(int i=0;i<l1;i++)
+	{
+		r=p;
+		r+=b*a[i];
+		p=r/base;
+		res.push_back(r%base);
+	}
+	while(p>0)
+	{
+		res.push_back(p%base);
+		p/=base;
+	}
+	return res;
+}
+
+void Write(vector <int> a)
+{
+	int k=a.size()-1;
+	printf("%d",a[k--]);
+	for(int i=k;i>=0;i--)
+	{
+		for(int step=10;step*a[i]<base;step*=10)
+			printf("0");
+		printf("%d",a[i]);
+	}
+	printf("
+");
+}
+
+vector <int> Solve(ll a,ll b)
+{
+	ll A=8*(a*b-4)+2*(a+b-8)*(2*a*b-12)+4*(2*a*b-8),C=(a-4),D=(b-4),B=(a*b-9);
+	vector <int> v,v1;
+	v.clear();
+	v1.clear();
+	while(C>0)
+	{
+		v.push_back(C%base);
+		C/=base;
+	}
+	while(A>0)
+	{
+		v1.push_back(A%base);
+		A/=base;
+	}
+	v=v*B;
+	v=v*D;
+	v=v+v1;
+	return v;
+}
+
+int res[7][7]={{0,2,6,12,20,30},
+{2,12,26,48,78,116},
+{6,26,56,104,170,254},
+{12,48,104,192,312,464},
+{20,78,170,312,504,746},
+{30,116,254,464,746,1100}};
+
+void CALC(ll n,ll m)
+{
+	ll a=0,b=n*m-1,base=10000000000000LL;
+	b*=n;
+	a=b/base; b%=base;
+	a*=m; b*=m; a+=b/base; b%=base;
+	if (n>1&&m>2)
+	{
+		b-=(n-1)*(m-2)*4;
+		if (b<0) b+=base,a--;
+	}
+	if (n>2&&m>1)
+	{
+		b-=(n-2)*(m-1)*4;
+		if (b<0) b+=base,a--;
+	}
+	if (a>0)
+	{
+		cout << a;
+		for(ll step=base/10;step>=10&&step>b;step/=10)
+			cout << 0;
+	}
+	cout << b << '
+';
+}
+
+
+int main()
+{
+	int T;
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d%d",&n,&m);
+//		if (n<=6&&m<=6) printf("%d
+",res[n-1][m-1]);
+//		else
+//		{
+//			Write(Solve(n,m));
+			CALC(n,m);
+//			cout << solve(n,m) << endl;
+//		}
+	}
+	return 0;
+}

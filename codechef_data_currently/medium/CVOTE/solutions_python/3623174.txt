@@ -1,0 +1,41 @@
+
+import sys
+from sys import stdin
+
+def main():
+	n,m=(stdin.readline().split())
+	n=int(n)
+	m=int(m)
+	
+	map={}
+	vote_count={}
+	cvote_count={}
+	
+	for i in range(n):
+		chef,country=stdin.readline().split()
+		map[chef]=country
+		
+	for i in range(m):
+		chef=stdin.readline().split('
+')
+		if chef[0] not in vote_count:
+			vote_count[chef[0]]=1
+		else:
+			vote_count[chef[0]]+=1
+			
+		if map[ chef[0] ] not in cvote_count:
+			cvote_count[ map[chef[0]] ]=1
+		else:
+			cvote_count[ map[chef[0]] ]+=1
+		
+	list=sorted(vote_count.items(),key = lambda x:x[0])
+	list=sorted(list,key=lambda x:x[1],reverse=True)
+	
+	list2=sorted(cvote_count.items(),key = lambda x:x[0])
+	list2=sorted(list2,key=lambda x:x[1],reverse=True)
+	
+	print list2[0][0]
+	print list[0][0]
+	
+if __name__ == '__main__':
+  main()

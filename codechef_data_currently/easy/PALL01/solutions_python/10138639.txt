@@ -1,0 +1,9 @@
+import math
+T= int(raw_input()) # number of cases
+ 
+for i in range(T):
+    x=str(raw_input()) #reads size of base
+    if x==x[::-1]:
+        print "wins"
+    else:
+        print "losses"

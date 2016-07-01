@@ -1,0 +1,24 @@
+n,W,L=map(int,raw_input().split(' '))
+H=[]
+R=[]
+for i in range(n):
+	h,r=map(int,raw_input().split(' '))
+	H.append(h)
+	R.append(r)
+
+def can_count(time):
+	sumt=0
+	for i in range(n):
+		val=H[i]+R[i]*time;
+		if val>=L:
+			sumt+=val 
+	return sumt>=W
+low=-1
+high=10**18+5
+while high-low>1:
+	mid=high+low>>1
+	if can_count(mid):
+		high=mid 
+	else:
+		low=mid 
+print high

@@ -1,0 +1,67 @@
+	#include<iostream>
+	#include<string>
+	#include<stdio.h>
+	#define get getchar_unlocked
+	#define put putchar_unlocked
+ 	using namespace std;
+	inline int inp()
+	{
+	
+	int n=0, c=get(),f=1;
+	while(c!='-'&&(c<'0'||c>'9')) c=get();
+	if(c=='-'){f=-1;c=get();}
+	 
+	while(c>='0'&&c<='9'){n=(n<<3)+(n<<1)+c-'0',c=get();}
+	return n*f;
+	 
+	}
+	int stack[2][1000005];
+	string st[1000005];
+	int main()
+	{
+		int n;
+		n=inp();
+		
+		int index=-1;
+		string a;
+		int num;
+		for(int i=0;i<n;++i)	
+		{
+			num=inp();
+			if(num>=0)
+			{
+				cin>>a;
+				if(num>0)
+				{	
+					if(index==-1)
+					{
+						index++;
+						stack[0][index]=num;
+						st[index]=a;
+						stack[1][index]=0;
+					}	
+					else if(num>stack[0][index])
+					{
+						stack[1][index]++;
+					}	
+					else
+					{
+						index++;
+						stack[0][index]=num;
+						st[index]=a;
+						stack[1][index]=0;
+					}
+				}	
+			}	
+			else if(num==-1)
+			{
+				
+					printf("%d ",stack[1][index]);
+					cout<<st[index];
+					printf("
+");
+					index--;
+					
+			}	
+		}
+	}

@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,c,q;
+        cin>>n>>c>>q;
+        int a[n];
+        memset(a,0,n*sizeof(int));
+        int l,r;
+        for(int i=0;i<q;i++)
+        {
+
+            cin>>l>>r;
+            l = l;
+            r = r;
+            if((l>c) || (r<c))
+                continue;
+            else
+                c = l+r-c;
+        }
+            cout<<c<<endl;
+    }
+}

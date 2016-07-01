@@ -1,0 +1,26 @@
+def process(N, A):
+    if not A:      return  0
+    if sum(A) % N: return -1
+    T = [0] * (N+1)
+    for a in A: T[a] += 1
+    i, j, c = 0, N, 0
+    while i < j:
+        while not T[i]: i += 1
+        while not T[j]: j -= 1
+        if i == j: break
+        R = (j-i) / 2 + (j-i) % 2
+        T[i]   -= 1
+        T[j]   -= 1
+        T[i+R] += 1
+        T[j-R] += 1
+        c      += 1
+    return c
+
+def main():
+    T = int(raw_input())
+    for t in xrange(T):
+        N = int(raw_input())
+        A = map(int, raw_input().split())
+        print process(N, A)
+
+main()

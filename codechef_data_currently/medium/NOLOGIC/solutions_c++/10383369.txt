@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 315
+
+int main()
+{
+int T,i,j;
+scanf("%d",&T);
+char line[MAX_LINE_LENGTH];
+gets(line);
+short letters[26];
+for(i=0;i<T;i++)
+  {
+      memset(letters,0,26*sizeof(short));
+//  for(i=0;i<26;++i)printf("%d, ",letters[i]);
+    gets(line);
+    for(j=0;line[j];j++)
+    {
+      if (isalpha(line[j]))
+	letters[tolower(line[j]) - 'a']++;
+    }
+
+
+
+
+    for(j=0;j<26;j++)
+    if (!letters[j]){
+	  printf("%c
+",j+97);
+	  break;}
+    if (j==26)
+	printf("~
+");
+    }
+
+
+  return 0;
+}

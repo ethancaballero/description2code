@@ -1,0 +1,76 @@
+/*God is greater than any problem that
+u have and u have to not worry because
+when u pray and then worry,
+the worry nullify your prayer
+He is right here, right now !!
+*/
+ 
+#include <bits/stdc++.h>
+using namespace std;
+#define bitcnt __builtin_popcount
+#define ln length()
+#define rep(i, n) for(int i = 0; i < n; i++)
+#define rrep(i, n) for(int i = n - 1; i >= 0; i--)
+#define all(a)  a.begin(),a.end()
+#define LL long long
+#define limit 1111111
+#define sl(n) scanf("%lld", &n)
+#define s(n)  scanf("%d", &n)
+#define pl(n) printf("%lld", n)
+#define pi(n)  printf("%d", n)
+#define mod 1000000007
+typedef vector<LL> row;
+typedef vector<row> matrix;
+ 
+void print(LL *arr, LL n)
+{
+	rep(i, n) cout << arr[i] << " ";
+	cout << endl;
+}
+ 
+bool isprime[100005];
+int a[limit];
+bool isPrime(int n)
+{
+	if(n < 2) return false;
+	if(n == 2) return true;
+	if(n % 2 == 0) return false;
+	for(int i = 3; i * i <= n; i++) {
+		if(n % i == 0) return false;	
+	} 	
+	return true;
+}
+ 
+void pre()
+{
+	rep(i, 100000) {
+		isprime[i] = isPrime(i);
+	}
+}
+ 
+void solve()
+{
+	LL L,R;
+	sl(L); sl(R);
+	for(LL i = 0; i <= R - L; i++) a[i] = 0;
+	for(LL i = 1; i * i <= R; i++) {
+		LL pro = i * i;
+		for(LL j = (L / i) * i; j <= R; j += i) if( j >= L && pro <= j ) a[j - L] += 1 + (pro != j);
+	}
+	int ans = 0;
+	for(LL i = L; i <= R; i++) if(isprime[a[i - L]]) ans++;
+	pi(ans);
+	printf("
+");
+}
+ 
+int main()
+{
+	pre();
+	int t;
+	scanf("%d", &t);
+	while(t--) {
+		solve();
+	}
+	return 0;
+}

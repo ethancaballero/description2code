@@ -1,0 +1,10 @@
+t=(int)(raw_input())
+for i in range (t):
+	x=raw_input()
+	n,m=map(int,x.split())
+	y=raw_input()
+	arr=map(int,y.split())
+	maxx=max(arr)
+	minn=min(arr)
+	for j in range(0,n):
+		print max(maxx-j,j-minn)

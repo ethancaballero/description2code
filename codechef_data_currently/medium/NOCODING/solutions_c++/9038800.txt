@@ -1,0 +1,55 @@
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stack>
+#include <string.h>
+#include <vector>
+#include <utility> 
+#include <limits.h>
+
+using namespace std;
+
+string s;
+long int i_lng;
+long int i_lim;
+int T;
+
+int main()
+{
+	cin >>T;
+	while(T--)
+	{
+		string s;
+		cin >> s;
+		i_lng=s.length()+1;
+		i_lim=11*s.length();
+		for(int i=0;i< (s.length()-1) ;i++)
+		{
+			if( ( (int)s[i+1] - (int)s[i]) < 0)
+			{
+				i_lng+=26 - ((int)s[i] - 48)  ;
+				i_lng+=(int)s[i+1] - 48 ;
+
+			}
+
+			else
+			{
+				i_lng+=(int)s[i+1] -(int)s[i];
+			}
+			
+		}
+
+		if(i_lng > i_lim)
+		cout << "NO"  << endl;
+	else
+		cout << "YES"  <<endl;
+
+	}	
+
+	
+
+	
+
+
+}

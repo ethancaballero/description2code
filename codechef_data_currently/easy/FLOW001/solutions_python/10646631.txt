@@ -1,0 +1,6 @@
+n = int(raw_input())
+
+for i in range(n):
+	a,b = raw_input().split()
+	a,b = (int(a),int(b))
+	print int(a+b)

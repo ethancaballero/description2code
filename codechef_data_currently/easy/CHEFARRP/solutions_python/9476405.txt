@@ -1,0 +1,23 @@
+testcases = input()
+
+for i in range(0, testcases):
+    windowsize = input()
+    count = windowsize
+    array = [int(x) for x in raw_input().split(' ')]
+    #print array
+    while (windowsize > 1):
+        firstwindowstart = 0
+        lastwindowstart = len(array) - windowsize
+        for j in range(firstwindowstart, lastwindowstart+1):
+            temparray = array[j:j+windowsize]
+            product = 1
+            sum = 0
+            for x in temparray:
+                product = product * x
+                sum = sum + x
+            if product == sum:
+                count = count + 1
+            #print temparray
+            
+        windowsize = windowsize-1
+    print count

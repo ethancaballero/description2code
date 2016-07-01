@@ -1,0 +1,30 @@
+#!/usr/bin/python
+N,M,H=raw_input().split(' ')
+N=int(N)
+M=int(M)
+H=int(H)
+cont={}
+for h in xrange(H):
+	T,C=raw_input().split(' ')
+	T=int(T)
+	C=int(C)
+	cont[h]=[T,C]
+
+cont=sorted(cont.items(), key=lambda x: x[1][1])
+total=N*M
+ans=0
+#for i in cont:
+#	print i
+for i in cont:
+	if(total>0):
+#		print total
+#		print i
+		done=min(total,i[1][0])
+		ans+=done*i[1][1]
+		total-=done
+	else:
+		break
+if(total>0):
+	print "Impossible"
+else:
+	print ans

@@ -1,0 +1,14 @@
+#baloons
+t=input()
+for i in range(t):
+ n=input()
+ s=raw_input()
+ s1="RGB"
+ max=0
+ for c in s1:
+  if s.count(c)>max:
+    max=s.count(c)
+	
+ print n-max	
+  
+ 

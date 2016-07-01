@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n1,n2,n3,n;
+	map<int, int> m;
+	map<int,int>::iterator it;
+	int max=INT_MIN;
+	int count=0;
+	vector<int> v;
+	//memset(arr,0,sizeof(arr));
+	cin>>n1>>n2>>n3;
+	for(int i=0;i<n1+n2+n3;i++){
+		cin>>n;
+		if(n>max){
+			max=n;
+		}
+		if(m.find(n)==m.end()){
+			m[n]=1;
+		}
+		else{
+			m[n]++;
+		}
+	}
+	for(it=m.begin();it!=m.end();it++){
+		//cout<<it->first;
+		if(it->second>=2){
+			count++;
+			v.push_back(it->first);
+		}
+	}
+	cout<<count<<"
+";
+	for(int i=0;i<v.size();i++){
+		cout<<v[i]<<"
+";
+	}
+	return 0;
+}

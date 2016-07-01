@@ -1,0 +1,58 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+#define task "latxu2"
+#define foru(i,a,b) for(int i = (a), _b = (b); i <= _b; ++i)
+#define ford(i,a,b) for(int i = (a), _b = (b); i >= _b; --i)
+const int maxn = 1e5 + 10;
+
+int test, n, k, t[maxn*4];
+char s[maxn];
+
+void update(int k, int l, int r, int i, int j) {
+    if (j<l || i>r) return;
+    if (i <= l && r <= j) {
+        t[k] = (t[k] + 1) & 1;
+        return;
+    }
+    int m = (l+r) / 2;
+    update(k*2, l, m, i, j);
+    update(k*2+1, m+1, r, i, j);
+}
+
+int get(int k, int l, int r, int i) {
+    if (l == r) return t[k];
+    int m = (l+r) / 2;
+    if (i <= m)
+        return (t[k] + get(k*2, l, m, i)) & 1;
+    return (t[k] + get(k*2+1, m+1, r, i)) & 1;
+}
+
+void solve() {
+    int res = 0;
+    foru(i,1,n) {
+        int c = get(1,1,n,i);
+        int x = ( (s[i] == 'G') + c) & 1;
+        if (x == 1) continue;
+        ++res;
+        update(1,1,n,i,min(n,i+k-1));
+        //foru(i,1,n) cout << get(1,1,n,i) << " "; cout << "
+";
+    }
+    printf("%d
+", res);
+}
+
+int main() {
+    //freopen(task".inp", "r", stdin);
+    //freopen(task".out", "w", stdout);
+    scanf("%d
+", &test);
+    for(; test; --test) {
+        scanf("%d %d
+", &n, &k);
+        gets(s+1);
+        foru(i,1,n*4) t[i] = 0;
+        solve();
+    }
+}

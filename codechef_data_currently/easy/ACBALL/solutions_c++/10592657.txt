@@ -1,0 +1,31 @@
+# include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,i;
+    cin>>t;
+    while(t--)
+    {
+        string x,y;
+        cin>>x>>y;
+        for(i=0;i<x.length();i++)
+        {
+            if(x[i]==y[i])
+            {
+                if(x[i]=='B')
+                {
+                    cout<<"W";
+                }
+                else
+                {
+                    cout<<"B";
+                }
+            }
+            else
+            {
+                cout<<"B";
+            }
+        }
+        cout<<endl;
+    }
+}

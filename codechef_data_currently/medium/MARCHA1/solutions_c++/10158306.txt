@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+bool find(int a[],int n,int sum)
+{
+    if(n ==0 && sum !=0)
+    return false;
+    if(sum ==0)
+    return true;
+    
+    if(a[n-1]>sum)
+    return find(a,n-1,sum);
+    
+    return find(a,n-1,sum)||find(a,n-1,sum-a[n-1]);
+}
+int main() {
+	// your code goes here
+	int n,m,k;
+	int sum;
+	bool result;
+	
+  cin>>n;
+  
+  while(n--)
+  {
+      int a[20];
+      cin>>m>>sum;
+     for(int i=0;i<m;i++)
+     {
+     cin>>a[i];
+     }
+     result = find(a,m,sum);
+     if(result == 0)
+     cout<<"No"<<endl;
+     else
+     cout<<"Yes"<<endl;
+     
+  }
+	return 0;
+}

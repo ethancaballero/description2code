@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+#define F first
+#define S second
+#define mp(x,y) make_pair(x,y)
+using namespace std;
+int i,n,a,r,y,o;
+set<pair<int,int> > sy;
+set<pair<int,int> > so;
+set<pair<int,int> >::iterator it;
+int ab(int p)
+{
+    if(p<0)return -p;
+    return p;
+}
+int main()
+{
+    cin>>n;
+    sy.insert(mp(0,0));
+    so.insert(mp(2000000000,0));
+    for(i=1;i<=n;i++)
+    {
+        cin>>a>>r;
+        it=sy.end();
+        it--;
+        if(i%2)
+        {
+            if(so.begin()->F>a)
+            {
+                sy.insert(mp(a,r));
+                y+=r;
+            }
+            else
+            {
+                o-=so.begin()->S;
+                y+=so.begin()->S;
+                sy.insert(*so.begin());
+                so.erase(so.begin());
+                so.insert(mp(a,r));
+                o+=r;
+            }
+        }
+        else
+        {
+            if(it->F<a)
+            {
+                so.insert(mp(a,r));
+                o+=r;
+            }
+            else
+            {
+                y-=it->S;
+                o+=it->S;
+                so.insert(*it);
+                sy.erase(it);
+                sy.insert(mp(a,r));
+                y+=r;
+            }
+        }
+        cout<<ab(y-o)<<endl;
+    }
+}

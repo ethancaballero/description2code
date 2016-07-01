@@ -1,0 +1,36 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+long int t,n,b,a;
+ cin>>t;
+ while(t--)
+ {
+  cin>>n;
+  a=sqrt(n);
+  if(a*a==n)
+   {
+   cout<<"0"<<"
+";
+   }
+  else
+  {
+  while(1)
+  {
+    if(n%a==0)
+     break;
+       a--;
+        }
+
+b=n/a;
+if(b>a)
+cout<<b-a<<"
+";
+else
+cout<<a-b<<"
+";
+}
+}
+return 0;
+}

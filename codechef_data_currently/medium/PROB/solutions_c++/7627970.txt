@@ -1,0 +1,19 @@
+#include<stdio.h>
+
+int main()
+{
+    int tc;
+    long int t1,t2,t3,t4;
+    double ans;
+
+    scanf("%d",&tc);
+
+    while(tc--)
+    {
+        scanf("%ld%ld%ld%ld",&t1,&t2,&t3,&t4);
+        ans = ((float)t1)/(t1+t2);
+        printf("%lf
+",ans);
+    }
+    return 0;
+}

@@ -1,0 +1,7 @@
+t = input()
+for _ in xrange(t):
+    q, p = map(int, raw_input().split())
+    if q <= 1000:
+        print "{0:.6f}".format(q * p)
+    else:
+        print "{0:.6f}".format(0.9 * q * p)

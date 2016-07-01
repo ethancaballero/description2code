@@ -1,0 +1,20 @@
+n = int(raw_input())
+r = {}
+for i in range(n):
+	temp = raw_input().split()
+	r[temp[0]]=int(temp[1])
+q = int(raw_input())
+for i in range(q):
+	s = raw_input()
+	ans = "NO"
+	val = None
+	for x in r.keys():
+		if (x.startswith(s)):
+			if (val == None):
+				ans = x
+				val = r[x]
+			else:
+				if (val<r[x]):
+					ans = x 
+					val = r[x]
+	print ans

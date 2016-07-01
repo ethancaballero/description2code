@@ -1,0 +1,12 @@
+for t in xrange(input()):
+    n, m = map(int, raw_input().strip().split())
+    arr = map(int, raw_input().strip().split())
+    arr.sort()
+    cuts = 0
+    for i in xrange(m):
+        k = m - i - cuts - 1
+        if k <= arr[i]:
+            ans = cuts + k
+            break
+        cuts += arr[i]    
+    print ans

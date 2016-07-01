@@ -1,0 +1,20 @@
+t = input()
+#print t
+
+while t > 0:
+
+    numbers = map(str, raw_input().split())
+    """print numbers
+    a = int(numbers[0])
+    print a
+    b = int(numbers[1])
+    print b"""
+
+    if int(numbers[0]) < int(numbers[1]):
+        print "<"
+    elif int(numbers[0]) > int(numbers[1]):
+        print ">"
+    elif int(numbers[0]) == int(numbers[1]):
+        print "="
+
+    t -= 1

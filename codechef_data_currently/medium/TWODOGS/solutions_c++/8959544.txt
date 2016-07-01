@@ -1,0 +1,32 @@
+	#include<iostream>
+	using namespace std;
+	int main()
+	{
+		int n,k;
+		cin>>n>>k;
+		int a[500005];
+		for(int i=0;i<n;i++)
+			cin>>a[i];
+		int b[1000005];
+		for(int i=0;i<1000005;i++)
+			b[i]=100000000;
+
+		for(int i=0;i<n;i++)
+		{
+			b[a[i]]=min(b[a[i]],min(i+1,n-i));
+		}	
+		int min=100000000;
+		int temp;
+		for(int i=0;i<n;i++)
+		{
+			if(k-a[i]>0 && a[i]!=k-a[i])
+				temp=max(b[a[i]],b[k-a[i]]);
+			if(temp<min)
+				min=temp;
+		}	
+		if(min>1000000)
+			cout<<"-1
+";
+		else
+			cout<<min<<endl;
+	}	

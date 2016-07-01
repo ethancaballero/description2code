@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 2510;
+int A[N][2];
+int vis[N];
+
+#define PII pair<int,int>
+#define mp make_pair
+#define F first
+#define S second
+
+void dij(int y) {
+	priority_queue<PII, vector< PII >, greater< PII > > Q;
+	vis[y] = 0;
+	Q.push(mp(0, y));
+
+	while(!Q.empty()) {
+		PII top = Q.top();
+		Q.pop();
+
+		int v = top.S; int dist = top.F;
+
+		if(dist <= vis[v]) {
+			for(int i=0; i<y+2; i++) {
+				if(i==v)
+					continue;
+				int cost = (A[v][0]-A[i][0])*(A[v][0]-A[i][0]) + (A[v][1]-A[i][1])*(A[v][1]-A[i][1]);
+				if(vis[i] == -1 || vis[i] > vis[v]+cost) {
+					vis[i]= vis[v] + cost;
+					Q.push(mp(vis[i], i));
+				}
+			}
+  		}
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(0);
+	int t; cin >> t;
+
+	while(t--) {
+		int n; cin >> n;
+		for(int i=0; i<n+2; i++)
+			cin >> A[i][0] >> A[i][1];
+
+		memset(vis, -1, sizeof vis);
+		dij(n);
+		cout << vis[n+1] << endl;
+	}
+}

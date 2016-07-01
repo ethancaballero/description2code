@@ -1,0 +1,20 @@
+from math import log
+
+def cook(a, b):
+    n = 0
+    while int(log(a, 2)) <> log(a, 2):
+        a //= 2
+        n += 1
+    n += abs(int(log(b, 2) - log(a, 2)))
+    return n
+
+answers = []
+for i in range(int(input())):
+    settings = raw_input().split()
+    a, b = int(settings[0]), int(settings[1])
+    answers.append(str(cook(a, b)))
+print('
+'.join(answers))
+
+
+    

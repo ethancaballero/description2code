@@ -1,0 +1,73 @@
+/*S[R]=No of spheres of radii R;
+
+F[K][R]=K no of nested spheres with largest radii of R;
+
+W[K][R]=F[K-1][J]for all J<R;
+
+F[K][R]=W[K][R]*S[R];
+
+*/
+
+/*The first line contains a three integers: N denoting the number of upper sphere halves, M denoting the number of lower sphere halves and C.
+
+The second line contains N space-separated integers U1, U2, ..., UN denoting the radii of upper hemispheres.
+
+The third line contains M space-separated integers L1, L2, ..., LM denoting the radii of lower hemispheres.
+Output
+
+Output a single line containing C space-separated integers D1, D2, ..., DC, where Di is the number of ways there are to build i-sequence in modulo 109+7.*/
+
+
+
+
+
+#include <cassert>
+#include <iostream>
+#include <algorithm>
+#include<stdio.h>
+
+using namespace std;
+
+const int MOD = 1000000007;
+long long int i,j,n,m,c,x,a[1005]={0},b[1005]={0},F[1005][1005]={0},S[1005]={0},W[1005][1005]={0},sum=0;
+
+int main() 
+{
+scanf("%lld%lld%lld",&n,&m,&c);
+while(n--)
+{
+scanf("%lld",&x);
+a[x]++;
+}
+while(m--)
+{
+scanf("%lld",&x);
+b[x]++;
+}
+for(i=0;i<=c;i++)
+{
+S[i]=a[i]*b[i];
+}
+F[0][0]=1;
+for(i=1;i<=c;i++)
+{
+for(j=1;j<=c;j++)
+{
+W[i][j]=((W[i][j-1])+(F[i-1][j-1]));
+F[i][j]=(W[i][j]*S[j])%MOD;
+}
+}
+for(i=2;i<=c;i++)
+{
+for(j=0;j<=c;j++)
+{
+sum=sum+F[i][j];
+}
+printf("%lld ",sum);
+sum=0;
+}
+printf("0
+");
+return 0;
+}
+

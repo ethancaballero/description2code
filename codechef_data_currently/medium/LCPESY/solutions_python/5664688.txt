@@ -1,0 +1,27 @@
+
+
+def function():
+    count=0
+    a=raw_input();
+    lena=len(a);
+    'a=list(map(str,str(a)))'
+
+    b=raw_input()
+    lenb=len(b);
+    'b=list(map(str,str(b)))'
+
+    if lena>lenb:
+        a,b=b,a
+
+
+    for i in set(a):
+        count+=min(a.count(i),b.count(i))
+
+    print count    
+
+
+t=input()
+
+for x in xrange(t):
+    function();
+

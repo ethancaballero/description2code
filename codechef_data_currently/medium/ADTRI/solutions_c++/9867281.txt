@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 5000000;
+bool pflag[N+5]={0},possible[N+5]={0};
+void sieve(){
+    long long i,j;
+    for (i=2; i<=N; i++) {
+        if (pflag[i]) continue;
+        for (j=i*i; j<=N; j+=i){
+            pflag[j] = 1;
+        }
+    }
+    for(i=2;i<=N;++i){
+    	if(pflag[i]) continue;
+    	if(i%4==1){
+    		for(j=1;j*i<=N;++j){
+    			possible[j*i]=1;
+    		}
+    	}
+    }
+}
+int main(){
+	int t,n;
+	scanf("%d",&t);
+	sieve();
+	while(t--){
+		scanf("%d",&n);
+		if(possible[n]) printf("YES
+");
+		else printf("NO
+");
+	}
+} 

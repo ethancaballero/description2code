@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+#define VAR(a,b) __typeof(b) a=(b)
+#define FOR(i,a,b) for (int _n(b), i(a); i < _n; i++)
+#define FORD(i,a,b) for(int i=(a),_b=(b);i>=_b;--i)
+#define FOREACH(it,c) for(VAR(it,(c).begin());it!=(c).end();++it)
+#define REP(i,n) FOR(i,0,n)
+#define ALL(c) (c).begin(), (c).end()
+#define SORT(c) sort(ALL(c))
+#define REVERSE(c) reverse(ALL(c))
+#define UNIQUE(c) SORT(c),(c).resize(unique(ALL(c))-(c).begin())
+#define INF 10000000
+#define X first
+#define Y second
+#define pb push_back
+#define SZ(c) (c).size()
+typedef pair<int, int> PII;
+typedef vector<int> VI;
+typedef vector<PII> VPII;
+typedef vector<VI> VVI;
+typedef long long LL;
+#define MOD 1000000007
+
+
+int l[1000001],p[1000001];
+int fin(int x)
+{
+	if(p[x]==x)
+		return x;
+	p[x]=fin(p[x]);
+	return p[x];
+	
+}
+void jon(int u,int v)
+{
+	int x=fin(u),y=fin(v);
+	if(x==y)
+		return;
+	if(l[x]<l[y])
+	{
+		p[y]=x;
+	}
+	else
+	{
+		p[x]=y;
+	}
+}
+PII lin[1000101];
+int main()
+{
+	int n,m,mi=INF,mii=0;
+	scanf("%d%d",&n,&m);
+	REP(i,n)
+		p[i]=i;
+	REP(i,m)
+	{
+		scanf("%d%d",&lin[i].X,&lin[i].Y);
+		lin[i].X--;lin[i].Y--;
+	}
+	REP(i,n)
+	{
+		scanf("%d",&l[i]);
+		if(l[i]<0)
+			l[i]=INF;
+		if(mi>l[i])
+		{
+			mi=l[i];
+			mii=i;
+		}
+	}
+	REP(i,m)
+	{
+		jon(lin[i].X,lin[i].Y);
+
+	}
+	int f=0,x=mii,set=0;
+	LL ans=0;
+	REP(i,n)
+	{
+		if(p[i]==i)
+		{
+			set++;
+			ans+=l[i];
+			if(l[i]==INF)
+			{
+				f=1;
+				break;
+			}
+		}
+	}
+	if(set==1)
+	{
+		printf("0
+");
+		return 0;
+	}
+	ans=(set-2)*mi+ans;
+	if(f)
+		printf("-1
+");
+	else
+		printf("%lld
+",ans);
+	return 0;
+}
+
+
+
+	
+
+

@@ -1,0 +1,54 @@
+                #include<iostream>
+                using namespace std;
+                long count =1;
+                int n =0;
+                long new1[100005];
+                long size=0;
+                int main()
+                {    void counting(long A[],long a);
+                     long x=0;
+                      cin>>n ;
+                         while(n--)
+                         {
+                           cin>>size;
+                            for(x=0;x<size;x++)
+                             {
+                               cin>>new1[x];
+                             }
+     
+                          for(x=0;x<size;x++)
+                             {
+                               counting(new1,x);
+                               
+                               while(count>1)
+                               {
+                                 cout<<count<<" ";
+                                 x+=1;
+                                
+                                 count-=1;
+                               
+                               }
+                               cout<<count<<" ";
+                             }  
+     
+     
+                          cout<<endl; 
+                        }
+     
+                     return 0 ;
+                   }
+                    void counting(long new1[],long y)
+                    {   if(y+1 < size)
+                      {
+                        if(new1[y]>0 && new1[y+1]<0)
+                        {
+                           count+=1;
+                           counting(new1,y+1);
+                        }
+                        else if( new1[y]<0 && new1[y+1] >0) 
+                        {
+                            count+=1;
+                           counting(new1,y+1);
+                        }
+                      }
+                    }            

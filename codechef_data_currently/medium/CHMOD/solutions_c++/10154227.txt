@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e5 + 10;
+typedef long long LL;
+
+int cnt[MAXN][30];
+int A[MAXN];
+int sieve[200];
+int ind[200];
+vector<int> pr;
+LL power(LL a, LL b, LL MOD){
+	LL ans = 1;
+	while(b > 0){
+		if(b & 1) ans = (ans * a) % MOD;
+		a = (a * a) % MOD;
+		b >>= 1;
+	}
+	return ans;
+}
+void go(int N){
+	memset(cnt, 0, sizeof cnt);
+	memset(sieve, 1, sizeof sieve);
+	int c = 0;
+	for(int i = 2;i < 100;++i){
+		if(sieve[i]){
+			pr.push_back(i);
+			ind[i] = c;
+			++c;
+			for(int j = i;j < 100;j += i)
+				sieve[j] = false;
+		}
+	}
+	for(int i = 1;i <= N;++i){
+		for(int j = 0;j < 4;++j){
+			int c = 0;
+			while(A[i] % pr[j] == 0){
+				++c;
+				A[i] /= pr[j];
+			}
+			if(c > 0){
+				cnt[i][j] += c;
+			}
+		}
+		if(A[i] > 1){
+			++cnt[i][ind[A[i]]];
+		}
+	}
+	for(int i = 1;i <= N;++i){
+		for(int j = 0;j < 25;++j){
+			cnt[i][j] += cnt[i - 1][j];
+		}
+	}
+}
+int main(){
+	int N;
+	scanf("%d", &N);
+	for(int i = 1;i <= N;++i){
+		scanf("%d", &A[i]);
+	}
+	go(N);
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		int L, R, MOD;
+		scanf("%d%d%d", &L, &R, &MOD);
+		LL ans = 1;
+		for(int i = 0;i < 25;++i){
+			ans = (ans * power(pr[i], cnt[R][i] - cnt[L - 1][i], MOD)) % MOD;
+		}
+		printf("%lld
+", ans);
+	}
+
+	return 0;
+}

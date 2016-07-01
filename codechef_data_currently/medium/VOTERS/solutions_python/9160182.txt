@@ -1,0 +1,14 @@
+N1,N2,N3 = map(int,raw_input().split())
+L1 = []
+M = []
+S = set()
+for i in range(N1+N2+N3):
+	n1 = int(raw_input())
+	L1.append(n1)
+L1 = sorted(L1)
+for i in range(len(L1)-2):
+	if L1[i] == L1[i+1] and L1[i-1] != L1[i]:
+		M.append(L1[i])
+print len(M)
+for k in M:
+	print k

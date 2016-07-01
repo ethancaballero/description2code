@@ -1,0 +1,9 @@
+for _ in range(input()):
+    n = input()
+    s = map(int,raw_input().split())
+    r = 0
+    ans = 0
+    for i in s:
+        r += i
+        ans += abs(r)
+    print ans

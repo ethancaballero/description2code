@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+int t,i,emp,pairs,a,b;
+scanf("%d",&t);
+while(t--){
+cin>>emp>>pairs;
+int array[pairs][2],temp[emp],j=1;
+bool visit[emp];
+memset(visit,false,sizeof visit);
+for(i=0;i<pairs;++i)
+cin>>array[i][0]>>array[i][1];
+visit[array[pairs-1][0]]=true,visit[array[pairs-1][1]]=true;
+temp[0]=pairs-1;
+a=array[pairs-1][0],b=array[pairs-1][1];
+for(i=pairs-2;i>=0;--i)
+{   if((!visit[array[i][0]]) && (!visit[array[i][1]]))
+    if((array[i][0]!=a&& array[i][1]!=a) && (array[i][0]!=b && array[i][1]!=b))
+    {temp[j++]=i;
+    a=array[i][0],b=array[i][1];
+    visit[array[i][0]]=true,visit[array[i][1]]=true;
+    }
+}
+    for(i=j-1;i>=0;--i)
+    printf("%d ",temp[i]);
+    printf("
+");
+}
+	return 0;
+}

@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	long long int temp,sum=0;
+	for(int i=0;i<t;i++)
+	{
+		cin>>temp;
+		sum+=temp;
+	}
+	if(t*2>=sum)
+	cout<<t<<endl;
+	else if(t*2<sum)
+	{
+		long long diff = sum - t*2;
+		long long x = ceil(diff/2.0);
+		cout<<(t+x)<<endl;	
+	}
+	return 0;
+}

@@ -1,0 +1,15 @@
+#chef and its sub array
+t=input()
+for i in range(t):
+ n=input()
+ l=map(int,raw_input().split())
+ count=0
+ for j in range(n):
+  sum,product=0,1
+  for k in range(j,n,1):
+   sum=sum+l[k]
+   product=product*l[k]
+   if sum==product:
+     count=count+1
+	 
+ print count 

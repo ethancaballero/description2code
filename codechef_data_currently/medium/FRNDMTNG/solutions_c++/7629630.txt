@@ -1,0 +1,61 @@
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+#include<bits/stdc++.h>
+using namespace std;
+#define sd(x) scanf("%d",&x)
+#define slld(x) scanf("%lld",&x)
+#define ss(x) scanf("%s",x)
+int main()
+{
+    int t,t1,t2,T1,T2;
+    double i,j,k;
+    sd(t);
+    while(t--)
+    {
+        sd(T1);
+        sd(T2);
+        sd(t1);
+        sd(t2);
+        if(T2>=T1)
+        {
+            i=0;j=0;k=0;
+            if(T1>=t2)
+                i=((float)(1ll*(T1-t2)*(T1-t2)))/(1ll*2*T1*T2);
+            if(T2>=t1)
+            {
+                if(T2<=T1+t1)
+                    j=((float)(1ll*(T2-t1)*(T2-t1)))/(1ll*2*T1*T2);
+                else
+                {
+                    j=(float)(1ll*T1*T1)/(1ll*2*T1*T2);
+                    k=((float)((1ll*T1*(T2-T1-t1))))/(1ll*T1*T2);
+                }
+            }
+
+            printf("%lf
+",1-i-j-k);
+        }
+        else
+        {
+            swap(T1,T2);
+            swap(t1,t2);
+            i=0;j=0;k=0;
+            if(T1>=t2)
+                i=((float)(1ll*(T1-t2)*(T1-t2)))/(1ll*2*T1*T2);
+            if(T2>=t1)
+            {
+                if(T2<=T1+t1)
+                    j=((float)(1ll*(T2-t1)*(T2-t1)))/(1ll*2*T1*T2);
+                else
+                {
+                    j=((float)(1ll*T1*T1))/(1ll*2*T1*T2);
+                    k=((float)(1ll*T1*(T2-T1-t1)))/(1ll*T1*T2);
+                }
+            }
+            printf("%lf
+",1-i-j-k);
+        }
+    }
+    return 0;
+}

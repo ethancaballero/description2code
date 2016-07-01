@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+
+	long int x,y;
+
+	while(t--)
+	{
+		cin>>x>>y;
+
+		if(x>0 && x%2!=0)
+		{
+			if(y>=(1-x) && y<=(x+1))
+			{
+				cout<<"YES
+";
+				continue;
+			}	
+		}
+		
+		if(x<0 && x%2==0)
+		{
+			if(y>=x && y<=(-x))
+			{
+				cout<<"YES
+";
+				continue;
+			}
+		}
+
+		if(y%2==0)
+		{
+			if(y>0)
+			{
+				if(x>=(-y) && x<=(y-1))
+				{
+					cout<<"YES
+";
+					continue;
+				}
+			}
+		
+			else 
+			{
+				if(x>=y && x<=(1-y))
+				{
+					cout<<"YES
+";
+					continue;
+				}
+			}
+		}
+	
+		cout<<"NO
+";
+	}
+	return 0;
+}

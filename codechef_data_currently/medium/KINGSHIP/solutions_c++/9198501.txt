@@ -1,0 +1,36 @@
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#define ll long long
+using namespace std;
+
+int main(){
+int i,t,n;
+cin>>t;
+while(t--){
+    cin>>n;
+    ll a[n];
+    for(i=0;i<n;i++){
+        cin>>a[i];
+    }
+    ll temp;
+    for(i=1;i<n;i++){
+        if(a[i]<a[0]){
+            temp=a[i];
+            a[i]=a[0];
+            a[0]=temp;
+        }
+    }
+    ll sum=0;
+    temp=a[0];
+    for(i=1;i<n;i++){
+        sum+=temp*a[i];
+    }
+    cout<<sum<<endl;
+}
+
+return 0;
+}

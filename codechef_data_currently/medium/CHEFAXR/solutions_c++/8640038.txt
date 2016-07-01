@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define SZ(x) ((int)(x).size())
+#define FORV(i,x) FOR(i,0,SZ(x))
+#define FORD(i,a,b) for(int i=(a);i>=(b);i--)
+#define MP make_pair
+#define PB push_back
+#define ALL(x) x.begin(),x.end()
+#define ULL unsigned long long
+#define LL long long
+#define mset(x,v) memset(x,v,sizeof x)
+#define F first
+#define S second
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	LL t,n,a[100][100],dp[100][100],ans;
+	cin>>t;
+	while(t--)
+	{
+		mset(dp,0);
+		cin>>n;
+		FOR(i,1,n+1) FOR(j,1,n+1) cin>>a[i][j];
+		FOR(i,1,n+1)
+			FOR(j,1,n+1)
+					dp[i][j]=a[i][j]^dp[i-1][j]^dp[i][j-1]^dp[i-1][j-1];
+		ans=a[0][0];
+		FOR(i,1,n+1)
+		FOR(j,1,n+1)
+		FOR(k,i,n+1)
+		FOR(l,j,n+1)
+			ans=max(ans,dp[k][l]^dp[i-1][j-1]^dp[i-1][l]^dp[k][j-1]);
+		cout<<ans<<endl; 
+	}
+	return 0;
+}

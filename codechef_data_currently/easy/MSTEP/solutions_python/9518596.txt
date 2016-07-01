@@ -1,0 +1,11 @@
+for test in xrange(int(raw_input())):
+	n = int(raw_input())
+	row = [0]*n**2
+	col = [0]*n**2
+	for i in xrange(n):
+		col_index = 0
+		for k in map(int,raw_input().strip().split()) :
+			row[k-1] = i
+			col[k-1] = col_index
+			col_index+=1
+	print sum( abs(row[i] - row[i-1]) + abs(col[i] - col[i-1]) for i in xrange(1,n**2))

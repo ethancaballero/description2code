@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//#define sqr(x) (x)*(x)
+#define ll long long
+const double eps=1e-7;
+template<class T>inline T sqr(T x) {return x*x;}
+ll x[111],y[111];
+int main(){
+    ll t,n;
+    //freopen("in","r",stdin);
+    cin>>t;
+    while(t--){
+      cin>>n;
+      for(ll i=0;i<n;i++){
+        cin>>x[i]>>y[i];
+
+      }
+      ll cnt=0;
+      for(ll i=0;i<n;i++)for(ll j=i+1;j<n;j++)for(ll k=j+1;k<n;k++){
+          //for ij
+          ll a1=2*(x[i]-x[j]);
+          ll b1=2*(y[i]-y[j]);
+          ll c1= ((x[i]*x[i]-x[j]*x[j])+(y[i]*y[i]-y[j]*y[j]));
+          //for ik
+          ll a2=2*(x[i]-x[k]);
+          ll b2=2*(y[i]-y[k]);
+          ll c2=((x[i]*x[i]-x[k]*x[k])+(y[i]*y[i]-y[k]*y[k]));
+          ll det=a1*b2-a2*b1;
+          if(det==0)continue;
+          ll xx=(c1*b2-c2*b1);
+          ll yy=(a1*c2-a2*c1);
+          ll r=sqr(xx-x[i]*det)+sqr(yy-y[i]*det);
+          for(ll l=0;l<n;l++)
+          if(l!=i&&l!=j&&l!=k&&sqr(xx-x[l]*det)+sqr(yy-y[l]*det)<=r)
+          cnt++;
+      }
+      ll  cont=n*(n-1)*(n-2)*(n-3)/6;
+      printf("%.18lf
+",(double)cnt/cont);
+
+    }
+    return 0;
+}

@@ -1,0 +1,21 @@
+def solve(s,k):
+    res = []
+    n = len(s)
+    j = 0
+    while k > 0:
+        sub = s[j:n-k+1]
+        res.append(min(sub))
+        index_min = sub.index(min(sub))
+        j += index_min+1
+        k -= 1
+    return "".join(res)
+
+def astring():
+    T = int(raw_input())
+    for t in range(T):
+        s = raw_input()
+        k = int(raw_input())
+        print solve(s,k)
+
+if __name__ == "__main__":
+  astring()

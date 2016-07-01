@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+
+int GCD(int m, int n)
+{
+    if(m%n == 0)
+    {
+        return n;
+    }
+    GCD(n,(m%n));
+}
+int main()
+{
+    int cases,M,N,minSquare;
+
+    cin>>cases;
+    while(cases--)
+    {
+        cin>>N>>M;
+        int x=GCD(N,M);
+        minSquare=(N*M)/(x*x);
+        cout<<minSquare<<endl;
+    }
+    return 0;
+}

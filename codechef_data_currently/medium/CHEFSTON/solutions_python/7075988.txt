@@ -1,0 +1,15 @@
+t = int(raw_input())
+for x in range(0,t):
+	r1 = raw_input()
+	l1 = r1.split(' ')
+	n = int(l1[0])
+	k = int(l1[1])
+	r2 = raw_input()
+	l2 = r2.split(' ')
+	r3 = raw_input()
+	l3 = r3.split(' ')
+	add = 0
+	for y in range(0,n):
+		if add<(k/int(l2[y]))*int(l3[y]):
+			add = (k/int(l2[y]))*int(l3[y])
+	print add

@@ -1,0 +1,17 @@
+#First And The Last Digit
+
+def main():
+    T = int(raw_input())
+    while(T!=0):
+        T-=1
+        NS = []
+        N = raw_input().split()
+        for i in N:
+            #N.remove(i)
+            NS.append(int(i))
+        NS.sort()
+        print int(NS[-2])
+        
+
+if __name__ == '__main__':
+    main()

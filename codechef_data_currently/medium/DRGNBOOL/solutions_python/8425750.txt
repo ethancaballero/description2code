@@ -1,0 +1,16 @@
+for t in range(int(raw_input())):
+	n,m=map(int,raw_input().split())
+	d={}
+	for x in xrange(n):
+		a,b=map(int,raw_input().split())
+		d[b]=d.get(b,0)+a
+	for x in xrange(m):
+		a,b=map(int,raw_input().split())
+		d[b]=d.get(b,0)-a
+	ans=0
+	for x in d.values():
+		if (x<0):
+			ans-=x
+	print ans
+	
+	

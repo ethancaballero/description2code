@@ -1,0 +1,52 @@
+#include<iostream>
+#include<list>
+using namespace std;
+int main()
+{
+	list<string> list1;
+	list<string> list2;
+	int n,i,x,j,y,z,k;
+	string a,b;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>x>>y;
+		for(j=0;j<x;j++)
+		{
+			cin>>a;
+			list1.push_back(a);
+		}
+		for(j=0;j<y;j++)
+		{
+			cin>>z;
+			for(k=0;k<z;k++)
+			{
+				cin>>b;
+				list2.push_back(b);
+			}
+		}
+		list<string> ::iterator itr1=list1.begin();
+		list<string> ::iterator itr2=list1.end();
+		list<string> ::iterator itr3=list2.begin();
+		list<string> ::iterator itr4=list2.end();
+		list<string> ::iterator itr5,itr6;
+		for(itr5=itr1;itr5!=itr2;itr5++)
+		{
+			for(itr6=itr3;itr6!=itr4;itr6++)
+			{
+				if(*itr5==*itr6)
+				{
+					cout<<"YES ";
+					break;
+				}
+			}
+			if(itr6==itr4)
+			cout<<"NO ";
+		}
+		cout<<"
+";
+		list1.clear();
+		list2.clear();
+		
+	}
+}

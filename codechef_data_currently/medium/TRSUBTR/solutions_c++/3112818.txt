@@ -1,0 +1,69 @@
+#include<algorithm>
+#include<iostream>
+#include<cassert>
+#include<vector>
+#include<cstdio>
+#include<queue>
+#include<map>
+using namespace std;
+
+const int N = 1e5;
+int age[N], leftChild[N], rightChild[N], parent[N], code[N];
+map<vector<int>, int> mapID;
+
+int getTree() {
+	int n; cin >> n;
+	fill_n(leftChild, n, -1);
+	fill_n(rightChild, n, -1);
+	fill_n(parent, n, -1);
+	for(int i = 0; i < n; ++i)
+		cin >> age[i];
+	for(int i = 1; i < n; ++i) {
+		int x, y; char c;
+		cin >> x >> y >> c;
+		--x; --y;
+		parent[y] = x;
+		if(c == 'M') leftChild[x] = y;
+		else rightChild[x] = y;
+	}
+	for(int i = 0; i < n; ++i)
+		if(parent[i] == -1)
+			return i;
+	assert(false);
+}
+
+int getCode(int u, bool check) {
+	vector<int> order;
+	queue<int> q; q.push(u);
+	while(!q.empty()) {
+		int u = q.front(); q.pop();
+		order.push_back(u);
+		if(leftChild[u] != -1) q.push(leftChild[u]);
+		if(rightChild[u] != -1) q.push(rightChild[u]);
+	}
+	for(int i = (int) order.size() - 1; i >= 0; --i) {
+		int u = order[i];
+		vector<int> v;
+		v.push_back(age[u]);
+		v.push_back(leftChild[u] == -1 ? -1 : code[leftChild[u]]);
+		v.push_back(rightChild[u] == -1 ? -1 : code[rightChild[u]]);
+		if(mapID.find(v) == mapID.end()) {
+			if(check) return N;
+			mapID.insert(make_pair(v, mapID.size()));
+		}
+		code[u] = mapID[v];
+	}
+	return code[u];
+}
+
+int main() {
+	ios::sync_with_stdio(false);
+	getCode(getTree(), false);
+	int maxTreeID = mapID.size();
+	int q; cin >> q;
+	for(int i = 0; i < q; ++i) {
+		puts(getCode(getTree(), true) < maxTreeID ? "YES" : "NO");
+		assert((int) mapID.size() == maxTreeID);
+	}
+	return 0;
+}

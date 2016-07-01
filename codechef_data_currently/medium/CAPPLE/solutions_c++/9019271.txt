@@ -1,0 +1,33 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#define mset(a, n)      memset(a, n, sizeof(a))
+#define MAX 100005
+using namespace std;
+
+int c[MAX];
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    int t;
+    cin >> t;
+    while(t--) {
+        int max = 0, count = 0;
+        mset(c, 0);
+        int n;
+        cin >> n;
+        int a[n];
+        for(int i = 0; i<n; ++i) {
+            cin >> a[i];
+            ++c[a[i]];
+            if(max < a[i]) max = a[i];
+        }
+        for(int i = 1; i<=max; ++i) {
+            if(c[i] != 0)
+                count++;
+        }
+        cout << count << "
+";
+    }
+    return 0;
+}

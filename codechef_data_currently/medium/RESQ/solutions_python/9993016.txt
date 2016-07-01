@@ -1,0 +1,17 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1] 	
+cases=input()
+for case in range(cases):
+ n=long(raw_input())
+ l=int(math.sqrt(n))
+ while n%l:
+  l-=1
+ print abs(l-n/l)

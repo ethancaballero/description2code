@@ -1,0 +1,44 @@
+import sys
+import math
+
+def check(cnt, m):
+    if cnt>int(math.ceil(m/3.0)):
+        return m/2
+    else:
+        return cnt+m-(2*cnt+1)
+def main():
+    t=int(raw_input())
+    for _ in range(t):
+        n,m=map(int,raw_input().split())
+        arr=map(int,raw_input().split())
+        arr.sort()
+        cnt=0
+        
+        if m==1:
+            print 0
+            continue
+        if m==2:
+            print 1
+            continue
+        
+        for i in arr:
+            if i==1:
+                cnt+=1
+            else:
+                break
+        if cnt>int(math.ceil(m/3.0)):
+            print m/2
+        else:
+            ans=0
+            ini = cnt+m-(2*cnt+1)
+            for i in range(cnt,m):
+                cnt=cnt+arr[i]
+                m=m+arr[i]-1
+                ans=check(cnt, m)
+                if ans>=ini:
+                    break
+                else:
+                    ini=ans
+            print ini
+
+main()

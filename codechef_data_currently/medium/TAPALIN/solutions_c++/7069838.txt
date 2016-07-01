@@ -1,0 +1,56 @@
+
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+int n;
+long long sum,prod;
+
+long long recur(long long no,int po)
+{
+    if(po==0)
+        return 1;
+    else if(po==1)
+        return no;
+    else
+    {
+        if(po%2==0)
+        {
+            no=no*no;
+            no=no%1000000007;
+            return recur(no,po/2)%1000000007;
+        }
+        else
+        {
+            int in=no;
+            no=no*no;
+            no=no%1000000007;
+            return (in*recur(no,(po-1)/2))%1000000007;
+        }
+    }
+}
+
+int main()
+{
+	int test;
+	cin >> test;
+	while(test--)
+    {
+        cin >> n;
+        int t=n/2;
+        prod=recur(26,t);
+        sum=(prod-1)*560000006;
+        sum=sum%1000000007;
+        if(n%2==1)
+        {
+            prod=prod*26;
+            prod=prod%1000000007;
+            sum=sum+prod;
+            sum=sum%1000000007;
+        }
+        cout << sum << "
+";
+    }
+}

@@ -1,0 +1,60 @@
+# color: 1=black / 0=red
+color_diff=0
+def traver_from_to(one,two,color,color_diff):
+  path1=[one]
+  x=one
+  while x/2:
+    path1.append(x/2)
+    x/=2
+
+  path2=[two]
+  x=two
+  while x/2:
+    path2.append(x/2)
+    x/=2
+
+  i,j=0,0
+
+  c1=(len(path1) + color_diff)%2
+  c2=(len(path2) + color_diff)%2
+
+  blacks=0
+  reds=0
+
+  while i<len(path1) and j<len(path2):
+    if path1[i] < path2[j]:
+      if c2==0:
+        reds+=1
+      else:
+        blacks+=1
+      c2=(c2+1)%2
+      j+=1
+    elif path1[i] > path2[j]:
+      if c1==0:
+        reds+=1
+      else:
+        blacks+=1
+      c1=(c1+1)%2
+      i+=1
+    else:
+      if c2==0:
+        reds+=1
+      else:
+        blacks+=1
+      break
+  if color=='b':
+    return (blacks)
+  else:
+    return (reds)
+
+n=int(raw_input())
+for i in xrange(n):
+  line=raw_input()
+  if line[1]=='b':
+    x,y=map(int,line[3:].split())
+    print traver_from_to(x,y,'b',color_diff)
+  elif line[1]=='r':
+    x,y=map(int,line[3:].split())
+    print traver_from_to(x,y,'r',color_diff)
+  else:
+    color_diff+=1

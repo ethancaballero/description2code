@@ -1,0 +1,16 @@
+t=input()
+for i in range(t):
+    n=input()
+    flag=0
+    doll=[]
+    for j in range(n):
+        k=input()
+        doll.append(k)
+    doll.sort()    
+    for j in range(1,n,2):
+        if(doll[j-1]!=doll[j]):
+            print doll[j-1]
+            flag=1
+            break
+    if flag==0:
+        print doll[n-1]

@@ -1,0 +1,35 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+ 
+int main()
+{
+    int T,p,q,x,y,val[1010];
+    fill(val, val+1010, -1);
+    x=y=0;
+    val[y]=x;
+    while(1)
+    {
+        x+=1;
+        y+=2;
+        while (val[x] >= 0 && y <= 1000 && x <= 1000)
+        {
+            x++;
+            y++;
+        }
+        if (y <= 1000 && x <= 1000); 
+        else break;
+        val[y] = x;
+    }
+    cin>>T;
+    while (T--)
+    {
+        cin>>x>>y>>p>>q;
+        x-=p;
+        y-=q;
+        if (x>y) swap(x,y);
+        if (val[y]==x) cout<<"Bob"<<endl; 
+        else cout<<"Alice"<<endl;
+    }
+    return 0;
+}  

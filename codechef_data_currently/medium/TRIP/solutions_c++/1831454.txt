@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define number 1000000007
+ 
+int arr[1000000];
+int temp1[1000000];
+int temp2[1000000];
+ 
+int main()
+{
+	int n,m,i,j = 0,min,k = 0;
+	long long count=0;
+	int *p;
+	p = arr; 
+ 
+	scanf("%d%d",&n,&m);
+	for(i = 0; i < n; i++)
+		scanf("%d",(p + i));
+	
+	temp2[0]=1;
+	for(i = 1; i < n; i++)
+	{
+		while(arr[i] - arr[j] > m)
+			count -= temp2[j++];
+ 
+		temp1[i] = temp1[j] + 1;
+		while(temp1[k] == temp1[j])
+			count += temp2[k++];
+ 
+		temp2[i] = count % number;
+	}
+ printf("%d %d
+",temp1[n-1] - 1,temp2[n-1]);
+ return 0;
+} 

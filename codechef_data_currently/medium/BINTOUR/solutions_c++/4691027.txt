@@ -1,0 +1,74 @@
+#include <stdio.h>
+
+#define MAXN 4000000
+#define MOD 1000000009
+
+int pot2[30];
+long long fact[MAXN+5];
+
+long long mmult(long long x, long long y)
+{
+	return (((long long)(x%MOD)*(y%MOD))%MOD);
+}
+
+long long mpow(long long x, int n)
+{
+	if(n == 1)
+		return x;
+	return mmult(mpow((x*x)%MOD, n/2), (n%2 == 1 ? x : 1));
+}
+
+long long mdiv(long long x, long long y)
+{
+	return mmult(x, mpow(y, MOD-2));
+}
+
+void calcFator()
+{
+	fact[0] = 1LL;
+	for(int i = 1; i < MAXN; i++)
+	{
+		fact[i] = mmult(fact[i-1], i);
+	}
+}
+
+void calcPot2() {
+	pot2[0] = 1;
+	
+	for(int i=1; i<25; i++)
+		pot2[i] = 2*pot2[i-1];
+}
+
+long long comb(long long x, long long y) {
+	
+	if(x < y)
+		return 0;
+	
+	long long ans = (fact[x]*(mpow(fact[y], MOD-2)))%MOD;
+	ans = (ans*(mpow(fact[x-y], MOD-2)))%MOD;
+
+	return ans;
+}
+
+int main() {
+	
+	calcPot2();
+	calcFator();
+	
+	int k;
+	scanf(" %d", &k);
+	
+	int p = pot2[k]/2;
+	
+	for(int i=0; i<pot2[k]; i++) {
+		long long result = 1LL;
+	
+		result = (result*comb(i, p-1))%MOD;
+		result = (result*fact[p])%MOD;
+		result = (result*fact[p-1])%MOD;
+		result = (result*pot2[k])%MOD;
+		printf("%lld
+", result);
+	}
+	
+}

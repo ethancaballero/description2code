@@ -1,0 +1,10 @@
+#!/usr/bin/python
+T=int(raw_input())
+for t in range(T):
+	num=int(raw_input())
+	rev_num=0
+	while (num>0):
+		rem=num%10
+		rev_num=rev_num*10+rem
+		num=num/10
+	print rev_num

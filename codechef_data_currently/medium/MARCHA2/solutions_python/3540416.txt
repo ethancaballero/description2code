@@ -1,0 +1,12 @@
+import sys
+for x in xrange(int(sys.stdin.readline())):
+	K=int(sys.stdin.readline())
+	L=sys.stdin.readline().split()
+	L=[int(l) for l in L]
+	ex=0.5
+	for k in xrange(K):
+		ex=2*ex-L[k]
+	if(ex==0):
+		print "Yes"
+	else:
+		print "No"

@@ -1,0 +1,8 @@
+for _ in range(int(raw_input())):
+    n = int(raw_input())
+    a = map(int, raw_input().split())
+    ans = n
+    for i in range(n):
+        if ans-i<a[i]:
+            ans+=a[i]-(ans-i)
+    print ans

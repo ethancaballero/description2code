@@ -1,0 +1,57 @@
+#include<stdio.h>
+int MOD=1000000007;
+typedef long long int ll;
+ll fact[5003];
+ll ways=1;
+ll modPow(ll a, ll x, ll p) {
+    //calculates a^x mod p in logarithmic time.
+    ll res = 1;
+    while(x > 0) {
+        if( x % 2 != 0) {
+            res = (res * a) % p;
+        }
+        a = (a * a) % p;
+        x /= 2;
+    }
+    return res;
+}
+
+ll modInverse(ll a, ll p) {
+    //calculates the modular multiplicative of a mod m.
+    //(assuming p is prime).
+    return modPow(a, p-2, p);
+}
+void precompute()
+{
+	fact[0]=1;
+	for(int i=1;i<5003;i++)
+	{
+		fact[i]=(fact[i-1]*i)%MOD;
+	}
+}
+int main()
+{
+	precompute();
+	int n,k;
+	scanf("%d%d",&n,&k);
+	while(!(n==0 && k==0))
+	{
+		if(k%2==0)
+		{
+			ways=(fact[n-2]*((modInverse(fact[k/2],MOD)*modInverse(fact[n-2-k/2],MOD))%MOD))%MOD;
+			ways=(ways*((fact[n-2]*((modInverse(fact[k/2-1],MOD)*modInverse(fact[n-2-k/2+1],MOD))%MOD))%MOD))%MOD;
+			ways=(ways*2)%MOD;
+			printf("%lld
+",ways);
+		}
+		else
+		{
+			ways=(fact[n-2]*((modInverse(fact[(k-1)/2],MOD)*modInverse(fact[n-2-(k-1)/2],MOD))%MOD))%MOD;
+			ways=(ways*((fact[n-2]*((modInverse(fact[(k-1)/2],MOD)*modInverse(fact[n-2-(k-1)/2],MOD))%MOD))%MOD))%MOD;
+			ways=(ways*2)%MOD;
+			printf("%lld
+",ways);
+		}
+		scanf("%d%d",&n,&k);
+	}
+}

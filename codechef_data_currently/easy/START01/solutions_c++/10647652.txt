@@ -1,0 +1,7 @@
+'''rishabh_mathur 30 Jun 2016'''
+# codechef
+# Number Mirror - START01
+'''Write a program that accepts a number
+and outputs the same.'''
+n=int(raw_input())
+print n

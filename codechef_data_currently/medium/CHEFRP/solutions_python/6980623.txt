@@ -1,0 +1,13 @@
+for i in range(input()):
+	n = input()
+	arr =map(int,raw_input().split())
+	flag=0
+	for i in arr:
+		if i<2:
+			print -1
+			flag=1
+			break
+	if flag:
+		continue
+	print sum(arr)-min(arr)+2
+	

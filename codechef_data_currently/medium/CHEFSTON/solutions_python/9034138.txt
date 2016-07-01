@@ -1,0 +1,16 @@
+import sys
+t=int(raw_input(""))
+while t:
+    n,k=map(int,sys.stdin.readline().split())
+    l1=list(map(float,sys.stdin.readline().split()))
+    l2=list(map(float,sys.stdin.readline().split()))
+    x=int(l2[0])
+    y=int(l1[0])
+    max=l2[0]/l1[0]
+    for i in range(n):
+        if l2[i]/l1[i]>max:
+            max=l2[i]/l1[i]
+            x=int(l2[i])
+            y=int(l1[i])
+    print (k/y)*x
+    t-=1

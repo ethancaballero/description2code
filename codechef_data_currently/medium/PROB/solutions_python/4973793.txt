@@ -1,0 +1,6 @@
+
+test_cases = int(raw_input())
+
+for test_case in range(test_cases):
+    (t1, t2, t3, t4) = [ int(x) for x in raw_input().split() ]
+    print float(t1) / (t1 + t2)

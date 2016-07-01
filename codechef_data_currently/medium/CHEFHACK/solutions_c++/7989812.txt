@@ -1,0 +1,150 @@
+//amazing takes time, legendary requires patience
+#include "bits/stdc++.h"
+#define sd(n) scanf("%d", &(n))
+#define rep(i, x, n) for (int i = x, _n = (n); i < _n; ++i)
+#define repi(i, a) for(typeof((a).begin()) i = (a).begin(), _##i = (a).end(); i != _##i; ++i)
+#define pra(v) repi(it, v) cout << *it << " "; cout << endl;
+#define SZ(c) (int)(c).size()
+#define lcm(a,b) (a*(b/__gcd(a,b)))
+#define VI vector<int>
+#define all(c) (c).begin(), (c).end()
+#define allr(c) (c).rbegin(), (c).rend()
+#define pb push_back
+#define mii map<int, int>
+#define pii pair<int, int>
+#define pip pair<int, pii>
+#define F first
+#define S second
+#define mp make_pair
+#define lli long long int
+#define llu unsigned long long
+#define CLR(p) memset(p, 0, sizeof(p))
+#define SET(p) memset(p, -1, sizeof(p))
+#define INF 0x3f3f3f3f
+#define pi 3.14159265358979
+#define debug 0
+using namespace std;
+
+const int MOD = 1e9+7;
+const int MAX = 1<<9;
+
+int n, a[MAX][MAX],  locked[MAX][MAX], type[MAX][MAX], cnt[MAX][MAX];
+
+void dfs(int i, int j, int par)
+{
+//	printf("doing dfs for %d, %d
+", i, j );
+	cnt[i][j] = 0;
+	locked[i][j] = 1;
+	rep(x, -1, 2)
+	{
+		rep(y, -1, 2)
+		{
+			if(x*x + y*y == 1)
+			{
+				int p = x + i;
+				int q = y + j;
+				if(p >= n or p < 0 or q >= n or  q < 0) continue;
+				if(!locked[p][q] and type[p][q] == par)
+				{
+					dfs(p, q, par);
+				}
+			}
+		}
+	}
+}
+
+
+const int MAXN = 1e7+10;
+int primes[MAXN], total;
+bool pr[MAXN];
+
+void sieve()
+{
+	pr[1] = 1;
+	for(int i = 2; i*i <= MAXN; i++)
+		if(pr[i] == 0)
+			for(int j = i*2; j <= MAXN; j += i)
+				pr[j] = 1;
+	rep(i, 2, MAXN)
+		if(pr[i] == 0)
+			primes[total++] = i;	
+//	printf("%d %d
+", total, primes[total-1]);
+}
+
+
+int isprime(int x)
+{
+	int pos = lower_bound(primes, primes+total, x) - primes;
+	if(primes[pos] == x)
+		return 1;
+	else
+		return 0;
+}
+
+int solve(int x)
+{
+	if(x == 2) return 0;
+	int pos = lower_bound(primes, primes+total, x) - primes;
+	if(primes[pos] == x)
+		return pos;
+	else
+	{
+		if(x&1)
+			return (x+1)/2 + 1;
+		else
+			return x/2;
+	}
+}
+
+
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	sieve();
+	int t;
+	sd(t);
+	while(t--)
+	{
+		sd(n);
+		rep(i, 0, n)
+			rep(j, 0, n)
+			{
+				sd(a[i][j]);
+				type[i][j] = (isprime(a[i][j]) ? -1 : a[i][j]%2);
+			}
+				
+		SET(cnt);
+		CLR(locked);
+		rep(i, 0, n)
+		{
+			rep(j, 0, n)
+			{
+				if(!locked[i][j])
+				{
+					locked[i][j] = 1;
+					if(!isprime(a[i][j]))
+						dfs(i, j, type[i][j]);
+					cnt[i][j] = solve(a[i][j]);
+				}
+			}
+		}
+		if(debug)
+		rep(i, 0, n)
+		{
+			rep(j, 0, n)
+				printf("%d ", cnt[i][j]);
+			printf("
+");
+		}
+		lli ans = 0;
+		rep(i, 0, n)
+			rep(j, 0, n)
+				ans += 1ll*cnt[i][j];
+		printf("%lld
+", ans);
+	}
+    return 0;
+}    

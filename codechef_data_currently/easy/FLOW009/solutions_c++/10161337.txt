@@ -1,0 +1,20 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main(){
+	int T, price, quantity, loop = 1;
+
+	cin >> T;
+
+	while (loop <= T){
+		cin >> quantity >> price;
+		double total = quantity * price;
+		if (quantity > 1000){
+			total = total * 0.9;
+		}
+		cout << setprecision(6) << fixed;
+		cout << total << endl;
+		loop++;
+	}
+}

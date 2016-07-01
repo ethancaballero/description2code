@@ -1,0 +1,30 @@
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+bool isPallindrome(string a, int i, int j, int c = 1) {
+    if(c < 0 || i >= a.size() || j < 0 || j < i) 
+        return false;
+    if(i == j) 
+        return true;
+    if(j-i == 1)
+        return (a[j] == a[i]) || (a[j] != a[i] and c == 1);
+    if(a[i] != a[j])
+        return isPallindrome(a, i, j-1, c-1) || isPallindrome(a, i+1, j, c-1);
+    else
+        return isPallindrome(a, i+1, j-1, c);
+}
+int main() {
+    int n;
+    map<bool, string> ans;
+    ans[true] = "YES";
+    ans[false] = "NO";
+    cin>>n;
+    while(n--) {
+        string palln;
+        cin>>palln;
+        cout<<ans[isPallindrome(palln, 0, palln.size()-1)]<<'
+';
+    }
+}
+    

@@ -1,0 +1,77 @@
+import sys
+def main():
+    test_case = map(int, sys.stdin.readline().strip().split(' '))
+    cutable=[]
+    a=[]
+
+    for i in range(int(test_case[0])):
+        cutable.append(0)
+        a.append([int (x) for x in raw_input().split(' ')])
+
+    months=0
+
+    while True:
+        temp1=0
+        temp2=0
+
+        flag2=False
+        
+        for i in xrange(int(test_case[0])):
+            if a[i][0] >= test_case[2]:
+                temp1+=a[i][0]
+                temp2+=a[i][1]
+                cutable[i]=1
+                flag2=True
+
+        if temp1>=test_case[1]:
+            print months
+            sys.exit(0)
+
+        if flag2:
+            min_m1=(test_case[1]-temp1)/temp2
+            mod = (test_case[1]-temp1)%temp2
+
+            if mod:
+                min_m1+=1
+
+        flag = False
+
+        for i in range(test_case[0]):
+            if not cutable[i]:
+                min_m2=(test_case[2]-a[i][0])/a[i][1]
+                mod = (test_case[2]-a[i][0])%a[i][1]
+                flag = True
+                if mod:
+                    min_m2+=1
+                if flag:
+                    break
+
+        for j in range(i+1,test_case[0]):
+            if not cutable[j]:
+                temp_m=(test_case[2]-a[j][0])/a[j][1]
+                mod=(test_case[2]-a[j][0])%a[j][1]
+
+                if mod:
+                    temp_m+=1
+
+                if temp_m < min_m2:
+                    min_m2=temp_m
+
+        if flag and flag2:
+            min_m = min(min_m2,min_m1)
+
+        elif flag2:
+            min_m = min_m1
+
+        else:
+            min_m = min_m2
+
+        for i in xrange(test_case[0]):
+            a[i][0]+=min_m*a[i][1]
+
+        months+=min_m
+        
+if __name__ == '__main__':
+    main()
+
+    

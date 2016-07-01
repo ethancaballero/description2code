@@ -1,0 +1,3 @@
+for _ in range(input()):
+        input()
+        print len(set(raw_input().strip().split()))

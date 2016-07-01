@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+
+pair <int, string> a[10333];
+
+int main(){
+//	freopen("input.txt", "r", stdin);
+//	freopen("output.txt", "w", stdout);
+	//ios_base::sync_with_stdio(0);
+	int tc;
+	scanf("%d", &tc);
+	while (tc--){
+		int n;
+		scanf("%d", &n);
+		int i;
+		for (i = 1; i <= n; i++){
+			cin>>a[i].second>>a[i].first;
+		}
+		sort(a + 1, a + n + 1);
+		a[0].first = a[n + 1].first = -1;
+		bool was = false;
+		for (i = 1; i <= n; i++)
+			if (a[i].first != a[i - 1].first && a[i].first != a[i + 1].first){
+				was = true;
+				cout<<a[i].second<<endl;
+				break;
+			}
+		if (!was) printf("Nobody wins.
+");
+	}
+}

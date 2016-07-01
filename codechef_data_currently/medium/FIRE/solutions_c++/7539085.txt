@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+bool cancan(int node,vector<int> tree[],int n,int parent,int save[]){
+	if(save[node] == 1){
+		return true;
+		}
+	if(tree[node].size()==1){
+		return false;
+		}
+	
+	if(tree[node].size()==2){
+		return false;
+		}
+	
+	if(tree[node].size()==3){
+		if(tree[node][0] == parent){
+			return cancan(tree[node][1],tree,n,node,save) && cancan(tree[node][2],tree,n,node,save);
+			}
+		else if(tree[node][1]==parent){
+			return cancan(tree[node][0],tree,n,node,save) && cancan(tree[node][2],tree,n,node,save);
+			} 
+		else{
+			return cancan(tree[node][1],tree,n,node,save) && cancan(tree[node][0],tree,n,node,save);
+			}
+		}
+	return false;
+	}
+
+int main(){
+	int T;
+	cin>>T;
+	for(int test=0;test<T;test++){
+	int n,s,t;
+	cin>>n>>s>>t;
+	vector<int> tree[n+1];
+	tree[s].push_back(0);
+	for(int i=1;i<=n;i++){
+		int k;
+		cin>>k;
+		for(int j=0;j<k;j++){
+			int temp;
+			cin>>temp;
+			tree[i].push_back(temp);
+			}
+		}
+	int save[n+1];
+	for(int i=0;i<n+1;i++){
+		save[i] = 0;
+		}
+	for(int i=0;i<t;i++){
+		int temp;
+		cin>>temp;
+		save[temp] = 1;
+		}
+	if(cancan(s,tree,n,0,save)){
+		cout<<"no"<<endl;
+		}
+	else{
+		cout<<"yes"<<endl;
+		}
+	}
+}

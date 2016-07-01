@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+long long int gcd(long long int a,long long int b)
+{
+    if(b==0)
+        return a;
+    return gcd(b,a%b);
+}
+int main()
+{
+    long long int t,n,i,k,p;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        scanf("%lld",&n);
+        p=0;
+        k=sqrt(n);
+        for(i=1;i<=k;i++)
+            p+=(n/i);
+        p*=2;
+        p-=pow(k,2);
+        k=gcd(p,n*n);
+        printf("%lld/%lld
+",p/k,n*n/k);
+    }
+    return 0;
+}

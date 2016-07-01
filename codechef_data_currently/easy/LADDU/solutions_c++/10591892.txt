@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+#include<cstring>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	string origin,s;
+	int act;
+	while(t--)
+	{
+		int c=0,laddu=0;
+		cin>>act>>origin;
+		if(origin=="INDIAN")
+		c=200;
+		else
+		c=400;
+		
+		while(act--)
+		{
+			cin>>s;
+			if(s=="CONTEST_WON")
+			{
+				int bonus=0,rank;
+				cin>>rank;
+				if(rank<=20)
+				bonus=20-rank;
+				laddu+=bonus+300;
+			}
+			else if(s=="TOP_CONTRIBUTOR")
+			{
+				laddu+=300;
+			}
+			else if(s=="BUG_FOUND")
+			{
+				int bug;
+				cin>>bug;
+				laddu+=bug;
+			}
+			else if(s=="CONTEST_HOSTED")
+			{
+				laddu+=50;
+			}
+		}
+		
+		int result=laddu/c;
+		cout<<result<<endl;
+		
+	}
+	return 0;
+}

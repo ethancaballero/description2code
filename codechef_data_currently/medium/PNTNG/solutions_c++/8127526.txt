@@ -1,0 +1,34 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+typedef long long ll;
+
+const int maxn=100000;
+int main(){
+	ll n,m,h;
+	cin>>n>>m>>h;
+	pair<ll,ll> p[maxn];
+	for (int i = 0; i < h; ++i)
+		cin>>p[i].second>>p[i].first;
+	sort(p,p+h);
+	ll cCnt=0;
+	ll cost=0;
+	for (int i = 0; i < h && cCnt<m*n; ++i)
+	{
+		ll curC;
+		if(cCnt+p[i].second>m*n)
+			curC=m*n-cCnt;
+		else
+			curC=p[i].second;
+		cost+=curC*p[i].first;
+		cCnt+=curC;
+	}
+	if(cCnt<m*n)
+		cout<<"Impossible
+";
+	else
+		cout<<cost<<"
+";
+}

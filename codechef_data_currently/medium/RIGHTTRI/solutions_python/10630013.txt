@@ -1,0 +1,12 @@
+import math
+t = int(raw_input())
+for i in xrange(t):
+    h, s = map(int, raw_input().split())
+    if h*h - 4*s >= 0:
+        x1 = (math.sqrt(h*h+4*s) + math.sqrt(h*h-4*s))/2
+        y1 = (math.sqrt(h*h+4*s) - math.sqrt(h*h-4*s))/2
+        l = [float(x1), float(y1), float(h)]
+        l = sorted(l)
+        print '{0:.6f}'.format(l[0]), '{0:.6f}'.format(l[1]), '{0:.6f}'.format(l[2])
+    else:
+        print -1

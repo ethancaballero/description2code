@@ -1,0 +1,8 @@
+import math
+t=int(input())
+n=[]
+for i in range(1,t+1):
+    n.append(int(input()))
+for j in range(0,t):
+    print math.factorial(n[j])    
+ 

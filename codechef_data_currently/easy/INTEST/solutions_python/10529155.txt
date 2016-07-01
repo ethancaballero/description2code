@@ -1,0 +1,11 @@
+n,k=raw_input().strip().split()
+n=int(n)
+k=int(k)
+i=1
+s=0
+while i<=n:
+    p=input()
+    if p%k==0:
+        s=s+1
+    i=i+1
+print s

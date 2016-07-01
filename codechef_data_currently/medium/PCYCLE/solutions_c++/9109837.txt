@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+void walk(int *,int );
+int main()
+{
+	int a,b,c,d,e,f;
+	cin>>a;
+	int A[a+1];
+    for(b=1;b<=a;b++)
+    {
+      cin>>A[b];
+    }
+     walk(A,a);
+    return 0;
+}
+void walk(int A[],int a)
+{
+	int B[2*a];
+	int p=0,q,s=1,t,u,v=0;
+    for(q=1;q<=a;q++)
+    { 
+    	int r=1;
+    	t=q;      
+    	if(A[q]==0)
+    	{
+    		r=0;
+        }
+    	while(r==1)
+    	{ 
+    		if(A[t]==0)
+    		{
+    			B[s]=t;
+    			v++;
+    			s++;
+    			break;
+    		}
+          u=t;
+          B[s]=t;
+          t=A[t];
+          A[u]=0;
+          s++;
+    	}
+    }
+    cout<<v<<endl;
+    
+    t=B[1];
+    u=1;
+    for(q=1;q<s;q++)
+    { 
+     if(q!=u && B[q]==t)
+     {
+     	cout<<B[q]<<endl;
+     	u=q+1;
+     	t=B[q+1];
+     }
+     else
+     {
+     	cout<<B[q]<<" ";
+     }
+    }
+}

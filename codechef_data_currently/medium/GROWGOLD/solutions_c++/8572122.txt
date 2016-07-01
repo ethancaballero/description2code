@@ -1,0 +1,277 @@
+#pragma warning( disable : 4786 )
+#include <string>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <sstream>
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cassert>
+#include <queue>
+#include <cstring>
+#include <ctime>
+using namespace std;
+ 
+typedef long long i64; 
+typedef unsigned long long u64;
+ 
+#define min(a,b) ((a)>(b)?(b):(a))
+#define max(a,b) ((a)<(b)?(b):(a))
+#define sq(x) ((x)*(x))
+ 
+#define EPS 1e-7
+ 
+#define eq(a,b) (a - b < EPS && b - a < EPS) 
+#define les(a, b) (b - a > EPS) 
+ 
+typedef vector<int> VI; 
+ 
+#define rep(i,n) for((i)=0;(i)<(n);++(i))
+ 
+#define all(c) (c).begin(),(c).end() 
+#define tr(c,i) for(typeof((c).begin() i = (c).begin(); i != (c).end(); i++) 
+#define present(c,x) ((c).find(x) != (c).end()) 
+#define cpresent(c,x) (find(all(c),c) != (c).end()) 
+ 
+#define FOR(v, it) for(it = v.begin(); it!=v.end(); ++it)
+#define foreach(vtype, v, it) for(vtype::iterator it = v.begin(); it!=v.end(); ++it)
+ 
+// tostring
+string itos (int i){ stringstream s; s << i; return s.str(); }
+ 
+ 
+#define dbg(x) if(DEBUG) cerr << __LINE__ << ": " << #x << " -> " << (x) << "	";
+#define dbge(x) if(DEBUG) cerr << __LINE__ << ": "<<#x << " -> " << (x) << endl;
+ 
+#define CLR(c, v) memset(c, v, sizeof(c))
+ 
+vector<string> Tokenize(string s, string ch) {
+  vector<string> ret;
+  for (int p = 0, p2; p < s.size(); p = p2+1) {
+    p2 = (int)s.find_first_of(ch, p);
+    if (p2 == -1) p2 = (int)s.size();
+    if (p2-p > 0) ret.push_back(s.substr(p, p2-p));
+  }
+  return ret;
+}
+ 
+vector<int> TokenizeInt(string s, string ch) {
+  vector<int> ret;
+  vector<string> p = Tokenize(s, ch);
+  for( int i = 0; i < p.size(); i++ )
+    ret.push_back(atoi(p[i].c_str()));
+  return ret;
+}
+ 
+vector<vector<int> > TokenizeMatrix(vector<string> s, string ch) {
+  vector<vector<int> > ret;
+  for( int i = 0; i < s.size(); i++ )
+    ret.push_back( TokenizeInt(s[i], ch) );
+  return ret;
+}
+ 
+int parseInts(char buff[], int a[]){
+	int n = 0;
+    char *p = strtok(buff," ");
+    while(p!=NULL){
+        sscanf(p,"%d",&a[n++]);
+        p = strtok(NULL," ");
+    }
+	return n;
+}
+ 
+int getInt(void){
+	int d;
+	scanf("%d",&d);
+	return d;
+}
+#define INT getInt()
+ 
+double getDouble(void){
+    double d;
+    scanf("%lf", &d);
+    return d;
+}
+#define DOUB getDouble()
+ 
+ 
+bool DBG = true;
+ 
+#define MOD 100000007
+class Matrix{
+	int N;
+	Matrix unit(){
+		Matrix r(N);
+		for(int i=0;i<N;++i){
+			r.M[i][i] = 1;
+		}
+		return r;
+	}
+public:
+	int M[101][101];
+	Matrix(int n){
+		N = n;
+		memset(M, 0, sizeof(M));
+	}
+	
+	Matrix mul(Matrix that){
+		Matrix ret(N);
+		for(int i=0;i<N;++i){
+			for(int j=0;j<N;++j){
+				for(int k=0;k<N;++k){
+					ret.M[i][j] = (int)(( (i64)ret.M[i][j] + (i64)M[i][k] * that.M[k][j] )%MOD);
+				}
+			}
+		}
+		return ret;
+	}
+    
+	Matrix pow(int p){
+		Matrix r = unit();
+		Matrix a = (*this);
+		while( p > 0 ){
+			if( p%2 == 1 ){
+				r = r.mul(a);
+			}
+			a = a.mul(a);
+			p/=2;
+		}
+		return r;
+	}
+    
+	Matrix psum(int k){
+		if( k == 0 ){
+			return Matrix(N);
+		}
+		else if( k%2 == 0 ){
+			return psum(k/2).mul(unit().add(pow(k/2)));
+		}
+		else{
+			return unit().add(mul(psum(k-1)));
+		}
+	}
+    
+	Matrix add(Matrix that){
+		Matrix ret(N);
+		for(int i=0; i<N; ++i){
+			for(int j=0; j<N; ++j){
+				ret.M[i][j] = (int)(((i64)M[i][j] + that.M[i][j])%MOD);
+			}
+		}
+		return ret;
+	}
+};
+ 
+i64 power(int n, int p) {
+    if (p == 0) return 1;
+    i64 q = power(n, p / 2);
+    q = (q * q) % MOD;
+    if (p % 2 == 1) q = (q * n) % MOD;
+    return q;
+}
+int mat[101][101];
+int tmat[101][101];
+int r[101][101];
+ 
+void mul(int a[101][101], int b[101][101], int c[101][101], int d) {
+    for (int i = 0; i < d; ++i) {
+        for (int j = 0; j < d; ++j) {
+            u64 tmp = 0;
+            for (int k = 0; k < d; ++k) {
+                //c[i][j] = (int)( ((i64) a[i][k] * b[k][j] + tmp) % MOD);
+                tmp += ((i64) a[i][k] * b[k][j]) ;
+            }
+            c[i][j] = (int)(tmp % (MOD - 1));
+        }
+    }
+}
+void cp(int a[101][101], int b[101][101], int d) {
+    for (int i = 0; i < d; ++i) {
+        for (int j = 0; j < d; ++j) {
+            b[i][j] = a[i][j];
+        }
+    }
+}
+ 
+int main (void){
+	//freopen("a.in", "r", stdin);
+    int T = INT;
+    while(T--) {
+        int initTax = INT;
+        int slot1 = INT;
+        int slot2 = INT;
+        int K = INT;
+        int N = INT;
+        
+        vector<int> v; v.clear();
+        v.push_back(initTax);
+        for (int i = 0; i < slot1; ++i) {
+            v.push_back((v.back() + 1) % MOD);
+        }
+        for (int i = 0; i < slot2; ++i) {
+            v.push_back((v.back() * 2) % MOD);
+        }
+        
+        if (N <= v.size()) {
+            printf("%d
+", v[N - 1]);
+            continue;
+        }
+        N -= v.size();
+        
+        vector<int> d; d.clear();
+        for (int i = 0; i < K; ++i) {
+            d.push_back(v.back());
+            v.pop_back();
+        }
+        reverse(all(d));
+        for (int i = 0; i < K; ++i) {
+            for (int j = 0; j < K; ++j) {
+                mat[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < K - 1; ++i) {
+            mat[i + 1][i] = 1;
+        }
+        for (int i = 0; i < K; ++i) {
+            mat[i][K - 1] = 1;
+        }
+        
+        int p = N;
+        for (int i = 0; i < K; ++i) {
+            for (int j = 0; j < K; ++j) {
+                if (i == j) r[i][j] = 1;
+                else r[i][j] = 0;
+            }
+        }
+        while (p > 0) {
+            if (p % 2 == 1) {
+                mul(r, mat, tmat, K);
+                cp(tmat, r, K);
+            }
+            mul(mat, mat, tmat, K);
+            cp(tmat, mat, K);
+            p /= 2;
+        }
+        cp(r, mat, K);
+        
+        
+        vector<int> ps; ps.clear();
+        for (int i = 0; i < K; ++i) ps.push_back(mat[i][K - 1]);
+        //for (int i = 0; i < ps.size(); ++i) cout<<ps[i]<<" "<<d[i]<<" "; cout<<endl;
+        i64 val = 1;
+        for (int i = 0; i < K; ++i) {
+            val = (val * power(d[i], ps[i])) % MOD;
+            //cout<<d[i]<<" "<<ps[i]<<" "<<val<<endl;
+        }
+        printf("%d
+", (int) val);
+    }
+	return 0;
+}

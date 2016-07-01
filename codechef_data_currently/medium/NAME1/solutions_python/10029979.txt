@@ -1,0 +1,13 @@
+for _ in range(input()):
+        a,b = raw_input().strip().split()
+        p = a+b
+        n = input()
+        c = ""
+        for _ in xrange(n):
+                c += raw_input()
+        flag = 0
+        for i in set(c):
+                if c.count(i) > p.count(i):
+                        flag = 1
+                        break
+        print 'NO' if flag else 'YES'

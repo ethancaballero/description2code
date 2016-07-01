@@ -1,0 +1,12 @@
+t = input()
+for _ in xrange(t):
+    s1 = raw_input()
+    s2 = raw_input()
+    l, h = 0, 0
+    for i in xrange(len(s1)):
+        if s1[i] == '?' or s2[i] == '?':
+            h += 1
+        elif s1[i] != s2[i]:
+            l += 1
+            h += 1
+    print l, h

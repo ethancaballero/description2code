@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+typedef unsigned long long int ll;
+struct node;
+typedef struct node data;
+struct node{
+ll a,b;};
+data interval[100005];
+ll arr[100006];
+int main(){
+ll t,i,j,k,d,ind;
+ll xyz=0,n,ss,sum,a,b,y,z;
+scanf("%lld",&t);
+while(t--){
+scanf("%lld%lld",&n,&k);
+xyz=0,ss=0,a=b=0;
+for(i=0;i<k;i++){
+scanf("%lld",&arr[i]);
+xyz+=arr[i];}
+sort(arr,arr+k);
+sum=0,ind=0;
+if(k>0){
+if(arr[0]!=1){
+interval[0].a=1;
+interval[0].b=(arr[0]-1);
+ind++;
+a=0,b=arr[0]*(arr[0]-1)/2;}
+else{
+printf("Chef
+");
+goto here;}
+for(i=1;i<k;i++){
+if(arr[i]==arr[i-1]+1)
+continue;
+else{
+interval[ind].a=arr[i-1]+1;
+interval[ind].b=arr[i]-1;
+ind++;}}
+if(n>arr[k-1])
+{
+interval[ind].a=arr[k-1]+1;
+interval[ind].b=n;
+ind++;
+}
+//for(i=0;i<ind;i++)
+//printf("%d %d
+",interval[i].a,interval[i].b);
+for(i=1;i<ind;i++){
+if(interval[i].a>b+1)
+{
+//printf("%lld.....
+",b+1);
+if((b+1)%2==1)
+printf("Chef
+");
+else
+printf("Mom
+");
+goto here;
+}
+y=interval[i].a;
+z=interval[i].b;
+b=z*(z+1)/2-y*(y-1)/2+b;
+}
+}
+ss = n*(n+1)/2 - xyz +1;
+//printf("%lld...%lld %lld
+",ss,n,xyz);
+if(ss%2==1)
+printf("Chef
+");
+else
+printf("Mom
+");
+here:
+d=1;
+}
+}

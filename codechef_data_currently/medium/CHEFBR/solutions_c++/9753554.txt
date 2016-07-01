@@ -1,0 +1,66 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<map>
+#include<set>
+#include<vector>
+#include<cstring>
+#include<queue>
+#include<stack>
+#include<list>
+#include<cstdlib>
+#include<cmath>
+#include<string>
+#include<climits>
+using namespace std;
+#define e printf("
+");
+#define all(it,v) for(it=(v).begin();it!=(v).end();it++)
+#define ll long long
+const ll mx=10000;
+const ll mod=1000000007;
+const ll inf=0x3f3f3f3f;
+ll dp[101][101];
+ll ar[101];
+void solve()
+{
+  int i,j,k,l,n;
+  cin>>n;
+  for(i=0;i<n;i++)
+    cin>>ar[i];
+  for(l=0;l<n;l++)
+  {
+    for(i=0;i<n-l;i++)
+    {
+      j=l+i;
+      if(j==i) dp[i][j]=0;
+      else
+      {
+        dp[i][j]=dp[i][j-1];
+        for(k=i;k<j;k++)
+        {
+          if(ar[j]>0&&-ar[j]==ar[k])
+          {
+            if(i==k)
+            {
+              dp[i][j]+=(1+dp[i+1][j-1]);
+              dp[i][j]%=mod;
+            }
+            else
+            {
+              dp[i][j]+=((1+dp[i][k-1])*(1+dp[k+1][j-1]))%mod;
+              dp[i][j]%=mod;
+            }
+          }
+        }
+      }
+    }
+  }
+  cout<<1+dp[0][n-1];
+  return ;
+}
+int main()
+{
+  solve();
+  return 0;
+}

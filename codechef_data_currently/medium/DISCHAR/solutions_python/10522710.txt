@@ -1,0 +1,7 @@
+T = int(raw_input())
+while T:
+    s = raw_input(); d,r = {},''
+    for i in s:
+        if i not in d: r += i; d[i] = None
+    print len(r)
+    T -= 1

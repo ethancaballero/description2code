@@ -1,0 +1,26 @@
+for t in range(int(raw_input())):
+	d={}
+	for x in range(int(raw_input())):
+		a,b=raw_input().split()
+		d[a]=b
+	s=raw_input()
+	ans=""
+	for c in s:
+		if (d.get(c,False)):
+			ans+=d[c]
+		else:
+			ans+=c
+	ans=ans.lstrip('0')
+	if (ans.find('.')!=-1):
+		ans=ans.rstrip('0')
+	try:
+		if (ans[-1]=='.'):
+			ans=ans[:-1]
+			if (ans==""):
+				print 0
+			else:	
+				print ans
+		else:
+			print ans
+	except:
+		print 0

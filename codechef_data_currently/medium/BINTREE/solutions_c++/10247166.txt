@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+  long long t,q1,q2,l1,l2,i,j,a[1000],b[1000];
+  cin>>t;
+  while(t--)
+  {
+   cin>>q1>>q2;
+   l1=l2=0;
+   i=q1;
+   j=q2;
+   while(i>0)
+   {
+   a[l1]=i;
+   i/=2;
+    l1++;
+   }
+   while(j>0)
+   {
+   b[l2]=j;
+   j/=2;
+    l2++;
+   }
+   i=0;j=0;
+      while(1)
+      {
+	if(a[i]==b[j])
+	break;
+	else
+	if(a[i]>b[j])
+	i++;
+	else
+	if(a[i]<b[j])
+	j++;
+      }
+      cout<<i+j<<"
+";
+ }
+ return 0;
+ }

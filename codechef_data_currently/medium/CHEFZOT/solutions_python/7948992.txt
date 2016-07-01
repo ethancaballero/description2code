@@ -1,0 +1,12 @@
+# cook your code here
+n=input()
+a=map(int,raw_input().split())
+c=0
+g=[]
+for i in range(n):
+    if a[i]==0:
+        g.append(c)
+        c=-1
+    c+=1
+g.append(c)
+print max(g)

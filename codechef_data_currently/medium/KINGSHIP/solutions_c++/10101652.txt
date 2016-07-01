@@ -1,0 +1,28 @@
+#include <iostream>
+
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin >>t;
+    while(t--){
+        long long n,q,sum,m;
+
+
+        cin>>n;
+        long long  p[n];
+        cin>> p[0];
+        sum= p[0];
+        m= p[0];
+        for(long long i=1;i<n;i++){
+            cin >>p[i];
+            if(p[i]<m) m = p[i];
+            sum +=p[i];
+        }
+
+        q = (sum-m)*m;
+        cout<<q<<endl;
+    }
+}

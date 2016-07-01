@@ -1,0 +1,20 @@
+for t in xrange(int(raw_input())):
+    h, s = map(int, raw_input().split())
+    x = h**2
+    y = 4*s
+    plus = x+y
+    minus = x-y
+    if  minus < 0 :
+        print -1
+    else:
+        plus =  plus**0.5
+        minus = minus**0.5
+        a = (plus + minus)/2
+        b = (plus - minus)/2
+        if (a>0 and b>0):
+            if (a<b):
+                print a, b, h
+            else:
+                print b, a, h
+        else:
+            print -1

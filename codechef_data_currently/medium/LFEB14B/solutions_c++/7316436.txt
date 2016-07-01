@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N=100045;
+const int mod=(int)1e9+7;
+
+int cnt[N];
+
+long long power(long long a, long long n) {
+    long long ans=1;
+    while(n) {
+        if(n & 1) {
+            ans=(ans*a)%mod;
+        }
+        a=(a*a)%mod;
+        n>>=1;
+    }
+    return ans;
+}
+
+int main() {
+    int test;
+    scanf("%d", &test);
+    while(test--) {
+        int n;
+        scanf("%d", &n);
+        for(int i=0;i<n;i++) {
+            int num;
+            scanf("%d", &num);
+            cnt[num]++;
+        }
+        long long pw;
+        for(int i=N-1;i>=0;i--) {
+            if(cnt[i]) {
+                pw=(long long)cnt[i];
+                break;
+            }
+        }
+        long long ans=power(2ll, pw);
+        ans=(ans-1+mod)%mod;
+        printf("%lld
+", ans);
+        memset(cnt, 0, sizeof(cnt));
+    }
+}

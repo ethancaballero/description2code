@@ -1,0 +1,11 @@
+import math
+
+t=int(raw_input())
+
+while(t):
+    t=t-1
+    x,k=[int(s) for s in raw_input().split()]
+    lg=int(math.log(k,2))
+    lg=math.pow(2,lg)
+    num=(k+.5-lg)
+    print "{:.16f}".format((x*num)/lg)

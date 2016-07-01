@@ -1,0 +1,22 @@
+for asd in range(int(raw_input())):
+	R,G,B,M=map(int,raw_input().split())
+	r=map(int,raw_input().split())
+	g=map(int,raw_input().split())
+	b=map(int,raw_input().split())
+	rm=max(r)
+	gm=max(g)
+	bm=max(b)
+	for ass in range (M):
+		if (rm>gm and rm>bm):
+			for i in range (R):
+				r[i]/=2
+			rm/=2
+		elif (gm>bm):
+			for i in range (G):
+				g[i]/=2
+			gm/=2
+		else:
+			for i in range (B):
+				b[i]/=2
+			bm/=2
+	print max(rm,gm,bm)

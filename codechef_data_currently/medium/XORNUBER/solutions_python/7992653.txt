@@ -1,0 +1,9 @@
+t = input();
+for i in range(0, t):
+	n = input();
+	if(n == 1):
+		print 2;
+	elif ((n > 0)  and ((n&(n+1)) == 0)):
+		print n >> 1;
+	else:
+		print -1;

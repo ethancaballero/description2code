@@ -1,0 +1,79 @@
+t=int(input())
+for i in xrange(t):
+    typ=int(input())
+    s=list(raw_input())
+    if(abs(s.count('B')-s.count('G'))>1):
+        print -1
+        continue
+    if('B' not in s and 'G' not in s):
+        print -1
+        continue
+    m=-1
+    ans=0
+    temp=0
+    li=[]
+    li2=[]
+    temp_li=[]
+    temp_li2=[]
+    if(s.count('B')>s.count('G')):
+        m=1
+    elif(s.count('B')<s.count('G')):
+        m=0
+    else:
+        m=-1
+    for j in xrange(0,len(s),2):
+        if(m==1):
+            if(s[j]=='B'):
+                continue
+            else:
+                li.append(j)
+        elif(m==0):
+            if(s[j]=='G'):
+                continue
+            else:
+                li.append(j)
+        else:
+            if(s[j]==s[0]):
+                temp_li.append(j)
+            else:
+                li.append(j)
+    if(m==-1):
+        if not temp_li:
+            print 0
+            continue
+        if not li:
+            print 0
+            continue
+    if not li:
+        print 0
+        continue
+    for j in xrange(1,len(s),2):
+        if(m==1):
+            if(s[j]=='B'):
+                li2.append(j)
+            else:
+                continue
+        elif(m==0):
+            if(s[j]=='G'):
+                li2.append(j)
+            else:
+                continue
+        else:
+            if(s[j]==s[0]):
+                li2.append(j)
+            else:
+                temp_li2.append(j)
+    if(typ==0):
+        typ=0
+    else:
+        typ=1
+    for j in xrange(0,len(li)):
+        ans+=(abs(li[j]-li2[j]))**(typ)
+    if(m==-1):
+        for k in xrange(0,len(temp_li)):
+            temp+=(abs(temp_li[k]-temp_li2[k]))**(typ)
+    if(m==-1):
+        print min(temp,ans)
+        continue
+    print ans
+    continue  

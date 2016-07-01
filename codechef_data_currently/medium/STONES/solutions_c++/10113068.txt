@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+ int func(char j[100],char s[100]);
+int main()
+{
+ int t,i,k;
+ char j[100][150],s[100][150];
+ cin>>t;
+ for(i=0;i<t;i++)
+ {
+   cin>>j[i]>>s[i];
+  }
+  for(i=0;i<t;i++)
+  func(j[i],s[i]);
+  return 0;
+ }
+ int func(char j[100],char s[100])
+ {
+    int i,k,l1,l2,count=0;
+    l1=strlen(j);
+    l2=strlen(s);
+    for(i=0;i<l2;i++)
+    {
+      for(k=0;k<l1;k++)
+      {
+	if(j[k]==s[i])
+	{count++;
+	break;
+	}
+      }
+    }
+    cout<<count<<"
+";
+    return 0;
+    }

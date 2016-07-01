@@ -1,0 +1,33 @@
+import sys
+from collections import Counter
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	recipes = sys.stdin.readline().rstrip().split()
+	ing1 = Counter(recipes[0])
+	ing2 = Counter(recipes[1])
+	chef = 1
+	granama = 1
+	if set(ing1.keys()) != set(ing2.keys()):
+		chef = 0
+	else:
+		chef = 1
+	if len(recipes[0]) > len(recipes[1]):	
+		max_dict = ing1
+		min_dict = ing2
+	else:
+		max_dict = ing2
+		min_dict = ing1
+
+	for key,val in max_dict.items():
+		if key not in min_dict:
+			granama = 0
+			break
+		else:
+			if val != min_dict[key]:
+				granama = 0
+				break
+	if chef == granama:
+		print "YES"
+	else:
+		print "NO"
+	num -= 1

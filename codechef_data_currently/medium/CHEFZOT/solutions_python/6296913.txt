@@ -1,0 +1,18 @@
+#Maximum non zero sub-array
+n = int(raw_input())
+num_list = [int(x) for x in raw_input().split()]
+
+max_len = 0
+current_len = 0
+index = 0
+
+while index < n:
+	if num_list[index] == 0:
+		max_len = max(max_len,current_len)
+		current_len = 0
+	else:
+		current_len += 1
+	index += 1
+
+max_len = max( max_len, current_len)
+print max_len

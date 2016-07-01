@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int main() {
+	int i;
+	long long int x,s,n;
+	cin>>n;
+	for(i=0; i<n; i++) {
+		cin>>x>>s;
+		if(s==0)
+			cout<<s<<" "<<x<<endl;
+		else if(x==0)
+			cout<<"0 0"<<endl;
+		else
+			cout<<x/s<<" "<<x%s<<endl;
+	}
+}

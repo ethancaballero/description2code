@@ -1,0 +1,53 @@
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+using namespace std;
+int T,n,m,a[500];
+int head[500],nx[500],seat[500],pd[500];
+void init()
+{
+	memset(head,0,sizeof(head));
+	memset(nx,0,sizeof(nx));
+	scanf("%d%d",&n,&m);
+	int i;
+	for(i=1;i<=m;i++) scanf("%d",&a[i]);
+	for(i=m;i>0;i--)
+	   {if(head[a[i]]==0) {head[a[i]]=i; nx[i]=9999;}
+	    else {nx[i]=head[a[i]]; head[a[i]]=i;}
+	   }
+}
+void work()
+{
+	int i,j,maxl,w,top=0,ans=0;
+	memset(pd,0,sizeof(pd));
+	for(i=1;i<=m;i++)
+	   {if(pd[a[i]]==1)
+	       {for(j=0;j<top;j++)
+		       {if(a[seat[j]]==a[i])
+			       {seat[j]=i; break;}
+			   }
+		   }
+		else if(pd[a[i]]==0&&top<n)
+		   {ans++; seat[top]=i; top++; pd[a[i]]=1;}
+		else if(pd[a[i]]==0&&top>=n)
+		   {maxl=-99;
+		    for(j=0;j<top;j++)
+		       {if(nx[seat[j]]>maxl)
+			       {maxl=nx[seat[j]]; w=j;}
+			   }
+			pd[a[seat[w]]]=0; pd[a[i]]=1; ans++; seat[w]=i;
+		   }
+	   }
+	printf("%d
+",ans);
+}
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	   {init(); work();}
+	return 0;
+}

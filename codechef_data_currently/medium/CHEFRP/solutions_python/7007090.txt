@@ -1,0 +1,10 @@
+import sys
+
+for __ in range(input()) :
+    n = input()
+    lists = list(map(int,sys.stdin.readline().split()))
+    k , tot = min(lists) , sum(lists)
+    if k < 2 :
+        print "-1"
+    else :
+        print tot-k+2

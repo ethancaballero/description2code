@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define inf 1000000000LL
+char str[100001];
+int pos1[100001];
+int pos2[100001];
+int main()
+{
+	int type;
+	int i,j,k,l,c1,c2,count,n,t;
+	ll res,temp;
+	scanf("%d",&t);
+	while(t--)
+	{
+		res=inf;
+		scanf("%d",&type);
+		scanf("%s",str);
+		n=strlen(str);
+		for(k=0;k<2;k++)
+		{
+			c1=c2=0;
+			for(i=0;i<n;i++)
+			{
+				if(str[i]=='B')
+				str[i]='G';
+				else
+				str[i]='B';
+			}
+			for(i=0;i<n;i++)
+			{
+				if(str[i]=='B')
+				c1++;
+				else
+				c2++;
+			}
+			if(c1!=c2&&c1!=c2+1)
+			{
+				continue;
+			}
+			if(type==0)
+			{
+				temp=0;
+			   for(i=0;i<n;i+=2)
+			   {
+			   	 if(str[i]!='B')
+			   	 {
+			   	 	temp++;
+			   	 }
+			   }
+			   res=min(res,temp);	
+			}
+			else
+			{
+				j=0;
+				for(i=0;i<n;i+=2)
+				{
+					if(str[i]!='B')
+					{
+						pos1[j]=i;
+						j++;
+					}
+				}
+				l=j;
+				j=0;
+				for(i=1;i<n;i+=2)
+				{
+					if(str[i]!='G')
+					{
+						pos2[j]=i;
+						j++;
+					}
+				}
+				temp=0;
+				for(i=0;i<l;i++)
+				{
+					temp+=abs(pos1[i]-pos2[i]);
+				}
+				res=min(res,temp);
+			}	
+		}
+		if(res==inf)
+		res=-1;
+		printf("%lld
+",res);
+	}
+	return 0;
+}
+
+
+
+
+
+

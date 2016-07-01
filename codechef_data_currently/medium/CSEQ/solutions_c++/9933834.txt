@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+#define mp make_pair
+#define pb push_back
+#define ll long long
+#define debug(x) cout<<">value ("<<#x<<") : "<<x<<endl;
+#define fr(i,beg,end) for(i=beg;i<end;i++)
+#define itfr(it,stl) for(it=stl.begin();it!=stl.end();it++)
+#define PII pair<int,int>
+#define init(x,val) memset(x,val,sizeof(x))
+#define fst first
+#define snd second
+using namespace std;
+long long SmallC(int n, int r, int MOD)
+{
+    vector< vector<long long> > C(2,vector<long long> (r+1,0));
+
+    for (int i=0; i<=n; i++)
+    {
+        for (int k=0; k<=r && k<=i; k++)
+            if (k==0 || k==i)
+                C[i&1][k] = 1;
+            else
+                C[i&1][k] = (C[(i-1)&1][k-1] + C[(i-1)&1][k])%MOD;
+    }
+    return C[n&1][r];
+}
+
+long long Lucas(int n, int m, int p)
+{
+    if (n==0 && m==0) return 1;
+    int ni = n % p;
+    int mi = m % p;
+    if (mi>ni) return 0;
+    return Lucas(n/p, m/p, p) * SmallC(ni, mi, p);
+}
+
+long long C(int n, int r, int MOD)
+{
+    return Lucas(n, r, MOD);
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll t,n,l,r;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>l>>r;
+        ll x=r-l+1;
+        cout<<(C(x+n,n,1000003)+1000002)%1000003<<endl;
+    }
+    return 0;
+}

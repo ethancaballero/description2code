@@ -1,0 +1,148 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+char a[1001][1001];
+int N;
+int ver_c(int i,int j)
+{
+	
+	if(a[i][j]=='.')
+	{
+		return 0;
+	}
+	int ans=1;
+	int ii=i-1;
+
+		while(a[ii][j]=='X' && ii>=0)
+		{
+			++ans;
+			--ii;
+		}
+		ii=i+1;
+		while(a[ii][j]=='X' && ii<N)
+		{
+			++ans;
+			++ii;
+		}
+	return ans;
+}
+int hor_c(int i,int j)
+{
+	
+	if(a[i][j]=='.')
+	{
+		return 0;
+	}
+	int ans=1;
+	int jj=j-1;
+	
+		while(a[i][jj]=='X' && jj>=0)
+		{
+			++ans;
+			--jj;
+		}
+		jj=j+1;
+		while(a[i][jj]=='X' && jj<N)
+		{
+			++ans;
+			++jj;
+		}
+	
+	return ans;
+}
+int dia1_c(int i,int j)
+{
+	
+	if(a[i][j]=='.')
+	{
+		return 0;
+	}
+	int ans=1;
+	int jj=j-1;
+	int ii=i-1;
+	
+		while(a[ii][jj]=='X' && jj>=0 && ii>=0)
+		{
+			++ans;
+			--jj;
+			--ii;
+		}
+		jj=j+1;
+		ii=i+1;
+		while(a[ii][jj]=='X' && jj<N && ii<N)
+		{
+			++ans;
+			++jj;
+			++ii;
+		}
+	
+	return ans;
+}
+int dia2_c(int i,int j)
+{
+	
+	if(a[i][j]=='.')
+	{
+		return 0;
+	}
+	int ans=1;
+	int jj=j+1;
+	int ii=i-1;
+	
+		while(a[ii][jj]=='X' && jj<N && ii>=0)
+		{
+			++ans;
+			++jj;
+			--ii;
+		}
+		jj=j-1;
+		ii=i+1;
+		while(a[ii][jj]=='X' && jj>=0 && ii<N)
+		{
+			++ans;
+			--jj;
+			++ii;
+		}
+	
+	return ans;
+}
+int maxx(int a,int b)
+{
+	if(a>=b)
+	{
+		return a;
+	}
+	else
+	{
+		return b;
+	}
+}			
+int main()
+{
+	int v,h,d,d1,aa,bb;
+	scanf("%d",&N);
+	
+	for(int i=0;i<N;i++)
+	{
+		scanf("%s",a[i]);
+	}
+	for(int i=0;i<N;i++)
+	{
+		for(int j=0;j<N;j++)
+		{
+			v=ver_c(i,j);
+			h=hor_c(i,j);
+			d=dia1_c(i,j);
+			d1=dia2_c(i,j);
+			aa=maxx(v,h);
+			bb=maxx(d,d1);
+			printf("%d ",maxx(aa,bb));
+			
+		}
+		printf("
+");
+	}
+	
+	return 0;
+}
+	

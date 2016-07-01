@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+#define F first
+#define S second
+using namespace std;
+double dist(pair <int,int> a, pair<int,int> b)
+{
+	double ans=(a.F-b.F)*(a.F-b.F) + (-a.S+b.S)*(-a.S+b.S);
+	return sqrt(ans);
+}
+vector <pair <int,int> > v;
+int main()
+{   ios_base::sync_with_stdio(false);
+	int t; cin>>t;
+	while(t--)
+	{
+		int n; cin>>n; int x,y;
+		v.clear();
+		vector <pair <int,int> > :: iterator it,itr;
+		for(int i=0;i<n;i++)
+		{
+			cin>>x>>y;
+			v.push_back(make_pair(x,-1*y));
+		}
+		sort(v.begin(),v.end());
+		double sum=0.0;
+		for(it=v.begin();it!=v.end()-1;++it)
+		{
+			itr=it+1;
+			sum+=dist(*it,*itr);
+		}
+		printf("%.2lf
+",sum);
+	}
+ return 0;	
+}

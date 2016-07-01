@@ -1,0 +1,19 @@
+n,q=map(int,raw_input().split())
+d={}
+for x in range(n):
+	s=raw_input().strip()
+	pos=s.find(" ")
+	k=s[:pos]
+	v=s[pos+1:]
+	d[k]=v
+for x in range(q):
+	s=raw_input().strip()
+	s=s.split()[0]
+	s=s.split('.')
+	if (len(s)==1):
+		print "unknown"
+	elif (d.get(s[-1])):
+		print d.get(s[-1])
+	else:
+		print "unknown"
+		

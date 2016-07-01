@@ -1,0 +1,92 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int t;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		long long int n,k,i,count=1,count1=0,count2=0,j=0;
+		scanf("%lld%lld",&n,&k);
+		char a[100050],b[100050];
+		vector<char>c(100050);
+		vector<char>d(100050);
+		scanf("%s",a);
+		if(k==1)
+		{
+			for(i=0;i<n;i++)
+			{
+				if(i%2==0)
+				c[i]='0';
+				else
+				c[i]='1';
+			}
+			for(i=0;i<n;i++)
+			{
+				if(i%2==0)
+				d[i]='1';
+				else
+				d[i]='0';
+			}
+			for(i=0;i<n;i++)
+			{
+				if(a[i]!=c[i])
+				count1++;
+				if(a[i]!=d[i])
+				count2++;
+				
+			}
+			if(count1<=count2)
+			{
+				printf("%lld
+",count1);
+				for(i=0;i<n;i++)
+				cout<<c[i];
+				cout<<endl;
+				c.clear();
+				d.clear();
+			}
+			else
+			{
+				printf("%lld
+",count2);
+				for(i=0;i<n;i++)
+				cout<<d[i];
+				cout<<endl;
+				c.clear();
+				d.clear();
+			}
+			
+			
+		
+		}
+		else
+		{
+			for(i=1;i<n;i++)
+			{
+				if(a[i]==a[i-1])
+				{
+					count++;
+				}
+				else if(a[i]!=a[i-1])
+				{
+					count=1;
+				}
+				if(count>k)
+				{
+					if(a[i+1]==a[i])
+					a[i]=a[i]^1;
+					else
+					a[i-1]=a[i-1]^1;
+					j++;
+					count=1;
+				}
+			}
+			printf("%lld
+",j);
+			puts(a);
+		}
+		
+	}
+	return 0;
+}

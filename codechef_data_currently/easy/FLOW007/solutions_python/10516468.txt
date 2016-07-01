@@ -1,0 +1,5 @@
+t=int(raw_input())
+for i in range(0,t):
+	x=raw_input()
+	y=int(x[::-1])
+	print y

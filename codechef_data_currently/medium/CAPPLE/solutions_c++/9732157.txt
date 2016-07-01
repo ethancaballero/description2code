@@ -1,0 +1,25 @@
+/* Author : Gaurav Chauhan (default911) */
+#include<bits/stdc++.h>
+using namespace std;
+int main(void)
+{
+    int t;
+    for(scanf("%d", &t); t--; )
+    {
+        int n;
+        scanf("%d", &n);
+        map<int, bool> m;
+        int cnt=0;
+        for(int i=0; i<n; i++){
+            int k;
+            scanf("%d", &k);
+            if(m.find(k)==m.end()){
+                m[k]=true;
+                cnt++;
+            }
+        }
+        printf("%d
+", cnt);
+    }
+    return 0;
+}

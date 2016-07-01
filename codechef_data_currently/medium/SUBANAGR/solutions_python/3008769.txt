@@ -1,0 +1,24 @@
+n = input()
+ans =''
+flag=1
+while n:
+    n-=1
+    if flag==1:
+        ans = raw_input()
+        ans = ''.join(sorted(ans))
+        flag=0
+    else:
+        m = ''.join(sorted(raw_input()))
+        temp =''
+        for l in m:
+            if l in ans:
+                temp += l
+                ans = ans[:ans.find(l)] + ans[ans.find(l)+1:]
+        ans = temp
+        if ans == '':
+            break
+if ans!='':
+    print ans
+else:
+    print 'no such string'
+        

@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	long int c,max,n,i,arr[100001];
+	c=0,max=0;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>arr[i];
+		if(arr[i]!=0)
+		{
+			c++;
+			if(c>max)
+			max=c;
+			
+		}
+		else
+		c=0;
+	}
+	cout<<max<<endl;
+	return 0;
+}

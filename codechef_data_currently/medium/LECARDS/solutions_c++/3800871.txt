@@ -1,0 +1,91 @@
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+
+using namespace std;
+#define REP(i,a,b)    for(int(i)=int(a);i<=int(b);i++)
+#define bignumber 1000000007
+
+long long fact[1001],invfact[1001],powmod[1001];
+
+int modulo_inverse(long long n){
+    int s,t,r,old_s,old_t,old_r,temp,quotient;
+    s = 0;
+    t = 1;
+    old_s = 1;
+    old_t = 0;
+    r = bignumber;
+    old_r = n;
+    while(r!=0){
+        quotient = old_r/r;
+        temp = r;
+        r = (old_r - quotient * r);
+        old_r = temp;
+        temp = s;
+        s = (old_s - quotient * s);
+        old_s = temp;
+        temp = t;
+        t = (old_t - quotient * t);
+        old_t = temp;
+    }
+    return old_s;
+}
+ 
+int choose(int n,int k){
+    int val;
+    val = (fact[n])%bignumber;
+    val = (val * invfact[k])%bignumber;
+    val = (val * invfact[n-k])%bignumber;
+    return val;
+}
+
+void calfact(){
+    long long factorial,inv_factorial;
+    fact[0]=1;
+    fact[1]=1;
+    invfact[0]=1;
+    invfact[1]=1;
+    factorial = 1;
+    REP(i,2,1000){
+        factorial = (factorial * i)%bignumber;
+        inv_factorial = modulo_inverse(factorial);
+        if(inv_factorial < 0)
+            inv_factorial = inv_factorial + bignumber;
+        fact[i]=factorial;
+        invfact[i]=inv_factorial;
+    }
+}
+
+void calmod(){
+    powmod[0]=1;
+    powmod[1]=2;
+    REP(i,2,1000)
+        powmod[i] = (powmod[i-1] * 2)%bignumber;
+}
+
+int main(){
+    int T,N,temp;
+    long long val;
+    scanf("%d",&T);
+    calfact();
+    calmod();
+    while(T--){
+        scanf("%d",&N);
+        REP(i,0,N-1)
+            scanf("%d",&temp);
+        if(N%2){
+            val = powmod[N-1];
+            printf("%lld
+",val);
+        }
+        else{
+            val = choose(N,N/2);
+            val = (val * (-1))+bignumber;
+            val = (powmod[N]+val)%bignumber;
+            val = (val * ((bignumber+1)/2))%bignumber;
+            printf("%lld
+",val);
+        }
+    }
+    return 0;
+}

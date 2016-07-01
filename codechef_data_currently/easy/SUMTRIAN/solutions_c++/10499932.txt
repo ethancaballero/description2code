@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int test,n,a[105][105],i,j;
+    cin>>test;
+    while(test--)
+    {
+        int t[105][105]={0};
+
+        cin>>n;
+        for(i=1;i<=n;i++)
+        {
+            for(j=1;j<=i;j++)
+                cin>>a[i][j];
+        }
+        for(i=1;i<=n;i++)
+        {
+            for(j=1;j<=i;j++)
+                {
+                    t[i][j]=a[i][j]+max(t[i-1][j],t[i-1][j-1]);
+                }
+        }
+        sort(t[n],t[n]+(n+1));
+        cout<<t[n][n]<<endl;
+    }
+    return 0;
+}

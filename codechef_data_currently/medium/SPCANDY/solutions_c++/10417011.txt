@@ -1,0 +1,31 @@
+//#include<iostream>
+#include<stdio.h>
+//using namespace std;
+int main()
+{
+
+int T,i;
+long long n,k;
+//clrscr();
+scanf("%d",&T);
+for( i=0;i<T;i++)
+{
+  scanf("%lld %lld",&n,&k);
+  if(k==0&&n==0)
+   printf("0 0
+");
+   else if(k==0&&n!=0)
+     printf("0 %lld
+",n);
+   else if(k!=0&&n==0)
+    printf("0 0
+");
+   else
+    printf("%lld %lld
+",n/k,n%k);
+
+
+}
+//getch();
+return 0;
+}

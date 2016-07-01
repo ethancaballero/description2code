@@ -1,0 +1,27 @@
+# your code goes here
+t = int(raw_input())
+for i in range(0,t):
+	n,k,e,m = map(int,raw_input().split())
+	a_sum = list()
+	for j in range(0,n-1):
+		s_num = 0
+		n_num = list(map(int,raw_input().split()))
+		for l in range(0,e):
+			#print l
+			s_num = s_num + n_num[l]
+		a_sum.append(s_num)
+		#print n_num
+	num = list(map(int,raw_input().split()))
+	#print num
+	s_sum = sum(num)
+	#print s_sum
+	list.sort(a_sum)
+	r = a_sum[n-k-1]-s_sum+1
+	if r > m:
+		print "Impossible"
+	else:
+		if r < 0:
+			print "0"
+		else:
+			print r
+		

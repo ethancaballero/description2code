@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    long long int x,n,c,i;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        x=0,c=0;
+        long long int ar[n];
+        for(i=0;i<n;i++)
+        {
+           cin>>ar[i];
+           if(ar[i]<ar[i-1]&&i>0)
+           {
+               x+=(c*(c+1))/2;
+               c=1;
+           }
+           else c++;
+        }
+        if(c>0)
+        x+=(c*(c+1))/2;
+        cout<<x<<endl;
+    }
+    return 0;
+}

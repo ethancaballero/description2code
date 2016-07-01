@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+long long int res,pr,mod=1000000007;
+long long int modfn(int k)
+{
+	res=1;
+	pr=26;
+	while(k>0)
+	{
+		if(k%2==1)
+		res=(res*pr)%mod;
+		k=k/2;
+		pr=(pr*pr)%mod;
+	}
+	return res;
+}
+int main()
+{ 
+	long long int result,temp,k,t,n,t2;;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld",&n);
+		if((n%2)==1)
+		k= (n/2)+1;
+		else
+		k= n/2;
+		temp= modfn(k);
+		t2= modfn(k-1);
+		//printf("%lld %lld %lld
+",k,temp,t2);
+		if(n%2==0)
+		result= ((52*((temp-1+mod)%mod))%mod*280000002)%mod;
+		else
+		result= (((26*((temp-1+mod)%mod))%mod*280000002)%mod + ((26*((t2-1+mod)%mod))%mod*280000002)%mod)%mod;
+		printf("%lld
+",result);
+	}
+	return 0;
+
+
+}

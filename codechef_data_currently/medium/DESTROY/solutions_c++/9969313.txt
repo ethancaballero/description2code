@@ -1,0 +1,43 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include<vector>
+#include<string>
+using namespace std;
+
+#define LL long long
+#define mod 1000000007
+
+int a[50001];
+
+void solve()
+{
+    map<int,int> mp;
+    int n,x,m = 0;
+    memset(a,0,sizeof(a));
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&x);
+        if(mp[x])
+            a[mp[x]-1]++;
+        else
+        {
+            mp[x] = m+1;
+            a[m]++;
+            m++;
+        }
+    }
+    sort(a,a+m);
+    int c = max(a[m-1],(n+1)/2);
+    printf("%d
+",c);
+}
+
+int main()
+{
+    int t;
+
+    scanf("%d",&t);
+    while(t--)
+        solve();
+}

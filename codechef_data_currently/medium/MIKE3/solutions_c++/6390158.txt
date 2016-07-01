@@ -1,0 +1,66 @@
+// bit manipulation
+// problem 1
+//  mike3
+
+#include<cstdio>
+#include<cstdlib>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+const int maxn = 20020;
+const int maxm = 22;
+int n, m ,answer=0;
+vector<int> a[maxn];
+bool used[maxn], intersect[maxm][maxm];
+vector<int> s;
+
+void rec(int pos)
+{
+    if(pos==m+1)
+    {
+        answer = max(answer, (int)s.size());
+        return;
+    }
+    rec(pos+1);
+    bool fl = true;
+    for( int i = 0; i< s.size(); i++) if(intersect[pos][s[i]]) fl= false;
+    if( fl==true)
+    {
+        s.push_back(pos);
+        rec(pos+1);
+        s.pop_back();
+    }
+}
+int main()
+{
+    int i,j;
+
+    scanf("%d %d", &n,&m);
+    for( int i=1;i<=m; i++)
+    {
+        int k;
+        scanf("%d",&k);
+        a[i].resize(k);
+        for(  j=0; j<k; j++) scanf("%d", &a[i][j]);
+    }
+    for(i=1; i<=m;i++)
+    {
+        for( j=1;j<=n;j++)
+
+            used[j]=false;
+        for(j=0;j<a[i].size(); j++)
+            used[a[i][j]] = true;
+        for(j=i+1;j<=m;j++)
+        {
+            bool fl=false;
+            for(int k=0; k< a[j].size(); k++)
+                if(used[a[j][k]]) fl=true;
+            intersect[i][j]=intersect[j][i] = fl;
+        }
+    }
+    rec(1);
+    printf("%d
+", answer);
+    return 0;
+}

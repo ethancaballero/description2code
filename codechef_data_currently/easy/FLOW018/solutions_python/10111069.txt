@@ -1,0 +1,7 @@
+t=input()
+for i in range(0,t):
+    x=input()
+    k=1;
+    for j in range(2,x+1):
+        k=k*j;
+    print k

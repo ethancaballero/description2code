@@ -1,0 +1,15 @@
+from sys import stdin
+
+T = int(stdin.readline().strip())
+for i in xrange(T):
+    N = int(stdin.readline().strip())
+    gesture = stdin.readline().strip()
+    indian = gesture.count('I')
+    foreigner = gesture.count('Y')
+    no = gesture.count('N')
+    if indian >= 1:
+        print 'INDIAN'
+    elif foreigner >= 1:
+        print 'NOT INDIAN'
+    else:
+        print 'NOT SURE'

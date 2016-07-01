@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long arr[100001];
+long long dp[100001];
+long double mi[100001];
+# define mod 1000000007
+int main()
+{
+    long long n,k,i,j,save;
+    cin>>n>>k;
+    for(i=0;i<n;i++)
+        cin>>arr[i];
+    mi[0]=log(arr[0]);
+    for(i=1;i<=k;i++)
+    {
+        mi[i]=mi[0]+log(arr[i]);
+        dp[i]=arr[0]*arr[i];
+        dp[i]%=mod;
+    }
+    for(i=k+1;i<n;i++)
+    {
+        long double r=INT_MAX;
+        for(j=i-k;j<=i-1;j++)
+        {
+            if(mi[j]<r)
+            {
+                save=j;
+                r=mi[j];
+            }
+        }
+        mi[i]=mi[save]+log(arr[i]);
+        dp[i]=dp[save]*arr[i];
+        dp[i]%=mod;
+    }
+    cout<<dp[n-1];
+}

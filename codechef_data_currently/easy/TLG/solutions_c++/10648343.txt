@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{   int t,m=0,s,x=0,y=0;
+    cin>>t;
+    while(t--)
+    {   int a,b;
+        cin>>a>>b;
+        x+=a;
+        y+=b;
+        if((x-y)>m)
+        {   s=1;
+            m=(x-y);
+        }
+        else if((y-x)>m)
+        {   s=2;
+            m=(y-x);
+        }
+    }
+    cout<<s<<" "<<m<<"
+";
+    return 0;
+}

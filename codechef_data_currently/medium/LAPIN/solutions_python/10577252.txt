@@ -1,0 +1,29 @@
+t=input()
+for i in range(0,t):
+	strn=raw_input()
+	f=""
+	l=""
+	if len(strn)%2==0:
+		f=strn[0:len(strn)/2]
+		l=strn[len(strn)/2:len(strn)]
+	else :
+		f=strn[0:len(strn)/2]
+		l=strn[len(strn)/2+1:len(strn)]
+	flist=[]
+	llist=[]
+	for j in range(0,26):
+		flist.append(0)
+		llist.append(0)
+	for j in range(0,len(f)):
+		ch1=f[j]
+		ch2=l[j]
+		flist[ord(ch1)-97]+=1
+		llist[ord(ch2)-97]+=1
+	flag=-1
+	for j in range(0,26):
+		if flist[j]!=llist[j]:
+			flag=0
+			print "NO"
+			break
+	if flag==-1:
+		print "YES"

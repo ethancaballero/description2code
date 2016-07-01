@@ -1,0 +1,24 @@
+#include<stdlib.h>
+#include<stdio.h>
+
+int main()
+{
+	int t,num,count,mod;
+	scanf("%d",&t);
+	while(t--)
+	{
+		count=0;
+		scanf("%d",&num);
+		while(num>0)
+		{
+			mod = num%10;
+			if(mod==4)
+				count++;
+			num = num/10;
+		}
+		printf("%d
+",count);
+		
+	}
+	return 0;
+}

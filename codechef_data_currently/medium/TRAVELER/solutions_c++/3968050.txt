@@ -1,0 +1,64 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int adj[51][51];
+
+int main() {
+    map<string, int> node;
+    int n, m, d;
+    cin >> n;
+    string str, str1;
+    for(int i=0;i<n;++i) {
+        cin >> str;
+        node[str] = i+1;
+    }
+
+    cin >> m;
+    for(int i=0;i<=n;++i) {
+        for(int j=0;j<=n;++j) {
+            adj[i][j] = 1000000;
+        }
+    }
+    for(int i=0;i<m;++i) {
+        cin >> str >> str1 >> d;
+        adj[node[str]][node[str1]] = d;
+    }
+    int t, k, i1, i2;
+    cin >> t;
+    long long res = 0;
+    while(t--) {
+        map<int,bool> qu;
+        cin >> k;
+        cin >> str;
+        bool flag = true;
+
+        if(node[str]) {
+            i1 = node[str];
+            qu[i1]=true;
+            res = 0;
+        } else flag = false;
+
+        while(--k) {
+            cin >> str1;
+            if(flag) {
+                if ( node[str1] ) {
+                    i2=node[str1];
+                    if (qu[i2]) flag = false;
+                    else {
+                        qu[i2] = true;
+                        long long val = adj[i1][i2];
+                        if ( val == 1000000 ) flag = false;
+                        else {
+                            res = res+val;
+                            i1 = i2;
+                        }
+                    }
+                } else flag = false;
+            }
+        }
+        if ( flag) cout << res << endl;
+        else cout << "ERROR" << endl;
+    }
+    return 0;
+}

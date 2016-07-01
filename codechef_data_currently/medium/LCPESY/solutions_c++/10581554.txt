@@ -1,0 +1,37 @@
+#include <iostream>
+#include<string.h>
+int c[200],d[200];
+int main()
+{ int t,i,count,l1,l2;
+ char a[10002],b[10002];
+ scanf("%d",&t);
+ while(t--)
+ { memset(c,0,sizeof(int)*200);
+  memset(d,0,sizeof(int)*200);
+   count=0;
+   scanf("%s",a);
+   scanf("%s",b);
+   l1=strlen(a);
+   l2=strlen(b);
+   
+   for(i=0;i<l1;i++)
+    { c[a[i]]+=1;
+    }
+    for(i=0;i<l2;i++)
+    { d[b[i]]+=1;
+    }
+    for(i='0';i<='z';i++)
+    {
+      if(c[i]<=d[i])
+       count+=c[i];
+       else
+       count+=d[i];
+      
+    }
+    printf("%d
+",count);
+  }
+   
+ 
+ return 0;
+}

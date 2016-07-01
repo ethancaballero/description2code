@@ -1,0 +1,44 @@
+#include <iostream>
+#define ll long long int
+
+using namespace std;
+
+int main()
+{
+    ll t,i,h,m,ans;
+    cin>>t;
+    while(t--)
+    {
+        cin>>h>>m;
+        ans=1;
+        if(h<=10)
+        {
+            for(i=1;i<h;i++)
+            {
+                if(i<m)
+                    ans++;
+                if((i*10+i)<m)
+                    ans++;
+            }
+        }
+        else
+        {
+            for(i=1;i<10;i++)
+            {
+                if(i<m)
+                    ans++;
+                if((i*10+i)<m)
+                    ans++;
+            }
+            for(i=11;i<h;i+=11)
+            {
+                if(i<m)
+                    ans++;
+                if((i/10)<m)
+                    ans++;
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

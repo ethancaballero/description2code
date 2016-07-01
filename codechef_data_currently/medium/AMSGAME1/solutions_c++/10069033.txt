@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int gcd(int a,int b){
+    if(b%a==0){
+        return a;
+    }
+    else{
+        return gcd(b%a,a);
+    }
+}
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int array[n];
+        for(int i=0;i<n;i++){
+            cin>>array[i];
+        }
+        int min1=gcd(array[0],array[1]);
+        for(int i=1;i<n-1;i++){
+            if(min1>array[i+1]){
+                min1=gcd(array[i+1],min1);
+            }
+            else{
+                min1=gcd(min1,array[i+1]);
+            }
+        }
+        cout<<min1<<endl;
+    }
+}

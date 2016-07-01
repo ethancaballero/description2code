@@ -1,0 +1,71 @@
+#include<iostream>
+using namespace std;
+#define infinite 500
+int main()
+{
+   int T,Ex,Ey,Ax,Ay,N,i,j,k;
+   char Ed,Ad;
+   double minimum;
+   cin>>T;
+   while(T--)
+   {
+      cin>>Ex>>Ey>>Ed;
+      cin>>N;
+      minimum=infinite;
+      while(N--)
+      {
+         cin>>Ax>>Ay>>Ad;
+         if(Ed==Ad)
+            continue;
+         if(Ed=='U')
+         {
+            if(Ad=='L'&&Ax-Ex==Ay-Ey&&Ax-Ex>0&&minimum>Ax-Ex)
+               minimum=Ax-Ex;
+            else if(Ad=='R'&&Ex-Ax==Ay-Ey&&Ex-Ax>0&&minimum>Ex-Ax)
+               minimum=Ex-Ax;
+            else if(Ad=='D'&&Ex==Ax&&Ey<Ay&&minimum>(Ay-Ey)/2.0)
+               minimum=(Ay-Ey)/2.0;
+         }
+         else if(Ed=='D')
+         {
+            if(Ad=='R'&&Ex-Ax==Ey-Ay&&Ex>Ax&&minimum>Ex-Ax)
+               minimum=Ex-Ax;
+            else if(Ad=='L'&&Ax-Ex==Ey-Ay&&Ax-Ex>0&&minimum>Ax-Ex)
+               minimum=Ax-Ex;
+            else if(Ad=='U'&&Ax==Ex&&Ey>Ay&&minimum>(Ey-Ay)/2.0)
+               minimum=(Ey-Ay)/2.0;
+         }
+         else if(Ed=='L')
+         {
+            if(Ad=='U'&&Ex-Ax==Ey-Ay&&Ex-Ax>0&&minimum>Ex-Ax)
+               minimum=Ex-Ax;
+            else if(Ad=='D'&&Ex-Ax==Ay-Ey&&Ex-Ax>0&&minimum>Ex-Ax)
+               minimum=Ex-Ax;
+            else if(Ad=='R'&&Ey==Ay&&Ex>Ax&&minimum>(Ex-Ax)/2.0)
+               minimum=(Ex-Ax)/2.0;
+         }
+         else if(Ed=='R')
+         {
+            if(Ad=='U'&&Ax-Ex==Ey-Ay&&Ax-Ex>0&&minimum>Ax-Ex)
+               minimum=Ax-Ex;
+            else if(Ad=='D'&&Ax-Ex==Ay-Ey&&Ax>Ex&&minimum>Ax-Ex)
+               minimum=Ax-Ex;
+            else if(Ad=='L'&&Ay==Ey&&Ax>Ex&&minimum>(Ax-Ex)/2.0)
+               minimum=(Ax-Ex)/2.0;
+         }
+      }
+      if(minimum!=infinite)
+      {
+         i=minimum;
+         cout<<i;
+         if(i==minimum)
+            cout<<".0"<<endl;
+         else
+            cout<<".5"<<endl;
+         
+      }
+      else
+         cout<<"SAFE"<<endl;
+   }
+   return 0;
+}

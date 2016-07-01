@@ -1,0 +1,51 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,m;
+        cin>>n>>m;
+        int binroom[n];
+        int ordervisit[m];
+        int room[101][n];
+        int i;
+        for(i=0;i<m;i++)
+            cin>>ordervisit[i];
+
+        int j;
+
+        for(i=0;i<n;i++)
+        {
+            cin>>binroom[i];
+            int volume[binroom[i]];
+            for(j=0;j<binroom[i];j++)
+                cin>>volume[j];
+
+            sort(volume,volume+binroom[i]);
+
+            for(j=0;j<binroom[i];j++)
+                room[j][i]=volume[j];
+        }
+
+        int totaldrink=0;
+
+        for(i=0;i<m;i++)
+        {
+            if (binroom[ordervisit[i]]==0)
+                continue;
+            else
+            {
+                totaldrink+=room[binroom[ordervisit[i]]-1][ordervisit[i]];
+                binroom[ordervisit[i]]--;
+            }
+        }
+
+        cout<<totaldrink<<'
+';
+    }
+    return 0;
+}

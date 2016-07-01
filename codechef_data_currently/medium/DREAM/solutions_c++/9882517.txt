@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std; 
+pair<long long int,long long int>p[100001];
+int main()
+{
+	long long t,u,n,k,sol=0;
+	cin>>n>>k;
+	for(t=0;t<=n;t++)
+	{
+		cin>>p[t].first;
+		p[t].second=t;
+	}
+	sort(p,p+n);
+	t=0;
+	while(t<n)
+	{
+		u=t+1;
+		while(u<n && p[u].first==p[t].first && p[u].second-p[t].second<k)
+		u++;
+		t=u;
+		sol=sol+1;
+	}
+	cout<<sol;
+	return 0;
+} 

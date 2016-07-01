@@ -1,0 +1,8 @@
+from sys import stdin
+
+MOD=10**9+7
+
+for trial in xrange(int(stdin.readline())):
+    N = int(stdin.readline())
+    if N%2==0: print (3*pow(2,N/2,MOD)-2)%MOD
+    else: print (pow(2,N/2+2,MOD)-2)%MOD

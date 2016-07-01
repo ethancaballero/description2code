@@ -1,0 +1,93 @@
+#include <iostream>
+#include <algorithm>
+#include <memory.h>
+#include <list>
+#define forn(i,n) for(i=0;i<n;i++)
+using namespace std;
+list<int> arr[10000];
+char flag[10000],is;
+int n;
+enum Status{yet,did,protect};
+int dd[10000] = { 0 };
+char tt;
+void BFS(int i,int depth)
+{
+	std::list<int>::iterator it;
+	char c=0;
+	if (flag[i] == protect)
+		c = 1;
+	flag[i] = did;
+	int result = dd[depth];
+
+	for (it = arr[i].begin(); it != arr[i].end(); it++){
+		if (flag[*it] != did)
+		{
+			if (flag[*it] == protect)
+			{
+				dd[depth]++;
+			}
+			BFS(*it,depth+1);
+		}
+	}
+	if (dd[depth] - result > 1){
+		if (!c){
+			dd[depth - 1]++;
+		}
+		dd[depth] = result;
+	}
+}
+bool Can(int s)
+{
+	if (flag[s] == protect)
+		return false;
+	flag[s] = did;
+	int result = 0;
+	std::list<int>::iterator it;
+	for (it = arr[s].begin(); it != arr[s].end(); it++){
+		if (flag[*it] != did){
+			if (!Can(*it)){
+				result++;
+			}
+		}
+	}
+	if (result > 1){
+		return false;
+	}
+	return true;
+}
+
+int main(void){
+	int T, i,j,k,s,t,c,f;
+
+	cin >> T;
+	forn(i, T){
+		cin >> n >> s >> t;
+		fill(flag, flag + n, yet);
+		fill(dd, dd + 10000, 0);
+		
+		forn(j, n)
+		{
+			cin >> c;
+			forn(k, c)
+			{
+				cin >> f;
+				arr[j].push_back(f-1);
+			}
+		}
+
+		forn(j, t){
+			cin >> f;
+			flag[f-1]=protect;
+		}
+		tt = 1;
+
+		if (Can(s - 1))
+			cout << "yes" << endl;
+		else
+			cout << "no" << endl;
+
+		forn(j, n){
+			arr[j].clear();
+		}
+	}
+}

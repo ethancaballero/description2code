@@ -1,0 +1,12 @@
+t=int(input())
+while(t>0):
+
+	n=int(input())
+	a=map(int,raw_input().split())
+	su=sum(a)
+	term = su/(n-1)
+	for x in a:
+		print term-x,
+	print
+	t-=1
+

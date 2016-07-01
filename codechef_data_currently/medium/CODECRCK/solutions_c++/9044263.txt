@@ -1,0 +1,27 @@
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+#include <cmath>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main(){
+long long int i,k,s;
+	double ans,a1,b1;
+	cin >> i >> k >> s;
+	cin >> a1 >> b1;
+	if((k-i)%2==0){
+		ans=a1+b1;
+		printf("%.10f
+",ans*pow(2.0,(2*(k-i))-s));
+	}
+	else
+	{
+		ans = sqrt(2.0)*pow(2.0,(2*(k-i)-1-s))*(a1+(sqrt(3.0)*b1));
+		printf("%.10f
+",ans);
+	}
+	return 0;
+}

@@ -1,0 +1,24 @@
+num = int(raw_input())
+
+for x in xrange(num):
+    linha, coluna = map(int,raw_input().split())
+
+    mapa = []
+
+    for i in xrange(linha):
+        l = raw_input().upper()
+        if 'SPOON' in l:
+            for x in xrange(linha-i-1):
+                raw_input()
+            break
+        else:
+            mapa.append(l)
+    else:
+        transposta = zip(*mapa)
+        for l in transposta:
+            if 'SPOON' in ''.join(l):
+                break
+        else:
+            print('There is indeed no spoon!')
+            continue
+    print('There is a spoon!')

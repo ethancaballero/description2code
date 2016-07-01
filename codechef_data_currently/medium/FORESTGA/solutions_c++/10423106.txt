@@ -1,0 +1,41 @@
+#include<iostream>
+#include<stdlib.h>
+
+using namespace std;
+int fun(long long int a[],long long int r[],long long int n,long long int w,long long int l,long long int m)
+{
+    long long int sum=0;
+    long long int height;
+    for(int i=0;i<n;i++)
+    {
+
+        height=a[i]+(m*r[i]);
+        if(height>=l)
+        {
+            sum+=height;
+            if(sum>=w)
+                return 1;
+        }
+    }
+    return 0;
+}
+ int main()
+ {
+     long long int n,w,l;
+     cin>>n>>w>>l;
+     long long int h[n];
+     long long int r[n];
+     for(long long int i=0;i<n;i++)
+     {
+         cin>>h[i]>>r[i];
+     }
+     for(long long int i=1;;i++)
+     {
+         if(fun(h,r,n,w,l,i)==1)
+         {
+             cout<<i;
+             break;
+         }
+     }
+     return 0;
+ }

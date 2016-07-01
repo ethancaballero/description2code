@@ -1,0 +1,12 @@
+n,m=map(int,raw_input().split())
+a=raw_input().split()
+z,sz=0,len(a)
+for i in xrange(m):
+	op,d=raw_input().split()
+	if op=='C':
+		z+=int(d)
+	elif op=='A':
+		z-=int(d)
+	elif op=='R':
+		print a[(z+int(d)-1)%sz]
+	

@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+#define MOD 1000000007
+
+using namespace std;
+
+long long pow(int x, long long n) {
+    if (n == 0) return 1;
+    long long res = pow (x, n / 2);
+    res = (res * res) % MOD;
+    if (n % 2) res = (res * x) % MOD;
+    return res;
+}
+
+int main() {
+    int t, n;
+    cin >> t;
+    while(t --) {
+        cin >> n;
+        long long p = ceil((double)n / 2.0);
+        if(!(n & 1)) {
+            cout << ((2 * 26 * (((long long)pow(26, p) - 1) + MOD) % MOD) * (long long)pow(25, (long long)1000000005)) % MOD << endl;
+        } else {
+            cout << (((2 * 26 * (((long long)pow(26, p) - 1) + MOD) % MOD) * (long long)pow(25, (long long)1000000005)) % MOD - pow(26, p) + MOD) % MOD << endl;
+        }
+    }
+    return 0;
+}

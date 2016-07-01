@@ -1,0 +1,19 @@
+def mime(s):
+	n,q = map(int,s.split())
+	d = {}
+	for i in range(n):
+		a = raw_input().split()
+		d[a[0]] = a[1]
+	
+	for i in range(q):
+		a1 = raw_input().split()
+		a = a1[0]
+		if '.' in a:
+			b = a.split('.')
+			if b[-1] in d.keys():
+				print d[b[-1]]
+			else:
+				print 'unknown'
+		else:
+			print 'unknown'
+mime(raw_input())

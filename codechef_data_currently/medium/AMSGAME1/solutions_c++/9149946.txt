@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+int euclid(int ,int );
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+       int a,b,c,d;
+       cin>>a;
+       int long A[a];
+       for(b=0;b<a;b++)
+       {
+       	cin>>A[b];
+       }
+       if(a==1)
+       {
+       	cout<<A[0];
+       }
+       else 
+       {
+          for(d=1;d<a;d++)
+          {
+          	c=euclid(A[d-1],A[d]);
+          	if(c==1)
+          	{
+          		cout<<c<<endl;
+          		break;
+          	}
+          	else 
+          	{
+          		A[d]=c;
+          	}
+          }
+          if(c!=1)
+          {
+          	cout<<A[a-1]<<endl;
+          }
+       }
+	}
+return 0;
+}
+int euclid(int a,int b)
+{
+	if(b==0)
+	{
+		return a;
+	}
+	else 
+	{
+		return euclid(b,a%b);
+	}
+}

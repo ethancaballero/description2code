@@ -1,0 +1,25 @@
+t=input()
+for i in xrange(t):
+    str=raw_input()
+    ans=1
+    if (len(str)%2!=0):
+        l=len(str)/2+1
+    else:
+        l=len(str)/2
+    for j in xrange(l):
+        if (str[j]!='?' and str[len(str)-j-1]!='?' and str[j]!=str[len(str)-j-1]):
+            ans*=0
+            break
+        elif (str[j]=='?'):
+            if (str[len(str)-j-1]!='?'):
+                ans*=1
+                ans%=10000009
+            elif (str[len(str)-j-1]=='?'):
+                ans*=26
+                ans%=10000009
+        elif (str[len(str)-j-1]=='?'):
+            if (str[j]!='?'):
+                ans*=1
+                ans%=10000009
+    
+    print ans

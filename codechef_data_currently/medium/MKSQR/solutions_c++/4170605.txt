@@ -1,0 +1,31 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+
+int main()
+{
+    int t,i,j,x[50002],y[50002];
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n,c1=0,c2=0;
+        scanf("%d",&n);
+        for(i=1;i<=n;i++)
+            scanf("%d%d",&x[i],&y[i]);
+        for(i=1;i<=n;i++)
+        {
+            if(x[i]-y[i]>0)
+                c1++;
+            else
+                c2++;
+        }
+        if(c1==n||c2==n)
+            printf("NO
+");
+        else
+            printf("YES
+");
+
+    }
+    return 0;
+}

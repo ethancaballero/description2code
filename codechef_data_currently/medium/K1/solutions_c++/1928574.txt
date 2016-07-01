@@ -1,0 +1,73 @@
+#include<iostream>
+#include<stdio.h>
+#include<cmath>
+
+#define EPS 1e-9
+#define MAXN 2005
+using namespace std;
+const long double INF = 10005.00;
+
+struct pt{
+    double x,y;
+} P[MAXN];
+
+double A,B,C;
+int N;
+
+double dist(pt a,pt b){
+    return sqrt( (a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y) );
+}
+
+double f(double X){
+    //printf("F[%.0lf]: ",X);
+    double x = X,y;
+    if(A == 0)
+        y = (-C)/B;
+    else if(B == 0)
+        y = (-C)/A;
+    else
+        y = (-A*x -C)/B;
+
+    //printf("F(%.2lf,%.2lf) = ",x,y);
+    pt p = (pt){x,y};
+    double ans = 0.0;
+    for(int i=0;i<N;i++){
+        ans += dist(P[i],p);
+    }
+    //printf("%lf
+",ans);
+    return ans;
+}
+
+int main()
+{
+    //freopen("tc.in","r",stdin);
+
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d %lf %lf %lf",&N,&A,&B,&C);
+        for(int i=0;i<N;i++){
+            scanf("%lf %lf",&P[i].x,&P[i].y);
+        }
+
+        double l = -INF, h = INF,lm,hm;
+        int i = 0;
+        while(true){
+            //printf("[%lf,%lf]
+",l,h);
+            if( fabs( f(l) - f(h) ) < EPS && i > 60) break;
+
+            lm = (2*l + h)/3.0;
+            hm = (l + 2*h)/3.0;
+
+            if( f(lm) < f(hm) )
+                h = hm;
+            else l = lm;
+            i++;
+        }
+        printf("%lf
+",f(l));
+    }
+    return 0;
+}

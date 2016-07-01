@@ -1,0 +1,39 @@
+from fractions import gcd
+def divisors_min(r):
+    if(r%2==0):
+        return 2
+    elif(r%3==0):
+        return 3
+    else:
+        y=2
+        i=5
+        while i<pow(r,0.5)+1:
+            if(r%i==0):
+                return i
+            i+=y
+            y=6-y
+    return r        
+def gcd2(l,n):
+    r=l[0]
+    if(n>1):
+     for i in l[1:]:
+        r=gcd(r,i)
+ 
+    if(r%2==0):
+        return 2
+    if(r%3==0):
+        return 3
+    for i in range(5,int(pow(r,0.5))+2,2):
+        if(r%i==0):
+            return i
+    return r
+times=input()
+while times:
+    times-=1
+    n=input()
+    l=[int(x) for x in raw_input().split()]
+    k=gcd2(l,n)
+    if(k>1):
+        print k
+    else:
+        print -1

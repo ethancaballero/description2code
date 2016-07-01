@@ -1,0 +1,52 @@
+//chef and subarrays
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+#define MAX(a,b) ((a)>(b)?(a):(b))
+#define pb push_back
+
+int main()
+{
+	int test;
+	scanf("%d",&test);
+	
+	for(int ind=0; ind!=test; ind++)
+	{
+		int length,temp,count=0;
+		scanf("%d",&length);
+		
+		vector<int>array(length,0);
+		
+		for(int ind1 = 0; ind1 != length; ind1++)
+		{
+			scanf("%d",&temp);
+			array[ind1] = temp;
+		}
+		
+		//cout<<"i ma here!"<<endl;
+		
+		for(int start=0; start!=length; start++)
+		{
+			for(int end=0; end!=length; end++)
+			{
+				//vector<int>sub;
+				int sum1=0, prod1=1;
+				
+				for(int i=start; i<=end; i++)
+				{
+					//sub.pb(array[i]);
+					sum1 += array[i];
+					prod1 = prod1 * array[i];
+				}
+				
+				if(sum1 == prod1)
+					count++;
+				
+			}
+		}
+		printf("%d
+",count);
+	}
+}

@@ -1,0 +1,13 @@
+#include<iostream>
+using namespace std;
+main()
+{
+float sum,m,n; int t;
+cin>>t;
+for(int z=0;z<t;z++)
+{
+cin>>n>>m;
+cout.precision(6);
+cout<<fixed<<m+n-1<<endl;
+}
+}

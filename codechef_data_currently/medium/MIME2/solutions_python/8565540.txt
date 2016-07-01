@@ -1,0 +1,15 @@
+n,q=map(int,raw_input().split())
+d={}
+for i in xrange(n):
+    ext,typ=map(str,raw_input().split())
+    d[ext]=typ
+for i in xrange(q):
+    filename=raw_input()
+    if "." not in filename:
+        print 'unknown'
+    else:
+        parts=filename.strip().split('.') #The real culprit was .strip()
+        if parts[-1] not in d:
+            print 'unknown'
+        else:
+            print d[parts[-1]]

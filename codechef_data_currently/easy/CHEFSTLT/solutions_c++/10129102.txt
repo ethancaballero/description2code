@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        char a[101];
+        char b[101];
+        scanf("%s",a);
+        scanf("%s",b);
+        int i;
+        int c=0;
+        int unc=0;
+        int l=strlen(a);
+        for(i=0;a[i]!=0;i++)
+        {
+            if(a[i]!=b[i] ||(a[i]=='?'&& b[i]=='?'))
+            {
+                if(a[i]=='?' || b[i]=='?')
+                {
+                    unc++;
+                }
+                else
+                    c++;
+            }
+        }
+            cout<<c<<" "<<c+unc<<endl;
+    }
+    return 0;
+}

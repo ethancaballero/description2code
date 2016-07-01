@@ -1,0 +1,26 @@
+import operator
+
+cases = int(raw_input())
+
+for _ in xrange(cases):
+    N, K, initial = map(int, raw_input().split())
+    operands = map(int, raw_input().split())
+    op = raw_input().strip()
+
+    if K == 0:
+        print initial
+    else:
+        if op == 'XOR':
+            if K % 2 == 1:
+                x = reduce(operator.xor, operands, initial)
+                print x
+            else:
+                print initial
+        elif op == 'AND':
+            x = reduce(operator.__and__, operands, initial)
+            print x
+        elif op == 'OR':
+            x = reduce(operator.__or__, operands, initial)
+            print x
+        else:
+            assert False

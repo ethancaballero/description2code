@@ -1,0 +1,19 @@
+from sys import stdin
+def printBS(li):
+ print " ".join([str(x) for x in li])
+def listInput():
+ return map(int,stdin.readline().split())
+cases=input()
+for case in xrange(cases):
+ n=input()
+ li=listInput()
+ ans=1
+ prevlen=1
+ for i in xrange(1,n):
+  if li[i]>=li[i-1]:
+   ans+=1+prevlen
+   prevlen+=1
+  else: 
+   prevlen=1
+   ans+=1
+ print ans

@@ -1,0 +1,8 @@
+T=int(raw_input())
+for t in range(T):
+    s=raw_input()
+    h=s[::-1]
+    if h==s:
+        print str(1)
+    else:
+        print str(2)

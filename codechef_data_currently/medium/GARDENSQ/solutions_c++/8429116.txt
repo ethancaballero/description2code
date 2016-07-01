@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		int n,m,c=0;
+		cin>>n>>m;
+		string s[n];
+		for(int i=0;i<n;i++){
+			cin>>s[i];
+		}
+		for(int i=0;i<n;i++){
+			for(int j=0;j<m-1;j++){
+				for(int k=j+1;k<m;k++){
+					if(s[i][j]==s[i][k]&&i+k-j<n){
+						if(s[i][j]==s[i+k-j][j]&&s[i][j]==s[i+k-j][k]){
+							c++;
+						}
+					}
+				}
+			}
+		}
+		cout<<c<<endl;
+	}
+}

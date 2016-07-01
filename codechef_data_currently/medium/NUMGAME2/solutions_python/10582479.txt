@@ -1,0 +1,9 @@
+t=input()
+while t>0:
+    t=t-1
+    a=input()
+    if a%4==1:
+        print "ALICE"
+    else:
+        print "BOB"
+    

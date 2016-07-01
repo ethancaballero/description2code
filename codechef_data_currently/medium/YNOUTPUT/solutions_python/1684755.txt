@@ -1,0 +1,36 @@
+def match(mainarray, output):
+    for i in range(len(output)):
+        if(output[i] == 'NO'):
+            if(mainarray[i] == output):
+                return False
+        else:
+            if(mainarray[i] != output):
+                return False
+    return True
+def myprint(array):
+    for i in array:
+        print i
+t = input()
+i = 0
+mainarray = []
+while(i < t):
+    subarray = []
+    j = 0
+    while(j < t):
+        subarray.append(raw_input())
+        j += 1
+    mainarray.append(subarray)
+    i += 1
+output = []
+i = 0
+found = False
+while(i < t):
+    if(match(mainarray,mainarray[i])):
+        myprint(mainarray[i])
+        found = True
+        break
+    else:
+        output.append('NO')
+    i += 1
+if(not(found)):
+    myprint(output)

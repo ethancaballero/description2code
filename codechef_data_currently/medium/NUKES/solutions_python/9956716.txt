@@ -1,0 +1,12 @@
+a=map(int, raw_input().split())
+k=a[2]
+n=a[1]+1
+a=a[0]
+s=""
+while k!=0:
+    ld=a%n
+    s+=str(ld)+" "
+    a=a/n
+    k-=1
+s=s.strip()
+print s

@@ -1,0 +1,75 @@
+#include<iostream>
+#include<cmath>
+const long long d=1000000007;
+using namespace std;
+long long digit (long long i)
+{ long long count=0;
+   while(i!=0)
+  {
+      i/=10;             /* n=n/10 */
+      ++count;
+  }
+  return count;
+}
+int main()
+{long long t,a,b;
+long long h[10],l1[10];
+h[1]=9;
+h[2]=99;
+h[3]=999;
+h[4]=9999;
+h[5]=99999;
+h[6]=999999;
+h[7]=9999999;
+h[8]=99999999;
+h[9]=999999999;
+l1[1]=0;
+l1[2]=10;
+l1[3]=100;
+l1[4]=1000;
+l1[5]=10000;
+l1[6]=100000;
+l1[7]=1000000;
+l1[8]=10000000;
+l1[9]=100000000;
+int T;
+long long m,sum,l,i;
+cin>>T;
+while(T--)
+{cin>>a>>b;
+    if(b>a)
+{t=a;
+a=b;
+b=t;}
+l=0;
+m=0;
+
+
+l=digit(a);
+    m=digit(b);
+
+//out<<l<<m<<endl;
+
+sum=0;
+long long p;
+//cout<<a<<b<<l<<m<<endl;
+if(l>m)
+{sum+=(((((l)*((a-l1[l]+1))))*(((l1[l]+a))))/2);
+sum=sum%d;
+sum=(sum%d)+(((((m)*((h[m]-b+1))))*(((h[m]+b))))/2)%d;
+sum=sum%d;
+for(i=m+1;i<=l-1;i++)
+    {
+        sum=(sum%d)+(((((i)*((h[i]-l1[i]+1)))%d)*(((l1[i]+h[i]))))/2)%d;
+        sum=sum%d;
+    }
+}
+else if(l==m)
+{
+   sum=(sum%d)+(((l)*(((a-b+1)))*(a+b)))/2;
+   sum=sum%d;
+
+}
+p=sum%d;
+cout<<p<<endl;}
+return 0;}

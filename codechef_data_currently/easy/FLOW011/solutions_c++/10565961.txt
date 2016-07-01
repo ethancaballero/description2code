@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,salary;
+	double gross_salary,c;
+	cin>>t;
+	while(t--)
+	{
+		cin>>salary;
+		if(salary<1500)
+		{
+			gross_salary=2*salary;
+		}
+		else
+		{
+			c=0.98*salary;
+			gross_salary=salary+500+c;
+		}
+		cout<<gross_salary<<endl;
+	}	
+	return 0;
+}

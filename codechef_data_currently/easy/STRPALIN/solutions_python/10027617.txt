@@ -1,0 +1,20 @@
+#https://www.codechef.com/problems/STRPALIN
+#Palindromic substrings 
+#!/usr/bin/env python
+
+def palin(s1,s2):
+	flag=0
+	for i in s1:
+		if i in s2:
+			flag+=1
+			break
+	if flag>0:
+		print "Yes"
+	else:
+		print "No"
+t=input()
+while t!=0:
+	t-=1
+	a=raw_input()
+	b=raw_input()
+	palin(a,b)

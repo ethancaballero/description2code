@@ -1,0 +1,4 @@
+for T in range(int(raw_input())):
+    raw_input()
+    inp = map(int,raw_input().split())
+    print max([inp[x]+x for x in range(len(inp))])

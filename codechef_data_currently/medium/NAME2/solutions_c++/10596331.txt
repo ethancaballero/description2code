@@ -1,0 +1,19 @@
+//Playing around with conditional operators :)
+#include<iostream>
+using namespace std;
+int main(){
+int t,c,min;
+string m,w;
+cin>>t;
+while(t--){
+    cin>>m>>w;
+    min=0;c=0;
+        for(int i=0;i<((m.length()>w.length())?(w.length()):(m.length()));i++){
+            for(int j=min;j<((m.length()>w.length())?(m.length()):(w.length()));j++){
+                if(((m.length()>w.length())?(m):(w))[j]==((m.length()>w.length())?(w):(m))[i]) {c++;min=j+1;break;}
+        }
+    }
+    if (c==((m.length()>w.length())?(w.length()):(m.length()))) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+}
+}

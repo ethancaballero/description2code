@@ -1,0 +1,15 @@
+a, n, k = map(int, raw_input().strip().split())
+
+c = [0] * k
+
+if n == 0:
+    if a <= k:
+        c[a-1] = 1
+else:
+    c[0] = a
+    for i in xrange(k-1):
+        c[i+1], c[i] = divmod(c[i], n+1)
+
+    c[k-1], x = divmod(c[k-1], n+1)
+
+print ' '.join(map(str, c))

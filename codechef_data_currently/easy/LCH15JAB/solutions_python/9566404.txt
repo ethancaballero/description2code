@@ -1,0 +1,19 @@
+import string
+for _ in xrange(input()):
+    text = raw_input()
+    count = {}
+    alpha = string.ascii_lowercase
+    for k in alpha:
+        count[k] = 0
+    for j in text:
+        count[j] += 1 
+    high = 0 
+    total = 0
+    for j in count :
+        total += count[j]
+        if count[j] > high:
+            high = count[j]
+    if high == total - high:
+        print 'YES'
+    else:
+        print 'NO'

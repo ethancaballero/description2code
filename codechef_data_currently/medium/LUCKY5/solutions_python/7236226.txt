@@ -1,0 +1,2 @@
+print "
+".join(str(i) for i in [len(s)-(s.count('4')+s.count('7')) for s in [raw_input().strip() for __ in range(input())]]) 

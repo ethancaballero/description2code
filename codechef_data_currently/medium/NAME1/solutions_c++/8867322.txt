@@ -1,0 +1,92 @@
+#include <iostream>
+#include <cstdio>
+#include <iomanip>
+#include <cmath>
+#include <string.h>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <stack>
+
+#include <set>
+
+#include <map>
+
+
+#define ll long long int
+#define fsentak for(int i=0;i<n;i++)
+#define fsentak1 for(int i=0;i<(n-1);i++)
+#define s(t) scanf("%d",&t)
+#define sc(n) scanf("%d",&n)
+#define sl(lln) scanf("%lld",&n)
+#define sa(my) scanf("%d",&my[i])
+#define MAX_INT 99999
+#define MIN_INT -99999
+using namespace std;
+
+
+
+int main()
+{
+    int t;
+    cin >>t;
+    while(t--)
+    {
+        string s1,s2;
+        cin >>s1 >>s2;
+        string s=s1+s2;
+        
+        string s3;
+        string s4="";
+        
+        
+        
+        int n;
+        cin >>n;
+        while(n--)
+        {
+            cin >>s3;
+            s4+=s3;
+            
+        }
+        
+        
+        int my[257];
+        int my1[257];
+        memset(my,0,sizeof(my));
+        memset(my1,0,sizeof(my1));
+        
+        
+        for(int i=0;i<s.size();i++)
+        {
+            my[s[i]]++;
+            
+        }
+        
+        for(int i=0;i<s4.size();i++)
+        {
+            my1[s4[i]]++;
+            
+            
+        }
+        int flag=0;
+        
+        
+        for(int i=0;i<s4.size();i++)
+        {
+           if(!( my1[s4[i]]<=my[s4[i]]))
+           {
+               flag=1;
+               
+           }
+            
+            
+        }
+        
+        
+        flag==0?cout<<"YES" <<endl:cout <<"NO" <<endl;
+        
+        
+        
+    }
+}

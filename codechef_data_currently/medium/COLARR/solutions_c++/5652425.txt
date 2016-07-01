@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+int C[1000][1000];
+int gains[1000];
+int B[1000][1000];
+int A[1000];
+int main()
+{
+    int N,M,K,T;
+    scanf("%d",&T);
+    while(T--)
+    {
+        cin>>N>>M>>K;
+        for(int i = 0;i<N;i++)scanf("%d",&A[i]);
+        for(int i = 0;i<N;i++)
+            for(int j = 0;j<M;j++)
+                scanf("%d",&B[i][j]);
+        for(int i = 0;i<N;i++)
+            for(int j = 0;j<M;j++)
+                scanf("%d",&C[i][j]);
+        int gain = 0;
+        for(int i = 0;i<N;i++)
+            gain+=B[i][A[i]-1];
+        for(int i = 0;i<N;i++)
+        {
+            gains[i] = 0;
+            for(int j = 0;j<M;j++)
+            {
+                gains[i] = max(gains[i],B[i][j]-B[i][A[i]-1]-C[i][j]);
+            }
+        }
+        sort(gains,gains+N);
+        int loss = 0;
+        int col = K;
+        int i = N;
+        int k;
+        while(K--)
+        {
+            --i;
+            k = gains[i];
+            if(k<=0)break;
+            loss+=k;
+        }
+        printf("%d
+",gain+loss);
+    }
+}

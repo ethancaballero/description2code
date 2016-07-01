@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+#define MAX 150005
+int main()
+{
+   int T,noOfChar[31],position[31],i,j,k,maxi;
+   char alphabets[31],str[MAX],ptext[31];
+   bool visited[31];
+   cin>>T;
+   cin.ignore();
+   while(T--)
+   {
+      cin.getline(alphabets,30);
+      for(i=0;i<26;i++)
+      {
+         position[alphabets[i]-'a']=i;
+         noOfChar[i]=0;
+         visited[i]=false;
+      }
+      cin.getline(str,MAX);
+      for(i=0;str[i];i++)
+      {
+         if(str[i]>='a'&&str[i]<='z')
+         {
+            noOfChar[str[i]-'a']++;
+         }
+         else if(str[i]>='A'&&str[i]<='Z')
+         {
+            noOfChar[str[i]-'A']++;
+         }
+      }
+      for(i=0,k=25;i<26;)
+      {
+         for(;i<26&&(visited[i]||noOfChar[i]==0);i++);
+ 
+         maxi=i;
+ 
+         for(j=i+1;j<26;j++)
+         {
+            if(noOfChar[j]==0||visited[j])
+               continue;
+            if(noOfChar[j]>=noOfChar[maxi])
+               maxi=j;
+         }
+         visited[maxi]=true;
+         ptext[maxi]=alphabets[k--];
+      }
+      for(i=0;str[i];i++)
+      {
+         if(str[i]<='z'&&str[i]>='a')
+            cout<<ptext[str[i]-'a'];
+         else if(str[i]<='Z'&&str[i]>='A')
+            cout<<(char)(ptext[str[i]-'A']-32);
+         else
+            cout<<str[i];
+      }
+      cout<<endl;
+   }
+   return 0;
+}

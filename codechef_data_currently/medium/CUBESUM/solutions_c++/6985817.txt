@@ -1,0 +1,79 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int i,t,j,k,x,y,z;
+	
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d%d",&x,&y,&z);
+		
+		int a[x][y][z];
+		int b[x][y][z];
+		for(i=0;i<x;i++)
+		{
+			for(j=0;j<y;j++)
+			{
+				for(k=0;k<z;k++)
+				{
+					scanf("%d",&a[i][j][k]);
+					if(i==0 && j==0 && k==0)
+					{
+						
+						b[i][j][k]=a[i][j][k];
+						
+					}
+					if(i==0  && j==0 && k!=0)
+					{
+						
+						b[i][j][k]=a[i][j][k]-a[i][j][k-1];
+					}
+					if(i==0  && j!=0 && k==0)
+					{
+						b[i][j][k]=a[i][j][k]-a[i][j-1][k];
+					}
+					if(i!=0  && j==0 && k==0)
+					{
+						
+						b[i][j][k]=a[i][j][k]-a[i-1][j][k];
+					}
+					if(i==0  && j!=0 && k!=0)
+					{
+						b[i][j][k]=a[i][j][k]-a[i][j-1][k]-a[i][j][k-1]+a[i][j-1][k-1];
+					}
+					if(i!=0  && j==0 && k!=0)
+					{
+						b[i][j][k]=a[i][j][k]-a[i-1][j][k]-a[i][j][k-1]+a[i-1][j][k-1];
+					}
+					if(i!=0  && j!=0 && k==0)
+					{
+						b[i][j][k]=a[i][j][k]-a[i-1][j][k]-a[i][j-1][k]+a[i-1][j-1][k];
+					}
+					if(i!=0  && j!=0 && k!=0)
+					{
+						b[i][j][k]=a[i][j][k]-(a[i][j][k-1]+a[i][j-1][k]+a[i-1][j][k]-a[i-1][j-1][k]-a[i-1][j][k-1]-a[i][j-1][k-1]+a[i-1][j-1][k-1]);
+					}
+					
+					
+				}
+			}
+		}
+		for(i=0;i<x;i++)
+		{
+			for(j=0;j<y;j++)
+			{
+				for(k=0;k<z;k++)
+				{
+					printf("%d ",b[i][j][k]);
+				}
+				printf("
+");
+			}
+			printf("
+");
+		}
+		
+		
+	}
+}

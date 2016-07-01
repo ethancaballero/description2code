@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int x,n;
+    scanf("%d%d",&x,&n);
+    int i=0;
+    int way=0;
+    int fact[]={1,1,2,6,24,120,720};
+    while(i<n)
+    {
+        int wag[]={0,0,0,0,0,0,0,0,0};
+        string arr;
+        cin>>arr;
+        for(int j=0;j<54;j++)
+        {
+            switch(j)
+            {
+                case 1:case 2:case 3:case 0: case 52: case 53: if(arr.at(j)=='0') wag[0]++; break;
+                case 4: case 5: case 6: case 7: case 51: case 50: if(arr.at(j)=='0') wag[1]++; break;
+                case 8: case 9: case 10: case 11: case 49: case 48: if(arr.at(j)=='0') wag[2]++; break;
+                case 12: case 13: case 14: case 15: case 47: case 46: if(arr.at(j)=='0') wag[3]++; break;
+                case 16: case 17: case 18: case 19: case 45: case 44: if(arr.at(j)=='0') wag[4]++; break;
+                case 20: case 21: case 22: case 23: case 43: case 42: if(arr.at(j)=='0') wag[5]++; break;
+                case 24: case 25: case 26: case 27: case 41: case 40: if(arr.at(j)=='0') wag[6]++; break;
+                case 28: case 29: case 30: case 31: case 39: case 38: if(arr.at(j)=='0') wag[7]++; break;
+                case 32: case 33: case 34: case 35: case 36: case 37: if(arr.at(j)=='0') wag[8]++; break;
+            }
+        }
+        for(int j=0;j<9;j++)
+        {
+           if(wag[j]>=x) way+=fact[wag[j]]/(fact[wag[j]-x]*fact[x]);
+        }
+        i++;
+    }
+    printf("%d
+",way);
+}

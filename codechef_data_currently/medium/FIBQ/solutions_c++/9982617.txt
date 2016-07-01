@@ -1,0 +1,170 @@
+/*
+* @problem: FIBQ
+*/
+#include <iostream>
+#include <algorithm>
+#include <utility>
+#include <cstring>
+#include <string.h>
+#include <set>
+#include <map>
+#include <math.h>
+#include <stdio.h>
+#include <vector>
+#include <functional>
+#include <bitset>
+#include <iomanip>
+#define ll long long
+#define pi acos(-1.0)
+#define pb push_back
+#define MS0(ar) memset(ar,0,sizeof ar)
+#define MS1(ar) memset(ar,-1,sizeof ar)
+#define ff first
+#define ss second
+#define pii pair<int,int>
+#define pll pair<ll,ll>
+#define ind(a) scanf("%d",&a)
+#define inf(a) scanf("%lf",&a)
+#define inl(a) scanf("%lld",&a)
+#define ins(a) scanf("%s",a)
+#define pd(a) printf("%d
+",a)
+#define pl(a) printf("%lld
+",a);
+#define bitcnt(x) __builtin_popcountll(x)
+using namespace std;
+#define mod 1000000007
+#define SIZE 100010
+struct data
+{
+	ll ans, l, r;
+} tree[4 * SIZE];
+int ar[SIZE];
+inline void multiply(ll f[2][2], ll m[2][2])
+{
+	ll x = (f[0][0] * m[0][0] + f[0][1] * m[1][0]) % mod;
+	ll y = (f[0][0] * m[0][1] + f[0][1] * m[1][1]) % mod;
+	ll z = (f[1][0] * m[0][0] + f[1][1] * m[1][0]) % mod;
+	ll w = (f[1][0] * m[0][1] + f[1][1] * m[1][1]) % mod;
+
+	f[0][0] = x;
+	f[0][1] = y;
+	f[1][0] = z;
+	f[1][1] = w;
+
+}
+inline void power(ll f[2][2], ll n)
+{
+	if (n == 0 || n == 1)
+		return;
+	ll m[2][2] = { { 1, 1 }, { 1, 0 } };
+
+	power(f, n / 2);
+	multiply(f, f);
+
+	if (n % 2 != 0)
+		multiply(f, m);
+	return;
+}
+
+inline ll fib(ll n)
+{
+	ll f[2][2] = { { 1, 1 }, { 1, 0 } };
+	if (n == 0)
+		return 0;
+	power(f, n - 1);
+	return (f[0][0]) % mod;
+}
+
+inline data merge(data a, data b)
+{
+	data c;
+	ll temp = ((a.ans * b.l) % mod + (a.r * b.ans) % mod) % mod;
+	c.ans = (a.ans + b.ans + temp) % mod;
+	c.l = (a.l + b.l + (a.ans * b.ans) % mod + (a.l * b.l) % mod) % mod;
+	c.r = (a.r + b.r + (a.ans * b.ans) % mod + (a.r * b.r) % mod) % mod;
+	return c;
+}
+inline void build(int node, int s, int e)
+{
+	if (s == e)
+	{
+		tree[node].ans = fib(ar[s]);
+		tree[node].l = fib(ar[s] - 1);
+		tree[node].r = (tree[node].ans + tree[node].l) % mod;
+		return;
+	}
+	int mid = (s + e) / 2;
+	build(2 * node, s, mid);
+	build(2 * node + 1, mid + 1, e);
+	tree[node] = merge(tree[2 * node], tree[2 * node + 1]);
+}
+inline void update(int node, int s, int e, int idx)
+{
+	if (s == e)
+	{
+		tree[node].ans = fib(ar[s]);
+		tree[node].l = fib(ar[s] - 1);
+		tree[node].r = (tree[node].ans + tree[node].l) % mod;
+		return;
+	}
+	int mid = (s + e) / 2;
+	if (idx <= mid)
+	{
+		update(2 * node, s, mid, idx);
+	}
+	else
+	{
+		update(2 * node + 1, mid + 1, e, idx);
+	}
+	tree[node] = merge(tree[2 * node], tree[2 * node + 1]);
+}
+inline data query(int node, int s, int e, int l, int r)
+{
+	if (s >= l && e <= r)
+	{
+		return tree[node];
+	}
+	int mid = (s + e) / 2;
+	if (r <= mid)
+	{
+		return query(2 * node, s, mid, l, r);
+	}
+	else if (l > mid)
+	{
+		return query(2 * node + 1, mid + 1, e, l, r);
+	}
+	data left = query(2 * node, s, mid, l, mid);
+	data right = query(2 * node + 1, mid + 1, e, mid + 1, r);
+	return merge(left, right);
+}
+int main()
+{
+#ifndef ONLINE_JUDGE
+	freopen("../input.txt", "r", stdin);
+#endif
+	int n, m;
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++)
+	{
+		cin >> ar[i];
+	}
+	build(1, 1, n);
+	int l, r;
+	char ch;
+	for (int i = 0; i < m; i++)
+	{
+		cin >> ch >> l >> r;
+		if (ch == 'Q')
+		{
+			cout << query(1, 1, n, l, r).ans << endl;
+		}
+		else
+		{
+			ar[l] = r;
+			update(1, 1, n, l);
+		}
+	}
+
+	return 0;
+}

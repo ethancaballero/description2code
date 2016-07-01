@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+	long long int a[100],i,t,n ;
+	a[1] = 1;
+	a[2] = 2;
+	for (int i = 3; i <= 87; i++)
+	{
+		a[i] = a[i - 1] + a[i - 2];
+	}
+	scanf("%lld", &t);
+
+	while (t--)
+	{
+		scanf("%lld", &n);
+		for (i = 1; i <= 87; i++)
+		{
+			if (a[i] > n)
+				break;
+		}
+		i--;
+		if (n <= 3)
+			i = n;
+		printf("%lld
+", i);
+	}
+	
+	getchar();
+	getchar();
+	return 0;
+}

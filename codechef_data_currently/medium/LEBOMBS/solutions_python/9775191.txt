@@ -1,0 +1,76 @@
+#### 2016.03.31
+##
+##def increment(n):
+##    return n+1
+##
+##def square(n):
+##    return n**2
+##
+##def apply(opList, arg):
+##    if len(opList) == 0:
+##        return arg
+##    else:
+##        return apply(opList[1:], opList[0](arg))
+##
+##def addLevel(opList, fctList):
+##    return [x+[y] for y in fctList for x in opList]
+##
+##def findSequence(initial, goal):
+##    opList=[[]]
+##    for i in range(1,goal-initial+1):
+##        opList = addLevel(opList,[increment,square])
+##        print opList
+##        for seq in opList:
+##            if apply(seq, initial) == goal:
+##                return seq
+##
+##answer = findSequence(1,5)
+##print 'answer =', answer
+
+## CodeChef
+## Little Elephant and Bombs
+## 2016.03.31
+
+##def destroy(length, building):
+##    db = [0] * length
+##    for i in xrange(length):
+##        if building[i] == 1:
+##            if i == 0:
+##                db[i+1] = 1
+##                db[i] = 1
+##            elif i == length - 1:
+##                db[i-1] = 1
+##                db[i] = 1
+##            else:
+##                db[i-1] = 1
+##                db[i+1] = 1
+##                db[i] = 1
+##
+##    return db
+##
+####def stringToList(length, building):
+####    lisT = []
+####    for i in xrange(length):
+####        lisT.append(int(building[i]))
+####        
+####    return lisT
+##
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    l = int(raw_input())
+##    b = map(int, raw_input())
+####    sTl = stringToList(l,b)
+##    des = destroy(l,b)
+##    print des.count(0)
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    n = int(raw_input())
+    destroy = '0'+raw_input()+'0'
+    bomb = 0
+    for j in range(1,n+1):
+        if destroy[j-1]=='1' or destroy[j] =='1' or destroy[j+1] =='1':
+            bomb += 1
+    print n-bomb

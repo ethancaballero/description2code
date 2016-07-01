@@ -1,0 +1,67 @@
+#include<cstdio>
+#include<iostream>
+#include<cstdlib>
+
+using namespace std;
+
+int main()
+{
+	int N,i,j,k=1,ct=0,l,n;
+	cin>>N;
+	
+	int *A= (int*) calloc(N+1,sizeof(int));
+	int *B= (int*) calloc((3*N)+1,sizeof(int));
+	
+	for(i=1;i<=N;i++)
+	{
+		cin>>A[i];
+	}
+	
+	for(i=1;i<=N;i++)
+	{
+		for(j=1;j<=k;j++)
+		{
+			if(i==B[j])
+				break;
+		}
+		if(j==k+1)
+		{
+			ct++;
+			n=k;
+			l=i;
+			B[n]=l;
+			while(1)
+			{
+				n++;
+				l=A[l];
+				B[n]=l;
+				if(B[n]==B[k])
+				{
+					n++;
+					k=n;
+					B[k]=-1;
+					k++;
+					break;
+				}
+			}
+		}
+	}
+	cout<<ct<<"
+";
+	
+	for(i=1;i<k;i++)
+	{
+		cout<<B[i];
+		if(B[i+1]==-1)
+		{
+			cout<<"
+";
+			i++;
+		}
+		else
+		cout<<" ";
+		
+	}
+	
+	return 0;
+}

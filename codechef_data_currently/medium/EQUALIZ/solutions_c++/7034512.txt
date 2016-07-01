@@ -1,0 +1,123 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main 
+{
+	static ArrayList<Integer> prime = new ArrayList<Integer>();
+	static int count;
+	
+	public static void main ( String[]args) throws Exception
+	{
+		int[] A = new int[31];
+		
+		for ( int i = 2 ; i <= 30 ; i++ )
+		{
+			if ( A[i]==0 )
+			{
+				prime.add(i);
+				for ( int j = i ; j <= 30 ; j+=i)
+					A[j]++;
+			}
+		}
+		
+		
+		BufferedReader br = new BufferedReader ( new InputStreamReader ( System.in ));
+		int t = Integer.parseInt(br.readLine());
+		int i;
+		
+		for ( i = 0 ; i < t ; i++ )
+		{
+			int N = Integer.parseInt(br.readLine());
+			ArrayList<Integer> x = factors(N);
+			Collections.sort(x,Collections.reverseOrder());
+			count = 0;
+			String tmp = br.readLine();
+			StringBuilder sb = new StringBuilder();
+			StringBuilder sb2 = new StringBuilder();
+			
+			for ( int w : x )
+			{
+				if ( w!=N )
+				{
+					for ( int j = 0 ; j < N ; j+=w )
+					{
+						sb.append(w+" ");
+						count++;
+						for ( int k = j ; k < j+w ; k++ )
+						{
+							sb.append((k+1)+ " ");
+						}
+						sb.append("
+");
+					}
+				}
+				else
+				{
+					sb.append(N+" ");
+					for ( int j = 0 ; j < N ; j++ )
+					{
+						sb.append(j+1+" ");
+					}
+					count++;
+					sb.deleteCharAt(sb.length()-1);
+					sb.append("
+");
+					continue;
+				}
+				break;
+			}
+			
+			sb = sb.append(group(x,N));
+			sb2.append(count+"
+");
+			sb2.append(sb);
+			System.out.print(sb2.toString());
+		}
+	}
+	
+	public static ArrayList<Integer> factors ( int N )
+	{
+		ArrayList<Integer> x = new ArrayList<Integer>();
+		while ( N!=1 )
+		{
+			for ( int w : prime )
+			{
+				if ( N%w==0 )
+				{
+					N/=w;
+					x.add(w);
+				}
+			}
+		}
+		return x;
+	}
+	
+	public static StringBuilder group (ArrayList<Integer> x , int N )
+	{
+		StringBuilder sb = new StringBuilder();
+		int y = x.get(0);
+		x.remove(0);
+		for ( int w : x )
+		{
+			for ( int i = 0 ; i < N ; i+=y*w )
+			{
+				for ( int j = i ; j < i+y ; j++ )
+				{
+					sb.append(w+" ");
+					count++;
+					for ( int k = 0 ; k < w ; k++ )
+					{
+						sb.append((y*k+j+1)+" ");
+					}
+					sb.deleteCharAt(sb.length()-1);
+					sb.append("
+");
+				}
+			}
+			y*=w;
+		}
+		return sb;
+	}
+}

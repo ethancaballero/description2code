@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t,n,c=0;
+scanf("%d",&t);
+while(t--)
+{
+scanf("%d",&n);
+while(n>=100)
+{
+c++;
+n-=100;
+}
+while(n>=50)
+{
+c++;
+n-=50;
+}
+while(n>=10)
+{
+c++;
+n-=10;
+}
+while(n>=5)
+{
+c++;
+n-=5;
+}
+while(n>=2)
+{
+c++;
+n-=2;
+}
+while(n>=1)
+{
+c++;
+n-=1;
+}
+printf("%d
+",c);
+c=0;
+}
+return 0;
+}

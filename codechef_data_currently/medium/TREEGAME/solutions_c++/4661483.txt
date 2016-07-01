@@ -1,0 +1,81 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+#define vi vector<int>
+#define pb push_back
+
+bool vis[10100];
+vi AdjList[10100];
+int bykLevel[10100];
+
+bool dfs(int node, int lv)
+{
+	bykLevel[lv]++;
+	vis[node] = true;
+	for(int z=0;z<AdjList[node].size();z++)
+	{
+		int u = AdjList[node][z];
+		if(!vis[u])
+		{
+			dfs(u, lv+1);
+		}
+	}
+}
+
+int main()
+{
+	int T,N,i,j,u,v;
+	
+	cin >> T;
+	
+	while(T--)
+	{
+		scanf("%d", &N);
+		for(i=1;i<=N;i++)
+		{
+			vis[i] = false;
+			AdjList[i].clear();
+			bykLevel[i] = 0;
+		}
+		for(i=1;i<N;i++)
+		{
+			scanf("%d %d", &u, &v);
+			AdjList[u].pb(v);
+			AdjList[v].pb(u);
+		}
+		dfs(1,1);
+		
+		int ans=0,L=1,R;
+		
+		for(i=N;i>=1;i--)
+		{
+			if(bykLevel[i]>0)
+			{
+				R = i;
+				break;
+			}
+		}
+		
+		while(true)
+		{
+			if(ans%2==0) //buang root sbnyak-bnyaknya
+			{
+				bykLevel[L++] = 0;
+			}
+			else //buang leaf 1
+			{
+				bykLevel[R]--;
+				if(bykLevel[R]==0) R--;
+			}
+			ans++;
+			if(L>R) break;
+		}
+		printf("%d
+", ans);
+	}
+
+	return 0;
+}

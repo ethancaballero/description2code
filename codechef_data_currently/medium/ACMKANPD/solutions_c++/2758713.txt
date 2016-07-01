@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <string>
+#include <iostream>
+#include <math.h>
+#include <vector>
+
+using namespace std;
+
+#define s(a) scanf("%d",&a)
+#define fr(i,j,k) for(i=j;i<=k;i++)
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef unsigned long long int ulli; 
+
+ulli toDecimal(string num){
+	ulli dec = 0;
+	for (int i = num.size()-1; i >= 0; i--)
+	{
+		if (num[i] == '1')
+		{
+			dec += 1 << (num.size()-1 - i);
+		}
+	}
+	return dec;
+}
+
+int main(){
+	string flag;
+	string block ="";
+	cin >> block;
+	while(block != "~"){
+		string number = "";
+		while(block != "#"){
+			if(block.size() == 1)
+			{
+				flag = "1";
+			}else
+			if (block.size() == 2)
+			{
+				flag = "0";
+			}else{
+				for (int i = 0; i < block.size() -2 ; ++i)
+				{		
+					number.append(flag);
+				}
+			}
+		cin >> block;
+		}
+		cout << toDecimal(number) << endl;
+		cin >> block;
+	}
+}

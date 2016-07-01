@@ -1,0 +1,14 @@
+t=int(raw_input())
+for asd in range(t):
+	h1,m1=map(float,raw_input().split(":")) #gf
+	h2,m2=map(float,raw_input().split(":")) #chef
+	d=int(raw_input())
+	x=(h1-h2)*60+(m1-m2)
+	p1=x+d
+	print("%.1f" % round(p1,1)),
+	if (2*d<=x):
+		print("%.1f" % round(x,1))
+	else:
+		p2=x/2+d
+		print("%.1f" % round(p2,1))
+	

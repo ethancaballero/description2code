@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+bool isOverlucky(int n){
+	while(n>0){
+		if(n%10==7||n%10==4){
+			return true;
+		}
+		n/=10;
+	}
+	return false;
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+		long int n;
+		cin>>n;
+		long int ctr=0;
+		for(long int i=2;i*i<=n;i++){
+			if(n%i==0){
+				if(i*i==n){
+					if(isOverlucky(i)){
+						ctr++;
+					}
+				}
+				else{
+					if(isOverlucky(i)){
+						ctr++;
+					}
+					if(isOverlucky(n/i)){
+						ctr++;
+					}
+				}
+			}
+		}
+		if(isOverlucky(n)){
+			ctr++;
+		}
+		cout<<ctr<<endl;
+	}
+	return 0;
+}

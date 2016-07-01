@@ -1,0 +1,5 @@
+t=int(raw_input())
+while t:
+    a,b,c=sorted(map(int, raw_input().split()))
+    print 0 if a+b>c and b+c>a and a+c>b else abs(c-a-b)
+    t-=1

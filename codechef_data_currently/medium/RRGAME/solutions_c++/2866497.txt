@@ -1,0 +1,61 @@
+#include<iostream>
+#include<ctype.h>
+#include<cstdio>
+#include<cstdlib>
+#include<algorithm>
+#include<vector>
+#include<set>
+#include<map>
+#include<string>
+#include<string.h>
+#include<cstring>
+#include<stack>
+#include<queue>
+#include<cassert>
+#include<iterator>
+#include<cmath>
+#include<climits>
+#include <bitset>
+
+using namespace std ;
+
+#define FOR(i,a,b) for(int i= (int)a; i< (int)b; ++i)
+#define REP(i,n) FOR(i,0,n)
+
+#define LL long long int 
+#define PII pair<int,int> 
+#define PB push_back
+#define MP make_pair
+#define INF 1000000000
+#define mod 1000000007
+
+int main()
+{
+   LL n,m,k; cin>>n>>m>>k;
+   vector<LL> v,changes;
+   LL x;
+   LL sumc = 0;
+   LL maxc = -1;
+   LL suma = 0;
+   int pos = 0;
+   REP(i,n) {
+      cin>>x; v.PB(x);
+      suma += x;
+      LL y = (m-x)/k + 1;
+      changes.PB(y);
+      sumc += y;
+      if(maxc < y) {
+         maxc = y;
+         pos = i;
+      }
+      //cout << y << " ";
+   }
+   sumc -= maxc;
+   if(maxc > sumc) maxc = sumc;
+   LL t = maxc/2;
+   if(sumc%2==0)
+      t++;
+   //cout << smax << " " << smin << endl;
+   cout << t%mod << endl;
+   return 0;
+}

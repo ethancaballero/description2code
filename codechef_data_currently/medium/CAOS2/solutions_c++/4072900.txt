@@ -1,0 +1,191 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+long long int mod=1000000007;
+int pri[550];
+int dp_prime[550];
+void prime()
+{
+        int i,j,k;
+        memset(pri,1,sizeof(pri));
+        //for(i=0;i<17;i++)
+                //cout<<pri[i]<<"
+";
+
+        pri[1]=0;
+        for(i=2;i<510;i++)
+        {
+                for(j=2;j<=sqrt(i);j++)
+                {
+                        if(i%j==0)
+                        {
+                                pri[i]=0;
+                                break;
+                        }
+                }
+        }
+        //for(i=0;i<15;i++)
+               // cout<<pri[i]<<"
+";
+}
+
+void precompute()
+{
+        int i,j,n,m,k;
+        dp_prime[1]=0;
+        for(i=2;i<510;i++)
+        {
+                if(pri[i]!=0)
+                        dp_prime[i]=dp_prime[i-1]+1;
+                else
+                        dp_prime[i]=dp_prime[i-1];
+        }
+        //for(i=0;i<15;i++)
+                //cout<<dp_prime[i]<<"
+";
+}
+int gcd(int a,int b)
+{
+ int r, i;
+  while(b!=0){
+    r = a % b;
+    a = b;
+    b = r;
+  }
+  return a;
+}
+
+long long int power(long long int x,long long int y)
+{
+    long long int temp,ty,my;
+    long long int mod;
+    //mod=1000000007;
+    if( y == 0)
+        return 1;
+    temp = power(x, y/2);
+    ty=(temp)*(temp);
+    if (y%2 == 0)
+        {
+
+                return ty;
+        }
+    else
+        {
+                my=(x)*(ty);
+                return my;
+        }
+}
+
+char a[550][550],r1;
+
+int dp1[550][550]; //for left
+int dp2[550][550]; //for right
+int dp3[550][550]; //for top
+int dp4[550][550]; //for bottom
+
+int main()
+{
+        int t,i,j,n,m,k,r,c,p,g;
+        //cin>>t;
+
+        prime();
+        precompute();
+        scanf("%d",&t);
+        while(t--)
+        {
+                p=0;
+                scanf("%d",&r);
+                scanf("%d",&c);
+                //for(i=0;i<r;i++)
+                        //cin>>a[i];
+
+                for(i=0;i<r;i++)
+                {
+                        scanf("%c",&r1);
+                        scanf("%s",&a[i]);
+                }
+
+                //memset(dp1,0,sizeof(dp1));
+                //memset(dp2,0,sizeof(dp2));
+                //memset(dp3,0,sizeof(dp3));
+                //memset(dp4,0,sizeof(dp4));
+
+                //for left
+                for(i=0;i<r;i++)
+                        dp1[i][0]=0;
+                for(i=0;i<r;i++)
+                {
+                        for(j=1;j<c;j++)
+                        {
+                                if(a[i][j-1]=='^')
+                               dp1[i][j]=dp1[i][j-1] +1;
+                               else
+                                dp1[i][j]=0;
+                        }
+                }
+
+
+                //for right
+                for(i=0;i<r;i++)
+                        dp2[i][c-1]=0;
+                for(i=0;i<r;i++)
+                {
+                        for(j=c-2;j>=0;j--)
+                        {
+                                if(a[i][j+1]=='^')
+                               dp2[i][j]=dp2[i][j+1] +1;
+                               else
+                                dp2[i][j]=0;
+                        }
+                }
+
+                //for top
+                for(i=0;i<c;i++)
+                        dp3[0][i]=0;
+                for(i=0;i<c;i++)
+                {
+                        for(j=1;j<r;j++)
+                        {
+                                if(a[j-1][i]=='^')
+                               dp3[j][i]=dp3[j-1][i] +1;
+                               else
+                                dp3[j][i]=0;
+                        }
+                }
+
+
+                //for bottom
+                for(i=0;i<c;i++)
+                        dp4[r-1][i]=0;
+                for(i=0;i<c;i++)
+                {
+                        for(j=r-2;j>=0;j--)
+                        {
+                                if(a[j+1][i]=='^')
+                               dp4[j][i]=dp4[j+1][i] +1;
+                               else
+                                dp4[j][i]=0;
+                        }
+                }
+
+                for(i=0;i<r;i++)
+                {
+                        for(j=0;j<c;j++)
+                        {
+                                if(a[i][j]=='^'){
+                                k=min(min(dp1[i][j],dp2[i][j]),min(dp3[i][j],dp4[i][j]));
+                                        if(k>=2)
+                                        {
+                                        //cout<<"dp_prime[k]->"<<dp_prime[2]<<" i->"<<i<<" "<<"j->"<<" "<<j<<"
+";
+                                        p=p+dp_prime[k];
+                                        }
+                                }
+                        }
+                }
+
+                cout<<p<<"
+";
+        }
+        return 0;
+}

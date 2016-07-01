@@ -1,0 +1,23 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+float v=0.00;
+int main()
+{
+    int t=0;
+    float p=0,s=0,r=0;
+    cin>>t;
+    while(t--)
+    {
+        cin>>p>>s;
+        cout<<"
+";
+        r=(p/12)-sqrt(((p*p)/144)-(s/6));
+        v=r*(r*(r-p/4)+s/2);
+            std::cout << std::fixed;
+            std::cout << std::setprecision(2);
+            std::cout << v;
+    }
+    return 0;
+}

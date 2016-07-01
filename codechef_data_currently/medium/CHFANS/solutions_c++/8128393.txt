@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+int gcd(int a,int b)
+{
+	if(b==0)
+		return a;
+	else
+		gcd(b,a%b);
+}
+int main()
+{
+	int t,a,b,mid;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d %d",&a,&b);
+         mid=abs(a-b);
+         a=abs(a);
+         b=abs(b);
+         printf("%d
+",mid/(gcd(a,b)));
+	}
+	
+return 0;
+}

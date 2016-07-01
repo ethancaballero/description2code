@@ -1,0 +1,53 @@
+
+#include<stdio.h>
+
+#define MAX_SIZE 50000
+
+int main(void)
+{
+    
+    long long int arrayA[MAX_SIZE];
+    int count;
+    
+    int inputs;
+    
+    long long int sum;
+    long long int solution;
+    
+    scanf("%d", &inputs);
+    
+    for(int input = 1; input <= inputs; input++)
+    {
+        
+        scanf("%d", &count);
+        
+        sum = 0;
+        
+        for(int index = 0; index < count; index++)
+        {
+            
+            scanf( "%lld", &arrayA[index] );
+            
+            sum = sum + arrayA[index];    
+        
+        }
+        
+        sum = sum / ( count - 1 );
+        
+        for(int index = 0; index < count; index++)
+        {
+            
+            solution = sum - arrayA[index];
+            
+            printf("%lld ", solution);
+            
+        }     
+        
+        printf("
+");
+        
+    }
+    
+    return 0;
+    
+}

@@ -1,0 +1,21 @@
+t = int(raw_input())
+for q in range(t):
+	s = raw_input().split();
+	n = int(s[0]);
+	arr = s[1];
+	new_word = [];
+	s = '{0:0' + str(n) + 'b}'
+	for i in range(len(arr)):
+		new_word.append(arr[i]);
+	for i in range(len(arr)):
+		b = s.format(i);
+		# print "i,b = ",i,b;
+		b = list(b);
+		b.reverse();
+		# print "b = ",b;
+		b = ''.join(b);
+		k = int(str(b),2);
+		# print "k : ",k
+		new_word[k] = arr[i];
+	new_word = ''.join(new_word);
+	print new_word;

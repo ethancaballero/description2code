@@ -1,0 +1,147 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define ll            long long
+#define ull           unsigned long long
+#define print(a)      printf("%d",a)
+#define print2(a,b)   printf("%d %d",a,b)
+#define print3(a,b,c) printf("%d %d %d",a,b,c)
+#define line          putchar('
+')
+#define scan(a)       scanf("%d",&a)
+#define scan2(a,b)    scanf("%d%d",&a,&b)
+#define scan3(a,b,c)  scanf("%d%d%d",&a,&b,&c)
+
+/*****************STL**********************/
+
+#define pb(a)         push_back(a)
+#define pf(a)         push_front(a)
+#define mp(a,b)       make_pair(a,b)
+#define type(a)       typeof(a.begin())
+#define set_it        set<int>::iterator
+#define vector_it     vector<int>::iterator
+
+/******************************************/
+
+const int MAX = 105;
+
+const int MOD = 1000000007;
+
+int a[MAX];
+ll dp[MAX][MAX];
+
+int main(int argc, char*argv[])
+{
+
+    //ios_base::sync_with_stdio(false);
+
+    int n,i,j,k,len;
+
+    scan(n);
+
+    for(i=0;i<n;i++) scan(a[i]);
+
+    for(i=0;i<n;i++) dp[i][i]=0;
+
+    //DP - easy
+
+    //one of different kind of problems of DP
+    //finding recurrence was a difficult task
+    //took some hint
+
+    //lets assume the we know the solution for a[0,n-1] (dp[0][n-1])
+    //now if we add a number into a[]
+    //then dp[0,n]=dp[0,n-1]+dp[k+1,n-1]+1+(dp[k+1,n-1]+1)*dp[0,k-1] for all k such that a[k]+a[n]==0 && 0<=k<n
+
+    //we can generalise this relation to compute dp[i][j] by replacing 0 with i and n with j
+    //to construct a DP solution we start solving subproblems of smaller length
+    //finding recurrence is the sole task of DP
+    //then we have to construct solution in bottom-up approach
+
+    //need to work harder
+
+    //solving it after 6 months
+    //consistency is desired
+
+    for(len=1;len<n;len++)
+    {
+
+        for(i=0;i+len<n;i++)
+        {
+
+            j=i+len;
+
+            dp[i][j]=dp[i][j-1];
+
+            for(k=i;k<j;k++)
+            {
+
+                if(a[k]+a[j]==0 && a[j]>0)
+                {
+
+                     if(i==k) dp[i][j]+=dp[k+1][j-1]+1;
+
+                     else dp[i][j]+=((dp[k+1][j-1]+1)*(dp[i][k-1]+1))%MOD;
+
+                     dp[i][j]%=MOD;
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    print((int)(dp[0][n-1]+1)%MOD);
+
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

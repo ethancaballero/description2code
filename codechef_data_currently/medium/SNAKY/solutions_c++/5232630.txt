@@ -1,0 +1,237 @@
+/*
+*
+* FileName: 
+* Created By: ptk23
+* Description: 
+*
+*/
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cmath>
+#include <algorithm>
+#include <utility>
+#include <vector>
+#include <set>
+#include <list>
+#include <map>
+#include <stack>
+#include <queue>
+#include <fstream>
+#include <istream>
+#include <ostream>
+#include <iomanip>
+ 
+#define ull unsigned long long
+#define ll long long
+#define ini(x) scanf("%d", &x)
+#define inl(x) scanf("%ld", &x)
+#define inll(x) scanf("%lld", &x)
+ 
+ 
+using namespace std;
+int a[1005][1005];
+int main()
+{
+	//freopen("i.txt","r",stdin);
+	int t;
+	for(scanf("%d",&t);t;--t)
+	{
+		int n,m,x,y,l;
+		//cin>>n>>m>>x>>y>>l;
+		scanf("%d%d%d%d%d",&n,&m,&x,&y,&l);
+		for(int i=1;i<=m;i++)
+		{
+			for(int j=1;j<=n;j++)
+			a[i][j]=0;
+		}
+		int rw=m-y+1,co=x;
+		int tpr=rw,tpc=co;
+		int k=1;
+		//cout<<rw<<" "<<co<<endl;
+		a[rw][co]=k;k++;
+		char ch;
+		scanf("%c",&ch);
+		for(int i=0;i<l-1;i++)
+		{
+			//cin>>ch;
+			scanf("%c",&ch);
+			//cout<<ch<<endl;
+			if(ch=='U')
+			{
+				rw--;
+				a[rw][co]=k;k++;	
+			}
+			else if(ch=='D')
+			{
+				rw++;
+				a[rw][co]=k;k++;
+			}
+			else if(ch=='R')
+			{
+				co++;
+				a[rw][co]=k;k++;
+			}
+			else
+			{
+				co--;
+				a[rw][co]=k;k++;
+			}
+			
+		}
+		int ls=k,st=2;
+		//cout<<rw<<" "<<co<<endl;
+		
+		//cout<<":P"<<endl;
+		if(ch=='U')
+		{
+			int f=0,coun=0;
+			rw--;
+			while(rw>0)
+			{
+				if(a[rw][co]!=0 && a[rw][co]!=a[tpr][tpc])
+				{
+					f=1;break;
+				}
+				else
+				{
+				a[tpr][tpc]=0;
+					a[rw][co]=ls;ls++;
+					
+					
+					if(a[tpr+1][tpc]==st)
+					tpr=tpr+1;
+					else if(a[tpr][tpc+1]==st)
+					tpc=tpc+1;
+					else if(a[tpr-1][tpc]==st)
+					tpr=tpr-1;
+					else
+					tpc=tpc-1;
+					coun++;rw--;
+					st++;
+					
+				}
+			}
+			if(f)
+			//cout<<"BODY "<<coun<<endl;
+			printf("BODY %d
+",coun);
+			else
+			//cout<<"WALL "<<coun<<endl;
+			printf("WALL %d
+",coun);
+		}
+		else if(ch=='D')
+		{
+			int f=0,coun=0;
+			rw++;
+			while(rw<=m)
+			{
+				if(a[rw][co]!=0 && a[rw][co]!=a[tpr][tpc])
+				{
+					f=1;break;
+				}
+				else
+				{
+					a[tpr][tpc]=0;
+					a[rw][co]=ls;ls++;
+					
+					
+					if(a[tpr+1][tpc]==st)
+					tpr=tpr+1;
+					else if(a[tpr][tpc+1]==st)
+					tpc=tpc+1;
+					else if(a[tpr-1][tpc]==st)
+					tpr=tpr-1;
+					else
+					tpc=tpc-1;
+					coun++;rw++;st++;
+				}
+			}
+		if(f)
+			//cout<<"BODY "<<coun<<endl;
+			printf("BODY %d
+",coun);
+			else
+			//cout<<"WALL "<<coun<<endl;
+			printf("WALL %d
+",coun);
+		}
+		else if(ch=='R')
+		{
+			int f=0,coun=0;
+			co++;
+			while(co<=n)
+			{
+				if(a[rw][co]!=0 && a[rw][co]!=a[tpr][tpc])
+				{
+					f=1;break;
+				}
+				else
+				{
+					a[tpr][tpc]=0;
+					a[rw][co]=ls;ls++;
+					
+					
+					if(a[tpr+1][tpc]==st)
+					tpr=tpr+1;
+					else if(a[tpr][tpc+1]==st)
+					tpc=tpc+1;
+					else if(a[tpr-1][tpc]==st)
+					tpr=tpr-1;
+					else
+					tpc=tpc-1;
+					coun++;co++;st++;
+				}
+			}
+			if(f)
+			//cout<<"BODY "<<coun<<endl;
+			printf("BODY %d
+",coun);
+			else
+			//cout<<"WALL "<<coun<<endl;
+			printf("WALL %d
+",coun);
+		}
+	else 
+	{
+		int f=0,coun=0;
+			co--;
+			while(co>0)
+			{
+				if(a[rw][co]!=0 && a[rw][co]!=a[tpr][tpc])
+				{
+					f=1;break;
+				}
+				else
+				{
+					a[tpr][tpc]=0;
+					a[rw][co]=ls;ls++;
+					
+					
+					
+					if(a[tpr+1][tpc]==st)
+					tpr=tpr+1;
+					else if(a[tpr][tpc+1]==st)
+					tpc=tpc+1;
+					else if(a[tpr-1][tpc]==st)
+					tpr=tpr-1;
+					else
+					tpc=tpc-1;
+					coun++;co--;st++;
+				}
+			}
+			if(f)
+			//cout<<"BODY "<<coun<<endl;
+			printf("BODY %d
+",coun);
+			else
+			//cout<<"WALL "<<coun<<endl;
+			printf("WALL %d
+",coun);
+	}
+	}
+	
+	return 0;
+}

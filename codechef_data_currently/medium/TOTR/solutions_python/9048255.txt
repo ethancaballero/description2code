@@ -1,0 +1,40 @@
+__author__ = 'deveshbajpai'
+
+
+byteLandMap = dict()
+
+def byteLand_diff(m):
+
+
+    for i in xrange(0,len(m)):
+        byteLandMap[chr(97+i)]=m[i]
+    #print byteLandMap
+
+def solve(sentence):
+
+    result = ""
+    for i in xrange(0,len(sentence)):
+        if ord(sentence[i])>=97 and ord(sentence[i])<=122:
+            result += byteLandMap[sentence[i]]
+        elif ord(sentence[i])>=65 and ord(sentence[i])<=90:
+            result += byteLandMap[sentence[i].lower()].upper()
+        elif sentence[i]=='_':
+            result += ' '
+        else:
+            result += sentence[i]
+
+    return result
+
+
+if __name__ == "__main__":
+
+    t,m = raw_input().split(" ")
+    byteLand_diff(m)
+    t = int(t)
+    results = []
+    for case in range(t):
+        sentence = raw_input()
+        results.append(solve(sentence))
+
+    for result in results:
+        print result

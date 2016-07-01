@@ -1,0 +1,27 @@
+import math
+c1=math.sqrt(2)-math.sqrt(6)
+c2=math.sqrt(2)+math.sqrt(6)
+z=raw_input().split()
+i=int(z[0])
+k=int(z[1])
+s=int(z[2])
+z=raw_input().split()
+a_i=int(z[0])
+b_i=int(z[1])
+if(i<=k):
+    diff=k-i
+    if(diff%2==0):
+        diff=diff/2
+        ans=(a_i+b_i)*math.pow(2,4*diff-s)
+    else:
+        diff=diff/2
+        ans=(c1*(a_i-b_i)+c2*(a_i+b_i))*math.pow(2,4*diff-s)
+else:
+    diff=i-k
+    if(diff%2==0):
+        diff=diff/2
+        ans=(a_i+b_i)/math.pow(2,4*diff+s)
+    else:
+        diff=diff/2
+        ans=(c1*(a_i-b_i)+c2*(a_i+b_i))/math.pow(2,4*diff+4+s)
+print ans

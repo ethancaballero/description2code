@@ -1,0 +1,148 @@
+
+#include<stdio.h>
+//#include<conio.h>
+#include<iostream>
+#include<string.h>
+
+using namespace std;
+
+int main()
+{
+	int t,n,i,j,k,l,m,f1,f2,f3;
+	char a[10],b[10],c[100],p[100],s[1000005];
+	
+	scanf("%d",&t);
+	
+	while(t--)
+	{
+		//fflush(stdin);
+		
+		scanf("%d",&n);
+		
+		for(i=0;i<n;i++)
+		{
+			//fflush(stdin);	
+			scanf("%s",a);
+			scanf("%s",b);
+			c[i]=a[0];
+			p[i]=b[0];
+		}
+		/*
+		for(i=0;i<n;i++)
+		{	
+			printf("%c %c
+",c[i],p[i]);
+		}
+		*/
+		//fflush(stdin);
+		
+		//printf("HI-105
+");
+		
+		scanf("%s",s);
+		
+		l=strlen(s);
+		
+		//printf("HI-109
+");
+		
+		for(i=0;i<l;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				if(s[i]==c[j])
+				{
+					//printf("HI-123 c[i]=%c p[i]=%c
+",c[i],p[i]);
+					s[i]=p[j];
+					break;
+				}
+			}
+		}
+		
+		//printf("HI-117
+");
+		
+		//printf("%s
+",s);
+		f1=-1;
+		for(i=0;i<l;i++)
+		{
+			if(s[i]!='0')
+			{
+				f1=i;
+				break;
+			}
+		}
+		
+		if(f1!=-1)
+		{
+			f2=-1;
+			for(j=0;j<l;j++)
+			{
+				if(s[j]=='.')
+				{
+					f2=j;
+					break;
+				}
+			}
+			if(f2==-1)
+			{
+				for(j=f1;j<l;j++)
+				{
+					printf("%c",s[j]);
+				}
+				printf("
+");
+			}
+			else
+			{
+				f3=-1;
+				for(k=l-1;k>=0;k--)
+				{
+					if(s[k]!='0')
+					{
+						f3=k;
+						break;
+					}
+				}
+				
+				if(f3==f2 && f2==f1)
+				{
+					printf("0
+");
+					continue; 
+				}
+				if(f3==f2)
+				{
+					for(m=f1;m<f2;m++)
+					{
+						printf("%c",s[m]);
+					}
+					printf("
+");
+				}
+				else
+				{
+					for(m=f1;m<=f3;m++)
+					{
+						printf("%c",s[m]);
+					}
+					printf("
+");
+				}
+				
+				
+			}
+		}
+		else
+		{
+			printf("0
+");			
+		}
+					
+	}
+	
+//	getch();
+	return 0;
+}

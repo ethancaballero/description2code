@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define AIN(a,n,b) assert(a<=n && n<=b)
+#define i64 long long
+#define MAX 1000000
+
+int main(){
+    int t,a,b;
+
+    scanf("%d",&t);
+    AIN(1,t,100);
+    while(t--){
+        scanf("%d %d",&a,&b);
+        AIN(0,a,MAX);
+        AIN(0,b,MAX);
+        printf("%d %d
+",max(a,b),a+b);
+
+    }
+    return 0;
+}

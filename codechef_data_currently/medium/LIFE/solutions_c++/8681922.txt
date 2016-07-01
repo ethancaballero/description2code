@@ -1,0 +1,101 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+bool check(string ans,string str)
+{
+    int l=ans.size();
+    for(int i=1; i<l-1; i++)
+    {
+        int x= ((int(ans[i-1]-'0'))^(int(ans[i]-'0')))^(int(ans[i+1]-'0'));
+        char ch=char(x+'0');
+        if(ch!=str[i])return false;
+    }
+    int x= ((int(ans[l-2]-'0'))^(int(ans[l-1]-'0')))^(int(ans[0]-'0'));
+    char ch=char(x+'0');
+    if(ch!=str[l-1])return false;
+
+    x= ((int(ans[l-1]-'0'))^(int(ans[0]-'0')))^(int(ans[1]-'0'));
+    ch=char(x+'0');
+    if(ch!=str[0])return false;
+
+    return true;
+}
+int main()
+{
+    int n,i,k,a,b,j,c;
+    cin>>n;
+    while(n--)
+    {
+        string str,ans,out;
+        int cnt=0;
+        char ch;
+        cin>>str;
+        int l=str.size();
+        ans="00";
+        for(i=2; i<l; i++)
+        {
+            int x= ((int(ans[i-1]-'0'))^(int(ans[i-2]-'0')))^(int(str[i-1]-'0'));
+            ch=char(x+'0');
+            ans+=ch;
+        }
+        if(check(ans,str) )
+        {
+            cnt++;
+            out=ans;
+        }
+
+        ans="01";
+        for(i=2; i<l; i++)
+        {
+            int x= ((int(ans[i-1]-'0'))^(int(ans[i-2]-'0')))^(int(str[i-1]-'0'));
+            ch=char(x+'0');
+            ans+=ch;
+        }
+        if(check(ans,str) )
+        {
+            cnt++;
+            out=ans;
+        }
+
+        ans="10";
+        for(i=2; i<l; i++)
+        {
+            int x= ((int(ans[i-1]-'0'))^(int(ans[i-2]-'0')))^(int(str[i-1]-'0'));
+            ch=char(x+'0');
+            ans+=ch;
+        }
+
+        if(check(ans,str) )
+        {
+            cnt++;
+            out=ans;
+        }
+
+
+        ans="11";
+        for(i=2; i<l; i++)
+        {
+            int x= ((int(ans[i-1]-'0'))^(int(ans[i-2]-'0')))^(int(str[i-1]-'0'));
+            ch=char(x+'0');
+            ans+=ch;
+        }
+        if(check(ans,str) )
+        {
+            cnt++;
+            out=ans;
+        }
+
+
+
+        if(cnt==1)
+        {
+            cout<<out<<endl;
+        }
+        else if(cnt==0)
+        {
+            cout<<"No solution"<<endl;
+        }
+        else cout<<"Multiple solutions"<<endl;
+
+    }
+}

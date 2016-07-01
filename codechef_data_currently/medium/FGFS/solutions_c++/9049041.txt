@@ -1,0 +1,60 @@
+	#include<iostream>
+	#include<vector>
+	#include<algorithm>
+	#include<map>
+	#include<stdio.h>
+	using namespace std;
+	typedef pair<int ,int > pp;
+	typedef pair<int ,pp> psup;
+	
+	int main()
+	{
+		int t;
+		cin>>t;
+
+		
+
+		while(t>0)
+		{
+			vector<psup> v;
+			int n,k;
+			scanf("%d%d",&n,&k);
+			int arrival,departure,compartment;
+			
+			for(int i=0;i<n;i++)
+			{
+				scanf("%d",&arrival);
+				scanf("%d",&departure);
+				scanf("%d",&compartment);
+				v.push_back(make_pair(departure,make_pair(arrival,compartment)));
+			}
+			
+			sort(v.begin(),v.begin()+n);
+			
+			map<int,pp> myset;
+			map<int,pp>::iterator itset; // comp arrival depart
+			int cnt=0;
+			for(vector<psup>::iterator it=v.begin();it!=v.end();it++)
+			{
+				itset=myset.find((it->second).second);
+				if(itset!=myset.end())
+				{
+					 if((it->second).first >= (itset->second).second )
+					 {
+					 	// modify time 
+					 	cnt++;
+					 	(itset->second).first=(it->second).first;
+					 	(itset->second).second=(it->first);
+					 }	
+				}	
+				else
+				{
+					cnt++;
+					myset.insert(make_pair((it->second).second,make_pair((it->second).first,it->first)));
+				}	
+			}
+			printf("%d
+",cnt);	
+			t--;
+		}
+	}

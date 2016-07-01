@@ -1,0 +1,33 @@
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <utility>
+#include <queue>
+#include <cmath>
+#include <functional>
+using namespace std;
+
+int N,M;
+int T;
+
+int main() {
+    scanf("%d", &T);
+    for(;T>0;T--) {
+        scanf("%d%d", &N, &M);
+        int pot = 1;
+        while(pot <=  M)
+            pot *= 2;
+        double num = 1.00000;
+        int curr = pot/2;
+        for(;curr != M; num+=2.00000, ++curr);
+        double ans = (num / pot) * N;
+        if(T!=0) printf("%.7f
+", ans);
+        else printf("%.7f", ans);
+    }
+    return 0;
+}

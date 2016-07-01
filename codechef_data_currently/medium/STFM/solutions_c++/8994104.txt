@@ -1,0 +1,64 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#define getchar_unlocked() getchar()
+using namespace std;
+long long fact[10000010];
+long long sum1[10000010];
+
+inline long long inp()
+{
+    register long long r=0,c;
+    for(c=getchar_unlocked(); c<=32; c=getchar_unlocked());
+    if(c=='-')
+        return -inp();
+    for(; c>32; r=(r<<1)+(r<<3)+c-'0',c=getchar_unlocked());
+    return r;
+}
+int main()
+{
+	long long n,m;
+	n=inp();
+	m=inp();
+	int i;
+	fact[1]=1;
+	for(i=2;i<=m;i++)
+	{
+		fact[i]=(fact[i-1]*i)%m;
+	}
+	sum1[1]=1;
+	for(i=2;i<m;i++)
+	{
+		sum1[i]=(sum1[i-1]+(i*fact[i])%m)%m;
+	}
+	long long ans=0,x,p;
+	for(i=1;i<=n;i++)
+	{
+		x=inp();
+		if(x%2==0)
+		{
+			if(x>=m)
+			ans=(ans+sum1[m-1])%m;
+			else
+			ans=(ans+sum1[x])%m;
+			p=x/2;p%=m;
+			p=(p*(x%m))%m;
+			p=(p*((x+1)%m))%m;
+			ans=(ans+p)%m;
+		}
+		else
+		{
+			if(x>=m)
+			ans=(ans+sum1[m-1])%m;
+			else
+			ans=(ans+sum1[x])%m;
+			p=(x+1)/2;
+			p%=m;
+			p=(p*(x%m))%m;
+			p=(p*(x%m))%m;
+			ans=(ans+p)%m;
+		}
+	}
+	cout<<ans<<endl;
+	return 0;
+
+	}

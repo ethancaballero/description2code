@@ -1,0 +1,57 @@
+#include<cstdio>
+#include<queue>
+#include<utility>
+#define ll long long
+#define LL_MAX 9223372036854775806LL
+#define f first
+#define s second
+using namespace std;
+ll A[75][75],visited[75][75];
+//priority_queue< pair<ll, pair<ll,ll> >, vector< pair<ll, pair<ll,ll> > >, greater< pair<ll, pair<ll,ll> > > q;
+priority_queue< pair<ll, pair<ll,ll> >,vector< pair<ll, pair<ll,ll> > >, greater< pair<ll, pair<ll,ll> > > > q; 
+int main()
+{
+  ll N,M,i,j,a,b,T,abscissa,ordinate;
+  pair<ll, pair<ll,ll> > x;
+  ll directions[4][2]={{0,1},{0,-1},{1,0},{-1,0}};
+  scanf("%lld %lld",&N,&M);
+  for(i=0;i<N;i++)
+    for(j=0;j<M;j++)
+      {
+	scanf("%lld",&A[i][j]);
+	visited[i][j]=LL_MAX;
+      }
+  scanf("%lld %lld %lld",&a,&b,&T);
+  a--;b--;
+  visited[0][0]=A[0][0];
+  q.push(make_pair(A[0][0],make_pair(0,0)));
+  //q.push(make_pair(make_pair(0,0),A[0][0]));
+  while(!q.empty())
+    {
+      x=q.top();
+      if(x.s.f==a && x.s.s==b)
+	{
+	  if(x.f>T)printf("NO
+");
+	  else{
+		printf("YES
+");
+		printf("%lld
+",T-x.f);
+	  }
+	  break;
+	}
+      q.pop();
+      for(i=0;i<4;i++)
+	{
+	  abscissa=x.s.f+directions[i][0];
+	  ordinate=x.s.s+directions[i][1];
+	  if(( abscissa>=0 && abscissa<N) && (ordinate>=0 && ordinate<M) && visited[abscissa][ordinate]>x.f+A[abscissa][ordinate])
+	 {
+	       visited[abscissa][ordinate]=x.f+A[abscissa][ordinate];	     
+	       q.push(make_pair(x.f+A[abscissa][ordinate],make_pair(abscissa,ordinate)));
+	 }
+	}	
+    }  
+  return 0;
+}

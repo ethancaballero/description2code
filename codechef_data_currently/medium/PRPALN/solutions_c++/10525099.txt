@@ -1,0 +1,83 @@
+#include<bits/stdc++.h>
+using namespace std;
+char a[100001];
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		cin>>a;
+		long int x=strlen(a);
+		int flag=1;
+		int count=0;
+		long int p,q;
+		for(long int i=0,j=x-1;i<=j;i++,j--)
+		{
+			if(a[i]==a[j])
+			continue;
+			else if(!count&&a[i]!=a[j])
+			{
+				if(a[i+1]==a[j]&&a[i]==a[j-1])
+				{
+				//	cout<<"a";5
+					count=1;
+					p=i;
+					q=j;
+					flag=2;
+					break;
+					
+				}
+				else if(a[i+1]==a[j])
+				i++,count=1;
+				else if(a[i]==a[j-1])
+				j--,count=1;
+				else
+				{
+					flag=0;
+					break;
+				}
+				
+			}
+			else 
+			{
+				flag=0;
+				break;
+			}
+		}
+		if(flag==2)
+		{
+			int flag1=1;
+			for(long int i=p+1,j=q;i<=j;i++,j--)
+	     	{
+	     		if(a[i]!=a[j])
+	     	  {
+	     		flag1=0;
+	     		break;
+			   }
+	    	}
+	    	int flag2=1;
+	    	for(long int i=p,j=q-1;i<=j;i++,j--)
+	    	{
+	    		if(a[i]!=a[j])
+	    		{
+	    			flag2=0;
+	    			break;
+				}
+			}
+			if(flag1||flag2)
+			cout<<"YES
+";
+			else
+			cout<<"NO
+";
+	    	
+		}
+		else if(flag==1)
+		cout<<"YES
+";
+		else
+		cout<<"NO
+";
+	}
+}

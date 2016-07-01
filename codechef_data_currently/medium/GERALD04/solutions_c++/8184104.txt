@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+#define D 1000000007
+#define gcd __gcd
+#define getcx getchar
+#define pc putchar
+#define get(x) scanf("%d",&x)
+#define getl(x) scanf("%lld",&x)
+#define print(x) printf("%d
+",x)
+#define printl(x) printf("%lld
+",x)
+#define bitcount __builtin_popcount
+using namespace std;
+typedef long long ll;
+int main()
+{
+    int t; get(t);
+    while(t--)
+    {
+        string s1,s2; cin >> s1 >> s2;
+        int mint; get(mint);
+        int hours_diff = ((s1[0]-'0')*10+(s1[1]-'0'))-((s2[0]-'0')*10+(s2[1]-'0'));
+        //cout << hours_diff << endl;
+        int min_diff=0;
+        if(hours_diff==0)
+            min_diff = ((s1[3]-'0')*10+(s1[4]-'0'))-((s2[3]-'0')*10+(s2[4]-'0'));
+        else
+        {
+            min_diff = ((s1[3]-'0')*10+(s1[4]-'0')) + (60-((s2[3]-'0')*10+(s2[4]-'0')));
+            min_diff += (hours_diff-1)*60;
+        }
+        double ans = min_diff+mint;
+        printf("%0.1f ",ans);
+        double extra_time=0;
+        if(2*mint<=min_diff)
+            extra_time = min_diff;
+        else
+            extra_time = min_diff/2.0 + mint;
+        //cout << "min_diff : " << min_diff << endl;
+        printf("%0.1f
+",extra_time);
+    }
+    return 0;
+}

@@ -1,0 +1,15 @@
+import sys
+t = int(sys.stdin.readline())
+arr = []
+ans = 0
+for i in xrange(100001):
+	ans = 0.45*i+ans/10
+	arr.append(ans)
+
+for j in xrange(t):
+	n = int(sys.stdin.readline())
+	
+	
+	print "%.6f"%arr[n]
+	
+	

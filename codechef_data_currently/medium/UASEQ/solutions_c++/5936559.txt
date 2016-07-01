@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+const int N=200000;
+ 
+int i,j,k,n,t,a[N],change;
+vector<pair<int,int> > v;
+int main(){
+	cin>>n>>change;
+		for(i=0;i<n;i++) cin>>a[i];
+	
+		for(i=0;i<change+2;i++){
+			for(j=0;j<i;j++){
+				int d=a[i]-a[j];
+				//cout<<i<<" "<<j<<'
+';
+				if(d%(i-j)) continue;
+				d/=(i-j);
+ 
+				//cout<<d<<" "<<i<<" "<<j<<'
+';
+				int ff=a[i],ch=0;
+				bool flag=true;
+				for(k=i+1;k<n;k++){
+					if((a[k]-ff)!=d) ch++;
+					if(ch>change){
+						flag=false; break;
+					} 
+					ff+=d;
+				}
+				
+				if(!flag) continue;
+				ff=a[j];
+				for(k=j+1;k<=i;k++){
+					if((a[k]-ff)!=d) ch++;
+					if(ch>change){
+						flag=false; break;
+					} 
+					ff+=d;
+				}
+ 
+				if(!flag) continue;
+				ff=a[j];
+				for(k=j-1;k>=0;k--){
+					if((ff-a[k])!=d) ch++;
+					if(ch>change){
+						flag=false; break;
+					}
+					ff-=d; 	
+				}
+				if(flag) v.push_back(make_pair(ff,d));
+		}
+	}
+	sort(v.begin(),v.end());
+	//for(i=0;i<v.size();i++) cout<<v[i].first<<" "<<v[i].second<<'
+';
+	int f=v[0].first,dd=v[0].second;
+	for(i=0;i<n;i++){
+		cout<<f<<" ";
+		f+=dd;
+	}
+	return 0;
+}

@@ -1,0 +1,14 @@
+for T in xrange(input()):
+	N,K= map(int, raw_input().split())
+	W= raw_input().split()
+	i=0
+	P= raw_input().split()
+	while i<K-1:
+		P.extend(raw_input().split())
+		i+=1
+	for x in W:
+		if x in P:
+			print 'YES',
+		else:
+			print 'NO',
+	print ''

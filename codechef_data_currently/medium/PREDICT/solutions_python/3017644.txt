@@ -1,0 +1,11 @@
+def main():
+    t=input()
+    while t:
+        t-=1
+        a=input()
+        if a<0.5:
+            a= 1-a
+        won = a*10000
+        total = won + won*2*(1-a)
+        print "%.6f"%total
+main()

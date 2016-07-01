@@ -1,0 +1,19 @@
+t = input()
+for i in range(0,t):
+	s = raw_input()
+	current = 0	
+	count = 0
+	maxlen = 0
+	for j in s:
+		count += 1
+		if j is '<':
+			current += 1
+		elif j is '>':
+			current -= 1
+		if current < 0:
+			break
+		elif current == 0:
+			maxlen += count
+			count = 0
+	print maxlen
+

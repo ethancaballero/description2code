@@ -1,0 +1,8 @@
+t=input()
+num=[]
+for i in range(0,t,1):
+    n=input()
+    num.append(n)
+num.sort()    
+for i in num:
+    print i

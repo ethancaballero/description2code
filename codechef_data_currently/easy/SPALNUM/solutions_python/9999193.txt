@@ -1,0 +1,29 @@
+test=int(raw_input())
+a=0
+while(a<test):
+	a=a+1
+	b=[]
+	l,r = map(int,raw_input().split())
+	for i in range(l,r+1):
+		
+		if i <10:
+			b.append(i)
+			
+		else:
+			num=i
+			z=0
+			while(num!=0):
+				k=num%10
+				z=z*10+k
+				num=num/10
+				
+			if z==i:
+				
+				b.append(i)
+			else:
+			
+				pass
+	sum=0
+	for i in range(0,len(b)):
+		sum=sum+b[i]
+	print sum

@@ -1,0 +1,40 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+    int r,c;
+    cin>>r>>c;
+    int mat[101][101];
+    int mx[101];
+    int mn[101];
+    for(int i=0;i<r;++i)
+    {
+        for(int j=0;j<c;++j)
+        {
+            cin>>mat[i][j];
+        }
+    }
+    for(int i=0;i<r;++i)
+        mn[i]=mat[i][0];
+    for(int i=0;i<c;++i)
+        mx[i]=mat[0][i];
+        for(int i=0;i<r;++i)
+    for(int j=0;j<c;++j)
+    {
+        if(mn[i]>mat[i][j])
+            mn[i]=mat[i][j];
+        if(mx[j]<mat[i][j])
+            mx[j]=mat[i][j];
+    }
+int flag=0;
+for(int i=0;i<r;++i)
+    for(int j=0;j<c;++j)
+    if((mat[i][j]==mn[i])&&(mat[i][j]==mx[j]))
+    flag=mat[i][j];
+if(flag)
+cout<<flag<<endl;
+else
+    cout<<"GUESS"<<endl;
+return 0;
+}

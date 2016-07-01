@@ -1,0 +1,17 @@
+t=input()
+for _ in range(t):
+	k=map(int,raw_input().split(" "))
+	v=[0]*(k[0]+1)
+	m,s=0,1
+	for i in range(k[1]):
+		p=map(int,raw_input().split(" "))
+		a,b=p[0],p[1]
+		if s:
+			if v[a] == 0: v[a] = 1
+			if v[b] == 0: v[b] = v[a]+1	
+			if v[b] < v[a]: s=0
+			if m < v[b]: m=v[b]
+	if s == 0:
+		print 'IMPOSSIBLE'
+	else:
+		print m

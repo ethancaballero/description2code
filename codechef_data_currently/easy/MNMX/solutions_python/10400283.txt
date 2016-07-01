@@ -1,0 +1,6 @@
+t=int(raw_input())
+for i in range(0,t):
+	p=int(raw_input())
+	lis=list(map(int,raw_input().split()))
+	p1 = min(lis)
+	print p1*(p-1)

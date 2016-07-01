@@ -1,0 +1,5 @@
+t=input()
+for _ in xrange(t):
+    ds,dt,d=map(int,raw_input().split())
+    print max(d-ds-dt,max(ds-dt-d,max(dt-ds-d,0)))
+    

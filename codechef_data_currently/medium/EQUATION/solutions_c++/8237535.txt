@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,a,b,c,t,k,i,j;
+	cin>>t;
+	long long int ans;
+	while(t--)
+	{
+		cin>>n>>a>>b>>c;
+		ans=0;
+		for(i=0;i<=a;i++)
+		{
+			if(i<=n)
+			{
+				for(j=0;j<=b;j++)
+				{
+					if(i+j<=n)
+					{
+					 k=n-i-j;
+					 if(k<c)
+					 {
+					 	ans=ans+k+1;
+					 }
+					 else
+					 {
+					 	ans=ans+c+1;
+						 }	
+					}
+					else 
+					break;
+				}
+			}
+			else
+			break;
+		}
+		cout<<ans<<endl;
+	}
+	
+ return 0;	
+}

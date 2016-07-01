@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes hnere
+	long long int n,max=0,c=0,i;
+	cin>>n;
+	long long int a[n];
+	for(i=0;i<n;i++)
+	cin>>a[i];
+	for(i=0;i<n;i++)
+	{
+	    if(a[i]!=0)
+	    { 
+	      c++;
+	      if(c>max)
+	      max=c;
+	    }
+	    else
+	    {
+	     if(c>max)
+	      max=c;
+	      c=0;
+	    }
+	}
+	cout<<max<<endl;
+	
+	return 0;
+}

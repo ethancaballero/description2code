@@ -1,0 +1,19 @@
+if __name__ == '__main__':
+	N = int(raw_input())
+	for i in range(N):
+		n = int(raw_input())
+		
+		arr = [int(x) for x in raw_input().split()]
+		BLOCK = 0
+		PREVIOUS_NUMBER =  10**9 + 4
+		SUB_ARRAY_COUNT = 0 
+		for j in range(n):
+			if arr[j] >= PREVIOUS_NUMBER:
+				SUB_ARRAY_COUNT += (BLOCK +1)
+				BLOCK += 1
+			else:
+				SUB_ARRAY_COUNT += 1
+				BLOCK = 1
+
+			PREVIOUS_NUMBER = arr[j]	
+		print SUB_ARRAY_COUNT	

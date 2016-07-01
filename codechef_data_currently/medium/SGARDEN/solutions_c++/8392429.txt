@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#include <cmath>
+#include <climits>
+#include <string.h>
+#include <map>
+#define MOD 1000000007
+#define all(x) x.begin(),x.end()
+using namespace std;
+typedef long long int ll;
+
+ll findLcm(vector<int> nums){
+	map<int, int> powers;
+	int i=2, n=2;
+	for(n=0; n<nums.size(); n++){
+		int no=nums[n];
+		for(i=2; i*i<=nums[n]; i++){
+			int cnt=0;
+			if(no%i==0){
+				while(no%i==0){
+					no=no/i;
+					cnt++;
+				}
+				powers[i]=max(powers[i], cnt);
+			}
+		}
+		if(no!=1){
+			powers[no]=max(powers[no],1);
+		}
+	}
+	map<int, int>::iterator it=powers.begin();
+	ll prod=1;
+	for(it=powers.begin(); it!=powers.end(); ++it){
+		int cnt=it->second;
+		while(cnt>0){
+			prod=(prod*it->first)%MOD;
+			cnt--;
+		}
+	}
+	return prod;
+}
+
+int main(){
+	int t, n, pos, i=0;
+	cin >> t;
+	map<int, int> positions;
+	ll prod=1;
+	while(t--){
+		cin >> n;
+		for(i=0; i<n; i++){
+			cin >> pos;
+			positions[i+1]=pos;
+		}
+		prod=1;
+		vector<int> cycles;
+		int visited[n+1];
+		memset(visited, 0, (n+1)*sizeof(int));
+		for(i=1; i<=n; i++){
+			if(!visited[i]){
+				int a=i, cnt=1;
+				while(positions[a]!=i){
+					visited[a]=1;
+					a=positions[a];
+					cnt++;
+				}
+				visited[a]=1;
+				if(cnt>1){
+					cycles.push_back(cnt);
+				}
+			}
+		}
+		cout << findLcm(cycles) << endl;
+		positions.clear();
+	}
+}

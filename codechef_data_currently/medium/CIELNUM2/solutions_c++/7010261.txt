@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<string.h>
+ 
+#define read(x) scanf("%d",&x)
+#define write(x) printf("%d
+",x)
+ 
+ 
+int main()
+{
+     int n,k=0,l,b,i,n3,n5,n8;
+    char s[110];
+    read(n);
+    gets(s);
+    
+    while(n--)
+    {
+              
+             gets(s);             
+             l=strlen(s);
+             b=1;
+             n3=n5=n8=0;
+             
+            
+             for(i=l-1;b && i >= 0 && s[i] != ' ';i--)
+             {
+                            
+                            
+                             /*a=s[i]-'0';
+                             if(!(a==3 || a==5 || a==8)){b=0;break;}
+                             cnt[a]++;
+                             */
+                             if(s[i]=='3')n3++;
+                             else if(s[i]=='5')n5++;
+                             else if(s[i]=='8')n8++;
+                             else if(s[i]>='0' && s[i]<='9') b=0;
+             } 
+             if(b && n8>=n5 && n5>=n3)k++;
+             
+   }  
+   
+          
+                         
+   write(k);
+    //getchar();
+    return 0;
+    
+}         

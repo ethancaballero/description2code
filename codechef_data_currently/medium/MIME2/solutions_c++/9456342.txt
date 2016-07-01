@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(void)
+{
+    int n,q; scanf("%d %d",&n,&q);
+    
+    map<string,string> mymap;
+    
+    while(n--)
+    {
+        string type,desc;
+        cin>>type>>desc;
+        mymap[type]=desc;
+    }
+    while(q--)
+    {
+        string fname; cin>>fname;
+        
+        bool np=false; string temp="";
+        for(int i=fname.size()-1;i>=0;i--)
+        {
+            if(fname[i]=='.')
+            {
+                np=true;
+                break;
+            }
+            else
+            {
+                temp+=fname[i];
+            }
+        }
+        string ext="";
+        for(int i=temp.size()-1;i>=0;i--)
+        {
+            ext+=temp[i];
+        }
+        if(np==false || mymap.find(ext)==mymap.end())
+        {
+            cout<<"unknown"<<endl;
+        }
+        else
+        {   
+            cout<<mymap[ext]<<endl;
+        }
+    }
+    
+    return 0;
+}
+        

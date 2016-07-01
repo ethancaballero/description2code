@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+	int t,m,n,i,j;
+	scanf("%d", &t); 
+	while(t--){
+		int arr[1001], dp[1001][1001];
+		scanf("%d %d", &n, &m);
+		for(i=0; i<n; i++){
+			scanf("%d", &arr[i]);
+		}
+		for(i=0; i<=n; i++){
+			dp[0][i]=1;
+		}
+		for(i=1; i<=m; i++){
+			dp[i][0]=0;
+		}
+		for(i=1; i<=m; i++){
+			for(j=1; j<=n; j++){
+				dp[i][j]= dp[i][j-1] || (i>=arr[j-1] && dp[i-arr[j-1]][j-1]) ;
+				//printf("%d ", dp [i][j]);
+			}
+		}
+		// for (int i = 0; i <= m; i++)
+  //    {
+  //      for (int j = 0; j <= n; j++)
+  //         printf ("%4d", dp[i][j]);
+  //      printf("
+");
+  //    }
+		if ( dp[m][n]==1) printf("Yes
+");
+		else if(dp[m][n]==0) printf("No
+");
+	}
+}

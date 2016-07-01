@@ -1,0 +1,80 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void merge1(int a[],int l,int r, int q){
+    int n1,n2;
+    n1=q-l+1;
+    n2=r-q;
+
+    int l1[n1],r1[n2];
+    for(int i=0;i<n1;i++){
+        l1[i]=a[l+i];
+    }
+    for(int i=0;i<n2;i++){
+        r1[i]=a[q+i+1];
+    }
+    int i=0;
+    int j=0;
+    int k=l;
+
+    while(i<n1&&j<n2){
+        if(l1[i]<r1[j]){
+            a[k]=l1[i];
+            k++;
+            i++;
+        }
+        else if(l1[i]>r1[j]){
+            a[k]=r1[j];
+            k++;
+            j++;
+        }
+    }
+
+    while(i<n1){
+        a[k]=l1[i];
+        k++;
+        i++;
+
+    }
+
+    while(j<n2){
+        a[k]=r1[j];
+        k++;
+        j++;
+
+    }
+}
+
+
+void mergesort(int a[],int l, int r){
+    int m;
+    if(l<r){
+        m=(r+l)/2;
+        mergesort(a,l,m);
+        mergesort(a,m+1,r);
+        merge1(a,l,r,m);
+    }
+}
+
+
+int main() {
+	// your code goes here
+	 int t;
+	cin>>t;
+    int a[t];
+
+    for (int i=0;i<t;i++){
+        cin>>a[i];
+    }
+
+    //mergesort(a,0,t-1);
+    sort(a, a + t);
+int j1;
+     for(j1=0;j1<t;j1++){
+        cout<<a[j1]<<endl;
+     }
+	return 0;
+}
+
+

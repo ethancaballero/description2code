@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+#define ge getchar_unlocked
+#define pc(x) putchar(x)
+#define max(a,b) a>b?a:b
+#define mod 1000000007
+#include<map>
+#include<vector>
+#define pb push_back
+typedef long long ll;
+ll scani();
+using namespace std;
+ll dp[1005][1005];
+int main()
+{
+	int t=scani(),i,j;
+	dp[1][1]=1;
+	for(i=2;i<=1000;i++)
+	{
+		for(j=1;j<=i;j++)
+		{   
+		    if(i==j)
+		    dp[i][j]=1;
+		    else
+			dp[i][j] =((dp[i-1][j]*j)%mod+dp[i-1][j-1])%mod;	
+		}
+	}
+	while(t--)
+	{
+		int sum = 0;
+		int n = scani();
+		for(int i=1;i<=n;i++)
+		sum=(sum+dp[n][i])%mod;
+		
+			cout<<sum<<endl;
+		
+		
+	}
+	return 0;
+}
+ll scani()
+{
+	ll  x=0;
+  	 int neg=0;
+	register int c=ge();
+	for(;((c<'0' || c>'9') && c!='-');c=ge());
+	if(c=='-')
+	{neg=1;
+	c=ge();
+	}
+	for(;c>='0' && c<='9';c=ge())
+	x=(x<<1)+(x<<3)+c-'0';
+	if(neg==1)
+	return -x;
+	return x;
+}

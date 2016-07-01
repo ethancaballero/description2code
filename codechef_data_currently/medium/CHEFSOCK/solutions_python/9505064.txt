@@ -1,0 +1,5 @@
+a,b,c=map(int,raw_input().split())
+if ((c-a)//b)%2==0:
+    print('Lucky Chef')
+else:
+    print('Unlucky Chef')

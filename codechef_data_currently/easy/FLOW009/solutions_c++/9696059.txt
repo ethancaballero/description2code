@@ -1,0 +1,18 @@
+#include<iostream>
+#include<iomanip>
+using namespace std ;
+main()
+{
+    float q,p;int t;
+    cin>>t;float c;
+    while(t--)
+    {
+     cin>>q>>p;c=p*q;
+
+     if(q>1000)
+        cout<<fixed<<setprecision(6)<<c*.9<<endl;
+     else
+        cout<<fixed<<setprecision(6)<<c<<endl;
+    }
+
+}

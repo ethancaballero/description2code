@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+int arr[10][501];
+int main()
+{
+   int T,B,i,j,ans,L,R,nmb;
+   bool previous;
+   cin>>T;
+   for(i=0;i<10;i++)
+   {
+      for(j=0;j<501;j++)
+         arr[i][j]=0;
+   }
+   while(T--)
+   {
+      cin>>B;
+      for(i=0;i<B;i++)
+      {
+         cin>>L>>R>>nmb;
+         arr[nmb][L]++;
+         if(R!=500)
+            arr[nmb][R+1]--;
+      }
+      for(ans=0,i=1;i<501;i++)
+      {
+         previous=false;
+         for(j=0;j<10;j++)
+         {
+            arr[j][0]+=arr[j][i];
+            arr[j][i]=0;
+            if(arr[j][0])
+            {
+               if(previous)
+               {
+                  ans++;
+                  break;
+               }
+               else
+                  previous=true;
+            }
+            else
+               previous=false;
+         }
+         for(;j<10;j++)
+         {
+            arr[j][0]+=arr[j][i];
+            arr[j][i]=0;
+         }
+      }
+      for(j=0;j<10;j++)
+         arr[j][0]=0;
+      cout<<500-ans<<endl;
+   }
+   return 0;
+}

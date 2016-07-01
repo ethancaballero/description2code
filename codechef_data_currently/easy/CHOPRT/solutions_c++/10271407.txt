@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+int main(){
+	long numOfTestCases;
+	cin>>numOfTestCases;
+	
+	for(long tc = 0; tc<numOfTestCases; tc++){
+		long a,b;
+		cin>>a>>b;
+		if(a<b){
+			cout<<"<"<<endl;
+		}else if(a>b){
+			cout<<">"<<endl;
+		}else{
+			cout<<"="<<endl;
+		}
+	}
+}

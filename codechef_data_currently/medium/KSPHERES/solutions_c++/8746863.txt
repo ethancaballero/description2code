@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+#include<utility>
+using namespace std;
+long long dp[1005][1005]={0},w[1005][1005]={0};
+long long s[100005]={0},a[100005],c,ans[1003]={0};
+
+void solve()
+{
+	for(int i=1;i<=c;i++)
+	{
+		dp[0][i]=s[i];
+	}
+	for(int i=1;i<=c;i++)
+	{
+		long long count=0;
+		for(int j=1;j<=c;j++)
+		{
+			w[i][j]=(w[i][j-1]+dp[i-1][j-1])%1000000007;
+			dp[i][j]=(w[i][j]*s[j])%1000000007;
+			count=(count+dp[i][j])%1000000007;
+		}
+		ans[i]=count;
+	}
+}
+
+int main()
+{
+	int m,n;
+	cin>>n>>m>>c;
+	for(int i=0;i<n;i++)
+	{
+		int x;
+		cin>>x;
+		a[x]++;
+	}
+	for(int i=0;i<m;i++)
+	{
+		int x;
+		cin>>x;
+		s[x]=(s[x]+a[x])%1000000007;
+	}
+	solve();
+	for(int i=1;i<=c;i++)
+	{
+		cout<<ans[i]<<' ';
+	}
+}

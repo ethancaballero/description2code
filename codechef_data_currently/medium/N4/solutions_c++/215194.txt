@@ -1,0 +1,161 @@
+/*
+ID: pallab81
+PROG:
+LANG: C++
+*/
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <sstream>
+#include <fstream>
+#include <string>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <cmath>
+#include <functional>
+
+using namespace std;
+#define p system("pause")
+#define MX (1<<29)
+#define MN (-1*MX)
+#define ABS(x) ( (x) < (0) ? -(x) : (x) )
+#define VI vector<int>
+#define VVI vector<VI >
+#define VS vector<string>
+#define VC vector<char>
+#define VVC vector<VC >
+#define VB vector<bool>
+#define VVB vector<VB >
+#define PAIR pair<int,int>
+#define VP vector<PAIR >
+#define fo(i,st,ed) for(int i = st; i < ed ; ++i)
+#define L_P list<PAIR >
+#define debug(x,y) if(x<0 || x>=y) { cerr<<x<<" Error in line : "<<__LINE__<<'
+' ; p; continue ; }
+#define IO ifstream cin(".in") ; ofstream cout(".out");
+#define CL(x) (double(x))/CLOCKS_PER_SEC
+#define mk make_pair
+#define f first
+#define s second
+#define pb push_back
+
+string winState="0001001011000";
+string move[6] = {"0 0","0 1","1 0","1 1","2 0","2 1"};
+
+inline string m00(string ss){
+    string tmp = ss;
+    tmp[0] = ss[3]; tmp[3] = ss[6]; tmp[6] = ss[8];
+    tmp[8] = ss[5]; tmp[5] = ss[2]; tmp[2] = ss[0];
+return tmp;
+}
+inline string m01(string ss){
+    string tmp = ss;
+    tmp[3] = ss[0]; tmp[6] = ss[3]; tmp[8] = ss[6];
+    tmp[5] = ss[8]; tmp[2] = ss[5]; tmp[0] = ss[2];
+return tmp;
+}
+inline string m10(string ss){
+    string tmp = ss;
+    tmp[3] = ss[1]; tmp[6] = ss[3]; tmp[9] = ss[6];
+    tmp[7] = ss[9]; tmp[4] = ss[7]; tmp[1] = ss[4];
+return tmp;
+}
+inline string m11(string ss){
+    string tmp = ss;
+    tmp[1] = ss[3]; tmp[3] = ss[6]; tmp[6] = ss[9];
+    tmp[9] = ss[7]; tmp[7] = ss[4]; tmp[4] = ss[1];
+return tmp;
+}
+inline string m20(string ss){
+    string tmp = ss;
+    tmp[8] = ss[6]; tmp[10] = ss[8]; tmp[12] = ss[10];
+    tmp[11] = ss[12]; tmp[9] = ss[11]; tmp[6] = ss[9];
+return tmp;
+}
+inline string m21(string ss){
+    string tmp = ss;
+    tmp[6] = ss[8]; tmp[8] = ss[10]; tmp[10] = ss[12];
+    tmp[12] = ss[11]; tmp[11] = ss[9]; tmp[9] = ss[6];
+return tmp;
+}
+
+
+inline string execute(int i,string ss){
+    if(i==0){return  m00(ss);}
+    if(i==1){return  m01(ss);}
+    if(i==2){return  m10(ss);}
+    if(i==3){return  m11(ss);}
+    if(i==4){return  m20(ss);}
+    if(i==5){return  m21(ss);}
+}
+
+struct pack{
+    int mov;
+    VS path;
+    string st;
+};
+
+inline void print(VS mat){
+    fo(i,0,(int)mat.size()){
+        cout<<mat[i]<<endl;
+    }
+return ;
+}
+inline void BFS(string in){
+    if(in==winState){
+        cout<<0<<endl;
+        return ;
+    }
+    map<string,int> vis;
+    queue<pack> q;
+    pack tmp,tmp1;
+    tmp.mov=0; tmp.path = VS(); tmp.st = in;
+    q.push(tmp);
+    vis[in]=1;
+        while(!q.empty()){
+            tmp1 = q.front(); q.pop();
+            fo(i,0,6){
+                string ST   = execute(i,tmp1.st);
+                if(vis[ST])continue;
+                int MOVE    = tmp1.mov+1;
+                VS PATH     = tmp1.path;
+                PATH.pb( move[i] );
+                /*
+                cout<<"Current Move : "<<MOVE<<endl;
+                cout<<"Current State: "<<ST<<endl;
+                cout<<"Path         : ";print(PATH);p;
+                */
+                if(ST==winState){
+                    cout<<MOVE<<endl;
+                    print(PATH);
+                    return ;
+                }
+                
+                tmp.mov = MOVE; tmp.path = PATH; tmp.st = ST;
+                vis[ST]=1;
+                q.push(tmp);
+            }
+        }
+
+return ;
+}
+
+inline void doRest(){
+    string in="";
+    cin>>in;
+    BFS(in);
+return ;
+}
+
+int main(){
+    int testCase;
+    cin>>testCase;
+    while(testCase--){
+        doRest();
+    }
+//p;
+return 0;
+}

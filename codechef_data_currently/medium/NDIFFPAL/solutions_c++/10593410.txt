@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+int compute(int x) {
+	return (x*x + x)/2;
+}
+
+
+int binarySearch(int l, int r, int n) {
+	if(l>r) return r;
+	int mid = (l+r)/2;
+	int value = compute( mid );
+	
+	if( value > n )
+		return binarySearch(l, mid-1, n);
+	else if( value < n )
+		return binarySearch(mid+1, r, n);
+	else
+		return mid;
+}
+
+int main() {
+	int t; cin >> t;
+	while(t-->0) {
+		int n; cin >> n;
+		
+		string s = "";
+		char currChar = 'a';
+		while( n > 0 ) {
+			int toReduce = binarySearch( 1, n, n );
+			n -= compute( toReduce );
+			for(int i=0; i<toReduce; i++)
+				s += currChar;
+			currChar++;
+		}
+		cout << s << endl;
+	}
+}

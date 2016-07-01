@@ -1,0 +1,44 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+        int t, num, c = 0;
+        scanf("%d", &t);
+
+        while(t--){
+                scanf("%d", &num);
+                c = 0;
+
+                if (num >= 100){
+                        c+= num/100;
+                        num%=100;
+                }
+                if (num>=50){
+                        c+= num/50;
+                        num%=50;
+                }
+                if (num>=10){
+                        c+= num/10;
+                        num%=10;
+                }
+                if (num>=5){
+                        c+= num/5;
+                        num%=5;
+                }
+                if (num>=2){
+                        c+= num/2;
+                        num%=2;
+                }
+                if (num>=1){
+                        c+= num/1;
+                        num%=1;
+                }
+
+                printf("%d
+", c);
+
+        }
+    return 0;
+}

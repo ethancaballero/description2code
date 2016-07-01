@@ -1,0 +1,35 @@
+def solution():
+	T = raw_input('')
+	answers = []
+	for i in range(0,int(T)):
+		n,A,B = map(int,raw_input('').split(' '))
+		t_n1_a = no_of_1(A)
+		t_n1_b = no_of_1(B)
+		n1_a = max(t_n1_a,t_n1_b)
+		n1_b = min(t_n1_b,t_n1_a)
+		free_ones = n1_a - n1_b
+		n1_a = n1_a - free_ones
+		val = 0
+		for i in range(0,free_ones):
+			val += pow(2,n-i-1)
+		n = n - free_ones
+		if n1_a + n1_b <= n:
+			free_ones = n1_a + n1_b
+		else:
+			free_ones = 2*n - n1_b - n1_a
+		for i in range(0,free_ones):
+			val += pow(2,n-i-1)
+		answers.append(val)
+	for i in answers:
+		print "%d"%(i)
+
+def no_of_1(value):
+	ones = 0
+	while value != 0:
+		temp = value%2
+		if temp == 1:
+			ones += 1
+		value = value / 2
+	return ones
+
+solution()

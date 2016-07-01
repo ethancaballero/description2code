@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+ll A[100007],dp[100007];
+
+int main()
+{
+	int t;
+    cin>>t;
+    ll n,i,j;
+    while(t--)
+    {
+    	cin>>n;
+    	for(i=1;i<=n;i++) cin>>A[i];
+    	memset(dp,0,sizeof(dp));
+    	dp[0]=1;j=1;
+    	for(i=1;i<n;i++)
+    	{
+    		if(A[i]<=A[i+1])
+    		{
+    			dp[i]=dp[i-1]+j+1;
+    			j++;
+    		}
+    		else
+    		{
+    			dp[i]=dp[i-1]+1;
+    			j=1;
+    		}
+    	}
+    	cout<<dp[n-1]<<"
+";
+	}
+	return 0;
+}
+
+
+    
+    

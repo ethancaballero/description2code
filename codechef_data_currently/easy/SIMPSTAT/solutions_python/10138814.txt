@@ -1,0 +1,10 @@
+t = input()
+for i in range(t):
+    n,k = map(int,raw_input().split())
+    a = map(int,raw_input().split())
+    a.sort()
+    for j in range(k):
+        a.remove(a[0])
+        a.remove(a[-1])
+    average = sum(a)*1.0/len(a)
+    print("{0:.6f}".format(average))

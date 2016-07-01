@@ -1,0 +1,9 @@
+n = int(raw_input())
+while(n!=0):
+    num = int(raw_input())
+    if(num ==1 or num ==2):
+        print num
+    elif(num>2):
+        c=(num//2)+1
+        print c
+    n-=1

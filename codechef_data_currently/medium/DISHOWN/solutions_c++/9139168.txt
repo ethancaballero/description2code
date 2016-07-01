@@ -1,0 +1,76 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int score[10001];
+int parent[10001];
+int findp(int x);
+void dounion(int x,int y);
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n;
+        scanf("%d",&n);
+        int i;
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d",&score[i]);
+            parent[i]=i;
+        }
+        int q;
+        scanf("%d",&q);
+        while(q--)
+        {
+            int a,x,y;
+            scanf("%d",&a);
+            if (a==0)
+            {
+                scanf("%d%d",&x,&y);
+                int px=findp(x);
+                int py=findp(y);
+                if (px==py)
+                    printf("Invalid query!
+");
+                else
+                    dounion(px,py);
+            }
+            else
+            {
+                scanf("%d",&x);
+                int p=findp(x);
+                cout<<p<<'
+';
+            }
+
+        }
+
+    }
+
+    return 0;
+}
+
+int findp(int x)
+{
+    if (parent[x]==x)
+        return x;
+    else
+        {int j=findp(parent[x]);
+        parent[x]=j;
+        return j;
+        }
+}
+
+void dounion(int px,int py)
+{
+    int x=px;//findp(px);
+    int y=py;//findp(py);
+
+
+        if (score[x]>score[y])
+            parent[y]=x;
+        else if (score[x]<score[y])
+            parent[x]=y;
+
+}

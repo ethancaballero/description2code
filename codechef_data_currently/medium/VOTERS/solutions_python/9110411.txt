@@ -1,0 +1,13 @@
+# cook your code here
+n1, n2, n3 = map(int, raw_input().split() )
+A, B, C = [], [], []
+for i in xrange(n1):
+    A.append(int(raw_input() ) )
+for i in xrange(n2):
+    B.append(int(raw_input() ) )
+for i in xrange(n3):
+    C.append(int(raw_input() ) )
+setT = (set(A) & set(B) ) | (set(B) & set(C) ) | (set(C) & set(A))
+print len(setT)
+for elem in sorted(setT):
+    print elem

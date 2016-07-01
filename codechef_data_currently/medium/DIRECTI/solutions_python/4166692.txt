@@ -1,0 +1,21 @@
+T = raw_input()
+T = int(T)
+ 
+for i in xrange(T):
+    N = raw_input()
+    N = int(N)
+    direction = []
+    road = []
+    for i in range(0, N):
+        inp = raw_input()
+        inp=inp.split(' ')
+        direction.append(inp[0])
+        tmp=' '.join(inp[2:])
+        road.append(tmp)
+ 
+    print 'Begin on ' + road[N-1]
+    rev = {'Left' : 'Right', 'Right' : 'Left'}
+    for i in range(N-2, -1, -1):
+        print rev[direction[i+1]] + ' on ' + road[i]
+ 
+    print

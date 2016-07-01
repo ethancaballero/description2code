@@ -1,0 +1,113 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef vector<int> vi;
+typedef vector<ll> vll;
+typedef vector<vi> vvi;
+typedef pair<int,int> pii;
+typedef vector<pii > vii;
+typedef vector<pair<int, pair<int, int> > > viii;
+typedef pair<ll,ll> pll;
+typedef vector<string> vs;
+typedef vector<vii> vvii;
+
+#define pb push_back
+#define mp make_pair
+#define X first
+#define Y second
+#define MEM(a,b) memset(a,(b),sizeof(a))
+#define tr(c,it) for(typeof((c).begin()) it = (c).begin(); it != (c).end(); it++)
+#define all(a) a.begin(),a.end()
+#define loop(x,a,b) for(ll (x) = (a);(x)<(b);(x)++)
+#define rep(x,n)   for(ll (x)=0;(x)<(n);(x)++)
+#define present(c,x) ((c).find(x) != (c).end()) 
+#define cpresent(c,x) (find(all(c),x) != (c).end())
+#define ain(a,n) ll ((a)[(n)]); for(ll i=0; i<(n); i++) cin>>((a)[i])  
+#define md 1000000007
+#define MAXN 200005
+
+
+#define pr16
+
+#ifdef pr16
+  #define pr(x)                 cerr << #x << ": " << x << endl;
+  #define pr2(x, y)             cerr << #x << ": " << x << " | " << #y << ": " << y << endl;
+  #define pr3(x, y, z)          cerr << #x << ": " << x << " | " << #y << ": " << y << " | " << #z << ": " << z << endl;
+  #define pr4(a, b, c, d)       cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " << #d << ": " << d << endl;
+  #define pr5(a, b, c, d, e)    cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " << #d << ": " << d << " | " << #e << ": " << e << endl;
+  #define pr6(a, b, c, d, e, f) cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " << #d << ": " << d << " | " << #e << ": " << e << " | " << #f << ": " << f << endl;
+  #define prdd(a,r,c) for(int i=0;i<(r);i++) { for(int j = 0;j<(c);j++) cerr<<a[i][j]<<" "; cerr<<endl; } cerr<<endl;
+  #define prc(a) tr(a, it) cerr<<*(it)<<" "; cerr<<endl
+  #define pra(a,n) for(int i=0; i<(n); i++) cerr<<((a)[i])<<" "; cerr<<"
+"
+  #define prdd(a,r,c) for(int i=0;i<(r);i++) { for(int j = 0;j<(c);j++) cerr<<a[i][j]<<" "; cerr<<endl; } cerr<<endl; 
+  #define prddd(a,x,y,z) for(int i=0;i<x;i++) {cerr<<"layer "<<i<<":
+";prdd(a[i],y,z)}
+
+#else
+  #define pr(x)
+  #define pr2(x, y)
+  #define pr3(x, y, z)
+  #define pr4(a, b, c, d)
+  #define pr5(a, b, c, d, e)
+  #define pr6(a, b, c, d, e, f)
+  #define tr(c,it)
+  #define prc(a)
+  #define pra(a,n)
+  #define prdd(a, r, c)
+  #define prddd(a,x,y,z)
+#endif
+
+int main()
+{   
+    ios::sync_with_stdio(false);
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n,k,m,i;
+        ll ans=INT_MAX;
+        cin>>n>>k>>m;
+        ll a[n];
+        for(i=0;i<n;i++)
+            cin>>a[i];
+        for(i=0;i<(1<<n);i++){
+            ll b[n];
+            ll cnt=0;
+            for(ll j=0;j<n;j++){
+                b[j]=a[j];
+              //  cout<<b[j]<<" ";
+                if (i & 1<<j){
+                    b[j]++;
+                    cnt++;
+                }
+            }
+           // cout<<endl;
+            if (cnt>=ans) continue;
+           //cout<<cnt<<endl;
+            int flag=1;
+            for(ll j=0;j<n-k+1;j++){
+                ll count=0;
+                ll maxe=INT_MIN;
+                for(int l=j;l<j+k;l++){
+                 //  cout<<b[i]<<" ";
+                    maxe=max(maxe,b[l]);
+                }
+                //cout<<endl;
+                for(int l=j;l<j+k;l++)
+                    if (b[l]==maxe) count++;
+            //    cout<<maxe<<" "<<count<<endl;
+                if (count>=m) {flag=0;break;}
+            }
+          //  cout<<cnt<<endl;
+            if (flag) ans=min(ans,cnt);
+
+        }
+        if (ans>=INT_MAX) cout<<"-1"<<endl;
+        else cout<<ans<<endl;
+    }
+    return 0;
+}
+
+

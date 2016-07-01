@@ -1,0 +1,54 @@
+#include<iostream>
+#define mod 1000000007
+using namespace std;
+long long int mypow(int i,long long int j)
+{
+	long long int k,l;
+	k=i;
+	if(j==0)
+	return 1;
+	else if(j==1)
+	return i;
+	else if (j%2==0)
+	{
+		l=mypow(i,j/2)%mod;
+		l=l*l;
+		l%=mod;
+		return l;
+		
+	}
+	else
+	{
+		l=mypow(i,j/2)%mod;
+		l=l*l;
+		l%=mod;
+		l=l*k;
+		l%=mod;
+		
+		return l;
+		
+	}
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int h,n,w,temp;
+		cin>>n;
+		if(n==1)
+		cout<<"4"<<endl;
+		else
+		{
+	    w=mypow(3,n);
+	    if(n%2==0)
+	    w=(w+3)%mod;
+	    else
+	    w=(w-3)%mod;
+		cout<<w<<endl;
+	    }
+	}
+   return 0;
+
+}

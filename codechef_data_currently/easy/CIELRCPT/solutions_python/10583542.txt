@@ -1,0 +1,20 @@
+t=int(raw_input())
+while(t>0):
+	a=int(raw_input())
+	if(a <2048):
+		b=bin(a)
+		b=list(b)
+		n=b.count('1')
+	else:
+		i=0
+		while(a>=2048):
+			a=a-2048
+			i+=1
+		b=bin(a)
+		b=list(b)
+		n=b.count('1')
+		n=n+i
+	print n
+	t-=1
+			
+	

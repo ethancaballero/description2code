@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    long long int n,k,r,p;
+	    cin>>n>>k;
+	    if(k==0)
+	    cout<<k<<" "<<n<<endl;
+	    else
+	    {
+	    r=n%k;
+	    p=n/k;
+	    cout<<p<<" "<<r<<endl;
+	    }
+	}
+	return 0;
+}

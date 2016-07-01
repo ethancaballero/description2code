@@ -1,0 +1,31 @@
+#include <iostream>
+#include<algorithm>
+#include <iomanip>
+#include<cmath>
+using namespace std;
+ 
+int main() {
+	        int t;
+	        cin >>t;
+	        while(t--)
+	        {  
+	            
+	            double b,h,u,s,hyp_,s_,A,B;
+	            cin >>h>>s;
+	            hyp_=h*h;
+	            s_=4*s;
+	            A=sqrt(hyp_+s_);
+	            B=sqrt(hyp_-s_);
+	            if(hyp_>=s_)
+	            {b=(A+B)/2;
+	             u=(A-B)/2;
+	             cout << std::setprecision(2) << std::fixed;
+	             cout<<u<<" "<<b<<" "<<h<<endl;
+	            }
+	            else
+	                cout<<"-1"<<endl;
+	            
+	        }
+	            
+	return 0;
+}  

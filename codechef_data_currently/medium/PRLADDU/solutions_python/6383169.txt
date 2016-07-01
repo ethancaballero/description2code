@@ -1,0 +1,12 @@
+# cook your code here
+t=int(raw_input())
+while t>0 :
+    t=t-1
+    n=int(raw_input())
+    a=0
+    c=0
+    inn=map(int,raw_input().split(' '))
+    for i in range(n) :
+        a=a+inn[i]
+        c=c+abs(a)
+    print c

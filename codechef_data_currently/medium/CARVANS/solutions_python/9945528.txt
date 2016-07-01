@@ -1,0 +1,29 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+cases=input()
+for case in range(cases):
+ n=input()
+ li=parseIntList(raw_input())
+ res=1
+ for i in range(1,n):
+  if li[i]<=li[i-1]:
+   res+=1
+  else: li[i]=li[i-1]
+ print res
+
+  
+  
+ 
+ 
+ 
+
+  
+ 

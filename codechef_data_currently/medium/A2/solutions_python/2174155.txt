@@ -1,0 +1,15 @@
+def tree():
+	levels = int(raw_input())
+	leaf = []
+	cnt = 0.5
+	leaf[0:] = map(int,raw_input().split())
+	for i in range(len(leaf)):
+		cnt = 2*cnt-leaf[i]
+	return cnt==0
+
+test = int(raw_input())
+for t in range(test):
+	if tree():
+		print "Yes"
+	else:
+		print "No"

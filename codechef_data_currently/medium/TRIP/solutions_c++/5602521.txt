@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define N 1000000
+int a[N + 2];
+int dst[N + 1],lpar[N + 1],fpar[N + 1],tways[N + 1];
+int main()
+{
+    int mod = pow(10,9) + 7;
+    int n,m;
+    scanf("%d %d",&n,&m);
+    for(int i = 1 ; i<=n ; i++) scanf("%d",&a[i]);
+    //sort(a+1,a+n+1);
+    int k = 2;
+    int j = 0;
+    dst[1] = 1;
+    fpar[1] = 0;
+    //tways[0] = 1;
+
+    for(int i = 1 ; i<=n ; i++)
+    {
+        for( ; k<=n ; k++)
+        {
+            if(a[k] - a[i] > m) break;
+            else
+            {
+                dst[k] = dst[i] + 1;
+                fpar[k] = i;
+            }
+        }
+        if(dst[i] != dst[i-1])
+        {
+            j = i - 1;
+        }
+        if(i == 1)
+        {
+            tways[1] = 1;
+            continue;
+        }
+        int temp = tways[j] - tways[fpar[i]-1] + mod;
+        if(temp >= mod) temp = temp - mod;
+        tways[i] = tways[i-1] + temp;
+        if(tways[i] >= mod) tways[i] = tways[i] - mod;
+        //printf("%d %d
+",dst[i],tways[i]-tways[i-1]);
+    }
+    int ans = tways[n] - tways[n-1];
+    if(ans < 0) ans += mod;
+    printf("%d %d
+",dst[n]-2,ans);
+    return 0;
+}

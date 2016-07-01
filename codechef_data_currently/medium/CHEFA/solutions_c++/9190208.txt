@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+
+ using namespace std;
+
+ int main(){
+    long tt;
+    //ifstream cin("a.txt");
+    cin>>tt;
+    long n;
+    while(tt--){
+        cin>>n;
+        long long a[n];
+        for(int i = 0 ; i < n ; i++)
+            cin>>a[i];
+
+        sort(a,a+n);
+
+        long long sum=0;
+        for(int i = n-1 ; i >=0;i-=2)
+            sum+=a[i];
+
+        cout<<sum<<endl;
+
+    }
+
+ }

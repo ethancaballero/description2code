@@ -1,0 +1,8 @@
+import math
+
+t = int(input())
+
+while t:
+    num = int(input())
+    print int(math.sqrt(num))
+    t = t-1

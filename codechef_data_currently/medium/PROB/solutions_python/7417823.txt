@@ -1,0 +1,5 @@
+t=int(raw_input())
+for asd in range(t):
+	a,b,c,d=map(float,raw_input().split())
+	temp=a/(a+b)
+	print temp

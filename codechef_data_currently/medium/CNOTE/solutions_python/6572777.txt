@@ -1,0 +1,11 @@
+for _ in range(input()):
+	x,y,k,n = map(int,raw_input().split())
+	flag=False
+	for i in range(n):
+		p,c = map(int,raw_input().split())
+		if p+y>=x and c<=k:
+			flag=True
+	if flag:
+		print "LuckyChef"
+	else:
+		print "UnluckyChef"

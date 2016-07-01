@@ -1,0 +1,4 @@
+for _ in range(int(raw_input())):
+    n=int(raw_input())
+    x=raw_input()
+    print (n*(n-1))/2

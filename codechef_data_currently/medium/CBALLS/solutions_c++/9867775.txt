@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+#define N 10005
+using namespace std;
+int psieve[N+5]; bool pflag[N+5];
+int sieve_p(){
+    int i,j,k=0;
+    for (i=2; i<=N; i++) {
+        if (pflag[i]) continue;
+        psieve[k++] = i;
+        for (j=i*i; j<=N; j+=i){
+            pflag[j] = 1;
+        }
+    }
+    return k;
+}
+int roundUp(int numToRound, int multiple){
+    if (multiple == 0) return numToRound;
+ 
+    int remaind = numToRound % multiple;
+    if (remaind == 0) return numToRound;
+ 
+    return numToRound + multiple - remaind;
+}
+int main(){
+    int c = sieve_p();
+    int t,n,i,j,mn;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d",&n);
+        int a[n],b[n];
+
+        scanf("%d",&a[0]);
+        mn=a[0];
+        for(i=1;i<n;++i) scanf("%d",&a[i]);
+        
+        int s=0;
+        b[0]=a[0];
+        for(i=1;i<n;++i){
+            if(a[i]>b[i-1]){
+                b[i]=a[i];
+            }
+            else{
+                s+=b[i-1]-a[i];
+                b[i]=b[i-1];
+            }
+        }
+
+        int st=0,stmp=0;
+        for(i=0;i<n;++i){
+            st+=roundUp(b[i],2)-b[i];
+        }
+
+        for(i=1;i<c;++i){
+            if(psieve[i]>mn) break;
+            stmp=0;
+            for(j=0;j<n;++j){
+                stmp+=roundUp(b[j],psieve[i])-b[j];
+                if(stmp>st) break;
+            }
+            if(stmp<st) st=stmp;
+        }
+        
+        printf("%d
+",s+st);
+    }
+    return 0;
+}  

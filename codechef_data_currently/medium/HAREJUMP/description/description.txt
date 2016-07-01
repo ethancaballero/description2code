@@ -1,0 +1,26 @@
+ The chef got a new rabbit and he is going to train him so that he can perform for him whenever he needs entertainment. The chef teaches k types of jumps to the rabbit. Each jump has definite length L units. The rabbit does not have any brains he will use any type of jump he feels like at any point of time. He is placed on a very long mat and starts at 0 unit. The chef wants to know in how many ways he can perform his jumps and cover exactly N units of distance.
+
+Input
+The first line contains the number of the test cases T(<=100). Each test case consists of 2 lines. The first line defines the distance N (1<=N<=10^18) which tells us the number of units the chef wants the rabbit to cover. The next line contains k the number of jumps which are taught to the rabbit, k (k<=15) integers follow in the same line each denoting distinct distance L (L<=15) units which can be jumped by the rabbit.
+
+Output
+Print T integers each denoting the number of ways the rabbit can perform jumps of N units of distance. Print the remainder obtained on dividing the answer by 1000000007 if the answer is greater than or equal to 1000000007.
+
+Example
+
+
+Input:
+3
+10
+1 1
+13
+3 1 2 8
+15
+5 1 2 3 4 5
+
+
+
+Output:
+1
+415
+13624

@@ -1,0 +1,118 @@
+#include<iostream>
+#include<fstream>
+#include<string.h>
+#include<stdio.h>
+#include<math.h>
+#include<algorithm>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+char mo[105][105];
+int mouse[101][101];
+int dp[101][101];
+pair<int,int> pre[101][101];
+
+int process(int n,int m)
+{
+	dp[0][0]=mouse[0][0]+mouse[0][1]+mouse[1][0];
+	//pre[0][0]=make_pair(0,0);
+	
+	for(int i=1;i<m;i++)
+	{
+		dp[0][i]=mouse[1][i]+dp[0][i-1];
+		if(i+1<m)
+			dp[0][i]+=mouse[0][i+1];
+		pre[0][i]=make_pair(0,i-1);
+	}
+	
+	for(int i=1;i<n;i++)
+	{
+		dp[i][0]=mouse[i][1]+dp[i-1][0];
+		if(i+1<n)
+			dp[i][0]+=mouse[i+1][0];
+		pre[i][0]=make_pair(i-1,0);
+	}
+	
+	int a,b;
+	for(int i=1;i<n;i++)
+	{
+		for(int j=1;j<m;j++)
+		{
+			a=0;
+			if(j+1<m)
+				a+=mouse[i][j+1];
+			if(i+1<n)
+				a+=mouse[i+1][j];
+			b=a;
+			
+			if(pre[i-1][j]==make_pair(i-2,j))
+				a+=mouse[i][j-1];
+			if(pre[i][j-1]==make_pair(i,j-2))
+				b+=mouse[i-1][j];
+			
+			a+=dp[i-1][j];
+			b+=dp[i][j-1];
+			
+			if(a<b)
+			{
+				dp[i][j]=a;
+				pre[i][j]=make_pair(i-1,j);
+			}
+			else if(a>b)
+			{
+				dp[i][j]=b;
+				pre[i][j]=make_pair(i,j-1);
+			}
+			else
+			{
+				dp[i][j]=a;
+				pre[i][j]=make_pair(-5,-5);
+			}
+		}
+	}
+	
+	/*
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<m;j++)
+		{
+			cout<<dp[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	
+	int i=n-1,j=m-1,x,y;
+	while(i!=0 || j!=0)
+	{
+		x=pre[i][j].first;
+		y=pre[i][j].second;
+		cout<<x<<" "<<y<<endl;
+		i=x,j=y;
+		//getchar();
+	}
+	*/
+	return dp[n-1][m-1];
+}
+
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	int t,n,m;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m;
+		for(int i=0;i<n;i++)
+			cin>>mo[i];
+	
+		for(int i=0;i<n;i++)
+			for(int j=0;j<m;j++)
+				mouse[i][j]=mo[i][j]-'0';
+		
+		cout<<process(n,m)<<endl;
+	}	
+	return 0;
+}

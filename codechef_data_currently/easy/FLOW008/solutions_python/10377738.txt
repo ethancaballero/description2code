@@ -1,0 +1,7 @@
+t=int(raw_input())
+for i in range(0,t):
+	q=int(raw_input())
+	if q<10:
+		print 'What an obedient servant you are!'
+	else:
+		print '-1'

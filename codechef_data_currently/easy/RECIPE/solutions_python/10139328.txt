@@ -1,0 +1,16 @@
+from fractions import gcd as g
+
+def gcdN(l):
+	l.sort()
+	temp=l[0]
+	for i in l[1:]:
+		temp=g(temp,i)
+	return temp
+
+# print gcdN([12,6,3,4,2])
+for testcases in xrange(int(raw_input())):
+	temp=map(int,raw_input().split())
+	n=gcdN(temp[1:])
+	for i in temp[1:]:
+		print (i/n),
+	print ''

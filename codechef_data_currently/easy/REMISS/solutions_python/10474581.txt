@@ -1,0 +1,5 @@
+testCases = int(raw_input())
+for x in xrange(testCases):
+	a, b = map(int, raw_input().split())
+	res1 = max(a, b)
+	print res1, a + b

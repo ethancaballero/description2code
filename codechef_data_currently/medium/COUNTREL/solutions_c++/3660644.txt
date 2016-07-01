@@ -1,0 +1,61 @@
+#include <iostream>
+
+
+using namespace std;
+
+#define INF 2147483647
+#define EL cout<<endl
+#define TI freopen("test.inp","rt",stdin)
+
+
+#define FOR(i,a,b) for(int i=a;i<=b;i++) 
+#define FORD(i,a,b) for(int i=a;i>=b;i--) 
+#define REP(i,n) for(int i=0;i<n;i++)
+
+int INP,AM;
+#define BUFSIZE (1<<10)
+char BUF[BUFSIZE+1], *inp=BUF;
+#define GETCHAR(INP) {					if(!*inp) {							fread(BUF,1,BUFSIZE,stdin);			inp=BUF;					}							INP=*inp++;					}
+#define DIG(a) (((a)>='0')&&((a)<='9'))
+#define GN(j) {					    AM=0;\    
+	GETCHAR(INP); while(!DIG(INP) && INP!='-') GETCHAR(INP);	if (INP=='-') {AM=1;GETCHAR(INP);} 	j=INP-'0'; GETCHAR(INP);					while(DIG(INP)){j=10*j+(INP-'0');GETCHAR(INP);}		if (AM) j=-j;}
+
+//Part 1 closed form: (3^n+1)/2 - 2^n
+//Part 2 closed form: 2*4^(n-1) - 3^n + 2^(n-1) + 2^n - (3^n+1)/2
+
+#define MOD 100000007
+
+int cs[111],d=0;
+
+long long int mu(long long int a,long long int n)
+{
+    long long int aa=a,ret=1;
+    while(n)
+    {
+        if (n&1) ret=(ret*aa)%MOD;    
+        aa=(aa*aa)%MOD;
+        n=n>>1;
+    }
+    return ret;
+}
+
+long long int n;
+
+void xuly()
+{
+    cin>>n;
+    int ret1=((mu(3,n)+1LL)*50000004)%MOD-mu(2,n);
+    if (ret1<0) ret1+=MOD;
+    int ret2=((2*mu(4,n-1)) - mu(3,n) + mu(2,n-1)-ret1)%MOD;
+    if (ret2<0) ret2+=MOD;
+    cout<<ret1<<" "<<ret2<<endl;      
+}
+
+ int main()
+{
+    
+    int t;cin>>t;
+    while(t--)     xuly();
+     
+    return 0;
+}

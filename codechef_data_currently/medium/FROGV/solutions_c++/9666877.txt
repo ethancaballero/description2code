@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define SF(x)	scanf("%d", &x)
+#define PF(x)	printf("%d", x)
+#define psp     printf(" ")
+#define pnl     printf("
+")
+#define charint(c) ((c)-'0')
+#define pii pair< int, int >
+#define pb(x) push_back(x)
+#define test int t; scanf("%d",&t);while(t--)
+#define forall(a,b) for(long long i=a;i<=b;i++)
+#define abs(a) ((a)>(0)?(a):(-a))
+#define bit(x,i)          (x&(1<<i))  //select the bit of position i of x
+#define lowbit(x)         ((x)&((x)^((x)-1))) 
+#define higbit(x)         (1 << ( int) log2(x) )
+#define countleadzero(x)  __builtin_ctz(x) //in its binary representation ex. when x=8 answer is 3
+#define countsetbits(x)   ____builtin_popcount(x) //count no of setbits
+#define gcd(a,b)   __gcd(a,b)
+#define bss binary_search
+#define esort(x)        (sort((x).begin(), (x).end()))
+#define ersort(x)       (sort((x).rbegin(), (x).rend()))
+#define MAX		100050
+#define INF		1e9
+#define MOD     1000000007
+#define fi first
+#define se second
+typedef long long 		ll;
+typedef unsigned long long	ull;
+int u,max_size;
+/*ll mint(ll *st,int beg,int end,int qb,int qe,int ci){
+	if(qb<=beg&&qe>=end)
+	return st[ci];
+	if(qe<beg||qb>end)
+	return -1;
+	int mid=(end-beg)/2+beg;
+	return max(mint(st,beg,mid,qb,qe,2*ci+1),mint(st,mid+1,end,qb,qe,2*ci+2));
+}
+ll mkrec(ll *a,int beg,int end,ll *st,int ci){
+	if(beg>end)
+	return -1;
+	if(beg==end){
+		st[ci]=a[end];
+		return a[end];
+	}
+	int mid=(beg+end)/2;
+	st[ci] =  max(mkrec(a, beg, mid, st, ci*2+1) ,mkrec(a, mid+1, end, st, ci*2+2));
+    return st[ci];
+}
+ll *mktree(ll *a){
+	int x = (int)(ceil(log2(u))); 
+     max_size = 2*(int)pow(2, x) - 1;
+    ll *st=new ll[max_size];
+	mkrec(a,0,u-1,st,0);
+	return st;
+}*/
+int main(){
+	int n,p;
+	ll k;
+	cin>>n>>k>>p;
+	ll a[n],v[n];
+	vector<pair<ll,int> > vu;
+	ll vt[100000];
+	for(int i=0;i<n;i++){
+		cin>>a[i];
+		vu.pb(make_pair(a[i],i));
+	}
+	sort(vu.begin(),vu.end());
+	reverse(vu.begin(),vu.end());
+	int ut=0;ll dta=vu.begin()->first;
+	vector<pair<ll,int> >::iterator it1;
+	vector<pair<ll,int> >::iterator it=vu.begin();
+	it1=it++;
+	v[it1->se]=it1->fi+k;
+	for(;it!=vu.end();it++){
+		//cout<<"* "<<it->fi<<" "<<it->se<<endl;
+//		if(it->fi!=dta){
+//			v[u++]=it->fi-dta;
+//			dta=it->fi;vt[it->se]=++ut;
+//		}
+//		else {
+//			vt[it->se]=ut;
+//		}
+		//cout<<v[u-1]<<" "<<ut<<endl;
+		if(it1->fi-it->fi<=k){
+			vt[it->se]=vt[it1->se];
+		}
+		else
+		vt[it->se]=it->fi+k;
+		it1=it;
+	}
+	while(p--){
+		int x,y;
+		ll mx;
+		cin>>x>>y;
+		//cout<<vt[x-1]<<" "<<vt[y-1]<<endl;
+		if(vt[x-1]==vt[y-1])
+		cout<<"Yes"<<endl;
+		else
+		cout<<"No"<<endl;
+	}
+}

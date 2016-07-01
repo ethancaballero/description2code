@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <string.h>
+#define SET(p) memset(p, -1, sizeof(p))
+#define READ freopen("input.cpp", "r", stdin);
+#define WRITE(f) freopen(f, "w", stdout)
+#define getcx getchar_unlocked
+// #define MX 1000000007
+
+using namespace std;
+
+inline int fi (){//fast input function
+    register int c = getcx();
+    int x = 0;
+    int neg = 0;
+    for(;((c<48 || c>57) && c != '-');c = getcx());
+    if(c=='-') {neg=1;c=getcx();}
+    for(;c>47 && c<58;c = getcx()) {x = (x<<1) + (x<<3) + c - 48;}
+    if(neg) x=-x;
+    return x;
+}
+
+
+template< class T > T _max(T a, T b) { return (!(a < b) ? a : b); }
+// int a[MX], b[MX];
+
+int main() {
+	// READ
+	long long int MX = 1e9 + 7;
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int n,k;
+		long long int bo;
+		scanf("%d",&n);
+		scanf("%d",&k);
+
+		if (n==1&&k==1)
+		{
+			printf("1
+");
+			continue;
+		}
+
+		bo = k;
+
+		for (int i = 0; i < n-1; ++i)
+		{
+			bo = bo*(k-1);
+			if(bo>MX) bo = bo%MX;
+		}
+		printf("%lld
+",bo);
+
+	}
+	return 0;
+}

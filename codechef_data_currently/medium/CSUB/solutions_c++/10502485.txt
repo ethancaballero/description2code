@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+	int t,n;
+	long long int m;
+	cin>>t;
+	while(t--){
+		cin>>n;
+		m=0;
+		char a[n];
+		cin>>a;
+		
+		for(int i=0;i<n;i++){
+			if(a[i]=='1'){
+				m++;
+			}
+			
+		}
+		long long int ans=((m*(m-1))/2)+m;
+		cout<<ans<<endl;
+		
+	}
+}

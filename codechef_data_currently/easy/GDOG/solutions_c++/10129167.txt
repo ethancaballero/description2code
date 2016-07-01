@@ -1,0 +1,21 @@
+//max remainder
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k;
+        cin>>n>>k;
+        int remain=0;
+        for(int i=1;i<=k;i++)
+        {
+            if(n%i>remain)
+                remain=n%i;
+        }
+        cout<<remain<<endl;
+    }
+    return 0;
+}

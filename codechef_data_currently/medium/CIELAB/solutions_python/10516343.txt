@@ -1,0 +1,8 @@
+a , b = raw_input().split()
+a , b = int(a) , int(b)
+s = str(a - b)
+if int(s[0]) == 1 :
+	 w = '2' + s[1:]
+else :
+	 w = str(int(s[0])-1) + s[1:] 
+print int(w)

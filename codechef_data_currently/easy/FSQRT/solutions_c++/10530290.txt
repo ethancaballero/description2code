@@ -1,0 +1,16 @@
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+ 
+using namespace std;
+ 
+int main(){
+long t,num;
+cin>>t;
+while(t--){
+    	cin>>num;
+	cout<<(int)sqrt(num)<<endl;		    
+}
+//system("pause");
+return 0;
+}   

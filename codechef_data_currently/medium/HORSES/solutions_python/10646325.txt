@@ -1,0 +1,12 @@
+t = input()
+
+for i in range(t):
+    n = input()
+    list_s_n = map(int,raw_input().split())
+    list_s_n.sort()
+    min = list_s_n[-1]
+    for j in range(len(list_s_n)-1):
+        tmin = list_s_n[j+1]-list_s_n[j]
+        if(tmin<min):
+            min = tmin
+    print min

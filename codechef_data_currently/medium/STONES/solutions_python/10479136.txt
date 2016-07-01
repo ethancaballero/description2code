@@ -1,0 +1,9 @@
+T = int(raw_input())
+for i in range(T):
+	J = raw_input()
+	S = raw_input()
+	count = 0
+	for j in S:
+		if j in J:
+			count = count + 1
+	print count

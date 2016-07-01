@@ -1,0 +1,31 @@
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        long long int diff = 0;
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s[i] == 'S')
+                diff++;
+            else if(s[i] == 'T')
+                diff += 2;
+        }
+        int n;
+        cin>>n;
+        long long int ans = 0;
+        for(int i = 0; i < 12*n; i++)
+        {
+            ans += (12*n - i - 1)/diff;
+        }
+        cout<<ans<<endl;
+    }
+}

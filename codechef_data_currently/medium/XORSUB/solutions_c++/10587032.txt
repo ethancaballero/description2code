@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int dp[1024][1024];
+int a[1024];
+int N;
+int ans =0;
+map<int,int>m;
+int rec(int pos,int val){
+ans = max(ans,val);
+if(pos==N){
+	return 0;
+}	
+	if(dp[pos][val]!=-1)
+	  return dp[pos][val];
+return dp[pos][val] = max(rec(pos+1,val^a[pos]),rec(pos+1,val));
+}
+int main(){
+	
+	
+	int t,n,k;
+	cin>>t;
+	while(t--){
+		int i,j;
+		cin>>n>>k;
+		for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+			
+		}
+		N=n;
+		for(i=0;i<N;i++)
+	   for(j=0;j<=1024;j++)
+	   dp[i][j]=-1;  
+		
+		rec(0,k);
+		cout<<ans<<endl;
+   
+	   ans =0; 
+	}	
+	return 0;
+}

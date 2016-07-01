@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,m,i,a[100000],d,r=0,w;
+	char ch;
+	cin>>n>>m;
+	for(i=0;i<n;++i)
+	cin>>a[i];
+	while(m--)
+	{
+		cin>>ch>>d;		
+		if(ch=='R')
+		{
+			w=a[(r+d-1)%n];
+			cout<<w<<"
+";
+		}
+		if(ch=='A')
+		d=n-d;
+		if(ch=='A'|| ch=='C')
+		r=(r+d)%n;
+	}
+	return 0;
+}

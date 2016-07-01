@@ -1,0 +1,30 @@
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#define MAX	 100005
+
+using namespace std;
+int A[MAX];
+
+int main(){
+	int t,n;
+	scanf("%d",&t);
+	while(t--){
+		scanf("%d",&n);
+		for(int i = 0;i < n;i++) scanf("%d",&A[i]);
+		
+		bool flag = false;
+		for(int  i = 1;i < n - 1;i++){
+			if(A[i - 1] == A[i + 1] && A[i] == A[i - 1]){
+				flag = true;
+				break;
+			}
+		}
+		if(flag) printf("Yes
+");
+		else printf("No
+");
+	}
+	return 0;
+}

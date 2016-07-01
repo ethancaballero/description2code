@@ -1,0 +1,66 @@
+from operator import itemgetter
+
+t = int(raw_input())
+while t:
+    #polygons
+    n = int(raw_input())
+    d = {}
+    Gpts = []
+    for i in range(n):
+        #vertices of a plygon i
+        m = int(raw_input())
+        st = raw_input()
+        lst = [int(j) for j in  st.strip().split()]
+        #polygon_i= []
+        if m > 0:
+            reserve_pt = lst[0],lst[1]
+            lst.pop(0)
+            lst.pop(0)
+        #improvement may be done here : finding the leftmost point
+        
+        while lst:
+            point = lst[0],lst[1]
+            if reserve_pt[0] > point[0]:
+                reserve_pt = point
+            lst.pop(0)
+            lst.pop(0)
+            #polygon_i.append(point)
+        #sort by x coordinate
+        #print 'polygon'+str(i),polygon_i
+        d[reserve_pt] = i
+        Gpts.append(reserve_pt)
+    #print 'allpoints before sort :',pts
+    #pts = [int(j) for j in pts_str.strip().split()]
+    Gpts = sorted(Gpts,key = itemgetter(0))
+    score = {}
+    #print 'allpoints after sort :',pts
+    #print 'init score',score
+    
+    index = 0
+    length = len(Gpts)
+    res = [0 for i in range(length)]
+    for j in range(length):
+        current_polygon = d[Gpts[length - 1- j]]
+        #print current_polygon
+        res[current_polygon] = j 
+
+    result = ''
+    for i in res:
+        result += ' '+str(i)
+    '''
+    if Gpts:
+        current_polygon = d[Gpts[-1]]
+        score[current_polygon] = index
+        Gpts.pop(len(Gpts)-1)
+        prev_polygon = current_polygon
+    while Gpts:
+        index += 1
+        current_polygon = d[Gpts[-1]]
+        score[current_polygon] = index       
+        Gpts.pop(len(Gpts)-1)
+        prev_polygon = current_polygon
+    '''
+    
+    #print 'result :',res 
+    print result[1:]
+    t -= 1

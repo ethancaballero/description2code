@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[1005];
+bool b[1005] = {false};
+vector<int>v[1005];
+int main()
+{
+	int n, i,j,x,k;
+    cin >> n;
+	for (i=1;i<=n;i++)
+    {
+     cin>>a[i];
+    }
+    k=0;
+	for (i=1;i<=n;i++)
+	{
+		if (b[i]==false)
+		{
+            j = i;
+			b[j]=true;
+			v[k].push_back(j);
+			j=a[i];
+			for(x=j;x!=i;)
+			{
+				v[k].push_back(x);
+				b[x]=true;
+				x=a[x];
+			}
+			v[k].push_back(x);
+			k++;
+		}
+	}
+	cout<<k<<endl;
+	for (i=0;i<k;i++)
+	{
+		for(j=0;j<v[i].size();j++)
+		{
+			cout<<v[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+return 0;
+
+}

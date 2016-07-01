@@ -1,0 +1,13 @@
+s="zyxwvutsrqponmlkjihgfedcba"
+for _ in range(input()):
+	n=input()
+	q,r=n//25,n%25
+    #print q,r
+	a=''
+	#print q,r
+	if r:
+		for i in range(r,-1,-1):
+			a+=chr(i+97)
+	for i in range(q):
+		a+=s
+	print a	

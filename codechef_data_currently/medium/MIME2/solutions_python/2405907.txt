@@ -1,0 +1,22 @@
+from sys import stdin 
+
+
+N,Q=map(int,stdin.readline().split())
+media_dict={}
+
+for i in xrange(N):
+	ext,mtype=stdin.readline().strip().split()
+	media_dict[ext]=mtype
+
+for j in xrange(Q):
+	entry=stdin.readline().strip()
+	dotidx=entry.rfind(".")
+	type="unknown"
+	if dotidx > -1:
+		key=entry[dotidx+1:]
+		if key in media_dict:
+			type=media_dict[key]
+	print type	
+	
+	
+

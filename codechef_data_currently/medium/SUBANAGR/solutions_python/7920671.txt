@@ -1,0 +1,18 @@
+d = {}
+for i in range(26):
+	d[chr(ord('a')+i)] = 1000
+N = int(raw_input())
+while N>0:
+	s = raw_input()
+	for i in range(26):
+		c = chr(ord('a')+i)
+		d[c] = min(d[c],s.count(c))
+	N -= 1
+b = "".join(sorted(d))
+res = ""
+for i in b:
+	res += i*d[i]
+if res :
+	print res
+else:
+	print "no such string"

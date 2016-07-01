@@ -1,0 +1,53 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<utility>
+#include<cmath>
+using namespace std;
+vector<pair<int,int> > vec;
+
+bool func(pair<int,int> p1 , pair<int,int> p2)
+{
+	if(p1.first < p2.first)return true;
+	if(p1.first==p2.first)
+	{
+		if(p1.second >= p2.second)return true;
+		else return false;
+	}
+	return false;
+}
+int main()
+{
+	int t,n,a,b;
+	double dist,ans;
+	cin>>t;
+	while(t--)
+	{
+		ans = 0;
+		cin>>n;
+		for(int i=0;i<n;i++)
+		{
+			cin>>a>>b;
+			vec.push_back(make_pair(a,b));
+		}
+	//	cout<<"
+ input points : 
+";
+	//	for(int i=0;i<n;i++)cout<<vec[i].first<<" " <<vec[i].second<<endl;
+		sort(vec.begin(),vec.end(),func);
+	//	cout<<"
+ after sorting ,  points : 
+";
+	//	for(int i=0;i<n;i++)cout<<vec[i].first<<" " <<vec[i].second<<endl;
+		for(int i=1;i<n;i++)
+		{
+			dist = hypot(abs(vec[i].first  - vec[i-1].first) , abs(vec[i].second - vec[i-1].second));
+			ans = ans + dist;
+		}
+		printf("%0.02f
+",ans);
+		vec.clear();
+	}
+	return 0;
+}

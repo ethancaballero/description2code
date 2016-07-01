@@ -1,0 +1,70 @@
+#include <iostream>
+#include <algorithm>
+#include<cmath>
+#include<cstring>
+#include<ctype.h>
+#include <climits>
+using namespace std;
+#define MOD 1000000007
+int A[10000005],B[10000005],C[10000005];
+int main()
+{
+	long long n,k,q;
+	cin>>n>>k>>q;
+	long long a, b, c, d, e, f, r, s, t, m;
+	cin>>a>>b>>c>>d>>e>>f>>r>>s>>t>>m>>A[1];
+	long long L1, La, Lc, Lm, D1, Da, Dc, Dm;
+	cin >> L1>>La>>Lc>>Lm>>D1>>Da>>Dc>>Dm ;
+	long long tPro=t;
+	for(int x=2 ; x<=n ; x++){
+		tPro = (tPro*t)%s;
+		if( tPro <= r)
+			A[x] = (a*A[x-1]*A[x-1] + b*A[x-1] + c) % m;
+		else
+			A[x] = (d*A[x-1]*A[x-1] + e*A[x-1] + f) % m;
+	}
+	int minn=INT_MAX;
+	for(int i=1 ; i<=n ; i++){
+		if(A[i]<minn) minn = A[i];
+		B[i] = minn;
+		if(i%k==0) minn=INT_MAX;
+	}
+	minn = INT_MAX;
+	for(int i=n ; i>=1 ; i--){
+		if(i%k==0) minn=INT_MAX;
+		if(A[i]<minn) minn=A[i];
+		C[i]=minn;
+	}
+	long long sum=0, pro=1;
+	for(int i=1 ; i<=q ; i++){
+		L1 = (La * L1 + Lc) % Lm;
+		D1 = (Da * D1 + Dc) % Dm;
+		int L,R;
+		L = L1 + 1;
+		R = min(L + k - 1 + D1, n);
+		if(R-L==k && L%k==0){
+			sum+=B[R];
+			pro = (pro*B[R])%MOD;
+		}
+		else{
+			int ans, nextIdx;
+			ans = C[L];
+			if(L%k==0)
+				nextIdx = L+k;
+			else
+				nextIdx = (L/k+2)*k;
+			if(R > nextIdx){
+				ans = min(min(ans,B[nextIdx]),B[R]);
+			}
+			else{
+				ans = min(ans,B[R]);
+			}
+			sum+=ans;
+			pro = (pro*ans)%MOD;
+		}
+	}
+	cout<<sum <<" "<<pro<<"
+";
+
+	return 0;
+}

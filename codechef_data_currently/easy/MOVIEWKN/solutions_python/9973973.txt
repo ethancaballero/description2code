@@ -1,0 +1,20 @@
+for _ in xrange(input()):
+    max_rate_value = 0
+    max_ratings = {}
+    n = input()
+    l = map(int, raw_input().split())
+    r = map(int, raw_input().split())
+    for i in range(len(l)):
+        product = l[i] * r[i]
+        if product not in max_ratings:
+            max_ratings[product] = [[i + 1, r[i]]]
+        else:
+            max_ratings[product].append([i + 1, r[i]])
+
+    max_product_list1 = max_ratings[max(max_ratings.keys())]
+    max_product_list2 = []
+    max_rat = 0
+    for i in max_product_list1:
+        if i[1] > max_rat:
+            max_rat = i[1]
+    print next(i[0] for i in max_product_list1 if i[1] == max_rat)

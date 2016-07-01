@@ -1,0 +1,110 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<bitset>
+#include<vector>
+using namespace std;
+bitset<102> bvec[58];
+bitset<102> temp,set,var;
+vector< bitset<102> > setcm;
+int flag[3000];
+inline int Scan_f()
+{
+    register int noRead=0;
+    //register char p=getchar_unlocked();
+    register char p=getc(stdin);
+    //for(;p<48 || p>57;p=getchar_unlocked());
+    for(;p<48 || p>57;p=getc(stdin));
+    //while(p>47 && p<58){ noRead = (noRead << 3) + (noRead << 1) + (p - '0');p=getchar_unlocked();}
+    while(p>47 && p<58){ noRead = (noRead << 3) + (noRead << 1) + (p - '0');p=getc(stdin);}
+    return noRead;
+}; 
+
+int main()
+{
+  int n,i,j,m,T,v,ans,k,tmp,ncm;
+  T = Scan_f();
+  while(T > 0)
+  {
+   ans = 0;
+   set.reset();
+   temp.reset();
+   setcm.clear();
+   ncm = 0;
+   n = Scan_f();
+   m = Scan_f();
+  for(j=0;j<m;j++)
+  {
+    v = Scan_f();
+    for(i=0;i<v;i++)
+    {
+	 tmp = Scan_f();
+	 bvec[j][tmp] = 1;
+    }
+  }  
+ for(i=0;i<m;i++)
+ {
+  for(j=i+1;j<m;j++)
+  {
+   for(k=0;k<n;k++)
+   {
+    if(bvec[i][k] == 1 && bvec[j][k] == 1)
+     temp[k] = 1;
+   }
+  if(temp != 0)
+  {
+   setcm.push_back(temp);
+   temp.reset();
+  }
+  }
+ }  
+ while(set.count() != n)
+ {
+  var = ~set;
+  for(i=0;i<setcm.size();i++)
+  {
+  if((var&setcm[i]) != 0)
+  {
+   var = var&setcm[i];				   
+  }
+  }
+  if(var != ~set)
+  {
+   ans++;
+   set = set|var;
+  } 
+  else
+   break;
+ }							                          
+ temp = set.flip();
+ for(i=0;i<m;i++)
+ {
+  var = temp&bvec[i];				 
+  if(var != 0)
+  {
+   ans++; 	    
+  for(j=0;j<n;j++)
+  {
+   if(temp[j] == 1 && bvec[i][j] == 1)
+    temp[j] = 0;
+  }  
+ }
+ for(j=0;j<n;j++)
+ {
+ if(temp[j] == 1)
+  break;
+ } 
+ if(j == n)
+  break;
+ }    
+  printf("%d
+",ans);
+ for(i=0;i<m;i++)
+ {
+  bvec[i].reset();
+ } 				 
+  T--;
+ }  
+ return 0;
+}
+ 

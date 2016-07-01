@@ -1,0 +1,11 @@
+from fractions import gcd
+
+testCases = int(raw_input())
+for x in xrange(testCases):
+	nums = map(int, raw_input().split())
+	div = nums[1]
+	for y in xrange(2, nums[0] + 1):
+		div = gcd(nums[y], div)
+	for y in xrange(1, nums[0] + 1):
+		print nums[y] / div, 
+	print

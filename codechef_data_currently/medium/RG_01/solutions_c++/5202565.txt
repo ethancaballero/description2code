@@ -1,0 +1,215 @@
+    #include <algorithm>
+    #include <stdio.h>
+    #include <assert.h>
+    #include <string.h>
+ 
+    #define MIN(a,b) ((a)<(b) ? (a) : (b))
+    #define MAX(a,b) ((a)>(b) ? (a) : (b))
+ 
+    using std::sort;
+ 
+    #define ASSERT(x)
+ 
+    typedef struct {
+    unsigned short v1, v2;
+    unsigned int w;
+    } edge_t;
+ 
+    typedef struct node_t {
+    node_t *head;
+    node_t *next;
+    } node_t;
+ 
+    node_t *node_head(node_t *node){
+        if(node->head == NULL){
+        return node;
+        }
+ 
+        node->head = node_head(node->head);
+        return node->head;
+    }
+ 
+    node_t *node_append(node_t *head_last, node_t *tail_first){
+        node_t *head_head = node_head(head_last);
+        ASSERT(tail_first->head == NULL);
+        ASSERT(head_head->head == NULL);
+        ASSERT(head_last->next == NULL);
+        tail_first->head = head_head;
+        head_last->next = tail_first;
+        return head_head;
+    }
+    
+    bool edge_cmp_max(const edge_t &a, const edge_t &b)
+    {
+        return a.w > b.w;
+    }
+    
+    
+    
+    
+    char digit_lut[201] = "00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899";
+ 
+    static char *fmt_uint(int x, char *s){
+        char b[16], *p = b+16;
+        if(x < 100){
+        if(x < 10) { s[0] = '0' + x; s[1] = 0; return s+1; }
+        else { s[0] = digit_lut[x*2]; s[1] = digit_lut[x*2+1]; s[2] = 0; return s+2; }
+        }
+        do {
+        char *d = digit_lut + (x%100)*2;
+        *(--p) = d[1]; *(--p) = d[0];
+        x /= 100;
+        } while(x >= 10);
+        if(x){ *(s++) = '0' + x; }
+        while(p != b+16){ *(s++) = *(p++); *(s++) = *(p++); }
+        *s = 0;
+        return s;
+    }
+ 
+ 
+    void mat_print(int A[1000][1000], int n, int m)
+    {
+        int i, j;
+        char buf[20000];
+        for(i = 0; i < n; i++){
+        char *ptr = buf;
+        for(j = 0; j < m; j++){
+        if(j != 0){
+        *ptr = ' ';
+        ptr++;
+        }
+ 
+        ptr = fmt_uint(A[i][j], ptr);
+        }
+        *ptr = 0;
+        printf("%s
+", buf);
+        }
+    }
+ 
+ 
+    void max_score_pairs(int n_nodes, node_t *nodes, int n_edges, edge_t *edges,
+    int C[1000][1000])
+    {
+    int i, j;
+    sort(edges, edges+n_edges, edge_cmp_max);
+    j = 0;
+    for(i = 0; i < n_edges; i++){
+    int v1 = edges[i].v1;
+    int v2 = edges[i].v2;
+    int w = edges[i].w;
+    node_t *n1 = &nodes[v1];
+    node_t *n2 = &nodes[v2];
+    node_t *h1 = node_head(n1);
+    node_t *h2 = node_head(n2);
+    
+    if(h1 == h2)
+        continue;
+    
+    C[v1][v2] = C[v2][v1]=w;
+    
+    node_t *cur1 = h1;
+    
+    while(1){
+    
+        node_t *cur2 = h2;
+        
+        while(cur2){
+            int i1 = cur1 - nodes;
+            int i2 = cur2 - nodes;
+            int c;
+                    c = w;
+                    
+                    C[i1][i2] = C[i2][i1]=c;
+            
+            cur2 = cur2->next;
+        }
+        
+        if(cur1->next==NULL){
+            node_append(cur1, h2);
+            break;
+        }
+        cur1 = cur1->next;
+    }
+         
+    }
+}
+    
+    int main(int argc, char **argv)
+    {
+        int i;
+        int n_vert = 0;
+        int n_edge = 0;
+       
+        edge_t *edges;
+       
+        node_t nodes[1000]= {};
+       
+        int A[1000][1000] = {};
+       
+ 
+            char c = getchar_unlocked();
+        while(c==' ' || c== '
+' || c=='	') c=getchar_unlocked();
+ 
+        while(c >='0' && c <='9')
+            {
+                n_vert = (n_vert<<3) + (n_vert<<1) + c-'0';
+                c=getchar_unlocked(); 
+            }
+ 
+ 
+        while(c==' ' || c== '
+' || c=='	') c=getchar_unlocked();
+ 
+        while(c >='0' && c <='9')
+            {
+                n_edge = (n_edge<<3) + (n_edge<<1) + c-'0';
+                c=getchar_unlocked(); 
+            }
+       
+        edges = (edge_t*)malloc(n_edge * sizeof(edge_t));
+       
+        for(i = 0; i < n_edge; i++){
+            int j=0,k=0; long int weight=0;
+ 
+            while(c==' ' || c== '
+' || c=='	') c=getchar_unlocked();
+ 
+            while(c >='0' && c <='9')
+            {
+                j = (j<<3) + (j<<1) + c-'0';
+                c=getchar_unlocked(); 
+            }
+ 
+            while(c==' ' || c== '
+' || c=='	') c=getchar_unlocked();
+            
+            while(c >= '0' && c<='9')
+            {
+                k = (k<<3) + (k<<1) + c-'0';
+                c=getchar_unlocked(); 
+            }
+        
+ 
+            while(c==' ' || c== '
+' || c=='	') c=getchar_unlocked();
+ 
+            while(c >= '0' && c<='9')
+            {
+                weight = (weight<<3) + (weight<<1) + c-'0';
+                c=getchar_unlocked(); 
+            }
+            
+            edges[i].v1 = j;
+            edges[i].v2 = k;
+            edges[i].w = weight;
+        }
+ 
+        
+        
+        max_score_pairs(n_vert, nodes, n_edge, edges, A);
+        mat_print(A, n_vert, n_vert);
+        free(edges);
+        return 0;
+    }  

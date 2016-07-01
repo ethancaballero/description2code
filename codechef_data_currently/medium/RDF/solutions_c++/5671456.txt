@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+const int maxN=100000;
+const double EPS=1e-6;
+
+typedef vector<double> VD;
+
+int main()
+{
+    vector<VD>EXRDF(1,VD(maxN));
+    int maxK=0;
+    for(int N=0;N<maxN;N++)
+        EXRDF[0][N]=N;
+    for(int K=1;;K++)
+    {
+        EXRDF.push_back(VD(maxN));
+        double sum=0;
+        for(int N=1;N<maxN;N++)
+        {
+            EXRDF[K][N]=sum/N;
+            sum+=EXRDF[K-1][N];
+        }
+        if(EXRDF[K][maxN-1]<EPS)
+        {
+            maxK=K;
+            break;
+        }
+    }
+    int T;
+    scanf("%d",&T);
+    while(--T >= 0)
+    {
+        int N,K;
+        scanf("%d%d",&N,&K);
+        printf("%f
+",K<maxK?EXRDF[K][N]:0);
+    }
+    return 0;
+}

@@ -1,0 +1,38 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+	int k,n;
+	cin>>k>>n;
+	char a[k+1][100];
+	char b[n+1][100];
+	int  i,j;
+	for(i=0;i<k;i++)
+	cin>>a[i];
+	for(i=0;i<n;i++)
+	cin>>b[i];
+	for(i=0;i<n;i++)
+	{
+		int flag=0;
+		int l;
+		l=strlen(b[i]);
+		if(l>=47)
+		cout<<"Good"<<endl;
+		else
+		{
+			for(j=0;j<k;j++)
+			{
+				if(strstr(b[i],a[j]))
+				{
+					flag=1;
+					break;
+				}
+			}
+			if(flag)
+			cout<<"Good"<<endl;
+			else
+			cout<<"Bad"<<endl;
+		}
+	}
+}

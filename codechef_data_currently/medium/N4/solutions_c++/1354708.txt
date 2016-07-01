@@ -1,0 +1,218 @@
+#include <cstdlib>
+#include <iostream>
+#include<algorithm>
+#include<cstdio> 
+#include <string.h>
+#include<queue>
+#include<set>
+#include <stack>
+using namespace std;
+class myst{
+public:
+	char s[14];
+	int step;
+	int idx;
+	bool operator < (const myst b) const
+	{
+		return strcmp(s,b.s)<0;
+	}
+	myst(){step=0;}
+};
+struct lst{
+	int no,op,fa;
+}steps[100000];
+int sidx=0;
+//bool operator <(const myst &a,const myst &b)
+//{
+//	return strcmp(a.s,b.s)<0;
+//}
+bool eq(myst & a,myst &b)
+{
+	return strcmp(a.s,b.s)==0;
+}
+myst onezero(myst &frm)
+{
+	
+	myst rt=frm;
+	rt.step++;
+	int idx[6]={1,4,7,9,6,3};
+	char tmp=rt.s[idx[0]];
+	for (int i=0;i<5;i++)
+	{
+		rt.s[idx[i]]=rt.s[idx[i+1]];
+	}
+	rt.s[idx[5]]=tmp;
+	rt.idx=sidx;
+	steps[sidx].no=1;
+	steps[sidx].op=0;
+	steps[sidx].fa=frm.idx;
+	sidx++;
+	return rt;
+}
+myst oneone(myst &frm)
+{
+	myst rt=frm;
+	rt.step++;
+	int idx[6]={1,3,6,9,7,4};
+	char tmp=rt.s[idx[0]];
+	for (int i=0;i<5;i++)
+	{
+		rt.s[idx[i]]=rt.s[idx[i+1]];
+	}
+	rt.s[idx[5]]=tmp;
+
+	rt.idx=sidx;
+	steps[sidx].no=1;
+	steps[sidx].op=1;
+	steps[sidx].fa=frm.idx;
+	sidx++;
+	return rt;
+
+}
+myst twozero(myst &frm)
+{
+	myst rt=frm;
+	rt.step++;
+	int idx[6]={6,9,11,12,10,8};
+	char tmp=rt.s[idx[0]];
+	for (int i=0;i<5;i++)
+	{
+		rt.s[idx[i]]=rt.s[idx[i+1]];
+	}
+	rt.s[idx[5]]=tmp;
+
+	rt.idx=sidx;
+	steps[sidx].no=2;
+	steps[sidx].op=0;
+	steps[sidx].fa=frm.idx;
+	sidx++;
+	return rt;
+}
+myst twoone(myst &frm)
+{
+	myst rt=frm;
+	rt.step++;
+	int idx[6]={6,8,10,12,11,9};
+	char tmp=rt.s[idx[0]];
+	for (int i=0;i<5;i++)
+	{
+		rt.s[idx[i]]=rt.s[idx[i+1]];
+	}
+	rt.s[idx[5]]=tmp;
+
+	rt.idx=sidx;
+	steps[sidx].no=2;
+	steps[sidx].op=1;
+	steps[sidx].fa=frm.idx;
+	sidx++;
+	return rt;
+}
+myst zeroone(myst &frm)
+{
+	myst rt=frm;
+	rt.step++;
+	int idx[6]={0,2,5,8,6,3};
+	char tmp=rt.s[idx[0]];
+	for (int i=0;i<5;i++)
+	{
+		rt.s[idx[i]]=rt.s[idx[i+1]];
+	}
+	rt.s[idx[5]]=tmp;
+
+	rt.idx=sidx;
+	steps[sidx].no=0;
+	steps[sidx].op=1;
+	steps[sidx].fa=frm.idx;
+	sidx++;
+	return rt;
+}
+myst zerozero(myst &frm)
+{
+	myst rt=frm;
+	rt.step++;
+	int idx[6]={0,3,6,8,5,2};
+	char tmp=rt.s[idx[0]];
+	for (int i=0;i<5;i++)
+	{
+		rt.s[idx[i]]=rt.s[idx[i+1]];
+	}
+	rt.s[idx[5]]=tmp;
+
+	rt.idx=sidx;
+	steps[sidx].no=0;
+	steps[sidx].op=0;
+	steps[sidx].fa=frm.idx;
+	sidx++;
+	return rt;
+}
+int main()
+{
+	int T;
+	cin>>T;
+	myst goal;
+	memcpy(goal.s,"0001001011000",14);
+	while (T--)
+	{
+		queue<myst> Q;
+		set<myst> Map;
+		myst start;
+		sidx=0;
+		cin>>start.s;
+		start.idx=-1;
+		start.step=0;
+		Q.push(start);
+		Map.insert(start);
+		while (!Q.empty())
+		{
+			myst tmp=Q.front();
+			Q.pop();
+	/*		if(Map.find(tmp)!=Map.end())
+				continue;
+			else
+				Map.insert(tmp);*/
+			if(eq(tmp,goal))
+			{
+				cout<<tmp.step<<endl;
+				stack<lst> S;
+				int id=tmp.idx;
+				while (id!=-1)
+				{
+					S.push(steps[id]);
+					id=steps[id].fa;
+				}
+				lst ot;
+				while(!S.empty())
+				{
+					ot=S.top();
+					S.pop();
+					cout<<ot.no<<' '<<ot.op<<endl;
+				}
+				break;
+			}
+			else
+			{
+				myst st=zerozero(tmp);
+				if(Map.find(st)==Map.end())
+					Q.push(st),Map.insert(st);
+				 st=zeroone(tmp);
+				if(Map.find(st)==Map.end())
+					Q.push(st),Map.insert(st);
+				 st=onezero(tmp);
+				if(Map.find(st)==Map.end())
+					Q.push(st),Map.insert(st);
+				 st=oneone(tmp);
+				if(Map.find(st)==Map.end())
+					Q.push(st),Map.insert(st);
+				 st=twozero(tmp);
+				if(Map.find(st)==Map.end())
+					Q.push(st),Map.insert(st);
+				 st=twoone(tmp);
+				if(Map.find(st)==Map.end())
+					Q.push(st),Map.insert(st);
+
+			}
+		}
+
+	}
+    return 0;
+}

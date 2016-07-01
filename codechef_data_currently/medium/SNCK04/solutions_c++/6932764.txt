@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define s(n) scanf("%lld",&n);
+#define loop(i,a,b) for(i=a;i<b;i++)
+#define loopi(i,a,b) for(i=b;i>=a;i--)
+#define mod 1000000007
+ll power(ll b, ll e) {
+    ll p = 1;
+    while (e > 0) {
+        if(e&1) {
+            p = (p*b)%mod;
+        }
+        e = e>>1;
+        b = (b * b)%mod;
+    }
+    return p;
+}
+ 
+const int N = 1000000 + 10;
+long long sum[N];
+int res[N];
+int d[N];
+ 
+int main()
+{
+	int tests;
+	scanf("%d", &tests);
+	for (int i = 2; i < N; ++i)
+		d[i] = i;
+	for (int i = 2; i * i < N; ++i)
+		if (d[i] == i)
+		{
+			for (int j = i; j * i < N; ++j)
+				d[j * i] = i;
+		}
+	res[1] = 1;
+	for (int i = 2; i < N; ++i)
+	{
+		int k = i;
+		int cnt = 0;
+		while (k % d[i] == 0)
+		{
+			++cnt;
+			k /= d[i];
+		}
+		if (k == 1)
+			res[i] = i - i / d[i];
+		else
+			res[i] = res[k] * res[i / k];
+	}
+	res[1] = 0;
+	for (int i = 1; i < N; ++i)
+		sum[i] = sum[i - 1] + res[i];
+	while (tests-- > 0)
+	{
+		int n;
+		scanf("%d", &n);
+		printf("%lld
+", sum[n]);
+	}
+	return 0;
+
+}

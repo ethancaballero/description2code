@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int cnt7=0,cnt4=0;
+    int sum4[100001]={0},sum7[100001]={0},r[100001]={0},m[50001]={0};
+    m[0]++;
+    for(int i=1;i<=100000;i++)
+    {
+            int test=i;
+            while(test!=0)
+            {
+                          if(test%10==4)
+                          cnt4++;
+                          
+                          if(test%10==7)
+                          cnt7++;
+
+                          
+                          test/=10;
+            }
+			sum4[i]=cnt4;
+			sum7[i]=cnt7;
+            r[i]+=r[i-1]+m[sum4[i]-sum7[i]]++;
+    }
+    int T,j=0;
+    cin>>T;
+    const int t=T;
+    int res[t];
+    while(T>0)
+    {
+                 int N;
+                 cin>>N;
+                 res[j++]=r[N];
+                 T--;
+    }
+    for(int k=0;k<j;k++)
+    cout<<res[k]<<"
+";
+    
+    return 0;
+}

@@ -1,0 +1,52 @@
+#include<cstdio>
+#include <iostream>
+#include<limits.h>
+#include<stdio.h>
+#include<sstream>
+#include<stdlib.h>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#include<map>
+#include<set>
+#include<list>
+#include<stack>
+#include<queue>
+#include<iomanip>
+#include<ctype.h>
+#include<complex>
+#include<utility>
+#include<functional>
+#include<bitset>
+#include<numeric>
+#include<cassert>
+#include<limits>
+using namespace std;
+#define ll long long
+int main() {
+	// your code goes here
+
+	int n,k;cin>>n>>k;
+	pair<int,int>ab[n];
+	for(int i=0;i<n;i++){
+	 int b;cin>>b;
+	 ab[i].first=b;
+	 ab[i].second=i;
+	 }
+	 sort(ab,ab+n);
+	 int cnt=0;
+	 for(int i=0;i<n;)
+	 {
+	   cnt++;
+	   int j=i+1;
+	   while(j<n)
+	   {
+	     if(ab[i].first==ab[j].first && ab[j].second-ab[i].second < k)
+	      j++;
+	     else break;
+	   }
+	   i=j;
+	 }
+	 cout<<cnt<<endl;
+	return 0;
+}

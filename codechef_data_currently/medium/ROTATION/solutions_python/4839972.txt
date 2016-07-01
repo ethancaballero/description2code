@@ -1,0 +1,13 @@
+from sys import stdin
+N,M=map(int,stdin.readline().split())
+l=stdin.readline().split()
+r=0
+for i in xrange(M):        
+        mode,deg=stdin.readline().split()
+        deg=int(deg)
+        if mode=='A':
+                r=(r-deg)
+        elif mode=='C':
+                r=(r+deg)
+        else:
+                print l[(deg-1+r)%N]

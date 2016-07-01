@@ -1,0 +1,10 @@
+for _ in range(int(raw_input())):
+	n = int(raw_input())
+	a = map(int, raw_input().split())
+	a.sort()
+	N = 10**9 + 7
+	s = 0
+	for i in xrange(0, len(a)):
+		s =  s +  (a[i]*(2**i)) - (a[i]*(2**(n-i-1)))
+		s = s%N
+	print s

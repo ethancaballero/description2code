@@ -1,0 +1,14 @@
+t=int(raw_input())
+ti=0
+while ti<t:
+    n=int(raw_input())
+    l=map(int,raw_input().strip().split())
+    m=map(int,raw_input().strip().split())
+    v,c,i=0,0,0
+    while i<n:
+        if l[i]-v>=m[i]:
+            c+=1
+        v=l[i]
+        i+=1
+    print c
+    ti+=1

@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+    string s;
+    cin>>s;
+    int balance=0,maxbalance=0;
+    for(int i=0;i<s.length();i++)
+    {
+        if(s[i]=='(')balance++;
+        else balance--;
+        maxbalance=max(maxbalance,balance);
+    }
+    for(int i=0;i<maxbalance;i++)cout<<"(";
+    for(int i=0;i<maxbalance;i++)cout<<")";
+    cout<<endl;
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--) solve();
+    return 0;
+}

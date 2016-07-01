@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[100005];
+int main()
+{
+	long long int n,k,sum=0;
+	cin>>n;
+	cin>>k;
+	priority_queue<int>q;
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	for(int i=0;i<n;i++)
+	{
+		q.push(a[i]);
+		sum=a[i];
+		for(int j=i+1;j<n;j++)
+		{
+			sum=sum+a[j];
+			q.push(sum);
+		}
+	}
+	int cnt=0;
+	while(cnt<k&&!q.empty())
+	{
+		int d=q.top();
+		cout<<d<< " ";
+		q.pop();
+		cnt++;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	return 0;
+}

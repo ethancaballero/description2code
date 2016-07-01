@@ -1,0 +1,67 @@
+    #include<iostream>
+    using namespace std;
+
+    long long int getSum(long long int BITree[], int n, int index)
+    {
+        long long int sum = 0; 
+        index = index + 1;
+        while (index>0)
+        {
+            sum += BITree[index];
+         index -= index & (-index);
+        }
+        return sum;
+    }
+     
+    void updateBIT(long long int *BITree, int n, int index, long long int val)
+    {
+        index = index + 1;
+        while (index <= n)
+        {
+           BITree[index] += val;
+           index += index & (-index);
+        }
+    }
+     
+    long long int *constructBITree(long long int arr[], int n)
+    {
+        long long int *BITree = new long long int[n+1];
+        for (int i=1; i<=n; i++)
+            BITree[i] = 0;
+     
+        for (int i=0; i<n; i++)
+            updateBIT(BITree, n, i, arr[i]);
+     
+        return BITree;
+    }
+ 
+    int main()
+    {
+        long long int a[1000005];
+        int n,q;
+        cin>>n>>q;
+        for(int i=0;i<n;i++)
+           cin>>a[i];
+        long long int *BITree=constructBITree(a,n);
+        int num1;
+        long long int num2;
+        for(int i=0;i<q;i++)
+        {
+            char ch;
+            cin>>ch;
+            cin>>num1>>num2;
+            if(ch=='S')
+            {
+                cout<<getSum(BITree,n,num2)-getSum(BITree,n,num1-1)<<endl;
+            }   
+            else if(ch=='G')
+            { 
+                updateBIT(BITree,n,num1,num2);
+
+            } 
+            else
+            {
+                updateBIT(BITree,n,num1,-num2);
+            } 
+        }  
+    }

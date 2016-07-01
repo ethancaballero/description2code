@@ -1,0 +1,66 @@
+/*logic ------------
+
+*/
+#include<iostream>
+#include<cmath>
+#include<cstring>
+#include<string>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<stack>
+#include<stdio.h>
+#include<queue>
+#define MIN(a,b) ((a)<(b)?(a):(b))
+#define MAX(a,b) ((a)>(b)?(a):(b))
+#define in(x) scanf("%d",&x)
+#define inlld(x) scanf("%lld", &x)
+#define inl64(x) scanf("%I64d", &x)
+#define MOD 1000000007 // 10**9 + 7
+#define INF 1e9
+#define FOR(i,a,b) for(int (i) = (a); (i) < (b); ++(i))
+#define RFOR(i,a,b) for(int (i) = (a)-1; (i) >= (b); --(i))
+#define CLEAR(a) memset((a),0,sizeof(a))
+#define mp(a, b) make_pair(a, b)
+#define pb(a) push_back(a)
+#define For(i, a, b) for (int i = a; i < b; i++)
+#define Rfor(i, b, a) for (int i = b; i > a; i--)
+#define all(v) v.begin(), v.end()
+typedef long long ll;
+typedef long l;
+
+using namespace std;
+const double pi = acos(-1.0);
+
+ll fact[19];
+int cnt[10];
+
+int main()
+{
+     fact[0]=1ll;
+     for(int i=1;i<20;i++) fact[i]=fact[i-1]*i;
+     int t;
+     in(t);
+     while(t--){
+     	char c[20];
+     	scanf("%s",c);
+     	CLEAR(cnt);
+     	ll ans=0,d=1;
+     	int y=strlen(c);
+     	for(int i=strlen(c)-1;i>=0;i--){
+     		int a=c[i]-'0';
+     		d*=++cnt[a];
+     		for(int j=0;j<a;j++){
+     			if(cnt[j]){
+     				ans+=(fact[y-i-1]*cnt[j])/d;
+     			}
+     		}
+     	}
+        printf("%lld
+",ans+1);
+     }
+     return 0;
+ }
+     	
+
+

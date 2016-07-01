@@ -1,0 +1,27 @@
+import itertools
+oa=[]
+for ntc in range(input()):
+    s=raw_input().strip().split(" ")
+    num=int(s[0])
+    tot=int(s[1])
+    ia=[]
+    for i in range(num):
+        ia.append(input())
+    yn="No"
+    br=False
+    for i in range(1,len(ia)+1):
+        for j in itertools.combinations(ia,i):
+            sm=0
+            for k in list(j):
+                sm+=k
+            if sm==tot:
+                yn="Yes"
+                br=True
+                break
+
+        if br:
+            break
+    oa.append(yn)
+
+for i in oa:
+    print i

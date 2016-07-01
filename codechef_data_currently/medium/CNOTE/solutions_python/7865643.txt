@@ -1,0 +1,30 @@
+test_cases = int(raw_input() )
+
+for j in range(test_cases):
+  input = raw_input().split() 
+  X = int(input[0])
+  Y = int(input[1])
+  K = int(input[2])
+  N = int(input[3])
+
+  max = 0
+
+  pages = []
+
+  for i in range(N):
+    input = raw_input().split() 
+    if int( input[1] ) <= K:
+      page = int( input[0] )
+      pages.append( page )
+      if(page > max):
+        max = page
+
+  if len(pages) and ( (X-Y) <= max ):
+    print "LuckyChef"
+  else:
+    print "UnluckyChef"
+
+
+
+
+

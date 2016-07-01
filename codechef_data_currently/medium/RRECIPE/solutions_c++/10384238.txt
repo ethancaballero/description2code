@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<string.h>
+
+main()
+{char a[1000005];
+ int t;
+ long long ctr,len,i;
+ scanf("%d",&t);
+ while(t--)
+ {
+  ctr=1;
+  scanf("%s",a);
+  len=strlen(a);
+  if(len&1)
+  {
+   if(a[len/2]=='?')
+   {
+    ctr=(ctr*26)%10000009;
+   }
+  }
+  for(i=0;i<len/2;i++){
+   if(a[i]==a[len-i-1]){
+    if(a[i]=='?')
+    ctr=(ctr*26)%10000009;
+    }
+   else{
+    if(a[i]!='?'&&a[len-i-1]!='?'){
+     ctr=0;
+     break;
+    }
+   }
+  }
+  printf("%lld
+",ctr);
+ }
+ return 0;
+}

@@ -1,0 +1,105 @@
+#include <iostream>
+#include <algorithm>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+using namespace std;
+
+#define inchar getchar_unlocked
+
+inline void inp( int &n )
+{
+n=0;
+int ch=inchar();int sign=1;
+while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=inchar();}
+while( ch >= '0' && ch <= '9' )
+n = (n<<3)+(n<<1) + ch-'0', ch=inchar();
+n=n*sign;
+}
+
+
+int main() {
+	// your code goes here
+	
+	int q;
+	char s[5];
+	int low[32],high[32];
+	low[1] = 1;high[1]=1;
+	for(int i=2;i<=30;i++)
+	 {
+	   low[i] = high[i-1]+1;
+	   high[i] = 2*low[i]-1;
+	 }
+	 
+	 cin>>q;
+	 int flag = 0;
+	 while(q--)
+	  {
+	      scanf("%s",s+1);
+	      if(s[2] == 'i')
+	       {
+	           flag = !flag;
+	       }
+	   else
+	       {
+	          int from,to;
+	          inp(from);inp(to);
+	          
+	          if(to<from) swap(to,from); // to will always be >= from
+	          
+	          //determine level;
+	          int flev,tlev;
+	          flev = upper_bound(low+1,low+31,from)-low; flev--;
+	          tlev = upper_bound(low+1,low+31,to)-low; tlev--;
+	          //cout<<flev<<tlev<<endl;
+	          // determine lca
+	          int tmpt = to;
+	          int tmpf = from;
+	          int diff = tlev - flev;
+	          while(diff)
+	           {
+	               tmpt = tmpt/2;
+	               diff--;
+	           }
+	          int lcalev = flev; //store level of lca
+	          while(tmpt!=tmpf)
+	           {
+	               tmpf /= 2;tmpt /=2;
+	               lcalev--;
+	           }
+	          
+	          int lca = tmpt; // node value of lca
+	          
+	          // determine the no of red and black nodes on the path
+	          int red = 0,black = 0;
+	          
+	          while(flev >= lcalev)
+	           {
+	               if(flev & 1) black++;
+	               else red++;
+	               flev--;
+	           }
+	           
+	           while(tlev > lcalev)
+	           {
+	               if(tlev & 1) black++;
+	               else red++;
+	               tlev--;
+	           }   
+	          
+	          int node;
+	          if(s[2] == 'b') node = 1;
+	          else node = 0;
+	          if(node ^ flag) printf("%d
+",black);
+	          else printf("%d
+",red);
+	          
+	       }
+	      
+	  }
+	 
+	
+	return 0;
+}

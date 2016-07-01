@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+#define MAXN 200003
+
+using namespace std;
+
+int n, m;
+
+int stamps[MAXN];
+int visited[1003];
+int ans[1003];
+
+vector<pair<int, int> > vec[1003];
+
+int dfs(int type, int day) {
+    int mx = type;
+    int sz = vec[type].size();
+    
+    visited[type] = 1;
+    
+    for(int i = 0 ; i < sz; i++) {
+        if(visited[ vec[type][i].first ] == 0  && vec[type][i].second >= day ) {
+            mx = max(mx, dfs( vec[type][i].first,vec[type][i].second ) ) ;
+        }
+    }
+    
+    return mx;
+    
+}
+
+int main() {
+    int tst;
+    scanf("%d", &tst);
+    
+    while(tst--) {
+        int a, b, t;
+        scanf("%d %d ", &n, &m);
+        
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &stamps[i]);
+        }
+        
+        for(int i = 0; i < m; i++) {
+            scanf("%d %d %d", &t , &a, &b);
+            
+            vec[a].push_back(make_pair(b, t));
+            vec[b].push_back(make_pair(a, t));
+        }
+        
+        for(int i = 0; i < 1003 ;i++) {
+            ans[i] = 0;
+        }
+        
+        int sum = 0;
+        
+        for(int i = 0; i < n; i++) {
+            
+            if(ans[stamps[i]] != 0) {
+                
+                sum += ans[stamps[i] ];
+                
+            } else {
+                
+                for(int i = 0 ; i < 1003 ; i++) {
+                    visited[i] = 0;
+                }
+                
+                ans[stamps[i] ] = dfs(stamps[i], 0);
+                sum += ans[stamps[i] ];           
+            }
+            
+        }
+        
+        
+        cout<<sum<<"
+";
+        
+        for(int i = 0; i < 1003; i++) {
+            vec[i].clear();
+        }
+    }
+    
+	return 0;
+}

@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+#define ll long long
+
+int main()
+{   ll t;
+    scanf("%lld",&t);
+    while(t--)
+    {   ll a,b;
+        scanf("%lld%lld",&a,&b);
+        if(a<b)
+            cout<<"<
+";
+        else if(a>b)
+            cout<<">
+";
+        else
+            cout<<"=
+";
+    }
+    return 0;
+}

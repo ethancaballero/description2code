@@ -1,0 +1,44 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+using namespace std;
+typedef vector<double> vd;
+typedef vector<vd> vvd;
+int T,n,sum,A[101];
+double P[101];
+int main()
+{
+  	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d",&n);
+		sum=0;
+		for(int i=0;i<n;i++){
+			scanf("%d",&A[i]);
+			sum+=A[i];
+		}
+		for(int i=0;i<n;i++){
+			scanf("%lf",&P[i]);
+			P[i]/=100;
+		}
+		
+		vvd dp(n,vd(sum+1,0));
+		dp[0][0]=1-P[0];
+		dp[0][A[0]]=P[0];
+		for(int j,i=1;i<n;i++)
+		{
+			for(j=0;j<=sum;j++)
+			{
+				dp[i][j]=dp[i-1][j]*(1-P[i]);
+				if(j>=A[i])dp[i][j]+=dp[i-1][j-A[i]]*P[i];
+			}
+		}
+		double res=0;
+		for(int i=(sum+1)/2;i<=sum;i++)res+=dp[n-1][i];
+		printf("%.8lf
+",res);
+	}
+	return 0;
+}

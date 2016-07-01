@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long long int st[2000002];
+long long int a[1000002],diff;
+long long int createst(long long int low,long long int high,long long int index)
+{
+	if(high == low)
+	{
+		st[index] = a[low];
+		return a[low];
+	}
+	long long int mid = (high+low)/2;
+	st[index]=createst(low,mid,2*index+1)+createst(mid+1,high,2*index+2);
+	return st[index];
+}
+long long int getsum(long long int low ,long long int high,long long int qs ,long long int qe,long long int index)
+{
+	//total overlap
+	if(qs<=low&&qe>=high)
+	{
+		return st[index];
+	}
+	//no overlap
+	else if(qs>high||qe<low)
+	{
+		return 0;
+	}	
+	long long int mid = (low+high)/2;
+	return(getsum(low,mid,qs,qe,2*index+1)+getsum(mid+1,high,qs,qe,2*index+2));
+}
+void updatest(long long int low ,long long int high,long long int diff,long long int ind,long long int index)
+{
+	if(ind<low||ind>high)
+	{
+		return;
+	}
+	
+		
+	st[index]+=diff;
+	if(low!=high)
+	{
+		long long int mid=(low+high)/2;
+		updatest(low,mid,diff,ind,2*index+1);
+		updatest(mid+1,high,diff,ind,2*index+2);
+	}
+}
+int main()
+{
+	long long int n,q,sum;
+	cin>>n;
+	cin>>q;
+	for(long long int i=0;i<n;i++)
+	{
+		cin>>a[i];	
+	}	
+//	for(int i=0;i<n;i++)
+//	{
+//		cout<<a[i];	
+//	}	
+	sum = createst(0,n-1,0);
+	while(q--)
+	{
+		long long int start,stop,diff,sum;
+		char s;
+		cin>>s;
+		cin>>start;
+		cin>>stop;
+		if(s=='S')
+		{
+			sum = getsum(0,n-1,start,stop,0);
+			//cout<<sum<<endl;
+			printf("%lld
+",sum);
+		}
+		else if(s=='G')
+		{
+			diff = stop;
+		//	a[start]+=stop; 
+			updatest(0,n-1,diff,start,0);
+		}
+		else if(s=='T')
+		{
+			diff = -stop;
+		//	a[start]-=stop; 
+			updatest(0,n-1,diff,start,0);
+		}
+	}
+	return 0;
+}

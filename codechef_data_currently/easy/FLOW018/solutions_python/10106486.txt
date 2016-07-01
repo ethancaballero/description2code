@@ -1,0 +1,15 @@
+# cook your code here
+def fact(n):
+    if n==2 :
+        return 2
+    else:
+        return n*fact(n-1)
+t=int(raw_input())
+for i in range(t):
+    x=int(raw_input())
+    # l=map(int,raw_input().split())
+    # l.sort()
+    if x<2 :
+        print "1" 
+    else: 
+        print fact(x)

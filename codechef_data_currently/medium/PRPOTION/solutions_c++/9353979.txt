@@ -1,0 +1,55 @@
+#include<stdio.h>
+long long int max(long long int a, long long int b, long long int c)
+{
+	if ((a >= b)&&(a >= c))
+		return a;
+	if ((b >= a)&&(b >= c))
+		return b;
+	return c;
+}
+int main()
+{
+	long long int r, g, b, m, t, i, temp, maxg, maxr, maxb,a;
+	scanf("%lld", &t);
+	while (t--)
+	{
+		scanf("%lld%lld%lld%lld", &r, &g, &b, &m);
+		maxr = maxg = maxb = 0;
+		for (i = 0; i < r; i++)
+		{
+			scanf("%lld", &a);
+			if (a > maxr)
+				maxr = a;
+		}
+		for (i = 0; i < g; i++)
+		{
+			scanf("%lld", &a);
+			if (a > maxg)
+				maxg = a;
+		}
+		for (i = 0; i < b; i++)
+		{
+			scanf("%lld", &a);
+			if (a > maxb)
+				maxb = a;
+		}
+		for (i = 1; i <= m; i++)
+		{
+			temp = max(maxr, maxg, maxb);
+			/*if (temp == 1)
+				break;*/
+			if (temp == maxr)
+				maxr /= 2;
+			else if (temp == maxg)
+				maxg /= 2;
+			else
+				maxb /= 2;
+		}
+		temp = max(maxr, maxg, maxb);
+		printf("%lld
+", temp);
+	}
+	getchar();
+	getchar();
+	return 0;
+}

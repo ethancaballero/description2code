@@ -1,0 +1,30 @@
+def comb(n):
+	return n*(n-1)
+
+def hack(N,M):
+	count = 0
+	for i in range(N-1):
+		for j in range(M):
+			if ((i+1)<N) and ((j-2)>=0):
+				count += 1
+			if ((i+1)<N) and ((j+2)<M):
+				count += 1
+			if ((i+2)<N) and ((j-1)>=0):
+				count += 1
+			if ((i+2)<N) and ((j+1)<M):
+				count += 1
+	return (comb(N*M)-count*2)
+
+
+T = input()
+result = []
+for t in range(T):
+	count = 0
+	N,M = [int (n) for n in raw_input().split()]
+	if (N<=5 or M<=5):
+		result.append(hack(N,M))
+	else:
+		result.append((comb(N*M) - ((10+4*(M-4))*(N-2) + (4+2*(M-4)))*2))
+
+for i in result:
+	print i

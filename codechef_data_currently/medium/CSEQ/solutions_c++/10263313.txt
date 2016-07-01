@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+#define LL long long
+#define i64 long long
+#define ri(x) scanf("%d",&x)
+#define rl(x) scanf("%lld",&x)
+using namespace std;
+/*LL countFact(LL a,LL b)
+{
+        i64 now=1;
+        i64 ret=0;
+        while(now<=a/b)
+        {
+            now*=b;
+            ret+=a/now;
+        }
+        return ret;
+ }
+long long pow(LL a, LL b, LL MOD)
+{
+    long long x=1,y=a; 
+    while(b > 0)
+    {
+        if(b%2 == 1)
+        {
+            x=(x*y);
+            if(x>MOD) x%=MOD;
+        }
+        y = (y*y);
+        if(y>MOD) y%=MOD; 
+        b /= 2;
+    }
+    return x;
+}
+long long InverseEuler(LL n, LL MOD)
+{
+    return pow(n,MOD-2,MOD);
+}
+ 
+long long factMOD(LL n, LL MOD)
+{
+    long long res = 1; 
+    while (n > 0)
+    {
+        for (int i=2, m=n%MOD; i<=m; i++)
+            res = (res * i) % MOD;
+        if ((n/=MOD)%2 > 0) 
+            res = MOD - res;
+    }
+    return res%MOD;
+}
+long long C(LL n, LL r, LL MOD)
+{
+    if (countFact(n,MOD)>countFact(r, MOD)+countFact(n-r, MOD))
+        return 0;
+    return (factMOD(n, MOD) * ((InverseEuler(factMOD(r, MOD), MOD) * InverseEuler(factMOD(n-r, MOD), MOD)) % MOD)) % MOD;
+}*/
+long long SmallC(long long n, long long r, long long MOD)
+{
+    vector< vector<long long> > C(2,vector<long long> (r+1,0));
+ 
+    for (int i=0; i<=n; i++)
+    {
+        for (int k=0; k<=r && k<=i; k++)
+            if (k==0 || k==i)
+                C[i&1][k] = 1;
+            else
+                C[i&1][k] = (C[(i-1)&1][k-1] + C[(i-1)&1][k])%MOD;
+    }
+    return C[n&1][r];
+}
+ 
+long long Lucas(long long n, long long m, long long p)
+{
+    if (n==0 && m==0) return 1;
+    long long ni = n % p;
+    long long mi = m % p;
+    if (mi>ni) return 0;
+    return Lucas(n/p, m/p, p) * SmallC(ni, mi, p);
+}
+ 
+long long C(long long n, long long r, long long MOD)
+{
+    return Lucas(n, r, MOD);
+}
+int main()
+{
+    int t;
+    ri(t);
+    while(t--)
+    {
+        long long k,l,r;
+        rl(k),rl(l),rl(r);
+        long long p=r-l;
+        cout<<(C(p+k+1,k,1000003)-1)<<endl;
+    }
+}

@@ -1,0 +1,18 @@
+t=int(raw_input())
+while t>0 :
+    t-=1
+    a = raw_input().strip()
+    if len(a) % 2 != 0 :
+        print 'NO'
+    else :
+        d = {}
+        for i in xrange(len(a)) :
+            if a[i] not in d.keys() :
+                d[a[i]] = 1
+            else :
+                d[a[i]] += 1
+        max_n = max(d, key=d.get)
+        if d[max_n] == len(a)/2 :
+            print 'YES'
+        else :
+            print 'NO'

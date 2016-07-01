@@ -1,0 +1,9 @@
+t=int(raw_input())
+for i in range(t):
+    j=set(list(raw_input()))
+    s=list(raw_input())
+    count=0
+    for k in s:
+        if k in j:
+            count+=1
+    print count

@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll temp[1000000];
+set<char> s1;
+map<ll,ll> cnt;
+map<char,ll> m;
+string s;
+char c,ch;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ll t,k,i,l,r,slen,ans;
+    cin>>t;
+    while(t--)
+    {
+        cin>>s>>k;
+        slen=s.length();
+        for(i=0;i<slen;i++)
+        {
+            c=s[i];
+            m[c]++;
+        }
+        ans=100000000000000000LL;
+        for(char ch='a';ch<='z';ch++)
+        {
+            ll x=m[ch];
+            ll cur=0;
+            for(char d='a';d<='z';d++)
+            {
+                if(m[d]<x)
+                {
+                    cur+=m[d];
+                }
+                if(m[d]>x+k)
+                {
+                    cur+=(m[d]-(x+k));
+                }
+            }
+            ans=min(ans,cur);
+        }
+        cout<<ans<<"
+";
+        m.clear();
+    }
+    return 0;
+}   

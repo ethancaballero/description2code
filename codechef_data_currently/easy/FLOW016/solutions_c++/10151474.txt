@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+long int gcd(int a,int b)
+{
+	if(b==0)
+	return a;
+	return gcd(b,a%b);
+}
+int main()
+{
+	int t,a,b;
+	long int l,g;
+	cin>>t;
+	while(t--)
+	{
+	cin>>a>>b;
+	g=gcd(a,b);
+	l=(a*b)/g;
+	
+	cout<<g<<" "<<l;
+	cout<<endl;	
+	}
+	return 0;
+}

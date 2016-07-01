@@ -1,0 +1,30 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#define F(i,x,y) for(i=x;i<y;i++)
+#define S(n) scanf("%lld",&n)
+#define s(n) scanf("%d",&n)
+#define P(n) printf("%lld
+",n)
+#define p(n) printf("%d
+",n)
+#define LLI long long int
+#define R return 0
+using namespace std;
+int main()
+{
+	int t;
+	s(t);
+	while(t--)
+	{
+		int p,s,x; s(p); s(s);
+		float h,v,y;
+		x=(p*p)-(24*s);
+		y=sqrt(x);
+		h=(p-y)/12;
+		//cout<<h<<endl;
+		v=(h*h*h)-((h*h*p)/4)+((s*h)/2);
+		printf("%0.2f
+",v);
+	}
+	R;
+}

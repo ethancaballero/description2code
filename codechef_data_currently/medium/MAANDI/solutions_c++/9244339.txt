@@ -1,0 +1,38 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int islucky(long long int n)
+{
+long long int i;
+while(n>1)
+{
+i=n%10;
+n=n/10;
+if(i==4||i==7)
+return 1;
+}
+return 0;
+}
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+long long int n,i,count=0,j;
+cin>>n;
+for(i=1;i<=sqrt(n);i++)
+{
+if(n%i)
+continue;
+//cout<<i;
+if(islucky(i))
+count++;
+j=n/i;
+if(j!=i&&islucky(j))
+count++;
+}
+cout<<count<<endl;
+}
+return 0;
+}

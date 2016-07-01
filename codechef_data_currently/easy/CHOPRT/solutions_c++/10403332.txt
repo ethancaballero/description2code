@@ -1,0 +1,31 @@
+#include<iostream>
+//#include<conio.h>
+using namespace std;
+int main()
+{
+//clrscr();
+int T,A,B;
+cin>>T;
+char *result=new char[T];
+for(int i=0;i<T;i++)
+{
+  cin>>A>>B;
+  if(A>B)
+    result[i]='>';
+  else if(A<B)
+    result[i]='<';
+  else
+    result[i]='=';
+
+}
+for(int l=0;l<T;l++)
+ {
+  cout<<"
+"<<result[l];
+
+  }
+
+
+//getch();
+return 0;
+}

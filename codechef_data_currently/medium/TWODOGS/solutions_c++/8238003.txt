@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+
+#define INT_MAX 2000000
+
+int main()
+{
+    int N,K;
+    int dist[1000001];
+    int a,min_;
+
+    cin>>N>>K;
+    for(int i=0;i<=K;i++)   dist[i]=INT_MAX;
+    for(int i=0;i<N;i++)
+    {
+        cin>>a;
+        min_ = min(i+1,N-i);
+        //cout<<min_<<" ";
+        if(dist[a]>min_)
+        {
+            dist[a]= min_;
+        }
+    }
+    int ans=INT_MAX;
+    //for(int i=0;i<=K;i++)   cout<<dist[i]<<" ";
+    for(int i=1;i<(K+1)/2;i++)
+    {
+        min_ = max(dist[i],dist[K-i]);
+        if(ans>min_)
+        {
+            ans = min_;
+        }
+    }
+    if(ans==INT_MAX)
+    {
+        cout<<"-1";
+    }
+    else
+        cout<<ans;
+
+    return 0;
+}

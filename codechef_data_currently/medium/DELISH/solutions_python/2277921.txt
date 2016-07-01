@@ -1,0 +1,77 @@
+
+# Property 1:
+#j and k cannot have gap
+#because if have gap > 0, one side will eat it up
+
+# hence for each middle position j or k
+# calculate the min/max values for each section, one to the left
+# and one to the right of j/k
+# then calculate the largest absolute difference between each
+# pair of left/right sections
+
+
+import sys
+
+
+T = int(sys.stdin.readline().strip())
+
+for z in range(T):
+	N = int(sys.stdin.readline().strip())
+	numbers = []
+	leftMins = []
+	leftMaxs = []
+	rightMins = []
+	rightMaxs = []
+	max_delish = 0
+	lines = sys.stdin.readline().strip()
+	for n in lines.split(" "):
+		numbers.append(int(n))
+		leftMins.append(10000001)
+		leftMaxs.append(-10000001)
+		rightMins.append(10000001)
+		rightMaxs.append(-10000001)
+
+	leftMins[0] = numbers[0] 
+	leftMaxs[0] = numbers[0]
+
+	rightMins[len(numbers)-1] = numbers[len(numbers)-1] 
+	rightMaxs[len(numbers)-1] = numbers[len(numbers)-1]
+
+
+	# for left sides
+	for j in range(1,N-1):
+		# for minimums
+		if leftMins[j-1] >= 0:
+			leftMins[j] = numbers[j]
+		else:
+			leftMins[j] = leftMins[j-1] + numbers[j]
+
+		# for maximums
+		if leftMaxs[j-1] <= 0:
+			leftMaxs[j] = numbers[j]
+		else:
+			leftMaxs[j] = leftMaxs[j-1] + numbers[j]
+
+	# for right sides
+	for z in range(1,N-1):
+		j = N - 1 - z
+		# for minimums
+		if rightMins[j+1] >= 0:
+			rightMins[j] = numbers[j]
+		else:
+			rightMins[j] = rightMins[j+1] + numbers[j]
+
+
+		# for maximums
+		if rightMaxs[j+1] <= 0:
+			rightMaxs[j] = numbers[j]
+		else:
+			rightMaxs[j] = rightMaxs[j+1] + numbers[j]
+		
+	max_delish = 0
+	for j in range(N-1):
+		k = j+1
+		delish = max(rightMaxs[k] - leftMins[j], leftMaxs[j] - rightMins[k])
+		if delish > max_delish:
+			max_delish = delish
+	print max_delish

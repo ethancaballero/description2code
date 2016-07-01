@@ -1,0 +1,29 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    
+    long long  int n,m,count,t,i,max1;
+    long long int a[100009];
+    
+    cin>>t;
+    while(t--){
+        cin>>n;
+        count=1;
+        for(i=0;i<n;i++)cin>>a[i];
+        max1=a[0];i=1;
+         while(i<n){
+         
+         while(a[i]>=max1 && i<n)i++;
+         if(max1>a[i] && i<n){
+         max1=a[i];
+         count++;
+         }
+             
+         }
+        cout<<count<<endl;
+        
+    }
+    
+    
+}

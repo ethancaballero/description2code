@@ -1,0 +1,136 @@
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#define MAX_N_VALUE 2000
+#define SELLING 0
+#define BUYING 1
+#define DOLLAR 1
+#define CORN 0
+
+double kiosk[MAX_N_VALUE + 2][MAX_N_VALUE + 2][2];
+double dp[MAX_N_VALUE + 2][MAX_N_VALUE + 2][2];
+int n, m;
+long long int d;
+void init_dp() {
+    for (int i = 0; i < MAX_N_VALUE + 2; i++)
+        for (int j = 0; j < MAX_N_VALUE + 2; j++)
+            dp[i][j][0] = dp[i][j][1] = -1;
+    for (int i = 0; i < n; i++) {
+        dp[i][0][CORN] = d;
+        dp[i][0][DOLLAR] = 0;
+    }
+}
+
+double calculate_dp(int index, int time, int currency) {
+
+    if (time < 0)
+        return 0;
+    if (index < 0)
+        return 0;
+    if (index >= n)
+        return 0;
+    if (dp[index][time][currency] != -1)
+        return dp[index][time][currency];
+    double answer[2];
+    answer[CORN] = calculate_dp(index, time - 1, CORN);
+    answer[DOLLAR] = calculate_dp(index, time - 1, DOLLAR);
+
+    answer[CORN] = std::max(answer[CORN],
+            std::max(calculate_dp(index + 1, time - 1, CORN),
+                    calculate_dp(index - 1, time - 1, CORN)));
+    answer[DOLLAR] = std::max(answer[DOLLAR],
+            std::max(calculate_dp(index + 1, time - 1, DOLLAR),
+                    calculate_dp(index - 1, time - 1, DOLLAR)));
+    answer[CORN] = std::max(answer[CORN],
+            calculate_dp(index, time - 1, DOLLAR)
+                    * kiosk[index][time - 1][BUYING]);
+
+    answer[DOLLAR] = std::max(answer[DOLLAR],
+            calculate_dp(index, time - 1, CORN)
+                    / kiosk[index][time - 1][SELLING]);
+    dp[index][time][CORN] = answer[CORN];
+    dp[index][time][DOLLAR] = answer[DOLLAR];
+    return answer[currency];
+}
+
+int main() {
+
+    scanf("%d %d %lld", &n, &m, &d);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            int sell_rate, buy_rate;
+            scanf("%d %d", &sell_rate, &buy_rate);
+            kiosk[i][j][SELLING] = (double) sell_rate;
+            kiosk[i][j][BUYING] = (double) buy_rate;
+        }
+    }
+    init_dp();
+//    for (int i = 0; i < n; i++) {
+//        dp[i][0][CORN] = d;
+//        dp[i][0][DOLLAR] = 0;
+//    }
+//    for (int j = 1; j <= m; j++) {
+//        for (int i = 0; i < n; i++) {
+//
+//            // Initial value is obtained by standing at kiosk i for 1 second
+//            // having done jack shit. No movement, no trade.
+//            dp[i][j][CORN] = dp[i][j - 1][CORN];
+//            dp[i][j][DOLLAR] = dp[i][j - 1][DOLLAR];
+//
+//            // First we check if we can get the best value just coming from
+//            // the left neighbor
+//            if (i - 1 >= 0) {
+//                dp[i][j][CORN] = std::max(dp[i][j][CORN],
+//                        dp[i - 1][j - 1][CORN]);
+//                dp[i][j][DOLLAR] = std::max(dp[i][j][DOLLAR],
+//                        dp[i - 1][j - 1][DOLLAR]);
+//                dp[i][j][CORN] = std::max(dp[i][j][CORN],
+//                        dp[i][j - 1][DOLLAR] * kiosk[i][j - 1][BUYING]);
+//                dp[i][j][DOLLAR] = std::max(dp[i][j][DOLLAR],
+//                        dp[i][j - 1][CORN] / kiosk[i][j - 1][SELLING]);
+//            }
+//            // Next we check if we can get the best value coming from the right
+//            // neighbor
+//            if (i + 1 < n) {
+//                dp[i][j][CORN] = std::max(dp[i][j][CORN],
+//                        dp[i + 1][j - 1][CORN]);
+//                dp[i][j][DOLLAR] = std::max(dp[i][j][DOLLAR],
+//                        dp[i + 1][j - 1][DOLLAR]);
+//                dp[i][j][CORN] = std::max(dp[i][j][CORN],
+//                        dp[i][j - 1][DOLLAR] * kiosk[i][j - 1][BUYING]);
+//                dp[i][j][DOLLAR] = std::max(dp[i][j][DOLLAR],
+//                        dp[i][j - 1][CORN] / kiosk[i][j - 1][SELLING]);
+//            }
+//            // Then we check if we can get the best value by trading at the kiosk
+//            // instead of having travelled from left or right neighbors at time
+//            // t-1
+//
+//        }
+//    }
+    double answer = 0.0;
+    for (int i = 0; i < n; i++)
+        answer = std::max(answer, calculate_dp(i,m,CORN));
+//    for(int i = 0; i < n; i++) {
+//        for(int j = 0; j <=m ; j++) {
+//            printf("%lf	", dp[i][j][CORN]);
+//        }
+//        printf("
+");
+//    }
+//    printf("
+");
+//    for(int i = 0; i < n; i++) {
+//            for(int j = 0; j <=m ; j++) {
+//                printf("%lf	", dp[i][j][DOLLAR]);
+//            }
+//            printf("
+");
+//        }
+    if(answer > pow(10, 18))
+        printf("Quintillionnaire
+");
+    else
+        printf("%lf
+", answer);
+    return 0;
+}

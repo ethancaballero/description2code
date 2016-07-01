@@ -1,0 +1,12 @@
+n,m=map(int,raw_input().split())
+a=map(int,raw_input().split())
+pos=0
+for _ in xrange(m):
+    x,d =raw_input().split()
+    d =int(d)
+    if x=="A":
+        pos-=d
+    elif x=="C":
+        pos+=d
+    elif x=="R":
+        print a[(pos-1+d)%n]

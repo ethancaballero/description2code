@@ -1,0 +1,15 @@
+# cook your code here
+for testcases in xrange(int(raw_input() ) ) :
+    k, Phrase = map(str, raw_input().split() )
+    k = int(k)
+    Dic = {}
+    L = []
+    for i in xrange( 2 ** k ) :
+        ibin = str(bin(i))[2:].zfill(k)
+        L.append(ibin)
+        Dic[ibin[::-1]] = Phrase[i]
+    ans = []
+    for elem in L :
+        ans.append(Dic[elem])
+
+    print ''.join(ans)

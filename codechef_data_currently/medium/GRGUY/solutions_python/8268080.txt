@@ -1,0 +1,25 @@
+t = int(raw_input())
+
+for i in range(t):
+	a = raw_input()
+	b = raw_input()
+	flag = 1
+	lane = 0
+	length = 0
+	for x, y in zip(a, b):
+		if x == '#' and y == '#':
+			flag = 0
+			break
+		elif x == '#':
+			if lane == 1:
+				length += 1
+			lane = 2
+		elif y == '#':
+			if lane == 2:
+				length += 1
+			lane = 1
+	if flag == 0:
+		print 'No'
+	else:
+		print 'Yes'
+		print length

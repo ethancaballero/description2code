@@ -1,0 +1,37 @@
+﻿def swap(N, l, r):
+	temp = N[l]
+	N[l] = N[r]
+	N[r] = temp
+
+''' 시간 초과
+def whereIsBall(n, c, l, r):
+	N = [0]*n
+	N[c-1] = 1
+	for i in range(len(l)):
+		left = l[i]-1
+		right = r[i]-1
+		while left < right:
+			swap(N, left, right)
+			left += 1
+			right -= 1
+	return N.index(1)+1
+'''
+
+def whereIsBall(n, c, l, r):
+	#사실 공이 있는 부분만 바꿔주면 되는데..
+	#공의 위치가 c라는 것을 알기 때문에, r-(c-l)로 바꿔주면 된다.
+	for i in range(len(l)):
+		if c >= l[i] and c <= r[i]:
+			c = r[i]-(c-l[i])
+	return c
+
+T=int(raw_input())
+for _ in range(T):
+	N, C, Q = map(int, raw_input().split())
+	L = []
+	R = []
+	for _ in range(Q):
+		l, r = map(int, raw_input().split())
+		L.append(l)
+		R.append(r)
+	print whereIsBall(N, C, L, R)

@@ -1,0 +1,31 @@
+#include <cstdio>
+using namespace std;
+
+int main() 
+{
+	int t, n, i;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		int a[n+1];
+		for(i = 1; i <= n; i++)
+			scanf("%d",&a[i]);
+		bool z = true;
+		for(i = 1; i <= n-2; i++)
+		{
+			if(a[i] > a[i+2])
+			{
+				z = false;
+				break;
+			}
+		}
+		if(z)
+			printf("YES
+");
+		else
+			printf("NO
+");
+	}
+	return 0;
+}

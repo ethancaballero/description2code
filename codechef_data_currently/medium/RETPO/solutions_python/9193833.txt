@@ -1,0 +1,17 @@
+for i in range(int(raw_input())):
+    x,y = raw_input().split()
+    x = abs(int(x))
+    y = abs(int(y))
+    m = min(x,y)
+    total = 2*m
+    x = x-m
+    y = y-m
+    if x==0 and y%2==0:
+        total+=2*y
+    elif x==0 and y%2==1:
+        total+=(2*y)-1
+    elif y==0 and x%2==1:
+        total+=(2*x)+1
+    else:
+        total+=2*x
+    print total

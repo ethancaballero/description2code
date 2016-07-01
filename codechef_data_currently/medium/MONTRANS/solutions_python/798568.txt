@@ -1,0 +1,17 @@
+import sys
+testCases = int(sys.stdin.readline().strip())
+for i in range(testCases):
+	A,B,C = sys.stdin.readline().strip().split()
+	A, B, C = int(A), int(B), int(C)
+	j = 0
+	maxJ = 0
+	maxValue = A*100+B
+	while (A*100+B) > C and j < 10000:
+		j += 1
+		if C>B and A>0:
+			A, B = A-1, B+100
+		A, B = B-C, A
+		if A*100+B > maxValue:
+			maxJ = j
+			maxValue = A*100+B
+	print maxJ

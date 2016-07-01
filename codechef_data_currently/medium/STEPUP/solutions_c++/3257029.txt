@@ -1,0 +1,119 @@
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+
+struct adjver
+{
+    unsigned no;
+	struct adjver* ptr;
+};
+
+struct vertex
+{
+	struct adjver* ptr;
+};
+
+
+vertex g[10001];
+bool e[10001][10001];
+bool vis[10001];
+bool possible;
+
+unsigned maxcnt;
+unsigned n,m;
+
+
+
+void dfs(unsigned v,unsigned cnt)
+{
+	vis[v] = true;
+	
+	if( ++cnt > maxcnt )maxcnt = cnt;
+
+	for(adjver* p = g[v].ptr ; p != 0; p = p->ptr)
+	{
+		if(!vis[p->no])dfs(p->no,cnt);
+		else 
+		{
+			possible = false;
+			return;
+		}
+		if(!possible)return;
+	}
+}
+
+int main()
+{
+	unsigned t;
+
+	register unsigned i,j,p,q;
+	bool indeg[10001];
+	adjver* ptr;
+
+	scanf("%u",&t);
+
+	while(t--)
+	{
+		scanf("%u%u",&n,&m);
+
+		memset(g,0,sizeof g);
+		memset(indeg,false,sizeof indeg);
+		memset(vis,false,sizeof vis);
+		memset(e,false,sizeof g);
+
+		/*
+		for(i = 1; i <= n; i++)
+		{
+			*(vis + i) = false;
+			*(indeg + i) = false;
+
+			for(j = 1; j <= n; j++)
+				g[i][j] = false;
+		}
+		*/
+
+		for(i = 1; i <= m ; i++ )
+		{
+			scanf("%u%u",&p,&q);
+
+			if( !e[p][q] )
+			{
+				e[p][q] = true;
+				indeg[q] = true;
+
+				ptr = (adjver*)malloc(sizeof (adjver));
+				ptr->ptr = g[p].ptr;
+				ptr->no = q;
+				g[p].ptr = ptr;
+			}
+		}
+		
+
+		maxcnt = 0;
+		possible = true;
+
+		for(i = 1; i <= n ; i++ )
+		{
+			if(!possible)break;
+
+			if(!indeg[i])dfs(i,0);
+		}
+
+		if(!possible)puts("IMPOSSIBLE");
+		else
+		{
+			for(i = 1; i <= n ; i++ )
+			{
+				if(!vis[i])
+				{
+					possible = false;
+					break;
+				}
+			}
+			if(!possible)puts("IMPOSSIBLE");
+			else printf("%u
+",maxcnt);
+		}
+	}
+	return 0;
+}

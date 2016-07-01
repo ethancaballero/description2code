@@ -1,0 +1,7 @@
+t=int(input())
+while t:
+    n=int(input())
+    a=map(int,raw_input().split())
+    a=list(set(a))
+    print len(a)
+    t=t-1

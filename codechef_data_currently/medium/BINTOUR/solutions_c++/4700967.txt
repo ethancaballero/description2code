@@ -1,0 +1,62 @@
+#include<iostream>
+
+#define mod 1000000009L
+
+using namespace std;
+
+long long int inv(int n)
+{
+	if(n <= 0)
+		return 0;
+	long long int pow = mod-2;
+	long long int val = n;
+	long long int ans = 1;
+	while(pow > 0)
+	{
+		if(pow %2 == 1)
+			ans = (ans * val) % mod;
+		val = (val * val)%mod;
+		pow /= 2;
+	}
+	return ans;
+}
+
+long long int val;
+long long int choose(int n, int k)
+{
+	if(n < k)
+		return 0;
+	if(n == k)
+	{
+		val = 1;
+		return 1;
+	}
+	val = (val * ((n * inv(n - k)) % mod))%mod;
+	return val;
+}
+
+//n>=1
+long long int fact(int n)
+{
+	if(n == 1)
+		return 1;
+	long long int ans = 1;
+	for(int i=1; i<=n; ++i)
+		ans = (ans * i)%mod;
+	return ans;
+}
+
+int main()
+{
+	int k;
+	cin>>k;
+	int n = 1<<k;
+	long long int factnb2 = fact(n/2);
+	long long int mult = (2 * ((factnb2 * factnb2) % mod))%mod;
+	for(int i=1; i<=n; ++i)
+	{
+		long long int val = (mult * choose(i-1, n/2 - 1)) % mod;
+		cout<<val<<endl;
+	}
+	return 0;
+}

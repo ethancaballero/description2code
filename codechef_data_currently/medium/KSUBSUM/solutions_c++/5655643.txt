@@ -1,0 +1,102 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <stdlib.h>
+#include <queue>
+
+#define MOD 1000000007
+#define MAX 100005
+
+using namespace std;
+
+typedef long long LL;
+
+inline void fastRead_int(int &x) {
+    register int c = getchar_unlocked();
+    x = 0;
+    int neg = 0;
+
+    for(; ((c<48 || c>57) && c != '-'); c = getchar_unlocked());
+
+    if(c=='-') {
+    	neg = 1;
+    	c = getchar_unlocked();
+    }
+
+    for(; c>47 && c<58 ; c = getchar_unlocked()) {
+    	x = (x<<1) + (x<<3) + c - 48;
+    }
+
+    if(neg)
+    	x = -x;
+}
+
+int a[10005];
+int S[20000];
+int n,k1,k2,k3;
+int main()
+{
+int test;
+fastRead_int(test);
+
+while(test>0)
+{
+    --test;
+
+    fastRead_int(n);
+    fastRead_int(k1);
+    fastRead_int(k2);
+    fastRead_int(k3);
+
+
+    for(int i=0;i<n;++i)
+        fastRead_int(a[i]);
+
+
+    priority_queue<int> pq;
+     int sum=0;
+    while(!pq.empty()) pq.pop();
+
+    for(int i=0;i<n;++i)
+    {
+        sum=0;
+
+        for(int j=i;j<n;++j)
+        {
+            sum += a[j];
+
+            if(pq.size()<=2012)
+            {
+                pq.push(sum*-1);
+            }
+            else
+            {
+                if(pq.top()*-1<sum)
+                {
+                    pq.pop();
+                    pq.push(sum*-1);
+                }
+            }
+
+        }
+    }
+
+
+    int Spos=0;
+
+    while(!pq.empty())
+    {
+        //cout<<pq.top()<<" ";
+        S[Spos++] = pq.top()*-1;
+        pq.pop();
+    }
+
+
+    printf("%d %d %d
+",S[Spos-k1],S[Spos-k2],S[Spos-k3]);
+
+
+}
+ return 0;
+}
+

@@ -1,0 +1,56 @@
+#include <iostream>
+
+#include<cstdio>
+using namespace std;
+#ifdef CHAR_UNLOCKED
+#	define gc getchar_unlocked
+#else
+#	define gc getchar
+#endif
+
+inline void input(int &x) {
+	int c;
+	while((c = gc()) < '0' || c > '9');
+
+	for(x = 0; c >= '0' && c <= '9'; c = gc()) x = (x << 1) + (x << 3) + c - '0';
+}
+
+#define size 1000001
+#define MOD 1000000007
+int n, m;
+int a[size];
+int p[size];
+int ar[size];
+int s;
+
+void Trip() {
+     long long count=0;
+     p[0]=1;
+     int j=0, k=0;
+
+     for(int i=1;i<n;i++) {
+                      while(a[i]-a[j] > m)
+	                                      count-= p[j++];
+
+                      ar[i]= ar[j]+1;
+
+                      while(ar[k]==ar[j])
+                                          count += p[k++];
+
+                      p[i]=count%MOD;
+
+    }
+
+    printf("%d %d
+",ar[n-1]-1, p[n-1]);
+
+}
+int main()
+{
+    input(n);
+    input(m);
+    for(int i=0; i<n; i++)
+            input(a[i]);
+    Trip();
+    return 0;
+}

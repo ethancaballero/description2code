@@ -1,0 +1,86 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MAXN 100005
+ 
+vector<int> parent(MAXN);
+vector<int> S(MAXN);
+int query,x,y,N,Q,px,py;
+ 
+int find(int i)
+{
+	int j;
+	if(parent[i]==i)
+		return i;
+	else
+	{
+		j=find(parent[i]);
+		parent[i]=j;
+		return j;
+	}
+}
+	
+void set_union(int i, int j)
+{
+	int x1,y1;
+	x1 = find(i);
+	y1 = find(j);
+	//parent of both of them will be the one with the highest score
+    if(S[x1]>S[y1])
+        parent[y1]=x1;
+    else if(S[x1] < S[y1])
+        parent[x1]=y1;
+}
+ 
+void init(int N)
+{
+	S.resize(N);
+	parent.resize(N);
+	for(int i = 0; i < N;i++)
+		parent[i]=i;
+}
+ 
+void solve(int query)
+{
+	if(query == 0)
+	{
+        cin >> x >> y;
+        x--; y--;
+        px = find(x);
+        py = find(y);
+        if(px == py)
+            cout << "Invalid query!" << endl;
+        else
+            set_union(px,py);
+	}
+    else
+    {
+        cin >> x;
+        x--;
+        cout << find(x)+1 << endl;
+	}
+}
+ 
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	int t;
+	cin >> t;
+	while(t--)
+	{
+		cin >> N;
+		init(N);
+		
+		for(int i = 0; i < N; i++)
+		{
+			cin >> S[i];
+		}
+		cin >> Q;
+		while(Q--)
+		{
+			cin >> query;
+			solve(query);
+		}
+	}
+	return 0;
+}

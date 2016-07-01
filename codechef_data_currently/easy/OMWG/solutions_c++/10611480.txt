@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t>0)
+    {
+        long int n,m,ans=0;
+        cin>>n>>m;
+       ans=n*(m-1)+m*(n-1);
+       cout<<ans<<endl;
+       t--;
+    }
+    return 0;
+}

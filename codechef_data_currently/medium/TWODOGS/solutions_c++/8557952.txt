@@ -1,0 +1,40 @@
+//
+//  main.cpp
+//  Make Him Happy
+//
+//  Created by kevin on 2015/10/16.
+//  Copyright (c) 2015年 kevin. All rights reserved.
+//
+
+#include<iostream>
+#include<cstring>
+int main(){
+    int n,k,a[500001];
+    std::cin>>n>>k;
+    memset(a,0,sizeof(a));
+    for(int i=0;i<n;i++){
+        std::cin>>a[i];
+    }
+    bool ans[1000001];
+    memset(ans,0,sizeof(ans));
+    int step=-1;
+    for(int i=0;i<n/2+1;i++){
+        ans[a[i]]=1;
+        ans[a[n-1-i]]=1;
+        if(k-a[i]>0){
+            if((k%2==1||k-a[i]!=k/2)&&ans[k-a[i]]==1){
+                step=i+1;
+                break;
+            }
+        }
+        if(k-a[n-1-i]>0){
+            if((k%2==1||k-a[n-1-i]!=k/2)&&ans[k-a[n-1-i]]==1){
+                step=i+1;
+                break;
+            }
+        }
+    }
+    std::cout<<step<<"
+";
+    return 0;
+}

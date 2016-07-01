@@ -1,0 +1,65 @@
+#include "bits/stdc++.h"
+using namespace std;
+#define ll long long 
+
+ll a[101][101];
+ll b[101][101];
+ll c[101][101];
+ll d[101][101];
+int main(int argc, char const *argv[])
+{
+	int t;
+	cin >> t;
+	while(t--)
+	{
+		int n;
+		cin >> n;
+
+		for(int i = 0 ; i <= 100; i++)
+		{
+			for(int j = 0 ; j <= 100; j++)
+			{
+				a[i][j] = b[i][j] = c[i][j] = d[i][j] = 0;
+			}
+		}
+
+		for(int i = 1 ; i <= n; i++)
+		{
+			for(int j = 1 ; j <= n; j++)
+			{
+				int x;
+				cin >> x;
+				a[i][j]  = x;
+				b[i][j]  = c[i][j] = d[i][j] = x;
+			}
+		}
+		for(int i = 1; i <= n; i++)
+		{
+			for(int j = 1; j <= n; j++)
+			{
+				b[i][j] ^= b[i-1][j]^b[i-1][j-1]^b[i][j-1];
+			}
+		}
+		ll  max2 = -1 ;
+
+		for(int i = 1; i <= n; i++)
+		{
+			for(int j = 1; j <= n; j++)
+			{
+				for(int k = 1; k <= i; k++)
+				{
+					for(int k1 = 1; k1 <= j; k1++)
+					{
+						max2 = max(max2,b[i][j]^b[i][k1-1]^b[k-1][j]^b[k-1][k1-1]);
+					}
+				}
+				
+			}
+		}
+
+
+		cout << max2 << "
+";
+	}
+	return 0;
+}

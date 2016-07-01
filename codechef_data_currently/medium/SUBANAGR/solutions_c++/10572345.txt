@@ -1,0 +1,51 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+
+using namespace std;
+ 
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    int n=t;int count=0;
+    int ans[26]={0};
+    for(int i=0;i<t;i++)
+    {    int a[26]={0};
+        string s;
+        cin>>s;
+        
+        if(i==0)
+        {
+        for(int i=0;i<s.length();i++)
+        ans[s[i]-'a']++; 
+        }
+
+        for(int i=0;i<s.length();i++)
+        a[s[i]-'a']++;
+        
+        for(int i=0;i<26;i++)
+        ans[i]=min(ans[i],a[i]);
+            
+        
+    }
+    
+    for(int i=0;i<26;i++)
+    if(ans[i]>=1)
+    count++;
+    
+    
+    if(count==0)
+    cout<<"no such string"<<endl;
+    
+    for(int i=0;i<26;i++)
+    { 
+        if(ans[i]>=1)
+        {for(int k=0;k<ans[i];k++)
+        printf("%c",i+97);
+        }
+    }
+    cout<<endl;
+ return 0;
+}

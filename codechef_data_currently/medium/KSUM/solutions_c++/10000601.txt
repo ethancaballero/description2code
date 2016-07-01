@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int n,i,k;
+	scanf("%lld%lld",&n,&k);
+	long long int a[n+1],j,sum[n+1],max,x,y;
+	sum[0]=0;
+	set<pair<long long int,pair<long long int,long long int> > >ins;
+	for(i=1;i<=n;i++)
+	{
+		scanf("%lld",&a[i]);
+		sum[i]=sum[i-1]+a[i];
+		ins.insert(make_pair(sum[i],make_pair(i,0)));
+	}
+		set<pair<long long int,pair<long long int,long long int> > >::iterator it;
+	while(k--)
+	{
+		it=ins.end();
+		it--;
+		max=it->first;
+		x=it->second.first;
+		y=it->second.second;
+		printf("%lld ",max);
+		ins.erase(it);
+		if(y<x)
+		{
+			ins.insert(make_pair(sum[x]-sum[y+1],make_pair(x,y+1)));
+		}
+		if(ins.size()==0)
+		break;
+	}
+	return 0;
+}

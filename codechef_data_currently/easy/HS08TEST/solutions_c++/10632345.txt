@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+ 
+int main()
+{
+int a;
+float b;
+cin>>a>>b;
+if((a+0.50)<=b&&(a%5==0))
+{
+b=b-a-0.50;
+}
+cout<<b;
+return 0;
+} 

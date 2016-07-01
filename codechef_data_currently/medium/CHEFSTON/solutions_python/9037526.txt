@@ -1,0 +1,13 @@
+from pprint import pprint as pp
+def GI(): return int(raw_input())
+def GIS(): return map(int, raw_input().split())
+
+def main():
+    T = GI()
+    for t in xrange(T):
+        N, K = GIS()
+        A = GIS()
+        B = GIS()
+        print max(K/a*b for a, b in zip(A, B))
+
+main()

@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	int t;
+	cin >>t;
+	while(t--){
+		long long n,k;
+		cin >> n >> k;
+		long long r=0,temp=0;
+		long long pq=0;
+		for(long long i=0;i<n;i++){
+			cin >> temp;
+			if(r>=temp){
+				r = r - temp;
+				if(r>0) r--;
+			}
+			else{
+				temp = temp - r;
+				if(k>=temp){
+					r = k - temp;
+					if(r>0) r--;
+					pq++;
+				}
+				else{
+					r = k - temp%k;
+					if(temp%k == 0)
+					    r = 0;
+					pq += temp/k;
+					if(r>0){
+					    r--;
+					    pq++;
+				    }
+				}
+			}
+		}
+		cout << pq << endl;
+	}
+	return 0;
+}

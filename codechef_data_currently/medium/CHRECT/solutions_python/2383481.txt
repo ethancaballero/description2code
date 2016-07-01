@@ -1,0 +1,14 @@
+import sys
+
+def rec(n,m,k):
+ if n+m <= 3:
+  print 0
+ elif n==1 or m==1:
+  print k
+ else:
+  print (k+1)/2
+
+t = int(sys.stdin.readline())
+for i in range(t):
+	n,m,k = [int(x) for x in sys.stdin.readline().strip().split(" ")]
+	rec(n,m,k)

@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<algorithm>
+int min_i(int a,int b){
+    if(a<b){
+        return a;
+    }
+    return b;
+}
+int main(){
+    int t;
+    scanf("%d",&t);
+    for(int w=0;w<t;w++){
+        int n;
+        scanf("%d",&n);
+        int arr[n];
+        for(int i=0;i<n;i++){
+            scanf("%d",&arr[i]);
+        }
+        std::sort(arr,arr+n);
+        int min=1000000000;
+        for(int i=0;i<n-1;i++){
+        min=min_i(min,arr[i+1]-arr[i]);
+        }
+        printf("%d
+",min);
+    }
+}

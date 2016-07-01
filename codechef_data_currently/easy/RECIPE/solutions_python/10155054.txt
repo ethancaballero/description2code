@@ -1,0 +1,15 @@
+
+def findgcd(a,b):
+	if (b==0): return a;
+	if (a>b): return findgcd(b,a%b);
+	else: return findgcd(a,b%a);
+
+t=input();
+while t>0:    
+    list1=map(int,raw_input().split())
+    g=reduce(findgcd,list1[1:]);
+    list2=[x/g for x in list1[1:]]
+    #print list2
+    print ' '.join(str(p) for p in list2)
+    t=t-1
+

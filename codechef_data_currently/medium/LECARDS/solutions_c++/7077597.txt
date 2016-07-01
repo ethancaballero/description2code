@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+#define M 1000000007
+long long int power(long long int a,long long int N)
+{
+   if(N==0)
+      return 1;
+   long long int res=power(a,N/2);
+   res=res*res%M;
+   if(N%2)
+      return res*a%M;
+   return res;
+}
+int main()
+{
+   long long int T,N,i,num,den,ans;
+   cin>>T;
+   while(T--)
+   {
+      cin>>N;
+      for(i=0;i<N;i++)
+         cin>>ans;
+      if(N%2)
+         cout<<power(2,N-1)<<endl;
+      else
+      {
+         num=den=1;
+         for(i=N/2;i;i--)
+         {
+            num=(i+N/2)*num%M;
+            den=i*den%M;
+         }
+         ans=num*power(den,M-2)%M;
+         ans=power(2,N)-ans;
+         ans=(M+ans)%M;
+         ans=ans*power(2,M-2)%M;
+         cout<<ans<<endl;
+      }
+   }
+   return 0;
+}

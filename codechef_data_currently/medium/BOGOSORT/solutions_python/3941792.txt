@@ -1,0 +1,31 @@
+def gcd(a,b):
+	if not b: 
+		return a
+	return gcd(b,a%b)
+
+def reduce(n,d):
+	g=gcd(n,d)
+	return n/g,d/g
+	
+def sum(sn,sd,n,d):
+	return reduce(sn*d+n*sd,sd*d)
+	
+a=[0,0,1]; b=[0,0,1]; n=[0,0,2]; d=[0,0,1]; x=2
+for i in range(3,151):
+	x=x*i
+	a.append(a[i-1]+2*(i-2))
+	b.append(b[i-1]*(i-2))
+	sn=x; sd=1
+	for j in range(2,i):
+		sn,sd=sum(sn,sd,(i+1-j)*a[j]*b[j]*n[j],d[j])
+	tn,td=reduce(sn,sd*(x-a[i]*b[i])); n.append(tn); d.append(td)
+	
+tc=input()
+for i in range(tc):
+	t=input()
+	if(d[t]>1):
+		print "%d/%d" %(n[t],d[t])
+	else:
+		print n[t]
+			
+    

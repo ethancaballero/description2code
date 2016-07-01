@@ -1,0 +1,76 @@
+#include <algorithm>
+#include <iostream>
+#include <cstring>
+#include <cassert>
+#include <cstdlib>
+#include <cstdio>
+#include <vector>
+#include <string>
+#include <cmath>
+#include <set>
+#include <map>
+
+using namespace std;
+
+typedef long long LL;
+typedef long double LD;
+
+#define pb push_back
+#define mp make_pair
+#define sz(A) (int)(A).size()
+
+const int N = int(1e7);
+
+LL q[N];
+int qmask[N], t;
+
+void add(LL num, int mask) {
+	q[t] = num;
+	qmask[t++] = mask;
+}
+
+int pos(LL p) {
+	int l = -1, r = t;
+	while (l + 1 < r) {
+		int mid = (l + r) / 2;
+		if (q[mid] <= p)
+			l = mid;
+		else
+			r = mid;					
+	}
+	return l;
+}
+
+int main() {	
+	for (int i = 1; i < 10; i++) {
+		add(i, 1 << i);
+	}
+
+	for (int i = 0; i < t; i++) {
+		for (int j = 0; j < 10; j++)
+			if ((qmask[i] & (1 << j)) == 0) 
+				add(q[i] * 10 + j, qmask[i] | (1 << j));
+	}	
+
+	int tst;
+	scanf("%d", &tst);	
+
+	for (int i = 0; i < tst; i++) {
+		LL l, r;
+		scanf("%lld%lld", &l, &r);
+
+		if (l > q[t - 1]) {
+			printf("0
+");			
+			continue;
+		}
+
+		if (r > q[t - 1])
+			r = q[t - 1];
+
+		printf("%d
+", pos(r) - pos(l - 1));
+	}
+
+	return 0;
+}

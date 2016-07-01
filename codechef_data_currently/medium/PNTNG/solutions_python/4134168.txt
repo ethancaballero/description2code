@@ -1,0 +1,30 @@
+# your code goes here
+from sys import*
+n,m,h=map(long, stdin.readline().split())
+lis=[]
+s=0
+v=n*m
+for _ in range(h):
+	t, c=map(long, stdin.readline().split())
+	lis.append((c,t))
+	s+=t
+if(s<v):
+	print "Impossible"
+else:
+	cost=0;
+	lis.sort()
+	f=1;
+	for i in lis:
+		if(v==0):
+			break
+		else:
+			c,t=i
+			if(t>v):
+				cost+=v*c;
+				v=0;
+				break;
+			else:
+				v-=t;
+				cost+=t*c;
+	print cost
+	

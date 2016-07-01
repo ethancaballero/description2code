@@ -1,0 +1,19 @@
+#include<iostream>
+#include <iomanip>      
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		double  q;
+		double  c;
+		cin>>q>>c;
+		if(q>1000){
+			c=(q*c)*0.9;
+			
+		}else
+		c = (q*c);
+		cout << std::fixed;
+		cout<<std::setprecision(6)<<c<<endl;
+	}
+}

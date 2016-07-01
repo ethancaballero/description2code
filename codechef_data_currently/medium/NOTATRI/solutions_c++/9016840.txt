@@ -1,0 +1,106 @@
+#include<bits/stdc++.h>
+using namespace std;
+/*int find_index(vector<int>& v,int n,int val,int l,int r)
+{
+	int mid=(l+r)/2;
+	if(l>r)
+	{
+		return -1;
+	}
+	if((v[mid]==val))
+	{
+		return find_index(v,n,val,mid+1,r);
+	}
+	else
+	{
+		if(v[mid]<val)
+		{
+			return find_index(v,n,val,mid+1,r);
+		}
+		else
+		{
+			if(v[mid-1]<val)
+			{
+				return mid;
+			}
+			else
+			{
+				return find_index(v,n,val,l,mid-1);
+			}
+		}
+	}
+}*/
+/*int main()
+{
+	int i,j,n,num,ans;
+	vector<int> v(2001);
+	scanf("%d",&n);
+	while(n!=0)
+	{
+		ans=0;
+		map<int,int> m;
+		map<int,int> f;
+		map<int,int>::iterator it;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&(v[i]));
+			m[v[i]]++;
+		}
+		it=m.end();
+		i=0;
+		for(it=m.begin();it!=m.end();it++)
+		{
+			f[it->first]=n-i;
+			i+=(it->second);
+		}		
+		for(i=0;i<n-1;i++)
+		{
+			for(j=i+1;j<n;j++)
+			{
+				it=f.upper_bound(v[i]+v[j]);
+				if(it!=f.end())
+				{
+					ans=ans+(it->second);
+				}
+			}
+		}
+		printf("%d
+",ans);
+		scanf("%d",&n);
+	}
+	return 0;
+}*/
+int main()
+{
+	int i,j,n,ans,val,k;
+	vector<int> v(2000);
+	scanf("%d",&n);
+	while(n)
+	{
+		ans=0;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&(v[i]));
+		}
+		sort(v.begin(),v.begin()+n);
+		for(i=n-1;i>1;i--)
+		{
+			val=v[i];
+			j=0;
+			k=i-1;
+			while(j<k)
+			{
+				if(v[j]+v[k]<val)
+				{
+					ans+=(k-j);
+					j++;
+				}
+				else
+					k--;
+			}
+		}
+		printf("%d
+",ans);
+		scanf("%d",&n);
+	}
+}

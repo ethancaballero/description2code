@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+#define MOD 1000000007
+#define MAX 1005
+using namespace std;
+int k;
+long long int dp[MAX][11];
+long long int sum(int n,int i)
+{
+    if(n==0 && i==0)
+        return 0;
+    if(n==0)
+        return 1;
+    if(dp[n][i]!=-1)
+        return dp[n][i];
+    int j,ans=0;
+    for(j=0;j<=k;j++)
+    {
+        if(j==i)    continue;
+        ans+=sum(n-1,j);
+        ans%=MOD;
+    }
+    return dp[n][i]=ans;
+}
+int main(int argc, char const *argv[]) {
+    int test,n;
+    int i,j;
+    long long int ans;
+    scanf("%d",&test);
+    while(test--)
+    {
+        scanf("%d%d",&n,&k);
+        for(i=0;i<=n;i++)
+            for(j=0;j<=k;j++)
+                dp[i][j]=-1;
+        n--;
+        ans=0;
+        for(i=1;i<=k;i++)
+        {
+            ans+=sum(n-1,i);
+            ans%=MOD;
+        }
+        printf("%lld
+",ans);
+    }
+    return 0;
+}

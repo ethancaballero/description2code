@@ -1,0 +1,425 @@
+#include<iostream>
+#include<fstream>
+#include<sstream>
+#include<bitset>
+#include<cstdio>
+#include<stdlib.h>
+#include<string>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#include<stack>
+#include<queue>
+#include<vector>
+#include<utility>
+#include<set>
+#include<map>
+#include<iomanip>
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<ll,ll> ii;
+typedef vector<ii> vii;
+typedef vector<int> vi;
+typedef vector<ll> vin;
+typedef vector<string> vs;
+typedef vector<vector<ll> > vvin;
+typedef vector<char> vc;
+typedef vector<bool> vb;
+typedef map<ll,ll> mll;
+typedef map<string, ll> msl;
+typedef set<ll> sll;
+typedef set<int> si;
+
+#define REP(i,a,b) for(ll i=a;i<b;i++)
+#define rep(i,n) REP(i,0,n)
+#define BREP(i,a,b) for(ll i=a-1;i>=b;i--)
+#define brep(i,n) BREP(i,n,0)
+#define pb push_back
+#define inf 1e18
+#define mp make_pair
+#define sz size()
+#define DEBUG 0
+#define all(vec) (vec).begin(),(vec).end()
+#define fi first
+#define se second
+#define POPCOUNT __builtin_popcountll
+#define CLR(x,y) memset(x,y,sizeof(x))
+#define UNIQUE(V) (V).erase(unique((V).begin(),(V).end()),(V).end())
+#define MIN(a,b) ((a)<(b)?(a):(b))
+#define MAX(a,b) ((a)>(b)?(a):(b))
+#define NUMDIGIT(x,y) (((int)(log10((x))/log10((y))))+1)
+#define SQ(x) ((x)*(x))
+#define ABS(x) ((x)<0?-(x):(x))
+#define FABS(x) ((x)+eps<0?-(x):(x))
+#define LCM(x,y) (((x)/gcd((x),(y)))*(y))
+#define mset(a,b) memset(a,b,sizeof a)
+#define endl "
+"
+#define DFS_WHITE -1 
+#define DFS_BLACK 1
+
+
+const double pi = 2 * acos ( 0.0 );
+const double eps = 1e-9;
+const int MOD = (int)1e9 + 7;
+const ll oo = ll(1e18);
+const ll dx[] = {-1, +0, +0, +1};
+const ll dy[] = {+0, -1, +1, +0};
+
+//setbase - cout << setbase (16); cout << 100 << endl; Prints 64
+//setfill -   cout << setfill ('x') << setw (5); cout << 77 << endl; prints xxx77
+//setprecision - cout << setprecision (4) << f << endl; Prints x.xxxx
+
+long long pow(long long base, long long exp, long long mod){
+    long long result = 1;
+    while(exp>0){
+        if(exp&1) result*=base;
+        base*=base;
+        if(base>mod) base%=mod;
+        if(result>mod) result%=mod;
+        exp/=2;
+    }
+    return result;
+}
+
+long long mult(long long A, long long B) {
+    if ( B == 0 ) return 0;
+    long long u = mult(A, B/2);
+    long long res;
+    if ( B%2 == 0 ) 
+        res = u + u;
+    else
+        res = u + u + A;
+    while ( res >= MOD ) res -= MOD;
+    return res;
+}
+
+inline ll MultMod(ll a, ll b, ll mod) {
+    if(b == 0)
+        return 0;
+    if(b % 2)
+        return (MultMod(a, b - 1, mod) + a) % mod;
+    return (MultMod(a, b / 2, mod) * 2) % mod;
+}
+
+inline ll ModPow(ll a, ll b, ll mod) {
+    if(b == 0)
+        return 1ll % mod;
+    if(b == 1)
+        return a % mod;
+    if(b % 2)
+        return MultMod(ModPow(a, b - 1, mod), a, mod) % mod;
+    ll z = ModPow(a, b / 2, mod);
+    return (MultMod(z, z, mod)) % mod;
+}
+
+
+ll n,num;
+vin nums;
+void inp() {
+    rep(i,n) {
+        cin>>num;
+        nums.pb(num);
+    }
+}
+
+ll _sieve_size;
+bitset<10000010> bs;   // 10^7 should be enough for most cases
+vi primes;   // compact list of primes in form of vector<int>
+////////     TEST USING bs.test(i) //////
+void sieve(ll upperbound) {          // create list of primes in [0..upperbound]
+    _sieve_size = upperbound + 1;                   // add 1 to include upperbound
+    bs.set();                                                 // set all bits to 1
+    bs[0] = bs[1] = 0;                                     // except index 0 and 1
+    for (ll i = 2; i <= _sieve_size; i++) if (bs[i]) {
+            // cross out multiples of i starting from i * i!
+            for (ll j = i * i; j <= _sieve_size; j += i) bs[j] = 0;
+            primes.push_back((int)i);  // also add this vector containing list of primes
+        }
+}
+
+ll numCC=0;
+vin vis;
+vector<vii> al;
+
+
+void dfs(int u) {          
+  // printf(" %d", u);                                    // this vertex is visited
+  vis[u] = DFS_BLACK;      // mark this vertex as visited
+  for (int j = 0; j < (int)al[u].size(); j++) {
+    ii v = al[u][j];                      // v is a (neighbor, weight) pair
+    if (vis[v.first] == DFS_WHITE)         //  check to avoid cycle
+      dfs(v.first);      // recursively visits unvisited neighbors v of u
+} }
+
+void ig(ll n) {
+    //input graph
+    al.assign(n+5, vii());
+    rep(i,n) {
+        int k; //no. of neighbours
+        cin>>k;
+        rep(j,k) {
+            int v,w;
+            cin>>v;
+            //CHECK WHETHER INPUT FROM 0 OR 1
+            al[i].pb(mp(v,0)); 
+            al[v].pb(mp(i,0));
+            // for directed graph:
+            //cin>>v>>w;
+            //al[i].pb(mp(v,w);
+        }
+    }
+}
+
+void ing(ll n) {
+    // pre proc
+    // al.assign(n+5, vii());
+    rep(i,n) {
+        int u,v,w;
+        cin>>u>>v;
+        //INPUT FROM 0
+        --u; --v;
+        al[u].pb(mp(v,0));
+        al[v].pb(mp(u,0));
+        // for directed graph:
+        // cin>>u>>v>>w;
+        // al[u].pb(mp(v,w);
+    }
+}
+
+void ibg(ll n, ll m) {
+    // n vertices in first set and m vertices in second
+    al.assign(n+m+5, vii());
+    //check if  vertices are starting from 0 or 1
+    rep(i,n) {
+        int k; //no. of neighbours
+        cin>>k;
+        rep(j,k) {
+            int v,w;
+            cin>>v;
+            al[i].pb(mp(v+n,0));
+            al[v+n].pb(mp(i,0));
+            // for directed graph:
+            //cin>>v>>w;
+            //al[i].pb(mp(v+n,w);
+        }
+    }
+}
+
+void fncc(ll n) {
+    //preproc:
+    // numCC = 0;
+    // vis.assign(V, DFS_WHITE);
+    numCC=0;
+    vis.assign(n, DFS_WHITE);
+    rep(i,n)
+        if(vis[i] == DFS_WHITE) {
+            ++numCC;
+            dfs(i);
+        }
+}
+
+#define DFS_GRAY 2              // one more color for graph edges property check
+vi dfs_parent;      // to differentiate real back edge versus bidirectional edge
+bool cycle=false;
+void graphCheck(int u) {  
+    //preproc: 
+    // numCC = 0;
+    //vis.assign(V, DFS_WHITE); dfs_parent.assign(V, -1);
+        
+    
+  vis[u] = DFS_GRAY;   // color this as DFS_GRAY (temp) instead of DFS_BLACK
+  for (int j = 0; j < (int)al[u].size(); j++) {
+    ii v = al[u][j];
+    if (vis[v.first] == DFS_WHITE) {     // Tree Edge, DFS_GRAY to DFS_WHITE
+      // dfs_parent[v.first] = u;                  // parent of this children is me
+      graphCheck(v.first);
+    }
+    else if (vis[v.first] == DFS_GRAY) {             // DFS_GRAY to DFS_GRAY
+    // cout<<u<<" "<<v.fi<<"
+";
+    //   if (v.first == dfs_parent[u])          // to differentiate these two cases
+    //     printf(" Bidirectional (%d, %d) - (%d, %d)
+", u, v.first, v.first, u);
+    //  else  // the most frequent application: check if the given graph is cyclic
+    //    printf(" Back Edge (%d, %d) (Cycle)
+", u, v.first);
+    cycle=true;
+    return;
+    }
+    else if (vis[v.first] == DFS_BLACK);             // DFS_GRAY to DFS_BLACK
+      // printf(" Forward/Cross Edge (%d, %d)
+", u, v.first);
+  }
+  vis[u] = DFS_BLACK;     // after recursion, color this as DFS_BLACK (DONE)
+}
+
+vin topoSort;             // global vector to store the toposort in reverse order
+
+
+
+void dfs2(int u) {    // change function name to differentiate with original dfs
+  vis[u] = DFS_BLACK;
+  for (int j = 0; j < (int)al[u].size(); j++) {
+    ii v = al[u][j];
+    if (vis[v.first] == DFS_WHITE)
+      dfs2(v.first);
+  }
+  topoSort.push_back(u); }
+ 
+void topo(ll n) {
+    topoSort.clear();
+    vis.assign(n, DFS_WHITE);
+    for (ll i = 0; i < n; i++)            
+        if (vis[i] == DFS_WHITE)
+        dfs2(i);
+    reverse(topoSort.begin(), topoSort.end());
+}
+
+inline void swap(ll &a, ll &b) {
+    a = a^b;
+    b = a^b;
+    a = a^b;
+}
+
+bool ispal(string s) {
+    int len=s.sz;
+    rep(i,len/2)
+        if(s[i]!=s[len-i-1])
+            return false;
+    return true;
+}
+
+long long powe(ll num, ll exp) {
+	ll prod=1;
+	rep(i,exp) prod*=num;
+	return prod;
+}
+
+bool inter(ll l1,ll r1,ll l2,ll r2) {
+ return max(l1,l2)<=min(r1,r2);
+}
+
+int CeilIndex(int A[], int l, int r, int key)
+{
+    while (r - l > 1)
+    {
+        int m = l + (r - l)/2;
+        if (A[m]>=key)
+            r = m;
+        else
+            l = m;
+    }
+    return r;
+}
+ 
+int LongestIncreasingSubsequenceLength(vin A, int size)
+{
+    // Add boundary case, when array size is one
+ 
+    int *tailTable   = new int[size];
+    int len; // always points empty slot
+ 
+    memset(tailTable, 0, sizeof(tailTable[0])*size);
+ 
+    tailTable[0] = A[0];
+    len = 1;
+    for (int i = 1; i < size; i++)
+    {
+        if (A[i] < tailTable[0])
+            // new smallest value
+            tailTable[0] = A[i];
+ 
+        else if (A[i] > tailTable[len-1])
+            // A[i] wants to extend largest subsequence
+            tailTable[len++] = A[i];
+ 
+        else
+            // A[i] wants to be current end candidate of an existing
+            // subsequence. It will replace ceil value in tailTable
+            tailTable[CeilIndex(tailTable, -1, len-1, A[i])] = A[i];
+    }
+ 
+    delete[] tailTable;
+    return len;
+}
+
+ll C[2600][2600];
+void nck(int n, int k, ll MOD) {
+    C[0][0] = 1;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= MIN(n,k); j++) {
+            if(i==j || j==0) C[i][j]=1;
+            else C[i][j] = (C[i - 1][j] + C[i - 1][j - 1]) % MOD;
+        }
+    }
+}
+
+int toDecimal(int n, int b) {
+   int result=0;
+   int multiplier=1;
+      
+   while(n>0)
+   {
+      result+=n%10*multiplier;
+      multiplier*=b;
+      n/=10;
+   }
+      
+   return result;
+}
+
+string fromDecimal2(int n, int b)
+{
+   string chars="0123456789ABCDEFGHIJ";
+   string result="";
+      
+   while(n>0)
+   {
+      result=chars[n%b] + result;
+      n/=b;
+   }
+      
+   return result;
+}
+
+
+ll lcm(int a, int b, int c) {
+    ll p =a*b*c;
+    return (ll)(p*(__gcd(a,__gcd(b,c))))/(__gcd(a,b)*__gcd(a,c)*__gcd(b,c));
+}
+
+long long inv(long long a, long long b){
+ return 1<a ? b - inv(b%a,a)*b/a : 1;
+}
+
+ll nchoosek(ll a,ll b){
+    //NOTE: parameters are k and n, NOT n and k
+    long long ans=1;
+    a=MIN(a,b-a);
+    int p=2;
+    REP(i,b-a+1,b+1){
+        ans*=(long long)i;
+        while(p<=a&&ans%p==0)ans/=p++;
+    }
+    return ans;
+}
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int tc;
+    cin>>tc;
+    while(tc--) {
+    	int m;
+    	cin>>n>>m;
+    	if(n%2&&m%2) cout<<"Vanka
+";
+    	else cout<<"Tuzik
+";
+    }
+    return 0;
+}

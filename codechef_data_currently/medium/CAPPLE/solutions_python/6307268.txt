@@ -1,0 +1,9 @@
+from sys import stdin
+
+
+print '
+'.join(
+    str(len(set(ln.split())))
+    for i, ln in enumerate(stdin)
+    if i and i % 2 == 0
+)

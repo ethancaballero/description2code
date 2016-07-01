@@ -1,0 +1,38 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+char s[1000001];
+int main()
+{
+	long int t;
+	cin>>t;
+//	long int day=0,count=0;
+	while(t--)
+	{
+		long int day=0,count=0,m=0;
+		cin>>s;
+		for(long int i=0;i<strlen(s);)
+		{
+			if(s[i]=='#')
+			{
+			    i++;
+				//continue;
+			}
+		//	continue;
+			else
+			{
+				m=max(m,count);
+				count=0;
+				while(s[i]=='.')
+				count++,i++;
+			//	cout<<count;
+				if(count>m)
+				day++;
+				
+				
+			}
+		}
+		cout<<day<<"
+";
+	}
+}

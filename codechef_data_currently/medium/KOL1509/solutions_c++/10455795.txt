@@ -1,0 +1,214 @@
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Main {
+
+  private static final String QUINTILLIONNAIRE = "Quintillionnaire";
+  private static boolean print = false;
+
+  private static Timer time(String message, boolean time) {
+    if (time) {
+      return new Timer(message);
+    } else {
+      return Timer.DUMMY;
+    }
+  }
+
+  private static class Timer implements AutoCloseable {
+
+    private long start;
+    private long startMillis;
+    private String message;
+
+    private static Timer DUMMY = new Timer() {
+      @Override
+      public void close() {
+      }
+    };
+
+    private Timer() {
+
+    }
+
+    public Timer(String message) {
+      if (print) {
+        this.message = message;
+        start = System.nanoTime();
+        startMillis = System.currentTimeMillis();
+      }
+    }
+
+    public void close() {
+      if (print) {
+        long endTime = System.nanoTime();
+        long endTimeMillis = System.currentTimeMillis();
+        System.out.println(
+            message + " " + (endTime - start) + " nanos. " + (endTimeMillis - startMillis)
+                + " millis.");
+      }
+    }
+  }
+
+  private static String getNextLine(Scanner scanner) {
+    String nextLine;
+    do {
+      nextLine = scanner.nextLine().trim();
+    } while (nextLine.startsWith("//"));
+    return nextLine;
+  }
+
+  private static int mod(long number) {
+    int mod = Integer.MAX_VALUE;
+    return mod(number, mod);
+  }
+
+  private static int mod(long number, int mod) {
+    if (number < mod) {
+      return (int) number;
+    } else {
+      return (int) (number % mod);
+    }
+  }
+
+  private static long mul(long a, long b) {
+    return a * b;
+  }
+
+  private static double mul(double a, long b) {
+    return a * b;
+  }
+
+  public static void main(String[] args) throws Exception {
+    InputStream in = System.in;
+    if (args.length > 0) {
+      print = true;
+      in = new FileInputStream(args[0]);
+    }
+    try (Timer totalTime = time("Total time:", true);
+         Scanner scanner = new Scanner(in)) {
+      int noOfTasks = Integer.parseInt(getNextLine(scanner));
+//    int noOfTasks = 1;
+      IntStream.range(1, noOfTasks + 1).forEach(testCaseNumber -> {
+        int N = Integer.parseInt(getNextLine(scanner));
+        List<Integer> numbers =
+            Arrays.stream(getNextLine(scanner).split("\s+")).map(Integer::parseInt)
+                .collect(Collectors.toList());
+//        Integer max = Collections.max(numbers);
+//        char[][] grid = new char[max + 1][max + 1];
+        List<Point> allPoints = findAllPoints(numbers);
+//        for (Point point : allPoints) {
+//          grid[max - point.y][point.x] = '*';
+//        }
+        LinkedList<Point> hullPointsLower = new LinkedList<>();
+        for (Point point : allPoints) {
+          while (hullPointsLower.size() >= 2
+              && cross(hullPointsLower.get(1), hullPointsLower.get(0), point) <= 0) {
+            hullPointsLower.removeFirst();
+          }
+          hullPointsLower.addFirst(point);
+        }
+        LinkedList<Point> hullPointsUpper = new LinkedList<>();
+        for (int i = allPoints.size() - 1; i >= 0; i--) {
+          Point current = allPoints.get(i);
+          while (hullPointsUpper.size() >= 2
+              && cross(hullPointsUpper.get(1), hullPointsUpper.get(0), current) <= 0) {
+            hullPointsUpper.removeFirst();
+          }
+          hullPointsUpper.addFirst(current);
+        }
+        LinkedHashSet<Point> union = new LinkedHashSet<>();
+        union.addAll(hullPointsUpper);
+        union.addAll(hullPointsLower);
+        List<Point> hull = new ArrayList<>(union);
+        Point first = hull.get(0);
+        Point last = hull.get(hull.size() - 1);
+        long answer = 0;
+        for (int i = 0; i < hull.size() - 1; i++) {
+          Point current = hull.get(i);
+          Point next = hull.get(i + 1);
+          answer += mul(current.x, next.y);
+          answer -= mul(next.x, current.y);
+        }
+        answer += mul(last.x, first.y);
+        answer -= mul(first.x, last.y);
+        System.out.println(Math.abs(answer));
+//        System.out.println(answer);
+//        for (int i = 0 ; i < max + 1; i++) {
+//          for(int j = 0; j < max + 1; j++) {
+//            if (grid[i][j] == '*') {
+//              System.out.print('*');
+//            } else {
+//              System.out.print('.');
+//            }
+//          }
+//          System.out.println();
+//        }
+      });
+    }
+  }
+
+  private static long cross(Point p1, Point p2, Point p3) {
+    return mul(p2.x - p1.x, p3.y - p1.y) - mul(p3.x - p1.x, p2.y - p1.y);
+  }
+
+  private static List<Point> findAllPoints(List<Integer> numbers) {
+    int maxX = numbers.get(0);
+    int minX = numbers.get(0);
+    List<Point> points = new ArrayList<>();
+    for (int y = 1; y < numbers.size(); y++) {
+      Integer current = numbers.get(y);
+      Integer previous = numbers.get(y - 1);
+      if (previous > maxX) {
+        maxX = previous;
+      }
+      if (previous < minX) {
+        minX = previous;
+      }
+      points.add(new Point(minX, current));
+      points.add(new Point(maxX, current));
+    }
+    Collections.sort(points);
+    return points;
+  }
+
+  private static class Point implements Comparable<Point> {
+    final int x;
+    final int y;
+    private String toString;
+
+    public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+
+
+    @Override
+    public int compareTo(Point o) {
+      if (o == null) {
+        throw new NullPointerException("Comparing with null");
+      }
+      if (o.x == x) {
+        return this.y - o.y;
+      } else {
+        return this.x - o.x;
+      }
+    }
+
+    @Override
+    public String toString() {
+      if (toString == null) {
+        toString = "(" + x + "," + y + ")";
+      }
+      return toString;
+    }
+  }
+}

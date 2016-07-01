@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define mno 1000000007
+#define inf LLONG_MAX
+using namespace std;
+ int arr[10000007];
+ int mina[10000007];
+list<ll> p;
+int main()
+{
+	ll N,i,Q,K,L,R,sum=0,pro=1,j;
+	cin.sync_with_stdio(0);
+	cin.tie(0);
+	p.clear();
+	cin>>N>>K>>Q;
+	ll a,b,c,d,e,f,r,s,t,m,x,ko;
+	cin>>a>>b>>c>>d>>e>>f>>r>>s>>t>>m>>arr[0];
+	ko=t;
+	for(x=1;x<N;x++)
+	{
+		ko=(ko%s * t%s)%s;
+		if( ko  <= r )        
+			 arr[x] = (((a%m) * arr[x-1] * arr[x-1]) + ((b%m) * arr[x-1]) + c%m)%m;
+		else
+			 arr[x] = (((d%m) * arr[x-1] * arr[x-1]) + ((e%m) * arr[x-1]) + f%m)%m;
+	}
+	p.push_back(arr[0]);
+	for(i=1;i<N;i++)
+	{
+		if(i-K>=0)
+		{
+			mina[i-K]=p.front();
+			if(p.front()==arr[i-K])
+				p.pop_front();
+		}
+		while(!p.empty() && p.back()>arr[i])
+			p.pop_back();
+		p.push_back(arr[i]);
+	}
+	mina[N-K]=p.front();
+	//for(i=0;i<N;i++)
+	//	cout<<arr[i]<<" ";
+	//cout<<endl;
+	ll L1, La, Lc, Lm, D1, Da, Dc, Dm;
+	cin>>L1>>La>>Lc>>Lm>>D1>>Da>>Dc>>Dm;
+	for(i=0;i<Q;i++)
+	{
+		L1 = ( ( La * L1 ) + Lc ) % Lm;
+    	D1 = ( ( Da * D1 ) + Dc ) % Dm;
+    	L = L1 + 1;
+		R = min(L + K - 1 + D1, N);
+		//cout<<L<<" "<<R<<endl;
+		//cout<<mina[L-1]<<" "<<mina[R-K]<<endl;
+		ll x=min(mina[L-1],mina[R-K]);
+		//cout<<x;
+		sum+=x;
+		pro=(pro* x)%mno;		
+	}
+	cout<<sum<<" "<<pro<<endl;
+}

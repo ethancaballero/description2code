@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int T;
+	cin >> T;
+	int answer[T];
+	for(int i=0; i < T; i++)
+	{
+		long N, sum;
+		cin >> N;
+		sum = N%10;
+		if(N>10)
+		{
+			while(N>9)
+			{
+				N = N/10;
+			}
+			sum = sum+N;
+		}
+		answer[i] = sum;
+	}
+	for(int o =0; o < T; o++)
+	{
+		cout << answer[o] << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,28 @@
+#!/usr/bin/python
+import sys
+def main():
+	n = int(raw_input())
+	s = raw_input()
+	first = []
+	for j in s:
+		first.append(j)
+	for i in xrange(1,n):
+		t = raw_input()
+		second = []
+		for j in t:
+			if j in first:
+				second.append(j)
+				first.remove(j)
+		first = second
+	final = sorted(first)
+	l = ""
+	for i in final:
+		l = l + i 
+	if l == "" :
+		print "no such string"
+	else:
+		print l
+ 
+ 
+if __name__=="__main__":
+	main()

@@ -1,0 +1,75 @@
+#include <stdio.h>
+ 
+typedef long long LL;
+ 
+const int N=1000;
+const int M=3;
+const LL MOD=1000000080798150871LL;
+ 
+LL bin[N+1][N+1];
+ 
+void precalc()
+{
+	for(int n=0;n<=N;n++)
+	{
+		bin[n][0]=bin[n][n]=1;
+		for(int k=1;k<n;k++)
+			bin[n][k]=(bin[n-1][k-1]+bin[n-1][k])%MOD;
+	}
+}
+ 
+char a[N][M+1];
+ 
+inline int bit(int n) {
+	return 1<<n;
+}
+ 
+LL calc(int n,int m,int l,int k)
+{
+	if(l>n || k>m) return 0;
+	LL ans=0;
+	for(int mask=0;mask<bit(m);mask++)
+	{
+		int cnt=0;
+		for(int j=0;j<m;j++)
+			if(mask & bit(j)) cnt++;
+		if(cnt!=k) continue;
+		int b[N];
+		for(int i=0;i<n;i++) b[i]=1;
+		for(int j=0;j<m;j++)
+			if(mask & bit(j))
+				for(int i=0;i<n;i++) b[i]&=a[i][j];
+		int num=0;
+		for(int i=0;i<n;i++)
+			num+=b[i];
+		ans=(ans+bin[num][l])%MOD;
+	}
+	return ans;
+}
+ 
+void solution()
+{
+	int TST;
+	scanf("%d",&TST);
+	for(int tst=0;tst<TST;tst++)
+	{
+		int n,m,l,k;
+		scanf("%d%d%d%d",&n,&m,&l,&k);
+		for(int i=0;i<n;i++)
+		{
+			scanf("%s",a[i]);
+			for(int j=0;j<m;j++) a[i][j]-='0';
+		}
+		LL ans=calc(n,m,l,k);
+		printf("%lld
+",ans);
+	}
+}
+ 
+int main()
+{
+	precalc();
+	solution();
+	return 0;
+}
+ 

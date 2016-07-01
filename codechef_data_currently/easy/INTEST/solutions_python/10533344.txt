@@ -1,0 +1,9 @@
+X = raw_input()
+k = int(X.split()[0])
+n = int(X.split()[1])
+count = 0
+for i in range(0,k):
+	x = raw_input()
+	if int(x) % n == 0:
+		count += 1
+print count

@@ -1,0 +1,110 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+typedef set<int> si;
+typedef map<string, int> msi;
+typedef map<int, int> mii;
+
+//#define in(a) scanf("%d",&a)
+#define out(a) printf("%d",a)
+
+#define pb push_back
+#define len length()
+#define sz size()
+
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+#define pn printf("
+")
+#define ps printf(" ")
+
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define repn(i,n) rep(i,0,n)
+#define W(a) while(a--)
+
+/*======================================Templates Ends========================*/
+/* Main Code Starts from here */
+
+
+inline void in(int &x)
+{
+	register char c = gc();
+	while(c<'0' || c>'9')
+		c = gc();
+
+	x=0; while(c>='0' && c<='9') { x = 10 * x + c - 48; c = gc(); } 
+} 
+
+
+struct node
+{
+    int s,e,score;
+};
+
+
+bool compare(node l, node r)
+{
+    return l.e<r.e;
+}
+
+
+int main()
+{
+    //freopen("in.in","r",stdin);
+
+    int i,j,k,l,t,n,a,b,c,x,y,z,m;
+
+    in(t);
+    W(t)
+    {
+        in(n);
+
+        vector<node> arr(n);
+
+        repn(iter,n)
+        {
+            in(arr[iter].s),in(arr[iter].e),in(arr[iter].score);
+
+        }
+
+        //sort
+        sort(arr.begin(),arr.end(),compare);
+
+        vi dp(n+1);
+
+        dp[0]=0;
+        dp[1]=arr[0].score;
+
+        for(i=2;i<=n;i++)
+        {
+            //use i values upto here
+            
+            //find approprite value of j
+            j=i-2;
+
+            while(j>=0)
+            {
+               if(arr[i-1].s>=arr[j].e)
+                   break;
+
+               j--;
+            }
+            
+
+            dp[i]=max(dp[i-1],dp[j+1]+arr[i-1].score);
+        }
+
+        out(dp[n]),pn;
+       
+
+    }
+
+
+   return 0;
+}

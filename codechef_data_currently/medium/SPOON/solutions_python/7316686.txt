@@ -1,0 +1,24 @@
+t=int(raw_input())
+for asd in range (t):
+	r,c=map(int,raw_input().split())
+	s=[""]*r
+	t=[""]*c
+	flag=0
+	for x in range (r):
+		s[x]=raw_input()
+		s[x]=s[x].lower()
+		for xc in range (c):
+			t[xc]+=s[x][xc]
+	for x in range (r):
+		if (s[x].find("spoon")!=-1):
+			flag=1
+			break
+	if (flag!=1):
+		for x in range (c):
+			if (t[x].find("spoon")!=-1):
+				flag=1
+				break
+	if (flag==1):
+		print "There is a spoon!"
+	else:
+		print "There is indeed no spoon!"

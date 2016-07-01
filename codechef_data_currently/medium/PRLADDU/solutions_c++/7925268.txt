@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int test,*vill,n,temp,i,j,res=0;
+    cin>>test;
+    while(test--)
+    {
+        cin>>n;
+        vill=new long long[n];
+        for(i=0;i<n;i++)
+            cin>>vill[i];
+        for(i=0;i<n;i++)
+        {
+            if(vill[i]==0)
+                continue;
+            for(j=i+1;vill[i]!=0;j++)
+            {
+                if(vill[i]*vill[j]<0)
+                {
+                    temp=min(abs(vill[i]),abs(vill[j]));
+                    res=res+(j-i)*temp;
+                    if(vill[i]<0)
+                    {
+                        vill[i]=vill[i]+temp;
+                        vill[j]=vill[j]-temp;
+                    }
+                    else
+                    {
+                        vill[i]=vill[i]-temp;
+                        vill[j]=vill[j]+temp;
+                    }
+                }
+            }
+        }
+        cout<<res<<endl;
+        res=0;
+    }
+    return 0;
+}

@@ -1,0 +1,91 @@
+#include<iostream>
+using namespace std;
+#define mod 1000000007
+typedef long long int lli;
+  void matmult(long long int   a[][2],long long  int  b[][2],long long int  c[][2])//multiply matrix a and b. put result in c
+{
+    long long int i,j,k;
+    for(i=0;i<2;i++)
+    {
+        for(j=0;j<2;j++)
+        {
+            c[i][j]=0;
+            for(k=0;k<2;k++)
+            {
+                c[i][j]+=(a[i][k]*b[k][j]);
+                c[i][j]=c[i][j]%mod;
+            }
+        }
+    }
+ 
+}
+ 
+  void matpow(long long int Z[][2],long long int n,long long int  ans[][2])
+//find ( Z^n )% M and return result in ans
+{
+ 
+    long long int temp[2][2];
+    //assign ans= the identity matrix initily ans always = identity metrix 
+    ans[0][0]=1;
+    ans[1][0]=0;
+    ans[0][1]=0;
+    ans[1][1]=1;
+    long long int i,j;
+    while(n>0)
+    {
+        if(n&1)
+        {
+            matmult(ans,Z,temp);//z*ans
+            for(i=0;i<2;i++)
+                for(j=0;j<2;j++)
+                    ans[i][j]=temp[i][j];
+        }
+        matmult(Z,Z,temp);// z*z
+        for(i=0;i<2;i++)
+            for(j=0;j<2;j++)
+                Z[i][j]=temp[i][j];
+ 
+ 
+        n=n/2;
+    }
+    return;
+     
+}
+  
+   
+long long int findFibonacci(long long int n)
+{
+     
+        long long int  fib;
+    
+    
+        long long int Z[2][2]={{2,2},{1,0}},result[2][2];//modify matrix a[][] for other recurrence relations
+        matpow(Z,n-2,result);
+        fib=(result[0][0]*3+ result[0][1]*1)%mod;    //final multiplication of Z^(n-2) with the initial terms of the series
+    
+     // cout<<result[0][0]<<" "<<cout<<result[0][1]<<endl;
+        return fib;
+
+}
+ int main()
+   {
+   	int t;
+   	 cin>>t;
+   	  while(t--)
+   	   {
+   	   	
+   	   
+    long long int n,m;
+      
+    cin>>n;   
+    if(n==1 ) cout<<n<<endl;
+    else if (n==2) cout<<n+1<<endl;
+    else
+    {
+    	long long int ll=findFibonacci(n);
+      cout<<ll<<endl;
+    }
+   
+}
+   return 0;
+   }

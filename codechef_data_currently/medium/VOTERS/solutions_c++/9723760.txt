@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n1,n2,n3,n,j,i,c;
+    scanf("%d %d %d",&n1,&n2,&n3);
+    n=n1+n2+n3;
+    int p[n],a[n],s[n];
+    j=0;
+    c=1;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+        p[j]=a[i];
+        j++;
+    }
+    sort(p,p+n);
+    j=0;
+    for(i=1;i<n;i++)
+    {
+        if(p[i]==p[i-1])
+        {
+
+            c++;
+
+        }
+        else{
+            if(c>=2)
+            {
+                s[j]=p[i-1];
+            j++;
+            }
+        c=1;
+        }
+
+    }
+    printf("%d
+",j);
+    for(i=0;i<j;i++)
+    {
+        printf("%d
+",s[i]);
+    }
+    return 0;
+}
+

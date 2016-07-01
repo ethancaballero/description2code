@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+long long a[50];
+int main(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,i,j,k,c;
+        scanf("%d",&n);
+
+        for(i=0;i<n;++i) scanf("%lld",&a[i]);
+        
+        c=0;
+        long long s,p;
+        for(i=0;i<n;++i){
+            for(j=i+1;j<n;++j){
+                s=0; p=1;
+                for(k=j;k>=i;--k){
+                    s+=a[k];
+                    p*=a[k];
+                }
+                if(s==p) c++;
+            }
+        }
+        printf("%d
+",c+n);
+    }
+    return 0;
+} 

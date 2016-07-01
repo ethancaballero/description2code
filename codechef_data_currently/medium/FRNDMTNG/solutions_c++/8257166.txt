@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    double t1,t2,p1,p2,a;
+    scanf("%d",&t);
+    while(t--)
+    {
+        cout<<fixed<<showpoint<<setprecision(8);
+        cin>>p1>>p2>>t1>>t2;
+        a = 1-((p1-t1)*(p2-t2))/(p1*p2);
+        cout<<a;
+        cout<<endl;
+    }
+    return 0;
+}

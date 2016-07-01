@@ -1,0 +1,20 @@
+import math
+T = int(raw_input())
+for t in range(T):
+    N, K = raw_input().split()
+    K = int(K)
+    N = int(N)
+    A = [int(i) for i in raw_input().split()]
+    B = []
+    val = 0
+    i = 1
+    for a in range(N):
+        for b in range(a+1,N):
+            if a!=b:
+                #print a,b
+                val = abs(A[a]+A[b]-K)
+                B.append(val)
+        #i += 1
+    B.sort()
+    C = [int(i) for i in B if i==min(B)]
+    print str(C[0])+' '+str(len(C))

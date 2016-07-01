@@ -1,0 +1,110 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+//#define minimum(a,b) ((a) > (b) ? b:a )
+inline float minimum(float a, float b) { return (a < b) ? a : b; }
+using namespace std;
+float i,t,n,xe,ye,xa,ya;
+float val;
+char dire,dira;
+void collide_r()
+{
+  if(ye-ya==0&&dira=='L')
+    val=minimum((xa-xe)/2,val);
+  else if((ya-ye)==(xa-xe)&&dira=='D')
+    val=minimum((ya-ye),val);
+  else if((ye-ya)==(xa-xe)&&dira=='U')
+    val=minimum((ye-ya),val);
+}
+void collide_l()
+{
+  if(ye-ya==0&&dira=='R')
+    val=minimum((xe-xa)/2,val);
+  else if((ya-ye)==(xe-xa)&&dira=='D')
+    val=minimum((ya-ye),val);
+  else if((ye-ya)==(xe-xa)&&dira=='U')
+    val=minimum((ye-ya),val);
+}
+void collide_u()
+{
+  if(xe-xa==0&&dira=='D')
+    val=minimum((ya-ye)/2,val);
+  else if((ya-ye)==(xa-xe)&&dira=='L')
+    val=minimum((ya-ye),val);
+  else if((ya-ye)==(xe-xa)&&dira=='R')
+    val=minimum((ya-ye),val);
+}
+void collide_d()
+{
+  if(xe-xa==0&&dira=='U')
+    val=minimum((ye-ya)/2,val);
+  else if((ye-ya)==(xa-xe)&&dira=='L')
+    val=minimum((ye-ya),val);
+  else if((ye-ya)==(xe-xa)&&dira=='R')
+    val=minimum((ye-ya),val);
+}
+/*
+void collide_1()
+{
+  if((xe-xa)==0)
+    min=minimum(xe-xa,min);
+  else if(ye-ya==xe-xa)
+    min=minimum(ye-ya,min);
+}
+*/
+main()
+{
+ cin>>t;
+ while(t--)
+ { 
+   val=1000000;
+   cin>>xe>>ye>>dire;
+   cin>>n;
+
+   if(dire=='R')
+   {
+     for(i=0;i<n;i++)
+     {
+       cin>>xa>>ya>>dira;
+       if(xa>xe)
+         collide_r();
+     }
+   }
+  else if(dire=='L')
+  {
+    for(i=0;i<n;i++)
+     {
+       cin>>xa>>ya>>dira;
+       if(xe>xa)
+         collide_l();
+     } 
+  }
+  else if(dire=='U')
+  {
+    for(i=0;i<n;i++)
+     {
+       cin>>xa>>ya>>dira;
+       if(ya>ye)
+         collide_u();
+     }
+  }
+  else if(dire=='D')
+  {
+    for(i=0;i<n;i++)
+     {
+       cin>>xa>>ya>>dira;
+       if(ya<ye)
+         collide_d();
+     }
+  }
+  
+  if(val!=1000000)
+ //   cout<<val<<endl;
+   printf("%0.1f
+",val);
+  else
+    cout<<"SAFE"<<endl;
+
+ } 
+ return 0;
+}

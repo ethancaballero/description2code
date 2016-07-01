@@ -1,0 +1,89 @@
+//amazing takes time, legendary requires patience
+#include "bits/stdc++.h"
+#define sd(n) scanf("%d", &(n))
+#define rep(i, x, n) for (int i = x, _n = (n); i < _n; ++i)
+#define repi(i, a) for(typeof((a).begin()) i = (a).begin(), _##i = (a).end(); i != _##i; ++i)
+#define pra(v) repi(it, v) cout << *it << " "; cout << endl;
+#define SZ(c) (int)(c).size()
+#define lcm(a,b) (a*(b/__gcd(a,b)))
+#define VI vector<int>
+#define all(c) (c).begin(), (c).end()
+#define allr(c) (c).rbegin(), (c).rend()
+#define pb push_back
+#define mii map<int, int>
+#define pii pair<int, int>
+#define pip pair<int, pii>
+#define F first
+#define S second
+#define mp make_pair
+#define lli long long int
+#define llu unsigned long long
+#define CLR(p) memset(p, 0, sizeof(p))
+#define SET(p) memset(p, -1, sizeof(p))
+#define INF 0x3f3f3f3f
+#define pi 3.14159265358979
+#define debug 0
+using namespace std;
+
+const int MOD = 1e9+7;
+const int MAX = 1<<5;
+
+int n, k, m, a[MAX], ans;
+
+
+void solve(int i, int cnt)
+{
+	if(cnt >= ans)	return;
+	if(i == n)
+	{
+		ans = cnt;
+		return;
+	}
+	rep(add, 0, 2)
+	{
+		a[i] += add;		//add 0/1 to a[i]
+		
+		int c = 0;
+		if(i >= k-1)
+		{
+			int mx = 0;
+			for(int j = i; j > i-k; j--)
+			{
+				if(mx == a[j])
+					c++;
+				else if(a[j] > mx)
+				{
+					mx = a[j];
+					c = 1;
+				}
+			}
+		}
+		if(c < m)
+			solve(i+1, cnt+add);
+		
+		a[i] -= add;
+	}
+}
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	int t;
+	sd(t);
+	while(t--)
+	{
+		sd(n);
+		sd(k);
+		sd(m);
+		
+		rep(i, 0, n)
+			sd(a[i]);
+		
+		ans = INF;
+		solve(0, 0);
+		if(ans >= INF) ans = -1;
+		printf("%d
+", ans);
+	}
+    return 0;
+}    

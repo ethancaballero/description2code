@@ -1,0 +1,47 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#define MAX 1000004
+using namespace std;
+long long int arr[MAX];
+int main()
+{
+	int t;
+	long long n,h,l,r;
+	cin>>t;
+	while(t--)
+	{
+		memset(arr,0,sizeof(long long int)*MAX);
+		cin>>n>>h;
+		long long int temp=n;
+		while(temp--)
+		{
+			cin>>l>>r;
+			arr[l]++;
+			arr[r+1]--;
+		}
+		int i;
+		for(i=1;i<MAX;i++)
+		{
+			arr[i]+=arr[i-1];
+		}
+		long long int max=0;
+		long long int sum=0;
+		for(i=0;i<h;i++)
+		{
+			sum+=arr[i];
+		}
+		max=sum;
+		for(i=h;i<MAX;i++)
+		{
+			sum+=arr[i];
+			sum-=arr[i-h];
+			if(sum>max)
+			max=sum;
+		}
+		n=n*h;
+		n=n-max;
+		cout<<n<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+long long int BIT[1000009],ar[1000009],n;
+void update(int x, int val)
+{
+      x+=1;
+      while(x<=n)
+      {
+      	BIT[x]+=val;
+      	x+=(x&(-x));
+	  }
+
+}
+long long int getsum(int x)
+{
+     long long int sum = 0;
+     x+=1;
+     while(x>0)
+     {
+     	sum+=BIT[x];
+     	x-=(x&(-x));
+	 }
+        return sum;
+}
+int main()
+{
+	int q,i,j;
+	cin>>n>>q;
+	char ch; int a,b;
+	long long int ans=0;
+	for(i=0;i<n;i++)
+        cin>>ar[i];
+	for(i=0;i<n;i++)
+	update(i,ar[i]);
+	for(j=0;j<q;j++)
+	{
+		cin>>ch>>a>>b;
+		if(ch=='S')
+		{
+			ans=getsum(b)-getsum(a-1);
+			cout<<ans<<endl;
+		}
+		else if(ch=='G')
+		update(a,b);
+		else
+		 update(a,-b);
+	}
+	return 0;
+}

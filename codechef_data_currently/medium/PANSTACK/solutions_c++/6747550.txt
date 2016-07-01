@@ -1,0 +1,74 @@
+/*God is greater than any problem that
+u have and u have to not worry because
+when u pray and then worry,
+the worry nullify your prayer
+He is right here, right now !!
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+#define bitcnt __builtin_popcount
+#define ln length()
+#define rep(i, n) for(int i = 0; i < n; i++)
+#define rrep(i, n) for(int i = n - 1; i >= 0; i--)
+#define all(a)  a.begin(),a.end()
+#define LL long long
+#define limit 1000006
+#define sl(n) scanf("%lld", &n)
+#define s(n)  scanf("%d", &n)
+#define pl(n) printf("%lld", n)
+#define pi(n)  printf("%d", n)
+#define pb push_back
+#define pn printf("
+")
+#define mod 1000000007
+typedef vector<LL> row;
+typedef vector<row> matrix;
+
+void print(LL *arr, LL n)
+{
+	rep(i, n) cout << arr[i] << " ";
+	cout << endl;
+}
+LL dp[1008][1008];
+
+void pre()
+{
+	for(int i = 1; i <= 1005; i++) {
+		dp[i][1] = 1;
+	}
+	for(int i = 2; i <= 1005; i++) {
+		for(int j = 2; j <= i; j++) {
+			dp[i][j] = dp[i - 1][j] * j + dp[i - 1][j - 1];
+			if(dp[i][j] >= mod) {
+				dp[i][j] %= mod;
+			}
+		}
+	}
+	for(int i = 1; i <= 1000; i++) {
+		for(int j = 2; j <= i; j++) {
+			dp[i][j] += dp[i][j - 1];
+			if(dp[i][j] >= mod) {
+				dp[i][j] %= mod;
+			}
+		}
+	}	
+}
+
+void solve()
+{
+	int n;
+	s(n);
+	pl(dp[n][n]); pn;
+}
+
+int main()
+{
+	pre();
+	int t;
+	scanf("%d", &t);
+	while(t--) {
+		solve();
+	}
+	return 0;
+}

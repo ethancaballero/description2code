@@ -1,0 +1,68 @@
+#include<iostream>
+#include<set>
+#include<map>
+#include<algorithm>
+ 
+#define mod 1000000007
+ 
+using namespace std;
+ 
+ 
+long long mul_inv(long long a, long long b)
+{
+	long long b0 = b, t, q;
+	long long x0 = 0, x1 = 1;
+	if (b == 1) return 1;
+	while (a > 1) {
+		q = a / b;
+		t = b, b = a % b, a = t;
+		t = x0, x0 = x1 - q * x0, x1 = t;
+	}
+	if (x1 < 0) x1 += b0;
+	return x1;
+}
+ 
+int main() {
+	long long int j,i,c;
+	map<char,int> m1;
+		map<char,int>::iterator it;
+     string s1;
+ 
+cin>>c;
+while(c--)
+{
+    m1.clear();
+ 
+    cin>>s1;
+  
+    long long int ans=1;
+ 
+    for(i=0;i<s1.size();i++)
+    {
+       m1[s1[i]]++;
+    }
+ 
+   long long int temp=1,gc,den=1,j=1;
+ 
+    for(i=1;i<=s1.size();i++)
+      ans=(ans*i)%mod;
+   
+    for(it=m1.begin();it!=m1.end();it++)
+   {
+       
+          temp=1;
+           for(j=1;j<=it->second;j++)
+               temp*=j;
+        
+        long long int ans1=temp;
+        ans=(ans*mul_inv(ans1,mod))%mod;
+    }
+    
+  
+    cout<<ans<<endl;
+ 
+}
+ 
+ 
+	return 0;
+}

@@ -1,0 +1,16 @@
+t = int(raw_input())
+lose = [-1]*1001
+count = 1
+for i in range(1, 1001):
+    if lose[i]==-1:
+        lose[i]=i+count
+        lose[i+count]=i
+        if i+count>=1000:
+            break
+        count+=1
+while t:
+    (m,n,p,q) = map(int, raw_input().split())
+    m-=p
+    n-=q
+    print "Alice" if lose[min(m,n)]!=max(m,n) else "Bob"
+    t-=1

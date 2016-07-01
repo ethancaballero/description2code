@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+	int test;
+	scanf("%d",&test);
+	int n,m;
+	
+	for(int a=1;a<=test;a++)
+	{
+		scanf("%d%d",&n,&m);
+		int *arr;
+		arr=(int *)calloc(n,sizeof(int));
+		for(int a=0;a<n;a++)
+		arr[a]=a+1;
+		int var;
+		for(int a=0;a<m;a++)
+		{
+			scanf("%d",&var);
+			arr[var-1]=-1;
+		}
+		//scanf("
+");
+		int counta=1;
+		for(int a=0;a<n;a++)
+		{
+			if(arr[a]!=-1)
+			{
+				if(counta%2==1)
+					printf("%d ",arr[a]);
+				counta++;
+			}
+		}
+		printf("
+");	
+		int countb=1;
+		for(int a=0;a<n;a++)
+		{
+			if(arr[a]!=-1)
+			{
+				if(countb%2==0)
+					printf("%d ",arr[a]);
+				countb++;	
+			}
+		
+		}
+		printf("
+");
+		
+	}
+	return 0;
+}

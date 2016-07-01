@@ -1,0 +1,9 @@
+def solve(a, n, k):
+    n = n+1
+    for i in range(k):
+        print (a%n),
+        a /= n
+ 
+a, n, k = map(int, raw_input().split())
+solve(a, n, k)
+ 

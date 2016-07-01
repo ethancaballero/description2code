@@ -1,0 +1,75 @@
+#include <iostream>
+#include<algorithm>
+#include<functional>  //greater<int>
+#include<queue>
+#include<map>
+#include<string>
+#include<cstring>
+#include<limits.h>
+#include<cmath>
+#include<stdlib.h>
+#include<ctype.h>
+#include<set>
+#include<vector>
+
+using namespace std;
+
+
+
+#define ll long long
+#define pb push_back
+#define mp make_pair
+#define pll pair<ll,ll>
+#define vll vector<pair<ll,ll> >
+
+
+
+int main() {
+	ll n,k;
+	cin>>n>>k;
+   map<ll,ll>m;
+	for(ll i=0;i<n;i++)
+	{
+		ll a;
+		cin>>a;
+		if(m[a]!=0)
+		m[a]=min(m[a],min(i+1,n-i));
+		else
+		m[a]=min(i+1,n-i);
+	}
+	map<ll,ll>::iterator i,j;
+	ll c1=0,c2=m.size()-1;
+	j=m.end();
+	j--;
+	ll ans=INT_MAX;
+	for(i=m.begin();c1<c2;)
+	{
+		ll a=i->first;
+		ll b=j->first;
+		ll x=i->second;
+		ll y=j->second;
+		if(a+b>k)
+		{
+			j--;
+			c2--;
+		}
+		else if(a+b<k)
+		{
+			i++;
+			c1++;
+		}
+		else
+		{
+			if(max(x,y)<ans)
+			ans=max(x,y);
+			i++;j--;
+			c1++;c2--;
+		}
+	}if(ans!=INT_MAX)
+	cout<<ans<<endl;
+	else
+	cout<<-1<<endl;
+	// your code goes here
+	
+	return 0;
+}

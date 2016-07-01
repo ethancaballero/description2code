@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    float n;
+	    cin>>n;
+	    int z;
+	    float y;
+	    z=360/n;
+	    y=360/n;
+	    if(z==y)
+	    cout<<"y ";
+	    else
+	    cout<<"n ";
+	    if(n<=360)
+	    cout<<"y ";
+	    else
+	    cout<<"n ";
+	    if(n<=26)
+	    cout<<"y ";
+	    else
+	    cout<<"n ";
+	    cout<<endl;
+	}
+	return 0;
+}

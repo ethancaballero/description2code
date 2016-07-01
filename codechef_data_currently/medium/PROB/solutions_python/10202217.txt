@@ -1,0 +1,14 @@
+import math
+output = list()
+val = raw_input()
+t = int(val)
+for i in range(t) :
+	nums = list()
+	string1 = raw_input()
+	nums = string1.split()
+	a = float(nums[0])
+	b = float(nums[1])
+	v = a/(a+b)
+	output.append(v)
+for i in range(t) :
+	print output[i]

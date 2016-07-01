@@ -1,0 +1,51 @@
+for _ in range(input()):
+    n = input()
+    s = raw_input()
+    if abs(s.count('B')-s.count('G')) > 1:
+        print '-1'
+    else:
+        if s.count('B') == s.count('G'):
+            t1 = 'BG'*(len(s)/2)
+            t2 = 'GB'*(len(s)/2)
+        elif s.count('B') > s.count('G'):
+            t1 = 'BG'*((len(s)-1)/2)+'B'
+            t2 = t1
+        else:
+            t1 = 'GB'*((len(s)-1)/2)+'G'
+            t2 = t1
+        if n == 0:
+            r1 = 0
+            r2 = 0
+            for i in range(len(s)):
+                if s[i] != t1[i]:
+                    r1 += 1
+                if s[i] != t2[i]:
+                    r2 += 1
+            print min(r1/2,r2/2)
+        else:
+            arr = [0]*len(s)
+            r1 = 0
+            ans1 = 0
+            for i in range(len(s)):
+                if s[i] != t1[i]:
+                    if s[i] == 'B':
+                        arr[i] = 1
+                    else:
+                        arr[i] = -1
+            for i in arr:
+                r1 += i
+                ans1 += abs(r1)
+
+            arr = [0]*(len(s))
+            r2 = 0
+            ans2 = 0
+            for i in range(len(s)):
+                if s[i] != t2[i]:
+                    if s[i] == 'B':
+                        arr[i] = 1
+                    else:
+                        arr[i] = -1
+            for i in arr:
+                r2 += i
+                ans2 += abs(r2)
+            print min(ans2,ans1)

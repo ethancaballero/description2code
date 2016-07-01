@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+double cache[100001] = {0};
+
+void fillarray(int index)
+{
+	if(cache[index] != 0)
+		return;
+	else
+	{
+		fillarray(index-1);
+		cache[index] = index + (cache[index-1]/10);
+	}
+}
+
+int main(int argc, char const *argv[])
+{
+	cache[1] = 1;
+	int T, N;
+
+	cin>>T;
+	while(T--)
+	{
+		cin>>N;
+		if(cache[N] == 0)
+		{
+			fillarray(N);
+		}
+		cout<<fixed<<cache[N]*0.45<<endl;
+	}
+
+	return 0;
+}

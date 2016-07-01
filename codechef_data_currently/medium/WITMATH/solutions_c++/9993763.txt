@@ -1,0 +1,124 @@
+//      go_on
+#include <bits/stdc++.h>
+using namespace std;
+
+
+//      LOOPS AND MEM
+#define mz(a) memset(a,0,sizeof(a))
+#define md(a,m,n) memset(a,-1,sizeof(a[0][0])*m*n);
+#define mmin1(a) memset(a,-1,sizeof(a))
+#define minf(a) memset(a,MEMSET_INF,sizeof(a));
+#define f(i,a,n) for(int i=a;i<=n;++i)
+#define fs(i,a,n) for(int i=a;i<n;++i)
+#define fl(i,n,a) for(int i=n;i>=a;--i)
+
+
+//       I/O
+#define i(n) cin>>n
+#define is(n) scanf("%s",n)
+#define s(n) scanf("%d",&n)
+#define sl(n) scanf("%lld",&n)
+#define o(n) cout<<n
+#define p(n) printf("%d",n)
+#define pl(n) printf("%lld",n)
+#define os cout<<" "
+#define on cout<<"
+"
+
+
+//       CONTAINERS
+typedef vector <int> vi;
+typedef pair<int, int> pii;
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define all(a)  a.begin(),a.end()
+//#define fv(i,v) for(auto i = v.begin();i !=v.end(); ++i)
+
+
+//        DEF AND INIT
+#define ll long long
+#define M (ll)(1e9+7)
+#define eps 1e-15
+#define N (ll)(1e5+5)
+/*
+        freopen("in", "r", stdin);
+        freopen("out", "w", stdout);
+*/
+
+//             MILLER RABIN TEST 10^18
+
+const int SZ=10;
+const int P[SZ]={2,3,5,7,11,13,17,19,23,29};
+
+ll mul(ll A,ll B,ll mod)
+{
+  long double T=A;
+  T=T*B/mod;
+  ll temp=A*B-(ll)T*mod;
+  while(temp>=mod)
+    temp-=mod;
+  while(temp<0)
+    temp+=mod;
+  return temp;
+}
+
+ll Pow(ll A,ll B,ll mod)
+{
+  if(!B)
+    return 1;
+  ll T=Pow(mul(A,A,mod),B/2,mod);
+  if(B&1)
+    T=mul(T,A,mod);
+  return T;
+}
+
+bool Check(ll P,ll num)
+{
+  if(P==num)
+    return true;
+  if(!(num%P))
+    return false;
+  if(Pow(P,num-1,num)!=1)
+    return false;
+  ll T=num-1;
+  while(~T&1)
+    T>>=1;
+  ll S=Pow(P,T,num);
+  if(S==1)
+    return true;
+  while(S!=1&&S!=num-1)
+    S=mul(S,S,num);
+  return S==num-1;
+}
+
+bool isprime(ll num)
+{
+  for(int i=0;i<SZ;i++)
+    if(!Check(P[i],num))
+      return false;
+  return true;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    ll t,n;
+    i(t);
+    while(t--)
+    {
+        i(n);
+        while(1)
+        {
+            if(isprime(n))
+            {
+                o(n);break;
+            }
+            --n;
+        }
+        on;
+    }
+
+    return 0;
+}

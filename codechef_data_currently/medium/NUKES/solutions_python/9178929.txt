@@ -1,0 +1,7 @@
+def mod(i,o):
+    if i<k:
+        print str(o%(n+1)),
+        mod(i+1,o/(n+1))
+
+a,n,k=map(int,raw_input().split())
+mod(0,a)

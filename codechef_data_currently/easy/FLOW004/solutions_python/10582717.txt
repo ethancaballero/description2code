@@ -1,0 +1,14 @@
+def eval(a) :
+	ans = a % 10
+	r = 0
+	while (a > 0) :
+		r = a % 10
+		a = a / 10
+	ans = ans + r
+	return ans
+t = input()
+while t > 0 :
+	a = input()
+	ans = eval(a) 
+	print(ans)
+	t = t - 1

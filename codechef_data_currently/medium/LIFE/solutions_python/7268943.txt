@@ -1,0 +1,29 @@
+num_cases = int(raw_input())
+output=[]
+for i in range(0,num_cases):
+	number = raw_input().strip()
+	number = number+ number[0]
+	valid_output=[]
+	cases = ["00","01","10","11"]
+	for a in cases:
+		new_string= a
+		for p in range(1,len(number)):
+			if new_string[p] == number[p]:
+				new_string = new_string+new_string[p-1]
+			else:
+				toggle="1"
+				if new_string[p-1] == "1":
+					toggle= "0"
+				new_string = new_string+toggle
+		if new_string[:2] == new_string[-2:]:
+			valid_output.append(new_string[:-2])
+	all_well=""
+	if len(valid_output)	== 0:
+		all_well="No solution"
+	elif len(valid_output) >1:
+		all_well = "Multiple solutions"
+	elif len(valid_output) ==1:
+		all_well = valid_output[0]
+	output.append(all_well)
+for j in output:
+	print j

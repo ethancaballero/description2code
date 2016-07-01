@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int max_ind(int A[] , int n)
+{
+	int mx = A[0];
+	int mind=0;
+	for(int i=1;i<n ;i++){
+		if(A[i]>mx){
+			mx=A[i];
+			mind=i;
+		}
+	}
+	return mind;
+}
+
+int min_ind(int A[] , int n)
+{
+	int mx = A[0];
+	int mind=0;
+	for(int i=1;i<n ;i++){
+		if(A[i]<mx){
+			mx=A[i];
+			mind=i;
+		}
+	}
+	return mind;
+}
+
+int main()
+{
+	int T;
+	int N;
+	int A[100000];
+	cin>>T;
+	int X=0;
+	while(T--){
+		cin>>N;
+		int sum=0;
+		for(int i=0;i<N;i++){
+			cin>>A[i];
+			sum+=A[i];
+		}
+		
+		X = 0;
+		if(N==1){
+			X = 0;
+		}
+		else if(sum%N!=0)
+			X=-1;
+		else {
+			/*while(A[0]!=A[N-1]){
+				int R = (A[N-1]-A[0])/2;
+				A[0] = A[0] + R;
+				A[N-1] = A[N-1] - R;
+				sort(A,A+N);
+				X++;
+				if(X>3000){
+					X=-1;
+					break;
+				}
+			}*/
+			int i = max_ind(A,N);
+			int j = min_ind(A,N);
+			while(A[i]!=A[j]){
+				int R = (A[j]-A[i])/2;
+				A[i] += R;
+				A[j] -= R;
+				i = max_ind(A,N);
+				j = min_ind(A,N);
+				X++;
+			}
+		}
+		cout<<X<<endl;
+	}
+	return 0;
+}

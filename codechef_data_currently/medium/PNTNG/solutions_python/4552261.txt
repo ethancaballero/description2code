@@ -1,0 +1,25 @@
+l = map(int,raw_input().split(' '))
+cost = 0
+total = l[0]*l[1]
+ll = []
+while (l[2] > 0):
+    t = list(reversed(map(int,raw_input().split(' '))))
+    cost += t[1]
+    ll.append(t)
+    l[2] -= 1
+if (cost < total):
+    print "Impossible"
+else:
+    ll = sorted(ll)
+    cost = 0
+    j = 0
+    while (total > 0):
+        total -= ll[j][1]
+        if (total >= 0):
+            cost += ll[j][0]*ll[j][1]
+        else:
+            cost += (total+ll[j][1])*ll[j][0]
+            break
+        j += 1
+    print cost
+            

@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+int setbits(int n)
+{
+int count=0;
+while(n)
+{
+n=n&(n-1);
+count++;
+}
+return count;
+}
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+int n,a,b;
+cin>>n>>a>>b;
+int set1,ans=0;
+set1=setbits(a)+setbits(b);
+if(set1>n)
+set1=(n<<1)-set1;
+while(set1--)
+{
+ans+=(1<<(n-1));
+n--;
+}
+cout<<ans<<endl;
+}
+return 0;
+}

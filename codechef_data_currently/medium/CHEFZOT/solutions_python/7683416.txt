@@ -1,0 +1,14 @@
+t = int(raw_input());
+a = map(int,raw_input().split());
+max = 0;
+a.append(0);
+current = 0;
+for t in a:
+	if t == 0 :
+		if current > max:
+			max = current;
+		current = 0;
+	else:
+		current+=1;
+
+print max;

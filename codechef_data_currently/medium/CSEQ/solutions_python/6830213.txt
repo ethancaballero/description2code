@@ -1,0 +1,16 @@
+m = 1000003
+T = int(raw_input())
+while T != 0:
+    s = raw_input()
+    s = s.split(' ')
+    N = int(s[0])
+    L = int(s[1])
+    R = int(s[2])
+    n = R - L + 1
+    sum = 0
+    ans = 1
+    for i in range(0 , N):
+        ans = ans * (n + i) / (i + 1)
+        sum = ((sum % m ) + (ans % m))%m
+    print sum
+    T -= 1

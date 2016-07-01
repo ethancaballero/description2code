@@ -1,0 +1,43 @@
+/* coder: Anh Tuan Nguyen */
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main()
+{
+#ifdef gsdt
+    freopen("input.txt","r",stdin);
+#endif // gsdt
+
+    int T;
+    cin>>T;
+    for(int qq=0; qq<T; qq++)
+    {
+        string s;
+        bool a[255];
+        bool b[255];
+        memset(a,false,sizeof(a));
+        memset(b,false,sizeof(b));
+        cin>>s;
+        for(int i=0; i<s.length(); i++)
+            a[s[i]]=true;
+        cin>>s;
+        for(int i=0; i<s.length(); i++)
+            b[s[i]]=true;
+
+        bool ok=false;
+        for(int i='a'; i<='z'; i++)
+            if(a[i]&b[i])
+            {
+                cout<<"Yes
+";
+                ok=true;
+                break;
+            }
+        if(ok) continue;
+        cout<<"No
+";
+    }
+
+    return 0;
+}

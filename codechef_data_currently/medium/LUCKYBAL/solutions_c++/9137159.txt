@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        long long int n,c=0,ans;
+        n=s.size();
+        ans=n*(n+1)/2;
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='7')
+            c++;
+            else
+            c=0;
+            ans-=c;
+        }
+        cout<<ans<<endl;
+    }
+}

@@ -1,0 +1,27 @@
+no_of_testcases = int(input())
+for each in range(no_of_testcases):
+    expression = raw_input()
+    dic = {'+':1,'-':1,'*':2,'/':2,'^':3,'(':0}
+    stack =[]
+    output=[]
+    for each in range(len(expression)):
+        if expression[each]==')':
+           while stack[len(stack)-1]!= '(':
+                    output.append(stack.pop())
+           stack.pop()
+        elif expression[each]=='(':
+            stack.append(expression[each])
+        elif dic.has_key(expression[each]):
+            if len(stack) == 0:
+                stack.append(expression[each])
+            elif dic[expression[each]] <= dic[stack[len(stack)-1]]:
+                output.append(stack.pop())
+                stack.append(expression[each])
+            else:
+                stack.append(expression[each])
+        else:
+            output.append(expression[each])
+    while len(stack) !=0:
+        output.append(stack.pop())
+    x=  filter(lambda a: a != '(', output)
+    print "".join('%s'%y for y in x)

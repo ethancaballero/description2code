@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<string.h>
+//#include<conio.h>
+
+char a[64010],b[64010];
+int dp[41][41][41];
+
+int main()
+{
+	int n,p;
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d",&n,&p);
+		scanf("%s%s",&a,&b);
+		
+		memset(dp,0,sizeof(dp));
+		
+		for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                for(int k=1;k<=n;k++)
+                {
+                    if(a[((i-1)*n*n)+((j-1)*n)+(k-1)] == b[((i-1)*n*n)+((j-1)*n)+(k-1)])
+                    dp[i][j][k] = 1;
+                    else
+                    dp[i][j][k] = 0;
+                }
+            }
+        }
+		
+        for(int i=1;i<=n;i++)
+		{
+			for(int j=1;j<=n;j++)
+			{
+				for(int k=1;k<=n;k++)
+				{
+					dp[i][j][k]+=dp[i-1][j-1][k-1]+dp[i][j][k-1]-dp[i][j-1][k-1]+dp[i-1][j][k]-dp[i-1][j-1][k]+dp[i][j-1][k]-dp[i-1][j][k-1];
+				}
+			}
+		}
+		
+		int dmax=-1;
+		int ctr=0;
+		
+		for(int d=n-1;d>=0;d--)
+		{
+			int vol=(d+1)*(d+1)*(d+1);
+			for(int i=1;i<=n-d;i++)
+			{
+				for(int j=1;j<=n-d;j++)
+				{
+
+					for(int k=1;k<=n-d;k++)
+					{
+						int x=i+d;
+						int y=j+d;
+						int z=k+d;
+
+						int ans=dp[x][y][z]-dp[i-1][j-1][k-1]-dp[x][y][k-1]-dp[x][j-1][z]-dp[i-1][y][z]+dp[x][j-1][k-1]+dp[i-1][j-1][z]+dp[i-1][y][k-1];
+
+
+						if(ans*100>=p*vol)
+						{
+
+							if(d>dmax)
+							{
+								ctr=1;
+								dmax=d;
+							}
+
+							else if(d==dmax)
+							{
+								ctr++;
+							}
+						}
+
+					}
+
+
+
+				}
+			}
+		}
+		
+		if(dmax==-1)
+		printf("-1
+");
+		
+		else
+		printf("%d %d
+",dmax+1,ctr);
+
+	}
+
+
+//	getch();
+	return 0;
+	
+}

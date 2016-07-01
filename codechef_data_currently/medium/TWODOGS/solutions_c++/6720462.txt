@@ -1,0 +1,78 @@
+#include<iostream>
+#include<vector>
+#include<cstdio>
+#include<cstdlib>
+#include<cmath>
+#include<algorithm>
+#include<bits/stdc++.h>
+using namespace std;
+int n,i,t;
+int A[500001]; ///array
+int B[1000001]; ///B indexes
+//int C[1000001];
+//bool D[1000001]={0}; ///done or not
+int f=0;
+long long ans=0;
+inline int Min(int a, int b, int c)
+{    return (a>b)?((b>c)?c:b):((a>c)?c:a);
+}
+int main()
+{ int K; int time; f=0;
+  scanf("%d%d", &n,&K);
+  int j=1,k=0,tmp=0,temp=0;
+ //vector<int>arr[n];
+ for(i=1;i<=n;i++)
+  { scanf("%d", &A[i]); //{scanf("%d", tmp); arr.push_back(tmp);
+    //C[A[i]]++; //C[A[i]]=1;
+    if(B[A[i]]) B[A[i]]=Min(i,n+1-i,B[A[i]]); // B[A[i], i, n+ 1-i);
+    else B[A[i]]=min(i,n+1-i);
+    //D[A[i]]=1;
+    //if(A[i]>temp) temp=A[i];
+  }
+  //display(D,n);
+  //printf("max is %d
+", temp);
+  //printf("Original array..."); display(A,n);
+  //printf("frequency array..."); display(C,temp);
+ // printf("mapping array..."); display(B,temp);
+  for(i=1,ans=n;i<=n;i++)
+  {
+    tmp=K-A[i]; //printf("tmp = %d, frequency = %d , position = %d
+", tmp, B[tmp],B[tmp]);
+     if(tmp>0 && B[tmp] && tmp!=A[i] ) //number is not same, Da temp has come and it's not half
+     { f=1; k=min(i,n+1-i); j=min(B[tmp],n-B[tmp]+1);
+       //printf("The pairs are %d and %d	", A[i], tmp);
+       //printf("positions are... %d is at k=%d	%d is at j=%d
+", A[i],k,tmp,j);
+      time=max(k,j) ; ///max( min(i,n+1-i) , min(B[tmp],n-B[tmp]+1));
+      //printf(" ... time is %d", time);
+      if(time<ans) ans=time;
+      //printf("... ans is %d
+", ans);
+     }
+     //b[A[i]]=1;
+  }
+ if(f) printf("%lld
+", ans);
+ else printf("-1
+");
+return 0;
+}
+/*void display(int arr[],int len)
+{ printf("array is
+");
+ for(i=1;i<=len;i++)
+   { printf("%d : %d
+",i, arr[i]);
+   } printf("
+");
+}
+void display(bool arr[],int len)
+{ printf("bool array is
+");
+ for(i=1;i<=len;i++)
+   { printf("%d  : %d
+",i, arr[i]);
+   } printf("
+");
+}*/

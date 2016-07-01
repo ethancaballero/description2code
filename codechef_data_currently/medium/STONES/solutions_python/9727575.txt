@@ -1,0 +1,35 @@
+## CodeChef
+## Coin Flip
+## 2016.03.24
+    
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    game = int(raw_input())  ## the number of games
+##
+##    for j in xrange(game):
+##        i,n,q = map(int,raw_input().strip().split())
+##        if i == q:
+##            print n/2
+##        else:
+##            print n - n/2
+
+## CodeChef
+## Jewels and Stones
+## 2016.03.24
+
+def identification(J,S):
+    total = 0
+    for i in xrange(len(S)):
+        if S[i] in J:
+            total += 1
+        
+    return total
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    J = raw_input() ## the string of jewels
+    S = raw_input() ## the stirng of mined stones
+
+    print identification(J,S)

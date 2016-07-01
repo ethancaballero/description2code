@@ -1,0 +1,7 @@
+read = lambda: map(int, raw_input().split())
+read_s = lambda: map(str, raw_input().split())
+
+A, N, K = read()
+for i in range(K):
+    print A % (N + 1),
+    A /= (N + 1)

@@ -1,0 +1,19 @@
+t=int(raw_input());
+arr=map(int,raw_input().split());
+mx=0;
+cur=0;
+
+for x in arr:
+    if x==0:
+        if cur>mx:
+            mx=cur;
+        cur=0;
+
+    else:
+            cur+=1;
+
+if cur > mx:
+    mx=cur;
+
+print mx;
+    

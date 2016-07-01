@@ -1,0 +1,18 @@
+import math
+t=int(input())
+while t>0:
+    t-=1
+    n=int(input())
+    i=1
+    p=int(math.sqrt(n)+1)
+    cnt=0
+    while i<p:
+        if (n%i)==0:
+            j=str(i)
+            if ('4' in j) or ('7' in j):
+                cnt+=1
+            j=str(n/i)
+            if ('4' in j) or ('7' in j):
+                cnt+=1
+        i+=1
+    print cnt

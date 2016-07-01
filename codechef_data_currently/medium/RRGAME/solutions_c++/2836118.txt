@@ -1,0 +1,66 @@
+#include<stdio.h>
+#define mod 1000000007
+
+long long mini(long long a,long long b)
+{
+     return a<b?a:b;
+}
+
+long long maxi(long long a,long long b)
+{
+     return a>b?a:b;
+}
+
+
+int main()
+{
+    
+    int t,n,i;
+    
+    long long m,k,x,min,max,sum,max2;
+    
+    //scanf("%d",&t);
+    
+    //while(t--)
+    //{
+              scanf("%d %lld %lld",&n,&m,&k);
+              max2=-1;
+              max=-1;
+              sum=0;
+              for(i=0;i<n;i++)
+              {
+                              scanf("%lld",&x);
+                              
+                              x=(m-x)/k + 1;
+                              
+                              if(x>max)
+                              {
+                                       max2=max;
+                                       max=x;
+                              }
+                              else if(x>max2)
+                              {
+                                   max2=x;
+                              }
+                                       
+                               
+                              sum+=x;
+                              
+                              
+              }
+              min=(sum-max)/2;
+              
+              if((sum-max)%2==1)
+               min++;
+               
+              min=maxi(min,max2);
+              //printf("%lld
+",min);
+              max=mini(sum/2,sum-max);
+              
+              
+              printf("%lld
+",(max-min+1)%mod);
+    //}
+    return 0;
+}

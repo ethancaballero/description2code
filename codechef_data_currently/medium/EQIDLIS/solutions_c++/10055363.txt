@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e4 + 10;
+int A[MAXN];
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int N;
+        scanf("%d", &N);
+        for(int i = 0;i <= N;++i){
+            A[i] = 0;
+        }
+        for(int i = 1;i <= N;++i){
+            int x;
+            scanf("%d", &x);
+            ++A[x];
+        }
+        int _i = 0;
+        int _j = N;
+        int ans = 0;
+       while(_i + 1 < _j){
+            while(A[_i] == 0 && _i <= N) ++_i;
+            while(A[_j] == 0 && _j >= 0) --_j;
+            if(_i + 1 < _j){
+                int matches = min(A[_i], A[_j]);
+                int R = (_j - _i + 1) >> 1;
+                A[_j] -= matches;
+                A[_i] -= matches;
+                int idest = _i + R;
+                int jdest = _j - R;
+                if(A[_j] == 0) --_j;
+                if(A[_i] == 0) ++_i;
+
+                A[idest] += matches;
+                A[jdest] += matches;
+                ans += matches;
+            }
+       }
+       int cnt = 0;
+       for(int i = 0;i <= N;++i){
+        cnt += (A[i] == 0?0:1);
+       }
+       if(cnt != 1) ans = -1;
+       printf("%d
+", ans);
+    }
+    return 0;
+}

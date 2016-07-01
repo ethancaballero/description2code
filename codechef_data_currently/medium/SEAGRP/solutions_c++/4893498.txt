@@ -1,0 +1,83 @@
+// ...............................$$.....................................//
+//BIG OH
+//prob-we have given two array and we have tp find the nth smallest sum
+#include<cstdio>
+#include <iostream>
+#include<cstring>
+#include<limits.h>
+#include<stdio.h>
+#include<sstream>
+#include<stdlib.h>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#include<map>
+#include<set>
+#include<list>
+#include<stack>
+#include<queue>
+#include<iomanip>
+#include<ctype.h>
+#include<complex>
+#include<utility>
+#include<functional>
+#include<bitset>
+#include<numeric>
+#include<cassert>
+#include<limits>
+using namespace std;
+#define ll long long
+#define gc getchar_unlocked
+#define mod 1000000007
+bool chek_degree(bool vis[105]);
+int read() {int nm=0;char ch=gc(); while(ch<'0'||ch>'9') ch=gc(); while(ch>='0'&&ch<='9') {nm=(nm<<1)+(nm<<3)+ch-'0';ch=gc();} return nm;}
+int n,m;
+int adj[105][105];
+int main()
+{
+  int t;
+  t=read();
+  while(t--)
+  {
+    memset(adj,0,sizeof(adj));
+    
+    n=read();m=read();
+    for (int i=0;i<m;i++)
+    {
+      int u,v;
+      u=read();v=read();
+      adj[u][v]=1;
+      adj[v][u]=1;
+    }
+    bool vis[105];memset(vis,0,sizeof(vis));
+    bool flag=chek_degree(vis);
+    if(flag) printf("YES
+");
+    else  printf("NO
+");
+   }
+}
+
+////////////////////////////////////////////////////
+bool chek_degree(bool vis[105])
+{
+  for (int i=1;i<=n;i++)
+  {
+    if(vis[i]==0)
+    {
+             // i not matched. match it
+       for (int j=1;j<=n;j++)
+       {
+           if((adj[i][j]==1) and (vis[j]==0))
+           {
+              vis[i]=1; vis[j]=1;
+              if (chek_degree(vis)==true) return true;
+              vis[i]=0;
+              vis[j]=0;
+            }
+       }
+     return false;
+   }
+  }
+return true;
+}

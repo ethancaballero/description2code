@@ -1,0 +1,32 @@
+
+
+for t in xrange(int(raw_input())):
+    line = list(raw_input())
+    length = len(line)
+    x = length-1
+    while x > 2:
+        tmp = [line[x], line[x-1], line[x-2], line[x-3]]
+        if (
+            (tmp[0] == '?' or tmp[0] == 'F') and
+            (tmp[1] == '?' or tmp[1] == 'E') and
+            (tmp[2] == '?' or tmp[2] == 'H') and
+            (tmp[3] == '?' or tmp[3] == 'C')
+        ):
+            line[x] = 'F'
+            line[x-1] = 'E'
+            line[x-2] = 'H'
+            line[x-3] = 'C'
+            x -= 3
+        if line[x] == '?':
+            line[x] = 'A'
+        x -= 1
+    try:
+        if line[0] == '?':
+            line[0] = 'A'
+        if line[1] == '?':
+            line[1] = 'A'
+        if line[2] == '?':
+            line[2] = 'A'
+    except:
+        pass
+    print ''.join(line)

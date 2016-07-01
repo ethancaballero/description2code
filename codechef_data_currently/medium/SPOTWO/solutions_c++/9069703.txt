@@ -1,0 +1,41 @@
+	#include<iostream>
+	#define mod 1000000007;
+	using namespace std;
+	long long int modular(unsigned long long int base,unsigned long long int power)
+	{
+		unsigned long long int result=1;
+		while(power>0)
+		{
+			if(power%2==1)
+				result=(result*base)%mod;
+			base=(base*base)%mod;
+			power/=2;
+		}	
+		return result;
+	}
+	int main()
+	{
+		int t;
+		cin>>t;
+		
+		while(t>0)
+		{
+			
+			unsigned long long int n,power=0;
+			cin>>n;
+			unsigned long long  times=1;
+			
+			while(n>0)
+			{
+				if(n%2==1)
+					power=power+times;
+				n/=2;
+				times*=10;
+			}
+			long long int number=modular(2,power);
+			number=(number*number)%mod;
+			cout<<number<<endl;
+			t--;
+		}
+
+	}

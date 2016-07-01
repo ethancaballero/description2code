@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string>
+#include<iostream>
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%d
+",n);
+using namespace std;
+int main()
+{
+int t;
+s(t)
+int c=0;
+while(t--)
+{
+int a[6];
+for(int i=0;i<6;i++)
+        s(a[i])
+        int m1,m2,m3,n1,n2,n3;
+m1=a[1]-a[3];
+n1=a[0]-a[2];
+m2=a[3]-a[5];
+n2=a[2]-a[4];
+m3=a[5]-a[1];
+n3=a[4]-a[0];
+int d1=m1*m1+n1*n1;
+int d2=m2*m2+n2*n2;
+int d3=m3*m3+n3*n3;
+//p(d1)p(d2)p(d3)
+if(d1>d2&&d1>d3&&d1==(d2+d3))
+{
+        c++;
+        continue;
+}
+    if(d2>d1&&d2>d3&&d2==(d1+d3))
+       {
+        c++;
+        continue;
+       }
+    if(d3>d1&&d3>d2&&d3==(d1+d2))
+    {
+        c++;
+        continue;
+    }
+}
+p(c)
+return 0;
+}

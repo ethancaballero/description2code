@@ -1,0 +1,64 @@
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+
+using namespace std;
+
+int n;
+string s[1011];
+
+int dx[] = {-1, -1, -1, 0, 1, 1, 1, 0};
+int dy[] = {-1, 0, 1, -1, 1, 0, -1, 1};
+
+bool check(int i, int j)
+{
+        if(i < 0 || j < 0 || i >= n || j >= n || s[i][j] != 'X') return false;
+        return true;
+}
+
+int main()
+{
+    cin >> n;
+    string ss;
+    char c[1005];
+    for(int i = 0; i < n; i++) {
+        scanf("%s", c);
+        s[i] = c;
+       // s[i] = '.';
+        //s[i] += ss;
+    }
+    int val[n+1][n+1];
+
+    memset(val, 0, sizeof(val));
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(s[i][j] == '.') {
+                val[i][j] = 0;
+            }
+            else {
+                val[i][j] = max(1, val[i][j]);
+                for(int k = 0; k < 4; k++) {
+                    if(!check(i+dx[k], j+dy[k])) {
+                        int ii = i;
+                        int jj = j;
+                        int cc = 1;
+                        while(check(ii-dx[k], jj-dy[k])) {
+                            ii -= dx[k], jj -= dy[k];
+                            cc++;
+                        }
+                        val[ii][jj] = max(val[ii][jj], cc);
+                        ii = i;
+                        jj = j;
+                        while(check(ii-dx[k], jj-dy[k])) {
+                            val[ii][jj] = max(cc, val[ii][jj]);
+                            ii -= dx[k], jj -= dy[k];
+                        }
+                    }
+                }
+            }
+            printf("%d ", val[i][j]);
+        }
+        cout << endl;
+    }
+   // cout << endl;
+}

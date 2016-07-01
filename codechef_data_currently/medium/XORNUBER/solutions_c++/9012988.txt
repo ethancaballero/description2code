@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,i;
+    cin>>t;
+    while(t--)
+    {
+        long long n;
+        cin>>n;
+        if(n==1)
+        {
+            cout<<"2
+";
+            continue;
+        }
+        int temp=int(log2(n))+1;
+        for(i=0;i<temp;i++)
+            {
+                if(n%2==0)
+                    break;
+                n/=2;
+            }
+        if(i!=temp)
+            cout<<"-1
+";
+        else
+        {
+            long long ans=(long long)pow(2,temp-1)-1;
+            cout<<ans<<"
+";
+        }
+    }
+}

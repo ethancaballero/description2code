@@ -1,0 +1,14 @@
+for i in range(input()):
+    a=map(int,raw_input().split())
+    extinct=raw_input().split()
+    l=[]
+    for j in range(a[1]):
+        modern=raw_input().split()
+        for k in modern:
+            l.append(k)
+    for k in range(0,a[0]):
+        if extinct[k] in l:
+            print "YES",
+        else:
+            print "NO",
+    print

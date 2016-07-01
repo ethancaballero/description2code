@@ -1,0 +1,21 @@
+t=input()
+while t>0:
+    t=t-1
+    n=input()
+    l=map(int,raw_input().split())
+    r=map(int,raw_input().split())
+    ma=0
+    maxi=l[0]*r[0]
+    for i in range(0,n-1):
+        if (l[i+1]*r[i+1])>maxi:
+            ma=i+1
+            maxi=l[i+1]*r[i+1]
+        elif (l[i+1]*r[i+1])==maxi:
+            if r[i+1]>r[ma]:
+                ma=i+1
+                maxi=l[i+1]*r[i+1]
+                
+        else:
+            continue
+    print ma+1
+        

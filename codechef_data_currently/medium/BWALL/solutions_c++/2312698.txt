@@ -1,0 +1,82 @@
+#include<stdio.h>
+
+struct mat{
+	long long x[3][3];
+};
+#define MOD 1000000007
+mat mul(long long);
+mat matmul(mat,mat);
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	long long int n,r;
+	mat res;
+	while(t--)
+	{
+		scanf("%lld",&n);
+		if(n==1)
+			printf("1
+");
+		else if(n==2)
+			printf("5
+");
+		else if(n==3)
+			printf("11
+");
+		else
+		{
+			res=mul(n-3);
+			r=res.x[0][0]*11+res.x[0][1]*5+res.x[0][2]*1;
+			r%=MOD;
+			printf("%lld
+",r);
+		}
+	}
+	return 0;
+}
+
+mat mul(long long n)
+{
+	mat a;
+	a.x[0][0]=1;
+	a.x[0][1]=4;
+	a.x[0][2]=2;
+	a.x[1][0]=1;
+	a.x[1][1]=0;
+	a.x[1][2]=0;
+	a.x[2][0]=0;
+	a.x[2][1]=1;
+	a.x[2][2]=0;
+	if(n==1)
+	{
+		return a;
+	}
+	mat b,c;
+	b=mul(n/2);
+	c=matmul(b,b);
+	if(n%2)
+	{
+		c=matmul(c,a);
+	}
+	return c;
+}
+mat matmul(mat a, mat b)
+{
+	mat c;
+	for(int i=0; i<3; i++)
+		for(int j=0; j<3; j++)
+			c.x[i][j]=0;
+	for(int i=0;i<3;i++)
+	{
+		for(int j=0;j<3;j++)
+		{
+			for(int k=0;k<3;k++)
+			{
+				c.x[i][j]+=a.x[i][k]*b.x[k][j];
+				c.x[i][j]%=MOD;
+			}
+		}
+	}
+	return c;
+}

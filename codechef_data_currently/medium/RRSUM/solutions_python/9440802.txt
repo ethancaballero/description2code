@@ -1,0 +1,21 @@
+string = raw_input()
+inte = string.split();
+N = int(inte[0])
+M = int(inte[1])
+#print N,M
+#M = int(raw_input())
+temp = M
+while temp > 0:
+   temp = temp - 1
+   q = int(raw_input())
+
+   medn = (4*N+2)/2
+
+   if( q <= medn ):
+      out = medn-(N+1)-(medn-q);
+   else:
+      out = medn-(N+1)-(q-medn);
+   if out <= 0:
+      out = 0
+   
+   print out

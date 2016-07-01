@@ -1,0 +1,28 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+def distance(a,b):
+ return (a[0]-b[0])**2+(a[1]-b[1])**2
+cases=input()
+res=0
+for case in range(cases):
+ s=parseIntList(raw_input())
+ a=distance(s[0:2],s[2:4])
+ b=distance(s[2:4],s[4:6])
+ c=distance(s[0:2],s[4:6])
+ if a+b==c:
+  res+=1
+ elif a+c==b:
+  res+=1
+ elif b+c==a:
+  res+=1
+print res
+ 
+ 

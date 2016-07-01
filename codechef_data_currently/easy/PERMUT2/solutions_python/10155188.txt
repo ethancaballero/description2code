@@ -1,0 +1,12 @@
+a=1;
+while (a!=0):
+	a=input();
+	if (a==0): break
+	myList=map(int,raw_input().split());
+	newList=[0]*len(myList);
+	i=1
+	for x in myList:
+		newList[x-1]=i
+		i=i+1
+	if (cmp(myList,newList)==0): print 'ambiguous'
+	else: print 'not ambiguous' 

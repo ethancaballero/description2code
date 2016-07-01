@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+
+import itertools
+
+num_case = int(raw_input())
+
+for cidx in range(num_case):
+    n = int(raw_input())
+    nstr = raw_input()
+    nlist = nstr.split()
+    nlist = [int(i) for i in nlist]
+
+    if n == 1:
+        print 'YES'
+        continue
+
+    # find inversions
+    inv_count = 0
+    for com in itertools.combinations(nlist, 2):
+        if com[0] > com[1]:
+            inv_count += 1
+
+    # find local inversion
+    loc_inv_count = 0
+    for i in range(n-1):
+        if nlist[i] > nlist[i+1]:
+            loc_inv_count += 1
+
+    if inv_count == loc_inv_count:
+        print 'YES'
+    else:
+        print 'NO'
+

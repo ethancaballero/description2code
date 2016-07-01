@@ -1,0 +1,93 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long arr[10001];
+//long long ans[10001];
+long long a[10001];
+long long b[10001];
+long long mi[10001];
+long long ma[10001];
+int main()
+{
+    long long t,n,i,j,x,y,z,w;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=0;i<n;i++)
+            cin>>arr[i];
+       //long long sum=arr[0];
+   /* ans[0]=sum;
+    for(i=1;i<n;i++)
+    {
+        sum=sum+arr[i];
+        ans[i]=sum;
+       // cout<<ans[i];
+    }*/
+    x=arr[0];
+    y=arr[0];
+    a[0]=x;
+    b[0]=x;
+    for(i=1;i<n;i++)
+    {
+        x=max(arr[i],x+arr[i]);
+        a[i]=x;
+        y=min(arr[i],y+arr[i]);
+        b[i]=y;
+    }
+    long long an=abs(arr[0]-arr[1]);
+    x=arr[n-1];
+    y=arr[n-1];
+    mi[n-1]=x;
+    ma[n-1]=x;
+    for(i=n-2;i>=0;i--)
+    {
+        x=max(arr[i],x+arr[i]);
+        ma[i]=x;
+        /*else
+            ma[i]=ma[i+1];
+        if(ans[i]<mi[i+1])
+            mi[i]=ans[i];
+        else
+            mi[i]=mi[i+1];*/
+            y=min(arr[i],y+arr[i]);
+            mi[i]=y;
+    }
+  /*  for(i=0;i<n-1;i++)
+    {
+        cout<<a[i]<<" "<<b[i]<<"
+";
+    }*/
+    for(i=0;i<n-1;i++)
+    {
+       //     cout<<miny<<maxy<<"
+";
+       // int x=*max_element(ans+i+1,ans+n);
+       // int y=*min_element(ans+i+1,ans+n);
+     // cout<<x<<y;
+     // cout<<"
+";
+        if(abs(b[i]-ma[i+1])>an)
+        {
+            an=abs(b[i]-ma[i+1]);
+            //cout<<an;
+        }
+        if(abs(a[i]-mi[i+1])>an)
+        {
+            an=abs(a[i]-mi[i+1]);
+           // cout<<an;
+        }
+       /*  if(abs(b[i]-mi[i+1])>an)
+        {
+            an=abs(b[i]-mi[i+1]);
+           // cout<<an;
+        }
+         if(abs(a[i]-ma[i+1])>an)
+        {
+            an=abs(a[i]-ma[i+1]);
+           // cout<<an;
+        }*/
+    }
+    cout<<an<<"
+";
+    }
+}

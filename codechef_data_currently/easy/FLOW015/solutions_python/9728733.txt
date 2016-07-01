@@ -1,0 +1,24 @@
+testCase = int(raw_input())
+ 
+for i in xrange(testCase):
+    inputYear = int(raw_input())
+    differenceDay = 0
+    day = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+    if inputYear > 2001:
+        for year in range(2001, inputYear):
+            if ((year % 4 == 0) and (year % 100 != 0)) or (year % 400 == 0):                   
+                differenceDay += 366
+            else:
+                differenceDay += 365
+        print day[(differenceDay%7)]
+ 
+    elif inputYear < 2001:
+        for year in range(inputYear,2001):
+            if ((year % 4 == 0) and (year % 100 != 0)) or (year % 400 == 0):
+                differenceDay += 366
+            else:
+                differenceDay += 365
+        print day[-(differenceDay%7)]
+ 
+    else:
+        print day[0]

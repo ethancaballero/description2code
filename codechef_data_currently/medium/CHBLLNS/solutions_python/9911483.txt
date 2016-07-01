@@ -1,0 +1,6 @@
+T = int(raw_input())
+while T>0:
+	R, B, G = map(int, raw_input().split())
+	K = int(raw_input())
+	print 1+min(R,K-1)+min(B,K-1)+min(G,K-1)
+	T -= 1

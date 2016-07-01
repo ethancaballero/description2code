@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+	int T;
+	cin>>T;
+	for(int t=0;t<T;t++){
+	int n,m;
+	cin>>n>>m;
+	int contain[m][n];
+	for(int i=0;i<m;i++){
+		for(int j=0;j<n;j++){
+			contain[i][j] = 0;
+			}
+		}
+	for(int i=0;i<m;i++){
+		int v;
+		cin>>v;
+		for(int j=0;j<v;j++){
+			int temp;
+			cin>>temp;
+			contain[i][temp] = 1;
+			}
+		}
+	
+	vector<vector<int> > groups;
+	for(int i=0;i<n;i++){
+		int num = i;
+		bool found = false;
+		for(int j=0;j<groups.size();j++){
+			bool tempfound = true;
+			for(int k=0;k<m;k++){
+				bool allcontain = false;
+				if(contain[k][groups[j][0]]==1){
+					allcontain = true;
+					}
+				/*
+				if(num==3 && j==1 && k==0){
+					cout<<allcontain<<" "<<groups[j][0]<<" "<<contain[k][num]<<endl;
+					}
+				*/
+				if(allcontain && contain[k][num]==1){					
+					tempfound = tempfound && true;
+					}
+				if(!allcontain && contain[k][num]==1){
+					tempfound = tempfound && false;
+					}
+				if(allcontain && contain[k][num]==0){
+					tempfound = tempfound && false;
+					}
+				}
+			if(tempfound){
+				found = true;
+				groups[j].push_back(num);
+				break;
+				}
+			}
+		if(!found){
+			vector<int> newvec;
+			newvec.push_back(num);
+			groups.push_back(newvec);
+			}
+		}
+	cout<<groups.size()<<endl;
+	/*
+	for(int i=0;i<groups.size();i++){
+		for(int j=0;j<groups[i].size();j++){
+			cout<<groups[i][j]<<" ";
+			}
+		cout<<endl;
+		}*/
+	}
+}

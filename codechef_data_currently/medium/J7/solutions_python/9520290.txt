@@ -1,0 +1,11 @@
+t=input()
+while t:
+	p,s=map(int,raw_input().split())
+	l1=(p+(p*p-24*s)**(.5))/12
+	l2=(p-(p*p-24*s)**(.5))/12
+	b1=p/4-2*l1
+	b2=p/4-2*l2
+	print max(l1*b1*l1,l2*b2*l2)
+	t=t-1
+	
+	

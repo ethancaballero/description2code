@@ -1,0 +1,16 @@
+import sys
+
+t = input()
+for i in range(t):
+	n = input()
+	c = map(int,sys.stdin.readline().split())
+	c.sort(reverse=True)
+	cost = 0
+	j = 0
+	while j<len(c):
+		k = j
+		while k<len(c) and (k-j)<=1:
+			cost+=c[k]
+			k+=1
+		j+=4
+	print cost

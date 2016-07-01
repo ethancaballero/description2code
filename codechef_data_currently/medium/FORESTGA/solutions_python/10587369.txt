@@ -1,0 +1,31 @@
+def possible(x,l,w):
+     sm=0
+     for i in range(n):
+          if((ini[i]+rate[i]*x)>=l):
+               sm=sm+ini[i]+rate[i]*x
+     if sm>=w:
+          return 1
+     else:
+          return 0
+n,w,l=map(int,raw_input().split())
+ini=[]
+rate=[]
+for i in range(n):
+     cur=map(int,raw_input().split())
+     ini.append(cur[0])
+     rate.append(cur[1])
+low=0
+high=1000000000000000000
+while low<=high:
+     mid=(low+high)/2
+     if(possible(mid,l,w)==1):
+          high=mid-1
+     else:
+          low=mid+1
+sm=0
+for i in range(n):
+     if((ini[i]+rate[i]*mid)>=l):
+          sm=sm+ini[i]+rate[i]*mid
+if(sm<w):
+     mid=mid+1
+print mid

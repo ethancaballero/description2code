@@ -1,0 +1,11 @@
+T = int(raw_input())
+while(T != 0):
+    T = T-1;
+    s = raw_input()
+    M,N = [int(i) for i in s.split(' ')]
+    ans = M*N*(M*N - 1);
+    if((M > 1) & (N > 2)):
+        ans = ans - 4*(M-1)*(N-2);
+    if((M > 2) & (N > 1)):
+        ans = ans - 4*(M-2)*(N-1);
+    print ans

@@ -1,0 +1,30 @@
+#include<iostream>
+#include<stdio.h>
+#include<iomanip>
+using namespace std;
+int main()
+{
+    cout<<setprecision(1)<<fixed;
+    int t;
+    double t1,t2,dist;
+    char a[10],b[10];
+    scanf("%d",&t);
+    while(t--)
+{
+        cin>>a>>b;
+        cin>>dist;
+        t1=60*(10*(a[0]-'0')+(a[1]-'0'))+10*(a[3]-'0')+(a[4]-'0');
+        t2=60*(10*(b[0]-'0')+(b[1]-'0'))+10*(b[3]-'0')+(b[4]-'0');
+        cout<<(t1-t2+dist)<<" ";
+
+        if((t1-t2)>=(2*dist))
+        {
+            cout<<(t1-t2)<<endl;
+        }
+        else
+        {
+            cout<<((2*dist)+(t1-t2))/2<<endl;
+        }
+    }
+    return 0;
+}

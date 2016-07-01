@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+#define ll long long
+
+
+using namespace std;
+struct polygon{
+    int no;
+    int maxX;
+};
+bool compare(const polygon a,const polygon b)
+{
+    return a.maxX < b.maxX;   //increasing order
+}
+int main()
+{
+    int t,n,m,x,y;
+    cin >> t;
+    while(t--)
+    {
+        cin >> n;  //no of polygons
+        vector<polygon> Pols;  //list of polygons
+        vector<int> ans(n);   //answer for each polygon
+        /* 
+           for each polygon
+         */
+        for(int i=0;i<n;i++)
+        {
+            cin >> m;
+            /* 
+               calculate sorting feature
+            */
+            int max_x=INT_MIN;
+            while(m--)
+            {
+                cin >> x >> y;
+                max_x=max(max_x,x);
+            }
+            polygon curr;
+            curr.no=i;
+            curr.maxX=max_x;
+            Pols.push_back(curr);  //insert polygon into the list
+        }
+        sort(Pols.begin(),Pols.end(),compare);
+        for(int rank=0;rank<(int)Pols.size();rank++)
+            ans[Pols[rank].no]=rank;
+        for(int i=0;i<(int)ans.size();i++)
+            cout << ans[i] << ' ';
+        cout << endl;
+    }
+    return 0;
+}
+

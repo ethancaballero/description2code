@@ -1,0 +1,11 @@
+import sys
+
+t = input()
+for i in range(t):
+	n = input()
+	s = map(int,list(map(str,sys.stdin.readline().split())[0]))
+	num = 0
+	for i in s:
+		if i==1:
+			num+=1
+	print num*(num+1)/2

@@ -1,0 +1,28 @@
+m=map(int,raw_input().split())
+n=m[0]
+k=m[1]
+arr=map(int,raw_input().split())
+arr2=[]
+arr1=[]
+ans=""
+ma=max(arr)
+for i in xrange(0,n):
+    arr1.append(ma-arr[i])
+ma=max(arr1)
+#print "ma1",ma
+for i in xrange(0,n):
+    arr2.append(ma-arr1[i])
+#print arr,arr1,arr2
+ans=""
+if k!=0:
+    if k%2==0:
+	for i in xrange(0,n):
+	    ans+=str(arr2[i])+" "
+    else:
+	for i in xrange(0,n):
+	    ans+=str(arr1[i])+" "
+else:
+    for i in xrange(0,n):
+	ans+=str(arr[i])+" "
+    ans
+print ans

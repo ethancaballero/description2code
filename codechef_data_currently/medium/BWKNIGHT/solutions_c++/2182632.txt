@@ -1,0 +1,39 @@
+#include<stdio.h>
+#define llu long long int
+int main()
+{
+    llu t,n,m,k,base=100000000000LL,d,x,a,b,i;
+    scanf("%lld",&t);
+    while(t--)
+    {
+     scanf("%lld %lld",&n,&m);
+     k=(n*m-1)*n;
+     a=k/base;b=k%base;
+     a=a*m;b=b*m;
+      a=a+b/base;b=b%base;
+     if(n>=2 && m>=1)
+     {
+             b=b-4*(n-2)*(m-1);
+             if(b<0) {b=b+base;a--;}
+     }
+     if(n>=1 && m>=2)
+     {
+             b=b-4*(m-2)*(n-1);
+             if(b<0) {b=b+base;a--;}
+     }
+     if(a)
+     {printf("%lld",a);
+     x=b;d=0;
+     while(x!=0) {x=x/10;d++;}
+     for(i=0;i<11-d;i++) printf("0");
+     }
+     printf("%lld
+",b);
+    }
+}
+    
+
+
+
+
+

@@ -1,0 +1,71 @@
+/*
+ * File:   FIRE.c
+ * Author: Varsha
+ *
+ * Created on December 16, 2013, 6:41 PM
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ *	Brush Fire - Program to tell whether we can save the special bushes from fire
+ */
+
+typedef struct Bush {
+	int spl;
+	int ct[3];
+} Bush;
+
+int canSave(Bush*, int, int);
+
+int main() {
+	int T, n, s, t, ci, *ans;
+	int i, j, k;
+	Bush *B;
+
+	scanf("%d", &T);
+	ans = (int *) malloc(T * sizeof (int));
+	for (i = 0; i < T; i++) {
+
+		scanf("%d %d %d", &n, &s, &t);
+		B = (Bush*) malloc((n + 1) * sizeof (Bush));
+		for (j = 1; j <= n; j++) {
+			scanf("%d", &ci);
+			for (k = 0; k < ci; k++)
+				scanf("%d", &(B[j].ct[k]));
+			for (; k < 3; k++)
+				B[j].ct[k] = 0;
+			B[j].spl = 0;
+		}
+		for (j = 0; j < t; j++) {
+			scanf("%d", &k);
+			B[k].spl = 1;
+		}
+
+		ans[i] = canSave(B, s, 0);
+
+		free(B);
+
+	}
+
+	for (i = 0; i < T; i++)
+		printf(((ans[i]) ? ("yes
+") : ("no
+")));
+
+	return (EXIT_SUCCESS);
+}
+
+int canSave(Bush *B, int s, int parent) {
+	int left = 0, right = 0;
+	if (!s)
+		return 1;
+	if (B[s].spl)
+		return 0;
+	if (!B[s].ct[1] || (!B[s].ct[2] && parent))
+		return 1;
+	left = ((B[s].ct[0] != parent) ? B[s].ct[0] : B[s].ct[1]);
+	right = ((B[s].ct[2] != parent) ? B[s].ct[2] : B[s].ct[1]);
+	return (canSave(B, left, s) || canSave(B, right, s));
+}

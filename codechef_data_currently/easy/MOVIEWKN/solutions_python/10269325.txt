@@ -1,0 +1,11 @@
+for t in range(int(raw_input())):
+    n=int(raw_input())
+    l=map(int,raw_input().split())
+    r=map(int,raw_input().split())
+    z=[i*j for i,j in zip(l,r)]
+    maxmz=max(z)    
+    a=[i for i in range(n) if z[i]==maxmz]
+    b=[r[i] for i in a]
+    maxmr=max(b)
+    ans=[i for i in a if r[i]==maxmr]
+    print ans[0]+1

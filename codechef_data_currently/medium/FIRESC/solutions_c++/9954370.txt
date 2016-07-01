@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<iostream>
+#include<bits/stdc++.h>
+
+#define sd(x) scanf("%d", &x);
+#define slld(x) scanf("%lld", &x);
+#define print(x) printf("%lld
+", x);
+#define TYPE int
+#define MOD 1000000007
+
+using namespace std;
+
+struct node {
+	TYPE data;
+	node* parent;
+	TYPE rank;
+};
+
+map<TYPE, node*> MAP;
+
+void makeSet(TYPE data) {
+	node* n = new node();
+	n->data = data;
+	n->parent = n;
+	n->rank = 0;
+	MAP[data] = n;
+}
+
+node* findSet(node* n) {
+	node* parent = n->parent;
+	if(parent == n) {
+		return parent;
+	}
+	n->parent = findSet(n->parent);
+	return n->parent;
+}
+
+TYPE findSet(TYPE data) {
+	return findSet(MAP[data])->data;
+}
+
+bool unionFunc(TYPE data1, TYPE data2) {
+	node* n1 = MAP[data1];
+	node* n2 = MAP[data2];
+	node* parent1 = findSet(n1);
+	node* parent2 = findSet(n2);
+	
+	if(parent1->data == parent2->data) {
+		return false;
+	}
+	if(parent1->rank == parent2->rank) {
+		parent1->rank++;
+		parent2->parent = parent1;
+	} else if(parent1->rank > parent2->rank) {
+		parent2->parent = parent1;
+	} else {
+		parent1->parent = parent2;
+	}
+	return true;
+}
+
+int main() {
+	int T;
+	sd(T);
+	int N, M, t, i, j, m, n;
+	long long int escapes = 0, selects = 1;
+	for(t = 0; t < T; t++) {
+		MAP.clear();
+		sd(N); sd(M);
+		for(n = 1; n <= N; n++) {
+			makeSet(n);
+		}
+		for(m = 0; m < M; m++) {
+			sd(i); sd(j);
+			unionFunc(i, j);
+		}
+		vector<TYPE> sets;
+		for(n = 0; n <= N; n++) {
+			sets.push_back(0);
+		}
+		for(n = 1; n <= N; n++) {
+			sets[findSet(n)]++;
+		}
+		escapes = 0;
+		selects = 1;
+		for(n = 1; n <= N; n++) {
+			if(sets[n] != 0) {
+				escapes = (escapes + 1)%MOD;
+				selects = (selects * sets[n])%MOD;
+			}
+		}
+		printf("%lld %lld
+", escapes, selects);
+	}
+	return 0;
+}

@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<iostream>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<map>
+#include<set>
+#include<sstream>
+#include<cmath>
+#include<assert.h>
+using namespace std;
+#define ll long long
+#define ull unsigned long long
+#define pi acos(-1)
+#define inf 1001001001
+#define mod 1000000007
+//const ll inf = 1000000000005LL;
+#define pii pair<int,int>
+#define vi vector<int>
+#define all(x) x.begin(),x.end()
+#define mp make_pair
+#define pb push_back
+#define x first
+#define y second
+#define N 250010
+
+#define DBG(vari) cerr<<#vari<<"="<<(vari)<<endl;
+#define FOREACH(i,t) for(typeof(t.begin()) i=t.begin();i!=t.end();i++)
+
+void cal(ll n,ll m)
+{
+	ll base=100000000000LL;
+	ll a=0,b=n*m-1;
+	b*=n;
+	a=b/base;b%=base;	
+	b*=m;a*=m;
+	a+=b/base;b%=base;
+	if(n&&m>2)
+	{
+		b-=(n-1)*(m-2)*4;
+		if(b<0)b+=base,a--;
+	}
+	if(n>2&&m)
+	{
+		b-=(n-2)*(m-1)*4;
+		if(b<0)b+=base,a--;
+	}
+	if(a>0)
+	{
+		printf("%lld",a);
+		for(ll step=base/10;step>=10&&step>b;step/=10)printf("0");
+	}
+	printf("%lld
+",b);
+}
+int main()
+{
+	int T,n,m;
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d%d",&n,&m);
+		cal(n,m);
+	}
+	return 0;
+}

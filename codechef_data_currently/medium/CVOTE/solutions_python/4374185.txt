@@ -1,0 +1,32 @@
+from operator import itemgetter
+
+chef_count, vote_count = map(int, raw_input().split())
+chef_to_country = {}
+for _ in xrange(chef_count):
+    chef, country = raw_input().split()
+    chef_to_country[chef] = country
+
+chef_votecount = {}
+country_votecount = {}
+for _ in xrange(vote_count):
+    chef = raw_input()
+    if chef not in chef_votecount:
+        chef_votecount[chef] = 1
+    else:
+        chef_votecount[chef] += 1
+
+    if chef_to_country[chef] not in country_votecount:
+        country_votecount[chef_to_country[chef]] = 1
+    else:
+        country_votecount[chef_to_country[chef]] += 1
+
+sorted_chefs = [(c, cv) for c, cv in chef_votecount.iteritems()]
+sorted_chefs.sort(key=itemgetter(0))
+sorted_chefs.sort(key=itemgetter(1), reverse=True)
+
+sorted_countries = [(country, votes) for country, votes in country_votecount.iteritems()]
+sorted_countries.sort(key=itemgetter(0))
+sorted_countries.sort(key=itemgetter(1), reverse=True)
+
+print sorted_countries[0][0]
+print sorted_chefs[0][0]

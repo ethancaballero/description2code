@@ -1,0 +1,13 @@
+from sys import stdin as ip
+for _ in xrange(int(ip.readline())):
+    r=int(ip.readline())**2
+    a,b=map(int,ip.readline().split())
+    x,y=map(int,ip.readline().split())
+    p,q=map(int,ip.readline().split())
+    d1=pow(x-a,2)+pow(y-b,2)
+    d2=pow(p-x,2)+pow(q-y,2)
+    d3=pow(p-a,2)+pow(q-b,2)
+    if d1<=r and d2<=r or d2<=r and d3<=r or d1<=r and d3<=r:
+        print "yes"
+    else:
+        print "no"

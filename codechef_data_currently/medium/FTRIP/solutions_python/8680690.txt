@@ -1,0 +1,36 @@
+C = [[0 for x in range(1001)] for x in range(1001)]
+for i in range(0,1001):
+    for j in range(0,1001):
+        C[i][j]= float(0)
+for i in range(0,1001):
+    C[i][0] = 1
+for i in range(1,1001):
+    for j in range(1,1001):
+        if C[i][j]==0:
+            if i==j:
+                C[i][j]=float(1)
+            elif j==1:
+                C[i][j]=float(i)
+            else:
+                C[i][j]=C[i-1][j]+C[i-1][j-1]
+t = input()
+while t>0 :
+    num = raw_input()
+    arg = num.split()
+    for i in range(0,4):
+        arg[i] = int(arg[i])
+    s = arg[0]
+    n = arg[1]
+    m = arg[2]
+    k = arg[3]
+    s -= 1
+    m -= 1
+    n -= 1
+    ans = float(0)
+    for i in range(k,m+1):
+        if n-i<0:
+            break
+        ans += C[m][i]*C[s-m][n-i]
+    ans /= C[s][n]
+    print ans
+    t -= 1

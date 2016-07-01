@@ -1,0 +1,66 @@
+#define DEBUG 1
+
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+using namespace std;
+
+int main(void) {
+  int n, y, x, i, j;
+  char a[1000][1001];
+  int f[1000][1000];
+
+  scanf("%d", &n);
+  for(y=0;y<n;y++)
+    scanf("%s", &a[y]);
+
+  memset(f, 0, sizeof(f));
+  //horizontal or dot
+  for(y=0;y<n;y++)
+    for(x=0;x<n;x+=i+1) {
+      for(i=0;x+i<n && a[y][x+i]=='X';i++);
+      for(j=0;j<i;j++)
+	f[y][x+j]=i;
+    }
+
+  //vertical line
+  for(x=0;x<n;x++)
+    for(y=0;y<n;y++)
+      if(a[y][x]=='X') {
+	for(i=1;y+i<n && a[y+i][x]=='X';i++);
+	for(j=0;j<i;j++)
+	  f[y+j][x]=max(i, f[y+j][x]);
+	y+=i;
+      }
+  
+  //diagonal lower right line
+  for(y=0;y<n-1;y++)
+    for(x=0;x<n-1;x++)
+      if(a[y][x]=='X' && (x==0 || y==0 || a[y-1][x-1]!='X')) {
+	for(i=1;y+i<n && x+i<n && a[y+i][x+i]=='X';i++);
+	for(j=0;j<i;j++)
+	  f[y+j][x+j]=max(i, f[y+j][x+j]);
+      }
+
+  //diagonal lower left line
+  for(y=0;y<n-1;y++)
+    for(x=n-1;x>0;x--)
+      if(a[y][x]=='X' && (x==n-1 || y==0 || a[y-1][x+1]!='X')) {
+	for(i=1;y+i<n && x-i>=0 && a[y+i][x-i]=='X';i++);
+	for(j=0;j<i;j++)
+	  f[y+j][x-j]=max(i, f[y+j][x-j]);
+	//if(DEBUG)
+	//printf("%d,%d=%d
+", x, y, i);
+      }
+
+  //print f
+  for(y=0;y<n;y++) {
+    printf("%d", f[y][0]);
+    for(x=1;x<n;x++)
+      printf(" %d", f[y][x]);
+    printf("
+");
+  }
+  return 0;
+}

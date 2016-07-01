@@ -1,0 +1,46 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+#define MOD 1000000007
+ long long int Modpow( long long int X ,  long long int Y, long long int Mod)
+{
+      long long int Product=1;
+    for( ; Y; Y >>= 1)
+    {
+        if(Y & 1) Product = (Product * X) %Mod;
+        X = (X * X) % Mod;
+    }
+    return Product;
+}
+int main()
+{
+    int cases;
+    cin>>cases;
+    while(cases--)
+    {
+                  long long int n,m,q,k , ans =0 , times =0;
+                  cin>>n;
+                  cin>>m;
+                  cin>>q;
+                  cin>>k;
+                  if(q>=m)
+                    {
+                       cout<<"0
+";
+                   
+                    }
+                    else
+                    {
+                  times  =  m -  q ;
+//                  cout<<Modpow(m - q - 2,n,MOD)<<endl;
+                  ans  =   (times%MOD)*((Modpow(q +1 ,n,MOD) - (2)*Modpow(q , n ,MOD)   + Modpow( q - 1,n,MOD))%MOD )%MOD;
+                  if(ans<0)
+                  {
+                           ans =  ans  +  MOD;
+                  }
+                 cout<<ans<<endl;
+                 }
+   }
+  // system("pause");
+   return 0;
+   }

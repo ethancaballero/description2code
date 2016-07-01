@@ -1,0 +1,17 @@
+import math
+test = int(raw_input().strip())
+while test:
+    s= int(raw_input().strip())
+    count=0
+    for i in xrange(1,int(math.sqrt(s))+1):
+        if s%i==0:
+            t = str(i)
+           # print t
+            if '4' in t or '7' in t:
+                count+=1
+            t = str(s/i)
+            #print t
+            if '4' in t or '7' in t:
+                count+=1
+    print count
+    test-=1

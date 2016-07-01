@@ -1,0 +1,12 @@
+for _ in range(int(raw_input())):
+	n=int(raw_input())
+	if (n>=1 and n<=25):
+		pos=n+1
+	elif (n>=26 and n<=50):
+		pos=n+2
+	elif (n>=51 and n<=75):
+		pos=n+3
+	elif (n>=76 and n<=100):
+		pos=n+4
+	s="zyxwvutsrqponmlkjihgfedcba"*4
+	print s[-pos:]

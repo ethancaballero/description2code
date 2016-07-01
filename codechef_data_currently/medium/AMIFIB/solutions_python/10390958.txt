@@ -1,0 +1,13 @@
+t = int(raw_input())
+def fib(n):
+    a,b,d = 0,1,{0:True,1:True}
+    while b < n: 
+        a,b = b,a+b
+        if not d.get(b): d[b] = True
+    return d
+d = fib(10 ** 1001)
+while t:
+    A = int(raw_input())
+    if d.get(A): print 'YES'
+    else: print 'NO'
+    t-=1    

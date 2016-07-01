@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+#include <string>
+using namespace std;
+ 
+#define f(i,n) for(int i=0; i<n; i++)
+#define g(n) scanf("%d",&n)
+#define gl(n) scanf("%lld",&n)
+#define test(t) while(t--)
+#define fab(i,a,b) for(int i=a; i<=b; i++)
+#define pb push_back
+#define mp make_pair
+ 
+typedef long long int lli;
+typedef pair<int,int> pii;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+
+bool not_number(char ch){
+	if(ch>='0' && ch<='9')
+		return false;
+	return true;
+}
+int main(){
+	int t;
+	g(t);
+	getchar();
+	getchar();
+
+	int ans = 0;
+	int count[10];
+	const char *ch;
+	string nm;
+	test(t){
+		
+		getline(cin, nm);
+		// cout << "line = "<<nm<<endl;
+		ch = nm.c_str();
+		int len = strlen(ch);
+		while(not_number(ch[len-1])) len--;
+		memset(count,0,sizeof count);
+		int i = len-1;
+		while(ch[i] != ' '){
+			count[ch[i]-'0']++;
+			i--;
+		}
+
+		if(count[8]>=count[5] && count[5]>=count[3]){
+			bool flag = true;
+			f(i,10){
+				if(i!=3 && i!=5 && i!=8 && count[i]>0){
+					flag = false;
+					break;
+				}
+			}
+			if(flag) ans++;
+		}
+		
+	}
+	printf("%d
+",ans);
+	return 0;
+}

@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int lli;
+ int  seg[1000000];
+ int arr[1000000];
+ int build(int idx,int start,int end)
+  {
+  	 if(start>end)return 100;
+	   
+	   else if(start==end)
+	   {
+	   	    seg[idx]=arr[start];
+	   	    return 0;
+	   }
+	   else
+	   {
+	   	  build(2*idx,start,(start+end)/2);
+	   	  build(2*idx+1,(start+end)/2+1,end);
+	   	  seg[idx]=min(seg[2*idx],seg[2*idx+1]);
+	   }
+  }
+  
+  
+  int query(int idx,int start,int end,int qs,int qe)
+   {
+   	 if(start>end || qe<start || qs>end)
+   	     {
+   	 	 return 100;
+		}
+		else if(start>=qs && end<=qe)
+		 {
+		 	 return seg[idx];
+		 }
+		 else
+		 {
+		 	int p1=query(2*idx,(start),(start+end)/2,qs,qe);
+		 	 int p2=query(2*idx+1,((start+end)/2)+1,end,qs,qe);
+		 	 return min(p1,p2);
+		 }
+   }
+int main()
+ {
+ 	
+ 	int t;
+ 	 cin>>t;
+ 	 while(t--)
+ 	  {
+ 	  	   
+ 	  	   string s;
+ 	  	   cin>>s;
+ 	  	   int k;
+ 	  	    cin>>k;
+ 	  	    
+ 	  	    int len=s.length();
+ 	  	    for(int i=0;i<len;i++)
+ 	  	     {
+ 	  	     	arr[i]=s[i]-'a';
+				}
+				
+				build(1,0,len-1);
+				
+				string res="";
+				int l=0;
+				int r;
+				for(int i=1;i<=k;i++)
+				 {
+				  int rem=k-i;
+				  int r=(len-1)-rem;
+				//   cout<<" l  "<<l<<" r "<<r<<endl;
+				  int mini=query(1,0,len-1,l,r);
+				  // cout<<" mini is "<<mini<<endl;
+				  res+=(char)('a'+mini);
+				  for(int j=l;j<=r;j++)
+				   {
+				  // 	  cout<<" check ";
+				   	if(arr[j]==mini)
+				   	    {
+				   	 	 l=j+1;
+				   	 	 break;
+						}
+				   }
+				     //cout<<l<<endl;
+				 }
+				 
+				 
+				 
+				 cout<<res<<endl;
+	   }
+ }

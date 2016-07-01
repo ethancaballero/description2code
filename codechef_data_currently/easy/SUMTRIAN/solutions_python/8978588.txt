@@ -1,0 +1,18 @@
+t = int(input())
+
+for i in range(0, t):
+    n = int(input())
+    l = []
+    for j in range(n):
+        l1 = list(map(int, raw_input().split()))
+        l.append(l1)
+
+    large = 0
+    while (n-1) != -1:
+        for i in range(n-1):
+            if l[n-1][i] > l[n-1][i+1]:
+                l[n-2][i] += l[n-1][i]
+            else:
+                l[n-2][i] += l[n-1][i+1]
+        n -= 1
+    print l[0][0]

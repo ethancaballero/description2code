@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int get(int x, int y)
+{
+  if(x==y) return 0;
+  if(x<y) swap(x,y);
+  if(x%y==0) return x/y-1;
+
+  int t = get(y,x%y);
+  if(t>=x/y) return x/y - 1;
+  else return x/y;
+}
+void solve()
+{
+  int N;
+  cin>>N;
+  int ans = 0;
+  while(N--)
+  {
+    int x,y;
+    cin>>x>>y;
+    ans = ans ^ get(x,y);
+  }
+  if(ans==0) cout << "NO
+";
+  else cout << "YES
+";
+}
+int main()
+{
+  int T;
+  cin>>T;
+  while(T--)
+  {
+    solve();
+  }
+  return 0;
+}

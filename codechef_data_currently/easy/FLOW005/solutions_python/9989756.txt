@@ -1,0 +1,13 @@
+from sys import stdin,stdout
+t = int(stdin.readline())
+for _ in xrange(t):
+	n = int(stdin.readline())
+	notes = [100,50,10,5,2,1]
+	nn = 0
+	i = 0
+	while n > 0:
+		nn += n//notes[i]
+		n = n%notes[i]
+		i += 1
+	stdout.write(str(nn)+"
+")

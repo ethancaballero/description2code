@@ -1,0 +1,52 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+int main() {
+	// your code goes here
+
+long long int n;
+
+cin>>n;
+long long  a,b;
+while(n--)
+{
+cin>>a>>b;
+
+long long int counta=0;
+long long int countb=0;
+long long int lastnodea;
+long long int lastnodeb;
+while(a>0||b>0){
+//cout<<a<<" "<<b<<endl;
+lastnodea=a;
+lastnodeb=b;
+if(lastnodea==lastnodeb)
+{
+cout<<counta+countb<<endl;
+break;
+}
+if(a>b){
+
+a=a/2;
+counta++;
+}
+
+if(b>a){
+
+b=b/2;
+countb++;
+
+}
+
+
+
+
+}
+
+
+
+}
+
+	return 0;
+}

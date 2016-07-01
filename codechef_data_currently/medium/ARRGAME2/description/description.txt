@@ -1,0 +1,56 @@
+  Problem Statement
+Little Chef doesn't love math anymore. He loves Aleksandra.
+
+
+Sashen'ka is nice. They spend all the time together. Even their birthdays they are celebrating together, because they were born on the same day :)
+
+
+And now, this day is coming...
+
+
+Chef know that most of all Sasha loves numbers, that's why he bought N positive numbers to a girl.
+From her side, Sasha as all girls, thought that if she likes something, then all people like that too. And bought to a boy N numbers too. xD
+After all greeting young people decide to play a game with their gifts. The game will be continued for N turns, in each turn the following will be done:
+Chef randomly choose some number x from his gift.
+Sasha randomly choose some number y form her gift.
+If xy > yx then girl will kiss fellow.
+Numbers x,y will be discarded from gifts.
+Now chef is wondering what is the expected number of times he will be kissed by Sasha ?
+
+\u00a0
+Input
+The first line of the input contains an integer T denoting the number of test cases. The description of T test cases follows.
+The first line of each test case contains a single integer N denoting the number of numbers in each gift. The second line contains N space-separated integers A1, A2, ..., AN denoting the numbers Sasha gave to Chef. Next line describe B1, B2, ..., BN numbers boy gave to girl in the same way. 
+\u00a0
+Output
+For each test case, output a single line containing answer for corresponding test. Your answer will be considered as correct if it will have absolute error not more then 10-6.
+\u00a0
+Constraints
+1 \u2264 T \u2264 5
+1 \u2264 N \u2264 105
+1 \u2264 Ai \u2264 109
+1 \u2264 Bi \u2264 109
+\u00a0
+Example
+
+Input
+3
+1
+3
+4
+2
+2 3
+1 4
+2
+2 4
+2 2
+
+Output:
+1.000000
+1.500000
+0.000000
+
+
+\u00a0
+Explanation
+Example case 1. Game will have only 1 turn. Chef will choose 3, while Sasha will choose 4. Since 34>43 girl will kiss boy. Hence answer is 1. 

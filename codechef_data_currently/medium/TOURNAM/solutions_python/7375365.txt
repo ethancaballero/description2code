@@ -1,0 +1,66 @@
+#include <algorithm>
+#include <bitset>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <deque>
+#include <iomanip>
+#include <iostream>
+#include <queue>
+#include <map>
+#include <numeric>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <utility>
+#include <vector>
+
+#define INF 1000000000
+#define FOR(i, a, b) for(int i=int(a); i<int(b); i++)
+#define FORC(cont, it) for(typeof((cont).begin()) it = (cont).begin(); it != (cont).end(); it++)
+#define pb push_back
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> ii;
+typedef vector<int> vi;
+typedef vector<ii> vii;
+typedef vector<vi> vvi;
+
+#define maxM 100000
+
+int T, N, M, P, a[maxM];
+double prob;
+
+double solve(int l, int r) {
+	if (r <= l) return 0.0;
+	int id1 = lower_bound(a, a + M, l) - a;
+	int id2 = lower_bound(a, a + M, r) - a;
+	if (id1>=M||id1 == id2&&a[id1] > r) return 0.0;
+	if (l + 1 == r) {
+		if (id1 != id2) return 1.0;
+		return 0.0;
+	}
+	int mid = (l + r) / 2;
+	double p1 = solve(l, mid);
+	double p2 = solve(mid, r);
+	return p1*p2 + (1.0 - p1)*p2*prob + (1.0 - p2)*p1*prob;
+}
+
+int main() {
+	cin >> T;
+	cout << fixed << setprecision(9);
+	while (T--) {
+		cin >> N >> M >> P;
+		FOR(i, 0, M) {
+			cin >> a[i];
+			a[i]--;
+		}
+		sort(a, a + M);
+		int start = 1 << (int)ceil(log2(N));
+		prob = P / 100.0;
+		cout << 100.0*solve(0, start) << endl;
+	}
+	return 0;
+}

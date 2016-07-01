@@ -1,0 +1,56 @@
+    #include<stdio.h>
+    #include<string.h>
+    int main()
+    {
+        int t=0;
+        scanf("%d",&t);
+        int i,n,d,c=0,j,k=0;
+        char a[100001];
+        char b[100001];
+        char tmp='a';
+        for(i=0;i<t;i++)
+        {
+    	scanf("%d %d",&n,&d);
+    	scanf("%s",a);
+    	scanf("%s",b);
+    	
+    	for(j=0;j<strlen(a);j++)
+    	{
+    	    c=0;
+    	    if(a[j]!=b[j])
+    	    {
+    		c=j+d;
+    		while(c<strlen(a))
+    		{
+    		    if(a[j]==b[c])
+    		    {
+    			tmp = b[c];
+    			b[c] = b[j];
+    			b[j] = tmp; 
+    		    }
+    		    c = c + d;
+    		}
+    	    }
+    	}
+    	k=0;
+    	for(j=0;j<strlen(a);j++)
+    	{
+    	    if(a[j]!=b[j])
+    	    {
+    		k++;
+    		break;
+    	    }
+    	}
+     
+    	if(k==0)
+    	    printf("Yes 
+");
+    	else
+    	    printf("No 
+");
+        }
+        
+       
+    	return 0;    
+     
+    } 

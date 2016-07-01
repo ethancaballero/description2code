@@ -1,0 +1,27 @@
+def f(P):
+    if len(P)==1 or P[0]!=P[1]:
+        return P[0]
+    for i in range(len(P)-1):
+        if P[i-1]!=P[i] and P[i]!=P[i+1]:
+            return P[i]
+    if P[-2]!=P[-1]:
+        return P[-1]
+    return 0
+r=int(raw_input())
+M=[]
+for i in range(r):
+    x=int(raw_input())
+    d={}
+    L=[]
+    for i in range(x):
+        a,b=raw_input().split()
+        L.append(int(b))
+        d[int(b)]=a
+    L.sort()
+    s=f(L)
+    if s==0:
+        M.append('Nobody wins')
+    else:
+        M.append(d[s])
+for i in range(r):
+    print M[i]

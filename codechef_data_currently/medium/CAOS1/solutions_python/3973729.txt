@@ -1,0 +1,19 @@
+import re
+def main():
+    t = input()
+    while t:
+        t-=1
+        r,c = map(int,raw_input().split())
+        maprow = []
+        cpc = 0
+        for i in xrange(r):
+            maprow.append(raw_input())
+        for i in xrange(2,r-2):
+            poss = [m.start() for m in re.finditer('(?=\^\^\^\^\^)', maprow[i])]
+            while poss:
+                c = poss[0]+2
+                poss.remove(poss[0])
+                if (maprow[i-1][c] == '^' and maprow[i-2][c] == '^') and (maprow[i+1][c] == '^' and maprow[i+2][c] == '^'):
+                    cpc+=1
+        print cpc
+main()

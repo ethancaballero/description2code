@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+
+int main()
+	{
+	int a[1000],j=0;
+	int f[1000],i=0,n;
+	cin>>n; //Number of elements
+
+		for(i=1;i<=n;i++) //Input numbers
+			{
+			cin>>a[i];
+			}
+		for(j=1;j<=n;j++) //Cycle for each number
+			{
+            f[j]=1;
+			for(i=1;i<=a[j];i++) //Calculation of factorial
+				{
+				    f[j]=i*f[j];
+				}
+			}
+		for(i=1;i<=n;i++)
+			{
+			cout<<f[i]<<"
+";
+			}
+	}

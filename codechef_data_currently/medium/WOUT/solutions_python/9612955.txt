@@ -1,0 +1,23 @@
+def solve():
+    t=input()
+    for i in xrange(t):
+        n,hi= map(int,raw_input().split())
+        a=[0]*(n+1)
+        for x in xrange(n):
+            l,h=map(int,raw_input().split())
+            # prefixs.append(prefixs[-1]+h-l+1)
+            a[l]+=1
+            a[h+1]-=1
+        prefixs=[0]
+        for x in xrange(n):
+            prefixs.append(prefixs[-1]+a[x])
+        newprefixs=[0]
+        for x in xrange(1,n+1):
+            newprefixs.append(newprefixs[-1]+prefixs[x])
+        maxi=0
+        for x in xrange(1,n-hi+2):
+            current=newprefixs[x+hi-1]-newprefixs[x-1]
+            if current>maxi:
+                maxi=current
+        print hi*n-maxi
+solve()

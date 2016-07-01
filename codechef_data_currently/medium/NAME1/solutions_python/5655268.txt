@@ -1,0 +1,20 @@
+for _ in range(int(raw_input())):
+  parents=bytearray(raw_input().replace(' ', ''))
+  freq=[0]*26
+  for c in parents:
+    freq[c-97]+=1
+  n = int(raw_input())
+  result = 0
+  while n:
+    children=bytearray(raw_input())
+    for c in children:
+      freq[c-97]-=1
+    if not all(True if i>=0 else False for i in freq):
+      result=1
+      n-=1
+      break
+    n-=1
+  while n:
+    raw_input()
+    n-=1
+  print ["YES", "NO"][result]

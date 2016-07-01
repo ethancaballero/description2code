@@ -1,0 +1,7 @@
+n = int(raw_input())
+a = map(int,raw_input().split())
+val  = sum(a)
+if val%2!=0:
+	print max(n,(val+1)/2)
+else:
+	print max(n,val/2)

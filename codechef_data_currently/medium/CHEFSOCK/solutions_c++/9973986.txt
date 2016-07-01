@@ -1,0 +1,14 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int jc,sc,m;
+	cin>>jc>>sc>>m;
+	if(((m-jc)/sc)%2==0)
+	cout<<"Lucky Chef"<<endl;
+	else
+	cout<<"Unlucky Chef"<<endl;
+	return 0;
+}

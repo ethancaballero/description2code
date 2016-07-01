@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+using namespace std;
+ 
+int main() {
+                int T;
+                cin >> T;
+                while(T--){
+                string c[6];
+                for(int i = 0; i < 6; i++) cin >> c[i];
+                //f,back,l,r,up,bottom/down
+                
+                //0,1,2,3,4,5 - Array index as to position
+                //Possibilities fur,ful,frd,fld,rbu,lbu,rdb,ldb
+                //              043,042,035,025,314,214,351,251
+                if((c[0] == c[4]) && (c[0]== c[3])) cout << "
+YES";
+                else if((c[0] == c[4])&& (c[0]== c[2])) cout << "
+YES";
+                else if((c[0] == c[3]) && (c[0]== c[5])) cout << "
+YES";
+                else if((c[0] == c[2])&& (c[0]== c[5])) cout << "
+YES";
+                else if((c[3] == c[1]) &&(c[3]== c[4])) cout << "
+YES";
+                else if((c[2] == c[1]) &&(c[2]== c[4])) cout << "
+YES";
+                else if((c[3] == c[5]) && (c[3]== c[1])) cout << "
+YES";
+                else if((c[2] == c[5])&& (c[2]== c[1])) cout <<"
+YES";
+                else cout << "
+NO";
+                }
+                return 0;
+} 

@@ -1,0 +1,25 @@
+def get_msb(k):
+	mask = 1
+	while mask < k:
+		mask = mask << 1
+	if mask > k:
+		mask >>= 1
+	# print "mask={}".format(mask)
+	assert mask-1 <= k <= (mask << 1)-1
+	return mask
+
+def get_segment_index(x, k):
+	n = get_msb(k)
+	offset = k % n
+	x *= 1.0 # to make it a float
+	slab_size = x/n
+	return slab_size * offset + slab_size/2
+
+def main():
+	T = int(raw_input())
+	for t in xrange(T):
+		x, k = map(int, raw_input().strip().split())
+		print "%.012f" % get_segment_index(x, k)
+
+if __name__ == '__main__':
+	main()

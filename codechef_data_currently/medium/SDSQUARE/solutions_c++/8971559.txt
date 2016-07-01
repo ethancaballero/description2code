@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int sq(long long int p)
+{
+	long long int q=p,r;
+	while(q!=0)
+	{
+		r=q%10;
+		if(r!=0&&r!=1&&r!=4&&r!=9)
+		{
+			return 0;
+		}
+		q=q/10;
+		
+	}
+	return 1;
+}
+int main()
+{
+	long long int i,j=0,a[10000],k;
+	for(i=1;i<=100000;i++)
+	{
+		k=i*i;
+		if(sq(k)==1)
+		{
+			
+			a[j]=k;
+			j++;
+		}
+		
+	}
+	
+	
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		long long int n,m,sum=0;
+		scanf("%lld%lld",&n,&m);
+		for(i=0;i<j;i++)
+		{
+			if(a[i]>=n&&a[i]<=m)
+			sum++;
+		}
+		printf("%lld
+",sum);
+	}
+	return 0;
+}
+		

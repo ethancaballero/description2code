@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int ips,flag;
+    cin>>ips;
+    while(ips)
+    {
+        flag=0;
+        int data[ips+1];
+        int rev_data[ips+1];
+        for(int i=1;i<=ips;i++)
+        {
+         cin>>data[i];
+         rev_data[data[i]]=i;
+        }
+        for(int i=1;i<ips+1;i++)
+        {
+            if(data[i]!=rev_data[i])
+                flag=1;
+        }
+        if(flag==1)
+            cout<<"not ambiguous";
+        else if(flag==0)
+            cout<<"ambiguous";
+        cout<<endl;
+        cin>>ips;
+    }
+}

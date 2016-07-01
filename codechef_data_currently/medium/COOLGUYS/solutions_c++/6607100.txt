@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<iostream>
+#include<math.h>
+long long gcd(long long a,long long b)
+{ if(b==0)
+    return a;
+  else
+      return gcd(b,a%b);  
+}
+int main()
+{ int t;
+  scanf("%d",&t);
+  while(t--)
+       { long long n,count=0;
+         scanf("%lld",&n);
+         long long x=sqrt(n);
+         for(int i=1;i<=x;i++)
+            count+=n/i;
+         count=count*2-x*x;   
+         x=gcd(count,n*n);
+		 count/=x;
+         printf("%lld/%lld
+",count,(n*n)/x);   
+       }
+}

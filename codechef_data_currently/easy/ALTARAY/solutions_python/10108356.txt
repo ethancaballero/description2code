@@ -1,0 +1,29 @@
+def opposite(a,b):
+    if(a<0):
+        return b>=0
+    else:
+        return b<0
+
+def func(a):
+    a2 = [1]*len(a)
+    count = 1
+    for i in range(len(a)):
+        if(count>1):
+            count = count-1
+            a2[i] = count
+        else:
+            j = i
+            while(j<len(a)-1 and opposite(a[j],a[j+1])):
+                count = count + 1
+                j = j+1
+            a2[i] = count      
+    return a2
+            
+
+t = int(input())
+for i in range(t):
+    n = int(input())
+    a = map(int, raw_input().split())
+    print (" ".join("{}".format(v) for i,v in enumerate(func(a))))
+    
+    

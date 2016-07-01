@@ -1,0 +1,21 @@
+n=input()
+a=[1000]*26
+for i in range(n):
+    b=[0]*26
+    s=raw_input()
+    for i in range(0,len(s)):
+        b[ord(s[i])-97]+=1
+    for i in range(0,26):
+        a[i]=min(a[i],b[i])
+s=""
+for i in range(0,26):
+    if a[i]!=1000:
+        x=a[i]
+        s=s+str(unichr(i+97))*x
+if len(s)>0:
+    print s
+else:
+    print "no such string"
+
+        
+    

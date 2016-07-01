@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+#define MOD 1000000007
+
+string s;
+int FMem[1047];
+int isPalMem[1047][1047];
+
+bool isPal(int b, int e) {
+	if(b==e || b+1==e) return true;
+	if(isPalMem[b][e]!=-1) return isPalMem[b][e];
+	if(s[b]!=s[e-1]) return isPalMem[b][e]=0;
+	return isPalMem[b][e]=isPal(b+1,e-1);
+}
+
+int F(int n) {
+	if(n==0) return 1;
+	if(FMem[n]!=-1) return FMem[n];
+	int res=0;
+	for(int i=0; i<n; i++)
+		if(isPal(i,n)) res=(res+F(i))%MOD;
+	return FMem[n]=res%MOD;
+}
+
+int main() {
+	cin >> s;
+	for(int i=0; i<s.length()+42; i++) FMem[i]=-1;
+	for(int i=0; i<s.length()+42; i++)
+		for(int j=0; j<s.length()+42; j++) isPalMem[i][j]=-1;
+	cout << F(s.length()) << endl;
+	return 0;
+}

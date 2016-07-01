@@ -1,0 +1,41 @@
+//Abdul Rais
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#define MOD 1000000007
+using namespace std;
+ 
+int t,n,i,ans,m,pos;
+string s;
+int main(){
+    cin>>t;
+    while(t--){
+        pos=ans=0;
+    	cin>>s>>n;
+    	m=s.size();
+        for(i=0;i<m;i++)
+            pos+=s[i]-'R';
+        i=pos;
+        for(;i<12*n;i+=pos)
+            ans+=12*n-i;
+        cout<<ans<<"
+";
+    }
+    return 0;
+}

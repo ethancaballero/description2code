@@ -1,0 +1,34 @@
+import sys
+T = input()
+if T < 1 or T > 50:
+	sys.exit(1)
+N = []
+M = []
+
+for i in range(0,T):
+	N.append(map(int, raw_input().split()))
+	if N[i][0] < 2 or N[i][0] > 1000:
+		sys.exit(1)
+	if N[i][1] < 1 or N[i][1] > 10000:
+		sys.exit(1)
+	M.append([])
+	for j in range(0,N[i][1]):
+		M[i].append(map(int,raw_input().split()))
+
+
+for i in range(0,T):
+	n = N[i][1]-1
+	arr = []
+	indices = []
+	for j in range(0,N[i][1]):
+		if n-j == N[i][1]-1:
+			arr.append(M[i][n-j][0])
+			arr.append(M[i][n-j][1])
+			indices.append(n-j)
+		else:
+			if M[i][n-j][1] not in arr and M[i][n-j][0] not in arr:
+				arr.append(M[i][n-j][0])
+				arr.append(M[i][n-j][1])
+				indices.append(n-j)
+	indices.reverse()
+	print " ".join(str(x) for x in indices)

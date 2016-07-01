@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct st {
+	int x;
+	char name[20];
+	int count;
+};
+
+st s[1000005];
+int top = -1;
+
+int main()
+{
+	int n, d, i, c, p;
+	
+	char y[20];
+	
+	scanf("%d", &n);
+	
+	while(n--) {
+		scanf("%d", &c);
+		
+		if (c == 0) {
+			scanf("%s", y);
+		} else if (c != -1) {
+			scanf("%s", y);
+			if (top == -1) {
+				top++;
+				s[top].x = c;
+				strcpy(s[top].name, y);
+				s[top].count = 0;
+			} else {
+				p = s[top].x;
+			//	cout<<p<< " ";
+				if (p >= c) {
+					top++;
+					s[top].x = c;
+					strcpy(s[top].name, y);
+					s[top].count = 0;
+				} else {
+					s[top].count++;
+				}
+			}
+		} else if (c == -1) {
+			if (top == -1) {
+				continue;
+			}
+			if (top == 0) {
+				printf("%d ", s[top].count);
+				printf("%s", s[top].name);
+				printf("
+");
+				top--;
+			} else {
+				printf("%d ", s[top].count);
+				printf("%s", s[top].name);
+				top--;
+				printf("
+");
+			}
+		}
+	}
+
+	return 0;	
+}

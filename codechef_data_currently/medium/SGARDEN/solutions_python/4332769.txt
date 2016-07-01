@@ -1,0 +1,71 @@
+global_primes = {}
+
+def gen_primes_sieve(n):
+	primes = [True for i in range(0, n+1)]
+	
+	for i in range(2, int(n**0.5)+1, 1):
+		if not primes[i]:
+			continue
+		k = 2
+		while k*i <= n:
+			primes[k*i] = False
+			k += 1
+	for k in range(2, n+1):
+		if primes[k]:
+			global_primes[k] = 0 
+
+def cycles_lists(om):
+	lists = []
+	for k,v in om.iteritems():
+		if v[1] == True:
+			continue
+		len = 0
+		key = k
+		while True:
+			if om[key][1] == True:
+				break
+			om[key][1] = True
+			len += 1
+			key = om[key][0]
+		lists.append(len)
+	return lists
+
+def lcm(n, primes):
+	local_map = {}
+	while n > 1:
+		p = max([p for p in primes if n%p == 0])
+		
+		try:
+			local_map[p] += 1
+		except:
+			local_map[p] = 1
+		if local_map[p] > primes[p]:
+			primes[p] += 1
+		n /= p
+
+
+def get_product(primes):
+	pro = 1
+	for k,v in primes.iteritems():
+		pro = (((k**v)%((10**9)+7))*pro)%((10**9)+7)
+	return pro
+
+gen_primes_sieve(10**5)
+
+n = int(raw_input())
+
+for i in range(n):
+	raw_input()
+	order = map(int, raw_input().split())
+	order_map = {}
+	for i in range(len(order)):
+		order_map[i+1] = [order[i], False]
+	
+	lists = cycles_lists(order_map)
+	global_map = global_primes.copy()
+	for l in lists:
+		lcm(l, global_map)
+
+	# print lists, [ (k, global_map[k]) for k in global_map.keys() if global_map[k] != 0]
+
+	print get_product(global_map)

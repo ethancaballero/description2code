@@ -1,0 +1,158 @@
+	#include<iostream>
+	#define mod 1000000007
+
+	using namespace std;
+
+	int main()
+	{
+
+		int t;
+		cin>>t;
+
+		while(t>0)
+		{
+
+			long long int l,r;
+			cin>>l>>r;
+			long long int seg1=9;
+			long long int seg2=99;		//9810
+			long long int seg3=999;		//1483650
+			long long int seg4=9999;	//197982000
+			long long int seg5=99999;	//749774832
+			long long int seg6=999999;	//997279217
+			long long int seg7=9999999;	//966074507
+			long long int seg8=99999999;	//362800007
+			long long int seg9=999999999;	//765000252
+			long long int sum=0,sum1=0;
+			if(seg1>=l)
+			{
+				sum=(((seg1+1-l)*(l+seg1))/2)%mod;
+				sum=(sum+4040404275)%mod;
+			}				
+			else if(seg2>=l)
+			{
+				sum=((seg2+1-l)*(l+seg2))%mod;
+//				sum=(sum*2)%mod;
+				sum=(sum+4040394465)%mod;
+			}	
+			else if(seg3>=l)
+			{
+				sum=(((seg3+1-l)*(l+seg3)*3)/2)%mod;
+			//	sum=(sum*3)%mod;
+				sum=(sum+4038910815)%mod;
+			}	
+			else if(seg4>=l)
+			{
+				sum=(((seg4+1-l)*(l+seg4)*4)/2)%mod;
+			//	sum=(sum*4)%mod;
+				sum=(sum+3840928815)%mod;
+			}	
+			else if(seg5>=l)
+			{
+				sum=(((seg5+1-l)*(l+seg5)*5)/2)%mod;
+			//	sum=(sum*5)%mod;
+				sum=(sum+3091153983)%mod;
+			}	
+			else if(seg6>=l)
+			{
+				sum=(((seg6+1-l)*(l+seg6)*6)/2)%mod;
+				sum=(sum+2093874766)%mod;
+			//	sum=(sum*6)%mod;
+			}	
+			else if(seg7>=l)
+			{
+				sum=(((seg7+1-l)*(l+seg7)*7)/2)%mod;
+				sum=(sum+1127800259)%mod;
+			//	sum=(sum*7)%mod;
+			}	
+			else if(seg8>=l)
+			{
+				sum=(((seg8+1-l)*(l+seg8)*8)/2)%mod;
+				sum=(sum+765000252)%mod;
+			//	sum=(sum*8)%mod;
+			}	
+			else if(seg9>=l)
+			{
+				sum=(((seg9+1-l)*(l+seg9)*9)/2)%mod;
+			//	sum=(sum*9)%mod;
+			}	
+			
+			r++;
+			if(seg1>=r)
+			{
+				sum1=((seg1+1-r)*(r+seg1)/2)%mod;
+				sum1=(sum1+4040404275)%mod;
+			}				
+			else if(seg2>=r)
+			{
+				sum1=((seg2+1-r)*(r+seg2))%mod;
+				sum1=(sum1+4040394465)%mod;
+			//	sum1=(sum1*2)%mod;
+			}	
+			else if(seg3>=r)
+			{
+				sum1=(((seg3+1-r)*(r+seg3)*3)/2)%mod;
+				sum1=(sum1+4038910815)%mod;
+			//	sum1=(sum1*3)%mod;
+			}	
+			else if(seg4>=r)
+			{
+				sum1=(((seg4+1-r)*(r+seg4)*4)/2)%mod;
+				sum1=(sum1+3840928815)%mod;
+			//	sum1=(sum1*4)%mod;
+			}	
+			else if(seg5>=r)
+			{
+				sum1=(((seg5+1-r)*(r+seg5)*5)/2)%mod;
+				sum1=(sum1+3091153983)%mod;
+			//	sum1=(sum1*5)%mod;
+			}	
+			else if(seg6>=r)
+			{
+				sum1=(((seg6+1-r)*(r+seg6)*6)/2)%mod;
+				sum1=(sum1+2093874766)%mod;
+			//	sum1=(sum1*6)%mod;
+			}	
+			else if(seg7>=r)
+			{
+				sum1=(((seg7+1-r)*(r+seg7)*7)/2)%mod;
+				sum1=(sum1+1127800259)%mod;
+			//	sum1=(sum1*7)%mod;
+			}	
+			else if(seg8>=r)
+			{
+				sum1=(((seg8+1-r)*(r+seg8)*8)/2)%mod;
+				sum1=(sum1+765000252)%mod;
+			//	sum1=(sum1*8)%mod;
+			}	
+			else if(seg9>=r)
+			{
+				sum1=(((seg9+1-r)*(r+seg9)*9)/2)%mod;
+			//	sum1=(sum1*9)%mod;
+			}
+			r--;
+			if(r==1000000000 && l==1000000000)
+			{
+
+				cout<<999999937<<endl;
+			}	
+			else if(r==1000000000)
+			{
+				sum1=(sum1+(r*10)%mod)%mod;
+				if(sum-sum1<0)
+					cout<<sum-sum1+mod<<endl;
+				else
+					cout<<sum-sum1<<endl;
+
+			}	
+			else
+			{
+				if(sum-sum1<0)
+					cout<<sum-sum1+mod<<endl;
+				else
+					cout<<sum-sum1<<endl;
+
+			}	
+			t--;
+		}	
+	}

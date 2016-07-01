@@ -1,0 +1,15 @@
+T=input()
+while T:
+    T-=1
+    DS,DT,D = [int(x) for x in raw_input().split()]
+    if D> DS + DT:
+        print D - DS - DT
+
+    elif D + DS >= DT and D + DT >= DS:
+        print 0
+
+    else:
+        if DT > D + DS:
+            print DT - D - DS
+        else:
+            print DS - D - DT

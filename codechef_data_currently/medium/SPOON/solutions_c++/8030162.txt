@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,r,c,i,j,f=0;
+    cin>>t;
+    while(t--)
+    {
+        cin>>r>>c;
+        char s[r+1][c+1];
+        for(i=0;i<r;i++)
+        {
+            scanf("%s",s[i]);
+        }
+        for(i=0;i<r;i++)
+        {
+            for(j=0;j<c;j++)
+            {
+                if((s[i][j]=='s' || s[i][j]=='S') &&
+                    ((r-i)>=5)  &&
+                    (s[i+1][j]=='p' || s[i+1][j]=='P') &&
+                    (s[i+2][j]=='o' || s[i+2][j]=='O') &&
+                    (s[i+3][j]=='o' || s[i+3][j]=='O') &&
+                    (s[i+4][j]=='n' || s[i+4][j]=='N'))
+                    {
+                        cout<<"There is a spoon!
+";
+                        f=1;
+                        break;
+                    }
+                    if((s[i][j]=='s' || s[i][j]=='S') &&
+                    ((c-j)>=5)  &&
+                    (s[i][j+1]=='p' || s[i][j+1]=='P') &&
+                    (s[i][j+2]=='o' || s[i][j+2]=='O') &&
+                    (s[i][j+3]=='o' || s[i][j+3]=='O') &&
+                    (s[i][j+4]=='n' || s[i][j+4]=='N'))
+                    {
+                        cout<<"There is a spoon!
+";
+                        f=1;
+                        break;
+                    }
+                    f=0;
+            }
+            if(f==1)
+            break;
+        }
+        if(f==0)
+        cout<<"There is indeed no spoon!
+";
+    }
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+ int t,n,i,j,k,c=0;
+ char s[1010];
+ cin>>t;
+ while(t--)
+ {
+  c=0;
+  cin>>n;
+  cin>>s;
+  for(i=0;i<n;i++)
+  {
+    if(s[i]=='1')
+    c++;
+    else
+    if(s[i+1]=='1')
+    c++;
+    else
+    if(s[i-1]=='1')
+    c++;
+  }
+  cout<<n-c<<"
+";
+}
+return 0;
+}

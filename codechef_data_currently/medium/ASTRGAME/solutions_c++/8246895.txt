@@ -1,0 +1,120 @@
+#pragma region include
+ 
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<iostream>
+#include<sstream>
+#include<queue>
+#include<math.h>
+#include<stdlib.h>
+#include<stack>
+#include<string.h>
+#include<string>
+#include<map>
+#include<algorithm>
+#include<time.h>
+#include<set>
+#include<vector>
+#include<numeric>
+#include<iomanip>
+#include <bitset>
+#include <functional>
+using namespace std;
+ 
+#pragma endregion
+ 
+#pragma region define 
+#define All(a) a.begin(), a.end()
+#define _2d(a,row,col,type) type**a=new type*[row]; for (int i=0;i<row;i++) a[i]=new type[col];
+#define rep(i,n) for(int i=0;i<int(n);i++)
+#define repd(i,n) for(int i=n-1;i>=0;i--)
+#define repi(i,a,n) for(int i=int(a);i<int(n);i++)
+#define clr(a, n) memset(a, n, sizeof(a));
+#define scn(a,n) rep(i,n) cin>>a[i];
+#define scn2(a,row,col) rep(i,row) rep(j,col) cin>>a[i][j];
+#define prn(a,n) rep(i,n-1) cout<<a[i]<<" "; cout<<a[n-1]<<endl;
+#define prn2(a,row,col) rep(i,row){rep(j,col-1) cout<<a[i][j]<<" "; cout<<a[i][col-1]<<endl;}
+#define mp make_pair
+#define Odd(x) x%2!=0
+#define Even(x) x%2==0
+#define Pi 3.14
+#define INF 2000000000 // 2 billion
+#define read freopen("in.in","r",stdin)
+#define write freopen("out.out","w",stdout)
+#pragma endregion
+ 
+#pragma region typedef
+ 
+typedef long long ll;
+typedef unsigned long ul;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef vector<int> vi;
+typedef vector<vi > vivi;
+typedef vector<long> vl;
+typedef vector<ll> vll;
+typedef vector<double> vd;
+typedef vector<string> vs;
+typedef pair<int, string> is;
+typedef pair<int, int> ii;
+ 
+#pragma endregion
+ 
+int k;
+int dp[100][100];
+vs ss;
+string s;
+vector<vi> pos;
+ 
+int solve(int i, int j)
+{
+	if (i > j) return 0;
+	if (dp[i][j] != -1)
+		return dp[i][j];
+	bool g[100000];
+	clr(g, 0);
+	int w = 0;
+	bool ok = 0;
+	rep(u, ss.size()){
+		ok = 0;
+		int len = ss[u].length();
+		rep(v, pos[u].size()){
+			if (i <= pos[u][v] && pos[u][v] + len <= j){
+				
+				w = solve(i, pos[u][v]) ^ solve(pos[u][v] + len, j);
+				g[w]=1;
+			}
+		}
+	}
+	int ret = 0;
+	while (g[ret])
+		ret++;
+	return dp[i][j] = ret;
+}
+ 
+int main(){
+	//read;
+	int t; 
+	cin >> t;
+	while (t--){
+		int n; 
+		cin >> s >> n;
+		ss = vs(n);
+		pos = vector<vi >(n);
+		rep(i, n){
+			cin >> ss[i];
+			int cur = s.find(ss[i], 0);
+			while (cur != string::npos){
+				pos[i].push_back(cur);
+				cur = s.find(ss[i], cur + 1);
+			}
+		}
+		clr(dp, -1);
+		int w = solve(0,s.length());
+		//cout << "Case " << u++ << ": ";
+		w ? cout << "Teddy
+" : cout << "Tracy
+"; 
+	}
+	return 0;
+} 

@@ -1,0 +1,16 @@
+from math import log
+def is_power2(num):
+    return num != 0 and ((num & (num - 1)) == 0)
+def minimum(a, b):
+    if a == b:
+        return 0
+    elif is_power2(a):
+        return abs(log(a, 2) - log(b, 2))
+    else:
+        return 1 + minimum(a / 2, b)
+t = int(raw_input())
+for i in xrange(t):
+    a, b = raw_input().split()
+    a = int(a)
+    b = int(b)
+    print "%g" % minimum(a,b)

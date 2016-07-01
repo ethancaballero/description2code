@@ -1,0 +1,13 @@
+n = int(raw_input())
+for i in xrange(n):
+	l = int(raw_input())
+	list_a = [0]
+	prev = -1
+	numList = [int(x) for x in raw_input().split()]
+	for num in numList:
+		if num >= prev:
+			list_a.append(list_a[-1] + 1)
+		else:
+			list_a.append(1)
+		prev = num
+	print sum(list_a)

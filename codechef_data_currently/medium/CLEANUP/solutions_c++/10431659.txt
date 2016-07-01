@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,m,n,var;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m;
+		set< int > v;
+		for(int i=0;i<m;i++)
+		{
+			cin>>var;
+			v.insert(var);
+		}
+		vector< int > c;
+		vector< int > a;
+		int f=0;
+		for(int i=1;i<=n;i++)
+		{
+			if(v.find(i)==v.end())
+			{
+				if(f == 0)
+				{
+					
+					c.push_back(i);
+					f=1;
+				}
+				else
+				{
+					
+					a.push_back(i);
+					f=0;
+				}
+			}
+		}
+		vector< int > :: iterator it;
+		for(it=c.begin();it!=c.end();it++)
+		{
+			cout<<*it<<" ";
+		}
+		cout<<endl;
+		for(it=a.begin();it!=a.end();it++)
+		{
+			cout<<*it<<" ";
+		}
+		cout<<endl;
+	}
+}

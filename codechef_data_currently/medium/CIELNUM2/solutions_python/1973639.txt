@@ -1,0 +1,26 @@
+def main():
+    t=(int)(input())
+    count=0
+    for aaaaa in range(t):
+        a=[0,0,0,0,0,0,0,0,0,0]
+        aa=raw_input()
+        p=aa.split()[len(aa.split())-1]
+        stat=0
+        for i in range (len(p)):
+            if p[i]=='8':
+                a[8]+=1
+            elif p[i]=='5':
+                a[5]+=1
+            elif p[i]=='3':
+                a[3]+=1
+            else:
+                stat=1
+                break
+        if(stat==0):
+            if a[8]>=a[5] :
+                if a[5]>=a[3]:
+                    count+=1
+    print count
+if __name__=='__main__':
+    main()
+        

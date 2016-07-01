@@ -1,0 +1,28 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+cases=input()
+for case in range(cases):
+ games=input()
+ for game in range(games):
+  s,n,e=parseIntList(raw_input())
+  if n%2==0:
+   print n/2
+  elif s==e:
+   print (n-1)/2
+  else: print (n+1)/2
+
+    
+    
+ 
+ 
+
+  
+ 

@@ -1,0 +1,9 @@
+def Rem(x,y):
+	remain=x%y
+	return remain
+	
+T=int(raw_input())
+for i in range(T):
+	line=raw_input()	
+	lst=line.split(' ')	
+	print Rem(int(lst[0]),int(lst[1]))

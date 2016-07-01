@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+	int n,t[250][250],i,j,s,d,g,k;
+	scanf("%d",&n);
+	 int m;
+	for(i=0;i<n;i++)
+		for(j=0;j<n;j++)
+			scanf("%d",&t[i][j]);scanf("%d",&m);
+			for( k=0;k<n;k++)
+			{
+				for(i=0;i<n;i++)
+				{
+					for(j=0;j<n;j++){
+					if(t[i][k]+t[k][j]<t[i][j])t[i][j]=t[i][k]+t[k][j];
+				}
+			}}
+			for(i=1;i<=m;i++)
+			{
+				scanf("%d%d%d",&s,&g,&d);
+				printf("%d %d
+",t[s][g]+t[g][d],t[s][g]+t[g][d]-t[s][d]);
+			}
+			return 0;
+		}

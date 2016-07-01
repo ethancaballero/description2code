@@ -1,0 +1,26 @@
+#include <iostream>
+long long int a[100002],b[100002];
+int main()
+{ long long int t,n,k,max,i,q,prof;
+  scanf("%lld",&t);
+  while(t--)
+  {max=0;
+   scanf("%lld%lld",&n,&k);
+   for(i=0;i<n;i++)
+   {scanf("%lld",&a[i]);
+   }
+   for(i=0;i<n;i++)
+   {scanf("%lld",&b[i]);
+   }
+   for(i=0;i<n;i++)
+   { q=k/a[i];
+     prof=q*b[i];
+     if(prof>max)
+     max=prof;
+   }
+   printf("%lld
+",max);
+   
+  }
+  return 0;
+}

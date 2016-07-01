@@ -1,0 +1,28 @@
+def adigit(digit_list):
+  result = []
+  for digit in xrange(10):
+    result.append([[0,0]])
+    if digit < digit_list[0]:
+      result[-1][0][1] = -(digit-digit_list[0])
+    elif digit > digit_list[0]:
+      result[-1][0][0] = digit - digit_list[0]
+  for integer in digit_list[1::]:
+    for digit in xrange(10):
+      B1 = result[digit][-1][0]
+      B2 = result[digit][-1][1]
+      if digit > integer:
+        B1 += digit - integer
+      elif digit < integer:
+        B2 += -(digit - integer)
+      result[digit].append([B1,B2])
+  return result
+
+import sys
+parameters = sys.stdin.readline().strip().split()
+n,m = int(parameters[0]), int(parameters[1])
+data = map(int,list(sys.stdin.readline().strip()))
+precalcul = adigit(data)
+for step in xrange(m):
+  x = input()
+  digit = data[x-1]
+  print(sum(precalcul[digit][x-1]))

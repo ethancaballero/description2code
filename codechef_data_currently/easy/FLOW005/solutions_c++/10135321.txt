@@ -1,0 +1,52 @@
+#include <iostream>
+#include <sstream>
+
+const int HUNDRED = 100;
+const int FIFTY = 50;
+const int TEN = 10;
+const int FIVE = 5;
+const int TWO = 2;
+const int ONE = 1;
+
+using namespace std;
+
+
+int min_coins(int rupees) {
+	int number = 0,number2,number3,number4,number5,number6;
+	number += rupees/100;
+	rupees -= number*100;
+
+	number2 = rupees/50;
+	number += rupees/50;
+	rupees -= number2*50;
+
+	number3 = rupees/10;
+	number += rupees/10;
+	rupees -= number3*10;
+
+	number4 = rupees/5;
+	number += rupees/5;
+	rupees -= number4*5;
+
+	number5 = rupees/2;
+	number += rupees/2;
+	rupees -= number5*2;
+
+	number6 = rupees/1;
+	number += rupees/1;
+	rupees -= number6*1;
+
+	return number;
+}
+
+
+int main()
+{
+	int testcase,i,rupees;
+	cin >> testcase;
+	for (i = 0; i < testcase; i++) {
+		cin>>rupees;
+		cout<<min_coins(rupees)<<endl;
+	}
+    return 0;
+}

@@ -1,0 +1,16 @@
+div = 33102
+
+for t in range(0, input()):
+    out = "3"
+    rest = 46870
+
+    for k in range(0, input()):
+        num = rest/div
+
+        if len(out) == 1:
+            out += "."
+        out += str(num)
+        
+        rest -= (div * num)
+        rest *= 10
+    print out

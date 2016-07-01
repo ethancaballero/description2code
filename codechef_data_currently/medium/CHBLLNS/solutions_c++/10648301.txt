@@ -1,0 +1,38 @@
+#include <iostream>
+#include<bits/stdc++.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int tc;
+	cin>>tc;
+	long long int r,g,b,sum,k,i,count;
+	while(tc--)
+	{
+		sum=0;
+		cin>>r>>g>>b;
+		cin>>k;
+		for(i=1;i<=k-1;i++)
+		{
+			count=0;
+		if(r>0)
+		{
+		r--;
+		count++;
+	}
+			if(g>0)
+	{
+		g--;
+		count++;
+		}	if(b>0)
+		{
+		b--;
+		count++;
+	}
+	sum=sum+count;
+		}
+		cout<<sum+1<<endl;
+	}
+	return 0;
+}

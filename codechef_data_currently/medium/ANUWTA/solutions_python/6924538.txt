@@ -1,0 +1,21 @@
+t=int(raw_input())
+for i in range(t):
+    n=int(raw_input())
+    sum=0
+    '''a=n+1
+    b=n+1
+    while a>=2:
+       
+        sum+=2*(n)
+        print sum
+        n-=2
+        a-=2
+    if b%2==0:
+        sum+=b/2-1
+    else:
+        sum+=int(b/2)'''
+    if(n%2==0):
+        sum=n/2*(n+2)+n/2
+    else:
+        sum=(n/2+1)*(n+1)+int(n/2)
+    print sum    

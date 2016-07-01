@@ -1,0 +1,19 @@
+from math import floor
+T=input()
+while T:
+    T-=1
+    N,M=[int(x) for x in raw_input().split()]
+    L=[int(x) for x in raw_input().split()]
+    ones=L.count(1)
+    total=len(L)-ones
+    if total-1==ones:
+        print ones
+    elif ones==len(L):
+        print int(floor(ones/2))
+    elif total<ones:
+        print (total-1)+int(floor((ones-total+1)/2))+1
+    else:
+        print total-1
+        
+#1 2 3 4 5 1 1 1 1 1 1 1
+#4 1 1

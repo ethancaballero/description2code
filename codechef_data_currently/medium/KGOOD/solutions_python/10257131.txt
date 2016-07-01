@@ -1,0 +1,42 @@
+t=input()
+def function(l,i,j):
+	if i>=j:
+		return 0
+		
+	if l[j]-l[i]<=k:
+		return 0
+
+	if mat[i][j]!=-1:
+		return mat[i][j]
+
+	count1=l[i]
+	count1+=function(l,i+1,j)
+
+	count2=l[j]-l[i]-k
+	count2+=function(l,i,j-1)
+	mat[i][j]=min(count1,count2)
+	return mat[i][j]
+	#mat[i][j]=min(l[i]+mat[i+1][j],mat[i][j-1]+l[j]-l[i]-k)
+
+def find_kgood(word,k):
+	a={}
+	for i in word:
+		if i in a:
+			a[i]+=1
+		else:
+			a[i]=1
+	l=sorted([a[i] for i in a])
+	res=function(l,0,len(l)-1)
+	return res
+
+
+while(t>0):
+	word,k=raw_input().strip().split()
+	mat=[[-1 for i in range(26)] for j in range(26)]
+	#mat[0][0]=0
+	#mat[]
+	k=int(k)
+	print find_kgood(word,k)
+	t-=1
+
+

@@ -1,0 +1,8 @@
+s=raw_input() 
+s1=s.split(' ')
+wd=int(s1[0])
+bal=float(s1[1])
+temp=float(wd)
+if wd%5==0 and temp<=bal-0.50:
+   bal=bal-wd-0.50
+print bal

@@ -1,0 +1,12 @@
+import sys
+N = int(sys.stdin.readline())
+
+for i in range(N):
+    n, k = map(int, sys.stdin.readline().strip().split())
+    
+    if(n != 0 and k != 0):
+        print str(n / k) + " " + str(n % k)
+    elif(n == 0 and k != 0):
+        print "0 0"
+    else:
+        print "0 " + str(n)

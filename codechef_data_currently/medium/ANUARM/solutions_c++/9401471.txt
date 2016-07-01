@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define T_LIMIT 10000
+#define N_LIMIT 100000
+
+int main() {
+	int t;
+	cin >> t;
+
+	while(t--) {
+		int n, m;
+		cin >> n >> m;
+
+		int minm = 1111111, maxm = -minm;
+		
+		while(m--) {
+			int x;
+			cin >> x;
+			minm = min(x, minm);
+			maxm = max(x, maxm);
+
+			//cout << minm << " " << maxm << "
+";
+		}
+		
+		for(int i=0; i<n; i++) {
+			cout <<  max( abs(i-minm), abs(i-maxm)) << " ";
+		}
+		cout << "
+";
+	}
+
+	return 0;
+}

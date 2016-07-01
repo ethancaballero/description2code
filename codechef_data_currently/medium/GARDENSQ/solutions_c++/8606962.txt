@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+   int t,n,m;
+   scanf("%d",&t);
+   while(t--)
+   {
+       scanf("%d%d",&n,&m);
+       //getchar();
+       char s[100][100];
+       for(int i=0; i<n; i++)
+        scanf("%s",s[i]);
+       int ans = 0;
+       for(int i=0; i<n-1; i++)
+       {
+           for(int j=0; j<m-1;j++)
+           {
+               for(int k=j+1; k<m; k++)
+               {
+                   if(s[i][j] == s[i][k])
+                   {
+                       int tmp = k-j;
+                       if(i + tmp < n)
+                       {
+                           if(s[i+tmp][j] == s[i+tmp][k] && (s[i+tmp][j] == s[i][j]))
+                            ans++;
+                       }
+                   }
+               }
+           }
+       }
+       printf("%d
+",ans);
+   }
+   return 0;
+}

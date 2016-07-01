@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+#define      pii               std::pair<int,int>
+#define      mp(a,b)           std::make_pair(a,b)
+#define      X                 first
+#define      Y                 second
+ 
+typedef long long ll;
+ll MOD = 1000000007;
+ 
+void solve()
+{
+	int N,M,C[2][44];	// 0: price, 1: frequency
+	ll A[2][44][44];	// 0: A-arr, 1: B-arr
+	memset(C,false, sizeof C);
+	memset(A,false, sizeof A);
+	scanf("%d%d",&N,&M);
+	for(int i=0;i<N;++i)
+	{
+		int x, y;
+		scanf("%d%d",&x,&y);
+		C[0][x] += y;
+		C[1][x] += 1;
+	}
+	for(int i=1;i<=40;++i)
+	{
+		for(int j=0;j<=40;++j)
+		{
+			if(j==0) A[1][i][j] = 1, A[0][i][j] = 0;
+ 
+			else if(i==1)
+			{
+				if(j==1) A[0][i][j] = (C[0][i])*(1LL<<(C[1][i]-1)), A[1][i][j] = (1LL<<C[1][i]) - 1;
+			}
+			else
+			{
+				A[0][i][j] = A[0][i-1][j] + ((1LL<<C[1][i])-1)*A[0][i-1][j-1] + (1LL<<(C[1][i]-1))*C[0][i]*A[1][i-1][j-1];
+				A[1][i][j] = A[1][i-1][j] + A[1][i-1][j-1]*((1LL<<C[1][i])-1);
+			}
+		}
+	}
+	ll num = 0, den = 0;
+	for(int i=M;i<=40;++i)
+		num += A[0][40][i], den += A[1][40][i];
+	// cout << num << " " << den << endl;
+	printf("%.9Lf
+",(long double)num/(long double)den);
+	return ;
+}
+ 
+int main()
+{
+	int T;
+	scanf("%d",&T);
+	while(T--)
+	{
+		solve();
+	}
+	return 0;
+} 

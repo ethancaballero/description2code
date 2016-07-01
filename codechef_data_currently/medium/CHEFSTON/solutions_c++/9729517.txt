@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int tym[100000],cost[100000];
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int n,k,i;
+		cin>>n>>k;
+		for(i=0;i<n;i++)
+			cin>>tym[i];
+		for(i=0;i<n;i++)
+			cin>>cost[i];
+		long long int max=0,pr,x;
+		for(i=0;i<n;i++)
+		{
+			x = k/tym[i];
+			pr = x * cost[i];
+			if(pr>max)
+				max = pr;
+		}
+		cout<<max<<endl;
+	}
+	return 0;
+}

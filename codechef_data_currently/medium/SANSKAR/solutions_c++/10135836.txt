@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+bool mapo[50];
+bool recur(ll arr[],int num[],int j,int in,ll sum)
+{   //0 1 2  sum = 2
+    //2 2 2
+    if(sum == 0)
+        {
+            for(int i = 0;i < j ;i++)
+                mapo[num[i]] = true;
+            return true;
+        }
+    if(in == -1)
+        return false;
+    if(arr[in] > sum || mapo[in] == true)
+        return recur(arr,num,j,in-1,sum);
+    bool a1,a2;
+    num[j++] = in;
+    a1 = recur(arr,num,j,in-1,sum - arr[in]);
+    if(a1)
+        return true;
+    j--;
+    a2 = recur(arr,num,j,in-1,sum);
+    return a1||a2;
+
+
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+     int n,k;
+     cin>>n>>k;
+     ll arr[n],i,j=0,l;
+     ll sum = 0;
+     for(i = 0 ; i<n ; i++)
+        {
+            //cout<<"i am here"<<endl;
+            cin>>arr[i];
+            sum = sum + arr[i];
+        }
+     if(sum%k != 0)
+     {
+         cout<<"no
+";
+         continue;
+     }
+     sum = sum/k;
+     int last[n];
+     memset(mapo,false,sizeof(mapo));
+     while(k--)
+     {
+         if(recur(arr,last,0,n-1,sum) == false)
+         {
+             cout<<"no
+";
+             j=1;
+             break;
+         }
+     }
+         if(j==0)
+            cout<<"yes
+";
+
+    }
+    return 0;
+}

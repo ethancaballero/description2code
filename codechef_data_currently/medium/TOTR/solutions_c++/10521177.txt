@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cstdio>
+#include <map>
+
+using namespace std;
+
+
+int main() {
+  int t;
+  string m;
+  map<char, char> conv;
+
+  scanf("%d ", &t);
+  getline(cin, m, '
+');
+  for (int j = 0; j < m.size(); ++j) {
+    if (islower(m[j]) || isupper(m[j])) {
+      conv['a' + j] = m[j];
+    }
+  }
+
+  for (int j = 0; j < t; ++j) {
+    getline(cin, m, '
+');
+    for (int i = 0; i < m.size(); ++i) {
+      if (m[i] == '_') {
+	m[i] = ' ';
+	continue;
+      }
+      if (conv.find(tolower(m[i])) != conv.end()) {
+	if (islower(m[i])) {
+	  m[i] = conv[m[i]];
+	} else {
+	  m[i] = toupper(conv[tolower(m[i])]);
+	}
+      } 
+    }
+    printf("%s
+", m.c_str());
+  }
+
+  return 0;
+}

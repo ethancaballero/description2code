@@ -1,0 +1,69 @@
+#include <iostream>
+#include<map>
+
+using namespace std;
+
+const int MAXN = 100;
+const int MAXM = 30;
+
+int uf[MAXN], s[MAXN];
+
+int parent(int v) {
+  if (v == uf[v]) return v;
+  return uf[v] = parent(uf[v]);
+}
+
+void merge(int u, int v) {
+  uf[parent(u)] = parent(v);
+}
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+	map<int,int> mymap;
+    int n, m;
+    cin >> n >> m;
+    for (int i = 0; i < n; ++i) {
+      uf[i] = i;
+      s[i] = 0;
+    }
+    for (int i = 0; i < m; ++i) {
+      int k, l;
+      cin >> k;
+      while (k--) {
+		cin >> l;
+		 //this is an OR operation on 'int' variables
+		 // 1<<i = 2^i   for eg 2 OR 1 = 3 because 10 OR 01 = 11 which is = 3 in decimal 
+		 // as s[] starts with all 0s, after 1st subset S0's input, s[i] = 1 for all i in S0
+		 // then i will take values 1,2,3...m-1 for subsets S1,S2,S3...Sm-1 & 1<<i will take from 
+		 // 
+		s[l] |= (1<<i); 
+		// for (int i = 0; i < n; ++i) {
+		// cout<<s[i]<<" ";
+	  // }
+	  // cout<<endl;
+      }
+	  
+	  // cout<<endl;
+    }
+	//at this point all numbers i that are related have the same value of s[i]
+	
+	//so if, 0 and 1 are related & 3 and 4 are related & 2 isn't related to any other number
+	//s[] = 1 1 3 2 2 (based on a specific example case)
+	//initially in uf[], uf[i]=i for all i
+	//at the end we would want uf[i] = i and uf[j] = i if i and j are related for all i,j pairs 
+	int count=0;
+    for (int i = 0; i < n; ++i)
+    {
+		
+		if(mymap[s[i]]==0)
+		{
+			mymap[s[i]]++;
+			count++;
+		}
+	}
+	cout<<count<<endl;
+  }
+}
+

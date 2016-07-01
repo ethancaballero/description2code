@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int gcd(int a, int b){
+	if(b==0)
+	return a;
+	else
+	return gcd(b, a%b);
+}
+int abs(int x){
+	return x>0?x:-x;
+}
+int main(){
+	int T;
+	cin>>T;
+	while(T--){
+		int S1, S2;
+		cin>>S1>>S2;
+		int t= abs(S1-S2);
+		S1 = abs(S1);
+		S2 = abs(S2);
+		int x = gcd(S1,S2);
+		int res  = t/x;	
+		cout<<res<<"
+";
+	}
+	return 0;
+}  

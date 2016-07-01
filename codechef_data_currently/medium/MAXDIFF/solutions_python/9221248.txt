@@ -1,0 +1,15 @@
+testcases = int(raw_input())
+while testcases:
+	testcases -= 1
+	nc = raw_input().split(' ')
+	n = long(nc[0])
+	c = long(nc[1])
+	weights = []
+	input_weights = raw_input().split(' ')
+	for i in range(n):
+		weights.append(int(input_weights[i]))
+	
+	weights.sort()
+	maxDiff1 =  abs(sum(weights[:c])- sum(weights[c:]))
+	maxDiff2 =  abs(sum(weights[:(n-c)])- sum(weights[(n-c):]))
+	print max(maxDiff1, maxDiff2)

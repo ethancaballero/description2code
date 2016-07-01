@@ -1,0 +1,16 @@
+n_testcases = int(raw_input())
+
+for test in xrange(n_testcases):   # loop through test cases
+    n_elements = int(raw_input())
+    elements = map(int, raw_input().strip().split())
+
+    i = 0;  #index of lowest element
+    n_ways = 0
+
+    for j in xrange(n_elements):    # actual case
+        if elements[j - 1] <= elements[j]: # if sequence is increasing, can recurse
+            n_ways += j - i + 1
+        else:
+            n_ways += 1
+            i = j
+    print n_ways

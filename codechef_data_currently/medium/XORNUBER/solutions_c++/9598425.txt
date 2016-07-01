@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+int main()
+{
+
+  int t;int x;
+  scanf("%d",&t);
+  while(t--){
+        x=-1;
+        int n;
+    scanf("%d",&n);
+  if(n==1)
+    printf("%d
+",2);
+    else{
+    for(int i=1;i<=30 && x<0;i++){
+
+        int a=1<<(i-1);
+        int b=(1<<(i-1))-1;
+        int c=a^b;
+        if(c==n)
+            x=b;
+    }
+    printf("%d 
+",x);
+    }
+  }
+
+    return 0;
+}

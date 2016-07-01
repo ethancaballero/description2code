@@ -1,0 +1,20 @@
+//I
+#include <bits/stdc++.h>
+ using namespace std;
+
+int main(){
+	int t; cin >> t;
+	while(t--){
+		int x,y,d1,d2; cin >> x >> y;
+		x=abs(x); y=abs(y);
+		int a = min(x,y);
+		int b = x-a;
+		int c = y-a;
+		if(b%2) d1 = 2*b+1;
+		else d1 = 2*b;
+		if(c%2) d2 = 2*c-1;
+		else d2 = 2*c;
+		cout << 2*a + d1 + d2 << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,50 @@
+	#include<iostream>
+	#include<string.h>
+	using namespace std;
+	int main()
+	{
+		int n,m;
+		cin>>n>>m;
+		int a[100005];
+		int b[10][100005]={0};
+		int temp;
+		char c[100005];
+		//for(int i=0;i<n;i++)
+
+		cin>>c;
+		int l=strlen(c);
+		for(int i=0;i<l;i++)
+		{
+			temp=c[i]-'0';
+			if(i!=0)
+			{
+				for(int j=0;j<10;j++)
+				{
+					b[j][i]=b[j][i-1];
+				}	
+			}	
+			b[temp][i]++;
+
+		}
+		int index,s;
+
+		for(int i=0;i<m;i++)
+		{
+			int sum1=0,sum2=0,sum3=0,count1=0,count2=0;
+			cin>>index;
+			index--;
+			s=c[index]-48;
+			for(int j=0;j<s;j++)
+			{
+				count1+=b[j][index];
+				sum1+=(j*b[j][index]);
+			}
+			for(int j=s+1;j<10;j++)
+			{
+				count2+=b[j][index];
+				sum2+=(j*b[j][index]);
+			} 
+			sum3=(count1*s-sum1)-(count2*s-sum2); 
+			cout<<sum3<<endl;
+		}	
+	}	

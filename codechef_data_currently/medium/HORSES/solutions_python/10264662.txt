@@ -1,0 +1,16 @@
+def solve(n, horse):
+    horse.sort()
+    res = horse[1]-horse[0]
+    for h in range(1,n-1):
+        res = min(res, horse[h+1]-horse[h])
+    return res
+
+def horses():
+    T = int(raw_input())
+    for i in range(T):
+        n = int(raw_input())
+        horse = map(int, raw_input().split())
+        print solve(n, horse)
+ 
+if __name__ == '__main__':
+    horses() 

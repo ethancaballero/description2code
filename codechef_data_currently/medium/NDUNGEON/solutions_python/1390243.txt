@@ -1,0 +1,110 @@
+import sys
+import logging
+import copy
+from heapq import *
+import cProfile
+from math import *
+
+class Map:
+
+	def __init__(self):
+		self.map = []
+
+	def read_map(self,f):
+		size_d = f.readline().split()
+		self.height = int(size_d[0])
+		self.width = int(size_d[1])
+		logging.info("Size: %s x %s", self.height, self.width)	
+		for i in range(0,self.height):
+			self.map.extend([int(x) for x in f.readline().strip().split()])
+		p_l = f.readline().split()
+		self.p_y = int(p_l[0])-1
+		self.p_x = int(p_l[1])-1
+		self.p_pos = self.p_y * self.width + self.p_x
+		self.T = int(p_l[2])
+		logging.info("Princess x: %d y: %d , T=%d", self.p_x, self.p_y, self.T)
+
+
+	def build_neighbour_list(self):
+		size = len(self.map)
+		self.neighbours = size * [None]
+		
+		h = self.height
+		w = self.width
+# Corners
+		self.neighbours[0] = [1,w]
+		ne = w-1
+		self.neighbours[ne] = [ne-1,ne+w]
+		sw = size-w
+		self.neighbours[sw] = [sw+1,sw-w]
+		se = size-1
+		self.neighbours[se] = [se-1,se-w]
+
+# Top row
+		for i in range(1,w-1):
+			self.neighbours[i]=[i-1,i+1,i+w]
+# Bottom row
+		for i in range(size-w+1,size-1):
+			self.neighbours[i]=[i-1,i+1,i-w]
+# Left and right columns
+		for i in range(1,h-1):
+			l = i*w
+			r = (i+1)*w-1
+			self.neighbours[l]=[l-w,l+w,(l+1)]
+			self.neighbours[r]=[r-w,r+w,(r-1)]
+			
+		for i in xrange(size):
+			if not self.neighbours[i]:
+				self.neighbours[i]=[i-w, i-1, i+1, i+w] 
+
+			
+	def print_map(self):
+		for n in range(self.height):
+			i = n*self.width
+			print self.map[i:i+self.width]
+		
+	def get_neighbours(self,pos):
+		return self.neighbours[pos]
+
+
+	def init_dist_map(self):
+		self.dist_map=self.height*self.width * [None]
+			
+
+	def solve(self):
+		h = []
+		T = self.T - self.map[self.p_pos]
+		heappush(h, (-T,self.p_pos))
+		
+		while h:
+			(T, pos) = heappop(h)
+			T = -T
+			if T < 0:
+				break;
+
+			if not self.dist_map[pos] or (self.dist_map[pos] < T):
+				self.dist_map[pos]=T
+				for p in self.get_neighbours(pos):
+					if self.dist_map[p] == None:
+						heappush(h, (self.map[p]-T,p))	
+			
+		
+		spare_time = self.dist_map[0]
+		if spare_time >= 0:
+			print "YES"
+			print spare_time
+		else:
+			print "NO"
+			
+			
+def run():
+#	logging.basicConfig(level=logging.DEBUG)
+	m = Map()
+	m.read_map(sys.stdin)
+	m.build_neighbour_list()
+	m.init_dist_map()
+	m.solve()
+
+
+run()
+#cProfile.run('run()')

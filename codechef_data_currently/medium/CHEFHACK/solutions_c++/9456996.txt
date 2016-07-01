@@ -1,0 +1,82 @@
+# include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool sie[10000005]={0};
+int n,p[10000005];
+int g[355][355];
+bool vis[355][355]={0};
+
+int dx[]={1,-1,0,0};
+int dy[]={0,0,-1,1};
+
+bool chk(int x, int y, int i) {
+    return (x+dx[i] >= 0 && x+dx[i] < n && y+dy[i] >= 0 && y+dy[i] < n);
+}
+
+int getCat(int x) {
+    if (sie[x] == false)
+        return 0;
+    if (x%2 == 0)
+        return 1;
+    return 2;
+}
+
+void sieve() {
+    int i,j,k=0;
+    memset(sie,false,sizeof sie);
+    sie[0]=sie[1]=true;
+    for (i=2 ; i*i <= 10000000; i++) {
+        if (!sie[i])
+        {
+            for (j=i*i ; j <= 10000000 ; j+=i)
+                sie[j]=true;
+        }
+    }
+    p[2]=0;
+    for (i=3,k=1 ; i <= 10000000 ; i+=2)
+    {
+        if (!sie[i])
+            p[i]=k++;
+    }
+}
+
+void dfs(int x, int y, int mycat) {
+    vis[x][y]=true;
+    for (int i=0 ; i < 4 ; i++) {
+        if (chk(x,y,i)) {
+            int cat = getCat(g[x+dx[i]][y+dy[i]]);
+            if (cat && cat == mycat && !vis[x+dx[i]][y+dy[i]])
+                dfs(x+dx[i],y+dy[i],mycat);
+        }
+    }
+}
+int main() {
+    int t,i,j,k;
+    sieve();
+    scanf("%d",&t);
+    while (t--) {
+        scanf("%d",&n);
+        memset(vis,false,sizeof vis);
+        for (i=0 ; i < n ;i++)
+            for (j=0 ; j < n ; j++)
+                scanf("%d",&g[i][j]);
+        ll ans = 0;
+        for (i=0 ; i < n ; i++) {
+            for (j=0 ; j < n ; j++) {
+                if (!vis[i][j]) {
+                    int cat = getCat(g[i][j]);
+                    if (cat == 0) {
+                        ans += p[g[i][j]];
+                    }
+                    else {
+                        ans += (g[i][j]/2 + (g[i][j]%2)*2);
+                        dfs(i,j,cat);
+                    }
+                }
+            }
+        }
+        printf("%lld
+",ans);
+    }
+    return 0;
+}

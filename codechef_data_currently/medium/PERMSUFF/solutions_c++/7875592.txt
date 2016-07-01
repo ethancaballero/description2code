@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <math.h>
+#include <utility>
+#include <vector>
+
+using namespace std;
+
+int input()
+{
+    int n=0;
+    char c=getchar_unlocked();
+    while(c < '0' || c >'9') {c=getchar_unlocked();}
+    while(c>='0' && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar_unlocked();
+    }
+    return n;
+}
+
+vector<pair<int, int> > pairs;
+
+bool check(int a, int b){
+	if(a == b)
+		return true;
+	for(std::vector<pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it) {
+		if(it->first <= a && it->second >= a){
+			if(it->first <= b && it->second >= b)
+				return true;
+			else 
+				return false;
+		}
+	}
+}
+
+typedef struct LR{
+	int left;
+	int right;
+}lr;
+
+int main(){
+	int L,R;
+	int T, temp, N, M, index;
+	int* perm;
+	int prev, flag, bracket_count;
+	T = input();
+	lr num[100000];
+	int* curr;
+	pair<int, int> temp_pair;
+	while(T--){
+		pairs.clear();
+		N = input();
+		M = input();
+		curr = new int[N];
+		for(int i = 0; i < N; i++){
+			curr[input()-1] = i;
+			num[i].left = 0;
+			num[i].right = 0;
+		}		
+		while(M--){
+			L = input();
+			R = input();
+			if(L == R)
+				continue;
+			num[L-1].left++;
+			num[R-1].right++;
+		}
+		index = -1;
+		prev = 0;
+		bracket_count = 0;
+		for(int i = 0; i < N; i++){
+			if(num[i].left > 0){
+				if(bracket_count == 0){
+					pairs.push_back(pair<int, int>(i,i));
+					index++;
+				}	
+				bracket_count += num[i].left; 
+			}
+			if(num[i].right > 0){
+				bracket_count -= num[i].right;
+				if(bracket_count == 0){
+					pairs[index].second = i;
+				}
+			}
+		}
+		flag = 0;
+//		for(std::vector<pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it) {
+//			cout << it->first << " " << it->second << endl;
+//		}
+		for(int i = 0; i < N; i++){
+			if(!check(curr[i],i)){
+				cout << "Impossible" << endl;
+				flag = 1;
+				break;
+			}
+		}
+		if(flag == 0)
+			cout << "Possible" << endl;
+		delete(curr);
+	}
+}
+
+

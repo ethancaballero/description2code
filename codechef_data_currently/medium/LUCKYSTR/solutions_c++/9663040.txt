@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef struct shivam
+{
+    char str[52];
+}shivam;
+shivam s[60];
+int main()
+{
+    int k,n,i,j;
+    char mainstr[60];
+    cin>>k>>n;
+    for(i=0;i<k;i++)
+    {
+        cin>>s[i].str;
+    }
+    for(i=0;i<n;i++)
+    {
+        cin>>mainstr;
+        int n=strlen(mainstr);
+
+      for(j=0;j<k;j++)
+      {
+          if(strstr(mainstr,s[j].str))
+          {
+              cout<<"Good"<<endl;
+              break;
+          }
+          if(n>=47)
+          {
+              cout<<"Good"<<endl;
+              break;
+
+          }
+      }
+      if(j>=k)
+        cout<<"Bad"<<endl;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    return 0;
+}

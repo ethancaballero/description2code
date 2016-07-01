@@ -1,0 +1,33 @@
+#include<iostream>
+#include<algorithm>
+
+#define mod 1000000009
+
+using namespace std;
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    int t,n,m,l1,l2,i;
+    long long d;
+    char x,y;
+    cin>>t;
+    while(t--)
+    {
+        d=1;
+       cin>>n>>m;
+        pair<int,char> x[m];
+
+        for(i=0;i<m;i++)
+            cin>>x[i].second>>x[i].first;
+        sort(x,x+m);
+
+        for(i=1;i<m;i++)
+        {
+            if(x[i].second!=x[i-1].second)
+                d=(d*(((x[i].first%mod)-(x[i-1].first%mod))%mod)%mod);
+        }
+       cout<<d<<endl;
+    }
+    return 0;
+}

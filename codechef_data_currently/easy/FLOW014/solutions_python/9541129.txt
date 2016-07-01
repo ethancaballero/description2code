@@ -1,0 +1,30 @@
+defhard = 50
+defcarb = 0.7
+deften = 5600
+a = input()
+for b in range(a):
+    list1 = [0,0,0]
+    c = raw_input().split()
+    if float(c[0])>defhard:
+        list1[0] = 1
+    if float(c[1]) < defcarb:
+
+        list1[1] = 1
+    if float(c[2]) > deften:
+        list1[2] = 1
+
+    t = 0
+    for d in list1:
+        t += d
+    if t == 3:
+        print 10
+    elif list1[0] == 1 and list1[1] == 1:
+        print 9
+    elif list1[1] == 1 and list1[2] == 1:
+        print 8
+    elif list1[0] == 1 and list1[2] == 1:
+        print 7
+    elif t == 1:
+        print 6
+    elif t == 0:
+        print 5

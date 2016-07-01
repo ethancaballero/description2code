@@ -1,0 +1,63 @@
+#include<stdio.h>
+#define ll long long
+
+#define gc getchar
+#define pc putchar
+inline int inp()
+{
+    int n = 0, c = gc(), f = 1;
+    while(c != '-' && (c < '0' || c > '9')) c = gc();
+        if(c == '-')
+        {
+            f = -1;
+            c = gc();
+        }
+    while(c >= '0' && c <= '9')
+        n = (n<<3) + (n<<1) + c - '0', c = gc();
+    return n * f;
+}
+void op(int n)
+{
+	if(n<0)
+	{  n=-n;
+	   pc('-');
+	}
+	int i=10;char output_buffer[11];
+	output_buffer[10]='
+';
+	do{output_buffer[--i]=(n%10)+'0';n/=10;}
+	while(n);
+	do{pc(output_buffer[i]);}
+    while(++i<11);
+}
+int main()
+{
+	int tc;
+	tc = inp();
+	while(tc--)
+	{
+		int x,y,min,max,ans;
+		x = inp(); y = inp();
+		x = (x<0)?(-x):x;
+		y = (y<0)?(-y):y;
+		max=(x>y)?x:y;
+		min=(max==x)?y:x;
+		if(x>=y)
+		{
+			if(((!(1&(min)))&& (!(1&max)) )||( (1&min) &&(1&max)))
+			ans = (max<<1);
+			else
+			ans = (max<<1)+1;
+		}
+		else
+		{
+			if(((!(1&(min)))&& (!(1&max)) )||( (1&min) &&(1&max)))
+			ans = (max<<1);
+			else
+            ans = (max<<1)-1;
+
+		}
+		op(ans);
+	}
+	return 0;
+}

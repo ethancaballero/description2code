@@ -1,0 +1,17 @@
+test_cases = raw_input()
+for test_case in range(int(test_cases)):
+    movie_count = input()
+    lengths=map(int,raw_input().split())
+    ratings=map(int,raw_input().split())
+    movie_rate = []
+    for i in xrange(movie_count):
+        movie_rate.append(lengths[i]*ratings[i])
+    temp=[]
+    if movie_rate.count(max(movie_rate)) == 1:
+        max_index = movie_rate.index(max(movie_rate))
+        print(max_index+1)
+    else:
+        for j in range(movie_count):
+            if movie_rate[j] == max(movie_rate):
+                temp.append(ratings[j])
+        print(ratings.index(max(temp))+1)

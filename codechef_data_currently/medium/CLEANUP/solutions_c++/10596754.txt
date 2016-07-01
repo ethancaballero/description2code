@@ -1,0 +1,57 @@
+#include<iostream>
+#include <cstring>
+// #include<stdio.h>
+// #include<string.h>
+using namespace std;
+int main(){
+	unsigned int p, i, n ,m;
+	bool a[1001];
+	// scanf("%d",&p);
+	cin>>p;
+	while(p--){
+		// scanf("%d %d",&n,&m);
+		cin>> n;
+		cin>> m;
+		memset(a,0, sizeof(a));
+		while(m--){
+			// scanf("%d",&i);
+			cin>>i;
+			a[i] = true;
+		}
+		m = 1;
+		cout << "
+";
+		for(i = 1 ; i <= n ; i += 1){
+			if (!a[i]){
+				if(m){
+					// printf("%d",i);
+					cout << i;
+					cout <<" ";
+					a[i] = true;
+					m = 0;
+				}
+				else
+					m = 1;
+			}
+		}
+		// printf("
+");
+		cout << "
+";
+		m=1;
+		for(i = 1 ; i <= n ; i += 1){
+			if (!a[i]){
+				// printf("%d",i);
+				cout << i;
+				cout <<" ";
+				a[i] = true;
+				m = 0;
+			}
+		}
+		// printf("
+");
+		
+
+	}
+	return 0;
+}

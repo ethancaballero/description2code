@@ -1,0 +1,17 @@
+T = int(raw_input())
+P1 = 0
+P2 = 0
+N = 0
+leader = 1
+D = []
+for i in range(T):
+    D.append(raw_input().split())
+    P1 = P1 + int(D[i][0])
+    P2 = P2 + int(D[i][1])
+    if((P1 > P2) and (P1-P2 > N)):
+        N = P1 - P2
+        leader = 1
+    elif((P2 > P1) and (P2-P1 > N)):
+        N = P2 - P1
+        leader = 2
+print leader, N

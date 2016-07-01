@@ -1,0 +1,10 @@
+t=int(raw_input())
+while(t>0):
+    a,b=raw_input().split()
+    a,b=[int(a),int(b)]
+    if a<b:
+        max=b
+    else:
+        max=a
+    print max,a+b
+    t=t-1

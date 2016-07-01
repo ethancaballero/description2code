@@ -1,0 +1,123 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+typedef long long ll;
+#define MOD 1000000000
+#define MAXN 2005
+#define MAXM 2005
+
+ll C[2*MAXM][MAXM];
+ll dp2[MAXN][MAXM];
+
+
+
+//Preprocess array C to contain C[n][k]= n choose k mod MOD
+void preprocess()
+{
+    for(ll i=0;i<=4000;i++)
+        C[i][0] = 1 ;
+    for(ll i=1;i<=4000;i++)
+        for(ll j=1;j<=i;j++)
+            C[i][j] = ( C[i-1][j-1] + C[i-1][j] ) % MOD ;
+}
+
+ll memo[MAXN][MAXM];
+ll M,N;
+
+ll solve(ll i,ll x)
+{
+
+    if(memo[i][x]!=0)
+        return memo[i][x];
+    if(x>M)
+    {
+        memo[i][x]=0;
+        return 0;
+    }
+    if(i==N+1)
+    {
+        memo[i][x]=1;
+        return 1;
+    }
+
+    memo[i][x]= (solve(i+1,x)*C[x+M-1][M-1] + solve(i,x+1))%MOD;
+
+    //cout<<"memo["<<i<<"]["<<x<<"]="<<memo[i][x]<<endl;
+    return memo[i][x];
+}
+
+ll solve()
+{
+
+    // Here dp2[i][j] stores the number of cases in which ith row with sum j considering all the rows above are steady.
+    for(ll i=0;i<=N;i++)
+    {
+        for(ll j=0;j<=M;j++)
+        {
+            dp2[i][j]=0;
+        }
+    }
+
+    dp2[0][0]=1;
+    ll s=0;
+    for(ll i=1;i<=N;i++)
+    {
+        s=0;
+        for(ll j=0;j<=M;j++)
+        {
+            s+= dp2[i-1][j];
+            if(s>=MOD) s -=MOD;
+            dp2[i][j] = (1LL*s*C[j+M-1][M-1])%MOD;
+        }
+    }
+
+    ll ans=0;
+    for(ll i=0;i<=M;i++)
+    {
+        ans+=dp2[N][i];
+        if(ans>=MOD)    ans -=MOD;
+    }
+    printf("%lld
+",ans);
+}
+
+
+
+
+int main()
+{
+    //freopen("STDYTAB_input.txt","r",stdin);
+    preprocess();
+
+    ll t;
+    scanf("%lld",&t);
+
+//    for(ll i=0;i<10;i++)
+//    {
+//        for(ll j=0;j<10;j++)
+//            printf("%lld ",C[i][j]);
+//        printf("
+");
+//    }
+
+
+    while(t--)
+    {
+        //memset(memo,0,sizeof(memo));
+
+        scanf("%lld %lld",&N,&M);
+        //    cout<<solve(1,0)<<endl;
+//
+//    for(ll i=0;i<=2;i++)
+//    {
+//        for(ll j=0;j<=2;j++)
+//            printf("%lld ",memo[i][j]);
+//        cout<<endl;
+//    }
+    solve();
+    }
+
+
+
+}

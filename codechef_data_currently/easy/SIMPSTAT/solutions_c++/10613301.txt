@@ -1,0 +1,30 @@
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%i",&t);
+    while(t--)
+    {
+        int n,k,a[10000];
+        float c=0;
+        scanf("%i%i",&n,&k);
+        for(int i=0;i<n;i++)
+            scanf("%i",&a[i]);
+        sort(a,a+n);
+        //for(int i=0;i<n;i++)
+           // printf("%i ",a[i]);
+        for(int i=k;i<(n-k);i++)
+        {
+            c+=(float)a[i];
+        }
+        c=c/(n-2*k);
+        printf("%f
+",c);
+    }
+	return 0;
+}
+ 

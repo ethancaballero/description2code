@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	int i,j,x;
+	char d[101][6],p[2501][6];
+	int n,k;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		for(i=0;i<n;i++)
+		cin>>d[i];
+		int l;
+		x=0;
+		for(i=0;i<k;i++)
+		{cin>>l;
+		 for(j=x;j<l+x;j++)
+		 {
+		 	cin>>p[j];
+		 }
+		 x+=l;
+		}
+		for(i=0;i<n;i++)
+		{
+			int s=0;
+			for(j=0;j<x;j++)
+			{
+				if(strcmp(d[i],p[j])==0)
+				{
+					s=1;break;
+				}
+			}
+			cout<<(s==1?"YES":"NO");
+			if(i!=n-1)cout<<" ";
+			
+		}cout<<endl;
+		
+		
+	}
+}

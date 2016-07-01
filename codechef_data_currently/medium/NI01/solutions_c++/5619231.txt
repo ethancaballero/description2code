@@ -1,0 +1,45 @@
+#include <iostream>
+#include "algorithm"
+#include "stdio.h"
+using namespace std;
+int main() {
+	
+	long long t;long long i,n,q,m,p,r,k;
+	scanf("%lld",&t);
+	while(t--)
+	{ long long tp=0;
+		long long dp[1000005];
+		scanf("%lld",&n);scanf("%lld",&m);scanf("%lld",&q);
+		scanf("%lld",&p);scanf("%lld",&r);scanf("%lld",&k);
+	 if(n>=q)
+	    {
+            n=n-q;dp[0]=q;q=0;	    	
+	    }
+	 else {
+	 	q=q-n;dp[0]=n;n=0;
+	 }
+	 for(i=1;i<=k;i++)
+	 {
+	 	if(i%r==0 && m)
+	 	{
+	 		m--;q++;
+	 	}
+	 	if(i-p>=0)
+	 	{
+	 		n=n+dp[i-p];
+	 		tp=tp+dp[i-p];
+	 	}
+	 	if(n>=q)
+	 	{
+	 	n=n-q;	dp[i]=q;q=0;
+	 	}
+	 	else
+	 	{
+	 		dp[i]=n;q=q-n;n=0;
+	 	}
+	 }
+	 cout<<n<<" "<<tp<<" "<<m<<" "<<q<<endl;
+	
+	}
+	return 0;
+}

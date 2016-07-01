@@ -1,0 +1,61 @@
+    #include <iostream>
+    #include <cstdio>
+    #include<limits.h>
+    #include <algorithm>
+    #define p(n) printf("%d
+",n);
+    #define s(n) scanf("%d",&n);
+    #define P(n) printf("%lli ",n);
+    #define S(n) scanf("%lli",&n);
+    #define gc getchar_unlocked
+    #define pc putchar_unlocked
+    using namespace std;
+//    inline unsigned int fastread()
+//        {
+//          unsigned int i=0;
+//          char c=gc();
+//          while(c<'0' || c>'9')
+//            c=gc();
+//          for(;c>='0' && c<='9';c=gc())
+//            i=(i<<3)+(i<<1)+c-'0';
+//          return i;
+//        }
+     int main()
+     {
+        long int n;
+        long long int k;
+        scanf("%li",&n); S(k)
+        long long int a[n];
+        long long int  min=LONG_LONG_MAX;
+        long long int max=0;
+        for(int i=0;i<n;i++)
+        {
+            S(a[i])
+            if(a[i]<min)
+                min=a[i];
+            if(a[i]>max)
+                max=a[i];
+        }
+        if(k==0)
+        for(int i=0;i<n;i++)
+        P(a[i])
+        else if(k%2==0)
+        {
+          for(int i=0;i<n;i++)
+          {
+              P(a[i]-min);
+              //P(a[i])
+          }
+        }
+        else
+        {
+           for(int i=0;i<n;i++)
+          {
+              P(max-a[i]);
+              //P(a[i])
+          }
+        }
+        printf("
+");
+return 0;
+     }

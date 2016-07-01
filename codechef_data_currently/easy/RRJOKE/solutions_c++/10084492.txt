@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int t,n,i,x,y,xo;
+int main()
+{
+	cin>>t;
+	while(t--)
+	{
+		cout<<"
+";
+		cin>>n;
+		for(i=1;i<=n;i++) 
+		{
+			cout<<"
+";
+			cin>>x>>y;
+		}
+		xo=1;
+		for(i=2;i<=n;i++)
+		{
+			xo=xo^i;
+		}
+		cout<<"
+"<<xo;
+	}
+}

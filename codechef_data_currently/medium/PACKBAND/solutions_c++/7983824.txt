@@ -1,0 +1,126 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <string.h>
+#include <queue>
+#include <stdint.h>
+#include <unistd.h>
+#define pb push_back
+#define S1(v) sort(v.begin(), v.end())
+#define S2(v,T) sort(v.begin(), v.end(), greater<T>())
+#define FOR(i,a,b) for(int i = (a); i < (b); i++)
+#define FORD(i,a,b) for(int i = (a); i >= (b); i--)
+#define FORV(i,a,b) for(int i = a; i < (signed)b.size(); i++)
+#define B begin()
+#define E end()
+#define II pair<int, int>
+#define S second
+#define F first
+using namespace std;
+char *fstart;
+const int MAXBUF=15000000;
+char buf[MAXBUF];
+char outbuf[MAXBUF];
+int outat;
+ 
+void skip() {
+  while (*fstart != 0 && !('0' <= *fstart && *fstart <= '9')) fstart++;
+}
+ 
+template <class T> void GETNUM(T& n){
+  skip();
+  n=0;
+  while ('0' <= *fstart && *fstart <= '9') {
+    n = n*10 + *fstart-'0', ++fstart;
+  }
+}
+ 
+void take_input() { // Take input using fast I/O
+  int sz=fread(buf, sizeof(char), MAXBUF, stdin);
+  buf[sz]=0;
+  fstart=buf;
+  outat=0;
+}
+ 
+inline void outc(char c) { outbuf[outat++] = c; }
+ 
+template <class T> inline void outnum(T x) {
+  char s[100]; int at = 0;
+  do { s[at++] = x%10, x/=10; } while(x>0);
+  for (int i=at-1;i>=0;--i) outbuf[outat++] = s[i]+'0';
+}
+ 
+void flushoutbuf() {
+  fwrite(outbuf,sizeof(char),outat, stdout);
+  outat = 0;
+}
+ 
+int s1()
+{
+    char ch;
+    do {
+        ch = getc(stdin);
+    } while(ch < '0' || ch > '9');
+    int num = 0;
+    do {
+        num = num * 10 + ch-48;
+        ch = getc(stdin);
+    } while(ch >= '0' && ch <= '9');
+    return num;
+}
+void p1(int x)
+{
+    char s[100];
+    int i;
+    int l = sprintf(s, "%d", x);
+    for(i = 0; i < l; i++) putc(s[i], stdout);
+}
+int a[1003];
+int ch[1003];
+II p[1003];
+int main()
+{
+    take_input();
+    int t;
+    GETNUM(t);
+    FOR(z,0,t) {
+        int n,m,x,y;
+        GETNUM(n);
+        FOR(i,0,n) { GETNUM(a[i]); a[i] *= 7; }
+        GETNUM(m);
+        FOR(i,0,m) { GETNUM(x); GETNUM(y); p[i].F = y * 11; p[i].S = x * 11; }
+        sort(p, p+m);
+        sort(a, a+n);
+        FOR(i,0,m) { ch[i] = 0; }
+        int j = 0, ans = 0, prev;
+        FOR(i,0,n) {
+            FOR(j,0,m) {
+                if(a[i] >= p[j].S && a[i] <= p[j].F && ch[j] == 0) {
+                    ans++;
+                    ch[j] = 1;
+                    break;
+                }
+            }
+        }
+        printf("%d
+", ans);
+    }
+    flushoutbuf();
+//    system("pause");
+    return 0;
+}

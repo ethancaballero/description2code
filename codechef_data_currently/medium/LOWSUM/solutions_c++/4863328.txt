@@ -1,0 +1,101 @@
+/*
+Created using a template at :
+Sun Sep 21 16:52:33 IST 2014
+*/
+#include<bits/stdc++.h>
+#define pb push_back
+#define pf push_front
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define ln length()
+#define all(a)  a.begin(),a.end() 
+#define SI(n) scanf("%d",&n)
+#define SL(n) scanf("%lld",&n)
+#define PI(n) printf("%d",n)
+#define PL(n) printf("%lld",n)
+#define PS printf(" ")
+#define PN printf("
+")
+#define mod 1000000007
+//#define _ ios_base::sync_with_stdio(0);cin.tie(0)
+
+using namespace std;
+typedef long long LL;
+typedef vector <int> VI;
+typedef vector <LL> VL;
+bool Sort_by_sec(pair<LL,LL> x,pair<LL,LL> y)
+{
+	return x.ss<y.ss;
+}
+int main()
+{  
+   LL T;
+   SL(T);
+   while(T--)
+   {
+	   LL K,Q;
+	   SL(K);
+	   SL(Q);
+	   VL A,B;
+	   LL x;
+	   vector<pair<LL,LL> > scinline;
+	 //  map<LL,LL>Ans;
+	   VL Ans;
+	   for(LL k=0;k<K;k=k+1)
+	   {
+		   SL(x);
+		   A.pb(x);
+	   }
+	   for(LL k=0;k<K;k=k+1)
+	   {
+		   SL(x);
+		   B.pb(x);
+	   }
+	   sort(all(A));
+	   sort(all(B));
+	   VL Inp;
+	   for(LL q=0;q<Q;q=q+1)
+	   {
+		   SL(x);
+		   scinline.pb(mp(q,x));
+		   Inp.pb(x);
+	   }
+	   sort(all(scinline),Sort_by_sec);
+	   LL m=0,n=0;
+//	   LL prev=-1;
+	   LL count=0;
+	   LL Pos=0;
+	   LL Max=10001;
+	   LL flag=0;
+	   for(LL m=0;m<K;m=m+1)
+	   {
+		   LL Min=min(Max/(m+1),K);
+		   for(LL n=0;n<Min;n=n+1)
+		   {
+			   Ans.pb(A[m]+B[n]);
+		//	   Pos+=1;
+		//	   if(Pos>Max)
+		//	   {
+		//		   flag=1;
+		//		   break;
+		//	   }
+		   }
+		   if(flag)
+		   {
+			   break;
+		   }
+	   }
+	   sort(all(Ans));
+//	   for(LL i=0;i<Ans.sz;i=i+1)
+//	   {
+//		   cout << Ans[i]<<endl;
+//	   }
+	   for(LL i=0;i<Q;i=i+1)
+	   {
+		   cout <<Ans[Inp[i]-1] << endl;
+	   }
+   }
+   return 0;
+}

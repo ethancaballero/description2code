@@ -1,0 +1,10 @@
+for i in range(int(raw_input())):
+    a=map(int,raw_input().split())
+    a.sort()
+    h=1
+    c,d=a[0],a[1]
+    while a[0]!=0:
+        h=a[0]
+        a[0]=a[1]%a[0]
+        a[1]=h
+    print (c*d)/(h*h)

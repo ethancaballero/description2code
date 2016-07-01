@@ -1,0 +1,11 @@
+from math import sqrt
+t=int(raw_input())
+ 
+for _ in range(0,t):
+    P,S=map(int,raw_input().split())
+    P/=2;
+    a1= (P + sqrt(P*P-6*S))/6
+    a2= (P - sqrt(P*P-6*S))/6
+    v1=a1*a1*(P/2-2*a1)
+    v2=a2*a2*(P/2-2*a2)
+    print("%.2f" % max(v1,v2))

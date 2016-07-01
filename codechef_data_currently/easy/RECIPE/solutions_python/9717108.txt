@@ -1,0 +1,24 @@
+def gcd(a,b):
+	if a<b:
+		tempo=a
+		a=b
+		b=tempo
+	if a%b==0:
+		return b
+	else:
+		return gcd(b,a%b)
+ 
+def solve():
+	list=raw_input().split()
+	current=int(list[1])
+	for i in range (1,len(list)):
+		current=gcd(current,int(list[i]))
+	strprn=""
+	for i in range (1,len(list)):
+		strprn=strprn+" "+str(int(list[i])/current)
+	print strprn[1:]
+		
+#main program
+t=int(raw_input())
+for i in range(t):
+	solve()

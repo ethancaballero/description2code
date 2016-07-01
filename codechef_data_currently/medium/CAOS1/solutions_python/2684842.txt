@@ -1,0 +1,46 @@
+t = int(raw_input())
+count=0
+for x in range(t):
+    count = 0
+    l = []
+    r,c = map(int,raw_input().split())
+    for y in range(r):
+        temp = [z for z in raw_input()]
+        l.append(temp)
+    if (r >= 5) and (c >=5):
+     for r1 in range(2,r-2):
+        for c1 in range(2,c-2):
+            if l[r1][c1] != '#':   
+                j,k,h,i = 0,0,0,0
+                for a in range(r1-1,-1,-1):
+                    if j == 2:
+                        break
+                    if l[a][c1] == '^':
+                        j+=1
+                    else:
+                        break    
+                for b in range(r1+1,r):
+                    if k==2:
+                        break
+                    if l[b][c1] =='^':
+                        k+=1
+                    else:
+                        break
+                for e in range(c1-1,-1,-1):
+                    if h == 2:
+                        break
+                    if l[r1][e] == '^':
+                        h+=1
+                    else:
+                        break
+                for d in range(c1+1,c):
+                    if i ==2:
+                        break
+                    
+                    if l[r1][d] == '^':
+                        i+=1
+                    else:
+                        break
+                if min(i,h,j,k) >= 2:
+                    count+=1
+    print count

@@ -1,0 +1,53 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int prime[5000003];
+int res[5000003];
+
+int main()
+{
+    long long int  maxi=5000000,i,j,n,t;
+
+    for(i=2;i<=maxi/2;i++)
+        prime[2*i]=1;
+    for(i=3;i*i<=maxi;i+=2)
+    {    if(prime[i]==0)
+        {
+            for(j=i*i;j<=maxi;j+=i)
+            {
+
+              prime[j]=1;
+             if(i%4==1) res[j]=1;
+            }
+        }
+
+    }
+    for(i=5;i<=maxi;i+=4)
+    {
+        if(prime[i]==0)
+        for(j=1;j<i*i&&j*i<=maxi;j++)
+            res[i*j]=1;
+    }
+
+
+
+
+    //cin>>t;
+    scanf("%lld",&t);
+    while(t--)
+    {
+
+        //cin>>n;
+        scanf("%lld",&n);
+        if(res[n]==1) //cout<<"YES
+";
+         printf("YES
+");
+        else //cout<<"NO
+";
+          printf("NO
+");
+    }
+    return 0;
+
+}

@@ -1,0 +1,6 @@
+n = int(raw_input())
+
+for i in range(n):
+	A,B = raw_input().split()
+	A,B = (int(A),int(B))
+	print A%B

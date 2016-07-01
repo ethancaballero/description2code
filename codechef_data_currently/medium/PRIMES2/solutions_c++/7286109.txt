@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+/*int isprime(int n)
+{
+	int i,flag=1;
+	for(i=2;i<=sqrt(n);i++)
+	{
+		if(n%i==0)
+		{
+			flag=0; break;
+		}
+	}
+	return flag;
+}*/
+int isprime(int N){
+	if(N<2 || (!(N&1) && N!=2))
+		return 0;
+	for(int i=3; i*i<=N; i+=2){
+		if(!(N%i))
+			return 0;
+	}
+	return 1;
+}
+
+void yes(int n,int &i,int &j,int &k)
+{
+			for(i=100;i>1;--i)
+			{
+				if(i*i*i<n && isprime(i))
+				{
+					for(j=2;i*i*i+j*j<n;++j)
+					{
+						k=n-i*i*i-j*j;
+						if(isprime(k)&&isprime(j))
+						return;					
+					}					
+				}				
+			}
+			i=j=k=0;
+}
+int main()
+{
+	int n,i,j,k;
+	while(1)
+	{
+		cin>>n;
+		int flag=0;
+		if(!n)
+		break;
+		yes(n,i,j,k);
+		cout<<k<<" "<<j<<" "<<i<<"
+";				
+	}
+	return 0;
+}

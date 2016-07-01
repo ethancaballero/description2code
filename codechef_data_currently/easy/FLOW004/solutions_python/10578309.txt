@@ -1,0 +1,5 @@
+t=input()
+for i in range(0,t):
+ n=input()
+ s=str(n)
+ print int(s[0])+int(s[len(s)-1])

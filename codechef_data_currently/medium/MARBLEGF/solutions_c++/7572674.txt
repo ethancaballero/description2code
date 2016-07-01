@@ -1,0 +1,178 @@
+#include<iostream>
+#include<stdlib.h>
+#include<math.h>
+#include<stdio.h>
+
+
+
+long long int mx = 999999999;
+using namespace std;
+long long int min(long long int x,long long int y)
+{
+	return (x < y)? x: y;
+}
+long long int input[1000005];
+long long int segTree[4000005];
+
+
+long long int constructSegTree(long long int input[],long long int segTree[],long long int low, long long int high, long long int pos)
+{
+	long long int mid;
+	if(low == high)
+	{
+		segTree[pos] = input[low];
+		return 0;
+	}
+	mid = (high+low)/2;
+	
+	constructSegTree(input,segTree,low,mid, 2*pos + 1);
+	constructSegTree(input,segTree,mid+1,high, 2*pos + 2);
+	
+	segTree[pos] = segTree[2*pos + 1] + segTree[2*pos + 2];
+	
+}
+
+void updateValueUtil(long long int segTree[], long long int ss, long long int se, long long int i, long long int diff, long long int index)
+{
+    // Base Case: If the input index lies outside the range of this segment
+    if (i < ss || i > se)
+        return;
+ 
+    // If the input index is in range of this node, then update the value
+    // of the node and its children
+    segTree[index] = segTree[index] + diff;
+    if (se != ss)
+    {
+        long long int mid = (ss + se)/2;
+        updateValueUtil(segTree, ss, mid, i, diff, 2*index + 1);
+        updateValueUtil(segTree, mid+1, se, i, diff, 2*index + 2);
+    }
+}
+
+void updateValue(long long int arr[], long long int segTree[], long long int n, long long int i, long long int new_val)
+{
+    // Check for erroneous input index
+//    if (i < 0 || i > n-1)
+//    {
+//        printf("Invalid Input");
+//        return;
+//    }
+ 
+    // Get the difference between new value and old value
+    long long int diff = new_val - arr[i];
+ 
+    // Update the value in array
+    arr[i] = new_val;
+ 
+    // Update the values of nodes in segment tree
+    updateValueUtil(segTree, 0, n-1, i, diff, 0);
+}
+
+
+
+//int RMQ(int segTree[], int qlow, int qhigh, int low, int high, int pos)
+//{
+//	int mid;
+//	if(qlow <= low && qhigh>= high)
+//	{
+//		return segTree[pos];
+//	}
+//	else if( qlow > high || qhigh< low)
+//	{
+//		return mx;
+//	}
+//	
+//	mid = (high + low)/2;
+//	return min(RMQ(segTree,qlow,qhigh,low,mid,2*pos + 1),RMQ(segTree,qlow,qhigh,mid+1,high,2*pos + 2) );
+//}
+
+long long int RS(long long int segTree[], long long int qlow, long long int qhigh, long long int low, long long int high, long long int pos)
+{
+	long long int mid;
+	if(qlow <= low && qhigh>= high)
+	{
+		return segTree[pos];
+	}
+	else if( qlow > high || qhigh< low)
+	{
+		return 0;
+	}
+	
+	mid = (high + low)/2;
+	return RS(segTree,qlow,qhigh,low,mid,2*pos + 1)+RS(segTree,qlow,qhigh,mid+1,high,2*pos + 2) ;
+}
+int main()
+{
+	long long int i,j,k,n,high,low,q,l,r,nVal;
+	char ch;
+	
+	scanf("%lld %lld",&n,&q);
+	
+	for(i=0;i<n;i++)
+	{
+		scanf("%lld",&input[i]);
+		//segTree[i] = 0;
+	}
+	constructSegTree(input,segTree,0,n-1,0);
+//	for(i=0;i<q;i++)
+//	{
+//		scanf("
+%c",&ch);
+//		
+//		if(ch == 'S')
+//		{
+//			scanf("%lld %lld",&l,&r);
+//			printf("%lld
+",RS(segTree,l,r,0,n,0));
+//		//	printf("Moved beyond 
+");
+//		}
+//		
+//		else if( ch == 'G')
+//		{
+//			scanf("%lld %lld",&l,&r);
+//			nVal = input[l] + r;
+//			updateValue(input, segTree, n, l, nVal);
+//		}
+//		else if( ch == 'T')
+//		{
+//			scanf("%lld %lld",&l,&r);
+//			nVal = input[l] - r;
+//			updateValue(input, segTree, n, l, nVal);
+//		}
+//		
+//		
+//	}
+
+		int z,y;
+	 
+	 while(q--)
+	 {
+	    cin>>ch>>l>>r;	
+	 	
+	 	if(ch == 'S')
+		{
+			//scanf("%lld %lld",&l,&r);
+			printf("%lld
+",RS(segTree,l,r,0,n-1,0));
+		//	printf("Moved beyond 
+");
+		}
+		
+		else if( ch == 'G')
+		{
+			//scanf("%lld %lld",&l,&r);
+			nVal = input[l] + r;
+			updateValue(input, segTree, n, l, nVal);
+		}
+		else if( ch == 'T')
+		{
+			//scanf("%lld %lld",&l,&r);
+			nVal = input[l] - r;
+			updateValue(input, segTree, n, l, nVal);
+		}
+	 }   
+	return 0;
+	
+}
+

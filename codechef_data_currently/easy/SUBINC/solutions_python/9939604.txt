@@ -1,0 +1,16 @@
+t=input()
+for i in range(t):
+    n=input()
+    s=raw_input()
+    s=map(int, s.split())
+    a=1
+    flag=1
+    for i in range(n-2,-1,-1):
+    	if s[i]<=s[i+1]:
+    		a+=1
+    		a+=flag
+    		flag+=1
+    	else:
+    		a+=1
+    		flag=1
+    print a

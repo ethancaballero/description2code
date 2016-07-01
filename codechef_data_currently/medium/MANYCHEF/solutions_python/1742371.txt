@@ -1,0 +1,13 @@
+count = int( raw_input() )
+for i in xrange( count ):
+    s = list( raw_input() )
+    t1 = len( s ) - 4
+    while t1 > -1 :
+        if  (s[t1]    =="C" or s[t1]    =="?") and             (s[t1 + 1]=="H" or s[t1 + 1]=="?") and             (s[t1 + 2]=="E" or s[t1 + 2]=="?") and             (s[t1 + 3]=="F" or s[t1 + 3]=="?"):
+                s[t1:t1+4] = "CHEF"
+                t1 = t1 - 3
+        t1 -= 1
+    for t1 in xrange( len( s ) ):
+        if s[t1]=="?": 
+            s[t1]="A"           
+    print "".join( s )

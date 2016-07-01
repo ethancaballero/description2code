@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <algorithm>
+using namespace std;
+#define ll long long
+#define LIM 1001111
+#define INF (1<<30)
+ 
+int A[LIM];
+int L[LIM];
+int R[LIM];
+int s[LIM]; // stack
+ 
+typedef pair<int,int> ct;
+#define value first
+#define count second
+ 
+ct cts[LIM];
+char typ[11];
+char ans[LIM]; // will contain the answer string
+int n, m;
+int find(int k) {
+    // binary search
+    int L = 0, R = n + 1;
+    while (R - L > 1) {
+        int M = L + R >> 1;
+        (cts[M].value <= k ? L : R) = M;
+    }
+    return cts[L].count;
+}
+ 
+int main() {
+    scanf("%d%d", &n, &m);
+    A[0] = A[n+1] = INF;
+    for (int i = 1; i <= n; i++) scanf("%d", A + i);
+ 
+    // compute L from left to right
+    s[0] = 0;
+    for (int q = 0, i = 1; i <= n; i++) {
+        while (A[s[q]] <  A[i]) q--;
+        L[i] = s[q];
+        s[++q] = i;
+    }
+ 
+    // compute R from right to left
+    s[0] = n+1;
+    for (int q = 0, i = n; i; i--) {
+        while (A[s[q]] <= A[i]) q--;
+        R[i] = s[q];
+        s[++q] = i;
+    }
+ 
+    // compute the frequencies of maximums of subarrays in sorted order.
+    cts[0].value = -INF;
+    cts[0].count = 0;
+    for (int i = 1; i <= n; i++) {
+        cts[i].value = A[i];
+        cts[i].count = (R[i] - i) * (i - L[i]);
+    }
+    sort(cts, cts + n + 1);
+ 
+    // compute cumulative sums. Since we only need the parity, we can use '^' instead of '+'
+    for (int i = 1; i <= n; i++) {
+        cts[i].count ^= cts[i-1].count;
+    }
+ 
+    // answer queries
+    for (int i = 0; i < m; i++) {
+        int k;
+        scanf("%s%d%s", typ, &k, ans + i);
+        if (!((*typ == '>' ? n*(n+1LL)/2 - find(k) : *typ == '<' ? find(k-1) : find(k) - find(k-1)) & 1)) ans[i] ^= 7;
+    }
+    ans[m] = 0;
+    printf("%s
+", ans);
+}
+ 

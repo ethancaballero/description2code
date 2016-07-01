@@ -1,0 +1,17 @@
+def f(a,b):
+    return a+(a*b)
+
+x=int(raw_input())
+for xx in xrange(x):
+    l,d,s,c=map(int,raw_input().split())
+    day=1
+    if (s>l-1):
+        print 'ALIVE AND KICKING'
+        continue
+    for cc in xrange(d-1):
+        s=f(s,c)
+        if (s>l-1):
+            print 'ALIVE AND KICKING'
+            break
+    if (s<l):
+        print 'DEAD AND ROTTING'

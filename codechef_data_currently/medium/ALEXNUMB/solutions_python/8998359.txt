@@ -1,0 +1,5 @@
+t = int(raw_input())
+for i in range(t):
+    n = int(raw_input())
+    numbers = raw_input()
+    print n*(n-1)/2

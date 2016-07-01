@@ -1,0 +1,72 @@
+#include<cstdio>
+#include<fstream>
+#include<algorithm>
+#include<cmath>
+#include<string>
+#include<cstring>
+#include<vector>
+#include<cmath>
+#include<map>
+#include<iostream>
+#include<cstdlib>
+#include<set>
+#include<sstream>
+using namespace std;
+
+typedef long long ll;
+typedef pair<long long,long long> lll;
+typedef pair<long long,int> lli;
+typedef pair<int,int> ii;
+
+#define EL printf("
+")
+#define OK printf("OK")
+#define pb push_back
+#define mp make_pair
+#define ep emplace_back
+#define X  first
+#define Y  second
+#define fillchar(a,x) memset(a, x, sizeof(a))
+#define FOR(i,l,r) for (int i=l;i<=r;i++)
+#define FORD(i,r,l) for (int i=r;i>=l;i--)
+#define Get getchar_unlocked()
+int getInt() { int a=0,s=1; char c=0; while(c<33) c=Get; if(c=='-') {s=-1; c=Get;} while(c>33) {a=(a<<3)+(a<<1)+c-'0'; c=Get;} return a*s; }
+
+long long mod(long long a)
+{
+    return a>=0?a:-a;
+}
+
+
+int main() {
+		//freopen("practice.in","r",stdin);
+        int t;
+        int mod = 1000000007;
+        t = getInt();
+        //t=1;
+        while(t--)
+        {
+            int arr[256] = {0};
+            string s;
+            getline(cin,s);
+            for(int i=0;i<s.size();i++)
+            {
+                if(s[i]>='A'&&s[i]<='Z')
+                arr[s[i]-'A'+'a']++;
+                else
+                    arr[s[i]]++;
+            }
+            char ans = '~';
+            for(int i='a';i<='z';i++)
+            {
+                if(arr[i]==0)
+                {
+                    ans = i;
+                    break;
+                }
+            }
+            printf("%c
+",ans);
+        }
+        return 0;
+	}

@@ -1,0 +1,49 @@
+#include<iostream>
+#include<bits/c++io.h>
+using namespace std;
+#define max 500
+void fact(int n);
+int mul(int x,int a[],int as);
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    int n;
+    cin>>n;
+    fact(n);
+    }
+    return 0;
+}
+void fact(int n)
+{
+    int a[max],as,i;
+    a[0]=1;
+    as=1;
+    for(int x=2;x<=n;x++)
+    as=mul(x,a,as);
+   // cout<<"factorial is:";
+    for(i=as-1;i>=0;i--)
+    printf("%d",a[i]);
+    printf("
+");
+}
+int mul(int x,int a[],int as)
+{
+int c=0;
+
+    for(int i=0;i<as;i++)
+    {
+        int pro=(a[i]*x)+c;
+        a[i]=pro%10;
+        c=pro/10;
+    }
+    while(c)
+    {
+        a[as]=c%10;
+        c=c/10;
+        as++;
+    }
+    return as;
+}

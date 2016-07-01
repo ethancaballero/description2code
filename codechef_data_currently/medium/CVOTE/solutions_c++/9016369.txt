@@ -1,0 +1,70 @@
+#include <iostream>
+#include<map>
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+
+int main()
+{
+    int n,m,i;
+    char a[15], b[15];
+    string s1;
+    //cout << "Hello world!" << endl;
+    map<string,string> chef;
+    map<string,int> country;
+    map<string,int> cvotes;
+   // map<string,int>::iterator iti;
+    map<string,int>::iterator it;
+    scanf("%d %d",&n,&m);
+    for(i=0;i<n;i++)
+    {
+       scanf("%s %s",a,b);
+       chef[a]=b;
+       //cvotes[a]++;
+      // country["b"]++;
+  //chef["a"]=b;
+    }
+    for(i=0;i<m;i++)
+    {
+        scanf("%s",a);
+        cvotes[a]++;
+        //strcpy(b,chef["a"]);
+        country[chef[a]]++;
+    }
+    int maxm=0;
+    for(it=country.begin();it!=country.end();it++)
+    {
+        if(it->second>maxm)
+            {
+                maxm=it->second;
+                s1=it->first;
+            }
+            if(it->second==maxm)
+            {
+                if(it->first<s1)
+                    maxm=it->second;
+            }
+    }
+    cout<<s1<<"
+";
+    int maxm2=0;
+    for(it=cvotes.begin();it!=cvotes.end();it++)
+    {
+       if(it->second>maxm2)
+            {
+                maxm2=it->second;
+                s1=it->first;
+            }
+            if(it->second==maxm2)
+            {
+                if(it->first<s1)
+                    maxm2=it->second;
+            }
+    }
+    cout<<s1<<"
+";
+
+
+
+return 0;
+}

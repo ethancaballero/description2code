@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#define mod 1000000007
+using namespace std;
+int t, n, m, q, k;
+long long quick(long long a, int n){
+	long long ans = 1;
+	while(n){
+		if(n & 1)ans = (ans * a) % mod;
+		a = (a * a) % mod;
+		n >>= 1;	
+	}	return ans;
+}
+int main()
+{
+	scanf("%d", &t);
+	while(t --){
+		scanf("%d%d%d%d", &n, &m, &q, &k);
+		if(n == 1){
+			if(q)puts("0");
+			else printf("%d
+", m);	
+		}
+		else{
+			int shu = max(0, m - q);
+			long long ans = (quick(q + 1, n) + quick(q - 1, n) - 2 * quick(q, n) + 4LL * mod) % mod;	
+			ans = (ans * shu) % mod;
+			printf("%lld
+", ans);
+		}
+	}
+   // system("pause");
+    return 0;
+}

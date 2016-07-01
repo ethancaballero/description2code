@@ -1,0 +1,28 @@
+import sys
+
+def gcd(a,b):
+	if b==0:
+		return a
+	else:
+		return gcd(b,a%b)
+
+def factor(n):
+	j = 2
+	if g>1:
+		while j*j<=g:
+			if g%j==0:
+				return j
+			j+=1
+	return n
+
+t = input()
+for k in range(t):
+	n = input()
+	a = map(int, sys.stdin.readline().split())
+	g = 0
+	for i in a:
+		g = gcd(i,g)
+	if g==1:
+		print -1
+	else:
+		print factor(g)

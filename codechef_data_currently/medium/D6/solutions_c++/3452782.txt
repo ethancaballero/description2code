@@ -1,0 +1,58 @@
+#include<cstdio>
+#include<algorithm>
+ 
+using namespace std;
+ 
+struct Point {
+    int x, y;
+};
+ 
+inline bool cmp(Point a, Point b) {
+    return a.x<b.x || (a.x==b.x && a.y<b.y);
+}
+ 
+inline bool is_range(int x, int y) {
+    return (x>=0 && x<=100 && y>=0 && y<=100);
+}
+ 
+int main() 
+{
+    int t;
+    scanf("%d", &t);
+    while(t--) 
+	{
+        int n;
+        scanf("%d", &n);
+ 
+        bool map[101][101]={false};
+        Point P[500];
+        for(int i=0; i<n; i++) 
+		{
+            int x, y;
+            scanf("%d %d", &x, &y);
+            x+=50; y+=50;
+            P[i].x=x; 
+			P[i].y=y;
+            map[x][y]=true;
+        }
+        sort(P, P+n, cmp);
+        int cnt=0;
+        for(int i=0; i<n-1; i++)
+        for(int j=i+1; j<n; j++) 
+		{
+            int x3=P[i].x-(P[j].y-P[i].y);
+            int y3=P[i].y+(P[j].x-P[i].x);
+            if(is_range(x3, y3)) 
+			{
+                int x4=P[j].x-(P[j].y-P[i].y);
+                int y4=P[j].y+(P[j].x-P[i].x);
+                if(is_range(x4, y4) && map[x3][y3] && map[x4][y4])
+                    cnt++;
+            }
+        }
+ 
+        printf("%d
+", cnt/2);
+    }
+}
+ 

@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+char farm[60][60];
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int N, M;
+        scanf("%d%d", &N, &M);
+        for(int i = 1;i <= N;++i){
+            for(int j = 1;j <= M;++j){
+                scanf(" %c", &farm[i][j]);
+            }
+        }
+        int ans = 0;
+        for(int i = 1;i <= N;++i){
+            for(int k = 1;k <= M;++k){
+                int d = min(N - i + 1, M - k + 1);
+                for(int j = 2;j <= d;++j){
+                    if(farm[i][k] == farm[i + j - 1][k] && farm[i][k] == farm[i][k + j - 1] && farm[i][k] == farm[i + j - 1][k + j - 1]){
+                        ++ans;
+                    }
+                }
+            }
+        }
+        printf("%d
+", ans);
+    }
+    return 0;
+}

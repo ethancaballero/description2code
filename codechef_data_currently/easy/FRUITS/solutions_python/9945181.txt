@@ -1,0 +1,11 @@
+t=input()
+for i in range(t):
+    n=map(int, raw_input().split())
+    k=n[2]
+    o=n[1]
+    a=n[0]
+    diff=abs(o-a)
+    if diff>k:
+        print diff-k
+        continue
+    print 0

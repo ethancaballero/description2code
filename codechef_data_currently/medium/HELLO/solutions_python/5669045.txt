@@ -1,0 +1,11 @@
+for _ in range(int(raw_input())):
+  d,u,n=map(float, raw_input().split())
+  current = d*u
+  index=0
+  for i in range(int(n)):
+    m,r,d=map(float, raw_input().split())
+    plan = r*u+d/m
+    if current>plan:
+      current = plan
+      index=i+1
+  print index

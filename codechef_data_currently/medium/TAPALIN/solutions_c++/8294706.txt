@@ -1,0 +1,54 @@
+	#include<iostream>
+	#define mod 1000000007
+	using namespace std;
+
+	long long modular(long long int base,long long int power)
+	{
+		long long int result=1;
+		while(power>0)
+		{
+			if(power%2==1)
+				result=(result*base)%mod;
+			base=(base*base)%mod;
+			power=power/2;
+
+		}	
+		return result;
+
+	}	
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n;
+			cin>>n;
+			long long int ans=modular(26,(n+1)/2);
+			if(n%2==0)
+			{
+				if(ans==0)
+					ans=mod;
+				ans-=1;
+				ans=(ans*26)%mod;
+				ans=(ans*modular(25,mod-2))%mod;
+				ans=(ans*2)%mod;
+
+			}	
+			else
+			{
+				long long int ans2=ans;
+				if(ans==0)
+					ans=mod;
+				ans-=1;
+				ans=(ans*26)%mod;
+				ans=(ans*modular(25,mod-2))%mod;
+				ans=(ans*2)%mod;
+				ans=ans-ans2;
+				if(ans<0)
+					ans+=mod;
+			}
+				cout<<ans<<endl;	
+			t--;
+		}	
+	}

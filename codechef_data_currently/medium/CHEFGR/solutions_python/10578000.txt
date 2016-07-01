@@ -1,0 +1,31 @@
+#include<stdio.h>
+
+int main(void)
+{
+    int iTests, iN, iM, iTemp, iLooper, iTotal;
+
+    scanf ("%d", &iTests);
+    while (iTests--)
+    {
+        scanf ("%d %d", &iN, &iM);
+        iLooper = iN;
+        iTotal = 0;
+        while (iLooper--)
+        {
+            scanf ("%d", &iTemp);
+            iTotal += iTemp;
+        }
+
+        if ((iTotal + iM) % iN)
+        {
+            printf ("No
+");
+        }
+        else
+        {
+            printf ("Yes
+");
+        }
+    }
+    return 0;
+}

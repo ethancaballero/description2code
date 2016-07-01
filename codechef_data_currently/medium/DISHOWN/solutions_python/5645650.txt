@@ -1,0 +1,37 @@
+'''p=[0]*10001
+for i in range(10001):
+    p[i]=i
+'''
+p=None
+def find(x):
+    global p
+    while p[int(x)]!=x:
+        p[x]=p[p[x]]
+        x=p[x]
+    return p[x]
+import sys
+t=int(raw_input())
+for _ in range(t):
+    n=int(raw_input())
+    S=map(int,sys.stdin.readline().rstrip().split(' '))
+    p=range(n)
+    q=int(raw_input())
+    for _ in range(q):
+        query=map(int,sys.stdin.readline().rstrip().split(' '))
+        if len(query)==3:
+            xx=query[1]-1
+            yy=query[2]-1
+            xx=find(xx)
+            yy=find(yy)
+
+            if xx==yy:
+                print("Invalid query!")
+            elif S[xx]>S[yy]:
+                p[yy]=xx
+            elif S[yy]>S[xx]:
+                p[xx]=yy
+
+
+        else:
+            x=query[1]-1
+            print(find(x)+1)

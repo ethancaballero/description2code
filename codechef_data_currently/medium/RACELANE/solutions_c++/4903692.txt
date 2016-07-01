@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define MAX 1000007
+int a[11][503];
+int main(){
+ll n,j,t;
+cin>>t;
+for(int k=0;k<t;k++){
+memset(a,0,sizeof(a));
+cin>>n;
+for(j=0;j<n;j++){
+int p,q,r;
+cin>>p>>q>>r;
+for(int i=p;i<=q;i++)
+a[r][i]++;
+}
+int c=500;
+for(j=1;j<=500;j++){
+for(int i=0;i<9;i++){
+if(a[i][j]>=1&&a[i+1][j]>=1){
+c--;
+break;
+}
+}
+}
+cout<<c<<endl;
+
+
+}
+   return 0;
+}

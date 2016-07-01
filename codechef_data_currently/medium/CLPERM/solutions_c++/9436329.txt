@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+#define MOD 1000000007
+ll calculateSum(ll a, ll b)
+{
+    a--;
+    ll A = (a*(a+1)) >> 1LL;
+    ll B = (b*(b+1)) >> 1LL;
+    return (B - A);
+}
+int main()
+{
+	#ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+    #endif
+    int T,K; ll N;
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%lld%d",&N,&K);
+        if(K == 0)
+        {
+            ll S = calculateSum(1,N) + 1;
+            if(S % 2 == 0) printf("Mom
+");
+            else printf("Chef
+");
+            continue;
+        }
+        vector<ll> missing(K + 1);
+        for(int i = 0; i < K; i++) scanf("%lld",&missing[i]);
+        missing[K] = N + 1;
+        sort(missing.begin(),missing.end());
+        ll prev, curr;
+        prev = missing[0] - 1;
+        ll S = calculateSum(1,prev) + 1;
+        for(int i = 0; i < K; i++)
+        {
+            if(missing[i] + 1 != missing[i + 1])
+            {
+                curr = missing[i] + 1;
+                if(curr > S) break;
+                prev = missing[i+1] - 1;
+                S += calculateSum(curr,prev);
+            }
+        }
+        if(S % 2 == 0) printf("Mom
+");
+        else printf("Chef
+");
+    }
+    #ifndef ONLINE_JUDGE
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.
+";
+    #endif
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    long int n;
+	    cin>>n;
+	    long long int a[n],c=0,i,j;
+	    for(i=0;i<n;i++)
+	    cin>>a[i];
+	    for(i=0;i<n-1;i++)
+	    {
+	        for(j=i;j<n-1;j++)
+	        {
+	            if(a[j]<=a[j+1])
+	            c++;
+	            else
+	            break;
+	        }
+	    }
+	    cout<<c+n<<endl;
+	}
+	return 0;
+}

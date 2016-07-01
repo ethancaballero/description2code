@@ -1,0 +1,21 @@
+#The Smallestt Pair
+def main():
+    T = int(raw_input())
+    while(T!=0):
+        T-=1
+        Num = []
+        N = int(raw_input())
+        S = raw_input().split()
+        for i in range(0, N):
+            Num.append(int(S[i]))
+        les =  Num[1] + Num[0]
+        for i in range(0, N):
+            for j in range(0, N):
+                if i == j:
+                    continue
+                if Num[i]+Num[j] < les:
+                    les = Num[i]+Num[j]
+        print les
+
+if __name__ == '__main__':
+    main()

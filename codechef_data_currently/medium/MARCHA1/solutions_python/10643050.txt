@@ -1,0 +1,40 @@
+def test():
+    matches = input()
+    for _ in range(matches):
+        number,amount = map(int,raw_input().split())
+        banknotes = []
+        for __ in range(number):
+            banknotes.append(int(raw_input()))
+
+        banknotes = sorted(banknotes,  reverse=True)
+        found = find_sum(amount,banknotes)
+        if found:
+            print 'Yes'
+        else:
+            print 'No'
+
+        
+
+def find_sum(amount,banknotes):
+    if banknotes == []:
+        return False
+    if amount in banknotes:
+        return True
+    # banknotes is sorted descending
+    smallest = 0
+    found = False
+    for index in range(len(banknotes)):
+        if banknotes[index] < amount:
+            smallest = index
+
+    # check if the biggest value bannknote is a part of solution
+    remain = amount - banknotes[0]
+    
+    found = find_sum(remain,banknotes[1:])
+    if not found:
+        found = find_sum(amount,banknotes[1:])
+
+    return found
+    
+  
+test()

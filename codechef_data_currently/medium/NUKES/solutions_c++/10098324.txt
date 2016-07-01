@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+ int n,k,i,j;
+ long a;
+ cin>>a>>n>>k;
+    for(i=0;i<k;i++)
+    {
+    cout<<a%(n+1)<<" ";
+    a=a/(n+1);
+    }
+    return 0;
+}

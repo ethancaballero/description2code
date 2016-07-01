@@ -1,0 +1,74 @@
+  Devu and Churu love to play games a lot. Today, they have an array A consisting of N positive integers. First they listed all N \u00d7 (N+1) \/ 2 non-empty continuous subarrays of the array A on a piece of paper and then replaced all the subarrays on the paper with the maximum element present in the respective subarray.
+Devu and Churu decided to play a game with numbers on the paper. They both have decided to make moves turn by turn. In one turn, the player picks some number from the list and discards that number. The one who is not able to make a valid move will be the loser. To make the game more interesting, they decided to put some constraints on their moves.
+A constraint on a game can be any of following three types :
+
+ > K : They are allowed to choose numbers having values strictly greater than K only.
+ < K : They are allowed to choose numbers having values strictly less than K only.
+ = K : They are allowed to choose numbers having values equal to K only.
+
+ 
+Given M constraints and who goes first, you have to tell the outcome of each game. Print 'D' if Devu wins otherwise print 'C' without quotes.
+Note that M games are independent, that is, they'll rewrite numbers by using array A after each game. (This is the task for the loser of the previous game!)
+Input 
+First line of input contains two space separated integers N and M denoting the size of array A and number of game played by them. Next line of input contains N space-separated integers denoting elements of array A. Each of the next M lines of input contains three space-separated parameters describing a game. First two parameter are a character C \u2208 {<, >, =} and an integer K denoting the constraint for that game. The last parameter is a character X \u2208 {D, C} denoting the player who will start the game. 
+ Output 
+Output consists of a single line containing a string of length M made up from characters D and C only, where ith character in the string denotes the outcome of the ith game.
+ Constraints: 
+
+1 \u2264 N, M \u2264 106
+1 \u2264 Ai, K \u2264 109 
+X \u2208 {D, C}
+C \u2208 {<, >, =}
+
+Example:
+
+Input:
+3 5
+1 2 3
+> 1 D
+< 2 C
+= 3 D
+> 4 C
+< 5 D
+
+Output:
+DCDDC
+Explanation: 
+
+Subarray List :
+
+
+[1]
+
+[2]
+
+[3]
+
+[1,2]
+
+[2,3]
+
+[1,2,3]
+
+Numbers on the paper after replacement :
+
+
+[1]
+
+[2]
+
+[3]
+
+[2]
+
+[3]
+
+[3]
+
+
+
+Game 1 : There are only 5 numbers > 1 in the list.
+Game 2 : There is only 1 number < 2 in the list.
+Game 3 : There are only 3 numbers = 3 in the list.
+Game 4 : There are no numbers > 4 in the list. So the first player cannot make his move.
+Game 5 : There are 6 numbers < 5 in the list.

@@ -1,0 +1,15 @@
+t=input()
+ans=[]
+for i in range(t):
+    com=raw_input()
+    if com=='b' or com=='B':
+        ans.append('BattleShip')
+    elif com=='c' or com=='C':
+        ans.append('Cruiser')
+    elif com=='d' or com=='D':
+        ans.append('Destroyer')
+    else:
+        ans.append('Frigate')
+for i in range(t):
+    print ans[i]
+        

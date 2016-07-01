@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+long long int t;
+cin>>t;
+while(t--)
+{
+long long int n,m,e,k;
+cin>>n>>k>>e>>m;
+long long int q=n-1,x=e,z,count=0;
+long long int a[10009]={0};
+while(q--)
+{
+while(x--)
+{
+cin>>z;
+a[count]=a[count]+z;
+}
+count++;
+x=e;
+}
+long long int i,p=0,n1=e-1,sum=0,sum1,g;
+i=0;
+while(n1--)
+{
+cin>>z;
+sum+=z;
+}
+sort(a,a+n-1);
+/*for(i=n-2;i>=0;i--)
+{
+    if(p+1==k)
+    {
+        sum1=a[i];
+    }
+    p++;
+}*/
+g=n-k;
+sum1=a[g-1];
+long long int ans,min;
+ans=sum1-sum+1;
+if(ans>m)
+cout<<"Impossible"<<endl;
+else if(ans<0)
+cout<<"0"<<endl;
+else
+cout<<ans<<endl;
+}
+return 0;
+}

@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int ff()
+{
+    char c=getchar();
+    int x=0;
+    bool n=0;
+    for(; ((c<48||c>57)&&c!='-'); c=getchar());
+    if(c=='-') {n=1; c=getchar();}
+    for(; (c>47&&c<58); c=getchar()) x=(x<<1)+(x<<3)+c-'0';
+    if(n) x=-x;
+    return x;
+}
+
+double a[100002][37];
+
+main()
+{
+      
+      int t=ff(),n,k,i,j;
+      
+      for(i=0; i<100002; i++) a[i][0]=(double)i;
+      
+      
+      for(i=1; i<36; i++)
+      {
+         double s=0;
+         for(j=1; j<100002; j++)
+         {
+            s+=a[j-1][i-1];
+            a[j][i]=(s*1.0)/(j*1.0);
+         }
+         
+      }
+      
+      while(t--)
+      {
+         n=ff();
+         k=ff();
+         if(k<=36)
+         printf("%lf
+",a[n][k]);
+         else printf("0
+");
+      }
+}
+

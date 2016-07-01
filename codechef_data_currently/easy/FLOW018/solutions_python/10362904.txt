@@ -1,0 +1,14 @@
+a = [0]*21
+a[0] = a[1] = 1
+a[2] = 2
+
+def fact(n):
+    if a[n] > 0:
+        return a[n]
+    else:
+        a[n] = n*fact(n-1)
+        return a[n]
+
+fact(20)
+for iterate in range(input()):
+    print a[input()]

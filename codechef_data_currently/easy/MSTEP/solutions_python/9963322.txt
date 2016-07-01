@@ -1,0 +1,13 @@
+t = int(raw_input())
+for i in xrange(t):
+	n = int(raw_input())
+	a = list()
+	step = 0
+	y = 0
+	for j in xrange(n):
+		a.append(map(int,raw_input().split()))
+	for j in xrange(1,n*n):
+		x1,y1 = reduce(lambda x,y: x+y, [[(x,y) for y in range(len(a[y])) if a[x][y] == j] for x in range(len(a))])[0]
+		x2,y2 = reduce(lambda x,y: x+y, [[(x,y) for y in range(len(a[y])) if a[x][y] == j+1] for x in range(len(a))])[0]
+		step += abs(x2-x1) + abs(y2-y1)
+	print step

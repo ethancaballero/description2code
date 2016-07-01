@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+//setbase - cout << setbase (16); cout << 100 << endl; Prints 64
+//setfill -   cout << setfill ('x') << setw (5); cout << 77 << endl; prints xxx77
+//setprecision - cout << setprecision (4) << f << endl; Prints x.xxxx
+using namespace std;
+#define REP(i,n) for(int i=0;i<n;i++)
+#define FOR(i,FROM,n) for(int i=FROM;i<n;i++)
+#define FORR(i,n) for(int i=n;i>=0;i--)
+#define FORIT(it,m)    for(it=m.begin();it!=m.end();it++)
+#define REPIT(i,c) for(typeof((c).begin()) i=(c).begin();i!=(c).end();it++)
+#define ll long long int
+#define llu unsigned long long int
+#define P(k) printf("%d
+", k)
+#define PNL printf("
+")
+#define si(n) scanf("%d",&n)
+#define sc(n) scanf("%c",&n)
+#define sl(n) scanf("%lld",&n)
+#define slu(n) scanf("%llu",&n)
+#define sf(n) scanf("%f",&n)
+#define sd(n) scanf("%lf",&n)
+#define ss(n) scanf("%s",n)
+#define PI pair<int,int>
+#define mp make_pair
+#define F first
+#define S second
+#define MP make_pair
+#define PB push_back
+#define V(x) vector<x>
+#define ALL(v)          (v).begin(), (v).end()
+#define RALL(v)         (v).rbegin(), (v).rend()
+#define SZ(V) (int)V.size()
+#define checkbit(n,b)   (((n)>>(b))&1)
+#define FILL(a,b) memset(a,b,sizeof(a))
+#define sqr(x) ((x)*(x))
+#define MAX(a,b) ((a)>(b)?(a):(b))
+#define MIN(a,b) ((a)<(b)?(a):(b))
+#define all(a) (a).begin(),(a).end()
+#define DREP(a)	sort(all(a)); a.erase(unique(all(a)),a.end())
+#define ALLOC(type, n) (type *) malloc((n)*sizeof(type))
+void read(string& s) {  char buf[650000]; scanf("%s",buf); s = buf; }
+const double PII=acos(-1.0);
+const double EPS=1e-11;
+#define MOD 10000009
+int main()
+{
+	int N,W,i,count=0;
+	si(N);
+	si(W);
+	int arr[N];
+	for(i=0;i<N;i++)
+	si(arr[i]);
+	deque<int> min(W);
+	deque<int> max(W);
+	for (i = 0; i < W; ++i)
+    {
+        while ( (!max.empty()) && arr[i] >= arr[max.back()])
+        max.pop_back();
+        while ( (!min.empty()) && arr[i] <= arr[min.back()])
+        min.pop_back();
+        max.PB(i);
+        min.PB(i);
+    }
+    for ( ; i <N; ++i)
+    {
+       
+        if(arr[max.front()]-arr[min.front()]+1==W)
+        count++;
+        while ( (!max.empty()) && max.front() <= i - W)
+        max.pop_front();  
+        while ( (!min.empty()) && min.front() <= i - W)
+        min.pop_front();  
+
+       
+        while ( (!max.empty()) && arr[i] >= arr[max.back()])
+        max.pop_back();
+        while ( (!min.empty()) && arr[i] <= arr[min.back()])
+        min.pop_back();
+
+        max.PB(i);
+        min.PB(i);
+    }
+
+    if(arr[max.front()]-arr[min.front()]+1==W)
+    count++;
+    P(count);
+    getchar();
+    return 0;
+}

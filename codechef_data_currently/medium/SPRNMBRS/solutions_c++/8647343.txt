@@ -1,0 +1,32 @@
+#include <cstdio>
+using namespace std;
+
+int main()
+{
+    int t;// test case
+    scanf("%d",&t);
+    while(t--){
+        long long l;
+          long long r;
+        scanf("%lld %lld",&l,&r);
+        long long base=2;
+        long long ans=0;
+        while(base<=r){
+             long long x=base;
+            while(x<=r){
+                if(x>=l && x<=r){
+                    ans++;
+            }
+           x*=3;
+        }
+        base*=2;
+        }
+        if(r>=1 && l<=1)
+            ans++;
+        printf("%lld
+", ans);
+
+    }
+
+    return 0;
+}

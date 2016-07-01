@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct pai{
+	int val;
+	int index;
+	pai(){}
+	pai(int a,int b){
+		val = a;
+		index = b;
+		}
+	};
+struct compare{
+	bool operator ()(const pai p1,const pai p2)const{
+		return p1.val<p2.val;
+		}
+	};
+int main(){
+	int T;
+	cin>>T;
+	for(int t=0;t<T;t++){
+	int n,m,k;
+	cin>>n>>m>>k;
+	int a[n],b[n][m],c[n][m];
+	long long int initsum = 0;
+	for(int i=0;i<n;i++){
+		int temp;
+		scanf("%d",&temp);
+		a[i]=temp-1;
+		}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			int temp;
+			scanf("%d",&temp);
+			b[i][j] = temp;
+			}
+		}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			int temp;
+			scanf("%d",&temp);
+			c[i][j]=temp;
+			}
+		}
+	for(int i=0;i<n;i++){
+		initsum += b[i][a[i]];
+		}
+	priority_queue<int> pq;
+	for(int i=0;i<n;i++){
+		int maxval = 0;
+		for(int j=0;j<m;j++){
+			int remain = b[i][j] - c[i][j] - b[i][a[i]];
+			maxval = max(maxval,remain);
+			}
+		if(maxval>0){
+			pq.push(maxval);
+			}
+		}
+	int p=0;
+	while(!pq.empty() && p<k){
+		int curr = pq.top();
+		//cout<<curr<<endl;
+		initsum += curr;
+		p++;
+		pq.pop();
+		}
+	cout<<initsum<<endl;
+	}
+}

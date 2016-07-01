@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    long long int t,n,x,i;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=0;i<n;i++)
+            cin>>x;
+        if(n==1)
+            cout<<"0"<<endl;
+        else
+            cout<<((n*(n-1))/2)<<endl;
+
+    }
+    return 0;
+}

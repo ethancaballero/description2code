@@ -1,0 +1,23 @@
+ 
+T=input()
+while(T):
+    s=raw_input()
+    s=s.split()
+    N=int(s[0])
+    M=int(s[1])
+    #found tricks with brute forcer
+    if(M>N):
+        tmp=N
+        N=M
+        M=tmp
+    #N>=M
+    ret=N*M*(N*M-1)
+    if(M==1):
+        print ret
+    else:
+        cnt=4+((N-2)*8)
+        start=(N-2)*4
+        start+=((M-2)*cnt)
+        print ret-start
+    T-=1
+    

@@ -1,0 +1,30 @@
+# your code goes here
+import math
+t=int(raw_input())
+for i in range(t):
+	
+    temp=raw_input().split()
+    days=int(temp[0])
+    capacity=int(temp[1])
+    required=raw_input().split()
+    required=map(int,required)
+    left=0
+    packages_consumed=0
+    for day in range(days):
+        flag=0
+        pack=0
+        
+        if left<required[day]:
+            required[day]-=left
+            left=0
+        else:
+            flag=1
+            left-=required[day]    
+        if flag==0:
+            
+            pack=int(math.ceil(float(required[day])/capacity))
+            left+=pack*capacity-required[day]
+        if left>0:
+            left-=1
+        packages_consumed+=pack
+    print packages_consumed

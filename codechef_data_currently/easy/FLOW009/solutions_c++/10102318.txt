@@ -1,0 +1,30 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    float nul;
+    float quan,price;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%f %f",&quan,&price);
+        if(quan<=1000)
+        {
+            printf("%f
+",quan*price);
+        }
+        else
+          {
+            nul=price*quan;
+            printf("%f
+",nul-nul*0.1);
+          }
+    }
+    return 0;
+}

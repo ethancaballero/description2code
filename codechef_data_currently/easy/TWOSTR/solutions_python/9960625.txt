@@ -1,0 +1,14 @@
+for i in range(int(raw_input())):
+    a=raw_input()
+    b=raw_input()
+    f=0
+    for j in range(len(b)):
+        if a[j]=="?" or b[j]=="?":
+            continue
+        elif a[j]!=b[j]:
+            f=1
+            break
+    if f==1:
+        print "No"
+    else:
+        print "Yes"

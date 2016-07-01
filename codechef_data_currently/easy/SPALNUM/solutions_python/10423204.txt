@@ -1,0 +1,18 @@
+#Program to print the sum of the palindromes in the given range of numbers
+#using python2
+
+n=int(input())
+su_palin=[0 for x in range(n)]
+for i in range(n):
+    a,b=map(int, raw_input().split())
+    for j in range(a,b+1,1):
+        rev_num=0
+        num=j
+        while(num>0):
+            rem=num%10
+            rev_num=rev_num*10+rem
+            num=num/10
+        if rev_num==j:
+            su_palin[i]=su_palin[i]+j
+for i in range(n):
+    print su_palin[i]

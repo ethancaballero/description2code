@@ -1,0 +1,60 @@
+#EGBOBRD
+tc = int(raw_input())
+pack=0
+left=0
+while tc!=0:
+    pack=0
+    left=0
+    temp=0
+    n,k = map(int,raw_input().split())
+    a = list(map(int,raw_input().split()))
+    left=0
+    i=0
+    while i<n:
+        if left > a[i]:
+             left = left-a[i]-1
+        elif left==a[i]:
+            left=0
+        elif k>a[i]:
+            if left==0:
+                pack+=1
+                left=k-a[i]-1
+            elif left!=0:
+                temp=a[i]-left
+                if temp>0:
+                    pack+=1
+                    left=k-(a[i]-left)
+        elif k==a[i]:
+            if left!=0:
+                temp=a[i]-left
+                if temp>0:
+                    pack+=1
+                    left=k-(a[i]-left)
+                    if left >= 1:
+                        left-=1
+                if temp==0:
+                    left=0
+            elif temp==0:
+                pack+=1
+        elif k<a[i]:
+            if left==0:
+                if a[i]%k==0:
+                    pack+=a[i]/k
+                elif a[i]%k!=0:
+                    pack+= (a[i]/k)+1
+                    left=(((a[i]/k)+1)*k)-a[i]
+                    if left >= 1:
+                        left-=1 
+            elif left!=0:
+                temp=a[i]-left
+                if temp%k==0:
+                    pack+= temp/k
+                elif temp%k!=0:
+                    pack+=(temp/k)+1
+                    left = (((temp/k)+1)*k)-a[i]
+                    if(left>=1):
+                        left-=1
+        i+=1
+    print pack
+    pack=0
+    tc-=1

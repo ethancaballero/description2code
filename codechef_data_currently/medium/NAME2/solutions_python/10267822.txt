@@ -1,0 +1,26 @@
+
+
+T = int(raw_input(""))
+for t in xrange(T):
+	str1, str2 = map(str,raw_input("").split())
+	m = len(str1)
+	n = len(str2)
+	#We consider str2 to be the larger string
+	#If not, swap them.
+	if(m>n):
+		temp = str1
+		str1 = str2
+		str2 = temp	
+		temp = m
+		m = n
+		n = temp	
+	j = 0
+	for ch in str2:
+		if(j<m and ch==str1[j]):
+			j+=1
+		#print "j = "+str(j)
+
+	if(j==m): 
+		print "YES"
+	else :	
+		print "NO"

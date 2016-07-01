@@ -1,0 +1,15 @@
+def solve(girlTime, guyTime, dist):
+	timeDiff = (((guyTime[0] - girlTime[0]) * 60) + (guyTime[1] - girlTime[1]))
+	ans1 = timeDiff + dist
+	if dist * 2 <= timeDiff:
+		ans2 = timeDiff
+	else:
+		ans2 = (timeDiff / 2.0) + dist
+	return (float(ans1), float(ans2))
+
+t = int(raw_input())
+for i in range(t):
+	guyTime1 = map(int, raw_input().split(":"))
+	girlTime1 = map(int, raw_input().split(":"))
+	dist1 = int(raw_input())
+	print " ".join(map(str, solve(girlTime1, guyTime1, dist1)))

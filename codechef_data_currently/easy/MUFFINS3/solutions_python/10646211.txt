@@ -1,0 +1,27 @@
+# Cupcakes
+# Practice : Beginner (8)
+# CodeChef
+
+# Aditya Vamsikrishna
+# 30th June 2016
+
+# 3rd submission || 1st and 2nd submissions I thought the maximum no.of cupcakes per box can utmost be 1000
+
+n = int(raw_input())
+'''
+for i in range(n):
+	cupcakes = int(raw_input())
+	if cupcakes <= 1998:
+		batch = int(cupcakes/2) + 1
+	else:
+		left_old = 0
+		for j in range(1,min(cupcakes+1,1001)):
+			left_new = cupcakes % j
+			if left_new >= left_old:
+				batch = j
+				left_old = left_new
+	print batch
+'''
+for i in range(n):
+	cupcakes = int(raw_input())
+	print int(cupcakes/2) + 1

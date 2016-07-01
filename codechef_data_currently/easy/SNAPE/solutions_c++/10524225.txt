@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t;
+	for(scanf("%d",&t);t;t--){
+		int a,b;
+		cin>>a>>b;
+		printf("%1.7f %1.7f",sqrt(b*b-a*a),sqrt(b*b+a*a));
+		cout<<endl;
+	}
+	return 0;
+}

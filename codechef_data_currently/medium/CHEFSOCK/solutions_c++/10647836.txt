@@ -1,0 +1,13 @@
+#include<stdio.h>
+main()
+{
+	long long j,s,r,s_,m;
+	scanf("%lld%lld%lld",&j,&s,&m);
+	r=m-j;
+	s_=r/s;
+	if(s_%2==0)
+	printf("Lucky Chef");
+	else
+	printf("Unlucky Chef");
+}
+	

@@ -1,0 +1,13 @@
+# Devajit Asem
+# PRLADDU
+import sys
+t = int(sys.stdin.readline())
+for i in xrange(t):
+    n = int(sys.stdin.readline())
+    D = map(int,sys.stdin.readline().split())
+    c=0
+    k=0
+    for i in xrange(n):
+        c+=D[i]
+        k+=abs(c)
+    print k

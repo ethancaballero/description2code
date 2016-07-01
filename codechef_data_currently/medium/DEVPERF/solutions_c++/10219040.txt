@@ -1,0 +1,37 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main(){
+	int T,n,m,i,j,max_x,min_x,max_y,min_y,maxtime,flag;
+	cin>>T;
+	while(T--){
+		flag=1;
+		cin>>n>>m;
+		max_x=0;
+		min_x=m-1;
+		max_y=0;
+		min_y=n-1;
+		char grid[n][m];
+		for(i=0;i<n;i++){
+			for(j=0;j<m;j++){
+				cin>>grid[i][j];
+				if(grid[i][j]=='*'){
+					flag=0;
+					max_x=max(j,max_x);
+					min_x=min(j,min_x);
+					max_y=max(i,max_y);
+					min_y=min(i,min_y);
+				}
+			}
+		}
+		if(flag){
+			cout<<0<<endl;
+		}
+		else{
+			maxtime=(max(max_x-min_x+1,max_y-min_y+1)/2)+1;
+			cout<<maxtime<<endl;
+		}
+	}
+	return 0;
+}

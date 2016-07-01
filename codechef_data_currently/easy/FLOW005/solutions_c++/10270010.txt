@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int count=0,s;
+		cin>>s;
+		count+=s/100;s%=100;
+		count+=s/50;s%=50;
+		count+=s/10;s%=10;
+		count+=s/5;s%=5;
+		count+=s/2;s%=2;
+		count+=s/1;
+		cout<<count<<endl;
+	}
+}

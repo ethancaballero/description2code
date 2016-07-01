@@ -1,0 +1,31 @@
+#include<cstdio>
+using namespace std;
+int main()
+{
+    int t,r,c,i,j,k;
+    char s[101][101];
+    scanf("%d",&t);
+    while(t--)
+    {
+              k=0;
+              scanf("%d%d",&r,&c);
+              for(i=0;i<r;i++)
+              scanf("%s",s[i]);
+              for(j=0;j<r;j++)
+              for(i=0;i<=c-5;i++)
+                                 if((s[j][i]=='s'||s[j][i]=='S')&&(s[j][i+1]=='p'||s[j][i+1]=='P')&&(s[j][i+2]=='o'||s[j][i+2]=='O')&&(s[j][i+3]=='o'||s[j][i+3]=='O')&&(s[j][i+4]=='n'||s[j][i+4]=='N'))
+                                 k=1;
+              if(k==0)
+              for(i=0;i<c;i++)
+              for(j=0;j<=r-5;j++)
+                                 if((s[j][i]=='s'||s[j][i]=='S')&&(s[j+1][i]=='p'||s[j+1][i]=='P')&&(s[j+2][i]=='o'||s[j+2][i]=='O')&&(s[j+3][i]=='o'||s[j+3][i]=='O')&&(s[j+4][i]=='n'||s[j+4][i]=='N'))
+                                 k=1;
+              if(k==1)
+              printf("There is a spoon!
+");
+              else
+              printf("There is indeed no spoon!
+");
+    }
+    return 0;
+} 

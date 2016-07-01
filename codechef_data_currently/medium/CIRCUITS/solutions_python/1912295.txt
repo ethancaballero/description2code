@@ -1,0 +1,43 @@
+def andgate(p1,p2):
+    return p1*p2
+
+def orgate(p1,p2):
+    return p1+p2-p1*p2
+
+cases=int(raw_input())
+for j in range(cases):
+    space=raw_input()
+    nodes = int(raw_input())
+    if nodes==0:
+        print 0.00000
+    else:
+        inpu=[]
+        for i in range(nodes):
+            m=raw_input()
+            if len(m)>1:
+                k=m.split(' ')
+                inpu.append([int(k[0]),int(k[1]),int(k[2])])
+            else:
+                inpu.append(int(m))
+        n=0
+        p=0.50000
+        lp=0.00000
+        hp=1.00000
+        while n!=0.5:
+            prob=[]
+            for i in range(nodes):
+                if inpu[i]==0:
+                    prob.append(p)
+                elif inpu[i][0]==1:
+                    prob.append(orgate(prob[inpu[i][1]-1],prob[inpu[i][2]-1]))
+                else:
+                    prob.append(andgate(prob[inpu[i][1]-1],prob[inpu[i][2]-1]))
+            n=round(prob[nodes-1],7)
+            if n>0.5:
+                hp=p
+                p=(p+lp)/2
+            elif n<0.5:
+                lp=p
+                p=(p+hp)/2
+        print "%.5f" % round(p,5)
+

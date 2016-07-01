@@ -1,0 +1,34 @@
+#include<iostream>
+//#include<conio.h>
+using namespace std;
+int main()
+{
+//clrscr();
+int T,N,sum=0;
+cin>>T;
+int *result=new int[T];
+for(int i=0;i<T;i++)
+{ sum=0;
+  cin>>N;
+  for(int j=0;j<5;j++)
+   {
+     if(N/10!=0)
+      {
+	sum+=N%10;
+	N/=10;
+      }
+     else
+      break;
+
+
+   }
+   sum+=N;
+result[i]=sum;
+
+}
+for(int j=0;j<T;j++)
+ cout<<"
+"<<result[j];
+//getch();
+return 0;
+}

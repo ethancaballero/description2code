@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin >> t;
+	while( t -- )
+	{
+		string s;
+		int k, cnt[26] = {0};
+		cin >> s >> k;
+		for( int i = 0 ; i < s.size() ; i ++ )
+			cnt[ s[i]-'a' ] ++;
+		int ans = s.size() + 2;
+		for( int i = 0 ; i < 26 ; i ++ )
+			ans = min( ans, (int)s.size() - cnt[i] );
+		for( int i = 0 ; i < s.size() ; i ++ )
+		{
+			int cur = 0;
+			for( int j = 0 ; j < 26 ; j ++ )
+				if( cnt[j] < i )
+					cur += cnt[j];
+				else if( cnt[j] > i+k )
+					cur += cnt[j] - i - k;
+			ans = min( ans, cur );
+		}
+		cout << ans << endl;
+	}
+	return 0;
+}

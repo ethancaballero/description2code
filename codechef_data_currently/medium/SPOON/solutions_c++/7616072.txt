@@ -1,0 +1,48 @@
+#include <cstdio>
+#include <iostream>
+#define read(x) scanf("%d",&x)
+using namespace std;
+
+
+int main()
+{
+    int t,r,c;
+    read(t);
+    while(t--)
+    {
+        read(r);
+        read(c);
+        char a[r][c+1];
+        for(int i = 0; i<r; ++i)
+        {
+            scanf("%s",a[i]);
+        }
+        int flag = 0;
+        for(int i = 0; i<r; ++i)
+        {
+            for(int j = 0; j<c; ++j)
+            {
+                if(a[i][j] == 's' || a[i][j] == 'S')
+                {
+                    if((j+4) < c && (a[i][j+1] == 'p' || a[i][j+1] == 'P') && (a[i][j+2] == 'o' || a[i][j+2] == 'O') && (a[i][j+3] == 'o' || a[i][j+3] == 'O') && (a[i][j+4] == 'n' || a[i][j+4] == 'N'))
+                    {
+                        flag = 1;
+                        break;
+                    }
+                    if((i+4) < r && (a[i+1][j] == 'p' || a[i+1][j] == 'P') && (a[i+2][j] == 'o' || a[i+2][j] == 'O') && (a[i+3][j] == 'o' || a[i+3][j] == 'O') && (a[i+4][j] == 'n' || a[i+4][j] == 'N'))
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+            }
+            if(flag == 1)
+                break;
+        }
+        if(flag)
+            cout << "There is a spoon!" << endl;
+        else
+            cout << "There is indeed no spoon!" << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,48 @@
+
+    #include<bits/stdc++.h>
+    #include<iostream>
+    #include<string.h>
+    using namespace std;
+    int main()
+    {
+    	int t;
+    	cin>>t;
+    	while(t--)
+    	{
+    		char str[1001];
+    		int n,i,j,k,l,flag=1;
+    		cin>>str;
+    		n=strlen(str);
+    		if(n%2==0)
+    		{
+    			k=n/2;
+    		}
+    		else
+    		k=(n+1)/2;
+    		for(i=0;i<n/2;i++)
+    		{
+    			flag=0;
+    			for(l=k;l<n;l++)
+    			{
+    				if(str[l]==str[i])
+    				{
+    					flag=1;
+    					str[l]='0';
+    					break;
+    				}
+    				
+    			}
+    			if(flag==0)
+    				break;
+    		}
+    		if(flag==0)
+    		{
+    			cout<<"NO"<<endl;
+    		}
+    		else
+    		cout<<"YES"<<endl;
+    		
+    	}
+    } 
+
+

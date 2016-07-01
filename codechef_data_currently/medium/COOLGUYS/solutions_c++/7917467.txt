@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+#include<math.h>
+#include<cmath>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_vvv) (int)(_vvv.size())
+#define all(_v) (_v).begin(),(_v).end()
+#define Geti(x) scanf("%d",&x)
+#define Getl(x) scanf("%ld",&x)
+#define Getll(x) scanf("%lld",&x)
+typedef long long ll;
+const ll mod = 1e9+7;
+const int INF = 0x7f7f7f7f;
+
+ll gcd(ll a,ll b) {
+	if(b == 0) return a;
+	return gcd(b,a%b);
+}
+
+int main() {
+    int t; Geti(t);
+	while (t--) {
+	    ll n; Getll(n);
+		ll ans = 0;
+		int sqr = sqrt(n);
+		ll prev = sqr;
+		for (int i = sqr; i >= 1; i --) {
+			ll k = n / i;
+			ans = (ans + (k - prev) * i);
+			ans = (ans + k);
+			prev = k;
+		}
+		int g = gcd(ans,n * n);
+		printf("%lld/%lld
+",ans / g,(n * n) / g);
+	}
+	return 0;
+}

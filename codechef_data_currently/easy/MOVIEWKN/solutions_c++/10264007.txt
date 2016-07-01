@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int T,index,max,n;
+	cin>>T;
+	int s[T];
+	for(int j=0;j<T;j++){
+		cin>>n;max=0;int l[n],r[n],p[n];
+		for(int i=0;i<n;i++){
+			cin>>l[i];
+		}
+		for(int i=0;i<n;i++){
+			cin>>r[i];
+		}
+		for(int i=0;i<n;i++){
+			p[i]=r[i]*l[i];
+			if(p[i]>max){
+				max=p[i];index=i;
+			}
+			else if(p[i]==max){
+				if(r[i]>r[index]){
+					max=p[i];index=i;
+				}
+			}
+		}
+		s[j]=index+1;
+	}
+	for(int i=0;i<T;i++){
+		cout<<s[i]<<endl;
+	}
+}

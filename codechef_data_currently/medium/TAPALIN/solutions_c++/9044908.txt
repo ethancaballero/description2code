@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define mod 1000000007
+ll power(ll a,ll b)
+{
+	if(!b)
+		return 1;
+	if(b==1)
+		return a;
+	ll temp=power(a,b/2);
+	temp=(temp*temp)%mod;
+	if(b&1)
+		temp=(temp*a)%mod;
+	return temp;
+}
+int main()
+{
+	ll t,n,cal1,cal2,flag;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld",&n);
+		if(n==1)
+			cal1=26;
+		else
+		{
+			flag=false;
+			if(n%2)
+			{
+				flag=true;
+				n++;
+			}
+			cal1=power(26,n/2+1);
+			cal1=(cal1-26)%mod;
+			if(cal1<0)
+				cal1+=mod;
+			cal1=(cal1*2)%mod;
+			cal2=power(25,mod-2);
+			cal1=(cal1*cal2)%mod;
+			if(flag)
+			{
+				cal2=power(26,n/2);
+				cal1=(cal1-cal2)%mod;
+				if(cal1<0)
+					cal1+=mod;
+			}
+		}
+		printf("%lld
+",cal1);
+	}
+	return 0;
+}

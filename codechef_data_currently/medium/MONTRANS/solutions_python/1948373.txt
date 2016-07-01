@@ -1,0 +1,37 @@
+import sys
+
+num_tests = int(sys.stdin.readline())
+
+for i in range(0,num_tests):
+    try:
+        line_str = sys.stdin.readline().split(' ')
+        dollars = int(line_str[0])
+        cents = int(line_str[1])
+        cost = int(line_str[2])
+    except:
+        break
+
+    max_amount = dollars*100+cents
+    max_step = 0
+    
+    cur_step = 1
+    while (dollars*100+cents) >= cost:
+        if cost > cents:
+            dollars -= 1
+            cents += 100
+
+        cents = cents - cost
+        
+        temp = cents
+        cents = dollars
+        dollars = temp
+
+        if (dollars*100+cents) > max_amount:
+            max_step = cur_step
+            max_amount = (dollars*100+cents)
+
+        cur_step += 1
+        if cur_step == 10000:
+            break
+
+    print max_step

@@ -1,0 +1,6 @@
+import sys
+for cases in xrange(int(sys.stdin.readline())):
+	prob = float(sys.stdin.readline())
+	if(prob < 0.5):
+		prob = 1-prob
+	print 10000*((2*prob+1)*(1-prob)+(2*prob-1))

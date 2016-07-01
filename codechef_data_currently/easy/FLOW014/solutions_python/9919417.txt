@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 16 12:29:47 2016
+
+@author: matteoarno
+"""
+
+t = int(raw_input())
+
+for i in range(t):
+    a, b, c = map(float, raw_input().split())
+    if a > 50:
+        cond1 = True
+    else:
+        cond1 = False
+    if b < 0.7:
+        cond2 = True
+    else:
+        cond2 = False
+    if c > 5600:
+        cond3 = True
+    else:
+        cond3 = False
+    
+    if cond1 and cond2 and cond3:
+        print 10
+    elif cond1 and cond2:
+        print 9
+    elif cond2 and cond3:
+        print 8
+    elif cond1 and cond3:
+        print 7
+    elif cond1 or cond2 or cond3:
+        print 6
+    else:
+        print 5

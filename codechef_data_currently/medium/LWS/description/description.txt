@@ -1,0 +1,43 @@
+ Finding the longest increasing subsequence is an old and well-known problem now. Here you will have to do something similar. You need to find the longest weird subsequence (LWS) of the given string. The subsequence is called weird if it can be split into two disjoint subsequences, one of which is non-decreasing and the other one is non-increasing. 
+
+Just for clarity, by subsequence of the given string S we mean any string that can be obtained from S by erasing from it zero or more characters. So empty string is a subsequence of any string and any string is a subsequence of itself. Further, note that we consider only strings composed of lowercase Latin letters and these letters compared by their ASCII codes. So, for example, 'a' is smaller than 'b' and 'p' is larger than 'h'. 
+
+Now let's consider some example. Let S="aabcazcczba". Then "abczz" is its some non-decreasing subsequene, "zccb" is its some non-increasing subsequence and "aabczcczba" is its some weird subsequence since it can be split into non-decreasing subsequence "aabzz" and non-increasing subsequence "cccba": "AABcZccZba" (first subsequence is shown by capital letters just for calrity). 
+
+
+Input
+The first line contains a single positive integer T, the number of test cases. T test cases follow. The only line of each test case contains a non-empty string S composed of lowercase Latin letters. 
+
+Output
+For every test case, output the length of the LWS of the given string. 
+
+Constraints
+
+1 \u2264 T \u2264 10
+1 \u2264 length of S \u2264 2000
+
+
+
+Example
+
+
+Input
+3
+abc
+cbazyzabc
+ddaabbaacc
+
+Output
+3
+6
+10
+
+
+
+Explanation
+
+First case: The string itself is LWS since it can be split into non-decreasing subsequence "abc" and non-increasing empty subsequence.
+
+Second case: One of the possible LWS is "cbaabc" since it can be split as "cbaABC". Here we indicate by capital letters non-decreasing subsequence and by lowercase letters non-increasing one. Other possible LWS's are "cbaZZa", "AzyaBC".
+
+Third case: Here the desired splitting is "ddAABBaaCC".

@@ -1,0 +1,15 @@
+a= raw_input()
+for i in range(int(a)):
+    b =int(raw_input())
+    r = raw_input()
+    ch = raw_input()
+    k = [int(x) for x in raw_input().split() ]
+    d = 0
+    for i in range(b):
+        if r[i] == ch[i]:
+            d += 1
+    if(d==b):
+        print k[-1]
+    else:
+        print max(k[0:d+1])
+    

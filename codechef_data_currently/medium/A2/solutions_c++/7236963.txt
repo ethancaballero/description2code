@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+inline void read(int *input){
+       char ch = 0;
+       while(ch<33)
+       ch = getchar_unlocked();
+       *input = 0; 
+       while(ch>33){
+       *input = *input*10 + ch - '0';
+        ch = getchar_unlocked();
+	   }
+      }
+int main()
+{
+	int a=0,b,c,d,i,j,l,sum,result,n,m,k,s,t,flag;
+    read(&t);
+    while(t--)
+    {
+    	flag=0;
+    	read(&n);
+    	sum=1;
+    	for(i=1;i<=n;i++)
+    	{
+    		read(&a);
+    		if(a>sum)
+    		{
+    			flag=1;break;
+    		}
+    		sum-=a;
+    		sum<<=1;
+    	}
+    	if(sum==0&&flag==0)
+    	printf("Yes
+");
+    	else
+    	printf("No
+");
+    }
+	return 0;
+}
+
+
+
+
+

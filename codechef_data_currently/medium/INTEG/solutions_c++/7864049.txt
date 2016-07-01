@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include<iostream>
+#include<algorithm>
+int main(void) {
+	long long a , x, sum = 0;
+	int t,i,count;
+	scanf("%d",&t);
+	int ar[t];
+	count = 0;
+	for(i=0;i<t;i++)
+	{
+		scanf("%lld",&a);
+		if(a<0)
+		{
+			ar[count++] = a;
+		}
+    }
+    scanf("%lld",&x);
+    std::sort(ar,ar+count);
+    i = 0;
+    while(i<count&&i<x)
+    {
+    	sum+=-1*ar[i];
+    	i++;
+    }
+     printf("%lld",sum);
+	return 0;
+}

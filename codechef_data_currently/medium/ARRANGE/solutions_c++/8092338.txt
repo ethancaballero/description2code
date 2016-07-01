@@ -1,0 +1,34 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	  int k,s,i,j,l,b,sum;
+	  cin>>k;
+	  int a[k];
+	  s=pow(2,k);
+	  char str[s+1];
+	  cin>>str;
+	  for(i=0;i<s;i++)
+	  {
+	  	b=i;
+	  	for(j=0;j<k;j++)
+	  	{
+	  	  a[j]=b%2;
+			b=b/2;	
+		}
+		for(j=k-1,sum=0,l=1;j>=0;j--)
+		{
+			sum=sum+a[j]*l;
+			l=l*2;
+		}
+		cout<<str[sum];
+	  }
+	  cout<<endl;	  
+	}
+	return 0;
+}

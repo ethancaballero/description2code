@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t,n,i,p=0,j;
+cin>>t;
+while(t--)
+{
+cin>>n;
+int a[n];
+for(i=0;i<n;i++)
+{
+cin>>a[i];
+}
+for(i=a[0];i>0;i--)
+{
+p=0;
+for(j=0;j<n;j++)
+{
+if(a[j]%i!=0)
+p=1;
+}
+if(p==0)
+{
+for(j=0;j<n;j++)
+{
+cout<<a[j]/i<<" ";
+}
+break;
+}
+}
+cout<<endl;
+}
+return 0;
+}

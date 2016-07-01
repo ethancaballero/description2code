@@ -1,0 +1,19 @@
+n,m,h=[int(x) for x in raw_input().split()]
+k=[]
+for i in xrange(h):
+    k+=[[int(x) for x in raw_input().split()]]
+k=sorted(k,key=lambda x:x[1])
+#print k
+l=n*m
+cost=0
+for i in k: 
+   if(l>0):
+    done=min(l,i[0])   
+    cost+=done*i[1]
+    l-=done
+   else:
+       break
+if(l>0):
+    print "Impossible"
+else:
+    print cost

@@ -1,0 +1,19 @@
+t=input()
+while(t):
+	t-=1
+	n=input()
+	arrp=map(int,raw_input().split())
+	i=0;mini=arrp[0];index=0
+	while(i<n):
+		if(mini>arrp[i]):
+			mini=arrp[i]
+			index=i
+		i+=1
+	#print mini,"i",index
+	i=0;mini=0
+	while(i<n):
+		if(i!=index):
+			mini+=arrp[index]*arrp[i]
+			#print mini
+		i+=1
+	print mini

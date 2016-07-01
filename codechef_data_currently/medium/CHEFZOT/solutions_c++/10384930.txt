@@ -1,0 +1,25 @@
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+
+int main()
+{
+    
+    int n,x,max=0,count=0;
+    scanf("%d",&n);
+    while(n--)
+    {
+      scanf("%d",&x);
+      if(x!=0)
+      count++;
+       if(count>max)
+          max=count;
+      else if(x==0)
+    count=0;
+     // cout<<count<<endl;
+    }cout<<max<<endl;
+ return 0;
+  
+}

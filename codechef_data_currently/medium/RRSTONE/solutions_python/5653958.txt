@@ -1,0 +1,21 @@
+n,k=map(int, raw_input().split())
+if k:
+  s=raw_input()
+  array = map(int, s.split())
+  if k&1:
+    maximum = max(array)
+    print ' '.join(str(maximum-i) for i in array)
+  else:
+    maximum = minimum = array[0]
+    for i in array[1:]:
+      if maximum<i:
+	maximum=i
+      elif minimum>i:
+	minimum=i
+    if minimum<0:
+      minimum=-minimum
+      print ' '.join(str(minimum+i) for i in array)
+    else:
+      print s
+else:
+  print raw_input()

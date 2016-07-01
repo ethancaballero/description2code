@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[100005];
+inline void fast( int &x) {
+    int c = getchar_unlocked();
+    x = 0;
+    int neg = 0;
+    
+    for(; ((c<48 || c>57) && c != '-'); c = getchar_unlocked());
+    
+    if(c=='-') {
+        neg = 1;
+        c = getchar_unlocked();
+    }
+    
+    for(; c>47 && c<58 ; c = getchar_unlocked()) {
+        x = (x<<1) + (x<<3) + c - 48;
+    }
+    
+    if(neg)
+        x = -x;
+}
+int main()
+{
+    int t,sz=0,n,a,idx,i;
+    fast(t);
+    //scanf("%d",&t);
+    while(t--)
+    {
+        sz=0;
+        fast(n);
+        fast(a);
+        //scanf("%d",&n);
+        //scanf("%d",&a);
+        arr[sz++]=a;
+        for(i=1;i<n;i++)
+        {
+            fast(a);
+            //scanf("%d",&a);
+            idx=upper_bound(arr,arr+sz,a)-arr;
+            if(idx==sz)
+                arr[sz++]=a;
+            else
+                arr[idx]=a;
+        }
+        cout<<sz<<" ";
+        for(i=0;i<sz;i++)
+            cout<<arr[i]<<" ";
+        cout<<endl;
+    }
+    return 0;
+}

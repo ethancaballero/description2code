@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll solve(ll n,ll m)
+{
+    ll l1,l2,n1,t,ans;
+    ll y;
+    n1=n%m;
+    l1=(((3LL*n1*n1)%m)+(3LL*n1)-1LL+m)%m;
+    l2=(l1*((2LL*n1)+1LL))%m;
+    y=n%30LL;
+    t=n/30LL;
+    t=t%m;
+    ans=(t*(n1+1LL)*l2)%m;
+    //printf("%lld ",ans);
+    ans=ans+(((t*y)*l2)%m);
+    ans=ans+(l1*(y*(y+1LL)*(2LL*t)))%m;
+    ans=ans+((y*(y+1LL)*((2LL*y)+1LL)*(3LL*y+3LL*y*y-1LL))/30LL)%m;
+    ans=ans+( y*(y+1LL)*(2LL*y+1LL)*(90LL*t*t + 6LL*t*y + 3LL*t))%m;
+    return ans%m;
+}
+ll func(ll n,ll m)
+{
+    ll ans=0LL,s=sqrt(n),l,r;
+    ll i;
+    for(i=1LL;i<=s;i++)
+        ans=(ans+(((i*i*i)%m)*((i*(n/i))%m))%m)%m;
+    for(i=n/s;i>=2LL;i--)
+    {
+        l=n/i;
+        r=n/(i-1LL);
+        ans=ans+(((solve(r,m)-solve(l,m)+m)%m)*(i-1LL))%m;
+    }
+    return (ans)%m;
+}
+int main()
+{
+    int t,f1,f2;
+    double g;
+    ll n,i,m,k,ans,y,d,l;
+    //for(i=1LL; i<=30LL; i++)
+      //  printf("%lld
+",func(i,10000LL));
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%lld %lld",&n,&m);
+        if(n==1LL)
+            printf("%lld
+",1LL%m);
+        else if(n==2LL)
+            printf("%lld
+",18LL%m);
+        else if(n==3LL)
+            printf("%lld
+",100LL%m);
+        else
+        {
+            printf("%lld
+",func(n,m));
+        }
+    }
+    return 0;
+}

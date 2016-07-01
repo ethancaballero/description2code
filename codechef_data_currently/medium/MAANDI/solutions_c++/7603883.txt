@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <iostream>
+#include <cstdlib>
+#include <limits.h>
+#include <math.h>
+
+using namespace std;
+
+bool check(int x){
+	while(x > 0){
+		if(x%10 == 4 || x%10 == 7){
+			return true;
+		}
+		x = x/10;
+	}
+	return false;
+}
+
+int dividers(int n){
+	int div;
+	int count = 0;
+	for(int i = 1; i <= sqrt(n); i++){
+		if(n%i == 0){
+			if(check(i))
+				count++;
+			div = n/i;
+			if(check(div)){
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+int main(){
+	int T, n;
+	scanf("%d", &T);
+	while(T--){
+		scanf("%d", &n);
+		cout << dividers(n) << endl;
+	}
+}

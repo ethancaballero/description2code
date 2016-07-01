@@ -1,0 +1,15 @@
+for _ in xrange(int(raw_input())):
+	N, K = map(int, raw_input().split())
+	coins = map(int, raw_input().split())
+	if coins[-1] == N:
+		print 0
+		continue
+	seconds = 0
+	previous = 0
+	remaining = len(coins)
+	for coin in coins:
+		opens = coin - previous - 1
+		if opens: seconds += (opens * ((remaining - 1) / K + 1))
+		previous = coin
+		remaining -= 1
+	print seconds

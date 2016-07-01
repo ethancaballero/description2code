@@ -1,0 +1,38 @@
+def contrib(line):
+	items = line.split()
+	out = 0
+	if items[0] == 'CONTEST_WON':
+		rank = int(items[1])
+		if rank <=20:
+			out = 300 + 20 - int(items[1])
+		else:
+			out = 300
+	elif items[0] == 'TOP_CONTRIBUTOR':
+		out = 300
+	elif items[0] == 'BUG_FOUND':
+		out = int(items[1])
+	elif items[0] == 'CONTEST_HOSTED':
+		out = 50
+	else:
+		raise NameError
+	return out
+	
+ 
+if __name__ == "__main__":
+	T = int(raw_input())
+	for ii in xrange(T):
+		line = raw_input()
+		num, type = line.split()
+		num = int(num)
+		out = 0
+		for jj in xrange(num):
+			out += contrib(raw_input())
+		if out >0:
+			if (type == 'INDIAN'):
+				print out/200
+			else:
+				print out/400
+		else:
+			print 0
+		
+		

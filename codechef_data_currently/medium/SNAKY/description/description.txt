@@ -1,0 +1,27 @@
+ 
+Chef loves to play the computer game "Snake Snaky". In this game the player controls a long thin creature, resembling a snake that crawls on the rectangular field with width N and height M surrounded by walls. Snake itself consists of L links each of which occupies one cell of the field. Any two consecutive links of the snake must be in adjacent cells of the field and the snake should not have self-intersections (i.e. no two links of the snake can not be located in the same cell).
+
+Snake moves all the time and the player can't stop it, but you can change the direction of its movement using cursor keys. The longer the player can control the snake avoiding self-intersections and collision with the wall the more points he earns. The snake moves in such a way that the first link (head) will occupy a cell adjacent to its previous position in the direction corresponding to the current pressed cursor key. Each successive snake link in a new position occupies the cell which was occupied by the previous link in the old position. Thus the connection of the snake is preserved. The cell which was occupied by the last link (tail) in the old position will be free. All movements made simultaneously so the cell that was occupied by the tail can be occupied by the head in the new position. If no key is pressed, the head of the snake will move in the same direction as in the previous move.
+
+In the middle of a game, the Chef leaves the computer but does not shut down the game so the snake is now moving on its own. Determine the number of movements of the snake before it collides with a wall or some part of its body.
+
+Input
+ The first line contains a single integer T <= 40, the number of test cases. T test cases follow. The first line of each test case contains five positive integers N, M, x, y, L. Here N and M are sizes of the field (1 <= N, M <=1000), x and y are coordinates of the cell which is occupied by the snake tail (1 <= x <= N, 1 <= y <= M) and L is the snake length (2 <= L <= N*M). The next line contains the sequence of L-1 symbols corresponding to the direction the snake moved in the last L-1 steps before the Chef left. Symbol 'U' means that the corresponding movement was up, 'D' - down, 'L'  - left, 'R'  - right. The positive x-axis is directed right and the positive y-axis is directed up. The coordinate of lower left cell is (1, 1). It is guaranteed that the input describes a valid snake that did not intersect itself or collide with a wall before the Chef left. The size of the input file does not exceed 4 MB.
+
+Output
+ For each test case output "WALL" if the snake will come into collision with the wall. Otherwise snake will come into collision with part of its body and you must output "BODY". After that, print a space followed by the number of movements before the collision.
+
+Example
+
+
+Input:
+2
+10 10 3 2 6
+URDDL
+6 6 1 6 13
+RRRRRDDDLLLU
+
+Output:
+WALL 2
+BODY 1
+

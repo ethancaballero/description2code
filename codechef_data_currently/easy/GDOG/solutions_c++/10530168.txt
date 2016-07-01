@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,k;
+		cin>>n>>k;
+		int r=0;
+		while(k)
+		{
+			if((n-(n/k)*k)>r)
+			{
+				r=n-(n/k)*k;
+			}
+			else
+				break;
+			k--;
+		}
+		cout<<r<<endl;	
+	}
+}

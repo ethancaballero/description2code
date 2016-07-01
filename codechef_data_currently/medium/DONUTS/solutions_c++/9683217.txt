@@ -1,0 +1,50 @@
+#include<map>
+#include<set>
+#include<cmath>
+#include<ctime>
+#include<queue>
+#include<stack>
+#include<cstdio>
+#include<string>
+#include<vector>
+#include<climits>
+#include<cstdlib>
+#include<cstring>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+typedef long long LL;
+const int Maxn=20000+1;
+int a[Maxn];
+int main()
+{
+	int times;
+	scanf("%d",&times);
+	while(times--)
+	{
+		int n,m;
+		scanf("%d%d",&n,&m);
+		for(int i=1;i<=m;i++)
+			scanf("%d",&a[i]);
+		sort(a+1,a+1+m);
+		int ans=0;
+		int tot=m-1;
+		for(int i=1;i<=m;i++)
+		{
+			if(tot==0)break;
+			if(a[i]+1<=tot)
+			{
+				ans+=a[i];
+				tot-=a[i]+1;
+			}
+			else
+			{
+				ans+=tot;
+				tot-=tot;
+			}
+		}
+		printf("%d
+",ans);
+	}
+	return 0;
+}

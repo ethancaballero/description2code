@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define mod 1000000007
+int binary(ll n)
+{
+	ll c=0;
+	while(n)
+	{
+		c+=(n&1);
+		n=n>>1;
+	}
+	return c;
+}
+int main()
+{
+	vector<ll> ans(1000000);
+	ll i,n,g,t;
+	ans[0]=1;
+	ans[1]=2;
+	for(i=2;i<1000000;i++)
+		ans[i]=(ans[i-1]+ans[i-2])%mod;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld%lld",&n,&g);
+		if(g==binary(ans[n-1]))
+			printf("CORRECT
+");
+		else
+			printf("INCORRECT
+");
+	}
+	return 0;
+}

@@ -1,0 +1,41 @@
+# your code goes here
+test = input()
+for k in range (0,test) :
+	n = input()
+	arr=[[0 for x in range (0,n)] for x in range ( 0 , n ) ]
+	brr=[ 0 for x in range ( 0 , (n*n)+1) ]
+	crr=[ 0 for x in range ( 0 , (n*n)+1) ]
+	for i in range (0,n) :
+		str1=raw_input().split(' ')
+		for j in range (0,n) :
+			arr[i][j]=int(str1[j])
+			brr[arr[i][j]]=i
+			crr[arr[i][j]]=j
+			'''
+			print(arr[i][j]),
+			print(" "),
+		print("")
+	print("")
+	for i in range ( 1 , ( n*n)+1 ) :
+		print (brr[i])
+		print (crr[i])
+	print("end of case")'''
+	w=1
+	c=0
+	while ( (w+1) <= (n*n) ) :
+		a=(brr[w+1])-(brr[w])
+		if ( a < 0 ) :
+			a*=-1
+		#print("here = %d %d")%(brr[w],brr[w+1])
+		b=(crr[w+1])-(crr[w])
+		if ( b < 0 ) :
+			b*=-1
+		c+=a+b
+		#print(c)
+		w+=1
+	#print("c=%d")%(c)
+	print(c)
+		
+	
+			
+			

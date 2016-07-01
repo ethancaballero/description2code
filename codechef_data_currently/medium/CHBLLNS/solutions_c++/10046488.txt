@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main()
+{
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+		ll r,g,b,k;
+		cin>>r>>g>>b;
+		cin>>k;
+		ll x=min(r,k-1)+min(g,k-1)+min(b,k-1);
+		
+		cout<<x+1<<endl;
+	}
+	return 0;
+}

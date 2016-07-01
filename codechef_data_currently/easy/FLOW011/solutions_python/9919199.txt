@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 16 12:29:47 2016
+
+@author: matteoarno
+"""
+
+import sys
+
+data = sys.stdin.readlines()
+t = int(data.pop(0))
+
+for i in range(t):
+    num = int(data.pop(0))
+    if num < 1500:
+        res = 0.9*num + 0.1*num + num
+        print '{0:g}'.format(res)
+    else:
+        res = num*0.98 + 500 + num
+        print '{0:g}'.format(res)

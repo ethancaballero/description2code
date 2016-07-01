@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+// int ans[100000009];
+	int a[10009];
+	multiset <int > b;
+	vector <int> c;
+	pair <int, int> s[10009];
+int main()
+{
+	
+	ios_base::sync_with_stdio(0);
+	
+			
+	int t;
+	cin>>t;
+
+	while(t--)
+	{
+
+
+		int n,k1,k2,k3;
+		cin>>n>>k1>>k2>>k3;
+		
+		for(int i=0;i<n;i++)
+		{
+			cin>>a[i];
+			s[i].second=i;
+			
+		}
+		s[0].first = a[0];
+		for(int i=1; i<n; i++) {
+			s[i].first = max(s[i-1].first+a[i],a[i]);
+		}
+		// s[n].first=0;
+		// s[n].second=n;
+		sort(s,s+n,greater< pair<int, int> >());
+		b.clear();
+		
+		
+		for(int i=0;i<n;i++)
+		{
+			if(b.size()>=k3 && s[i].first<=*b.begin()) break;
+			int count=0;
+			for(int j=s[i].second;j>=0;j--)
+			{
+				
+				count+=a[j];
+				if(count>*b.begin() || b.size()<k3)
+					b.insert(count);
+				if(b.size()>k3)
+					b.erase(b.begin());
+				
+			}
+		}
+		int s1=b.size();
+
+
+		
+		c.clear();
+		for(multiset<int>::reverse_iterator it = b.rbegin(); it!=b.rend(); it++)
+		{
+			c.push_back(*it);
+			
+
+		} 
+		
+		
+		
+		cout<<c[k1-1]<<" "<<c[k2-1]<<" "<<c[k3-1]<<endl;
+	
+
+		
+		
+
+	}
+
+	return 0;
+}

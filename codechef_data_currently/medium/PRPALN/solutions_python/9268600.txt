@@ -1,0 +1,20 @@
+def palin():
+    for  i in xrange(input()):
+        lst=raw_input()
+        lst=list(lst)
+        b=lst[::-1]
+        if b==lst:
+            print "YES"
+        else:
+            for i in xrange(len(lst)):
+                if b[i]!=lst[i]:
+                    c=b[::1];d=lst[::1]
+                    del c[i];del d[len(lst)-i-1]
+                    del b[len(b)-i-1];del lst[i]
+                    if c==d or b==lst:
+                        print "YES"
+                        break
+                    else:
+                        print "NO"
+                        break
+palin()

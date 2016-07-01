@@ -1,0 +1,36 @@
+#include <map>
+#include <cmath>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+const int MOD = 100000000 + 7;
+const int MOD2 = MOD * 2;
+int test;
+long long n;
+
+int calc(int x, long long y, int MOD)
+{
+    if (y == 0) return 1;
+    long long ret = calc(x, y / 2, MOD);
+    ret = (ret * ret) % MOD;
+    if (y % 2 == 1) ret = (ret * x) % MOD;
+    return ret;
+}
+
+int main()
+{
+    scanf("%d", &test);
+    while (test --) {
+        scanf("%lld", &n);
+        int tot = ((calc(4, n, MOD2) - 2 * calc(3, n, MOD2) + calc(2, n, MOD2) + MOD2 * 2) % MOD2) / 2;
+        int R1 = ((calc(3, n, MOD2) - 2 * calc(2, n, MOD2) + 1 + MOD2 * 2) % MOD2) / 2;
+        int R2 = (tot - R1 + MOD) % MOD;
+        printf("%d %d
+", R1, R2);
+    }
+    return 0;
+}
+

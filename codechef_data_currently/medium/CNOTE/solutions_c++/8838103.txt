@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int x,y,k,n;
+        cin>>x>>y>>k>>n;
+        int p=x-y;
+        int page,cost;
+        bool ans=false;
+        for(int i=0;i<n;i++)
+            {
+                cin>>page>>cost;
+                if(page>=p and cost<=k)
+                    ans=true;
+            }
+        if(ans)
+            cout<<"LuckyChef"<<endl;
+        else
+            cout<<"UnluckyChef"<<endl;
+
+    }
+
+}

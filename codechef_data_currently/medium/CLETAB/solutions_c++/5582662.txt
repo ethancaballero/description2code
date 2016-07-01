@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+#define maxm 401
+
+int customer[maxm], last_use[maxm], next_seen[maxm];
+bool present[maxm];
+
+int main() {
+    int t, n, m, order, ans, index;
+    cin >> t;
+    while(t--) {
+        cin >> n >> m;
+        for(int i=0;i<maxm;++i) {
+            next_seen[i] = 0;
+            present[i] = false;
+        }
+
+        for(int i=0;i<m;++i) {
+            cin >> customer[i];
+            last_use[customer[i]] = i;
+        }
+
+        order = 0;
+        ans = 0;
+        while(order<m && (ans < n || present[customer[order]])) {
+            if (!present[customer[order]]) {
+                present[customer[order]] = true;
+                ++ans;
+            }
+            ++order;
+        }
+
+        while(order<m) {
+            if (!present[customer[order]]) {
+                index = -1;
+                for(int i=order-1; i>=0; --i) {
+                    if (present[customer[i]] && (last_use[customer[i]] == i)) {
+                        index = customer[i];
+                        break;
+                    }
+                }
+
+                if (index == -1) {
+                    for(int i=order+1; i<m; ++i) {
+                        if (present[customer[i]] && (next_seen[customer[i]] != order)) {
+                            index = customer[i];
+                            next_seen[customer[i]] = order;
+                        }
+                    }
+                }
+
+                present[index] = false;
+                present[customer[order]] = true;
+                ++ans;
+            }
+
+            ++order;
+        }
+
+        cout << ans << endl;
+    }
+    return 0;
+}

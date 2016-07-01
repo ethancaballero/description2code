@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<iostream>
+#include<stdlib.h>
+
+using namespace std;
+
+int main(){
+
+float ax,ay,bx,by,cx,cy;
+int n;
+int j=0,k=0;
+cin>>n;
+float A[n];
+for(int i=0;i<n;i++)
+{
+	float area;
+	cin>>ax>>ay>>bx>>by>>cx>>cy;
+	area=abs((ax*(by-cy)+bx*(cy-ay)+cx*(ay-by))/2.0);
+	A[i]=area;
+	
+	};
+
+float max=A[0];
+float min=A[0];
+
+for(int i=1;i<n;i++)
+{
+
+if(A[i]>=max)
+{
+	max=A[i];
+	j=i;
+	}
+	}
+	
+for(int i=1;i<n;i++)
+{
+	if (A[i]<=min)
+	{
+		min=A[i];
+		k=i;
+		}
+	}
+	
+	cout<<k+1<<" "<<j+1<<endl;
+	return 0;
+	};

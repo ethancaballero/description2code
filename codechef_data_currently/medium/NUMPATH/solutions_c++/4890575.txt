@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ull  long long int
+#define mod  1000000007
+#define in(a) scanf("%lld",&a)
+#define loop(i,n) for(int i=0;i<n;i++)
+
+ull arr[200333];
+ull dp[200333];
+ull sumd[200333];
+
+
+int main()
+{
+  ull A,B,q,n,x,dist;
+  in(n); in(A);
+  
+  loop(i,n)
+  in(arr[i]);
+
+
+  ull i=1,t=A;
+  sumd[t-1]=1;
+  dp[t-1]=1;
+  
+  
+  for(int j= (t-2);j>=0;j--)
+  {
+      ull rm=0;
+     if((j+arr[j]+1)<n)
+       rm=sumd[j+arr[j]+1];
+      dp[j]=sumd[j+1]-rm;
+      if(dp[j]<0)
+      dp[j]+=mod;
+      sumd[j]=sumd[j+1]+dp[j];
+
+      if(sumd[j]>=mod)
+       sumd[j] -= mod;
+     // printf("%lld ",dp[j]);
+  }
+
+  /*for(int j=1;j<=t;j++)
+   printf("%lld ",dp[j]);
+  printf("
+");*/
+
+  
+  in(q);
+  while(q--)
+  {
+    in(x);
+    printf("%lld
+",dp[x-1]);
+    
+  }
+
+  return 0;
+  
+  
+}

@@ -1,0 +1,13 @@
+
+t=int(input())
+for i in range (t):
+    salary= input()
+    gross = 0
+    if (salary<1500):
+         gross =2*salary
+    else:
+        gross= salary+(0.98*salary+500)
+        
+    print "{0:g}".format(gross)
+    
+    

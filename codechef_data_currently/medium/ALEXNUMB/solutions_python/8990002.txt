@@ -1,0 +1,8 @@
+import sys
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    no_of_elements = int(sys.stdin.readline())
+    elements = sys.stdin.readline()
+    print (no_of_elements * (no_of_elements - 1))/2

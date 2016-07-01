@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+long long int t  , n , ans;
+
+int main(int argc, char const *argv[])
+{
+	scanf("%lld" , &t);
+
+	while(t--)
+	{
+		scanf("%lld" , &n);
+		ans = (n*(n+3))/2;
+		printf("%lld
+" , ans);
+	}
+	return 0;
+}

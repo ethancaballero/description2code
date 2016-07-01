@@ -1,0 +1,28 @@
+import sys
+
+lines = sys.stdin.readlines()
+n, k = tuple(int(tok) for tok in lines[0].split(" "))
+
+A = [int(tok) for tok in lines[1].split(" ")]
+
+def memoize(func):
+    table = {}
+    def decorated(*args):
+        if args in table:
+            return table[args]
+        result = table[args] = func(*args)
+        return result
+    return decorated
+
+@memoize
+def sublistSum(start, end):
+    if start > end:
+        raise Exception("BAD BOY")
+    if start == end:
+        return A[start]
+    return A[end] + sublistSum(start, end - 1)
+
+L = [sublistSum(i, j) for i in xrange(len(A)) for j in xrange(len(A)) if i <= j]
+L.sort(key=lambda n: -n)
+
+print " ".join(str(n) for n in L[:k])

@@ -1,0 +1,169 @@
+#include<stdio.h>
+ 
+int top[600][600];
+int bottom[600][600];
+int left[600][600];
+int right[600][600];
+int prime[600];
+ 
+inline int minimum(int t,int b,int rt,int l)
+{
+	int min = t;
+	if(min>b)
+		min = b;
+	if(min>l)
+		min = l;
+	if(min>rt)
+		min = rt;
+	return min;
+}
+inline int isprime(int n)
+ {
+    int c;
+	for ( c = 2 ; c <= n - 1 ; c++ )
+   {
+      if ( n%c == 0 )
+      {
+        return 0;
+      }
+   }
+   if ( c == n )
+     return 1;
+ 
+ }
+inline void buildprimetable()
+{
+ 
+prime[0] = 0;
+prime[1] = 0;
+int count = 0;
+int i;
+for(i=2;i<599;i++)
+{
+	if(isprime(i))
+		count++;
+	prime[i] = count;
+ 
+}
+}
+ 
+ 
+inline void buildtabletop(char a[][600],int r,int c)
+{
+	int i,j;
+	for(i=0;i<c;i++)
+		top[0][i] = 0;
+	for(i=1;i<r;i++)
+		for(j=0;j<c;j++)
+		{
+		  if(a[i-1][j] == '^')
+			  top[i][j] = top[i-1][j] +1;
+ 
+		  else
+			  top[i][j] = 0;
+		}
+ 
+}
+ 
+ 
+ 
+inline void buildtablebottom(char a[][600],int r,int c)
+{
+	int i,j;
+	for(i=0;i<c;i++)
+		bottom[r-1][i] = 0;
+	for(i=r-2;i>=0;i--)
+		for(j=0;j<c;j++)
+		{
+		  if(a[i+1][j] == '^')
+			  bottom[i][j] = bottom[i+1][j] +1;
+ 
+		  else
+			  bottom[i][j] = 0;
+		}
+ 
+}
+ 
+ 
+inline void buildtableleft(char a[][600],int r,int c)
+{
+	int i,j;
+	for(i=0;i<r;i++)
+		left[i][0] = 0;
+	for(i=0;i<r;i++)
+		for(j=1;j<c;j++)
+		{
+		  if(a[i][j-1] == '^')
+			  left[i][j] = left[i][j-1] +1;
+ 
+		  else
+			  left[i][j] = 0;
+		}
+ 
+}
+ 
+inline void buildtableright(char a[][600],int r,int c)
+{
+	int i,j;
+	for(i=0;i<r;i++)
+		right[i][c-1] = 0;
+	for(i=0;i<r;i++)
+		for(j=c-2;j>=0;j--)
+		{
+		  if(a[i][j+1] == '^')
+			  right[i][j] = right[i][j+1] +1;
+ 
+		  else
+			  right[i][j] = 0;
+		}
+ 
+}
+int main()
+{   
+	 char a[600][600];
+ 
+	int test,i,j,t,l,b,rt,r,c,flag,p,monster,min;
+	scanf("%d",&test);
+	buildprimetable();
+	while(test--)
+	{
+	    scanf("%d",&r);
+	    scanf("%d",&c);
+		for(i=0;i<r;i++)
+		{
+		scanf("%s",a[i]);
+		}
+	  buildtabletop(a, r, c);
+	  buildtablebottom(a, r, c);
+	  buildtableleft(a, r, c);
+	  buildtableright(a, r, c);
+ 
+		monster = 0;
+		for(i = 0;i<r;i++)
+			for(j=0;j<c;j++)
+			{
+ 
+			   t = 0,b = 0, l = 0,rt = 0;
+			  if(a[i][j]!='^')
+				 continue;
+ 
+			   rt = right[i][j];
+ 
+			   t = top[i][j];
+			   l = left[i][j];
+			   b = bottom[i][j];
+ 
+			   min = minimum(t,b,rt,l);
+			   // printf("%d %d %d %d %d %d  %d
+",i,j,rt,l,t,b,min);
+ 
+			   monster = monster+prime[min];
+ 
+			}
+ 
+	printf("%d
+",monster);
+	}
+ 
+return 0;
+} 

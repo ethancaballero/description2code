@@ -1,0 +1,81 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+typedef long long int llint;
+
+const int mod=1000003, MAXN=20010;
+
+inline int add(int a, int b)
+{
+    int ret = a+b;
+    if(ret >= mod) ret-=mod;
+    return ret;
+}
+
+inline int mul(int a, int b)
+{
+    llint ret = ((llint)a*b)%mod;
+    return ret;
+}
+
+inline int sub(int a, int b)
+{
+    int ret = a-b;
+    if(ret <= 0) ret+=mod;
+    return ret;
+}
+
+inline int pot(int a, int x)
+{
+    int ret = 1;
+    while(x)
+    {
+        if(x & 1) ret = mul(ret, a);
+        a = mul(a, a);
+        x/=2;
+    }
+    return ret;
+}
+
+inline int inverz(int x)
+{
+    return pot(x, mod-2);
+}
+
+inline int dijeli(int a, int b)
+{
+    return mul(a, inverz(b));
+}
+
+int faktorijel[MAXN];
+
+inline int povrh(int n, int k)
+{
+    return dijeli(faktorijel[n], mul(faktorijel[k], faktorijel[n-k]));
+}
+
+int n,l,r,m;
+
+void postavi()
+{
+    faktorijel[0] = 1;
+    for(int i=1; i<MAXN; i++)
+        faktorijel[i] = mul(faktorijel[i-1], i);
+}
+
+int main()
+{
+    postavi();
+    int test;
+    scanf("%d", &test);
+    for(int br=0; br<test; br++)
+    {
+        scanf("%d %d %d", &n, &l, &r);
+        m = r-l+1;
+        int rj = sub(povrh(add(n, m), m), 1);
+        printf("%d
+", rj);
+    }
+    return 0;
+}

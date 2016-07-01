@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+#define mod 1000000007
+using namespace std;
+long long int n=1, k=1, ma[5005][5005], a, b, c;
+
+int main(){
+    int i,j;
+    for(i=0; i<=5000; i++){
+        ma[i][0]=1;
+        ma[i][i]=1;
+    }
+    for(i=1; i<=5000; i++){
+        for(j=1; j<=i; j++){
+            ma[i][j]=(ma[i-1][j-1]+ma[i-1][j])%mod;
+        }
+    }
+    cin >> n >> k;
+    while(n!=0&&k!=0){
+        if(k%2==0){
+            a=(((ma[n-2][k/2-1]*ma[n-2][k/2])%mod)*2)%mod;
+            cout << a << "
+";
+        }else{
+            a=(((ma[n-2][k/2]*ma[n-2][k/2])%mod)*2)%mod;
+            cout << a << "
+";
+        }
+        cin >> n >> k;
+        }
+}

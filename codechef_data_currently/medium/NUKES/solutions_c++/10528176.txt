@@ -1,0 +1,19 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    long long int a,n,k,i,m=0;
+    cin>>a>>n>>k;
+    long long int s[100]={0};
+    n++;
+for(i=0;i<k;i++)
+{
+    s[i]=a%n;
+    a=a/n;
+    cout<<s[i]<<" ";
+}
+
+    return 0;
+}

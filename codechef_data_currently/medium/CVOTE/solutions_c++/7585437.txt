@@ -1,0 +1,66 @@
+#include <iostream>
+#include<stdio.h>
+#include<string>
+#include<map>
+#include<string.h>
+using namespace std;
+int main()
+{
+    int n=0,m=0,large=0;
+    string s,c;
+    map <string,string> connect;
+    map <string,int> chef;
+    map <string,int> country;
+    //scanf("%d",&n);
+    //scanf("%d",&m);
+    cin>>n>>m;
+    while(n--)
+    {
+      cin>>s;
+      cin>>c;
+      //scanf("%s",s);
+      //scanf("%s",c);
+      connect.insert(pair<string,string>(s,c));
+      chef.insert(pair<string,int>(s,0));
+      country.insert(pair<string,int>(c,0));
+    }
+    while(m--)
+    {
+      cin>>s;
+      //scanf("%s",s);
+      chef[s]++;
+      c=connect[s];
+      //strcpy(c,connect[s]);
+      country[c]++;
+    }
+    large=0;
+    map<string,int>::iterator it=chef.begin();
+    //while(it!=chef.end())
+    for(it=chef.begin();it!=chef.end();it++)
+    {
+      if(it -> second > large)
+      {
+        large=it->second;
+        s=it -> first;
+        //it++;
+        //strcpy(s,it -> first);
+      }
+    }
+    large=0;
+    it=country.begin();
+    //while(it!=country.end())
+    for(it=country.begin();it!=country.end();it++)
+    {
+      if(it -> second > large)
+      {
+        large=it->second;
+        c=it -> first;
+        //it++;
+        //strcpy(c,it -> first);
+      }
+    }
+    //printf("%s
+%s",c,s);
+    cout<<c<<endl<<s;
+    return 0;
+}

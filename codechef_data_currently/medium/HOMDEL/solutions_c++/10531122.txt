@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int mat[1000][1000];
+int dp[1000][1000];
+int main()
+{
+    int v;
+    cin>>v;
+    int i,j;
+    for(i=0;i<v;i++)
+    {
+        for(j=0;j<v;j++)
+        {
+            cin>>mat[i][j];
+            dp[i][j]=mat[i][j];
+
+        }
+    }
+    int k;
+
+
+    for(k=0;k<v;k++)
+    {
+        for(i=0;i<v;i++)
+        {
+            for(j=0;j<v;j++)
+            {
+                dp[i][j]=min(dp[i][j],dp[i][k]+dp[k][j]);
+            }
+        }
+    }
+     int q;
+
+     cin>>q;
+     int a,b,c;
+     while(q--)
+     {
+         scanf("%d%d%d",&a,&b,&c);
+         cout<<dp[a][b]+dp[b][c]<<" "<<dp[a][b]+dp[b][c]-dp[a][c]<<endl;
+     }
+
+
+}

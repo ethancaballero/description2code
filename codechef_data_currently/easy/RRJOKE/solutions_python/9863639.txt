@@ -1,0 +1,14 @@
+#!/usr/bin/python
+L={}
+def XOR(N):
+	if N in L:
+		return L[N]
+	if N==1:
+		return 1
+	else:
+		return N^XOR(N-1)
+for i in range(input()):
+	M=input()
+	for j in range(M):
+		x=raw_input()
+	print XOR(M)

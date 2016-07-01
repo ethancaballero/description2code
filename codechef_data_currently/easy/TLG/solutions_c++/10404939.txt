@@ -1,0 +1,45 @@
+#include<iostream>
+
+using  namespace std;
+
+int main()
+{
+	int n,s1,s2,i,big,flag;
+	
+	s1=0;
+	s2=0;
+	cin>>n;
+	int l[n],w[n],a[n],b[n];
+	for(i=0;i<n;i++)
+	{
+		cin>>a[i]>>b[i];
+		
+		
+		s1=s1+a[i];
+		s2=s2+b[i];
+		
+	
+				
+		if(s1>s2)
+		w[i]=1;
+		else w[i]=2;
+		
+		if(s1>s2)
+		l[i]=s1-s2;
+		else l[i]=s2-s1;
+	
+	}
+	
+	
+	big=l[0];
+	flag=0;
+	for(i=1;i<n;i++)
+	{
+		if(l[i]>big)
+	{
+		big=l[i];
+		flag=i;
+	}}
+	
+	cout<<w[flag]<<" "<<big;
+}

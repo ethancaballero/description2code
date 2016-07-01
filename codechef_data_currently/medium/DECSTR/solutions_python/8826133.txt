@@ -1,0 +1,14 @@
+t=int(raw_input())
+while t>0:
+    n=int(raw_input())
+    s="zyxwvutsrqponmlkjihgfedcba"
+    m=n%25;q=n/25
+    if(m==0):
+        print s*q
+    else:
+        print s[-(m+1):] +s*q
+    t=t-1
+        
+        
+
+    

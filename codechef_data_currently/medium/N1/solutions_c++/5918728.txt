@@ -1,0 +1,129 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define      For(i,a,b)        for(int i=a;i<b;i++)
+#define      pii               std::pair<int,int>
+#define      vi                std::vector<int>
+#define      mp(a,b)           std::make_pair(a,b)
+#define      GC(x)             scanf("%c",&x)
+#define      rep(i,n)         for(int i = 0; i < (n); ++i)
+#define      X                 first
+#define      Y                 second
+int INF = 1000000007;
+struct pt{
+	int  x, y;
+};
+
+int dx[] = {+1, 0, -1, 0};
+int dy[] = {0, +1, 0, -1};
+int w,h;
+pii source, dest;
+char maze[14][14];
+pt tre[14],*t;
+int dis[14][14],M,dp[14][1<<13];
+
+bool isValid(int x, int y){
+if(x < 0 || y < 0 || x >= h || y >= w) return 0;
+	if(maze[x][y] == '#') return 0;
+	return 1;
+}
+
+int bfs(pt a, pt b) {
+	queue <pt> Q;
+	queue <int> dist;
+	pt t,k;
+	int d,vis[h][w];
+	Q.push(a);
+	dist.push(0);
+	rep(i,h) rep(j,w) vis[i][j]=0;
+	vis[a.x][a.y]=1;
+	while(!Q.empty()) {
+		t=Q.front();
+		Q.pop();
+		d=dist.front();
+		dist.pop();
+		if(t.x==b.x && t.y==b.y) return d;
+		rep(i,4) {
+			k.x=t.x+dx[i];
+			k.y=t.y+dy[i];
+			if(isValid(k.x,k.y)) {
+				if(!vis[k.x][k.y]) {
+					vis[k.x][k.y]=1;
+					Q.push(k);
+					dist.push(d+1);
+				}
+			}
+		}
+	}
+	return INF;
+}
+
+int recur(int a, int b) {
+	pt x;
+	x.x=dest.X,x.y=dest.Y;
+	if(b == ((1<<M)-1)) return bfs(tre[a],x);
+	int ans=INF;
+	int & ret=dp[a][b];
+	if(ret != -1) return ret;
+	rep(i,M) {
+		if( (b & (1<<i))==0) ans=min(ans,dis[a][i]+recur(i,b|(1<<i)));
+	}
+	return ret=ans;
+}
+
+int main() {
+int n;
+	scanf("%d",&n);
+while(n--){
+	
+
+	scanf("%d",&w);
+	h=w;
+	pt temp,x,y;
+	int ans,tom;
+
+		t=tre;
+		M=0;
+
+		rep(i,h) rep(j,w) {
+		cin>>maze[i][j];
+			if(maze[i][j] == '*') {
+				temp.x=i,temp.y=j;
+				*t++=temp;
+				M++;
+			}
+
+		}
+				source.X=source.Y=0;
+			dest.X=dest.Y=h-1;
+		if(M==0) {
+			x.x=source.X,x.y=source.Y;
+			y.x=dest.X,y.y=dest.Y;
+			ans=bfs(x,y);
+			if(ans!=INF) printf("%d",ans);
+			else printf("-1");
+			goto out;
+		}
+		rep(i,M) For(j,i+1,M) {
+			dis[i][j]=dis[j][i]=bfs(tre[i],tre[j]);
+			if(dis[i][j]==INF) {
+				printf("-1");
+				goto out;
+			}
+		}
+		memset(dp,-1,sizeof(dp));
+		ans=INF;
+		x.x=source.X,x.y=source.Y;
+		rep(i,M) {
+			y.x=tre[i].x,y.y=tre[i].y;
+			tom=bfs(x,y);
+			if(tom==INF) continue;
+			ans=min(ans,tom+recur(i,(1<<i)));
+		}
+		if(ans<INF) printf("%d",ans);
+		else printf("-1");
+		out:	cout<<endl;
+	}
+	return 0;
+}
+ 

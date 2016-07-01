@@ -1,0 +1,28 @@
+import sys, os
+
+input_from_file = False
+file_name = 'in.txt'
+if input_from_file:
+    f = open(file_name, "rt")
+else:
+    f = sys.stdin
+
+def getInput():
+    inL = f.readline()
+    inL = inL.rstrip()
+    return inL
+    
+numTestCases = int(getInput())
+for testIdx in xrange(0, numTestCases):
+    total = 0
+    (n,m) = [int(i) for i in getInput().split(' ')]
+    travels = [int(i) for i in getInput().split(' ')]
+    rooms = []
+    for roomIdx in xrange(0, n):
+        rooms.append(sorted([int(i) for i in getInput().split(' ')][1:]))
+    
+    for travel in travels:
+        room = rooms[travel]
+        if room:
+            total += room.pop();
+    print total

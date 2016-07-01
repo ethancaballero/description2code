@@ -1,0 +1,10 @@
+ntc = int(raw_input())
+while ntc!=0:
+	c=0
+	j=raw_input()
+	s=raw_input()
+	for i in s:
+		if i in j:
+			c+=1
+	print c
+	ntc-=1

@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	long long int *a ,small,n;
+	int i,t;
+	cin>>t;
+	while(t--)
+	{
+	cin>>n;
+	a=new long long int[n];
+	for(i=0;i<n;i++)
+	cin>>a[i];
+		small=a[0];
+		for(i=1;i<n;i++)
+		{
+			if(a[i]<small)
+				small=a[i];
+		}
+	cout<<small*(n-1)<<endl;
+	}	
+	return 0;
+}

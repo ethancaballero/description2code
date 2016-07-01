@@ -1,0 +1,17 @@
+t=int(raw_input())
+for i in xrange(t):
+    a=raw_input()
+    count1=0
+    count2=0
+    for j in xrange(len(a)):
+        if j%2==0:
+            if a[j]=='-':
+                count2+=1
+            else:
+                count1+=1
+        else:
+            if a[j]=='+':
+                count2+=1
+            else:
+                count1+=1
+    print min(count1,count2)

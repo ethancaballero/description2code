@@ -1,0 +1,21 @@
+import sys
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    bridge = sys.stdin.readline()
+    l = bridge.__len__()
+    jump_len = 0
+    days = 0
+    gap = 0
+    i = 0
+    while i < l:
+        if bridge[i] == '.':
+            gap += 1
+        elif i > 0 and bridge[i] == '#' and bridge[i - 1] == '.':
+            if gap > jump_len:
+                days += 1
+                jump_len = gap
+            gap = 0
+        i += 1
+    print days

@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct cord
+{
+    int x;
+    int y;
+};
+bool comp(cord a,cord b)
+{
+    if(a.x!=b.x)
+        return a.x<b.x;
+    else return a.y<b.y;
+
+}
+struct cord a[2002];
+int n;
+int bin_srchx(int l,int h,int u,int w)
+{
+    int m=(l+h)/2;
+    if(a[m].x==u && a[m].y==w)
+        return m;
+        else if(h<l)
+            return n;
+    else if(a[m].x<u || (a[m].x==u && a[m].y<w))
+        return bin_srchx(m+1,h,u,w);
+    else return bin_srchx(l,m-1,u,w);
+}
+int main()
+{
+int i,j,p,q,g,h,c,d,e,v;
+
+cin>>n;
+for(i=0;i<n;i++)
+{
+    scanf("%d%d",&a[i].x,&a[i].y);
+
+}
+sort(a,a+n,comp);
+
+e=d=c=0;
+for(i=0;i<n;i++)
+{
+    for(j=i+1;j<n;j++)
+    {
+
+        c=0;
+
+        p=a[i].x-(a[j].y-a[i].y);
+        q=a[i].y+(a[j].x-a[i].x);
+        g=a[j].x-(a[j].y-a[i].y);
+        h=a[j].y+(a[j].x-a[i].x);
+
+
+    v=bin_srchx(0,n-1,p,q);
+
+      if(v<n)
+      {
+            c=1;
+            e=1;
+
+      }
+
+      v=bin_srchx(0,n-1,g,h);
+      if(v<n)
+      {
+
+                if(c==1)
+               {
+                d=1;
+                cout<<"0"<<endl;
+                exit(0);}
+          else
+          {
+          e=1;
+          }
+
+      }
+
+
+
+    }
+}
+
+if(e==1)
+    cout<<"1"<<endl;
+else if(n>=2)
+cout<<"2"<<endl;
+else if(n==1)
+    cout<<"3"<<endl;
+else cout<<"4"<<endl;
+
+return 0;
+
+}

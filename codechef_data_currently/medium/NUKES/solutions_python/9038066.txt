@@ -1,0 +1,6 @@
+a, n, k = map(int, raw_input().split())
+
+while k > 0 :
+    print a % (n + 1),
+    a /= (n + 1)
+    k -= 1

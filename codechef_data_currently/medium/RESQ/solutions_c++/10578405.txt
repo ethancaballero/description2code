@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+
+
+int main()
+{
+    int T;
+    cin >> T;
+    while(T-->0)
+    {
+        int N;
+        cin >> N;
+        int d,m;
+        d = sqrt(N);
+        int mini=1000000001, ans;
+        if(d*d==N)
+            cout << 0 << endl;
+        else
+        {
+            for(int i=1;i<=d;i++)
+            {
+                if(N%i==0){
+                    ans=N/i-i;
+                    if(ans<mini)
+                        mini=ans;
+                }
+            }
+            cout << mini << endl;
+        }
+    }
+}

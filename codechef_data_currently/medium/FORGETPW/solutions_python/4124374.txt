@@ -1,0 +1,40 @@
+from __future__ import division
+import math
+import sys
+from fractions import gcd
+
+
+def solver(s, trans):
+    new_s = ""
+    for c in s:
+        if c in trans:
+            new_s += trans[c]
+        else:
+            new_s += c
+
+    new_s = new_s.lstrip("0")
+    if '.' in new_s:
+        p = new_s.split('.')
+        p1 = p[0]
+        p2 = p[1].rstrip("0")
+
+        new_s = p1 + '.' + p2
+        new_s = new_s.rstrip('.')
+
+
+    if new_s == '' or new_s == '.':
+        new_s = '0'
+    return new_s
+
+
+def main():
+    t = int(sys.stdin.readline().strip())
+    for i in xrange(t):
+        (n,) = [int(x) for x in sys.stdin.readline().strip().split(" ")]
+        trans = {}
+        for j in xrange(n):
+            c, p = sys.stdin.readline().strip().split(" ")
+            trans[c] = p
+        s = sys.stdin.readline().strip()
+        print solver(s, trans)
+main()

@@ -1,0 +1,26 @@
+def count_max(matrix, pairs):
+    sum1, sum2 = 0, 0
+    for item in pairs:
+        if sum1 > -1:
+            try:
+                sum1 += matrix[item[0]-1][item[1]-1]
+            except IndexError:
+                sum1 = -1
+        if sum2 > -1:
+            try:
+                sum2 += matrix[item[1]-1][item[0]-1]
+            except IndexError:
+                sum2 = -1
+    return max(sum1, sum2)
+
+matrix = []
+for i in range(map(int, raw_input().split())[0]):
+    matrix.append(map(int, raw_input().split()))
+
+n = int(raw_input())
+
+pairs = []
+for i in range(n):
+    pairs.append(map(int, raw_input().split()))
+
+print count_max(matrix, pairs)

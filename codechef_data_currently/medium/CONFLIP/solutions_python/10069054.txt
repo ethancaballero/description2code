@@ -1,0 +1,16 @@
+t = int(raw_input())
+while(t):
+    t -= 1
+    x = int(raw_input())
+    while(x):
+        x -=1
+        i, n, q = map(int, raw_input().split())
+        zeroes = n/2
+        if(n%2==0):
+            ones = zeroes
+        else:
+            ones = zeroes+1
+        if(i==q):
+            print zeroes
+        else:
+            print ones

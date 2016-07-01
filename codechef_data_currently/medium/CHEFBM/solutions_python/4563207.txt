@@ -1,0 +1,49 @@
+n,m,p=map(int,raw_input().split())
+b=[]
+for x in xrange(p):
+    a=map(int,raw_input().split())
+    b.append(a)
+b.sort()
+pos=0
+for i in xrange(1,n+1):
+    if b[pos][0]!=i:
+        ans=m-1
+    else:
+        count=0
+        prev=0
+        ans=m-1
+        while b[pos][0]==i and m!=1:
+            count=count+1
+            if (pos<p-1) and ((b[pos][1]==b[pos+1][1]) and (b[pos+1][0]==i)):
+                pos=pos+1
+                continue
+            elif pos<p-1 and (b[pos+1][1]==((b[pos][1])+1) and b[pos+1][0]==i):
+                if prev>(count+1):
+                    ans=-1
+                    while pos<p-1 and b[pos][0]==i:
+                        pos=pos+1
+                    break
+                prev=count
+                count=0
+                if b[pos][1]-1==0:
+                    ans=ans-prev
+            else:
+                if prev>(count+1) or (count>1 and b[pos][1]!=m):
+                    ans=-1
+                    while pos<p-1 and b[pos][0]==i:
+                        pos=pos+1
+                    break
+                if b[pos][1]==m:
+                    ans=ans+count
+                if b[pos][1]==1:
+                    ans=ans-count
+            
+                prev=0
+                count=0
+            if pos!=p-1:
+                pos=pos+1
+            else:
+                break
+    print ans
+            
+                

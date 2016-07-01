@@ -1,0 +1,7 @@
+testCases = int(raw_input())
+lst = []
+for x in xrange(testCases):
+	lst.append(int(raw_input()))
+lst.sort()
+for x in lst:
+	print x

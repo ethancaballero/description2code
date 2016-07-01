@@ -1,0 +1,17 @@
+for _ in range(input()):
+    for _ in range(input()):
+        a=map(int,raw_input().split())
+        if a[0] == 1 and a[2] == 1:
+            print a[1]/2
+        elif a[0]==2 and a[2]==2:
+            print a[1]/2
+        elif a[0]==1 and a[2]==2:
+            if a[1]%2==0:
+                print a[1]/2
+            else:
+                print a[1]/2 + 1
+        elif a[0] == 2 and a[2] == 1:
+            if a[1] % 2 == 0:
+                print a[1] / 2
+            else:
+                print a[1]/2 + 1

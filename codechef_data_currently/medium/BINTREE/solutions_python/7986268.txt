@@ -1,0 +1,25 @@
+import math
+t=input()
+while(t>0):
+    [a,b] = [int(i) for i in raw_input().split()]
+    c1=0
+    c2=0
+    p1=int(math.log(a)/math.log(2))
+    p2=int(math.log(b)/math.log(2))
+    while(a!=b):
+        if(p1==p2):
+            a/=2
+            b/=2
+            c1+=1
+            c2+=1
+        if(p1>p2):
+            a/=2
+            c1+=1
+            p1=int(math.log(a)/math.log(2))
+        if(p1<p2):
+            b/=2
+            c2+=1
+            p2=int(math.log(b)/math.log(2))
+    r=c1+c2
+    print r
+    t-=1

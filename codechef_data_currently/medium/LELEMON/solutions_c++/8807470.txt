@@ -1,0 +1,44 @@
+#include<cstdio>
+#include<cstdlib>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int arr[101][101],arrm[10010];
+
+int main()
+{
+	int i,j,t,p,v,c,n,m,temp;
+	long long int sum;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d",&n,&m);
+		for(i=0;i<m;i++)
+		scanf("%d",&arrm[i]);
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&c);
+			arr[i][0]=c;
+			for(j=1;j<=c;j++)
+			scanf("%d",&arr[i][j]);
+			sort(*(arr+i)+1,*(arr+i)+(c+1));
+			//for(j=0;j<=c;j++)
+			//printf("%d ",arr[i][j]);
+		}
+		sum=0;
+		for(i=0;i<m;i++)
+		{
+			temp= arr[arrm[i]][0];
+			if(temp>0)
+			{
+				sum+=arr[arrm[i]][temp];
+				arr[arrm[i]][0]--;
+			}
+			
+		}
+		printf("%lld
+",sum);
+	}
+	return 0;
+}

@@ -1,0 +1,9 @@
+for _ in xrange(input()):
+    temp = []
+    for i in xrange(input()):
+        n = input()
+        if n not in temp:
+            temp.append(n)
+        else:
+            temp.remove(n)
+    print temp[0]

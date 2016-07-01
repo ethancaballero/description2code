@@ -1,0 +1,81 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <functional>
+#include <utility>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+ 
+#define LL long long
+#define vi vector<int>
+#define pb push_back
+#define sz size
+#define all(x) (x).begin(),(x).end()
+#define it iterator
+#define REP(i,a,b) for(int i=(a);i<(b);i++)
+#define REPX(i,a,b,c) for(int i=(a);i<(b);i+=(c))
+#define DEP(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define REX(i,x) for(__typeof((x).begin()) i=(x).begin(); i!=(x).end();i++)
+#define pii pair<int,int>
+#define mp make_pair
+#define fi first
+#define se second
+#define st string
+#define ffo find_first_of
+#define su substr
+#define vs vector<st>
+#define ub upper_bound
+#define lb lower_bound
+#define vli vector<list<int> >
+#define ni next_int
+#define gu getchar_unlocked
+#define MAX 10010
+#define MOD 1000000007
+using namespace std;
+vli edge; int x[MAX],vis[MAX],tot[MAX];
+void dfs(int i)
+{
+	vis[i]=1;
+	REX(j,edge[i]) if(!vis[*j])
+	{
+		dfs(*j); 
+		x[i]+=(tot[i]*tot[*j])<<1;
+		tot[i]+=tot[*j];
+	}
+	tot[i]++;
+	x[i]+=(tot[i]<<1)-1;
+}
+int main()
+{
+	int tc; scanf("%d",&tc);
+	REP(t,0,tc)
+	{
+		int n; scanf("%d",&n);
+		edge.clear();
+		edge.resize(n+1);
+		REP(i,0,n-1)
+		{
+			int a,b; scanf("%d %d",&a,&b);
+			edge[a].pb(b);
+			edge[b].pb(a);
+		}
+		dfs(1);
+		int s=0;
+        REP(i,1,n+1) s=(s+(LL)i*x[i])%MOD;
+        printf("%d
+",s);
+        memset(x,0,sizeof(x));
+		memset(vis,0,sizeof(vis));
+		memset(tot,0,sizeof(tot));
+	}
+	return 0;
+}

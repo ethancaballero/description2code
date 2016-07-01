@@ -1,0 +1,18 @@
+def f(n):
+	s = str(n)
+	if (s.find('4')!=-1 or s.find('7')!=-1):
+		return True
+	return False
+for t in xrange(int(raw_input())):
+	n = int(raw_input())
+	count = 0
+	if (f(n)):
+		count += 1
+	for i in range(2,int(n**0.5)+1):
+		if (n%i==0):
+			if (f(i)):
+				count += 1 
+			if (f(n/i)):
+				count += 1
+	print count
+				

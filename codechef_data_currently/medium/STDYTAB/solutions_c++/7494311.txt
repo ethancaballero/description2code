@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define mod 1000000000
+
+
+using namespace std;
+
+    ll C[4000][2000];
+    ll Fill[2003][2003],N,M;
+ll Value(int i,int j)
+{
+    if(i==N+1)
+        return 1;
+    else if(j>M)
+        return 0;
+    return (Fill[i+1][j]*(C[j+M-1][M-1]) + Fill[i][j+1])%mod;
+}
+int main()
+{
+    int n,r,t;
+    /*
+    *  create binomial coefficients
+    */
+    for(n=0;n<4000;n++)
+    {
+        for(r=0;r<min(2000,n+1);r++)
+        {
+            if(r==n || r==0)
+                C[n][r]=1;
+            else
+                C[n][r]=(C[n-1][r]+C[n-1][r-1])%mod;
+        }
+    }
+
+    cin >> t;
+    while(t--)
+    {
+        cin >> N >> M;
+//        for(i=0;i<=N;i++)
+//            for(j=0;j<=M;j++)
+//                Fill[i][j]=-1;
+        for(int row=N+1;row>0;row--)
+            for(int col=M+1;col>=0;col--)
+                    Fill[row][col]= Value(row,col);
+        cout << Fill[1][0] << endl;
+    }
+    return 0;
+}
+

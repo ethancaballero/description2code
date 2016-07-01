@@ -1,0 +1,20 @@
+from sys import stdin
+class Solution:
+	def sieve(self, a, b):
+		N = max(a, b)
+		ls = [0 for x in range(N+1)]
+		for i in xrange(1, N+1, 2):
+			for j in xrange(i, N+1, i):
+				ls[j] += i
+			#ls[i] -= i
+		#print ls
+		for i in xrange(1, N+1, 1):
+			ls[i] += ls[i-1]
+		#print ls
+		return ls[max(a, b)] - ls[min(a, b)-1]
+		
+s = Solution()
+T = int(stdin.readline().strip())
+for _ in range(T):
+	ar = map(int, stdin.readline().strip().split())
+	print s.sieve(ar[0], ar[1]) 

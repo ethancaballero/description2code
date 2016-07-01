@@ -1,0 +1,13 @@
+for i in range(int(raw_input())):
+    a=raw_input()
+    a=raw_input()
+    b=a
+    for j in range(len(a)):
+        if a[j]=="1":
+            if j==0:
+                b="22"+b[j+2:]
+            elif j==(len(a)-1):
+                b=b[:j-1]+"22"
+            else:
+                b=b[:j-1]+"222"+b[j+2:]
+    print b.count("0")

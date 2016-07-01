@@ -1,0 +1,17 @@
+t = int(raw_input())
+while (t>0):
+    input1 = raw_input().upper()
+    input2 = raw_input().upper()
+    output = ''
+    i = 0
+    for i in range(len(input1)):
+        if input1[i]==input2[i]=='W':
+            output +='B'
+        elif input1[i]==input2[i]=='B':
+            output +='W'
+        else:
+            output += 'B'
+    
+    print output
+    t = t-1
+        

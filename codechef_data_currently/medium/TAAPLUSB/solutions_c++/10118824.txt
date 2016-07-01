@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e5 + 10;
+long double E[MAXN];
+int main(){
+    E[1] = 0.45;
+    for(int i = 2;i < MAXN;++i){
+        E[i] = 0.45 + E[i - 1]/10;
+
+    }
+    for(int i = 2;i < MAXN;++i){
+        E[i] += E[i - 1];
+    }
+    int t;
+    scanf("%d", &t);
+    while(t--){
+        int N;
+        scanf("%d", &N);
+        printf("%.6Lf
+", E[N]);
+    }
+    return 0;
+}

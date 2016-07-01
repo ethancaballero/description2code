@@ -1,0 +1,26 @@
+#include<iostream>
+#include<vector>
+ 
+using namespace std;
+ 
+int main(){
+long t,num;
+cin>>t;
+while(t--){
+	long num1=0;
+	vector<int> v;
+	vector<int>::iterator it,it1;
+    int i=0;
+    	cin>>num;
+	while(num!=0){
+		v.push_back(num%10);
+		num/=10;
+	}
+	it=v.begin();
+	it1=v.end();
+	it1--;
+	cout<<(*it+*it1)<<endl;		    
+}
+//system("pause");
+return 0;
+}   

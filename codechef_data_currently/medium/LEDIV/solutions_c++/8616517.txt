@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int t,n,g,a;
+
+int gcd(int a,int b){
+	return((b==0)?a:gcd(b,a%b));
+}
+
+int div(int x){
+	for(int i=2;i*i<=x;++i)
+		if(x%i==0)
+			return i;
+	return x;
+}
+
+int main (){
+	scanf("%d",&t);
+	
+	while(t--){
+		scanf("%d
+",&n);
+		long long int cnt =0;
+		
+		scanf("%d",&g);
+		--n;
+		
+		while(n--){
+			scanf("%d",&a);
+			g = gcd(g,a);
+		}
+		
+		printf("%d
+",(g==1)?-1:div(g));
+	}
+	
+	return 0;
+}

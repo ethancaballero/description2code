@@ -1,0 +1,44 @@
+#include <cstdio>
+ 
+#define MOD 100000007
+#define RMOD 50000004
+ 
+typedef long long int lint;
+ 
+lint mod_exp(lint a, lint n, lint m)
+{
+    lint r = 1;
+    while (n > 0) {
+        if (n & 1) {
+            r = (r * a) % m;
+        }
+        n >>= 1;
+        a = (a * a) % m;
+    }
+    return r;
+}
+ 
+int main(void)
+{
+    lint n, R1, R2;
+    int T;
+    scanf("%d", &T);
+    while (T--) {
+        scanf("%lld", &n);
+        R1 = (mod_exp(3, n, MOD) - mod_exp(2, n+1, MOD) + 1) % MOD;
+        //printf("%lld
+
+", mod_exp(3, n, MOD));
+        R1 = (RMOD * R1) % MOD;
+        while (R1 < 0)
+            R1 += MOD;
+        R2 = (mod_exp(4, n, MOD) - mod_exp(3, n+1, MOD) +
+                3 * mod_exp(2, n, MOD) - 1) % MOD;
+        R2 = (RMOD * R2) % MOD;
+        while (R2 < 0)
+            R2 += MOD;
+        printf("%lld %lld
+", R1, R2);
+    }
+    return 0;
+}

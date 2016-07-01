@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define ll long long int
+#define FOR(i,s,l) for (int i = s; i < l; ++i)
+#define SIZE(arr) sizeof(arr)/sizeof(arr[0])
+#define SCAN(arr,n) For(i,0,n) cin>>arr[i]
+ 
+int arr[30];
+ 
+#define id(x) x - 'a'
+ 
+int main() {
+	int t;
+	cin>>t;
+	while(t--) {
+		FOR(i,0,30) arr[i]=0;
+		string p1, p2, p;
+		cin>>p1>>p2;
+		p = p1+p2;
+		int l = p.length();
+		FOR(i,0,l)arr[id(p[i])]++;
+		int nc;
+		bool flag = true;
+		cin>>nc;
+		while(nc--) {
+			string c;
+			cin>>c;
+			l = c.size();
+			for(int i=0; i<l;i++) {
+				arr[id(c[i])]--;
+				if(arr[id(c[i])] < 0) {
+					flag = false;
+					break;
+				}
+			}
+			//if(!flag) break; THIS LINE FREAKING SUCKS AS ALL THE CHILDREN'S NAME HAVE TO BE INPUT
+		}
+		if(!flag) printf("NO
+");
+		else printf("YES
+");
+	}
+	return 0;
+} 

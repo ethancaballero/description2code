@@ -1,0 +1,15 @@
+def depth(sequence):
+    balance = 0
+    max_balance = 0
+    for bracket in sequence:
+        if bracket == '(':
+            balance += 1
+        else:
+            balance -= 1
+        max_balance = max(max_balance, balance)
+    return max_balance
+
+test_cases = input()
+for _ in range(test_cases):
+    case_depth = depth(raw_input())
+    print "(" * case_depth + ")" * case_depth

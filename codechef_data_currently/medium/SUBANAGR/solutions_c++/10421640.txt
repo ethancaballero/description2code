@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int n, i, j;
+char s[147], c;
+int a[147], b[147];
+
+int main() {
+  scanf("%d",&n);
+  for (c='a';c<='z';c++) 
+  a[c] = 1000;
+  for (i=0;i<n;i++) {
+    scanf("%s",s);
+    for (c='a';c<='z';c++) 
+	b[c] = 0;
+    j = 0;
+    while (s[j]) 
+	b[s[j++]]++;
+    for (c='a';c<='z';c++)
+      if (b[c] < a[c]) a[c] = b[c];
+  }
+  j = 0;
+  for (c='a';c<='z';c++)
+    for (i=0;i<a[c];i++) {
+      printf("%c",c);
+      j++;
+    }
+  if (!j) printf("no such string");
+  printf("
+");
+  return 0;
+}

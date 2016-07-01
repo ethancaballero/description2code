@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+int main()
+{
+    int k=0;
+    queue <long long> arr;
+    arr.push(3);
+    arr.push(5);
+    arr.push(8);
+    while(k<50000)
+    {
+        int five=0;int eight=0;int three=0;
+        long long n=arr.front();
+        while(n!=0)
+        {
+            long long temp=n%10;
+            if (temp==8)
+                eight++;
+            else if (temp==5)
+                five++;
+            else if (temp==3)
+                three++;
+            n=n/10;
+        }
+        long long j = arr.front()*10;
+        if(five<=eight && three<=five)
+        {
+            //cout<<arr.front()<<endl;
+            printf("%lld
+",arr.front());
+            k++;
+        }
+        arr.push(j+3);
+        arr.push(j+5);
+        arr.push(j+8);
+        arr.pop();
+    }
+    return 0;
+}

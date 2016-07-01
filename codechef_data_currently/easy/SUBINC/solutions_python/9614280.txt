@@ -1,0 +1,29 @@
+# your code goes here
+test = input()
+for k in range ( 0 , test ) :
+	n = input()
+	arr=list()
+	x=raw_input().split(' ')
+	for i in range ( 0 , n ) :
+		v=int(x[i])
+		arr.append(v)
+	#print arr
+	ans = 0
+	i=0
+	while ( i <= n-1 ) :
+		c=1
+		j=i
+		while ( i < n-1 and arr[i+1]>=arr[i] ) :
+			c+=1
+			i+=1
+		for t in range ( 0 , c+1 ) :
+			ans += t
+		i=j+c # not j+c+1 because c was 1 when j was i = 1
+	print ( ans )
+	
+	
+	
+	
+	
+	
+	

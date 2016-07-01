@@ -1,0 +1,74 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <sstream>
+
+using namespace std;
+
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define SZ(x) ((int)(x).size())
+#define FORV(i,x) FOR(i,0,SZ(x))
+#define FORD(i,a,b) for(int i=(a);i>=(b);i--)
+#define MP make_pair
+#define PB push_back
+#define ALL(x) x.begin(),x.end()
+#define ULL unsigned long long
+#define LL long long
+#define mset(x,v) memset(x,v,sizeof x)
+#define F first
+#define S second
+
+map<LL,LL> m;
+map<LL,bool> vis;
+vector< pair<LL,LL> > v;
+vector<LL> small;
+int main()
+{
+	ios::sync_with_stdio(false);
+	LL n,a,b,t,test,tot;
+	cin >> test;
+	while(test--)
+	{
+		tot=0;
+		v.clear();
+		small.clear();
+		m.clear();
+		vis.clear();
+		cin >> n;
+		FOR(i,0,n)
+		{
+			cin >> b >> t;
+			v.PB(MP(b,t));
+			if(m[b])m[b]=min(m[b],t);
+			else m[b]=t;
+		}
+		for(map<LL,LL> :: iterator it=m.begin() ; it!=m.end(); it++ )
+			small.PB(it->S);
+		sort(ALL(small));
+		FORV(i,small) tot+=small[i]*(i+1);
+		FORV(i,v) 
+		{
+			if(!vis[v[i].F] && m[v[i].F] == v[i].S) vis[v[i].F]=1;
+			else
+				tot+=(SZ(small)*v[i].S);
+		}
+		cout << tot << endl;
+	}
+	return 0;
+}

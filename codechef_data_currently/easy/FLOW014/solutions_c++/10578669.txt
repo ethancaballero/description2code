@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+	double hardness,tensile_strength,carbon,t;
+	cin>>t;
+	while(t--)
+	{
+	cin>>hardness>>carbon>>tensile_strength;
+	if(hardness>50&&tensile_strength>5600&&carbon<0.7)
+	cout<<"10"<<endl;
+	else if(hardness>50&&carbon<0.7)
+	cout<<"9"<<endl;
+	else if(tensile_strength>5600&&carbon<0.7)
+	cout<<"8"<<endl;
+	else if(hardness>50&&tensile_strength>5600)
+	cout<<"7"<<endl;
+	else if(hardness>50||tensile_strength>5600||carbon<0.7)
+	cout<<"6"<<endl;
+	else
+	cout<<"5"<<endl;
+	}
+	return 0;
+} 

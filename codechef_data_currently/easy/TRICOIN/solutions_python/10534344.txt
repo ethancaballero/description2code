@@ -1,0 +1,12 @@
+t=input()
+ans=[]
+for i in range(t):
+    num =input()
+    temp=0
+    j=1
+    while temp<=num:
+        temp=(j*(j+1))/2
+        j+=1
+    ans.append(j-2)
+for i in range(t):
+    print ans[i]

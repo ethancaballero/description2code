@@ -1,0 +1,7 @@
+import sys
+def dist(t):
+	for i in xrange(t):
+		a,b,d = map(float,sys.stdin.readline().split())
+		l = [0,d-a-b,a-b-d,b-a-d]
+		print max(l)
+dist(int(sys.stdin.readline()))

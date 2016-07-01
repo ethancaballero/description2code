@@ -1,0 +1,27 @@
+n1,n2,n3 = map(int,raw_input().split())
+
+first = []
+
+answer =[]
+
+y=n1+n2+n3
+
+for i in xrange (y):
+    x=int(raw_input())
+    first.append(x)
+
+first.sort()
+
+for i in xrange(y-1):
+    if first[i] == first [i+1]:
+        answer.append(first[i])
+
+answer=list(set(answer))
+answer.sort()
+
+l=len(answer)
+print l
+
+for i in xrange(l):
+    print answer[i]
+    

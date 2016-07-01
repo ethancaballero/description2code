@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+	string a[6];
+	int tc, i;
+	string ans;
+
+	cin >> tc;
+
+	while (tc--) {
+		cin >> a[0] >> a[1] >> a[2] >> a[3] >> a[4] >> a[5];
+		ans = "NO
+";
+		
+		if (a[0] == a[2] && a[2] == a[4]) {
+			ans = "YES
+";
+		} else if (a[0] == a[2] && a[2] == a[5]) {
+			ans = "YES
+";
+		} else if (a[0] == a[3] && a[3] == a[4]) {
+			ans = "YES
+";
+		} else if (a[0] == a[3] && a[3] == a[5]) {
+			ans = "YES
+";
+		} else if (a[1] == a[2] && a[2] == a[4]) {
+			ans = "YES
+";
+		} else if (a[1] == a[2] && a[2] == a[5]) {
+			ans = "YES
+";
+		} else if (a[1] == a[3] && a[3] == a[4]) {
+			ans = "YES
+";
+		} else if (a[1] == a[3] && a[3] == a[5]) {
+			ans = "YES
+";
+		}
+
+		cout << ans;
+
+	}
+
+	return 0;
+}

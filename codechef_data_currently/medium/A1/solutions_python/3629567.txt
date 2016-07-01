@@ -1,0 +1,25 @@
+import itertools
+def prnt(a,n,m):
+    if m==0:
+        return True
+    if n==0:
+        return False
+    if a[n-1]>m:
+        return prnt(a,n-1,m)
+    else:
+        return prnt(a,n-1,m-a[n-1]) or prnt(a,n-1,m)
+
+t=int(raw_input())
+while t>0:
+    t-=1
+    a=[]
+    [n,m]=map(int,raw_input().split())
+    i=0
+    while i<n:
+        a.append(int(input()))
+        i+=1
+    if prnt(a,n,m):
+        print "Yes"
+    else:
+        print "No"
+    

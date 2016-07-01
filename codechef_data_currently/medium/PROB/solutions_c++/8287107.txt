@@ -1,0 +1,32 @@
+	#include<iostream>
+	using namespace std;
+	double ncr(double n,double r)
+	{
+		double ans1=1,ans2=1;
+		for(double i=1;i<=r;i++)
+		{
+			ans1=ans1*i;
+			ans2=ans2*n;
+			n--;
+		}	
+		return (ans2/ans1);
+	}
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			double t1,t2,t3,d,ans=1;
+			cin>>t1>>t2>>t3>>d;
+			if(d-t1-t2>=0)
+			{
+				ans=ncr(t3,d-t1-t2)/ncr(t1+t2+t3,d);
+
+			}	
+			ans=(ans*t1)/(t1+t2);
+			cout<<ans<<endl;
+			t--;
+
+		}	
+	}

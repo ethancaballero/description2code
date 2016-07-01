@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<iostream>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<map>
+#include<set>
+#include<sstream>
+#include<cmath>
+#include<assert.h>
+using namespace std;
+#define ll long long
+#define ull unsigned long long
+#define pi acos(-1)
+#define inf 1000000007
+#define mod 1000000007
+#define pii pair<int,int>
+#define vi vector<int>
+#define all(x) x.begin(),x.end()
+#define mp make_pair
+#define pb push_back
+#define x first
+#define y second
+#define N 1005
+
+#define DBG(vari) cerr<<#vari<<"="<<(vari)<<endl;
+#define FOREACH(i,t) for(typeof(t.begin()) i=t.begin();i!=t.end();i++)
+
+int n;char a[1005],b[1005];
+int p2[1005],p8[1005],c[1005][1005],dp[1005];
+int lucy[14]={4,7,44,47,74,77,444,447,474,477,744,747,774,777};
+ll calc(char *s,int flag)
+{
+	n=strlen(s);
+	ll ans=0;int f1=0;
+	for(int i=0;i<n;i++)ans+=dp[i],ans%=mod;
+	//cerr<<ans<<" ";
+	for(int i=0;i<n;i++)
+	{
+		for(int j=(i==0?1:0);j<s[i]-'0';j++)
+		{
+			int m=f1;
+			if(j==4||j==7)m++;
+			for(int k=0;k<14;k++)
+			if(lucy[k]>=m)
+			{
+				int x=lucy[k]-m,y=n-1-i;
+				if(x>y)continue;
+				ans+=(ll)c[y][x]*p2[x]%mod*(ll)p8[y-x]%mod;
+				ans%=mod;
+			}
+		}
+		if(s[i]=='4'||s[i]=='7')f1++;
+	}
+	if(!flag)
+	for(int i=0;i<14;i++)
+	if(f1==lucy[i])ans++;
+	//cerr<<ans<<endl;
+	return ans%=mod;
+}
+
+void init()
+{
+	int i,j,k;
+	p2[0]=1;
+	for(i=1;i<N;i++)p2[i]=((ll)p2[i-1]*2LL)%mod;
+	p8[0]=1;
+	for(i=1;i<N;i++)p8[i]=((ll)p8[i-1]*8LL)%mod;
+	c[0][0]=1;
+	for(i=1;i<N;i++)
+	{
+		c[i][0]=1;
+		for(j=1;j<=i;j++)
+		c[i][j]=(c[i-1][j-1]+c[i-1][j])%mod;
+	}
+	for(i=4;i<N;i++)
+	{
+		for(j=0;j<14;j++)
+		if(lucy[j]<=i)
+		{
+			int x=lucy[j],y=i-x;
+			if(y>0)dp[i]+=(c[i-1][x-1]+(ll)c[i][x]*7LL)%mod*(ll)p2[x]%mod*(ll)p8[y-1]%mod;
+			else dp[i]+=p2[x];
+			dp[i]%=mod;
+		}
+	}
+}
+int main()
+{
+	int i,j,k,T,m;
+	init();
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%s%s",a,b);
+		ll ans=(calc(b,0)-calc(a,1)+mod)%mod;
+		printf("%d
+",(int)ans);
+	}
+	return 0;
+}

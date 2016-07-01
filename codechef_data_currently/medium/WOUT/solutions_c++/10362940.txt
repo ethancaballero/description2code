@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int t,n,h,i,a,b,sum,min,j;
+	cin>>t;
+	while(t--)
+	{
+		sum = 0;
+		cin>>n>>h;
+		int arr[n];
+		for(i=0;i<n;i++)
+		{
+			arr[i] = n;
+		}		
+		for(i=0;i<n;i++)
+		{
+			cin>>a>>b;
+			for(j=a;j<=b;j++)
+			{
+				arr[j]--;	
+			}
+		}
+		for(i=0;i<h;i++)
+			sum+=arr[i];
+		min = sum;
+		b = h;
+		a = 0;	
+		while(b<n)
+		{
+			sum-=arr[a];
+			sum+=arr[b];
+			a++;
+			b++;
+			if(sum<min)
+				min = sum;
+		}
+		cout<<min<<endl;
+	}
+	return 0;
+}

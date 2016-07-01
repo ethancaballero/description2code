@@ -1,0 +1,16 @@
+c=raw_input().split()
+crack=c[1]
+orig="abcdefghijklmnopqrstuvwxyz"
+for _ in range(int(c[0])):
+    newstr=[]
+    mystr=raw_input()
+    for i in mystr:
+        if(i.islower()):
+            newstr.append(crack[orig.index(i)])
+        elif(i.isupper()):
+            newstr.append((crack[orig.index(i.lower())]).upper())
+        elif(i=='_'):
+            newstr.append(' ')
+        else:
+            newstr.append(i)
+    print ''.join(str(x) for x in newstr)  

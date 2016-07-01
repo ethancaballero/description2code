@@ -1,0 +1,38 @@
+//subarray sum and product
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n,i,s;
+        int a[51];
+        int sum[51];
+        int pro[51];
+        cin>>n;
+        cin>>a[0];
+        sum[0]=a[0];
+        pro[0]=a[0];
+        for(i=1;i<n;i++)
+        {
+            cin>>a[i];
+            sum[i]=sum[i-1]+a[i];
+            pro[i]=pro[i-1]*a[i];
+        }
+        int ans=n;
+        for(s=2;s<=n;s++)
+        {
+            if(pro[s-1]==sum[s-1])
+                ans++;
+            for(i=0;i<n-s;i++)
+            {
+                if(sum[i+s]-sum[i]==(pro[i+s]/pro[i]))
+                {ans++;}
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+using namespace std;
+int str[1006][1006];
+int row[1006][1006];
+int col[1006][1006];
+
+
+int main()
+{
+    int t,i,k,j,n;
+    char ch;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                cin>>ch;
+                if(ch=='.')
+                {
+                    str[i][j]=0;
+                }
+                else
+                    str[i][j]=1;
+                    row[i][j]=1;
+                    col[i][j]=1;
+            }
+        }
+
+
+           for(j=0;j<n;j++)
+
+        {
+            for(i=n-1;i>=0;i--)
+            {
+                if(str[i][j]==0)
+                row[i][j]=0;
+                else
+                    break;
+            }
+
+        }
+
+        for(i=0;i<n;i++)
+        {
+
+            for(j=n-1;j>=0;j--)
+            {
+                if(str[i][j]==0)
+                col[i][j]=0;
+                else
+                    break;
+            }
+
+        }
+        int count1=0;
+         for(j=0;j<n;j++)
+        {
+            for(i=0;i<n;i++)
+            {
+                if(col[i][j]==0&&row[i][j]==0)
+                    count1++;
+            }
+        }
+
+           cout<<count1<<endl;
+
+
+
+    }
+    return 0;
+}

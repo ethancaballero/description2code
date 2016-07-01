@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+ int main()
+ {
+ 	long long int ans,j,s,m,rem;
+ 	cin>>j>>s>>m;
+ 	rem=m-j;
+ 	ans=rem/s;
+ 	if(ans%2==0)
+ 	cout<<"Lucky Chef"<<endl;
+ 	else
+ 	cout<<"Unlucky Chef"<<endl;
+ 	
+	 
+ }

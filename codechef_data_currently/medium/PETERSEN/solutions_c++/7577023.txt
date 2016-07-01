@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+int g[10][3] = {
+    {1,4,5},
+    {0,2,6},
+    {1,3,7},
+    {2,4,8},
+    {0,3,9},
+    {0,7,8},
+    {1,8,9},
+    {2,5,9},
+    {3,5,6},
+    {4,6,7}
+};
+char str[100000];
+char ans[100000];
+int l;
+bool dfs_rec(int u, int i)
+{
+    bool b = false;
+    if (u == l) b = true;
+    else if (u == 0)
+    {
+        b = dfs_rec(u+1, str[0] - 'A');
+        if (b) ans[u] = str[0] - 'A';
+        else
+        {
+            b = dfs_rec(u+1, str[0] - 'A' + 5);
+            ans[u] = str[0] - 'A' + 5;
+        }
+    }
+    else for (int j = 0; j < 3 and !b; ++j)
+    {
+        if (str[u] - 'A' == g[i][j] or str[u] - 'A' + 5 == g[i][j])
+        {
+            b = dfs_rec(u+1, g[i][j]);
+            if (b) ans[u] = g[i][j];
+        }
+    }
+    return b;
+}
+
+
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while (t--)
+    {
+        scanf("%s", str);
+        l = strlen(str);
+        bool b =  dfs_rec(0, str[0] - 'A');
+        if (b) for (int i = 0; i < l; ++i) printf("%d", ans[i]);
+        else printf("%d",-1);
+        printf("
+");
+    }
+}

@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+	int test,j;
+	int yc , ic;
+	int gesture;
+	string x;
+	cin >> test;
+	while(test--)
+	{
+	  yc = 0;
+	  ic = 0;
+	  cin>>gesture;
+	   cin >> x;
+	 // cout <<x;
+	 for(j = 0 ; j < gesture ; j++ )
+	 {
+	 if(x[j] == 'Y')
+         {
+         yc++;
+         break;
+         }
+      if(x[j] == 'I')
+         {
+         ic++;
+         break;
+         }
+     }		
+	if( yc > 0 )
+	  cout << "NOT INDIAN";
+	else if(ic > 0)
+	   cout << "INDIAN";
+	else cout << "NOT SURE";
+	cout<<endl;
+	}	
+	return 0;
+} 

@@ -1,0 +1,48 @@
+# include <iostream>
+    using namespace std;
+    void factorial(int n)
+    {
+    	int a[200],i=0,no=n,m,temp=0,x;
+    	while (no>0)
+    	{
+    		a[i++]=no%10;
+    		no/=10;
+    	}
+    	m=i;
+    	n--;
+    	while (n>=1)
+    	{
+    		for (i=0;i<m;i++)
+    		{
+    			x = a[i]*n + temp;
+    			a[i] = x%10;
+    			temp = x/10;
+    		}
+    		while (temp>0)
+    		{
+    			a[i++]=temp%10;
+    			temp/=10;
+    			m++;
+    		}
+    		n--;
+    	}
+    	for (i=m-1;i>=0;i--)
+    	{
+    		cout<<a[i];
+    	}
+    }
+    int main()
+    {
+    	int t,n;
+    	cin>>t;
+    	while (t--)
+    	{
+    		cin>>n;
+    		if (n==0)
+    			cout<<"1";
+    		else
+    			factorial(n);
+    		cout<<endl;
+    	}	
+    	return 0;	
+    }

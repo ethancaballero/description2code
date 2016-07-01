@@ -1,0 +1,14 @@
+t=int(raw_input())
+while t>0:
+    n=int(raw_input())
+    cost=[int(i) for i in raw_input().split()]
+    res=0;
+    cost.sort()
+    cost.reverse()
+    for i in range(n):
+        if i%4==0 or i%4==1:
+            res=res+cost[i]
+    print res
+    t=t-1
+
+

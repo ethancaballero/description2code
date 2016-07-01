@@ -1,0 +1,4 @@
+for t in range(int(raw_input())):
+    (n, k) = (int(x) for x in raw_input().split())
+    a = sorted([int(x) for x in raw_input().split()])
+    print max(abs(sum(a[0: k]) - sum(a[k:])), abs(sum(a[:-k]) - sum(a[-k:])))

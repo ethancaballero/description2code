@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+
+inline long long int inp() //Fast input only for numbers upto 10^9
+{
+    register long long  r=0,c;   
+    for(c=getchar_unlocked(); c<=32; c=getchar_unlocked());
+    if(c=='-')
+        return -inp();
+    for(; c>32; r=(r<<1)+(r<<3)+c-'0',c=getchar_unlocked());
+    return r;
+}
+
+ll a[1010]={0};
+
+int main()
+{
+	ll t=inp();
+	while(t--)
+	{
+		ll n=inp();
+		ll k=inp();
+		for(ll i=0;i<n;i++)
+			a[i]=inp();
+		ll min=a[0]+a[1];
+		for(ll i=0;i<n-1;i++)
+			for(ll j=i+1;j<n;j++)
+			{
+				if(abs(a[i]+a[j]-k)<min)
+					min=a[i]+a[j];
+			}
+		ll dif=abs(k-min);
+		ll count=0;
+		for(ll i=0;i<n-1;i++)
+			for(ll j=i+1;j<n;j++)
+				{	
+					ll sum=a[i]+a[j];
+					if (((sum-k)==dif) || ((k-sum)==dif))
+						count++;
+				}	
+		cout<<dif<<" "<<count<<"
+";
+	}
+}

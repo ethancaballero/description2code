@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+
+long long int mod(long long int t)
+{
+	if(t>0)
+	return t;
+	else
+	return -t;
+		
+}
+
+int main()
+{
+	
+	long long int s,n,r,t;
+	char ch;
+
+	while(1)
+	{
+		cin>>n;
+		
+		if(n==0)
+		break;
+		
+		r=0;
+		
+		while(n--)
+		{
+			cin>>ch>>s;
+			if(ch=='M' && s>=0)
+			t=s+1;
+			else if(ch=='P' && s>=0)
+			t=s-1;
+			else if(ch=='M' && s<0)
+			t=-1-s;
+			else
+			t=1-s;
+			
+			if(mod(t)>=r)
+			r=mod(t);
+			else if((mod(t)%2) && !(r%2) || (r%2) && !(mod(t)%2))
+			r=r+1;
+			
+		}
+		
+		cout<<r<<endl;
+		
+	}
+	
+
+	
+	return 0;
+}

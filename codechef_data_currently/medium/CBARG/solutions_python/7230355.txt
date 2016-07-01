@@ -1,0 +1,11 @@
+if __name__ == '__main__':
+    T = input()
+    for _ in range(T):
+        N = input()
+        alloc, curr_alloc = 0, 0
+        for i in raw_input().split(" "):
+            i = int(i)
+            if (i - curr_alloc) > 0:
+                alloc += (i - curr_alloc)
+            curr_alloc = i 
+        print alloc 

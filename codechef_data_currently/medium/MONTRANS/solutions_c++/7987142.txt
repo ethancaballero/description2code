@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t,count,a,b,c,ans,temp,profit,max;
+	cin>>t;
+	while(t--)
+	{
+		count=0;
+		ans=0;
+		cin>>a;
+		cin>>b;
+		cin>>c;
+		profit=a*100+b;
+		max=profit;
+		while(count<10000&&profit>=c)
+		{
+			count++;
+			if(c>b)
+			{
+				a=a-1;
+				b=b+100;
+			}
+			b=b-c;
+			temp=a;
+			a=b;
+			b=temp;
+			profit=a*100+b;
+			if(profit>max)
+			{
+				max=profit;
+				ans=count;
+			}
+		}
+		cout<<ans<<endl;
+	}
+	return 0;
+}

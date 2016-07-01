@@ -1,0 +1,37 @@
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <string.h>
+#include <cstdlib>
+ 
+using namespace std;
+ 
+long long int a[1000001];
+double b[1000000];
+ 
+int main()
+{
+    int h, i;
+    cin >> h;
+    while (h != 0) {
+        int n = (1<<h) - 1;
+        for (i = 1; i <= n; i++) {
+            cin >> a[i];
+            b[i] = (double)a[i];
+        }
+        for (i = n / 2; i >= 1; i--) {
+            if (b[2*i] > b[2*i + 1]) {
+                a[i] = (a[i]*a[2*i])%1000000007;
+                b[i] = (b[i]*b[2*i]);
+            } else {
+                a[i] = (a[i]*a[2*i + 1])%1000000007;
+                b[i] = (b[i]*b[2*i + 1]);
+            }
+        }
+        cout << a[1] << endl;
+         cin >> h;
+    }
+    return 0;
+}
+ 

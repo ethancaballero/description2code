@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MOD = 1e9+7;
+#define pb push_back
+#define sci(x) scanf("%d",&x)
+
+vector< pair< long long , long long > > v;
+int main() {
+    long long n,m,k;
+    scanf("%lld%lld%lld",&n,&m,&k);
+    for(int i=0;i<k;i++) {
+        long long x,y;
+        scanf("%lld%lld",&x,&y);
+        v.pb(make_pair(y,x));
+    }
+    long long req = m*n;
+    sort(v.begin(),v.end());
+    long long ans = 0;
+    for(int i=0;i<v.size();i++) {
+        if(v[i].second>=req) {
+            ans+=req*v[i].first;
+            req = 0;
+            break;
+        }
+        else {
+            req-=v[i].second;
+            ans+=v[i].second*v[i].first;
+        }
+    }
+    if(req>0) {
+        puts("Impossible");
+    }
+    else {
+        printf("%lld
+",ans);
+    }
+}

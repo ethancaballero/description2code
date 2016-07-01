@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,p,x,u;
+    cin>>t;
+    while(t--)
+    {
+        u=2048,x=0;
+        cin>>p;
+        while(p%u!=0)
+        {
+            if(p%u<p)
+            {
+                x+=p/u;
+                p=p%u;
+            }
+            u/=2;
+        }
+        x+=p/u;
+    cout<<x<<endl;
+    }
+    return 0;
+}

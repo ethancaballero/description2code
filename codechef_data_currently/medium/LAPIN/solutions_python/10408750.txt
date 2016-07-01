@@ -1,0 +1,32 @@
+#https://www.codechef.com/problems/LAPIN
+import string 
+t = int(raw_input())
+
+while t > 0 :
+	word = raw_input()
+	first_half = word[:len(word) / 2]
+	second_half = ""
+	if len(word) % 2 == 0:
+		second_half = word[len(word) / 2:]
+	else:
+		second_half = word[len(word) / 2 + 1:]
+
+	alphabet = string.ascii_lowercase
+	
+	dic_1 = {}
+	dic_2 = {}
+
+	for c in alphabet:
+		dic_1[c] = 0
+		dic_2[c] = 0
+	
+	for i in range(len(word) / 2):
+		dic_1[first_half[i]] += 1
+		dic_2[second_half[i]] += 1
+
+	if dic_1 == dic_2:
+		print "YES"
+	else: 
+		print "NO"
+
+	t = t - 1

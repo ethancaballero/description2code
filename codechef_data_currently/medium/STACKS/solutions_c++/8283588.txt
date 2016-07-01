@@ -1,0 +1,57 @@
+#include<iostream>
+#include<stdio.h>
+#include<map>
+#include<algorithm>
+using namespace std;
+map<long ,long> mp;
+map<long ,long> :: iterator it,it2;
+int main()
+{
+  int t;
+  cin>>t;
+  long i,n,a;
+    while(t--)
+    {
+      cin>>n;
+        for(i=1;i<=n;i++)
+         {
+             scanf("%ld",&a);
+             it=mp.upper_bound(a);
+             if(it==mp.end())
+               {
+                   if(mp.count(a)==1)
+                     mp[a]=mp[a]+1;
+                   else
+                     mp[a]=1;
+               }
+             else
+               {  
+                   if(mp.count(a)==1)
+                     mp[a]=mp[a]+1;
+                   else
+                     mp[a]=1;
+                   it2=it;
+                   it++;
+                   if(it2->second==1)
+                     mp.erase(it2,it);
+                   else
+                     it2->second=it2->second-1;
+               } 
+         }
+      long ctr=0;
+      for(it=mp.begin();it!=mp.end();it++)
+        {
+          ctr=ctr+it->second;    
+        }
+      cout<<ctr<<" ";
+      for(it=mp.begin();it!=mp.end();it++)
+        {  
+           for(i=1;i<=it->second;i++)
+            cout<<it->first<<" ";    
+        }
+      cout<<"
+";    
+      mp.clear();     
+    }
+  return 0;
+}

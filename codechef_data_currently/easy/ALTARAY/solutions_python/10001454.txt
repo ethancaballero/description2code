@@ -1,0 +1,14 @@
+test_cases = input()
+for test_case in range(test_cases):
+    n = input()
+    ints = map(int, raw_input().split())
+    final_counter = ''
+    arr = [1]*n
+    for i in range(n - 2, -1, -1):
+        curr = ints[i]
+        next = ints[i+1]
+        if (curr > 0 and next > 0) or (curr < 0 and next < 0):
+            continue
+        else:
+            arr[i] = arr[i]+arr[i+1]
+    print ' '.join(str(a) for a in arr)

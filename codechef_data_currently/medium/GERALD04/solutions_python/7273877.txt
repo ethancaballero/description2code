@@ -1,0 +1,6 @@
+for _ in range(int(raw_input())):
+    ht1, mt1 = map(int, raw_input().split(':'))
+    ht2, mt2 = map(int, raw_input().split(':'))
+    dist=int(raw_input())
+    t=(ht1*60+mt1)-(ht2*60+mt2)  
+    print "%.1f %.1f" % (t+dist, t if 2*dist<=t else ((t+2.0*dist)/2)) 

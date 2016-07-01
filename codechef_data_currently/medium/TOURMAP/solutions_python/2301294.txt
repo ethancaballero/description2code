@@ -1,0 +1,45 @@
+'''
+Created on Jun 28, 2013
+
+@author: psgada
+'''
+import sys
+
+def min_cost():
+    
+    num_cases = int(sys.stdin.readline().strip())
+    
+    for i in range(0, num_cases):
+        
+        num_route = int(sys.stdin.readline().strip())
+        if num_route == 1:
+            continue
+        cost = 0
+        route_dict = {}
+        start_set = set()
+        end_set = set()
+        start_end_dict ={}
+        
+        for j in range(0, num_route-1):
+            route = sys.stdin.readline().strip().split() 
+            start_set.add(route[0])
+            end_set.add(route[1])
+            start_end_dict[route[0]] = route[1]
+            key_val = route[0]+'-'+route[1]
+            route_dict[key_val] = route[2]
+            
+            
+        start_city = start_set.difference(end_set).pop()
+        num_route -= 1
+        while num_route > 0:
+            cost += int(route_dict[start_city+'-'+start_end_dict[start_city]].split('$')[0])
+            print start_city+' '+start_end_dict[start_city]+' '+ route_dict[start_city+'-'+start_end_dict[start_city]]
+            start_city = start_end_dict[start_city]
+            
+            num_route -= 1
+            
+        print str(cost)+'$'
+        
+        
+        
+min_cost()

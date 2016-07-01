@@ -1,0 +1,16 @@
+t = input()
+
+for i in range(t):
+    s = raw_input()
+    length = len(s)
+    flag = 0
+    for ch in s:
+        char_length = s.count(ch)
+        if length-char_length == char_length:
+            flag = 1
+            break
+
+    if flag:
+        print "YES"
+    else:
+        print "NO"

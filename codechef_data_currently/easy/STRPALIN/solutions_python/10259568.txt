@@ -1,0 +1,11 @@
+import itertools as it
+t=int(raw_input())
+ti=0
+while ti<t:
+    x=raw_input().strip()
+    y=raw_input().strip()
+    if len(set(x).intersection(set(y)))>0:
+        print "Yes"
+    else:
+        print "No"
+    ti+=1

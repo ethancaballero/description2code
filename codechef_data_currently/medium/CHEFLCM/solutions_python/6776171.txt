@@ -1,0 +1,13 @@
+import math
+
+T = input()
+for i in xrange(T):
+	N = input()
+	s = 0
+	temp = math.sqrt(N)
+	for j in xrange(1,int(temp)+1):
+		if N%j == 0:
+			s += j + N/j
+	if temp == int(temp):
+		s -= int(temp)
+	print s

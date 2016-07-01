@@ -1,0 +1,45 @@
+def main():
+    t = int(raw_input())
+    while t != 0:
+        inp = (raw_input()).split()
+        n = int(inp[0])
+        k = int(inp[1])
+        
+        inp = (raw_input()).split()
+        a = [0] * len(inp)
+        
+        for i in range(0, n):
+            a[i] = int(inp[i])
+            
+        inp = (raw_input()).split()
+        b = [0] * len(inp)
+        
+        for i in range(0, n):
+            b[i] = int(inp[i])
+        
+        def_inter = 0
+        inter = 0
+        max_inter = 0
+        
+        for i in range(0, n):
+            inter += a[i]*b[i]
+        max_inter = inter  
+        def_inter = inter
+        
+        for i in range(0, n):
+            inter = def_inter + b[i]*k
+            if inter > max_inter:
+                max_inter = inter
+            inter = def_inter
+            
+            inter = def_inter - b[i]*k
+            if inter > max_inter:
+                max_inter = inter
+            inter = def_inter
+                
+        print max_inter
+            
+        
+        t -= 1
+
+main()

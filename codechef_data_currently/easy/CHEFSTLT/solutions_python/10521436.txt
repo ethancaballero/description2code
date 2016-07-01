@@ -1,0 +1,12 @@
+t=input()
+for i in range(0,t):
+    s1=raw_input()
+    s2=raw_input()
+    a=0
+    b=0
+    for j in range(0,len(s1)):
+        if s1[j]!=s2[j] and (s1[j]!= '?' and s2[j]!= '?'):
+            a+=1
+        if s1[j]!=s2[j] or s1[j]=='?' or s2[j]=='?':
+            b+=1
+    print a,b

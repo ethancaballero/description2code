@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+int main()
+{
+	int n;
+	cin>>n;
+	long long inp[n];
+	long long dp[102][102]={0};
+	for(int i=0;i<n;i++)
+		cin>>inp[i];
+	for(int length=0;length<n;length++)
+	{
+		for(int i=0;i<n;i++)
+		{
+			int j=i+length;
+			if(j>n-1 or i==j)
+				continue;
+			//cout<<i<<"  "<<j-1<<"  "<<dp[i][j-1]<<endl;
+			dp[i][j]=dp[i][j-1];
+			for(int k=i;k<j;k++)
+			{   if(inp[j]>0 and inp[k]==-inp[j]){
+				if(k==i){
+						dp[i][j] = (dp[i][j] + 1+dp[k+1][j-1])%MOD;	
+					}
+					else{
+						dp[i][j] = (dp[i][j] + ((1+dp[k+1][j-1])*(1+dp[i][k-1]))%MOD )%MOD;	
+					}
+				}
+			}
+			//cout<<i<<"  "<<j<<"  "<<dp[i][j]<<endl;
+		}
+	}
+	cout<<dp[0][n-1]+1<<endl;
+}

@@ -1,0 +1,121 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int minF(int,int,int,int);
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    short tc;
+    cin>>tc;
+    int Lo=1,U=251;
+    int primes[54];
+    int ctr=0;
+    int i,j,d;
+    d=U-Lo+1;
+    bool *flag=new bool[d];
+    for (i=0;i<d;i++) flag[i]=true;
+    for (i=(Lo%2!=0);i<d;i+=2) flag[i]=false;
+    for (i=3;i<=sqrt(U);i+=2) {
+    if (i>Lo && !flag[i-Lo]) continue;
+    j=Lo/i*i; if (j<Lo) j+=i;
+    if (j==i) j+=i;
+    j-=Lo;
+    for (;j<d;j+=i) flag[j]=false;
+    }
+    if (Lo<=1) flag[1-Lo]=false;
+    if (Lo<=2) flag[2-Lo]=true;
+    for (i=0;i<d;i++) if (flag[i]&&ctr<5005) {primes[ctr]=Lo+i;ctr++;}
+
+    while(tc--)
+    {
+        int r,c;
+        ctr=0;
+        cin>>r>>c;
+        char a[r][c];
+        for(int i=0;i<r;i++)
+            for(int j=0;j<c;j++)
+                cin>>a[i][j];
+
+        int L[r][c],R[r][c],T[r][c],B[r][c];
+
+        for(int i=0;i<r;i++)
+        {
+            L[i][0]=0;
+            for(int j=1;j<c;j++)
+                if(a[i][j-1]=='^')
+                    L[i][j]=L[i][j-1] + 1;
+                else
+                    L[i][j]=0;
+        }
+
+        for(int i=0;i<r;i++)
+        {
+            R[i][c-1]=0;
+            for(int j=c-2;j>=0;j--)
+            {
+                if(a[i][j+1]=='^')
+                    R[i][j] = R[i][j+1] + 1;
+                else
+                    R[i][j]=0;
+            }
+        }
+
+        for(int j=0;j<c;j++)
+        {
+            T[0][j]=0;
+            for(int i=1;i<r;i++)
+                if(a[i-1][j]=='^')
+                    T[i][j]=T[i-1][j] + 1;
+                else
+                    T[i][j]=0;
+        }
+
+        for(int j=0;j<c;j++)
+            {
+                B[r-1][j]=0;
+                for(int i=r-2;i>=0;i--)
+                {
+                    if(a[i+1][j]=='^')
+                        B[i][j] = B[i+1][j] + 1;
+                    else
+                        B[i][j]=0;
+                }
+            }
+
+        for(int i=2;i<r-2;i++)
+        {
+            for(int j=2;j<c-2;j++)
+            {
+                if(a[i][j]=='^')
+                {
+                int min =  minF(L[i][j],R[i][j],T[i][j],B[i][j]);
+                if(min>1)
+                for(int k=0;k<54;k++)
+                {
+                    if(primes[k]>min)
+                        break;
+                    else
+                        {
+                            ctr++;
+                        }
+                }
+                }
+            }
+        }
+
+           cout<<ctr<<endl;
+    }
+    return 0;
+}
+
+int minF(int l,int r,int t,int b)
+{
+    int min=l;
+    if(r<min)
+        min=r;
+    if(t<min)
+        min=t;
+    if(b<min)
+        min=b;
+    return min;
+}

@@ -1,0 +1,32 @@
+count = int(raw_input())
+
+total_counts_list = []
+finished_counts_list = []
+finished_jobs_lists = []
+for i in range(0, count):
+    temp = raw_input().split()
+    total_counts_list.append(int(temp[0]))
+    #    finished_job_count = temp[1]
+    finished_jobs_lists.append(sorted(raw_input().split()))
+
+for i in range(0, count):
+    chef_jobs = []
+    assistant_jobs = []
+
+    jobs = [x for x in range(1,total_counts_list[i]+1)]
+    next_job = "Chef"
+    for job in jobs:
+        if str(job) in finished_jobs_lists[i]:
+            continue
+        elif next_job is "Chef":
+            next_job = "Assistant"
+            chef_jobs.append(job)
+        else:
+            next_job = "Chef"
+            assistant_jobs.append(job)
+    for job in chef_jobs:
+        print job,
+    print ""
+    for job in assistant_jobs:
+        print job,
+    print ""

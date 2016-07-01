@@ -1,0 +1,37 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    long long int t,n1,n2;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n1>>n2;
+        if(n1==1 && n2==1)
+        {
+            cout<<"Vanka
+";
+        }
+        else if(n1==1 || n2==1)
+        {
+            cout<<"Tuzik
+";
+        }
+        else
+        {
+            if(n1%2==0 && n2%2==0)
+            {
+                cout<<"Tuzik
+";
+            }
+            else if(n1%2!=0 && n2%2!=0)
+            cout<<"Vanka
+";
+            else cout<<"Tuzik
+";
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,19 @@
+cases = int(raw_input().strip())
+while cases > 0:
+	a = raw_input().strip()
+	b = raw_input().strip()
+	
+	len_a = len(a)
+	len_b = len(b)
+	flag = 0
+	for i in range(0, len_a):
+		for j in range(0, len_b):
+			if a[i] == b[j]:
+				flag = 1
+				print "Yes"
+				break
+		if flag == 1:
+			break
+	if flag == 0:
+		print "No"
+	cases -= 1

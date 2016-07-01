@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   string s;
+   cin>>s;
+   int n=s.length();
+   //cout<<n<<endl;
+   vector<int>v[10];
+   bool visited[100005]={false};
+   int distance[100005]={0};
+   
+   
+   for(int i=1;i<n;i++)
+     {  
+      
+      int x=s[i]-'0'; 
+      v[x].push_back(i);
+      }
+   
+  
+     
+   queue<int>q;
+   
+   visited[0]=true;
+   q.push(0);
+	
+   while(q.empty()!=true)
+   {
+    int index=q.front();
+    q.pop();
+    if(index==n-1)
+      break;
+     
+    int value=s[index]-'0';
+    int vec_sz=v[value].size();
+    
+    //put all the occurences of this value into queue befor index+1 and index-1
+    
+    for(int j=0;j<vec_sz;j++)
+      {
+       int idx=v[value][j];
+       if(visited[idx]!=true)
+       {visited[idx]=true;
+       q.push(idx);
+       distance[idx]=distance[index]+1;
+       }
+      }
+     v[value].clear();
+      
+    if(index-1>=0 && visited[index-1]!=true)
+      {
+       visited[index-1]=true;
+       distance[index-1]=distance[index]+1;
+       q.push(index-1);
+      }
+      
+       if(index+1<=n-1 && visited[index+1]!=true)
+      {
+       visited[index+1]=true;
+       distance[index+1]=distance[index]+1;
+       q.push(index+1);
+      }
+    }
+	cout<<distance[n-1]<<endl;
+	return 0;
+}

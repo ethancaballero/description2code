@@ -1,0 +1,22 @@
+a=int(raw_input())
+b=map(int,raw_input().split())
+s=""
+l=[]
+for i in range(a):
+    if b[i]==-1:
+        continue
+    s=""
+    c=i
+    while b[c]!=-1:
+        t=c
+        s+=str(c+1)+" "
+        c=b[c]-1
+        b[t]=-1
+        
+    else:
+        s+=str(c+1)
+    s=s.strip()
+    l.append(s)
+print len(l)
+for i in l:
+    print i 

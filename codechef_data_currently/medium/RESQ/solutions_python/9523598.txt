@@ -1,0 +1,14 @@
+t=input()
+while t:
+	n=input()
+	sq=int(n**(.5))
+	if n==sq*sq:
+		print "0"
+	else:
+		diff=[]
+		for i in xrange(1,sq+2):
+			if n%i==0:
+				diff.append(abs(n/i-i))
+		print min(diff)
+	t=t-1
+			

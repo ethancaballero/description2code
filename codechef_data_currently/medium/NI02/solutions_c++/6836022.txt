@@ -1,0 +1,66 @@
+/*
+TASK: KGP Summers
+LANG: C++
+*/
+#include <bits/stdc++.h>
+using namespace std;
+#define X first
+#define Y second
+#define EPS 1e-9
+#define ALL(x) (x).begin(),(x).end()
+#define mp(x,y) make_pair((x),(y))
+#define pb(x) push_back((x))
+#define FOR(i,st,ed) for(int (i)=(st);(i)<(ed);(i)++)
+typedef pair<int,int> PII;
+typedef vector<int> vi;
+typedef vector<pair<int,int> > vii;
+typedef long long LL;
+
+int N,M,T;
+long long tb[2505];
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    //freopen("xxx.in","r",stdin);
+    //freopen("xxx.out","w",stdout);
+    int i,j,k;
+    cin >> T;
+    while(T--)
+    {
+        cin >> N;
+        vii v(N+2);
+        memset(tb,-1,sizeof tb);
+        for(i=1;i<=N;i++)
+        {
+            cin >> j >> k;
+            v[i]=mp(j,k);
+        }
+        cin >> j >> k;
+        v[0]=mp(j,k);
+        cin >> j >> k;
+        v[N+1]=mp(j,k);
+        priority_queue<pair<long long,int> > Q;
+        Q.push(mp(0,0));
+        tb[0]=0;
+        long long temp;
+        while(!Q.empty())
+        {
+            j=Q.top().Y;
+            temp=-Q.top().X;
+            Q.pop();
+            if(temp!=tb[j])
+                continue;
+            for(i=1;i<=N+1;i++)
+            {
+                if(tb[i]==-1 || tb[i]>temp+(v[i].X-v[j].X)*(v[i].X-v[j].X)+(v[i].Y-v[j].Y)*(v[i].Y-v[j].Y))
+                {
+                    tb[i]=temp+(v[i].X-v[j].X)*(v[i].X-v[j].X)+(v[i].Y-v[j].Y)*(v[i].Y-v[j].Y);
+                    Q.push(mp(-tb[i],i));
+                }
+            }
+        }
+        cout << tb[N+1] << '
+';
+    }
+}

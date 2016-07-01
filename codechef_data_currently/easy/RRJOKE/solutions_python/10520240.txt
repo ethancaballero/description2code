@@ -1,0 +1,11 @@
+import sys
+
+for __ in range(input()) :
+    n = input()
+    for __ in range(n) :
+        sys.stdin.readline()
+    ans = 0
+    while n != -1 :
+        ans ^= n
+        n -= 1
+    print ans

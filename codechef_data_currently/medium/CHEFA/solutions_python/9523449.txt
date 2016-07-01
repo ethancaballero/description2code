@@ -1,0 +1,7 @@
+t=input()
+while t:
+	n=input()
+	l=list(map(int,raw_input().split()))
+	l.sort()
+	print sum(l[len(l)-1::-2])
+	t=t-1

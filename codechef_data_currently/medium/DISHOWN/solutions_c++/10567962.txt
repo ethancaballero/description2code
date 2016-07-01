@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+int root(int a[],int p)
+{
+	int i=p;
+	while(i!=a[i])
+	{
+		a[i]=a[a[i]];
+		i=a[i];
+	}
+	return i;
+}
+int main(void)
+{
+	int a[100000],s[100000],q,t,i,j,k,n,p,l,rootp,rootl;
+	scanf("%d",&t);
+	while(t--)
+	{
+		cin>>n;
+		for(i=1;i<=n;i++)
+		a[i]=i;
+		for(i=1;i<=n;i++)
+		scanf("%d",&s[i]);
+		scanf("%d",&q);
+		while(q--)
+		{
+			scanf("%d",&k);
+			if(k==0)
+			{
+				cin>>p>>l;
+				rootp=root(a,p);
+				rootl=root(a,l);
+				if(rootp==rootl)
+				printf("Invalid query!
+");
+				else if(s[rootp]>s[rootl])
+				{
+					a[rootl]=rootp;
+				}
+				else if(s[rootp]<s[rootl])
+				{
+					a[rootp]=rootl;
+				}
+			}
+			else if(k==1)
+			{
+				scanf("%d",&p);
+				rootp=root(a,p);
+				printf("%d
+",rootp);
+			}
+		}
+		
+	}
+}

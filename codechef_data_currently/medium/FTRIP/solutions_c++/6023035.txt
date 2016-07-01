@@ -1,0 +1,30 @@
+#include<stdio.h>
+#define MAX(a,b) (a>b)?(a):(b)
+ 
+int main()
+{
+ int S,N,M,K,T,i;
+ double tmp,fav,tot;
+ scanf("%d",&T);
+ 
+ while(T--)
+ {
+  scanf("%d%d%d%d",&S,&N,&M,&K);
+  S--;
+  N--;
+  M--;
+  tmp=1,fav=0;tot=1;
+  i=MAX(N-S+M,0);
+  if(i>=K) fav=1;
+  for(;i<M&&i<N;i++)
+  {
+   tmp*=(double)(M-i)*(N-i)/((S-M-N+i+1)*(i+1));
+   if(i+1>=K) fav+=tmp;
+   tot+=tmp;
+  }
+  printf("%.6lf
+",fav/tot);
+ }
+ 
+ return 0;
+}  

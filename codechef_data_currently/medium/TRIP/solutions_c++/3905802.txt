@@ -1,0 +1,73 @@
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <string>
+using namespace std;
+int dp1[1000001];
+int dp2[1000001];
+int a[1000001];
+int N,M;
+
+
+void solve()
+{
+    int index=1;
+    int oindex=1;
+    int startindex=0;
+ //   scanf("%d",a+1);
+    int sum1=dp2[1];
+    int sum=0;
+    for(int i=2;i<=N;i++)
+    {
+       // scanf("%d",a+i);
+       //a[i]=readInt();
+        int minstep;
+        oindex=index;
+        while((a[i]-a[index])>M)
+        {
+  //          sum-=dp2[index];
+    //        if(sum<0) sum+=1000000007;
+            index++;
+
+        }
+        dp1[i]=dp1[index]+1;
+        if(dp1[i]==dp1[i-1])
+        {
+          //  sum=0;
+            for(int k=oindex;k<index;k++)
+            {
+                sum-=dp2[k];
+                if(sum<0) sum+=1000000007;
+            }
+            dp2[i]=sum;
+        }
+        else
+        {
+            sum=0;
+            for(int k=index;k<i;k++)
+            {
+                sum+=dp2[k];
+                if(sum>=1000000007) sum-=1000000007;
+            }
+            dp2[i]=sum;
+
+        }
+
+
+    }
+}
+int main()
+{
+    //freopen("data.in","r",stdin);
+    dp1[1]=0;
+    dp2[1]=1;
+    a[0]=0;
+    scanf("%d%d",&N,&M);
+    for(int i=1;i<=N;i++)
+    scanf("%d",a+i);
+    solve();
+    printf("%d %d
+",dp1[N]-1,dp2[N]);
+    return 0;
+}

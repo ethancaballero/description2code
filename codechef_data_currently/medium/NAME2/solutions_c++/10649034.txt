@@ -1,0 +1,55 @@
+#include <cstdio>
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <algorithm>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string m,n;
+        cin>>m>>n;
+        int result=1;
+        long lenM=m.length();
+        long lenN=n.length();
+        if(lenM>lenN){
+                long int j=0;
+            for(long int i=0;i<lenN;i++){
+                while(j<lenM){
+                    if(n[i]==m[j]){
+                        j++;
+                        break;
+                    }
+                    j++;
+                }
+                if(j>=lenM && i!=lenN-1){
+                        result=0;
+                    }
+            }
+        }
+        else{
+               long int j=0;
+            for(long int i=0;i<lenM;i++){
+                while(j<lenN){
+                    if(m[i]==n[j]){
+                        j++;
+                        break;
+                    }
+                    j++;
+                }
+                if(j>=lenN && i!=lenM-1){
+                        result=0;}
+
+            }
+        }
+        if(result==0){
+            cout<<"NO"<<endl;
+        }
+        else{
+            cout<<"YES"<<endl;
+        }
+    }
+return 0;
+}

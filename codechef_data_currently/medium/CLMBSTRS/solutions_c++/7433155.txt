@@ -1,0 +1,133 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+typedef long long int ll;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int,int> ii;
+typedef vector<ii> vii;
+
+#define all(x) (x).begin(),(x).end()
+#define pb push_back
+#define tr(c,it) for(typeof((c).begin()) it=(c).begin();it!=(c).end();it++)
+#define rd(x) scanf("%lld",&x)
+#define wr(x) printf("%lld
+",x)
+#define rep(i,a,b) for(i=a;i<b;i++)
+#define pi 3.141592653589793238462643383279
+#define mod 1000000007
+
+ll isguesscorrect(ll m,ll g)
+{
+    ll count=0;
+    while(m>0)
+    {
+        if(m%2)
+            count++;
+        m/=2;
+        if(count>g)
+            break;
+    }
+    return (count==g);
+}
+
+void matmul(ll a[][2],ll b[][2],ll c[][2])
+{
+    ll i,j,k;
+    rep(i,0,2)
+      rep(j,0,2)
+        {
+            c[i][j]=0;
+            rep(k,0,2)
+             {
+              c[i][j]+=(a[i][k]*b[k][j])%mod;
+              c[i][j]=c[i][j]%mod;
+             }
+        }
+}
+
+
+
+void matpow(ll a[][2],ll b,ll result[][2] )
+{
+    // identity matrix, equivalent to ans=1 in binary exponentiation
+    result[0][0]=1; result[0][1]=0;
+    result[1][0]=0; result[1][1]=1;
+    ll temp[2][2],i,j;
+    while(b>0)
+    {
+        if(b%2)
+        {
+            matmul(result,a,temp);
+            rep(i,0,2)
+              rep(j,0,2)
+                result[i][j]=temp[i][j];
+        }
+
+
+            matmul(a,a,temp);              //   squaring the base matrix
+            rep(i,0,2)
+              rep(j,0,2)
+                a[i][j]=temp[i][j];
+
+
+        b=b/2;
+    }
+}
+
+
+
+
+
+int main()
+{
+    ll t,n,g,m=0,i,j;
+    rd(t);
+    while(t--)
+    {
+        rd(n);
+        rd(g);
+
+        if(n==1||n==2)
+           {
+               if(g==1)
+                  printf("CORRECT
+");
+               else
+                   printf("INCORRECT
+");
+           }
+
+        if(n>2)
+        {
+         ll z[2][2], result[2][2];
+        z[0][0]=1;
+        z[0][1]=1;
+        z[1][0]=1;
+        z[1][1]=0;
+    /*
+        result[0][0]=0;
+        result[0][1]=0;
+        result[1][0]=0;
+        result[1][1]=0;
+    */
+        //fib[0][0]=2;
+        //fib[1][0]=1;
+
+        matpow(z,n-2,result);
+     /*    rep(i,0,2)
+           rep(j,0,2)
+              wr(result[i][j]); */
+        m=((result[0][0]*2)%mod + (result[0][1]*1)%mod)%mod;
+      //  wr(m);
+        if(isguesscorrect(m,g))
+            printf("CORRECT
+");
+        else
+            printf("INCORRECT
+");
+        }
+    }
+
+    return 0;
+}

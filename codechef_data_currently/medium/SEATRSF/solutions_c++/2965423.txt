@@ -1,0 +1,64 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <string.h>
+
+using namespace std;
+
+const int MOD = 1000000007;
+
+inline void add(int &a, int b, int mod){
+	a += b;
+	if(a >= mod)
+		a -= mod;
+}
+
+inline int powmod(int x, int t, int mod){
+	if(t == 0)
+		return 1 % mod;
+	int y = powmod(x, t >> 1, mod);
+	y = (long long)y*y % mod;
+	if(t & 1)
+		y = (long long)y * x % mod;
+	return y;
+}
+
+int main(void){
+	//freopen("input.txt", "r", stdin);
+	int T;
+	cin >> T;
+	while(T--){
+		int n, m, q, k;
+		cin >> n >> m >> q >> k;
+		int x = max(m-q, 0);
+		int y = 0;
+		if(q == 0)
+			y = 1;
+		else{
+			add(y, powmod(q+1, n, MOD), MOD);
+			add(y, (MOD - powmod(q, n, MOD) * 2 % MOD) % MOD, MOD);
+			add(y, powmod(q-1, n, MOD), MOD);
+		}
+		long long ans = (long long)x*y%MOD;
+		cout<<ans<<endl;
+	}
+
+
+	return 0;
+}

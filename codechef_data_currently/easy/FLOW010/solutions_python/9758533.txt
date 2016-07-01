@@ -1,0 +1,6 @@
+ID= {'B': 'BattleShip','b': 'BattleShip','C': 'Cruiser','c': 'Cruiser',
+'D': 'Destroyer','d': 'Destroyer', 'F': 'Frigate','f': 'Frigate'}
+T= input()
+while T>0:
+	print ID[raw_input()]
+	T-=1

@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<cstdlib>
+#include<string.h>
+#include<math.h>
+#include<time.h>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<iostream>
+#include<functional>
+#include<utility>
+using namespace std;
+
+#define gc getchar_unlocked
+typedef unsigned long long ull;
+
+void scanint(int &x);
+void scanlong(ull &x);
+
+int main()
+{
+    int noOfTestCase;
+    scanint(noOfTestCase);
+    for(int i=0; i<noOfTestCase; ++i)
+    {
+        int nVal,mVal;
+        scanint(nVal);scanint(mVal);
+        int soints[101];
+        int sofloats[101];
+        int cost,level;
+        memset(soints,0,(101)*sizeof(int));
+        memset(sofloats,0,(101)*sizeof(int));
+        for(int j=0;j<nVal;++j)
+        {
+            scanint(cost);scanint(level);
+            soints[level]+=cost;
+           // printf("%d %d
+",cost,level);
+        }
+        for(int j=0;j<mVal;++j)
+        {
+            scanint(cost);scanint(level);
+            sofloats[level]+=cost;
+            //printf("%d %d
+",cost,level);
+        }
+        int res=0;
+        for(int j=1;j<101;++j)
+        {
+            if(soints[j] > 0)
+            {
+                if(soints[j] >= sofloats[j])
+                    soints[j]-=sofloats[j];
+                else
+                {
+                    sofloats[j]-=soints[j];
+                    if(sofloats[j] > 0) res+=sofloats[j];
+                }
+            }
+            else if (soints[j] == 0 &&  sofloats[j]>0)
+                res+=sofloats[j];
+            //printf("%d %d
+",soints[i],sofloats[i]);
+        }
+        printf("%d
+",res);
+    }
+                
+    return 0;
+}
+
+void scanint(int &x)
+{
+        int flag=0;
+        register int c = gc();
+        if(c == '-') flag=1;
+	x = 0;
+	for(;(c<48 || c>57);c = gc());
+	for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+        if(flag == 1)x=-x;
+}
+
+void scanlong(ull &x)
+{
+        int flag=0;
+        register int c = gc();
+        if(c == '-') flag=1;
+	x = 0;
+	for(;(c<48 || c>57);c = gc());
+	for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+        if(flag == 1)x=-x;
+}
+

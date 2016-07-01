@@ -1,0 +1,72 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <algorithm>
+#include <string.h>
+#include <string>
+ 
+using namespace std;
+ 
+string s;
+int t, k;
+ 
+int main()
+{
+	scanf("%d", &t);
+	while (t--)
+	{
+		cin >> k >> s;
+		if (s.size() == 1)
+		{
+			cout << (s[0] == '?' ? '0' : s[0]) << endl;
+			continue;
+		}
+		if (k == 1)
+		{
+			if (s.size() == 1)
+				cout << (s[0] == '?' ? '0' : s[0]) << endl;
+			else
+				cout << "NO" << endl;
+		}
+		if (k == 2)
+		{
+			bool f1 = true;
+			bool f2 = true;
+			for (int i = 0; i < s.size(); ++i)
+			{
+				if (s[i] != '?' && s[i] != char('0' + i % 2))
+					f1 = false;
+				if (s[i] != '?' && s[i] != char('0' + (i + 1) % 2))
+					f2 = false;
+			}
+			if (s.size() % 2 == 1)
+				f1 = f2 = false;
+			if (!f1 && !f2)
+				cout << "NO" << endl;
+			else
+			{
+				for (int i = 0; i < s.size(); ++i)
+					cout << (f1 ? char('0' + i % 2) : char('0' + (i + 1) % 2));
+				cout << endl;
+			}
+		}
+		if (k >= 3)
+		{
+			bool ok = true;
+			for (int i = 0; i < s.size() && ok; ++i)
+				if (s[i] != '?' && s[i] == s[i == s.size() - 1 ? 0 : i + 1])
+					ok = false;
+			for (int i = 0; i < s.size() && ok; ++i)
+			{
+				for (char c = '0'; c < '3' && s[i] == '?'; ++c)
+					if (s[i == 0 ? s.size() - 1 : i - 1] != c && s[i == s.size() - 1 ? 0 : i + 1] != c)
+						s[i] = c;					
+			}
+			if (ok)
+				cout << s << endl;
+			else
+				cout << "NO" << endl;
+		}
+	}
+} 

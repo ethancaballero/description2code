@@ -1,0 +1,39 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+
+long int avg[1000][1000];
+int judge[1000][1000];
+int main(){
+    int tc,n,i,j;
+    long int temp;
+    double ans;
+
+    cin>>tc;
+
+    while(tc--){
+        cin>>n;
+        for(i=0;i<n;i++)
+            for(j=0;j<n;j++)
+                cin>>judge[i][j];
+        avg[0][0] = 0;
+        for(i=1;i<n;i++){
+            avg[0][i] = avg[0][i-1]+judge[0][i];
+            avg[i][0] = avg[i-1][0]+judge[i][0];
+        }
+        for(i=1;i<n;i++){
+            for(j=1;j<n;j++){
+                temp = avg[i-1][j] >= avg[i][j-1]?avg[i-1][j]:avg[i][j-1];
+                avg[i][j] = judge[i][j]+temp;
+            }
+        }
+        if(avg[n-1][n-1] >=0){
+            ans = avg[n-1][n-1]/(1.0*2*n-3);
+            cout<<fixed<<ans<<endl;
+        }
+        else
+            cout<<"Bad Judges
+";
+    }
+    return 0;
+}

@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+        int t,a,b,c,maxa,maxb,maxcount,i,temp;
+        cin >> t;
+        while(t--)
+        {
+                cin >> a >> b >> c;
+                maxcount = 0;
+                maxa = a;
+                maxb = b;
+                for(i=1;i<=10000;i++)
+                {
+                        if(c > b)
+                        {
+                                if(a <= 0)
+                                break;
+                                a--;
+                                b+=100-c;
+                        }
+                        else
+                                b-=c;
+
+                        temp = a;
+                        a = b;
+                        b = temp;
+                        if(a > maxa)
+                        {
+                                maxa = a;
+                                maxb = b;
+                                maxcount = i;
+                        }
+                        else if(a == maxa && b > maxb)
+                        {
+                                maxb = b;
+                                maxcount = i;
+                        }
+                }
+                cout << maxcount << endl;
+        }
+        return 0;
+}

@@ -1,0 +1,108 @@
+#include <iostream>
+using namespace std;
+
+int granama(string str1,string str2){
+	int length1 = str1.length();
+	int length2 = str2.length();
+	int j=0;
+
+	
+	if(length1!=length2){
+		return 0;
+	}
+	
+	
+	bool visited[length2];
+	
+	for(int i=0;i<length2;i++)
+		visited[i]=false;
+	
+	for(int i=0;i<length1;i++)
+	{
+		
+		char p=str1[i];
+		bool flag=false;
+		
+		for(int j=0;j<length2;j++){
+			
+			if(p==str2[j] && visited[j]==false)
+			   {
+			   flag=true;
+			   visited[j]=true;
+			   break;
+			   }
+			
+		}
+		
+		if(flag==false){
+		return 0;
+		}
+	}
+	 return 1;
+ }
+
+
+int chef_granama(string str1,string str2){
+	int length1 = str1.length();
+	int length2 = str2.length();
+		
+	for(int i=0;i<length1;i++)
+	{		
+		char p=str1[i];
+		bool flag=false;
+		
+		for(int j=0;j<length2;j++){
+			
+			if(p==str2[j])
+			   {
+			   flag=true;
+			   break;
+			   }		
+		}
+		
+		if(flag==false){
+		return 0;
+		}
+	}
+	
+	for(int i=0;i<length2;i++)
+	{
+		
+		char p=str2[i];
+		bool flag=false;
+		
+		for(int j=0;j<length1;j++){
+			
+			if(p==str1[j])
+			   {
+			   flag=true;
+			   break;
+			   }		
+		}
+		
+		if(flag==false){
+		return 0;
+		}
+	}
+	 return 1;	
+}
+
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		string str1, str2;
+		cin>>str1>>str2;
+		int x=granama(str1,str2);
+		int y=chef_granama(str1,str2);
+		//cout<<x<<" "<<y<<endl;
+		if(x==y){
+			cout<<"YES"<<endl;
+		}
+		else{
+			cout<<"NO"<<endl;
+		}
+		
+	}
+}

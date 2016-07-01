@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   int t,i,n,year;
+   cin>>t;
+   while(t--)
+   {
+       cin>>year;
+       n=year-1900;
+       for(i=1900;i<year;i++)
+       {
+           if((i%4==0 && i%100!=0) ||(i%400 ==0))
+               n++;
+       }
+       n=n%7;
+       switch(n)
+    		{
+    			case 0:
+    			cout<<"monday"<<endl;break;
+    			case 1:
+    			cout<<"tuesday"<<endl;break;
+    			case 2:
+    			cout<<"wednesday"<<endl;break;
+                case 3:
+                cout<<"thursday"<<endl;break;
+    			case 4:
+    			cout<<"friday"<<endl;break;
+    			case 5:
+    			cout<<"saturday"<<endl;break;
+    			case 6:
+    			cout<<"sunday"<<endl;break;
+    			default:cout<<"error";
+    		}
+   }
+   
+   return 0;          
+}

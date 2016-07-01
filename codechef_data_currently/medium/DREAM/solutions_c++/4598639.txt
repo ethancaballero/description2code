@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define N 100005
+
+int arr[N], val[N];
+vector<int> vec[N];
+int n, k, tot;
+
+int main() {
+	scanf("%d%d", &n, &k);
+
+	for (int i = 1; i <= n; i++) {
+		scanf("%d", arr + i);
+		val[tot++] = arr[i];
+	}
+
+	sort(val, val + tot);
+	tot = unique(val, val + tot) - val;
+
+	for (int i = 1; i <= n; i++) {
+		vec[lower_bound(val, val + tot, arr[i]) - val].push_back(i);	
+	}	
+	
+	int res = 0;
+
+	for (int i = 0; i < N; i++) {
+		if (vec[i].size() == 0) continue;
+		int rt = vec[i][0] + k - 1;
+		res++;
+		for (int j = 1; j < vec[i].size(); j++) {
+			if (vec[i][j] > rt) {
+				rt = vec[i][j] + k - 1;
+				res++;
+			}				
+		}
+	}	
+
+	printf("%d
+", res);
+	return 0;
+}
+

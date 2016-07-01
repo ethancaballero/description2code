@@ -1,0 +1,29 @@
+#include <iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+ 
+int main() {
+	long long int t,i,j,v;
+	double a1,a2;
+	cin>>t;
+	for(v=0;v<t;v++)
+	{
+		cin>>a1;
+		for(i=0;i<12;i++)
+		{
+			for(j=0;j<60;j++)
+			{
+				a2=30*i -5.5*j;
+				if(a2>180)
+				a2=360-a2;
+				if(fabs(a1-a2)<1.0/120.0)
+				 printf("%02d:%02d
+",i,j);
+			}
+		}
+	}
+	
+	// your code goes here
+	return 0;
+} 

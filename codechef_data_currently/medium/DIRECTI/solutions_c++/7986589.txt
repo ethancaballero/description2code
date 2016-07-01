@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <limits.h>
+ 
+void losen()
+{
+int N, t;
+char a[100][100];
+char *p;
+ 
+gets(a[0]);
+N=atoi(a[0]);
+ 
+for(t=0; t<N; t++)
+	gets(a[t]);
+ 
+for(t=N-1; t>=0; t--)
+	{
+	if(t==N-1)
+		printf("Begin ");
+	else
+		{
+		if(a[t+1][0]=='L')
+			printf("Right ");
+		else
+			printf("Left ");
+		}
+ 
+	if(a[t][0]=='L')
+		p=a[t]+5;
+	else
+		p=a[t]+6;
+ 
+	puts(p);
+	}
+ 
+ 
+puts("");
+}
+ 
+int main()
+{
+int fall;
+char a[100];
+for(gets(a),fall=atoi(a); fall--; losen());
+return 0;
+}

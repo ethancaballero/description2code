@@ -1,0 +1,24 @@
+def gcd(x,y):
+	if (x==0):
+		return y
+	if (y==0):
+		return x
+	if (y>x):
+		return gcd (x,y%x)
+	else:
+		return gcd (x%y,y)
+def c(n,k):
+	if (k>n-k):
+		k=n-k
+	p=1
+	for i in range(1,k+1):
+		d=gcd(p,i)
+		p/=d
+		p*=(n-i+1)/(i/d)
+	return p
+for t in xrange(int(raw_input())):
+	n,k=map(int,raw_input().split())
+	if (k>n):
+		print 0
+	else:
+		print c(n,k)

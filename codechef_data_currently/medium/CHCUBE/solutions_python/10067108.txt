@@ -1,0 +1,22 @@
+# your code goes here
+t=input()
+for i in range(t):
+	b = raw_input().split()
+	if(b[0]==b[2] and b[2]==b[4] and b[4]==b[0]):
+		print 'YES'
+	elif(b[0]==b[2] and b[2]==b[5] and b[5]==b[0]):
+		print 'YES'	
+	elif(b[0]==b[3] and b[3]==b[4] and b[4]==b[0]):
+		print 'YES'	
+	elif(b[0]==b[3] and b[3]==b[5] and b[5]==b[0]):
+		print 'YES'	
+	elif(b[1]==b[3] and b[3]==b[5] and b[5]==b[1]):
+		print 'YES'
+	elif(b[1]==b[3] and b[3]==b[4] and b[4]==b[1]):
+		print 'YES'
+	elif(b[1]==b[2] and b[2]==b[4] and b[4]==b[1]):
+		print 'YES'
+	elif(b[1]==b[2] and b[2]==b[5] and b[5]==b[1]):
+		print 'YES'	
+	else:
+		print 'NO'

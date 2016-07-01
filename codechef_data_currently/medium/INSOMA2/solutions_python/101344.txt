@@ -1,0 +1,46 @@
+
+def initialArray(matrix, n, letter):
+    for i in xrange(0,n):
+        for j in xrange(0,n):
+            if matrix[i][j] == letter:
+                yield (i,j)
+
+def nextMove(matrix, n, pos, letter):
+    for d in diagonals:
+        nm = nextMove1(matrix, n, pos, letter, d)
+        if nm != None: 
+            yield nm
+
+def nextMove1(matrix, n, pos, letter, delta):
+    x,y = pos[0]+delta[0], pos[1]+delta[1]
+    if 0 <= x < n and  0 <= y < n and letter == matrix[x][y]: 
+        return (x,y)
+
+def flatten(lst):
+    for elem in lst:
+        for i in elem:
+            yield i
+
+def readInput(file):
+    matrix = []
+    n = int(file.readline())
+    for i in xrange(0,n):
+        matrix.append(file.readline().strip().split(' '))
+    hladaj = file.readline().strip()
+    return (n, matrix, hladaj)
+
+if __name__ == "__main__":
+    import sys
+    diagonals = [(-1,-1),(1,-1),(-1,1),(1,1)]
+    
+    n, matrix, hladaj = readInput(sys.stdin)
+    
+    l = initialArray(matrix, n, hladaj[0])
+    for h in hladaj[1:] :
+        def closeH(ch):
+            return flatten(nextMove(matrix, n, pos, ch) for pos in l)
+        l = closeH(h)
+
+    count = 0
+    for x in l: count += 1 
+    print count

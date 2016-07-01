@@ -1,0 +1,87 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cctype>
+#include <string>
+#include <cstring>
+#include <ctime>
+#include <string.h>
+
+using namespace std;
+
+/*typedef long long int64;
+typedef unsigned long long uint64;*/
+#define two(X) (1<<(X))
+#define twoL(X) (((int64)(1))<<(X))
+#define contain(S,X) (((S)&two(X))!=0)
+#define containL(S,X) (((S)&twoL(X))!=0)
+const double pi=acos(-1.0);
+const double eps=1e-11;
+/*template<class T> inline void checkmin(T &a,T b){if(b<a) a=b;}
+template<class T> inline void checkmax(T &a,T b){if(b>a) a=b;}
+template<class T> inline T sqr(T x){return x*x;}*/
+typedef pair<int,int> ipair;
+#define SIZE(A) ((int)A.size())
+#define LENGTH(A) ((int)A.length())
+#define MP(A,B) make_pair(A,B)
+#define PB(X) push_back(X)
+#define ll long long int
+#define si(x) scanf("%d",&x)
+#define sl(x) scanf("%lld",&x)
+#define pi(x) printf("%d",x)
+#define nl printf("
+")
+#define pl(x) printf("%lld",x)
+#define mod 1000000007
+
+ll repeat(int a,int b)
+{   
+    ll x= 1 , y = a;
+    while(b > 0)
+    {
+        if(b%2 == 1)
+        { 
+           x =( x * y ) % mod;
+        } 
+        y = (y * y) % mod;
+        b /= 2;
+    }
+    return x;
+}
+int main()
+{
+	int T,n;
+	cin>>T;
+	while(T--) {
+		cin>>n;
+		ll ans=0;
+		if(n==2||n==3) {
+			cout<<(n==2?12:24)<<endl;
+		}
+		else {
+			if((n-2)%2==0) {
+				ans=(9*(repeat(3,n-2)-1)+12)%mod;
+			}
+			else {
+				ans=(9*(repeat(3,n-2)+1)-12)%mod;
+			}
+			cout<<ans<<endl;
+		}
+		
+	}
+}

@@ -1,0 +1,14 @@
+# cook your code here
+a= int(raw_input())
+
+for i in range(a):
+    no=0
+    max=0
+    p=raw_input().split('#')
+    for i in range(len(p)):
+        if(len(p[i])>0)and(len(p[i])>max):
+            max=len(p[i])
+            no=no+1
+    print no
+    
+

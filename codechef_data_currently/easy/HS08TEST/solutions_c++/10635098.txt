@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	float bal;
+	int wd;
+	cin>>wd>>bal;
+ 
+	if((wd%5==0)&&.5<=bal-(float)wd)
+		bal=bal-wd-0.5;
+	cout<<bal<<endl;
+
+return 0;
+}

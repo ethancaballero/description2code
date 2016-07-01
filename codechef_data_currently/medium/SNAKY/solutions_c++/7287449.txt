@@ -1,0 +1,104 @@
+// Headers
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#include<cassert>
+#include<cstdlib>
+#include<vector>
+#include<map>
+#include<fstream>
+#include<list>
+#include<stack>
+#include<queue>
+#include<algorithm>
+#include<bitset>
+#include<set>
+using namespace std;
+// Global declarations
+typedef long long int ll;
+typedef vector<int> vi;
+typedef vector<char> vc;
+typedef pair<int, int> pi;
+const int mod = 1e9 + 7;
+const int INF = 1 << 25;
+// Macros
+#define mp make_pair
+#define el putchar('
+')
+#define sp putchar(' ')
+#define Fill(a,val) memset(a,val,sizeof a)
+#define ff first
+#define ss second
+#define pb push_back
+#define ppb pop_back
+#define gcd __gcd
+#define all(a) a.begin(),a.end()
+
+const int NN = 1e3 + 3;
+bool board[NN][NN];
+char Steps[NN*NN];
+
+pi getCoordinates(pi xy, char c){
+	int x = xy.first;
+	int y = xy.second;
+	if (c == 'U'){
+		return mp(x, y + 1);
+	}
+	if (c == 'D'){
+		return mp(x, y - 1);
+	}
+	if (c == 'R'){
+		return mp(x + 1, y);
+	}
+	return mp(x - 1, y);
+}
+int main(){
+	int t;
+	cin >> t;
+	while (t--){
+		int N, M, x, y, L;
+		cin >> N >> M >> x >> y >> L;
+		cin >> Steps;
+		Fill(board, false);
+		board[x][y] = true;
+		pi currentXY = mp(x, y);
+		queue<pi>path;
+		while (!path.empty()){
+			path.pop();
+		}
+		path.push(currentXY);
+		for (int i = 1; i < L; ++i){
+			char c = Steps[i - 1];
+			pi xy = getCoordinates(currentXY, c);
+			board[xy.first][xy.second] = true;
+			currentXY = xy;
+			path.push(xy);
+		}
+		char currentDirection = Steps[L - 2];
+		int answer = 0;
+		string coll;
+		while (1){
+			pi xy = getCoordinates(currentXY, currentDirection);
+			currentXY = xy;
+			int x = xy.first;
+			int y = xy.second;
+			if (x <= 0 || y <= 0 || x > N || y > M){
+				coll = "WALL";
+				break;
+			}
+			pi tailXY = path.front();
+			path.pop();
+			if (tailXY != currentXY && board[x][y]){
+				coll = "BODY";
+				break;
+			}
+			++answer;
+			board[x][y] = true;
+			path.push(xy);
+			board[tailXY.first][tailXY.second] = false;
+		}
+		cout << coll<<' '<<answer; el;
+	}
+	return 0;
+}

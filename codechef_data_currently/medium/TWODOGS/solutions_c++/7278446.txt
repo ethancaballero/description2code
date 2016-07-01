@@ -1,0 +1,34 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<set>
+#include<cmath>
+using namespace std;
+int n,k,A[1000005];
+int main()
+{
+	for(int i=0;i<=1000003;i++)A[i]=100000007;
+	scanf("%d %d",&n,&k);
+	for(int x,i=1;i<=n;i++){
+		scanf("%d",&x);
+		A[x]=min(A[x],min(i,n-i+1));
+	}
+	
+	int res=100000007;
+	for(int l,r,i=1;i<k;i++)
+	if(A[i]!=100000007&&i!=(k-i))
+	{
+		if(A[k-i]!=100000007)res=min(res,max(A[i],A[k-i]));
+	}
+	
+	if(res<100000007)cout<<res<<"
+";
+	else cout<<"-1
+";		
+	return 0;
+}
+			
+		

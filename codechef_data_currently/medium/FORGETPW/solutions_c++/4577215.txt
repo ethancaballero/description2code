@@ -1,0 +1,118 @@
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <deque>
+#include <list>
+#include <set>
+#include <map>
+#include <numeric>
+#include <functional>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <climits>
+#include <string>
+ 
+ 
+using namespace std;
+ 
+int main()
+{
+    int t,n,len,i,flag=0,dec_flag,dec_index;
+ 
+    string s;
+    scanf("%d",&t);
+ 
+    while(t--)
+    {
+        char c_,c[200]={0},p;
+        flag=0;
+        dec_flag=0;
+        scanf("%d",&n);
+        while(n--)
+        {
+            //46 ascii value for .
+            cin>>c_;
+            cin>>p;
+ 
+            c[c_] = p;
+        }
+ 
+      cin>>s;
+ 
+      len = s.length();
+      //flag=0 means the string only contains 0s
+      //dec_index gives the index of the decimal point if it exists
+//dec_flag = 1 means the number contains a decimal mark
+// checking if the string contains only zeroes after all the replacements
+      for(i=0;i<len;i++)
+        {
+            if(c[s[i]]!=0)
+            {
+                s[i] = c[s[i]];
+            }
+            if(s[i]!=48 && s[i]!=46)
+                flag = 1;
+            if(s[i]==46)
+            {
+                dec_flag=1;
+                dec_index=i;
+            }
+        }
+        //if the number contains decimal mark
+        if(dec_flag==1)
+        {
+        i=0;
+        //removing starting zeroes
+        while(s[i]==48)
+        {
+            s[i] = -1;
+            i++;
+        }
+        //removing zeroes from the last
+        i=len-1;
+        while(s[i]==48)
+        {
+            s[i] = -1;
+            i--;
+        }
+ 
+        //checking if the decimal itself is irrelevant
+        if(i == dec_index)
+        {
+            s[i] = -1;
+        }
+ 
+        }
+        // when the number doesn't contain a decimal mark
+        else
+        {
+            i=0;
+            while(s[i]==48)
+            {
+                s[i] = -1;
+                i++;
+            }
+ 
+        }
+ 
+        if(flag == 0)
+            printf("0
+");
+        else
+        {
+            for(i=0;i<len;i++)
+            {
+                if(s[i]!=-1)
+                    printf("%c",s[i]);
+            }
+            printf("
+");
+        }
+         // correct till here
+ 
+ 
+    }
+    return 0;
+}

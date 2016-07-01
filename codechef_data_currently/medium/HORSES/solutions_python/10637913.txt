@@ -1,0 +1,14 @@
+import sys
+
+cases = int(sys.stdin.readline().rstrip())
+
+for _dummy in range(cases):
+	numhorses = int(sys.stdin.readline().rstrip())
+	horses = sys.stdin.readline().rstrip().split()
+	horses = map(int, horses)
+	horses.sort()
+	mindiff = horses[numhorses-1]
+	for i in range(numhorses-1):
+		if horses[i+1] - horses[i] < mindiff:
+			mindiff = horses[i+1] - horses[i]
+	print mindiff

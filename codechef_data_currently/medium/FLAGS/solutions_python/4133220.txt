@@ -1,0 +1,7 @@
+# your code goes here
+import math
+t=(int)(raw_input())
+for _ in range(0,t):
+	n=(int)(raw_input())
+	ans=(n*(n-1)*(n-1)<<1)+n*(n-1)*(n-2)+(n*(n-1)*(n-2)*(n-2)<<1)
+	print ans

@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>(t);
+    while(t--)
+    {
+        long long int L,R,ans=0,i,x;
+        cin>>L>>R;
+        x=2;
+        while(x<=R)
+        {
+            i=x;
+            while(i<=R)
+            {
+                if(i>=L and i<=R)
+                    ans++;
+                i=i*3;
+            }
+            x=x*2;
+        }
+        if(L==1 or R==1)
+            ans++;
+        cout<<ans<<endl;
+    }
+}

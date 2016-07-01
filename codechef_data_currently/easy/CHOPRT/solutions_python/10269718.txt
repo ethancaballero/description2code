@@ -1,0 +1,8 @@
+for i in range(int(raw_input())):
+    tra=str(raw_input()).split()
+    if long(tra[0])>long(tra[1]):
+        print ">"
+    elif long(tra[0])<long(tra[1]):
+        print "<"
+    else:
+        print "="

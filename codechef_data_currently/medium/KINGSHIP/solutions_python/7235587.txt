@@ -1,0 +1,12 @@
+R=lambda:map(int,raw_input().split())
+I=lambda:int(raw_input())
+for _ in xrange(I()):
+    n=I()
+    A=[]
+    A=R()
+    m=min(A)
+    cost=0
+    for i in A:
+        cost+=m*i
+    cost=cost-m*m
+    print cost

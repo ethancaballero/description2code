@@ -1,0 +1,17 @@
+for t in range(int(raw_input())):
+	N,K,Answer = [int(num) for num in raw_input().split()]
+	A=map(int,raw_input().split())
+	Operator = raw_input().strip()
+	if K:
+		if Operator == "XOR":
+			if K%2:
+				for num in range(N):
+					Answer ^= A[num]
+			
+		elif Operator == "AND":
+			for num in range(N):
+				Answer &= A[num]
+		elif Operator == "OR":
+			for num in range(N):
+				Answer |= A[num]
+	print Answer

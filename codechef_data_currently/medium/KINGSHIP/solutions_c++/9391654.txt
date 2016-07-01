@@ -1,0 +1,31 @@
+#include <iostream>
+#include<limits.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--){
+    long long int minm=INT_MAX,sum=0,index=-1;
+    int n;
+    cin>>n;
+    long long int *p = new long long int[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>p[i];
+        sum=sum+p[i];
+        if(minm>p[i])
+        {
+            minm=p[i];
+            //index=i;
+
+        }
+    }
+    sum=minm*(sum-minm);
+    cout<<sum<<"
+";
+
+    }
+    return 0;
+}

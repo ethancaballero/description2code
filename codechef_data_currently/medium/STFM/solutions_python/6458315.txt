@@ -1,0 +1,31 @@
+n ,m = list(map(int,raw_input().split()))
+X = []
+X = list(map(int,raw_input().split()))
+F = []
+F.append(1 % m)
+a = 1 % m
+for i in range(1,m):
+    a = ( (a % m) * (i % m) ) % m
+    F.append(a)
+def fact(x,m):
+    if x >= m:
+        return 0
+    return F[x]
+#print F
+i = 0
+s = 0
+while i < n:
+    x = X[i]
+    if x % 2 == 0:
+        a = x / 2
+        b = x + 1
+    else:
+        a = (x + 1) / 2
+        b = x
+    a = ( ( ( (a % m) * (x % m) ) % m ) * (b % m) ) % m
+    b = ( fact(x + 1,m) - 1 ) % m
+    #print str(x) + " "+str(a) + " 
+    a = ( a % m + b % m ) % m
+    s = ( s % m + a % m ) % m
+    i = i + 1
+print s

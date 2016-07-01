@@ -1,0 +1,15 @@
+#Chef and Dolls 
+#https://www.codechef.com/problems/MISSP
+
+t=input()
+while t!=0:
+	t-=1
+	ti=[]
+	for _ in xrange(input()):
+		ti.append(input())
+	tis=list(set(ti))
+#	print ti,tis
+	for i in tis:
+		if ti.count(i)%2!=0:
+			print i
+			break

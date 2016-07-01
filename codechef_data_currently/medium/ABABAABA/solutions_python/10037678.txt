@@ -1,0 +1,28 @@
+#!/usr/bin/python
+t = int(raw_input())
+ 
+for k in range(0, t):
+    string = raw_input()
+    size = len(string)
+    total = pow(2, size) - 1
+    results = {}
+ 
+    for i in range(1, total):
+        f = "{0:0" + str(size) + "b}"
+        ref = f.format(i)
+        s = ""
+        for j in range(0, len(ref)):
+            if ref[j] == "1":
+                s += string[j]
+ 
+        if not s in results:
+            results[s] = 1
+        else:
+            results[s] += 1
+ 
+    output = -1
+    for key, value in results.iteritems():
+        if value == 2:
+            output = key
+            break
+    print output

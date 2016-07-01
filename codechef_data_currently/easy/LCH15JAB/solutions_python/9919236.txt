@@ -1,0 +1,12 @@
+t = input()
+for _ in xrange(t):
+    r = raw_input()
+    flag = False
+    counters = [0] * 26
+    for c in r:
+        counters[ord(c) - ord('a')] += 1
+    for i in xrange(26):
+        if sum(counters[:i]) + sum(counters[i+1:]) == counters[i]:
+            flag = True       
+            break
+    print "YES" if flag else "NO"

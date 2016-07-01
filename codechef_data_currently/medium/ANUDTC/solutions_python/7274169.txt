@@ -1,0 +1,16 @@
+_=int(raw_input())
+while _>0:
+    n=int(raw_input())
+    if (360%n)==0:
+        print("y"),
+    else:
+        print("n"),
+    if n<=360:
+        print("y"),
+    else:
+        print("n"),
+    if n<=26:
+        print("y")
+    else:
+        print("n")
+    _-=1

@@ -1,0 +1,107 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<map>
+#include<cmath>
+
+using namespace std;
+
+int x[505],y[505];
+int r,R,n;
+
+double md[505];
+
+double dist(int x,int y)
+{
+	return sqrt(x*x+y*y);
+}
+
+double vdist(int v1,int v2)
+{
+	if(v1==0)
+	{
+		if(v2==0)
+		{
+			return 0;
+		}
+		else if(v2==n+1)
+		{
+			return (double)(R-r);
+		}
+		else
+		{
+			return dist(x[v2],y[v2])-(double)r;
+		}
+	} else {
+		if(v2==n+1)
+		{
+			return (double)R-dist(x[v1],y[v1]);
+		}
+		else
+		{
+			return dist(x[v2]-x[v1],y[v2]-y[v1]);
+		}
+	}
+}
+
+void solve()
+{
+	int visited[505]={0};
+	visited[0]=1;
+	md[0]=0;
+	for(int i=1;i<=n+1;i++)
+	{
+		md[i]=vdist(0,i);
+	}
+	int temp;
+	double max= 0;
+	for(int i=1;i<=n+1;i++)
+	{
+		temp=n+1;
+		for(int j=1;j<=n+1;j++)
+		{
+			if(!visited[j])
+			{
+				if(md[j]<md[temp])
+				{
+					temp=j;
+				}
+			}
+		}
+		if(md[temp]>max)
+		max=md[temp];
+		visited[temp]=1;
+		for(int j=1;j<=n+1;j++)
+		{
+			if(!visited[j])
+			{
+				double temp_dist=vdist(temp,j);
+				if(temp_dist<md[j])
+				{
+					md[j]=temp_dist;
+				}
+			}
+		}
+	}
+	printf("%.3lf
+",max);
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&r);	
+		scanf("%d",&R);
+		scanf("%d",&n);
+		for(int i=1;i<=n;i++)
+		{
+			scanf("%d",&x[i]);
+			scanf("%d",&y[i]);
+		}
+		
+		solve();
+	}
+	return 0;
+}

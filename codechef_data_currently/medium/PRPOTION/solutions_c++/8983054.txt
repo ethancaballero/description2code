@@ -1,0 +1,103 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+using namespace std;
+
+int mycmp(const void * a, const void * b)
+{
+    return (*(int*)a-*(int*)b);
+}
+
+int r[102],g[102],b[102],R,G,B;
+
+void swap(int* a, int* b)
+{
+    int t=*a;
+    *a=*b;
+    *b=t;
+}
+
+void one(int& i, int& j, int& k)
+{
+    if(i>j)
+    {
+        if(k>i)
+        {
+            for(int p=0; p<B; p++)
+                b[p]/=2;
+            //for(int i=B-1; i>0 && b[i]<b[i-1]; i--)
+              //  swap(&b[i],&b[i-1]);
+            return;
+        }
+        else
+        {
+            for(int p=0; p<R; p++)
+                r[p]/=2;
+            //for(int i=R-1; i>0 && r[i]<r[i-1]; i--)
+              //  swap(&r[i],&r[i-1]);
+            return;
+        }
+    }
+    else
+    {
+        if(k>j)
+        {
+            for(int p=0; p<B; p++)
+                b[p]/=2;
+            //for(int i=B-1; i>0 && b[i]<b[i-1]; i--)
+              //  swap(&b[i],&b[i-1]);
+            return;
+        }
+        else
+        {
+            for(int p=0; p<G; p++)
+                g[p]/=2;
+            //for(int i=G-1; i>0 && g[i]<g[i-1]; i--)
+              //  swap(&g[i],&g[i-1]);
+            return;
+        }
+    }
+}
+
+int max(int a, int b, int c)
+{
+    if(a>b)
+    {
+        if(c>a)
+            return c;
+        return a;
+    }
+    else
+    {
+        if(b>c)
+            return b;
+        return c;
+    }
+}
+
+int main()
+{
+    int m,i,j,k,t;
+    cin >> t;
+    while(t--)
+    {
+        cin >> R >> G >> B >> m;
+        for(i=0; i<R; i++)
+            cin >> r[i];
+        for(i=0; i<G; i++)
+            cin >> g[i];
+        for(i=0; i<B; i++)
+            cin >> b[i];
+        qsort(r,R,sizeof(int),mycmp);
+        qsort(g,G,sizeof(int),mycmp);
+        qsort(b,B,sizeof(int),mycmp);
+
+        while(m--)
+        {
+            one(r[R-1],g[G-1],b[B-1]);
+        }
+        printf("%d
+",max(r[R-1],g[G-1],b[B-1]));
+    }
+}

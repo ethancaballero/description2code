@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int min(int a,int b)
+{
+    return a>b?b:a;
+}
+int main()
+{
+    int n,i,j,t,m;
+    char col;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+        if((n%2==1&&m%2==1)||(n==1&&m!=2)||(m==1&&n!=2))
+            cout<<"No
+";
+        else cout<<"Yes
+";
+    }
+    return 0;
+}

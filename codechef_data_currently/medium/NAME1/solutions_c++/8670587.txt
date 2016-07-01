@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define ll long long int
+#define FOR(i,s,l) for (int i = s; i < l; ++i)
+#define sizearr(arr) sizeof(arr)/sizeof(arr[0])
+#define si(n) scanf("%d", &n)
+#define scanarr(arr,n) FOR(i,0,n) si(arr[i])
+#define valx(x) x-'a'
+
+int arr[26];
+int main(int argc, char const *argv[])
+{
+	int T; si(T);
+	while(T--){
+		memset(arr,0,sizeof(arr));
+		string pname1, pname2, pname;
+		cin>>pname1>>pname2;
+		pname = pname1+pname2;
+		int n, flag = 1; si(n);
+		int len = pname.size();
+		FOR(i,0,len) ++arr[valx(pname[i])];
+		while(n--){
+			string c; cin>>c;
+			len = c.size();
+			FOR(i,0,len) {
+			    if(valx(c[i]) > 25 || valx(c[i]) < 0)
+			    continue;
+			    --arr[valx(c[i])];
+				if(arr[valx(c[i])] < 0){
+					flag = 0; break;
+				}
+			}
+			if(!flag){
+				FOR(j,0,n) cin>>c;
+				break;
+			}
+		}
+		if(!flag) printf("NO
+");
+		else printf("YES
+");
+	}
+	return 0;
+}

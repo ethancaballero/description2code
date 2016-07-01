@@ -1,0 +1,24 @@
+T=int(raw_input())
+for x in xrange(T):
+	first=map(int,raw_input().split())
+	N=first[0]
+	W=first[1]
+	C=[0]*N
+	P=[0]*N
+	T=[0]*N
+	dp = [[0]*(W+1) for i in range(N+1)]
+	for i in xrange(N):
+		second=map(int,raw_input().split())
+		C[i]=second[0]
+		P[i]=second[1]
+		T[i]=second[2]
+	#Either he learns that question or he doesn't
+	for i in xrange(N+1):
+		for j in xrange(W+1):
+			if i==0 or j==0:
+				dp[i][j]=0
+			elif T[i-1]<=j:
+				dp[i][j]=max(dp[i-1][j],C[i-1]*P[i-1]+dp[i-1][j-T[i-1]])
+			else:
+				dp[i][j]=dp[i-1][j]
+	print dp[N][W]

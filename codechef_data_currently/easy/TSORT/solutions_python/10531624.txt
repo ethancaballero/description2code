@@ -1,0 +1,9 @@
+t=input()
+ans=[]
+for x in range(t):
+    a=input()
+    ans.append(a)
+ans.sort()
+for x in range(t):
+    print ans[x]
+    

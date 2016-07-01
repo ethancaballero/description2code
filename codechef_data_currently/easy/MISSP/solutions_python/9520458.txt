@@ -1,0 +1,14 @@
+testcases = int(raw_input())
+
+for i in range(0, testcases):
+    numberofelements = int(raw_input())
+    array = [int]
+    #print numberofelements
+    for j in range(0, numberofelements):
+        x = int(raw_input())
+        if x in array:
+            array.remove(x)
+        else:
+            array.extend([x])
+    #print array
+    print array[1]

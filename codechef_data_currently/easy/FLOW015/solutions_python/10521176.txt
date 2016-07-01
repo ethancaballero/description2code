@@ -1,0 +1,47 @@
+def isLeap(year):
+    if year%400 == 0:
+        return True
+    elif year%100 == 0:
+        return False
+    elif year%4 == 0:
+        return True
+    else:
+        return False
+    
+    
+def test2():
+    matches = input()
+    results = []
+    for _ in range(matches):
+        year_input = int(raw_input())
+        result = ''
+        year_base = 2001
+        day_base = 'monday'
+        day_dic = {0:'monday',1:'tuesday',2:'wednesday',3:'thursday',4:'friday',5:'saturday',6:'sunday'}
+        day_count = 0
+        list_year = []
+        direction = 0
+
+        if year_input > year_base:
+            for year in range(year_base,year_input):
+                if isLeap(year):
+                    day_count += 366
+                else:
+                    day_count +=365
+        else:
+            for year in range(year_input,year_base):
+                if isLeap(year):
+                    day_count -= 366
+                else:
+                    day_count -=365            
+
+  
+                
+        day_in_week = day_count%7
+        result = day_dic[day_in_week]
+        results.append(result) 
+    for e in results:
+        print e
+
+
+test2()

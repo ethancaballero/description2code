@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// my choco pie
+#define pb push_back
+#define VI vector<int>
+#define VL vector<long long int >
+
+// my fastest car series
+#define scan(x) scanf("%d",&x)
+#define print(x) printf("%d
+",x)
+#define scanll(x) scanf("%lld",&x)
+#define printll(x) printf("%lld
+",x)
+#define ms(x) memset(x,0,sizeof(x))
+
+// data pies
+#define ll long long int
+#define li long int
+#define ff float
+#define db double
+
+// loopi loops
+#define rep(i,a,b) for(i=a;i<b;i++)
+#define repr(i,a,b) for(i=a;i>=b;i--)
+
+// debugger
+#define print_v(x) for(int i=0;i<x.size();i++) cout << x[i] << " "
+
+#define MOD 1000000007
+inline int min(int x,int y){
+	return x>y?y:x;
+}
+int getMinLRTB(char arr[50][50],int x,int y,int rc,int c){
+	int l=0,r=0,t=0,bm=0;
+	int a=x,b=y;
+	while(a<rc-1&&arr[a+1][b]=='^'){
+		r++;
+		a++;
+	}
+	a = x;
+	b = y;
+	while(a>0&&arr[a-1][b]=='^'){
+		l++;
+		a--;
+	}
+	a = x;
+	b = y;
+	while(b<c-1&&arr[a][b+1]=='^'){
+		bm++;
+		b++;
+	}
+	a = x;
+	b = y;
+	while(b>0&&arr[a][b-1]=='^'){
+		t++;
+		b--;
+	}
+	a = min(l,r);
+	b = min(t,bm);
+	return min(a,b);
+}
+
+int main(){
+	int t;
+	scan(t);
+	char arr[50][50];
+	while(t--){
+		int r,c;
+		scan(r);
+		scan(c);
+		int i,j;
+		rep(i,0,r){
+			string s;
+			cin>>s;
+			rep(j,0,c){
+				arr[i][j] = s[j];
+			}
+		}
+		if(r<5||c<5){
+			cout<<"0
+";
+		}
+		else{
+			int ctr=0;
+			int x = 2,y = 2;
+			rep(x,2,r-2){
+				rep(y,2,c-2){
+					if(arr[x][y]=='^'){
+						int ans = getMinLRTB(arr,x,y,r,c);
+						if(ans>=2){
+							ctr++;
+						}
+					}
+				}
+			}
+			print(ctr);
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,13 @@
+#currency system
+t=input()
+for i in xrange(t):
+ sum=input()
+ note=0
+ l=[100,50,10,5,2,1]
+ for n in l:
+  note=note+sum/n
+  sum=sum%n
+  if sum==0:
+   break
+ print note  
+  

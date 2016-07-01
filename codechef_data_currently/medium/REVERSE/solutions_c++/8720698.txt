@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MX 100009
+typedef pair<int,int> pii;
+vector<int> adj[MX];
+int n,m,vis[MX],ans=INT_MAX,dis[MX];
+int main()
+{
+	scanf("%d%d",&n,&m);
+	int i,u,v;
+	for(i=0;i<m;i++)
+	{
+		scanf("%d %d",&u,&v);
+		if(u!=v)
+		{
+			adj[u].push_back(v);
+			adj[v].push_back(-u);
+		}
+	}
+	for(i=1;i<=n;i++)
+		dis[i]=INT_MAX;
+	priority_queue< pii,vector<pii>,greater<pii> > q;
+	q.push(make_pair(0,1));
+	dis[1]=0;
+	while(!q.empty())
+	{
+		v=q.top().second;
+		int tans=q.top().first;
+		q.pop();
+		if(v==n)
+		{
+			ans=tans;
+			break;
+		}
+		else if(!vis[v])
+		{
+			for(i=0;i<adj[v].size();i++)
+			{
+				int tp=abs(adj[v][i]);
+				int d=tp==adj[v][i]?0:1;
+				if(!vis[tp])
+				{
+					if(dis[tp]>dis[v]+d)
+					{
+						dis[tp]=dis[v]+d;
+						q.push(make_pair(dis[tp],tp));
+					}
+				}
+			}
+		}
+		vis[v]=1;
+	}
+	if(ans==INT_MAX)
+		printf("-1
+");
+	else
+		printf("%d
+", ans);
+	return 0;
+}

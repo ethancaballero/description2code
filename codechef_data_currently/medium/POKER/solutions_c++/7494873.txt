@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef pair< int , int > pii;
+typedef long long LL;
+#define fr first
+#define se second
+#define EPS 1e-8
+#define INF 10000*10000*10000LL
+stringstream ss;
+#define two(x) ( 1LL<<x )
+LL mod = 1000000007LL;
+
+/**************************Code****************************/
+
+string s[5];
+map < char, int > mp;
+int rank[13] = { 'A','K','Q','J','T','9','8','7','6','5','4','3','2' };
+
+int cmp( string a, string b )
+{
+	return mp[ a[0] ] < mp[ b[0] ];
+}
+int flush()
+{
+	for( int i = 0 ; i < 5 ; i ++ )
+		for( int j = i+1 ; j < 5 ; j ++ )
+			if( s[i][1] != s[j][1] )
+				return 0;
+	return 1;
+}
+int straight()
+{
+	if( s[0][0] == 'A' && s[1][0] == '5' && s[2][0] == '4' && s[3][0] == '3' && s[4][0] == '2' )
+		return true;
+	for( int i = 0 ; i < 5 ; i ++ )
+		if( mp[ s[i][0] ] != i + mp[ s[0][0] ] )
+			return false;
+	return true;
+}
+int royal_flush()
+{
+	return ( flush() && s[0][0] == 'A' && s[4][0] == 'T' );
+}
+int straight_flush()
+{
+	return ( flush() && straight() );
+}
+int four_of_a_kind()
+{
+	return ( s[0][0] == s[3][0] || s[1][0] == s[4][0] );
+}
+int full_house()
+{
+	return ( s[0][0] == s[2][0] && s[2][0] != s[3][0] && s[3][0] == s[4][0] ) 
+		|| ( s[0][0] == s[1][0] && s[1][0] != s[2][0] && s[2][0] == s[4][0] );
+}
+int three_of_a_kind()
+{
+	return ( s[0][0] == s[2][0] && s[2][0] != s[3][0] && s[3][0] != s[4][0] )
+		|| ( s[1][0] == s[3][0] && s[0][0] != s[1][0] && s[3][0] != s[4][0] )
+		|| ( s[2][0] == s[4][0] && s[0][0] != s[1][0] && s[1][0] != s[2][0] );
+}
+int two_pairs()
+{
+	return ( s[0][0] == s[1][0] && s[1][0] != s[2][0] && s[2][0] == s[3][0] && s[3][0] != s[4][0] )
+		|| ( s[0][0] == s[1][0] && s[1][0] != s[2][0] && s[2][0] != s[3][0] && s[3][0] == s[4][0] )
+		|| ( s[0][0] != s[1][0] && s[1][0] == s[2][0] && s[2][0] != s[3][0] && s[3][0] == s[4][0] );
+}
+int _pair()
+{
+	return ( s[0][0] == s[1][0] || s[1][0] == s[2][0] || s[2][0] == s[3][0] || s[3][0] == s[4][0] );
+}
+
+int main()
+{
+	for( int i = 0 ; i < 13 ; i ++ )
+		mp[ rank[i] ] = i;
+	int t;
+	scanf( "%d", &t );
+	while( t -- )
+	{
+		for( int i = 0 ; i < 5 ; i ++ )
+			cin >> s[i];
+		sort( s, s+5, cmp );
+		if( royal_flush() )
+			puts( "royal flush" );
+		else if( straight_flush() )
+			puts( "straight flush" );
+		else if( four_of_a_kind() )
+			puts( "four of a kind" );
+		else if( full_house() )
+			puts( "full house" );
+		else if( flush() )
+			puts( "flush" );
+		else if( straight() )
+			puts( "straight" );
+		else if( three_of_a_kind() )
+			puts( "three of a kind" );
+		else if( two_pairs() )
+			puts( "two pairs" );
+		else if( _pair() )
+			puts( "pair" );
+		else
+			puts( "high card" );
+	}
+	return 0;
+}

@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+import sys
+
+def solve( i, e ) :
+	if i >= len(e) : return 1
+	return max( e[i] * solve( 2*i, e ), e[i] * solve( 2*i+1, e ) )
+
+def main() :
+	while True :
+		n = int( raw_input() )
+		if n == 0 : break
+		edge = [int(x) for x in raw_input().split()]
+		edge2 = [0]
+		edge2.extend( edge )
+		
+		sol = solve( 1, edge2 ) % 1000000007
+		print sol
+		##sys.stdout.write( sol )
+		
+if __name__ == '__main__' :
+	main()

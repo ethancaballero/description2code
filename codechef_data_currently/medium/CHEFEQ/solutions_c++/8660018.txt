@@ -1,0 +1,39 @@
+#include <iostream>
+#include<set>
+#include<map>
+
+using namespace std;
+
+int main() {
+	
+	long long int n,i,t;
+	set<int> myset;
+	map<int,int> m1;
+		map<int,int>::iterator it;
+	cin>>t;
+	while(t--)
+	{
+	
+	
+	m1.clear();
+	cin>>n;
+	long long int a[n];
+	  for(i=0;i<n;i++)
+	  {
+	    cin>>a[i];
+	    m1[a[i]]++;
+	  }
+	  
+	  long long int temp=1;
+	  
+	  for(it=m1.begin();it!=m1.end();it++)
+	  {
+	     if((it->second)>=temp)
+	       temp=it->second;
+	  }
+	  
+	long long int ans=n-temp;
+	cout<<ans<<endl;
+	}
+	return 0;
+}

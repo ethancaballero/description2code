@@ -1,0 +1,26 @@
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+
+int ones(int x)
+{
+	if(x==0) return 0;
+	return 1 + ones(x&(x-1));
+}
+
+int main()
+{
+	int t, n, a, b, a0, b0, a1, b1; 
+
+	for(scanf("%d",&t);t--;)
+	{
+		scanf("%d %d %d", &n, &a, &b);
+		a1 = ones(a); a0 = n - a1;
+		b1 = ones(b); b0 = n - b1;
+		int ones = min(a1,b0) + min(b1,a0);
+		printf("%d
+", ((1<<ones)-1) << (n-ones) );
+	}
+
+	return 0;
+}

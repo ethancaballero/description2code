@@ -1,0 +1,11 @@
+import math
+for asd in range(int(raw_input())):
+	s=raw_input()
+	a=[0]*125
+	for c in s:
+		a[ord(c)]+=1
+	d=1
+	for temp in a:
+		if temp != 0:
+			d*=math.factorial(temp)
+	print (math.factorial(len(s))/d)%1000000007

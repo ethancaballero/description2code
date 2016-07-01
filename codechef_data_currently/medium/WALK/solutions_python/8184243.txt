@@ -1,0 +1,11 @@
+import sys
+
+t = input()
+for i in range(t):
+	n = input()
+	w = map(int, sys.stdin.readline().split())
+	j = len(w)-2
+	while j>=0:
+		w[j] = max(w[j],w[j+1]+1)
+		j-=1
+	print w[0]

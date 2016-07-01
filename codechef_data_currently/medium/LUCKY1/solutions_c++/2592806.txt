@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <string.h>
+#define ull unsigned long long
+using namespace std;
+int sum4[100002];
+int sum7[100002];
+ull ans[100002];
+int c[1000002];
+void pre()
+{
+	int i;
+	int j;
+	sum4[0] = 0;
+	sum7[0] = 0;
+	ans[0] = 0;
+	c[0] = 1;
+	for (i = 1; i < 100001; i++) {
+		int temp = i;
+		int four;
+		int seven;
+		four = seven = 0;
+		while (temp) {
+			int x = temp%10;
+			temp /= 10;
+			if (x == 4){
+				four++;
+			}
+			else if (x == 7) {
+				seven++;
+			}
+		}
+		sum4[i] = sum4[i-1]+four;
+		sum7[i] = sum7[i-1]+seven;
+		int s = sum4[i]-sum7[i];
+		ans[i] = ans[i-1]+c[s];
+		c[s]++;
+	}
+}
+int main()
+{
+	int t;
+	int n;
+	pre();
+	scanf("%d",&t);
+	while (t--) {
+		scanf("%d",&n);
+		printf("%llu
+",ans[n]);
+	}
+	return 0;
+}

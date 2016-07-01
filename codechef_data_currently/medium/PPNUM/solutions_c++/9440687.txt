@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_v) (int)(_v).size()
+#define all(_v) (_v).begin(),(_v).end()
+#define pii pair<int,int>
+typedef long long ll;
+const int INF = 1000000000;
+const ll MOD = 1e9 + 7;
+
+const int maxn = 1000010;
+
+ll get_sum(ll a,ll b,ll c) {
+	b = (b * (b + 1)) / 2;
+	a = (a * (a + 1)) / 2;
+
+	b -= a;
+
+	b = (b * c) % MOD;
+
+	return b;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+
+	int t; cin >> t;
+	while (t --) {
+	    ll l,r; cin >> l >> r;
+
+		ll p = 1;
+		ll j = 1;
+		for (; p * 10 <= l; p *= 10, j ++);
+		
+		ll aa = (p * (p - 1)) / 2ll;
+		ll bb = (l * (l - 1)) / 2ll;
+		ll c = j;
+
+		ll ans = 0;
+		while (p * 10ll <= r) {
+			ans = (ans + get_sum(p - 1,p * 10 - 1,j)) % MOD;
+			p *= 10ll;
+			j ++;
+		}
+
+		ans = (ans + get_sum(p - 1,r,j)) % MOD;
+		ans = (ans + aa * c) % MOD;
+		ans = (ans - bb * c) % MOD;
+		ans = (ans + MOD) % MOD;
+		
+		cout << ans << "
+";
+	}
+	return 0;
+}

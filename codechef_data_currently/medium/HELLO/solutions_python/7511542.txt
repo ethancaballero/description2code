@@ -1,0 +1,13 @@
+t=int(raw_input())
+for asd in range (t):
+	d,u,n=map(float,raw_input().split())
+	old=d*u
+	p=0
+	plan=0
+	for x in range(int(n)):
+		m,r,c=map(float,raw_input().split())
+		new=r*u+(c/m)
+		if (new<old):
+			old=new
+			plan=x+1
+	print plan

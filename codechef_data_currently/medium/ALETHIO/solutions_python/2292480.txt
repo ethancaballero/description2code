@@ -1,0 +1,30 @@
+import sys
+
+s=sys.stdin.readline()
+t='0'
+pr=0
+mt=0
+mx=0
+for i in range(0,len(s)):
+  if ord(s[i])>=65 and ord(s[i])<=90:
+     if t!='0':
+        pr=mx
+        mt=int(t)  
+        mx=max(mt,pr)
+        t='9'
+     else:
+        t=t+'9'
+     ind=i
+     while ind!=0:
+          ind=ind-1
+          if ord(s[ind])>=48 and ord(s[ind])<=57:
+               t=s[ind]+t
+               #print t
+          else:
+               break  
+  else:
+      #if t!='0':
+        t=t+s[i]
+        #print t
+print max(mx,int(t))
+             

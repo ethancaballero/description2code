@@ -1,0 +1,21 @@
+t=int(raw_input())
+for i in range (0,t):
+    l,r=map(int, raw_input().split())
+    sum=0
+    dig=0
+    temp=l
+    while(temp>0):
+        temp=temp/10
+        dig=dig+1
+    j=l
+    while(1):
+        p=pow(10,dig)-1
+        if(p<=r):
+            sum=sum+((p*(p+1)/2)-((j-1)*j/2))*dig
+            j=p+1
+            dig=dig+1
+        else:
+            sum=sum+((r*(r+1)/2)-(j*(j-1)/2))*dig
+            break
+    ans=sum%1000000007
+    print "%d" % ans

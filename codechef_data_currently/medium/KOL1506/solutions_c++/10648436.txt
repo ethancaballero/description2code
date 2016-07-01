@@ -1,0 +1,104 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#define FFF 1000000007
+
+using namespace std;
+
+long int long mod(long long int i){
+	if(i>=0)
+	return i%FFF;
+	else return ((i%FFF)+FFF)%FFF;
+}
+
+long long  int pow_(long int A, int n){
+	int i;
+	long long int result = 1;
+	for(i=0;i<n;i++){
+		result = result*A;
+		result = mod(result);
+	}
+	return result;
+}
+
+
+
+
+
+int main(){
+int T,i,j,t,a;
+
+
+long long int comb[101][101];
+
+for(i=1;i<=100;i++)for(j=0;j<=100;j++) comb[i][j]= 0;
+comb[0][0] = 1;
+for(i=1;i<=100;i++)for(j=0;j<=i;j++){
+	if(j==0){ comb[i][j] = 1; continue; }
+	comb[i][j] = mod(comb[i-1][j-1] + comb[i-1][j]);
+	//printf("
+comb(%d,%d) = %lld  ====  %lld + %lld ",i,j,comb[i][j],comb[i-1][j-1],comb[i-1][j]);
+}
+
+
+
+scanf("%d",&T);
+
+
+for(t=0;t<T;t++){
+	int N,k;
+	scanf("%d %d",&N,&k);
+	
+	long int A[N+1];
+	for(i=1;i<=N;i++) scanf("%ld",A+i);
+	
+	A[0] = 0;
+	std::sort(A,A+(N+1));
+	// for(i=1;i<=N;i++) printf("%lld ",A[i]);
+	 
+	long long int aa,power[N+1],kCa,Cia,r;
+	vector<vector<long long int> > C(N+1,vector<long long int>(k+1));
+	for(i=1;i<=N;i++) power[i] = 1;
+	for(i=0;i<=k;i++) C[1][i] = 0;
+	for(j=0;j<=k;j++){
+		if(j != 0) for(a=1;a<=N;a++) power[a] = mod(power[a]*A[a]);
+		for(i=2;i<=N;i++){
+			if(j%2 == 0) C[i][j] = mod(C[i-1][j] + power[i-1]);
+			else C[i][j] = mod(C[i-1][j] - power[i-1]);
+			//printf("
+C[%d][%d] = %lld == %lld +- %lld",i,j,C[i][j],C[i-1][j],power[i-1]);
+		}
+
+	}
+	
+
+	for(i=1;i<=N;i++) power[i] = 1;
+	long long rr = 0;
+	for(a=0;a<=k;a++){
+		kCa = comb[k][a];
+		r = 0;
+		if(a != 0) for(j=1;j<=N;j++) power[j] = mod(power[j]*A[j]);
+		//for(j=1;j<=N;j++) printf("power[%d],%d = %lld  ",j,a,power[j]);
+		//printf("
+");
+		for(i=2;i<=N;i++){
+			Cia = C[i][k-a];
+			aa = power[i];
+			r = mod(r + aa*Cia);
+		}
+		r = mod(r*kCa);
+		//printf("
+at a = %d, kCa = %lld,  r = %lld",a,kCa,r);
+		rr = mod(rr+r);
+	}
+	rr = mod(2*rr);
+	printf("%lld
+",rr);
+
+}
+
+
+return 0;
+}

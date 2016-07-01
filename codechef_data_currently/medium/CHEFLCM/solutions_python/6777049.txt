@@ -1,0 +1,31 @@
+from math import *
+def lcm(n):
+    x,c, t,f= 1,0,0,False
+    while (n%2 == 0):
+        c+=2**t
+        f = True
+        t+=1
+        n = n/2
+    if f == True:
+        x = c+2**t
+    i = 3
+    while i<=sqrt(n):
+        f = False
+        c = 0
+        t = 0
+        while (n%i == 0):
+            f = True
+            c+=i**t
+            t+=1
+            n = n/i
+        if f==True:
+            x = x*(c+pow(i,t))
+        i+=2    
+    if n>2:
+    	x = x*(n+1)
+    return x
+t = input()
+for j in range(t):
+    n = input()
+    x = lcm(n)
+    print int(x)

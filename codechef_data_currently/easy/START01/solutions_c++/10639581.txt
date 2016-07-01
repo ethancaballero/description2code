@@ -1,0 +1,18 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <limits.h>
+#include <stdlib.h>
+#include <stack>
+#include <iomanip>
+#include <math.h>
+using namespace std;
+typedef long long int ll;
+typedef long double ld;
+
+int main(){
+    ll n;
+    cin >> n;
+    cout << n;
+    return 0;
+}

@@ -1,0 +1,152 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+using namespace std;
+string life(string orig,string prev,int i){
+	if(i==orig.length()-1){
+		if(orig[i]=='0'){
+			bool chk1=true;
+			bool chk2=true;
+			bool atleastone=false;
+			int ent1=0;
+			int ent2=0;
+			if((prev[i-1]=='1' || prev[0]=='1') && !(prev[i-1]=='1' && prev[0]=='1')){
+				ent1=1;
+				atleastone=true;
+				if(prev[i-1]!=orig[i-1] && prev[i-2]=='1') chk1=false;
+				if(prev[i-1]==orig[i-1] && prev[i-2]=='0') chk1=false;
+				if(prev[0]!=orig[0] && prev[1]=='1') chk1=false;
+				if(prev[0]==orig[0] && prev[1]=='0') chk1=false;
+			}	
+			
+			if((prev[i-1]=='0' && prev[0]=='0') || (prev[i-1]=='1' && prev[0]=='1')){
+				atleastone=true;
+				ent2=1;
+				//cout<<"blaaz"<<endl;
+				if(prev[i-1]!=orig[i-1] && prev[i-2]=='0') chk2=false;
+				if(prev[i-1]==orig[i-1] && prev[i-2]=='1') chk2=false;
+				if(prev[0]!=orig[0] && prev[1]=='0') chk2=false;
+				if(prev[0]==orig[0] && prev[1]=='1') chk2=false;
+			}
+			if(atleastone==false) return "No solution";
+			if(chk1 && chk2 && ent1==1 && ent2==1) return "Multiple solutions";
+			else if(chk1==false && chk2==false) return "No solution";
+			else if(chk1==true && ent1==1) {
+				prev[i]='1';
+				return prev;
+			}
+			else if(chk2==true && ent2==1){
+					prev[i]='0';
+					return prev;
+			}
+			else return "No solution";
+		}
+		else if(orig[i]=='1'){
+			bool chk1=true;
+			bool chk2=true;
+			bool atleastone=false;
+			int ent1=0;
+			int ent2=0;
+			if((prev[i-1]=='1' || prev[0]=='1') && !(prev[i-1]=='1' && prev[0]=='1')){
+				atleastone=true;
+				ent1=1;
+				if(prev[i-1]!=orig[i-1] && prev[i-2]=='0') chk1=false;
+				if(prev[i-1]==orig[i-1] && prev[i-2]=='1') chk1=false;
+				if(prev[0]!=orig[0] && prev[1]=='0') chk1=false;
+				if(prev[0]==orig[0] && prev[1]=='1') chk1=false;
+			}
+			//00011101
+			if((prev[i-1]=='0' && prev[0]=='0') || (prev[i-1]=='1' && prev[0]=='1')){
+				atleastone=true;
+				ent2=1;
+				if(prev[i-1]!=orig[i-1] && prev[i-2]=='1') chk2=false;
+				if(prev[i-1]==orig[i-1] && prev[i-2]=='0') chk2=false;
+				if(prev[0]!=orig[0] && prev[1]=='1') chk2=false;
+				if(prev[0]==orig[0] && prev[1]=='0') chk2=false;
+			}
+			if(atleastone==false) return "No solution";
+			if(chk1 && chk2 && ent1==1 && ent2==1) return "Multiple solutions";
+			else if(chk1==false && chk2==false) return "No solution";
+			else if(chk1==true && ent1==1) {
+				prev[i]='0';
+				return prev;
+			}
+			else if(chk2==true && ent2==1){
+					prev[i]='1';
+					return prev;
+			}
+			else return "No solution";
+		}
+	}
+	if(i==0){
+			string tmp1 = orig;
+			string tmp2 = orig;
+			tmp1[0]='0';
+			string str1 = life(orig,tmp1,1);
+			tmp2[0]='1';
+			string str2 = life(orig,tmp2,1);
+			if(str1 == "Multiple solutions" || str2 == "Multiple solutions") {
+				return "Multiple solutions";
+			}
+			else if(str1=="No solution" && str2 == "No solution" ) return "No solution";
+			else if(str1!="No solution" && str2 != "No solution") return "Multiple solutions";
+			else if(str1!="No solution") return str1;
+			else if(str2!="No solution") return str2;
+			else return "bug";
+	}
+	else if(i==1){
+			string tmp1 = prev;
+			string tmp2 = prev;
+			tmp1[1]='0';
+			string str1 = life(orig,tmp1,2);
+			tmp2[1]='1';
+			string str2 = life(orig,tmp2,2);
+			if(str1 == "Multiple solutions" || str2 == "Multiple solutions") return "Multiple solutions";
+			else if(str1=="No solution" && str2 == "No solution" ) return "No solution";
+			else if(str1.find("solution")!=std::string::npos && str2.find("solution")!=std::string::npos) return "Multiple solutions";
+			else if(str1!="No solution") return str1;
+			else if(str2!="No solution") return str2;
+			else return "bug";
+	}
+	else{
+		if(orig[i-1]==prev[i-1]){
+			char tmp;	
+			if(prev[i-2]=='1'){
+				tmp='1';
+			}
+			else if(prev[i-2]=='0'){
+				tmp='0';
+			}
+			string str = prev;
+			str[i]=tmp;
+			string ans = life(orig,str,i+1);
+			return ans;
+		}
+		else if(orig[i-1]!=prev[i-1]){
+			char tmp;
+			if(prev[i-2]=='1'){
+				tmp='0';
+			}
+			else if(prev[i-2]=='0'){
+				tmp='1';
+			}
+			string str = prev;
+			str[i]=tmp;
+			string ans = life(orig,str,i+1);
+			return ans;
+		}
+	}
+	return "bugg";
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+	string str;
+	cin>>str;
+	string pl = str;
+	string strp = life(str,pl,0);
+	cout<<strp<<endl;
+	}
+	
+}

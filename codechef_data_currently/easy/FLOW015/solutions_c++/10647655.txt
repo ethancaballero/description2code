@@ -1,0 +1,84 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+bool leap(int i)
+{
+if((i%400)==0)
+return true;
+else if((i%100)==0)
+return false;
+else if((i%4)==0)
+return true;
+else
+return false;
+}
+void print(int a)
+{
+    switch(a)
+    {
+        case 6:cout<<"sunday";break;
+        case 0:cout<<"monday";break;
+        case 1:cout<<"tuesday";break;
+        case 2:cout<<"wednesday";break;
+        case 3:cout<<"thursday";break;
+        case 4:cout<<"friday";break;
+        case 5:cout<<"saturday";
+    }
+}
+int main()
+{
+int t;cin>>t;
+while(t--)
+{
+int y;cin>>y;int ans=0;
+if(y<2001)
+{
+for(int i=y;i<2001;i++)
+{
+if(leap(i))
+{
+      ans=ans+2;
+    if(ans>6)
+    {
+        ans=ans%7;
+    }
+}
+else
+{
+      ans=ans+1;
+    if(ans>6)
+    {
+        ans=ans%7;
+    }
+}
+}
+ans=(ans==0)?0:(7-ans);
+}
+else if (y>2001)
+{
+    for(int i=2001;i<y;i++)
+{
+if(leap(i))
+{
+     ans=ans+2;
+    if(ans>6)
+    {
+        ans=ans%7;
+    }
+}
+else
+{
+     ans=ans+1;
+     if(ans>6)
+    {
+       ans=ans%7;
+    }
+}
+}
+}
+else
+    ans=0;
+print(ans);
+cout<<endl;
+}
+}

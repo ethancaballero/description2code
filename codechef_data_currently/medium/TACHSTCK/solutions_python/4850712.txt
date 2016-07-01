@@ -1,0 +1,20 @@
+no_of_chopsticks,max_diff=map(int,raw_input().split())
+
+chop=[]
+
+for i in xrange(no_of_chopsticks):
+    chop.append(int(raw_input()))
+chop.sort()
+count=0
+i=0
+while i<len(chop)-1:
+    try:
+        if chop[i+1]-chop[i]<=max_diff:
+            count+=1
+            i+=2
+        else:
+            i+=1
+    except:
+        break
+    
+print count

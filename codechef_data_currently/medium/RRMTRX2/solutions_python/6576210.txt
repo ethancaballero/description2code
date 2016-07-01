@@ -1,0 +1,15 @@
+ns = raw_input().split(" ")
+n = int(ns[0])
+m = int(ns[1])
+lst = [0] * m
+for x in range(n):
+	cols = raw_input().split(" ")
+	for i in range(len(cols)):
+		lst[i] += int(cols[i])
+
+
+total = 1
+for t in range(len(lst)):
+	total *= lst[t]
+
+print total % 10000007

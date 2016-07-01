@@ -1,0 +1,15 @@
+t = input()
+while(t>0):
+    t-=1
+    gold_coins = input()
+    height = 0
+    sum = 0
+    j = 1
+    while(j<=gold_coins+1):
+        sum +=j
+        j = j+1
+        if(sum <=gold_coins):
+            height+=1
+        else:
+            break
+    print height

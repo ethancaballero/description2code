@@ -1,0 +1,20 @@
+# cook your code here
+t=int(raw_input())
+for x in range(t):
+    s=raw_input()
+    left=dict()
+    right=dict()
+    for i in range(len(s)/2):
+        if(s[i] in left.keys()):
+            left[s[i]]+=1
+        else:
+            left[s[i]]=1
+    for i in range(len(s)-len(s)/2,len(s)):
+        if(s[i] in right.keys()):
+            right[s[i]]+=1
+        else:
+            right[s[i]]=1
+    if(left==right):
+        print "YES"
+    else:
+        print "NO"

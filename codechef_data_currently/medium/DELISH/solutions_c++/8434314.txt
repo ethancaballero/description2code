@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define fastScan ios_base::sync_with_stdio(0); cin.tie(NULL);
+
+int main()
+{
+    fastScan;
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        long long int tlmx[n],arr[n],rmn[n],tlmn[n],rmx[n],lmn[n],lmx[n],i,ans;
+        for(i=0;i<n;i++)
+          cin>>arr[i];
+         lmx[0]=arr[0];
+         lmn[0]=arr[0];
+         for(i=1;i<n;i++){
+             lmx[i]=max((lmx[i-1]+arr[i]),arr[i]);
+             lmn[i]=min((lmn[i-1]+arr[i]),arr[i]);
+         }
+         tlmn[0]=arr[0];
+         tlmx[0]=arr[0];
+         for(i=1;i<n;i++){
+             tlmx[i]=max(tlmx[i-1],lmx[i]);
+             tlmn[i]=min(tlmn[i-1],lmn[i]);
+         }
+         rmn[n-1]=arr[n-1];
+         rmx[n-1]=arr[n-1];
+         for(i=n-2;i>=0;i--){
+             rmx[i]=max(arr[i],(rmx[i+1]+arr[i]));
+             rmn[i]=min(arr[i],(rmn[i+1]+arr[i]));
+         }
+         ans=tlmx[0]-rmn[1];
+         for(i=1;i<n-1;i++){
+             if(tlmx[i]-rmn[i+1] > ans)
+               ans=tlmx[i]-rmn[i+1];
+         }
+         for(i=0;i<n-1;i++){
+             if(rmx[i+1]-tlmn[i]>ans)
+               ans=rmx[i+1]-tlmn[i];
+         }
+         cout<<ans<<endl;
+         
+    }
+    return 0;
+}

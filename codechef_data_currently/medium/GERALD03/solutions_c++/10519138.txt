@@ -1,0 +1,79 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+using namespace std;
+
+string s;
+int t,n,curL,curR,l,r;
+
+void matchLeft(){
+	
+	if(l<curL){
+		for(int i=l;i<curL;i++)
+			s += "L-";
+	} else{
+		for(int i=curL;i<l;i++)
+			s += "L+";
+	}
+	curL = l;
+
+}
+
+void leftM(){
+	
+	for(int i=curL;i<curR-1;i++)
+		s += "L+";
+	curL = curR-1;
+
+}
+
+void matchRight(){
+	
+	if(r<curR){
+		for(int i=r;i<curR;i++)
+			s += "R-";
+	} else{
+		for(int i=curR;i<r;i++)
+			s += "R+";
+	}
+	curR = r;
+}
+
+int main() {
+	// your code goes here
+	
+	scanf("%d",&t);
+	
+	while(t--){
+		scanf("%d",&n);
+		scanf("%d %d",&curL,&curR);
+		s = "";
+		for(int i=2;i<=n;i++){
+		
+			scanf("%d %d",&l,&r);
+			if(curR<=l){
+				leftM();
+				
+				for(int i=curL;i<l;i++){
+					s+="R+L+";
+				}
+				curL = l;
+				curR = curL+1;
+				matchRight();
+				
+			}
+			else{
+				matchLeft();
+				matchRight();
+			
+			}
+			
+
+		}
+		cout << s.length()/2<<endl;
+		cout << s << endl;
+		
+	}
+	
+	return 0;
+}

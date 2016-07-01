@@ -1,0 +1,53 @@
+#include<cstdio>
+#include<cstring>
+#define MAX 50002
+int a[MAX], b[MAX], d[MAX], sols[MAX];
+
+int main()
+{
+	int T;
+	scanf("%d", &T);
+
+	while(T--)
+	{
+		int N;
+		scanf("%d", &N);
+		memset(d, 0, (N+1)*sizeof(int));
+
+		for(int i=0; i<N; i++)
+		{
+			scanf("%d %d", a+i, b+i);
+			d[a[i]]++;
+			d[b[i]+1]--;
+		}
+
+		int currbkn = 0, ns=0;
+		for(int i=0; i<=N; i++)
+		{
+			currbkn += d[i];
+			if(currbkn == i) sols[ns++] = i;
+		}
+
+		printf("%d
+", ns);
+		for(int i=0; i<N; i++)
+		{
+			if(a[i]<=sols[0] && sols[ns-1]<=b[i])
+			{
+				printf("1");
+			}
+			else
+			{
+				int m,n;
+				for(m=0; m<ns && sols[m] < a[i]; m++);
+				for(n=m; n<ns && sols[n] <= b[i]; n++);
+				for(; n < ns; m++, n++) sols[m] = sols[n];
+				ns=m;
+				printf("0");
+			}
+		}
+		printf("
+");
+	}
+	return 0;
+}

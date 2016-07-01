@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include<math.h>
+
+int main(void) {
+	// your code goes here
+     int n,q,i,a,b,j,maxr,maxc;
+    char st[20];
+    int row[314170],col[314170];
+    scanf("%d %d",&n,&q);
+    for(j=0;j<n;j++)
+        {
+            row[j]=0;
+            col[j]=0;
+        }
+    for(i=0;i<q;i++)
+    {
+        scanf("%s %d %d",st,&a,&b);
+        
+        if(st[0]=='R')
+        {
+            row[a-1]+=b;
+        }
+        else
+        {
+            col[a-1]+=b;
+        }
+        
+    }
+    maxr=row[0];
+        maxc=col[0];
+        for(j=1;j<n;j++)
+        {
+            if(maxr<row[j])
+            {
+                maxr=row[j];
+            }
+            if(maxc<col[j])
+            {
+                maxc=col[j];
+            }
+        }
+        printf("%d
+",maxr+maxc);
+	return 0;
+}
+

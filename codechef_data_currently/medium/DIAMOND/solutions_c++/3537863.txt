@@ -1,0 +1,46 @@
+//precalculating probability of 1st player picking Kth diamond in game with L diamonds
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+#define K 2001
+#define L 2001
+double dp[L][K];
+
+//recursive formula is C[L][K]=1-0.5*(C[L-1][K-1]+C[L-1][K])
+void init()
+{
+    dp[1][1]=1;
+    for(int len=2;len<L;++len)
+    {
+        for(int i=1;i<=len;++i)
+        {
+                if(i!=1){dp[len][i]=0.5*dp[len-1][i-1];}
+                if(i!=len){dp[len][i]+=0.5*(dp[len-1][i]);}
+                dp[len][i]=1-dp[len][i];
+                //if(len<5)cout<<dp[len][i]<<" ";
+        }
+        //if(len<5)cout<<endl;
+    }
+}
+
+int main()
+{
+    init();
+    int t,n;int ar[K];
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        for(int i=0;i<n;++i)scanf("%d",&ar[i]);
+        double ans=0;
+        int len=n;
+        for(int i=1;i<=len;++i)
+        {
+            ans+=dp[len][i]*ar[i-1];
+        }
+        printf("%lf
+",ans);
+    }
+    return 0;
+}

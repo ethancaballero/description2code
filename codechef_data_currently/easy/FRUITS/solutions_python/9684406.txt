@@ -1,0 +1,10 @@
+def process_problem_statement():
+    t = int(raw_input())
+    
+    for i in range(0,t):
+        N,M,K = map(int,raw_input().split())
+        
+        ans = abs(N-M) - K if abs(N-M)>K else 0
+        print ans
+        
+process_problem_statement()

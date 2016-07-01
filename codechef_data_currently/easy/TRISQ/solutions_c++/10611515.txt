@@ -1,0 +1,24 @@
+# include<stdio.h>
+int main()
+{
+	int i,j,s=0,d,t,b;
+	scanf("%d",&t);
+	int *a =new int[t];
+	for(i=0;i<t;i++)
+	{	
+		s=d=0;
+		scanf("%d",&b);
+		printf("
+");
+		for(j=(b-2)/2;j>0;j--)
+		{
+			s+=j;
+		}
+		a[i]=s;
+	}
+	for(i=0;i<t;i++)
+		printf("
+%d",a[i]);
+		delete a;
+	return 0;
+} 

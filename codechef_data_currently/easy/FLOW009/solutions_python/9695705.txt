@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 16 12:29:47 2016
+
+@author: matteoarno
+"""
+
+import sys
+
+data = sys.stdin.readlines()
+t = int(data.pop(0))
+
+for i in range(t):
+    q, p = map(int, data.pop(0).split(' '))
+    if q > 1000:
+        p = p * 0.9
+    print format(q*p*1.0,'.6f')

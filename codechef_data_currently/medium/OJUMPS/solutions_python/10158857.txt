@@ -1,0 +1,5 @@
+n = int(raw_input())
+if (n - 1) % 6 == 0 or n % 3 == 0 or n == 0:
+	print 'yes'
+else:
+	print 'no'

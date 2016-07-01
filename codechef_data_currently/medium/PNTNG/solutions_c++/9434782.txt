@@ -1,0 +1,53 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+typedef struct
+{
+    long long limit;
+    int cost;
+}layer;
+int cmpfun(const void *a, const void *b)
+{
+	return ((layer *)a)->cost - ((layer *)b)->cost;
+}
+int main()
+{
+    long long int n,m,h,i,sum=0,maxi,cost=0;
+    cin>>n>>m>>h;
+    layer t[h];
+    for(i=0;i<h;i++)
+    {
+        cin>>t[i].limit>>t[i].cost;
+        sum+=t[i].limit;
+    }
+   // if(sum<n*m)
+    //{
+      //  cout<<"Impossible";
+       // return 0;
+    //}
+	qsort(t,h,sizeof(layer),cmpfun);
+	maxi=n*m;
+    for(i=0;i<h;i++)
+    {
+       if(t[i].limit<maxi)
+       {
+        cost+=t[i].cost*t[i].limit;
+        maxi-=t[i].limit;
+        //if(maxi==0)
+           // break;
+       }
+       else
+       {
+          cost=cost+ maxi*t[i].cost;
+          maxi=0;
+          break;
+       }
+    }
+    if(maxi>0)
+    cout<<"Impossible";
+    else
+        cout<<cost;
+    return 0;
+
+}

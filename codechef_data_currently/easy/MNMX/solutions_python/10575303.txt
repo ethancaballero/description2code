@@ -1,0 +1,7 @@
+#chef and its array
+t=input()
+for i in range(t):
+ n=input()
+ a=map(int,raw_input().split())
+ a.sort()
+ print a[0]*(len(a)-1)

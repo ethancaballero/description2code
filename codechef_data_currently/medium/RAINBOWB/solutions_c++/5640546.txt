@@ -1,0 +1,58 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+
+typedef long long ll;
+const ll mod = 1000000007;
+
+int scanint(){
+	register int c = getchar();
+	int x=0;
+	for(;(c<48 || c>57);c=getchar());
+	for(;c>47 && c<58;c=getchar())
+	{
+		x=(x<<1)+(x<<3)+c-48;
+	}
+	return x;
+}
+
+ll modulo(ll a , ll b)
+{
+	if(a == 1 || b == 0)
+		return 1;
+	
+	ll ans = modulo(a , b/2);
+	if(b & 1){
+		ans = (((ans * ans) % mod) * a ) % mod; 
+	}else{
+		ans = (ans * ans) % mod ;
+	}
+	return ans;
+}
+
+ll calculate(int n){
+	if(n<13)
+		return 0 ;
+	
+	if(n%2==0){
+		n=(n-14)/2;
+	}else{
+		n=(n-13)/2;
+	}
+	ll res=1;
+	for(ll i=2 ; i<=6 ; i++){
+		res = (res * modulo(i,mod-2)) % mod ;
+	}
+	
+	for(ll i=n+6 ; i>n ;i--){
+		res = (res * i) % mod ;
+	}
+	return res % mod;
+}
+
+int main(){
+	int n;
+	n=scanint();
+	cout<<calculate(n);
+}

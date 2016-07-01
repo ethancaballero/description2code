@@ -1,0 +1,8 @@
+t=input()
+ans=[]
+for x in range(t):
+    temp=raw_input()
+    l=temp.split()
+    ans.append(int(l[0])%int(l[1]))
+for x in range(t):
+    print ans[x]

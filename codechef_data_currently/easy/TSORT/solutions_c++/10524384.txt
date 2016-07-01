@@ -1,0 +1,18 @@
+#include<iostream>
+#include<algorithm>
+#include <vector>
+using namespace std;
+long int a[1000000],t,i;
+int main()
+{
+	cin>>t;
+	for(i=0;i<t;i++)
+	{
+		cin>>a[i];	
+	}
+	std::vector<int> myvector (a,a+t);
+	std::sort (myvector.begin(), myvector.end());
+	for (std::vector<int>::iterator it=myvector.begin(); it!=myvector.end(); ++it)
+    std::cout << ' ' << *it<<"
+";
+}

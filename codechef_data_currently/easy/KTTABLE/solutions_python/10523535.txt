@@ -1,0 +1,17 @@
+#kitchen timing shedule
+t=input()
+for i in range(t):
+ n=input()
+ ft=map(int,raw_input().split())
+ rt=map(int,raw_input().split())
+ st=0
+ count=0
+ for j in range(n):
+   if (ft[j]-st)>=(rt[j]):
+      count=count+1
+   st=ft[j]	
+  
+ print count 
+	
+	
+  

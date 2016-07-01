@@ -1,0 +1,24 @@
+t=int(raw_input())
+for asd in range(t):
+	temp=raw_input().strip()
+  	n,k,ans=map(int,temp.split())
+	temp=raw_input().strip()
+   	a=map(int,temp.split())
+   	op=raw_input().strip() 
+   	if k==0:
+   		print ans
+   	elif(op[0]=='X'):
+   		if (k%2==0):
+   			ans=ans^0
+   		else:
+   			for j in range(n):
+   				ans=ans^a[j]
+   		print ans
+   	elif(op[0]=='A'):
+   		for j in range(n):
+   			ans=ans&a[j]
+   		print ans
+   	elif(op=='OR'):
+   		for j in range(n):
+   			ans=ans|a[j]
+ 		print ans

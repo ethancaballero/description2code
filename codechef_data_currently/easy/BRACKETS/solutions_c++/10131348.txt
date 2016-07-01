@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        char a[100000];
+        scanf("%s",a);
+        int b=0,l,i;
+        int mb=0;
+        l=strlen(a);
+        for(i=0;i<l;i++)
+        {
+            if(a[i]=='(')
+                b++;
+            else
+                b--;
+            if(b>mb)
+                mb=b;
+        }
+        for(i=0;i<mb;i++)
+            cout<<'(';
+        for(i=0;i<mb;i++)
+            cout<<')';
+        cout<<endl;
+
+    }
+    return 0;
+}

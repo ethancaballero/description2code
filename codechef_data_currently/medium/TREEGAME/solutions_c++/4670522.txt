@@ -1,0 +1,101 @@
+//==============================================================================
+// main.cpp
+// Copyright 2014 test. All rights reserved.
+//==============================================================================
+
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<map>
+#include<set>
+#include<stack>
+#include<queue>
+#include<algorithm>
+#include<cmath>
+#include<string>
+#include<cstdlib>
+#include<climits>
+#include<cstring>
+#include<functional>
+#include<numeric>
+
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define LOOP(i,a) FOR(i,0,a)
+
+#define SET(p) memset(p, -1, sizeof(p))
+#define CLR(p) memset(p, 0, sizeof(p))
+#define BIG(p) memset(p, 0x3f, sizeof(p))
+#define MAX 10005
+
+#define ll unsigned long long
+#define oo (1000000000+7)
+#define DEBUG
+#ifdef DEBUG
+#define deb(args...) {dbg,args; cerr<<endl;}
+#else
+#define deb(args...) // Just strip off all debug tokens
+#endif
+struct debugger {
+	template<typename T> debugger& operator ,(const T& v) {
+		std::cerr << v << " ";
+		return *this;
+	}
+} dbg;
+using namespace std;
+int parentOfEachNode[MAX], isNodeDeleted[MAX], nodeCurrentLevel[MAX];
+vector<int> graph[MAX + 5];
+void dfs(int u, int level, int parent)
+{
+    if(isNodeDeleted[u] == 1)
+        return;
+    isNodeDeleted[u] = 1;
+    int len = graph[u].size();
+    parentOfEachNode[u] = parent;
+    nodeCurrentLevel[u] = level;
+    for(int i = 0 ; i < len ; i ++ )
+    {
+        dfs(graph[u][i], level + 1, u);
+    }
+}
+
+int main()
+{
+    int testCase;
+    cin >> testCase;
+    while(testCase--)
+    {
+        int n, u, v;
+        cin >> n;
+        
+        CLR(parentOfEachNode);CLR(isNodeDeleted);CLR(nodeCurrentLevel);
+        for(int i = 0 ; i < n - 1 ; i++)
+        {
+            cin >> u >> v;
+            graph[u].push_back(v);
+            graph[v].push_back(u);
+        }
+        dfs(1, 0, 1);
+        vector<int> nodeLevel;
+        for(int i = 1 ; i <= n ; i ++)
+            nodeLevel.push_back(nodeCurrentLevel[i]);
+        sort(nodeLevel.begin(), nodeLevel.end());
+        int step = 0, leftPointer = 0, rightPointer = n-1;
+        while(leftPointer <= rightPointer)
+        {
+            
+            int level = nodeLevel[leftPointer];
+            while(leftPointer < n && nodeLevel[leftPointer] == level)
+                leftPointer ++;
+            step ++ ;
+            if( rightPointer >= leftPointer)
+            {    rightPointer --; step ++;}
+            
+            
+            
+        }
+        cout<< step <<endl;
+        for(int i = 0 ; i < MAX; i ++ )
+            graph[i].clear();
+    }
+    return 0;
+}

@@ -1,0 +1,82 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<string>
+using namespace std;
+string s;
+string t;
+bool countchar(char ch){
+    int count1=0;
+    for(int i=0;i<s.size();i++){
+        if(ch==s[i]) count1++;
+    }
+    int count2=0;
+    for(int i=0;i<t.size();i++){
+        if(ch==t[i]) count2++;
+    }
+    if(count1!=count2) return true;
+    else return false;
+}
+int solve(int type,char beg){
+    t="";
+    if(beg=='B'){
+        for(int i=0;i<s.size();i++){
+            if(i%2==0) t+='B';
+            else t+='G';
+        }
+    }
+    else{
+        for(int i=0;i<s.size();i++){
+            if(i%2==0) t+='G';
+            else t+='B';
+        }
+    }
+    //printf("s = ");
+    //cout << s << endl;
+    //printf("t = ");
+    //cout << t << endl;
+    if(countchar('B') && countchar('G')) return -1;
+    if(type==0){
+        int ans=0;
+        for(int i=0;i<s.size();i++){
+            if(s[i]!=t[i]) ans++;
+        }
+        return ans/2;
+    }
+    else{
+        int curr=0;
+        int ans=0;
+        for(int i=0;i<s.size();i++){
+            int val;
+            if(s[i]==t[i]) val=0;
+            else{
+                if(s[i]=='B') val=1;
+                else val=-1;
+            }
+            curr+=val;
+            ans+=abs(curr);
+        }
+        return ans;
+    }
+}
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    int TC;
+    scanf("%d",&TC);
+    while(TC--){
+        int type;
+        scanf("%d",&type);
+        cin >> s;
+        int res1=solve(type,'B');
+        int res2=solve(type,'G');
+        if(res1==-1 && res2==-1) printf("-1
+");
+        else if(res1==-1 && res2!=-1) printf("%d
+",res2);
+        else if(res1!=-1 && res2==-1) printf("%d
+",res1);
+        else printf("%d
+",min(res1,res2));
+    }
+}

@@ -1,0 +1,46 @@
+#include <iostream>
+#include<stdio.h>
+#include <algorithm>
+#include<string.h>
+#define inf 100000002
+using namespace std;
+
+int main()
+{
+   // cout << "Hello world!" << endl;
+
+    int tst,n,i;
+    char l1[200001],l2[200001];
+    int d1[200003],d2[200003];
+    scanf("%d",&tst);
+    while(tst--)
+    {
+        scanf("%s %s",l1,l2);
+        n=strlen(l1);
+        d1[0]=0;
+        d2[0]=0;
+        for(i=1;i<=n;i++)
+        {
+
+            if(l1[i-1]=='#')
+              d1[i]=inf;
+            else if(l1[i-1]=='.')
+                d1[i]=min(d1[i-1],d2[i-1]+1);
+           if(l2[i-1]=='#')
+              d2[i]=inf;
+            else if(l2[i-1]=='.')
+                d2[i]=min(d2[i-1],d1[i-1]+1);
+
+
+        }
+
+  if(min(d1[n],d2[n])!=inf)
+      printf("Yes
+%d
+",min(d1[n],d2[n]));
+   else
+       printf("No
+");
+    }
+    return 0;
+}

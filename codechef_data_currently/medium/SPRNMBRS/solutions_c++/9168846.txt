@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define f(i,a,b) for(i=a;i<b;i++)
+#define si(a) scanf("%d",&a);
+#define slli(a) scanf("%lld",&a);
+#define MOD 1000000007
+#define MAX 100005
+#define pb(a) push_back(a)
+int main()
+{
+	lli count,current,value,i,j,k,m,n,t,l,r;
+	slli(t);
+	while(t--)
+	{
+		slli(l);
+		slli(r);
+		value=2;
+		count=0;
+		while(value<=r)
+		{
+			current=value;
+			while(current<=r)
+			{
+				if(current>=l && current<=r)
+					count++;
+
+				current*=3;
+			}
+			value*=2;
+		}
+
+		if(1>=l && 1<=r)
+			count++;
+		printf("%lld
+",count);
+	}
+}

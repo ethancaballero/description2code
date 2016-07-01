@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+
+LL FEM(LL a, LL b, LL m)
+{
+    LL c=a%m,p=1;
+    while(b>0)
+        {
+            if(b%2==1)
+            {
+                p=p*c;
+                p=p%m;
+            }
+            b=b/2;
+            c=(c*c)%m;
+        }
+    return p;
+}
+
+LL mod_inv(LL a, LL b)
+{
+	LL b0=b, t, q;
+	LL x0=0, x1=1;
+	if(b==1)
+		return 1;
+	while(a>1)
+	{
+		q=a/b;
+		t=b, b=a%b, a=t;
+		t=x0, x0=x1-q*x0, x1=t;
+	}
+	if (x1<0)
+		x1+=b0;
+	return x1;
+}
+
+LL nCr(LL N, LL R, LL mod)
+{
+	LL numr=1,denr=1,i;
+	for(i=R+1;i<=N;i++)
+		numr=(numr*i)%mod;
+	for(i=2;i<=R;i++)
+		denr=(denr*mod_inv(i,mod))%mod;
+	return (numr*denr)%mod;
+}
+
+int main()
+{
+	int T,N,i,temp,mod=1000000007,ans;
+	cin>>T;
+	while(T--)
+	{
+		cin>>N;
+		for(i=0;i<N;i++)
+			cin>>temp;
+		ans=FEM(2,N-1,mod);
+		if(N%2==0)
+			ans=ans-(mod_inv(2,mod)*nCr(N,N/2,mod))%mod;
+		cout<<(ans+mod)%mod<<"
+";
+	}
+	return 0;
+}

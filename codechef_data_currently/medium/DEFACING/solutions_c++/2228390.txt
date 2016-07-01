@@ -1,0 +1,145 @@
+
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<algorithm>
+ 
+using namespace std;
+ 
+void Output(int X)
+{
+int Len=0,Data[10];
+while(X)
+{
+Data[Len++]=X%10;
+X/=10;
+}
+if(!Len)
+Data[Len++]=0;
+while(Len--)
+putchar(Data[Len]+48);
+putchar('
+');
+}
+ 
+const bool Map[10][7]={
+{1,1,1,0,1,1,1},
+{0,0,1,0,0,1,0},
+{1,0,1,1,1,0,1},
+{1,0,1,1,0,1,1},
+{0,1,1,1,0,1,0},
+{1,1,0,1,0,1,1},
+{1,1,0,1,1,1,1},
+{1,0,1,0,0,1,0},
+{1,1,1,1,1,1,1},
+{1,1,1,1,0,1,1}};
+ 
+int Max[10],Best[10][10];
+bool Grow[10][10];
+ 
+int main()
+{
+static bool Grow[10][10];
+for(int i=0;i<10;i++)
+for(int j=0;j<10;j++)
+{
+Grow[i][j]=true;
+for(int k=0;k<7;k++)
+if(Map[i][k]&&!Map[j][k])
+Grow[i][j]=false;
+}
+for(int i=0;i<10;i++)
+{
+Max[i]=-1;
+for(int j=0;j<i;j++)
+if(Grow[j][i])
+Max[i]=j;
+}
+for(int i=0;i<10;i++)
+{
+Best[i][0]=-1;
+for(int j=1;j<10;j++)
+{
+Best[i][j]=Best[i][j-1];
+if(Grow[i][j-1])
+Best[i][j]=j-1;
+}
+}
+int Test;
+scanf("%d",&Test);
+while(Test--)
+{
+int N=0,M=0,A[8],B[8];
+char c;
+while(c=getchar(),c<'0'||c>'9');
+while(c>='0'&&c<='9')
+{
+A[N++]=c-48;
+c=getchar();
+}
+while(c=getchar(),c<'0'||c>'9');
+while(c>='0'&&c<='9')
+{
+B[M++]=c-48;
+c=getchar();
+}
+for(int i=0,j=N-1;i<j;i++,j--)
+swap(A[i],A[j]);
+for(int i=0,j=M-1;i<j;i++,j--)
+swap(B[i],B[j]);
+int Ans=0;
+for(int Delta=0;Delta<=M-N;Delta++)
+{
+int S=0;
+for(int i=M-1;i>=N+Delta;i--)
+S=S*10+B[i];
+if(S)
+{
+int Temp=S-1;
+for(int i=N-1;i>=0;i--)
+if(Grow[A[i]][9])
+Temp=Temp*10+9;
+else
+Temp=Temp*10+8;
+for(int i=0;i<Delta;i++)
+Temp=Temp*10+9;
+Ans=max(Ans,Temp);
+}
+bool OK[9];
+OK[N]=true;
+for(int i=N-1;i>=0;i--)
+OK[i]=OK[i+1]&&Grow[A[i]][B[i+Delta]];
+for(int i=N-1;i>=0;i--)
+{
+if(i<N-1)
+S=S*10+B[i+Delta+1];
+if(!OK[i+1])
+continue;
+int P=B[i+Delta]-1;
+while(P>=0&&!Grow[A[i]][P])
+P--;
+if(P==-1)
+continue;
+int Temp=S*10+P;
+for(int j=i-1;j>=0;j--)
+if(Grow[A[j]][9])
+Temp=Temp*10+9;
+else
+Temp=Temp*10+8;
+for(int j=0;j<Delta;j++)
+Temp=Temp*10+9;
+Ans=max(Ans,Temp);
+}
+if(OK[0])
+{
+int Temp=S;
+for(int i=Delta;i>=0;i--)
+Temp=Temp*10+B[i];
+Ans=max(Ans,Temp);
+}
+}
+Output(Ans);
+}
+return 0;
+}

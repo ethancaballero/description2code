@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+# pylint: disable=C0111
+from sys import stdin
+
+'''input
+10 3
+0324152397
+1
+4
+7
+'''
+
+
+def main():
+    inp = stdin.readlines()
+    n, m = map(int, inp[0].split())
+    arr = map(int, inp[1].strip())
+    occ = [[0]*10]
+    occ[0][arr[0]] += 1
+
+    for x in xrange(1, n):
+        occ.append(occ[-1][:])
+        occ[x][arr[x]] += 1
+
+    for _ in xrange(m):
+        q = int(inp[_ + 2]) - 1
+        s = 0
+
+        for i, x in enumerate(occ[q]):
+            s += abs(x * (i - arr[q]))
+
+        print s
+
+
+main()

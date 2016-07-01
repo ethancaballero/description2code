@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int maxn = 1e5;
+int DP[30][maxn];
+int n, m;
+int ar[30];
+
+
+int dp(int i = n - 1, int left = m) {
+  if (left == 0) return 1;
+  if (i < 0 || left < 0) return 0;
+  if (DP[i][left] != -1) return DP[i][left];
+  return DP[i][left] = 
+          dp(i - 1, left) || dp(i - 1, left - ar[i]);
+}
+
+
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int t; cin >> t;
+  while (t--) {
+    cin >> n >> m;
+    for (int i = 0; i < n; ++i) cin >> ar[i];
+    memset(DP, -1, sizeof(DP));
+    cout << (dp() ? "Yes" : "No") << endl;
+  }
+
+  return 0;
+}

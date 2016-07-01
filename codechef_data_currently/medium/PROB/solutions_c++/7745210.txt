@@ -1,0 +1,35 @@
+#include<iostream>
+#include <list>
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include <stdlib.h>
+#include<algorithm>
+using namespace std;
+
+
+int main()
+{
+int t;
+double t1,t2,t3,t4,total,ans,temp;
+
+    scanf("%d",&t);
+
+    
+    while(t--){
+
+        scanf("%lf %lf %lf %lf",&t1,&t2,&t3,&t4);
+       
+         total = t1 + t2 + t3;
+         
+         ans = t1/(t1+t2);
+        
+         printf("%lf
+",ans);         
+
+    }
+
+    return 0;
+
+}
+

@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int t,n[1000],k[1000],ai[100000],i,j,l,a=0,temp,temp1;
+    cin>>t;
+    for(i=0;i<t;i++)
+    {
+        cin>>n[i];
+        for(j=0;j<n[i];j++)
+        cin>>ai[a++];
+        cin>>k[i];
+    }
+    a=0;
+    for(i=0;i<t;i++)
+    {
+        temp=ai[k[i]+a-1];
+        for(j=a;j<n[i]+a-1;j++)
+        {
+            for(l=j+1;l<n[i]+a;l++)
+            {
+                if(ai[j]>ai[l])
+                {
+                    temp1=ai[j];
+                    ai[j]=ai[l];
+                    ai[l]=temp1;
+                }
+            }
+        }
+        for(j=a;j<n[i]+a;j++)
+        {
+            if(ai[j]==temp)
+            {
+                cout<<j-a+1<<endl;
+                break;
+            }
+        }
+        a+=n[i];
+    }
+	return 0;
+}

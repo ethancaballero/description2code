@@ -1,0 +1,12 @@
+#!/usr/bin/python
+
+
+def main():
+    num_cases = int(raw_input())
+    for i in xrange(0, num_cases):
+        inputs = map(float, raw_input().split())
+        print inputs[0]/(inputs[0] + inputs[1])
+
+
+if __name__ == "__main__":
+    main()

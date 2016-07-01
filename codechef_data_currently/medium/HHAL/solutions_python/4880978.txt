@@ -1,0 +1,13 @@
+#!/usr/bin/python
+
+for i in xrange(int(raw_input())):
+    string = raw_input()
+    
+    if string.find('a') == -1 or string.find('b') == -1:
+        print 1
+    elif len(string)%2 == 0 and string[:len(string)/2] == string[len(string)-1:len(string)/2-1:-1]:
+        print 1
+    elif len(string)%2 == 1 and string[:len(string)/2] == string[len(string)-1:len(string)/2:-1]:
+        print 1
+    else:
+        print 2

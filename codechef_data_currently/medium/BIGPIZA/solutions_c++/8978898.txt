@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define ull unsigned long long
+#define pb push_back
+#define ft first
+#define se second
+#define mp make_pair
+
+int main(int argc, char const *argv[]) {
+    int gam[10001];
+    memset(gam, 0, sizeof gam);
+    for (int i = 2; i < 10001; ++i) {
+    	bool vist[10001];
+    	memset(vist, 0, sizeof vist);
+    	for(int j = 0; j < i - 1; ++j) vist[gam[j] ^ gam[i - 2 - j]] = 1;
+    	for (int j = 0; j < 10001; ++j) {
+    		if (!vist[j]) {
+    			gam[i] = j;
+    			break;
+    		}
+    	}
+    }
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+    	int n;
+    	scanf("%d", &n);
+    	if (!gam[n]) printf("Bhima
+");
+    	else printf("Arjuna
+");
+    }
+	return 0;
+}

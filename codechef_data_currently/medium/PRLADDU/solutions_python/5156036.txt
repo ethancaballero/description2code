@@ -1,0 +1,8 @@
+for _ in range(input()):
+	a=input()
+	lis=map(int, raw_input().split())
+	c, d=0, 0;
+	for i in lis:
+		c+=i
+		d+=abs(c)
+	print d

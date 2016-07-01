@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+main()
+{
+long int n,ar[100000],q,k;
+cin>>n;
+for(int i=0;i<n;i++)
+cin>>ar[i];
+cin>>q;
+while(q!=0)
+{
+cin>>k;
+int count=0;
+for(int i=0;i<n;i++)
+{long int min=10000000;
+for(int j=i;j<n;j++)
+{
+if(ar[j]<min)
+min=ar[j];
+if(min==k)
+count++;
+}
+}
+cout<<count<<endl;
+q--;
+}
+}

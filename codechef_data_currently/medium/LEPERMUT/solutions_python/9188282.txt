@@ -1,0 +1,18 @@
+for t in range(int(raw_input())):
+    n=int(raw_input())
+    a=[]
+    N=map(int,raw_input().split())
+    add=0
+    count=0
+    
+    for i in range(n):
+        for j in range(i,n):
+            if N[i]>N[j]:
+                count+=1
+    for i in range(n-1):
+        if N[i]>N[i+1]:
+            add+=1
+    if add==count:
+        print "YES"
+    else:
+        print "NO"

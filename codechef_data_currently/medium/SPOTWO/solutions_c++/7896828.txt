@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+#define mod 1000000007
+#define gc getchar 
+unsigned long long int fast_exp(int ,unsigned long long int );
+using namespace std;
+int read_int() {
+  char c = gc();
+  while(c<'0' || c>'9') c = gc();
+  int ret = 0;
+  while(c>='0' && c<='9') {
+    ret = 10 * ret + c - 48;
+    c = gc();
+  }
+  return ret;
+}
+int main(){
+	int T=read_int();
+	while(T--){
+		int N=read_int();
+		int l=log2(N)+1;
+		unsigned long long int t=1;
+		unsigned long long int x=0;
+		for(int i=1;i<=l;i++){
+			x+=t*(N%2);
+			t*=10;
+			N/=2;
+		}
+		unsigned long long int res=fast_exp(2,x);
+		res=(res*res)%mod;
+		printf("%lld
+",res);
+		
+	}
+	return 0;
+}
+unsigned long long int fast_exp(int b,unsigned long long int e){
+	unsigned long long int res;
+	if(e==0) return 1;
+	if(e==1) return b;
+	if(e%2==0){
+		res=pow(fast_exp(b,e/2),2);
+		return res%mod;
+	}
+	else{
+		res=b*pow(fast_exp(b,(e-1)/2),2);
+		return res%mod;
+	}
+}

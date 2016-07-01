@@ -1,0 +1,6 @@
+for i in xrange(int(raw_input())):
+    p = float(raw_input())
+    if p > 0.5:
+        print 10000*p*(3-2*p)
+    else:
+        print 10000*(1-p)*(1+2*p) 

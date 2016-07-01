@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+#include<algorithm>
+#include<string.h>
+#include<math.h>
+#include<iomanip>
+#include<vector>
+#include<map>
+#include<set>
+#define M 1000000009
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef double db;
+db dt(ll x1,ll y1,ll x2,ll y2)
+{
+	db d=(x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
+	return sqrt(d);
+}
+
+int main()
+{
+  //ios_base::sync_with_stdio(false);
+  //cin.tie(NULL);
+  ll t,n;
+  pair<ll,ll> p[100001];
+  
+  cin>>t;
+  while(t--)
+  { db d=0;
+    cin>>n;
+    
+    for(int i=0;i<n;i++)
+    {   ll temp;
+    	cin>>p[i].first>>temp;
+    	temp=temp*-1;
+    	p[i].second=temp;
+	}
+	sort(p,p+n);
+	for(int i=1;i<n;i++)
+	 {
+	     d+=dt(p[i-1].first,p[i-1].second,p[i].first,p[i].second);	
+	 }
+	 cout<<setprecision(2)<<fixed<<d<<"
+";
+  }
+   	return 0;
+}

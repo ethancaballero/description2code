@@ -1,0 +1,15 @@
+import sys
+t=int(sys.stdin.readline())
+for i in range(0,t):
+	n,a,b=map(int,sys.stdin.readline().split())
+	s1=str(bin(a))[2:]
+	s2=str(bin(b))[2:]
+	s1=(n-s1.__len__())*'0'+s1
+	s2=(n-s2.__len__())*'0'+s2
+	x1,y1=s1.count('1'),s1.count('0')
+	x2,y2=s2.count('1'),s2.count('0')
+	a=min(x1,y2)
+	b=min(x2,y1)
+	c=a+b
+	s='1'*c+'0'*(n-c)
+	print int(s,2)

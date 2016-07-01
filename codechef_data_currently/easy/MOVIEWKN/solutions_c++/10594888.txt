@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int m,n,j,i,x,t,s,p;
+	cin>>x;
+	for(i=0;i<x;i++)
+	{
+		cin>>n;
+		int arr1[n],arr2[n],arr[n];
+		int max=0,r;
+		for(j=0;j<n;j++)
+		cin>>arr1[j];
+		for(j=0;j<n;j++)
+		cin>>arr2[j];
+		for(j=0;j<n;j++)
+		arr[j]=arr1[j]*arr2[j];
+		for(j=0;j<n;j++)
+    	{
+			if(arr[j]>max)
+			{
+				max=arr[j];
+				r=arr2[j];
+				p=j;
+			}
+		else if(arr[j]==max)
+			{
+				if(arr2[j]>r)
+				{
+					p=j;
+					r=arr2[j];
+				}
+			}
+		}
+	//	cout<<r<<endl;
+		cout<<p+1<<endl;
+	}
+}

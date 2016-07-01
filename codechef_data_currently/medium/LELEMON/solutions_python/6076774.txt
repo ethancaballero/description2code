@@ -1,0 +1,22 @@
+def splitInt():
+    raw = raw_input().split()
+    return [int(x) for x in raw]
+
+def main():
+    t = int(raw_input())
+    for ti in xrange(t):
+        nm = splitInt()
+        visit = splitInt()
+        rooms = []
+        for r in xrange(nm[0]):
+            temp = splitInt()[1:]
+            temp.sort()
+            rooms.append(temp)
+        liters = 0;
+        for v in visit:
+            if len(rooms[v]) > 0:
+                liters += rooms[v][-1]
+                rooms[v] = rooms[v][:-1]
+        print liters
+
+main()

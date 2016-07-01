@@ -1,0 +1,19 @@
+a=int(raw_input())
+for i in range(a):
+    b=int(raw_input())
+    f1=0
+    f2=1
+    x=0
+    while(b>x):
+        x=f2+f1
+        f1=f2
+        f2=x
+    if x==b:
+        print "YES"
+    else:
+        print "NO"
+    
+    
+    
+    
+            

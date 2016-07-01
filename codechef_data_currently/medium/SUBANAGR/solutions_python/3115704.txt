@@ -1,0 +1,33 @@
+n = int(input())
+array = [[0 for x in xrange(26)] for x in xrange(n)] 
+check = [0]*26
+output = [0]*26
+for i in xrange(0,n):
+    string = raw_input().rstrip()
+    for ch in string:
+        num =  ord(ch)-97
+        if i >= 1 and array[0][num] == 0:
+            check[num] = -1
+        else:
+            array[i][num] += 1
+for i in xrange(26):
+    if check[i] != -1:
+        output[i] = 100
+        for j in xrange(n):
+            if array[j][i] > 0:
+                output[i] = min(array[j][i],output[i])
+            else:
+                output[i] = 0
+                break
+
+op = ''
+for i in xrange(26):
+    if output[i] > 0:
+        op += (chr(i+97))*output[i]
+if op == '':
+    print 'no such string'
+else:
+    print op
+                
+
+    

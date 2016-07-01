@@ -1,0 +1,38 @@
+#include<stdio.h>
+using namespace std;
+int max(int a,int b)
+{
+	if(a>b)
+		return a;
+	else
+		return b;
+}
+int hcf(int a,int b)
+{
+	int i,c;
+	c = max(a,b);
+	for(i=c;i>0;i--)
+	{
+		if(a%i == 0 && b%i == 0)
+			return i;
+	}
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int m,n;
+		scanf("%d%d",&n,&m);
+		long long int ar,num,res;
+		ar = n*m;
+		res = hcf(n,m);
+	//	printf("%lld
+",res);
+		num = ar/(res*res);
+		printf("%lld
+",num);
+	}
+	return 0;
+}

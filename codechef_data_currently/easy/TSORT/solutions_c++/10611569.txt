@@ -1,0 +1,32 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+
+using namespace std;
+
+bool func(int i, int j){
+	return j > i;
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	
+	int a[1000001];
+
+	for(int i=0; i<t; i++){
+		scanf("%d",&a[i]);
+	}
+
+	sort(a,a+t, func);
+
+	for(int i=0; i<t; i++){
+  		printf("%d
+",a[i]);
+	}
+
+	return 0;
+}
+
+

@@ -1,0 +1,77 @@
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <cstdio>
+#include <ios>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <cstring>
+#include <ctime>
+#include <queue>
+#include <cassert>
+#include <cmath>
+#include <string>
+#include <stack>
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<long double ,long double> pi;
+
+set< string > v;
+string S;
+int dp[32][32];
+
+int mex(int l ,int r){
+    if(l > r) return 0;
+    int& ret = dp[l][r];
+    if(ret != -1) return ret;
+    set< int > se;
+    for(int s = l; s <= r; s++){
+        for(int i = 1; i+s-1 <= r; i++){
+            string cur = S.substr(s, i);
+            if(v.count(cur) > 0){
+                int ans = mex(l, s-1) ^ mex(s+i, r);
+                se.insert(ans);
+            }
+        }
+    }
+    set<int>::iterator it = se.begin();
+    while(it != se.end()){
+        if(*it != ret + 1){
+            break;
+        }
+        ret++;
+        ++it;
+    }
+    ret++;
+    return ret;
+}
+
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("in.in", "r", stdin);
+#endif
+    ios::sync_with_stdio(false);
+    string x;
+    int T, n;
+    cin >> T;
+    while(T--){
+        cin >> S >> n;
+        v.clear();
+        for(int i = 0; i < n; i++){
+            cin >> x;
+            v.insert(x);
+        }
+        memset(dp, -1, sizeof dp);
+        if(mex(0, S.size() - 1) == 0){
+            cout << "Tracy" << endl;
+        }else{
+            cout << "Teddy" << endl;
+        }
+        
+    }
+    
+    return 0;
+}

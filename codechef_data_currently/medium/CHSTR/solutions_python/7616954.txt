@@ -1,0 +1,38 @@
+def f(n):
+    if n == 0:
+        return 1
+    else:
+        return n * f(n-1)
+
+def nCr(n,r):
+    return f(n) / (f(r) * f(n-r))
+
+
+
+def RollingSubStrings(S):
+    D1 = {}
+    for i in range(1, len(S) + 1):
+        for m in range(0, len(S) - i + 1):
+            if S[m:m+i] not in D1.keys():
+                D1[S[m:m+i]] = 1
+            else:
+                D1[S[m:m+i]] += 1
+    return D1
+
+t = int(raw_input())
+while(t > 0):
+    temp = raw_input()
+    length, numQues = temp.split()
+    length = int(length)
+    numQues = int(numQues)
+    s = raw_input()
+    D = RollingSubStrings(s)
+    while(numQues > 0):
+        temp = int(raw_input())
+        res = 0
+        for i in D.keys():
+            if D[i] >= temp:
+                res += nCr(D[i], temp)
+        print res
+        numQues = numQues - 1
+    t = t - 1

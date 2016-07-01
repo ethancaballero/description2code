@@ -1,0 +1,10 @@
+# cook your code here
+N = int(raw_input())
+
+for i in range(N):
+    string = raw_input()
+    distinct = []
+    for j in string:
+        if j not in distinct:
+            distinct.append(j)
+    print len(distinct)

@@ -1,0 +1,13 @@
+def findSolution(notes, n, value):
+  if value == 0:
+    return True
+  if value < 0 or n==-1:
+    return False
+  return findSolution(notes, n-1, value - notes[n]) or findSolution(notes, n-1,value)
+for _ in range(int(raw_input())):
+  (n,m) = map(int, raw_input().split())
+  notes = [0]*n
+  for i in range(n):
+    notes[i] = int(raw_input())
+  notes.sort()
+  print ["No","Yes"][findSolution(notes, i, m)]

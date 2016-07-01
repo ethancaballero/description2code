@@ -1,0 +1,20 @@
+#include<cstdio>
+#include<bits/stdc++.h>
+#include<math.h>
+#include<algorithm>
+#include<iostream>
+
+using namespace std;
+
+
+int main() {
+	float f1,f2,f3,f4;
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    cin>>f1>>f2>>f3>>f4;
+	    cout<<f1/(f1+f2)<<endl;
+	}
+	return 0;
+}

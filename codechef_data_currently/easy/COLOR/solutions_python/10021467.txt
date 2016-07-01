@@ -1,0 +1,7 @@
+for i in range(int(raw_input())):
+    n=int(raw_input())
+    s=raw_input()
+    r=n-s.count('R')
+    g=n-s.count('G')
+    b=n-s.count('B')
+    print min(r,g,b)

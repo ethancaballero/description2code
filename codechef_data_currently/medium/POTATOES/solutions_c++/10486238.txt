@@ -1,0 +1,33 @@
+#include<vector>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+bool prime(int c)
+{
+    int cnt=0;
+    for(int i=2;i<c;i++)
+    {
+        if(c%i==0)
+            cnt++;
+    }
+    if(cnt==0)
+        return true;
+    else return false;
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t-->0)
+    {
+        int x,y;
+        cin>>x>>y;
+        int sum=x+y;
+        ++sum;
+        int c=1;
+        while(!prime(sum))
+            sum++;
+        cout<<sum-x-y<<endl;
+    }
+    return 0;
+}

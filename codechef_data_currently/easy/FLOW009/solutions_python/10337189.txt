@@ -1,0 +1,9 @@
+t=int(raw_input())
+j=0
+while j<t :
+    a,b = map(int,raw_input().split())
+    if a > 1000 :
+        print '%1.6f' %(float(0.9*a*b))
+    else :
+        print '%1.6f' %(float(a*b))
+    j+=1    

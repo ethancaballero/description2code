@@ -1,0 +1,53 @@
+#include<iostream>
+using namespace std;
+inline int gcd(int a,int b)
+{
+		return (b==0?a:gcd(b,a%b));
+}
+int checkgcd(int a[],int c)
+{
+	int result=a[0];
+	for(int i=1;i<c;i++)
+	{
+		result=gcd(result,a[i]);
+	}
+	return result;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,count=0;
+		cin>>n;
+		int a[n];
+		for(int i=0;i<n;i++)
+			cin>>a[i];
+		for(int i=0;i<n-1;i++)
+		{
+			if(a[i]>a[i+1])
+			{
+				int x=a[i]-a[i+1];
+				a[i+1]+=x;
+				count+=x;	
+			}
+				
+		}
+		int g=checkgcd(a,n);
+	//	cout<<"g== "<<g<<endl;
+		if(g==1)
+		{
+			for(int i=0;i<n;i++)
+			{
+				if(a[i]%2!=0)
+				{
+					a[i]+=1;
+					count+=1;
+				}
+			}
+		}
+		cout<<count<<endl;
+	}
+	return 0;
+}

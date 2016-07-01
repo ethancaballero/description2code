@@ -1,0 +1,37 @@
+# include <bits/stdc++.h>
+using namespace std;
+
+main () {
+	map<string,string> getcountry;
+	int n,m,i,j,k;
+	scanf("%d%d",&n,&m);
+	for (i=0 ; i < n ; i++) {
+		string che, cou ;
+		cin >> che >> cou;
+		getcountry[che]=cou;
+	}
+	map<string,int> vote,cv;
+	for (i=0 ; i < m ; i++) {
+		string s;
+		cin >> s;
+		vote[s]++;
+		cv[getcountry[s]]++;
+	}
+	string winchef,wincount;
+	int chefmax=-1,countmax=-1;
+	for (map<string,int>::iterator it = vote.begin(); it != vote.end(); it++) {
+		if (chefmax < it->second){
+			chefmax = it->second;
+			winchef = it->first;
+		}
+	}
+	for (map<string,int>::iterator it = cv.begin(); it != cv.end() ; it++) {
+		if (it->second > countmax) {
+			countmax = it->second;
+			wincount = it->first;
+		}
+	}
+	cout << wincount << '
+' << winchef;
+	return 0;
+}

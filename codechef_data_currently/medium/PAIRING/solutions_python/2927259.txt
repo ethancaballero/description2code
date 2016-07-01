@@ -1,0 +1,28 @@
+cases = int(raw_input())
+
+for i in xrange(0, cases):
+    employees, npairs = map(int, raw_input().split(" "))
+    assigned = [False for a in xrange(0, employees)]
+   
+    pairs = []
+    for j in xrange(0, npairs):
+        pairs.append(map(int, raw_input().split(" ")))
+
+    pairs.reverse()
+    
+    pair_index = npairs - 1
+    max_pairs = []
+    for pair in pairs:
+        e1 = pair[0]
+        e2 = pair[1]
+
+        if not assigned[e1] and not assigned[e2]:
+            assigned[e1] = True
+            assigned[e2] = True
+            max_pairs.append(pair_index)
+
+        pair_index -= 1
+
+    max_pairs.reverse()
+    print " ".join(map(str, max_pairs))
+         

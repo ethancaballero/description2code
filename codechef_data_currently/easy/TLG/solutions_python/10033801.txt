@@ -1,0 +1,14 @@
+n = int(raw_input())
+a = b = 0
+Max = [1, 0]
+for i in range(n):
+    A, B = raw_input().split()
+    a = a + int(A)
+    b = b + int(B)
+    if abs(a - b) > Max[1]:
+        Max[1] = abs(a - b)
+        if a - b > 0:
+            Max[0] = 1
+        else:
+            Max[0] = 2
+print Max[0], Max[1]

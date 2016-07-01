@@ -1,0 +1,5 @@
+import math
+for t in range(int(raw_input())):
+	n, s = map(int,raw_input().split())
+	i = s-(n-1)
+	print n-int(math.ceil((-1+(1+8*i)**0.5)/2))

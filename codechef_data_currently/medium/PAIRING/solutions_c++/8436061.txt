@@ -1,0 +1,31 @@
+#include<iostream>
+#include<set>
+using namespace std;
+#define ll long long
+int main(){
+ int t,n,m;
+ cin>>t;
+ int  f[10500],s[10500],ha[1050];
+ set<int> v;
+ set<int>::iterator k;
+ while(t--){
+ cin>>n>>m;
+ for(int i=0;i<m;i++){
+  cin>>f[i]>>s[i];
+ }
+ for(int i=0;i<1050;i++)
+   ha[i]=0;
+ for(int i=m-1;i>=0;i--){
+    if(!ha[f[i]] && !ha[s[i]]){
+      v.insert(i);
+      ha[f[i]]=1;ha[s[i]]=1;
+    }
+  }
+ for(k=v.begin();k!=v.end();k++)
+   cout<<*k<<" ";
+   v.clear(); 
+ cout<<endl;
+ }
+ //system("pause");
+ return 0;
+}

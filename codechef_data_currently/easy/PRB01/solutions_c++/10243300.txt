@@ -1,0 +1,33 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long  n,y=0;
+        cin>>n;
+        for(long long i=2;i<=sqrt(n);i++)
+        {
+            if(n%i==0)
+            {
+                y=0;
+                break;
+            }
+            else
+            {
+                y=1;
+            }
+        }
+        if(y==1 || n==2 || n==3)
+        {
+            cout<<"yes"<<endl;
+        }
+        else
+        {
+            cout<<"no"<<endl;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+#include<cmath>
+#include<iostream>
+using namespace std;
+int main(){
+
+        
+        int t;
+		cin>>t;
+        while(t--)
+        {
+            double p;cin>>p;
+            double s;cin>>s;
+			            double x=(p/2-sqrt(p*p/4-6*s))/6;
+            double y=p/4-2*x;
+            y=x*x*y;
+            y=y*1000;int q=(int)y;
+            if (q % 10 >= 5) {q=q/10;q++;
+                y=(double)q/100;
+                }
+            else
+            {q=q/10;y=(double)q/100;}
+            cout<<(y)<<endl;
+    }
+}

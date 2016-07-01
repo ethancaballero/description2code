@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long gcd(long long a,long long b)
+{
+	if(b==0)
+	return a;
+	return gcd(b,a%b);
+}
+int main()
+{
+	int t;
+	long n;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%ld",&n);
+		long long num=0;
+		int l=sqrt(n);
+		for(int i=1;i<=l;i++)
+		{
+			num+=(n/i);
+		}
+		num=(num+num)-(l*l);
+		long long den=n;
+		den=den*den;
+		long long a=num;
+		long long b=den;
+		long long r=0;
+		while(b!=0)
+		{
+			r=a%b;
+			a=b;
+			b=r;
+		}
+		num=num/a;
+		den=den/a;
+		printf("%lld/%lld
+",num,den);
+	}
+}

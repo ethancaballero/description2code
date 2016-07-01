@@ -1,0 +1,33 @@
+  Chef loves games! But he likes to invent his own. Now he plays game "Digit Jump". Chef has sequence of digits S1, S2,..., SN,. He is staying in the first digit (S1) and want to reach the last digit (SN) in the minimal number of jumps. 
+While staying in some digit x with index i (digit Si) Chef can jump into digits with indices i - 1 (Si-1) and i + 1 (Si+1) but he can't jump out from sequence. Or he can jump into any digit with the same value x. 
+Help Chef to find the minimal number of jumps he need to reach digit SN from digit S1.\u00a0
+\u00a0
+Input
+Input contains a single line consist of string S of length N- the sequence of digits.
+\u00a0
+Output
+In a single line print single integer - the minimal number of jumps he needs.
+\u00a0
+Constraints
+
+1 \u2264 N \u2264 10^5
+Each symbol of S is a digit from 0 to 9. 
+
+\u00a0
+Example
+Input:
+01234567890
+
+Output:
+1
+
+Input:
+012134444444443
+
+Output:
+4
+
+\u00a0
+Explanation
+In the first case Chef can directly jump from the first digit (it is 0) to the last (as it is also 0).
+In the second case Chef should jump in such sequence (the number of digits from 1: 1-2-4-5-15). 

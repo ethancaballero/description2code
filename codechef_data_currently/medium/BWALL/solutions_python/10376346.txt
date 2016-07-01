@@ -1,0 +1,77 @@
+#include <iostream>
+#include<vector>
+#include<bits/stdc++.h>
+typedef long long ll;
+#define row vector<long long int>
+#define matrix vector<row>
+#define FORAB for(int i=a;i<b;i++)
+#define ll long long
+#define llscan(a) scanf("%lld",&a)
+using namespace std;
+ll MOD = (ll) 1e9 + 7;
+
+ll s(ll &x) {
+	register int c = getchar();
+	x = 0;
+	for(;(c<48 || c>57);c = getchar());
+	for(;c>47 && c<58;c = getchar()) {x = (x<<1) + (x<<3) + c - 48;}
+	return x;
+}
+
+void
+clear (matrix & A)
+{
+  for (size_t i = 0; i < A.size (); i++)
+    for (size_t j = 0; j < A[i].size (); j++)
+      A[i][j] = 0;
+}
+
+matrix
+mul (const matrix & A, const matrix & B)
+{
+  matrix C = A;
+  clear (C);
+  for (size_t i = 0; i < C.size (); i++)
+    for (size_t j = 0; j < C[i].size (); j++)
+      for (size_t k = 0; k < A[i].size (); k++)
+	C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
+  return C;
+}
+
+matrix
+pow (const matrix & A, ll p)
+{
+  if (p == 0)
+    {
+      matrix C = A;
+      clear (C);
+      for (size_t i = 0; i < C.size (); i++)
+	C[i][i] = 1;
+      return C;
+    }
+  matrix C = pow (A, p / 2);
+  C = mul (C, C);
+  if (p & 1)
+    C = mul (C, A);
+  return C;
+}
+
+
+int main()
+{
+    matrix mat(4,row(4,0));
+    mat[1][0]=mat[2][1]=mat[3][2]=1;
+    mat[0][0]=1;mat[0][1]=4;mat[0][2]=2;
+    int t;
+    scanf("%d",&t);
+
+    while(t--)
+    {
+        ll int n;
+        //llscan(n);
+        s(n);
+        matrix B = pow (mat, n);
+        cout << B[0][0] << endl;
+    }
+    return 0;
+}

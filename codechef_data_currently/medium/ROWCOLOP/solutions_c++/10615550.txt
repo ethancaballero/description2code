@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<malloc.h>
+int main()
+{
+	int n,q;
+	int *row,*column;
+	int i;
+	int add,k;
+	int maxrow,maxcolumn;
+	char input[10];
+	scanf("%d %d",&n,&q);
+	row=(int *)malloc((n+1)*sizeof(int));
+	column=(int *)malloc((n+1)*sizeof(int));
+	for(i=0;i<=n;i++)
+		row[i]=column[i]=0;
+	maxrow=maxcolumn=1;
+	for(i=0;i<q;i++)
+	{
+		
+		scanf("%s %d %d",input,&k,&add);
+		if(input[0]=='R')
+		{
+				if(maxrow==k)
+				{
+					row[k]=row[k]+add;
+				}
+				else
+				{
+					row[k]=row[k]+add;
+					if(row[k]>row[maxrow])
+						maxrow=k;
+				} 
+		}
+		else
+		{
+			if(maxcolumn==k)
+			{
+				column[k]=column[k]+add;
+			}
+			else
+			{
+				column[k]=column[k]+add;
+				if(column[k]>column[maxcolumn])
+					maxcolumn=k;
+			}
+		}
+		
+	}
+	printf("%d",row[maxrow]+column[maxcolumn]);
+	return 0;
+}

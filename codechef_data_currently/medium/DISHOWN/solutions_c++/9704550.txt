@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define MAX 10000
+using namespace std;
+
+int point[MAX+1],owner[MAX+1];
+
+int find_owner(int);
+
+void merge(int child,int parent)
+{
+	owner[child]=parent;
+}
+
+void comp(int x,int y)
+{
+	int owner_x=find_owner(x);
+	int owner_y=find_owner(y);
+	if(owner_x==owner_y)
+	{
+		cout<<"Invalid query!"<<endl;
+		return;
+	}
+	else
+	{
+		if(point[owner_y]>point[owner_x])
+			merge(owner_x,owner_y);
+		else if(point[owner_x]>point[owner_y])
+			merge(owner_y,owner_x);
+		else
+			return;
+	}
+}
+
+int find_owner(int x)
+{
+	if(owner[x]==x)
+		return x;
+	owner[x]=find_owner(owner[x]);
+	return owner[x];
+}
+
+int main()
+{
+	std::ios::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,i;
+		cin>>n;
+		for(i=1;i<=n;i++)
+		{
+			owner[i]=i;
+			cin>>point[i];
+		}
+		int q;
+		cin>>q;
+		while(q--)
+		{
+			int ch;
+			cin>>ch;
+			if(!ch)
+			{
+				int x,y;
+				cin>>x>>y;
+				comp(x,y);
+			}
+			else
+			{
+				int x;
+				cin>>x;
+				cout<<find_owner(x)<<endl;
+			}
+		}
+
+	}
+	return 0;
+}

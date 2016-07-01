@@ -1,0 +1,35 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include<vector>
+#include<string>
+using namespace std;
+
+#define LL long long
+#define mod 1000000007
+
+char str[100010];
+
+void solve()
+{
+    int n,m,k;
+
+    scanf("%d%d%d",&n,&m,&k);
+    if(n<m)
+    {
+        n = n+m;
+        m = n-m;
+        n = n-m;
+    }
+
+    printf("%d
+",max(n-m-k,0));
+}
+
+int main()
+{
+    int t;
+
+    scanf("%d",&t);
+    while(t--)
+        solve();
+}

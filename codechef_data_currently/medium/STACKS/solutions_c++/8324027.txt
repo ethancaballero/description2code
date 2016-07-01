@@ -1,0 +1,51 @@
+	#include<iostream>
+	#include<set>
+	#include<stdio.h>
+	#define get getchar_unlocked
+	#define put putchar_unlocked
+ 	using namespace std;
+
+	inline int inp()
+	{
+	
+	int n=0, c=get(),f=1;
+	while(c!='-'&&(c<'0'||c>'9')) c=get();
+	if(c=='-'){f=-1;c=get();}
+	 
+	while(c>='0'&&c<='9'){n=(n<<3)+(n<<1)+c-'0',c=get();}
+	return n*f;
+	 
+	}
+	
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n;
+			cin>>n;
+			int num;
+			multiset<int > myset;
+			multiset<int >::iterator it;
+			for(int i=0;i<n;i++)
+			{
+				num=inp();
+				it=myset.insert(num);
+				//it=myset.find(num);
+				while(*it==num && it!=myset.end())
+				{
+					it++;
+
+				}
+				if(it!=myset.end())
+					myset.erase(it);
+
+			}	
+			cout<<myset.size()<<" ";
+			for(it=myset.begin();it!=myset.end();it++)
+				cout<<(*it)<<" " ;
+			cout<<endl;
+			t--;
+		}	
+	}	

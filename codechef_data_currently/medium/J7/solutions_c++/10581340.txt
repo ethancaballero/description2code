@@ -1,0 +1,25 @@
+#include<iostream>
+#include<iomanip>
+#include<vector>
+#include<cmath>
+#include<algorithm>
+#include<string.h>
+using namespace std;
+int main()
+{
+int p,s,t;
+float x,y,vol;
+cin>>t;
+while(t--)
+{
+cin>>p>>s;
+y=p*p-24*s;
+y=sqrt(y);
+y=p-y;
+y/=12;
+x=p/4-2*y;
+vol=x*y*y;
+cout<<fixed<<setprecision(2)<<vol<<endl;
+}
+return 0;
+}

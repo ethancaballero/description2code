@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;
+	char class_ID;//remembeer class_ID is CHAR not INT :P
+	cin>>t;
+	while(t--)
+	{
+		cin>>class_ID;
+		switch(class_ID)
+		{
+		case 'b':
+		case 'B':
+		{cout<<"BattleShip"<<"
+";break;}
+		case 'c':
+		case 'C':
+		{cout<<"Cruiser"<<"
+";break;}
+		case 'D':
+		case'd':
+		{cout<<"Destroyer"<<"
+";break;}
+		case 'F':
+		case 'f':
+		{cout<<"Frigate"<<"
+";break;}
+		}
+	}
+	return 0;
+}

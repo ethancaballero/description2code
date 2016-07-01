@@ -1,0 +1,87 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int i,j,k,m,n,t,curr;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		char arr[n+1];
+		scanf(" %s",arr);
+		int count=0,current=arr[0],flag=0;
+		if(k!=1)
+		{
+			for(i=0;i<n;i++)
+			{
+				curr=arr[i];
+				if(curr==current)
+				{
+					flag++;
+				}
+				else
+				{
+					current=curr;
+					flag=1;
+				}
+				if(flag>k)
+				{
+					if(i==n-1 || arr[i+1]==current)
+					{
+						if(arr[i]=='1')
+							arr[i]='0';
+						else
+							arr[i]='1';
+					}
+					else
+					{
+						if(arr[i-1]=='1')
+							arr[i-1]='0';
+						else
+							arr[i-1]='1';
+					}				
+					flag=1;
+					current=arr[i];
+					count++;
+				}
+			}
+			cout<<count<<endl<<arr<<endl;
+		}
+		else
+		{
+			int count1=0,count2=0;
+			for(i=0;i<n;i++)
+			{
+				if(i%2==0)
+				{
+					if(arr[i]=='1')
+						count1++;
+					else
+						count2++;
+				}
+				else
+				{
+					if(arr[i]=='0')
+						count1++;
+					else
+						count2++;
+				}
+			}
+			if(count1>=count2)
+			{
+				cout<<count2<<endl;
+				for(i=0;i<n;i++)
+					cout<<(i+1)%2;
+				cout<<endl;
+			}
+			else
+			{
+				cout<<count1<<endl;
+				for(i=0;i<n;i++)
+					cout<<i%2;
+				cout<<endl;
+			}
+		}
+
+	}
+}

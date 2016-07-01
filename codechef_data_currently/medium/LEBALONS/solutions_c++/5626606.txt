@@ -1,0 +1,118 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+inline void inp(int &n ) {//fast input function
+      n=0;
+      int ch=getchar(),sign=1;
+      while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getchar();}
+      while( ch >= '0' && ch <= '9' )
+          n=(n<<3)+(n<<1)+ ch-'0', ch=getchar();
+      n=n*sign;
+}
+typedef long long lli;
+typedef vector <int> vi;
+typedef pair< int ,int > pii;
+typedef istringstream iss;
+typedef ostringstream oss;
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define ln length()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define fu(i,a,n) for(int i=a;i<=n;i++)
+#define fd(i,n,a) for(int i=n;i>=a;i--)
+#define all(a)  a.begin(),a.end() 
+#define ESP (1e-9)
+ 
+#define gi(n) scanf("%d",&n)
+#define gl(n) cin >> n
+#define pi(n) printf("%d",n)
+#define pl(n) printf("%lld",n)
+#define ps printf(" ")
+#define pn printf("
+")
+#define N 222222
+
+
+int main () {
+  int t;
+  inp(t);
+
+  while (t--) {
+    int n, m;
+    inp(n); inp(m);
+    vector<pii> vec;
+    for (int i = 0; i < n; i++) {
+      int x, y;
+      inp(x); inp(y);
+      vec.push_back(pii(x,y));
+    }
+    sort (vec.begin(),vec.end());
+    vector<int> color;
+    vector<int> cost;
+    int colors = 1;
+    color.push_back(1);
+    cost.push_back(vec[0].second);
+    for (int i = 1; i < n; i++) {
+      if (vec[i].first == vec[i-1].first) {
+        color[color.size()-1]++;
+        cost[cost.size()-1] += vec[i].second;
+      }
+      else {
+        color.push_back(1);
+        cost.push_back(vec[i].second);
+        colors++;
+      }
+    }
+
+    // for (int i = 0; i < colors; i++) {
+    //   printf("%d %d 
+",color[i],cost[i]);
+    // }
+    // exit(0);
+    lli dp1[colors+1][colors+1];
+    lli dp2[colors+1][colors+1];
+    memset(dp1,0,sizeof dp1);
+    memset(dp2,0,sizeof dp2);
+    
+    for (int i = 0; i <= colors; i++) {
+      dp1[i][0] = 1;
+      dp1[0][i] = 0;
+      dp2[i][0] = 0;
+      dp2[0][i] = 0;
+    }
+    dp1[0][0] = 1;
+    for (int i = 1; i <= colors; i++) {
+      for (int j = 1; j <= i; j++) {
+        dp1[i][j] = dp1[i-1][j] + dp1[i-1][j-1]*(pow(2,color[i-1])-1);
+      }
+    }
+    
+    for (int i = 1; i <= colors; i++) {
+      for (int j = 1; j <= i; j++) {
+        dp2[i][j] = dp2[i-1][j] + dp2[i-1][j-1]*(pow(2,color[i-1])-1) +  dp1[i-1][j-1]*cost[i-1]*(pow(2,color[i-1]-1));
+      }
+    }
+
+    // for (int i = 1; i <= colors; i++) {
+    //   for (int j = 1; j <= i; j++) {
+    //     printf("%lli ",dp1[i][j]);
+    //   }
+    //   printf("
+");
+    // }
+    // exit(0);
+    lli tot = 0;
+    lli num = 0;
+    for (int i = m; i <= colors; i++) {
+      tot += dp2[colors][i];
+      num += dp1[colors][i];
+    }
+    double ans = double(tot)/double(num);
+    printf("%.6lf
+",ans);
+  }
+}

@@ -1,0 +1,96 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<cstring>
+#include<algorithm>
+#include<list>
+#include<vector>
+#include<cstring>
+#define mod 1000000007
+#define ll long long
+using namespace std;
+
+int arr[100001];
+
+int main()
+{
+	int t,n,m,i,j,var1,var2,flag=0,a,b;
+
+	vector<pair<int,int> > p;
+	pair<int,int> s;
+	cin>>t;
+	
+	while(t--)
+	{
+		cin>>n>>m;
+		
+		for(i=1;i<=n;i++)
+		{
+			cin>>arr[i];
+		}
+		p.clear();
+		while(m--)
+		{
+			cin>>a>>b;
+			s=make_pair(a,b);
+			p.push_back(s);
+		}
+		
+		sort(p.begin(),p.end());
+		
+		i=0;
+		
+		var1=p[0].first;
+		var2=p[0].second;
+		
+		while(1)
+		{
+			if(i>=p.size())
+			break;
+			
+			if(i+1<p.size())
+			{
+				if(p[i+1].first>var2)
+				{
+					sort(arr+var1,arr+var2+1);
+					var1=p[i+1].first;
+					var2=p[i+1].second;
+					i++;
+					continue;
+				}
+				else
+				{
+					var2=max(var2,p[i+1].second);
+					i++;
+					continue;
+				}
+			}
+			else
+			{
+				sort(arr+var1,arr+var2+1);
+				break;
+			}	
+		}
+		flag=0;
+		for(i=1;i<=n;i++)
+		{
+			if(arr[i]==i)
+			continue;
+			else
+			{
+				flag=1;
+				break;
+			}
+		}
+		
+		
+		if(flag==1)
+		cout<<"Impossible
+";
+		else
+		cout<<"Possible
+";
+		
+	}
+	return 0;
+}

@@ -1,0 +1,19 @@
+#-------------------------------------------------------------------------------
+# Name:        module2
+# Purpose:
+#
+# Author:      USER
+#
+# Created:     13-12-2015
+# Copyright:   (c) USER 2015
+# Licence:     <your licence>
+#-------------------------------------------------------------------------------
+
+test=input()
+for a in range(0,test):
+    n=input()
+    sqrt=int(n**0.5)
+    for i in range(sqrt,0,-1):
+        if n%i==0:
+            break
+    print ((n/i)-i)

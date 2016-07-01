@@ -1,0 +1,32 @@
+''' time limit exceeded
+def minTime(n, s):
+	time = 0
+	for i in range(n):
+		x, l, f = s[i]
+		departTime = x
+		while departTime < time:
+			departTime += f
+		time = departTime if departTime > time else time
+		time += l
+		
+	return str(time)
+'''
+def minTime(n, s):
+	time = 0
+	for i in range(n):
+		x, l, f = s[i]
+		if x >= time:
+			time = x
+		else:
+			r = (time - x) % f
+			time += f - r if r > 0 else 0
+		time += l
+	return str(time)
+
+T=int(raw_input())
+for _ in range(T):
+	n=int(raw_input())
+	s=[]
+	for i in range(n):
+		s.append(map(int, raw_input().split()))
+	print minTime(n, s)

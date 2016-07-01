@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define MOD 1000000007
+long a[100000010];
+
+void go (){
+    a[1]=1;
+    for(long i=2;i<100000010;i++)
+        a[i]=((a[i-1]<<1) + 1)%MOD;
+}
+
+int main(){
+    go();
+    //ifstream cin("a.txt");
+    int tt;
+    cin>>tt;
+    long n;
+    while(tt--){
+        cin>>n;
+        cout<<a[n]<<endl;
+    }
+}

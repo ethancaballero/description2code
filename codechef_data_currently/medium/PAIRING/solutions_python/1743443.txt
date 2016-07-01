@@ -1,0 +1,21 @@
+t = int(raw_input())
+for i in range(t):
+    n,m = map(int, raw_input().split())
+    l = []
+    for j in range(m):
+        l.append(map(int, raw_input().split()))
+    m = m - 1
+    out = []
+    visited = [True]*n
+    for k in range(m,-1,-1):
+        a = l[k][0]
+        b = l[k][1]
+        if visited[a] and visited[b]:
+            out.append(k)
+            visited[a] = False
+            visited[b] = False
+    out.reverse()
+    for e in out:
+        print e,
+    print
+        

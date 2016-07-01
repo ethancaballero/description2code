@@ -1,0 +1,101 @@
+//THEM THAT STICK TO IT OUT, ARE THEM THAT WIN
+//The closer you think you're, the less you will actually see.
+#include "bits/stdc++.h"
+#define sd(n) scanf("%d", &(n))
+#define rep(i, x, n) for (int i = x, _n = (n); i < _n; ++i)
+#define repV(i, v) for (i = v.begin(); i != v.end(); i++)
+#define SZ(c) (int)(c).size()
+#define lcm(a,b) (a*(b/__gcd(a,b)))
+#define VI vector<int>
+#define all(c) (c).begin(), (c).end()
+#define pb push_back
+#define mii map<int, int>
+#define pii pair<int, int>
+#define pip pair<int, pii>
+#define F first
+#define S second
+#define mp make_pair
+#define lli long long int
+#define CLR(p) memset(p, 0, sizeof(p))
+#define SET(p) memset(p, -1, sizeof(p))
+#define INF 0x3f3f3f3f
+using namespace std;
+
+const int MOD = 1e9+7;
+const int MAX = 100010;
+
+int n, k;
+string s;
+int BIT[MAX];
+
+int query(int x)
+{
+	int ans = 0;
+	while(x > 0)
+	{
+		ans += BIT[x];
+		x -= x & -x;
+	}
+	return ans;
+}
+
+void update(int x, int v)
+{
+	while(x <= n)
+	{
+		BIT[x] += v;
+		x += x & -x;
+	}
+}
+
+int main()
+{
+	int t;
+	sd(t);
+	while(t--)
+	{
+		sd(n);
+		sd(k);
+
+		cin >> s;
+		s = " " + s;
+
+		rep(i, 0, n+1)
+			BIT[i] = 0;
+
+		rep(i, 1, n+1)
+			update(i, 0);
+
+		int  cnt = 0;
+		rep(i, 1, n+1)
+		{
+			if(query(i)&1)
+				if(s[i] == 'R')
+					s[i] = 'G';
+				else
+					s[i] = 'R';
+
+//			printf("s[%d] is %c
+", i, s[i]);
+
+			if(s[i] == 'R')
+			{
+//				printf("counting...
+");
+				cnt++;
+				update(i, 1);
+//				printf("done first
+");
+				int y = min(n, i + k - 1);
+//				printf("y is %d
+", y);
+				update(y+1, -1);
+			}
+		}
+
+		cout << cnt << endl;
+	}
+
+    return 0;
+}    
+

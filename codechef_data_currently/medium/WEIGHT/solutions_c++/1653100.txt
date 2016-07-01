@@ -1,0 +1,59 @@
+#include<algorithm>
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<fstream>
+#include<iomanip>
+#include<bitset>
+#include<deque>
+#include<queue>
+#include<string>
+#include<map>
+#include<cstring>
+#include<sstream>
+#include<cmath>
+#include<ctime>
+using namespace std;
+
+#define NMAX 20
+#define WMAX 200
+
+int dp[NMAX+1][WMAX+1][10];
+
+#define DP(i,j,k) ((j >= 0 && k <= 9 && k >= 0)?dp[i][j][k]:0)
+
+int main()
+{
+	memset(dp, 0, sizeof(dp));
+	for (int i = 1; i < 10; i++)
+		dp[1][0][i] = 1;
+	for (int i = 2; i <= NMAX; i++)
+	{
+		for (int j = 0; j <= WMAX; j++)
+		{
+			for (int k = 0; k <= 9; k++)
+			{
+				int count = 0;
+				count += DP(i-1,j,k);
+				for (int w = 1; w <= 9; w++)
+					count += (DP(i-1,j-w,k-w)+DP(i-1,j-w,k+w));
+				dp[i][j][k] = count%1000007;
+				//printf("%d %d %d %d
+", i, j, k, count);
+			}
+		}
+	}
+	int T;
+	scanf("%d", &T);
+	for (int t = 0; t < T; t++)
+	{
+		int n, w;
+		scanf("%d %d", &n, &w);
+		int count = 0; 
+		for (int i = 0; i < 10; i++)
+			count += dp[n][w][i];
+		printf("%d
+", count%1000007);
+	}
+	return 0;
+}

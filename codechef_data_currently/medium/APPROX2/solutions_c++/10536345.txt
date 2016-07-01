@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t,num,i,j,chef,diff;
+    cin>>t;
+    while(t--)
+    {   int minsum=INT_MAX,count=0;
+        cin>>num>>chef;
+        int array[num+1];
+        for(i=0;i<num;++i)
+            cin>>array[i];
+        for(i=0;i<num-1;++i)
+        {
+            for(j=i+1;j<num;++j)
+            {
+                diff=abs(array[i]+array[j]-chef);
+                if(diff==minsum)
+                    ++count;
+                if(diff<minsum)
+                {
+                    minsum=diff,count=1;
+                }
+            }
+        }
+        printf("%d %d
+",minsum,count);
+    }
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	int arr[100009];
+	while(t--){
+		long long int n,temp;
+		cin>>n;
+		for(int i=0;i<100002;i++)
+			arr[i]=0;
+		for(int i=0;i<n;i++)
+		{
+			cin>>temp;
+			arr[temp]=1;
+		}
+		long long int count=0;
+		for(int i=0;i<100002;i++)
+			if(arr[i]==1)
+				count++;
+		cout<<count<<"
+";
+	}
+	return 0;
+}

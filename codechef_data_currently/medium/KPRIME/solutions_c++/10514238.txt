@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int P[100001];
+int R[6][100001];
+void pre() {
+    for(int i=2;i<=100000;i+=2) P[i] = 1;
+    for(int i=3;i<=100000;i+=2)
+        if(P[i] == 0)
+        for(int j=i;j<=100000;j+=i)
+        ++P[j];
+
+}
+
+
+int main() {
+    pre();
+    int T,count;
+    cin >> T;
+    while(T--) {
+            count=0;
+        int A, B, K;
+        cin >> A >> B >> K;
+        for(int i=A;i<=B;++i)
+            if(P[i]==K)
+                ++count;
+        cout<<count<<endl;
+    }
+    return 0;
+}
+

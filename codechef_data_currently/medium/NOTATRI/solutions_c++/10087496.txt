@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    while(n>0){
+        int *array=new int[n];
+        for(int i=0;i<n;i++){
+            cin>>array[i];
+        }
+        sort(array,array+n);
+        int sum=0;
+        for(int i=n-1;i>1;i--){
+            int j=0;
+            int k=i-1;
+            while(k>j){
+                if(array[j]+array[k]<array[i]){
+                    sum=sum+k-j;
+                    j++;
+                }
+                else{
+                    k--;
+                }
+            }
+        }
+        cout<<sum<<endl;
+        cin>>n;
+    }
+}

@@ -1,0 +1,38 @@
+#!/usr/bin/python
+# -*- encoding: utf-8 -*-
+# pylint: disable=invalid-name,missing-docstring,bad-builtin
+from sys import stdin
+from itertools import imap
+from heapq import heappush as pqPush
+from heapq import heappop as pqPop
+
+def dijkstra(graph, v):
+    dist = [float('inf')]*v
+    pq = [(0, 0)]
+    while pq:
+        curDist, node = pqPop(pq)
+        if dist[node] <= curDist:
+            continue
+        dist[node] = curDist
+        for x, c in graph[node].iteritems():
+            pqPush(pq, (curDist + c, x))
+    return dist[-1]
+
+
+
+def main():
+    dstream = imap(int, stdin.read().split())
+    n, m = next(dstream), next(dstream)
+    graph = [{} for _ in xrange(n)]
+    for _ in xrange(m):
+        u, v = next(dstream) - 1, next(dstream) - 1
+        graph[u][v] = 0
+        if u not in graph[v]:
+            graph[v][u] = 1
+    result = dijkstra(graph, n)
+    if result == float('inf'):
+        print -1
+    else:
+        print result
+
+main()

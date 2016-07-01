@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <set>
+#include <iostream>
+#include <string>
+
+
+using namespace std;
+
+int main()
+{
+	int t,i,n,j,k,m,a;
+	scanf("%d",&t);
+	for(i=0;i<t;i++)
+	{
+		multiset <int> st;
+		multiset <int> :: iterator it;
+		scanf("%d",&n);
+	
+		for(j=0;j<n;j++)
+		{
+		
+		  scanf("%d",&a);
+		  //st.insert(a);		  
+		  int flag = 0;
+			
+		    it = st.upper_bound (a);
+		    if(it!=st.end())
+		    {
+		    	st.erase(it);
+		    	st.insert(a);
+			}
+			 
+			else 
+				st.insert(a); 
+		
+		}
+		
+		cout<<st.size()<<" ";
+		int count = 1;
+		
+		for(it=st.begin();it!=st.end();it++)
+		{ 
+			if(count==st.size())     
+			 cout<<*it;
+			else
+			 cout<<*it<<" ";
+			
+			count++; 			      
+	    }
+		
+		printf("
+");
+									
+	}
+	
+return 0;	
+
+}

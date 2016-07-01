@@ -1,0 +1,10 @@
+T=int(raw_input())
+for i in xrange(T):
+    N,r=map(int,raw_input().split())
+    M=map(int,raw_input().split())
+    a=min(M)
+    b=max(M)
+    for i in xrange(N):
+        l=max(abs(b-i),abs(a-i))
+        print l,
+    print ''

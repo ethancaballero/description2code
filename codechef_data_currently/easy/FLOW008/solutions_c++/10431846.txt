@@ -1,0 +1,22 @@
+//servant
+#include <iostream>
+using namespace std;
+main()
+{
+	int n,i,a;
+	cin>>n;
+	int x[n];
+	for (i=0;i<n;i++)
+	{
+		cin>>a;
+		x[i]=0;
+		if (a<10) x[i]=1;
+	}
+	
+	for (i=0;i<n;i++)
+	{
+		if (x[i]==1) cout<<"What an obedient servant you are!"<<endl;
+		else cout<<"-1"<<endl;
+	}
+	
+}

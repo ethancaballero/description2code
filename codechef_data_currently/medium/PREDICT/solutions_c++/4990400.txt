@@ -1,0 +1,19 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main() {
+	long t;
+	double p,ans;
+	scanf("%ld",&t);
+	while(t--){
+		scanf("%lf",&p);
+		if(p>0.5)
+			ans=10000*p*(3-2*p);
+		else
+			ans=10000*(1-p)*(1+2*p);
+		printf("%0.9lf
+",ans);
+	}
+	return 0;
+}

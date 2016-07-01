@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <vector>
+#include <string>
+#include <map>
+#include <set>
+#include <queue>
+#include <algorithm>
+#define lli long long int
+#define pb push_back
+#define mod 1000000007
+#define pii pair<int,int>
+
+using namespace std;
+char arr[1003][1003];
+int main()
+{
+    int t,n,m,i,j,a,b;
+    char ch;
+    scanf("%d",&t);
+    while(t--){
+        int cols=mod,coll=0,rows=mod,rowl=0;
+        scanf("%d%d",&n,&m);
+        for(i=1;i<=n;i++){
+            for(j=1;j<=m;j++){
+                scanf(" %c",&ch);
+                if(ch=='*'){
+                    cols=min(cols,j);
+                    rows=min(rows,i);
+                    coll=max(coll,j);
+                    rowl=max(rowl,i);
+                }
+            }
+        }
+        int ans=max((rowl-rows+1)/2 + 1 ,(coll-cols+1)/2 +1);
+        if(cols==mod)ans=0;
+        printf("%d
+",ans);
+    }
+
+
+    return 0;
+}

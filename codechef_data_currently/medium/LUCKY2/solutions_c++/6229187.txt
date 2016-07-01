@@ -1,0 +1,162 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cctype>
+#include <string>
+#include <cstring>
+#include <ctime>
+#include <string.h>
+ 
+using namespace std;
+ 
+/*typedef long long int64;
+typedef unsigned long long uint64;*/
+#define two(X) (1<<(X))
+#define twoL(X) (((int64)(1))<<(X))
+#define contain(S,X) (((S)&two(X))!=0)
+#define containL(S,X) (((S)&twoL(X))!=0)
+const double pi=acos(-1.0);
+const double eps=1e-11;
+/*template<class T> inline void checkmin(T &a,T b){if(b<a) a=b;}
+template<class T> inline void checkmax(T &a,T b){if(b>a) a=b;}
+template<class T> inline T sqr(T x){return x*x;}*/
+typedef pair<int,int> ipair;
+#define SIZE(A) ((int)A.size())
+#define LENGTH(A) ((int)A.length())
+#define MP(A,B) make_pair(A,B)
+#define PB(X) push_back(X)
+#define ll long long int
+#define si(x) scanf("%d",&x)
+#define sl(x) scanf("%lld",&x)
+#define pi(x) printf("%d",x)
+#define nl printf("
+")
+#define pl(x) printf("%lld",x)
+#define mod 1000000007
+int k;
+ll dp[1010][800];
+char A[1010],B[1010];
+
+ll check(int x) {
+	if(x==0)return 0;
+	int d=0;
+	while(x!=0) {
+		d=x%10;
+		if(d!=4&&d!=7) return 0LL;
+		x/=10;
+	}
+	return 1LL;
+}
+ 
+ll solve(int idx,int cnt) {
+	if(idx==k) {
+		ll r=check(cnt);
+		dp[idx][cnt]=r;
+		return r;
+	}
+	else {
+		ll ans=dp[idx][cnt];
+		if(ans!=-1) return ans;
+		else {
+			ans=0;
+			for(int i=0;i<=9;i++) {
+				int newidx=idx+1;
+				int newcnt=cnt;
+				if(i==4||i==7) newcnt=cnt+1;
+				if(newcnt>777) continue;
+				ans=ans+solve(newidx,newcnt);
+			}
+		}
+		dp[idx][cnt]=ans%mod;
+		return dp[idx][cnt];
+	}
+}
+ 
+int main()
+{
+	//freopen("inp.txt","r",stdin);
+	int T;
+	cin>>T;
+	k = 1002;
+	for(int i=0;i<k;i++) {
+		for(int j=0;j<800;j++) {
+			dp[i][j] = -1;
+		}
+	}
+	ll x = solve(0,0);
+	
+	while(T--) {
+		scanf("%s %s",A,B);
+		int cnt=0,point = 1002-strlen(A);
+		ll ans1=0;
+		for(int i=point;i<1002;i++) {
+			for(int val=0;val<=9;val++) {
+				if(val==(A[i-point]-'0')) {
+					if((val)==4||(val)==7) {
+						cnt++;
+					}
+					break;
+				}
+				int newcnt=cnt;
+				if(val==4||val==7) {
+					newcnt=cnt+1;
+				}
+				if(newcnt>777)continue;
+				ans1=(ans1+dp[i+1][newcnt])%mod;
+				//cout<<i<<" "<<ans1<<endl;
+			}
+		}
+		
+		ll ans2=0;
+		cnt=0;
+		point = 1002-strlen(B);
+		for(int i=point;i<1002;i++) {
+			for(int val=0;val<=9;val++) {
+				if(val==(B[i-point]-'0')) {
+					if((val)==4||(val)==7) {
+						cnt++;
+					}
+					break;
+				}
+				int newcnt=cnt;
+				if(val==4||val==7) {
+					newcnt=cnt+1;
+				}
+				if(newcnt>777)continue;
+				ans2=(ans2+dp[i+1][newcnt])%mod;
+			}
+		}
+		
+		cnt=0;
+		int len=strlen(A);
+		for(int i=0;i<len;i++) {
+			if(A[i]=='4'||A[i]=='7') cnt++;
+		}
+		ll r=check(cnt);
+		ans1=(ans1+r)%mod;
+		int r1=r;
+		cnt=0;
+		len=strlen(B);
+		for(int i=0;i<len;i++) {
+			if(B[i]=='4'||B[i]=='7') cnt++;
+		}
+		r=check(cnt);
+		ans2=(ans2+r)%mod;
+		cout<<(ans2-ans1+mod+r1)%mod<<endl;
+	}
+}

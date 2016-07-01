@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef pair< int , int > pii;
+typedef long long LL;
+#define fr first
+#define se second
+#define EPS 1e-8
+#define INF 10000*10000*10000LL
+stringstream ss;
+#define two(x) ( 1LL<<x )
+LL mod = 10000007LL;
+
+/**************************Code****************************/
+
+int a[64];
+
+int main()
+{
+	int n, m, x;
+	scanf( "%d%d", &n, &m );
+	for( int i = 0 ; i < n ; i ++ )
+		for( int j = 0 ; j < m ; j ++ )
+			scanf( "%d", &x ), a[j] += x;
+	LL ans = 1;
+	for( int i = 0 ; i < m ; i ++ )
+		ans = ( ans * a[i] % mod + mod ) % mod;
+	printf( "%d
+", (int)ans );
+	return 0;
+}

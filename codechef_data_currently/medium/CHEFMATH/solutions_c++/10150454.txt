@@ -1,0 +1,116 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int mod = (1e9)+7;
+
+long long f[52];
+long long dp[46][46][12];
+bool visited[52];
+
+long long modVal(long long x) {
+    if (x >= mod) {
+        return (x%mod);
+    }
+    
+    
+    if (x < 0 ) {
+        x += mod;
+    }
+    
+    return x;
+}
+
+int getIdx(long long x) {
+    
+    int low = 0;
+    int high = 45;
+    
+    while (low <= high) {
+        int mid = (low + high)/2;
+        if (f[mid] == x) {
+            return mid;
+        } else if (f[mid] > x) {
+            high = mid - 1;
+        } else if (f[mid] < x) {
+            low  = mid + 1;
+        }
+    }
+    
+    
+    return -1;
+}
+
+long long rec(long long X, long long y, int yId, int K) {
+    long long ans = 0 ;
+    
+    if (X == 0 && K == 0 ) {
+        return 1;
+    }
+    
+    if ( K == 0 ) {
+        return 0;
+    }
+
+    for (int i = 44 ; i >= 0 ; i--) {
+        long long fib = f[i];
+        
+        if (K *  fib < X) {
+            return ans;
+        }
+        
+        if ( fib <= y ) {
+            long long v = X - fib;
+            long long a = rec(v, fib,  i, K-1);
+            ans += a;
+            
+            ans = modVal(ans);
+        }
+    }
+    
+    
+    return ans;
+}
+void precompute() {
+   f[0] = 1;
+   f[1] = 2;
+
+   for (int i = 2 ; i < 52; i++) {
+      f[i] = f[i-2] + f[i-1];
+   }
+   
+   dp[0][0][1] = 1;
+   visited[0] = true;
+}
+
+
+int main() {
+   precompute();
+   memset(visited, false, sizeof visited);
+   
+   int X, K;
+   int q;
+   scanf("%d", &q);
+   while (q--) {
+      scanf("%d %d", &X, &K);
+      
+      
+      long long ans = 0;
+      for (int i = 44 ; i >= 0 ; i--) {
+          long long fib = f[i];
+          if (K * fib < X) {
+              break;
+          }
+
+          if ( fib <= X) {
+              
+            long  long v = rec(X - fib, fib, i,  K-1);
+            ans += v;
+            ans = modVal(ans);
+          } 
+      }
+      
+      printf("%lld
+", ans);
+   }
+	return 0;
+}

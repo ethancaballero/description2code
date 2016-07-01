@@ -1,0 +1,42 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<string.h>
+#include<algorithm>
+
+using namespace std;
+
+struct pairs {
+	int u, v;
+};
+
+int main() {
+	int T, N, M, i;
+	cin>>T;
+	while(T--) {
+		cin >> N >> M;
+		
+		int s[N], ans[M];
+		pairs A[M];
+		for(i = 0; i<M ; ++i) {
+			ans[i] = 0;
+			cin >> A[i].u >> A[i].v;
+		}
+		
+		for(i = 0; i<N; ++i)
+			s[i] = 0;
+
+		for(i = M-1; i>=0; --i) {
+			if(s[A[i].u] || s[A[i].v])
+				continue;
+			ans[i] = 1;
+			s[A[i].u] = s[A[i].v] = 1;
+			
+		}			
+
+		for(i = 0; i<M; ++i)
+			if(ans[i])
+				cout<<i<<' ';
+		cout<<endl;
+	}
+}

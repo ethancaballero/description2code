@@ -1,0 +1,19 @@
+from __future__ import division
+for _ in range(0,int(raw_input())):
+	n = int(raw_input())
+	bin = 0
+	nd = 0
+	power = 0
+	while(n>0):
+		bin *= 10
+		if(n%2 == 0):
+			bin += 0
+		else:
+			bin +=1
+		n = n//2
+		nd += 1
+	for _ in range(0,nd):
+		power *= 10
+		power += bin%10
+		bin = bin//10
+	print pow(2,2*power,1000000007)

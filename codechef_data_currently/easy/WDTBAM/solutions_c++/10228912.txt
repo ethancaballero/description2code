@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{int t;
+cin>>t;
+
+while(t!=0)
+{int n;
+cin>>n;
+char a[n],b[n];
+cin>>a>>b;
+
+int cnt=0;
+vector <int> c(n + 1);
+for(int i=0;i<n;i++)
+  if(a[i]==b[i])
+        cnt++;
+
+for(int i=0;i<=n;i++)
+    cin>>c[i];
+
+int ans=0;
+if(cnt==n)
+    ans=c[n];
+else
+for(int i=0;i<=cnt;i++)
+  if(c[i]>ans)
+    ans=c[i];
+
+ cout<<ans<<endl;
+t--;
+}
+    return 0;
+}

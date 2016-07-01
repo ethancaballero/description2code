@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+int main()
+{int a;
+//cout<<"enter the no. of test cases ";
+cin>>a;
+for(int z=0;z<a;z++)
+{   int n,m;
+     // cout<<"enter the no. of total and finished tasks";
+     cin>>n>>m;
+     int  *p=new int[m]; 
+      //cout<<"enter the no. the tasks that are finished ";
+     for(int w=0;w<m;w++)
+      {
+	  cin>>p[w];
+     }
+     int *e=new int[n-m];
+      int c=0;
+     for(int r=1;r<=n;r++)
+       { int q=1;
+	      for(int b=0;b<m;b++)
+	       {   
+	       if(r==p[b])
+	       {
+		     q=0;
+	        }
+	      
+	       }
+	        if(q)
+	       { e[c]=r;
+	           c++;
+	        }
+		}
+	 for(int d=0;d<n-m;d+=2)
+	 {cout<<e[d]<<" ";
+	  }
+	 cout<<endl;
+	 for(int f=1;f<n-m;f+=2)
+	  {cout<<e[f]<<" ";
+	   }cout<<endl;
+	}	
+}
+	
+	
+	
+

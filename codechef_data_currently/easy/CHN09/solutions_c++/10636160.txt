@@ -1,0 +1,32 @@
+/*
+ * practice.cpp
+ *
+ *  Created on: Jun 28, 2016
+ *      Author: Tarun Anand
+ */
+#include<bits/stdc++.h>
+#include<sstream>
+#include<map>
+#include<climits>
+#define ll long long int
+using namespace std;
+int main()
+{ std::ios::sync_with_stdio(false);
+  int t,i,counta,countb;
+  string a;
+  cin>>t;
+  while(t--)
+  { cin>>a;
+    counta=0;
+    countb=0;
+    for(i=0;i<a.length();i++)
+    { if(a.at(i)=='a')
+       counta++;
+    else
+    	countb++;
+
+    }
+    std::cout<<min(counta,countb)<<endl;
+  }
+  return 0;
+}

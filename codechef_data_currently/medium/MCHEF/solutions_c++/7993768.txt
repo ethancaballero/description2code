@@ -1,0 +1,95 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define MAX 100002
+ll a[MAX],c[MAX];
+ll dp[MAX][501];
+ll maxm(ll a,ll b)
+{
+    return (a>b)?a:b;
+}
+ll minm(ll a,ll b)
+{
+    return (a<b)?a:b;
+}
+
+ll solve(ll k,ll c[],ll a[],ll n)
+{
+    ll i,j;
+    for (i=0; i<n; i++)
+    {
+        for (j=0; j<=k; j++)
+        {
+            if (i==0 || j==0)
+                dp[i][j] = 0;
+            else if (c[i]<=j)
+                dp[i][j]=maxm(a[i]+dp[i-1][j-c[i]],dp[i-1][j]);
+            else
+                dp[i][j]=dp[i-1][j];
+        }
+    }
+    return dp[n-1][k];
+}
+struct node
+{
+    int left,right,paisa;
+}nd[100000];
+struct mode
+{
+    int id;
+    ll val;
+}arr[100000];
+bool comp(const node &a,const node &b)
+{
+    return a.paisa<b.paisa;
+}
+int main()
+{
+    ll t,n,k,j,m,x,y,v,sum,num,le;
+    cin>>t;
+    while(t--)
+    {
+        sum=0;
+        j=1;
+        le=1;
+        scanf("%lld%lld%lld",&n,&k,&m);
+        for(ll i=1; i<=n; i++)
+        {
+            scanf("%lld",&num);
+            if(num<0){
+                arr[le].val=num;
+                arr[le++].id=i;
+            }
+            sum=sum+num;
+        }
+
+        for(int i=1; i<=m; i++)
+        {
+            scanf("%lld%lld%lld",&x,&y,&v);
+             nd[i].left=x;
+             nd[i].right=y;
+             nd[i].paisa=v;
+        }
+        sort(nd+1,nd+m+1,comp);
+        j=1;
+        for(ll i=1; i<=le; i++)
+        {
+
+                for(int x=1;x<=m;x++)
+                {
+                    if(nd[x].paisa<=k&&arr[i].id>=nd[x].left&&arr[i].id<=nd[x].right)
+                    {
+                        c[j]=nd[x].paisa;
+                        a[j]=(arr[i].val>0)?arr[i].val:-arr[i].val;
+                        j++;
+                        break;
+                    }
+                }
+
+        }
+        ll sum1=solve(k,c,a,j);
+        printf("%lld
+",(sum+sum1));
+    }
+    return 0;
+}

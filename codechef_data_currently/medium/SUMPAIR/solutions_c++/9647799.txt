@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e5 + 10;
+typedef long long LL;
+int A[MAXN];
+LL sum[MAXN];
+inline int getIndex(int low, int high, int el){
+	while(low < high - 1){
+		int mid = (low + high) >> 1;
+		if(A[mid] > el){
+			high = mid - 1;
+		} else {
+			low = mid;
+		}
+	}
+	if(A[high] <= el) return high;
+	return low;
+}
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		int N, D;
+		scanf("%d%d",&N,&D);
+		for(int i = 1;i <= N;++i){
+			scanf("%d", &A[i]);
+		}
+		sort(A + 1, A + N + 1);
+		LL ans = 0;
+		for(int i = 1;i <= N;){
+			int j = i;
+			while(j + 1 <= N && A[j + 1] - A[j] < D)
+				++j;
+			// cout << j << "
+";
+			int len = j - i + 1;
+			int start = ((len&1)?i + 1:i);
+			for(int k = start;k <= j;++k){
+				ans += A[k	];
+			}
+			i = j + 1;
+		}
+		printf("%lld
+", ans);
+	}
+	return 0;
+}

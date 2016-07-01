@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define LL long long
+#define MOD 1000000007
+#define getcx getchar_unlocked
+inline void din( int &n )//fast input function
+{
+   n=0;
+   int ch=getcx();int sign=1;
+   while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();}
+
+   while(  ch >= '0' && ch <= '9' )
+           n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+   n=n*sign;
+}
+inline void llin( int &n )//fast input function
+{
+   n=0;
+   int ch=getcx();int sign=1;
+   while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();}
+
+   while(  ch >= '0' && ch <= '9' )
+           n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+   n=n*sign;
+}
+
+int a[200005];
+int dp[200005],sum[201][101];
+LL P(LL base, LL power) {
+    LL res = 1;
+    while (power) {
+        if (power & 1) {
+            res = (res * base) % MOD;
+        }
+        base = (base * base) % MOD;
+        power >>= 1;
+    }
+    return res;
+}
+int main()
+{
+	int t;
+	din(t);
+	while(t--)
+	{
+		int n;
+		din(n);
+		int ANS=0;
+		memset(sum,0,sizeof(sum));
+		for(int i=0;i<n;i++)din(a[i]);
+		for(int diff=-100;diff<=100;++diff)
+		{
+			//memset(dp,0,sizeof(dp));
+			
+			int ans=0;
+			for(int i=0;i<n; ++i)
+			{
+				if(!i){dp[i]=1;sum[diff+100][a[i]]+=1;}
+				else
+				{
+					if(a[i]-diff>=1 && a[i]-diff<=100)
+					{
+						dp[i]=sum[diff+100][a[i]-diff]+1;
+						sum[diff+100][a[i]]+=dp[i];
+						//if(dp[i]>=MOD)dp[i]%=MOD;
+						//if(sum[a[i]]>=MOD)sum[a[i]]%=MOD;
+					}
+					else
+					{
+						dp[i]=1;
+						sum[diff+100][a[i]]+=dp[i];
+						//if(sum[a[i]]>=MOD)sum[a[i]]%=MOD;
+					}
+				}
+				ans+=dp[i];
+				//ans-=n
+				if(dp[i]>=MOD)dp[i]%=MOD;
+				if(sum[diff+100][a[i]]>=MOD)sum[diff+100][a[i]]%=MOD;
+				if(ans>=MOD)ans%=MOD;
+			}
+			ans-=n;
+			//if(ans<0)ans+=MOD;
+			ANS+=ans;
+			if(ANS>=MOD)ANS%=MOD;
+		}
+		ANS+=n;
+		int req=(P(2,n)-1-ANS);
+		if(req>=MOD)req%=MOD;
+		else if(req<0)
+		{
+			req=(req%MOD+MOD);
+		}
+		printf("%d
+",req);
+	}
+}

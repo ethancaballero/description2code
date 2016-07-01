@@ -1,0 +1,105 @@
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+bool isBad(vector<int> R, int K, int M) {
+	
+	int N = R.size();
+	
+	for (int i = 0; i <= N - K; ++i) {
+
+		
+		int maxR = 0;
+		for (int j = i; j < K + i; ++j) {
+			maxR = max(maxR, R[j]);
+		}
+
+		
+		int count = 0;
+		for (int j = i; j < K + i; ++j) {
+			if(R[j] == maxR) {
+				++count;
+			}
+		}
+
+		
+		if (count >= M) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+int popcount(int x) {
+	int res = 0;
+	while (x > 0) {
+		
+		x -= x & -x;
+		++res;
+	}
+	return res;
+}
+
+int main() {
+	
+	int T;
+	cin >> T;
+
+	
+	for (int t = 0; t < T; ++t) {
+
+		
+		int N, K, M;
+		cin >> N >> K >> M;
+
+		
+		vector<int> R(N);
+		for (int i = 0; i < N; ++i) {
+			cin >> R[i];
+		}
+
+		
+		int res = N + 1;
+
+		
+		for (int mask = 0; mask < (1<<N); ++mask)
+            {
+
+			
+			int size = popcount(mask);
+
+			
+			if (res <= size) {
+				continue;
+			}
+
+			
+			vector<int> newR(N);
+			for (int i = 0; i < N; ++i) {
+			
+				if (mask & 1<<i) {
+					newR[i] = R[i] + 1;
+				} else {
+					newR[i] = R[i];
+				}
+			}
+
+			
+			if (!isBad(newR, K, M)) {
+				
+				res = size;
+			}
+		}
+
+		
+		if (res == N + 1) {
+			res = -1;
+		}
+
+		
+		cout << res << endl;
+	}
+}

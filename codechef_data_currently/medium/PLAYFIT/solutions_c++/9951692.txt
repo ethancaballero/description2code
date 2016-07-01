@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+    std::ios_base::sync_with_stdio(false);
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,a[100000],diff=0,min;
+		scanf("%d",&n);
+		scanf("%d",&a[0]);
+		
+	    min=a[0];
+	    for(int i=1;i<n;i++)
+	    {
+		scanf("%d",&a[i]);
+		if(a[i]<min)
+		min=a[i];
+		if(a[i]-min>diff)
+		diff=a[i]-min;
+	    }
+			if(diff>0)
+			printf("%d
+",diff);
+			else
+			printf("UNFIT
+");
+			
+	}
+	return 0;
+} 

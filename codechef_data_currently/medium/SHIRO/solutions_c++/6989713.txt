@@ -1,0 +1,47 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t, n, i, c, p, tot, j;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        double dp[2][10511];
+        for (i = 0; i <= 10500; i++)
+            dp[0][i] = 0.0;
+        c = 1;
+        p = 0;
+        int a[n];
+        tot = 0;
+        for (i = 0; i < n; i++) {
+            cin >> a[i];
+            tot += a[i];
+        }
+        double pb[n];
+        for (i = 0; i < n; i++) {
+            cin >> pb[i];
+            pb[i] /= 100.0;
+        }
+        dp[p][0] = 1.0-pb[0];
+        dp[p][a[0]] = pb[0];
+        for (i = 1; i < n; i++) {
+            for (j = 0; j <= 10000; j++)
+                dp[c][j] = (1-pb[i])*dp[p][j];
+            for (j = 0; j <= 10000; j++)
+                dp[c][j+a[i]] += pb[i]*dp[p][j];
+            swap(c, p);
+        }
+        double ans = 0.0;
+        for (i = 0; i <= tot; i++) {
+            if ((tot-i) <= i)
+                ans += dp[p][i];
+        }
+        printf("%.6lf
+", ans);
+    }
+    return 0;
+}

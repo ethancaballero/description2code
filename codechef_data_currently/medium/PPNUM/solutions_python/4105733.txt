@@ -1,0 +1,31 @@
+mod=(10**9)+7
+def digits( num):
+	count =0
+	while(num):
+		count+=1
+		num=num/10
+	return count
+
+def sigma(n):
+		return (n*(n-1))/2
+
+def sumbetween(l,r):
+	return sigma(r+1) - sigma(l)
+
+def answer( l,r):
+	if ( l>r):
+		return 0
+	d=digits(l)
+	n=10**d
+	if n>r:
+		n=r+1
+	s = sumbetween(l,n-1)% mod
+	s=(s*d ) %mod
+	#print n,r
+	return (s+answer(n,r))%mod
+
+num=input()
+
+for q in range(num):
+	l,r=map( int,raw_input().split())
+	print answer( l, r)

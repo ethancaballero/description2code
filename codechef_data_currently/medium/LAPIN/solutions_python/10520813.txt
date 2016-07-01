@@ -1,0 +1,21 @@
+q=int(raw_input())
+while(q>0):
+	a=raw_input()
+	a1=a[0:len(a)//2]
+	if(len(a)%2==0):
+		a2=a[(len(a)//2):len(a)]
+	else:
+		a2=a[(len(a)//2)+1:len(a)]
+	a1=list(a1)
+	a1.sort()
+	a2=list(a2)
+	a2.sort()
+	cnt=0
+	for x, y in zip(a1, a2):
+		if(x==y):
+			cnt+=1
+	if(cnt==len(a)//2):
+		print 'YES'
+	else:
+		print 'NO'
+	q-=1

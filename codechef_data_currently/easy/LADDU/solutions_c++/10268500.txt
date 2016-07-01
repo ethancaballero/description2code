@@ -1,0 +1,45 @@
+#include<iostream>
+#include <string>
+using namespace std;
+int activites,points,rankc,sever;
+string nation,type;
+void input()
+{
+	points=0;
+	cin>>activites>>nation;
+	while(activites--)
+	{
+		cin>>type;
+		if(type == "CONTEST_WON")
+		{
+			cin>>rankc;
+			points+=(300+((20-rankc>0?20-rankc:0)));
+		}
+		else if(type == "TOP_CONTRIBUTOR")
+		{
+			points+=300;
+		}
+		else if(type == "BUG_FOUND")
+		{
+			cin>>sever;
+			points+=sever;
+		}
+		else if(type == "CONTEST_HOSTED")
+		{
+			points+=50;
+		}
+
+	}
+	cout<<points/(nation=="INDIAN"?200:400)<<endl;
+
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		input();
+	}
+	return 0;
+}

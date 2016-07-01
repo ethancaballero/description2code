@@ -1,0 +1,13 @@
+t = int(raw_input())
+for i in xrange(t):
+	h = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77, 88, 99]
+	m = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77, 88, 99]
+	hi, mi = map(int, raw_input().split())
+	ans = 0
+	for i in xrange(len(h)):
+		for j in xrange(len(m)):
+			if h[i] < hi and m[j] < mi:
+				if h[i]%10 == m[j]%10:
+					#print "%d %d" %(h[i], m[j])
+					ans += 1
+	print ans

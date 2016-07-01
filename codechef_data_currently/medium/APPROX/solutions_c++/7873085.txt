@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+char arr[1000005];
+int main()
+{
+	int a = 103993;
+	int b = 33102;
+	int c = a / b;
+	arr[0] = c+'0';
+	//cout << arr[0];
+	a= (a%b) * 10;
+	arr[1] = '.';
+	int i;
+	for(i=2;i<1000005;i++){
+		c = a / b;
+		arr[i] = c+'0';
+		a= (a%b) * 10;	
+	}
+    int t;
+    cin >> t;
+    while(t--){
+    	int k;
+    	cin >> k;
+    	if(k == 0)
+    	cout << arr[0] << endl;
+    	else{
+    		for(i=0;i<k+2;i++){
+    			cout << arr[i];
+    		}
+    		cout << endl;
+    	}
+	}
+    return 0;
+}
+ 

@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+#include <iostream>
+using namespace std;
+
+int map_val[10][10] =
+{1,0,0,0,0,0,0,0,1,0,
+1,1,0,1,1,0,0,1,1,1,
+0,0,1,0,0,0,0,0,1,0,
+0,0,0,1,0,0,0,0,1,1,
+0,0,0,0,1,0,0,0,1,1,
+0,0,0,0,0,1,1,0,1,1,
+0,0,0,0,0,0,1,0,1,0,
+1,0,0,1,0,0,0,1,1,1,
+0,0,0,0,0,0,0,0,1,0,
+0,0,0,0,0,0,0,0,1,1};
+
+#if 0
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--) {
+        int S,M;
+        cin>>S>>M;
+        if(M==0);
+        int temp1=S,temp2=M,power=1;
+        while(temp1>9) {
+            temp1 /= 10;
+            temp2 /= 10;
+            power *= 10;
+        }
+        int equal_flag = 1,result = 0
+        ;
+        while(power>0) {
+            int qut1 = S/power;
+            int qut2 = M/power;
+            if(qut2>9) {
+
+            }
+            else {
+                if(equal_flag) {
+                    int temp = 0;
+                    while(true) {
+                        int val = find_greater(qut1,temp++);
+                        if(val == qut2) {
+                            int S1 = S%power;
+                            int M1 = M%power;
+                            if(M1>S1) {
+                                result = result*10 + val;
+                                equal_flag = 0;
+                                break;
+                            }
+                            if(M1==S1) {
+                                result = result*10 + val;
+                                break;
+                            }
+                            continue;
+                        }
+                        else if(val < qut2) {
+                            result = result*10 + val;
+                            equal_flag = 0;
+                            break;
+                        }
+                    }
+                }
+                else {
+                     int val = find_greater(qut1,0);
+                     result = result*10 + val;
+                }
+                S %= power;
+                M %= power;
+                power /= 10;
+            }
+        }
+        cout<<result<<endl;
+    }
+}
+#endif
+
+int find_lower(int val,int start_val)
+{
+    for(int i=start_val;i>=0;i--) {
+        if(map_val[val][i]) return i;
+    }
+    return -1;
+}
+
+int find_greater(int val)
+{
+    for(int i=9;i>=0;i--)
+        if(map_val[val][i]) return i;
+}
+int main()
+{
+    //freopen("out.txt","r",stdin);
+    //freopen("ans_mine.txt","w",stdout);
+    int t;
+    int equal_arr[10];
+    scanf("%d",&t);
+    while(t--) {
+        char S[10],M[10];
+        scanf("%s%s",S,M);
+        int len_S = strlen(S);
+        int len_M = strlen(M);
+        int equal_flag = 1,result=0,final_result=0;
+        for(int i=0;i<=(len_M-len_S);i++) {
+            int retry=0,value1=1,equal_flag=1;
+            while(value1) {
+            value1=0;
+            for(int i1=0;i1<i;i1++) {
+                value1 = value1*10 + M[i1] - '0';
+            }
+            if(value1 && retry) {
+                retry++;
+                --value1;
+                equal_flag = 0;
+            }
+            memset(equal_arr,0,sizeof equal_arr);
+            label2: result = value1;
+            for(int i2=i;i2<(i+len_S);i2++) {
+                int res;
+                if(equal_flag) {
+                    if(equal_arr[i2]) {
+                        equal_flag=0;
+                        res = find_lower(S[i2-i]-'0',M[i2]-'0' - 1);
+                    }
+                    else {
+                        res = find_lower(S[i2-i]-'0',M[i2]-'0');
+                    }
+                    if(res == -1) {
+                        for(int i4=i2;i4>=i;i4--) {
+                            res = find_lower(S[i4-i]-'0',M[i4]-'0'-1);
+                            if(res!=-1) {
+                                if(M[i4]!=0) {
+                                    equal_arr[i4] = 1;
+                                    goto label2;
+                                }
+                            }
+                        }
+                        if(value1) retry++;
+                        goto label;
+                    }
+                    if(res < M[i2]-'0') equal_flag = 0;
+                }
+                else {
+                    res = find_greater(S[i2-i]-'0');
+                }
+                result = result*10 + res;
+            }
+            for(int i3=i+len_S;i3<len_M;i3++) {
+                if(equal_flag) {
+                    result = result*10 + M[i3] - '0';
+                }
+                else {
+                    result = result*10 + 9;
+                }
+            }
+            break;
+            label: int xx;
+            }
+            if(result>final_result) final_result = result;
+        }
+        cout<<final_result<<endl;
+    }
+    return 0;
+}

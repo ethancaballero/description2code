@@ -1,0 +1,9 @@
+t=int(raw_input())
+p=list()
+p.append(0)
+while t>0:
+    n=int(raw_input())
+    s=len(p)
+    for i in range(s,n+1): p.append(p[i-1]*1.1+0.45-0.1*p[i-2]);
+    print p[n]
+    t=t-1

@@ -1,0 +1,45 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#define mod 1000000007
+using namespace std;
+
+int main(){
+int a[1000], answer[1000];
+	int ans, n, j, i;
+
+	a[0] = 1;
+	answer[0] = 1;
+	i = 1;
+	while (i < 1000)
+	{
+		ans = a[i-1];
+		j = 0;
+		while (j < i)
+		{
+			n = a[j];
+			a[j] = ans;
+			ans = ans + n;
+			ans = ans % mod;
+			j++;
+		}
+
+		a[j] = ans;
+		answer[j] = ans;
+		i++;
+	}
+
+
+	int t;
+
+	cin >> t;
+
+	while (t--)
+	{
+		cin >> n;
+		cout << answer[n - 1] << endl;
+	}
+
+
+	return 0;
+}

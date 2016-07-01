@@ -1,0 +1,22 @@
+import sys
+a=[0]*100001
+b=[0]*100001
+def sieve():
+    for x in xrange(2,100001):
+        if a[x]==0:
+            b[x]=1
+            z=x
+            while(z<100001):
+                a[z]=1
+                z+=x
+sieve()
+
+t=int(raw_input())
+i=0
+while(i<t):
+    n=int(raw_input())
+    if b[n]==1:
+        print "yes"
+    else:
+        print "no"
+    i+=1

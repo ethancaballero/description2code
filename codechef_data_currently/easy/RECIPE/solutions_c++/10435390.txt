@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+#include<bits/stdc++.h>
+int hcfunc(int a,int b)
+{
+    int i;
+    for(i=min(a,b);i>=1;i--)
+	{
+	    if(a%i==0&&b%i==0)
+	    break;
+	}
+	return i;
+}
+int main() {
+	// your code goes here
+	int t,i,n,hcf;
+	cin>>t;
+	int a[122];
+	while(t--)
+	{
+	    int i,hcf;
+	    int n;
+	    cin>>n;
+	    for(i=0;i<n;i++)
+	    cin>>a[i];
+	    hcf=a[0];
+	    for(i=1;i<n;i++)
+	    hcf=hcfunc(hcf,a[i]);
+	 
+	 for(i=0;i<n;i++)
+	 cout<<a[i]/hcf<<" ";
+	 cout<<endl;
+	}
+	return 0;
+}

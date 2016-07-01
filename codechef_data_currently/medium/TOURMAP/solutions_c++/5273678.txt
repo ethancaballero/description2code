@@ -1,0 +1,123 @@
+#include <iostream>
+#include <map>
+#include <list>
+#include <cstring>
+#include <string>
+
+using namespace std;
+
+typedef list<int>::iterator adjlist_iterator;
+
+class Graph
+{
+public:
+	Graph(int N):v(N),c(0)
+	{
+		VerticesArray = new list <int> [N];
+		inDegree = new int[N];
+		outDegree = new int[N];
+		weights = new int * [N];
+		for(int i = 0 ; i<N ; i++)
+		{
+			weights[i] = new int [N];
+			memset(weights[i] , 0 , N);
+		}
+	}
+	void connect(string , string , short int);
+	void print(int *);
+	void DFT(int *);
+
+private:
+	void DFT(int , bool* , int* , int);
+	list <int> *VerticesArray;
+	map <string , int> M;
+	map <int , string> M2;
+	int v , c , *inDegree , *outDegree , **weights;
+};
+
+void Graph::connect(string A , string B , short int C)
+{
+	if(M.find(A) == M.end())
+		{M[A] = c++; M2[c-1] = A;}
+	if(M.find(B) == M.end())
+		{M[B] = c++; M2[c-1] = B;}
+
+	int a = M[A];
+	int b = M[B];
+
+	VerticesArray[a].push_back(b);
+	inDegree[b]++;
+	outDegree[a]++;
+	weights[a][b] = C;
+}
+
+void Graph::DFT(int *store)
+{
+	bool visited[v];
+	int V , k=0;
+	for(int i = 0 ; i<v ; i++)
+		if(inDegree[i] == 0)
+			{V = i; break;}
+	memset(visited , false , v);
+	DFT(V , visited , store , k);
+}
+
+void Graph::DFT(int V , bool *visited , int *store , int k)
+{
+	adjlist_iterator it = VerticesArray[V].begin();
+	visited[V] = true;
+	store[k++] = V;
+
+	for( ; it != VerticesArray[V].end() ; it++)
+		if(!visited[*it])
+			DFT((*it) , visited , store ,k);
+}
+
+void Graph::print(int *S)
+{
+	int _cost = 0;
+	for(int k = 0 ; k<v-1 ; k++)
+	{
+		cout << M2[S[k]] << " ";
+		cout << M2[S[k+1]] << " ";
+		cout << weights[S[k]][S[k+1]] << "$
+";
+		_cost += weights[S[k]][S[k+1]];
+	}
+	cout << _cost << "$
+";
+}
+
+int main()
+{
+	short int T , N , cost;
+	string A , B;
+	char t1[51] , t2[51] , t3[6];
+
+	cin >> T;
+	Graph **graphs = new Graph*[T];
+	int **store = new int * [T];
+
+	while(T--)
+	{
+		cin >> N;
+		graphs[T] = (new Graph(N));
+		store[T] = new int [N];
+		N--;
+		int N2 = N;
+
+		while(N--)
+		{
+			cin >> t1 >> t2 >> t3;
+			A = t1;	B = t2;	cost = 0;
+
+			for(int i = 0 ; i <= (strlen(t3)-2) ; i++)
+				cost = cost * 10 + (t3[i] - '0');
+
+			graphs[T]->connect(A,B,cost);
+		}
+		graphs[T]->DFT(store[T]);
+		graphs[T]->print(store[T]);
+	}
+	return 0;
+}

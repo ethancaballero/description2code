@@ -1,0 +1,23 @@
+#include <iostream>
+#include<stdio.h>
+
+using namespace std;
+
+int main()
+{
+        int t, num;
+
+        scanf("%d", &t);
+
+        while(t--){
+                scanf("%d", &num);
+
+                if (num <10)
+                        printf("What an obedient servant you are!
+");
+                else
+                        printf("%d
+", -1);
+        }
+    return 0;
+}

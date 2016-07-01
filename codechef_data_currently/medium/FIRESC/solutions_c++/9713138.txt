@@ -1,0 +1,84 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+int max_no[100000],parent[100000];
+void union_set(int x,int y,int parent[],int rank_list[]);
+int find_parent(int x,int parent[]);
+map <int,int> mp;
+int mod = (1000000007);
+
+int main()
+{
+    int T,n,m,x,y,count_list;long long pdt;
+    scanf("%d",&T);
+    while(T-->0)
+    {
+
+        count_list=0;pdt=1;
+        scanf("%d%d",&n,&m);
+        int parent[n+1],rank_list[n+1];
+
+        for(int i=1;i<=n;i++)
+        {
+            mp.insert(make_pair(i,1));
+            rank_list[i] = 1;
+            parent[i] = i;
+        }
+        while(m-->0)
+        {
+            scanf("%d%d",&x,&y);
+            union_set(x,y,parent,rank_list);
+        }
+        for(int i=1;i<=n;i++)
+        {
+            if(parent[i]==i)
+            {
+                count_list++;
+                pdt = (pdt*mp[i])%mod;
+            }
+
+        }
+        printf("%d %lld
+",count_list,pdt);
+        for(int i=1;i<=n;i++)
+        {
+            mp.erase(i);
+        }
+    }
+    return 0;
+}
+
+
+
+void union_set(int x,int y,int parent[],int rank_list[])
+{
+    int px = find_parent(x,parent);
+    int py = find_parent(y,parent);
+    if(px==py)
+        return;
+    if(rank_list[px]>rank_list[py])
+    {
+        parent[py] = px;
+        mp[px]=(mp[px]+mp[py])%mod;
+    }
+    else if(rank_list[py]>rank_list[px])
+    {
+        parent[px] = py;
+        mp[py]=(mp[py]+mp[px])%mod;
+    }
+    else
+    {
+        parent[px] = py;
+        mp[py] = (mp[py]+mp[px])%mod;
+        rank_list[py]++;
+    }
+}
+
+
+int find_parent(int x,int parent[])
+{
+    if(x==parent[x])
+        return x;
+    parent[x] = find_parent(parent[x],parent);
+    return parent[x];
+}

@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int test,n,i,cur,ans,a[100000];
+	cin>>test;
+	while(test--)
+	{
+		cin>>n;
+		cur=ans=0;
+		for(i=0;i<n;++i)
+		cin>>a[i];
+		for(i=0;i<n;++i)
+		{
+			cur+=a[i];
+			if(cur>0)
+			ans+=(cur);
+			else
+			ans-=cur;
+		}
+		cout<<ans<<"
+";
+	}
+	return 0;
+}

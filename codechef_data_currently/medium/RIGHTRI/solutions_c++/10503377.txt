@@ -1,0 +1,29 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+
+
+
+int main()
+{
+	long long int t,count=0,a,b,c,d,e,f;
+	double l=0,m=0,n=0;
+	cin>>t;
+	while(t--)
+	{
+	
+	cin>>a>>b>>c>>d>>e>>f;
+	l=(pow(a-c,2)+pow(b-d,2));
+	m=(pow(a-e,2)+pow(b-f,2));
+	n=(pow(e-c,2)+pow(f-d,2));
+	
+	
+	
+	if(l==m+n || m==l+n || n==l+m)
+	count++;
+	
+}
+	cout<<count;
+	return 0;
+}

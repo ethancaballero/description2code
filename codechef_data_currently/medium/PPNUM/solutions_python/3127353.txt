@@ -1,0 +1,14 @@
+from math import *
+test_cases = int(raw_input())
+for case in range(test_cases):
+	l,r = [int(num) for num in raw_input().split()]
+	x = l
+	answer = 0
+	while x<=r:
+		digits = len(str(x))
+		max_value = (10**digits) - 1
+		min_number = min(max_value,r)
+		answer = answer + digits * (min_number + x)*(min_number - x + 1)/2
+		x = int(min_number) +1
+	print int(answer) % 1000000007
+		

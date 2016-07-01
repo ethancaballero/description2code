@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long gcd(long long a,long long b)
+{
+if(b==0)return a;
+else return gcd(b,a%b);
+}
+main()
+{
+int tc;
+scanf("%d",&tc);
+	while(tc--)
+	{
+		long long n,ans=0,i;
+		scanf("%lld",&n);
+		if(n==1)
+		{
+			printf("1/1
+");continue;
+		}
+		long long sq=sqrt(n);
+		for(i=1;i<=sq;i++)
+		{
+			ans+=(n/i);
+		}	
+		ans=2*ans-sq*sq;
+		long long g1=gcd(ans,((1ll*n)*n));
+		printf("%lld/%lld
+",ans/g1,((1ll*n)*n)/g1);
+	}
+}

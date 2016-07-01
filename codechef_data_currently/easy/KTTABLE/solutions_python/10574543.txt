@@ -1,0 +1,21 @@
+
+t = int( raw_input( "" ) )
+
+for i in range( t ):
+
+   n = int( raw_input( "" ) )
+   
+   A = [ int( i ) for i in raw_input( "" ).split( " " ) ] 
+   B = [ int( i ) for i in raw_input( "" ).split( " " ) ]
+   
+   if A[0] >= B[0]:
+      count = 1
+   else:
+      count = 0
+         
+   for i in range( 1 , n ):
+   
+      if A[i] - A[i - 1] >= B[i]:
+         count += 1
+       
+   print count        

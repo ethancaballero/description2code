@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+int fib(long long int n)
+{
+	long long int a,b,c,term=3;
+	a=2;
+	b=3;
+	c=b;
+	if(n==1||n==2||n==3)
+	return n;
+	while(c<n)
+	{
+		c=a+b;
+		term++;
+		a=b;
+		b=c;
+	}
+	if(c==n)
+	return term;
+	else
+	return term-1;
+}
+int main()
+{
+	int t;
+	long long int n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		cout<<fib(n)<<endl;
+	}
+return 0;
+	
+} 

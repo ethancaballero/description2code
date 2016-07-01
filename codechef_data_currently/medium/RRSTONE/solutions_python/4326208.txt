@@ -1,0 +1,10 @@
+n,k = map(int, raw_input().split())
+s=raw_input()
+A = map(int, s.split())
+maxA=max(A)
+minA=min(A)
+if k==0: print s
+elif k%2<>0:
+       for i in A: print maxA - i
+else:
+       for i in A: print i - minA 

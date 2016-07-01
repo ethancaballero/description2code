@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[102];
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        
+        memset(arr,0,sizeof(int)*102);
+        int n,m;
+        scanf("%d%d",&n,&m);
+        int c,l;
+        while(n--)
+        {
+            scanf("%d%d",&c,&l);
+            arr[l]-=c;
+        }
+        while(m--)
+        {
+            scanf("%d%d",&c,&l);
+            arr[l]+=c;
+        }
+        int i=0,ct=0;
+        while(i<102)
+        {
+            if(arr[i]>0) ct+=arr[i];
+            i++;
+        }
+        printf("%d
+",ct);
+    }
+}

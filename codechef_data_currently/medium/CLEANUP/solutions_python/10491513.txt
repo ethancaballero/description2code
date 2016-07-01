@@ -1,0 +1,37 @@
+t=input()
+
+for i in range(0,t):
+	tmplis=list(raw_input().split())
+	n=int(tmplis[0])
+	m=int(tmplis[1])
+	job=range(1,n+1)
+	jobdone=list(raw_input().split())
+	for j in range(0,len(jobdone)):
+		jobdone[j]=int(jobdone[j])
+	jobdone.sort()
+	for j in range(0,len(jobdone)):
+		job[jobdone[j]-1]=99999999
+		
+	ch="chef"
+	cheflis=[]
+	asslis=[]
+	for j in range(0,len(job)):
+		if job[j]==99999999:
+			continue
+		elif ch=="chef":
+			cheflis.append(job[j])
+			ch="ass"
+		else :
+			asslis.append(job[j])
+			ch="chef"
+	if cheflis==[]:
+		print
+	else:
+		for j in range(0,len(cheflis)):
+			print cheflis[j],
+	print
+	if asslis==[]:
+		print
+	else:
+		for j in range(0,len(asslis)):
+			print asslis[j],

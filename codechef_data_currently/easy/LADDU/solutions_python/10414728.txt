@@ -1,0 +1,36 @@
+n=int(raw_input())
+for i in range(0,n):
+    a = list(( raw_input().strip().split()))
+    
+    q=int(a[0])
+    countr=a[1]
+    
+    val=0
+    for j in range(0,q):
+        t=list(( raw_input().strip().split()))
+
+        if "CONTEST_WON" in t[0] :
+            val=val+300
+            t[1]=int(t[1])
+            if(t[1]<20):
+                val=val+20-t[1]
+        elif "TOP_CONTRIBUTOR" in t[0]:
+            val=val+300
+        elif "BUG_FOUND" in t[0]:
+            val=val+int(t[1])
+            
+        elif "CONTEST_HOSTED" in t[0]:
+            val=val+50
+    
+    
+    if "NON" in countr:
+        mod=400
+    else:
+        mod=200
+        
+    print int(val/mod)
+            
+            
+
+
+  

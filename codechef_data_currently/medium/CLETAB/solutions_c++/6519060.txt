@@ -1,0 +1,68 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   int T,M,N,l[401],m[401],n[401],i,j,ans,k,p;
+   cin>>T;
+   while(T--)
+   {
+      cin>>N>>M;
+      for(i=0;i<401;i++)
+      {
+         l[i]=M+1;
+         n[i]=0;
+      }
+      for(i=1;i<=M;i++)
+      {
+         cin>>m[i];
+         if(n[m[i]])
+         l[n[m[i]]]=i;
+         n[m[i]]=i;
+      }
+      for(ans=0,i=j=k=1;j<=M&&k<=N;j++,i++,k++)
+      {
+         for(p=1;p<i;p++)
+         {
+            if(m[i]==m[p])
+            break;
+         }
+
+         if(i!=p)
+         {
+            l[p]=l[i];
+            k--;
+         }
+         else
+         {
+            m[k]=m[i];
+            l[k]=l[i];
+            ans++;
+         }
+      }
+      for(i=j;i<=M;i++)
+      {
+         for(k=j=1;j<=N;j++)
+         {
+            if(m[i]==m[j])
+            break;
+            else if(l[j]>l[k])
+            k=j;
+         }
+
+         if(j<=N)
+         {
+            l[j]=l[l[j]];
+            continue;
+         }
+
+         m[k]=m[i];
+         l[k]=l[i];
+         ans++;
+      }
+      if(ans>M)
+         ans=M;
+      cout<<ans<<endl;
+   }
+
+return  0;
+}

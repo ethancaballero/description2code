@@ -1,0 +1,41 @@
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+int main()
+{
+    int i,j,t,k=0,ans=-1,list_yes[110];char s[110],num[110][110];bool flag=1,test[110];
+    scanf("%i",&t);
+    for(i=0;i<t;i++)
+        {
+            for(j=0;j<t;j++)
+            {
+                scanf("%s",s);
+                num[i][j]=(strcmp(s,"NO")==1)+'0';
+            }
+            test[i]=num[i][i]-'0';
+            if(test[i]) {list_yes[k]=i;k++;}
+            num[i][t]=0;
+        }
+    for(i=0;i<k;i++)
+    {
+        strcpy(s,num[list_yes[i]]);
+        flag=1;
+        for(j=0;j<t;j++)
+            if((s[j]=='1' && strcmp(s,num[j])) ||(s[j]=='0' && !strcmp(s,num[j])))
+                flag=0;
+        if(flag==1) {ans=list_yes[i];break;}
+    }
+    if(ans>=0)
+        for(j=0;j<t;j++)
+            if(num[ans][j]-'0') printf("YES
+");
+            else printf("NO
+");
+    else
+        for(j=0;j<t;j++)
+            printf("NO
+");
+    return 0;
+}

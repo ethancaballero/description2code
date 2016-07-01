@@ -1,0 +1,20 @@
+################################################
+### http://www.codechef.com/problems/TAPALIN ###
+################################################
+def modular_pow(base, exponent):
+    result=1
+    while exponent > 0:
+        if (exponent%2==1):
+            result=(result * base)%1000000007
+        exponent=exponent >> 1
+        base=(base*base)%1000000007
+    return result
+c=int(raw_input())
+from math import ceil
+for z in range(c):
+    n=int(raw_input())
+    ans=modular_pow(26, int(ceil(n/2)))
+    if(n%2==0):
+        print ((52*((ans)-1+ 1000000007)%1000000007)*280000002)%1000000007
+    else:
+        print ((52*((((ans)-1+ 1000000007)*280000002)%1000000007))%1000000007+(ans*26)%1000000007)%1000000007

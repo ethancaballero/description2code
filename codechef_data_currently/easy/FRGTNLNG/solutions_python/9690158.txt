@@ -1,0 +1,14 @@
+t = input()
+for i in range(t):
+    n, k = map(int, raw_input().split())
+    forgot, modern = [], []
+    forgot = map(str, raw_input().split())
+    for i in range(k):
+        modern += map(str, raw_input().split())
+    out = ""
+    for x in forgot:
+        if x in modern:
+            out += "YES "
+        else:
+            out += "NO "
+    print out[0:-1]

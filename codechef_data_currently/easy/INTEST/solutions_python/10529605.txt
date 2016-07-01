@@ -1,0 +1,12 @@
+initialinput = raw_input().split()
+n = int(initialinput[0])
+k = int(initialinput[1])
+counter = 0
+tempvar = 0
+for number in range(1, n+1):
+	number = int(raw_input())
+	if number % k == 0:
+		counter = counter + 1
+	else:
+		tempvar = tempvar + 1
+print counter

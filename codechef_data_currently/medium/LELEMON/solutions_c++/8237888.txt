@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+void quicksort(long int x[100],int first,int last){
+    long int pivot,j,temp,i;
+
+     if(first<last){
+         pivot=first;
+         i=first;
+         j=last;
+
+         while(i<j){
+             while(x[i]>=x[pivot]&&i<last)
+                 i++;
+             while(x[j]<x[pivot])
+                 j--;
+             if(i<j){
+                 temp=x[i];
+                  x[i]=x[j];
+                  x[j]=temp;
+             }
+         }
+
+         temp=x[pivot];
+         x[pivot]=x[j];
+         x[j]=temp;
+         quicksort(x,first,j-1);
+         quicksort(x,j+1,last);
+
+    }
+}
+int main()
+{
+	int t,n,m,arr[101],a,c,i,j;
+	long int arr1[100],v;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		cin>>m;
+		for(i=0;i<n;i++)
+		arr[i]=0;
+		for(i=0;i<m;i++)
+		{
+			cin>>a;
+			arr[a]++;
+		}
+		v=0;
+		for(i=0;i<n;i++)
+		{
+			cin>>c;
+			for(j=0;j<c;j++)
+			cin>>arr1[j];
+			quicksort(arr1,0,c-1);
+			for(j=0;j<arr[i]&&j<c;j++)
+			v=v+arr1[j];
+		}
+		cout<<v<<endl;
+	}
+	return 0;
+}

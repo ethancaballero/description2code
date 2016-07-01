@@ -1,0 +1,78 @@
+#include<iostream>
+using namespace std;
+
+int rel[108],c[108][108],prev[108],mark[108],n;
+
+int nextDFS(int k)
+{	
+	if(k<0)   return 1;
+	
+	if(mark[k])  return 0;
+	
+	mark[k]=1;
+	
+	for( int i=1; i<=n; i++)
+	{
+		if(!c[k][i])  continue;
+		
+		if( nextDFS(prev[i]) )
+		{
+			prev[i]=k;
+			
+			return 1;
+		}
+	}
+return 0;	
+}
+
+
+int main()
+{
+	int tc,m,a,b,i,j,ans;
+	
+	cin>>tc;
+	
+	while(tc--)
+	{
+		ans=0;
+		
+		cin>>n>>m;
+		
+		for(i=1; i<=n; i++)
+		 rel[i]=0;
+	
+		for(i=1; i<=n; i++)
+		 for(j=1; j<=n; j++)
+	 	   c[i][j]=0;
+		
+		while(m--)
+		{
+			cin>>a;    rel[a]++;
+			
+			cin>>b;    rel[b]++;
+			
+            c[a][b]=1;			
+		}
+		
+		for(i=1; i<=n; i++)
+		{
+			if(!rel[i])
+			 ans++;
+		}
+			
+		for(i=1; i<=n; i++) prev[i]=-1;
+		
+		for(i=1; i<=n; i++)
+		 {
+		 	if(!rel[i])
+		 	 continue;
+		 	 
+		 	for(j=1; j<=n; j++)  mark[j]=0; 
+		 	
+		 	if(!nextDFS(i)) ans++;	
+		 }
+		
+		  cout<<ans<<endl;
+	}
+return 0;	
+}

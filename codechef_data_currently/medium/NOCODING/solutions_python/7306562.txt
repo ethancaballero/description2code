@@ -1,0 +1,11 @@
+t = input()
+ref = 'abcdefghijklmnopqrstuvwxyz'
+for test in xrange(t):
+    s = raw_input()
+    inst = 1 + len(s)
+    for i in xrange(1,len(s)):
+        inst+= (ref.index(s[i]) - ref.index(s[i-1])) % 26
+    if inst > len(s)*11:
+        print 'NO'
+    else:
+        print 'YES'

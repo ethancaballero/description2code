@@ -1,0 +1,70 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <math.h>
+
+using namespace std;
+
+int subsequence(string a,string b)
+{
+	  int i=0;int j=0;
+	  while (i<a.length() && j<b.length())
+	  {
+	  	  if (a[i]==b[j])
+	  	  {
+	  	  	 i++;
+	  	  	 j++;
+	  	  }
+	  	  else
+	  	  i++;
+	  }
+	  
+	  if (i>=a.length()-1 && j==b.length() )
+	  return 1;
+	  else
+	  return 0;
+}
+	  
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	
+	while (t--)
+    {
+		   string s="";
+		   cin>>s;
+		   int l=s.length();
+		   if (s.length()==1)
+		   {
+		   	  printf("NO
+");
+		   	  continue;
+		   }
+	 
+	 if (l%2==0)
+	 {
+	 	if (s.substr(0,l/2).compare(s.substr(l/2))==0)
+	 	printf("YES
+");
+	 	else
+	 	printf("NO
+");
+	 	
+	 	continue;
+	 }
+	 
+	 int x=(int)ceil(l/2.0);
+     if (subsequence(s.substr(0,x),s.substr(x)) || subsequence(s.substr(x-1),s.substr(0,x-1)) )
+     printf("YES
+");
+     else
+     printf("NO
+");
+     
+    }
+    
+    return 0;
+}
+		   
+		   

@@ -1,0 +1,27 @@
+from sys import stdin
+def cost(n,costs):
+    costs.sort()
+    pay=0
+    costs.reverse()
+    if n%4 == 0:
+        for i in range(n/4):
+            split = costs[i*4:(i+1)*4]
+            if len(split)>=2:
+                pay= pay+split[0]+split[1]
+            else:
+                pay = pay+split[0]
+        return pay
+    else:
+        for i in range((n+4)/4):
+            split= costs[i*4:(i+1)*4]
+            if len(split)>=2:
+                pay = pay+split[0]+split[1]
+            else:
+                pay=pay+split[0]
+        return pay
+
+
+for i in range(int(stdin.readline())):
+    num=int(stdin.readline())
+    items =map(int,stdin.readline().split())
+    print cost(num,items)

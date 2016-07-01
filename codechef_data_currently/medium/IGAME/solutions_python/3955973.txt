@@ -1,0 +1,38 @@
+a=[[0 for i in xrange(1001)] for y in range(1001)]
+ 
+def row(i,j):
+    for k in xrange(1001-j-1):
+        a[i][k+j+1]=2
+ 
+def col(i,j):
+    for k in xrange(1001-i-1):
+        a[k+i+1][j]=2
+ 
+def diag(i,j):
+    i=i+1
+    j=j+1
+    while(i<1001)and(j<1001):
+        a[i][j]=2
+        i=i+1
+        j=j+1
+ 
+def main():
+	test=input()
+	for i in xrange(1001):
+		for j in xrange(1001):
+			if(a[i][j]==0):
+				a[i][j]=1
+				row(i,j)
+				col(i,j)
+				diag(i,j)
+	for t in xrange(test):
+		m,n,p,q=map(int,raw_input().split())
+		if(a[m-p][n-q]==1):
+			print "Bob"
+		else:
+			print "Alice"
+	return 0
+	
+if __name__ == '__main__':
+	main()
+ 

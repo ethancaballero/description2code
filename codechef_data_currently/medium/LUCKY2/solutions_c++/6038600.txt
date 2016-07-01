@@ -1,0 +1,52 @@
+ #include <iostream>
+    #include <string>
+    using namespace std;
+     
+    #define MOD 1000000007
+     
+    int comb[1001][1001], pow2[1001], pow8[1001];
+    int allowed[14] = {4,7, 44,47,74,77, 444,447,474,477,744,747,774,777};
+     
+    int doit(const string& N) {
+    int ret = 0;
+    int lucky = 0;
+    for (int i = 0; i < N.size(); i++) {
+    if(i > 0) lucky += (N[i-1]=='4' || N[i-1]=='7');
+    int lim = N[i]-'0' + (i==N.size()-1);
+    for (int dig = 0; dig < lim; dig++) {
+    int cur = lucky + (dig == 4 || dig == 7);
+    for (int alln = 0; alln < 14; alln++) {
+    int all = allowed[alln];
+    if (all < cur || all-cur > N.size()-i-1) continue;
+    int v = comb[N.size()-i-1][all-cur];
+    v = (v * (long long)pow2[all-cur]) % MOD;
+    v = (v * (long long)pow8[(N.size()-i-1) - (all-cur)]) % MOD;
+    ret = (ret + v) % MOD;
+    }
+    }
+    }
+    return ret;
+    }
+     
+    main() {
+    for (int i = 0; i <= 1000; i++) {
+    comb[i][0] = 1;
+    for (int j = 1; j <= i; j++)
+    comb[i][j] = (comb[i-1][j] + comb[i-1][j-1]) % MOD;
+    }
+    pow2[0] = pow8[0] = 1;
+    for (int i = 1; i <= 1000; i++) pow2[i] = (pow2[i-1]<<1) % MOD;
+    for (int i = 1; i <= 1000; i++) pow8[i] = (pow8[i-1]*8LL) % MOD;
+     
+    int T;
+    for (cin >> T; T--;) {
+    string L, R;
+    cin >> L >> R;
+    L = string(R.size()-L.size(), '0') + L;
+    for (int i = L.size()-1; ; i--) {
+    if (--L[i] < '0') L[i] = '9'; else break;
+    }
+    int ret = (doit(R) - doit(L) + MOD) % MOD;
+    cout << ret << endl;
+    }
+    }   

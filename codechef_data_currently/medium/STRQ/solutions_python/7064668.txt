@@ -1,0 +1,37 @@
+s = raw_input()
+pre = [[0 for i in range(len(s)+1)]for i in range(4)]
+
+chk = ['c','e','f','h']
+for i in range(4):
+    for j in range(1,len(s)+1):
+        if s[j-1] == chk[i]:
+            pre[i][j] = pre[i][j-1]+1
+        else:
+            pre[i][j] = pre[i][j-1]
+
+comp = []
+for i in range(4):
+    for j in range(4):
+        comp.append(chk[i]+chk[j])
+data = []
+for i in range(len(comp)):
+    r = [0]*(len(s)+1)
+    x = y = 0
+    for j in range(len(s)+1):
+        if y == pre[chk.index(comp[i][1])][j]:
+            r[j] = r[j-1]
+        else:
+            r[j] = r[j-1]+pre[chk.index(comp[i][0])][j]
+            y = pre[chk.index(comp[i][1])][j]
+    foo = [comp[i]]+r
+    data.append(foo)
+#print data[comp.index('ch')]
+for i in range(input()):
+    q = map(str,raw_input().split())
+    a = q[0]+q[1]
+    n = comp.index(a)
+    n1 = chk.index(q[0])
+    n2 = chk.index(q[1])
+    x = int(q[2])+1
+    y = int(q[3])+1
+    print data[n][y]-data[n][x]-pre[n1][x-2]*(pre[n2][y-1]-pre[n2][x-1])

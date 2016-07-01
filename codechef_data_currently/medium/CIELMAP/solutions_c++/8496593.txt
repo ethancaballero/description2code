@@ -1,0 +1,89 @@
+#include <cstdio>
+#include <cmath>
+
+struct Point
+{
+    int x;
+    int y;
+};
+
+double sqr_length(const Point& a, const Point& b)
+{
+    double ret = (a.x - b.x) * (a.x - b.x);
+    ret += (a.y - b.y) * (a.y - b.y);
+    return ret;
+}
+
+bool isTetragonSide(int i, int j, Point* points)
+{
+    int res = 0;
+    Point a = points[i];
+    Point b = points[j];
+    for (int k = 0; k < 4; ++k)
+    {
+        if (i != k && j != k)
+        {
+            Point p = points[k];
+            float d = (float)((p.x - a.x)*(b.y - a.y)) - (float)((p.y -  a.y)*(b.x - a.x));
+            if (d > 0) res++;
+            else res--;
+
+            if (res > 1 || res < -1)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+int main()
+{
+    int t, n;
+    Point points[1000];
+    scanf("%d", &t);
+    for (int test = 0; test < t; ++test)
+    {
+        scanf("%d", &n);
+        double max_sqr_length = 0.0f;
+        if (n > 4)
+        {
+            for (int i = 0; i < n; ++i)
+            {
+                scanf("%d %d", &(points[i].x), &(points[i].y));
+
+                for (int j = 0; j < i; ++j)
+                {
+                    double length = sqr_length(points[i], points[j]);
+                    if (length > max_sqr_length)
+                    {
+                        max_sqr_length = length;
+                    }
+                }
+            }
+        }
+        else if (n == 4)
+        {
+            for (int i = 0; i < n; ++i)
+            {
+                scanf("%d %d", &(points[i].x), &(points[i].y));
+            }
+
+            for (int i = 0; i < n; ++i)
+            {
+                for (int j = 0; j < i; ++j)
+                {
+                    double length = sqr_length(points[i], points[j]);
+                    if (length > max_sqr_length && isTetragonSide(i, j, points))
+                    {
+                        max_sqr_length = length;
+                    }
+                }
+            }
+        }
+
+        printf("%.10lf
+", sqrt(max_sqr_length));
+    }
+}

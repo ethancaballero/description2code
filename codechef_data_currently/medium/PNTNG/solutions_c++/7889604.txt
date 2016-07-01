@@ -1,0 +1,48 @@
+// URL : https://www.codechef.com/problems/PNTNG
+
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <vector>
+
+using namespace std;
+
+typedef long long ll;
+int h;
+ll n, m;
+vector< pair<ll, ll> > vt;
+
+int main()
+{
+	cin >> n >> m >> h;
+	ll s = n * m;
+	for(int i = 0; i < h; ++i)
+	{
+		ll u, v;
+		cin >> u >> v;
+		vt.push_back(make_pair(v, u));
+	}
+	ll ans = 0;
+	sort(vt.begin(), vt.end());
+	int p = 0;
+	
+	while(s && p < (int)vt.size())
+	{
+		if(s >= vt[p].second)
+		{
+			s -= vt[p].second;
+			ans += (vt[p].first * vt[p].second);
+		}
+		else
+		{
+			ans += s * vt[p].first;
+			s = 0;
+		}
+		p++;
+	}
+	if(s == 0)
+		cout << ans << endl;
+	else
+		cout << "Impossible" << endl;
+	return 0;
+}

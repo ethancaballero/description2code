@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.io.PrintWriter;
+
+class Equalization
+{ 
+    public static void main(String[] args) throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out);
+        
+        int test_case = Integer.parseInt(br.readLine());
+        
+        while(test_case-- > 0)
+        {
+            int N = Integer.parseInt(br.readLine());
+            
+            int origN = N;
+            int total = 0;
+            
+            ArrayList <Integer> divisors = new ArrayList <> ();
+            
+            for(int n = 2; n <= N; n++)
+            {
+                while(N % n == 0)
+                {
+                    divisors.add(n);
+                    total += origN / n;
+                    N /= n;
+                }
+            }
+            
+            br.readLine();
+            
+            pw.println(total);
+            
+            int groupSize = 1;
+            
+            for(int p : divisors)
+            {
+                for(int start = 0; start < origN; start += groupSize * p)
+                {
+                    for(int offset = 0; offset < groupSize; offset++)
+                    {
+                        pw.print(p);
+                        
+                        for(int i = 0; i < p; i++)
+                        {
+                            pw.print(" " + (start + offset + i * groupSize + 1));
+                        }
+                        
+                        pw.println();
+                    }
+                }
+                
+                groupSize *= p;
+            }
+        }
+        
+        pw.flush();
+    }
+}

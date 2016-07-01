@@ -1,0 +1,16 @@
+import sys
+
+def gcd(a,b) :
+    if b == 0 :
+        return a
+    else :
+        return gcd(b,a%b)
+        
+    
+for __ in range(input()) :
+    n = input()
+    ans = 0;
+    lists = [int(i) for i in sys.stdin.readline().split()]
+    for i in range (n) :
+        ans = gcd(lists[i],ans)
+    print len(lists)if ans == 1 else "-1"

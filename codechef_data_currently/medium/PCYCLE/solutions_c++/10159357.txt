@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+int main()
+{   int num;
+    cin>>num;
+    int array[num],check[1001]={0},flag[1001]={0},i,next,count=0;
+    for(i=1;i<=num;++i)
+    {
+        cin>>array[i];
+    }
+    for(i=1;i<=num;++i)
+    {
+    if(!flag[i])
+    {next=i;
+    if(!flag[i])
+        ++flag[i];
+    do
+    {
+    next=array[next];
+    ++flag[next];
+
+    }while(next!=i);
+    ++count;
+    }
+    }
+    cout<<count<<endl;
+for(i=1;i<=num;++i)
+    {
+    if(!check[i])
+    {next=i;
+    cout<<i<<" ";
+    if(!check[i])
+        ++check[i];
+    do
+    {
+    next=array[next];
+    ++check[next];
+    cout<<next<<" ";
+
+    }while(next!=i);
+    cout<<endl;
+    }
+    }
+return 0;
+}

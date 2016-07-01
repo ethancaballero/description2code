@@ -1,0 +1,20 @@
+for t in range(int(raw_input())):
+	s=raw_input()
+	l=len(s)
+	s1=""
+	s2=""
+	c1=0
+	c2=0
+	for i in range(l):
+		if (i%2==0):
+			s1+="+"
+			s2+="-"
+		else:
+			s1+="-"
+			s2+="+"
+	for i in range(l):
+		if (s[i]!=s1[i]):
+			c1+=1
+		if (s[i]!=s2[i]):
+			c2+=1
+	print min(c1,c2)

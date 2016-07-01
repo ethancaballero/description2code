@@ -1,0 +1,15 @@
+for _ in xrange(input()):
+    n, k = map(int, raw_input().split())
+    words = map(str, raw_input().split())
+    phrase_words = []
+    for i in xrange(k):
+        l = map(str, raw_input().split())
+        for j in l[1:]:
+            if j not in phrase_words:
+                phrase_words.append(j)
+    for p in range(n):
+        if words[p] in phrase_words:
+            print "YES",
+        else:
+            print "NO",
+    print ""

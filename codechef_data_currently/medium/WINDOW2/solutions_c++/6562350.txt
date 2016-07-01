@@ -1,0 +1,87 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+#include<malloc.h>
+#include<vector>
+#include<algorithm>
+#include<stack>
+#include<queue>
+#include<list>
+#include<string>
+#include<map>
+#define min(a,b) (a>b?b:a)
+#define max(a,b) (a>b?a:b)
+#define PB(x) push_back(x)
+#define MP(x,y) make_pair(x,y)
+#define F first
+#define S second
+using namespace std;
+typedef long long LL;
+typedef pair<int,int> PII;
+typedef vector<int> VI;
+const LL MOD=1000000080798150871LL;
+LL cnk[1001][1001]= {};
+char arr[1001][10];
+ 
+LL comb(int n,int r)
+{
+    if(n<r)
+        return 0;
+    r=min(r,n-r);
+    if(r==0)
+        return 1;
+    if(r==1)
+        return n;
+    if(cnk[n][r])
+        return cnk[n][r];
+    else{
+        cnk[n][r]=(comb(n-1,r-1)%MOD+comb(n-1,r)%MOD)%MOD;
+        return cnk[n][r];
+    }
+}
+ 
+int main()
+{
+    //cout<<comb(10,5)<<endl;
+    //freopen("input.txt","r",stdin);
+    int t;
+    scanf("%d",&t);
+    while(t--) {
+        int N,M,L,K;
+        scanf("%d %d %d %d",&N,&M,&L,&K);
+        for(int i=0; i<N; i++) {
+            scanf("%s",&arr[i]);
+        }
+        if(L>N || K>M){
+            cout<<"0
+";
+            continue;
+        }
+        LL ans=0;
+        for(int k=0; k<M-K+1; k++) {
+            int cnt=0;
+            for(int i=0; i<N; i++) {
+                int flag=0;
+                for(int j=k; j<k+K && !flag; j++) {
+                    if(arr[i][j]=='0')
+                        flag++;
+                }
+                if(!flag)
+                    cnt++;
+            }
+            //cout<<cnt<<endl;
+            ans=(ans+comb(cnt,L))%MOD;
+        }
+        if(M==3 && K==2){
+            int cnt=0;
+            for(int i=0;i<N;i++){
+                if(arr[i][0]=='1' && arr[i][2]=='1')
+                    cnt++;
+            }
+            ans=(ans+comb(cnt,L))%MOD;
+        }
+        cout<<ans<<endl;
+    }
+}

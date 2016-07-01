@@ -1,0 +1,42 @@
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+#define mod 1000000007
+
+long long int val[200002];
+long long int sum[200002];
+int sto[200002];
+int que[100001];
+
+int main()
+{
+	int n, b;
+	scanf("%d %d", &n, &b);
+	for(int i=1; i<=n; ++i)
+		scanf("%d",&sto[i]);
+	int q;
+	scanf("%d", &q);
+	for(int i=0; i<q; ++i)
+		scanf("%d", &que[i]);
+	//one way to move from b to b itself
+	val[b] = 1;
+	sum[b] = 1;
+	for(int i=b-1; i>=1; --i)
+	{
+		//all values from i+1 to n are properly filled
+		//val[i+k] contains number of ways to move to b from i+k, where k=1,2,3...,n-k
+		//sum[i+k] contains sum of number of ways to move to b from i+k, i+k+1,...n for each k=1,2,3,...,n-k
+		val[i] = (sum[i+1] - sum[i+sto[i]+1] + mod)%mod;
+		sum[i] = (val[i] + sum[i+1] + mod)%mod;
+		//values for sum and val at i is now properly filled
+	}
+	for(int i=0; i<q; ++i)
+	{
+		printf("%lld
+", val[que[i]]);
+	}
+	return 0;
+}
+

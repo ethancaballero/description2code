@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+
+typedef long long ll;
+using namespace std;
+
+int f(int n) {
+    if(n<0) return 0;
+    return ((n+2)*(n+1))/2;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t,n,a,b,c,i;
+    ll d;
+    cin>>t;
+    while(t--) {
+        cin>>n>>a>>b>>c;
+        d=0;
+        for(i=0;i<=n;i++) {
+            d+=f(i)-f(i-a-1)-f(i-b-1)-f(i-c-1)+f(i-a-b-2)+f(i-b-c-2)+f(i-c-a-2)-f(i-a-b-c-3);
+        }
+        cout<<d<<"
+";
+    }
+    return 0;
+}

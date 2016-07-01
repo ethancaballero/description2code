@@ -1,0 +1,21 @@
+R=lambda:map(int,raw_input().split())
+I=lambda:int(raw_input())
+S=lambda:map(str,raw_input().split())
+
+t=I()
+while t:
+	t-=1
+	ar=[]
+	ar=R()
+	pos=ar[1]
+	flips=ar[2]
+	
+	while flips:
+		flips-=1
+		ar=R()
+		l=ar[0]
+		r=ar[1]
+		if pos>=l and pos<=r:
+			pos=r-(pos-l)
+		
+	print pos	

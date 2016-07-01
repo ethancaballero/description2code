@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_v) (int)(_v).size()
+#define all(_v) (_v).begin(),(_v).end()
+#define pii pair<int,int>
+typedef long long ll;
+const int INF = 100000000;
+const ll mod = 1e9 + 7;
+
+const int maxn = 100010;
+int pr[maxn];
+int cnt[6][maxn];
+
+void seive() {
+	for (int i = 2; i <= maxn - 4; i ++) {
+		if(!pr[i]) {
+			for (int j = i; j <= maxn - 4; j += i) pr[j] ++;
+		}
+	}
+
+	for (int i = 1; i <= 5; i ++) {
+		for (int j = 2; j <= maxn - 4; j ++) cnt[i][j] = cnt[i][j - 1] + (pr[j] == i);
+	}
+}
+
+int main() {
+	//ios_base::sync_with_stdio(false);
+	seive();
+	int t; scanf("%d",&t);
+	
+	while (t --) {
+		int a,b,k; scanf("%d%d%d",&a,&b,&k);
+		printf("%d
+",cnt[k][b] - cnt[k][a - 1]);
+	}
+	
+	return 0;
+}

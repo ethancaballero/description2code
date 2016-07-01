@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[500005];
+
+int main()
+{
+    int t,i,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=0;i<n;i++)
+            {
+                cin>>arr[i];
+            }
+        sort(arr,arr+n);
+        priority_queue<int,vector<int> >pq;
+        int op=0;
+        for(i=0;i<n;)
+        {
+            int num=arr[i];
+            int count=1;
+            int j=i+1;
+            while(j<n)
+            {
+                if(num==arr[j])
+                    count++;
+                else
+                    break;
+                j++;
+            }
+            i=j;
+
+            pq.push(count);
+        }
+        while(!pq.empty())
+        {
+            int x=pq.top();
+
+            pq.pop();
+            if(!pq.empty())
+            {
+                int y=pq.top();
+                pq.pop();
+                op++;
+                x--;
+                y--;
+                if(x>0)
+                    pq.push(x);
+                if(y>0)
+                    pq.push(y);
+
+            }
+            else
+                op+=x;
+        }
+        cout<<op<<"
+";
+    }
+    return 0;
+}

@@ -1,0 +1,12 @@
+t = input()
+for _ in xrange(t):
+    n, k = map(int, raw_input().split())
+    buckets = map(int, raw_input().split())
+    ops = 0
+    for number in buckets:
+        m = number % k
+        if number < k:
+            ops += k - m
+        else:
+            ops += min(m, k - m)
+    print ops

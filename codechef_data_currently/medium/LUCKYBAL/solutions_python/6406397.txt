@@ -1,0 +1,24 @@
+import fileinput
+
+mennyi = 1
+not_first = False
+
+    
+for line in fileinput.input():
+    if not_first:
+        hetesek = [0]
+        ok = 0
+        n = len(line)
+        for plus in range(1, n):
+            ok += n - plus
+        for character in line:
+            if character == "4":
+                hetesek.append(0)
+            elif character == "7":
+                hetesek[-1] += 1
+        for number in hetesek:
+            for x in range(0, number):
+                ok -= number - x
+        del hetesek[:]
+        print str(ok)
+    not_first = True

@@ -1,0 +1,42 @@
+t=int(raw_input().rstrip())
+while t:
+    s = bytearray(raw_input().rstrip())
+    if len(s)<=8:
+        print "unlucky"
+    else:
+        length = len(s)
+        initialCount = 0
+        lucky = bytearray("lucky")
+        palindrome = bytearray(length)
+        j=0
+        k=length-1
+        while j<=k:
+            if s[j]!=s[k]:
+                initialCount+=1
+            palindrome[j] = min(s[j], s[k])
+            j+=1
+            k-=1
+        palindrome[j:]=palindrome[length/2-1::-1]
+        minimum = 1001
+        answer = bytearray(length)
+        for i in range(length-4):
+            if not (i in range((length+1)/2-4, length/2)):
+                count = initialCount
+                for j in range(i, i+5):
+                    count+=(1+(1 if (s[j]==s[length-1-j] and j != (length-1-j)) else 0)) if not (lucky[j-i] in (s[j], s[length-1-j])) else 0
+                    if count > minimum:
+                        break
+                if minimum >= count:
+                    save1 = palindrome[i:i+5]
+                    save2 = palindrome[length-i-5:length-i]
+                    palindrome[i:i+5]=lucky
+                    palindrome[length-5-i:length-i]=lucky[::-1]
+                    if minimum == count:
+                        answer[:] = min(answer, palindrome)
+                    else:
+                        minimum = count
+                        answer[:] = palindrome
+                    palindrome[i:i+5]=save1
+                    palindrome[length-i-5:length-i]=save2
+        print answer, minimum
+    t-=1

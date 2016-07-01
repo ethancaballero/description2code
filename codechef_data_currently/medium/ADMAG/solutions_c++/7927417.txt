@@ -1,0 +1,37 @@
+   //farooq ahamed code sample //
+    #include <iostream>
+     
+    using namespace std;
+     
+    int main()
+    {
+        long long int c,t,n;
+        cin>>t;
+        for(int x=0;x<t;x++)
+        {
+            long long int a=1;
+            long long int b=2;
+            long long int i=0;
+            cin>>n;
+            while(true)
+            {
+                c=a+b;
+                a=b;
+                b=c;
+                i++;
+                if(n<a)
+                {
+                    break;
+                }
+                else if(n==a)
+                {
+                    i++;
+                    break;
+                }
+     
+            }
+            cout<<i<<endl;
+        }
+     
+     
+    }

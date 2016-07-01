@@ -1,0 +1,51 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int max(int a,int b)
+{
+	if(a>b)
+	return a;
+	else return b;
+}
+int func(int n)
+{
+	int k=1,count=0;
+	while(k<n)
+	{
+		k=k*2;
+		count++;
+	}
+	if(k==n)
+	return k;
+	else return k/2;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,a,b;
+		cin>>n>>a>>b;
+		int c1=0,c2=0;
+		while(a!=0)
+		{
+			c1++;
+			a=a-func(a);
+		}
+		while(b!=0)
+		{
+			c2++;
+			b=b-func(b);
+		}int p;
+	if(c1+c2<=n)
+	p=c1+c2;
+	else p=2*n-c1-c2;
+		int sum=0;
+		for(int i=0;i<p;i++)
+		{
+			sum=sum+int(pow(2,n-i-1));
+		}
+		cout<<sum<<endl;
+	}
+}

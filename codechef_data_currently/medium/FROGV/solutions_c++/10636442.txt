@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long arr[100001];
+long long a[100001];
+long long father[100001];
+int main()
+{
+    long long n,k,p,c,d,i,co;
+    cin>>n>>k>>p;
+    for(i=0;i<n;i++)
+    {
+        cin>>arr[i];
+        a[i]=arr[i];
+    }
+    sort(a,a+n);
+    father[0]=0;
+    co=0;
+    for(i=1;i<n;i++)
+    {
+        if(a[i]-a[i-1]<=k)
+        {
+            father[i]=co;
+        }
+        else
+        {
+            co++;
+            father[i]=co;
+        }
+    }
+    while(p--)
+    {
+        cin>>c>>d;
+        int x=lower_bound(a,a+n,arr[c-1])-a;
+        int y=lower_bound(a,a+n,arr[d-1])-a;
+        if(father[x]==father[y])
+            cout<<"Yes";
+        else
+            cout<<"No";
+        cout<<"
+";
+    }
+}

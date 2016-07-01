@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef pair< int , int > pii;
+typedef long long LL;
+#define fr first
+#define se second
+#define EPS 1e-8
+#define INF 10000*10000*10000LL
+stringstream ss;
+#define two(x) ( 1LL<<x )
+int mod = 1000000007LL;
+
+/**************************Code****************************/
+
+int power( int a, int b )
+{
+	if( !b )
+		return 1;
+	int r = power( a, b/2 );
+	r = r * 1LL * r % mod;
+	if( b&1 )
+		r = r * 1LL * a % mod;
+	return r;
+}
+
+int main()
+{
+	int t, n;
+	scanf( "%d", &t );
+	while( t -- )
+	{
+		scanf( "%d", &n );
+		int ans = ( power( 2, n/2+2) -2 + mod ) % mod;
+		if( n%2 == 0 )
+			ans = ( ans - power( 2, n/2 ) + mod ) % mod;
+		printf( "%d
+", ans );
+	}
+	return 0;
+}

@@ -1,0 +1,12 @@
+#http://www.codechef.com/problems/SAD
+r,c=map(int,raw_input().split())
+mat=[]
+for i in xrange(r):
+	mat.append(map(int,raw_input().split()))
+f=1
+for i in xrange(r):
+	for j in xrange(c):
+		if mat[i][j]==min(mat[i]) and mat[i][j]== max(map(lambda x: x[j], mat)) and f:
+			print mat[i][j]
+			f=0
+if f:print "GUESS"

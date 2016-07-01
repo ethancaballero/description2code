@@ -1,0 +1,34 @@
+import sys
+t=sys.stdin.readline()
+t=int(t)
+for y in range(0,t):
+	str=sys.stdin.readline()
+	str1,str2=str.split(' ')
+	m=len(str1)
+	n=len(str2)-1
+	list1=[]
+	list2=[]
+	for i in range(0,26):
+		list1.append(0)
+		list2.append(0)
+	for i in range(0,m):
+		list1[ord(str1[i])%97]+=1
+	for i in range(0,n):
+		list2[ord(str2[i])%97]+=1
+	flag=0
+	for i in range(0,26):
+		if (list1[i]>0 and list2[i]==0) or (list1[i]==0 and list2[i]>0):
+			flag=1
+			break
+	if flag==1:
+		print "YES"
+	else:
+		for i in range(0,26):
+			if not(list1[i]==list2[i]):
+				flag=1
+				break
+		if flag==1:
+			print "NO"
+		else:
+			print "YES"
+sys.exit(0)

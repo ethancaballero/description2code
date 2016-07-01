@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define MOD 1000000007
+using namespace std;
+char a[100005],b[100005];
+struct chode
+{
+ int asc;
+ int occ;
+}p[26];
+bool cmp(chode a,chode b)
+{
+ if(a.occ!=b.occ)
+ return a.occ<b.occ;
+ else
+ return a.asc<b.asc;
+}
+int main()
+{
+ int n,i,j,t;
+ map<int,int> mp;
+ scanf("%d
+",&t);
+ while(t--)
+{
+ memset(p,0,sizeof(p));
+ cin.getline(a,100005);
+ cin.getline(b,100005);
+//cout<<a<<endl<<b<<endl;
+int c=strlen(b);
+for(j=0;j<c;j++){
+if(isalpha(b[j])!=0){
+    int s=tolower(b[j]);
+p[s-97].asc=s-97;
+p[s-97].occ++;
+}
+}
+sort(p,p+26,cmp);
+for(j=25;j>=0;j--){
+if(p[j].occ!=0){
+int q=p[j].asc;
+int r=a[j]-97;
+mp[q]=r;
+}
+}
+for(j=0;j<c;j++){
+if(isalpha(b[j])!=0&&isupper(b[j])!=0){
+int p=tolower(b[j]);
+b[j]=(mp.find(p-97)->second+65);
+}
+if(isalpha(b[j])!=0&&isupper(b[j])==0)
+b[j]=(mp.find(b[j]-97)->second+97);
+}
+cout<<b;
+cout<<endl;
+mp.clear();
+}
+return 0;
+}

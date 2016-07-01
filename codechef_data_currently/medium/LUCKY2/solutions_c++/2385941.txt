@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 1001
+#define MOD 1000000007LL
+
+int C[MAX+10][MAX+10], pow2[3*MAX], cnt[MAX][MAX], na, nb;
+char a[1005], b[1005];
+int lucky[14]={4,7,44,47,74,77,444,447,474,477,744,747,774,777};
+
+inline int mul(long long a, long long b){ return (a*b)%MOD;}
+inline int islucky(int n){
+  int i = 0;
+  while(i < 14) if (lucky[i++] == n) return 1;
+  return 0;
+}
+inline int get_cnt(int m, int used){
+  int res = 0;
+  int i = 0;
+  while(lucky[i] < used) i++;
+  for (; i < 14; i++) res = (res + cnt[m][lucky[i]-used])%MOD; 
+  //for (i = 0; i <= m; i++) if (islucky[i+used]) res = (res + cnt[m][i])%MOD;
+  return res;
+}
+
+inline int get_cnt2(int d, int m, int used){
+  int res1 = get_cnt(m, used);
+  if (d > 7) return (mul((d-2),res1) + mul(2,get_cnt(m, used+1)))%MOD;
+  if (d > 4) return (mul((d-1),res1) + get_cnt(m, used+1))%MOD;
+  return mul(d,res1)%MOD;
+}
+
+inline int solve(char * a, int len){
+ int res = 0;
+  int used = 0;
+  int i = 0;
+  for (i = 0; i < len; i++){
+    int d = a[i] - '0';
+    res = (res + get_cnt2(d, len - 1 - i, used))%MOD;
+    if (d == 4 || d == 7) used++;
+  }
+  return (res + islucky(used))%MOD;
+}
+
+inline void dec(char * a, int len){
+  int i;
+  for (i = len - 1; a[i] == '0'; i--) a[i] = 9;
+  a[i]--;
+}
+
+int main(){
+  int i, j;
+  pow2[0] = C[0][0] = cnt[0][0] = 1;
+  for (i = 1; i < 3*MAX; i++) pow2[i] = (pow2[i-1]<<1)%MOD;
+  for (i = 1; i < MAX; i++){
+    C[i][0] = 1;
+    cnt[i][0] = pow2[3*i];
+    for (j = 1; j <= i; j++){
+      C[i][j] = (C[i-1][j] + C[i-1][j-1])%MOD;
+      cnt[i][j] = mul(mul(C[i][j], pow2[j]), pow2[3*(i-j)]);
+    }
+    C[i][j+1] = 0;
+  }
+  int nt;
+  for (scanf("%d", &nt); nt--;){
+    scanf("%s %s", a, b);
+    na = strlen(a);
+    nb = strlen(b);
+    dec(a, na);
+    printf("%lld
+", (solve(b, nb) - solve(a, na) + MOD)%MOD);
+  }
+  return 0;
+}

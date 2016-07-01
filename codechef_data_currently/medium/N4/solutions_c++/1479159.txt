@@ -1,0 +1,144 @@
+#include <stdio.h>
+#include <math.h>
+
+
+int fromid[][6]={{0,3,6,8,5,2},
+		 {1,4,7,9,6,3},
+		 {6,9,11,12,10,8}};
+
+int toid[][6]={{2,0,3,6,8,5},
+	       {3,6,8,5,2,0},
+	       {3,1,4,7,9,6},
+	       {4,7,9,6,3,1},
+	       {8,6,9,11,12,10},
+	       {9,11,12,10,8,6}};
+
+char binstr[14];
+
+bool occ[1<<14];
+int prevmove[1<<14];
+int prevconfig[1<<14];
+int que[2][1<<14];
+int elimmask[3];
+int moves[7000];
+int tonumber(char *a)
+{
+  //printf("%s
+",a);
+  int retval=0;
+  for(int i=0;i<13;i++)
+    retval+=(a[i]=='1'?(1<<i):0);
+  return retval;
+}
+
+int rotate(int x,int which,int how)
+{
+  int y=x;
+  y=(y&elimmask[which]);
+
+  for(int i=0;i<6;i++)
+    {
+      int from=fromid[which][i];
+      int to=toid[(which<<1)+how][i];
+      y+=(((x>>from)&1)<<to);
+    }
+
+  return y;
+
+}
+
+
+
+
+int main()
+{
+  int target=(1<<3)+(1<<6)+(1<<9)+(1<<8);
+
+  int allmask=(1<<13)-1;
+  for(int i=0;i<3;i++)
+    {
+      elimmask[i]=allmask;
+      for(int j=0;j<6;j++)
+	elimmask[i]^=(1<<fromid[i][j]);
+    }
+
+
+  int T;
+  scanf("%d",&T);
+
+  for(int t=1;t<=T;t++)
+    {
+      scanf("%s",&binstr);
+      
+
+      int decid=tonumber(binstr);
+      //printf("%d
+",decid);
+      occ[decid]=1;
+      prevmove[decid]=-1;
+      int side=0;
+      int sz=1;
+      que[0][0]=decid;
+      bool done=0;
+      int answer=0;
+      for(int i=0;i<(1<<13);i++)
+	occ[i]=0;
+
+      while(sz>0)
+	{
+	  //printf("%d
+",sz);
+	  int nsz=0;
+	  for(int i=0;i<sz;i++)
+	    {
+	      if(que[side][i]==target)
+		{
+		  done=1;
+		  break;
+		}
+	      for(int j=0;j<3;j++)
+		for(int k=0;k<2;k++)
+		  {
+		    int next=rotate(que[side][i],j,k);
+		    //printf("%d %d
+",next,que[side][i]);
+		    if(!occ[next])
+		      {
+			occ[next]=1;
+			prevmove[next]=j*2+k;
+			prevconfig[next]=que[side][i];
+			que[1-side][nsz++]=next;
+		      }
+		  }
+	    }
+	  if(done)
+	    break;
+	  answer++;
+	  side=1-side;
+	  sz=nsz;
+	}
+
+      printf("%d
+",answer);
+      int curr=target;
+      int tmp=answer;
+      while(curr!=decid)
+	{
+	  moves[answer-1]=prevmove[curr];
+	  curr=prevconfig[curr];
+	  answer--;
+	}
+      for(int i=0;i<tmp;i++)
+	{
+	  printf("%d %d
+",(moves[i]/2),moves[i]%2);
+	}
+
+
+      
+      
+      
+
+    }
+
+}

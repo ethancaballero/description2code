@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    int t,n,k,i,a[101],m;
+    cin>>t;
+    while(t--)
+    {
+        int sum=0;
+        cin>>n>>m;
+        for(i=0;i<n;i++)
+            cin>>a[i];
+        sort(a,a+n);
+        for(i=0;i<n;i++)
+        sum=sum+a[n-1]-a[i];
+        if(sum==m)
+        cout<<"Yes"<<endl;
+        else if(sum>m)
+        cout<<"No"<<endl;
+        else if(sum<m&&(m-sum)%n==0)
+        cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
+    }
+	return 0;
+}

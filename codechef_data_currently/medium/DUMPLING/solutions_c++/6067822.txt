@@ -1,0 +1,46 @@
+/*This is by Technical Bangla from University of Dhaka*/
+#include <bits/stdc++.h>
+using namespace std;
+
+#define pi acos(-1.0)
+#define e 2.7182818284590451
+#define eps 1e-9
+#define in_d(x) scanf("%d",&x)
+#define nl printf("
+")
+#define MAX 101
+#define Mod 1000000007
+#define MOD(a,m) ((a)%(m)+(m))%(m)
+#define Inf 2147483
+#define filein freopen("input.txt","r",stdin)
+#define fileout freopen("output.txt","w",stdout)
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+double sqr(double x) {return x*x;}
+double distsqr(double x,double y,double a,double b) {return sqr((x-a))+sqr((y-b));}
+double cosine_angle(double a,double b,double c) {return (double)(sqr(a)+sqr(b)-sqr(c))/((double)2.0*a*b);}
+
+template <class T> T Maximum(T a, T b) {return a>b?a:b;}
+template <class T> T Minimum(T a, T b) {return a<b?a:b;}
+template <class T> T GCD(T a, T b) {if(!b) return a;return GCD(b,a%b);}
+template <class T> void SWAP(T &a, T &b) {T temp=a;a=b;b=temp;return ;}
+template <class T> T ExtendedEuclid(T a,T b,T c) {if(!a) return 0;return (b*ExtendedEuclid(b%a,a,-c)+c)/a;}
+template <class T> T ModInverse(T a,T m) {return MOD(ExtendedEuclid(a,m,(T)1),m);}
+
+int main()
+{
+    int t;llu a,b,c,d,k;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%llu %llu %llu %llu %llu",&a,&b,&c,&d,&k);
+        a=GCD(a,b);
+        c=GCD(c,d);
+        if(a<c) SWAP(a,c);
+        b=GCD(a,c); a/=b;
+        k/=a;k/=c;k<<=1;k++;
+        printf("%llu
+",k);
+    }
+}

@@ -1,0 +1,154 @@
+#include<bits/stdc++.h>                         
+#define lld long long int                      
+#define llu unsigned long long int
+#define pb(x) push_back(x)
+#define pii pair<int,int>
+#define pll pair<lld,lld>
+#define pq priority_queue<int> 
+#define mp(x,y) make_pair(x,y)
+#define sz size()
+#define inp1(x) scanf("%lld",&x)
+#define inp2(x,y) scanf("%lld%lld",&x,&y)
+#define inp3(x,y,z) scanf("%d%d%d",&x,&y,&z)
+#define print(x) printf("%d",x)
+#define println(x) printf("%lld
+",x)
+#define _for(i,x,y) for(int i=x;i<y;i++)
+using namespace std;
+const int maxx=1e5+2;
+lld mod=1e9+7;
+lld A[maxx],C[102][102];
+lld k,sum[102][maxx],flag,n,Pow[102][maxx];
+ 
+inline bool cmp(const lld &a,const lld &b)
+{
+    return a>b?1:0;
+}
+ 
+inline lld neg_mod(lld &num)
+{
+    if(num>mod) num-=(num/mod)*mod; 
+    else if(num<0) 
+    {
+        lld temp=-num,quo;
+        quo=temp/mod;
+        if(quo*mod!=temp) quo++;
+        num=quo*mod-temp;
+    }
+}
+ 
+lld modPow(lld a, lld x, lld p) 
+{
+    //calculates a^x mod p in logarithmic time.
+    lld res = 1;
+    while(x > 0)
+    {
+        if( x % 2 != 0)
+        {
+            res = (res * a);
+            neg_mod(res);
+        }
+        a = (a * a) % p;
+        x /= 2;
+    }
+    return res;
+}
+ 
+lld modInverse(lld a, lld p) 
+{
+    return modPow(a, p-2, p);
+}
+ 
+lld nCr(lld n, lld k, lld p) // calculates C(n,k) mod p (assuming p is prime).
+{
+    lld numerator = 1; 
+    for (lld i=0; i<min(k,p); i++) 
+    {
+        numerator = (numerator * (n-i) );
+        neg_mod(numerator);
+    }
+    
+    lld denominator = 1; 
+    for (lld i=1; i<=min(k, p); i++)
+    {
+        denominator = (denominator * i);
+        neg_mod(denominator);
+    }
+    lld ans=numerator* modInverse(denominator,p);
+    neg_mod(ans);
+    return  ans;
+}
+ 
+lld calc(int r)
+{
+    lld ans=0,coeff=C[k][r];
+    _for(i,0,n-1)
+    {
+        ans=(ans+Pow[k-r][i]*sum[r][i+1]);
+        neg_mod(ans);
+    }
+    ans*=coeff;
+    neg_mod(ans);
+    return ans;
+}
+ 
+inline void solve()  //..O(NK +NlogN)
+{
+    inp2(n,k);
+    _for(i,0,n) 
+    {
+        inp1(A[i]);
+        Pow[0][i]=1;
+    }
+    
+    sort(A,A+n,cmp);
+    
+    _for(i,0,k+1)
+    {    
+        if(i>0) 
+        {
+            Pow[i][n-1]=Pow[i-1][n-1]*A[n-1];
+            neg_mod(Pow[i][n-1]);
+        }
+        sum[i][n-1]=Pow[i][n-1];
+        for(int j=n-2;j>=0;j--)
+        {   
+            if(i>0)
+            {
+                Pow[i][j]=Pow[i-1][j]*A[j];
+                neg_mod(Pow[i][j]);
+            }
+            sum[i][j]=sum[i][j+1]+Pow[i][j];
+            neg_mod(sum[i][j]);
+        }
+    }
+    
+    lld res=0;
+    
+    flag=1;
+    for(int r=0;r<=k;r++)
+    {
+        res=res+calc(r)*flag;
+        neg_mod(res);
+        flag*=-1;
+    }
+    res=(res*2)%mod;
+    println(res);
+}
+ 
+int main()
+{
+    int t;
+    inp1(t);
+    
+    _for(i,0,101)
+    {
+        _for(j,0,i+1) C[i][j]=nCr(i,j,mod);
+    }
+    
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+} 

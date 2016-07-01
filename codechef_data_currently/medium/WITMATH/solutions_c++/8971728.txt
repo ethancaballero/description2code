@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+using namespace std ;
+#define ll long long 
+
+int arr[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+
+ll mulmod(ll a,ll b,ll mod)
+{
+	ll x = 0,y = a%mod ;
+	while(b)
+	{
+		if(b&1)
+		 x = (x+y)%mod ;
+		y = (y<<1)%mod ;
+		b>>=1;
+	}
+	return x ;
+}
+
+ll po(ll a, ll b,ll mod)
+{
+	ll x = 1,y=a;
+	while(b)
+	{
+		if(b&1)
+		 x = mulmod(x,y,mod) ;
+		 y = mulmod(y,y,mod) ;
+		 b>>=1;
+	}
+	return x ;
+}
+
+bool isprime(ll n)
+{
+	
+	for(int i=0;i<25;i++)
+	{
+		if(arr[i]==n)
+	     return true ;
+	    else if(n%arr[i]==0)
+	      return false ;
+	}
+	  
+	ll s = n-1 ;
+	while(s%2==0)
+	 s = s/2 ;
+	for(int j = 0;j<5;j++)
+	{
+		ll a=rand()%(n-1)+1,temp=s;
+		ll mod = po(a,s,n) ;
+		if(mod==-1||mod==1)
+		  continue ;
+		while(temp!=n-1&&mod!=n-1)
+		{
+			mod = mulmod(mod,mod,n) ;
+			temp<<=1 ;
+		}
+		if(mod!=n-1)
+		  return false ;
+	}
+	return true ;
+}
+int main()
+{
+	ll  t;
+	scanf("%lld",&t) ;
+	while(t--)
+	{
+		ll  n;
+		scanf("%lld",&n) ;
+		ll ans ;
+		if(n==2)
+		{
+			 printf("2
+") ;
+			 continue ;
+		}
+		for(ll k = n;k>=2;k--)
+		 {
+		 	if(isprime(k))
+		 	{
+		 		ans = k;
+		 		break ;
+			 }
+		 }
+		printf("%lld
+",ans) ; 
+	}
+}

@@ -1,0 +1,17 @@
+test = int(raw_input().strip())
+while test:
+    n,m = map(int,raw_input().strip().split())
+    turn = map(int,raw_input().strip().split())
+    rooms=[]
+    while n:
+        rooms.append(map(int,raw_input().strip().split()))
+        rooms[-1].pop(0)
+        rooms[-1].sort()
+        n-=1
+    ans=0
+    #print rooms
+    for i in xrange(len(turn)):
+        if len(rooms[turn[i]])>0:
+            ans+=rooms[turn[i]].pop()
+    print ans
+    test-=1

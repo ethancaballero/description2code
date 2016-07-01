@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	char str[10];
+	long int r,c,x,i,q,n,*row,*column,max_r=0,max_c=0;
+	scanf("%ld%ld",&n,&q);
+	row=(long int *)calloc(n,sizeof(long int));
+	column=(long int *)calloc(n,sizeof(long int));
+	while(q--)
+	{
+		scanf("%s%ld%ld",str,&r,&x);
+		if(!strcmp(str,"RowAdd"))
+			row[r]+=x;
+		else
+			column[r]+=x;
+	}
+	for(i=0;i<n;i++)
+	{
+		if(row[i]>max_r)
+			max_r=row[i];
+		if(column[i]>max_c)
+			max_c=column[i];
+	}
+	printf("%ld
+",max_r+max_c);
+	return 0;
+}

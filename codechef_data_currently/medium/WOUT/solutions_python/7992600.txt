@@ -1,0 +1,70 @@
+'''
+ @da
+'''
+INT_MAX = 10**13
+MAX = 1234567
+def lazyupdate(tree, lazy, node, low, high, qlow, qhigh, val):
+    if low > high:
+        return
+    if lazy[node] != 0:
+        tree[node] += lazy[node]
+        if low != high:
+            lazy[2*node + 1] += lazy[node]
+            lazy[2*node + 2] += lazy[node]
+        lazy[node] = 0
+    if qlow > high or qhigh < low:
+        return
+    if qlow <= low and qhigh >= high:
+        tree[node] += val
+        if low != high:
+            lazy[2*node + 1] += val
+            lazy[2*node + 2] += val
+        return
+    
+    mid = (low + high) / 2
+    lazyupdate(tree, lazy, 2*node + 1, low, mid, qlow, qhigh, val)
+    lazyupdate(tree, lazy, 2*node + 2, mid+1, high, qlow, qhigh, val)
+
+    tree[node] = min(tree[2*node + 1], tree[2*node + 2])
+
+def lazyquery(tree, lazy, node, low, high, qlow, qhigh):
+    global INT_MAX
+    if low > high:
+        return INT_MAX
+    if lazy[node] != 0:
+        tree[node] += lazy[node]
+        if low != high:
+            lazy[2*node + 1] += lazy[node]
+            lazy[2*node + 2] += lazy[node]
+        lazy[node] = 0
+    if qlow > high or qhigh < low:
+        return INT_MAX
+    if qlow <= low and qhigh >= high:
+        return tree[node]
+    mid = (low + high) / 2
+    q1 = lazyquery(tree, lazy, 2*node + 1, low, mid, qlow, qhigh)
+    q2 = lazyquery(tree, lazy, 2*node + 2 , mid + 1, high, qlow, qhigh)
+
+    tree[node] = min(tree[2*node + 1], tree[2*node + 2])
+    return min(q1, q2)
+
+test = input()
+while test:
+    test = ~(-test)
+    n,h = map(int,raw_input().split())
+    tree = [n]*(4*n+4)
+    lazy = [0]*(4*n+4)
+    for i in range(n):
+        l,r = map(int,raw_input().split())
+        lazyupdate(tree, lazy, 0, 0, n-1, l, r, -1)
+    arr = [0] * (n+1)
+    for i in range(1,n+1):
+        arr[i] = lazyquery(tree, lazy, 0, 0, n-1, i-1, i-1)
+    for i in range(1,n+1):
+        arr[i] += arr[i-1]
+    #print arr
+    mini = 12324234234234234
+    for i in range(n-h+1):
+        mini = min(mini, arr[i+h]-arr[i])
+        #print i 
+    print mini

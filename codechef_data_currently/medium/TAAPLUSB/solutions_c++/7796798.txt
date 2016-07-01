@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+#define gc getchar
+#define pc putchar
+#define SIZE 100003
+using namespace std;
+typedef long long ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+inline void putDoub(double x)
+{
+    char number[24];
+    int i=0,wd=x;
+    int deci=(x-wd)*10000000;
+    int temp=deci;
+    while(deci)
+    {
+        number[i++]='0'+deci%10;
+        deci=deci/10;
+    }
+    for(int deci2=1000000;deci2>temp;deci2/=10)
+    {
+        number[i++]='0';
+    }
+    number[i++]='.';
+    if(wd==0)
+        number[i++]='0';
+    while(wd)
+    {
+        number[i++]='0'+wd%10;
+        wd/=10;
+    }
+    i--;
+    while(i>=0)
+    {
+        pc(number[i]);
+        i--;
+    }
+    pc('
+');
+}
+int main()
+{
+    ll t,n,i;
+    t=read_int();
+    double arr[SIZE],s[SIZE];
+    arr[0]=0.45;
+    s[0]=0.45;
+    for(i=1;i<=100000;i++)
+    {
+        arr[i]=0.45+0.1*arr[i-1];
+        s[i]=s[i-1]+arr[i];
+    }
+    while(t--)
+    {
+        n=read_int();
+        putDoub(s[n-1]);
+    }
+    return 0;
+}

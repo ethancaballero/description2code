@@ -1,0 +1,19 @@
+# chef team  - chefteam.py
+
+def combin(n,k):
+    if k>n:
+        return 0
+    if k>n/2:
+        k = n-k
+    num = den =1
+    for k1 in xrange(k):
+        num *= (n-k1)
+        den *= k1+1
+    return num/den
+
+t = int (raw_input())
+
+for iter in range(t):
+    n,k = map(int, raw_input().strip().split())
+
+    print combin(n,k)

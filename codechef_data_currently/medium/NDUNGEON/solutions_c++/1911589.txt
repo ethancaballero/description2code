@@ -1,0 +1,63 @@
+using namespace std;
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#define max 100000000
+#define getcha getchar_unlocked
+int scan() {
+int t = 0;
+char c = getcha();
+while(c<'0' || c>'9') c = getcha();
+while(c>='0' && c<='9') {
+t = 10 * t + c - 48;
+c = getcha();
+}
+return t;
+}
+int main()
+{
+int n,m,i,j,k,temp,pr,pc,pt;
+int grid[72][72];
+int sum[72][72];
+n=scan();m=scan();
+for(i=1;i<=n;i++)
+{
+for(j=1;j<=m;j++)
+grid[i][j]=scan();                
+}
+//memset(sum, 1000000000, sizeof(sum[0][0]) * n+1 * m+1);
+for(i=0;i<=n+1;i++) 
+{
+for(j=0;j<=m+1;j++) 
+{
+sum[i][j]=max;
+}
+}
+sum[1][1]=grid[1][1];
+for(k=0;k<=100;k++) 
+{
+for(i=1;i<=n;i++) 
+{
+for(j=1;j<=m;j++) 
+{
+temp=min(sum[i-1][j],sum[i+1][j]);
+temp=min(temp,sum[i][j-1]);
+temp=min(temp,sum[i][j+1]);
+sum[i][j]=min(temp+grid[i][j],sum[i][j]);
+}
+}
+}
+pr=scan();pc=scan();pt=scan();
+//cout<<"sum"<<sum[pr][pc]<<endl;
+if(sum[pr][pc]<=pt) 
+{
+printf("YES
+");
+printf("%d
+",pt-sum[pr][pc]);
+}
+else printf("NO
+");
+//system("pause");
+return 0;    
+}

@@ -1,0 +1,22 @@
+cases = int(raw_input())
+for x in range(cases):
+	letters = raw_input()
+	count = 1
+	odd = False
+	for l in letters:
+		if l == 'l':
+			if odd == False:
+				count = count * 2
+				odd = True
+			else:
+				count = (count * 2) - 1
+				odd = False
+		elif l == 'r':
+			if odd == False:
+				count = (count * 2) + 2
+				odd = True
+			else:
+				count = (count * 2) + 1
+				odd = False
+	count = count % 1000000007
+	print count

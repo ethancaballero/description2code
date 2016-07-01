@@ -1,0 +1,31 @@
+#include <iostream>
+#include <math.h>
+#include <stdlib.h>
+using namespace std;
+int main()
+{
+    int t,i,j,k,n,c,q,te,l,r,o,z;
+    cin>>t;
+    for(i=1;i<=t;i++)
+    {
+        cin>>n>>c>>q;
+        n=n+1;
+        int a[n];
+        a[0]=0;
+        for(j=1;j<n;j++)
+        {
+            a[j]=j;
+        }
+        for(j=1;j<=q;j++)
+        {
+            cin>>l>>r;
+            if(c>=l && c<=r)
+           c=r-(c-l);
+        }
+ 
+                cout<<c<<"
+";
+ 
+    }
+    return 0;
+}

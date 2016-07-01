@@ -1,0 +1,11 @@
+#include<stdio.h>
+int main()
+{
+ long long int n,p;
+ //printf("input");
+  scanf("%lld",&n);
+  p=n;
+  printf("%lld
+",p);
+return 0;
+}

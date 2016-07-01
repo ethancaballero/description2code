@@ -1,0 +1,470 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+ 
+#define MAX 1007
+ 
+char str2[MAX];
+ 
+int store1[MAX],store2[MAX];
+int sp1,sp2,len;
+ 
+ 
+ 
+void convert1(char*);
+void convert2(char*);
+ 
+int getmoves1(char *,int,int);
+int getmoves2(char*,int,int);
+ 
+int getpalin(char *);
+ 
+int main()
+{
+ 
+char str[MAX];
+int t,moves;
+ 
+scanf("%d",&t);
+getchar();
+ 
+while(t>0)
+{
+   scanf("%s",str);
+   // gets(str);
+ 
+len=strlen(str);
+ 
+if(len<9)
+{
+    printf("unlucky
+");
+}
+else
+{
+  moves =   getpalin(str);
+ 
+    printf("%s %d
+",str,moves);
+}
+ 
+  t--;
+}
+ 
+ 
+ 
+  return 0;
+}
+ 
+ 
+int getpalin(char *str)
+{
+  int i,j,moves1,moves2;
+int min1,min2;
+ 
+ 
+  i=0;
+  j=len-1;
+sp1=sp2=-1;
+ 
+min1=99999;
+min2=99999;
+// PARt I
+ 
+ 
+ 
+ 
+  while ( (j-i+1) >=9 )
+    {
+      moves1 = getmoves1(str,i,j);
+ 
+      if (  moves1 < min1 )
+        {
+ 
+          min1=moves1;
+          sp1=-1;
+          store1[++sp1]=i;
+ 
+        }
+      else
+        if (  moves1 ==min1)
+          {
+            store1[++sp1]=i;
+          }
+ 
+      i++;
+      j--;
+ 
+    }
+ 
+ 
+//////////  PART II ......
+ 
+  i=0;
+  j=len-1;
+ 
+ 
+  while ( (j-i+1)>=9   )
+    {
+      moves2=getmoves2(str,i,j);
+ 
+ 
+      if (moves2 < min2)
+        {
+          min2=moves2;
+          sp2=-1;
+          store2[++sp2]=i;
+        }
+      else
+        if ( moves2 == min2 )
+          {
+            store2[++sp2]=i;
+          }
+ 
+ 
+      i++;
+      j--;
+    }
+ 
+/*
+ 
+/////// special case  /////////
+if(  len%2!=0)
+{
+    mid = (len/2) +1;
+temp=str[ mid ];
+ 
+str[mid] = 'y';
+ 
+      moves1 = getmoves1(str,mid-4,mid+4);
+ 
+ 
+      if (  moves1 < min1 )
+        {
+ 
+          min1=moves1;
+          sp1=-1;
+          store1[++sp1]=mid-4;
+ 
+        }
+      else
+        if (  moves1 ==min1)
+          {
+            store1[++sp1]=mid-4;
+          }
+ 
+ 
+str[mid]=temp;
+ 
+}
+ 
+ 
+/////// special case  /////////
+ 
+*/
+ 
+// convert .........
+ 
+  if ( min1 < min2 )
+    {
+ 
+convert1(str);
+return min1;
+    }
+    else
+ 
+  if ( min1 > min2 )
+    {
+ 
+convert2(str);
+return min2;
+    }
+    else
+    if( min1==min2 )
+    {
+strcpy(str2,str);
+ 
+convert1(str);
+convert2(str2);
+ 
+if(  strcmp(str,str2) > 0 )
+{
+    strcpy(str,str2);
+    return min2;
+}
+else
+return min1;
+ 
+    }
+ 
+ 
+return -10000;
+}
+ 
+ 
+int getmoves1(char *str,int a,int b)
+{
+ 
+int i,j;
+int count=0;
+ 
+i=a;
+ 
+// first half ......
+if( str[i++] != 'l' )
+count++;
+ 
+if( str[i++] != 'u' )
+count++;
+ 
+if( str[i++] != 'c' )
+count++;
+ 
+if( str[i++] != 'k' )
+count++;
+ 
+if( str[i++] != 'y' )
+count++;
+ 
+// second half .......
+j=b;
+ 
+if( str[j--]!='l' )
+count++;
+ 
+if( str[j--]!='u' )
+count++;
+ 
+if( str[j--]!='c' )
+count++;
+ 
+if( str[j--]!='k' )
+count++;
+ 
+if( str[j]!='y'  &&  j!=(i-1) )
+count++;
+ 
+ 
+ 
+// rest of the string .......
+i=0;
+j=len-1;
+    while(  i < j )
+    {
+        if( i==a )
+        {
+          i=i+5;
+          j=j-5;
+          continue;
+        }
+ 
+      if( str[i]!=str[j] )
+      count++;
+ 
+      i++;
+      j--;
+    }
+ 
+return count;
+}
+ 
+ 
+int getmoves2(char *str,int a,int b)
+{
+  int i,j;
+int count=0;
+ 
+i=a;
+ 
+// first half ......
+if( str[i++] != 'y' )
+count++;
+ 
+if( str[i++] != 'k' )
+count++;
+ 
+if( str[i++] != 'c' )
+count++;
+ 
+if( str[i++] != 'u' )
+count++;
+ 
+if( str[i++] != 'l' )
+count++;
+ 
+// second half .......
+j=b;
+ 
+if( str[j--]!='y' )
+count++;
+ 
+if( str[j--]!='k' )
+count++;
+ 
+if( str[j--]!='c' )
+count++;
+ 
+if( str[j--]!='u' )
+count++;
+ 
+if( str[j]!='l'  &&  j!=(i-1) )
+count++;
+ 
+ 
+ 
+// rest of the string .......
+i=0;
+j=len-1;
+    while(  i < j )
+    {
+        if( i==a )
+        {
+          i=i+5;
+          j=j-5;
+          continue;
+        }
+ 
+      if( str[i]!=str[j] )
+      count++;
+ 
+      i++;
+      j--;
+    }
+ 
+ 
+return count;
+}
+ 
+void convert1(char *str)
+{
+int i,j,flag;
+ 
+ 
+  for (i=0  ;i<=sp1;i++)
+        {
+          flag =   strncmp(  &str[  store1[i] ], "lucky" ,5) ;
+          if (  flag > 0  )
+            {
+ 
+ 
+break;
+            }
+            else
+            if(  flag==0)
+            {
+              if( strncmp( &str[ len-1 - store1[i] ] , "lucky" ,5  ) < 0      )
+              {
+              }
+              else
+              break;
+ 
+ 
+            }
+        }
+ 
+ 
+// copy lucky ...
+if( i>sp1 )
+i=store1[sp1];
+else
+i=store1[i];
+ 
+              str[i++]='l';
+              str[i++]='u';
+              str[i++]='c';
+              str[i++]='k';
+              str[i++]='y';
+ 
+              i=(len)-i;
+              str[i++]='y';
+              str[i++]='k';
+              str[i++]='c';
+              str[i++]='u';
+              str[i++]='l';
+ 
+ 
+// convert rest of the string ...
+i=0;
+j=len-1;
+ 
+while( i<j)
+{
+ 
+  if( str[i] < str[j] )
+  str[j]=str[i];
+  else
+  str[i]=str[j];
+ 
+  i++;
+  j--;
+}
+ 
+ 
+}
+ 
+void convert2(char *str)
+{
+ 
+int i,j,flag;
+ 
+ 
+          for ( i=0 ;i<=sp2;i++)
+        {
+          flag =   strncmp(  &str[  store1[i] ], "ykcul" ,5) ;
+          if (  flag > 0  )
+            {
+ 
+ 
+break;
+            }
+            else
+            if(  flag==0)
+            {
+              if( strncmp( &str[ len-1 - store1[i] ] , "ykcul" ,5  ) < 0      )
+              {
+              }
+              else
+              break;
+ 
+ 
+            }
+        }
+ 
+ 
+// copy lucky ...
+        if( i>sp2 )
+i=store2[sp2];
+else
+i=store2[i];
+ 
+ 
+              str[i++]='y';
+              str[i++]='k';
+              str[i++]='c';
+              str[i++]='u';
+              str[i++]='l';
+ 
+              i=(len)-i;
+ 
+              str[i++]='l';
+              str[i++]='u';
+              str[i++]='c';
+              str[i++]='k';
+              str[i++]='y';
+ 
+// convert rest of the string ...
+i=0;
+j=len-1;
+ 
+while( i<j)
+{
+ 
+  if( str[i] < str[j] )
+  str[j]=str[i];
+  else
+  str[i]=str[j];
+ 
+  i++;
+  j--;
+}
+} 

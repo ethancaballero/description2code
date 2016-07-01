@@ -1,0 +1,50 @@
+  
+There is a haunted town called HauntedLand. The structure of HauntedLand can be thought of as a grid of size n * m. There is a house in each cell of the grid. Some people have fled from their houses because they were haunted. '.' represents a haunted house whereas '*' represents a house in which people are living.
+
+
+One day, Devu, the famous perfumer came to town with a perfume whose smell can hypnotize people. Devu can put the perfume in at most one of the houses. This takes Devu one second. Then, the perfume spreads from one house (need not be inhabited by people) to all its adjacent houses in one second, and the cycle continues. Two houses are said to be a adjacent to each other, if they share a corner or an edge, i.e., each house (except those on the boundaries) will have 8 adjacent houses.
+
+
+You want to save people from Devu's dark perfumery by sending them a message to flee from the town. So, you need to estimate the minimum amount of time Devu needs to hypnotize all the people? Note that if there are no houses inhabited by people, Devu doesn't need to put perfume in any cell.
+
+Input
+The first line of input contains an integer T denoting the number of test cases. The description of T test cases follows.
+First line of each test case contains two space separated integers n, m denoting the dimensions of the town.
+For each of next n lines, each line has m characters (without any space) denoting a row of houses of the town.
+Output
+For each test case, output a single integer corresponding to the answer of the problem.
+Constraints
+
+1 \u2264 T \u2264 20
+
+
+Subtask #1: (40 points) 
+
+1 \u2264 n, m \u2264 100
+
+Subtask #2: (60 points) 
+
+1 \u2264 n, m \u2264 1000
+
+
+Example
+Input:
+2
+2 2
+*.
+..
+3 4
+.*..
+***.
+.*..
+
+Output:
+1
+2
+Explanation
+In the first example, it will take Devu one second for putting the perfume at the only house. So, the answer is 1.
+
+In the second example, He will first put the perfume at the * at cell (1, 1) (assuming 0-based indexing).
+Now, it will take Devu 1 secs to put perfume. In the next second, the perfume will spread to all of its adjacent cells, thus making each house haunted.
+So, the answer is 2.
+

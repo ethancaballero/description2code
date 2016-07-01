@@ -1,0 +1,28 @@
+cases = int(raw_input())
+
+for _ in xrange(cases):
+    move = raw_input()
+    if len(move) == 5:
+        x1 = ord(move[0]) - ord('a')
+        y1 = ord(move[1]) - ord('1')
+
+        x2 = ord(move[3]) - ord('a')
+        y2 = ord(move[4]) - ord('1')
+
+        firstCorrect = (x1 >= 0 and x1 < 8 and y1 >= 0 and y1 < 8)
+        dashCorrect = move[2] == '-'
+        secondCorrect = (x2 >= 0 and x2 < 8 and y2 >= 0 and y2 < 8)
+
+        if not (firstCorrect and dashCorrect and secondCorrect):
+            print 'Error'
+        else:
+            xd = abs(x1 - x2)
+            yd = abs(y1 - y2)
+
+            if (xd == 2 and yd == 1) or (xd == 1 and yd == 2):
+                print 'Yes'
+            else:
+                print 'No'
+
+    else:
+        print 'Error'

@@ -1,0 +1,72 @@
+#include<cstdlib>
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long e=0, o=0, i, n, typ, ans1=0, ans2=0, b=0, g=0, k=0;
+		string s;
+		cin>>typ>>s;
+		n=s.length();
+		for(i=0; i<n; i++)
+		{
+			if(s[i]=='B')b++;else g++;
+		}
+		long long z=abs(b-g);
+		if(z>1)cout<<-1<<endl;else
+		if(typ==0)
+		{
+			for(i=0; i<n; i++)
+			{
+				if(i%2==0)
+				{
+					if(s[i]=='B')ans1++;
+					else ans2++;
+				}
+				else
+				{
+					if(s[i]=='G')ans1++;
+					else ans2++;
+				}
+			}//cout<<ans1<<endl<<ans2;
+			if(ans2%2)ans2=ans1;if(ans1%2)ans1=ans2;
+			k=(ans1<ans2)?ans1/2:ans2/2;
+			cout<<k;cout<<endl;
+		}
+		else
+		{
+			for(i=0; i<n; i++)
+			{
+				if(s[i]=='B')
+				{
+					ans1+=abs(i-2*e);
+					e++;
+				}
+				else
+				{
+					ans1+=abs(i-2*o-1);o++;
+				}
+			}e=0;o=0;
+			for(i=0; i<n; i++)
+			{
+				if(s[i]=='G')
+				{
+					ans2+=abs(i-2*e);
+					e++;
+				}
+				else
+				{
+					ans2+=abs(i-2*o-1);o++;
+				}
+			}
+			if(b>g)ans2=ans1;if(g>b)ans1=ans2;
+			k=(ans1<ans2)?ans1/2:ans2/2;
+			cout<<k;cout<<endl;
+		}
+	}
+	return 0;
+}

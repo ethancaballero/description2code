@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long int t;
+	cin>>t;
+	while(t--)
+	{
+		int l,i,j,flag=0,e=0;
+		string s;
+		cin>>s;
+		l=s.size();
+	
+			for(i=0,j=l-1;i<l/2,j>=l/2;i++,j--)
+			{
+				if(s[i]!=s[j])
+				{
+					e++;
+					if(e>1)
+					{
+						flag=1;
+					break;
+					}
+					if(s[i]==s[j-1])
+					{
+						j--;	
+					}
+					else if(s[j]==s[i+1])
+					{
+						i++;
+					}
+					else 
+					{
+						flag=1;
+						break;
+					}	
+				}
+			}
+			if(flag)
+			{
+				cout<<"NO"<<endl;
+			}
+			else
+			cout<<"YES"<<endl;
+		
+	}
+	return 0;
+}

@@ -1,0 +1,82 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+ 
+using namespace std;
+bool visited[100004];
+int d[100004];int qarr[100004];
+int size;
+int V[10][100004];
+int v1[10]={0,};
+string s;
+ 
+class Que{
+	int front,rear;
+	public:
+	Que(){
+		front = 0;
+		rear = 0;
+	}
+	
+	void push(int i){
+		
+		qarr[rear++]=i;
+	}
+	
+	int pop(){
+		int d=qarr[front++];
+		return d;
+	}
+	
+	bool empty(){
+		if(front==rear)
+		return true;
+		return false;
+	}
+};
+Que Q;
+ 
+int main(){
+	cin>>s;	
+	memset(visited,false,sizeof visited);
+	size = s.length();
+ 
+	for(int i=0;i<size;i++){
+		int val = s[i]-'0';
+		V[val][v1[val]++]=i;
+	}
+ 
+		Q.push(0);
+		visited[0]=true;
+  d[0]=0;
+	while(!Q.empty()){
+		int idx = Q.pop();
+		if(idx==size-1)
+		break;
+		 int val = s[idx]-'0';
+		 int vsz = v1[val];
+		 
+		 for(int j=0;j<vsz;j++){
+		     int nidx = V[val][j];
+		     
+		     if(!visited[nidx]){
+		     	visited[nidx]=true;
+		     	Q.push(nidx);
+		     	d[nidx]=d[idx]+1;
+			 }
+	     }
+	     v1[val]=0;
+	     if(idx-1>-1&&!visited[idx-1]){
+	     	visited[idx-1]=true;
+		    Q.push(idx-1);
+		    d[idx-1]=d[idx]+1;
+		 }
+		 
+		 if(idx+1<size&&!visited[idx+1]){
+		 	visited[idx+1]=true;
+		    Q.push(idx+1);
+		    d[idx+1]=d[idx]+1;
+		 }		
+	}
+	cout<<d[size-1];
+} 

@@ -1,0 +1,12 @@
+t=int(raw_input())
+while t > 0 :
+    t-=1
+    n,k = map(int,raw_input().strip().split())
+    a = map(int,raw_input().strip().split())
+    counter = 0
+    for i in xrange(n) :
+        if (a[i] % k < k - a[i] % k) and (a[i] - a[i] % k != 0) :
+            counter += a[i] % k
+        else :
+            counter += k - a[i] % k
+    print counter

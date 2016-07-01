@@ -1,0 +1,38 @@
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <algorithm>
+using namespace std;
+int a0,diff;
+int main() {
+	int n,k;
+	scanf("%d %d",&n,&k);
+	int array[100010];
+	for(int i=0;i<n;i++){
+		scanf("%d",&(array[i]));
+	}
+	a0=1000000000,diff=100000000;
+	for(int i=0;i<k+2;i++){
+		for(int j=i+1;j<k+2;j++){
+			if((array[j]-array[i])%(j-i)!=0) continue;
+			int dif=(array[j]-array[i])/(j-i);
+			int st=array[i]-i*dif;
+			int count=0;
+			for(int l=0;l<n;l++){
+				if(array[l]!=st+l*dif) count++;
+			}
+			if(count>k) break;
+			if((st<a0)||((st==a0)&&(dif<diff))){
+				a0=st;
+				diff=dif;
+			}
+		}
+	}
+	for(int i=0;i<n;i++){
+		printf("%d ",a0+i*diff );
+	}
+	printf("
+");
+	return 0;
+}

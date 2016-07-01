@@ -1,0 +1,158 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long LL;
+struct node {
+	int l, r;
+	int Left, Right, mid;
+
+	LL clear;
+	LL add, mul, sum;
+};
+
+const int MAXN =1e5 + 10;
+const int MOD = 1e9 + 7;
+node T[MAXN * 30];
+int A[MAXN];
+
+void propagateLazy(int idx){
+	if(T[idx].clear > 0){
+		T[idx].sum = (T[idx].clear * (T[idx].r - T[idx].l + 1)) % MOD;
+	}
+	T[idx].sum = (T[idx].sum * T[idx].mul + (T[idx].r - T[idx].l + 1) * T[idx].add) % MOD;
+
+	int L = T[idx].Left;
+	int R = T[idx].Right;
+	if(T[idx].l != T[idx].r){
+		if(T[idx].clear > 0){
+			T[L].clear = T[idx].clear;
+			T[R].clear = T[idx].clear;
+			T[L].add = 0;
+			T[L].mul = 1;
+			T[R].add = 0;
+			T[R].mul = 1;
+		} else{
+			T[L].add = (T[L].add * T[idx].mul + T[idx].add) % MOD;
+			T[L].mul = (T[L].mul * T[idx].mul) % MOD;
+			T[R].add = (T[R].add * T[idx].mul + T[idx].add) % MOD;
+			T[R].mul = (T[R].mul * T[idx].mul) % MOD;
+		}
+	}
+	T[idx].add = 0;
+	T[idx].mul = 1;
+	T[idx].clear = 0;
+}
+void build(int l, int r, int idx){
+	if(l == r){
+		T[idx].l = l;
+		T[idx].mid = l;
+		T[idx].r = l;
+
+ 		T[idx].Left = idx;
+		T[idx].Right = idx;
+
+		T[idx].clear = 0;
+		T[idx].add = 0;
+		T[idx].mul = 1;
+		T[idx].sum = A[l];
+		return ;
+	}
+	int mid = (l + r) >> 1;
+	int L = idx << 1;
+	int R = L + 1;
+
+	build(l, mid, L);
+	build(mid + 1, r, R);
+
+	T[idx].l = l;
+	T[idx].mid = mid;
+	T[idx].r = r;
+
+	T[idx].Left = L;
+	T[idx].Right = R;
+
+	T[idx].clear = 0;
+	T[idx].add = 0;
+	T[idx].mul = 1;
+	T[idx].sum = (T[L].sum + T[R].sum) % MOD;
+}
+void update(int idx, int vl, int vr, LL add, LL mul, LL clear){
+	propagateLazy(idx);
+	if(vl == T[idx].l && vr == T[idx].r){
+		if(clear > 0){
+			T[idx].clear = clear;
+			T[idx].add = 0;
+			T[idx].mul = 1;
+		} else {
+			T[idx].add = (T[idx].add * mul + add) % MOD;
+			T[idx].mul = (T[idx].mul * mul) % MOD;
+		}
+		propagateLazy(idx);
+		return ;
+	}
+	int L = T[idx].Left;
+	int R = T[idx].Right;
+	int mid = T[idx].mid;
+
+	if(vr <= mid){
+		update(L, vl, vr, add, mul, clear);
+	} else if(vl > mid){
+		update(R, vl, vr, add, mul, clear);
+	} else{
+		update(L, vl, mid, add, mul, clear);
+		update(R, mid + 1, vr, add, mul, clear);
+	}
+	propagateLazy(L);
+	propagateLazy(R);
+	T[idx].sum = (T[L].sum + T[R].sum) % MOD;
+}
+LL query(int idx, int vl, int vr){
+	propagateLazy(idx);
+	if(vl == T[idx].l && vr == T[idx].r){
+		return T[idx].sum;
+	}
+	if(vr <= T[idx].mid){
+		return query(T[idx].Left, vl, vr);
+	} else if(vl > T[idx].mid){
+		return query(T[idx].Right, vl, vr);
+	} else{
+		return (query(T[idx].Left, vl, T[idx].mid) + query(T[idx].Right, T[idx].mid + 1, vr)) % MOD;
+	}
+}
+int main(){
+	int N, Q;
+	scanf("%d%d", &N, &Q);
+	for(int i = 1;i <= N;++i){
+		scanf("%d", &A[i]);
+	}
+	build(1, N, 1);
+	int x, y, v;
+	while(Q--){
+		int type;
+		scanf("%d", &type);
+		switch(type){
+			case 1: 
+				scanf("%d%d%d", &x, &y, &v);
+				update(1, x, y, v, 1, 0);
+			break;
+			case 2: 
+				scanf("%d%d%d", &x, &y, &v);
+				update(1, x, y, 0, v, 0);
+			break;
+			case 3: 
+				scanf("%d%d%d", &x, &y, &v);
+				update(1, x, y, 0, 1, v);
+			break;
+			case 4: 
+				scanf("%d%d", &x, &y);
+				printf("%lld
+", query(1, x, y));
+			break;
+		}
+		// for(int i = 1;i <= 7;++i){
+		// 	cout << i << " " << T[i].add << " " << T[i].mul << " " << T[i].sum << " " << T[i].clear << "
+";
+		// }
+	}
+	return 0;
+}

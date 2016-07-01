@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+#define MOD 1000000007
+#define len(a) strlen(a)
+#define ll long long
+#define nl printf("
+")
+#define F first
+#define S second
+#define db printf("debug")
+#define yes printf("YES
+")
+#define no printf("NO
+")
+#define pb(a) push_back(a)
+#define po(a) pop_back()
+#define mp(a,b) make_pair(a,b)
+#define set(a,v) memset(a,v,sizeof(a))
+#define sz(v) v.size()
+#define gc getchar//_unlocked
+#define pcase(i) printf("Case #%d: ",i)
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int a[27]={0},k,l,i,j,ans=0,ms,cnt;
+        string s;
+
+
+        cin>>s>>k;
+        l=s.length();
+        for(i=0;i<l;i++)
+        {
+            int as= s[i]-97;
+            a[as]++;
+        }
+        ans=l;
+        for(i=0;i<26;i++)
+        {
+            cnt=0;
+            if(a[i]!=0)
+            {
+                for(j=0;j<26;j++)
+                {
+                    if(a[j]!=0)
+                    {
+                       if(a[j]<a[i])
+                        cnt +=a[j];
+
+                       else if (a[j]>a[i]+k)
+                        cnt+= a[j]-(a[i]+k);
+                    }
+                }
+                 if(cnt<ans)
+                ans=cnt;
+            }
+
+        }
+        cout<<ans;nl;
+    }
+}

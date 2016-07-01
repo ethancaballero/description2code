@@ -1,0 +1,17 @@
+import sys
+
+filetypes={}
+(inptypes,noofinps) = map(int,sys.stdin.readline().split())
+for z in range(inptypes):
+    data = sys.stdin.readline().split()
+    filetypes[data[0]] = data[1]
+    data.sort(reverse=True)
+for z in range(noofinps):
+    data = sys.stdin.readline().split()[0].split('.')
+    try:
+        if len(data) > 1:
+            print filetypes[data[-1]]
+        else:
+            print 'unknown'
+    except:
+        print 'unknown'

@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+const LL MOD = 1e9 + 7;
+
+LL power(LL A, LL B, LL MOD){
+    LL ans = 1;
+    while(B > 0){
+        if(B&1LL)  ans = (ans * A) % MOD;
+        A = (A * A) % MOD;
+        B >>= 1;
+    }
+    return ans;
+}
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int N;
+        scanf("%d", &N);
+        LL p = 1;
+        LL ans = 1;
+        while(N > 0){
+            if(N & 1)
+                ans = (ans * power(2, p, MOD)) % MOD;
+            p = (p * 10) % (MOD - 1);
+            N >>= 1;
+        }
+        printf("%lld
+", (ans * ans) % MOD);
+    }
+    return 0;
+}

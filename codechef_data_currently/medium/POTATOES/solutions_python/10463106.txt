@@ -1,0 +1,24 @@
+from math import sqrt
+def sieveoferatosthenes(n):
+    L = [0 for i in range(n+1)]; P = []
+    for i in range(2,int(sqrt(n))+1):
+        if L[i] == 0:
+            for j in range(2*i,n+1,i):
+                L[j] = 1
+    for i in range(2,n+1):
+        if L[i] == 0: P.append(i)
+    return P
+def binarysearch(A,left,right,key):
+    while left < right:
+        mid = left + (right - left)/2
+        if A[mid] <= key: left = mid + 1
+        elif A[mid] > key: right =  mid
+    return left
+T = int(raw_input())
+P = sieveoferatosthenes(2003)
+l = len(P)
+while T:
+    x,y = map(int,raw_input().split())
+    index = binarysearch(P,0,l-1,x+y)
+    print P[index] - (x+y); T-=1
+        

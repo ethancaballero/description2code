@@ -1,0 +1,17 @@
+T = int(raw_input())
+
+for _ in range(T):
+    Q = int(raw_input())
+    for q in range(Q):
+        [I, N, Q] = [int(x) for x in raw_input().rstrip().split(" ")]
+        if N % 2 == 0:
+            h = int(N/2)
+        else:
+            if I == 2:
+                h = int(N/2) + 1
+            else:
+                h = int(N/2)
+        if Q == 1:
+            print(h)
+        else:
+            print(N-h)

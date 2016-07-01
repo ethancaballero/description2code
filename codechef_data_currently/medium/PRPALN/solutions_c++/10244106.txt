@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+char inp[1000000];
+
+bool isPallindromePossible(char inp[])
+{
+	int n = strlen(inp);
+
+	int p1=0, p2=n-1;
+	int pos1=0,pos2=0;
+	while(p1<=p2){
+		if(inp[p1]==inp[p2]){
+			p1++;
+			p2--;
+		}else{
+			pos1 = p1;
+			pos2 = p2;
+			break;
+		}
+	}
+	if(p1>p2)
+		return true;
+	p1 = 0, p2 = n-1;
+	bool firstInvalid = false, secondInvalid = false;
+	while(p1 <= p2){
+		if(p1==pos1)
+			p1++;
+		if(inp[p1] != inp[p2]){
+			firstInvalid = true;
+			break;
+		}else{
+			p1++;
+			p2--;
+		}
+	}
+	if(p1>p2)
+		return true;
+	p1 = 0, p2 = n-1;
+	while(p1 <= p2){
+		if(p2==pos2)
+			p2--;
+		if(inp[p1] != inp[p2]){
+			secondInvalid = true;
+			break;
+		}else{
+			p1++;
+			p2--;
+		}
+	}
+	if(firstInvalid && secondInvalid)
+		return false;
+	
+	return true;
+}
+
+void readInp(char inp[])
+{
+	cin>>inp;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t){
+	readInp(inp);
+	bool res = isPallindromePossible(inp);
+	if(res)
+		cout<<"YES"<<endl;
+	else
+		cout<<"NO"<<endl;
+	t--;
+	}
+}

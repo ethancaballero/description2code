@@ -1,0 +1,14 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main(){
+ios::sync_with_stdio(false);
+int t;
+long int l,d,s,c;
+cin>>t;
+while(t--){
+    cin>>l>>d>>s>>c;
+    if((d-1)*(log(c+1))>=(log(l)-log(s))) cout<<"ALIVE AND KICKING"<<endl;
+    else cout<<"DEAD AND ROTTING"<<endl;
+}
+}

@@ -1,0 +1,83 @@
+#include <iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cmath>
+
+using namespace std;
+
+int main() {
+	int p2[168]={0};
+	int p3[25]={0};
+    bool seive[1000000]={false},s;
+    long long int k,i,j,N,number,n1,n2;
+    //cout<<"here"<<endl;
+    for(i=2;i*i<=1000000;i++)
+    {
+    	//cout<<"inside for"<<endl;
+    	if(seive[i]==false)
+    	{
+    		for(j=2;i*j<=1000000;j++)
+    		{
+    			seive[i*j]=true;
+    		}
+    	}
+    }
+    for(i=2,k=0;i<=1000;i++)
+    {
+    	//cout<<"inside 2 for"<<endl;
+    	if(seive[i]==false)
+    	{
+    	  p2[k]=i;
+    	  //cout<<p2[k]<<' ';
+    	  k++;
+    	}
+    }
+    //cout<<k;
+    //cout<<endl;
+    for(i=2,k=0;i<=100;i++)
+    	{
+    		if(seive[i]==false)
+    		{
+    		   p3[k]=i;
+    		  // cout<<p3[k]<<' ';
+    		   k++;
+      		}
+    	}
+    	//cout<<k;
+    while(1)
+    	{
+    	cin>>N;
+    	if(N==0)
+    	break;
+        for(i=0;i<168;i++)
+        {
+          n1=p2[i]*p2[i];
+          //cout<<"here1";
+          //cout<<n1;
+    	for(j=0;j<25;j++)
+    	{
+    		//cout<<"here";
+    	    n2=pow(p3[j],3);
+    	    //cout<<n2;
+    		number=N-(n1+n2);
+    		if(number>0 && seive[number]==false)
+    		{
+    		//	cout<<"inside if";
+    			cout<<number<<' '<<p2[i]<<' '<<p3[j]<<endl;
+    			s=true;
+    			break;
+    		}
+    		else{
+    			s=false;
+    		}
+    	}
+    	if(s)
+        break;
+        }
+        if(!s)
+        {
+        	cout<<"0 0 0"<<endl;
+        }
+    }
+	return 0;
+}

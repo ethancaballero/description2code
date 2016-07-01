@@ -1,0 +1,14 @@
+for i in xrange(int(raw_input())):
+    n, m, k = map(int, raw_input().split())
+    l1 = map(int, raw_input().split())
+    l2 = map(int, raw_input().split())
+    l3 = list(set(l1).intersection(set(l2)))
+    l4 = list(set(l1).union(set(l2)))
+    hsh = [0] * 113
+    ans = 0
+    for i in l4:
+        hsh[i] += 1
+    for i in xrange(1,n+1):
+        if hsh[i] == 0:
+            ans += 1
+    print len(l3), ans

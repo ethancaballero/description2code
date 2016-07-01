@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+    long int j,s,p;
+    cin>>j>>s>>p;
+    p=p-j;
+    s=p/s;
+
+    if(s%2==0)
+        printf("Lucky Chef");
+        else
+             printf("Unlucky Chef");
+        return 0;
+}

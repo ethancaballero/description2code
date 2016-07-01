@@ -1,0 +1,9 @@
+from math import ceil
+n = int(raw_input().strip())
+for i in xrange(n) :
+    a = int(raw_input())
+    if a < 1500 :
+        print 2 * a
+    else :
+        a += 500 + 0.98 * a
+        print '%g' %(float(a))

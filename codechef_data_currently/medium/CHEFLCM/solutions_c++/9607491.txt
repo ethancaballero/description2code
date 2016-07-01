@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int lli;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        lli n;
+        cin>>n;
+        lli sum=0;
+        lli temp=sqrt(n);
+        for(int p=1;p<=temp;p++){
+            if(n%p==0)
+             {
+
+               sum+=p;
+            if(p!=n/p)
+            {
+                sum+=n/p;
+
+            }
+             }
+    }
+
+            cout<<sum<<endl;
+
+    }
+
+
+
+
+
+}

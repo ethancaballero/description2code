@@ -1,0 +1,22 @@
+# your code goes here
+test=input()
+for i in range (0,test) :
+	y=raw_input().split(' ')
+	n=int ( y[0] )
+	m=int ( y[1] )
+	k=int ( y[2] )
+	diff=0
+	if ( n == m ) :
+		diff=0     #my bad
+	elif ( n > m ) :
+		diff=n-m
+	elif ( n < m ) :
+		diff=m-n
+	#print("diff=%d")%(diff)
+	if ( k < diff ) :
+		diff-=k
+	else :
+		diff=0
+	print(diff)
+		
+		

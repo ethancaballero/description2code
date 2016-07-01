@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MAX 1000000007
+long long int a[50000];
+double b[50000];
+
+int main()
+{
+	long long int i,j,k,h,n;
+	scanf("%lld",&h);
+	while(h!=0)
+	{
+		n=1<<h;
+		n--;
+		for(i=0;i<n;i++)
+		{
+			scanf("%lld",&a[i]);
+			b[i]=a[i];
+		}
+		for(i=n-1;i>0;i-=2)
+		{
+			a[(i-1)/2]*=(b[i]>b[i-1]?a[i]:a[i-1]);
+			b[(i-1)/2]*=(b[i]>b[i-1]?b[i]:b[i-1]);
+			a[(i-1)/2]%=MAX;
+		}
+		printf("%lld
+",a[0]);
+		scanf("%lld",&h);
+	}
+}

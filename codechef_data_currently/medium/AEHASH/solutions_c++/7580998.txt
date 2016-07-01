@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+const int maxn = 52;
+typedef long long LL;
+int dp[maxn][maxn][1002];
+int getV(int A, int E, int V){
+    if(A < 0 || E < 0 || V < 0) return 0;
+    int& ret = dp[A][E][V];
+    if(ret != -1) return ret;
+    ret = 0;
+    V -= A;
+    if(A+E <= 1) return ret = (V >= 0 ? 1 : 0);
+    int left = (A+E)/2;
+    for(int i = 0; i <= A; i ++){
+        ret = (ret + (LL)getV(i, left-i, V) * getV(A-i, E-left+i, V)) % MOD;
+    }
+    return ret;
+}
+int main() {
+    int test, A, E, V;
+    memset(dp, -1, sizeof(dp));
+    scanf("%d", &test);
+    while(test --){
+        scanf("%d%d%d", &A, &E, &V);
+        printf("%d
+", (getV(A, E, V) - getV(A, E, V-1) + MOD)%MOD);
+    }
+    return 0;
+}

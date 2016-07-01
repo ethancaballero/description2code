@@ -1,0 +1,22 @@
+#include<iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+	unsigned int t;
+	cin>>t;
+	while(t--)
+	{
+		unsigned int n;
+		cin>>n;
+		unsigned int a[n];
+		for(unsigned int i=0;i<n;i++)
+			cin>>a[i];
+		sort(a,a+n);
+		for(unsigned int i=n-1;i>0;i--)
+			a[i] = a[i] - a[i-1];
+		sort(a+1,a+n);
+		cout<<a[1]<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,21 @@
+def main():
+
+        N,R = map(int,raw_input().split())
+        lookup = {}
+
+        for i in range(N):
+                file_ext, media_type = raw_input().split()
+                lookup[file_ext] = media_type
+
+        for j in range(R):
+                f = raw_input().split()[0]  ## WTF IS THAT SHIT ~Cyberax (I agree)
+                if('.' in f):
+                        ext = f.split('.')[-1]
+                        if(ext in lookup):
+                                print lookup[ext]
+                        else:
+                                print "unknown"
+                else:
+                        print "unknown"
+
+main()

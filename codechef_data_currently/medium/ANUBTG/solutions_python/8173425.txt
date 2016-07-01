@@ -1,0 +1,20 @@
+# cook your code here
+t=int(raw_input())
+for _ in range(t):
+   n=int(raw_input())
+   s=map(int,raw_input().split())
+   s.sort(reverse=True)
+   i=0
+   ans=0
+   for i in range(0,len(s)//4):
+        ans=s[i*4]+s[i*4+1]+ans
+   if(len(s)%4==3):
+       i=len(s)//4
+       ans=ans+s[i*4]+s[i*4+1]
+   elif(len(s)%4==2):
+       i=len(s)//4
+       ans=ans+s[i*4]+s[i*4+1]
+   elif(len(s)%4==1):
+       i=len(s)//4
+       ans=ans+s[i*4]
+   print ans

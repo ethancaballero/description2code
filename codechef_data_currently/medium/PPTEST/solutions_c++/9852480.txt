@@ -1,0 +1,42 @@
+    #include<stdio.h>
+    int max(int,int);
+    int main()
+    {
+    int t,n,wt;
+    scanf("%d",&t);
+    for(;t>0;t--)
+    {
+    scanf("%d%d",&n,&wt);
+    int p[n+1],w[n+1],i,j,knap,a[n+1][wt+1];
+    for(i=1;i<=n;i++)
+    {
+    scanf("%d%d",&p[i],&w[i]);
+    p[i]=p[i]*w[i];
+    scanf("%d",&w[i]);
+    }
+    for(i=0;i<=n;i++)
+    {
+    for(j=0;j<=wt;j++)
+    {
+    if(i==0 ||j==0)
+    a[i][j]=0;
+    else{
+    if(w[i]>j)
+    a[i][j]=a[i-1][j];
+    else
+    a[i][j]=max(a[i-1][j],(a[i-1][j-w[i]]+p[i]));
+    }
+    }
+    }
+    printf("%d
+",a[n][wt]);
+     
+    }
+    return 0;
+    }
+    int max(int a,int b)
+    {
+    if(a>b)
+    return a;
+    else return b;
+    } 

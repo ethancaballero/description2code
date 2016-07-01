@@ -1,0 +1,22 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+using namespace std;
+ 
+int main()
+{
+int t,n;
+string s="zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba",s2;
+scanf("%d",&t);
+while(t--)
+{
+ s2.clear();
+ scanf("%d",&n);
+ n=n+((n-1)/25)+1;
+ s2.assign(s.end()-n,s.end());
+cout<<s2;
+printf("
+");
+}
+return 0;
+} 

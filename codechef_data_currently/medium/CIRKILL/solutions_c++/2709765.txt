@@ -1,0 +1,144 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+#include<cstdio>
+using namespace std;
+
+#define eps 0.000001
+
+struct point{
+	double x,y;
+	point(double x1 = 0.0,double y1 = 0.0){
+		x = x1;
+		y = y1;
+	}
+};
+
+struct line{
+	double A,B,C;
+};
+
+struct circle{
+	point center;
+	double radius;
+};
+
+void printPoint(point);
+void printLine(line);
+void printCircle(circle);
+
+double findDistance(point a,point b){
+	return sqrt(pow(a.x-b.x,2.0) + pow(a.y-b.y,2.0));
+}
+
+point findIntersection(line l1,line l2){
+	point a;
+	double det = l1.A*l2.B - l1.B*l2.A;
+	a.x = (l2.B*l1.C - l1.B*l2.C)/det;
+	a.y = (l1.A*l2.C - l2.A*l1.C)/det;
+	return a;
+}
+
+line makeLine(point p1,point p2){
+	line l;
+	l.A = p2.y - p1.y;
+	l.B = p1.x - p2.x;
+	l.C = l.A*p1.x + l.B*p1.y;
+	return l;
+}
+
+line findPerpendicular(line l1,point p){
+	line l;
+	l.A = -l1.B;
+	l.B = l1.A;
+	l.C = l.A*p.x + l.B*p.y;
+	return l;
+}
+
+point midPoint(point a,point b){
+	point c;
+	c.x = (a.x + b.x)/2;
+	c.y = (a.y + b.y)/2;
+	return c;
+}
+
+bool collinear(point a,point b,point c){
+	line l = makeLine(a,b);
+	return l.A*c.x + l.B*c.y == l.C;
+}
+
+bool killAble(circle c,point p){
+	double s_squared = pow(p.x-c.center.x,2.0) + pow(p.y-c.center.y,2.0);
+	double radius_squared = c.radius * c.radius;
+	if(s_squared - radius_squared <= eps)return true;
+	return false;
+}
+
+circle makeCircle(point a,point b,point c){
+	line l1 = makeLine(a,b);
+	//printLine(l1);cin.get();
+	line l2 = makeLine(a,c);
+	//printLine(l2);cin.get();
+	l1 = findPerpendicular(l1,midPoint(a,b));
+	//printLine(l1);cin.get();
+	l2 = findPerpendicular(l2,midPoint(a,c));
+	//printLine(l2);cin.get();
+	circle c1;
+	c1.center = findIntersection(l1,l2);
+	c1.radius = findDistance(c1.center,a);
+	//printCircle(c1);cin.get();
+	return c1;
+}
+
+void printLine(line l){
+	cout<<"line : "<<l.A<<"x + "<<l.B<<"y = "<<l.C<<endl;
+}
+
+void printPoint(point a){
+	cout<<"point : x = "<<a.x<<" , y = "<<a.y<<endl;
+}
+
+void printCircle(circle c){
+	cout<<"Circle : c = ";
+	printPoint(c.center);
+	cout<<" radius = "<<c.radius<<endl;
+}
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		int n;
+		cin>>n;
+		vector<point> p(n);
+		for(int i = 0;i<n;i++){
+			cin>>p[i].x>>p[i].y;
+		}
+		double yes = 0;
+		//sort(p.begin(),p.end());
+		for(int i=0;i<n;i++){
+			for(int j = i+1;j<n;j++){
+				for(int k = j+1;k<n;k++){
+					if(collinear(p[i],p[j],p[k])){
+						continue;
+					}
+					circle c = makeCircle(p[i],p[j],p[k]);
+					for(int l = 0;l<n;l++){
+						if(l == i || l == j || l == k)continue;
+						if(killAble(c,p[l])){
+						//	cout<<"yes for i = "<<i<<" j = "<<j<<" k= "<<k<<"l = "<<l<<endl;
+							yes++;
+						}
+					}
+				}
+			}
+		}
+		double total = (n)*(n-1)*(n-2)*(n-3)/6;
+	//	cout<<"total = "<<total<<endl;
+		printf("%0.6f
+",yes/total);
+	}
+	//point a(-1,0),b(0,0),c(0,1);
+	//circle c1 = makeCircle(a,b,c);
+}

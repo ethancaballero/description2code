@@ -1,0 +1,6 @@
+# cook your code here
+t = int(raw_input())
+while t:
+    s = raw_input()
+    print len(set(s))
+    t -= 1

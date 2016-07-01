@@ -1,0 +1,36 @@
+#include <iostream>
+ 
+using namespace std;
+int main()
+ 
+{
+    int i;
+ 
+    //float k;
+    cin>>i;
+    while(i--)
+    {
+ 
+      float j,k,l;
+      cin>>j>>k>>l;
+      if(j>50 && k<0.7 && l>5600)
+      cout<<"10";
+      else if(j>50 && k<0.7 && l<=5600)
+      cout<<"9";
+      else if(j<=50 && k<0.7 && l>5600)
+      cout<<"8";
+      else if(j>50 && k>=0.7 && l>5600)
+      cout<<"7";
+      else if((j>50 && k>=0.7 && l<=5600)||(j<=50 && k>=0.7 && l>5600)||(j<=50 && k<0.7 && l<=5600))
+      cout<<"6";
+ 
+ 
+      else if(j<=50 && k>=0.7 && l<=5600)
+      cout<<"5";
+      cout<<"
+";
+      //printf("%d
+",grade);
+    }
+       return 0;//
+}

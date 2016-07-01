@@ -1,0 +1,8 @@
+t = int(raw_input())
+for i in range(0,t):
+    n = int(raw_input())
+    xor = 0
+    for j in range(0,n):
+        xor = xor ^ int(raw_input())
+    
+    print xor

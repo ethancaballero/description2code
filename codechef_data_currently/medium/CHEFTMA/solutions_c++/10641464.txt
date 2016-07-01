@@ -1,0 +1,76 @@
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+#define LL int long long
+int Arr1[100001];
+int diff[100001];
+int ma[100001];
+int main()
+{
+        int t;
+        scanf("%d",&t);
+      while(t--)
+      {
+      	int n,k,m;
+      	scanf("%d %d %d",&n,&k,&m);
+      	int x,i;
+      	for(i=0;i<n;i++)
+        {
+        	scanf("%d",&Arr1[i]);
+        }
+        LL ans=0;        
+        for(i=0;i<n;i++)
+        {
+        	int y;
+        	scanf("%d",&y);
+        	diff[i]=Arr1[i]-y;
+        	ans+=diff[i];
+        }
+        sort(diff,diff+n);
+        for(i=0;i<(k+m);i++)
+        {
+        	scanf("%d",&ma[i]);
+        }
+        x=k+m;
+        sort(ma,ma+x);
+        int p=(k+m)-1;
+        /*printf("diff
+");
+        for (i = 0; i < n; ++i)
+        {
+        	printf("%d ",diff[i]);
+        }
+        printf("
+");
+        printf("ma
+");
+        for(i=0;i<(k+m);i++)
+        {
+        printf("%d ",ma[i]);
+        }
+        printf("
+");
+        */
+        for(i=n-1;i>=0;i--)
+        {
+        	int q=diff[i];
+        	int s=p;
+        	for(;s>=0;s--)
+        	{
+              if(ma[s]<=q)
+              {
+                ans-=ma[s];
+                break;
+              }
+        	}
+        	p=s-1;
+        	if(p<0)
+        	{
+        	break;
+        	}
+        }
+        printf("%lld
+",ans);
+      }
+	return 0;
+}

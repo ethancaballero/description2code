@@ -1,0 +1,39 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    int t,a,flag;
+    cin>>t;
+    unsigned long long int i,n,k;
+    vector<unsigned long long int>v;
+    vector<unsigned long long int>::iterator it;
+    while(t--)
+    {
+        cin>>n;
+        cin>>k;
+        v.push_back(k);
+        for(i=0;i<n-1;i++)
+        {
+            cin>>k;
+            if(k>=v[v.size()-1])
+                v.push_back(k);
+            else
+            {
+                it=upper_bound(v.begin(),v.end(),k);
+                if(*it==k)
+                    v[it-v.begin()+1]=k;
+                else
+                    v[it-v.begin()]=k;
+            }
+        }
+        cout<<v.size()<<" ";
+        for(i=0;i<v.size();i++)
+            cout<<v[i]<<" ";
+        cout<<endl;
+        v.clear();
+    }
+    return 0;
+}

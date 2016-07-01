@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define PB push_back
+#define S(n)	scanf("%d",&n)
+#define Sd(n)	scanf("%lf",&n)
+#define P(n)	printf("%d
+",n)
+#define ll long long
+int a[105][105];
+int dp[105][105][2];
+int scare[105][105];
+int n,m;
+bool check(int i, int j)
+{
+	if (i>=0 && i<n && j>=0 && j<m)
+		return true;
+	return false;
+}
+void incre(int i, int j)
+{
+	if(check(i,j) )
+		scare[i][j]++;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m;
+		memset(dp, 1, sizeof(dp));
+		memset(scare,0,sizeof(scare));
+		FOR(i,0,n)
+		{	
+			FOR(j,0,m)
+			{
+				char ch;
+				cin>>ch;
+				a[i][j]=ch-'0';
+			}
+		}
+
+		FOR(i,0,n)
+		{
+
+			FOR(j,0,m)
+			{
+
+				if(a[i][j]==1)
+				{
+					incre(i+1,j);
+					incre(i-1,j);
+					incre(i,j+1);
+					incre(i,j-1);
+				}
+			}
+		}
+		dp[0][0][0]=dp[0][0][1]=scare[0][0]-a[0][0];
+		FOR(i,0,n)
+			FOR(j,0,m)
+			{
+				if(i+j)
+				{
+					//int i1=-1e9,j1=-1e9;//i2=-1e9,j2=-1e9;
+					int a1=0,a2=0;
+					if(check(i-1,j))
+						a1=a[i-1][j];
+					if(check(i,j-1))
+						a2=a[i][j-1];
+					if(check(i,j-1))
+						dp[i][j][0]=min(dp[i][j-1][0], dp[i][j-1][1]-a1)+scare[i][j]-a[i][j];
+					if(check(i-1,j))
+						dp[i][j][1]=min(dp[i-1][j][1], dp[i-1][j][0]-a2)+scare[i][j]-a[i][j];
+
+				}
+			}
+		cout<<min(dp[n-1][m-1][0], dp[n-1][m-1][1])+a[0][0]+a[n-1][m-1]<<"
+";
+		
+	}
+	return 0;
+}

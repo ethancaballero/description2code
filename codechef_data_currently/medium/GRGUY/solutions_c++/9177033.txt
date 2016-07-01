@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+string s1,s2;
+int main(int argc, char const *argv[])
+{
+	ios_base::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		cin>>s1>>s2;
+		int len=s1.length();
+		int i;
+		int s=0;
+		for(i=0;i<len;i++)
+		{
+			if(s1[i]=='#' && s2[i]=='#')
+				break;
+		}
+		int pnt=1;
+		if(i==len)
+		{
+			cout<<"Yes
+";
+			for(i=0;i<len;i++)
+			{
+				if(s1[i]=='#')
+				{
+					pnt=2;
+					break;
+				}
+				if(s2[i]=='#')
+				{
+					pnt=1;
+					break;
+				}
+			}
+			for(;i<len;i++)
+			{
+				if(pnt==1)
+				{
+					while(i<len && s1[i]=='.')	
+					{
+						i++;
+					}
+					if(i<len)
+					{
+						s++;
+						pnt=2;
+					}
+				}
+				else
+				{
+					while(i<len && s2[i]=='.')
+					{
+						i++;
+					}
+					if(i<len)
+					{
+						s++;
+						pnt=1;
+					}
+				}
+			}
+
+			cout<<s<<"
+";
+		}
+		else
+			cout<<"No
+";
+	}
+	return 0;
+}

@@ -1,0 +1,6 @@
+t=int(raw_input())
+for i in range(1, t+1):
+	b=int(raw_input())
+	n=(b/2)-1
+	k=int(n*(n+1)*0.5)
+	print k

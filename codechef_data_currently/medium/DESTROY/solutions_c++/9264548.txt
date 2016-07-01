@@ -1,0 +1,38 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+int cmpfun(const void*a, const void*b)
+{
+	return(*(int*)a - *(int*)b);
+}
+inline int scan_d() { int ip = getchar_unlocked(), ret = 0, flag = 1;for (;ip<'0' || ip>'9';ip = getchar_unlocked())if (ip == '-') { flag = -1;ip = getchar_unlocked();break; }for (;ip >= '0'&&ip <= '9';ip = getchar_unlocked())ret = ret * 10 + ip - '0';return flag*ret; }
+int main()
+{
+	long int arr[50002], i, j, k,temp,T,N,pos,max,ans;
+	 T= scan_d();
+	while (T > 0)
+	{
+		N= scan_d();
+		for (i = 0;i <N;i++)
+		arr[i]= scan_d();
+		qsort(arr, N, sizeof(long int), cmpfun);
+		pos = 1;
+		max = 0;
+		for (i = 1;i < N;i++)
+		{
+			pos++;
+			if (arr[i] != arr[i - 1])
+				pos = 1;
+			if (pos > max)
+				max = pos;
+		}
+		if (max >N / 2)
+			cout <<max<< endl;
+		else if (N % 2 == 0)
+			cout << N / 2 << endl;
+		else
+			cout << N / 2 + 1 << endl;
+		T--;
+	}
+	return 0;
+}

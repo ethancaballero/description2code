@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+using namespace std;
+int par[100005];
+int rank[100005];
+int cost[100005];
+int min_cost[100005];
+int comp[100005];
+int find_par(int x)
+{
+if(par[x]==x)
+return x;
+else
+return par[x]=find_par(par[x]);
+}
+void unio(int x,int y)
+{
+int px=find_par(x);
+int py=find_par(y);
+if(px==py)
+return;
+if(rank[px]<rank[py])
+par[px]=py;
+else if(rank[py]<rank[px])
+par[py]=px;
+else
+{
+par[px]=py;
+rank[px]++;
+}
+}
+int main()
+{
+int n,m,x,y;
+scanf("%d%d",&n,&m);
+for(int i=1;i<=n;i++)
+{
+par[i]=i;
+rank[i]=0;
+}
+while(m--)
+{
+scanf("%d%d",&x,&y);
+unio(x,y);
+}
+for(int i=1;i<=n;i++)
+{
+scanf("%d",&cost[i]);
+min_cost[i]=10001;
+comp[i]=0;
+}
+for(int i=1;i<=n;i++)
+{
+int p=find_par(i);
+comp[p]++;
+if(cost[i]>=0)
+{
+if(cost[i]<min_cost[p])
+min_cost[p]=cost[i];
+}
+}
+int sum=0;
+int set=0;
+int flag=0;
+int min_vertex=10001;
+for(int i=1;i<=n;i++)
+{
+if(comp[i]>0)
+{
+set++;
+if(min_cost[i]==10001)
+flag=1;
+sum=sum+min_cost[i];
+if(min_vertex>min_cost[i])
+min_vertex=min_cost[i];
+}
+}
+if(set==1)
+printf("0
+");
+else if(flag==1)
+printf("-1
+");
+else
+printf("%d
+",sum+min_vertex*(set-2));
+}
+

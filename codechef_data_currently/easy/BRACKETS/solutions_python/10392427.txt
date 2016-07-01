@@ -1,0 +1,14 @@
+t=int(raw_input())
+while t > 0 :
+    t-=1
+    x = raw_input().strip()
+    max_balance = balance = 0
+    for i in xrange(len(x)) :
+        if x[i] == '(' :
+            balance += 1
+        elif x[i] == ')' :
+            balance -= 1
+        max_balance = max(max_balance,balance)
+    s = '('*max_balance + ')'*max_balance
+    print s
+    

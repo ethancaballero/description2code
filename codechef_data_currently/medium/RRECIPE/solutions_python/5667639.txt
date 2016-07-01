@@ -1,0 +1,20 @@
+def check(data):
+    i=0
+    j=len(data)-1
+    res=0
+    num=26
+    while i<=j:
+        if data[i]=='?' and data[j]=='?':
+            res+=1
+        elif data[i]!=data[j] and data[i]!='?' and data[j]!='?':
+            print 0
+            return
+        i+=1
+        j-=1
+    print (num**res)%10000009
+
+import sys
+
+for i in range(int(sys.stdin.readline())):
+    data=sys.stdin.readline().strip()
+    check(data)

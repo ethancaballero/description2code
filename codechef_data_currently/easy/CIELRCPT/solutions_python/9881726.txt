@@ -1,0 +1,15 @@
+itr = int(raw_input())
+price = [1,2,4,8,16,32,64,128,256,512,1024,2048]
+for i in xrange(itr):
+    bill = int(raw_input())
+    no = 0
+    j=11
+    while(bill>0):
+        if price[j]>bill:
+            j-=1
+            continue
+        else:
+            no+=bill/price[j]
+            bill-=(bill/price[j])*price[j]
+            j-=1
+    print no

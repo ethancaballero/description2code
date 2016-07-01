@@ -1,0 +1,14 @@
+
+t=input()
+for i in range(t):
+ l=[]
+ n=input()
+ for j in range(n):
+   l.append(input())
+   
+ for j in l:
+  if l.count(j)%2 !=0:
+   print j 
+   break
+   
+  

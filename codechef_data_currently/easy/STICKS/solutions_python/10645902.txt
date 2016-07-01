@@ -1,0 +1,27 @@
+t=int(raw_input())
+while t:
+    s=int(raw_input())
+    n=str(raw_input()).split()
+    count=0
+    for i in range(s):
+        n[i]=int(n[i])
+    n.sort(reverse=True)
+    l=[]
+    n.append(-1)
+    i=0
+    while i<s and count<2:
+        if n[i]==n[i+1]:
+            l.append(n[i])
+            i+=2
+            count+=1
+        else:
+            i+=1
+            
+    if count<2:
+        print -1
+    else:
+        print l[0]*l[-1]
+            
+    t-=1   
+        
+    

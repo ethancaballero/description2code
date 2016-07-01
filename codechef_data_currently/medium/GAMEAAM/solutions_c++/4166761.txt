@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pii;
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz(a) (int)a.size()
+#define all(c) c.begin(), c.end()
+#define fill(a, v) memset(a, v, sizeof(a))
+
+#define gl(x) cin >> x
+#define gi(x) scanf("%d", &x)
+#define pls(x) cout << x << " "
+#define pln(x) cout << x << endl
+#define pis(x) printf("%d ", x)
+#define pin(x) printf("%d
+", x)
+#define pnl printf("
+")
+#define dbn cerr << endl
+#define dbs(x) cerr << x << " "
+#define dbg(x) cerr << #x << " : " << x << " "
+
+#define rep(i, n) for(int i = 0; i < (n); ++i)
+#define forn(i, a, b) for(int i = (a); i < (b); ++i)
+#define ford(i, a, b) for(int i = (a); i >= (b); --i)
+#define fore(i, a, b) forn(i, a, b + 1)
+#define foreach(c, it) for(__typeof(c.begin()) it = c.begin(); it != c.end(); ++it)
+
+int grundy(int a, int b) {
+    if(a > b) swap(a, b);
+    if(b % a == 0) return (b / a) - 1;
+    int g = grundy(a, b % a);
+    int n = b/a;
+    return n <= g ? n - 1 : n;
+}
+
+int main() {
+    // fore(i, 1, 10) fore(j, 1, 10) if(i != j) dbg(i), dbg(j), dbg(grundy(i, j)), dbn;
+    int T; gi(T);
+    rep(tt, T) {
+        int n; gi(n);
+        int canWin = 0;
+        rep(i, n) {
+            int a, b;
+            gi(a); gi(b);
+            canWin ^= grundy(a, b);
+        }
+        puts(canWin ? "YES" : "NO");
+    }
+    return 0;
+}

@@ -1,0 +1,22 @@
+//bits
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n;
+        int x,y;
+        int xo=0;
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+            cin>>x>>y;
+            xo^=(i+1);
+        }
+        cout<<xo<<endl;
+    }
+    return 0;
+}

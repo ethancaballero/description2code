@@ -1,0 +1,12 @@
+t = input()
+for _ in xrange(t):
+    n = input()
+    prev_row = [input()]
+    for i in xrange(1, n):
+        row = map(int, raw_input().split())
+        row[0] += prev_row[0]
+        row[-1] += prev_row[-1]
+        for j in xrange(1, len(row) - 1):
+            row[j] += max(prev_row[j - 1], prev_row[j])
+        prev_row = row
+    print max(prev_row)

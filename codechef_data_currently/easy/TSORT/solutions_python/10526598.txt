@@ -1,0 +1,7 @@
+t = int(raw_input())
+userinput = []
+for i in range(0,t):
+    userinput.append(int(raw_input()))
+userinput.sort()
+for x in range(0,len(userinput)):
+    print userinput[x]

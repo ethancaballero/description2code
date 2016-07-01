@@ -1,0 +1,34 @@
+t = input()
+i = 0
+list1 = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+
+while i != t:
+    n = input()
+    diff = n - 2001
+    j = 2000
+    num = 0
+
+    if n < 2001:
+        while j >= n:
+            if j % 100 == 0:
+                if j % 400 == 0:
+                    num += 1
+            else:
+                num += 1
+            j -= 4
+        diff -= num
+    elif n > 2001:
+        while j <= n:
+            j += 4
+            if j < n:
+                if j % 100 == 0:
+                    if j % 400 ==0:
+                        num += 1
+                else:
+                    num += 1
+        diff += num
+    else:
+        num = 0
+
+    print list1[diff%7]
+    i += 1

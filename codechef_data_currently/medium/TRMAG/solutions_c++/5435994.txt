@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <cmath>
+#include <list>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cassert>
+#include <climits>
+#include <functional>
+#include <bitset>
+#include <math.h>
+
+#define pb push_back
+#define all(x) x.begin(),x.end()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define print(x) cout<<x<<endl;
+#define input(x) cin>>x;
+#define SWAP(a, b)  a ^= b; b ^= a; a ^= b; 
+#define MOD 1000000007
+#define max(a,b) a < b ? b : a
+
+long long int total_count=0, count1=0, max_count;
+int sides[3000], sides_count, f, x, torn_count, i, t;
+
+using namespace std;
+
+int main(){
+    cin >> t;
+    while(t--){
+        float ans;
+        int leaves;
+        max_count = 0;
+        cin >> sides_count;
+        cin >> f;
+        for(i=1;i<=sides_count;i++){
+            sides[i] = i;
+            max_count += i;
+        }
+        for(i=0;i<f;i++){
+            cin >> x;
+            sides[x] = 0;
+            max_count -= x;
+        }
+        cin >> torn_count;
+        
+        if(sides_count % 2 != 0)
+            sides_count += 1;
+        leaves = sides_count / 2;
+        ans = float(max_count) * (leaves - torn_count)/leaves;
+        printf("%.4f
+", ans);
+    }
+    return 0;
+}
+

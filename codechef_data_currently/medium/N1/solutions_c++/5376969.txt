@@ -1,0 +1,201 @@
+#include<iostream>
+#include<queue>
+#include<string.h>
+#include<stdio.h>
+using namespace std;
+
+class Orienteering {
+static const int MAXD = 50000;
+static const int row=101;
+static const int col=101;
+static const int vertices = 15;
+int W,H;
+int graph[row][col]; 
+char input[row][col];
+int nodes;
+int nodesX[vertices];
+int nodesY[vertices];
+int xMove[4];
+int yMove[4];
+int distancei[1<<vertices][vertices+1];
+
+public:
+	Orienteering(){
+		xMove[0]=0;
+		xMove[1]=0;
+		xMove[2]=1;
+		xMove[3]=-1;
+		
+		yMove[0]=1;
+		yMove[1]=-1;
+		yMove[2]=0;
+		yMove[3]=0;
+		nodes = 0;
+	}
+
+	void main();
+	void read();
+	void makeGraph();
+	int bfs(int,int);
+	bool isSafe(int,int);
+	void compute();
+};
+
+
+inline void Orienteering::main() {
+	read();
+	makeGraph();
+}
+
+
+inline void Orienteering::read() {
+	scanf("%d",&W);
+	H=W;
+	for(int i=0;i<H;i++){
+			scanf("%s",input[i]);
+	}
+}
+
+
+inline bool Orienteering::isSafe(int i,int j) {
+
+	if(i>=0 && j>=0 && i<H && j<W && input[i][j]!='#')
+		return true;
+	return false;
+}
+
+
+inline int Orienteering::bfs(int source,int destination) {
+	
+	
+	int visited[row][col];
+	
+	for(int i=0;i<H;i++)
+	for(int j=0;j<W;j++)
+	visited[i][j] = 0;
+	
+	int Q[10002][3];
+	int top,rear;
+	top = rear = 0;
+	
+	int t1 = nodesX[source];
+	int t2 = nodesY[source];
+	Q[rear][0] = t1;
+	Q[rear][1] = t2;
+	Q[rear++][2] = 0;
+	visited[t1][t2]=1;
+	
+	
+	while(top<rear){
+		int i = Q[top][0];
+		int j = Q[top][1];
+		int depth = Q[top][2];
+		
+		
+		if(nodesX[destination]==i && nodesY[destination]==j){
+			return Q[top][2];
+		}
+		top++;
+		for(int k=0;k<4;k++){
+			int x = i+xMove[k];
+			int y = j+yMove[k];
+			
+			if(isSafe(x,y) && visited[x][y]==0){
+				Q[rear][0] = x;
+				Q[rear][1] = y;
+				Q[rear++][2] = depth+1;
+				visited[x][y] = 1;
+			}
+		}
+	}
+	return -1;
+}
+
+
+inline void Orienteering::makeGraph() {
+	
+				nodesX[0] = 0;
+				nodesY[0] = 0;
+				nodes = 1;
+
+	for(int i=0;i<H;i++){
+		for(int j=0;j<W;j++){
+			if(input[i][j]=='*'){
+				nodesX[nodes] = i;
+				nodesY[nodes++] = j;
+			}
+		}	
+	}	
+	
+	nodesX[nodes] = W-1;
+	nodesY[nodes] = W-1;
+	
+	for(int i=0;i<=nodes;i++)
+	{
+		graph[i][i]=MAXD;
+		for(int j=i+1;j<=nodes;j++)
+		{
+				int len = bfs(i,j);
+				if(len<0){
+					printf("%d
+",-1);
+					return;
+				}
+				graph[i][j] = len;
+				graph[j][i] = len; 
+		}		
+	}
+	
+	compute();
+	
+}
+
+
+inline void Orienteering::compute() {
+
+
+		
+		memset(distancei,0X01,sizeof(distancei));
+	
+		nodes-=1;
+		int powMax = 1<<nodes;
+		for(int i=0;i<nodes;i++)
+		{
+			distancei[1<<i][i+1]=graph[0][i+1];
+		}
+		
+		for(int i=1;i<powMax;i++)
+		{
+			for(int j=0;j<nodes;j++)
+			{
+				if((1<<j)&i)
+				{
+					for(int k=0;k<nodes;k++)
+					{
+						if(((1<<k) & i) == 0)
+						{
+							distancei[((1<<k)|i)][k+1]=min(distancei[((1<<k)|i)][k+1],distancei[i][j+1]+graph[j+1][k+1]);
+						}
+					}
+				}
+			}
+		}
+		int temp=MAXD;
+		for(int i=1;i<=nodes;i++)
+		{
+			temp=min(temp,distancei[powMax-1][i]+graph[i][nodes+1]);
+		}
+		printf("%d
+",temp);
+}
+
+
+int main(int argc, char* argv[]) {
+	int T;
+	scanf("%d",&T);
+	while(T--)
+	{
+	Orienteering o;	
+	o.main();
+}	return 0;
+}

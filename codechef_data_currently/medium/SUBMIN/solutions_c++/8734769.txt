@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+long int foo(long int *a,int n,long int k){
+	long int count=0,min;
+	for(int i=0;i<n;++i){
+		min=1000000+1;
+		if(a[i]>=k){
+			for(int j=i;j<n;++j){
+				if(min>a[j])
+					min=a[j];
+				if(min==k)
+					count++;
+			}
+		}
+	}
+	return count;
+}
+int main(){
+	int n;
+	cin>>n;
+	long int a[n];
+	for(int i=0;i<n;++i)
+		cin>>a[i];
+	int q;
+	cin>>q;
+	long int k;
+	while(q--){
+		cin>>k;
+		cout<<foo(a,n,k)<<endl;
+	}	
+	return 0;
+}

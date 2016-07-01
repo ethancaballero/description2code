@@ -1,0 +1,72 @@
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <utility>
+#include <set>
+#include <map>
+#include <deque>
+#include <queue>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstdio>
+#include <stdio.h>
+
+using namespace std;
+
+#define fo(i,n) for(int i=0; i<(int)n; i++)
+#define rep(it,s) for(__typeof((s).begin()) it=(s).begin();it!=(s).end();it++)
+#define mp(a,b) make_pair(a,b)
+#define pb(x) push_back(x)
+#define pii pair<int,int>
+
+#define mod 1000000007
+
+long long ans;
+int s[10010];
+vector<int> e[10010];
+int n;
+
+int dfs(int p,int q) {
+	s[p] = 1;
+	for (int i=0; i<e[p].size(); i++) if (e[p][i]!=q) {
+		s[p] += dfs(e[p][i],p);
+	}
+	long long tmp = 0;
+	tmp = (tmp + 1 + 2*(s[p]-1))%mod;
+	for (int i=0; i<e[p].size(); i++) if (e[p][i]!=q) {
+		tmp = (tmp + (s[p]-1-s[e[p][i]])*s[e[p][i]])%mod;
+		tmp = (tmp + mod)%mod;
+	}
+	ans = (ans + (p+1)*tmp%mod)%mod;
+	return s[p];
+}
+
+int main() {
+
+    //freopen("input.txt","r",stdin);
+    //freopen("output.txt","w",stdout);
+
+	int tt;
+	cin>>tt;
+	while (tt--) {
+		cin>>n;
+		for (int i=0; i<n; i++) e[i].clear();
+		for (int i=0; i<n; i++) s[i] = 0;
+		for (int i=0; i<n-1; i++) {
+			int a,b;
+			scanf("%d%d",&a,&b);
+			a--; b--;
+			e[a].push_back(b);
+			e[b].push_back(a);
+		}
+		ans = 0;
+		dfs(0,-1);
+		cout<<ans<<endl;
+	}
+	
+    return 0;
+
+}

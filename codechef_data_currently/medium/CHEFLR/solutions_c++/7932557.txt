@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+#define m 1000000007
+#define VMAX 100000
+char S[VMAX];
+using namespace std;
+int main()
+{
+    int t;
+
+    cin>>t;
+
+    while(t--)
+    {
+     cin>>S;
+    int num=1;
+     for(int i=0;i<strlen(S);i++)
+     {
+
+         if(((i+1)&1))
+         {
+
+             if(S[i]=='l')
+               num=num*2;
+
+             else
+               num=num*2+2;
+         }
+
+         else
+         {
+             if(S[i]=='l')
+               num=num*2-1;
+
+            else
+               num=num*2+1;
+         }
+         
+      //   cout<<"num="<<num<<endl;
+
+             num%=m;
+     }
+         cout<<num<<endl;
+
+    }
+
+
+    return 0;
+}

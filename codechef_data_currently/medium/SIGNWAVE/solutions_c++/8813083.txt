@@ -1,0 +1,44 @@
+#include<iostream>
+#include<vector>
+#include<climits>
+#include<algorithm>
+#include<string>
+#include<cstdio>
+using namespace std;
+vector<long long int> arr(51);
+int main(){
+    int t,i,j;
+    cin>>t;
+    arr[0] = 1;
+    for(i=1;i<=50;i++){
+        arr[i] = 2 * arr[i-1];
+    }
+    while(t--){
+        long long int s,c,k,sum = 0;
+        //cout<<arr[4];
+        cin>>s>>c>>k;
+        if(s>=k)
+            sum = sum + arr[s-k+1] + 1;
+        if(k==1){
+            if(s<c && s!=0)
+                sum = sum + arr[c] - arr[s-1];
+            else
+            if(s<c && s==0)
+                sum = sum + arr[c];
+        }
+        i = 1;
+        //cout<<sum<<endl;
+        //j = k;
+        for(i=1;i<k;i++){
+            if(c<i)
+                break;
+            if((s>=(i+1)) && ((s-i+1)>=k)){
+                //cout<<"here";
+                sum = sum + arr[i];
+                //cout<<sum<<endl;
+            }
+        }
+        cout<<sum<<endl;
+
+    }
+}

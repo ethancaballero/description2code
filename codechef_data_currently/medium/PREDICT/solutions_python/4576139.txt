@@ -1,0 +1,6 @@
+t = int(raw_input())
+for i in range(t):
+    px = float(raw_input())
+    if px >= 0.5: print 10000 + (10000 * (1.0 - px) * ((2 * px) - 1.0))
+    else: print 10000 + (10000 * px * (1 - (2 * px)))
+    

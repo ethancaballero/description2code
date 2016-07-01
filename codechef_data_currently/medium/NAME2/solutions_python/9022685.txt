@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+import sys
+import unittest
+
+def isSubseq(A, B):
+    "Return True if A is a subsequence of B.  Otherwise, return False"
+
+    # Simple cases
+    if A == B:
+        return True
+    if len(A) > len(B):
+        return False
+    if len(A) == len(B):
+        return False
+
+    posB = -1
+
+    for x in A:
+        posB = B.find(x, posB + 1)
+        if posB == -1:
+            return False
+
+    return True
+
+if __name__ == '__main__':
+    T = int(sys.stdin.readline().strip())
+    for t in xrange(T):
+        M, W = sys.stdin.readline().strip().split()
+        if isSubseq(M, W) or isSubseq(W, M):
+            print "YES"
+        else:
+            print "NO"
+
+
+class Tests(unittest.TestCase):
+    def test_john_johanna(self):
+        self.assertTrue(isSubseq('john', 'johanna'))
+        self.assertFalse(isSubseq('johanna', 'john'))
+
+    def test_ira_ira(self):
+        self.assertTrue(isSubseq('ira', 'ira'))
+
+    def test_kayla_jayla(self):
+        self.assertFalse(isSubseq('kayla', 'jayla'))
+        self.assertFalse(isSubseq('jayla', 'kayla'))
+
+    def test_kayla_jaylan(self):
+        self.assertFalse(isSubseq('kayla', 'jaylan'))
+        self.assertFalse(isSubseq('jaylan', 'kayla'))

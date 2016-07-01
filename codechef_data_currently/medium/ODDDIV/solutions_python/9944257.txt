@@ -1,0 +1,17 @@
+t = int(raw_input())
+
+for i in range(0,t):
+	l,r = raw_input().split()
+	l = int(l)
+	r = int(r)
+	sum2 = 0
+	sum1 = 0
+	j = 1
+	while j <= r:
+		sum2 = sum2 + int(j*(r/j))
+		j = j + 2
+	j = 1
+	while j <= l-1:
+		sum1 = sum1 + int(j*((l-1)/j))
+		j = j + 2
+	print sum2-sum1

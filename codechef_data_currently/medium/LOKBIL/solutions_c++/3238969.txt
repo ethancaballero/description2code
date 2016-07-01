@@ -1,0 +1,60 @@
+// bfs is giving wa for unknown reason
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+int adj[101][101];
+int dist[101];
+int n;
+
+int main() {
+    int t, f;
+    scanf("%d",&t);
+    while(t--) {
+        scanf("%d",&n);
+        for(int i=1;i<=n;++i) {
+            for(int j=1;j<=n;++j) {
+                adj[i][j] = 1000;
+            }
+        }
+        for(int i=1;i<=n;++i) {
+            adj[i][i] = 0;
+            scanf("%d",&f);
+            adj[i][f] = 1;
+            while(getchar()!='
+') {
+                scanf("%d",&f);
+                adj[i][f] = 1;
+            }
+        }
+
+        //floyd warshall algo for finding shortest dist b/w two points
+        for(int k=1;k<=n;++k) {
+            for(int i=1;i<=n;++i) {
+                for(int j=1;j<=n;++j) {
+                    adj[i][j] = min(adj[i][j],adj[i][k]+adj[k][j]);
+                }
+            }
+        }
+
+        for(int i=1;i<=n;++i) {
+            dist[i]=0;
+            for(int j=1;j<=n;++j) {
+                dist[i]+=adj[i][j];
+            }
+        }
+
+        int ind=0;
+        int ans=1000;
+        for(int i=1;i<=n;++i) {
+            if(dist[i]<ans) {
+                ans = dist[i];
+                ind = i;
+            }
+        }
+        double res=(double)ans/n;
+        printf("%d %.6f
+",ind,res);
+    }
+    return 0;
+}

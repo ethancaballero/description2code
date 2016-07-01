@@ -1,0 +1,18 @@
+t=input()
+
+def fsq(n):
+    sq=0
+    if n<4:
+        return 0
+    else:
+        sq=n/4
+        n-=sq*2
+        sq=sq*sq
+        return sq+2*fsq(n)
+    
+
+while t>0:
+    n=input()
+    k=fsq(n)
+    print k
+    t-=1

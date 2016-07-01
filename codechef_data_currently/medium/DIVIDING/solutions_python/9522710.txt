@@ -1,0 +1,9 @@
+n=input()
+l=map(int,raw_input().split())
+k=sum(l)
+if k==n*(n+1)/2:
+	print "YES"
+else:
+	print "NO"
+	
+	

@@ -1,0 +1,15 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+long int n,k,cnt=0;
+cin>>n>>k;
+while(n--){
+    long long int val;
+    cin>>val;
+    if(val%k==0)cnt++;
+}
+cout<<cnt;
+return 0;
+}
+ 

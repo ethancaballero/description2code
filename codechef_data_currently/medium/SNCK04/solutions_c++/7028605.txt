@@ -1,0 +1,58 @@
+#include <stdio.h>
+ 
+#define MAX 1000000
+#define SQRTMAX 1000
+#define MAXP 79000
+ 
+char composite[MAX+1];
+int primes[MAXP];
+char mu[MAX+1];
+short M[MAX+1];
+ 
+void genmu(int d, int *pp, char s) {
+	int p;
+	mu[d] = s;
+	int ub=MAX/d;
+	for( ; (p=*pp)<=ub; pp++) genmu(d*p, pp+1, -s);
+}
+ 
+void init() {
+	int i;
+	for(i=3; i<=SQRTMAX; i+=2) if(!composite[i]) {
+		int i2 = i<<1;
+		for(int j=i*i; j<=MAX; j+=i2) composite[j] = 1;
+	}
+ 
+	primes[0]=2;
+	int nump=1;
+	for(i=3; i<=MAX; i+=2) if(!composite[i]) primes[nump++] = i;
+	primes[nump] = MAX+1;
+ 
+	genmu(1, primes, 1);
+	for(i=1; i<=MAX; i++) M[i] = M[i-1]+mu[i];
+}
+ 
+long long compute(int a) {
+	long long rslt = 0;
+ 
+	int nd;
+	for(int d=0; d<a; d=nd) {
+		int ad = a/(d+1);
+		nd = a/ad;
+ 
+		rslt += (long long)(M[nd]-M[d])*ad*ad;
+	}
+	
+	return rslt>>1;
+}
+ 
+int main() {
+	int tests, a;
+	init();
+	scanf("%d", &tests);
+	while(tests--) {
+		scanf("%d", &a);
+		printf("%lld
+", compute(a));
+	}
+} 

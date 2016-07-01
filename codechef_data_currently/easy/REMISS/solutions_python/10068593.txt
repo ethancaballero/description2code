@@ -1,0 +1,10 @@
+t = input()
+if 1<=t and t<=100:
+    for i in range(t):
+         a_b = map(int,raw_input().split(' '))
+         a = a_b[0]
+         b = a_b[1]
+         if (0<=a and 0<=b and a<=1000000 and b<=1000000):
+             min_seen = max(a,b)
+             max_seen = a+b
+             print min_seen,max_seen

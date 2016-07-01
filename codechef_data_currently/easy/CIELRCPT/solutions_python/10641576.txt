@@ -1,0 +1,32 @@
+T=int(raw_input())
+
+a=[]
+item_count=0
+shift_count=0
+remaining=0
+R=0
+for i in range(T):
+
+	n=int(raw_input())
+	item_count=0
+	shift_count=0
+	remaining=0
+	R=0
+	while True:
+		R=n-remaining
+		shift_count=0
+		while R!=1 and shift_count!=11:
+			R=R>>1
+			shift_count+=1
+		
+		remaining=remaining+(2**shift_count)
+
+		item_count+=1
+
+		if remaining==n:
+			break
+
+	a.append(item_count)
+
+for i,val in enumerate(a):
+	print val

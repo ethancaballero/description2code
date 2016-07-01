@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n,i,state=0;
+        int a[100000];
+        int b[100000];
+        scanf("%d",&n);
+        long long sum=0,cost=0;
+        for(i=0;i<n;i++)
+        {
+            scanf("%d",&a[i]);
+        }
+        if(a[0]>0)
+        {
+            state=1;
+        }
+        else
+        {
+            state=2;
+        }
+        for(i=0;i<n;i++)
+        {
+            if(state==1)
+            {
+                if(a[i]>-sum)
+                {
+                    cost+=(a[i]*(n-i));
+                }
+                else
+                {
+                    cost+=(-sum)*(n-i);
+                    cost+=(a[i]+sum)*(i+1);
+                    state=2;
+                }
+                sum+=a[i];
+            }
+            else
+            {
+                if(a[i]<(-sum))
+                {
+                    cost+=(a[i]*(i+1));
+                }
+                else
+                {
+                    cost+=(-sum)*(i+1);
+                    cost+=(a[i]+sum)*(n-i);
+                    state=1;
+                }
+                sum+=a[i];
+            }
+        }
+        if(cost>=0)
+            printf("%lld
+",cost);
+        else
+            printf("%lld
+",0-cost);
+    }
+    return 0;
+}

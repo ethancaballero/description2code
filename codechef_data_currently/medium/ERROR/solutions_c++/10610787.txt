@@ -1,0 +1,31 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+int main(){
+	unsigned int n, i, lenth;
+	cin>>n;
+	start:
+	while(n--){
+		string feedback;
+		cin>>feedback;
+		lenth = feedback.length();
+		if (lenth<3){
+			cout<<"Bad
+";
+			continue;
+		}
+		for (i=0;i<lenth-2;i++){
+			if((feedback[i] == '0' && feedback[i+1] == '1' && feedback[i+2] == '0') ||
+				 (feedback[i] == '1' && feedback[i+1] == '0' && feedback[i+2] == '1')){
+				cout<<"Good
+";
+				goto start;
+				// break;
+			}	
+		}
+		cout<<"Bad
+";
+	}
+	return 0;
+}

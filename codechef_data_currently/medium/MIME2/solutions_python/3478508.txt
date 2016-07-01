@@ -1,0 +1,18 @@
+no_of_media_Types,no_of_files = [int(i) for i in raw_input().split()]
+dict_for_media = {}
+
+for iter in range(0,no_of_media_Types):
+	temp1,temp2 = [i for i in raw_input().split()]
+	dict_for_media[temp1] = temp2
+
+for j in range(0,no_of_files):
+	file_name = raw_input().strip()
+	last_index = file_name.rfind(".")
+	if last_index == -1:
+		print("unknown")
+		continue
+	ext = file_name[last_index+1:len(file_name)]
+	if ext not in dict_for_media.keys():
+		print("unknown")
+		continue
+	print(dict_for_media[ext])

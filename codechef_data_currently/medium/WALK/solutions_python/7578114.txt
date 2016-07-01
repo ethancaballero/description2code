@@ -1,0 +1,8 @@
+t=int(raw_input())
+for i in range(t):
+    s=int(raw_input())
+    y=map(int,raw_input().split())
+    for i in range(s):
+        y[i]+=i
+    print max(y)    
+            

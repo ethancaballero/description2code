@@ -1,0 +1,23 @@
+t = int(raw_input())
+for cases in range(t):
+    n = int(raw_input())
+    a = map(int,raw_input().split())
+    xx = [0 for i in xrange(n+1)]
+    yy = [0 for j in xrange(n+1)]
+    xxx = [0 for i in xrange(n+1)]
+    yyy = [0 for i in xrange(n+1)]
+    xx[1],xxx[1]=a[0],a[0]
+    for i in range(2,n+1):
+        xx[i] = max(xx[i-1]+a[i-1],a[i-1])
+        xxx[i] = min(xxx[i-1]+a[i-1],a[i-1])
+    yy[n],yyy[n]=a[n-1],a[n-1]
+    for i in range(n-1,0,-1):
+        yy[i] = max(yy[i+1]+a[i-1],a[i-1])
+        yyy[i] = min(yyy[i+1]+a[i-1],a[i-1])
+    ans = max(abs(xx[1]-yyy[2]),abs(xxx[1]-yy[2]))
+    for i in range(2,n):
+        ans = max(ans,max(abs(xx[i]-yyy[i+1]),abs(xxx[i]-yy[i+1])))
+    print ans
+    
+    
+    

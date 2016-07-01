@@ -1,0 +1,21 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{ int t,i,x;
+int a[1000001]={0};
+cin>>t;
+for(i=0;i<t;i++)
+{
+    cin>>x;
+    a[x]++;
+}
+for(i=0;i<1000001;i++)
+    while(a[i]>0)
+{
+    cout<<i<<"
+";
+    a[i]--;
+}
+    return 0;
+}

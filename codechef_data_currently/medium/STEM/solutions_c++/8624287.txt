@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	map < string, set<int> > words;
+	map < string, set<int> >::iterator it;
+	string s[10], sub, ans;
+	int t, n, i, j, k;
+	cin>>t;
+	while(t--) {
+		cin>>n;
+		ans = "";
+		int a = 0;
+		words.clear();
+		for(i=0;i<n;i++)
+			cin>>s[i];
+		for(i=0;i<n;i++) {
+			for(k=0;k<s[i].length();k++) {
+				sub = "";
+				for(j=k;j<s[i].length();j++) {
+					sub += s[i][j];
+					words[sub].insert(i);
+				}
+			}
+		}
+		for(it = words.begin(); it!=words.end(); it++) {
+			if(it->second.size() == n && it->first.size() > a) {
+				ans = it->first;
+				a = it->first.size();
+			}
+		}
+		cout<<ans<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,34 @@
+h = [2,1,-1,-2,-2,-1,1,2]
+v = [1,2,2,1,-1,-2,-2,-1]
+
+tc=int(raw_input())
+while tc:
+	(m, n) = raw_input().split()
+	m=int(m)
+	n=int(n)
+	if (m>n):
+		(m,n) = (n, m)
+	tot = (m*n)*(m*n - 1)
+	if m>=4 and n>=4:
+		#print 'case 1'
+		print tot - ((m-4)*(n-4)*8 + 2*(m-4)*6 + 2*(m-4)*4+2*(n-4)*6+2*(n-4)*4+2*4+3*2*4+4*4)
+	elif n>=4:
+		#print 'case 2'
+		if (m==3):
+			print tot - (12*(n-4) + 28)
+		elif (m==2):
+			print tot - (4*(n-4) + 8)
+		elif m==1:
+			print tot
+	else:
+		#print 'case 3'
+		ans=0
+		for i in range(m):
+			for j in range(n):
+				for k in range(8):
+					x=j+h[k]
+					y=i+v[k]
+					if x>=0 and y>=0 and x<n and y<m:
+						ans+=1
+		print tot-ans
+	tc-=1

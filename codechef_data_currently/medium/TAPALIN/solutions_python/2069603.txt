@@ -1,0 +1,38 @@
+t=long(raw_input())
+mod = 1000000007
+
+# for finding a^n%mod mod1
+def repeated_square(a, n, mod1):
+    
+    if n%2==0:
+        expo=1
+        n=n/2
+    else:
+        expo=a
+        n=n/2
+        
+    while n>0:
+        if n%2==0:
+            a=(a*a)%mod1
+            n=n/2
+        else:
+            a=(a*a)%mod1
+            expo=(expo*a)%mod1
+            n=n/2
+    return expo
+            
+#inverse of 25
+inverse_of_twentyfive=repeated_square(25,1000000005,1000000007)
+
+while t:
+    n=long(raw_input())
+    k=(n+1)/2
+    result1= repeated_square(26,k,mod)
+    result=result1-1
+    result=(result*52)%mod
+    result=(long(inverse_of_twentyfive)*result)%mod
+    if n%2==1:
+        result=(result+mod-result1)%mod
+        
+    print result
+    t=t-1

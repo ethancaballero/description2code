@@ -1,0 +1,108 @@
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+int i,j,x,t,h1[10],h2[10],h0[10],i6[10];
+char h[15];
+
+bool check() {
+    return (h0[3]&&h0[4]&&h0[5]&&h1[1]&&h1[5]&&h1[6]&&h2[1]&&h2[2]&&h2[3]);
+}
+void ispis() {
+      printf("%d
+", x);
+      for (int k=1; k<=x; k++) {
+          if (i6[k]==0) printf("0 0
+");
+          if (i6[k]==1) printf("0 1
+");
+          if (i6[k]==2) printf("1 0
+");
+          if (i6[k]==3) printf("1 1
+");
+          if (i6[k]==4) printf("2 0
+");
+          if (i6[k]==5) printf("2 1
+");
+      }
+      return;
+}
+void start(){
+       h0[1]=h[2]-48; h0[2]=h[0]-48; h0[3]=h[3]-48; h0[4]=h[6]-48;  h0[5]=h[8]-48;  h0[6]=h[5]-48;
+       h1[1]=h[3]-48; h1[2]=h[1]-48; h1[3]=h[4]-48; h1[4]=h[7]-48;  h1[5]=h[9]-48;  h1[6]=h[6]-48;
+       h2[1]=h[8]-48; h2[2]=h[6]-48; h2[3]=h[9]-48; h2[4]=h[11]-48; h2[5]=h[12]-48; h2[6]=h[10]-48;
+}
+void rotiraj00(){
+     h1[1]=h0[4]; h1[6]=h0[5];
+     h2[1]=h0[6]; h2[2]=h0[5];
+     int pom;
+     pom=h0[1]; h0[1]=h0[2];  h0[2]=h0[3];  h0[3]=h0[4];  h0[4]=h0[5];  h0[5]=h0[6];  h0[6]=pom;
+}
+void rotiraj01(){
+     h1[1]=h0[2]; h1[6]=h0[3];
+     h2[1]=h0[4]; h2[2]=h0[3];
+     int pom;
+     pom=h0[1]; h0[1]=h0[6];  h0[6]=h0[5];  h0[5]=h0[4];  h0[4]=h0[3];  h0[3]=h0[2];  h0[2]=pom;
+}
+void rotiraj10(){
+     h0[4]=h1[1]; h0[3]=h1[2];
+     h2[2]=h1[1]; h2[3]=h1[6];
+     int pom;
+     pom=h1[1]; h1[1]=h1[2];  h1[2]=h1[3];  h1[3]=h1[4];  h1[4]=h1[5];  h1[5]=h1[6];  h1[6]=pom;
+}
+void rotiraj11(){
+     h0[4]=h1[5]; h0[3]=h1[6];
+     h2[2]=h1[5]; h2[3]=h1[4];
+     int pom;
+     pom=h1[1]; h1[1]=h1[6];  h1[6]=h1[5];  h1[5]=h1[4];  h1[4]=h1[3];  h1[3]=h1[2];  h1[2]=pom;
+}
+void rotiraj20(){
+     h0[4]=h2[3]; h0[5]=h2[2];
+     h1[6]=h2[3]; h1[5]=h2[4];
+     int pom;
+     pom=h2[1]; h2[1]=h2[2];  h2[2]=h2[3];  h2[3]=h2[4];  h2[4]=h2[5];  h2[5]=h2[6];  h2[6]=pom;
+}
+void rotiraj21(){
+     h0[4]=h2[1]; h0[5]=h2[6];
+     h1[6]=h2[1]; h1[5]=h2[2];
+     int pom;
+     pom=h2[1]; h2[1]=h2[6];  h2[6]=h2[5];  h2[5]=h2[4];  h2[4]=h2[3];  h2[3]=h2[2];  h2[2]=pom;
+}
+int sestnax(int n) {
+    int sol=1;
+    for(int i=1; i<=n; i++) sol*=6;
+    return sol;
+}
+void radi(){
+          for (x=1; x<=8; x++)
+           for (int i=0;i<=sestnax(x)-1;i++) {
+            start();
+            int n=i;
+            for (int j=1; j<=x; j++) {
+              i6[j]=n%6;
+              n=n/6;
+              if (i6[j]==0) rotiraj00();
+              if (i6[j]==1) rotiraj01();
+              if (i6[j]==2) rotiraj10();
+              if (i6[j]==3) rotiraj11();
+              if (i6[j]==4) rotiraj20();
+              if (i6[j]==5) rotiraj21();
+            }
+            if (check()) {ispis(); return;}
+          }
+      }
+int main() {
+//    freopen("hex.in", "r", stdin);
+//    freopen("dule.out", "w", stdout);
+    scanf("%d", &t);
+    for (int T=1; T<=t;T++) {
+      scanf("%s", &h);
+      start();
+      if (check()) {printf("0
+"); continue;}
+      radi();
+    }
+    return 0;
+}

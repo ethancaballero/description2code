@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+//#include<stdio.h>
+using namespace std;
+#define for1(i,n) for(i=0;i<n;i++)
+#define for2(i,n) for(i=n-1;i>=0;i--)
+#define rep(i, begin, end) for (__typeof(end) i = (begin) - ((begin) > (end)); i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+#define ll long long int
+#define CLEAR(array, value) memset(array, value, sizeof(array));
+#define si(a)     scanf("%d", &a)
+#define sl(a)     scanf("%lld", &a)
+#define sc(a)     scanf(" %c", &a)
+#define ss(a)     scanf("%s", a)
+#define pi(a)     printf("%d
+", a)
+#define pl(a)     printf("%lld
+", a)
+#define pn        printf("
+")
+
+#define mod long(1e9+7)
+int check(ll x)
+{
+	ll temp;
+	while(x)
+	{
+		temp=x%10;
+		if(temp==4 || temp==7)
+		return 1;
+		x/=10;
+	}
+	return 0;
+}
+int main()
+
+{
+	ll i,j,k,n,temp,t;
+	sl(t);
+	while(t--)
+	{
+		sl(n);
+		vector <ll> factors;
+		for(i=1;i<=sqrt(n);i++)
+		{
+			if(n%i==0)
+			{
+				factors.push_back(i);
+				factors.push_back(n/i);
+			}
+		}
+		sort(factors.begin(),factors.end());
+		/*for1(i,factors.size())
+		pl(factors[i]);*/
+		k=0;
+		for1(i,factors.size())
+		{
+			if(check(factors[i]))
+			k++;
+		}
+		pl(k);
+	}
+	return 0;
+} 
+

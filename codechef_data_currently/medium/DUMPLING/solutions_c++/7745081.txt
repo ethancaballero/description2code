@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+
+#define rep(i,n) for(i=1;i<=n;i++)
+#define Rep(i,n) for(i=0;i<n;i++)
+#define For(i,a,b) for(i=a;i<=b;i++)
+
+#define pb(x) push_back(x)
+#define sz(x) x.size()
+
+#define mem(ara,val) memset(ara,val,sizeof(ara))
+#define eps 1e-9
+
+#define si(x) scanf("%d",&x)
+#define sii(x,y) scanf("%d %d",&x,&y)
+#define siii(x,y,z) scanf("%d %d %d",&x,&y,&z)
+#define sl(x) scanf("%lld",&x)
+#define sll(x,y) scanf("%lld %lld",&x,&y)
+#define slll(x,y,z) scanf("%lld %lld %lld",&x,&y,&z)
+#define ss(ch) scanf("%s",ch)
+#define pi(x) printf("%d",x)
+#define pii(x,y) printf("%d %d",x,y)
+#define piii(x,y,z) printf("%d %d %d",x,y,z)
+#define pl(x) printf("%lld",x)
+#define pll(x,y) printf("%lld %lld",x,y)
+#define plll(x,y,z) printf("%lld %lld %lld",x,y,z)
+#define ps(ch) printf("%s",ch)
+#define Afridi 0
+#define NL printf("
+")
+#define SP printf(" ")
+#define loj(x) printf("Case %d:",x)
+#define Loj(x) printf("Case %lld:",x)
+#define debug(str,x) cout << str << " " << x << endl;
+#define Max 1000000
+#define INF INT_MAX
+
+typedef long long LL;
+typedef unsigned long long ULL;
+
+using namespace std;
+
+int main()
+{
+    LL t,T,u,v,x,y,k,ans;
+    sl(T);
+    rep(t,T)
+    {
+        sll(u,v);
+        sll(x,y);
+        sl(k);
+        LL a = __gcd(u,v);
+        LL b = __gcd(x,y);
+        LL ng = __gcd(a,b);
+        LL c = a/ng;
+        LL my = k/c;
+        if(my < b)
+        {
+            ans = 1;
+        }
+        else
+        {
+            LL l = c*b;
+            ans = k/l;
+            ans*=2;
+            ans++;
+        }
+        pl(ans);NL;
+    }
+    return 0;
+}

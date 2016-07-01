@@ -1,0 +1,16 @@
+
+import re
+def processPath(line):
+    x = re.split(" ", line)
+    M = int(x[0]); N = int(x[1])
+    if min(M,N)==1 and max(M,N)==2:
+        return "Yes"
+    if min(M,N)>=2 and (M%2==0 or N%2==0):
+        return "Yes"
+    return "No"
+
+if __name__ == '__main__':
+    T = int(raw_input())
+    for t in range(T):
+        line = raw_input()
+        print processPath(line)

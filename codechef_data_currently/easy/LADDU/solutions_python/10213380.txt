@@ -1,0 +1,25 @@
+for i in range(int(raw_input())):
+    x,y=raw_input().split()
+    x=int(x)
+    laddu=0
+    for j in range(x):
+        k=raw_input().split()
+        if len(k)==1:
+            if k[0]=='TOP_CONTRIBUTOR':
+                laddu+=300
+            elif k[0]=='CONTEST_HOSTED':
+                laddu+=50
+        else:
+            if k[0]=='CONTEST_WON':
+                if int(k[1])<=20:
+                    laddu=laddu+300+(20-int(k[1]))
+                else:
+                    laddu+=300
+            else:
+                laddu+=int(k[1])
+    ans=0
+    if y=='INDIAN':
+        ans=laddu//200
+    else:
+        ans=laddu//400
+    print(ans)

@@ -1,0 +1,48 @@
+#include <iostream>
+#define N 1000100
+using namespace std;
+
+
+
+int phi[N+1];
+int i=0;
+
+void calculate(){
+   for(i=2;i<=N;i++){
+	    phi[i]=i;
+	}
+	
+	for(i=2;i<=N;i++){
+	    
+	    if(phi[i]==i){
+	        
+	        for(int j=i;j<=N;j+=i){
+	            phi[j]-=phi[j]/i;
+	        }
+	        
+	    }
+	    
+	} 
+}
+
+int main() {
+	
+    long long int sum[N+1];
+    int t,n;
+    sum[1]=phi[1]=0;
+    calculate();
+    for(i=2;i<=N;i++){
+        sum[i]=sum[i-1]+phi[i];
+    }
+    
+    cin>>t;
+    while(t--){
+        cin>>n;
+        cout<<sum[n]<<"
+";
+    }
+    
+	
+	
+		return 0;
+}

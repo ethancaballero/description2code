@@ -1,0 +1,18 @@
+t = input()
+#print t
+
+while t > 0:
+
+    result = ""
+    
+    number = raw_input()
+    #print number
+
+    for i in reversed(number):
+        result += i
+    if number == result:
+        print "wins"
+    else:
+        print "losses"
+        
+    t -= 1

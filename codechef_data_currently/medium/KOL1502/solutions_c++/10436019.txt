@@ -1,0 +1,134 @@
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class Main {
+
+  private static final String QUINTILLIONNAIRE = "Quintillionnaire";
+  private static boolean print = false;
+
+  private static Timer time(String message, boolean time) {
+    if (time) {
+      return new Timer(message);
+    } else {
+      return Timer.DUMMY;
+    }
+  }
+
+  private static class Timer implements AutoCloseable {
+
+    private long start;
+    private long startMillis;
+    private String message;
+
+    private static Timer DUMMY = new Timer() {
+      @Override
+      public void close() {
+      }
+    };
+
+    private Timer() {
+
+    }
+
+    public Timer(String message) {
+      if (print) {
+        this.message = message;
+        start = System.nanoTime();
+        startMillis = System.currentTimeMillis();
+      }
+    }
+
+    public void close() {
+      if (print) {
+        long endTime = System.nanoTime();
+        long endTimeMillis = System.currentTimeMillis();
+        System.out.println(
+            message + " " + (endTime - start) + " nanos. " + (endTimeMillis - startMillis)
+                + " millis.");
+      }
+    }
+  }
+
+  private static String getNextLine(Scanner scanner) {
+    String nextLine;
+    do {
+      nextLine = scanner.nextLine().trim();
+    } while (nextLine.startsWith("//"));
+    return nextLine;
+  }
+
+  private static int mod(long number) {
+    int mod = 10000000;
+    return mod(number, mod);
+  }
+
+  private static int mod(long number, int mod) {
+    if (number < mod) {
+      return (int) number;
+    } else {
+      return (int) (number % mod);
+    }
+  }
+
+  private static long mul(long a, long b) {
+    return mod(a * b);
+  }
+
+  private static double mul(double a, long b) {
+    return a * b;
+  }
+
+  public static void main(String[] args) throws Exception {
+    InputStream in = System.in;
+    if (args.length > 0) {
+      print = true;
+      in = new FileInputStream(args[0]);
+    }
+    Timer totalTime = time("Total time:", true);
+    try (Scanner scanner = new Scanner(in)) {
+      int noOfTasks = Integer.parseInt(getNextLine(scanner));
+//    int noOfTasks = 1;
+      IntStream.range(1, noOfTasks + 1).forEach(testCaseNumber -> {
+        int N = Integer.parseInt(getNextLine(scanner));
+        String[] split = getNextLine(scanner).split("\s+");
+        List<Integer> tasteValues =
+            Arrays.stream(split).map(Integer::parseInt).collect(Collectors.toList());
+        int sumOfAllTastes =
+            tasteValues.stream().reduce(0, (integer, integer2) -> integer + integer2);
+        int[][] dishCounts = new int[N + 1][sumOfAllTastes + 1];
+        dishCounts[0][0] = 1;
+        for (int ingredientCount = 1; ingredientCount <= N; ingredientCount++) {
+          for (int dollarValue = 0; dollarValue <= sumOfAllTastes; dollarValue++) {
+            dishCounts[ingredientCount][dollarValue] = mod(getDishCounts(ingredientCount - 1,
+                dollarValue - tasteValues.get(ingredientCount - 1), dishCounts) + getDishCounts(
+                ingredientCount - 1, dollarValue + tasteValues.get(ingredientCount - 1),
+                dishCounts));
+          }
+        }
+        int total = 0;
+        for (int dollarValue = 1; dollarValue <= sumOfAllTastes; dollarValue++) {
+          total =
+              mod(total + mul(dishCounts[N][dollarValue], dollarValue * 2));
+        }
+        System.out.println(total);
+      });
+    }
+    totalTime.close();
+  }
+
+  private static int getDishCounts(
+      int ingredientCount, int dollarValue, int[][] dishCounts) {
+    dollarValue = Math.abs(dollarValue);
+    int[] currentDishCounts = dishCounts[ingredientCount];
+    if (dollarValue >= currentDishCounts.length) {
+      return 0;
+    }
+    return mod(currentDishCounts[dollarValue]);
+  }
+
+}

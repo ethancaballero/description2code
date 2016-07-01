@@ -1,0 +1,26 @@
+n, w, l = map(int, raw_input().strip().split())
+tr = []
+
+for i in xrange(n):
+	h, g = map(int, raw_input().strip().split())
+	tr.append((int(h),int(g)))
+
+low = -1
+high = 10**18+11
+w = int(w)
+while 1 < int(high) - int(low):
+	mid = (high + low) >> 1
+	mid = int(mid)
+	check = int(0)
+	# print (low, high, mid)
+	for h,g in tr:
+		# print (h,g)
+		temp = int(h) + (int(g) * int(mid))
+		# print temp
+		if int(temp) >= int(l):
+			check = int(check) + int(temp)
+	if int(check) >= int(w):
+		high = int(mid)
+	else:
+		low = int(mid)
+print high

@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <iomanip>
+#include <vector>
+#include <map>
+#include <set>
+#include <cmath>
+#include <algorithm>
+#include <cstring>
+
+#define mod 1000000007
+#define si(x) scanf("%d", &x)
+#define pi(x) printf("%d
+", x)
+#define F(x, a, b) for(int x=a; x<b; x++)
+
+using namespace std;
+
+typedef long long ll;
+
+int a[505][505];
+
+bool valid(int i, int j, int n, int m)
+{
+    if (i>=1 && i<=n && j>=1 && j<=m)
+        return true;
+
+    return false;
+}
+
+int main()
+{
+    int n, m;
+    si(n);
+    si(m);
+
+    F(i, 0, n) {
+        F(j, 0, m) {
+            si(a[i][j]);
+        }
+    }
+
+    int l, x, y;
+    ll e1=0, e2=0;
+
+    si(l);
+    while (l--) {
+        si(x);
+        si(y);
+
+        if (e1 != -1 && valid(x, y, n, m))
+            e1 += (ll)a[x-1][y-1];
+        else
+            e1 = -1;
+
+        if (e2 != -1 && valid(y, x, n, m))
+            e2 += (ll)a[y-1][x-1];
+        else
+            e2 = -1;
+    }
+
+    pi(max(e1, e2));
+
+    return 0;
+}

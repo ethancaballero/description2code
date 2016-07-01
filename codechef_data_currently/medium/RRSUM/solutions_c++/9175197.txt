@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	long long int q,n,ans,l,r,t1,t2;
+	int m;
+	scanf("%lld %d",&n,&m);
+	while(m--)
+	{
+	scanf("%lld",&q);
+	l=n+2;
+	ans=0;
+	t1=0;
+	t2=0;
+	r=3*n;
+	if((q<l)||(q>r))
+	{
+	printf("0
+");
+	}
+	else
+	{
+	t1=q-l;
+	t2=r-q;
+	ans=min(t1,t2);
+	ans++;
+	printf("%lld
+",ans);
+	}
+	}
+	return 0;
+}

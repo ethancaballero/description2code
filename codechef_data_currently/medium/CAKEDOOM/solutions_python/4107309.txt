@@ -1,0 +1,45 @@
+def write_against(i,a,b):
+	''' set s[i] as the lowest of [0, 1, 2] that is different from a and b '''
+	if s[i] == '?':
+		s[i] = min(c for c in '012' if c not in a+b)
+
+
+z = input()
+for cas in xrange(1,z+1):
+	k = input()
+	s = list(raw_input().strip())
+	n = len(s)
+
+	succ = n == 1 or not any(s[i] == s[i-1] != '?' for i in xrange(n))
+	if succ:
+		if n == 1:
+			# length one string. set to "0" if "?"
+			if s[0] == '?':
+				s[0] = '0'
+		elif k == 1:
+			# one-character string. impossible because n > 1
+			succ = 0
+		elif k == 2: 
+			# two-character string. 010101... or 101010...
+			if n & 1:
+				# odd length... impossible
+				succ = 0
+			else:
+				# check 0101010101...
+				succ = not any(s[i] == '10'[i & 1] for i in xrange(n))
+				if succ:
+					for i in xrange(n):
+						s[i] = '01'[i & 1]
+				else:
+					# check 1010101010...
+					succ = not any(s[i] == '01'[i & 1] for i in xrange(n))
+					if succ: 
+						for i in xrange(n):
+							s[i] = '10'[i & 1]
+
+		else:
+			# it's always possible. greedily fill the "?"
+			for i in xrange(n):
+				write_against(i,s[i-1],s[(i+1)%n])
+
+	print ''.join(s) if succ else 'NO'

@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+#define max2(a,b) (a>b?a:b)
+#define max3(a,b,c) (a>max2(b,c)?a:max2(b,c))
+int tim[105],cost[105],dp[105][105];
+int main()
+{
+    int t,n,a,b,c,w,i,j;
+    scanf("%d",&t);
+    while(t--)
+    {
+        memset(cost,0,sizeof(cost));
+        memset(tim,0,sizeof(tim));
+        memset(dp,0,sizeof(dp));
+        scanf("%d %d",&n,&w);
+        for(i=1; i<=n; i++)
+        {
+            scanf("%d %d %d",&a,&b,&c);
+            cost[i]+=a*b;
+            tim[i]=c;
+        }
+        for(i=1; i<=n; i++)
+        {
+            for(j=1; j<=w; j++)
+            {
+                if(j>=tim[i])
+                    dp[i][j]=max3(dp[i-1][j],dp[i][j-1],dp[i-1][j-tim[i]]+cost[i]);
+                else
+                    dp[i][j]=max2(dp[i-1][j],dp[i][j-1]);
+            }
+        }
+        /*for(i=0;i<=n;i++)
+        {
+            for(j=0;j<=w;j++)
+            {
+                printf("%d ",dp[i][j]);
+            }
+            printf("
+");
+        }*/
+        printf("%d
+",dp[n][w]);
+    }
+    return 0;
+}
+

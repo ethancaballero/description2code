@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+#define pb push_back
+#define fo(i,n) for(i=0;i<n;i++)
+using namespace std;
+const int MAXN = 3002;
+vector<int> a[MAXN];
+bool vis[MAXN];
+int ap[MAXN];
+int low[MAXN],disc[MAXN];
+int parent[MAXN];
+int ans;
+int n,m,k;
+void dfs(int root){
+	static int time=0;
+	vis[root]=true;
+	int children=0;
+	disc[root]=low[root]=++time;
+	int i;
+	fo(i,a[root].size()){
+	
+		int v = a[root][i];
+		if(vis[v]){
+			if(parent[root]!=v)low[root]=min(low[root],disc[v]);
+		}
+		else{
+			children++;
+			parent[v]=root;
+			dfs(v);
+			low[root]=min(low[root],low[v]);
+			if (parent[root] == -1 && children > 1)
+               ap[root] = 1;
+
+            if (parent[root] != -1 && low[v] >= disc[root])
+               ap[root] = 1;
+		}
+	}
+	
+
+}
+int solve()
+{
+	ans=0;
+	cin>>n>>m>>k;
+	
+	int i;
+	fo(i,n){
+		a[i].clear();
+		ap[i]=0;
+		parent[i]=-1;
+	//	disc[i]=low[i]=-1;
+		vis[i]=false;
+	}
+	while(m--){
+		int u,v;
+		cin>>u>>v;
+		a[u].pb(v);
+		a[v].pb(u);
+	}
+	fo(i,n)
+		if(!vis[i])
+			dfs(i);
+	fo(i,n){
+		ans+=ap[i];
+	//	if(ap[i]==1)cout<<i<<" ";
+	}
+	return ans*k;
+}
+int main() 
+{
+	ios_base::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--){
+		cout<<solve()<<endl;
+	}
+	return 0;
+}

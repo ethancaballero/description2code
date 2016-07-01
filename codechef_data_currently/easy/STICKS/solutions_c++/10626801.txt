@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int arr[1005],count[1005]={0};
+		int l=0,b=0;
+		int n,flag=0;
+		scanf("%d",&n);
+		for(int i=0;i<n;i++)
+		{
+			scanf("%d",&arr[i]);
+			count[arr[i]]++;
+		}
+//		for(int i=0;i<11;i++)
+//		{
+//			printf("Count: %d
+",count[i]);
+//		}
+		for(int i=1000;i>0;i--)
+		{
+			if(count[i]==0)
+			continue;
+			if((count[i]>=4)&&(l==0&&b==0))
+			{
+				l=i;
+				b=i;
+				flag=1;
+				break;
+			}
+			else if((count[i]>=2)&&((l==0)||(b==0)))
+			{
+				if(l==0)
+				l=i;
+				else
+				b=i;
+				if(l!=0&&b!=0)
+				{
+					flag=1;
+					break;
+				}
+			}
+		}
+		if(flag==0)
+		cout<<-1<<"
+";
+		else
+		cout<<(l*b)<<"
+";
+	}
+	return 0;
+}

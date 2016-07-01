@@ -1,0 +1,11 @@
+t = input()
+
+while t > 0:
+
+    n = input()
+
+    if n % 4 == 1:
+        print "ALICE"
+    else:
+        print "BOB"
+    t -= 1

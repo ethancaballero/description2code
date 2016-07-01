@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    long long int t;
+
+    while(scanf("%lld",&t)!=EOF)
+    {
+        if(t%3==0 || t%6==1)cout<<"yes"<<endl;
+        else cout<<"no"<<endl;
+    }
+
+    return 0;
+}

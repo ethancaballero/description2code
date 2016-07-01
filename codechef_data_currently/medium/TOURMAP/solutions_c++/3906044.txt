@@ -1,0 +1,120 @@
+#include<iostream>
+#include<map>
+#include<string>
+#include<string.h>
+#include<stdlib.h>
+using namespace std;
+map<string,int>m_map;
+#define MAX_CITY 5001
+#define CHAR_SIZE 60
+int inorder[MAX_CITY];
+struct Travel
+{
+	string destination;
+	int cost;
+};
+map<string,struct Travel>m_Travel;
+int main()
+{
+	//freopen("input.txt","r",stdin);
+	int test_case = 0;
+	cin >>test_case;
+	char strname_S[CHAR_SIZE];
+	char strname_D[CHAR_SIZE];
+	char strcost[CHAR_SIZE];
+	int no_of_ele = 0;
+	int tmp = 0;
+	int Index = 1;
+	while(test_case -- > 0)
+	{
+		memset(inorder,0,sizeof(int)*MAX_CITY);
+		m_map.clear();
+		m_Travel.clear();
+		no_of_ele = 0;
+		tmp = 0;
+		Index = 1;
+		scanf("%d
+",&no_of_ele);
+		while(tmp < no_of_ele-1)
+		{
+		  memset(strname_S,0,sizeof(char)*CHAR_SIZE);
+		  memset(strname_D,0,sizeof(char)*CHAR_SIZE);
+		  memset(strcost,0,sizeof(char)*CHAR_SIZE);
+	
+		   int cost_int = 0;
+		  scanf("%s %s %d$
+",strname_S,strname_D,&cost_int);
+		  string tmpstr;
+		  tmpstr = strname_S;
+		  if ( m_map.find(tmpstr) == m_map.end())
+		  {
+		   m_map[tmpstr] = Index;
+		   Index++;
+		  }
+		   tmpstr = strname_D;
+		  if ( m_map.find(tmpstr) == m_map.end())
+		  {
+		   m_map[tmpstr] = Index;
+		   Index++;
+		  }
+		  tmp++;
+
+		  // update InOrder for each city
+		  tmpstr = strname_D;
+		  inorder[m_map[tmpstr]]++;
+
+		  // update Travel Data
+		  
+		  struct Travel tmpdata;
+		  tmpdata.destination = strname_D;
+		  tmpdata.cost = cost_int;
+
+		  tmpstr = strname_S;
+		  m_Travel[tmpstr] = tmpdata;
+
+		}
+		// Find out the Citi Index which is having InOrder 0.
+		int zero_inOrder_Index = 0;
+		for ( int i = 1; i<= no_of_ele ; i++)
+		{
+			if(inorder[i] == 0)
+			{
+				zero_inOrder_Index = i;
+				break;
+			}
+		}
+
+		// Find out the city Name which is Having Inorder zero 
+		string strName_withzeroInorder;
+		map<string,int>::iterator itr = m_map.begin();
+		while(itr != m_map.end())
+		{
+			if (itr->second == zero_inOrder_Index)
+			{
+				strName_withzeroInorder = itr->first;
+				break;
+			}
+			itr++;
+		}
+
+		// Start with the First City Name and Traverse to all city 
+		long long totalsum = 0;
+		int totalcity = 0;
+		while(totalcity < no_of_ele-1)
+		{
+			struct Travel tmp = m_Travel[strName_withzeroInorder];
+			printf("%s %s %d$
+",strName_withzeroInorder.c_str(),tmp.destination.c_str(),tmp.cost);
+			//cout<<strName_withzeroInorder<<" "<<tmp.destination<<" "<<tmp.cost<<"$"<<endl;
+			strName_withzeroInorder = tmp.destination;
+			totalsum += tmp.cost;
+			totalcity++;
+		}
+		printf("%llu$
+",totalsum);
+		//cout<<totalsum<<"$"<<endl;
+
+	}
+	return 0;
+}
+

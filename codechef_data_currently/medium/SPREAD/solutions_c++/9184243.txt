@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int a[1000004];
+ll tree[1000004];
+int n;
+inline void fastRead(int *a)
+{
+register char c=0;
+while (c<33) c=getchar_unlocked();
+*a=0;
+while (c>33)
+{
+*a=*a*10+c-'0';
+c=getchar_unlocked();
+}
+}
+ll getsum(int ind)
+{  ll ans=0;
+   //ind=ind+1;
+   while(ind>0)
+     {
+        ans+=tree[ind];
+        ind-=(ind & (-ind));
+     }
+     return ans;
+}
+void update(int ind,int val)
+{   //ind=ind+1;
+
+    while(ind<=n)
+    {
+       tree[ind]+=val;
+       ind+=(ind & (-ind));
+
+    }
+}
+void rangeUpdate(int u,int v,int val)
+{
+  update(u,val);
+  update(v+1,-val);
+}
+int main()
+{
+    int i,p;
+   int m,c;
+
+   fastRead(&n);
+   fastRead(&m);
+   fastRead(&c);
+   rangeUpdate(1,n,c);
+   while(m--)
+   {char ch;
+    int u,v,k;
+      ch=getchar_unlocked();
+      while(ch!='S' && ch!='Q')
+         ch=getchar_unlocked();
+      if(ch=='S')
+       {
+       fastRead(&u);
+       fastRead(&v);
+       fastRead(&k);
+       rangeUpdate(u,v,k);
+       }
+      if(ch=='Q')
+       {fastRead(&p);printf("%lld
+",getsum(p));}
+   }
+}

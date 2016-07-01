@@ -1,0 +1,26 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main(){
+int t,n,d[50],s[50],f=0,hcf=1;
+cin>>t;
+for(int i=0;i<t;i++){
+    cin>>n;
+    for(int j=0;j<n;j++){
+        cin>>d[j];
+        s[j]=d[j];
+    }
+    sort(s,s+n);
+    for(int k=1;k<=s[0];k++){
+        for(int l=0;l<n;l++){
+            if(d[l]%k==0) f=1;
+            else {f=0;break;}
+        }
+        if(f==1) hcf=k;
+    }
+    for(int m=0;m<n;m++){
+    cout<<d[m]/hcf<<" ";
+    }
+    cout<<endl;
+    }
+}

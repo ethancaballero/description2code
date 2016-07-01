@@ -1,0 +1,203 @@
+/* http://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/ */
+
+// template : rjohari23
+
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<cstring>
+#include<stdlib.h>
+#include<algorithm>
+#include<vector>
+#include<list>
+#define getcx getchar_unlocked
+#define pc(x) putchar_unlocked(x);
+#ifndef ONLINE_JUDGE
+    #define getcx getchar
+#endif
+using namespace std;
+#define clear(a) memset((a),0,sizeof(a))
+#define pb push_back
+#define SIZE(v) v.size()
+#define ull unsigned long long int
+#define lli long long int
+#define li long int
+#define ii int
+#define mod 1000000007
+
+inline int inp()
+{
+   int n=0;
+   int ch=getcx();int sign=1;
+   while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();}
+ 
+   while(  ch >= '0' && ch <= '9' )
+           n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+   return n*sign;
+}
+
+inline long long in()
+{
+   long long n=0;
+   long long ch=getcx();long long sign=1;
+   while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();}
+ 
+   while(  ch >= '0' && ch <= '9' )
+           n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+   return n*sign;
+}
+
+inline void write (lli n)
+{
+    lli N = n, rev, count = 0;
+    rev = N;
+    if (N == 0) { pc('0');return ;}
+    while ((rev % 10) == 0) { count++; rev /= 10;} //obtain the count of the number of 0s
+    rev = 0;
+    while (N != 0) { rev = (rev<<3) + (rev<<1) + N % 10; N /= 10;}  //store reverse of N in rev
+    while (rev != 0) { pc(rev % 10 + '0'); rev /= 10;}
+    while (count--) pc('0');
+}
+
+/* http://discuss.codechef.com/questions/20106/fast-string-input */
+/* fast string input using getchar_unlocked */
+inline string ip()
+{
+    string s = "";
+    int temp=getchar_unlocked();
+    while ( temp<'a'||temp>'z' )
+        temp = getchar_unlocked();
+    while ( temp>='a'&&temp<='z' )
+    {
+        s += (char)temp;
+        temp = getchar_unlocked();
+    }
+    return s;
+}
+
+#define NIL -1
+int k=5;
+
+class Graph
+{
+    int V;
+    list<int> *adj;
+    void APUtil ( int v, bool visit[], int disc[], int low[], int parent[], bool ap[] );
+	
+public:
+    Graph ( int V );
+    void addEdge ( int v, int w );
+    void AP();
+};
+ 
+Graph::Graph(int V)
+{
+    this->V = V;
+    adj = new list<int>[V];
+}
+ 
+void Graph::addEdge ( int v, int w )
+{
+    adj[v].pb(w);
+    adj[w].pb(v);
+}
+ 
+void Graph::APUtil ( int u, bool visit[], int disc[], int low[], int parent[], bool ap[] )
+{
+    static int time = 0;
+ 
+    int children = 0;
+ 
+    visit[u] = true;
+ 
+    disc[u] = low[u] = ++time;
+ 
+    list<int>::iterator i;
+    for ( i=adj[u].begin();i!=adj[u].end();++i )
+    {
+        int v = *i;
+ 
+        if ( !visit[v] )
+        {
+            children++;
+            parent[v] = u;
+            APUtil(v,visit,disc,low,parent,ap);
+ 
+            low[u]  = min(low[u],low[v]); 
+            
+            if ( parent[u]==NIL && children>1 )
+               ap[u] = true;
+ 
+            if ( parent[u]!=NIL && low[v]>=disc[u] )
+               ap[u] = true;
+        }
+ 
+        else if ( v!=parent[u] )
+            low[u] = min(low[u], disc[v]);
+    }
+}
+ 
+//dfs traversal
+void Graph::AP()
+{
+    bool *visit = new bool[V];
+    int *disc = new int[V];
+    int *low = new int[V];
+    int *parent = new int[V];
+    bool *ap = new bool[V];
+ 
+    for ( int i=0;i<V;i++ )
+    {
+        parent[i] = NIL;
+        visit[i] = false;
+        ap[i] = false;
+    }
+ 
+    for ( int i=0;i<V;i++ )
+	{
+        if ( visit[i]==false )
+            APUtil(i, visit, disc, low, parent, ap);
+	}
+ 	int ans = 0;
+    for ( int i=0;i<V;i++ )
+	{
+        if ( ap[i]==true )
+        {
+            //cout << i << " ";
+            ans += k;
+        }
+	}
+	printf("%d
+",ans);
+}
+ 
+int main()
+{ 
+    /*cout << "Articulation Points:
+";
+    Graph g(7);
+    g.addEdge(0, 1);
+    g.addEdge(1, 2);
+    g.addEdge(3, 4);
+    g.addEdge(2, 4);
+    g.addEdge(2, 6);
+    g.addEdge(5, 2);
+    g.AP();*/
+    
+    int t,n,m,a,b;
+    
+    t = inp();
+    while ( t-- )
+    {
+    	n = inp();	m = inp();	k = inp();
+    	Graph g(n);
+    	while ( m-- )
+    	{
+    		a = inp();	b = inp();
+    		g.addEdge(a,b);
+    	}
+    	g.AP();
+    }
+ 
+    return 0;
+}

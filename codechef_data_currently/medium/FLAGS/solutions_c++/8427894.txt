@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		long long int k;
+		cin>>k;
+		if(k<2)
+		cout<<"0"<<endl;
+		else if(k==2)
+		cout<<"4"<<endl;
+		else if(k==3)
+		cout<<"42"<<endl;
+		else{
+			long long int s;
+			s=k*(k-1)*(2*k*k-5*k+4);
+			cout<<s<<endl;
+		}
+	}
+}

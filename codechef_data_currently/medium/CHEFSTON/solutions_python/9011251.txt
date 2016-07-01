@@ -1,0 +1,14 @@
+import sys
+t=int(raw_input())
+for w in range (0,t):
+    max=0
+    n,k = map(int,sys.stdin.readline().split(' '))
+    a = map(int,raw_input().strip().split(' '))
+    b = map(int,raw_input().strip().split(' '))
+    for i in range (0,n):
+        q=k/a[i]
+        q=q*b[i]
+        if q>=max: 
+            max=q
+    print max
+ 

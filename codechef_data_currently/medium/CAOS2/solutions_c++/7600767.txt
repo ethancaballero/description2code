@@ -1,0 +1,84 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   int T,R,C,prime[501],i,j,arr[501][501],brr[501][501],ans,counter;
+   char str[501][503];
+   cin>>T;
+   for(i=0;i<=500;i++)
+      prime[i]=0;
+   for(i=2,counter=0;i<=500;i++)
+   {
+      if(prime[i]==0)
+      {
+         counter++;
+         for(j=i*i;j<=500;j+=i)
+            prime[j]=1;
+      }
+      prime[i]=counter;
+   }
+   while(T--)
+   {
+      cin>>R>>C;
+      cin.ignore();
+      for(i=0;i<R;i++)
+         cin.getline(str[i],C+2);
+      for(i=0;i<R;i++)
+      {
+         for(j=0;j<C;j++)
+         {
+            if(str[i][j]=='#'||!i||str[i-1][j]=='#')
+            {
+               arr[i][j]=0;
+               continue;
+            }
+            arr[i][j]=arr[i-1][j]+1;
+         }
+      }
+      for(i=0;i<R;i++)
+      {
+         for(j=0;j<C;j++)
+         {
+            if(str[i][j]=='#'||!j||str[i][j-1]=='#')
+            {
+               arr[i][j]=brr[i][j]=0;
+               continue;
+            }
+            brr[i][j]=brr[i][j-1]+1;
+            if(arr[i][j]>brr[i][j])
+               arr[i][j]=brr[i][j];
+         }
+      }
+      for(i=R-1;i+1;i--)
+      {
+         for(j=C-1;j+1;j--)
+         {
+            if(str[i][j]=='#'||i==R-1||str[i+1][j]=='#')
+            {
+               arr[i][j]=brr[i][j]=0;
+               continue;
+            }
+            brr[i][j]=brr[i+1][j]+1;
+            if(arr[i][j]>brr[i][j])
+               arr[i][j]=brr[i][j];
+         }
+      }
+      for(ans=0,i=R-1;i+1;i--)
+      {
+         for(j=C-1;j+1;j--)
+         {
+            if(str[i][j]=='#'||j==C-1||str[i][j+1]=='#')
+            {
+               arr[i][j]=brr[i][j]=0;
+               continue;
+            }
+            brr[i][j]=brr[i][j+1]+1;
+            if(arr[i][j]>brr[i][j])
+               arr[i][j]=brr[i][j];
+            ans+=prime[arr[i][j]];
+         }
+      }
+      cout<<ans<<endl;
+   }
+   return 0;
+}

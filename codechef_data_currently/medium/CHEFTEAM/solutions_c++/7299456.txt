@@ -1,0 +1,39 @@
+//good qustn
+#include<iostream>
+using namespace std;
+unsigned long long int Gcd(unsigned long long int a,unsigned long long int b)
+{
+	if(b==0)
+	return a;
+	else
+	return Gcd(b,a%b);
+}
+int main()
+{
+	unsigned long long int test,n,i,ans,k,gcd;
+	cin>>test;
+	while(test--)
+	{
+		cin>>n>>k;
+		ans=1; i=1;
+		if(k>n)
+		cout<<"0
+";
+		else
+		{
+			if(k>n/2)
+			k=n-k;
+			while(i<=k)
+			{
+				gcd=Gcd(ans,i);
+				ans/=gcd;
+				ans*=(n-i+1)/(i/gcd);
+				//ans/=(i/gcd);
+				i++;
+			}		
+			cout<<ans<<endl;
+		}
+		
+	}
+	return 0;
+}

@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int n,m;
+	cin>>n>>m;
+	int arr[100005];
+	for(int i=0;i<n;i++){
+		cin>>arr[i];
+	}
+	int si = 0;
+	for(int i=0;i<m;i++){
+		char ch;
+		cin>>ch;
+		int d;
+		cin>>d;
+		//d-=1;
+		if(ch=='R'){
+			cout<<arr[(si+d-1)%n]<<endl;
+		}
+		else if(ch=='C'){
+			si = (si + d)%n;
+		}
+		else{
+			si = (si - d);
+			if(si<0){
+				si+=n;
+			}
+		}
+	}
+	return 0;
+}

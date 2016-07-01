@@ -1,0 +1,6 @@
+for i in range(int(raw_input())):
+    a=map(int,raw_input().split())
+    if (min(a[:2])+a[2])>max(a[:2]):
+        print 0
+    else:
+        print max(a[:2])-min(a[:2])-a[2]

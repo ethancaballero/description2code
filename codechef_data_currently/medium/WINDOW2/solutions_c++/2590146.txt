@@ -1,0 +1,155 @@
+
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <cmath>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <bitset>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <map>
+#include <cassert>
+
+#define ull unsigned long long
+#define ill long long int
+#define pii pair<int,int>
+#define pb(x) push_back(x)
+#define F(i,a,n) for(i=(a);i<(n);++i)
+#define FD(i,a,n) for(i=(a);i>=(n);--i)
+#define FE(it,x) for(it=x.begin();it!=x.end();++it)
+#define V(x) vector<x>
+#define S(x) scanf("%d",&x)
+#define S1(x) scanf("%lld",&x)
+#define epsilon 0.000000000000001
+#define pie acos (-1.0)
+#define MAXNODES 100001
+#define sz size()
+#define MAX 100009
+using namespace std;
+ill mod;
+int n,m,l,k;
+int a[1001][3];
+int bit[1LL<<4];
+
+
+ill c[1001][1001];
+
+void pp ()
+{
+    c[0][0] = 1LL;
+    for (int i = 1; i <= 1000; i ++) {
+		c[i][0] = 1LL;
+		for (int j = 1; j <= i; j ++) {
+			c[i][j] = c[i - 1][j - 1] + c[i - 1][j];
+			if (c[i][j] >= mod) c[i][j] -= mod;
+		}
+	}
+}
+bool check (int bit, int mask)
+{
+    mask = (1LL<<mask);
+    mask = bit | mask;
+    if (bit == mask) {
+        return true;
+    }
+    return false;
+}
+
+int count (int mask, int m)
+{
+    int i,sum=0;
+    F (i, 0, m) {
+        if (check (mask, i)) {
+            sum++;
+        }
+    }
+    return sum;
+}
+char ss[1009][4];
+
+int main()
+{
+  //  freopen ("input.txt", "r", stdin);
+    mod = 1000000080798150871LL;
+    pp ();
+   // cout << c[5][3] << endl;
+   // return 0;
+    int t;
+    S (t);
+
+    while (t--) {
+        scanf ("%d %d %d %d", &n, &m, &l, &k);
+        int i,j;
+      //  cout << n << " " << m << " SADDSA " << l << " " << k << endl;
+        F (i, 0, n) {
+            scanf ("%s", ss[i]);
+        }
+
+        F (i, 0, n) {
+            F (j, 0, m) {
+                a[i][j] = ss[i][j] - '0';
+            }
+        }
+
+        if (l > n || k > m) {
+            printf ("0
+");
+            continue;
+        }
+
+        memset (bit, 0, sizeof(bit));
+
+        F (i, 0, n) {
+            F (j, 0, (1LL<<m)) {
+                int flag = 0;
+                int k;
+                F (k, 0, m) {
+                    if (!check (j, k)) {
+                        continue;
+                    }
+                    if (a[i][k] == 0) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0) {
+                    bit[j]++;
+                }
+            }
+        }
+
+
+
+        ill sum = 0;
+        swap (k, l);
+        F (i, 0, (1LL<<m)) {
+           // cout << i << "  " << count (i, m) << " --> " << l << endl;
+            if (count (i, m) == l) {
+               // cout << "AA " <<  i << " " << bit[i] << " --> " << k << " " << c[bit[i]][k] << endl;
+                if (bit[i] >= k) {
+                    sum = sum + c[bit[i]][k];
+                    if (sum >= mod) sum = sum % mod;
+                }
+            }
+        }
+        printf ("%lld
+", sum);
+
+    }
+
+    return 0;
+}

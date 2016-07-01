@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long int t,i,j,l1,l2,x;
+
+long long int fun(long long int a)
+{
+    if(a%2==0)
+        return a/2;
+    else
+        return (a-1)/2;
+}
+int main()
+{
+    cin>>t;
+    while(t--)
+    {
+        cin>>i>>j;
+        l1=(long long int)log2(i);
+        l2=(long long int)log2(j);
+
+        x=0;
+        if(l2>l1)
+        {
+            while(l2!=l1)
+            {
+                j=fun(j);
+                l2--;
+                x++;
+            }
+        }
+        else if(l1>l2)
+        {
+            while(l1!=l2)
+            {
+                i=fun(i);
+                l1--;
+                x++;
+            }
+        }
+        while(i!=j)
+        {
+            i=fun(i);
+            j=fun(j);
+            x+=2;
+        }
+        cout<<x<<endl;
+    }
+    return 0;
+}

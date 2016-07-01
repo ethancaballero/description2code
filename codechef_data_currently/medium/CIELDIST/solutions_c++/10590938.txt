@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,ds,dt,d;
+	cin>>t;
+	while(t--)
+	{
+		cin>>ds>>dt>>d;
+		float ans;
+		if(dt>(d+ds))
+		ans=dt-(d+ds);
+		else if(d>(ds+dt))
+		ans=d-(ds+dt);
+		else if(ds>(d+dt))
+		ans=ds-(d+dt);
+		else
+		ans=0;
+		cout<<ans<<endl;
+	}
+	return 0;
+}

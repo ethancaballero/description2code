@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,n,i,j,max,maxb,bal;
+    cin>>t;
+    string s1,s2;
+    while(t--)
+    { bal=0;maxb=0;
+       cin>>s1;
+       n=s1.length();
+       for(i=0;i<n;i++)
+       {
+           if(s1[i]=='(') bal++;
+           if(s1[i]==')') bal--;
+           if(bal>maxb) maxb=bal;       }
+         for(i=0;i<maxb;i++) cout<<'(';
+         for(i=0;i<maxb;i++) cout<<')';
+         cout<<endl;
+
+    }
+}

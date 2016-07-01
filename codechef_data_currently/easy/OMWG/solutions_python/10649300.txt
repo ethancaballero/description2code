@@ -1,0 +1,6 @@
+T=int(raw_input())
+while T:
+    n,m=map(int,raw_input().split())
+    ans = 2*n*m-n-m
+    print(ans)
+    T-=1

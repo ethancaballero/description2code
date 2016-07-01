@@ -1,0 +1,14 @@
+'''
+Created on 10-Dec-2015
+
+@author: Lenovo
+'''
+for _ in xrange(input()):
+    n=input()
+    A=[]
+    A=map(int, raw_input().split())
+    A.sort()
+    s=0
+    for i in xrange(n-1,-1,-2):
+        s+=A[i]
+    print s 

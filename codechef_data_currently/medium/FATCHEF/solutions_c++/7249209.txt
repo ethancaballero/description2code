@@ -1,0 +1,70 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+#include<stack>
+#include<queue>
+#include<deque>
+#include<bitset>
+#include<cmath>
+#include<list>
+#include<set>
+#include<map>
+#define vi vector<int>
+#define vvi vector< vi >
+#define pii pair<int,int>
+#define pb push_back
+#define mp make_pair
+#define all(c) c.begin(),c.end() 
+#define sz(c) c.size()
+#define tr(c,it)  for(typeof(c.begin()) it=c.begin();it!=c.end();it++)  
+#define max(a,b) (a>b?a:b)
+#define min(a,b) (a<b?a:b)
+#define abs(a)  (a>=0?a:-a)
+#define present(c,x) find(all(c),x)!=c.end()
+#define cpresent(c,x) c.find(x)!=c.end()  
+#define permute(c) next_permutation(all(c))
+#define MOD 1000000009
+using namespace std;
+int main(){   
+    std::ios::sync_with_stdio(false);
+    long long T,N,M,arr[100005],y,i,ans,u,v,ch1,k;
+    char x;
+    cin>>T;
+    while(T--){
+    	memset(arr,0,sizeof(arr));
+    	ans=1;
+    	cin>>N>>M;
+    	for(i=0;i<M;i++){
+    		cin>>x;
+    		cin>>y;
+    		arr[y]=x;
+    	} 
+    	for(u=1;u<=N;u++){
+    		if(arr[u]!=0)
+    		   break;
+    	}
+    //	cout<<"u="<<u<<" "<<"v="<<v<<endl;
+    	ch1=arr[u],k=1;
+    	for(i=u;i<=N;i++){
+    		if(arr[i]==0)
+    		   k++;
+    		else{
+    			 if(arr[i]!=ch1){
+    			   if(ans*k>1000000009)
+    			     ans=(ans*k)%MOD;
+    			   else
+				     ans=ans*k;  
+				   
+    			 }
+    			 ch1=arr[i];
+				 k=1;   	
+    		}   
+    	}
+    	cout<<ans<<endl;
+    }
+	return 0;
+}

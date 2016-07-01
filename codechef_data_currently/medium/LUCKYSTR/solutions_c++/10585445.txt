@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+    int k,n;
+    scanf("%d%d",&k,&n);
+    string s[k];
+    string r[n];
+    for(int i=0;i<k;i++)
+        cin>>s[i];
+    for(int i=0;i<n;i++)
+    {
+        cin>>r[i];
+        int c=0;
+        for(int j=0;j<k;j++)
+        {
+            std::size_t found = r[i].find(s[j]);
+           if (found!=std::string::npos)
+           {
+               c=1;
+               break;
+           }
+        }
+        if(c!=0)
+            cout<<"Good"<<endl;
+        else
+        {
+            if(r[i].size()>=47)
+               cout<<"Good"<<endl;
+            else
+                cout<<"Bad"<<endl;
+        }
+    }
+}

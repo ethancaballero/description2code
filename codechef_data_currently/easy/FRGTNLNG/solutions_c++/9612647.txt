@@ -1,0 +1,67 @@
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <algorithm> // for fill_n method
+#include <map>
+// #include <vector>
+
+using namespace std;
+
+int main()
+{
+	int T;
+	cin >> T;
+	int t=0;
+	while(t<T)
+	{
+		t++;
+		int N,K;
+		cin >> N;
+		cin >> K;
+
+		
+		map<string,int> map_string_count;
+		bool* solution_array =  new bool[N];
+		fill_n(solution_array, N, false);
+
+		// vector<bool> solution_array (N,false);
+
+		int n=0;
+		while (n<N)
+		{
+			string current_word;
+			cin >> current_word;
+			map_string_count[current_word]=n;
+			n++;
+		}
+
+		int k=0;
+		while (k<K)
+		{
+			k++;
+			int L;
+			cin >> L;
+			int l=0;
+
+			string next;
+			while (l<L){
+				l++;
+				cin >> next;
+				if (map_string_count.find(next) != map_string_count.end())
+				{
+					solution_array[map_string_count[next]] = true;
+				}
+			}
+		}
+
+		for(int i=0;i<N;i++)
+		{
+			if (solution_array[i]) cout << "YES ";
+			else cout <<"NO ";
+		}
+		cout << endl;
+
+		// delete solution_array;
+	}
+	return 0;
+}

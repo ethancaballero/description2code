@@ -1,0 +1,7 @@
+n, k = [int(x) for x in raw_input().strip().split(' ')]
+divisible = 0
+
+for n in xrange(n):
+    if int(raw_input()) % k == 0:
+        divisible += 1
+print divisible  

@@ -1,0 +1,153 @@
+#include <iostream>
+#include<vector>
+#include<stdlib.h>
+#define gc getchar_unlocked
+#define N 1000
+using namespace std;
+
+inline void scanint(int* x)
+{
+	register char c = getchar_unlocked();
+	*x = 0;
+	for(; (c<48)||(c>57);c = getchar_unlocked());
+	for(; (c>47)&&(c<58);c = getchar_unlocked())
+		*x = (int)((((*x)<<1) + ((*x)<<3)) + c - 48);
+}
+
+
+char A[1001][1002];
+
+int n;
+
+short int hdp1[N+2][N+2]={{0}};
+short int hdp2[N+2][N+2]={{0}};
+short int vdp1[N+2][N+2]={{0}};
+short int vdp2[N+2][N+2]={{0}};
+short int ldp1[N+2][N+2]={{0}};
+short int ldp2[N+2][N+2]={{0}};
+short int rdp1[N+2][N+2]={{0}};
+short int rdp2[N+2][N+2]={{0}};
+
+
+void bform()
+{
+int max,m1,m2,m3,m4,i,j;
+for(i=0;i<n;i++)
+{
+	
+ for(j=0;j<n;j++)
+ {
+ 	
+ 	
+ if(A[i][j]=='X')
+ {
+ m1=ldp1[i][j] + ldp2[i][j] -1;
+ 
+ m2=rdp1[i][j] + rdp2[i][j] -1;
+
+ m3=vdp1[i][j] + vdp2[i][j] -1;
+
+ m4=hdp1[i][j] + hdp2[i][j] -1;
+
+ max=m1;
+
+ if(m2>max) max=m2;
+ if(m3>max) max=m3;
+ if(m4>max) max=m4;
+ }
+ else max=0;
+ 
+ printf("%d ",max); 
+ }
+printf("
+");
+}
+
+}
+
+int main() 
+{
+	int i,j;
+	char t[16];
+
+	
+	fgets(t,16,stdin);
+	
+	n=atoi(t);
+
+	for(i=0;i<n;i++)
+	{
+	fgets(A[i],1005,stdin);
+	}
+	
+	
+	
+for(i=0;i<n;i++)
+  {
+   for(j=0;j<n;j++)
+   {
+	
+	if(A[i][j]=='X')
+	{
+	if(j!=0)hdp1[i][j]=hdp1[i][j-1]+1;
+	else hdp1[i][j]=1;
+	
+	if(i!=0)vdp1[i][j]=vdp1[i-1][j]+1;
+	else vdp1[i][j]=1;
+	
+	if(i!=0 && j!=0)ldp1[i][j]=ldp1[i-1][j-1]+1;
+    else ldp1[i][j]=1;
+    
+    if(i!=0 && j!=n-1)rdp1[i][j]=rdp1[i-1][j+1]+1;
+    else rdp1[i][j]=1;
+    }
+    
+    else
+	{
+		hdp1[i][j]=0;
+		vdp1[i][j]=0;
+		ldp1[i][j]=0;
+		rdp1[i][j]=0;
+	}
+    
+    
+    
+	if(A[i][n-j-1]=='X')
+	{
+	if(j!=0)hdp2[i][n-j-1]=hdp2[i][n-j]+1;
+	else hdp2[i][n-j-1]=1;
+	}
+	else hdp2[i][n-j-1]=0;
+	
+	
+	if(A[n-i-1][j]=='X')
+	{
+	if(i!=0)vdp2[n-i-1][j]=vdp2[n-i][j]+1;
+    else vdp2[n-i-1][j]=1;
+    
+    if(i!=0 && j!=n-1)ldp2[n-i-1][j]=ldp2[n-i][j+1]+1;
+    else ldp2[n-i-1][j]=1;
+    
+    if(i!=0 && j!=0)rdp2[n-i-1][j]=rdp2[n-i][j-1]+1;
+    else rdp2[n-i-1][j]=1;
+    }
+    
+    else
+    {
+    vdp2[n-i-1][j]=0;
+    ldp2[n-i-1][j]=0;
+    rdp2[n-i-1][j]=0;
+	}
+	
+	
+	}
+	
+   }
+  
+
+
+	bform();
+	
+	
+	return 0;
+}

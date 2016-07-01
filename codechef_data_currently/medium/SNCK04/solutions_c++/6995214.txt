@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long a[1000001][2];
+long long b[1000001];
+vector <int> f[1000001];
+int prime[1000001] = {0};
+
+void sieve()
+{
+    for(int i=2;i<1000001;i++)
+    {
+        a[i][0]=1;
+        a[i][1]=i;
+    }
+    for(int i=2;i<1000001;i++)
+    {
+        if(prime[i]==0)
+        {
+            //cout<<"b"<<endl;
+            //f[i].push_back(i);
+            a[i][0] = a[i][0]*(i-1);
+            a[i][1] = a[i][1]/i;
+            for(int j=2;(j*i)<1000001;j++)
+            {
+                prime[i*j] = 1;
+                a[i*j][0] = a[i*j][0]*(i-1);
+                a[i*j][1] = a[i*j][1]/i;
+//                f[i*j].push_back(i);
+            }
+        }
+    }
+}
+
+int main()
+{
+    sieve();
+    b[0]=0;
+    b[1] = 0;
+    //freopen("output2.txt","w",stdout);
+	for(int i=2;i<1000001;i++)
+	{
+/*	    int s = i;
+	    int g = 1;
+        for(int j=0;j<f[i].size();j++)
+        {
+            s = s/f[i][j];
+            g= g*(f[i][j]-1);
+        }*/
+        b[i] = a[i][0]*a[i][1];
+	}
+	for(int i=2;i<1000001;i++)
+	{
+		b[i] = b[i]+b[i-1];
+		//cout<<b[i]<<endl;
+	}
+
+	int t;
+	scanf("%d",&t);
+	int n;
+	while(t--)
+	{
+		scanf("%d",&n);
+		printf("%lld
+",b[n]);
+	}
+
+	return 0;
+}

@@ -1,0 +1,17 @@
+test = input()
+
+while test>0 :
+
+	n = input()
+
+	str = raw_input()
+
+	list1 = str.split()
+
+	list1.sort()
+
+	add = int(list1[0]) + int(list1[1])
+
+	print add
+
+	test=test-1

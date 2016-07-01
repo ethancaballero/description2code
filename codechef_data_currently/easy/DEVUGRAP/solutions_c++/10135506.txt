@@ -1,0 +1,44 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#define gc getchar
+#define ll long long
+using namespace std;
+ 
+void scanint(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+ 
+int main(){
+int t,n,i,k;
+scanint(t);
+while(t--){
+    scanint(n);scanint(k);
+    int a;
+    ll ans=0;
+    for(i=0;i<n;i++){
+        scanint(a);
+        if(a<k)
+			{
+				ans=ans+k-a;
+				continue;
+			}
+			a=a%k;
+			a=min(a,k-a);
+			ans=ans+a;
+    }
+    printf("%lld
+",ans);
+ 
+ 
+}
+ 
+return 0;
+}
+ 

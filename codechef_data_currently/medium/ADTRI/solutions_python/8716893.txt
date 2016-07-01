@@ -1,0 +1,35 @@
+MAX = 1000000*5
+arr_slow = [False]*MAX
+
+def pythagoreanTriplets_slow(limit) :
+	c=long(0)
+	m = 2
+	ans = []
+	while c < limit :
+		n = 1
+		while n<m :
+			c = m**2 + n**2 
+			if c > limit :
+				break
+			ans.append(c)
+			n+=1
+		m+=1
+	return ans
+
+arr = pythagoreanTriplets_slow(MAX)
+arr.sort()
+for i in arr :
+	temp = i
+	if not arr_slow[temp] :
+		while temp < MAX:
+			arr_slow[temp] = True
+			temp+=i
+
+t = int(raw_input())
+while t:
+	t-=1
+	n = long(raw_input())
+	if arr_slow[n] :
+		print "YES"
+	else :
+		print "NO"

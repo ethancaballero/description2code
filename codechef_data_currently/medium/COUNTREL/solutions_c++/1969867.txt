@@ -1,0 +1,57 @@
+#include <iostream>
+#include <cstdio>
+#include <fstream>
+
+#define ll long long
+#define MOD 100000007ll
+
+using namespace std;
+
+ll pow(ll n, ll a){
+   ll res = 1ll;
+   while(a){
+      if(a%2ll == 1)
+         res = (res*n)%MOD;
+      n = (n*n)%MOD;
+      a /= 2ll;
+   }
+   return res;
+}
+
+int main(void){
+   //freopen("test_countRelations.txt", "r", stdin);
+   int T;
+   ll N, R, R1, R2, temp2, temp3;
+   
+   scanf("%d", &T);
+   
+   while(T--){
+      scanf("%lld", &N);
+      
+      //printf("N: %lld
+", N);
+      
+      R = pow(2, N-1ll);
+      temp3 = pow(3, N);
+      temp2 = (2ll*R)%MOD;
+      R = (R*(temp2+1ll))%MOD;
+      //R = (temp2*2ll)%MOD;
+      //R = (R+1ll)%MOD;
+      //R = (temp2*R)%MOD;
+      R = (R - temp3 + MOD)%MOD;
+      
+      //printf("R: %lld
+", R);
+      
+      R1 = (temp3 + 1ll)%MOD;
+      R1 = (R1*((MOD+1ll)/2ll))%MOD;
+      //temp2 = (2*temp2)%MOD;
+      R1 = (R1 - temp2 + MOD)%MOD;
+      
+      R2 = (R - R1 + MOD)%MOD;
+      
+      printf("%lld %lld
+", R1, R2);
+   }
+   return 0;
+}

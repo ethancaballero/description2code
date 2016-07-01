@@ -1,0 +1,18 @@
+ext,eg = raw_input().split()
+dic = {
+       }
+for i in range(int(ext)):
+    key,value= raw_input().split()
+    dic[key] = value
+for i in range(int(eg)):
+    un = raw_input()
+    uns= un.split()[0]
+    inp=uns.split(".")
+    val=inp[-1]
+    if "." in uns:
+       if val in dic.keys():
+          print dic[val]
+       else:
+           print "unknown"
+    else:
+        print "unknown"

@@ -1,0 +1,15 @@
+#https://www.codechef.com/problems/SIMPSTAT
+#Simple Statistics 
+#!/usr/bin/env python
+
+def avg(nos, n, k ):
+	nos = sorted(nos)
+	nos = nos[k:(n-k)]
+	print "%.6f"%(float(sum(nos))/float(len(nos)))
+
+t=input()
+while t!=0:
+	t-=1
+	n,k = map(int,raw_input().split())
+	nos = map(int, raw_input().split())
+	avg(nos, n,k)

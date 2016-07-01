@@ -1,0 +1,41 @@
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<cmath>
+#include<iostream>
+#include<algorithm>
+#define ll long long
+using namespace std;
+int T;//n(n+1)(2n+1)(3n^2+3n-1)/30
+ll n,m,ans;
+ll calcu(ll x,ll y)//n(n+1)(2n+1)(3n^2+3n-1)/30
+{
+	ll a,b,c,sum1,sum2,mod;
+	mod=30*m;
+	a=x%mod; b=(a*(a+1))%mod*(2*a+1)%mod; c=(3*a*(a+1)+mod-1)%mod;
+	sum1=(b*c%mod)/30;
+	a=y%mod; b=(a*(a+1))%mod*(2*a+1)%mod; c=(3*a*(a+1)+mod-1)%mod;
+	sum2=(b*c%mod)/30;
+	if(sum2-sum1<0) return sum2-sum1+m;
+	return sum2-sum1;
+}
+void work()
+{
+	ll i,j;
+	ans=0;
+	for(i=1;i<=n;i=j+1)
+	   {j=n/(n/i);
+	    ans=(ans+calcu(i-1,j)*(n/i)%m)%m;
+	   }
+	printf("%lld
+",ans);
+}
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	   {scanf("%lld%lld",&n,&m);
+	    work();
+	   }
+	return 0;
+}

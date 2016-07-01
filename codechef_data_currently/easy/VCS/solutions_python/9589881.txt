@@ -1,0 +1,13 @@
+t = input()
+for i in range(t):
+    n, m, k = map(int, raw_input().split())
+    a = list(map(int, raw_input().split()))
+    b = list(map(int, raw_input().split()))
+    track_ignore = 0
+    untrack_unignore = 0
+    for j in range(1, n+1):
+        if j in a and j in b:
+            track_ignore += 1
+        elif j not in a and j not in b:
+            untrack_unignore += 1
+    print track_ignore, untrack_unignore

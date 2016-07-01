@@ -1,0 +1,9 @@
+t=input()
+def is_prime(n):
+    return all([(n%j) for j in range(2, int(n**0.5)+1)]) and n>1
+
+for i in range(0,t):
+    if is_prime(input())==True:
+        print "yes"
+    else:
+        print "no"

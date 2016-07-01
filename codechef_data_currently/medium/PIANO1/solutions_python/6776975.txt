@@ -1,0 +1,22 @@
+for k in range(input()):
+    a=raw_input()
+    c=0
+    l=0
+    i=0
+    g=2
+    d=0
+    while (i<len(a)):
+        if a[i]=="T":
+            c=c+2
+        else:
+            a[i]=="S"
+            c=c+1
+        i=i+1
+    #print c
+    n=input()
+    d=c
+    while (d<(12*n)):
+        l=(l+(12*n)-d)
+        d=c*g
+        g=g+1
+    print l

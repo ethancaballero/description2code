@@ -1,0 +1,54 @@
+#include<cstdio>
+#include<iostream>
+#include<deque>
+#define MAX 400005
+using namespace std;
+
+int A[MAX];
+
+int main()
+{
+    int n,w,total=0;
+    deque <pair<int,int> > mini,maxi;
+    cin>>n>>w;
+    for(int i=0;i<n;++i)
+        cin>>A[i];
+    for(int i=0;i<w;++i)
+    {
+            while((!mini.empty())&&(mini.back()).first>=A[i])
+            {
+                mini.pop_back();
+            }
+            while((!maxi.empty())&&(maxi.back()).first<=A[i])
+            {
+                maxi.pop_back();
+            }
+            mini.push_back(make_pair(A[i],i));
+            maxi.push_back(make_pair(A[i],i));
+    }
+    total+=((maxi.front().first-mini.front().first+1)==w);
+    for(int i=w;i<n;++i)
+    {
+            while((!mini.empty())&&(mini.front()).second<(i-w+1))
+            {
+                mini.pop_front();
+            }
+            while((!mini.empty())&&(mini.back()).first>=A[i])
+            {
+                mini.pop_back();
+            }
+            while((!maxi.empty())&&(maxi.front()).second<(i-w+1))
+            {
+                maxi.pop_front();
+            }
+            while((!maxi.empty())&&(maxi.back()).first<=A[i])
+            {
+                maxi.pop_back();
+            }
+            mini.push_back(make_pair(A[i],i));
+            maxi.push_back(make_pair(A[i],i));
+            total+=((maxi.front().first-mini.front().first+1)==w);
+    }
+    cout<<total;
+    return 0;
+}

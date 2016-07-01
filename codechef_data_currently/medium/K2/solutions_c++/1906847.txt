@@ -1,0 +1,74 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int ar[50];
+
+int generate(unsigned long long int n, unsigned long long int b)
+{
+    int i = 0;
+    while(n > 0) {
+        i++;
+        ar[i-1] = n%b;
+        n /= b;
+    }
+    return i;
+}
+
+bool ispalin(int i)
+{
+    int j;
+    if(i % 2 == 0) {
+        for(j = 1; j <= i/2; j++) {
+            if(ar[j-1] != ar[i-j]) return false;
+        }
+    }
+    else {
+        for(j = 0; j < (i-1)/2; j++) {
+            if(ar[j] != ar[i-1-j]) return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    unsigned long long int t, i;
+
+    cin >> t;
+
+    while(t--) {
+        unsigned long long int n;
+
+        cin >> n;
+
+        if(n == 1 || n == 3 || n == 5) cout << "2
+";
+        else if(n == 2 || n == 4) cout << "3
+";
+        else if(n == 6) cout << "5
+";
+        else {
+            for(i = 2; i <= sqrt(n); i++) {
+                   // int size;
+                   // s = generate(n, i);
+                  /*  for(int j = 0; j < s.size(); j++) {
+                        cout << s[j] << " ";
+                    }*/
+                   // cout << endl;
+                    if(ispalin(generate(n, i))) {
+                        break;
+                    }
+            }
+            if(i <= sqrt(n))
+            cout << i << endl;
+            else {
+                 for(i = sqrt(n); !(n % i == 0 && i < ((n/i)-1)); i--);
+                 cout << (n/i) - 1 << endl;
+            }
+        }
+    }
+}

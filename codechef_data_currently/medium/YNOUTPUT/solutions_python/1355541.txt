@@ -1,0 +1,38 @@
+t=int(raw_input())
+b=[]
+l=[]
+d=0
+for i in xrange(0,t*t):
+	k=raw_input()
+	if(k[0]=='Y'):
+		d='1'	
+	elif(k[0]=='N'):
+		d='0'
+	l.append(d)
+	if(i%t==t-1):
+		b.append(''.join(l))
+		l=[]
+
+#print b
+ans=0
+for i in xrange(0,t):
+	f=1
+	for j in xrange(0,t):
+		if((b[i]==b[j] and b[i][j]=='0') or (b[i]!=b[j] and b[i][j]=='1')):
+			f=0
+			break
+#		print f
+	if(f==1):
+		ans=b[i]
+		break;
+
+#print ans
+if(ans!=0):
+	for i in ans:
+		if(i=='1'):
+			print 'YES'
+		else:
+			print 'NO'
+else:
+	for i in xrange(0,t):
+		print 'NO'

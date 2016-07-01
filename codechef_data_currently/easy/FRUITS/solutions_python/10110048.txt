@@ -1,0 +1,26 @@
+t = input()
+for i in range(t):
+    apple,orange,gold_coin = map(int,raw_input().split())
+    max_value = 0
+    min_value = 0
+    if(apple>=orange):
+        max_value = apple
+        min_value = orange
+    else:
+        max_value = orange
+        min_value = apple
+        
+    difference = max_value-min_value
+    added_difference = difference
+    gd = gold_coin
+    
+    while(added_difference <= difference and added_difference>=0 and gd > 0):
+        if(added_difference == 0):
+            break
+        else:
+            gd -=1
+            min_value+=1
+            difference = added_difference
+            added_difference = max_value - min_value
+    
+    print added_difference

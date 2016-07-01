@@ -1,0 +1,113 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+#include<iostream>
+#include<vector>
+#include<cassert>
+#include<sstream>
+#include<map>
+#include<set>
+#include<iomanip>
+#include<stack>
+#include<queue>
+#include<algorithm>
+
+using namespace std;
+
+#define pb push_back
+#define mp make_pair
+#define clr(x) x.clear()
+#define sz(x) ((int)(x).size())
+
+#define F first
+#define S second
+
+#define REP(i,a,b) for(i=a;i<b;i++)
+#define rep(i,b) for(i=0;i<b;i++)
+#define rep1(i,b) for(i=1;i<=b;i++)
+
+#define pdn(n) printf("%d
+",n)
+#define pln(n) printf("%ld
+",n)
+
+#define sll(n) scanf("%lld",&n)
+#define sl(n) scanf("%ld",&n)
+#define sd(n) scanf("%d",&n)
+
+#define pn printf("
+")
+
+typedef pair<int,int> PII;
+typedef vector<PII> VPII;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef long long LL;
+
+#define MOD 1000000007
+
+LL mpow(LL a, LL n)
+{LL ret=1;LL b=a;while(n) {if(n&1)
+ret=(ret*b)%MOD;b=(b*b)%MOD;n>>=1;}
+return (LL)ret;}
+
+bool isleft(int ax,int ay,int bx,int by,int cx,int cy)
+{
+     return ((bx - ax)*(cy - ay) - (by - ay)*(cx - ax)) > 0;
+}
+
+int main()
+{
+    int t,n,i,j,o1,o2,k,cur;
+    float m,max;
+    sd(t);
+    while(t--)
+    {
+        max=0;
+        sd(n);
+        assert(n>=4&&n<=1000);
+        int x[1000],y[1000];
+        rep(i,n)
+        {
+            scanf("%d%d",&x[i],&y[i]);
+        }
+        if(n>4)
+        {
+            rep(i,n)
+            {
+                REP(j,i+1,n)
+                {
+                    m=(((x[j]-x[i])*(x[j]-x[i]))+((y[j]-y[i])*(y[j]-y[i])));
+                    if(m>max)
+                    {
+                        max=m;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(i=0;i<n;i++) for(j=0;j<n;j++) for(o1=0;o1<n;o1++) for(o2=0;o2<n;o2++)
+			if(i!=j && i!=o1 && i!=o2 && j!=o1 && j!=o2 && o1!=o2)
+			{
+				if(isleft(x[i],y[i],x[j],y[j],x[o1],y[o1])==isleft(x[i],y[i],x[j],y[j],x[o2],y[o2]))
+				{
+
+					k=x[i]-x[j];
+					cur=y[i]-y[j];
+					cur=k*k+cur*cur;
+					if(cur>max)
+						max=cur;
+				}
+			}
+        }
+        cout<<setprecision(11)<<(double)sqrt((double)(max))<<endl;
+        //printf("%0.10f",max);
+    }
+    return 0;
+}
+//next_permutation(ar,ar+n)
+//role of next_permutation(ar,ar+n) here is comparing str[0] with all the combination of strings...
+//like strcmp(str[0],str[1])
+//strcmp(str[0],str[2])

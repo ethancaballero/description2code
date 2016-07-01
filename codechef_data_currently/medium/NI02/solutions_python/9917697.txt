@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+pair<int,int> now;
+int db[3000][3000];
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int t,n,i,j,k,l,d,m,dis;
+    int sd[3000]={0},vis[3000];
+    int x[3000],y[3000];
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d",&n);
+        for(i=1;i<=n;i++){
+            scanf("%d%d",&x[i],&y[i]);
+        }
+        scanf("%d%d",&x[0],&y[0]);
+        scanf("%d%d",&x[n+1],&y[n+1]);
+        for(i=0;i<n+2;i++){
+            for(j=0;j<n+2;j++){
+                db[i][j]=((x[i]-x[j])*(x[i]-x[j]))+((y[i]-y[j])*(y[i]-y[j]));
+                db[j][i]=((x[i]-x[j])*(x[i]-x[j]))+((y[i]-y[j])*(y[i]-y[j]));
+            }
+        }
+        for(i=n+1;i>0;i--){
+            sd[i]=db[i][0];
+            vis[i]=0;
+        }
+        for(i=1;i<n+2;i++){
+            k=0;
+            dis=100000000;
+            for(j=1;j<n+2;j++)
+            if(vis[j]==0&&dis>sd[j]){
+                dis=sd[j];
+                k=j;
+            }
+            if(k==n+1)
+            break;
+            vis[k]=1;
+            for(j=1;j<n+2;j++)
+            if(sd[j]>sd[k]+db[j][k])
+            sd[j]=sd[k]+db[j][k];
+        }
+        cout<<sd[n+1]<<endl;
+    }
+	return 0;
+}

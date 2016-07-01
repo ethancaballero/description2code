@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+typedef long long ll;
+int main()
+{
+	ll t,n,ans;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		ans=0;
+		scanf("%lld",&n);
+		if(n>2)
+		{
+			ans= 2*n*(n-1)*(n-1) + n*(n-1)*(n-2) + 2*n*(n-1)*(n-2)*(n-2);
+		}
+		else if(n==2)
+		{
+			ans=2*n*(n-1)*(n-1);
+		}
+		else
+			ans=0;
+		printf("%lld
+",ans);
+	} 
+	return 0;
+}

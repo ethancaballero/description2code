@@ -1,0 +1,49 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int a[101][101][101];
+int b[101][101][101];
+int c[101][101][101];
+int d[101][101][101];
+
+int main()
+{
+    int t, i, j, x, y, z, k;
+    cin >> t;
+    while (t--) {
+        cin >> x >> y >> z;
+        for (i = 0; i < x; i++) {
+            for (j = 0; j < y; j++) {
+                for (k = 0; k < z; k++) {
+                    cin >> b[i][j][k];
+                    a[i][j][k] = b[i][j][k];
+                    if (k)
+                        a[i][j][k] -= b[i][j][k-1];
+                    if (j)
+                        a[i][j][k] -= c[i][j-1][k];
+                    if (i)
+                        a[i][j][k] -= d[i-1][j][k];
+                    c[i][j][k] = a[i][j][k];
+                    if (j)
+                        c[i][j][k] += c[i][j-1][k];
+                    if (i)
+                        c[i][j][k] += d[i-1][j][k];
+                    d[i][j][k] = a[i][j][k];
+                    if (i)
+                        d[i][j][k] += d[i-1][j][k];
+                }
+            }
+        }
+        for (i = 0; i < x; i++) {
+            for (j = 0; j < y; j++) {
+                for (k = 0; k < z-1; k++)
+                    cout << a[i][j][k] << " ";
+                cout << a[i][j][k] << endl;
+            }
+        }
+    }
+    return 0;
+}

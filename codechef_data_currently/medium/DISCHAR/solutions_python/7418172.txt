@@ -1,0 +1,7 @@
+t=int(raw_input())
+for asd in range(t):
+	s=raw_input()
+	l=[0]*26
+	for c in s:
+		l[ord(c)-97]=1
+	print l.count(1)

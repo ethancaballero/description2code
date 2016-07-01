@@ -1,0 +1,12 @@
+def find_max_arithmetic(list):
+    mod = 1000000007
+    res = list.count(max(list))
+    return (2**res - 1) % mod
+
+t = int(raw_input())
+
+while t:
+    t -= 1
+    a = {}
+    n = int(raw_input())
+    print find_max_arithmetic(map(int, raw_input().strip().split()))

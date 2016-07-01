@@ -1,0 +1,128 @@
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<algorithm>
+
+using namespace std;
+#define REP(i,a,b)     for(int(i)=int(a);i<=int(b);i++)
+#define REPMIN(i,a,b)     for(int(i)=int(a);i>=int(b);i--)
+
+int rank[13], suits[4];
+char ip[12];
+int main(){
+    int T,count,val,ctr;
+    string line;
+    bool flag,flagTwo,flagThree,straightFlag;
+    scanf("%d",&T);
+    while(T--){
+        ctr = 0;
+        REP(i,0,4){
+            cin>>line;
+            ip[ctr]=line[0];
+            ctr++;
+            ip[ctr]=line[1];
+            ctr++;
+        }
+//        printf("%s",ip);
+        flag = true;
+        straightFlag = false;
+        flagThree = false;
+        flagTwo = false;
+        REP(i,0,13)
+            rank[i]=0;
+        REP(i,0,3)
+            suits[i]=0;
+        REP(i,0,9){
+            if(i%2==0){
+                if(ip[i] >'1' && ip[i]<='9')
+                    rank[ip[i]-'1']++;
+                else if(ip[i]=='A')
+                    rank[0]++;
+                else if(ip[i]=='T')
+                    rank[9]++;
+                else if(ip[i]=='J')
+                    rank[10]++;
+                else if(ip[i]=='Q')
+                    rank[11]++;
+                else if(ip[i]=='K')
+                    rank[12]++;
+            }
+            else if(i%2==1){
+                if(ip[i]=='S')
+                    suits[0]++;
+                else if(ip[i]=='H')
+                    suits[1]++;
+                else if(ip[i]=='D')
+                    suits[2]++;
+                else if(ip[i]=='C')
+                    suits[3]++;
+            }
+        }
+        count = 0;
+        val = 0;
+        REP(i,0,13){
+            if(rank[i]==1){
+                count++;
+                if(count == 5){
+                    val = i;
+                    break;
+                }
+            }
+        }
+        REPMIN(i,val,val-4)
+            if(rank[i]==0)
+                flag = false;
+        if(flag == false){
+            if(rank[0]==3 || rank[1]==3 || rank[2]==3 || rank[3]==3 || rank[4]==3 || rank[5]==3 || rank[6]==3 || rank[7]==3 || rank[8]==3 || rank[9]==3 || rank[10]==3 || rank[11]==3 || rank[12]==3 )
+                flagThree = true;
+            if(rank[0]==2 || rank[1]==2 || rank[2]==2 || rank[3]==2 || rank[4]==2 || rank[5]==2 || rank[6]==2 || rank[7]==2 || rank[8]==2 || rank[9]==2 || rank[10]==2 || rank[11]==2 || rank[12]==2)
+                flagTwo = true;
+        }
+        if(suits[0]==5 || suits[1]==5 || suits[2]==5 || suits[3]==5){
+            if(rank[0]==1 && rank[9]==1 && rank[10]==1 && rank[11]==1 && rank[12]==1)
+                printf("royal flush
+");
+            else if(flag == true)
+                printf("straight flush
+");
+            else
+                printf("flush
+");
+        }
+        else if(rank[0]==4 || rank[1]==4 || rank[2]==4 || rank[3]==4 || rank[4]==4 || rank[5]==4 || rank[6]==4 || rank[7]==4 || rank[8]==4 || rank[9]==4 || rank[10]==4 || rank[11]==4 || rank[12]==4 )
+            printf(" four of a kind
+");
+        else if(flag==true)
+            printf("straight
+");
+        else if(flagThree){
+            if(flagTwo)
+                printf("full house
+");
+            else
+                printf("three of a kind
+");
+        }
+        else if(flagTwo){
+            ctr = 0;
+            REPMIN(i,12,0){
+                if(rank[i]==2){
+                    ctr++;
+                    if(ctr==2)
+                        break;
+                }
+            }
+            if(ctr == 2)    
+                printf("two pairs
+");
+            else
+                printf("pair
+");
+        }
+        else
+            printf("high card
+");
+    }
+    return 0;
+}

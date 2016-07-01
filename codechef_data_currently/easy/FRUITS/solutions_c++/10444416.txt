@@ -1,0 +1,52 @@
+#include<iostream>
+
+#include<stdio.h>
+using namespace std;
+ int main()
+ {
+  int T,a[100][3],i,j,big,small,d,k;
+
+  cin>>T;
+  for(i=0;i<T;i++)
+  {
+   for(j=0;j<3;j++)
+   {
+    cin>>a[i][j];
+   }
+  }
+
+
+  for(i=0;i<T;i++)
+  {
+   if(a[i][0]>a[i][1])
+   {
+    big=a[i][0];
+    small=a[i][1];
+   }
+   else
+   {
+    big=a[i][1];
+    small=a[i][0];
+   }
+
+   k=a[i][2];
+   d=big-small;
+   if(k>=d)
+   {
+    cout<<0<<endl;
+   }
+   else if(k<d)
+   {
+    d=d-k;
+    cout<<d<<endl;
+   }
+   else if(k==0)
+   {
+    cout<<d<<endl;
+   }
+
+
+
+  }
+  return(0);
+ }

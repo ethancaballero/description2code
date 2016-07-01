@@ -1,0 +1,27 @@
+//the block game - palindrom numbers
+#include <iostream>
+using namespace std;
+main()
+{
+	int n,i,a,b,k;
+	cin>>n;
+	int x[n];
+	for (i=0;i<n;i++)
+	{
+		cin>>a;
+		b=0;
+		x[i]=0;
+		k=a;
+		while(k!=0)
+		{
+			b=b*10+k%10;
+			k=k/10;
+		}
+		if (a==b) x[i]=1;
+	}
+	for (i=0;i<n;i++)
+	{
+		if (x[i]==1) cout<<"wins"<<endl;
+		else cout<<"losses"<<endl;
+	}
+}

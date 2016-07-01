@@ -1,0 +1,64 @@
+// asdasdasda as dasd 
+#include <bits/stdc++.h>
+using namespace std;
+#define REP(a,b,c) for(int a=b;a<c;a++)
+#define asd(x)              cout<<__LINE__<<" :: "<<#x<< ": "<<x<<endl;
+#define asdf(x, y)          cout<<__LINE__<<" :: "<<#x<< ": "<<x<<" | "<<#y<< ": "<<y<<endl;
+typedef pair<int,int> ii;
+typedef long long LL;
+
+map<string, int> G;
+
+string inp, f;
+
+int dp[31][31];
+
+int grundy(int l, int r){
+    if(l > r) return 0;
+
+    if(dp[l][r] != -1) return dp[l][r];
+
+
+    map<int,int> fofo;
+    REP(i, l, r+1){
+        REP(j,i,r+1){
+            string subs = inp.substr(i, j-i+1);
+            if(G.count(subs)) {
+                int here = grundy(l,i-1)^grundy(j+1,r);
+                fofo[here];
+            }
+        }
+    }
+
+    int cur = 0;
+    while(1){
+        if(fofo.count(cur) == 0) return dp[l][r] = cur;
+        cur++;
+    }
+
+    assert(0);
+}
+
+void solve(){
+    G.clear();
+    cin >> inp;
+    int t;
+    cin >> t;
+    while(t--){
+        cin >>f;
+        G[f];
+    }
+    memset(dp,-1,sizeof dp);
+    if(grundy(0, inp.size()-1) == 0) cout << "Tracy" << endl;
+    else cout << "Teddy" << endl;
+}
+
+int main(){
+
+    int test;
+    cin >> test;
+    while(test-->0){
+        solve();
+    }
+    return 0;
+}

@@ -1,0 +1,91 @@
+#include<iostream>
+using namespace std;
+int val(string s)
+{	int n=0;
+	for(int i = 0 ; i <s.size();i++)
+	{	if(int(s[i])>57)
+		{	n = n*10 + int(s[i])-97;	}
+		else
+		{	n=n*10+int(s[i])-48	;}
+	}
+	return n;
+}
+string comp(string s1 , string s2)
+{	int l1 = s1.size();
+	int l2=s2.size();
+	string save1=s1;
+	string save2=s2;
+	string big=s1;
+	if(l1>l2)
+	{	while(l1!=l2)
+		{	s2="0"+s2;
+			l2++;
+		}
+	}
+	else 
+	{	while(l1!=l2)
+		{	s1="0"+s1;
+			l1++;
+		}
+	}
+	for(int i = 0; i < l1; i++)
+	{	if(s1[i]>s2[i])
+		{	big = save1;
+			break;
+		}
+		else if(s1[i]<s2[i])
+		{	big = save2;
+			break;
+		}
+	}
+	return big;
+}
+	
+int main()
+{	string s;
+	cin>>s;
+	string max="";
+	for(int i= 0 ; i <s.size() ; i++)
+	{	string care="";
+		char k ;
+		int ch=0;
+		int iter=i;
+//		cout<<int(s[i])<<endl;
+		while((ch==1||ch==0)&&iter!=s.size())
+		{	if(int(s[iter])>57)
+			{	ch++;
+				if(ch==1)
+				{	care+= char(57);
+				}
+				else if(ch>1)
+				{	break;
+				}
+			}
+			else
+			{	care+=s[iter];
+			}
+			iter++;
+		}
+//		cout<<care<<endl;
+		max = comp(max,care);
+	}
+	int chc=0;
+	string ans="";
+	for(int i = 0; i < max.size(); i++)
+	{	if(max[i]!='0')
+		{	chc=1;	}
+		if(chc==1)
+		{	ans+=max[i];
+		}
+	}	
+	if(chc==0)
+	{	ans="0";
+		cout<<ans<<endl;
+	}
+	else
+	{	cout<<ans<<endl;
+	}
+}
+
+		
+	

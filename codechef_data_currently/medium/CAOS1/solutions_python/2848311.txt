@@ -1,0 +1,36 @@
+def ch(m):
+    w=len(m[0])
+    h=len(m)
+    f=0
+    for x in range(0,w):
+        for y in range(0,h):
+            if m[y][x]=="#":continue
+            r=0;l=0;t=0;b=0
+            i=1
+            while i+x<w and m[y][i+x]=="^":
+                i+=1
+                if i==3:r=1;break
+            i=1
+            while i+y<h and m[y+i][x]=="^":
+                i+=1
+                if i==3:b=1;break
+            i=-1
+            while i+x>=0 and m[y][x+i]=="^":
+                i-=1
+                if i==-3:l=1;break
+            i=-1
+            while i+y>=0 and m[y+i][x]=="^":
+                i-=1
+                if i==-3:t=1;break
+            if r==l==t==b==1:f+=1
+    return f
+ 
+ 
+n = int(raw_input())
+for i in range(n):
+    h,w = map(int,raw_input().split())
+    m=[]
+    for i in range(h):
+        l = raw_input()
+        m.append([x for x in l])
+    print ch(m)

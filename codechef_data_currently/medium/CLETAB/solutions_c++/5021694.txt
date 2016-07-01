@@ -1,0 +1,73 @@
+#include <algorithm>
+#include <vector>
+#include <cstdlib>
+#include <iostream>
+#define customer cust_order
+using namespace std;
+
+const int M=400;
+
+int main() {
+	int t,n,m,i,j,*cust_order;
+	
+	 vector<bool> sit(M+1);
+    int last_use[M+1]={0};
+    int seen_before[M+1]={0};
+    //int customer[M]={0};
+	
+	cin>>t;
+	while(t--)
+	{ 
+	cin>>n>>m;
+	 cust_order=(int*)calloc(m,sizeof(int));
+	for(i=0;i<m;i++) {
+	cin>>cust_order[i];
+	last_use[cust_order[i]]=i;
+	}
+     	fill(sit.begin(), sit.end(), false);
+       // memset(seen_before, 0,sizeof(seen_before));
+       for(j=0;j<400;j++)
+       seen_before[j]=0;
+        int ans = 0;
+        int order_no = 0;
+	
+	 while (order_no < m && (ans < n || sit[cust_order[order_no]])) {
+            if (!sit[cust_order[order_no]]) {
+                sit[cust_order[order_no]] = true;
+                ans++;
+            }
+            order_no++;
+        }
+	
+	while (order_no < m) {
+            if (!sit[cust_order[order_no]]) {
+                //try to pick victim as customer who doesn't orders again
+                int victim = -1;
+                for (int i = order_no-1; i >= 0; i--) {
+                    if (sit[cust_order[i]] && last_use[cust_order[i]] == i){
+                        victim = cust_order[i];
+                        break;
+                    }
+                }
+                //if all customer will order again, find the one who will order next the last
+                if (victim == -1) {
+                    for (int i = order_no+1; i < m; i++) {
+                        if (sit[cust_order[i]] && seen_before[customer[i]] != order_no) {
+                            victim = customer[i];
+                            seen_before[customer[i]] = order_no;
+                        }
+                    }
+                }
+                sit[victim] = false;
+                //cerr << victim << " ";
+                sit[customer[order_no]] = true;
+                ans++;
+            }
+            order_no++;
+        }
+       
+        cout << ans << endl;
+	
+	}
+	return 0;
+}

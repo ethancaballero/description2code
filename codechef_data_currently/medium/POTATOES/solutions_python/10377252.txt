@@ -1,0 +1,25 @@
+import math
+output = list()
+prime = list()
+val = raw_input()
+t = int(val)
+for i in range(t) :
+	nums = list()
+	string1 = raw_input()
+	nums = string1.split()
+	a = int(nums[0])
+	b = int(nums[1])
+	c = a + b + 1
+	x = 0
+	while x == 0 :
+		div = 0
+		for div in range(2,c):
+			if c % div == 0 :
+				break
+		if div == c-1 :
+			num = c - (a + b)
+			output.append(num)
+			x = 1 
+		c = c + 1
+for i in range(t) :
+	print output[i]

@@ -1,0 +1,89 @@
+ 
+Alice and Bob have decided to play the following game. Initially there are N diamonds placed in a straight line. Diamonds numbered from 1 to N in consecutive order. Each diamond has a specific value. The value of i-th diamond is Vi for i from 1 to N. Players make moves alternatively. In each move player proceeds as follows. If there is only one diamond left the player takes it otherwise he\/she tosses the unbiased coin and if it lands on heads he\/she takes the first diamond among the diamonds that are currently present in a line, otherwise he\/she takes the
+last diamond. What is the expected total value Alice will get, if she plays first? Note that the unbiased coin lands on heads with probability 0.5 (and hence lands on tail with the same probability). Also note that the total value is the sum of values of all diamonds that Alice will get.
+
+Input
+
+The first line of the input contains an integer T, the number of test cases. T test cases follow. Each test case consists of exactly 2 lines. The first line of each test case contains a single integer
+N, the number of diamonds. The second line contains N space separated integers
+V1, V2, ..., VN, the values of diamonds in the order they lie in a line.
+
+Output
+
+Output for each test case should contain a single real number in a separate line, the expected total value Alice will get for this particular test. Your answer will be considered as correct if it has an absolute error less than 10-2.
+
+Constraints
+
+1 \u2264 T \u2264 500 
+1 \u2264 N \u2264 2000 
+0 \u2264 Vi \u2264 999
+
+Example
+
+Input
+4
+1
+100
+2
+42 0
+3
+1 4 9
+4
+5 5 5 5
+
+Output
+100.000
+21.000
+9.500
+10.000
+Explanation
+
+Case 1: In the first move Alice has to take 100, and this is the only move. Hence, the expected value Alice will get is 100.
+
+
+Case 2:  It is quite clear that Alice will make only 1 move. As she can get 42 or 0 with
+equal probability, the expected value she will get is equal to 0.5 \u2219 42 + 0.5 \u2219 0 = 21.
+
+
+Case 3:  Let's consider all possible scenarios how game can proceed:
+
+
+
+
+1st move
+2nd move
+3rd move
+Alice total value
+
+
+Alice gets 1
+Bob gets 4
+Alice gets 9
+10
+
+
+Alice gets 1
+Bob gets 9
+Alice gets 4
+5
+
+
+Alice gets 9
+Bob gets 1
+Alice gets 4
+13
+
+
+Alice gets 9
+Bob gets 4
+Alice gets 1
+10
+
+
+
+
+Clearly each of these scenarios will happen with probability 0.5 \u2219 0.5 = 0.25. Hence the expected value Alice will get is equal to 0.25 \u2219 10 + 0.25 \u2219 5 + 0.25 \u2219 13 + 0.25 \u2219 10 = 9.5.
+
+
+Case 4: Out of the 4 diamonds, Alice will get some 2 of them. As all of the diamonds have the same value 5, the expected value she will get is equal to 5 + 5 = 10.
+

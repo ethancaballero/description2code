@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t;cin>>t;
+while(t--)
+{
+int m,n;cin>>m>>n;int c=0;
+   while((n%m)!=0){
+m=m/2;
+    c++;
+   }
+   while(m!=n)
+{
+    m=m*2;
+    c++;
+}
+cout<<c<<endl;
+}
+}

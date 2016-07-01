@@ -1,0 +1,12 @@
+t=input()
+
+while t>0:
+    list=[]
+    a,b,c=map(int, raw_input().split())
+    list.append(a)
+    list.append(b)
+    list.append(c)
+    list.sort()
+    print list[1]
+    t-=1
+

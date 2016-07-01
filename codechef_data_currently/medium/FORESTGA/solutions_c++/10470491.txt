@@ -1,0 +1,63 @@
+# include<bits/stdc++.h>
+using namespace std;
+# define ll unsigned long long int
+int main()
+{
+    ll sum;
+      ll mid,temp;
+        ll n,w,l,i;
+        cin>>n>>w>>l;
+        ll h[n];
+        ll r[n];
+        ll tl=0;
+        ll tr=w;
+        for(i=0;i<n;i++)
+        {
+            cin>>h[i]>>r[i];
+        }
+        sum=0;
+            for(i=0;i<n;i++)
+            {
+                temp=h[i]+(r[i]*0);
+                if(temp>=l)
+                {
+                    sum=sum+temp;
+                }
+
+            }
+            if(sum>=w)
+            {
+                cout<<"0"<<endl;
+            }
+            else
+            {
+
+
+        while((tl+1)<tr)
+        {
+            mid=(tr+tl)/2;
+            sum=0;
+            for(i=0;i<n;i++)
+            {
+                temp=h[i]+(r[i]*mid);
+                if(temp>=l)
+                {
+                    sum=sum+temp;
+                }
+
+            }
+            //cout<<mid<<" ";
+            if(sum>=w)
+            {
+                tr=mid;
+            }
+            else
+            {
+                tl=mid;
+            }
+        }
+        cout<<tr<<endl;
+            }
+
+
+}

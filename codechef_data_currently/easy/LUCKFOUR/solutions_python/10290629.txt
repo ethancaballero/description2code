@@ -1,0 +1,9 @@
+t=int(raw_input());
+l = [];
+k=0;
+while t:
+	a=raw_input();
+	l.append(a);
+	print l[k].count("4");
+	k+=1
+	t-=1

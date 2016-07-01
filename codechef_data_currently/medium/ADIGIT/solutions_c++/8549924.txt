@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int b[100010][10];
+main()
+{
+	int i,j,t,n,m;
+	scanf("%d %d",&n,&m);
+	char str[100010];
+	scanf("%s",str+1);
+	for(i=0;i<=9;i++)
+	{
+		b[0][i]=0;
+	}
+	for(i=1;i<=n;i++)
+	{
+		int temp=str[i]-'0';
+		for(j=0;j<=9;j++)
+		{
+			b[i][j]=b[i-1][j]+abs(j-temp);
+		}
+	}
+	while(m--)
+	{
+		scanf("%d",&t);
+		printf("%d
+",b[t][str[t]-'0']);
+	}
+}

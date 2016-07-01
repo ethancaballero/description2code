@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <iostream>
+#include <cstdlib>
+#include <math.h>
+#define M 1000000007
+
+using namespace std;
+
+int b[1000000] = {0};
+
+long long int ones(int n)
+{
+	long long int ans = 0;
+	while(n > 0)
+	{
+		if(n%2 == 1)
+		{
+			ans = ans + 1;
+			n = n/2;
+		}
+		else
+			n = n/2;
+	}
+	return ans;
+}
+
+int main(){
+	int T, count = 0, last = 0;	
+	cin >> T;
+	int N, G, temp1, temp2, temp3, t;
+	b[0] = 1;
+	b[1] = 2;
+	last = 2;
+	while(T--){
+		cin >> N;
+		cin >> G;
+		if(N == 1 || N == 2){
+			if(G == 1)
+				cout << "CORRECT" << endl;
+			else
+				cout << "INCORRECT" << endl;
+			continue;
+		}
+		if(b[N-1] == 0){
+			t = last;
+			while(t < N){
+				b[t] = (b[t-1] + b[t-2])%M;
+				t++;
+			}
+			last = N;
+		}
+		//cout << b[N-1] << endl;
+		if(ones(b[N-1]) == G){
+			cout << "CORRECT" << endl;
+		}
+		else
+			cout << "INCORRECT" << endl;
+	}
+}
+
+
+
+
+

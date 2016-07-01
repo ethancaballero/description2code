@@ -1,0 +1,181 @@
+/*		Anupraas Gautam
+		CSE, 
+		MNNIT, Allahabad.	
+ 
+FINAL!!!!!!
+JULY LONG QUESTION 5
+	*/
+ 
+ 
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define sf(x) scanf("%d",&x)
+#define sf2(x,y) scanf("%d %d",&x,&y)
+#define pf(x) printf("%d ",x)
+#define pf2(x,y) printf("%d %d",x,y)
+#define sp printf(" ")
+#define nl printf("
+")
+#define yes printf("YES")
+#define no printf("NO")
+#define fl(i,l,r) for(i=l;i<r;i++)
+#define flr(i,r,l) for(i=r;i>l;i--)
+#define wlt(t) while(t--)
+ 
+#define ll long long int 
+#define vi vector<int>
+#define vii vector<pair<int,int> >
+#define viii vector<pair<int,pair<int,int> > >
+#define pii pair<int,int>
+ 
+#define mem(x,y) memset(x,y,sizeof(x))
+#define sq(x) ((x)*(x))
+#define pb(x) push_back(x)
+#define mp(x,y) make_pair(x,y)
+#define all(x) x.begin(),x.end()
+ 
+#define F first
+#define S second
+ 
+/*
+				---------------------
+				-	CODE FROM HERE	-	
+				---------------------
+*/
+#define MOD 1000000007
+#define MAX 100005
+int arr[MAX];
+ll tree[3*MAX];
+ll lazy[3*MAX];
+ll lazyp[3*MAX];
+ll lazys[3*MAX];
+ 
+void build(int idx,int i,int j)
+{
+if(i==j)
+{
+tree[idx]=arr[i-1];
+return;
+}
+build(2*idx,i,(i+j)/2);
+build(2*idx+1,((i+j)/2)+1,j);
+tree[idx]=(tree[2*idx]%MOD+tree[2*idx+1]%MOD)%MOD;
+}
+ 
+ 
+void propagate(int idx,int i,int j)
+{
+if(lazys[idx]==0)
+{
+tree[idx]=(((tree[idx])%MOD * (lazyp[idx]))%MOD+(((ll)j-i+1)*lazy[idx]))%MOD;
+if(i!=j)
+{
+lazy[2*idx]=(((lazy[2*idx]) * (lazyp[idx]))%MOD+lazy[idx])%MOD;
+lazy[2*idx+1]=(((lazy[2*idx+1])*(lazyp[idx]))%MOD+lazy[idx])%MOD;
+ 
+lazyp[2*idx]=((lazyp[2*idx]) * (lazyp[idx]))%MOD;
+lazyp[2*idx+1]=((lazyp[2*idx+1]) * (lazyp[idx]))%MOD;
+}
+lazy[idx]=0;
+lazyp[idx]=1;
+}
+ 
+else
+{
+tree[idx]=(((ll)j-i+1)*(lazys[idx]))%MOD;
+if(i!=j)
+{
+lazy[2*idx]=lazy[2*idx+1]=0;
+lazyp[2*idx]=lazyp[2*idx+1]=1;
+lazys[2*idx]=lazys[2*idx+1]=lazys[idx];
+}
+lazys[idx]=0;
+if(lazy[idx]!=0 || lazyp[idx]!=1)
+propagate(idx,i,j);
+lazy[idx]=0;
+lazyp[idx]=1;
+ 
+}
+}
+ 
+void update(int idx,int i,int j,int l,int r,int val,int u)
+{
+if(lazy[idx]!=0 || lazyp[idx]!=1||lazys[idx]!=0)
+{propagate(idx,i,j);}
+if(i>r||j<l)
+return ;
+if(i>=l && j<=r)
+{
+if(u==1)
+lazy[idx]=(lazy[idx]%MOD+val)%MOD;
+else if(u==2)
+{
+lazy[idx]=((lazy[idx]%MOD) * (val))%MOD;
+lazyp[idx]=((lazyp[idx]%MOD) * (val))%MOD;
+}
+else
+{
+lazy[idx]=0;
+lazyp[idx]=1;
+lazys[idx]=val;
+}
+propagate(idx,i,j);
+return;
+}
+update(2*idx,i,(i+j)/2,l,r,val,u);
+update(2*idx+1,((i+j)/2)+1,j,l,r,val,u);
+tree[idx]=(tree[2*idx] + tree[2*idx+1])%MOD;
+}
+ 
+ll query(int idx,int i,int j,int l,int r)
+{
+if(lazy[idx]!=0 || lazyp[idx]!=1||lazys[idx]!=0)
+propagate(idx,i,j);
+if(i>r || j<l)
+return 0;
+if(i>=l && j<=r)
+return tree[idx];
+ll x,y;
+x=query(2*idx,i,(i+j)/2,l,r);
+y=query(2*idx+1,((i+j)/2)+1,j,l,r);
+//return (max(x,y));
+return (x+y)%MOD;
+}
+ 
+ 
+int main()
+{
+int t;
+int u;
+int v;
+{
+int n,c,p,q,i;
+sf2(n,c);
+ 
+fl(i,0,3*MAX)
+{
+tree[i]=lazy[i]=lazys[i]=0;
+lazyp[i]=1;
+}
+ 
+fl(i,0,n)
+sf(arr[i]);
+build(1,1,n);
+ 
+fl(i,0,c)
+{
+sf(u);
+sf2(p,q);
+if(u==1 || u==2||u==3)
+{
+sf(v);
+update(1,1,n,p,q,v,u);
+}
+else
+printf("%lld
+",query(1,1,n,p,q));
+}
+}
+return 0;
+}

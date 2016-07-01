@@ -1,0 +1,38 @@
+def maxSubArraySum(A):
+    f = []
+    b = []
+
+    cur = 0
+    for i in range(len(A)):
+        cur = max(A[i],cur+A[i])
+        f.append(cur)
+
+    cur=0
+
+    ll = range(len(A))
+    ll.reverse()
+    for i in ll:
+        cur = max(A[i],cur+A[i])
+        b.append(cur)
+
+    b.reverse()
+
+    ans = max(f)
+    # print "f ",f
+    # print "b ",b
+    # print "max normal ",ans
+
+    for i in range(1,len(A)-1):
+        ans = max(ans,f[i-1]+b[i+1])
+    
+    return ans
+
+
+T = int(raw_input())
+
+while T > 0:
+
+    n=raw_input()
+    l = map(int,raw_input().split())
+    print maxSubArraySum(l)
+    T-=1

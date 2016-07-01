@@ -1,0 +1,9 @@
+for i in range(int(raw_input())):
+    a=raw_input()
+    s=""
+    for j in range(len(a)-1,-1,-1):
+        s+=a[j]
+    if a==s:
+        print "wins"
+    else:
+        print "losses"

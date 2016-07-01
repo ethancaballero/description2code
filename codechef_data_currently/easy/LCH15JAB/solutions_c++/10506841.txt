@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#define fo(x,n) for(int i=x;i<n;i++)
+using namespace std;
+
+int main()
+{
+    int t;
+    string s;
+    cin>>t;
+    while(t--)
+    {
+        map <char,int> m;
+        m.clear();
+        cin>>s;
+        fo(0,s.length())
+        {
+            m[s[i]]++;
+        }
+        bool flag = false;
+        fo(0,s.length())
+        {
+            if(m[s[i]]==s.length()-m[s[i]])
+                flag = true;
+        }
+        if(flag)
+            cout<<"YES
+";
+        else cout<<"NO
+";
+    }
+    return 0;
+}

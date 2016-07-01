@@ -1,0 +1,17 @@
+for t in range(0, input()):
+    input()
+    z = 0
+    vals = raw_input().split()
+    cons = False
+    
+    for i in range(0, len(vals) - 1):
+        if vals[i] != vals[i+1]:
+            z += 1
+            if not cons:
+                z += 1
+            cons = True
+        else:
+            cons = False
+        
+    print z
+        

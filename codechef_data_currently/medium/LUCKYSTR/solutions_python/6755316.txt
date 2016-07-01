@@ -1,0 +1,33 @@
+#-------------------------------------------------------------------------------
+# Name:        Rajat Singh
+# Purpose:
+#
+# Author:      hp
+#
+# Created:     11-04-2015
+# Copyright:   (c) hp 2015
+# Licence:     <your licence>
+#-------------------------------------------------------------------------------
+import string
+t=raw_input().split()
+#n=raw_input()
+#n=int(n)
+a=[]
+for i in range(0,int(t[0])):
+    a.append(raw_input())
+for j in range(0,int(t[1])):
+    k=raw_input()
+    if len(k)>=47:
+         print "Good"
+    else:
+
+       temp=-1
+
+       for r in range(0,int(t[0])):
+          if string.find(k,a[r])!=-1:
+              print "Good"
+              temp=0
+              break
+          temp=1
+       if temp==1:
+           print "Bad"

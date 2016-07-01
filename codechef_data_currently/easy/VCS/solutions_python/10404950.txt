@@ -1,0 +1,10 @@
+t=int(raw_input())
+for i in range(0,t):
+	lis=list(map(int,raw_input().split()))
+	lis1=list(map(int,raw_input().split()))
+	lis2=list(map(int,raw_input().split()))
+	set1=set(lis1)
+	set2=set(lis2)
+	p =  len(set1.intersection(set2))
+	q= len(set1.union(set2))
+	print p,lis[0]-q

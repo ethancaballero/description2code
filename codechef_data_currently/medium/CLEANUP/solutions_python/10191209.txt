@@ -1,0 +1,32 @@
+import sys
+
+def main():
+	t = int(raw_input())
+	n , m = map(int, raw_input().split())
+	while t:
+		if n or not n:
+			listm = map(int, raw_input().split())
+			myset = set()
+			l = []
+			for i in range(m):
+				myset.add((listm[i]))
+			for j in range(n):
+				if (j+1) not in myset:
+					l.append(j+1)
+			i =0
+			while i < len(l):
+				print l[i] ,
+				i=i+2
+			print
+			i=1
+			while i < len(l):
+				print l[i] ,
+				i=i+2
+			if t>1:
+				print
+		t=t-1;
+		if t:
+			n,m = map(int, raw_input().split())
+	sys.exit()
+if __name__ == '__main__':
+	main()

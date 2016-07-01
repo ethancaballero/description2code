@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int t1,t2,T1,T2;
+		cin>>T1>>T2>>t1>>t2;
+		double sqr1,sqr2;
+		if(T1>T2)
+		{
+			swap(T1,T2);
+			swap(t1,t2);
+		}
+		if(t1>T2) t1=T2;
+		if(t2>T1) t2=T1;
+		sqr1=T1*0.5*T1;
+		if(t2<T1)
+		 sqr1-=(T1-t2)*0.5*(T1-t2);
+		if(t1+T1<=T2)
+		{
+			sqr2=t1*1.0*T1;
+			
+		}
+		else
+		{
+			sqr2=T1*0.5*T1;
+			sqr2+=(T2-T1)*1.0*(T1);
+			sqr2-=(T2-t1)*0.5*(T2-t1);
+		}
+		cout.precision(6);
+		cout<<fixed<<(sqr1+sqr2)/(T1*1ll*T2)<<endl;
+		
+	}
+}

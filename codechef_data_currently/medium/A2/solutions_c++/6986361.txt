@@ -1,0 +1,48 @@
+/**
+submitted by: prakhar8795
+Sleep. Code. Eat. Repeat.
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+typedef long long int ll ;
+
+
+void solve()
+{
+    int test ;
+    scanf("%d",&test) ;
+    while(test--) {
+        int k ;
+        scanf("%d",&k) ;
+        int stem=1,flag=0 ;
+        for(int i=0 ; i<k ; i++) {
+            int leaves ;
+            scanf("%d",&leaves) ;
+            if(leaves>stem) {
+                flag=1 ;
+                break ;
+            }
+            stem= (stem-leaves)*2 ;
+        }
+        if(stem || flag) {
+            printf("No
+") ;
+        }
+        else {
+            printf("Yes
+") ;
+        }
+    }
+}
+
+int main()
+{
+    //freopen("input.txt","r",stdin) ;
+    //freopen("out.txt","w",stdout) ;
+    solve() ;
+    return 0 ;
+}
+

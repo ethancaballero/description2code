@@ -1,0 +1,16 @@
+def f(n):
+	divsum = 0
+	for i in xrange(1, n + 1, 2):
+		divsum += i * (n / i)
+	return divsum
+
+if __name__ == "__main__":
+	T = raw_input()
+	T = int(T)
+	while(T > 0):
+		T -= 1
+		l_and_r = raw_input()
+		l, r = l_and_r.split()
+		l = int(l)
+		r = int(r)
+		print f(r) - f(l-1)

@@ -1,0 +1,21 @@
+#include <cstdio>
+#include <cstring>
+using namespace std;
+int main()
+{
+  long long bit[60], val[105]; int S, C, K, i, j, k, tn;
+  for (i = 0; i < 60; i++) bit[i] = 1LL << i;
+  for (scanf("%d", &tn); tn--; )
+  {
+    scanf("%d%d%d", &S, &C, &K);
+    memset(val, 0, sizeof val);
+    for (i = 1; i < S; i++)   if (S - i - 1 < C) val[i + 1] += bit[S - i];
+                              else val[i] += bit[S - i];
+    if (S >= 1) val[S] += 3;
+    for (i = 0; i < C; i++)    if (i + 1 > S - 1) val[1] += bit[i + 1];
+    long long rlt = 0LL;
+    for (i = K; i < 105; i++) rlt += val[i];
+    printf("%lld
+", rlt);
+  }
+}

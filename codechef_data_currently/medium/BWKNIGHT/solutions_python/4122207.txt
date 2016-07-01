@@ -1,0 +1,14 @@
+test = input()
+while(test):
+	n, m = raw_input().split()
+	n = int(n)
+	m = int(m)
+	res = m*n*(m*n-1)
+	if (m>1 and n>2):
+		res -= 4*(m-1)*(n-2)
+	if (m>2 and n>1):
+		res -= 4*(m-2)*(n-1)
+	print "%d
+" % res
+	test -= 1
+

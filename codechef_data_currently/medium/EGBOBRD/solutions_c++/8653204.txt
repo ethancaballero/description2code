@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long int g,k,c=1,w,y;
+    long int n,m,t;
+    scanf("%ld",&t);
+    while(t--)
+    {
+        scanf("%ld%ld",&n,&k);
+        g=k;
+        while(n--)
+        {
+            scanf("%ld",&m);
+            if(k>m)
+            {
+                k=k-(m+1);
+            }
+            else if(k==m)
+            {
+                k=0;
+            }
+            else
+            {   w=m-k;
+                y=(w-1)/g;
+                c=c+y+1;
+                k=k+((y+1)*g);
+                if(k!=m)
+                k=k-(m+1);
+                else
+                k=0;
+            }
+        }
+        printf("%ld
+",c);
+        c=1;
+    }
+    return 0;
+}

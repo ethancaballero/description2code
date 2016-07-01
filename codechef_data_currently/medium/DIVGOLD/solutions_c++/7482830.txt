@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include<stdio.h>
+using namespace std;
+
+string modify1(string str,int i,int j){
+str.insert(i,str,j,1);
+//std::cout<<"inserted   "<<str<<"
+";
+str.erase (str.begin()+j+1);
+//std::cout<<"deleted  "<<str<<"
+";
+return str;
+}
+
+string modify2(string str,int i,int j){
+str.insert(i+1,str,j,1);
+//std::cout<<"inserted   "<<str<<"
+";
+str.erase (str.begin()+j);
+//std::cout<<"deleted  "<<str<<"
+";
+return str;
+}
+string min1(string str1,string str2,int n)
+{
+    int i=0;
+    while(i<n){
+
+        if((int)str1[i]>(int)str2[i])
+        {
+            //cout<<str2;
+            return str2;
+        }else if((int)str1[i]<(int)str2[i]){
+            //cout<<str1;
+            return str1;
+        }else if((int)str1[i]==(int)str2[i])
+            {
+                i++;
+            }
+    }
+
+return str1;
+}
+
+int main ()
+{
+    int i,t;
+    scanf("%d",&t);
+    for(i=0;i<t;i++)
+    {
+        int n,j,k;
+        string str,str1,min_str;
+        std::cin>>n;
+        cin>>str1;
+        min_str=str1;
+        //modify(str1,0,1);
+        for(j=0;j<n;j++){
+            for(k=0;k<n;k++){
+                    string temp;
+                    if(j<k){
+                        temp=modify1(str1,j,k);
+                    }else{
+                        temp=modify2(str1,j,k);
+                    }
+                    //cout<<"
+";
+                    min_str=min1(min_str,temp,n);
+            }
+        }
+        cout<<min_str<<"
+";
+        //str1=modify(str,2,4);
+    }
+    return 0;
+}

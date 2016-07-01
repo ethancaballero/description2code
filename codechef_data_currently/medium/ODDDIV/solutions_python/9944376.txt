@@ -1,0 +1,10 @@
+for _ in range(input()):
+	l,r = map(int, raw_input().split())
+	fl = fr =0
+	for i in range(1,l,2):
+		for d in range(i,l,i):
+			fl += i
+	for i in range(1,r+1,2):
+		for d in range(i,r+1,i):
+			fr += i
+	print fr - fl

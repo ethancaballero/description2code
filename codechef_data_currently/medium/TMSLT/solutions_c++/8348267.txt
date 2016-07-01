@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+
+    
+    int main() {
+     
+    int t;
+    scanf("%d",&t);
+      while(t--)
+      {
+        int n;
+        unsigned long long a,b,c,d,s,temp,i;
+        scanf("%d%lld%lld%lld%lld",&n,&a,&b,&c,&d);
+        
+        int hash[1000000]={0};
+        temp=d;
+        hash[d]=1;
+        for(i=1;i<n;i++)
+        {
+          s=(a*temp*temp + b*temp +c)%1000000;
+          temp=s;
+          if(hash[s])
+            hash[s]=0;
+          else
+            hash[s]=1;
+        }
+        
+        int count=0;
+        long long sum=0;
+        
+        for(i=0;i<1000000;i++)
+        {
+          if(hash[i])
+          {
+            if(count%2==0)
+              sum +=i;
+            else
+              sum -=i;
+              count++;
+          }
+        }
+          sum=abs(sum);
+          printf("%lld
+",sum );
+        
+      }
+      return 0;
+    }    

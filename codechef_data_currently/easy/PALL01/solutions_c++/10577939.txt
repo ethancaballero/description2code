@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+	int t,n,rem=0,c;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		rem=0;//reintialise REMEMBER
+		c=n;
+		while(n!=0)
+		{
+			rem*=10;
+			rem+=n%10;
+			n/=10;
+		}
+		if(c==rem)
+		cout<<"wins"<<endl;
+		else
+		cout<<"losses"<<endl;
+	}
+			
+		
+	return 0;
+}

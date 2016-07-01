@@ -1,0 +1,27 @@
+t=input()
+while t>0:
+    n,k,ans=map(int,raw_input().split())
+    a=map(int,raw_input().split())
+    l=ans
+    s=raw_input().strip()
+    t-=1
+    if k==0:
+        print ans
+        continue
+    if s=='XOR':
+        if k%2==0:
+            tmp=0
+        else:
+            tmp=a[0]
+            for i in range(1,n):
+                tmp^=a[i]
+        ans=ans^tmp
+    elif s=='AND':
+        for i in range(0,n):
+            ans=ans&a[i]
+    else:
+        for i in range(0,n):
+            ans=ans|a[i]
+    print ans
+            
+        

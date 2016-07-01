@@ -1,0 +1,23 @@
+loc = {}
+
+def min_steps(matrix, n):
+    for i in xrange(n):
+        for j in xrange(n):
+            l = matrix[i][j]
+            loc[l] = (i, j)
+    r, c = loc[1]
+    steps = 0
+    for cur in xrange(2, n * n + 1):
+        row, column = loc[cur]
+        steps += abs(r - row) + abs(c - column)
+        r, c = row, column
+    return steps
+
+t = input()
+for _ in xrange(t):
+    n = input()
+    matrix = []
+    for i in xrange(n):
+        matrix.append(map(int, raw_input().split()))
+    print min_steps(matrix, n)
+    loc = {}

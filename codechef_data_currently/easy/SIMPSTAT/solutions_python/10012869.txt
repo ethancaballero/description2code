@@ -1,0 +1,9 @@
+test_cases = input()
+for test_case in range(test_cases):
+    m = map(int,raw_input().split())[1]
+    n = map(int,raw_input().split())
+    for i in range(m):
+        n.remove(max(n))
+        n.remove(min(n))
+    print(float(sum(n))/len(n))
+    

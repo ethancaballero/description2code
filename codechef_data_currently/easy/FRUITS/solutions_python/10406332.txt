@@ -1,0 +1,14 @@
+t=int(raw_input())
+for i in range(0,t):
+	lis=list(map(int,raw_input().split()))
+	n=lis[0]
+	m=lis[1]
+	k=lis[2]
+	diff=abs(n-m)
+	mini=min(n,m)
+	if diff==k:
+		print 0
+	elif diff<k:
+		print 0
+	elif diff>k:	
+		print diff - k

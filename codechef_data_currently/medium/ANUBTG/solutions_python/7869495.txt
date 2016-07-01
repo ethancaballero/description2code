@@ -1,0 +1,10 @@
+t = int(raw_input())
+for _ in range(t):
+    n = int(raw_input())
+    a = map(int,raw_input().split())
+    a.sort()
+    a.reverse()
+    sum = 0
+    for i in range(n):
+        if i%4 == 0 or i%4 == 1: sum += a[i]
+    print sum

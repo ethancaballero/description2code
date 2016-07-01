@@ -1,0 +1,42 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+#define f(i, n) for(int i = 0; i<n; ++i)
+
+int main()
+{
+    std :: ios :: sync_with_stdio(false);
+    int t;
+    cin >> t;
+    while(t--) {
+        int R, G, B, M;
+        cin >> R >> G >> B >> M;
+        int r, g, b, maxR, maxG, maxB;
+        maxR = maxG = maxB = 0;
+        f(i, R) {
+            cin >> r;
+            if(maxR < r) maxR = r;
+        }
+        f(i, G) {
+            cin >> g;
+            if(maxG < g) maxG = g;
+        }
+        f(i, B) {
+            cin >> b;
+            if(maxB < b) maxB = b;
+        }
+        vector < int > v(3);
+        v.push_back(maxR);
+        v.push_back(maxG);
+        v.push_back(maxB);
+        f(i, M) {
+            sort(v.rbegin(), v.rend());
+            v[0] >>= 1;
+        }
+        sort(v.rbegin(), v.rend());
+        cout << v[0] << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,18 @@
+for asd in range(int(raw_input())):
+	n,m=map(int,raw_input().split())
+	order=map(int,raw_input().split())
+	l=[]
+	for ass in range(n):
+		temp=map(int,raw_input().split())
+		room=temp[0]
+		amount=sorted(temp[1:])
+		l.append(amount)
+	s=0
+	for i in order:
+		try:
+			temp=l[i]
+			s+=temp[-1]
+			l[i].pop()
+		except:
+			continue
+	print s

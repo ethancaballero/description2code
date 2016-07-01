@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,i;
+    string s;
+    cin>>t;
+    while(t--)
+    {
+        cin>>s;
+        for(i=s.size()-1;i>=0;i--)
+        {
+            switch(s[i])
+            {
+            case 'F' :  if(((s[i-1]=='?')||(s[i-1]=='E'))&&((s[i-2]=='?')||(s[i-2]=='H'))&&((s[i-3]=='?')||(s[i-3]=='C')))
+                        {
+                            s[i-1]='E';
+                            s[i-2]='H';
+                            s[i-3]='C';
+                            i=i-3;
+                        }
+                        break;
+            case '?' :  if(((s[i-1]=='?')||(s[i-1]=='E'))&&((s[i-2]=='?')||(s[i-2]=='H'))&&((s[i-3]=='?')||(s[i-3]=='C')))
+                        {
+                            s[i]='F';
+                            s[i-1]='E';
+                            s[i-2]='H';
+                            s[i-3]='C';
+                            i=i-3;
+                        }
+                        else
+                        {
+                            s[i]='A';
+                        }
+                        break;
+            }
+        }
+        cout<<s<<endl;
+    }
+    return 0;
+}

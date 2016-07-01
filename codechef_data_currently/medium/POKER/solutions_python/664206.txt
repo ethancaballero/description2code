@@ -1,0 +1,113 @@
+# code chef - easy practice - poker
+
+def evalHand(cards):
+    straight = flush = highStraight = False
+    ranks = []
+    suits = []
+    for card in cards:
+        rank = card[0]
+        if rank=="A":
+            rank=1
+        elif rank=="T":
+            rank =10
+        elif rank=="J":
+            rank=11
+        elif rank=="Q":
+            rank=12
+        elif rank=="K":
+            rank=13
+        else:
+            rank =int(rank)
+        ranks.append(rank)
+        suits.append(card[1])
+    ranks.sort()
+    suits.sort()
+
+    counts = []
+    lastRank = ""
+    count = 0
+    for rank in ranks:
+        if rank==lastRank:
+            count +=1
+        else:
+            if count:
+                counts.append(count)
+            lastRank = rank
+            count = 1
+    counts.append(count)
+
+    counts.sort(reverse=True)
+
+    # check for pair-type hands
+
+    if (counts[0]==4):
+        return "four of a kind"
+    elif (counts[0]==3):
+        if (counts[1]==2):
+            return "full house"
+        else:
+            return "three of a kind"
+    elif (counts[0]==2):
+        if (counts[1]==2):
+            return "two pairs"
+        else:
+            return "pair"
+    else:
+        # no pair:  high card, straight, flush, straight flush, royal flush
+
+        if suits[0]==suits[4]:
+            flush = True
+
+        if ranks[4]==ranks[0]+4:
+            straight = True
+            
+        if ranks[0]==1 and ranks[1]==10:
+            highStraight = True
+
+        if flush and highStraight:
+            return "royal flush"
+        elif flush and straight:
+            return "straight flush"
+        elif flush:
+            return "flush"
+        elif straight or highStraight:
+            return "straight"
+        else:
+            return "high card"    
+
+nCases = int(raw_input())
+
+for iter in range(nCases):
+    cards = raw_input().split()
+    value = evalHand(cards)
+    print value
+
+##deck = []
+##for suit in "CDHS":
+##    for rank in "AKQJT98765432":
+##        card = rank+suit
+##        deck.append(card)
+##
+##results = {}
+##hand = [""]*5
+##for c1 in range(52):
+##    hand[0] = deck[c1]
+##    for c2 in range(c1+1,52):
+##        hand[1] = deck[c2]        
+##        for c3 in range(c2+1,52):
+##            hand[2] = deck[c3]
+##            for c4 in range(c3+1, 52):
+##                hand[3] = deck[c4]
+##                for c5 in range(c4+1, 52):
+##                    hand[4] = deck[c5]
+##                    value = evalHand(hand)
+##                    if value in results.keys():
+##                        results[value] = results[value]+1
+##                    else:
+##                        results[value] = 1
+##
+##print results
+##
+##                        
+##                    
+##        

@@ -1,0 +1,43 @@
+from math import factorial
+mod = 1000000007
+
+mul = lambda x, y: x * y
+
+product_range_cache = {}
+def product_range(a, b):
+   key = (a, b)
+   if key not in product_range_cache:
+      product_range_cache[key] = reduce(mul, xrange(a, b), 1)
+   return product_range_cache[key]
+
+comb_cache = {}
+def combinations(n, r):
+   key = (n, r)
+   if key not in comb_cache:
+      comb_cache[key] = (product_range(n - r + 1, n + 1) / factorial(r)) % mod
+   return comb_cache[key]
+
+F = []
+meal = {}
+def cook(N, S):
+   if S == 0: return 1
+   if N == 0: return 0
+   key = (N, S)
+   if key in meal: return meal[key]
+   food = 0
+   for rank in xrange(N, 0, -1):
+      for count in xrange(S // rank, 0, -1):
+         cooked = cook(rank - 1, S - (rank * count))
+         if cooked: food += combinations(F[rank] + count - 1, count) * cooked
+   food %= mod
+   meal[key] = food
+   return food
+
+for _ in xrange(int(raw_input())):
+   A0, A1, A2, A3 = map(int, raw_input().split())
+   S = int(raw_input())
+   F = [0]
+   for N in xrange(1, S + 1):
+      F.append((((A3 * N + A2) * N + A1) * N + A0) % mod)
+   meal = {}
+   print cook(S, S)

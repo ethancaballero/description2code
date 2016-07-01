@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,i,k,t,r,j,s;
+	long int w[100];
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		r=0,s=0;
+		for(i=0;i<n;i++)
+		{
+		  cin>>w[i];
+		  s+=w[i];
+	    }
+	    sort(w,w+n);
+	    int k1=n/2;
+	    if(k<=k1)
+	    {
+		  for(i=0;i<k;i++)
+	      r+=w[i];
+	    }
+	    else
+	    {
+	    	for(i=0;i<n-k;i++)
+	    	r+=w[i];
+		}
+		cout<<s-2*r<<endl;
+	}
+	return 0;
+} 

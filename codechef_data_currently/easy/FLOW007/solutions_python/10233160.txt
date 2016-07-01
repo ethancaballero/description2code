@@ -1,0 +1,16 @@
+t = input()
+#print t
+
+while t > 0:
+
+    num = raw_input()
+    #print num
+
+    result = ""
+
+    for i in reversed(num):
+        result += i
+
+    print int(result)
+        
+    t -= 1

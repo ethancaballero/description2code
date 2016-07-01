@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+typedef long long ll;
+ 
+struct Segment
+{
+	ll val;
+	int lef, rig;
+	Segment(ll v, int l, int r): val(v), lef(l), rig(r) {}
+};
+ 
+struct cmp
+{
+	bool operator()(Segment x, Segment y)
+	{
+		return x.val > y.val;
+	}
+};
+ 
+int n, k;
+ll a[100010], sum;
+set<Segment, cmp> st;
+vector<ll> res;
+ 
+int main()
+{
+	scanf("%d %d", &n, &k);
+ 
+	for (int i = 1; i <= n; ++i)
+		scanf("%lld", a+i), sum += a[i];
+ 
+	st.insert(Segment(sum, 1, n));
+ 
+	while ((int)res.size() < k)
+	{
+		Segment s = *(st.begin());
+		st.erase(st.begin());
+		// printf("%lld %d %d
+", s.val, s.lef, s.rig);
+		res.push_back(s.val);
+		if (s.lef < s.rig)
+		{
+			st.insert(Segment(s.val - a[s.lef], s.lef + 1, s.rig));
+			st.insert(Segment(s.val - a[s.rig], s.lef, s.rig - 1));
+		}
+	}
+ 
+	for (int i = 0; i < k; ++i)
+		printf("%lld ", res[i]);
+ 
+	return 0;
+} 

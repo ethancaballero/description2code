@@ -1,0 +1,95 @@
+#include <cstdio>
+#include <map>
+#include <string>
+#include <iostream>
+#include <utility>
+ 
+using namespace std;
+map<string, int> cities;
+inline void getString(string* var) {
+	char buf[22];
+	scanf("%s", buf);
+	*var = buf;
+}
+ 
+inline int getIndex(string* city) {
+	map<string, int>::iterator p;
+	p = cities.find(*city);
+	if (p == cities.end())
+		return -1;
+	int index = p->second;
+	return index;
+ 
+}
+int main() {
+	//freopen("traveler.in", "rt", stdin);
+	int numCities;
+	int numRoads;
+	int numRoutes;
+	string cityname;
+	int roadLengths[50][50] = { { 0 } };
+	scanf("%d", &numCities);
+ 
+	for (int var = 0; var < numCities; ++var) {
+		getString(&cityname);
+		cities.insert(pair<string, int>(cityname, var));
+	}
+ 
+	scanf("%d", &numRoads);
+	for (int var = 0; var < numRoads; ++var) {
+		int index1, index2;
+		getString(&cityname);
+		index1 = getIndex(&cityname);
+		getString(&cityname);
+		index2 = getIndex(&cityname);
+		scanf("%d", roadLengths[index1] + index2);
+	}
+ 
+	scanf("%d", &numRoutes);
+	for (int i = 0; i < numRoutes; ++i) {
+		int length = 0;
+		int routeLength;
+		int index1, index2;
+		bool flag = true;
+		bool visited[50] = { false };
+		scanf("%d", &routeLength);
+ 
+		getString(&cityname);
+		index1 = getIndex(&cityname);
+		if (index1 == -1)
+			flag = false;
+ 
+		visited[index1] = true;
+ 
+		for (int var = 1; var < routeLength; ++var) {
+			getString(&cityname);
+			if (flag) {
+				index2 = getIndex(&cityname);
+				if (index2 == -1) {
+					flag = false;
+					continue;
+				}
+				if (visited[index2]) {
+					flag = false;
+					continue;
+				}
+				visited[index2] = true;
+				int distance = roadLengths[index1][index2];
+				if (distance > 0)
+					length += distance;
+				else
+					flag = false;
+				index1 = index2;
+			}
+		}
+ 
+		if (flag)
+			printf("%d
+",length);
+		else
+			printf("ERROR
+");
+ 
+	}
+	return 0;
+}

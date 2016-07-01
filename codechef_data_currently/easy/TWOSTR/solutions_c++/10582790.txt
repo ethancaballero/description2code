@@ -1,0 +1,28 @@
+#include <iostream>
+#include<string>
+using namespace std;
+ 
+int main() {
+	int t,i;
+	cin>>t;
+	while(t--)
+	{
+		int len;
+		string x,y;
+		cin>>x;
+		cin>>y;
+		len=x.size();
+		for(i=0;i<len;i++)
+		{
+			if(x[i]==y[i]||x[i]=='?'||y[i]=='?')
+			continue;
+			else
+			break;
+		}
+		if(i==len)
+		cout<<"Yes"<<endl;
+		else
+		cout<<"No"<<endl;
+	}
+		return 0;
+} 

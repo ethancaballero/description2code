@@ -1,0 +1,25 @@
+import math;
+
+st = raw_input()
+x = int(st.split(" ")[0].strip())
+n = int(st.split(" ")[1].strip())
+lstc = []
+for i in range(0, n):
+    lstc.append(raw_input())
+
+res = 0
+
+for i in range(0, n):
+    t = lstc[i]
+    for j in range(0, 9):
+        m = 0
+        for k in range(0,6):
+            if (k < 4):
+                idx = 4 * j + 1 + k
+            else:
+                idx = 4*9 + 2* (9-j) - (6-k-1)
+            if t[idx-1] == "0":
+                m+=1
+        if m>=x:
+            res += math.factorial(m) / (math.factorial(x) * math.factorial(m-x))
+print res

@@ -1,0 +1,56 @@
+#include <cstdio>
+#include <string.h>
+
+#define SIZE 50002
+
+int main(int argc, char** argv) {
+	int testCases;
+	int occurrences[SIZE] = {0};
+	int solns[SIZE] = {0};
+	int low[SIZE] = {0};
+	int high[SIZE] = {0};
+
+	int n;
+	scanf("%d", &testCases);
+	for (int i = 0; i < testCases; i++)
+	{
+		scanf("%d", &n);
+		int num = 0;
+		for (int i = 0; i < n; i++) { 
+			scanf("%d", &low[i]); scanf("%d",&high[i]);
+			occurrences[low[i]]++;
+			occurrences[high[i] + 1]--;
+		}
+		int sum = 0;
+		for (int i = 0; i <= n; i++) {
+			sum += occurrences[i];
+			occurrences[i] = 0;
+			if (sum == i) { 
+				solns[num++] = i;
+			}
+		}
+		occurrences[n+1] = 0;
+		printf("%d
+", num%1000000007);
+		int max = num -1, j = 0, k, l;
+		for (int i = 0; i < n; i++) {
+			if (low[i] <= solns[0] && high[i] >= solns[max])
+				printf("1");
+			else
+			{
+				printf("0");
+				while (j<= max && solns[j] < low[i]) j++;
+				k = j;
+				while (k <= max && solns[k] <= high[i]) k++;
+				l = k - j;
+				for (;k <= max; j++, k++)
+					solns[j] = solns[k];
+				j = 0;
+				max -= l;
+			}
+		}
+		printf("
+");
+	}
+	return 0;
+}

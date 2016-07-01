@@ -1,0 +1,22 @@
+from __future__ import division
+
+def main():
+    t=int(raw_input())
+    for i in range(t):
+        tokens = raw_input().split()
+        default , talktime, addons  =  float(tokens[0]), int(tokens[1]), int(tokens[2])
+        defaultCost = round(talktime * default,3)
+        bestPlan = 0
+        bestPlanVal = defaultCost;
+        for plan in range(addons):
+            tokens = raw_input().split()
+            months, rate, cost  = int(tokens[0]), float(tokens[1]), int(tokens[2])
+            planCost  = talktime * rate + cost/months
+            planCost = round(planCost, 3)
+            #print planCost, defaultCost
+            if planCost < bestPlanVal :
+                bestPlan = plan + 1;
+                bestPlanVal = planCost;
+        print bestPlan
+
+main()

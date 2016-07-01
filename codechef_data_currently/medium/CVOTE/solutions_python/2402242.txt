@@ -1,0 +1,28 @@
+n,m=map(int,raw_input().split())
+chef = {}
+country = {}
+cheftocountry = {}
+for i in range(n):
+    ch,co = raw_input().split()
+    if not cheftocountry.get(ch,0):
+        cheftocountry[ch]=co
+for i in range(m):
+    ch = raw_input()
+    if not chef.get(ch,0):
+        chef[ch]=1
+    else:
+        chef[ch]+=1
+    if not country.get(cheftocountry[ch],0):
+        country[cheftocountry[ch]]=1
+    else:
+        country[cheftocountry[ch]]+=1
+ch = max(chef,key=chef.get)
+co = max(country,key=country.get)
+for i in chef:
+    if chef[ch]==chef[i] and i<ch:
+        ch=i
+for i in country:
+    if country[co]==country[i] and i<co:
+        co=i
+print co
+print ch

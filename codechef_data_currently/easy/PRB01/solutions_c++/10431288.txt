@@ -1,0 +1,32 @@
+//primality test
+#include <iostream>
+using namespace std;
+int prost(int a)
+{
+ int i;
+ for(i=2; i<=a/2; i++)
+  if(a%i == 0)
+   return 0;
+return 1;
+}
+
+main()
+{
+	int n,i,a;
+	cin>>n;
+	int x[n];
+	for (i=0;i<n;i++)
+	{
+		x[i]=0;
+		cin>>a;
+		if (prost(a)) x[i]=1;
+	
+	}
+	for (i=0;i<n;i++)
+{
+
+	if (x[i]==1) cout<<"yes"<<endl;
+	else cout<<"no"<<endl;
+}
+	
+}

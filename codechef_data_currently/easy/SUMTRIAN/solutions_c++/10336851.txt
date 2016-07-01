@@ -1,0 +1,23 @@
+#include<iostream>
+ using namespace std;
+ int main()
+{
+int t,n;
+cin>>t;
+while(t--)
+{
+    cin>>n;
+int ar[100][100] = {0},i,j;
+for(i=0;i<n;++i)
+      for(j=0;j<=i;++j)
+        cin>>ar[i][j];
+
+for(i=n-2;i>=0;i--)
+    for(j=0;j<=i;j++)
+         ar[i][j] += ar[i + 1][j] > ar[i + 1][j + 1]?ar[i + 1][j]:ar[i + 1][j + 1];
+
+      cout<<ar[0][0]<<endl;
+}
+
+}
+

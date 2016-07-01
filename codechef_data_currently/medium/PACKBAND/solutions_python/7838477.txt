@@ -1,0 +1,28 @@
+import sys
+
+num_tests = int(sys.stdin.readline())
+
+
+for t in xrange(num_tests):
+    sys.stdin.readline()
+    boxes = [int(b) * 7 for b in sys.stdin.readline().split()]
+    num_bands = int(sys.stdin.readline())
+    bands = []
+    for _ in xrange(num_bands):
+        r1, r2 = sys.stdin.readline().split()
+        bands.append([int(r2) * 11, int(r1) * 11])
+
+    boxes.sort()
+    bands.sort()
+
+    count = 0
+    for box in boxes:
+        if count == num_bands:
+            break
+
+        for i, (h, l) in enumerate(bands):
+            if box >= l and box <= h:
+                count += 1
+                del bands[i]
+                break
+    print count

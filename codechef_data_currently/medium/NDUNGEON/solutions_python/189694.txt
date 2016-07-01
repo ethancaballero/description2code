@@ -1,0 +1,95 @@
+#!/usr/bin/python
+# Richard Lee
+# CodeChef
+# Nikhils Dungeon
+#
+import os
+import sys
+
+inp = sys.stdin.readline
+INF=-1
+
+# what does the board look lke?
+l = inp()
+p = l.split()
+m = int(p[0])
+n = int(p[1])
+l = ""
+for i in xrange(m):
+   l += inp()
+board = [int(i) for i in l.split()]
+
+# where's the princess and how much time is left?
+l = inp()
+p = l.split()
+a = int(p[0])
+b = int(p[1])
+T = int(p[2])
+
+def q_sort(x, y):
+   if d[x] == INF:
+      return 1
+   if d[y] == INF:
+      return -1
+   return d[x] - d[y]
+
+# invoke Dijstkra to find the best route
+def get_neighbors(i):
+   global n
+   r = i / n
+   c = (i - (r * n)) % n
+   n_q = []
+   if (r+1 < m):
+      n_q.append(((r+1) * n) + c)
+   if (r-1 >= 0):
+      n_q.append(((r-1) * n) + c)
+   if (c+1 < n):
+      n_q.append((r * n) + (c+1))
+   if (c-1 >= 0):
+      n_q.append((r * n) + (c-1))
+   return n_q
+
+# Dijstkra is invoking...
+d = [INF for i in xrange(m * n)]
+qd = [True for i in xrange(m *n)]
+qr = [False for i in xrange(m *n)]
+d[0] = 0
+
+# stop at princess' location
+p_l = ((a - 1) * n) + (b-1)
+q = [0]
+while len(q) > 0:
+   i = q.pop()
+   if d[i] == INF:
+      break # infinity...
+   
+   qd[i] = False
+   v_l = get_neighbors(i)
+   for v in v_l:
+      if qd[v]:
+         alt = d[i] + board[v]
+         if d[v] == INF or alt < d[v]:
+            d[v] = alt
+         if not qr[v]:
+            q.append(v)
+            qr[v] = True
+   q = sorted(q, lambda x,y: q_sort(y, x))
+# Dijstkra done invoking...
+
+# can save the princess?
+c = d[p_l] + board[0]
+if c < T:
+   print "YES"
+   print T - c
+else:
+   print "NO"
+
+
+
+
+
+
+
+
+
+

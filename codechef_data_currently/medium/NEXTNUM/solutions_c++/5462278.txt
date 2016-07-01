@@ -1,0 +1,72 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<cassert>
+#include<string>
+#define ull unsigned long long
+using namespace std;
+ull fac(vector<int> dig)
+{
+	assert(dig.size()==10);
+	ull sum=0,ans=1;
+	for(int i=0;i<10;++i)
+	{
+		sum+=dig[i];
+	}
+	for(ull i=1;i<=sum;++i)
+	{
+		ans*=i;
+		for(int i=0;i<10;++i)
+			while(dig[i]!=0)
+			{
+				if(ans%dig[i]==0)
+				{
+					ans/=dig[i];
+					dig[i]--;
+				}
+				else break;
+			}
+	}
+	for(int i=0;i<10;++i)
+	{
+		while(dig[i]!=0)
+		{
+			if(ans%dig[i]==0)
+			{
+				ans/=dig[i];
+				dig[i]--;
+			}
+			else break;
+		}
+	}
+	return ans;
+}
+ull doit()
+{
+	ull ans=1;
+	string inp;
+	cin>>inp;
+	int n=inp.length();
+	vector<int> dig(10,0);
+	for(int i=0;i<n;++i)dig[inp[i]-'0']++;
+	for(int i=0;i<n;++i)
+	{
+		for(int j=0;j<inp[i]-'0';++j)
+		if(dig[j]>0)
+		{
+			dig[j]--;
+			ans+=fac(dig);
+			dig[j]++;
+		}
+		dig[inp[i]-'0']--;
+	}
+	return ans;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+		cout<<doit()<<endl;
+	return 0;
+}

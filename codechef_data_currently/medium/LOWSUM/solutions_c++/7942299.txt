@@ -1,0 +1,56 @@
+//kunalprince548
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<set>
+#include<sstream>
+#include<list>
+using namespace std;
+#define ll long long
+#define pf(x) printf("%lld",x)
+#define sf(x) scanf("%lld",&x)
+int mod=1000000007;
+int max=1000001;
+ll a[20001];
+ll b[20001];
+int main()
+{
+   	ll num;
+   	int i,j,k,t,n,q;
+   	scanf("%d",&t);
+   	while(t--)
+   	{
+   		vector<ll> v;
+   		int co=0;
+   		bool flag=false;
+   		scanf("%d%d",&n,&q);
+   		for(i=1;i<=n;i++) scanf("%lld",&a[i]);
+   		for(i=1;i<=n;i++) scanf("%lld",&b[i]);
+   		sort(a+1,a+n+1);
+   		sort(b+1,b+n+1);
+   		for(j=1;j<=n;j++)
+		   {
+		   	k=10001/j;
+		   	i=min(k,n);
+		   	for(k=1;k<=i;k++)
+		   	v.push_back(a[j]+b[k]);
+		   } 
+		   sort(v.begin(),v.end());
+		   /*for(i=0;i<v.size();i++)
+		   cout<<v[i]<<" ";
+		   cout<<"
+";*/
+		  	while(q--)
+		  	{
+		  		scanf("%d",&n);
+		  		printf("%lld
+",v[n-1]);
+		  	}
+   	}
+   	return 0;
+}
+
+

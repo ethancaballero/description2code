@@ -1,0 +1,106 @@
+/*_______SHREY MANIK______*/
+#include <iostream>
+#include <string>
+#include <climits>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <utility>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <cstring>
+#include <iomanip>
+#include<list>
+#define ff first
+#define ss second
+#define LL long long
+#define SET(a) memset(a,-1,sizeof(a))
+#define CLEAR(a) memset(a,0,sizeof(a))
+#define mp(a,b) make_pair(a,b)
+#define pb(a) push_back(a)
+using namespace std;
+template<class T>T gcd(T a,T b){return (b==0)?a:gcd(b,a%b);}
+template<class T>T lcm(T a,T b){return (a*b)/gcd(a,b);}
+//#define mat vector<vector<LL> >
+int k,test;
+LL MOD=1e9 + 7,n;
+void copy(LL a[20][20],LL b[20][20])
+{
+for(int i=0;i<k;i++)for(int j=0;j<k;j++)a[i][j]=b[i][j];
+}
+void mul1(LL c[20][20],LL a[20][20],LL b[20][20])
+{
+	 LL d[20][20];
+	 CLEAR(d);
+	 for(int i=0;i<k;i++)
+	 {
+	 	for(int j=0;j<k;j++)
+	 	{
+	 		for(int z=0;z<k;z++)
+	 		d[i][j]=(d[i][j]%MOD+(a[i][z]%MOD*b[z][j]%MOD)%MOD)%MOD;
+		 }
+	 }
+	 //for(int i=0;i<k;i++)for(in j=0;j<k;j++)a[i][j]=c[i][j];
+	 copy(c,d);
+}
+void po(LL c[20][20],LL a[20][20],LL n)
+{
+	
+	if(n==1)
+	{
+	  copy(c,a);
+	  return;
+	}
+	
+	if(n%2==0)
+	{
+	  po(c,a,n/2);
+	  mul1(c,c,c);	
+	}
+	else
+	{
+		po(c,a,n-1);
+		mul1(c,c,a);
+	}
+	
+}
+void ans(LL c[20][20],LL a[20][20],LL b[20],LL n)
+{
+	 po(c,a,n-1);
+	LL res=0;
+	for(int i=0;i<k;i++)
+	{
+	  res=(res%MOD+(c[0][i]%MOD*b[i]%MOD)%MOD)%MOD;
+	}
+	printf("%lld
+",res);
+}
+int main()
+{
+  scanf("%d",&test);
+  	LL t[20][20];
+	LL a[20];
+	LL c[20][20];
+  while(test--)
+  {
+    k=2;
+    
+	CLEAR(c);
+	CLEAR(t);
+	CLEAR(a);
+  	t[0][0]=0;t[0][1]=1;t[1][0]=2;t[1][1]=2;
+    LL f;
+	a[0]=1;a[1]=3;
+    scanf("%lld",&n);
+    if(n==1)cout<<"1
+";
+    else
+	ans(c,t,a,n);
+  }
+  
+  return 0;
+}

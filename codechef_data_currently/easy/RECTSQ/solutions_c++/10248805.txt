@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t,n,m;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m;
+		long long int count=n*m,temp;
+		if(m>n)
+		{
+			temp=m;
+			m=n;
+			n=temp;
+		}
+		while(n%m>0)
+		{
+			temp=n%m;
+			n=m;
+			m=temp;
+		}
+		cout<<count/(m*m)<<endl;
+	}
+	return 0;
+}

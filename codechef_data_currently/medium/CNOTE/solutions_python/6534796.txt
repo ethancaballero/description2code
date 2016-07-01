@@ -1,0 +1,13 @@
+T = input()
+for cas in xrange(1,T+1):
+    X, Y, K, N = map(int, raw_input().strip().split())
+    books = []
+    for i in xrange(N):
+        P, C = map(int, raw_input().strip().split())
+        books.append((P, C))
+    for P, C in books:
+        if P >= X - Y and C <= K:
+            print "LuckyChef"
+            break
+    else:
+        print "UnluckyChef"

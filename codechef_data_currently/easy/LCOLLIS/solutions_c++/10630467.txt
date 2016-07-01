@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+
+    while(t--) {
+        int ct=0,n,x=0,m,i,j;
+        scanf("%d %d
+",&n,&m);
+        char str[n][m+2];
+
+        for(i=0;i<n;i++) {
+            gets(str[i]);
+        }
+        for(i=0;i<m;i++) {
+            for(j=0;j<n;j++) {
+                if(str[j][i] == '1') ct++;
+            }
+            //cout<<ct<<"
+
+";
+            if(ct>=2) {
+                x = x+ct*(ct-1)/2;
+            }
+            ct = 0;
+        }
+
+        cout<<x<<"
+";
+
+
+    }
+
+
+
+
+
+
+}

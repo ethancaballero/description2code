@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+
+int gcd(int a,int b){
+	while(b>0){
+		int c=a%b;
+		a=b;
+		b=c;
+	}
+	return a;
+}
+int main(){
+	int t;
+    cin>>t;
+    while(t--){
+        int n;
+		cin>>n;
+		int a;
+		cin>>a;
+		int x=a;
+		for(int i=1;i<n;i++){
+			cin>>a;
+			x=gcd(x,a);
+		}
+		cout<<x<<endl;
+    }
+		
+	return 0;
+}

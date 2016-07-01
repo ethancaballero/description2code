@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<queue>
+#include<iostream>
+using namespace std;
+class chef
+{
+public:
+	int age;
+	int rate;
+
+};
+struct comparegreater
+{
+	bool operator()(const chef& lhs, const chef& rhs)
+	{
+		return lhs.age < rhs.age;
+
+	}
+};
+struct compareless
+{
+	bool operator()(const chef& lhs, const chef& rhs)
+	{
+		return lhs.age > rhs.age;
+
+	}
+};
+int main()
+{
+	int n;
+	scanf("%d",&n); // number of chefs
+	int y_rating=0,s_rating=0;
+	int c_age,c_rating;
+	priority_queue<chef,vector<chef>,comparegreater> young;
+	priority_queue<chef,vector<chef>,compareless> old;
+	scanf("%d",&c_age);
+	scanf("%d",&c_rating);
+	chef n1;
+	n1.age = c_age;
+	n1.rate = c_rating;
+	young.push(n1);
+	y_rating = n1.rate;
+	int out;
+	out = (y_rating > s_rating) ? y_rating - s_rating : s_rating - y_rating;
+	cout<<out<<endl;
+	
+	for (int i = 0; i < n-1; ++i)
+	{
+		scanf("%d",&c_age);
+		scanf("%d",&c_rating);
+		n1.age = c_age;
+		n1.rate = c_rating;
+		if (young.size() == old.size())
+		{
+			if (n1.age < old.top().age)
+			{
+				young.push(n1);
+				y_rating = y_rating+n1.rate;
+			}
+			else
+			{
+				 young.push(old.top());
+				 y_rating = y_rating + old.top().rate;
+				 s_rating = s_rating - old.top().rate;
+				 old.pop();
+				 old.push(n1);
+				 s_rating = s_rating + n1.rate;
+
+			}
+			
+		}
+		else if(young.size() > old.size())
+		{
+			if (n1.age > young.top().age)
+			{
+				old.push(n1);
+				s_rating = s_rating + n1.rate;
+			}
+			else
+			{
+				old.push(young.top());
+				s_rating = s_rating + young.top().rate;
+				y_rating = y_rating - young.top().rate;
+				young.pop();
+				young.push(n1);
+				y_rating = y_rating + n1.rate;
+			}
+
+		}
+		out = (y_rating > s_rating) ? y_rating - s_rating : s_rating - y_rating;
+		cout<<out<<endl;
+	}
+	return 0;
+}

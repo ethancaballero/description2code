@@ -1,0 +1,8 @@
+a = int(raw_input().strip())
+l = []
+for i in xrange(a) :
+    x = int(raw_input().strip())
+    l.append(x)
+l.sort()
+for i in xrange(a) :
+    print l[i]    

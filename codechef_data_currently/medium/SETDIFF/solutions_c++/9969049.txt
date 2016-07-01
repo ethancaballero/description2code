@@ -1,0 +1,49 @@
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+#define MOD 1000000007
+long long int two[50050];
+void generate()
+{
+	two[0]=1;
+	for(long int i=1;i<50050;i++)
+	{
+		two[i]=(two[i-1]*2)%MOD;
+	}
+}
+int main()
+{
+	long long int tc,i,j;
+	generate();
+	//cout<<"done"<<endl;
+	cin>>tc;
+	while(tc--)
+	{
+		long long int n,a[100100],sum=0;
+		cin>>n;
+		for(i=0;i<n;i++)cin>>a[i];
+		sort(a,a+n);
+		if(n==1)
+		{
+			cout<<"0"<<endl;
+			continue;
+		}
+		long long int temp,temp1=n,temp2=0,z;
+			temp=n/2;
+			for(i=0,j=n-1;i<temp;i++,j--)
+			{
+				z=(two[temp1-1]-1)*two[temp2];
+				z=z%MOD;
+				long long int x,y;
+				x=a[j]*z;
+				y=a[i]*z;
+				sum+=(x-y);
+				sum=sum%MOD;
+				temp1-=2;
+				temp2++;
+			}
+			cout<<sum<<endl;
+	}
+	return 0;
+} 

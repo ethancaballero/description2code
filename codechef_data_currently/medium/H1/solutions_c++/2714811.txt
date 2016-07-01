@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include <map>
+#include <algorithm> 
+#include <queue>
+std::map<int,int> shortest;
+std::map<int,int> visited;
+std::queue<int> toVisit;
+int prime[]={0,0,1,1,0,1,0,1,0,0,0,1,0,1,0,0,0,1,0,1};
+int bit[]={1,2,3,4,5,6,7,8,9};
+int points[12][2] =
+{
+{ 0, 3, },
+{ 0, 1, },
+{ 1, 2, },
+{ 1, 4, },
+{ 2, 5, },
+{ 3, 6, },
+{ 3, 4, },
+{ 4, 7, },
+{ 4, 5, },
+{ 5, 8, },
+{ 6, 7, },
+{ 7, 8}
+};
+int power[] = {1,10,100,1000,10000,100000,1000000,10000000,100000000,1000000000};
+void generate_bit(int val)
+{
+int temp=8;
+while(val)
+{
+bit[temp]=val%10;
+val=val/10;
+temp--;
+}
+
+}
+
+void calculate(int number)
+{
+
+	int i,val,temp;
+	while(!toVisit.empty())
+	{
+		val=toVisit.front();
+		toVisit.pop();
+		generate_bit(val);
+		for(i=0;i<12;i++)
+		{
+			if(prime[bit[points[i][0]]+bit[points[i][1]]])
+			{
+				temp = val+(bit[points[i][1]]-bit[points[i][0]])*power[8-points[i][0]]+(bit[points[i][0]]-bit[points[i][1]])*power[8-points[i][1]];
+				if(visited[temp])
+					continue;
+				visited[temp]=1;
+				toVisit.push(temp);
+				shortest[temp] = shortest[val]+1;
+
+			}
+		}
+	}
+}
+
+int main ()
+{
+shortest[123456789]=0;
+int T,i,val,temp;
+toVisit.push(123456789);
+visited[123456789]=1;
+calculate(985241376);
+  scanf("%d",&T);
+  while(T--)
+  {
+	val=0;
+	for(i=0;i<=8;i++)
+		{scanf("%d",&temp);val=val*10+temp;}
+	if(shortest.find(val)==shortest.end())
+		printf("%d
+",-1);
+	else
+		printf("%d
+",shortest[val]);
+  }
+  return 0;
+}

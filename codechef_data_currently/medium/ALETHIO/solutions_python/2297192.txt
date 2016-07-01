@@ -1,0 +1,32 @@
+from sys import stdin
+s = stdin.readline();
+s = s.strip()
+l = len(s)
+a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+a = list(a)
+ma = 0
+for i in range(l):
+    cur = s[i]
+    tmp = 0
+    for j in range(i):
+        if s[j] not in a:
+            tmp = tmp*10 + int(s[j])
+        else:
+            if tmp >ma:
+                ma = tmp
+            tmp = 0
+    if cur in a:
+        tmp = tmp*10 + 9
+    else:
+        tmp = tmp*10 + int(s[i])
+    for j in range(i+1,l):
+        if s[j] not in a:
+            tmp = tmp*10 + int(s[j])
+        else:
+            if tmp > ma:
+                ma = tmp
+            tmp = 0
+    if tmp > ma:
+        ma = tmp
+
+print ma

@@ -1,0 +1,32 @@
+t = int(raw_input())
+
+for x in range(t):
+    enter = raw_input()
+    n = int(raw_input())
+    h = {}
+    
+    ans = 0
+    for y in range(n):
+        inp = [int(z) for z in raw_input().split()]
+        if inp[0] in h:
+            h[inp[0]].append(inp[1])
+        else:
+    
+            h[inp[0]] = [inp[1]]
+    l = h.keys()
+    l.sort()
+    prev_x = l[0]
+    h[l[0]].sort()
+    prev_y = h[l[0]][-1]
+    for i in l:
+        h[i].sort()
+        
+        dist1 = ((i - prev_x)**2 + (h[i][-1] - prev_y)**2)**0.5
+        
+        dist2 = h[i][-1] - h[i][0]
+        prev_x = i
+        prev_y = h[i][0]
+        ans += (dist1 + dist2)
+    
+    print "%.2f" % ans
+    

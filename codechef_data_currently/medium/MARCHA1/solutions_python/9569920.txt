@@ -1,0 +1,11 @@
+for ntc in range(input()):
+	x=map(int,raw_input().split(" "))
+	ia=[]
+	for i in range(x[0]):
+		t=input()
+		at=[]
+		for j in ia:
+			at.append(t+j)
+		ia.append(t)
+		ia+=at
+	print ["No","Yes"][int(x[1] in ia)]

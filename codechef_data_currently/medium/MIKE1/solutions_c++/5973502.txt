@@ -1,0 +1,44 @@
+#include <iostream>
+#include<cstdio>
+#include<cmath>
+#include<algorithm>
+#define ll long long int
+using namespace std;
+char ch[100010];
+ll in(){
+    ll r=0,c;for(c=getchar_unlocked();
+c<=32;c=getchar_unlocked());
+if(c=='-')
+    return -in();
+for(;c>32;r=(r<<1)+(r<<3)+c-'0',c=getchar_unlocked());return r;}
+int main() {
+	ll n,m,A[510][510],e1,e2,ans,i,j,l,a,b;
+	n=in();m=in();
+	for(i=0;i<n;i++)
+    {
+        for(j=0;j<m;j++)
+            A[i][j]=in();
+    }
+    l=in();
+    for(i=0;i<l;i++)
+    {
+        a=in();b=in();
+        if(a>n||b>m)
+            e1=-1;
+            else
+            {
+                if(e1!=-1)
+                    e1+=A[a-1][b-1];
+            }
+        if(b>n||a>m)
+            e2=-1;
+            else
+            {
+                if(e2!=-1)
+                    e2+=A[b-1][a-1];
+            }
+    }
+    ans=max(e1,e2);
+    printf("%lld
+",ans);
+}

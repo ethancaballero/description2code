@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<math.h>
+ 
+double power(double, long long);
+ 
+int main()
+{
+	double a, b, root2, root3;
+	long long i, k, p, s;
+	scanf("%lld %lld %lld", &i, &k, &s);
+	scanf("%lf %lf", &a, &b);
+	if ((k - i) % 2 == 0)
+	{
+		p = 2 * (k - i) - s;
+		if (p < 0)
+			printf("%lf
+", (a + b) / power(2.0, -p));
+		else
+			printf("%lf
+", (a + b) * power(2.0, p));
+	}
+	else
+	{
+		p = 2 * (k - i) - s - 1;
+		root2 = sqrt(2.0);
+		root3 = sqrt(3.0);
+		if (p < 0)
+			printf("%lf
+", root2 * (a + root3 * b) / power(2.0, -p));
+		else
+			printf("%lf
+", root2 * (a + root3 * b) * power(2.0, p));
+	}
+	return 0;
+}
+ 
+double power(double a, long long b)
+{
+	double result;
+	result = 1;
+	while (b > 0)
+	{
+		if (b & 1)
+			result *= a;
+		b >>= 1;
+		a *= a;
+	}
+	return result;
+} 

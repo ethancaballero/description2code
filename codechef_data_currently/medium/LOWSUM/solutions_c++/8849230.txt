@@ -1,0 +1,98 @@
+#include <iostream>
+#include <vector>
+#include <cstdio>
+#include <cstring>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <utility>
+#include <stack>
+#include <sstream>
+#include <list>
+#include <map>
+#include <queue>
+#include <set>
+#include <deque>
+#include <bitset>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <iomanip>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <climits>
+#include <cassert>
+ 
+using namespace std;
+ 
+#define FOR(i,a,b)				for (i=a;i<b;i++)
+#define s(n)					scanf("%d",&n)
+#define p(n)					printf("%d
+",n)
+#define pl(n)					printf("%lld
+",n)
+#define sd(n)					int n;scanf("%d",&n)
+#define sl(n)					scanf("%lld",&n)
+#define sld(n)					long long int n;scanf("%lld",&n)
+#define pb(n)                                   push_back(n)
+#define all(c)                                  (c).begin(),(c).end()
+#define tr(container,it)                        for (typeof(container.begin()) it=container.begin();it!=container.end();it++ )
+#define sz(a)                                   int((a).size())
+#define clr(a)                                  memset(a,0,sizeof(a))
+#define mp(a,b)                                 make_pair(a,b)
+#define ps(str)                                 printf("%s
+",str)
+ 
+#define INF                                     INT_MAX
+#define UINF                                    UINT_MAX
+#define INF_LL                                  LLONG_MAX
+#define UINF_LL                                 ULLONG_MAX
+#define PI 3.14159265358979323846
+ 
+typedef long long ll;
+typedef vector <int> vi;
+typedef vector <vi> vvi;
+typedef vector <string> vstr;
+typedef pair<int,int> pii;
+typedef vector<vector<pair<int,int> > > TG;
+ 
+typedef pair<ll,pair<int,int> > TT;
+ 
+int main()
+{
+    sd(T);
+    int t;
+    int i,j;
+    FOR(t,0,T)
+    {
+        sd(k);sd(q);
+        vector<ll> arr1(k),arr2(k);
+        FOR(i,0,k) sl(arr1[i]);
+        FOR(i,0,k) sl(arr2[i]);
+        sort(all(arr1));
+        sort(all(arr2));
+        set<TT> st;
+        st.insert(mp(arr1[0]+arr2[0],mp(0,0)));
+        vector<ll> ans_arr;
+        int K=11000;
+        FOR(i,0,K)
+        {
+            if (st.empty()) break;
+            TT temp=*st.begin();
+            st.erase(st.begin());
+            ans_arr.pb(temp.first);
+            int x=temp.second.first;
+            int y=temp.second.second;
+            if (x<k-1) st.insert(mp(arr1[x+1]+arr2[y],mp(x+1,y)));
+            if (y<k-1) st.insert(mp(arr1[x]+arr2[y+1],mp(x,y+1)));
+        }
+//        FOR(i,0,sz(ans_arr)) printf("%d ",ans_arr[i]); printf("
+");
+        FOR(i,0,q)
+        {
+            sd(temp);
+            pl(ans_arr[temp-1]);
+        }
+    }
+}

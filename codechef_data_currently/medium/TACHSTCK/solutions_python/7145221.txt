@@ -1,0 +1,16 @@
+N,D=map(int,raw_input().split())
+L=[]
+for _ in range(N):
+	L.append(int(raw_input()))
+L.sort()
+count=0
+#print L
+i=1
+while i<N:
+	#print i
+	if (L[i]-L[i-1])<=D:
+		i+=2
+		count+=1	
+	else:
+		i+=1
+print count

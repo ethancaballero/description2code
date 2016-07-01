@@ -1,0 +1,14 @@
+n=input()
+a=[int(x) for x in raw_input().split()]
+count=0
+final=0
+i=0
+while i<n:
+    if a[i]!=0:
+        count+=1
+    if a[i]==0 or i==n-1:
+        if final<count:
+            final=count
+        count=0
+    i+=1
+print final

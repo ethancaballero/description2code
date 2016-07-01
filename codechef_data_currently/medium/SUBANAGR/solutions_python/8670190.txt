@@ -1,0 +1,37 @@
+N = int(raw_input())
+
+first = raw_input()
+res = []
+for i in first:
+    res.append(i)
+end = res[:]
+
+N -= 1
+
+
+
+while N > 0:
+    end = []
+    sec = raw_input()
+    res2 = []
+    for i in sec:
+        res2.append(i)
+
+    for i in res:
+        if i in res2:
+            res2[res2.index(i)] = 0
+            end.append(i)
+    res = end[:]
+
+    if len(end)==0:
+        print 'no such string'
+        break
+    
+    N -= 1
+
+if len(end) > 0:
+    end.sort()
+    s = ''
+    for i in end:
+        s += i
+    print s

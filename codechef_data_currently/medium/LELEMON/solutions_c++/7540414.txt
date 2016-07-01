@@ -1,0 +1,132 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<cstdio>
+#include<stack>
+#include<queue>
+#include<algorithm>
+#define all(c) c.begin(),c.end()
+#define tr(c,it) for(typeof(c.begin()) it=c.begin();it!=c.end();it++)
+#define sz(c) c.size()
+#define pb push_back
+#define mp make_pair
+#define inf 1000001
+//#define gc() getchar_unlocked()
+//#define pc(x) putchar_unlocked(x)
+#define ll long long int
+using namespace std;
+
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int,int> pii;
+typedef map<int,int> mii;
+
+
+
+/*static inline int fastio()
+{
+    int x=0;
+    char c=gc();
+    while(c<'0'||c>'9')
+    {
+        c=gc();
+    }
+    while(c>='0'&&c<='9')
+    {
+        x=(x<<1)+(x<<3)+c-'0';
+        c=gc();
+    }
+    return x;
+}
+
+
+static inline void fastWrite(int x)
+{
+  char s[11];
+  int i=0;
+  do
+  {
+      s[i++]=x%10+'0';
+      x/=10;
+  }while(x);
+  --i;
+  while(i>=0)
+  {
+      pc(s[i--]);
+  }
+  pc('
+');
+
+}
+*/
+
+
+
+
+
+bool comp(pair<int,int> p1,pair<int,int> p2)
+{
+    return(p1.first>p2.first);
+
+}
+
+
+
+
+
+
+
+int p[10001];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int T;
+    int N;
+    int M;
+    int C;
+    int V;
+    cin>>T;
+    while(T--)
+    {
+
+        cin>>N>>M;
+        int i;
+         vector<vector<pair<int,int> > > P;
+        for(i=0;i<M;i++)
+            cin>>p[i];
+        for(i=0;i<N;i++)
+        {
+            cin>>C;
+            vector<pair<int,int> > s;
+            for(int j=0;j<C;j++)
+            {
+                cin>>V;
+                s.push_back(make_pair(V,0));
+            }
+            sort(s.begin(),s.end(),comp);
+            P.push_back(s);
+        }
+        ll totLitre=0;
+        for(i=0;i<M;i++)
+        {
+          int D=p[i];
+          vector<pair<int,int> > X=P[D];
+          int l=X.size();
+          for(int zz=0;zz<l;zz++)
+          {
+             if(!X[zz].second)
+             {
+              //printf("%d ",X[zz].first);
+               totLitre+=X[zz].first;
+                 X[zz].second=1;
+                 P[D]=X;
+                 break;
+             }
+
+          }
+        }
+cout<<totLitre<<endl;
+    }
+    return 0;
+}

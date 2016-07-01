@@ -1,0 +1,28 @@
+def test():
+    matches = input()
+    final = []
+    for _ in range(matches):
+        matrix = []
+        n = int(raw_input())
+        for i in range(n):
+            tmp = map(int,raw_input().split())
+            matrix.append(tmp)
+            
+        direction = {}
+        count = 0
+        max_num = n*n
+        for i in range(n):
+            for j in range(n):
+                direction[matrix[i][j]] = (i,j)
+
+        current = direction[1]
+        for position in range(2,n*n+1):
+            next_pos = direction[position]
+            count += abs(current[0]-next_pos[0]) + abs(current[1]-next_pos[1])
+            current = next_pos         
+        
+        print count
+
+   
+
+test()

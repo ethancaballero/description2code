@@ -1,0 +1,184 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+ 
+using namespace std;
+ 
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define For(i,a,b) for(int i=a-1;i>=0;i--)
+#define K 10000000
+#define L 400
+#define ll long long
+#define s1(a) scanf("%d",&a);
+#define s2(a) scanf("%lld",&a);
+#define s3(a,b) scanf("%d%d",&a,&b);
+#define s4(a,b,c) scanf("%d%d%d",&a,&b,&c);
+#define pb push_back
+#define mp make_pair
+#define F first
+#define S second 
+ 
+ll a[100005],b[100005];
+ll ans[1000005];
+int n,q,p;
+ 
+ll powr(int s,int p)
+{
+	if(p==0)
+		return 1;	
+ 
+	if(p%2==1)
+	{
+		ll q=powr(s,p/2);
+		ll a=q;
+		q=(a*a);
+		q=(q*s);	
+		return ( q );
+	}
+ 
+	else
+	{
+		ll q=powr(s,p/2);
+		ll a=q;
+		q=(a*a);	
+		return (q);
+	}
+}
+ 
+int bin(ll c,int low,int high)
+{
+	if(low>high)
+	{
+		//cout<<low<<'
+';
+		if(low>=n)	return n-1;
+		if(b[low]<c)
+		{
+			while(b[low+1]<c && (low+1)<n)	++low;
+			return low;
+		}
+		while(b[low-1]>c && (low-1)>=0)	--low;
+		return low;
+	}
+	int mid=(low+high)/2;
+	if(b[mid]==c)
+	{
+		while(b[mid+1]==c && (mid+1)<n)	++mid;
+		return mid;
+	}
+	else if(b[mid]<c)
+	{
+		return bin(c,mid+1,high);
+	}
+	else
+	{
+		//printf("%lld
+",c);
+		return bin(c,low,mid-1);
+	}
+	
+}
+ 
+void scan()
+{
+	s1(n)
+	FOR(i,0,n)
+	{
+		s2(a[i])
+	}
+	FOR(i,0,n)
+	{
+		s2(b[i])
+	}
+	sort(a,a+n);
+	sort(b,b+n);
+	p=0;
+	q=0;
+	FOR(i,0,n)
+	{
+		if(b[i]==1)	++p;
+		else if(b[i]==3)	++q;
+		else if(b[i]>3)	break;
+	}
+}
+ 
+void out()
+{
+	ll an=0LL;
+	ll h=-1;
+	FOR(i,0,n)
+	{
+		if(a[i]==1)	ans[i]=0.0;
+		else if(a[i]==3)
+		{
+			ans[i]=(n-q);
+		}
+		else if(a[i]==2)
+		{
+			if(a[i]==h)	ans[i]=ans[i-1];
+			else
+			{
+				int j=bin(4,0,n-1);
+				if(b[j]>4)
+				{
+					--j;
+				}	
+				ans[i]=(n-((j+1)-p));
+				h=a[i];
+			}
+		}
+		else
+		{
+			if(a[i]==h)	ans[i]=ans[i-1];
+			else
+			{
+				int j=bin(a[i],0,n-1);
+				if(b[j]>a[i])
+				{
+					--j;
+				}
+				ans[i]=(n-((j+1)-p));
+				//cout<<j<<'
+';
+				h=a[i];
+			}
+		}
+	}
+	FOR(i,0,n)
+	{
+		//cout<<ans[i]<<endl;	
+		an+=ans[i];}
+	//cout<<an<<'
+';
+	printf("%.6lf
+",(double)an/n);
+		
+}
+ 
+int main()
+{
+	int t;
+	s1(t)
+	while(t--)
+	{
+		scan();
+		out();
+	}
+	return 0;
+} 

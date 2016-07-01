@@ -1,0 +1,7 @@
+# cook your code here
+for _ in xrange(input()):
+    S = raw_input()
+    if "010" in S or "101" in S:
+        print "Good"
+    else:
+        print "Bad"

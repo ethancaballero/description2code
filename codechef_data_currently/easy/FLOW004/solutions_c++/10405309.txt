@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int main()
+{int a,n,i;
+int d[8];
+cin>>n;
+for(i=0;i<n;i++)
+{int s=0;
+cin>>a;
+s=a%10;
+a=a/10;
+while(a>0)
+{if(a<10)
+{s+=a%10; a=a/10;}
+else
+{a=a/10;}
+}
+cout<<s<<endl;
+}
+return 0;
+}

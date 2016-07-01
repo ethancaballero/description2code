@@ -1,0 +1,12 @@
+for _ in range(int(raw_input())):
+    n = int(raw_input())
+    if n:
+        ans = "3."
+        a = 103993%33102*10
+        for i in range(n):
+            (c,a) = divmod(a, 33102)
+            a*=10
+            ans+=str(c)
+        print ans
+    else:
+        print 3

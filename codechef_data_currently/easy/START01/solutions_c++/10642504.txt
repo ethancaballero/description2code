@@ -1,0 +1,17 @@
+import java.util.*;
+class mirror
+{
+	public static void main(String ar[])
+	{
+		try
+		{
+			Scanner s = new Scanner(System.in);
+			long a;			
+			a=s.nextLong();
+			System.out.println(a);
+				
+		}		
+		catch(Exception on)
+		{}
+	}
+}

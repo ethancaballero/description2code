@@ -1,0 +1,35 @@
+//TORQUE
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#define MAXN 100001
+#define max(a, b) ((a)>(b)?(a):(b))
+ 
+int N, K;
+long long int a[MAXN], dp[MAXN];
+ 
+int main(){
+	int test;
+	scanf("%d", &test);
+	while(test--){
+		scanf("%d %d", &N, &K);
+		for(int i=0; i<N; i++) scanf("%lld", &a[i]);
+		long long max_here=a[0], max_far=a[0];
+		dp[0]=a[0];
+		for(int i=1; i<N-K-1; i++){
+			max_here=(max_here<0)?a[i]:(max_here+a[i]);
+			max_far=max(max_here, max_far);
+			dp[i]=max_far;
+		}
+		max_here=max_far=a[N-1];
+		long long int maximum=max_here+dp[N-1-(K+1)];
+		for(int i=N-2; i>=(K+1); i--){
+			max_here=(max_here<0)?a[i]:(max_here+a[i]);
+			max_far=max(max_here, max_far);
+			if(maximum<dp[i-(K+1)]+max_far) maximum=dp[i-(K+1)]+max_far;
+		}
+		printf("%lld
+",maximum);
+	}
+}
+ 

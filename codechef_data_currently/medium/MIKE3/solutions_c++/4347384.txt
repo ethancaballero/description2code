@@ -1,0 +1,82 @@
+#include <iostream>
+#include<cstdio>
+#include<cmath>
+#include<vector>
+#include<algorithm>
+#define gc getchar_unlocked
+using namespace std;
+void scanint(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+bool f (vector<int> i,vector<int> j) { return (i.size()>j.size()); }
+int check(vector<int> a,vector<int> b)
+{
+	for(int i=0;i<a.size();i++)
+		if (binary_search (b.begin(), b.end(), a[i]))
+				return 0;
+ 
+	return 1;
+}
+int main() {
+	int x;int y;
+	int tempp;
+	vector<int> temp;
+	vector<int>store[20];
+	vector<int>conflict[20];
+	int stamps=0;int offers=0;
+	int maxstamp=0;int maxoffers=0;
+	int n;
+	int count=0;
+	scanint(y);
+	scanint(n);//no of offers
+	for(int i=0;i<n;i++)
+	{
+		//cin>>x;
+		scanint(x);
+		for(int j=0;j<x;j++)
+		{//cin>>tempp;
+		scanint(tempp);store[i].push_back(tempp);}
+	}
+	for(int i=0;i<n;i++)
+	for(int j=i+1;j<n;j++)
+	{
+		if(check(store[i],store[j])==0)
+		{
+		conflict[i].push_back(j);
+		conflict[j].push_back(i);
+		}
+	}
+	int flag=0;vector<int> v;
+		for(int i=0;i<pow(2,n);i++)
+		{
+			 stamps=0;offers=0;
+			flag=0;
+			for(int j=0;j<n;j++)
+			{
+				if((i & (1<<j))>0)
+				{
+					int r2=v.size();
+					int r1=conflict[j].size();
+					for(int k=0;k<r1;k++)
+					for(int l=0;l<r2;l++)
+					if(v[l]==conflict[j][k])
+					{flag=1;goto x;}
+					x:
+					if(flag==1)
+					break;
+					v.push_back(j);
+					stamps+=store[j].size();
+					offers+=1;
+				}
+			}
+			if(stamps>=maxstamp && offers>maxoffers)
+			{maxoffers=offers;maxstamp=stamps;}
+			v.clear();stamps=0;offers=0;
+		}
+		cout<<maxoffers<<endl;
+	return 0;	
+} 

@@ -1,0 +1,12 @@
+T=int(raw_input())
+
+for i in range(T):
+	q,p=raw_input().split()
+	q=int(q)
+	p=int(p)
+	ans=p*q
+	
+	if q>1000:
+		ans=ans-(ans*0.10)
+	
+	print "%.6f"%(ans)	

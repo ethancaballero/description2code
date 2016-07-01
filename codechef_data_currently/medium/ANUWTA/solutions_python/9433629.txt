@@ -1,0 +1,7 @@
+# cook your code here
+T = int(raw_input())
+while T:
+	n = int(raw_input())
+	print (n*(n+1)/2)+n
+
+	T = T - 1

@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define rep(i, begin, end) for (__typeof(end) i = (begin) - ((begin) > (end)); i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+//Works for forward as well as backward iteration
+#define pb push_back
+#define mp make_pair
+#define all(c) (c).begin(),(c).end()
+#define F first
+#define S second
+#define MOD 1000000007
+#define newl cout<<"
+"
+#define newli "
+"
+#define itn int
+#define reutrn return
+typedef long long int lld;
+//-----------------------------------------------------
+lld gcd(lld m, lld n)
+{
+    if(n == 0)
+        return m;
+    return gcd(n, m % n);
+}
+//---------------------------------------------------------
+lld powmod(lld a,lld b)
+{
+    if(b==0)return 1;
+    lld x=powmod(a,b/2);
+    lld y=(x*x)%MOD;
+    if(b%2)
+        return (a*y)%MOD;
+    return y%MOD;
+}
+//-------------------------------------------------------
+
+int main()
+{
+    lld t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        vector< pair<lld,lld> > v; 
+        rep(i,0,n)
+        {
+            int x,y;
+            cin>>x>>y;
+            v.pb(mp(y,x));
+        }
+        sort(all(v));
+        set<lld> s;
+        int num=0;
+        lld ans=0;
+        int check[n];
+        memset(check,0,sizeof(check));
+        rep(i,0,v.size())
+        {
+            if(s.find(v[i].second)==s.end())
+            {
+                num++;
+              //  cout<<"fsvs
+";
+                check[i]=1;
+                s.insert(v[i].second);
+                ans=ans+v[i].first*num;
+                //num++;
+            }
+        }
+        rep(i,0,v.size())
+        {
+            if(check[i]==0)
+            {
+                ans=ans+v[i].first*num;
+            }
+        }
+        cout<<ans<<"
+";
+    }
+    return 0;
+}

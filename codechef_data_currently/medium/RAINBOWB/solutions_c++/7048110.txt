@@ -1,0 +1,68 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<string>
+#include<cstring>
+#include<queue>
+#include<stack>
+#include<utility>
+#include<cstdlib>
+#include<algorithm>
+#include<map>
+#include<set>
+using namespace std;
+
+#define pii pair< int,int >
+#define piii pair< pii , int >
+
+
+#define in2(n,m) scanf("%d %d",&n,&m);
+#define in3(x,y,z) scanf("%d %d %d",&x,&y,&z);
+
+#define getcx getchar
+inline void in(int &n)
+{
+    n=0; int ch = getcx(); int sign = 1;
+    while(ch < '0' || ch > '9') { if(ch == '-') sign=-1; ch = getcx(); }
+    while(ch >= '0' && ch <= '9') { n = (n << 3) + (n << 1) + ch - '0', ch = getcx(); }
+    n = n * sign;
+}
+#define mod 1000000007
+long long int dp[500005][8];
+int main()
+{
+    int n;
+    in(n);
+
+    if(n<13)
+    {
+        printf("0
+");
+        return 0;
+    }
+    if(n&1)
+    {
+        n=(n+1)/2;
+    }
+    else
+    {
+        n=n/2;
+    }
+    dp[1][1]=1;
+
+    for(int i=2; i<=n; i++)
+    {
+        for(int j=1; j<=7; j++)
+        {
+            dp[i][j]=dp[i-1][j]+dp[i-1][j-1];
+            dp[i][j]%=mod;
+        }
+    }
+
+    long long int ans;
+    ans=dp[n][7];
+    printf("%lld
+",ans);
+
+    return 0;
+}

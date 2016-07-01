@@ -1,0 +1,30 @@
+#include<iostream>
+inline int abs(int n)
+{
+    return (n<0?-n:n);
+}
+using namespace std;
+int main()
+{
+   int t,n,i,j;
+   int mat[250010][2];
+   int data;
+   long int steps=0;
+   cin>>t;
+   while(t--)
+   {
+     steps=0;
+     cin>>n;
+     for(i=1;i<=n;i++)
+        for(j=1;j<=n;j++)
+        {
+            cin>>data;
+            mat[data][0]=i;
+            mat[data][1]=j;
+        }
+      for(i=1;i<=(n*n)-1;i++)
+         steps+=(abs(mat[i][0]-mat[i+1][0])+abs(mat[i][1]-mat[i+1][1]));
+         cout<<steps<<"
+";
+   }
+}

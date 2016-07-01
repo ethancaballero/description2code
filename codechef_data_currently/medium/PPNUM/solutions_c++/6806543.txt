@@ -1,0 +1,81 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+
+#define MOD 1000000007
+
+
+bool flag;
+
+long long checker(long long l, long long count_l, long long r, long long count_r, long long ans){
+		long long g=l,h=r;
+		if(count_l==1){
+			l=1,r=9;
+		}
+		else if(count_l==2){
+			l=10,r=99;
+		}
+		else if(count_l==3){
+			l=100,r=999;
+		}
+		else if(count_l==4){
+			l=1000,r=9999;
+		}
+		else if(count_l==5){
+			l=10000,r=99999;
+		}
+		else if(count_l==6){
+			l=100000,r=999999;
+		}
+		else if(count_l==7){
+			l=1000000,r=9999999;
+		}
+		else if(count_l==8){
+			l=10000000,r=99999999;
+		}
+		else if(count_l==9){
+			l=100000000,r=999999999;
+		}
+		else if(count_l==10){
+			l=r=1000000000;
+		}
+	if(flag==0){
+		l=g;
+		flag=1;
+	}
+	if(count_l==count_r){
+		r=h;
+	}
+	ans=(ans+(count_l*(((r*(r+1))/2)-((l*(l-1))/2))%MOD)%MOD)%MOD;
+	return ans;
+}
+
+int main(){
+	long long t,l,r,x,y,count_l,count_r,ans;
+	scanf("%lld", &t);
+	while(t--){
+		count_l=0,count_r=0; flag=0,ans=0;
+		scanf("%lld %lld", &l, &r);
+		x=l, y=r;
+		while(x>0){
+			x/=10;
+			count_l++;
+		}
+		while(y>0){
+			y/=10;
+			count_r++;
+		}
+		while(count_l<=count_r){
+				ans=checker(l,count_l,r,count_r,ans);
+				count_l++;
+		}
+		if(ans<0){
+			ans+=MOD;
+		}
+		printf("%lld
+", ans);
+	}
+	
+	return 0;
+}

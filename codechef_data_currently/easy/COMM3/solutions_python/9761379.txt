@@ -1,0 +1,19 @@
+for _ in range(int(raw_input())):
+    r=int(raw_input())
+    cx,cy=map(int,raw_input().split())
+    hsx,hsy=map(int,raw_input().split())
+    scx,scy=map(int,raw_input().split())
+    chsd = (((cx-hsx)**2)+((cy-hsy)**2))**0.5
+    cscd = (((cx-scx)**2)+((cy-scy)**2))**0.5
+    hsscd= (((scx-hsx)**2)+((scy-hsy)**2))**0.5
+    c=0
+    if chsd<=r:
+        c+=1
+    if cscd<=r:
+        c+=1
+    if hsscd<=r:
+        c+=1
+    if c>=2:
+        print "yes"
+    else:
+        print "no"

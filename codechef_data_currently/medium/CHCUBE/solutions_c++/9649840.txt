@@ -1,0 +1,85 @@
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
+#define gc getchar_unlocked
+using namespace std;
+
+void scan( int &x )
+{
+    register int c = gc();
+    x = 0;
+    for( ; ((c<48 || c>57)); c = gc() );
+    for( ;c>47 && c<58; c = gc() ) {
+        x = (x << 1) + (x << 3) + c - 48;
+    }
+}
+
+typedef struct Trio{
+  int a;
+  int b;
+  int c;
+}trio;
+
+int main()
+{
+  trio **T= (trio **) malloc(sizeof(trio) * 8);
+  register int t, i;
+  for(i=0; i<8; i++)
+  {
+    T[i] = (trio *) malloc(sizeof(trio));
+  }
+   T[0]->a = 1;
+   T[0]->b = 3;
+   T[0]->c = 5;
+    T[1]->a = 1;
+    T[1]->b = 3;
+    T[1]->c = 6;
+
+
+
+      T[2]->a = 1;
+        T[2]->b = 4;
+        T[2]->c = 5;
+
+          T[3]->a = 1;
+                T[3]->b = 4;
+                T[3]->c = 6;
+
+    T[4]->a = 2;
+    T[4]->b = 3;
+    T[4]->c = 5;
+
+      T[5]->a = 2;
+        T[5]->b = 3;
+        T[5]->c = 6;
+
+    T[6]->a = 2;
+    T[6]->b = 4;
+    T[6]->c = 5;
+
+    T[7]->a = 2;
+    T[7]->b = 4;
+    T[7]->c = 6;
+
+
+  cin>>t;
+
+
+  string S[7];
+  while(t--){
+
+    for(i=1; i<=6; i++){
+      cin>>S[i];
+    }
+
+
+    for(i=0; i<8; i++)
+    {
+      if(S[T[i]->a]==S[T[i]->b] && S[T[i]->a]==S[T[i]->c]){
+        cout<<"YES"<<endl;break;
+      }
+    }
+    if(i==8) cout<<"NO"<<endl;
+  }
+  return 0;
+}

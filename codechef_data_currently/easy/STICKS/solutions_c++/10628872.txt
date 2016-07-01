@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(void)
+{
+	int a[10000],i,t,j,k,l,p,m=-1,n=-1;
+	cin>>t;
+	while(t--)
+	{
+		cin>>p;
+		int count[100000]={0};
+		for(i=0;i<p;i++)
+		cin>>a[i];
+		for(i=0;i<p;i++)
+		{
+			count[a[i]]++;
+			if(count[a[i]]>1)
+			{
+				if(a[i]>m&&a[i]>n)
+				{
+					if(count[a[i]]>3)
+					{
+						m=n=a[i];
+					}
+					else
+					{
+						if(m>n)
+						{
+							l=m;
+							m=a[i];
+							n=l;
+						}
+						else
+						{
+							l=n;
+							n=a[i];
+							m=l;
+						}
+					}
+					
+				}
+				else if(a[i]>m)
+				{
+					if(a[i]!=n||count[a[i]]>3)
+					m=a[i];
+				}
+				else if(a[i]>n)
+				{
+					n=a[i];
+				}
+			}
+		}
+		if(m==-1||n==-1)
+		cout<<-1<<endl;
+		else
+		{
+			cout<<m*n<<endl;
+		}
+		m=n=-1;
+		
+	
+	}
+}

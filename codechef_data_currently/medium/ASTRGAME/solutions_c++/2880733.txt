@@ -1,0 +1,109 @@
+#include <iostream>
+#include<cstdio>
+#include<string.h>
+#include<set>
+#include<cstdlib>
+using namespace std;
+
+struct trie
+{
+    int flag;
+    struct trie* ch[26];
+};
+
+int dp[50][50];
+struct trie* newnode()
+{
+    int i;
+    struct trie* node=(struct trie*)malloc(sizeof(struct trie));
+    node->flag=0;
+    for(i=0;i<=25;i++)
+    node->ch[i]=NULL;
+    return node;
+}
+
+void make_trie(char w[50],int i,int l,struct trie* x)
+{
+    if(i==l)
+    {
+        x->flag=1;
+        return;
+    }
+    if(x->ch[w[i]-'a']==NULL)
+    {
+        x->ch[w[i]-'a']=newnode();
+        make_trie(w,i+1,l,x->ch[w[i]-'a']);
+    }
+    else
+    make_trie(w,i+1,l,x->ch[w[i]-'a']);
+    return;
+}
+
+int game_theory(char s[50],int i,int j,struct trie* start)
+{
+    if(i>j)
+    return 0;
+    if(dp[i][j]!=-1)
+    return dp[i][j];
+    int k,l,c0,c1;
+    set<int>se;
+    for(k=i;k<=j;k++)
+    {
+        struct trie* x;
+        x=start->ch[s[k]-'a'];l=k;
+        while(x!=NULL)
+        {
+            if(x->flag==1)
+            {
+                c0=game_theory(s,i,k-1,start);
+                c1=game_theory(s,l+1,j,start);
+                se.insert(c0^c1);
+            }
+            l++;
+            if(l>j)
+            break;
+            x=x->ch[s[l]-'a'];
+        }
+    }
+    int mex=0;
+    set<int>::iterator it;
+    for(it=se.begin();it!=se.end();it++)
+    {
+        if((*it)==mex)
+        mex++;
+        else
+        break;
+    }
+    dp[i][j]=mex;
+    return mex;
+}
+
+int main()
+{
+    int test,n,i,l,ans,len;
+    char s[50],w[50];
+    scanf("%d",&test);
+    while(test--)
+    {
+        memset(dp,-1,sizeof(dp));
+        scanf("%s",s);
+        len=strlen(s);
+        scanf("%d",&n);
+        struct trie* start;
+        start=newnode();
+        for(i=0;i<n;i++)
+        {
+            scanf("%s",w);
+            l=strlen(w);
+            make_trie(w,0,l,start);
+        }
+        ans=game_theory(s,0,len-1,start);
+        if(ans==0)
+        printf("Tracy
+");
+        else
+        printf("Teddy
+");
+    }
+    return 0;
+}

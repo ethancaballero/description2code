@@ -1,0 +1,20 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        double pa,pb,amount=10000.00;
+        cin>>pa;
+        pa=max(pa,1-pa);
+        //cout<<pa<<endl;
+        double   gain=amount*(1-pa)*(2*pa-1);
+        printf("%.10lf
+",gain+amount);
+    }
+    return 0;
+}

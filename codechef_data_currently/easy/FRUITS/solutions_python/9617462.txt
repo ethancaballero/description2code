@@ -1,0 +1,17 @@
+def chef_fruits(N,M,K):
+    if(K>=abs(N-M)):
+        return 0
+    else:
+        return max(N,M)- (min(N,M)+K)
+
+
+n = int(raw_input()) #test_cases
+diff_list = []
+
+for i in range(n):
+    N,M,K = map(int, raw_input().split())
+    diff_list.append(chef_fruits(N,M,K))
+
+for j in range(n):
+    print diff_list[j]
+    

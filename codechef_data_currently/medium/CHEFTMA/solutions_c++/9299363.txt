@@ -1,0 +1,98 @@
+#include<iostream>
+#include<algorithm>
+#define f(i,n)  for(i=0;i<n;i++)
+ 
+using namespace std;
+ 
+/*int s()
+{
+	int n=0;
+	char ch=getchar();
+	while(ch<'0'||ch>'9')
+	{
+		ch=getchar();
+	}
+	while(ch>='0'&&ch<='9')
+	{
+		n=n*10+ch-48;
+		ch=getchar();
+	}
+	return n;
+}*/
+     
+int main()
+{
+	int t;
+	//t=s();
+	cin>>t;
+	while(t--)
+	{
+		int n,k,m,sum=0;;
+	cin >>n >>k >>m;
+	//	n=s();k=s();m=s();
+	
+		int plan[n],done[n],a[m+k];
+		int i;
+		f(i,n)
+	    cin>>plan[i];
+		f(i,n)
+		{
+			cin>>done[i];
+			//done[i]=s();
+			plan[i]-=done[i];
+			sum+=plan[i];
+		}
+		f(i,m+k)
+		{
+			cin>>a[i];
+			//a[i]=s();
+		}
+		
+		sort(a,a+m+k);
+		sort(plan,plan+n);
+		
+		    /*1
+            4 2 2 
+             5 7 6 1
+              3 3 1 1
+              2 4 5 0
+                      0 2 4 5
+              6 3 // 1 3 4 6
+               1 4
+		*/
+		/*for(i=0;i<m+k;i++)
+		{
+			if()
+			
+			
+			
+			
+			
+			
+			
+		}*/
+		 
+		int j=m+k-1;
+		i=n-1;
+		
+		while(1)
+		{
+			if(plan[i]>=a[j])
+			{
+		//	cout<<"j"<<" "<<j<<"-->"<<a[j]<<endl;
+		//	cout<<"i"<<" "<<i<<"-->"<<plan[i]<<endl;
+				sum-=a[j];
+				i--;
+				j--;
+			}
+			else{
+				j--;
+			}
+			if(i==-1||j==-1)
+			{
+				break;
+			}
+		}
+		cout<<sum<<endl;
+	}
+} 

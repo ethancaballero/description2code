@@ -1,0 +1,13 @@
+n1, n2, n3 = map(int, raw_input().split())
+d = {}
+for x in range(n1+n2+n3):
+	z = int(input())
+	if z not in d:
+		d[z]=1
+	else:
+		d[z]+=1
+ans = [x for x in d if d[x]>=2 ]
+ans.sort()
+print len(ans)
+for x in ans:
+	print x

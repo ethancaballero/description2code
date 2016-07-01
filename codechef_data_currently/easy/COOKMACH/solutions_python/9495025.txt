@@ -1,0 +1,67 @@
+# cook your code here
+test=input()
+for i in range (0,test) :
+    n=raw_input().split(' ')
+    v=long(n[0])
+    dest=long(n[1])
+    #print("%d %d")%(v,dest)
+    y=list()
+    for x in range (0,25) :
+        y.append(2**x)
+    '''for x in range (0,25) :
+        print y[x]'''
+    f=0 
+    temp = v
+    k = 0
+    j = 0
+    if ( v != dest ) :
+        while ( v != 1 ) :
+            if ( v%2 == 0 ) :
+                v/=2
+            else :
+                f=1
+                v=(v-1)/2
+        #print("passed the first test with f=%d")%(f)
+        l=0
+        l2=0
+        o=0
+        p=1
+        if ( f == 0 ) :
+            if ( dest > temp ) :
+                while ( temp != dest ) :
+                    temp*=2
+                    l+=1
+            else :
+                while ( temp != dest ) :
+                    temp/=2
+                    l+=1
+            print(l)
+        else :
+            e=0
+            while ( e==0 ) :
+                if ( temp%2 == 0 ) :
+                    temp/=2
+                    k+=1
+                else :
+                    temp=(temp-1)/2
+                    j+=1
+                for x in range (0,25) :
+                    if ( y[x] == temp ) :
+                        e=1
+                        q=y[x]
+                        break
+            #print ("e=%d k=%d j=%d y[x]=%d")%(e,k,j,q)
+            if ( e == 1 ) :
+                if ( dest > temp ) :
+                    while ( temp != dest ) :
+                        temp*=2
+                        l2+=1
+                else :
+                    while ( temp != dest ) :
+                        temp/=2
+                        l2+=1
+            print(l2+k+j)
+    else : 
+        print("0")
+    
+    

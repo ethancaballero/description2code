@@ -1,0 +1,32 @@
+import sys
+def cal(c,m):
+        k=[]
+        count = 0
+        l=[]
+        if c==0 and m==0:
+                return "Yes"
+        elif c==0:
+                return "No"
+        k.append(int(sys.stdin.readline()))
+        if c==1:
+                if (k.pop())==m or m==0:
+                        return "Yes"
+                else:
+                        return "No"
+        while (c-1)>0:
+                s=int(sys.stdin.readline())
+                if s<=m and (m not in k):
+                        l=[i+s for i in k]
+                        k.append(s)
+                        k= k + l
+                c = c-1
+        if (m in k) or m==0:
+                return "Yes"
+        else:
+                return "No"
+ 
+n=int(sys.stdin.readline())
+while n>0:
+        k,m=map(int,(sys.stdin.readline()).split())
+        print cal(k,m)
+        n = n-1 

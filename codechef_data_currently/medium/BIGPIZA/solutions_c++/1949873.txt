@@ -1,0 +1,67 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <cctype>
+
+using namespace std;
+
+#define ull unsigned long long
+#define ill long long int
+#define pii pair<int,int>
+#define pb(x) push_back(x)
+#define F(i,a,n) for(i=(a);i<(n);++i)
+#define FD(i,a,n) for(i=(a);i>=(n);--i)
+#define FE(it,x) for(it=x.begin();it!=x.end();++it)
+#define V(x) vector<x>
+#define S(x) scanf("%d",&x)
+#define Sl(x) scanf("%lld",&x)
+#define debug(i,sz,x) F(i,0,sz){cout<<x[i]<<" ";}cout<<endl
+
+int dp[10010];
+
+int grundy(int n) {
+	if ( dp[n] != -1 ) return dp[n];
+	int mex = 0,i;
+	bool check[50]={false};
+	F(i,0,(n/2)) {
+		int x = grundy(i)^grundy(n-i-2);
+		check[x]=true;
+	}
+	while ( check[mex] ) mex++;
+	dp[n] = mex;
+	return mex;
+}
+
+int main() {
+	int i,j,n,t;
+	memset(dp,-1,sizeof(dp));
+	dp[0]=0;
+	dp[1]=0;
+	dp[2]=1;
+	// F(i,0,10001)  { if(dp[i]==-1) dp[i]=grundy(i); }// if (dp[i]==0) cout << i << endl;}
+	S(t);
+	while ( t-- ) {
+		S(n);
+		printf("%s
+", (grundy(n)!=0?"Arjuna":"Bhima") );
+	}
+	return 0;
+}

@@ -1,0 +1,13 @@
+for _ in xrange(input()):
+    n, k = map(int, raw_input().split())
+    l = map(int, raw_input().split())
+    count = 0
+    for i in l:
+        rem = i % k
+        if i > k and rem > k/2:
+            count += k - rem
+        elif i < k:
+            count += k - i
+        else:
+            count += rem
+    print count

@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main()
+{
+
+      ll test;
+      cin>>test;
+      while (test--)
+      {
+          vector <int> vx;
+          ll n, temp;
+          cin>>n;
+
+          for(int i = 0 ; i < n; i++)
+          {
+              cin>>temp;
+              vx.push_back(temp);
+
+          }
+          sort(vx.begin(), vx.end());
+
+          ll sum = vx[0]+vx[1];
+          cout<<sum<<endl;
+          vx.clear();
+
+      }
+    return 0;
+}

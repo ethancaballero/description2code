@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int a,t,fact=1;
+	cin>>t;
+	while(t--)
+	{
+	  cin>>a;
+	  for(int i=1;i<=a;i++)
+	  fact=i*fact;
+	  cout<<fact<<"
+";
+	  fact=1;
+	 }
+	return 0;
+}

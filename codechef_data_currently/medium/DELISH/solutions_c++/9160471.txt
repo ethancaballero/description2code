@@ -1,0 +1,81 @@
+	#include<iostream>
+	using namespace std;
+	typedef long long int ll;;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n;
+			cin>>n;
+			ll arr[10005];
+			ll leftmax[10005];
+			ll rightmin[10005];
+			ll rightmax[10005];
+			ll leftmin[10005];
+			for(int i=0;i<n;i++)
+			{
+				cin>>arr[i];
+			}
+
+		// leftmax
+			leftmax[0]=arr[0];	
+			for(int i=1;i<n;i++)
+			{
+				if(leftmax[i-1]>=0)
+					leftmax[i]=leftmax[i-1]+arr[i];
+				else
+					leftmax[i]=arr[i];
+			}
+		
+		//	rightmin
+			rightmin[n-1]=arr[n-1];
+			for(int i=n-2;i>=0;i--)
+			{
+				if(arr[i]<=0 && rightmin[i+1]<=0)
+					rightmin[i]=rightmin[i+1]+arr[i];
+				else if(arr[i]<0 && rightmin[i+1]>0)
+					rightmin[i]=arr[i];
+				else if(arr[i]>=0 && rightmin[i+1]<=0)
+					rightmin[i]=arr[i]+rightmin[i+1];
+				else
+					rightmin[i]=arr[i];
+			}
+			ll max=leftmax[0]-rightmin[1];
+
+		// rightmax
+			rightmax[n-1]=arr[n-1];	
+			for(int i=n-2;i>=0;i--)
+			{
+				if(rightmax[i+1]>=0)
+					rightmax[i]=rightmax[i+1]+arr[i];
+				else
+					rightmax[i]=arr[i];
+			}	
+
+		//	leftmin
+			leftmin[0]=arr[0];
+			for(int i=1;i<n;i++)
+			{
+				if(arr[i]<=0 && leftmin[i-1]<=0)
+					leftmin[i]=leftmin[i-1]+arr[i];
+				else if(arr[i]<0 && leftmin[i-1]>0)
+					leftmin[i]=arr[i];
+				else if(arr[i]>=0 && leftmin[i-1]<=0)
+					leftmin[i]=arr[i]+leftmin[i-1];
+				else
+					leftmin[i]=arr[i];
+			}
+			for(int i=0;i<n;i++)
+			{	
+				if(i+1<n && max<leftmax[i]-rightmin[i+1])
+					max=leftmax[i]-rightmin[i+1];
+				if( i-1>=0 && max<rightmax[i]-leftmin[i-1] )
+					max=rightmax[i]-leftmin[i-1];
+			}	
+
+			cout<<max<<endl;
+			t--;
+		}	
+	}

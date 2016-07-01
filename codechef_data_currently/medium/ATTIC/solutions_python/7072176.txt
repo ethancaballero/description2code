@@ -1,0 +1,25 @@
+t = int(raw_input())
+while(t > 0):
+    temp = raw_input()
+    count = 0
+    A = []
+    inLoop = False
+    for i in range(0, len(temp)):
+        if(temp[i] == '.'):
+            if(inLoop):
+                count += 1
+            else:
+                count = 1
+                inLoop = True
+        else:
+            A.append(count)
+            inLoop = False
+            count = 0
+    days = 0
+    curr = 0
+    for i in range(0, len(A)):
+        if(A[i] > curr):
+            days += 1
+            curr = A[i]
+    print days
+    t = t - 1

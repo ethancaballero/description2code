@@ -1,0 +1,33 @@
+  Furik and Rubik have come to the sanatorium, which consists of N rooms and M passageways. Each passageway connects two rooms, and there is at most one way to move between each pair of rooms. Some rooms have opened windows. There is a draught between two different rooms if both rooms have opened windows, and are connected with each other by some way.
+Furik is interested in one question: what is the number of pairs of rooms, which have a draught between them. Rubik wants to know what is the number of the rooms, which have at least one draught passing through the room.
+Input
+The first line contains two space-separated integers N and M. The next line contains N integers, where the ith number is equal to 1, if the window in the room number i is opened, otherwise 0. Then the next M lines contain pairs of integers, where the ith pair denotes the numbers of the connected rooms by ith passageway. Consider that the rooms are numerated by different integers from 1 to N.
+Output
+In a single line print two numbers, denoting the answers to Furik and Rubik questions.
+Constraints
+
+1 \u2264 N \u2264 50000 (5 \u00d7 104)
+0 \u2264 M \u2264 N \u2212 1
+There is at most one way to move between each pair of rooms, that is, the given graph is a forest
+
+Example
+
+Input:
+6 5
+1 1 1 1 1 0
+1 2
+1 6
+1 5
+2 4
+4 3
+
+Output:
+10 5
+
+Input:
+2 1
+1 0
+1 2
+
+Output:
+0 0

@@ -1,0 +1,89 @@
+    #include<stdio.h>
+    #include<vector>
+    using namespace std;
+    #define MOD 1000000007
+    unsigned long long int fun(int n)
+    {
+    unsigned long long int d=1;
+    for(int i=32;i>0;i--)
+    {
+    d=(d*d)%MOD;
+    if(n&(1<<(i-1)))
+    {
+    d=((d)*2)%MOD;
+    }
+    }
+    return d%MOD;
+    }
+     
+    /*
+    06
+    C(n,r) mod m
+    07
+    Using recurrence:
+    08
+    C(i,k) = C(i-1,k-1) + C(i-1,k)
+    09
+    Time Complexity: O(n*r)
+    10
+    Space Complexity: O(n*r)
+    11
+    */
+     
+    unsigned long long C(int n, int r)
+    {
+     
+    vector< vector<unsigned long long> > C(n+1,vector<unsigned long long> (r+1,0));
+     
+     
+    for (int i=0; i<=n; i++)
+     
+    {
+     
+    for (int k=0; k<=r && k<=i; k++)
+    {
+     
+    if (k==0 || k==i)
+     
+    C[i][k] = 1;
+     
+    else
+     
+    C[i][k] = (C[i-1][k-1] + C[i-1][k])%MOD;
+    }
+    }
+     
+    return C[n][r];
+     
+    }
+     
+    int main()
+    {
+    unsigned long long t,n,x;
+     
+    scanf("%llu",&t);
+    while(t--)
+    {
+    scanf("%llu",&n);
+   for(int i=0;i<n;i++)
+    {
+    scanf("%d",&x);
+    }
+    if(n%2)
+    {
+    printf("%llu
+",fun(n-1));
+    }
+    else
+    {
+    x=C(n,n/2);
+   if(x%2)
+    printf("%llu
+",(fun(n-1)-(x+MOD)/2 + MOD)%MOD );
+    else
+    printf("%llu
+",(fun(n-1)-x/2 + MOD)%MOD );
+    }
+    }
+    return 0;
+    }

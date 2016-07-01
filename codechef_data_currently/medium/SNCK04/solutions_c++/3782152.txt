@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+
+#define max 1000001
+
+long long int phi[max];
+long long int sum[max];
+
+void euler_phi()
+{
+phi[1]=1;
+int i,j;
+for(i=2;i<max;i++)
+{
+ if(!phi[i])
+ {
+  phi[i]=i-1;
+  for(j=(i<<1); j<max;j+=i)
+  {
+  if(!phi[j]) phi[j]=j;
+  phi[j]=phi[j]/i*(i-1);
+  }
+ }
+}
+
+sum[1]=0;
+for(i=2;i<max;i++)
+{
+sum[i]=sum[i-1]+phi[i];
+}
+
+}
+
+
+int main()
+{    
+    int test;
+    cin>>test;
+    euler_phi();
+    while(test--)
+    {
+    int n,i;
+    cin>>n;
+    cout<<sum[n]<<endl;
+    }
+	return 0;
+}

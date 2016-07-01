@@ -1,0 +1,19 @@
+import sys
+from operator import itemgetter
+from math import sqrt
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    blank_line = sys.stdin.readline();
+    no_of_points = int(sys.stdin.readline())
+    b = []
+    for i in range(0, no_of_points):
+        a = map(int, sys.stdin.readline().split())
+        b.append(a)
+    b.sort(key=itemgetter(0,1),reverse=True)
+    b.sort(key=itemgetter(0))
+    dist = 0
+    for i in range(0, no_of_points - 1):
+        dist += sqrt((b[i][0] - b[i + 1][0])**2 + (b[i][1] - b[i + 1][1])**2)
+    print "%0.2f" % dist

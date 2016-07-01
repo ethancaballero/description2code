@@ -1,0 +1,20 @@
+chef = raw_input()
+
+c = 0
+h = 0
+e = 0
+f = 0
+for letter in chef:
+    if letter == 'C':
+        c += 1
+    elif letter == 'H':
+        if h<c:
+            h += 1
+    elif letter == 'E':
+        if e<h:
+            e += 1
+    elif letter == 'F':
+        if f<e:
+            f += 1
+
+print f

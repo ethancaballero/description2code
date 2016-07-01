@@ -1,0 +1,48 @@
+  #include <stdio.h>
+     
+    inline int getn(){
+    	int number = 0;
+    	char c = getchar_unlocked();
+    	while(c<'0')
+    		c = getchar_unlocked();
+    	while(c>='0' && c<='9'){
+    		number = (number<<3)+(number<<1)+c-'0';
+    		c = getchar_unlocked();
+    	}
+    	return number;
+    }
+     
+    inline int big(int a,int b)
+    {
+        if(a>b)
+            return a;
+        return b;
+    }
+     
+    int main () {
+    	int t, n , k ; 
+    	t = getn();
+    	while(t--) {
+    		int dp[1024] = {0};
+    		n = getn() ; 
+    		k = getn() ; 
+    		int a; 
+    		int i , j; 
+    		for(i = 1 ; i <= n ; i++) {
+    			a = getn() ; 
+    			for(j = 0 ; j < 1024 ; j++) {
+    				if(dp[j]) {
+    					dp[j^a] = 1 ; 
+    				}
+    			}
+    			dp[a] = 1 ; 
+    		}
+    		int max = k ; 
+    		for(j = 0 ; j < 1024 ; j++) {
+    			if(dp[j]) max= big(max, j ^ k); 
+    		}
+    		printf("%d
+" , max);
+    	}
+        return 0;
+    }

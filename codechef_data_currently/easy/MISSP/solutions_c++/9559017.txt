@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main ( ) {
+    int a,x , n ,t;
+    cin >>t;
+    while ( t-- ) {
+        cin >>n;
+        cin >> a;
+        x =a;
+        for ( int i=1 ; i<n ; i++ ) {
+            x = a;
+            cin >> a;
+            a = a xor x;
+        }
+        cout << a <<endl;
+    }
+    return 0;
+}

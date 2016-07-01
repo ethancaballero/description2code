@@ -1,0 +1,11 @@
+t = int(raw_input())
+for i in range(t):
+  n = int(raw_input())
+  sum, power = 0, 0
+  while True:
+    power += 1
+    zeros = n / 5 ** power
+    if zeros == 0:
+      break
+    sum += zeros
+  print sum

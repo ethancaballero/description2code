@@ -1,0 +1,19 @@
+for t in xrange(int(raw_input())):
+    n = int(raw_input())
+    a = sorted(map(int, raw_input().split()), reverse = True)
+    c = 0
+    l = []
+    i = 0
+    while (i < n-1):
+        if (a[i] == a[i+1]):
+            l.append(a[i])
+            c+=1
+            i+=2
+            if (c==2):
+                break
+        else:
+            i+=1
+    if (c==2):
+        print l[0]*l[1]
+    else:
+        print -1

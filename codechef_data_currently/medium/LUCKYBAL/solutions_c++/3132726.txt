@@ -1,0 +1,58 @@
+#include <string.h>
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+int main()
+{
+    int cases;
+    scanf("%d",&cases);
+    while(cases--)
+    {
+        char str[100001];
+        scanf("%s",str);
+        long long int len=strlen(str);
+        long long int total=0,flag=0,temp=0;
+        for(int i=0;i<len;i++)
+        {
+            if(str[i]=='4')
+            {
+                flag=1;
+                temp=i;
+            }
+            if(flag==1)
+            {
+                total=total+temp+1;
+            }
+        }
+       /* for(int i=0;i<len;i++)
+        {
+            for(int j=i;j<len;j++)
+            {
+
+                for(int k=i;k<=j;k++)
+                {
+                    int cnt4=0;
+                    int cnt7=0;
+                    for(int l=k-1;l>=i;l--)
+                    {
+                        if(str[l]=='4')
+                        cnt4++;
+                    }
+                    for(int m=k;m<=j;m++)
+                    {
+                        if(str[m]=='7')
+                        cnt7++;
+                    }
+                    if(cnt4==cnt7)
+                    {
+                        total++;
+                        break;
+                    }
+                }
+            }
+        } */
+        printf("%lld
+",total); 
+    }
+    return 0;
+}

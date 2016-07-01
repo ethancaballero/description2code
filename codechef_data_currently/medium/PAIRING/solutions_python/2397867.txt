@@ -1,0 +1,13 @@
+from sys import stdin
+
+for trial in xrange(int(stdin.readline())):
+    n,m = map(int,stdin.readline().split())
+    C,L = [0]*n, []
+    uv = [map(int, stdin.readline().split()) for i in range(m)]
+    for i in range(m-1,-1,-1):
+        u,v = uv[i]
+        if C[u]==C[v]==0:
+            C[u]=C[v]=1
+            L.append(i)
+    L.reverse()
+    print ' '.join(map(str, L))

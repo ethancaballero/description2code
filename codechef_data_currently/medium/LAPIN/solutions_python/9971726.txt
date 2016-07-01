@@ -1,0 +1,15 @@
+for i in range(int(raw_input())):
+    a=raw_input()
+    f=0
+    if len(a)%2==0:
+        a,b=a[:len(a)/2],a[len(a)/2:]
+    else:
+        a,b=a[:len(a)/2],a[len(a)/2+1:]
+    for j in a:
+        if a.count(j)!=b.count(j):
+            f=1
+            break;
+    if f==1:
+        print "NO"
+    else:
+        print "YES"

@@ -1,0 +1,17 @@
+h=input()
+while h>0:
+ tree=raw_input()
+ tree=[0]+tree.split()
+ #tree=[0]+tree
+ #for i in range(len(tree)):
+  #tree[i]=int(tree[i])
+ nodes=(2**h) -1
+ till=((nodes-1)/2)
+ for i in range(till,0,-1):
+  if int(tree[2*i])>int(tree[2*i+1]):
+   tree[i]=int(tree[i])*int(tree[2*i])
+  else:
+   tree[i]=int(tree[i])*int(tree[2*i+1])
+
+ print int(tree[1])%1000000007
+ h=input()

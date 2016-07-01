@@ -1,0 +1,111 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <math.h>
+#include <string.h>
+#include <stdio.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int n, min = 100001, flag = 0, ans = 0;
+        scanf("%d", &n);
+        int arr[n];
+        for(int i = 0; i < n; i++)
+        {
+            scanf("%d", &arr[i]);
+            if(arr[i] < min)
+            {
+                min = arr[i];
+            }
+        }
+
+        int fac[1000], in = 0;
+
+        if(min == 1)
+        {
+            ans = -1;
+        }
+        else
+        {
+
+            for(int z = 2; z*z <= min; z++)
+        {
+            if(min % z == 0)
+            {
+                fac[in] = z;
+                in++;
+                while(min%z == 0)
+                {
+                    min /= z;
+                }
+            }
+        }
+        if(min > 1)
+        {
+            fac[in] = min;
+            in++;
+        }
+
+//            flag = 1;
+//            for(int i = 0; i < n; i++)
+//            {
+//                if(arr[i] % 2 != 0)
+//                {
+//                    flag = 0;
+//                    break;
+//                }
+//            }
+//
+//            if(flag == 1)
+//            {
+//                ans = 2;
+//            }
+//            if(flag == 0)
+//            {
+                for(int j = 0; j < in; j++)
+        {
+            flag = 1;
+            for(int i = 0; i < n; i++)
+            {
+                if(arr[i] % fac[j] != 0)
+                {
+                    flag = 0;
+                    break;
+                }
+            }
+
+            if(flag == 1)
+            {
+                ans = fac[j];
+                break;
+            }
+        }
+//            }
+
+        if(flag == 0)
+        {
+//            for(int i = 0; i < n; i++)
+//            {
+//                if(arr[i] % min != 0)
+//                {
+                    ans = -1;
+//                    break;
+//                }
+//                else
+//                {
+//                    ans = min;
+//                }
+//            }
+        }
+        }
+        printf("%d
+", ans);
+    }
+    return 0;
+}

@@ -1,0 +1,18 @@
+'''
+Created on Jun 20, 2015
+
+@author: aman
+'''
+t = int(raw_input())
+for i in range(0,t):
+    d,u,n=map(float,raw_input().split())
+    n= int(n)
+    s=d*u
+    s2=0
+    for j in range(1,n+1):
+        m,r,c=map(float,raw_input().split())
+        s1 = float(c/m) +float(r*u)
+        if(s1 < s):
+            s=s1
+            s2=j
+    print s2

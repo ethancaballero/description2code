@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+	int t;
+	float n,m;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%f%f",&n,&m);
+		printf("%f
+",(n+m-1));
+	}
+	return 0;
+}

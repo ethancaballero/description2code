@@ -1,0 +1,6 @@
+cases = int(raw_input())
+
+for _ in xrange(cases):
+    DS, DT, D = map(int, raw_input().split())
+
+    print max(0, DT - (D + DS), D - (DT + DS), DS - (D + DT))

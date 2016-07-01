@@ -1,0 +1,9 @@
+from fractions import gcd
+def main():
+	t = int(raw_input())
+	while t>0:
+		a, b, c, d, k = map(int, raw_input().split())
+		x,y = gcd(a, b), gcd(c, d)
+		print 2 * ((k * gcd(x,y))//(x*y))  + 1
+		t-=1
+main()

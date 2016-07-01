@@ -1,0 +1,220 @@
+#include <iostream>
+#include<stdio.h>
+#include<math.h>
+#define ll long long int
+using namespace std;
+ll m=1000000007;
+ll a[100001];
+ll *st,*lazyadd,*lazymul;
+ll construct(ll a[], int l, int r, int i, ll *st)
+{
+
+    if(l==r)
+    {
+        st[i]=a[l];
+        return a[l];
+    }
+    else
+    {
+        st[i]=((construct(a,l,(l+r)/2,2*i+1,st)%m)+(construct(a,(l+r)/2+1,r,2*i+2,st)%m))%m;
+        return st[i];
+    }
+}
+void updateadd(ll *st,int l, int r, int ql, int qr, ll diff, int i)
+{
+    if(lazyadd[i]!=0 || lazymul[i]!=1)
+    {
+        st[i]=(st[i]*lazymul[i]+(r-l+1)*lazyadd[i])%m;
+    //     st[i]=((((r-l+1)*((st[i]*lazymul[i])%m))%m)+(((r-l+1)*(lazyadd[i]))%m))%m;
+        if(l!=r)
+        {
+/*            lazy[i*2+1]+=lazy[i];
+            lazy[i*2+2]+=lazy[i];
+*/
+        lazymul[i*2+1]=((lazymul[i*2+1])*(lazymul[i]))%m;
+        lazymul[i*2+2]=((lazymul[i*2+2])*(lazymul[i]))%m;
+        lazyadd[i*2+1]=((lazyadd[i*2+1]*lazymul[i])+(lazyadd[i]))%m;
+        lazyadd[i*2+2]=((lazyadd[i*2+2]*lazymul[i])+(lazyadd[i]))%m;
+        }
+        lazyadd[i]=0;
+        lazymul[i]=1;
+    }
+    if(l>r||ql>r||qr<l) return;
+    if(l>=ql&&r<=qr)
+    {
+//        st[i]+=(r-l+1)*diff;
+        st[i]=((st[i])+((r-l+1)*diff)%m)%m;
+        if(l!=r)
+        {
+/*            lazy[i*2+1]+=diff;
+            lazy[i*2+2]+=diff;
+ */
+            lazyadd[i*2+1]=((lazyadd[i*2+1])+(diff))%m;
+            lazyadd[i*2+2]=((lazyadd[i*2+2])+(diff))%m;
+        }
+        return;
+    }
+    updateadd(st,l,(l+r)/2,ql,qr,diff,i*2+1);
+    updateadd(st,(l+r)/2+1,r,ql,qr,diff,i*2+2);
+    st[i]=((st[2*i+1])+(st[2*i+2]))%m;
+}
+
+void updatemult(ll *st,int l, int r, int ql, int qr, ll mult, int i)
+{
+    if(lazyadd[i]!=0 || lazymul[i]!=1)
+    {
+        st[i]=(st[i]*lazymul[i]+(r-l+1)*lazyadd[i])%m;
+    //     st[i]=((((r-l+1)*((st[i]*lazymul[i])%m))%m)+(((r-l+1)*(lazyadd[i]))%m))%m;
+        if(l!=r)
+        {
+/*            lazy[i*2+1]+=lazy[i];
+            lazy[i*2+2]+=lazy[i];
+*/
+        lazymul[i*2+1]=((lazymul[i*2+1])*(lazymul[i]))%m;
+        lazymul[i*2+2]=((lazymul[i*2+2])*(lazymul[i]))%m;
+        lazyadd[i*2+1]=((lazyadd[i*2+1]*lazymul[i])+(lazyadd[i]))%m;
+        lazyadd[i*2+2]=((lazyadd[i*2+2]*lazymul[i])+(lazyadd[i]))%m;
+        }
+        lazyadd[i]=0;
+        lazymul[i]=1;
+    }
+    if(l>r||ql>r||qr<l) return;
+    if(l>=ql&&r<=qr)
+    {
+//        st[i]+=(r-l+1)*diff;
+        st[i]=((st[i])*(mult))%m;
+        if(l!=r)
+        {
+/*            lazy[i*2+1]+=diff;
+            lazy[i*2+2]+=diff;
+ */
+        lazymul[i*2+1]=((lazymul[i*2+1])*(mult))%m;
+        lazymul[i*2+2]=((lazymul[i*2+2])*(mult))%m;
+        lazyadd[i*2+1]=((lazyadd[i*2+1])*(mult))%m;
+        lazyadd[i*2+2]=((lazyadd[i*2+2])*(mult))%m;
+        }
+        return;
+    }
+    updatemult(st,l,(l+r)/2,ql,qr,mult,i*2+1);
+    updatemult(st,(l+r)/2+1,r,ql,qr,mult,i*2+2);
+    st[i]=((st[2*i+1])+(st[2*i+2]))%m;
+}
+
+void updateset(ll *st,int l, int r, int ql, int qr, ll diff, int i)
+{
+    if(lazyadd[i]!=0 || lazymul[i]!=1)
+    {
+        st[i]=(st[i]*lazymul[i]+(r-l+1)*lazyadd[i])%m;
+    //     st[i]=((((r-l+1)*((st[i]*lazymul[i])%m))%m)+(((r-l+1)*(lazyadd[i]))%m))%m;
+        if(l!=r)
+        {
+/*            lazy[i*2+1]+=lazy[i];
+            lazy[i*2+2]+=lazy[i];
+*/
+        lazymul[i*2+1]=((lazymul[i*2+1])*(lazymul[i]))%m;
+        lazymul[i*2+2]=((lazymul[i*2+2])*(lazymul[i]))%m;
+        lazyadd[i*2+1]=((lazyadd[i*2+1]*lazymul[i])+(lazyadd[i]))%m;
+        lazyadd[i*2+2]=((lazyadd[i*2+2]*lazymul[i])+(lazyadd[i]))%m;
+        }
+        lazyadd[i]=0;
+        lazymul[i]=1;
+    }
+    if(l>r||ql>r||qr<l) return;
+    if(l>=ql&&r<=qr)
+    {
+//        st[i]+=(r-l+1)*diff;
+        st[i]=(((r-l+1))*(diff))%m;
+        if(l!=r)
+        {
+/*            lazy[i*2+1]+=diff;
+            lazy[i*2+2]+=diff;
+ */
+        lazymul[i*2+1]=lazymul[i*2+2]=0;
+        lazyadd[i*2+1]=lazyadd[i*2+2]=diff;
+        }
+        return;
+    }
+    updateset(st,l,(l+r)/2,ql,qr,diff,i*2+1);
+    updateset(st,(l+r)/2+1,r,ql,qr,diff,i*2+2);
+    st[i]=((st[2*i+1])+(st[2*i+2]))%m;
+}
+
+ll getsum(ll *st, int l, int r, int i, int ql, int qr)
+{
+    if(lazyadd[i]!=0 || lazymul[i]!=1)
+    {
+        st[i]=(st[i]*lazymul[i]+(r-l+1)*lazyadd[i])%m;
+    //     st[i]=((((r-l+1)*((st[i]*lazymul[i])%m))%m)+(((r-l+1)*(lazyadd[i]))%m))%m;
+        if(l!=r)
+        {
+/*            lazy[i*2+1]+=lazy[i];
+            lazy[i*2+2]+=lazy[i];
+*/
+        lazymul[i*2+1]=((lazymul[i*2+1])*(lazymul[i]))%m;
+        lazymul[i*2+2]=((lazymul[i*2+2])*(lazymul[i]))%m;
+        lazyadd[i*2+1]=((lazyadd[i*2+1]*lazymul[i])+(lazyadd[i]))%m;
+        lazyadd[i*2+2]=((lazyadd[i*2+2]*lazymul[i])+(lazyadd[i]))%m;
+        }
+        lazyadd[i]=0;
+        lazymul[i]=1;
+    }
+    if(l>r||l>qr||r<ql) return 0;
+    if(l>=ql&&r<=qr)
+    {
+        return st[i];
+    }
+    return ((getsum(st,l,(l+r)/2,i*2+1,ql,qr))+(getsum(st,(l+r)/2+1,r,i*2+2,ql,qr)))%m;
+}
+int main()
+{
+     //   freopen("input.txt","r",stdin);
+    ll t,n,q,w,c,l,r,v;
+        scanf("%lld%lld",&n,&q);
+        for(int i=0; i<n; i++)
+        {
+            scanf("%lld",&a[i]);
+            a[i]%=m;
+        }
+        int x=int(ceil(log2(n)));
+        int siz=2*int(pow(2,x))-1;
+        st=new ll[siz];
+        lazyadd=new ll[siz];
+        lazymul=new ll[siz];
+        for(int i=0; i<siz; i++)
+        {
+            lazyadd[i]=0;
+            lazymul[i]=1;
+        }
+        construct(a,0,n-1,0,st);
+    for(ll i=0;i<q;i++)
+    {
+        scanf("%lld%lld%lld",&c,&l,&r);
+        if(c!=4)
+               scanf("%lld",&v);
+ //       cout<<"done
+";
+        l--;r--;
+        if(c==1){
+            updateadd(st,0,n-1,l,r,v,0);
+           // root=updateadd(a,0,n-1,l,r,v,root);
+        }
+        else  if(c==2){
+            updatemult(st,0,n-1,l,r,v,0);
+           // root=updatemullazy(a,0,n-1,l,r,v,root);
+        }
+        else if(c==3)
+        {
+            updateset(st,0,n-1,l,r,v,0);
+            //root=updatesetlazy(a,0,n-1,l,r,v,root);
+        }
+        else if(c==4)
+        {
+            printf("%lld
+",getsum(st,0,n-1,0,l,r));
+ //           cout<<"yoyo
+";
+           // cout<<rmslazy(a,0,n-1,l,r,&root)<<endl;
+        }
+    }
+    return 0;
+}

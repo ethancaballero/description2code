@@ -1,0 +1,41 @@
+#include<iostream>
+#include<cstdio>
+#define gc getchar_unlocked
+using namespace std;
+
+
+int scn(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+
+int main()
+{
+ 
+ 
+  int t;
+  scn(t);
+  while(t--)
+  {
+    int n,a,b,cnt=1;
+    scn(n);
+    scn(a);
+    for(int i=1;i<n;i++)
+    {
+     scn(b);
+     if(b<a)
+     {
+	 cnt++;
+         a=b;	
+     } 
+     
+    }
+ 
+    cout<<cnt<<endl;
+  }
+
+}

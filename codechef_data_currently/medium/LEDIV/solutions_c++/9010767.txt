@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		long long int n,i,a,sum=0,sum1=0,d;
+		scanf("%lld",&n);
+		for(i=0;i<n;i++)
+		{
+			scanf("%lld",&a);
+			if(i>=1)
+			{
+				d=__gcd(d,a);
+			}
+			else
+			d=a;
+		}
+		if(d==1)
+		printf("-1
+");
+		else
+		{
+			for(i=2;i<=sqrt(d);i++)
+			{
+				if(d%i==0)
+				{
+					d=i;
+					break;
+				}
+			
+			}
+			printf("%lld
+",d);
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+string Modify(int i,int j,string str,int n)
+{
+    string tmp;
+    int k;
+    if(i<j)
+    {
+        tmp=str.substr(0,i);
+        for(k=i+1;k<=j;k++)
+            tmp+=str[k];
+        tmp+=str[i];
+        for(k=j+1;k<n;k++)
+            tmp+=str[k];
+
+    }
+    else if(i>j)
+    {
+        tmp=str.substr(0,j);
+        tmp+=str[i];
+        for(k=j;k<i;k++)
+            tmp+=str[k];
+        for(k=i+1;k<n;k++)
+            tmp+=str[k];
+
+    }
+    else
+        tmp=str;
+    return tmp;
+}
+int main()
+{
+    string str,tmp,given_string;
+    int i,t,n,save,j;
+    //freopen("in.txt","r",stdin);
+    cin>>t;
+
+    while(t--)
+    {
+        cin>>n;
+        cin>>given_string;
+        string temp_string,lex_minimum = given_string;
+        for(int i = 0 ;  i< given_string.length() ; i ++)
+        {
+            for(int j =0 ; j < given_string.length() ; j++)
+            {
+                temp_string = Modify(i,j,given_string,n);
+                lex_minimum = min(temp_string,lex_minimum);
+            }
+        }
+
+        cout<<lex_minimum<<endl;
+
+    }
+    //fclose(stdin);
+    return 0;
+}

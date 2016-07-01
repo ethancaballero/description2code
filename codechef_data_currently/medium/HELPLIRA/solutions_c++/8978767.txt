@@ -1,0 +1,34 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n,i=1,x1,y1,x2,y2,x3,y3;
+	float area,maxi,mini;
+	cin>>n;
+	cin>>x1>>y1>>x2>>y2>>x3>>y3;
+	maxi=abs(((y3-y1)*(x2-x1)-(y2-y1)*(x3-x1)));
+	mini=abs(((y3-y1)*(x2-x1)-(y2-y1)*(x3-x1)));
+	int maxarea=i;
+	int minarea=i;
+	n--;
+	i++;
+	while(n--)
+	{ 
+	   cin>>x1>>y1>>x2>>y2>>x3>>y3;
+	  area=abs(((y3-y1)*(x2-x1)-(y2-y1)*(x3-x1)));
+	  if(area>=maxi)
+	  {maxi=area;
+	  maxarea=i;
+	  }
+	  if(area<=mini)
+	  {
+	      mini=area;
+	      minarea=i;
+	  }
+	  i++;
+	}
+	cout<<minarea<<" "<<maxarea;
+	return 0;
+}

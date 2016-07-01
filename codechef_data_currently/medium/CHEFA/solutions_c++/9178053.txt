@@ -1,0 +1,27 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	int t,n,i;
+	long long int ans;
+	scanf("%d",&t);
+	while(t--)
+	{
+	ans=0;
+	scanf("%d",&n);
+	long long int a[n];
+	for(i=0;i<n;i++)
+	{
+	scanf("%lld",&a[i]);
+	}
+	sort(a,a+n);
+	for(i=n-1;i>=0;i=i-2)
+	{
+	ans=ans+a[i];
+	}
+	printf("%lld
+",ans);
+	}
+	return 0;
+}

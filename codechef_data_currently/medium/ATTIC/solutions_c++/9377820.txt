@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+int main()
+{
+    int tc;
+    string floorboards;
+    cin>>tc;
+
+
+    for (int i=0;i<tc;i++){
+        int current_length=0;
+        int max_length=0;
+        int days=0;
+
+        cin>>floorboards;
+        for (int j=0;j<floorboards.length();j++){
+
+            if (floorboards[j]== '.')
+                {
+                    current_length++;
+                }
+            else if (floorboards[j]== '#')
+                {
+                    if (current_length>max_length)
+                    {
+                            max_length=current_length;
+                            days++;
+
+                    }
+                    current_length=0;
+
+                }
+
+
+        }
+
+        cout<<days<<endl;
+
+
+        }
+
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main(){
+	
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+	ll t,n,i,k,count,sum=0,x,y,flag=0,left,p,c;
+	cin>>t;
+	while(t--){
+		cin>>x>>y>>k>>n;
+		left=x-y;
+		
+		
+		
+		for(i=0;i<n;i++){
+			cin>>p>>c;
+			if(p>=left&&c<=k){
+				flag=1;
+			}
+		}
+		if(flag==1){
+			cout<<"LuckyChef"<<endl;
+		}
+		else
+		cout<<"UnluckyChef"<<endl;
+		flag=0;
+	}
+	return 0;
+}

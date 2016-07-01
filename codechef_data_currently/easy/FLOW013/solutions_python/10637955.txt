@@ -1,0 +1,9 @@
+t=int(raw_input())
+while(t>0):
+	n=map(int,raw_input().split())
+	m=sum(n)
+	if(m!=180):
+		print 'NO'
+	else:
+		print 'YES'
+	t-=1  

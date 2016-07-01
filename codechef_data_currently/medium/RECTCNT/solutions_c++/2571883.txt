@@ -1,0 +1,68 @@
+    #include <iostream>
+    #include <algorithm>
+    #include <vector>
+    #include <map>
+    using namespace std;
+     
+    #define PB push_back
+    #define MP make_pair
+     
+    typedef pair<int,int> PII;
+     
+    int main()
+    {
+    ios_base::sync_with_stdio(0);
+    int n;
+    cin >> n;
+    while(n)
+    {
+    vector<PII> tab;
+    for(int i = 0;i < n;++i)
+    {
+    int a, b;
+    cin >> a >> b;
+    tab.PB(MP(a, b));
+    }
+    if(n < 4) cout << "0
+";
+    
+    else
+    {
+    sort(tab.begin(), tab.end());
+    vector<PII> nowe;
+    
+    if(tab[0].first == tab[1].first) 
+    nowe.PB(tab[0]);
+    
+    for(int i = 1;i < n - 1;++i)
+    {
+    if(tab[i].first == tab[i - 1].first || tab[i].first == tab[i + 1].first) 
+    nowe.PB(tab[i]);
+    }
+    
+    if(tab[n - 1].first == tab[n - 2].first) 
+    nowe.PB(tab[n - 1]);
+    
+    map<PII,int> m;
+    
+    for(unsigned int i = 0;i < nowe.size();i += 2)
+    {
+    int y1 = min(nowe[i].second, nowe[i + 1].second);
+    int y2 = max(nowe[i].second, nowe[i + 1].second);
+    ++m[MP(y1, y2)];
+    }
+    
+    map<PII,int>::iterator it;
+    unsigned long long int w = 0;
+    for(it = m.begin();it != m.end();++it)
+    {
+    int x = (*it).second;
+    w += ((long long)x * (x - 1)) / 2;
+    }
+    cout << w << "
+";
+    }
+    cin >> n;
+    }
+    return 0;
+    }

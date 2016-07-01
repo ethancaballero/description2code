@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+int HEMANT(int,long long int ,long long int ,char[],long long int[]);
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,i;
+		cin>>n;
+		long long int k,ans,a[n+1],ans1;
+		cin>>k>>ans;
+		for(i=1;i<=n;i++)
+		cin>>a[i];
+		cin.ignore();
+		char str[5];
+		cin>>str;
+		ans1=ans;
+		ans1=HEMANT(n,k,ans,str,a);
+		cout<<ans1<<endl;		
+	}
+	return 0;
+}
+int HEMANT(int n,long long int k,long long int ans,char str[],long long int a[])
+{
+	if(k<=0)
+	return ans;
+   	if(str[0]=='X')
+	{
+		long long int i,j;
+		//for(i=1;i<=k;i++)
+	   if(k%2==1)
+		{
+			for(j=1;j<=n;j++)
+			{
+				ans=(ans^a[j]);
+			}
+	    }
+		return ans;
+	}
+	else if(str[0]=='A')
+	{
+		long long int i,j;
+	//	for(i=1;i<=k;i++)
+	//	{
+			for(j=1;j<=n;j++)
+			{
+				ans=(ans&a[j]);
+			}
+	//	}
+		return ans;
+	}
+	else if(str[0]=='O')
+	{
+		long long int i,j;
+	//	for(i=1;i<=k;i++)
+	//	{
+			for(j=1;j<=n;j++)
+			{
+				ans=(ans|a[j]);
+			}
+	//	}
+		return ans;
+	}
+}

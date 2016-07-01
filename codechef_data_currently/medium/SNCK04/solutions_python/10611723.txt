@@ -1,0 +1,16 @@
+limit = 10**6 + 1
+a = [i for i in range(limit)]
+a[1] = 0
+for i in range(2, limit):
+    if a[i] == i :
+        for j in range(i, limit, i):
+            a[j]/=i
+            a[j]*=(i-1)
+        
+b = [0]*(limit)
+for i in range(1, limit):
+    b[i] = b[i-1] + a[i]
+#print time.time() - s
+    
+for t in xrange(int(raw_input())):
+    print b[int(raw_input())]

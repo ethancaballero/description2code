@@ -1,0 +1,20 @@
+from sys import stdin, stdout
+t=int(input())
+for k in range(t):
+  n=int(input())
+  A= map(int,stdin.readline().rstrip().split())
+  count1=0
+  for i in range(n):
+    for j in range(i+1,n):
+      if(A[i]>A[j]):
+        count1=count1+1
+  count2=0
+  for i in range(n-1):
+    if(A[i]>A[i+1]):
+      count2=count2+1
+  if count1==count2:
+    print("YES")
+  else:
+    print("NO")
+                
+         

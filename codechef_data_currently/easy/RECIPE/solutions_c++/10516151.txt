@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,i,j,k,p,min;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>p;
+		int arr[p],l=1;
+		for(j=0;j<p;j++)
+		cin>>arr[j];
+		min=arr[0];
+		for(j=0;j<p;j++)
+		{
+			if(arr[j]<=min)
+			min=arr[j];
+		}
+		for(j=2;j<=min;j++)
+		{
+			for(k=0;k<p;k++)
+			{
+				if(arr[k]%j!=0)
+				break;
+			}
+			if(k==p)
+			l=j;
+		}
+		for(j=0;j<p;j++)
+		{
+			cout<<arr[j]/l<<" ";
+		}
+		cout<<endl;
+		
+	}
+}

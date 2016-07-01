@@ -1,0 +1,56 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+bool double_string(string &a, int& len)
+{
+	int h = len/2;
+	for(int i=0;i<h;i++)
+		if(a[i] != a[h+i])
+			return false;
+	return true;	
+}
+bool is_subsequence(string a, string b)
+{
+	int j = 0;
+	//cout<<a<<" "<<b<<"
+";
+	for(int i=0; i<a.size(); i++)
+	{
+		while(j < b.size() && a[i] != b[j])
+			j++;
+		if(j == b.size())
+			return false;
+			j++;
+	}	
+	return true;
+}
+
+bool check(string &a)
+{
+	int len = a.size();
+	if(len%2==0)
+		return double_string(a,len);
+	if(len<=1)
+		return false;
+	else
+	{
+		int h = len/2;
+		//cout<<h<<"
+";
+		return is_subsequence(a.substr(0,h), a.substr(h, len-1)) || is_subsequence(a.substr(h+1,len), a.substr(0, h+1));
+	}
+}
+int main()
+{
+	int test;
+	scanf("%d", &test);
+	
+	string a;
+	while(test--)
+	{
+		cin>>a;
+		string result = check(a)? "YES" : "NO";
+		cout<<result<<"
+";
+	}
+}

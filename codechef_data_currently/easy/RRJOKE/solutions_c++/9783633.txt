@@ -1,0 +1,36 @@
+//
+//  RRJOKE.cpp
+//  
+//
+//  Created by Aneesh on 01/04/16.
+//
+//
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int t,n,x,y;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        int ans;
+        for(int i=1; i<=n; i++)
+        {
+            cin>>x>>y;
+            if(i>1)
+                ans ^= i;
+            else
+                ans = 1;
+        }
+        
+        cout<<ans<<endl;
+        
+        
+        
+        
+        
+    }
+    
+}

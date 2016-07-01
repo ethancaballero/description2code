@@ -1,0 +1,43 @@
+from heapq import heappush,heappop
+def init(l):
+	a = [0]
+	while l>0:
+		a.append({})
+		l -=1
+	return a	
+def v_con(m,n,l):
+	while m>0:
+		a,b = map(int,raw_input().split())
+		n[a][b] = 0
+		if not n[b].has_key(a):
+			if a == 1 and b == l:
+				n[b][a] = 1
+			elif a!=1:
+				n[b][a] = 1
+		m -=1
+	return n
+def relax(W,u,v,D):
+	d = D.get(u,inf) + W[u][v]
+	if d<D.get(v,inf):
+		D[v] = d
+		return True
+def dijkstra(G,s=1):
+	D,Q,S = {s:0}, [(0,s)], set()
+	while Q:
+		_, u = heappop(Q)
+		if u in S:continue
+		S.add(u)
+		for v in G[u]:
+			relax(G,u,v,D)
+			heappush(Q,(D[v],v))
+	return D
+
+inf = float('inf')
+n,m = map(int,raw_input().split())
+g = init(n)
+g = v_con(m,g,n)
+l = dijkstra(g)
+if l.has_key(n):
+	print l[n]
+else:
+	print -1

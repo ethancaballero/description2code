@@ -1,0 +1,44 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+li={0:True,1:True}
+lim=4800
+t1=0
+t2=1
+for i in range(2,lim):
+ t=t1+t2
+ li[t]=True
+ t1=t2
+ t2=t
+cases=input()
+for case in range(cases):
+ n=long(raw_input())
+ if n in li: print 'YES'
+ else: print 'NO'
+ 
+   
+
+  
+  
+ 
+ 
+ 
+
+  
+ 
+
+  
+  
+ 
+ 
+ 
+
+  
+ 

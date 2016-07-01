@@ -1,0 +1,52 @@
+#include <iostream>
+#include <math.h>
+#include <stdlib.h>
+using namespace std;
+
+int n;
+long long int D[100000];
+
+void readInp()
+{
+	cin>>n;
+	for(int i=0; i<n; i++){
+		cin>>D[i];
+	}
+}
+void calc()
+{
+	int p1=0, p2=0;
+	long long ans=0;
+	while(true){
+		while(p1<n && D[p1]<=0){
+			p1++;
+		}
+		while(p2<n && D[p2]>=0){
+			p2++;
+		}
+		if(p1<n && p2<n){
+			ans += min(D[p1],-D[p2]) * abs(p2-p1);
+			if(D[p1] < -D[p2]){
+				D[p2] = D[p2] + D[p1];
+				D[p1] = 0;
+			}else{
+				D[p1] = D[p2] + D[p1];
+				D[p2] = 0;
+			}
+		}
+		else
+			break;
+	}
+	cout<<ans<<endl;
+}
+int main(int argc, char const *argv[])
+{
+	int t;
+	cin>>t;
+	while(t){
+	readInp();
+	calc();
+	t--;
+	}
+	return 0;
+}

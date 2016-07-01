@@ -1,0 +1,30 @@
+#include <iostream>
+#include<algorithm>
+#include<cstdio>
+using namespace std;
+inline int input( )
+{
+int n=0;
+int ch=getchar_unlocked();
+while(ch<'0' || ch>'9')
+	ch=getchar_unlocked();
+while( ch >47 )
+n = (n<<3)+(n<<1) + ch-'0', ch=getchar_unlocked();
+return n;
+}
+ 
+ 
+int main(){
+	int n,l,a[100001],count=0,temp,i;
+	n=input(); l=input();
+	for(i=0;i<n;i++)
+		a[i]=input();
+	sort(a,a+n);
+	for(i=0;i<n-1;i++){
+		if(a[i+1]-a[i]<=l)
+			count++,i++;
+	}
+	printf("%d
+",count);
+	return 0;
+}

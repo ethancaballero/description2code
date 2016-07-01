@@ -1,0 +1,95 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+// Shortcuts for "common" data types in contests
+typedef long long int ll;
+typedef vector<int> vi;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+typedef set<int> si;
+typedef map<string, int> msi;
+// To simplify repetitions/loops, Note: define your loop style and stick with it!
+#define s(i) scanf("%d",&i)
+#define sl(i) scanf("%ld",&i)
+#define sll(i) scanf("%lld",&i)
+#define REP(i, a, b) for (int i = int(a); i <= int(b); i++) // a to b, and variable i is local!
+#define NREP(i,a,b) for (int i = int(a); i >= int(b); i--)
+#define TRvi(c, it) for (vi::iterator it = (c).begin(); it != (c).end(); it++)
+#define TRvii(c, it) for (vii::iterator it = (c).begin(); it != (c).end(); it++)
+#define TRmsi(c, it) for (msi::iterator it = (c).begin(); it != (c).end(); it++)
+#define INF 2000000000 // 2 billion
+
+string a[35];
+int n;
+map < string , int > dp;
+int memoize( string str )
+{
+    if( dp.count(str) == 1 )
+        return dp[str];
+    int ans = 0;
+    si myset;
+    REP(i,0,n - 1)
+    {
+        int len = a[i].length();
+        int siz = str.length();
+        REP(j,0,siz - 1)
+        {
+            int q = j;
+            int k = 0;
+            while( k < len && q < siz )
+            {
+                if( str[q] == a[i][k])
+                {
+                    k++;
+                    q++;
+                }
+                else
+                    break;
+            }
+            if( k == len )
+            {
+                string p = "";
+                REP(s,0,j - 1)
+                    p += str[s];
+                string r = "";
+                REP(s,q,siz - 1)
+                    r += str[s];
+                //cout << p << " " << r << endl;
+                int sg = memoize( p ) ^ memoize( r );
+                myset.insert(sg);
+            }
+        }
+    }
+    int i = 0;
+    while( 1 )
+    {
+        if( myset.count(i) == 0 )
+            return dp[str] = i;
+        i++;
+    }
+}
+
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    //freopen("output.txt","r",stdout);
+    int t;s(t);
+    while( t-- )
+    {
+        dp.clear();
+        string str;
+        cin >> str;
+        s(n);
+        REP(i,0,n - 1)
+            cin >> a[i];
+        int ans = memoize(str);
+        if( ans )
+            printf("Teddy
+");
+        else
+            printf("Tracy
+");
+    }
+    return 0;
+}

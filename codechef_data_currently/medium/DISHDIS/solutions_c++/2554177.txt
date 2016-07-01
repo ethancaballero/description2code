@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
+#include <algorithm>
+#include <map>
+#include <vector>
+#include <list>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <string>
+#include <cmath>
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<=b;i++)
+#define FORD(i,a,b) for(int i=a;i>=b;i--)
+#define REP(i,n) FOR(i,0,n)
+#define PB push_back
+#define ITER(i,a) for( typeof(a.begin()) i=a.begin();i!=a.end();i++)
+#define mod 1000000007
+#define MAXN 1000010
+
+typedef pair<int,int>   PI;
+typedef vector<int> VI;
+typedef long long int LL;
+
+int main(){
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "rt", stdin);
+	freopen("output.txt", "wt", stdout);
+#endif
+	int t;
+	scanf("%d",&t);
+	// everything is 1 based
+	//dp[i][j] = ways to form sum =j from 1st i chefs
+	int n,m,i,x[210],y[210],dp[210][210]={0},sum,chef,k;
+
+	while(t--)
+	{
+		memset(dp,0,sizeof(dp));
+		scanf("%d%d",&n,&m);
+
+		FOR(i,1,m)
+			scanf("%d%d",&x[i],&y[i]);
+
+		// sums which can be formed by 1st chef
+		for(i=x[1];i<=y[1];i++)
+		  dp[1][i]=1;
+
+		for(chef=2;chef<=m;chef++)
+		    for(sum=0;sum<=n;sum++)
+			    for(k=x[chef];k<=y[chef];k++)
+			      if(sum>=k)
+					{
+			         dp[chef][sum] += dp[chef-1][sum-k];
+
+			         if(dp[chef][sum]>= mod) dp[chef][sum]%=mod;
+			        }
+
+		printf("%d
+",dp[m][n]);
+	}
+	return 0;
+}

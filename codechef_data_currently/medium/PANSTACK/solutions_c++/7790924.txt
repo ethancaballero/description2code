@@ -1,0 +1,84 @@
+                                             //BIG OH
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+#include<sstream>
+#include<stdlib.h>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#include<map>
+#include<set>
+#include<list>
+#include<stack>
+#include<queue>
+#include<iomanip>
+#include<ctype.h>
+#include<complex>
+#include<utility>
+#include<functional>
+#include<bitset>
+#include<numeric>
+#include<cassert>
+#include<climits>
+#include <fstream> 
+using namespace std;
+#define ll  long long 
+#define gc getchar_unlocked
+#define mod 1000000007
+#define pq priority_queue
+#define vi vector<int>
+#define eps 1e-9
+#define inf (1 << 28)
+#define  MX 1002
+#define pi pair<int ,int >
+
+ll dp[MX+1][MX+1]; //dp[i][j]=dp[i-1][j]+dp[i-1][j-1]          
+ll res[MX+1];
+
+void solve()
+{
+ 
+     for(int i=0;i<=MX;i++)
+     {
+       dp[i][0]=1;
+       dp[i][i]=1;
+     }
+     for(int i=1;i<=MX;i++)  
+     {
+        for(int j=1;j<i;j++)
+        {
+           dp[i][j]=(dp[i-1][j]+dp[i-1][j-1])%mod;
+        }
+     }      
+    
+     res[0]=1;
+     res[1]=1;
+     for(int i=2;i<=MX;i++)
+     {
+        ll temp=0;
+        for(int j=0;j<i;j++)
+        {
+            temp+=res[j]*dp[i-1][j];
+            if(temp>=mod)
+             temp=temp%mod;
+        }
+        res[i]=temp;   
+     }    
+}    
+
+int main()
+{
+
+  solve();
+  int t;
+  cin>>t;
+  while(t--)
+  {
+     int n;
+     cin>>n;
+     cout<<res[n]<<endl;
+   }
+}          
+   
+

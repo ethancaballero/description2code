@@ -1,0 +1,28 @@
+#include <iostream>
+#include<algorithm>
+#include<iomanip>
+#define ll long long
+using namespace std;
+int main() {
+    double avg;
+    double sum;
+    unsigned int t,n,k;
+    cin>>t;
+    for(int i=0;i<t;i++)
+    {
+        cin>>n>>k;
+        ll int a[n];
+        for(int j=0;j<n;j++)
+        {
+            cin>>a[j];
+        }
+        sort(a,a+n);
+        sum=0;
+        for(int p=k;p<=n-k-1;p++)
+        {
+            sum+=a[p];
+        }
+        avg=sum/(n-2*k);
+        cout<<fixed<<setprecision(6)<<avg<<endl;
+    }
+}

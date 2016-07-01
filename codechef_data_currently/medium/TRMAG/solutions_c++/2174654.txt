@@ -1,0 +1,25 @@
+#include <cstdio>
+
+//int torn[2001];
+
+int main(){
+
+	int tc;
+	scanf("%d", &tc);
+	while (tc--){
+		int n, t, temp, ans, np;
+		ans=0;
+		scanf("%d %d", &n, &t);
+		for (int i=0; i<t; i++){
+			scanf("%d", &temp);
+			ans -= temp;
+		}
+		scanf("%d", &np);
+		float fans;
+		ans += n*(n+1)/2;
+		fans = ans * (1 - ((float)np/((int)(n+1)/2)));
+		printf("%0.4f
+", fans);
+	}
+	return 0;
+}

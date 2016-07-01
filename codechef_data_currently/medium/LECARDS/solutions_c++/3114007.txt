@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+#define mod 1000000007
+long long int a[1001];
+long long int poww(long long int m, long long int n)
+{
+    long long int result = 1;
+    while (n > 0)
+    {
+        if (n % 2 == 1)
+           result = (result * m) % mod;
+        n = n >> 1;
+        m = (m * m) %mod;
+    }
+    return result;
+}
+long long int fact(long long int n)
+{
+     if(n==0)
+     return 1;
+     long long int f=1; 
+ for(int i=1;i<=n;++i)
+ f=(f*i)%mod;
+ return f;     
+}
+int main()
+{
+ a[0]=1;
+ for(int i=1;i<1001;++i)
+ {
+  a[i]=(a[i-1]*2)%mod;        
+ }  
+ int t;
+ cin>>t;
+ while(t--)
+ {
+  int n;
+  cin>>n;
+  int b[n];
+  for(int i=0;i<n;++i)
+  cin>>b[i];
+  if(n%2!=0)
+  {
+   cout<<a[n-1]<<endl;          
+  }
+  else
+  {
+   long long int x=fact(n),y=fact(n/2),z=(y*y*2)%mod,inv=poww(z,mod-2),ans=a[n-1]-((x*inv)%mod);
+   if(ans<0)
+   ans+=mod;
+  // cout<<x<<" "<<y<<" "<<x/z<<" ";
+   cout<<ans<<endl;    
+  }           
+ }  
+} 

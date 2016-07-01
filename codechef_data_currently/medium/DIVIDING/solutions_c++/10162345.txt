@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+long long n,num,p,sum=0;
+//    cin>>t;
+//while(t--)
+{
+cin>>num;
+n=num*(num+1)/2;
+while(num--)
+{
+    cin>>p;
+    sum+=p;
+}
+if(sum==n)
+    cout<<"YES
+";
+else
+    cout<<"NO
+";
+}
+return 0;
+}

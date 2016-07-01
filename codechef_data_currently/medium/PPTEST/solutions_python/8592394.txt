@@ -1,0 +1,22 @@
+T = int(raw_input())
+
+while T > 0:
+    N, W = map(int, raw_input().split())
+    F = [[0 for x in xrange(W+1)] for x in xrange(N+1)] 
+    G = [[0 for x in xrange(N)] for x in xrange(2)] 
+   # for x in xrange(W):
+   #     F[0][x] = 0
+    for x in xrange(N):
+        a,b,c = map(int, raw_input().split())
+        G[0][x] = a*b
+        G[1][x] = c
+    for i in xrange(1,N+1):
+        for j in xrange(W+1):
+            if G[1][i-1] <= j:
+                F[i][j] = max(F[i-1][j], F[i-1][j-G[1][i-1]] + G[0][i-1])
+            else:
+                F[i][j] = F[i-1][j]
+    if W > 0:
+        print F[N][W]
+
+    T -= 1

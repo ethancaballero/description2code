@@ -1,0 +1,22 @@
+import operator
+while True:
+    n = input()
+    if(n == 0):
+        break
+    else:
+        if (1<=n) and (n<=100000):
+            str_permut = raw_input().split(' ');
+            dict = {}
+            for i in range(1,len(str_permut)+1):
+                dict[i] = int(str_permut[i-1])
+            sorted_x = sorted(dict.items(), key=operator.itemgetter(1))
+            dict_values = dict.values()
+            sorted_keys = []
+            for w in sorted_x:
+                sorted_keys.append(w[0])
+            if(cmp(dict_values,sorted_keys) == 0):
+                print "ambiguous"
+            else:
+                print "not ambiguous"
+                
+            

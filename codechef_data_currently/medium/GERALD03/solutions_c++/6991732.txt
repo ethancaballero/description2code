@@ -1,0 +1,69 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define pb push_back
+
+int main()
+{
+    int t, n, i;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        int x[n], y[n];
+        for (i = 0; i < n; i++)
+            cin >> x[i] >> y[i];
+        if (n == 1) {
+            cout << "0" << endl << endl;
+            continue;
+        }
+        vector <string> v;
+        n--;
+        for (i = 0; i < n; i++) {
+            if (x[i] > x[i+1]) {
+                while (x[i] != x[i+1]) {
+                    x[i]--;
+                    v.pb("L-");
+                }
+                while (y[i] > y[i+1]) {
+                    y[i]--;
+                    v.pb("R-");
+                }
+                while (y[i] < y[i+1]) {
+                    y[i]++;
+                    v.pb("R+");
+                }
+                continue;
+            }
+            while (x[i] != x[i+1] || y[i] != y[i+1]) {
+                while (x[i] < (y[i]-1) && x[i] != x[i+1]) {
+                    x[i]++;
+                    v.pb("L+");
+                }
+                if (x[i] != x[i+1]) {
+                    if (y[i] != y[i+1]) {
+                        y[i]++;
+                        v.pb("R+");
+                    }
+                }
+                else {
+                    while (y[i] > y[i+1]) {
+                        y[i]--;
+                        v.pb("R-");
+                    }
+                    while (y[i] < y[i+1]) {
+                        y[i]++;
+                        v.pb("R+");
+                    }
+                }
+            }
+        }
+        cout << v.size() << endl;
+        for (i = 0; i < v.size(); i++)
+            cout << v[i];
+        cout << endl;
+    }
+    return 0;
+}

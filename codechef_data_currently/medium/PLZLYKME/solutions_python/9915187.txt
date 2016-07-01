@@ -1,0 +1,15 @@
+import math
+t = int(raw_input());
+while(t):
+    lt = raw_input();
+    lt = lt.split();
+    l = int(lt[0])
+    d = int(lt[1])
+    s = int(lt[2])
+    c = int(lt[3])
+    num_day = ((math.log10(l)-math.log10(s))/math.log10(1+c))+1
+    if d >= int(math.ceil(num_day)):
+        print "ALIVE AND KICKING"
+    else:
+        print "DEAD AND ROTTING"
+    t-=1

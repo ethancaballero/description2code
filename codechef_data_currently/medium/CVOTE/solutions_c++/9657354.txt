@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n,m;string mch,mco;
+    string ch,co;
+    map<string,string> chco;
+    map<string,int> chvo;
+    map<string,int> covo;
+    cin>>n>>m;
+    for(int i=0;i<n;i++)
+    {
+        cin>>ch>>co;
+        chco[ch]=co;
+    }
+    for(int i=0;i<m;i++)
+    {
+        cin>>ch;
+        chvo[ch]++;
+        if(chvo[ch]>chvo[mch] || (chvo[ch]==chvo[mch] && ch<mch))
+            mch=ch;
+        else if(i==0)
+        {
+            chvo[ch]=1;
+            mch = ch;
+        }
+        /*else
+        {
+            chvo[ch]=1;
+            if((chvo[ch]==chvo[mch] && ch<mch))
+                mch=ch;
+        }*/
+
+        covo[chco[ch]]++;
+             if(covo[chco[ch]]>covo[mco] || (covo[chco[ch]]==covo[mco] && chco[ch]<mco))
+                mco=chco[ch];
+        else if(i==0)
+        {
+            covo[chco[ch]]=1;
+            mco = chco[ch];
+        }
+        /*else
+        {
+            covo[chco[ch]]=1;
+            if((covo[chco[ch]]==covo[mch] && chco[ch]<mco))
+                mco=chco[ch];
+        }*/
+    }
+
+        cout<<mco<<endl;
+        cout<<mch<<endl;
+        return 0;
+}

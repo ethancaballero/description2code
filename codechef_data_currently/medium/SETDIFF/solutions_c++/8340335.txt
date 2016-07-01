@@ -1,0 +1,42 @@
+	#include<iostream>
+	#include<algorithm>
+	#define mod 1000000007
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n;
+			cin>>n;
+			long long int a[100005];
+			long long int max=0;
+			long long int base=1;
+			for(int i=0;i<n;i++)
+			{
+				cin>>a[i];
+			}
+			sort(a,a+n);
+			for(int i=0;i<n;i++)
+			{
+		
+				max=(max+(base*a[i])%mod)%mod;
+				base=(base*2)%mod;
+			}	
+
+			base=1;
+			long long int min=0;
+			for(int i=n-1;i>=0;i--)
+			{
+				min=(min+(base*a[i])%mod)%mod;
+				base=(base*2)%mod;
+			}	
+			
+			max=max-min;
+			if(max<0)
+				max+=mod;
+			cout<<max<<endl;
+			t--;
+		}	
+	}

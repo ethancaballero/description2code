@@ -1,0 +1,182 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[100012];
+map<char ,int> mp;
+vector<int> v[200012];
+int visited[200];
+int n;
+char s[100012];
+string t="";
+int check()
+{
+    int c=0;
+    for(int i=0; i<n; i++)
+    {
+        if(s[i]!=t[i])
+            c++;
+    }
+    return c;
+}
+int main()
+{
+    int tc;
+    scanf("%d",&tc);
+
+    while(tc--)
+    {
+        int k;
+        scanf("%d",&k);
+        scanf("%s",s);
+        n =strlen(s);
+        int g=0,b=0;
+        for(int i=0; i<n; i++)
+        {
+            if(s[i]=='G') g++;
+            else b++;
+
+        }
+        int d = abs(b-g);
+        if(d>1)
+        {
+            puts("-1");
+        }
+        else if(k==0)
+        {
+            if(b==g)
+            {
+                int l=0,c=0;
+                for(int i=0; i<n; i++)
+                {
+                    if(l==0)
+                    {
+                        if(s[i]!='B') c++;
+                        l=1;
+                    }
+                    else
+                    {
+                        if(s[i]!='G') c++;
+                        l=0;
+                    }
+                }
+                int x = c;
+                l=0,c=0;
+                for(int i=0; i<n; i++)
+                {
+                    if(l==0)
+                    {
+                        if(s[i]!='G') c++;
+                        l=1;
+                    }
+                    else
+                    {
+                        if(s[i]!='B') c++;
+                        l=0;
+                    }
+                }
+                x = min(x,c);
+                x = x/2 + x%2;
+                printf("%d
+",x);
+            }
+
+            else if(b>g)
+            {
+                int l=0,c=0;
+                for(int i=0; i<n; i++)
+                {
+                    if(l==0)
+                    {
+                        if(s[i]!='B') c++;
+                        l=1;
+                    }
+                    else
+                    {
+                        if(s[i]!='G') c++;
+                        l=0;
+                    }
+                }
+                c = c/2 + c%2;
+                printf("%d
+",c);
+            }
+            else
+            {
+                int l=0,c=0;
+                for(int i=0; i<n; i++)
+                {
+                    if(l==0)
+                    {
+                        if(s[i]!='G') c++;
+                        l=1;
+                    }
+                    else
+                    {
+                        if(s[i]!='B') c++;
+                        l=0;
+                    }
+                }
+                c = c/2 + c%2;
+                printf("%d
+",c);
+
+            }
+        }
+
+        else
+        {
+            if(b==g)
+            {
+                int left =0,ans=0,ans2=0;
+                for(int i=0; i<n; i+=2)
+                {
+
+                    while(s[left]!='B') left++;
+                    ans = ans + abs(i-left);
+                    left++;
+                }
+                left=0;
+                for(int i=0; i<n; i+=2)
+                {
+
+                    while(s[left]!='G') left++;
+
+                    ans2 = ans2 + abs(i-left);
+                    left++;
+                }
+                //cout<<ans<<" "<<ans2<<endl;
+                ans = min(ans,ans2);
+                printf("%d
+",ans);
+
+            }
+            else if(b>g)
+            {
+                int left =0,ans=0;
+                for(int i=0; i<n; i+=2)
+                {
+
+                    while(s[left]!='B') left++;
+
+                    ans = ans + abs(i-left);
+                    left++;
+                }
+                printf("%d
+",ans);
+            }
+            else if(g>b)
+            {
+                int left =0,ans=0;
+                for(int i=0; i<n; i+=2)
+                {
+
+                    while(s[left]!='G') left++;
+                    ans = ans + abs(i-left);
+                    left++;
+                }
+                printf("%d
+",ans);
+            }
+        }
+    }
+
+}

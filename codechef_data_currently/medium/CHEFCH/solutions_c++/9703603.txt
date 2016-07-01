@@ -1,0 +1,40 @@
+#include<iostream>
+#include<string.h>
+using  namespace std;
+char a[100001];
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long int es=0,em=0,os=0,om=0,i;
+		cin>>a;
+		for(i=0;i<strlen(a);i=i+2)
+		{
+		//	counte++;
+			if(a[i]=='-')
+			em++;
+			else
+		    es++;
+			
+		}
+			for(i=1;i<strlen(a);i=i+2)
+		{
+		//	counto++;
+			if(a[i]=='-')
+			om++;
+			else
+		    os++;
+			
+		}
+		
+		if((em+os)>(es+om))
+		cout<<(strlen(a)-em-os)<<"
+";
+		else
+		cout<<(strlen(a)-es-om)<<"
+";
+		
+	}
+}

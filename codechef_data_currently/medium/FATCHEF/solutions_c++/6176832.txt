@@ -1,0 +1,42 @@
+#include <cstdio>
+#include <algorithm>
+#include <utility>
+#include <iostream>
+
+using namespace std;
+const long long MOD = 1e9 + 9;
+pair <int, char> p[100005];
+
+int main()
+{
+    //freopen("input.txt", "r", stdin);
+    int t, x, n, m;
+    char c;
+    long long ans;
+    for(scanf("%d", &t);t--;)
+    {
+        scanf("%d %d", &n, &m);
+        for(int i = 0;i < m;++i)
+        {
+            cin.ignore();
+            scanf("%c %d", &c, &x);
+            p[i] = make_pair(x, c);
+        }
+        sort(p, p + m);
+        x = p[0].first;
+        ans = 1;
+        for(int i = 1;i < m;++i)
+        {
+            if(p[i].second == p[i-1].second)
+                x = p[i].first;
+            else
+            {
+                ans = (ans * (p[i].first - x)) % MOD;
+                x = p[i].first;
+            }
+        }
+        printf("%lld
+", ans);
+    }
+    return 0;
+}

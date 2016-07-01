@@ -1,0 +1,15 @@
+t=int(raw_input())
+while t>0:
+	t-=1
+	s=[x for x in raw_input().strip()]
+	i,m,k,ans=0,0,0,0
+	while i<len(s):
+		if s[i]=='.':
+			k+=1
+		else:
+			if k>m:
+				ans+=1
+				m=k
+			k=0
+		i+=1
+	print ans

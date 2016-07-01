@@ -1,0 +1,40 @@
+import math
+import heapq
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+n,k=parseIntList(raw_input())
+li=parseIntList(raw_input())
+s=0
+for i in range(n):
+ s+=li[i]
+hp=[[-s,1,n]]
+res=[]
+st={tuple(hp[0])}
+while( k and hp):
+  t=heapq.heappop(hp)
+  res.append(-t[0])
+  if t[1]!=t[2]:
+   t1=(t[0]+li[t[2]-1],t[1],t[2]-1)
+   t2=(t[0]+li[t[1]-1],t[1]+1,t[2])
+   if t1 not in st:
+    heapq.heappush(hp,[t[0]+li[t[2]-1],t[1],t[2]-1])
+    st.add(t1)
+   if t2 not in st:
+    heapq.heappush(hp,[t[0]+li[t[1]-1],t[1]+1,t[2]])
+    st.add(t2)
+  k-=1
+printBS(res)
+
+ 
+
+
+
+
+  

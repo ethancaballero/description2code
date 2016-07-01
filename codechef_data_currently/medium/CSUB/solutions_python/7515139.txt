@@ -1,0 +1,11 @@
+def pairs(n):
+	return n*(n-1)/2 #n people handshakes = sumUpto(n-1)
+
+t = int(raw_input())
+for i in range(t):
+	count = 0
+	n = int(raw_input())
+	num = raw_input()
+	new = num.replace("1", "")
+	count = len(num) - len(new)
+	print pairs(count) + count

@@ -1,0 +1,6 @@
+t=int(raw_input())
+
+if (t-1)%6==0 or t%3==0 or t==0:
+    print "yes"
+else:
+    print "no"

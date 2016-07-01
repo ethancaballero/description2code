@@ -1,0 +1,31 @@
+#include<stdio.h>
+int flag[100006];
+int main()
+{
+	long long int max, n, count, t, a,i;
+	scanf("%lld", &t);
+	while (t--)
+	{
+		max = -1;
+		count = 0;
+		scanf("%lld", &n);
+		for (i = 0; i < n; i++)
+		{
+			scanf("%lld", &a);
+			if (flag[a] == 0)
+			{
+				flag[a] = 1;
+				count++;
+			}
+			if (a > max)
+				max = a;
+		}
+		for (i = 0; i <= max; i++)
+			flag[i] = 0;
+		printf("%lld
+", count);
+	}
+	getchar();
+	getchar();
+	return 0;
+}

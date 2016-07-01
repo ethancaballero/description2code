@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main(void) {
+	int a,b,c,n;
+	scanf("%d",&n);
+	while(n--)
+	{
+		scanf("%d%d%d",&a,&b,&c);
+		if(a>0&&b>0&&c>0&&(a+b+c)==180)
+		printf("YES
+");
+		else
+		printf("NO
+");
+	}
+	
+	return 0;
+}

@@ -1,0 +1,19 @@
+t=input()
+mod=1000000007
+while t>0:
+	t-=1
+	n=input()
+	s=raw_input()
+	l=[int(x) for x in s.split(" ")]
+	l.sort()
+	min_sum=0
+	for i in range(n):
+		min_sum=(2*min_sum+l[i])%mod
+	l.reverse()
+	max_sum=0
+	for i in range(n):
+		max_sum=(2*max_sum+l[i])%mod
+	temp=int(max_sum-min_sum)
+	while temp<0:
+		temp+=mod
+	print temp

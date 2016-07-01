@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int i,t,n,x,y,tot,maxi,val;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d%d",&n,&x,&y);
+		tot=x*y;
+		vector<int> v(n);
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&(v[i]));
+		}
+		sort(v.begin(),v.end());
+		int ans=0;
+		val=v[0]-tot;
+		if(val>1)
+		{
+			ans+=val-1;
+		}
+		maxi=min(100,v[0]+tot);
+		//cout<<ans<<endl;
+		for(i=1;i<n;i++)
+		{
+			val=max(v[i]-tot,1);
+			if(val>maxi)
+			{
+				ans+=val-maxi-1;
+			}
+			val=min(100,v[i]+tot);
+			maxi=max(val,maxi);
+			//cout<<ans<<endl;
+		}
+		if(maxi<100)
+		{
+			ans+=100-maxi;
+		}
+		printf("%d
+",ans);
+	}
+	return 0;
+}

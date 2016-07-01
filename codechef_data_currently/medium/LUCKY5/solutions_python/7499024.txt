@@ -1,0 +1,9 @@
+from sys import stdin
+t=int(stdin.readline())
+for i in range(0,t):
+	s=raw_input().strip()
+	ans=0
+	for j in range(0,s.__len__()):
+		if s[j]!='4' and s[j]!='7':
+			ans+=1
+	print ans

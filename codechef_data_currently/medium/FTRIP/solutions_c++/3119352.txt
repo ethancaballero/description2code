@@ -1,0 +1,35 @@
+/*Author : Alok Thatikunta*/
+#include <bits/stdc++.h>
+using namespace std;
+double c[1003][1003];
+void Combinations()
+{
+        memset(c , 0 , sizeof(c));
+        for(int i=0;i<1001;i++) {
+                //Base cases
+                c[i][0] = 1;
+                c[i][i] = 1;
+                //Recurrence : iCj = (i-1)Cj + (i-1)C(j-1)
+                for(int j=1;j<i;j++) {
+                       c[i][j] = c[i-1][j] + c[i-1][j-1];
+                }
+        }
+}
+int main()
+{
+        Combinations();
+        int t;
+        scanf("%d",&t);
+        while(t--) {
+                int s , n , m , k;
+                scanf("%d %d %d %d",&s,&n,&m,&k);
+                double num = 0 , den = 0;
+                for(int i=max(k , n-1+m-s);i<=min(n-1 , m-1);i++) {
+                        num += (c[m-1][i] * c[s-m][n-1-i]);
+                }
+                den = c[s-1][n-1];
+                printf("%lf
+",num/den);
+        }
+	return 0;
+}

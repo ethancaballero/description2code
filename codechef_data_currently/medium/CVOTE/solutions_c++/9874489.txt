@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+      long long int n,m;
+      map<string,pair<string,long long int> > chf;
+     map<string,pair<string,long long int> >::iterator itr1;
+      map<string,long long int> cont;
+       map<string,long long int>::iterator itr;
+      cin>>n>>m;
+      string st1,st2;
+      chf.clear(),cont.clear();
+      for(int i=0;i<n;i++)
+      {
+            cin>>st1>>st2;
+            chf[st1].first=st2;
+            chf[st1].second=0;
+            cont[chf[st1].first]=0;
+      }
+      long long int mxchf=0,mxcont=0;
+      string chff,cou;
+      for(int i=0;i<m;i++)
+      {
+            cin>>st1;
+            chf[st1].second++;
+            cont[chf[st1].first]++;
+           /* if(mxchf<chf[st1].second)
+            {
+                  mxchf=chf[st1].second;
+                  chff=st1;
+                  
+            }
+           else if(mxchf==chf[st1].second&&chff>st1)
+            {
+                  mxchf=chf[st1].second;
+                  chff=st1;
+                  
+            }
+            
+            if(mxcont<cont[chf[st1].first])
+            {
+               mxcont=cont[chf[st1].first];
+                  cou=chf[st1].first;
+                  
+            }
+            else if(mxcont==cont[chf[st1].first]&&cou>chf[st1].first)
+            {
+                  mxchf=chf[st1].second;
+                  chff=st1;
+                  
+            }
+            */
+      }
+      for(itr1=chf.begin();itr1!=chf.end();itr1++)
+      {
+            if(itr1->second.second>mxchf)
+            {mxchf=itr1->second.second;chff=itr1->first;}
+            else if(itr1->second.second==mxchf&&chff>itr1->first)
+            chff=itr1->first;
+      }
+      for(itr=cont.begin();itr!=cont.end();itr++)
+      {
+            if(itr->second>mxcont)
+            {
+                  cou=itr->first;
+                  mxcont=itr->second;
+            }
+            else if(itr->second==mxcont&&cou>itr->first)
+            cou=itr->first;
+      }
+      cout<<cou<<"
+"<<chff;
+}

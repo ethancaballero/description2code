@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long int n;
+		cin>>n;
+		string a;
+		cin>>a;
+		long long int count=0;
+		long long int ans=0;
+		for(int i=0;i<n;i++)
+		{
+			if(a[i]=='1')
+			   count++;
+		}
+		ans=(count*(count+1))/2;
+		cout<<ans<<endl;
+	}
+}

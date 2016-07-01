@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+
+#define MOD 1000000007
+
+using namespace std;
+
+int main()
+{
+	int T;
+	int length , level;
+	long long int res;
+	string S;
+	string::iterator it;
+	cin>>T;
+	while(T--){
+		cin>>S;
+		it=S.begin();
+		res = 1;
+		level = 1;
+		while(it!=S.end()){
+			if(level == 1){
+				if(*it=='l'){
+					res = (res*2)%MOD;
+				}
+				else res = (res*2 +2)%MOD;
+			}
+			else{
+				if(*it=='l'){
+					res=(res*2 -1)%MOD;
+				}
+				else res = (res*2+1)%MOD;
+			}
+			*it++;
+			level = (level+1)%2;
+		}
+		cout<<res<<endl;
+	}
+	return 0;
+}

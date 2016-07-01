@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef pair< int , int > pii;
+typedef long long LL;
+#define fr first
+#define se second
+#define EPS 1e-8
+#define INF 10000*10000*10000LL
+stringstream ss;
+#define two(x) ( 1LL<<x )
+LL mod = 1000000007LL;
+
+/**************************Code****************************/
+
+int a[128][128];
+
+int main()
+{
+	int n, m;
+	scanf( "%d%d", &n, &m );
+	for( int i = 0 ; i < n ; i ++ )
+		for( int j = 0 ; j < m ; j ++ )
+			scanf( "%d", &a[i][j] );
+	for( int i = 0 ; i < n ; i ++ )
+		for( int j = 0 ; j < m ; j ++ )
+		{
+			int bad = 0;
+			for( int k = 0 ; k < m ; k ++ )
+				if( a[i][k] < a[i][j] )
+					bad = 1;
+			for( int k = 0 ; k < n ; k ++ )
+				if( a[k][j] > a[i][j] )
+					bad = 1;
+			if( !bad )
+			{
+				cout << a[i][j] << endl;
+				return 0;
+			}
+		}
+	cout << "GUESS" << endl;
+	return 0;
+}

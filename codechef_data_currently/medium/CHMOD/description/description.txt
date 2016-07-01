@@ -1,0 +1,30 @@
+ Chef likes toys. His favourite toy is an array of length N. This array contains only integers. He plays with this array every day. His favourite game with this array is Segment Multiplication. In this game, the second player tells the left and right side of a segment and some modulo. The first player should find the multiplication of all the integers in this segment of the array modulo the given modulus. Chef is playing this game. Of course, he is the first player and wants to win all the games. To win any game he should write the correct answer for each segment. Although Chef is very clever, he has no time to play games. Hence he asks you to help him. Write the program that solves this problem.
+Input
+The first line of the input contains an integer N denoting the number of elements in the given array. Next line contains N integers Ai separated with spaces. The third line contains the number of games T. Each of the next T lines contain 3 integers Li, Ri and Mi, the left side of the segment, the right side of segment and the modulo.
+Output
+For each game, output a single line containing the answer for the respective segment.
+Constrdaints
+
+1 \u2264 N \u2264 100,000
+1 \u2264 Ai \u2264 100
+1 \u2264 T \u2264 100,000
+1 \u2264 Li \u2264 Ri \u2264 N
+1 \u2264 Mi \u2264 109
+
+Example
+
+Input:
+5
+1 2 3 4 5
+4
+1 2 3
+2 3 4
+1 1 1
+1 5 1000000000
+
+Output:
+2
+2
+0
+120
+

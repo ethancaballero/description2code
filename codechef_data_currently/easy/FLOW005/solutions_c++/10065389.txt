@@ -1,0 +1,34 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(void){
+	
+	int t,x,cnt;
+	cin>>t;
+	while( t-- ){
+		cnt = 0;
+		cin>>x;
+		while( x!= 0 ){
+			
+			if( x>=100 ){
+				cnt += x/100;x=x%100;
+			}
+			else if( x>=50){
+				cnt+=x/50;x=x%50;
+			}
+			else if( x>=10 ){
+				cnt+= x/10;x=x%10;
+			}
+                        else if( x>=5 ){ 
+                                cnt+= x/5;x=x%5;
+                        } 
+                        else if( x>=2 ){ 
+                                cnt+= x/2;x=x%2;
+                        } 
+                        else if( x>=1 ){ 
+                                cnt+= x/1;x=x%1;
+                        } 
+		}
+		cout<<cnt<<endl;
+	}
+}

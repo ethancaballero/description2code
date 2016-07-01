@@ -1,0 +1,77 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+#define MOD 1000000007
+void matmult(long long int a[][3],long long int b[][3],long long int c[][3])
+{
+    int i,j,k;
+    for(i=0;i<3;i++)
+    {
+        for(j=0;j<3;j++)
+        {
+            c[i][j]=0;
+            for(k=0;k<3;k++)
+            {
+                c[i][j]+=(((a[i][k])*(b[k][j])));
+				c[i][j]=c[i][j]%MOD;
+            }
+        }
+    }
+}
+void matpow(long long int Z[][3],long long int n,long long int ans[][3])
+{
+ 
+    long long temp[3][3];
+    //assign ans= the identity matrix
+    ans[0][0]=1;
+    ans[1][0]=0;
+    ans[0][1]=0;
+	ans[0][2]=0;
+    ans[1][1]=1;
+	ans[1][2]=0;
+	ans[2][0]=0;
+	ans[2][1]=0;
+	ans[2][2]=1;
+    int i,j;
+    while(n>0)
+    {
+        if(n%2)
+        {
+            matmult(ans,Z,temp);
+            for(i=0;i<3;i++)
+                for(j=0;j<3;j++)
+                    ans[i][j]=temp[i][j];
+        }
+        matmult(Z,Z,temp);
+        for(i=0;i<3;i++)
+            for(j=0;j<3;j++)
+                Z[i][j]=temp[i][j];
+ 
+        n=n/2;
+    }
+long long int v[3]={5,1,1};
+long long int answ[3]={0};
+     for(int i=0;i<3;i++)
+     {
+   		for(int kk=0;kk<3;kk++)answ[i]+=ans[i][kk]*v[kk];
+   		answ[i]%=MOD;
+     }
+      printf("%lld
+",answ[2]%MOD);
+    
+     
+}
+int main() {
+long long int t,n,Z[3][3],result[3][3];
+scanf("%lld",&t);
+while(t--)
+{
+ scanf("%lld",&n);
+  Z[0][0]=1,Z[0][1]=4,Z[0][2]=2,Z[1][0]=1,Z[1][1]=0,Z[1][2]=0,Z[2][0]=0,Z[2][1]=1,Z[2][2]=0;
+  matpow(Z,n,result);
+  //printf("%lld
+",(((11*result[0][0])%MOD)+((5*result[0][1])%MOD)+((1*result[0][2])%MOD))%MOD);
+  
+} 
+	return 0;
+}

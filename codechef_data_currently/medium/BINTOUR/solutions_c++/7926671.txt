@@ -1,0 +1,115 @@
+#include<iostream>
+#include<cstdlib>
+#include<cstdio>
+#include<string>
+#include<vector>
+ 
+using namespace std;
+#define MOD 1000000009
+#define x getchar_unlocked()
+#define y putchar_unlocked
+#define REP(i,K) for(int i = 0; i < K; i++)
+typedef unsigned long long ull;
+ull *per,*fact;
+ 
+// fast input
+inline void read(int & n)
+{
+	n = 0; char ch = x;
+	int sign = 1;
+	while(ch < '0' || ch > '9'){if(ch == '-') sign = -1; ch = x;}
+	while(ch >= '0' && ch <= '9'){
+		n = n*10 + ch -'0'; ch = x;
+	}
+	n *= sign ;
+}
+// fast output
+inline void out(ull k) {
+	int n=k,i=0;
+	char ch[15];
+	if(n<=0) {
+		if(n==0) y('0');		
+		else 	y('-');
+		n=n*-1;
+		}
+	while(n>0) {
+		ch[i]=(n%10)+'0';
+		n=n/10;
+		i++;
+		}
+	while(i>0) {
+		y(ch[i-1]);
+		i--;
+		}
+	y('
+');
+	}
+ 
+ 
+// this function gives power of 2
+inline ull pow_2(int k)
+{
+	if(k == 0)
+		return 1;
+	else if(k == 1)
+		return 2;
+	ull temp = pow_2(k/2);
+	if(k % 2 == 0)
+		return (temp*temp);
+	else
+		return (2*temp*temp);
+}
+ 
+int main()
+{
+	ull k2,i,value;
+	int K;
+	read(K);
+ 
+	if(K == 1)
+	{
+		y('2'),y('
+');
+		y('2'),y('
+');
+		return 0;
+	}
+	else{
+	k2 = pow_2(K-1);
+	per = (ull *)malloc(k2*sizeof( ull ));
+	fact = (ull *)malloc((k2+1)*sizeof( ull ));
+ 
+	per[0] = k2;
+ 
+	for(i = 1; i < k2; i++)
+	{
+		y('0');y('
+');
+		per[i] = ( per[i-1] * (k2-i) ) % MOD;
+	}
+ 
+	fact[0] = per[k2-1] = per[k2-2];
+ 
+	for(i = k2+1; i <= k2*2; i++)
+		fact[i-k2] = ( fact[i-k2-1] * i ) % MOD;
+ 
+	value = (( (2 * fact[0])%MOD) * fact[0] ) % MOD;
+	out(value);
+ 
+ 
+	for( i = 1; i <(k2); i++)
+	{
+		value = 2*k2;
+		value = (value*fact[i-1]) % MOD;
+		value = (per[k2-i-1] * value) % MOD;
+		out(value);
+	}
+ 
+	value = ( fact[k2] ) % MOD;
+	out(value);
+	}
+	free(per);
+	free(fact);
+ 
+	return 0;
+}  

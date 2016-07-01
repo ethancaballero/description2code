@@ -1,0 +1,210 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cstring>
+#include<map>
+#define zeros(A) memset(A,0,sizeof(A))
+#define FOR(i,n) for(int i=0;i<n;i++)
+#define FOR2(i,start,end,inc) for(int i=start;i<=end;i+=inc)
+#define DEC(i,start,end,inc) for(int i=start;i>=end;i-=inc)
+#define INT_MIN -100000
+#define MOD 1000000007
+#ifndef ONLINE_JUDGE
+#define gc getchar
+#define pc putchar
+#else
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+#endif
+typedef long long int ll;
+using namespace std;
+map<ll,ll> inv;
+ll ans[6000];
+ll fact[6000];
+string s;
+struct info{
+    int prev,cur,index;
+};
+inline void pi(int a)
+{
+ register char s[11];
+ register int t = -1;
+ do s[++t]=a%10+'0',a/=10; while(a>0);
+ while(t>=0) pc(s[t--]);
+ pc('
+');
+}
+inline void pll(long long a)
+{
+ register char s[30];
+ register int t = -1;
+ do s[++t]=a%10+'0',a/=10; while(a>0);
+ while(t>=0) pc(s[t--]);
+ pc('
+');
+}
+bool criteria(struct info s1,struct info s2)
+{
+    if(s1.prev!=s2.prev) return s1.prev<s2.prev;
+    else return s1.cur<s2.cur;
+}
+struct info suffix_array[6000];
+int sort_index[17][6000];
+int fin_count[5005];
+int lcp_array[6000];
+int two_power[20],max_log;
+void build_suffix_array(int l)
+{
+    FOR(i,l)sort_index[0][i]=s[i]-'a';
+    int log_value=1,exp_value=1;
+    two_power[0]=1;two_power[1]=2;
+    while(1){
+        FOR(i,l){
+            suffix_array[i].prev=sort_index[log_value-1][i];
+            suffix_array[i].cur=i+exp_value<l?sort_index[log_value-1][i+exp_value]:-1;
+            suffix_array[i].index=i;
+        }
+        sort(suffix_array,suffix_array+l,criteria);
+        sort_index[log_value][suffix_array[0].index]=0;
+        FOR2(i,1,l-1,1){
+            sort_index[log_value][suffix_array[i].index]=suffix_array[i].prev==suffix_array[i-1].prev && suffix_array[i].cur==suffix_array[i-1].cur?sort_index[log_value][suffix_array[i-1].index]:i;
+        }
+        log_value++;
+        exp_value*=2;
+        two_power[log_value]=exp_value;
+        if(exp_value>l)break;
+    }
+    max_log=log_value;
+}
+void build_lcp(int l)
+{
+    lcp_array[0]=0;
+    FOR2(i,1,l-1,1){
+        int start1=suffix_array[i].index,start2=suffix_array[i-1].index;    int com=0;
+        while(start1<l && start2<l && s[start1]==s[start2])com++,start1++,start2++;
+        lcp_array[i]=com;
+    }
+}
+/*
+void print_suffix_array(int l)
+{
+   printf("
+");
+    FOR(i,l)printf("%d ",lcp_array[i]);
+    printf("
+");
+}
+void build_lcp_array(int l)
+{
+    lcp_array[0]=0;
+    FOR2(i,1,l-1,1)
+    {
+        int x=suffix_array[i].index,y=suffix_array[i-1].index;
+        DEC(j,max_log,0,1)
+        {
+            if(x<l && y<l && sort_index[j][x]==sort_index[j][y] && sort_index[j][x]!=-1)
+            {
+                lcp_array[i]+=two_power[j];
+                x+=two_power[j];                y+=two_power[j];
+            }
+        }
+    }
+}
+*/
+void preprocess(int l)
+{
+    int maxinlcp=INT_MIN,tmp,ind;
+    FOR(i,l)if(lcp_array[i]>maxinlcp)maxinlcp=lcp_array[i];
+    FOR2(i,1,maxinlcp,1)
+    {
+        ind=0;
+        while(ind<l){
+            if(lcp_array[ind]<i)  {  ind++;  continue;    }
+            tmp=ind+1;
+            while(tmp<l && lcp_array[tmp]>=i)tmp++;
+            fin_count[tmp-ind+1]++;            ind=tmp;
+        }
+    }
+    FOR(i,l+1)
+    {
+        if(fin_count[i]==0)continue;
+        FOR2(j,1,i,1)
+        {
+            ans[j]+=((((fact[i]*inv[fact[j]])%MOD)*((inv[fact[i-j]]*(ll)fin_count[i])%MOD))%MOD);
+            ans[j]%=MOD;
+        }
+    }
+}
+string ip()
+{
+    string i="";
+    int temp=gc();
+    while(temp<'a'||temp>'z')
+        temp=gc();
+    while(temp>='a'&&temp<='z')
+    {
+        i+=(char)temp;        temp=gc();
+    }
+    return i;
+}
+inline void scanint(int &a)
+{
+ register int c; a=0;
+ do c=gc(); while(c<'0');
+ do
+ {
+  a=(a<<1)+(a<<3)+c-'0';  c=gc();
+ }while(c >= '0');
+}
+long long int modular_pow(long long int base,long long int exponent,long long int modulus)
+{ 
+    long long int result = 1;
+    while (exponent > 0)
+    {
+        if (exponent%2 == 1) result = (result * base)% modulus;
+        exponent = exponent >> 1;        base = (base * base) % modulus;
+    }
+    return result;
+}
+void factorial()
+{
+    fact[0]=1;    fact[1]=1;    inv[1]=1;
+    FOR2(i,2,5005,1)
+    {
+        fact[i]=fact[i-1]*i;        fact[i]%=MOD;
+        inv[fact[i]]=modular_pow(fact[i],MOD-2,MOD);
+    }
+}
+int main()
+{
+    int t,n,q,k;    factorial();    scanint(t);
+    while(t--)
+    {
+        zeros(ans);zeros(sort_index);zeros(lcp_array);
+        zeros(fin_count);
+        scanint(n);scanint(q);
+        s=ip();       int first=0;    ll M;
+        FOR(i,n)if(s[0]==s[i])first++;
+        if(first==n)
+        {
+            FOR2(i,2,n,1)
+            {
+                M=n-i;
+                ans[i]=((((fact[i+M+1]*inv[fact[M]])%MOD)*inv[fact[i+1]])%MOD);
+                ans[i]%=MOD;
+            }
+        }
+        if(first!=n)
+        {
+            build_suffix_array(n);
+            build_lcp(n); preprocess(n);
+        }
+        ans[1]=n*(n+1);  ans[1]/=2;
+        FOR(i,q)
+        {
+            scanint(k);
+            if(k>n) pi(0);
+            else pll(ans[k]);
+        }
+    }
+} 

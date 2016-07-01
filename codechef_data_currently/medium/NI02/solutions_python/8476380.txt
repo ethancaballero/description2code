@@ -1,0 +1,79 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define li long int
+#define PB push_back
+#define P push
+#define MP make_pair
+#define F first
+#define S second
+using namespace std;
+struct comp
+{
+	bool operator()(pair<ll,li> n1, pair<ll,li> n2)
+	{
+		return n1.F>n2.F;
+	}
+};
+
+ll dis(pair<int,int> arr[],ll a,ll b){ return ((arr[a].F-arr[b].F)*(arr[a].F-arr[b].F)+(arr[a].S-arr[b].S)*(arr[a].S-arr[b].S));
+}
+
+int main() {
+	int t;cin>>t;
+	
+	while(t){
+		
+		int n;cin>>n;
+		n=n+2;
+		 pair<int,int> arr[n];
+		for(int i=0;i<n;i++)
+		{int x,y;cin>>x>>y;
+			arr[i]=make_pair(x,y);
+		}
+	ll inf = pow(10,9)+7;
+	ll* val = new ll[n];int* vis = new int[n];
+	priority_queue<pair<ll,li> ,vector<pair<ll,li> >,comp> pq;
+	for(int i = 0;i<n;i++)
+	{val[i] = inf;vis[i] = -1;	}
+	val[n-2] = 0; 
+/*	pq.P(MP(0,n-2));
+	while(!pq.empty())
+	{
+	int f1 = pq.top().S; 
+		pq.pop();
+		if(vis[f1] == 1)
+		continue;
+		vis[f1] = 1;
+		for(int i = 0;i<n;i++)
+	{
+		if(vis[i] == -1)
+		{
+		  val[i] = min(val[i],val[f1]+dis(arr,i,f1));
+		  pq.P(MP(val[i],i));
+          	}
+	else continue;
+	}
+	
+}*/
+vis[n-2]=1; int q=n-2;
+while(1){
+	int h;int mindis=inf;
+	for(int i=0;i<n;i++)
+	{  if(vis[i] == -1)
+		{  val[i] = min(val[i],val[q]+dis(arr,i,q)); if(val[i]<mindis) { mindis=val[i];h=i;}}
+		
+		}
+		q=h;vis[q]=1;
+	if(q==n-1) break;
+}
+
+cout<<val[n-1]<<endl;
+		
+		
+		t--;
+	}
+	
+	
+	
+	return 0;
+}

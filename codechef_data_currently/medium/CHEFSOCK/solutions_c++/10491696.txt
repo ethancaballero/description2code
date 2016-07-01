@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int jCost, money, sCost;
+	cin>>jCost>>sCost>>money;
+	money = money - jCost;
+	int no = money/sCost;
+	if(no%2==0)
+		cout<<"Lucky Chef"<<endl;
+	else
+		cout<<"Unlucky Chef"<<endl;
+	return 0;
+}

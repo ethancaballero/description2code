@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+	int t,sal;
+	cin>>t;
+	while(t--){
+		cin>>sal;
+		if(sal<1500){
+			cout<<2*sal<<endl;
+		}
+		else if(sal>=1500){
+			cout<<sal*1.98+500<<endl;
+		}
+	}
+}

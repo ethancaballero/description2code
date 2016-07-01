@@ -1,0 +1,11 @@
+t = int(raw_input())
+
+foo=1000000007
+
+for i in range(0,t):
+	x = int(raw_input())
+	if x%2 == 0:
+		print pow(3,x,foo) + 3
+	else:
+		print pow(3,x,foo) - 3
+	

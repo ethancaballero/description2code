@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+
+void solve(){
+	int tests;
+	cin>>tests;
+	while(tests--){
+		long long t1,t2,t3,t4;
+		cin>>t1>>t2>>t3>>t4;
+		printf("%.10lf
+",t1/double(t1+t2));
+	}
+}
+
+int main()
+{
+	solve();
+}

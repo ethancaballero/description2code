@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;long long int n,ans;
+	cin>>t;
+	while(t--!=0)
+	{
+		cin>>n;
+		ans=2*n;
+		ans+=((n-1)*n)/2;
+		cout<<ans<<endl;
+	}
+	// your code goes here
+	return 0;
+}

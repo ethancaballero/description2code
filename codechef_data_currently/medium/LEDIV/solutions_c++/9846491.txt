@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include<stdbool.h>
+#define min(a,b) a>b?b:a
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+int scan(){register int n=0,c=gc();while(c<'0'||c>'9')c=gc();while(c<='9'&&c>='0')n=(n<<1)+(n<<3)+c-'0',c=gc();return n;}
+void print(int a){char s[20];int i=0;do{s[i++]=a%10+'0';a/=10;}while(a);i--;while(i>=0)pc(s[i--]);pc('
+');}
+int smallestprimes[100000];
+void sieve()
+{	int i,j;
+	for(i=2;i<=100000;i++)smallestprimes[i]=i;
+	for(i=2;i<=318;i++)
+		if(smallestprimes[i]==i)
+		for(j=2*i;j<=100000;j+=i)
+			smallestprimes[j]=min(smallestprimes[j],i);
+}
+int gcd(int a,int b)
+{ return b?gcd(b,a%b):a; }
+int main(void) {
+	int n,t,g;
+	sieve();
+	t=scan();
+	while(t--)
+	{	g=0;n=scan();
+		while(n--)g=gcd(g,scan());
+		if(g==1)puts("-1");
+		else print(smallestprimes[g]);
+	}
+	return 0;
+}

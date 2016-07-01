@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+
+def convert_pair(a, b):
+    res = []
+    if a < b:
+        a, b = b, a
+    while b:
+        res.append(a / b)
+        a, b = b, a % b
+    res[-1] -= 1
+    while res[-1] == 0:
+        del res[-1]
+    return tuple(res)
+
+
+def grundy(col):
+    res = 0
+    for N in reversed(col):
+        if res >= N:
+            res = N - 1
+        else:
+            res = N
+    return res
+
+
+t = int(raw_input())
+for _ in range(t):
+    n = int(raw_input())
+    cols = []
+    for _ in range(n):
+        a, b = map(int, raw_input().strip().split())
+        cols.append(convert_pair(a, b))
+
+    nimsum = reduce(lambda a, b: a ^ b, [grundy(col) for col in cols])
+    print "NO" if nimsum == 0 else "YES"

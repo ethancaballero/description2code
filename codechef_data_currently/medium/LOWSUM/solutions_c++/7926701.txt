@@ -1,0 +1,305 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<algorithm>
+ 
+#define ull unsigned long long int
+#define gc() getchar_unlocked()
+ 
+//#define gc() getchar()
+//#define putchar_unlocked putchar
+ 
+ 
+struct query
+{
+    int x,i;
+    ull ans;
+};
+ 
+struct a
+{
+    ull val;
+    int i;
+};
+ 
+ 
+ 
+ 
+void _mergei(struct query a[],int i,int k,int n)
+{
+    struct query b[n+2];
+    int x1=i,x2=i+k,x=i;
+    int lim2=i+2*k;
+    if(i+k>n)
+        return;
+    if(i+2*k>n)
+        lim2=n+1;
+    while(x1<i+k && x2<lim2)
+        if(a[x1].i<a[x2].i)
+        {
+            b[x++]=a[x1];
+            x1++;
+        }
+        else
+        {
+            b[x++]=a[x2];
+            x2++;
+        }
+    while(x1<i+k)
+        b[x++]=a[x1++];
+    while(x2<lim2)
+        b[x++]=a[x2++];
+    x--;
+    for(;x>=i;x--)
+        a[x]=b[x];
+}
+ 
+ 
+ 
+void mergesort_i(struct query a[],int m,int n) //index m to n
+{
+    int k,i;
+    for(k=1;k<=n;k*=2)
+    {
+        for(i=m;i<=n;i+=2*k)
+        {
+            _mergei(a,i,k,n);
+        }
+    }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+void _mergex(struct query a[],int i,int k,int n)
+{
+    struct query b[n+2];
+    int x1=i,x2=i+k,x=i;
+    int lim2=i+2*k;
+    if(i+k>n)
+        return;
+    if(i+2*k>n)
+        lim2=n+1;
+    while(x1<i+k && x2<lim2)
+        if(a[x1].x<a[x2].x)
+        {
+            b[x++]=a[x1];
+            x1++;
+        }
+        else
+        {
+            b[x++]=a[x2];
+            x2++;
+        }
+    while(x1<i+k)
+        b[x++]=a[x1++];
+    while(x2<lim2)
+        b[x++]=a[x2++];
+    x--;
+    for(;x>=i;x--)
+        a[x]=b[x];
+}
+ 
+ 
+ 
+void mergesort_x(struct query a[],int m,int n) //index m to n
+{
+    int k,i;
+    for(k=1;k<=n;k*=2)
+    {
+        for(i=m;i<=n;i+=2*k)
+        {
+            _mergex(a,i,k,n);
+        }
+    }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+inline ull read_int() {
+  register char c = gc();
+  while(c<'0' || c>'9') c = gc();
+  ull ret = 0;
+  while(c>='0' && c<='9') {
+    ret = 10 * ret + c - 48;
+    c = gc();
+  }
+  return ret;
+}
+ 
+inline int read_inte() {
+  register char c = gc();
+  while(c<'0' || c>'9') c = gc();
+  int ret = 0;
+  while(c>='0' && c<='9') {
+    ret = 10 * ret + c - 48;
+    c = gc();
+  }
+  return ret;
+}
+ 
+inline void fastwrite(ull a){
+register char c;
+char snum[20];
+int i=0;
+do{
+snum[i++]=a%10+48;
+a=a/10;
+}while(a!=0);
+i=i-1;
+while(i>=0)
+putchar_unlocked(snum[i--]);
+putchar_unlocked('
+');
+}
+ 
+ 
+ 
+ 
+int main()
+{
+    int t,i,k,q;
+    t=read_inte();
+    struct a heap[20004];
+ 
+    while(t--)
+    {
+ 
+        k=read_inte();
+        q=read_inte();
+ 
+        ull A[k+2],B[k+2];
+        int ctr[k+2];
+ 
+        struct query qi[q];
+ 
+        for(i=0;i<k;i++)
+            A[i]=read_int();
+        for(i=0;i<k;i++)
+            B[i]=read_int();
+ 
+        std::sort(A,A+k);
+        std::sort(B,B+k);
+ 
+        for(i=0;i<q;i++)
+        {
+            qi[i].x=read_inte();
+            qi[i].i=i;
+        }
+ 
+        int x=0;
+ 
+        for(i=0;i<k;i++)
+            ctr[i]=0;
+ 
+        mergesort_x(qi,0,q-1);
+ 
+        for(i=1;i<=k;i++)
+        {
+            heap[i].i=i-1;
+            heap[i].val=A[i-1]+B[0];
+        }
+ 
+        i=0;
+        int j=0;
+        int high=k;
+        ull anss;
+        while(j<q)
+        {
+            while(i<qi[j].x)
+            {
+                struct a swappy;
+                anss=heap[1].val;
+                ctr[heap[1].i]++;
+                if(ctr[heap[1].i]!=k)
+                    heap[1].val=A[heap[1].i]+B[ctr[heap[1].i]];
+                else
+                {
+                    swappy=heap[high];
+                    heap[high]=heap[1];
+                    heap[1]=swappy;
+                    high--;
+                }
+ 
+                int ii=1;
+                while(2*ii<=high)
+                {
+                    ull left,right,cur;
+                    left=heap[2*ii].val;
+                    cur=heap[ii].val;
+                    if(2*ii+1>high)
+                    {
+                        if(left<cur)
+                        {
+                            swappy=heap[ii];
+                            heap[ii]=heap[2*ii];
+                            heap[2*ii]=swappy;
+                        }
+                        break;
+                    }
+                    right=heap[2*ii+1].val;
+                    if(left<cur)
+                    {
+                        if(left<right)
+                        {
+                            swappy=heap[ii];
+                            heap[ii]=heap[2*ii];
+                            heap[2*ii]=swappy;
+                            ii=2*ii;
+                            continue;
+                        }
+                        else
+                        {
+                            swappy=heap[ii];
+                            heap[ii]=heap[2*ii+1];
+                            heap[2*ii+1]=swappy;
+                            ii=2*ii+1;
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(right<cur)
+                        {
+                            swappy=heap[ii];
+                            heap[ii]=heap[2*ii+1];
+                            heap[2*ii+1]=swappy;
+                            ii=2*ii+1;
+                            continue;
+                        }
+                        else
+                            break;
+                    }
+ 
+                }
+ 
+                i++;
+ 
+            }
+ 
+            qi[j].ans=anss;
+            j++;
+        }
+ 
+        mergesort_i(qi,0,q-1);
+ 
+        for(i=0;i<q;i++)
+            fastwrite(qi[i].ans);
+    }
+ 
+ 
+ 
+ 
+    return 0;
+}
+ 

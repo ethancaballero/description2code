@@ -1,0 +1,54 @@
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+long gcd(long a,long b)
+{
+	if(a==0)
+		return b;
+	else if(b==0)
+		return a;
+	else
+	{
+		while(a!=b)
+		{
+			if(a>b)
+				a=a-b;
+			else
+				b=b-a;
+		}
+	}
+	//printf("GCD: %ld",a);
+	return a;
+
+}
+
+int main()
+{
+
+	int t,i;
+
+	scanf("%d",&t);
+
+	long size,offset,j,count;
+	for(i=0;i<t;i++)
+	{
+
+		count=0;
+		scanf("%ld%ld",&size,&offset);
+
+		long g = (long)(size/gcd(size,offset));
+
+		if(g==size)
+			printf("Yes
+");
+		else
+			printf("No %ld
+",g);
+
+
+	}
+
+	return 0;
+}

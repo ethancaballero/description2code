@@ -1,0 +1,58 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#include<map>
+using namespace std;
+int T,n,A[100005],B[100005];
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d",&n);
+		long long one=0,two=0;
+		for(int i=0;i<n;i++)scanf("%d",&A[i]);
+		for(int i=0;i<n;i++)
+		{
+			scanf("%d",&B[i]);
+			if(B[i]==1)one++;
+			else if(B[i]==2)two++;
+		}
+		
+		sort(A,A+n);
+		sort(B,B+n);
+		
+		double res=0;
+		for(int count=0,i=0;i<n;i++)
+		if(A[i]!=1)
+		{
+			count=1;
+			while(i+1<n&&A[i]==A[i+1]){
+				i++;
+				count++;
+			}
+			
+			res+=count*one;
+			if(A[i]==3)res+=count*two;
+						
+			if(A[i]==2&&4<B[n-1]){
+				int idx=upper_bound(B,B+n,4)-B;
+				idx=n-idx;
+				//cout<<idx<<" : ";
+				res+=(long long)count*idx;
+			}
+			if(A[i]!=2&&A[i]<B[n-1]){
+				int idx=upper_bound(B,B+n,A[i])-B;
+				idx=n-idx;
+				//cout<<idx<<" : ";
+				res+=(long long)count*idx;
+			}
+		}
+		printf("%lf
+",res/n);
+	}
+	return 0;
+}

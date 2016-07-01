@@ -1,0 +1,6 @@
+input = raw_input().split()
+x, y = float(input[0]), float(input[1])
+if x % 5 or x + 0.5 > y: # if not multiple of 5 or insufficient funds
+  print '%0.2f' % y
+else:
+  print '%0.2f' % (y - x - 0.5)

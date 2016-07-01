@@ -1,0 +1,139 @@
+#include<iostream>
+#include<stack>
+#include<map>
+#include<vector>
+#include<queue>
+#include<set>
+#include<algorithm>
+#include<string>
+#include<iomanip>
+#include<stdio.h>
+#include<math.h>
+#include<ctype.h>
+#include<string.h>
+#include<cstring>
+#include<time.h>
+using namespace std;
+#define ull unsigned long long
+#define ll long long
+#define pll pair<ll,ll>
+#define ppll pair<ll, pair<ll,ll> >
+#define inf 1000000007
+
+ll power(ll a, ll b)
+{
+    if(b==1)
+        return a;
+    if(!b)
+        return 1;
+    ll temp=power(a,b/2);
+    temp*=temp;
+    if(b%2)
+        temp*=a;
+    return temp;
+}
+
+ll constructST(vector<ll> &st, vector<ll> &a, ll s, ll e, ll ind)
+{
+    if(s==e)
+    {
+        st[ind]=a[s];
+        return st[ind];
+    }
+    ll mid=s+((e-s)/2);
+    st[ind]=constructST(st,a,s,mid,2*ind+1)+constructST(st,a,mid+1,e,2*ind+2);
+    return st[ind];
+}
+
+ll getSum(vector<ll> &st, ll ss, ll se, ll qs, ll qe, ll ind)
+{
+    if(se<qs || ss>qe)
+        return 0;
+    
+    if(ss>=qs && se<=qe)
+        return st[ind];
+    
+    ll mid=ss+((se-ss)/2);
+    return getSum(st,ss,mid,qs,qe,2*ind+1)+getSum(st,mid+1,se,qs,qe,2*ind+2);
+}
+
+
+
+int main()
+{
+    ll t,n,h,i,li,hi,x,max_size,ans;
+    vector<ll> rowSum,st,a;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        scanf("%lld%lld",&n,&h);
+        rowSum.resize(n+2,0);
+        a.resize(n+2,0);
+        for(i=0;i<n;i++)
+        {
+            scanf("%lld%lld",&li,&hi);
+            li++;
+            hi++;
+            rowSum[li-1]++;
+            rowSum[hi]--;
+        }
+        for(i=1;i<=n;i++)
+        {
+            a[i]=rowSum[i-1]+a[i-1];
+        }
+        
+        for(i=1;i<=n;i++)
+        {
+            a[i]=n-a[i];
+            //cout<<a[i]<< " ";
+        }
+        //cout<<endl;
+        
+        x=(ll)(ceil(log2(n)));
+        max_size=2*power(2,x)-1;
+        st.resize(max_size);
+        constructST(st,a,1,n,0);
+        
+        /*for(i=0;i<max_size;i++)
+            cout<<st[i]<<" ";
+        cout<<endl;*/
+        
+        ans=inf;
+        for(i=1;i<=n-h+1;i++)
+        {
+            ll temp=getSum(st,1,n,i,i+h-1,0);
+            //cout<<i<<" "<<i+h-1<<" "<<temp<<endl;
+            ans=min(ans,temp);
+        }
+        printf("%lld
+",ans);
+        st.clear();
+        rowSum.clear();
+    }
+}
+
+/*4
+ 4 3
+ 1 2
+ 1 2
+ 1 2
+ 1 2
+ 5 2
+ 2 3
+ 1 2
+ 2 3
+ 1 2
+ 2 3
+ 5 3
+ 3 3
+ 1 3
+ 2 3
+ 1 2
+ 2 4
+ 5 2
+ 3 3
+ 1 3
+ 2 3
+ 1 2
+ 2 4*/
+

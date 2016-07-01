@@ -1,0 +1,155 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+const int MAXN = 1009;
+const int MAXM = 1e6 + 9;
+const int INF = 0x3f3f3f3f;
+
+typedef struct Node
+{
+	int w, to, next;
+} Node;
+
+typedef struct Edge
+{
+	int a, b, w;
+	bool operator < (const struct Edge & ano) const
+	{
+		return w > ano.w;
+	}
+} Edge;
+
+int head[MAXN];
+Node rEdge[MAXN];
+Edge edge[MAXM];
+int father[MAXN];
+int ans[MAXN][MAXN];
+
+void AddEdge(int a, int b, int w, int k)
+{
+	rEdge[k].to = b;
+	rEdge[k].w = w;
+	rEdge[k].next = head[a];
+	head[a] = k;
+}
+
+int GetFather(int x)
+{
+	if(father[x] != x)
+		father[x] = GetFather(father[x]);
+	
+	return father[x];
+}
+
+void Union(int x, int y)
+{
+	father[x] = y;
+}
+
+void Dfs(int root, int father, int s, int minS)
+{
+	int k, to;
+	
+	ans[root][s] = minS;
+	
+	for(k = head[s]; k != -1; k = rEdge[k].next)
+	{
+		to = rEdge[k].to;
+
+		if(to == father)
+			continue;
+		
+		Dfs(root, s, to, min(minS, rEdge[k].w));
+	}
+}
+
+int main()
+{
+	int n, m;
+	int i, j, k;
+	int ra, rb;
+	
+	while(scanf("%d%d", &n, &m) != EOF)
+	{
+		memset(head, -1, sizeof(head));
+		for(i = 0; i < n; ++i)
+			father[i] = i;
+
+		for(k = 0; k < m; ++k)
+			scanf("%d%d%d", &edge[k].a, &edge[k].b, &edge[k].w);
+
+		sort(edge, edge + m);
+		for(i = k = 0; i < m; ++i)
+		{
+			ra = GetFather(edge[i].a);
+			rb = GetFather(edge[i].b);
+			if(ra != rb)
+			{
+				AddEdge(edge[i].a, edge[i].b, edge[i].w, k++);
+				AddEdge(edge[i].b, edge[i].a, edge[i].w, k++);
+				Union(ra, rb);
+			}	
+		}
+		
+		for(i = 0; i < n; ++i)
+			Dfs(i, -1, i, INF);
+		
+		for(i = 0; i < n; ++i)
+		{
+			for(j = 0; j < n; ++j)
+			{
+				if(j != 0)
+					printf(" ");
+
+				printf("%d", (i == j ? 0 : ans[i][j]));
+			}
+			printf("
+");
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

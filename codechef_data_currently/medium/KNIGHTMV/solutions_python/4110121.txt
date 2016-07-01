@@ -1,0 +1,92 @@
+def checkstring( str):
+	if( len(str)==5):
+		if ( str[0] >='a' and str[0] <='h'):
+			if( str[1] >='1' and str[1] <='8' ):
+				if str[2]=='-':
+					if( str[3] >='a' and str[3] <='h' ):
+						if( str[4] >='1' and str[4] <='8' ):
+							return 1;
+	return 0;
+
+def checkmove(str):
+	a=ord(str[0]);
+	b=ord(str[1]);
+	c=ord(str[3]);
+	d=ord(str[4]);
+	if ( abs(a-c) ==1):
+		if ( abs(b-d) ==2):
+			return 1;
+	if ( abs(a-c) ==2):
+		if ( abs(b-d) ==1):
+			return 1;
+	return 0
+
+num=input()
+for q in range(num):
+	str=raw_input()
+	c=checkstring(str);
+	if c==0:
+		print "Error"
+		continue;
+	c=checkmove(str)
+	if (c==0):
+		print "No"
+	else:
+		print "Yes"
+	
+
+'''
+def ciel(str):
+	if ('0' in str or '1' in str or '2' in str or '4' in str or '6' in str or'7' in str or'9' in str):
+		return 0;
+	else:
+		c3=str.count('3')
+		c5=str.count('5')
+		c8=str.count('8')
+		if ( c8>= c5 and c5>=c3 and c8>=c3):
+			return 1;
+		else :
+			return 0
+num=raw_input().strip()
+num = int(num)
+count=0
+
+for q in range(num):
+	string=raw_input().strip(' ')
+	str=[s for s in string.split() if s.isdigit()]
+	str=str[len(str)-1]
+	#print str
+	count+= ciel(str)
+print count
+'''		
+	
+'''
+	list=map( int, raw_input().split())
+	a=sorted(list)
+	i=0; 
+	j=n-1
+	k=j-1;
+	c=0
+	if ( a[0]+a[1]>= a[j]):
+		print 0
+		n=input()
+		continue;
+		
+	while ( i<j):
+		if( a[i] + a[k] < a[j] and k>i):
+			c+=(k-i); 
+			print a[i]," ",a[k]," ",a[j]," ",c
+			k=j-1
+			i+=1
+			
+		elif (  a[i] + a[k] >= a[j] and k>i ):
+			k-=1
+		elif ( k<=i):
+			i=0
+			j-=1
+			k=j-1
+		print c;
+	print c
+	n=input()
+	
+'''	

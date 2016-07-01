@@ -1,0 +1,42 @@
+__author__ = 'Deepak'
+import collections
+import sys
+cycles=collections.defaultdict(list)
+n=int(sys.stdin.readline())
+p=sys.stdin.readline()
+perm=[]
+visited=[]
+perm=p.split()
+for key in range(len(perm)):
+    perm[key]=int(perm[key])
+if(n==len(perm)):
+    counter=0
+    for key in range(len(perm)):
+        if key in visited:
+            continue
+        else:
+            #print "1"
+            i=key
+            while(i not in visited):
+                #print "hi2"
+                visited.append(i)
+                cycles[counter].append(i+1)
+                i=perm[i]-1
+            visited.append(i)
+            cycles[counter].append(i+1)#since 1 index based
+            counter+=1
+print counter
+for k in range(counter):
+        for j in cycles[k]:
+            print j,
+        print 
+
+
+
+
+
+
+
+
+
+

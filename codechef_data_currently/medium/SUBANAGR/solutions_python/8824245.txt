@@ -1,0 +1,22 @@
+# cook your code here
+n=int(raw_input().strip())
+s=str(raw_input().strip())
+
+cnt=[0]*256
+for i in s:
+    cnt[ord(i)]+=1
+for i in range(1,n):
+    s=str(raw_input().strip())
+    cnt1=[0]*256
+    for i in s:
+        cnt1[ord(i)]+=1
+    for i in range(256):
+        cnt[i]=min(cnt[i],cnt1[i])
+ans=""
+for i in range(256):
+    while cnt[i]>0:
+        ans+=chr(i)
+        cnt[i]-=1
+if ans=="":
+    ans="no such string"
+print(ans)

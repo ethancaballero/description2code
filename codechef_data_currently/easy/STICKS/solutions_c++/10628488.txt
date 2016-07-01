@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+
+    while(t--) {
+        int i,n,a=0,b=0,df=0,flg=0;
+
+        cin>>n;
+        int ara[n];
+
+        for(i=0;i<n;i++) {
+            cin>>ara[i];
+        }
+        sort(ara,ara+n);
+
+        for(i=n-1;i>=0;i--) {
+            if(flg == 0) {
+                if(ara[i]==ara[i-1]) {
+                    a = ara[i];
+                    flg = 1;
+                    --i;
+                    continue;
+                }
+            }
+
+            if(flg == 1) {
+                if(ara[i]==ara[i-1]) {
+                    b = ara[i];
+                    //if(b==a) {--i; continue;}
+                    df = 9;
+                    break;
+                }
+            }
+
+        }
+        if(df == 0) cout<<"-1
+";
+        else cout<<a*b<<"
+";
+    }
+
+
+    return 0;
+
+
+}

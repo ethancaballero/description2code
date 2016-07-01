@@ -1,0 +1,27 @@
+#include <iostream>
+#define ABS(x)   ((x)<0?-(x):(x))
+using namespace std;
+
+int main()
+{
+    int t,x1,y1,x2,y2,x3,y3,area,i,maxa,maxv,mina,minv;
+    cin>>t;
+    maxa=maxv=0;
+    mina=minv=100000000;
+    for(i=1;i<=t;i++)
+    {
+        cin>>x1>>y1>>x2>>y2>>x3>>y3;
+        area=ABS((x1 * y2 - x2 * y1) + (x2 * y3 - x3 * y2) + (x3 * y1 - x1 * y3));
+        if(area>=maxa)
+            {maxa=area;
+            maxv=i;}
+        if(area<=mina)
+        {
+            mina=area;
+            minv=i;
+        }
+
+    }
+    cout<<minv<<" "<<maxv<<endl;
+
+}

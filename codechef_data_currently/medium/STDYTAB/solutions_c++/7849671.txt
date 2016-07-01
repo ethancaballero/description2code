@@ -1,0 +1,62 @@
+#include<iostream>
+#define mod 1000000000
+using namespace std;
+
+#define ll long long int
+ll fac[4001][4001];
+void solve()
+{
+	for(int i=0;i<4001;i++)
+	{
+		for(int j=0;j<4001;j++)
+		{   
+		    if(i<j)
+		    fac[i][j]=0;
+			else if(i==j || j==0)
+			fac[i][j]=1;
+		    else
+		    fac[i][j]=(fac[i-1][j]+fac[i-1][j-1])%mod;
+		}
+	}
+}
+int main()
+{
+	ll t,i,j,n,m,a[2001],com[2001],sum=0,temp[2001];	
+	solve();
+  /*for(int i=0;i<=5;i++)
+	{
+		for(int j=0;j<=5;j++)
+		{   
+		    cout<<fac[i][j]<<" ";
+		}
+		cout<<endl;
+	}*/
+	cin>>t;
+	while(t--)
+	{    sum=0;
+		cin>>m>>n;
+		for(i=0;i<=n;i++)
+		{
+		a[i]=fac[n+i-1][i];	
+		com[i]=a[i];
+		}
+		for(int i=0;i<m-1;i++)
+		{
+			for(int i=1;i<=n;i++)
+			com[i]=(com[i]+com[i-1])%mod;
+			for(int i=0;i<=n;i++)
+			com[i]=(com[i]*a[i])%mod;
+		}
+		/*for(i=0;i<=n;i++)
+		{
+		//a[i]=fac[n+i-1][i];	
+		cout<<a[i]<<endl;
+		}*/
+	   ll ans=0;
+			for(i=0;i<=n;i++)
+		{
+			ans+=(com[i])%mod;
+		}
+		cout<<ans%mod<<endl;
+	}
+}

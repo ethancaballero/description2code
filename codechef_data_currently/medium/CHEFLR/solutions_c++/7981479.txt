@@ -1,0 +1,36 @@
+#include<stdio.h>
+ 
+char string[100005];
+ 
+int main(){
+        int t, odd, index;
+        char c;
+        unsigned long long int num;
+ 
+        scanf("%d", &t);
+        while(t--){
+ 
+                scanf("%s", string);
+                odd = 1;
+                index = 0;
+                num = 1;
+ 
+                while(c = string[index++])
+				{
+                        if(odd){
+                                odd = 0;
+                                num = (num << 1) + 2 * (c == 'r');
+                        }else{
+                                odd = 1;
+                                num = (num << 1) - 1 + 2 * (c == 'r');
+                        }
+                        
+                        num=num%1000000007;
+                }
+                printf("%llu
+", num);
+                
+        }
+ 
+        return 0;
+} 

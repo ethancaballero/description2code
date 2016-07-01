@@ -1,0 +1,19 @@
+n1,n2,n3=map(int,raw_input().split())
+
+freq=[0]*1000000
+count=0
+maxid=0
+for _ in range(0,n1+n2+n3):
+    id=int(raw_input())
+    freq[id]+=1
+    if(freq[id]==2):
+        count+=1
+    if(id>maxid):
+        maxid=id
+        
+print count        
+
+for i in range(0,maxid):
+    if(freq[i]>1):
+        print i
+    

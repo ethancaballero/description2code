@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;
+	scanf("%d",&t);
+	long long n;
+	long long arr[90];
+	arr[0]=1;
+	arr[1]=2;
+	for(int i=2;i<88;i++){
+		arr[i]=arr[i-1]+arr[i-2];
+	}
+	while(t--){
+		scanf("%lld",&n);
+		int ans=0;
+		while(arr[ans]<n+1){
+			ans++;
+		}
+		printf("%d
+",ans);
+	}
+	return 0;
+}

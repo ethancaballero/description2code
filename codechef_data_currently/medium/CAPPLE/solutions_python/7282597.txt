@@ -1,0 +1,4 @@
+for _ in xrange(input()):
+    n=input()
+    a=map(int,raw_input().split())
+    print len(set(a))

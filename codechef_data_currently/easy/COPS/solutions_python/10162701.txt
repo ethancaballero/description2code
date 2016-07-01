@@ -1,0 +1,14 @@
+for i in range(int(raw_input())):
+    arr=range(1,101)
+    m,x,y=str(raw_input()).split()
+    houselist=str(raw_input()).split()
+    for i in houselist:
+        for k in range(int(i)-(int(x)*int(y)),(int(x)*int(y))+int(i)+1):
+            try:
+                arr.remove(k)
+            except ValueError:
+                pass
+    #print arr            
+    print len(arr)
+            
+    

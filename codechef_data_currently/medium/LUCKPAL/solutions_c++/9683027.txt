@@ -1,0 +1,177 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <cstdio>
+#include <stdio.h>
+#include <fstream>
+#include <map>
+#include <set>
+#include <cstdlib>
+#include <queue>
+#include <math.h>
+#include <iterator>
+#include <cmath>
+#include <cstring>
+#include <stdlib.h>
+#include <stack>
+#include <iomanip>
+#define ll long long
+#define endl '
+'
+#define ull unsigned long long
+#define pb push_back
+#define mp make_pair
+#define pii pair<short,short>
+#define pll pair<ll,ll>
+#define pull pair<ull,ull>
+#define ff first
+#define ss second
+#define triple pair< ll, pair<ll,ll> >
+#define mt(x,y,z) mp(x,mp(y,z))
+#define fir first
+#define sec second.first
+#define thi second.second
+ll MOD=1000000007;
+ll inf=1e18;
+using namespace std;
+int mem[1005][10];
+int v[1005][10];
+int id,n;
+string L="lucky";
+string s;
+string ss;
+ 
+int solve(int x,int w)
+{
+	int y=n-x-1;
+	if(x>=y)
+	{
+		if(w==4 && x==y && s[x]==L[4])return 0;
+		if(w==4 && x==y)return 1;
+		if(w==5)return 0;
+		return 1000000000;
+	}
+	if(v[x][w]==id)return mem[x][w];
+	v[x][w]=id;
+	int ans=1000000000;
+	for(char c='a';c<='z';c++)
+	{
+		int cost=0;
+		int ww=w;
+		if(c!=s[x])cost++;
+		if(c!=s[y])cost++;
+		if(w==5);
+		else if(c==L[w])ww++;
+		else if(c==L[0])ww=1;
+		else ww=0;
+		ans=min(ans,cost+solve(x+1,ww));
+	}
+	mem[x][w]=ans;
+	return ans;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    	id++;
+    	cin>>s;
+    	ss=s;
+    	if(s.size()<9){cout<<"unlucky
+";continue;}
+    	n=s.size();
+    	L="lucky";
+    	int anss=solve(0,0);
+    	int x=0;
+    	int w=0;
+    	int y=n-1-x;
+    	while(x<y)
+    	{
+    		int ans=1000000000;
+    		char letter;
+    		int www=w;
+    		for(char c='a';c<='z';c++)
+    		{
+    			int cost=0;
+    			int ww=w;
+    			if(c!=s[x])cost++;
+    			if(c!=s[y])cost++;
+    			if(w==5);
+    			else if(c==L[w])ww++;
+    			else if(c=='l')ww=1;
+    			else ww=0;
+    			int tmp=cost+solve(x+1,ww);
+    			if(tmp<ans)
+    			{
+    				ans=tmp;
+    				letter=c;
+    				www=ww;
+    			}
+    		}
+    		s[x]=letter;
+    		s[y]=letter;
+    		x++;
+    		y--;
+    		w=www;
+    	}
+    	if(w!=5)s[x]='y';
+ 
+    	int ans1=anss;
+    	string s1=s;
+ 
+    	s=ss;
+    	L="ykcul";
+    	id++;
+    	anss=solve(0,0);
+    	x=0;
+		w=0;
+		y=n-1-x;
+		while(x<y)
+		{
+			int ans=1000000000;
+			char letter;
+			int www=w;
+			for(char c='a';c<='z';c++)
+			{
+				int cost=0;
+				int ww=w;
+				if(c!=s[x])cost++;
+				if(c!=s[y])cost++;
+				if(w==5);
+				else if(c==L[w])ww++;
+				else if(c=='y')ww=1;
+				else ww=0;
+				int tmp=cost+solve(x+1,ww);
+				if(tmp<ans)
+				{
+					ans=tmp;
+					letter=c;
+					www=ww;
+				}
+			}
+ 
+			s[x]=letter;
+			s[y]=letter;
+			x++;
+			y--;
+			w=www;
+		}
+		if(w!=5)s[x]='l';
+ 
+		int ans2=anss;
+		string s2=s;
+ 
+		if(ans1<ans2){cout<<s1<<" "<<ans1<<endl;}
+		else if(ans2<ans1)cout<<s2<<" "<<ans2<<endl;
+		else if(s1<s2)cout<<s1<<" "<<ans1<<endl;
+		else cout<<s2<<" "<<ans2<<endl;
+ 
+    }
+ 
+ 
+    return 0;
+ 
+}

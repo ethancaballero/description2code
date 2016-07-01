@@ -1,0 +1,39 @@
+#! /usr/bin/python
+def gcd(x,y):
+    while(y):
+        x,y = y,x%y;
+    return x;
+ 
+def main():
+    num = [0]*160;den = [0]*160
+    num[0] = 1;num[1] = 0;num[2] = 2;num[3] = 10;
+    den[0] = 1;den[1] = 1;den[2] = 1;den[3] = 3;
+    t = int(raw_input());
+    for j in range(t):
+        n = int(raw_input())
+        if n<4:
+            if den[n] == 1:
+                print num[n];
+                continue;
+            else:
+                print "%s/%s"%(num[n],den[n]);
+                continue;
+        for i in range(4,n+1):
+            if num[i] == 0:
+                num[i] = num[i-1]*2*(i-1)*den[i-2]-num[i-2]*den[i-1];
+                den[i] = den[i-1]*den[i-2];
+                num[i] = num[i]+den[i]*(i)*(i-1);
+                den[i] = den[i]*(2*i-3);
+                g = gcd(num[i],den[i]);
+                num[i] = num[i]/g;
+                den[i] = den[i]/g;
+                num[i] -= den[i];
+                if i==n:
+                    if den[i] == 1:
+                        print num[i];
+                    else:
+                        print "%s/%s"%(num[i],den[i]);
+ 
+if __name__:
+    main()
+ 

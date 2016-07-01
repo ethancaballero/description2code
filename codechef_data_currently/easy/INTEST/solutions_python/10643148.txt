@@ -1,0 +1,8 @@
+t = raw_input()
+s = map(int,t.split())
+count = 0
+for i in range(s[0]):
+    x = int(raw_input())
+    if x%s[1]==0:
+       count+=1
+print count

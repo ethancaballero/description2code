@@ -1,0 +1,29 @@
+def main():
+        R,C = map(int,raw_input().split())
+
+        rowMat = []
+        rowMins = []
+        colMat = []
+        solution = "GUESS"
+        
+        for x in range(C):
+                colMat.append([])
+
+        for i in range(R):
+                row = map(int,raw_input().split())
+                rowMat.append(row)
+                rowMin = min(row)
+                rowMins.append([x for x,val in enumerate(row) if val==rowMin])
+                for j in range(C):
+                        colMat[j].append(row[j])
+        
+        
+        for k in range(R):
+                for l in range(len(rowMins[k])):
+                        colMax = max(colMat[rowMins[k][l]])
+                        if(min(rowMat[k])==colMax):
+                                solution = colMax
+
+        print solution  
+
+main()

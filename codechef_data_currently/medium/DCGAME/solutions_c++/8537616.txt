@@ -1,0 +1,156 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define S(x) scanf("%d",&x)
+#define Sl(x) scanf("%lld",&x)
+#define P(x) printf("%d
+",x)
+#define Pl(x) printf("%lld
+",x)
+#define FOR(i,x) for(int i=0;i<x;i++)
+#define FORC(i,k,x) for(int i=k;i<x;i++)
+#define PB push_back
+#define MP make_pair
+#define Fill(a, b) memset(a, b, sizeof(a))
+
+#define N 1000000
+#define LOGN 20
+#define MAX (1+(1<<21))
+#define INF 1000000009
+#define MOD 1000000007
+
+typedef long long LL;
+typedef pair<int, int> PII;
+typedef vector<int> VI;
+
+int n,m;
+int ar[N+1];
+int rmq[N][LOGN], power[LOGN];
+map<int, LL> mapp;
+map<int, LL>::iterator it;
+map<int, LL>::iterator it_end;
+LL total;
+
+int max_query(int i, int j) {
+	if (j == i)	return i;
+	int k = log2(j-i);
+	if (ar[rmq[i][k]] >= ar[rmq[j-power[k]+1][k]]) 
+		return rmq[i][k];
+	return rmq[j-power[k]+1][k];
+}
+
+void max_rmq(int n) {
+	power[0] = 1;
+	FORC(i, 1, LOGN) {
+		power[i] = power[i-1]*2;
+	}
+
+	int l = log2(n), x;
+	FOR(i ,l+1)	rmq[n-1][i] = n-1;
+	FOR(i, n)	rmq[i][0] = i;
+
+	for(int i=n-2; i >= 0; i--) {
+		for(int j=1; j <= l; j++) {
+			x = min(n-1, i+power[j-1]);
+			if (ar[rmq[i][j-1]] >= ar[rmq[x][j-1]]) {
+				rmq[i][j] = rmq[i][j-1];
+			} else {
+				rmq[i][j] = rmq[x][j-1];
+			}
+		}
+	}
+}
+
+void fill_map(int a, int b) {
+	if (a > b)	return;
+	if (a == b)	{
+		mapp[ar[a]]+= 1;
+		total+= 1;
+		return;
+	} 
+	if( b-a == 1) {
+		mapp[max(ar[a], ar[b])]+= 1;
+		mapp[ar[a]]+=1;
+		mapp[ar[b]]+=1;
+		total+= 3;
+		return;
+	}
+	
+	int c = max_query(a, b);
+	int val = ar[c];
+	LL left = (c-a+1), right = (b-c+1);
+	LL change = left * right;
+	total+= change; 
+	mapp[val]+= change;
+
+	fill_map(a, c-1);
+	fill_map(c+1, b);
+}
+
+void make_cumulative() {
+	LL temp;
+	it_end = mapp.end();
+	it = it_end;
+	it--; 
+	temp = it->second;
+	it--;
+	while(it != mapp.begin()) {
+		mapp[it->first] += temp;
+		temp = mapp[it->first];
+		it--;
+	}
+	mapp[it->first] += temp;
+}
+
+void solve() {
+	S(n); S(m);
+	FOR(i,n)	S(ar[i]);
+	ar[n] = -INF;
+	total = 0;
+    
+	max_rmq(n);
+	fill_map(0, n-1);
+	make_cumulative();
+
+	char c, x;
+	int k;
+	LL v = 0;
+	FOR(i,m) {
+		scanf(" %c %d %c", &c, &k, &x);	
+		switch(c) {
+			case '>':
+				it = mapp.upper_bound(k);
+				if (it == it_end)	v = 0;
+				else	v = it->second;
+				break;
+			case '=':
+				it = mapp.lower_bound(k);
+				if (it == it_end || it->first != k)	v = 0;
+				else {
+					v = it->second;
+					if ((++it) != it_end)	v-= it->second;
+				}
+				break;
+			case '<':
+				it = mapp.lower_bound(k);
+				if (it == it_end)	v = total;
+				else	v = total - it->second;
+		}
+		if (v&1) {
+			printf("%c", x);
+		} else {
+			printf("%c", (x=='D')?'C':'D');
+		}
+	}
+}
+
+int main(int argc, char const *argv[])
+{
+	int t=1;
+//	scanf("%d",&t);
+	for(int i=1;i<=t;i++)
+	{
+		solve();
+	}
+}

@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+
+typedef long long ll;
+const ll MOD = 100000007;
+const ll MOD2 = 100000006;
+
+struct matrix {
+    ll A[105][105];
+};
+
+matrix matrix_mul(matrix a, matrix b, int dim) {
+    matrix ret;
+    for (int i=0; i<dim; i++)
+        for (int j=0; j<dim; j++) {
+            ret.A[i][j] = 0;
+            for (int k=0; k<dim; k++) {
+                ret.A[i][j] += a.A[i][k]*b.A[k][j];
+            }
+            ret.A[i][j] %= MOD2;
+        }
+    return ret;
+}
+
+matrix mat_st(matrix a, int dim, int st) {
+    if (st == 1) return a;
+    matrix ret = mat_st(a, dim, st/2);
+    ret = matrix_mul(ret, ret, dim);
+    if (st&1) ret = matrix_mul(a, ret, dim);
+    return ret;
+}
+
+ll st(int a, int P){
+    if (P == 0) return 1;
+    if (P == 1) return a;
+    ll ret = st(a, P/2);
+    ret = (ret*ret)%MOD;
+    if (P&1) ret = (ret*a)%MOD;
+	return ret;
+}
+
+ll v[105];
+
+int main()
+{
+    int t, slot1, slot2, n, k;
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%d%d%d%d%d", &v[0], &slot1, &slot2, &k, &n);
+        n--;
+        for (int i=1; i<=slot1; i++) {
+            v[i] = v[i-1]+1;
+        }
+        for (int i=1; i<=slot2; i++) {
+            v[i+slot1] = (v[i+slot1-1]*2)%MOD;
+        }
+        if (n<=slot1+slot2)
+            printf("%lld
+", v[n]);
+        else {
+            matrix a;
+            for (int i=0; i<k; i++) {
+                for (int j=0; j<k; j++) {
+                    a.A[i][j] = 0;
+                }
+            }
+            for (int i=0; i<k; i++) {
+                a.A[0][i] = a.A[i+1][i] = 1;
+            }
+            a = mat_st(a, k, n-slot1-slot2);
+            ll ans = 1;
+            for (int i=0; i<k; i++) {
+                ll temp = st(v[slot1+slot2-i], a.A[0][i]);
+                //cout << temp << " " << v[slot1+slot2-i] << " " << a.A[0][i] << endl;
+                ans = (ans * temp) % MOD;
+            }
+            printf("%lld
+", ans);
+        }
+    }
+    return 0;
+}

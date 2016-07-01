@@ -1,0 +1,6 @@
+from math import sqrt
+for testcases in xrange(int(raw_input())):
+	b,ls=map(int,raw_input().split())
+	ls=ls**2
+	b=b**2
+	print sqrt(ls-b),sqrt(ls+b)

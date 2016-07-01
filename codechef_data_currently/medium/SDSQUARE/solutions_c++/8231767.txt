@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+int check(long long int k)
+{
+	while(k)
+	{
+		if(k%10!=0&&k%10!=1&&k%10!=4&&k%10!=9)
+		return 0;
+		k=k/10;
+	}
+	return 1;
+}
+int main()
+{
+	long long int t,i,k,a,b,store[130],j=0,c=0;
+	cin>>t;
+	for(i=1;i<=100000;i++)
+	{
+		if(i%10==4||i%10==5||i%10==6)
+		continue;
+		k=i*i;
+		if(check(k)==1)
+		store[j++]=k;
+	}
+	while(t--)
+	{
+		cin>>a;
+		cin>>b;
+		c=0;
+		for(i=0;i<j;i++)
+		{
+			if(store[i]<=b&&store[i]>=a)
+			c++;
+		}
+		cout<<c<<endl;
+	}
+	return 0;
+}

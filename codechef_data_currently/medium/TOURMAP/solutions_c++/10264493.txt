@@ -1,0 +1,108 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<vector>
+#include<map>
+#include<set>
+#include<algorithm>
+#include<list>
+#include<cstring>
+#include<stack>
+#include<queue>
+using namespace std;
+#define ll long long
+#define vi vector<int>
+#define vii vector<vi >
+#define pp pair<int,int>
+#define pb push_back
+#define mp make_pair
+#define ppl pair<ll,ll>
+#define vl vector<ll>
+#define vll vector<vl >
+#define vb vector<bool>
+#define llu unsigned ll
+#define all(c) c.begin(),c.end()
+#define mod 1000000007
+#define sc scanf
+#define pf printf
+ll power(ll a,ll b,ll m)
+{
+	if(!b)
+		return 1;
+	if(b==1)
+		return a;
+	ll temp=power(a, b/2, m);
+	temp=(temp*temp)%m;
+	if(b&1)
+		temp=(temp*a)%m;
+	return temp;
+}
+class graph
+{
+	vi * adj;
+	int time;
+	public:
+		graph( int v)
+		{
+			adj = new vi[v];
+			time = 0;
+		}
+		void add_edge(int u, int v)
+		{
+			adj[u].pb( v);
+			adj[v].pb( u);
+		}
+};
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	int i, n, t, ans, p, j;
+	string s1, s2, s3, root;
+	char ch;
+	cin >> t;
+	while( t--)
+	{
+		cin >> n;
+		ans = 0;
+		if( n > 1)
+		{
+			map<string, pair<string, int  > > m;
+			map<string, bool> st;
+			map<string, pair<string, int  > >::iterator sit;
+			for( i=0;i<n-1;i++ )
+			{
+				cin >> s1 >> s2 >> s3;
+				p = 0;
+				for( j=0;j<s3.length()-1;j++ )
+				{
+					p = p*10 + (s3[j]-'0');
+				}
+				ans += p;
+				m[s1] = mp(s2, p);
+				st[s2] = true;
+			}
+			for( sit=m.begin();sit!=m.end();sit++ )
+			{
+				if( ! st[sit->first] )
+				{
+					root = sit->first;
+					break;
+				}
+			}
+			pair<string, int> take;
+			for( i=1;i<n;i++ )
+			{
+				s1 = root;
+				take = m[s1];
+				s2 = take.first;
+				p = take.second;
+				cout << s1 << " " << s2 << " " << p << "$
+";
+				root = s2;
+			}
+			cout << ans << "$
+";
+		}
+	}
+    return 0;
+}

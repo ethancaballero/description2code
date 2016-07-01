@@ -1,0 +1,15 @@
+import math
+
+def spath(a,b):
+    if a==b:
+        return 0
+    elif a==b/2 or b==a/2:
+        return 1
+    else:
+        return 1+spath(max(a,b)/2,min(a,b))
+
+q=int(raw_input())
+while q>0:
+    a,b=map(int,raw_input().split(" "))
+    print spath(a,b)
+    q-=1

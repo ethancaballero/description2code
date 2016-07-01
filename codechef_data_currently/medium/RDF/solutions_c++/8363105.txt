@@ -1,0 +1,133 @@
+#include <algorithm>
+#include <string>
+#include <cctype>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <climits>
+#include <iostream>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <deque>
+#include <functional>
+#include <list>
+#include <map>
+#include <set>
+#include <utility>
+
+
+using namespace std;
+/*========================================Templates=============================================*/
+// datatypes
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+typedef set<int> si;
+typedef map<string, int> msi;
+
+
+//#define in(a) scanf("%d",&a)
+#define out(a) printf("%d",a)
+
+#define pb push_back
+#define len length()
+#define sz size()
+
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+#define pn printf("
+")
+#define ps printf(" ")
+
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define repn(i,n) rep(i,0,n)
+
+#define all(a) a.begin(),a.end()
+#define repv(i,a) rep(i,all(a))
+#define sortv(a) sort(all(a))
+#define W(a) while(a--)
+
+/*======================================Templates Ends========================*/
+/* Main Code Starts from here */
+
+inline void in(int &x)
+{
+	register char c = gc();
+	while(c<'0' || c>'9')
+		c = gc();
+
+	x=0;
+	while(c>='0' && c<='9')
+	{
+		x = 10 * x + c - 48;
+		c = gc();
+	}
+
+}
+
+
+int main()
+{
+    int i,j,k,x,y,z;
+    int t,n;
+    double eps=1e-6;
+
+    vector<vector<double> >dp(100000,vector<double> (1,0));
+
+    //tabulate the values
+    for(i=0;i<100000;i++)
+    {
+        dp[i][0]=(double)i;
+    }
+
+    int maxk=0;
+    double sum;
+
+    for(k=1; ;k++)
+    {
+        sum=0;
+        for(n=k+1;n<100000;n++)
+        {
+            sum=(sum+dp[n-1][k-1]);
+            //insert new column in this row
+            //dp[n][k]=
+            dp[n].push_back(sum/n);
+        }
+
+        if(sum<eps)
+        {
+            maxk=k;
+            break;
+        }
+
+        //condition for break
+    }
+
+
+    in(t);
+    W(t)
+    {
+        in(n), in(k);
+
+        if(k>=n)
+            out(0);
+
+        else if(k>maxk)
+            out(0);
+
+        else
+            printf("%.7f",dp[n][k]);
+
+        pn;
+
+    }
+
+    return 0;
+}

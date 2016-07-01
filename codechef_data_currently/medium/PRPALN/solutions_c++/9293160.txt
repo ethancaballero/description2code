@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<string.h>
+char a[100005];
+int ispalin( long long int st, long long int end)
+{
+	while (st < end)
+	{
+		if (a[st] != a[end])
+			return 0;
+		st++;
+		end--;
+	}
+	return 1;
+}
+int main()
+{
+	long long int t,flag,st,end;
+	scanf("%lld", &t);
+	while (t--)
+	{
+		flag = 0;
+		scanf("%s", a);
+		st = 0;
+		end = strlen(a) - 1;
+		while (st < end)
+		{
+			if (a[st] != a[end])
+			{
+				if (!(ispalin(st + 1, end) || ispalin(st, end - 1)))
+				{
+					flag = 1;
+					break;
+				}
+			}
+			st++;
+			end--;
+		}
+		if (flag)
+			printf("NO
+");
+		else
+			printf("YES
+");
+
+	}
+	getchar();
+	getchar();
+	return 0;
+}

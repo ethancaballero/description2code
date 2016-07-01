@@ -1,0 +1,155 @@
+/* Divanshu Garg */
+
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <cctype>
+#include <cassert>
+
+using namespace std;
+
+#define ull unsigned long long
+#define ill long long int
+#define pii pair<int,int>
+#define pb(x) push_back(x)
+#define F(i,a,n) for(int i=(a);i<(n);++i)
+#define FD(i,a,n) for(int i=(a);i>=(n);--i)
+#define FE(it,x) for(it=x.begin();it!=x.end();++it)
+#define V(x) vector<x>
+#define S(x) scanf("%d",&x)
+#define Sl(x) scanf("%llu",&x)
+#define M(x,i) memset(x,i,sizeof(x))
+#define debug(i,sz,x) F(i,0,sz){cout<<x[i]<<" ";}cout<<endl
+int ABS(int a) { if ( a < 0 ) return (-a); return a; }
+#define fr first
+#define se second
+
+/* Relevant code begins here */
+
+/* Input from file or online */
+
+void input() {
+#ifndef ONLINE_JUDGE
+    freopen("input.txt","r",stdin);
+#endif
+}
+
+/* Input opener ends */
+
+int K;
+ill MOD = 100000007;
+ill pay[105];
+#define ll long long
+typedef vector<vector<ll> > matrix;
+
+ill T[105][105];
+
+// computes A * B
+void mul(ill A[105][105], ill B[105][105])
+{
+    ill C[105][105];
+    F(i,0,K) F(j,0,K) C[i][j] = 0;
+    F(i,0,K) F(j,0,K) { F(k,0,K)
+        C[i][j] = (C[i][j] + A[i][k] * B[k][j]); C[i][j] %= (MOD-1); }
+    F(i,0,K) F(j,0,K) A[i][j] = C[i][j];
+}
+
+// computes A ^ b
+void pow(ll b)
+{
+    ill X[105][105], Y[105][105];
+    F(i,0,K)F(j,0,K) if ( i==j ) X[i][j]=1; else X[i][j] = 0;
+    F(i,0,K) F(j,0,K) Y[i][j] = T[i][j];
+    while ( b > 0 ) {
+        if ( b&1 ) {
+            mul(X,Y);
+        }
+        mul(Y,Y);
+        b = (b>>1);
+    }
+    F(i,0,K) F(j,0,K) T[i][j] = X[i][j];
+}
+
+/* This function calculates (a^b)%MOD */
+ill power(ill a, ill b) {
+    ill x = 1, y = a;
+    while ( b > 0 ) {
+        if ( b&1 ) {
+            x = (x*y);
+            if ( x >= MOD ) x %= MOD;
+        }
+        y = (y*y);
+        if ( y >= MOD ) y %= MOD;
+        b = (b>>1);
+    }
+    return x;
+}
+
+// returns the N-th term of Fibonacci sequence
+ill f(ill N, ill DIM)
+{
+    // create vector F1
+    vector<ll> F1(K);
+    F(i,0,K) F1[i] = 1;
+
+    // create matrix T
+    // matrix T(K, vector<ll>(K,0));
+    F(i,0,K) F(j,0,K) T[i][j] = 0;
+    F(i,0,K-1) T[i][i+1] = 1;
+    F(i,0,K) T[K-1][i] = 1;
+
+    // F(i,0,K) { F(j,0,K) cout << T[i][j] << " "; cout << endl; }
+
+    pow(N-1);
+
+    // F(i,0,K) cout << T[0][i] << " "; cout << endl;
+    // the answer is the first row of T . F1
+    ll res = 1;
+    F(i,0,K) {
+        // cout << pay[DIM-K+i] << " " << T[0][i] << endl;
+        res = (res * power(pay[DIM-K+i],T[0][i]) ) % MOD;
+    }
+    return res;
+}
+
+int main() {
+    input();
+    int t; S(t);
+    while ( t-- ) {
+        ill init,slot1,slot2,k,n;
+        scanf("%lld %lld %lld %lld %lld",&init,&slot1,&slot2,&k,&n);
+        // cout << init << " " << slot1 << " " << slot2 << " " << k << " " << n << endl;
+        n--;
+        pay[0] = init;
+        F(i,1,slot1+1) pay[i] = pay[i-1]+1;
+        F(i,slot1+1,slot1+slot2+1) pay[i] = (pay[i-1]*2) % MOD;
+        int DIM = slot1+slot2+1; K = k;
+        // F(i,0,DIM) cout << pay[i] << " "; cout << endl;
+        if ( n < DIM ) {
+            printf("%lld
+", pay[n]);
+        } else {
+            printf("%lld
+", f(n-DIM+K+1,DIM));
+        }
+    }
+    return 0;
+}

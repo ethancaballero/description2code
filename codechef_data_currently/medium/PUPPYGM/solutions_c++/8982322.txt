@@ -1,0 +1,24 @@
+#include <stdio.h>
+int main()
+{
+     int T,A,B;
+     scanf("%d
+",&T);
+     while(T>0)
+     {
+        scanf("%d %d
+",&A,&B);
+         if(A%2 !=0 && B%2!=0)
+         {
+            printf("Vanka
+");
+         }
+         else
+         {
+            printf("Tuzik
+");
+         }
+       T--;
+     }
+ return 0;
+} 

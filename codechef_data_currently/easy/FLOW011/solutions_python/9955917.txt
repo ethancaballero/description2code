@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+T = input()
+sal=0
+
+for i in range(T):
+    sal = input()
+    if sal<1500:
+        print "{0:g}".format(2*sal)
+    elif sal>=1500:
+        print "{0:g}".format(sal+500+(sal*0.98))

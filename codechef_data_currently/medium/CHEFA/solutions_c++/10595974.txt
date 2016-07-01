@@ -1,0 +1,19 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	long long int n,i,j,k,x;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>x;
+		long long int arr[x],sum=0;
+		for(j=0;j<x;j++)
+		cin>>arr[j];
+		sort(arr,arr+x);
+		for(j=x-1;j>=0;j-=2)
+		sum=sum+arr[j];
+		cout<<sum<<endl;
+	}
+}

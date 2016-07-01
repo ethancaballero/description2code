@@ -1,0 +1,20 @@
+a = input()
+for b in range(a):
+    c = raw_input().split()
+    quantity = int(c[0])
+    price = int(c[1])
+    total = quantity * price
+    if quantity > 1000:
+        disc = total * 0.1
+        total -= disc
+    floating = float(total)
+    floating = str(floating).split('.')
+    while len(floating[1]) < 6:
+        d = floating[1]
+        d += "0"
+        floating[1] = d
+    final = ""
+    final += floating[0]
+    final += "."
+    final += floating[1]
+    print final

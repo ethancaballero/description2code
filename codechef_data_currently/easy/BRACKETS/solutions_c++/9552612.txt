@@ -1,0 +1,30 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+#include<string>
+using namespace std;
+int t,a;
+string s;
+int f(string s){
+  int state=0;
+  int max_state=0;
+  for(int i=0;i<=s.size();i++){
+  if(s[i]=='(') state++;
+  if(s[i]==')') state--;
+  max_state=max(max_state,state);
+  }
+return max_state;
+}
+int main (){
+  cin >>t;
+  while(t--){
+  cin >>s;
+  a=f(s);
+    for(int i=0;i<a;i++) cout << "(";
+    for(int i=0;i<a;i++) cout << ")";
+    cout <<endl;
+  }
+
+ return 0;
+}

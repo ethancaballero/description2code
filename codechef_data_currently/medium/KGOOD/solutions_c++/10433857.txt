@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int F[30];
+int memo[30][30];
+string s; int K;
+int r(int a, int b){
+	if(a>b || F[b]-F[a]<=K ) return 0;
+	if(memo[a][b]!=-1) return memo[a][b];
+	return memo[a][b] = min( F[b]-F[a]-K + r(a,b-1), F[a] + r(a+1,b));
+}
+
+int main(){
+	int tc; cin>>tc;
+	while(tc--){
+		cin>>s>>K;
+		memset(F,0,sizeof F);
+		for(int i = 0; i<s.size(); i++){
+			F[s[i]-'a']++;
+		}
+		sort(F,F+26);
+		int a = 0, b=25;
+		while(F[a]==0) a++;
+		memset(memo,-1,sizeof memo);
+		cout<<r(a,b)<<endl;
+	}
+}

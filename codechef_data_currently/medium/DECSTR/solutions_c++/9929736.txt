@@ -1,0 +1,28 @@
+#include<cstdio>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int k,i,j;
+        scanf("%d",&k);
+        int m=k%25;
+        int n=k/25;
+        if(m!=0)
+        {
+        for(i=m;i>=0;i--)
+            printf("%c",97+i);
+        }
+        for(j=0;j<n;j++)
+        {
+        for(i=25;i>=0;i--)
+           printf("%c",97+i);
+        }
+         printf("
+");
+
+    }
+}
+

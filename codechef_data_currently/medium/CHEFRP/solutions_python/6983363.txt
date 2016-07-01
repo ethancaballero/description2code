@@ -1,0 +1,17 @@
+import sys
+ 
+def recipe(A):
+    for a in A:
+        if a < 2:
+            return -1
+ 
+    return sum(A) - min(A) + 2
+ 
+def run_recipe():
+    T = int(raw_input())
+    for t in range(T):
+        N = raw_input()
+        A = [int(x) for x in raw_input().split()]
+        print(recipe(A))
+ 
+run_recipe()

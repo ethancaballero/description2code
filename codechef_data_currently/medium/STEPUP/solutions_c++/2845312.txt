@@ -1,0 +1,87 @@
+#include <iostream>
+#include <stdio.h>
+#include <utility>
+#include <algorithm>
+#include <cstring>
+#include <vector>
+#include <map>
+#include <set>
+#include <queue>
+#include <math.h>
+#include <cstdio>
+ 
+#define FOR(i,x,y) for(int i=(x);i<(y);i++)
+#define RFOR(i,x,y) for(int i=(x);i>=(y);i--)
+#define MIN(x,y) ((x)<(y)?(x):(y))
+#define MAX(x,y) ((x)>(y)?(x):(y))
+#define ABS(x) ((x)>0?(x):-(x))
+#define SQ(x) ((x)*(x))
+#define mset(x,y) memset(x,y,sizeof(x))
+ 
+typedef long long int lli;
+typedef long double ld;
+ 
+using namespace std;
+ 
+vector<int> adl[10100];
+int ma[10100];
+int n,m;
+ 
+int calc(int k)
+{
+	if(ma[k]==-1)
+	{
+		int M=0;
+		for(int i=0;i<adl[k].size();i++) M=max(M,calc(adl[k][i])+1);
+		ma[k]=M;
+	}
+	return ma[k];
+}
+
+int done[10100];
+int rec[10100];
+bool chk(int k)
+{
+    if(rec[k]) return 1;
+    if(done[k]) return 0;
+    done[k]=1;
+    rec[k]=1;
+    for(int i=0;i<adl[k].size();i++)
+        if(chk(adl[k][i])) return 1;
+    rec[k]=0;
+    return 0;
+}
+int main()
+{
+    //freopen("inp.txt","r",stdin);
+    int t;
+    int a,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+    	scanf("%d%d",&n,&m);
+    	for(int i=0;i<n;i++) adl[i].clear();
+    	for(int i=0;i<m;i++)
+    	{
+    		scanf("%d%d",&a,&b);
+    		adl[a-1].push_back(b-1);
+    	}
+        mset(done,0);
+        mset(rec,0);
+        bool ch=0;
+        for(int i=0;i<n;i++) if(chk(i)) ch=1;
+        if(ch) 
+            {
+                printf("IMPOSSIBLE
+");
+                continue;
+            }
+    	mset(ma,-1);
+    	int m=0;
+    	for(int i=0;i<n;i++) m=max(m,calc(i));
+    	printf("%d
+",m+1);
+    }
+    return 0;
+    
+} 

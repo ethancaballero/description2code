@@ -1,0 +1,27 @@
+#include<iostream>
+//prankuragarwal
+using namespace std;
+int abs(int x){
+	if(x>=0)
+		return x;
+	else
+		return -x;
+}
+int main(){
+	int T, N;
+	cin>>T;
+	for(int i=0;i<T;i++){
+		cin>>N;
+		int A[N][N], pos[N*N][2], steps = 0;
+		for(int j=0;j<N;j++){
+			for(int k = 0;k<N;k++){
+				cin>>A[j][k];
+				pos[A[j][k]-1][0] = j;
+				pos[A[j][k]-1][1] = k;
+			}
+		}
+		for(int l=0, k=0;l<N*N-1;l++,k++)
+			steps += abs(pos[k][0]-pos[k+1][0]) + abs(pos[k][1]-pos[k+1][1]);
+		cout<<steps<<endl;
+	}
+} 

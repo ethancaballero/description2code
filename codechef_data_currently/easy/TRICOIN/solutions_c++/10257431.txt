@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+   int t,i,h;
+   long long int n,r;
+   cin>>t;
+   while(t--)
+   {
+     cin>>n;i=1;r=1;
+     while(r<=n)
+     {
+        r=(i*(i+1))/2;
+        if(n<r)
+        {
+           h=i-1;
+           break;
+        }
+        i++;
+     }
+     cout<<h<<endl;
+   
+   }
+ return 0;
+}  

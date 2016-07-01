@@ -1,0 +1,130 @@
+#include <iostream>
+#include <cstdlib>
+#include <algorithm>
+#include <cstdio>
+
+using namespace std;
+
+int main(void)
+{
+	int t, r, c;
+	char mat[501][501];
+	int lrtbs[4][501][501];
+	int prime[501] = { 0 };
+	for (int i = 2; i < 501; i++)
+	{
+		if (prime[i] == 0)
+		{
+			for (int j = 2 * i; j < 501; j += i)
+			{
+				prime[j] = 1;
+			}
+		}
+	}
+
+	scanf("%d", &t);
+	while (t--)
+	{
+		int monsters = 0;
+		scanf("%d %d", &r, &c);
+		for (int i = 0; i < r; i++)
+		{
+			scanf("%s", mat[i]);
+		}
+
+		int temp;
+		for (int i = 0; i < r; i++)
+		{
+			temp = 0;
+			for (int j = 0; j < c; j++)
+			{
+				lrtbs[0][i][j] = temp;
+				if (mat[i][j] == '^')
+					temp++;
+				else
+					temp = 0;
+			}
+		}
+		for (int i = 0; i < r; i++)
+		{
+			temp = 0;
+			for (int j = c-1; j >= 0; j--)
+			{
+				lrtbs[1][i][j] = temp;
+				if (mat[i][j] == '^')
+					temp++;
+				else
+					temp = 0;
+			}
+		}
+		for (int j = 0; j < c; j++)
+		{
+			temp = 0;
+			for (int i = 0; i < r; i++)
+			{
+				lrtbs[2][i][j] = temp;
+				if (mat[i][j] == '^')
+					temp++;
+				else
+					temp = 0;
+			}
+		}
+		for (int j = 0; j < c; j++)
+		{
+			temp = 0;
+			for (int i = r-1; i >= 0; i--)
+			{
+				lrtbs[3][i][j] = temp;
+				if (mat[i][j] == '^')
+					temp++;
+				else
+					temp = 0;
+			}
+		}
+		for (int i = 0; i < r; i++)
+		{
+			for (int j = 0; j < c; j++)
+			{
+				if (mat[i][j] == '^')
+				{
+					//left = right = top = below = 0;
+					//int temp = i - 1;
+					//while (temp >= 0 && mat[temp][j] == '^')
+					//{
+					//	top++;
+					//	temp--;
+					//}
+					//temp = i + 1;
+					//while (temp < r && mat[temp][j] == '^')
+					//{
+					//	below++;
+					//	temp++;
+					//}
+					//temp = j + 1;
+					//while (temp < c && mat[i][temp] == '^')
+					//{
+					//	right++;
+					//	temp++;
+					//}
+					//temp = j - 1;
+					//while (temp >= 0 && mat[i][temp] == '^')
+					//{
+					//	left++;
+					//	temp--;
+					//}
+					int lp = min(lrtbs[0][i][j], min(lrtbs[1][i][j], min(lrtbs[2][i][j], lrtbs[3][i][j])));
+					for (int p = 2; p <= lp; p++)
+					{
+						if (prime[p] == 0)
+						{
+							monsters++;
+						}
+					}
+				}
+			}
+		}
+		printf("%d
+", monsters);
+	}
+	return 0;
+}

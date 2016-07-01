@@ -1,0 +1,20 @@
+t = input()
+def is_overlucky(h):
+    while h:
+        dig = h%10
+        if dig == 4 or dig == 7:
+            return 1
+        h /= 10
+for i in range(t):
+    n = input()
+    count = 0
+    x = 1
+    while x*x <= n:
+        if n % x == 0:
+            if is_overlucky(x) == True:
+                count += 1
+            if x * x < n:
+                if is_overlucky(n/x) == True:
+                    count += 1
+        x = x + 1        
+    print count        

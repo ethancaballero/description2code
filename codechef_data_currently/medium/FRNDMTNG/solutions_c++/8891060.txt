@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+ 
+void swap(int& a,int& b)
+{
+	int t;
+	t=a;
+	a=b;
+	b=t;
+}
+int main()
+{
+	int tt;
+	double T1,T2,t1,t2,sum,ll1,ul1,ul2,ul3;
+	cin>>tt;
+	while(tt--)
+	{
+		cin>>T1>>T2>>t1>>t2;
+		if(T2<T1)
+		{
+			swap(t1,t2);
+			swap(T1,T2);
+		}
+		sum=0;
+		if(t2<=T1-t1)
+		{
+			ll1=0;ul1=t2,ul2=T2-t1,ul3=T1;
+			if(ul1<0) ul1=0;
+			if(ul1>T1) ul1=T1;
+			if(ul1>ll1)
+			{
+				sum+=(t1*ul1+ul1*ul1/2-(t1*ll1+ll1*ll1/2));
+			}
+			if(ul2<0) ul2=0;
+			if(ul2>T1) ul2=T1;
+			if(ul2>ul1)
+			{
+				sum+=(t2*ul2+t1*ul2-(t1*ul1+t2*ul1));
+			}
+			if(ul3>ul2)
+			{
+				sum+=(T2*ul3+t2*ul3-ul3*ul3/2-(T2*ul2+t2*ul2-ul2*ul2/2));
+			}
+			sum=sum/(T1*T2);
+		}
+		else
+		{
+			ll1=0;ul1=T2-t1,ul2=t2,ul3=T1;
+			if(ul1<0) ul1=0;
+			if(ul1>T1) ul1=T1;
+			if(ul1>ll1)
+			{
+				sum+=(t1*ul1+ul1*ul1/2-(t1*ll1+ll1*ll1/2));
+			}
+			if(ul2<0) ul2=0;
+			if(ul2>T1) ul2=T1;
+			if(ul2>ul1)
+			{
+				sum+=((T2*ul2)-(T2*ul1));
+			}
+			if(ul3>ul2)
+			{
+				sum+=(T2*ul3+t2*ul3-ul3*ul3/2-(T2*ul2+t2*ul2-ul2*ul2/2));
+			}
+			sum=sum/(T1*T2);
+		}
+		printf("%0.8lf
+",sum);
+	}
+	return 0;
+} 

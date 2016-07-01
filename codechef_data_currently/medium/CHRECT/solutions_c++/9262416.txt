@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_v) (int)(_v).size()
+#define all(_v) (_v).begin(),(_v).end()
+#define pii pair<int,int>
+typedef long long ll;
+const int INF = 100000000;
+const ll mod = 1e9 + 7;
+
+const int maxn = 100010;
+
+int main() {
+	//ios_base::sync_with_stdio(false);
+	int t; scanf("%d",&t);
+	
+	while (t --) {
+		int n,m,k; scanf("%d%d%d",&n,&m,&k);
+		int ans;
+
+		if(n > m) swap(n,m);
+
+		if(n == 1 and m <= 2) ans = 0;
+		else if(n == 1) ans = k;
+		else ans = (k + 1) / 2;
+		
+		printf("%d
+",ans);
+	}
+	
+	return 0;
+}

@@ -1,0 +1,14 @@
+w=raw_input().split()
+n=int(w[0])
+m=int(w[1])
+for i in xrange(m):
+    r=int(raw_input())
+    if r<n+2 or r>3*n:
+        print 0
+    else:
+        if r==2*n+1:
+            print n
+        elif r<2*n+1:
+            print n-(2*n+1-r)
+        else:
+            print n-(r-(2*n+1))

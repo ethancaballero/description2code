@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while(t--)
+	{
+		int n,m,arr[1000],max=0,tdiff=0;
+		cin >> n >> m;
+		for(int i=0;i<n;i++)
+			{
+			cin >> arr[i];
+			if(arr[i]>max)
+				max=arr[i];
+			}
+		for(int i=0;i<n;i++)
+			tdiff+=(max-arr[i]);
+		if((m-tdiff)%n==0)
+			cout << "Yes
+";
+		else
+			cout << "No
+";
+
+	}
+	return 0;
+}

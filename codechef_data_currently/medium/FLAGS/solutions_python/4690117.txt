@@ -1,0 +1,26 @@
+#-*- coding:utf-8 -*-
+
+import sys, random, math
+
+
+def main():
+    t = int(raw_input())
+    for _ in range(t):
+        n = int(raw_input())
+
+        count = 0
+        # p1
+        count += n * (n - 1) * (n - 1)
+        # p2
+        count += n * (n - 1) * (n - 1)
+        # p3
+        count += n * (n - 1) * (n - 2)
+        # p4
+        count += n * (n - 1) * (n - 2) * (n - 2)
+        # p5
+        count += n * (n - 1) * (n - 2) * (n - 2)
+        print count
+
+
+if __name__ == '__main__':
+    main()

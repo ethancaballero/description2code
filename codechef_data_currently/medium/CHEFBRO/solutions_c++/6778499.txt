@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+    
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int C,n,m,ans=0;
+        scanf("%d",&C);
+        while(C--)
+        {
+            scanf("%d %d",&n,&m);
+            ans^=((n+m-2)%3);
+        }
+       if(ans)
+			printf("MasterChef
+");
+		else
+			printf("Football
+");
+    }
+    return 0;
+}
+ 

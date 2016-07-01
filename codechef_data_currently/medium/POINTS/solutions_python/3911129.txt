@@ -1,0 +1,17 @@
+import sys
+import math
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	sys.stdin.readline()
+	points = []
+	num_points = int(sys.stdin.readline().rstrip())
+	for i in xrange(0,num_points):
+		point = [int(s) for s in sys.stdin.readline().rstrip().split(' ')]
+		points.append(point)
+	sorted_points = sorted(points, key=lambda x: (x[0],-x[1]))
+	distance = 0
+	for i in xrange(1,len(sorted_points)):
+		cur_dist = math.hypot(sorted_points[i][0] - sorted_points[i-1][0], sorted_points[i][1] - sorted_points[i-1][1])
+		distance += cur_dist
+	print "%.2f" % (distance)
+	num -= 1

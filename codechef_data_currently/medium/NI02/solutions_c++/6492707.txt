@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define FILL(a, v) memset(a, v, sizeof(a))
+#define FOREACH(it,c) for(__typeof((c).begin()) it=((c).begin());it!=(c).end();++it)
+#define mp make_pair
+#define mod 1000000007
+#define INF 1000000001
+
+typedef long long LL;
+typedef vector<int> VI;
+
+//********************* <global variable> ************************
+struct Point
+{
+    int x;
+    int y;
+    int safe;
+    int d;
+};
+int n;
+Point node[2502];
+//************************ <main code> ***************************
+inline int dist(int a, int b)
+{
+    int ans=(node[a].x-node[b].x)*(node[a].x-node[b].x)+(node[a].y-node[b].y)*(node[a].y-node[b].y);
+    return ans;
+}
+inline void read()
+{
+    scanf("%d", &n);
+    n++;
+    for(int i=1;i<=n;i++)
+    {
+        scanf("%d %d", &node[i].x, &node[i].y);
+    }
+    scanf("%d %d", &node[0].x, &node[0].y);
+}
+
+void solve()
+{
+    int min_node, minm=INF;
+    for(int i=0;i<=n;i++)
+    {
+        node[i].safe=1;
+    }
+    for(int i=1;i<=n;i++)
+    {
+        node[i].d=dist(0, i);
+        if(node[i].d<minm)
+        {
+            minm=node[i].d;
+            min_node=i;
+        }
+    }
+    node[min_node].safe=0;
+    while(node[n].safe)
+    {
+        int temp=min_node;
+        minm=INF;
+        for(int i=1;i<=n;i++)
+        {
+            if(node[i].safe)
+            {
+                if(node[temp].d+dist(temp, i)<node[i].d)
+                    node[i].d=node[temp].d+dist(temp, i);
+                if(node[i].d<minm)
+                {
+                    minm=node[i].d;
+                    min_node=i;
+                }
+            }
+        }
+        node[min_node].safe=0;
+    }
+    printf("%d
+", node[n].d);
+}
+
+int main()
+{
+    int tc=1;
+    scanf("%d", &tc);
+    while(tc--)
+    {
+        read();
+        solve();
+    }
+}

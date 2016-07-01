@@ -1,0 +1,17 @@
+for i in range(int(raw_input())):
+    first=str(raw_input())
+    second=str(raw_input()) # number of cases
+    flag=True
+    for i in range(len(first)):
+        if first[i]=="?" or second[i]=="?":
+            continue
+        elif first[i]!=second[i]:
+            flag=False
+            print "No"
+            break
+    if flag:
+        print "Yes"
+        
+            
+            
+    

@@ -1,0 +1,13 @@
+t=input()
+ans=[]
+for x in range(t):
+    num=input()
+    bol=False
+    if num<10:
+        bol=True
+    ans.append(bol)
+for x in range(t):
+    if ans[x]==True:
+        print 'What an obedient servant you are!'
+    else:
+        print -1

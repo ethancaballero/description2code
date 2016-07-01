@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <math.h>
+#include <cassert>
+
+typedef long long ll;
+using namespace std;
+ll x,y,z,finalans,ans1,ans2,lcmpart;
+ll ans;
+ ll euclid(ll m,ll n){
+if(n==0)
+    return m;
+   return
+   euclid(n,m%n);
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+         ll a,b,c,d,k;
+        scanf("%lld %lld %lld %lld %lld",&a,&b,&c,&d,&k);
+         x=euclid(a,b);
+         //cout<<x<<endl;
+         y=euclid(c,d);
+         //cout<<y<<endl;
+        z=euclid(x,y);
+       // cout<<z<<endl;
+         x/=z;
+        // cout<<lcmpart<<endl;
+      ans=k/x;
+        // cout<<ans1<<endl;
+         ans=ans/y;
+         //cout<<ans2<<endl;
+         finalans=2ll*ans+1;
+        printf("%lld
+",finalans);
+
+    }
+
+    return 0;
+}

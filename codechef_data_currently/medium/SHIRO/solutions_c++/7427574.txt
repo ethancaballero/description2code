@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+#define scan(t) scanf("%d",&t)
+
+int main()
+{
+	
+	int t;
+	scan(t);
+	while(t--)
+	{
+		
+		int n;
+		scan(n);
+		int sum=0,b[n],a[n],i,j;
+		for(i=0;i<n;i++)
+		{scan(a[i]);
+			if(i==0)
+			b[0]=a[0];
+			else
+			b[i]=b[i-1]+a[i];
+			}
+			
+			float pro[n];
+			for(i=0;i<n;i++)
+		{scanf("%f",&pro[i]);
+		pro[i]/=100.000000;}
+	
+			
+			float ans[n+1][b[n-1]+3];
+			memset(ans,0.000000,sizeof(ans));
+
+
+			ans[0][a[0]]=(pro[0]*1.0);
+			ans[0][0]=(1-pro[0]);
+			
+	
+		
+		
+
+// printf("%f %f",ans[0][0],ans[0][5]);
+			
+	
+	
+		
+		
+			for(j=1;j<n;j++)
+			{for(i=0;i<=b[j-1];i++)
+			{ans[j][i+a[j]]+=(ans[j-1][i]*pro[j]*1.0);
+		
+		
+			
+				ans[j][i]+=(ans[j-1][i]*(1-pro[j])*1.0);
+				
+				
+				
+				
+				}
+			}	
+			
+			
+				
+				
+				
+
+				
+sum=b[n-1];				
+				
+				
+				
+		
+				
+			float f=0.0;	
+			if(sum%2==0)
+			{
+				
+				for(i=sum/2;i<=sum;i++)
+				f+=ans[n-1][i]*1.0;
+			}
+			else
+			{
+				
+				
+				for(i=sum/2+1;i<=sum;i++)
+				f+=ans[n-1][i]*1.0;
+				
+			}
+			
+			printf("%f
+",f);		
+				
+			}
+			
+		
+			
+			
+			
+			
+			return 0;
+		}
+			

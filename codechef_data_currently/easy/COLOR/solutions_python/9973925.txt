@@ -1,0 +1,22 @@
+t=int(raw_input())
+for _ in range(t):
+	n=int(raw_input())
+	s=raw_input()
+	r=0
+	g=0
+	b=0
+	for i in range(len(s)):
+		if s[i]=='R':
+			r=r+1
+		if s[i]=='G':
+			g=g+1
+		if s[i]=='B':
+			b=b+1
+	x=0
+	if r>=b and r>=g:
+		x=r
+	if b>=r and b>=g:
+		x=b
+	if g>=r and g>=b:
+		x=g
+	print n-x

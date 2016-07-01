@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+long int gcd(long int a,long int b);
+int main()
+{
+ long int t,n,a[100000],i,j,k;
+ cin>>t;
+ while(t--)
+ {
+ cin>>n;
+ for(i=0;i<n;i++)
+ cin>>a[i];
+ k=gcd(a[0],a[1]);
+ for(i=2;i<n;i++)
+ {
+ k=gcd(k,a[i]);
+ if(k==1)
+ break;
+ }
+ if(k==1)
+ cout<<n<<"
+";
+ else
+ cout<<"-1
+";
+ }
+ return 0;
+ }
+ long int gcd(long int a,long int b)
+ {
+   if((a>=b)&&((a%b))==0)
+      return(b);
+      else
+       gcd(b,(a%b));
+ }

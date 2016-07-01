@@ -1,0 +1,21 @@
+//G
+#include <bits/stdc++.h>
+ using namespace std;
+#define MOD 1000000007
+
+long long pw(long long a, long long b){
+	if(!b) return 1;
+	long long r = pw(a,b/2);
+	r = (r*r)%MOD;
+	if(b%2) r = (r*a)%MOD;
+	return r;
+}
+
+int main(){
+	int t; cin >> t;
+	while(t--){
+		int n; cin >> n;
+		cout << (pw(2,n)-1)%MOD << endl;
+	}
+	return 0;
+}

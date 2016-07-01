@@ -1,0 +1,15 @@
+import itertools 
+from numpy import prod
+n,m,c=map(int,raw_input().split())
+U=sorted(map(int,raw_input().split()))
+L=sorted(map(int,raw_input().split()))
+S=list(set(U))
+pairs=[]
+for i in S:
+	pairs.append(U.count(i)*L.count(i))
+for r in xrange(2,c+1):
+	s=0
+	for i in list(itertools.combinations(pairs, r)):
+		s+=prod(i)
+	print s,
+print 0

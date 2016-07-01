@@ -1,0 +1,9 @@
+N = int(raw_input())
+c = 0
+
+for _ in xrange(N):
+	num = list(raw_input().strip().split()[-1])
+	c3, c5, c8 = num.count('3'), num.count('5'), num.count('8')
+	if c3+c5+c8==len(num) and c8>=c5>=c3: 
+		c += 1
+print c

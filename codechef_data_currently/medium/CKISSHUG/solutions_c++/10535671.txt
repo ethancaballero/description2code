@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define M 1000000007;
+long long power(long long x,long long y)
+{
+    x=x%M;
+    long long res=1;
+    while(y)
+    {
+        if(y&1)
+            res=(res*x)%M;
+
+    y>>=1;
+    x=(x*x)%M;
+    }
+    return res;
+}
+int main()
+{
+    int t;
+    long long num,ans,temp;
+    cin>>t;
+    while(t--)
+    {
+        cin>>num;
+        if(num&1)
+        {
+            ans=(2*(power(2,num/2+1)-1))%M;
+        }
+        else
+        {
+            temp=power(2,num/2);
+            ans=(2*(temp-1)+temp)%M;
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,30 @@
+  This time Chef does not want to bother you with long story, so the problem description will be as short as possible. You are given a square matrix A, which has N rows and N columns. Chef wants you to answer following queries: given a rectangular submatrix with upper-left corner in (X1,  Y1) and lower-right corner in  (X2, Y2), and you are to count number of disctinct elements in this submarix, i.e count number of such distinct Ai, j that (X1  \u2264 i \u2264  X2) and (Y1  \u2264 j \u2264  Y2). [You may assume that i is looping through the rows and j through columns]
+
+Input
+The first line of the input file will contain single integer N. Then N lines with N numbers in each follow - description of the matrix. The rows are indexed from top to bottom that is top row has index 1, and columns are indexed from left to right that is left column has index 1. There is a single integer Q that follows on the next line right after the matrix description - number of Chef's queries. Then Q queries follow. Each query is described by four integers - X1, Y1, X2, and Y2.
+Output
+Output Q integers, each in a separate line - answers for the queries. 
+Constraints
+
+1\u2264N\u2264300
+1\u2264Q\u2264105
+1\u2264Ai, j\u226410
+1\u2264X1\u2264X2\u2264N
+1\u2264Y1\u2264Y2\u2264N
+
+
+Example
+Input:
+3
+1 2 3
+3 2 1
+5 6 3
+3
+1 1 2 3
+2 2 2 2
+1 1 3 3 
+
+Output:
+3
+1
+5

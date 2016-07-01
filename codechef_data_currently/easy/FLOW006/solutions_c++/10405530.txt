@@ -1,0 +1,29 @@
+#include<stdio.h>
+int main()
+{
+ int t,i,t1;
+ scanf("%d",&t);
+ t1=t;
+ int sum[t];
+ while(t)
+ {
+     int i,n,rem;
+     scanf("%d",&n);
+     sum[t]=0;
+
+     while(n)
+     {
+         rem=n%10;
+         n=n/10;
+         sum[t]=sum[t]+rem;
+     }
+     t--;
+ }
+
+ for (i=t1;i>0;i--)
+ {
+     printf("%d
+",sum[i]);
+ }
+return 0;
+}

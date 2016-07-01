@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+
+int distance(int p,int q, int l ,int m)
+ {
+ return (p-l)*(p-l)+(q-m)*(q-m);
+ }
+
+int main()
+{
+   int n;
+   cin>>n;
+   int cnt=0;
+   while(n--)
+   {
+     int x1,x2,x3,y1,y2,y3;
+     cin>>x1>>y1>>x2>>y2>>x3>>y3;
+ 
+     int dist1=distance(x1,y1,x2,y2);
+     int dist2=distance(x1,y1,x3,y3);
+     int dist3=distance(x2,y2,x3,y3);
+     
+     if((dist1+dist2==dist3)||(dist1+dist3==dist2)||(dist3+dist2==dist1))
+     cnt++;
+     
+   }
+   cout<<cnt<<endl;
+
+}

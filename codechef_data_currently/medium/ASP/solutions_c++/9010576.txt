@@ -1,0 +1,42 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+#define  s(t) scanf("%d",&t)
+
+int main()
+{
+
+int t;
+s(t);
+
+
+int n;
+long long int x;
+
+while(t--){
+
+ s(n);
+
+int flag=0;
+
+for(int i=1;i<=n;i++)
+{
+   scanf("%lld",&x);
+
+   if((i-x)>1){flag=1;}
+
+}
+
+if(flag==1)printf("NO
+");
+else
+    printf("YES
+");
+
+
+}
+
+ return 0;
+
+}

@@ -1,0 +1,6 @@
+#This Is an Important Message that is meaningless. <VigzMv/>
+for i in range(0,int(raw_input())):
+	n=int(raw_input())
+	l=list(map(int,raw_input().split()))
+	l.sort()
+	print sum(l[len(l)-1::-2])

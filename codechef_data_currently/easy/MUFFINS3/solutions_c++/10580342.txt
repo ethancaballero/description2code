@@ -1,0 +1,19 @@
+#include<iostream>
+#include<stdlib.h>
+
+using namespace std;
+int main()
+{
+	int n;
+	long long int a;
+	cin>>n;
+	while(n--){
+		cin>>a;
+		if(a%2==0)
+			cout<<(a/2 + 1);
+		else
+			cout<<(a+1)/2;
+		cout<<endl;
+	}
+	return 0;
+}

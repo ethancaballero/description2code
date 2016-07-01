@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+int rev(int n,int k){
+ int p=1,num=0,rem,tmp=n;
+ while(k>1){
+  p=p*2;
+  k--;
+ }
+ while(n>0){
+  rem=n%2;
+  n=n/2;
+  num+=(rem*p);
+  p=p/2;
+ }
+ return num;
+}
+int main(){
+ int t,k,n,in;
+  cin>>t;
+  string s;
+  while(t--){
+   cin>>k;
+   cin>>s;
+    n=s.size();
+   char ans[n];
+   for(int i=0;i<n;i++){
+    in=rev(i,k);
+   // cout<<in<<endl;
+    ans[in]=s[i];
+   }
+   for(int i=0;i<n;i++)
+    cout<<ans[i];
+    cout<<endl;
+  } 
+ return 0;
+}

@@ -1,0 +1,77 @@
+#include<iostream>
+#include<vector>
+#define ull unsigned long long
+#define SIZE 3
+#define MOD 1000000007
+using namespace std;
+
+typedef vector<vector<ull> > matrix;
+
+matrix mul(matrix A, matrix B)
+{
+    matrix C(SIZE, vector<ull> (SIZE));
+
+    for(int i = 0; i < SIZE; i++)
+    {
+        for(int j = 0; j < SIZE; j++)
+            C[i][j]=0;
+    }
+
+    for(int i = 0; i < SIZE; i++)
+    {
+        for(int j = 0; j < SIZE; j++)
+        {
+            for(int k = 0; k < SIZE; k++)
+            {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+            C[i][j] %= MOD;
+        }
+    }
+
+    return C;
+}
+
+matrix pow(matrix A,int p)
+{
+    if(p == 1)
+        return A;
+    else if(p % 2)
+        return mul(A, pow(A, p-1));
+    else
+    {
+        matrix X = pow(A, p/2);
+        return mul(X, X);
+    }
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        matrix M(SIZE, vector<ull>(SIZE));
+        M[0][0] = 1; M[0][1] = 4; M[0][2] = 2;
+        M[1][0] = 1; M[1][1] = 0; M[1][2] = 0;
+        M[2][0] = 0; M[2][1] = 1; M[2][2] = 0;
+
+        int n;
+        cin>>n;
+        ull ans = 0;
+
+        int arr[SIZE] = {11, 5, 1};
+
+        if(n <= SIZE)
+            ans = arr[SIZE -  n];
+        else
+        {
+            M = pow(M, n-SIZE);
+            for(int i = 0; i < SIZE; i++)
+            ans += M[0][i] * arr[i];
+        }
+
+        cout<<ans % MOD<<endl;
+    }
+    return 0;
+}

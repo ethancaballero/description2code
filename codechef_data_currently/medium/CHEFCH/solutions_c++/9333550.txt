@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+void check(string s)
+{
+    long long int sum1=0,sum2=0,i;
+    char x='+';
+    for(i=1;s[i]!=0;i++)
+    {
+      if(s[i]==x)
+        sum1++;
+      if(i&1)
+        x='-';
+      else
+        x='+';
+    }
+    if(s[0]=='-')
+        sum1++;
+    x='-';
+    for(i=1;s[i]!=0;i++)
+    {
+        if(s[i]==x)
+            sum2++;
+        if(i&1)
+            x='+';
+        else
+            x='-';
+    }
+    if(s[0]=='+')
+        sum2++;
+        if(sum1<sum2)
+            cout<<sum1<<endl;
+        else
+            cout<<sum2<<endl;
+}
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+string s;
+cin>>s;
+//cout<<"hhh";
+check (s);
+}
+return 0;
+}

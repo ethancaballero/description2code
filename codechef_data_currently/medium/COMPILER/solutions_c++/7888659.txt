@@ -1,0 +1,39 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+char s[1000010];
+
+int fun()
+{
+    int c = 0;
+    int i = 0;
+    int ans = 0;
+    while(s[i])
+    {
+        if(s[i] == '<') ++c;
+        else
+        {
+            --c;
+            if(c == 0)
+                //ans = max(ans,i+1);
+                ans = (ans > i+1) ? ans : i+1;
+            else if(c<0)
+                break;
+        }
+        ++i;
+    }
+    return ans;
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        cin >> s;
+        cout << fun() << endl;
+    }
+    return 0;
+}

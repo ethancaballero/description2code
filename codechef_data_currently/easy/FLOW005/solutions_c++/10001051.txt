@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int t,n,ans;
+	int A[6]={100,50,10,5,2,1};
+	cin>>t;
+	while(t--){
+		cin>>n;
+		ans=0;
+		for(int i=0;i<6;i++){
+			if(n==0)
+				break;
+			if(n/A[i] > 0){
+				ans=ans+n/A[i];
+				n=n%A[i];
+			}
+		}
+		cout<<ans<<endl;
+	}
+	return 0;
+}

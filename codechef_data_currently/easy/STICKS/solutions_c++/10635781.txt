@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+
+ll dp[1001];
+int main()
+{
+
+
+    int t,n;
+
+    cin >> t;
+
+    while(t--)
+    {
+        cin >> n;
+
+        ll a[n];
+       int dp[1001]={0};
+      for(int i=0;i<n;i++)
+      {
+          cin >> a[i];
+          dp[a[i]]++;
+      }
+            int max1=0,max2=0;
+         for(int i=1000;i>=0;i--)
+         {
+
+
+              if(dp[i]>1)
+              {
+                   max1=i;
+                   break;
+              }
+
+         }
+
+        for(int i=1000;i>=0;i--)
+        {
+            if(dp[i]>1 && i<max1)
+             {
+              max2=i;
+              break;
+             }
+        }
+
+        if(max2&&max1)
+        {
+
+            if(dp[max1]>=4)
+            cout << max1*max1 << endl;
+
+            else
+            cout << max1*max2 << endl;
+
+        }
+        else
+        {
+
+          if(dp[max1]<4)
+          cout << -1 << endl;
+
+          else
+          cout <<max1*max1<< endl;
+
+        }
+
+
+
+    }
+
+    return 0;
+}

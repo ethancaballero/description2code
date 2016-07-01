@@ -1,0 +1,64 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+int n,i,x=0,maxi,mini,cnt=0,j,k;
+cin>>n;
+int a[n];
+for(i=0;i<n;i++)
+{
+    cin>>a[i];
+    x+=a[i];
+}
+if(x%n!=0)
+cout<<"-1
+";
+else
+{
+    while(1)
+    {
+        maxi=-1;
+        mini=40000;
+        for(i=0;i<n;i++)
+        {
+            if(a[i]>maxi)
+            {
+                maxi=a[i];
+                j=i;
+            }
+            if(a[i]<mini)
+            {
+                mini=a[i];
+                k=i;
+            }
+        }
+         //cout<<maxi<<" "<<mini;
+        if(maxi==mini)
+            break;
+        cnt++;
+        //cout<<"haha
+";
+        x=maxi-mini;
+        //cout<<x<<"uiasi";
+        if(x%2==0)
+        {
+            a[j]-=x/2;
+            //cout<<a[maxi];
+            a[k]+=x/2;
+            //cout<<a[mini];
+        }
+        else
+        {
+            a[j]-=(x/2+1);
+            a[k]+=(x/2+1);
+        }
+    }
+    cout<<cnt<<endl;
+}
+}
+return 0;
+}

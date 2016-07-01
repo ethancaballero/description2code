@@ -1,0 +1,37 @@
+def main():
+	t=input()
+	lt=[]
+	for j in range(t):
+		n=input()
+		l=[]
+		r=[]
+		p=[]
+		l = [int(i) for i in raw_input().strip().split()]
+		r = [int(i) for i in raw_input().strip().split()]
+		m=0
+		k=0
+		for i in range(n):
+			d=l[i]*r[i]
+			p.append(d)
+			if(d>m):
+				m=d
+				rating=r[i]
+				k=i
+		#print m,k+1
+
+		for i in range(n):
+			if(m==p[i] and k!=i):
+				if(r[i]>rating):
+					rating=r[i]
+					k=i
+		lt.append(k+1)
+
+	for i in range(t):
+		print lt[i]
+
+	
+
+
+
+if __name__ == '__main__':
+	main()

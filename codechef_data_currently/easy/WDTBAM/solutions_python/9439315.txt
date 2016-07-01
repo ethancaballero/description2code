@@ -1,0 +1,24 @@
+## Codechef
+## Who dares to be a millionaire
+## 2016.02.18
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    nq = int(raw_input()) # the number of questions
+    question = raw_input()
+    answer = raw_input()
+
+    correct = 0
+
+    for i in xrange(nq):
+        if question[i] == answer[i]:
+            correct+=1
+
+    winningPoints = map(int,raw_input().strip().split())
+
+    if nq!=correct:
+        print max(winningPoints[:correct+1])
+
+    else:
+        print winningPoints[correct]

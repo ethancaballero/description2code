@@ -1,0 +1,65 @@
+//	Coded by:  samfisher
+#include<bits/stdc++.h>
+#define ll long long int
+#define vii  vector<int>::iterator 
+#define vli  vector<ll>::iterator 
+#define vi  vector<int> 
+#define vl  vector<ll> 
+#define pb(x) push_back(x)
+#define pf(x) push_front(x)
+#define mp(x,y) make_pair(x,y)
+#define MOD 1000000007
+#define in cin>>
+#define i2(x,y) cin>>x>>y
+#define i3(x,y,z) cin>>x>>y>>z
+#define os(x) cout<<x<<' '
+#define on(x) cout<<x<<endl
+#define o2(x,y) cout<<x<<' '<<y<<endl
+#define o3(x,y,z) cout<<x<<' '<<y<<' '<<z<<endl
+#define pn cout<<endl
+#define F first
+#define S second
+#define for_it(it, X) for (__typeof((X).begin()) it = (X).begin(); it != (X).end(); it++)
+#define op(X) cout<<X.F<<" "<<X.S<<" ";
+#define opn(X) cout<<X.F<<" "<<X.S<<endl;
+#define SET(X,Y) memset(X,Y,sizeof(X))
+using namespace std;
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	int t,i,j,k,n,m,a,b,c;	
+	in t;
+	while(t--)
+	{
+		int tot,tmp,p,r,k;
+		int pass[100009]={0};
+		int car[100009]={0};
+		int cur=0,P=0,inC=0,completed=0;;
+		i3(car[0],tot,P);
+		i3(p,r,k);
+		i=0;
+		for(i=0;i<=k;i++)
+		{
+			cur += car[i]; // New Car
+			if(i%r ==0 && tot && i!=0)
+			{
+				tot--;
+				P++;	
+			}
+			if(i!=0)
+				completed += car[i];  // Completed
+			j = min(cur,P);		// New people in transit
+			// o3("At instant",i,j);
+			// o3("Passenger",P,completed);
+			cur -= j;		// availble car
+			P -= j;			// availble people
+			if(i+p<=k)
+				car[i+p] += j;	// New car
+		}
+		os(cur);
+		os(completed);
+		os(tot);
+		os(P);pn;
+	}
+}

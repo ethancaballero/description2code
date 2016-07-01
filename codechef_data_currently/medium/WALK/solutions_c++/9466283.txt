@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		long unsigned int N,W[100000],i,max;
+		cin>>N;
+		for(i=0;i<N;i++)
+		{
+			cin>>W[i];
+			W[i]+=i;
+		}
+		max=W[0];
+		for(i=1;i<N;i++)
+		{
+			if(W[i]>max)
+			max=W[i];
+		}
+		cout<<max<<"
+";
+	}
+	return 0;
+} 

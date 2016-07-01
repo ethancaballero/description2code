@@ -1,0 +1,9 @@
+for _ in range(input()):
+        N = int(raw_input())
+        l = map(int, raw_input().strip().split())
+        l.sort(reverse=True)
+        cost = 0
+        for i in range(N):
+                if i % 4 < 2:
+                        cost += l[i]
+        print cost

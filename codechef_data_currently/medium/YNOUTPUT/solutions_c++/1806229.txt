@@ -1,0 +1,108 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+
+#define Si(a) scanf("%d",&(a))
+#define F(i,a,b) for(int i=a;i<b;i++)
+
+#define L long
+
+using namespace std;
+//////global
+
+
+/////func
+
+int t;
+
+char x[10];
+char in [105][105];
+
+int chk(int p){
+   
+   for(int i=0;i<t;i++)
+    {
+if(in[p][i]=='Y'){
+                  for(int w=0;w<t;w++)
+                  {if(in[p][w]!=in[i][w])
+                          
+                          return 0;//layer
+                          }
+                  }           
+           else{
+                int r;
+                  for( r=0;r<t;r++)
+                  {if(in[p][r]!=in[i][r])break;
+                          
+                          }
+                
+                if(r==t)return 0;
+                }
+           
+           }
+           
+    return 1;//true;
+    
+    }
+
+int main(){
+Si(t);
+
+F(i,0,t){
+F(j,0,t){
+         
+         scanf("%s",x);
+         in[i][j]=x[0];
+         }}
+
+F(i,0,t){
+         
+         if(in[i][i]=='Y')
+         {
+                         if( chk(i)){
+                           for(int s=0;s<t;s++){
+                                   if(in[i][s]=='Y')cout<<"YES
+";
+                                   else cout<<"NO
+";
+                                   }  
+                             
+                                                    
+        // system("pause");
+         return 0;
+       
+                             }
+                          
+                          
+                          }
+              
+              }
+         
+         
+         
+
+
+for(int i=0;i<t;i++){
+        cout<<"NO
+";
+        }
+
+        // system("pause");
+return 0;
+}

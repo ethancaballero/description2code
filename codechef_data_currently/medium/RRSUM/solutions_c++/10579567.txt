@@ -1,0 +1,52 @@
+#include<stdio.h>
+   #include <vector>
+    #include<algorithm>
+    #define gc getchar_unlocked
+    #define pc putchar_unlocked
+    #define p(n) printf("%lu
+",n);
+    #define s(n) scanf("%d",&n);
+    #define S(n) scanf("%li",&n);
+     inline unsigned long int fastread()
+    {
+      unsigned int i=0;
+      char c=gc();
+      while(c<'0' || c>'9')
+        c=gc();
+      for(;c>='0' && c<='9';c=gc())
+        i=(i<<3)+(i<<1)+c-'0';
+      return i;
+    }
+    using namespace std;
+    int main()
+    {
+        unsigned long int n;
+        //S(n)
+        //printf("%li
+",n);
+        unsigned long int m;
+        //s(m)
+        n=fastread();
+        m=fastread();
+        for(int k=0;k<m;k++)
+        {
+            unsigned long int q;
+            //S(q)
+           q=fastread();
+            unsigned long int count=0;
+            //long int u1,u2,l1,l2;
+            if(q<n+2||q>2*n+n){
+             count=0;
+            // printf("here
+");
+            }
+            else if(q<=2*n+1&&q>=n+2)
+                count=q-n-1;
+           // else if(q-n>=n+1&&q<=3*n)
+             //   count=n-(q-2*n)+1;
+            else
+               count=n-(q-2*n)+1;;
+            p(count)
+        }
+           return 0;
+        }

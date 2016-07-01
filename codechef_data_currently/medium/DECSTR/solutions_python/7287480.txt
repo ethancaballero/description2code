@@ -1,0 +1,13 @@
+import sys, string
+
+for cases in xrange(int(sys.stdin.readline())):
+    n = int(sys.stdin.readline())
+    ans = ''
+    while n > 0:
+        if n > 25:
+            ans = string.lowercase[::-1] + ans
+            n -= 25
+        else:
+            ans = string.lowercase[:n+1][::-1] + ans
+            break
+    print ans

@@ -1,0 +1,103 @@
+#include<iostream>
+#include<cstdio>        // J=74, Q=81, K=75, A=65, T=84 spades,  hearts, diamond, club
+#include<string>
+#include<algorithm>
+using namespace std;
+ 
+class pi {
+    public :
+    int first[5];
+    int second[5];
+};
+ 
+bool flush(pi &p) {
+    for(int i=0; i<4; i++)
+        if(p.first[i+1]!=p.first[i]+1 ) {
+            if(i==3 && p.first[i+1]==14 && p.first[i]==5) { return true; }
+            return false;
+        }
+    return true;
+}
+ 
+bool suit(pi &p) {
+    for(int i=0; i<4; i++)
+        if(p.second[i+1]!=p.second[i]) { return false; }
+    return true;
+}
+ 
+int kind(pi &p) {
+    int count=1, max=0;
+    for(int i=0; i<5; i++) {
+        if(p.first[i]==p.first[i+1]) { count++; }
+        else {
+            max=(count>max)?count:max;
+            count=1;
+        }
+    }
+    return max;
+}
+ 
+int toInt(char c) {
+    switch(c) {
+        case '2': return 2;
+        case '3': return 3;
+        case '4': return 4;
+        case '5': return 5;
+        case '6': return 6;
+        case '7': return 7;
+        case '8': return 8;
+        case '9': return 9;
+        case 'T': return 10;
+        case 'J': return 11;
+        case 'Q': return 12;
+        case 'K': return 13;
+        case 'A': return 14;
+        case 'S': return 1;
+        case 'D': return 2;
+        case 'C': return 3;
+        case 'H': return 4;
+        default : return -1;
+    }
+}
+ 
+int main() {
+    int t;
+    bool read=false;
+    scanf("%d", &t);
+    while(t>0) {
+        pi p;
+        int i=0, j=0;
+        char c;
+        while((c=getchar())!='
+') {
+            if(i==j) {
+                p.first[i++]=toInt(c);
+                i=(toInt(c)==-1)?i-1:i;
+            }
+            else { p.second[j++]=toInt(c); }
+            read=true;
+        }
+        if(read) {
+            sort(p.first, p.first+5);
+            if(flush(p) && suit(p)) { puts((p.first[0]==10)?"royal flush":"straight flush"); }
+            else if(kind(p)==4) { puts("four of a kind"); }
+            else if(kind(p)==3) {
+                if((p.first[0]==p.first[1] && p.first[1]!=p.first[2]) || (p.first[2]!=p.first[3] && p.first[3]==p.first[4]))
+                puts("full house");
+                else if(!suit(p)) { puts("three of a kind"); }
+            }
+            else if(suit(p)) { puts("flush"); }
+            else if(flush(p)) { puts("straight"); }
+            else if(kind(p)==2) {
+                        int count=1;
+                        for(int i=0; i<4; i++)
+                            if(p.first[i]==p.first[i+1]) { count++; }
+                        puts((count>2)?"two pairs":"pair");
+                 }
+                 else { puts("high card"); }
+            t--;
+            read=false;
+        }
+    }
+    return 0;
+}

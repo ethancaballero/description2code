@@ -1,0 +1,83 @@
+// Devajit Asem
+// UASEQ
+// template <createcode.py>
+ 
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+#include<memory>
+#include<iomanip>
+#include<vector>
+#include<cstdlib>
+#define l long
+#define in_t(x) scanf("%d",&x)
+#define in_l(x) scanf("%ld",&x)
+#define out_t(x) printf("%d",x)
+#define out_l(x) printf("%ld",x)
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+#define nl printf("
+")
+#define M 100002
+l seq[M]={0};
+const l SI = 1000000001;
+inline void getInt(l& x)
+{
+		l c = gc();
+		x = 0;
+		for(;(c<48 || c>57);c = gc());
+		for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+ 
+inline void out_d(l n) 
+{
+		if(n<0){n=-n;pc('-');}
+		l i=10;char output_buffer[10];
+		do{
+				output_buffer[--i]=(n%10)+'0';n/=10;
+		}while(n);
+		do{
+				pc ( output_buffer [ i ] ) ; 
+		} while ( ++i< 10 ) ; 
+		pc(' ');
+}
+inline int max(const int& x,const int& y)
+{
+		return (x > y) ? x : y;
+}
+using namespace std;
+ 
+int main()
+{
+		int n,k,i,j,x,c;
+		long b_a,b_d,a,d;
+		in_t(n),in_t(k);
+		b_a = SI;
+		b_d = SI;
+		for(i=0;i<n;i++)
+				getInt(seq[i]);	
+		for(i=0;i<k+1;i++)
+		{
+				//cout<<max(i+1,n-1-(k-i))<<endl;
+				for(j=(n-(k-i)-1);j<n;j++)
+				{
+						d = (seq[j] - seq[i])/(j-i);
+						a = seq[i] - i * d;
+						c=0;
+						for(x=0;x<n;x++)
+								if(seq[x] != a + x * d)
+										c++;
+						if(c<=k)
+								if (a<b_a || (a == b_a && d < b_d))
+								{
+										b_a = a;
+										b_d = d;
+								}
+				}
+		}
+		for(i=0;i<n;i++)
+				out_d((b_a+i*b_d));
+		nl;
+		return 0;
+}
+ 

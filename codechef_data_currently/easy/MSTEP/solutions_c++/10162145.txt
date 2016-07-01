@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+
+class Test
+{
+public:
+int a[100][100],i,j,k,n,m1,n1,sum,count;
+
+int matrix()
+
+{
+sum=0;
+cin>>n;
+for(i=0;i<n;i++)
+{
+for(j=0;j<n;j++)
+{
+cin>>a[i][j];
+if(a[i][j]==1)
+{m1=i; n1=j;
+}
+}
+cout<<"
+";
+}
+
+
+for(k=2;k<=(n*n);k++)
+{
+for (i=0;i<n;i++)
+{
+for(j=0;j<n;j++)
+{
+if(k==a[i][j])
+{count=i+j-m1-n1;
+if(i-m1<0&&j-n1>0)
+{count=m1-i+j-n1;}
+if(j-n1<0&&i-m1>0)
+{count=i-m1-j+n1;}
+if(i-m1<0&&j-n1<0)
+{count=m1-i+n1-j;}
+if(i-m1==0&&j-n1<0)
+{count=n1-j;}
+if(i-m1<0&&j-n1==0)
+{count=m1-i;}
+sum=sum+count;
+m1=i;
+n1=j;
+}
+}
+}
+}
+cout<<sum;
+}
+};
+
+
+
+int main()
+{
+ int t,i;
+ Test obj[5];
+cin>>t;
+for(i=0;i<t;i++)
+{
+
+
+ obj[i].matrix();
+}
+return 0;
+}

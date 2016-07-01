@@ -1,0 +1,47 @@
+#include<iostream>
+
+#include<string.h>
+using namespace std;
+char a[51];
+int main()
+{
+    ios::sync_with_stdio(false);
+	int x;
+	cin>>x;
+	int b[26];
+	while(x--)
+	{
+		memset(b,0,26*sizeof(int));
+		cin>>a;
+		int flag=0;
+		
+		for(int i=0;i<strlen(a);i++)
+		{
+			b[a[i]-97]++;
+		}
+//		for(int i=0;i<26;i++)
+//		cout<<b[i];
+		for(int i=0;i<26;i++)
+		{
+			int sum=0;
+			for(int j=0;j<26;j++)
+			{
+				if(j!=i)
+				{
+					sum=sum+b[j];
+				}
+			}
+			if(b[i]==sum)
+			{
+				flag=1;
+				break;
+			}
+		}
+		if(flag)
+		cout<<"YES
+";
+		else
+		cout<<"NO
+";
+	}
+}

@@ -1,0 +1,12 @@
+t=input()
+ans=[]
+for i in range(t):
+    temp='wins'
+    num=raw_input()
+    l=len(num)
+    for j in range(l/2):
+        if num[j]!=num[l-1-j]:
+            temp='losses'
+    ans.append(temp)
+for i in range(t):
+    print ans[i]

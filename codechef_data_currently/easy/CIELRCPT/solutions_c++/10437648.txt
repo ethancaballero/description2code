@@ -1,0 +1,24 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+int main(){
+     int t;
+     cin>>t;
+     while(t--)
+     {
+     	int p,i,sum=0,x,y;
+     	cin>>p;
+     	for(i=11;i>=0;i--)
+     	{
+     		y=pow(2,i);
+     		x=p/y;
+     		if(x>0)
+     		{
+     			sum=sum+x;
+     			p=p%y;
+     		}
+     	}
+     	cout<<sum<<endl;
+     }
+return 0;
+} 

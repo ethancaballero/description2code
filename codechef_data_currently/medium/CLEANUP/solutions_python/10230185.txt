@@ -1,0 +1,42 @@
+t=int(raw_input())
+for i in xrange(0,t):
+    job,jobdone=map(int,raw_input().split())
+    jobsdone = map (int,raw_input().split())
+    
+    a=[]
+    c=[]
+    incompletedjobs=[]
+    
+    for i in xrange(job):
+        incompletedjobs.append(i+1)
+       
+    for i in xrange(jobdone):
+        x= jobsdone[i]
+        incompletedjobs.remove(x)
+
+        
+    for i in xrange(job-jobdone):
+        y=i+1
+        
+        s=incompletedjobs[i]
+        
+        
+        if y%2==0:
+            a.append(s);
+        else:
+            c.append(s)
+    
+
+    s=""
+    d=""
+    
+    for i in xrange(len(c)):
+        s= s+str(c[i]) + " "
+    print s
+        
+    for i in xrange(len(a)):
+        d= d+str(a[i]) + " "
+    print d
+            
+        
+    

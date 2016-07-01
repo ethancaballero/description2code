@@ -1,0 +1,34 @@
+#include<iostream>
+
+using namespace std;
+
+typedef long long ll;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	int arr[55];
+	int i,n,k,even=0;
+	cin>>n>>k;
+	for(i=0;i<n;i++)
+		cin>>arr[i];
+	for(i=0;i<n;i++)
+	{
+		if(arr[i]%2==0)
+			even++;
+	}
+	if(even==n&&k==0)
+		cout<<"NO
+";
+	else if(even>=k)
+		cout<<"YES
+";
+	else
+		cout<<"NO
+";
+	}
+	return 0;
+}

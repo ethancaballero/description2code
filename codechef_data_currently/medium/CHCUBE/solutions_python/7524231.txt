@@ -1,0 +1,16 @@
+tc = int(raw_input())
+while tc!=0:
+    val=0
+    orig_list = list(map(str,raw_input().split()))
+    list1=orig_list[0:2]
+    list2=orig_list[2:4]
+    list3=orig_list[4:]
+    for data in list1:
+        if data in list2 and data in list3:
+            val = 1
+            break
+    if val==1:
+        print "YES"
+    elif val==0:
+        print "NO"
+    tc-=1

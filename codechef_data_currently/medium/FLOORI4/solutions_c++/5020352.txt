@@ -1,0 +1,105 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <cctype>
+#include <cassert>
+
+#define S(x) scanf("%d", &x)
+#define SS(x) scanf("%s", &x)
+#define MOD 1000000007
+typedef long long int ll;
+
+using namespace std;
+
+#define gc getchar_unlocked
+long long int read_int() {
+	char c = gc();
+	while(c<'0' || c>'9') c = gc();
+	long long int ret = 0;
+	while(c>='0' && c<='9') {
+		ret = 10 * ret + c - 48;
+		c = gc();
+	}
+	return ret;
+}
+
+#define pc(x) putchar_unlocked(x);
+inline void writeInt (int n)
+{
+    int N = n, rev, count = 0;
+    rev = N;
+    if (N == 0) { pc('0'); pc('
+'); return ;}
+    while ((rev % 10) == 0) { count++; rev /= 10;} //obtain the count of the number of 0s
+    rev = 0;
+    while (N != 0) { rev = (rev<<3) + (rev<<1) + N % 10; N /= 10;}  //store reverse of N in rev
+    while (rev != 0) { pc(rev % 10 + '0'); rev /= 10;}
+    while (count--) pc('0');
+}
+
+void input() {
+	#ifndef ONLINE_JUDGE
+	freopen("C:\Users\ronish\OneDrive\Documents\in.txt","r",stdin);
+	#endif
+}
+
+long long int N, M;
+
+ll sumfour(ll s)
+{
+	int m = M;
+	//s*(1+s)*(1+2*s)*(-1+3*s+3*s^2)/30
+	// s= 30t + y
+	ll y = s%30 , sM = s%m ,c2=2 , c3=3,c90=90,c6=6;
+	ll t = ((s-y)/30)%m;
+	ll last = ( c3*sM*sM + c3*sM -1 )%m;
+	ll last_two = ((c2*sM + 1) * last )%m;
+	return (t*(sM+1)*last_two  + t*y*last_two + c2*t*y*(y+1)*last + y*(y+1)*(c2*y+1)*(c90*t*t + c6*t*y + c3*t) + (y*(y+1)*(c2*y+1)*(c3*y*y+c3*y-1))/30)%m;
+}
+
+int main(int argc, char const *argv[])
+{
+	input();
+	int t;
+	t = read_int();
+	while (t--) 
+	{
+		N = read_int();
+		M = read_int();
+		ll srt = sqrt(N),answer=0,x,y,z;
+		for(ll i=1;i<=srt;i++){
+			//brute force area
+			x = i;
+			answer = (answer + ((i*i*i)%M)*((i*(N/i))%M))%M;
+			//answer = answer + i^4 * N/i;
+		}
+		for(ll i=(N/srt);i>1;i--){
+			x = N/i;
+			y = N/(i-1);
+			answer = (answer + (i-1)* (sumfour(y) - sumfour(x)))%M;
+		}
+		if (answer < 0)	answer += M;
+		writeInt(answer);
+		printf("
+");
+	}
+	return 0;
+}

@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define Rep(i,a,b) for(int i=a;i<b;i++)
+#define TEST  int t;scanf("%d",&t);while(t--)
+int main()
+{
+   TEST
+    {
+        int n;
+        scanf("%d",&n);
+        string strings[20];
+Rep(i,0,n)
+        cin>>strings[i];
+        string stm = "";
+for(int i=0; i<strings[0].size(); i++)
+        {
+            for(int j=i;j<strings[0].size();j++)
+            {
+                string stem=strings[0].substr(i,(j-i+1));
+                bool flag=true;
+Rep(k,1,n)
+    {
+        if(strings[k].find(stem)==string::npos)
+            {
+                        flag=false;
+                        break;
+            }
+    }
+ 
+                if(flag && stm.size()<=stem.size())
+                {
+                    if(stm.size() < stem.size())
+                        stm = stem;
+                    else if(stm.compare(stem)>0)
+                        stm = stem;
+                }
+}}
+ 
+cout<<stm<<endl;
+    }
+    return 0;
+}

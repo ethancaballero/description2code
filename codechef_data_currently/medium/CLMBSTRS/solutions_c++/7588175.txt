@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+#define lli long long int
+#define MAX 1000005
+#define MOD 1000000007
+lli f[MAX];
+using namespace std;
+int main()
+{
+        lli count,i,j,k,m,n,t;
+        f[1]=1;
+        f[2]=2;
+        for(i=3;i<MAX;i++)
+                f[i]=(f[i-1]+f[i-2])%MOD;
+
+        scanf("%lld",&t);
+        while(t--)
+        {
+                scanf("%lld%lld",&n,&m);
+                k=f[n];
+                count=0;
+                while(k!=0)
+                {
+                        if(k%2!=0)
+                                count++;
+                        k=k/2;
+                }
+                if(count==m)
+                        printf("CORRECT
+");
+
+                else
+                        printf("INCORRECT
+");
+        }
+}

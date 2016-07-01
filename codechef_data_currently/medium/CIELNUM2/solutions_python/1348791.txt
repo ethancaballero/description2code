@@ -1,0 +1,22 @@
+def checkNoGood(each):
+    noGood = ['0','1','2','4','6','7','9']
+    for i in noGood:
+        if i in each:
+            return(True)
+    return(False)
+
+def checkCiel(nums):
+    count = 0
+    for each in nums:
+        if checkNoGood(each):
+            continue
+        if each.count('8') >= each.count('5') and each.count('5') >= each.count('3'):
+            count += 1
+    return(count)
+
+t = int(raw_input())
+nums = []
+for i in range(t):
+    line = raw_input().strip().split()[-1]
+    nums += [line]
+print(checkCiel(nums))

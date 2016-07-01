@@ -1,0 +1,51 @@
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%i",&t);
+    while(t--)
+    {
+        int a,s=0,n;
+        scanf("%i",&a);
+        if(a<2001)
+        {
+            n=a-2000;
+            s=-2;
+        }
+        else
+            n=a-2001;
+        s+=n+(n/4)-(n/100)+(n/400);
+        s%=7;
+        s+=7;
+        s%=7;
+        switch(s)
+        {
+            case 0:printf("monday
+");
+                    break;
+            case 1:printf("tuesday
+");
+                    break;
+            case 2:printf("wednesday
+");
+                    break;
+            case 3:printf("thursday
+");
+                    break;
+            case 4:printf("friday
+");
+                    break;
+            case 5:printf("saturday
+");
+                    break;
+            case 6:printf("sunday
+");
+                    break;
+        }
+    }
+	return 0;
+}

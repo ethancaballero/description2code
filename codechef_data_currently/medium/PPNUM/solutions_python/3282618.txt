@@ -1,0 +1,55 @@
+import sys
+tnp = [1]
+for i in range(1,13):
+	tnp.append(tnp[i-1]*10)
+
+T = int(raw_input())
+MOD = 1000000007
+
+while T:
+	T-=1
+	L,R = map(int,sys.stdin.readline().split())
+	upL = 0
+	upLi = 0
+	dnR = 0
+	dnRi = 0
+	for i in range(len(tnp)):
+		if tnp[i] >= L:
+			upL = tnp[i]
+			upLi = i
+			break
+	
+
+	for i in range(len(tnp)-1,-1,-1):
+		if tnp[i] <= R:
+			dnR = tnp[i]
+			dnRi = i
+			break
+ 	
+	if upLi > dnRi :
+		a = (R*(R+1))%MOD
+		b = (L*(L-1))%MOD
+		t = (a-b+MOD)%MOD
+		t = (t*len(str(L)))%MOD
+		t = (t*500000004)%MOD
+		print t
+		continue
+		
+	a = (upL*(upL-1))%MOD
+	b = ((L-1)*L)%MOD
+	ans = (a-b+MOD)%MOD
+	ans  = (ans*upLi)%MOD
+	for  i in range(upLi,dnRi):
+		a = (tnp[i+1]*(tnp[i+1]-1))%MOD
+		b = (tnp[i]*(tnp[i]-1))%MOD
+		t = (a-b+MOD)%MOD
+		t = (t*(i+1))%MOD
+		ans = (ans + t)%MOD 
+	
+	a = (R*(R+1))%MOD
+	b = (tnp[dnRi]*(tnp[dnRi]-1))%MOD
+	t = (a-b+MOD)%MOD
+	t = (t*(dnRi+1))%MOD
+	ans = (ans + t)%MOD
+	ans = (ans * 500000004)%MOD
+	print ans

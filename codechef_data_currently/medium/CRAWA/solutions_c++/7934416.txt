@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+#define lli long long int
+using namespace std;
+int main()
+{
+        lli x,y,i,j,k,m,n,t;
+        scanf("%lld",&t);
+        while(t--)
+        {
+                m=0;
+                scanf("%lld%lld",&x,&y);
+                if(x>0 && x%2==1 && y>=-x+1 && y<=x+1)
+                        m=1;
+                if(x<0 && x%2==0 && y>=x && y<=-x)
+                        m=1;
+                if(y>0 && y%2==0 && x>=-y && x<=y-1)
+                        m=1;
+                if(y<=0 && y%2==0 && x>=y && x<=-y+1)
+                        m=1;
+                if(m)
+                        cout<<"YES"<<endl;
+                else
+                        cout<<"NO"<<endl;
+        }
+}

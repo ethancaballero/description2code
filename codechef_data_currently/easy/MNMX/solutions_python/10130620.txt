@@ -1,0 +1,4 @@
+for t in range(int(raw_input())):
+	n=int(raw_input())
+	a=map(int,raw_input().split())
+	print (n-1)*min(a)

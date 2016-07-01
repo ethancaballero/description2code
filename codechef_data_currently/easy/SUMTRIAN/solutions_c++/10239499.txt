@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cmath>
+#include <climits>
+#include <cstdlib>
+using namespace std;
+int a[100][100];
+int n;
+int arr[100][100];
+int fun(int i,int j)
+{
+    if(arr[i][j] != -1)
+        return arr[i][j];
+    if(i == n-1)
+    {
+        arr[i][j] = a[i][j]; 
+        return arr[i][j];
+    }
+    int y = a[i][j] + fun(i+1,j);
+    int r = a[i][j]+ fun(i+1,j+1);
+    arr[i][j] = max(y,r);
+    return arr[i][j];
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+                cin >> n;
+        for(int i = 0 ; i < n ; i++)
+        {
+            for(int j = 0 ; j < n ; j ++)
+            {
+                arr[i][j] = -1;
+            }
+        }
+
+        for(int i = 0 ; i < n; i++)
+        {
+            for(int j = 0 ; j <= i ; j++)
+            {
+                cin >> a[i][j];
+            }
+        }
+        cout << fun(0,0) << endl;
+    }
+	return 0;
+}

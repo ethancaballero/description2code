@@ -1,0 +1,8 @@
+t=input()
+def gross(sal):
+    if sal<1500:
+        return (0.1*sal)+(0.9*sal)+sal
+    else:
+        return (500)+(0.98*sal)+sal
+for i in range(0,t):
+    print '{0:g}'.format(gross(input()))

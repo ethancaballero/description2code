@@ -1,0 +1,52 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--) {
+		int n;
+		int laddus=0;
+		cin>>n;
+		string s;
+		cin>>s;
+		while(n--) {
+			string st;
+			cin>>st;
+			
+			if(st=="CONTEST_WON") {
+			    int rank;
+			    cin>>rank;
+			    if(rank<=20) laddus+=(300 + (20-rank));
+			    else laddus+=300;
+			}
+			else if(st=="TOP_CONTRIBUTOR") {
+			    laddus+=300;
+			}
+			else if(st=="BUG_FOUND") {
+				int bug;
+				cin>>bug;
+				laddus+=bug;
+		    }
+			else {
+				laddus+=50;
+			}
+		}
+
+		if(s=="INDIAN") laddus/=200;
+		else laddus/=400;
+		cout<<laddus<<endl;
+	}
+}
+/*
+2
+2 INDIAN
+CONTEST_WON 123
+BUG_FOUND 50
+4 NON_INDIAN
+CONTEST_WON 1
+TOP_CONTRIBUTOR
+BUG_FOUND 100
+CONTEST_HOSTED
+*/

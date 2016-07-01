@@ -1,0 +1,25 @@
+__author__ = "Devajit Asem"
+__prog__ = "UASEQ"
+
+from sys import stdin
+
+n, k = map(int, stdin.readline().split())
+seq = map(int, stdin.readline().split())
+m = 10000000001
+b_a = m
+b_d = m
+for i in xrange(k + 1):
+    for j in xrange((n - (k - i) - 1), n):
+        if j - i == 0:
+            break
+        d = (seq[j] - seq[i])/(j-i)
+        a = (seq[i] - i * d)
+        c = 0
+        for x in xrange(n):
+            if seq[x] != a + d * x:
+                c += 1
+        if c <= k:
+            if a < b_a or (a == b_a and d < b_d):
+                b_a, b_d = a, d
+print " ".join([str(b_a + i * b_d) for i in xrange(n)])
+

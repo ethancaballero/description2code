@@ -1,0 +1,33 @@
+#include<iostream>
+
+using namespace std;
+int main()
+{
+	int n;
+	string a,b;
+	cin>>n;
+	while(n--)
+	{
+		cin>>a>>b;
+		for(int i=0;i<a.length();i++)
+		{
+			if(a[i]==b[i])
+			{
+				if(i==a.length()-1)
+				cout<<"Yes"<<endl;
+				else
+				continue;
+			}
+			else if(a[i]=='?'||b[i]=='?')
+			{
+				if(i==a.length()-1)
+				cout<<"Yes"<<endl;
+				else
+				continue;
+			}
+			else 
+			cout<<"No"<<endl;
+			break;
+		}
+	}
+}

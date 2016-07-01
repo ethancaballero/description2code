@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+#define M 10000007
+int main()
+{
+   int n,m,i,j,k;
+   long long int ans;
+   long long int *matrix;
+   cin>>n>>m;
+   matrix=new long long int[m];
+   for(j=0;j<m;j++)
+   cin>>matrix[j];
+   for(i=1;i<n;i++)
+   {
+      for(j=0;j<m;j++)
+      {
+         cin>>k;
+         matrix[j]=(matrix[j]+k)%M;
+      }
+   }
+   for(i=0,ans=1;i<m;i++)
+   ans=ans*matrix[i]%M;
+   ans=(M+ans)%M;
+   cout<<ans<<endl;
+return 0;
+}

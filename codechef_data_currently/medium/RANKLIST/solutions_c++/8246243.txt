@@ -1,0 +1,23 @@
+	#include<iostream>
+	using namespace std;
+	int main()
+	{
+			int t;
+			cin>>t;
+			while(t>0)
+			{
+			
+				long long int n,s;
+				cin>>n>>s;
+				int index=-1;
+				for(long long int i=1;i<=n;i++)
+				{
+					if((((i*(i+1))/2)+(n-i))<=s)
+						index=i;
+					else
+						break;
+				}	
+				cout<<n-index<<endl;
+				t--;
+			}	
+	}

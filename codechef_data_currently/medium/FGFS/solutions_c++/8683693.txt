@@ -1,0 +1,93 @@
+/*
+Author : vishal sharma
+vishal0408sharma@gmail.com
+Solution for problem code FGFS.
+ 
+ */
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define CLR(a,x) memset(a,x,sizeof(a))
+#define PB push_back
+#define INF 1000000000
+#define MOD 1000000007
+#define MP make_pair
+#define tr(container , it) for(typeof(container.begin()) it=container.begin() ; it!=container.end() ; it++)
+#define FOR(i,a,b) for(i=a;i<b;i++)
+#define REP(i,a) FOR(i,0,a)
+#define LLD long long
+#define VI vector < int >
+#define PII pair < int , int >
+#define MAX 1000000000
+vector<PII> V[1000005];
+map<int, int> my;
+ 
+int max_act_sel(vector<PII> acts)
+{
+    int sz = acts.size();
+    if(sz==0)
+	return 0;
+    sort(acts.begin(), acts.end());
+ 
+    int ans = 1;
+    int lst = acts[0].first;
+ 
+    for(int i=1;i<sz;i++)
+    {
+	 if(acts[i].second>=lst)
+	 {
+	     ans++;
+	     lst = acts[i].first;
+	 }
+    }
+ 
+    return ans;
+ 
+}
+ 
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+ 
+	my.clear();
+	int pos = 0;
+	int n, k;
+	scanf("%d%d",&n,&k);
+ 
+	if(n==0)
+	{
+	    printf("0
+");
+	    continue;
+	}
+ 
+	for(int i=0;i<=n;i++)
+	    V[i].clear();
+ 
+	int s,f,p;
+	for(int i=0;i<n;i++)
+	{
+	    scanf("%d%d%d",&s,&f,&p);
+	    p--;
+	    if(my.count(p)==0)
+	    {
+		my[p] = pos++;
+	    }
+	    V[my[p]].PB(MP(f,s));
+	}
+ 
+	int ans = 0;
+	for(int i=0;i<pos;i++)
+	{
+	    ans += max_act_sel(V[i]);
+	}
+	printf("%d
+",ans);
+    }
+    return 0;
+}
+ 

@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main()
+{
+	ll t,k,num,avail,flag;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld",&k);
+		avail=1;
+		flag=0;
+		while(k--)
+		{
+			scanf("%lld",&num);
+			if(num>avail)
+			{
+				flag=1;
+				break;
+			}
+			else
+			{
+				avail=(avail-num)*2;
+			}
+		}
+		if((flag)||(avail))
+		{
+			printf("No
+");
+		}
+		else
+			printf("Yes
+");	
+	}	
+	return 0;
+}

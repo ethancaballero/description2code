@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<bits/stdc++.h>
+long long int b[100000000];
+using namespace std;
+int main()
+{
+    long long int n,k,j,p=1,sum,i,a[100001];
+    scanf("%lld %lld",&n,&k);
+    for(i=1;i<=n;i++)
+        scanf("%lld",&a[i]);
+    //sort(a,a+(n+1),greater<long long int>());
+    //for(i=0;i<n;i++)
+      //  printf("%lld ",a[i]);
+    for(i=1;i<=n;i++)
+    {
+        sum=a[i];
+        for(j=i+1;j<=n;j++)
+        {
+            sum=sum+a[j];
+            b[p]=sum;
+            p++;
+        }
+    }
+      for(i=1;i<=n;i++)
+      {
+          b[p]=a[i];
+          p++;
+      }
+      sort(b+1,b+(p));
+      reverse(b+1,b+(p));
+      //printf("%lld",p);
+      for(i=1;i<=k;i++)
+        printf("%lld ",b[i]);
+    return 0;
+}

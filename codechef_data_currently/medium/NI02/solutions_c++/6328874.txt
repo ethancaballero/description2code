@@ -1,0 +1,140 @@
+#include <cstring>
+#include <cstdio>
+#include <vector>
+#include <queue>
+#include<iostream>
+using namespace std;
+ 
+typedef pair< int, int > pii;
+ 
+/*
+Set MAX according to the number of nodes in the graph. Remember,
+nodes are numbered from 1 to N. Set INF according to what is the
+maximum possible shortest path length going to be in the graph.
+This value should match with the default values for d[] array.
+*/
+const int MAX = 2503;
+const int INF = 0x3f3f3f3f;
+ 
+/*
+pair object for graph is assumed to be (node, weight). d[] array
+holds the shortest path from the source. It contains INF if not
+reachable from the source.
+*/
+vector< pii > G[MAX];
+int d[MAX];
+ 
+/*
+The dijkstra routine. You can send a target node too along with
+the start node.
+*/
+void dijkstra(int start) {
+    int u, v, i, c, w;
+ 
+    /*
+    Instead of a custom comparator struct or class, we can use
+    the default comparator class greater<T> defined in quque.h
+    */
+    priority_queue< pii, vector< pii >, greater< pii > > Q;
+ 
+    /*
+    Reset the distance array and set INF as initial value. The
+    source node will have weight 0. We push (0, start) in the
+    priority queue as well that denotes start node has 0 weight.
+    */
+    memset(d, 0x3f, sizeof d);
+    Q.push(pii(0, start));
+    d[start] = 0;
+ 
+    /*
+    As long as queue is not empty, check each adjacent node of u
+    */
+    while(!Q.empty()) {
+        u = Q.top().second; // node
+        c = Q.top().first; // node cost so far
+        Q.pop(); // remove the top item.
+ 
+        /*
+        We have discarded the visit array as we do not need it.
+        If d[u] has already a better value than the currently
+        popped node from queue, discard the operation on this node.
+        */
+        if(d[u] < c) continue;
+ 
+        /*
+        In case you have a target node, check if u == target node.
+        If yes you can early return d[u] at this point.
+        */
+ 
+        /*
+        Traverse the adjacent nodes of u. Remember, for the graph,,
+        the pair is assumed to be (node, weight). Can be done as
+        you like of course.
+        */
+        for(i = 0; i < G[u].size(); i++) {
+            v = G[u][i].first; // node
+            w = G[u][i].second; // edge weight
+ 
+            /*
+            Relax only if it improves the already computed shortest
+            path weight.
+            */
+            if(d[v] > d[u] + w) {
+                d[v] = d[u] + w;
+                Q.push(pii(d[v], v));
+            }
+        }
+    }
+}
+ 
+int main() {
+    int n, e, i, u, v, w, start,x,y,a[2503][2],t,j;
+   cin>>t;
+    
+    while(t--) {
+    	cin>>n;
+        for(i = 0; i <= n+1; i++)
+		 G[i].clear();
+         for(i = 1; i <= n; i++)
+         {
+         	cin>>x>>y;
+         	a[i][0]=x;
+       		a[i][1]=y;
+         }
+         	cin>>a[0][0]>>a[0][1];
+         	cin>>a[n+1][0]>>a[n+1][1];
+        /*
+        Read all the edges. u to v with cost w
+        */
+        for(i = 0; i <= n+1; i++)
+        for(j = 0; j <= n+1; j++) {
+            //scanf("%d %d %d", &u, &v, &w);
+            w=(a[i][0]-a[j][0])*(a[i][0]-a[j][0])+(a[i][1]-a[j][1])*(a[i][1]-a[j][1]);
+            G[i].push_back(pii(j, w));
+            G[j].push_back(pii(i, w)); // only if bi-directional
+        }
+ 
+        /*
+        For a start node call dijkstra.
+        */
+       
+ 
+        dijkstra(0);
+ 
+        /*
+        Output the shortest paths from the start node.
+        */
+        //printf("Shortest path from node:
+", d[n+1]);
+        cout<<d[n+1]<<"
+";
+       /* for(i = 1; i <= n; i++) {
+            if(i == start) continue;
+            if(d[i] >= INF) printf("	 to node %d: unreachable
+", i);
+            else printf("	 to node %d: %d
+", i, d[i]);
+        }*/
+    }
+    return 0;
+}

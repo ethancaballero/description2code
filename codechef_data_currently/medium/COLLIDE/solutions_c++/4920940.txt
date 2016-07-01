@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main(){
+ll n,i,j,t;
+double x,y,x1,y1;
+cin>>t;
+for(int i=0;i<t;i++){
+char ch,ch1;
+cin>>x>>y>>ch;
+cin>>n;
+
+double min1=(1.0)*(1e9);
+for(j=0;j<n;j++){
+cin>>x1>>y1>>ch1;
+if(ch=='U'&&ch1=='D'&&x==x1&&y<y1)
+  min1=min(min1,fabs(y-y1)/2.0);
+if(ch=='D'&&ch1=='U'&&x==x1&&y>y1)
+  min1=min(min1,fabs(y-y1)/2.0);
+if(ch=='U'&&ch1=='L'&&x<x1&&y1>y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(y-y1));
+if(ch=='L'&&ch1=='U'&&x>x1&&y1<y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(y-y1));
+if(ch=='L'&&ch1=='R'&&y==y1&&x>x1)
+  min1=min(min1,fabs(x-x1)/2.0);
+if(ch=='R'&&ch1=='L'&&y==y1&&x<x1)
+  min1=min(min1,fabs(x-x1)/2.0);
+if(ch=='D'&&ch1=='L'&&x<x1&&y1<y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(y-y1));
+if(ch=='L'&&ch1=='D'&&x>x1&&y1>y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(y-y1));
+if(ch=='U'&&ch1=='R'&&x>x1&&y1>y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(x-x1));
+if(ch=='R'&&ch1=='U'&&x<x1&&y1<y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(x-x1));
+if(ch=='D'&&ch1=='R'&&x>x1&&y1<y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(x-x1));
+if(ch=='R'&&ch1=='D'&&x<x1&&y1>y&&abs(x-x1)==abs(y-y1))
+min1=min(min1,fabs(x-x1));
+  }
+
+  if(min1==(1.0)*1e9)
+ cout<<"SAFE"<<endl;
+ else
+ cout<<fixed<<setprecision(1)<<min1<<endl;
+}
+return 0;
+}

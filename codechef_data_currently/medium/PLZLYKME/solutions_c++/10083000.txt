@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        long long l,d,s,c;
+        cin>>l>>d>>s>>c;
+        double days=log(l/(double)s)/(double)log(c+1);
+        if(days+1<=d){
+            cout<<"ALIVE AND KICKING"<<endl;
+        }
+        else{
+            cout<<"DEAD AND ROTTING"<<endl;
+        }
+    }
+}

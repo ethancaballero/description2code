@@ -1,0 +1,12 @@
+n=input()
+s=map(int,raw_input().split())
+l=j=0
+a=[0]*n
+for i in s:
+	if i==0:
+		l=0
+	else:
+		l+=1
+		a[j]=l
+		j+=1
+print max(a)		

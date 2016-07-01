@@ -1,0 +1,16 @@
+'''input
+4
+1 4 3 2
+5
+2 3 4 5 1
+1
+1
+0
+'''
+
+n = input()
+while n:
+	data, indices = [int(i) for i in raw_input().rstrip().split()], {}
+	for i, x in enumerate(data): indices[x] = i+1
+	print 'ambiguous' if indices.values() == data else 'not ambiguous'
+	n = input()

@@ -1,0 +1,92 @@
+//      vikky_codder(Vikash Dubey)
+//	I.T. B.Tech. IInd year
+//	MNNIT Allahabad 
+
+#include<bits/stdc++.h>
+using namespace std;
+#define wl(t) while(t--)
+#define scan(n)	scanf("%d",&n)
+#define scanll(n) scanf("%lld",&n)
+#define print(n) printf("%d
+",n)
+#define printll(n) printf("%lld
+",n)
+#define pb push_back
+#define mp make_pair
+#define ft first
+#define sd second
+#define all(x) (x).begin(), (x).end()
+#define mem(a,v) memset(a,v,sizeof(a))
+#define nline printf("
+")
+typedef long long int ll;
+typedef vector<int> VI;
+typedef vector<ll> VLL;
+typedef pair<int, int> PII;
+typedef pair<ll, ll> PLL;
+typedef vector<vector<int> > matrix;
+
+int dist[2510];
+bool sptSet[2510];
+int adj[2510][2510];
+
+int minDist(int n)
+{
+	int min=99999999;
+	int min_index;
+	for(int v=0;v<n;v++){
+		if(sptSet[v] == false && dist[v] <= min){
+			min = dist[v];
+			min_index = v;
+		}
+	}
+	return min_index;
+}
+
+void dijkstra(int src, int dst, int n)
+{
+	for(int i=0;i<n;i++){
+		dist[i]=99999999;
+		sptSet[i]=0;
+	}
+	dist[src]=0;
+	for(int count=0;count<n-1;count++){
+		int u = minDist(n);
+		sptSet[u]=true;
+		for(int v=0;v<n;v++){
+			if(!sptSet[v] && adj[u][v] && dist[u]!=99999999 && dist[u]+adj[u][v] < dist[v]){
+				dist[v] = dist[u] + adj[u][v];
+			}
+		}
+	}
+	print(dist[dst]);
+}
+
+int main()
+{
+	int t,n,x,y;
+	vector< PII > v;
+	scan(t);
+	wl(t){
+		scan(n);
+		v.clear();
+		for(int i=0;i<n;i++){
+			scanf("%d%d",&x,&y);
+			v.pb(mp(x,y));
+		}
+		scanf("%d%d",&x,&y);
+		v.pb(mp(x,y));
+		scanf("%d%d",&x,&y);
+		v.pb(mp(x,y));
+		for(int i=0;i<n+2;i++)
+			for(int j=0;j<n+2;j++)
+				adj[i][j]=0;
+		for(int i=0;i<n+2;i++){
+			for(int j=0;j<n+2;j++){
+				adj[i][j]=((v[i].ft-v[j].ft)*(v[i].ft-v[j].ft) + (v[i].sd-v[j].sd)*(v[i].sd-v[j].sd));
+			}
+		}
+		dijkstra(n,n+1,n+2);
+	}
+	return 0;
+}

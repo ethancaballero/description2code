@@ -1,0 +1,62 @@
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <algorithm>
+using namespace std;
+typedef long long ll;
+#define MAXN 100005
+#define MOD 1000000007
+ll dp[MAXN];
+void pre() {
+    dp[1] = 1; dp[2] = 3;
+    for(int i = 3; i < MAXN; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+        dp[i] = dp[i] * 2;
+    }
+    for(int i = 1; i < 10; i++) cout << dp[i] << " "; cout << endl;
+}
+ll ans[2][2], temp[2][2], to[2][2];
+void clr() {
+    for(int i = 0; i < 2; i++) for(int j = 0; j < 2; j++) temp[i][j] = 0;
+}
+ll ipow(ll num) {
+    to[0][0] = 0; to[0][1] = 1;
+    to[1][0] = to[1][1] = 2;
+    for(int i = 0; i < 2; i++) for(int j = 0; j < 2; j++) ans[i][j] = 0;
+    ans[1][1] = ans[0][0] = 1;
+    num -= 1;
+    while(num) {
+        if(num & 1) {
+            clr();
+            for(int i = 0; i < 2; i++) for(int j = 0; j < 2; j++) for(int k = 0; k < 2; k++) temp[i][j] += (ans[i][k] * to[k][j]);
+            for(int i = 0; i < 2; i++) for(int j = 0; j < 2; j++) ans[i][j] = temp[i][j] % MOD;
+        }
+        clr();
+        for(int i = 0; i < 2; i++) for(int j = 0; j < 2; j++) for(int k = 0; k < 2; k++) temp[i][j] += (to[i][k] * to[k][j]);
+        for(int i = 0; i < 2; i++) for(int j = 0; j < 2; j++) to[i][j] = temp[i][j] % MOD;
+        num >>= 1LL;
+    }
+    ll res = ans[0][0] + (ans[0][1] * 3);
+    res = res % MOD;
+    return res;
+}
+void solve() {
+    ll N; scanf("%lld", &N);
+    if(N == 1) {
+        printf("1
+");
+        return;
+    } else if(N == 2) {
+        printf("3
+");
+        return;
+    }
+    ll ans = ipow(N);
+    printf("%lld
+", ans);
+}
+int main() {
+    int t; //pre();
+    scanf("%d", &t);
+    while(t--) solve();
+}

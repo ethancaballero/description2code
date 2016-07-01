@@ -1,0 +1,20 @@
+l=[0,1]
+for x in range(4789):
+    l.append(l[x]+l[x+1])
+    
+t=int(raw_input())
+for x in range(t):
+    n=int(raw_input())
+    i=0
+    j=4790
+    c="NO"
+    for y in range(14):
+        if n>l[(i+j)/2]:
+            i=(i+j)/2
+        
+        elif n<l[(i+j)/2]:
+            j=(i+j)/2
+        else:
+            c="YES"
+            break
+    print c        

@@ -1,0 +1,4 @@
+T = input()
+for case in range(T):
+    m,n = raw_input().split(" ")
+    print int(m)*(int(n)-1)+int(n)*(int(m)-1)

@@ -1,0 +1,13 @@
+t = int (raw_input())
+while(t>0):
+    t-=1
+    string = raw_input().split()
+    n,k=map(int,string)
+    a=map(int,raw_input().split())
+    b=map(int,raw_input().split())
+    s=0
+    for i in range(0,len(a)):
+        s+=a[i]*b[i]
+    maxi=max(map(abs,b))
+    print maxi*k+s
+    

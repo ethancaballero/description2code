@@ -1,0 +1,96 @@
+#include <iostream>
+#include <vector>
+#include <cstdio>
+
+#define pb push_back
+#define VV vector< vector<int> >
+#define VI vector<int> 
+
+
+using namespace std;
+
+int dfstraversal(int k,VV &nodes,VV &weights,VI &visited);
+
+int main() {
+
+   int t;
+
+   scanf("%d",&t);
+
+   while(t-- > 0) {
+
+    VV nodes(10001); VV weights(10001);    
+	
+	VI visited(10001,0);
+
+	int n,u,v;
+	
+	long long sum=0,remcomb,totalcomb,total;
+
+	scanf("%d",&n);
+
+	for(int i=1;i<n;i++) {
+
+		scanf("%d %d",&u,&v);
+
+		nodes[u].pb(v);
+
+		nodes[v].pb(u);
+
+	}
+
+	total = dfstraversal(1,nodes,weights,visited);
+
+	for(int i=1;i<=n;i++) {
+
+		remcomb=totalcomb=0;
+
+		for(int j=0;j<nodes[i].size();j++) {
+
+			remcomb += (weights[i][j]*(weights[i][j]-1))/2;
+
+			totalcomb += weights[i][j];
+            
+		}
+
+		remcomb = (totalcomb * (totalcomb-1))/2 - remcomb;
+
+		sum += 2* i * (remcomb+totalcomb) + i;
+
+		sum = sum % 1000000007;
+
+	}
+	
+	printf("%lld
+",sum);
+
+    }
+
+    return 0;
+
+}
+
+
+int dfstraversal(int k,VV &nodes,VV &weights,VI &visited) {
+
+   visited[k]=1; int sum = 0;
+
+   for(int i=0;i<nodes[k].size();i++) {
+
+	if(visited[nodes[k][i]]==0) {
+
+		weights[k].pb(1);
+
+		weights[k][i]+=dfstraversal(nodes[k][i],nodes,weights,visited);
+
+		sum+=weights[k][i];
+
+	}
+
+	else weights[k].pb(0);
+
+    }
+
+    return sum;
+
+}

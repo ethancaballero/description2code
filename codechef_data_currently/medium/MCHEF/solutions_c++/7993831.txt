@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define maxx 99999999
+#define minn -99999999
+#define PB push_back
+#define MP make_pair
+#define ff first
+#define ss second
+typedef pair<int,int >  pii;
+#define MX 100005
+int arr[MX];
+pii v[MX];
+pair <int , pii> ma[MX];
+int W[MX], tmp[MX];
+ll dp[MX][502];
+int main()
+{
+	int t,i,j,kk,jj,n,m,k;
+	ll ans = 0;
+	scanf("%d",&t);
+	while(t--)
+    {
+        ans = 0;
+       // sc(n); sc(kk); sc(m);
+       scanf("%d%d%d",&n,&kk,&m);
+        for(i = 1,j = 1; i <= n ; i++)
+        {
+            scanf("%d",&arr[i]);
+            if(arr[i] < 0)
+            {
+                v[j].ff = arr[i]; v[j++].ss = i;
+            }
+            ans += arr[i];
+        }
+        for(int i=1;i<=m;i++)
+        {
+          scanf("%d",&ma[i].ss.ff);
+          scanf("%d",&ma[i].ss.ss);
+          scanf("%d",&ma[i].ff);
+        }
+        sort(ma + 1, ma + 1 + m);
+        for(i = 1, k = 1; i < j; i++)
+        {
+            for(int jj=1;jj<=m;jj++)
+            {
+                if(ma[jj].ff <= kk && v[i].ss <= ma[jj].ss.ss && v[i].ss >= ma[jj].ss.ff)
+                {
+                    W[k] = ma[jj].ff;
+                    tmp[k++] = (v[i].ff > 0) ? v[i].ff : -v[i].ff;
+                    break;
+                }
+            }
+        }
+        for(int i=1;i<k;i++)
+        {
+            for(int jj=1;jj<=kk;jj++)
+            {
+                if(W[i] <= jj)
+                    dp[i][jj] = max(dp[i-1][jj], tmp[i] + dp[i-1][jj - W[i]]);
+                else
+                    dp[i][jj] = dp[i-1][jj];
+            }
+        }
+        printf("%lld
+", dp[k-1][kk] + ans);
+    }
+    return 0;
+}

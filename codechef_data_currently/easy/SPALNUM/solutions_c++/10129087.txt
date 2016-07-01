@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+int palincheck(int n)
+{
+        int palin=n;
+        int rev=0;
+        while(n!=0)
+        {
+            rev=(rev*10)+n%10;
+            n/=10;
+        }
+        if(palin==rev)
+            return 1;
+        else
+            return 0;
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int l,r,sum=0,i;
+        cin>>l>>r;
+        for(i=l;i<=r;i++)
+        {
+            if(palincheck(i))
+                sum+=i;
+        }
+        cout<<sum<<endl;
+    }
+    return 0;
+}

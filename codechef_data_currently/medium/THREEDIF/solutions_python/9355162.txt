@@ -1,0 +1,6 @@
+for _ in range(input()):
+	a=map(int,raw_input().split())
+	a.sort()
+	c=(a[0]%1000000007)*((a[1]-1)%1000000007)*((a[2]-2)%1000000007)
+	#print c
+	print c%1000000007

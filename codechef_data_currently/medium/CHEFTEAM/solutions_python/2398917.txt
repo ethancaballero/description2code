@@ -1,0 +1,16 @@
+from sys import stdin
+
+def comb(n, k):
+    if 0 <= k <= n:
+        n2k = 1
+        k2k = 1
+        for t in xrange(1, min(k, n - k) + 1):
+            n2k *= n
+            k2k *= t
+            n -= 1
+        return n2k // k2k
+    else: return 0
+
+for trial in xrange(int(stdin.readline())):
+    N,K = map(int,stdin.readline().split())
+    print comb(N,K)

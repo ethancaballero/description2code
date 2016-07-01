@@ -1,0 +1,13 @@
+alphastr="bcdefghijklmnopqrstuvwxyz"
+for _ in range(int(input())):
+    N=int(raw_input())
+    ans=""
+    while(N>0):
+        ans=ans+"a"
+        if(N/25 > 0):
+            ans=ans+alphastr
+        else:
+            ans=ans+alphastr[:N]
+        N-=25
+            
+    print "".join(reversed(ans))

@@ -1,0 +1,34 @@
+  Chef doesn't love math anymore. He loves Sasha. Sashen'ka is cute.
+
+Chef goes on a date with her. Flowers are boring, while numbers are not. He knows that most of all this girl loves numbers, that's why he is going to bring ribbon with numbers L, L+1, L+2, ..., R written on it.
+
+
+Sasha thinks that numbers with prime number of divisors are special. That's why she is going to kiss boy for each such number he will bring.
+
+Now Chef wonder how many times he will be kissed by Sashen'ka ?
+
+\u00a0
+Input
+The first line of the input contains an integer T denoting the number of test cases. The description of T test cases follows.
+The first line of each test case contains two number L, R.
+\u00a0
+Output
+For each test case, output a single line containing answer for corresponding test case.
+\u00a0
+Constraints
+
+1 \u2264 T \u2264 5
+1 \u2264 L \u2264 R \u2264 1012
+0 \u2264 R-L \u2264 106
+
+\u00a0
+Example
+Input:
+1
+1 10
+
+Output:
+6
+\u00a0
+Explanation
+Example case 1. Numbers 2,3,4,5,7,9 are special.

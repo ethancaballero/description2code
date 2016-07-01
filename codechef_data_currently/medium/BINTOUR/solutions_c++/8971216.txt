@@ -1,0 +1,47 @@
+#include<iostream>
+#define MOD 1000000009
+using namespace std;
+
+long long power(long long x,long long  n,long long m){
+    if(n==0)
+        return 1;
+
+    if(n==1)
+       return x;
+
+       long long k=power(x,n/2,m);
+        k=(k*k)%m;
+
+       if(n%2)
+           return (k*x)%m;
+
+       else
+          return k;
+}
+
+int main(){
+	int k;
+	cin>>k;
+	int n=1<<k;
+	int fact[1100000];
+	fact[0]=1;
+	long long ans=1;
+	for(int i=1;i<=n;i++)
+		fact[i]=((long long)fact[i-1]*i)%MOD;
+
+
+
+	for(int i=1;i<=n;i++){
+		ans=1;
+		if(i<n/2)
+			cout<<0<<endl;
+		else{
+			ans=(power(fact[i-n/2],MOD-2,MOD)*(long long)fact[i-1])%MOD;				
+			ans=(((ans*fact[n/2])%MOD)*n)%MOD;
+
+			cout<<ans<<endl;
+		}	
+	}
+
+	return 0;
+}

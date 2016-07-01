@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<iostream>
+#include<math.h>
+typedef unsigned long long ll;
+using namespace std;
+ll isprime[1000010],cnt,prime[100001],a[1000010],div[1000010];
+void set(){
+	cnt=0;
+	isprime[0]=0;
+	isprime[1]=0;
+	for(int i=2;i<1000010;i++)
+		isprime[i]=1;
+}
+void sieve(){
+	ll i,j;
+	set();
+	for(i=2;i<1000010;i++)
+		if(isprime[i]){
+			prime[cnt++]=i;
+			for(j=i*i;j<1000010;j+=i)
+				isprime[j]=0;
+		}
+}
+int main(){
+	int t;
+	scanf("%d",&t);
+	sieve();
+	while(t--){
+		ll l,r,i,j,d,ans,k;
+		scanf("%llu%llu",&l,&r);
+		for(i=l;i<=r;i++){
+			div[i-l]=1;
+			a[i-l]=i;
+		}
+		for(i=0;i<=78498;i++){
+			k=prime[i];
+			for(j=((l-1)/k+1)*k;j<=r;j+=k){
+				d=0;
+				while(a[j-l]%k==0){
+					d++;
+					a[j-l]/=k;
+				}
+				div[j-l]*=(d+1);
+			}
+		}
+		ans=0;
+		for(i=l;i<=r;i++){
+			if(a[i-l]>1)
+				div[i-l]*=2;
+			if(isprime[div[i-l]])
+				ans++;
+		}
+		printf("%llu
+",ans);
+	}
+	return 0;
+}

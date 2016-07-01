@@ -1,0 +1,236 @@
+import java.io.*;
+import java.io.PrintWriter;
+import java.util.*;
+import java.io.InputStream;
+import java.io.DataInputStream;
+ 
+ 
+ 
+public class Main
+{
+// static{ System.out.println("hello");}
+	    static InputStream inputStream = System.in;
+        static OutputStream outputStream = System.out;
+        static FastReader scn = new FastReader(inputStream);
+        static PrintWriter out = new PrintWriter(outputStream);
+        public static int convert(String s)
+        { int pro=1; int sum=0;
+           for(int i=s.length()-1; i>=0 ;i--)
+           {   if(s.charAt(i)=='1')
+               sum+=(pro* 1);
+                 pro=pro*2; 
+               
+            }   
+            
+            return sum;
+        }    
+         public static void main(String[] args) throws IOException
+       {  
+          // HashMap<Integer,ArrayList<Integer>> hm=new HashMap<Integer,ArrayList<Integer>>();
+            String temp=""; int flag=0;
+          while(true)
+          { 
+             String s=scn.ns();   
+             if (s.charAt(0)=='~') break;
+             else if (s.charAt(0)=='0')
+              {
+                if (s.equals("0")) flag=1;
+                else if (s.equals("00")) flag=0;
+                   else for (int i=1;i<=s.length()-2;i++) temp+=flag;        
+                  
+              }
+              else if (s.charAt(0)=='#') {out.println(convert(temp)); temp=""; }
+              else 
+              {
+                  String qq=s.substring(17,s.length());
+                   if (qq.equals("0")) flag=1;
+                else if (qq.equals("00")) flag=0;
+                   else for (int i=1;i<=qq.length()-2;i++) temp+=flag;  
+                  
+                  
+                }
+          
+            }
+          out.close();
+        }    
+                    
+         
+}
+
+
+  class num implements Comparator<num>
+    {
+        
+        public int ff;
+        public int ss;
+   
+        num()
+        {
+            
+        }
+        num(int x,int y)
+        {
+            this.ff = x;
+            this.ss =y;
+       
+        }
+        public int getff()
+        {
+        return ff;
+        }
+        public int getss()
+        {
+        return ss;
+        }
+       public boolean equals(Object n1)
+        {num n=(num)n1;
+        if (this.ff==n.ff && this.ss==n.ss) return true;
+        else return false;
+            
+            
+        }
+       public int compare(num n1,num n2)
+        {  if (n1.ff!=n2.ff) return n1.ff-n2.ff;
+            else return n2.ss-n1.ss;
+            
+            
+        }    
+        
+    }
+
+class FastReader
+{
+ 
+    public InputStream stream;
+    private byte[] buf = new byte[1024];
+    private int curChar;
+    private int numChars;
+    private SpaceCharFilter filter;
+ 
+    public FastReader(InputStream stream)
+    {
+        this.stream = stream;
+    }
+ 
+    public int read()
+    {
+        if (numChars == -1)
+        {
+            throw new InputMismatchException ();
+        }
+        if (curChar >= numChars)
+        {
+            curChar = 0;
+            try
+            {
+                numChars = stream.read (buf);
+            } catch (IOException e)
+            {
+                throw new InputMismatchException ();
+            }
+            if (numChars <= 0)
+            {
+                return -1;
+            }
+        }
+        return buf[curChar++];
+    }
+    
+ public char nc()
+    {
+        int c = read ();
+        while (isSpaceChar (c))
+            c = read ();
+        return (char) c;
+    }
+    
+    public int ni()
+    {
+        int c = read ();
+        while (isSpaceChar (c))
+            c = read ();
+        int sgn = 1;
+        if (c == '-')
+        {
+            sgn = -1;
+            c = read ();
+        }
+        int res = 0;
+        do
+        {
+            if (c < '0' || c > '9')
+            {
+ 
+                
+            }
+            res *= 10;
+            res += c - '0';
+            c = read ();
+        } while (!isSpaceChar (c));
+        return res * sgn;
+    }
+ 
+    public long nl()
+    {
+        int c = read ();
+        while (isSpaceChar (c))
+            c = read ();
+        int sgn = 1;
+        if (c == '-')
+        {
+            sgn = -1;
+            c = read ();
+        }
+        long res = 0;
+        do
+        {
+            if (c < '0' || c > '9')
+            {
+                throw new InputMismatchException ();
+            }
+            res *= 10;
+            res += c - '0';
+            c = read ();
+        } while (!isSpaceChar (c));
+        return res * sgn;
+    }
+ 
+    public String ns()
+    {
+        int c = read ();
+        while (isSpaceChar (c))
+            c = read ();
+        StringBuilder res = new StringBuilder ();
+        do
+        {
+            res.appendCodePoint (c);
+            c = read ();
+        } while (!isSpaceChar (c));
+        return res.toString ();
+    }
+ 
+    public boolean isSpaceChar(int c)
+    {
+        if (filter != null)
+        {
+            return filter.isSpaceChar (c);
+        }
+        return isWhitespace (c);
+    }
+ 
+    public static boolean isWhitespace(int c)
+    {
+        return c==' ' || c == '
+' || c == '' || c == '	' || c == -1;
+    }
+ 
+    public String next()
+    {
+        return ns ();
+    }
+ 
+    public interface SpaceCharFilter
+    {
+        public boolean isSpaceChar(int ch);
+    }
+}     

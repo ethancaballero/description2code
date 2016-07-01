@@ -1,0 +1,90 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cassert>
+
+#include <algorithm>
+using namespace std;
+
+#define ASSERT(A,p,q) assert(p <= A && q >= A)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+
+int P[100010], R[100010];
+void init(int N) {
+    for(int i=1;i<=N;i++) {
+        P[i] = i;
+        R[i] = 0;
+    }
+}
+int find(int n) {
+    if(P[n] == n) return n;
+    return P[n] = find(P[n]);
+}
+void join(int a, int b) {
+    a = find(a);
+    b = find(b);
+    if(a == b) return;
+    if(R[a] < R[b]) P[a] = b;
+    else {
+        P[b] = a;
+        if(R[a] == R[b]) R[a]++;
+    }
+}
+
+int A[100010];
+int C[100010], mi[100010];
+
+int main() {
+    int N, M;
+    scanf("%d %d",&N,&M);
+    ASSERT(N,1,100000);
+    ASSERT(M,1,1000000);
+    init(N);
+    FOR(i,0,M) {
+        int s, e;
+        scanf("%d %d",&s,&e);
+        ASSERT(s,1,N);
+        ASSERT(e,1,N);
+        assert(s != e);
+        join(s,e);
+    }
+    FOR(i,1,N+1) {
+        scanf("%d",&A[i]);
+        ASSERT(A[i],-10000,10000);
+    }
+    FOR(i,1,N+1) {
+        C[i] = 0;
+        mi[i] = 10001;
+    }
+    FOR(i,1,N+1) {
+        int p = find(i);
+        C[p]++;
+        if(A[i] >= 0) mi[p] = min(mi[p],A[i]);
+    }
+    int se = 0, su = 0, ovi = 10001, f = 0;
+    //FOR(i,1,N+1) printf("%d ",C[i]); printf("
+");
+    //FOR(i,1,N+1) printf("%d ",mi[i]); printf("
+");
+    FOR(i,1,N+1) {
+        if(C[i] > 0) {
+            se++;
+            if(mi[i] == 10001) f = 1;
+            ovi = min(ovi, mi[i]);
+            su += mi[i];
+        }
+    }
+    if(se == 1) {
+        printf("%d
+",0);
+    }
+    if(se > 1) {
+        if(f) {
+            printf("-1
+",0);
+        } else {
+            printf("%d
+",ovi*(se-1)+su-ovi);
+        }
+    }
+    return 0;
+}

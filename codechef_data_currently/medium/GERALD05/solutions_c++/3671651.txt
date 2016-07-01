@@ -1,0 +1,134 @@
+/* Name- Aayush Agarwal
+   Language -C++
+   */
+#include <cstdio>
+#include <iostream>
+#include <cmath>
+#include <cstring>
+#include <cstdlib>
+#include <ctime>
+#include <climits>
+#include <set>
+#include <map>
+#include <vector>
+#include <queue>
+#include <list>
+#include <deque>
+#include <stack>
+#include <iterator>
+#include <cassert>
+#include <cctype>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <algorithm>
+#define fOr(i,n) for(int i=0;i<n;i++)
+#define For(i,n) for(int i=1;i<=n;i++)
+#define ss(a) scanf("%s",a)
+#define si(a) scanf("%d",&a)
+#define sl(a) scanf("%lld",&a)
+#define pi(a) printf("%d ",a)
+#define pl(a) printf("%lld ",a)
+#define ps(a) printf("%s ",a)
+#define nl    printf("
+");
+#define ll long long int
+#define ull unsigned long long int
+#define mod 1000000007
+using namespace std;
+
+const double eps=1e-9;
+const double PI=2*acos(0.0);
+
+#define VI vector<int>
+#define VS vector<string>
+#define VL vector<long long int>
+#define VVI vector<VI>
+#define PII pair<int,int>
+#define PLL pair<ll,ll>
+#define PSS pair<string,string>
+#define PSI pair<string,int>
+#define VPII vector<PII>
+#define VPLL vector<PLL>
+#define VPSS vector<PSS>
+#define VPSI vector<PSI>
+#define pb(a) push_back(a)
+#define mp(a,b) make_pair(a,b)
+#define sqr(x) ((x)*(x))
+#define min(a,b) ((a<b)?a:b)
+
+ll types[105];
+ll dp[105][105];
+
+ll power(ll a,ll b)
+{
+	ll x=1,y=a;
+	while(b)
+	{
+		if(b%2)
+		{
+			x=(x*y)%mod;
+		}
+		y=(y*y)%mod;b/=2;
+	}
+	return x;
+	
+	
+}
+
+ll nCr(ll n,ll r)
+{	
+	ll num=n,a=1,b=1;
+	for(int i=1;i<=r;i++)
+	{
+		a=(a*num)%mod;
+		num--;
+	}
+	for(int i=1;i<=r;i++)
+	{
+		b=(b*i)%mod;
+	}
+	a=((a)*power(b,mod-2))%mod;
+	return a;
+	
+}
+
+int main()
+{
+	int t,a,b,c,d,s;
+	si(t);
+	while(t--)
+	{	
+		memset(dp,0,sizeof(dp));
+		si(a);
+		si(b);
+		si(c);
+		si(d);
+		si(s);
+		for(int i=1;i<=s;i++)
+		{
+			types[i]=a+(b*i)+(c*i*i)+(d*i*i*i);
+			types[i]%=mod;
+		}
+		dp[0][0]=1;
+		for(int i=1;i<=s;i++)
+		{
+			for(int j=0;j<=s;j++)
+			{	
+				dp[i][j]=dp[i-1][j];
+				for(int k=1;;k++)
+				{
+					if((i*k)>j)break;
+					dp[i][j]=dp[i][j]+ (nCr(types[i]-1+k,k)*dp[i-1][j-(i*k)])%mod;
+					dp[i][j]%=mod;
+					
+				}
+			}
+		}
+		pl(dp[s][s]);nl;
+	}
+	
+}

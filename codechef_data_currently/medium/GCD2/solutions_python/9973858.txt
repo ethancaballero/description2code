@@ -1,0 +1,46 @@
+import math
+import sys
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+def gcd(a,b):
+ if b==0: return a
+ return gcd(b,a%b)
+cases=input()
+for case in range(cases):
+ b,a=raw_input().split()
+ b=int(b)
+ if b==0:
+  print a
+ else:
+  num=0
+  for i in a:
+   num=(num*10+int(i))%b
+  print gcd(b,num)
+ 
+ 
+
+
+  
+  
+ 
+ 
+ 
+
+  
+ 
+
+  
+  
+ 
+ 
+ 
+
+  
+ 

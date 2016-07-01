@@ -1,0 +1,35 @@
+t = input()
+ar = raw_input().split()
+bn = 0
+
+# def check (a,b):
+# 	if (a % 10 == 5):
+		
+
+for x in ar:
+	d = int(x)
+	r = 0
+	fv = 0
+	tw = 0
+	# if (d % 10 == 0):
+	# 	check(d,100)
+	# print 1 % 5
+	dw = d
+	while(1):
+		if (dw % 2 == 0):
+			tw += 1
+			dw /= 2
+		if (dw % 5 == 0):
+			fv += 1
+			dw /= 5
+		# print dw	
+		if (dw % 2 != 0 and dw % 5 != 0 ):
+			break
+
+	r = fv - tw
+	if ( r > 0):
+		if (r % 2 != 0):
+			r = r +1
+		for e in range(r):
+			d *= 2
+	print d		

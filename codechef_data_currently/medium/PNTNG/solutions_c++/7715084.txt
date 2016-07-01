@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct sorting
+{
+	long long int a;
+	long long int b;
+};
+struct sorting v[100001];
+
+bool sortbyb(struct sorting v1,struct sorting v2)
+{
+	if(v1.b<v2.b)
+	return true;
+	else return false;
+}
+
+
+int main()
+{
+	long long int i,n,m,h,sum,sum1,ans;
+	
+	sum=0;sum1=0;
+	scanf("%lld%lld%lld",&n,&m,&h);
+	for(i=0;i<h;i++)
+	{
+		scanf("%lld%lld",&(v[i].a),&(v[i].b));
+		sum1+=v[i].a;
+	}
+	
+	if(sum1<(n*m))
+	printf("Impossible
+");
+	else
+	{
+		sum=(n*m);
+		sort(v,v+h,sortbyb);
+		ans=0;
+		for(i=0;i<h;i++)
+		{
+			if(v[i].a!=0)
+			{
+				ans=ans+(min((v[i].a),sum)*v[i].b);
+				sum=sum-v[i].a;
+				if(sum<=0)
+				break;
+			}
+		}
+		printf("%lld
+",ans);
+	}
+			
+		return 0;			
+}
+		
+	
+	
+//	for(i=0;i<10;i++)
+	//cout<<v[i].a<<" "<<v[i].b<<endl;

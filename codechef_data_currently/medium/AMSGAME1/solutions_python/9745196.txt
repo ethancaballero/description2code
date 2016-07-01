@@ -1,0 +1,9 @@
+#making them equal <VigzMv/>
+from fractions import gcd
+for t in range(int(raw_input())):
+    n=int(raw_input())
+    a=0
+    N=map(int,raw_input().split())
+    for i in N:
+        a=gcd(a,i)
+    print a 

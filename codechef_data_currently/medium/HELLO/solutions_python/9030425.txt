@@ -1,0 +1,14 @@
+import sys
+
+t = input()
+for _ in xrange(t):
+	d,u,n = map(float, sys.stdin.readline().split())
+	cost = d*u
+	j = 0
+	for i in xrange(int(n)):
+		m,r,c = map(float, sys.stdin.readline().split())
+		plan = c/m + r*u
+		if plan<cost:
+			cost = plan
+			j = i+1
+	print j

@@ -1,0 +1,15 @@
+import math
+def maxVol(p,s):
+    d=(p*p*0.25)-(6*s)
+    a1=((p/2)+math.sqrt(d))/6
+    a2=((p/2)-math.sqrt(d))/6
+ 
+    c1=(p/4)-(2*a1)
+    c2=(p/4)-(2*a2)
+ 
+    v=[(a1**2)*c1,(a2**2)*c2]
+    return max(v)
+    
+for testcases in xrange(int(raw_input())) :
+    perimeter, surface = map(int, raw_input().split() )
+    print "%.2f"%maxVol(perimeter, surface)

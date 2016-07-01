@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    long long int p;
+    string s;
+    cin>>s;
+    long long int d=s.size();
+    long int l=0,r=d-1;
+    if(s[l]!=s[r]&&(s[l]!='?'&&s[r]!='?'))
+    {
+        cout<<0<<endl;
+    }
+        else
+            {
+              int flag=1;
+              p=1;
+              while(l<=r)
+            	{
+            	if(s[l]==s[r])
+            	{
+            		if(s[l]=='?')
+            		{
+            		p=(p*26)%10000009;
+            	    }
+                }
+            		else if(s[l]!=s[r]&&s[l]!='?'&&s[r]!='?')
+            		{
+            		flag=0;
+            		break;
+            		}
+            		else if(s[l]=='?'||s[r]=='?')
+            		{
+            			p=(p*1)%10000009;
+            		}
+            		l++;
+            		r--;
+            	}
+
+            if(flag==1)
+            cout<<p<<endl;
+            else
+            cout<<0<<endl;
+            }
+    }
+return 0 ;
+
+}

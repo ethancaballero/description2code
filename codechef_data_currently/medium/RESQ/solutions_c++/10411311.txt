@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,i,j,root;
+	long int n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+	    root=sqrt(n);
+        for(i=root;i>=0;i--)
+        if(n%i==0)
+        break;
+        cout<<((n/i)-i)<<endl;
+	}
+	
+	return 0;
+}

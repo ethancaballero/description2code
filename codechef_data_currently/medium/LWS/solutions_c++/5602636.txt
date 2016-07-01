@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define N 2000
+char s[N + 2];
+int dp[N + 1][26][26];
+int main()
+{
+    int tc,t,i;
+    scanf("%d",&tc);
+    for(t = 1 ; t<=tc ; t++)
+    {
+        scanf("%s",s+1);
+        int n = strlen(s+1);
+        //for(int j = 0 ; j<=27 ; j++)
+        //for(int k = 0 ; k<=27 ; k++)
+        //dp[0][j][k] = -10000;
+        //dp[0][0][27] = 0;
+        for(int i = 1 ; i<=n ;i++)
+        {
+            for(int j = 0 ; j<=25 ; j++)
+            for(int k = 0 ; k<=25 ; k++)
+            dp[i][j][k] = dp[i-1][j][k];
+
+            int ch = s[i] - 'a';
+            for(int j = 0 ; j<=25 ; j++)
+            {
+                for(int k = ch ; k<=25 ; k++)
+                dp[i][j][ch] = max(dp[i][j][ch],1+dp[i-1][j][k]);
+            }
+            for(int k = 0 ; k<=25 ; k++)
+            {
+                for(int j = 0 ; j<=ch ; j++)
+                dp[i][ch][k] = max(dp[i][ch][k],1+dp[i-1][j][k]);
+            }
+        }
+        int ans = 0;
+        for(int j = 0 ; j<=25 ; j++)
+        for(int k = 0 ; k<=25 ; k++)
+        ans = max(ans,dp[n][j][k]);
+        printf("%d
+",ans);
+    }
+    return 0;
+}

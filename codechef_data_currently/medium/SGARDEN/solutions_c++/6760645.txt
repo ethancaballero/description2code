@@ -1,0 +1,70 @@
+#include<iostream>
+#include<cstdio>
+#define M 1000000007
+long l(long lcm,long c)
+{
+if(c==0)
+return lcm;
+return l(c,lcm%c);
+}
+
+int ll(int c[100005],int j)
+{
+int i,k;
+long long ans=1;
+for(i=0;i<j;i++)
+{
+if(c[i]!=1)
+{
+for(k=i+1;k<j;k++)
+c[k]/=l(c[k],c[i]);
+}
+ans=(ans*c[i])%M;
+}
+return ans;
+}
+
+int main()
+{
+int t,n,i,j,o;
+long long lcm,countt;
+int arr[100010],res[100010];
+bool m[100010];
+scanf("%d",&t);
+while(t--)
+{
+o=0;
+lcm=1;
+scanf("%d",&n);
+
+for(i=1;i<=n;i++)
+{
+m[i]=true;
+scanf("%d",&arr[i]);
+}
+
+for( i=1 ; i<=n ; i++ )
+{
+countt=0;
+if(m[i]==true)
+{
+m[i]=false;
+j=arr[i];
+m[j]=false;
+countt++;
+while(j!=i)
+{
+j=arr[j];
+m[j]=false;
+countt++;
+}
+res[o]=countt;
+o++;
+}
+}
+lcm=ll(res,o);
+printf("%lld
+",lcm);
+}
+return 0;
+}

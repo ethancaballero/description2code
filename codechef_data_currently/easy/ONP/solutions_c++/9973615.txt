@@ -1,0 +1,89 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+int y,z;
+char ch;
+struct stack{
+	char data;
+	struct stack* next;
+};
+struct stack* top=NULL;
+void push(char x){
+	struct stack *temp=(struct stack*)malloc(sizeof(struct stack*));
+	temp->data=x;
+	temp->next=top;
+	top=temp;
+}
+void pop(){
+	struct stack *temp;
+	temp=top;
+	top=temp->next;
+	free(temp);
+}
+char peep(){
+	return top->data;
+}
+int prec(char ch){
+	if(ch=='+'||ch=='-')
+		return 1;
+	else if(ch=='*'||ch=='/')
+		return 2;
+	else if(ch=='^')
+	return 3;
+	else
+	return 8;
+}
+int main(){
+	string s;
+	int t;
+	cin>>t;
+	while(t--){
+	cin>>s;
+	for(int i=0;i<s.length();i++){
+		if(s[i]>=97&&s[i]<=122)
+		cout<<s[i];
+		else{
+			if(s[i]=='(')
+			push(s[i]);
+			else if(s[i]==')'){
+				ch=peep();
+				while(ch!='('){
+					cout<<ch;
+					pop();
+					ch=peep();
+				}
+				pop();
+				}
+			else if(s[i]=='+'||s[i]=='-'||s[i]=='*'||s[i]=='/'||s[i]=='^'){
+				ch=peep();
+				if(ch=='(')
+				push(s[i]);
+				else{
+				y=prec(ch);
+				z=prec(s[i]);
+				if(z>y)
+				push(s[i]);
+				else{
+					cout<<ch;
+					pop();
+					ch=peep();
+					y=prec(ch);
+					z=prec(s[i]);
+					while(z>y){
+						cout<<ch;
+						pop();
+						ch=peep();
+						y=prec(ch);
+						z=prec(s[i]);
+					}
+					push(s[i]);
+				}
+			}
+			}
+		}
+	//	cout<<peep()<<"top"<<endl;
+	}
+	cout<<endl;
+}
+return 0;
+}

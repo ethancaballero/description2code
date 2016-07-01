@@ -1,0 +1,5 @@
+MOD=1000000007
+t=int(raw_input())
+for i in xrange(t):
+    n , k=map(int , raw_input().split())
+    print k*((k-1)**(n-1))%MOD

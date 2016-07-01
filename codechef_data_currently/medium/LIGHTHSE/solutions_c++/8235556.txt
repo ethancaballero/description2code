@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define R(i,a,b) for(int i=a;i<b;i++)
+#define RE(i,a,b) for(int i=a;i<=b;i++)
+#define RR(i,a,b) for(int i=a;i>b;i--)
+#define RRE(i,a,b) for(int i=a;i>=b;i--)
+#define F(i,n) for(int i=0;i<n;i++)
+#define FE(i,n) for(int i=0;i<=n;i++)
+#define FR(i,n) for(int i=n;i>0;i--)
+#define FRE(i,n) for(int i=n;i>=0;i--)
+#define mp(a,b) make_pair(a,b)
+#define pii pair <int, int>
+#define pb push_back
+#define ft first
+#define sd second
+#define LL long long
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+
+inline void get(int &x)
+{
+    register int c = gc();
+    x = 0;
+    int neg = 0;
+    for(;((c<48 || c>57) && c != '-');c = gc());
+    if(c=='-') {neg=1;c=gc();}
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+    if(neg) x=-x;
+}
+
+int main()
+{
+	int T;
+	get(T);
+	for (int __rep = 1; __rep <=T; __rep++)
+	{
+		int n;
+		get(n);
+		int ymax, ymin;
+		int xmax, xmin;
+		int ixmax, ixmin;
+		int iymax, iymin;
+		int yxmax, yxmin;
+		ymax = xmax = ixmax = iymax = yxmax = -1000000008;
+		ymin = xmin = ixmin = iymin = yxmin = 1000000008;
+		F(i,n)
+		{
+			int x,y;
+			get(x);
+			get(y);
+			assert(abs(x) <= 1000000000);
+			assert(abs(y) <= 1000000000);
+			if (xmax < x)
+			{
+				xmax = x;
+				yxmax = y;
+				ixmax = i;
+			}
+			if (xmin > x)
+			{
+				xmin = x;
+				yxmin = y;
+				ixmin = i;
+			}
+			if (ymax < y)
+			{
+				ymax = y;
+				iymax = i;
+			}
+			if (ymin > y)
+			{
+				ymin = y;
+				iymin = i;
+			}
+		}	
+		if (ixmax == iymax)
+			cout << "1
+" << ixmax+1 << " SW
+"; 
+		else if (ixmax == iymin)
+			cout << "1
+" << ixmax+1 << " NW
+";
+		else if (ixmin == iymax)
+			cout << "1
+" << ixmin+1 << " SE
+";
+		else if (ixmin == iymin)
+			cout << "1
+" << ixmin+1 << " NE
+";
+		else
+		{
+			if (yxmax > yxmin)
+				cout << "2
+" << ixmax+1 << " SW
+" << ixmin+1 << " NE
+";
+			else
+				cout << "2
+" << ixmax+1 << " NW
+" << ixmin+1 << " SE
+";
+		}
+	}
+	return 0;
+}

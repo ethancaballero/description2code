@@ -1,0 +1,15 @@
+t = int(raw_input())
+j = 0
+while j<t :
+    l,r = map(int,raw_input().split())
+    sum = 0
+    for i in range(l,r+1) :
+        if i < 10 :
+            sum += i
+        else :
+            a = str(i)
+            b=a[::-1]
+            if b==a :
+                sum += i    
+    print sum
+    j+=1

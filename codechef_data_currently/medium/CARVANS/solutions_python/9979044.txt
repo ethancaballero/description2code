@@ -1,0 +1,11 @@
+def CARVANS():
+	t = int(raw_input())
+	while t:
+		N = int(raw_input())
+		L = [int(i) for i in raw_input().split()]; cars = 1
+		for i in range(len(L)-1):
+			if L[i] > L[i+1]: cars+=1
+			else: L[i+1] = L[i]
+		print cars
+		t-=1
+if __name__ == '__main__': CARVANS()

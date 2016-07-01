@@ -1,0 +1,9 @@
+for t in range(input()):
+ n=int(raw_input())
+ N=int(n**.5)
+ for i in range(N,0,-1):
+  if n%i==0:
+   a=i
+   break
+ b=n/a
+ print abs(b-a)

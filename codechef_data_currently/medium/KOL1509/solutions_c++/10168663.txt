@@ -1,0 +1,164 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <math.h>
+#include <iostream>
+#include <stack>
+#include <stdlib.h>
+using namespace std;
+
+#define mod 1000000007
+
+struct Point
+{
+    long long int x, y;
+};
+Point p0;
+
+Point nextToTop(stack<Point> &S)
+{
+    Point p = S.top();
+    S.pop();
+    Point res = S.top();
+    S.push(p);
+    return res;
+}
+void swap(Point &p1, Point &p2)
+{
+    Point temp = p1;
+    p1 = p2;
+    p2 = temp;
+}
+long long int distSq(Point p1, Point p2)
+{
+    return (p1.x - p2.x)*(p1.x - p2.x) +
+          (p1.y - p2.y)*(p1.y - p2.y);
+}
+int orientation(Point p, Point q, Point r)
+{
+    long long int val = (q.y - p.y) * (r.x - q.x) -
+              (q.x - p.x) * (r.y - q.y);
+ 
+    if (val == 0) return 0;  
+    return (val > 0)? 1: 2; 
+}
+
+int compare(const void *vp1, const void *vp2)
+{
+   Point *p1 = (Point *)vp1;
+   Point *p2 = (Point *)vp2;
+   int o = orientation(p0, *p1, *p2);
+   if (o == 0)
+     return (distSq(p0, *p2) >= distSq(p0, *p1))? -1 : 1;
+ 
+   return (o == 2)? -1: 1;
+}
+
+
+void convexHull(Point points[], long long int n)
+{
+   long long int ymin = points[0].y, min = 0;
+   for (long long int i = 1; i < n; i++)
+   {
+     long long int y = points[i].y;
+     if ((y < ymin) || (ymin == y &&
+         points[i].x < points[min].x))
+        ymin = points[i].y, min = i;
+   }
+   swap(points[0], points[min]);
+   p0 = points[0];
+   if(n>1)
+   qsort(&points[1], n-1, sizeof(Point), compare);
+
+   long long int m = 1; 
+   for (long long int i=1; i<n; i++)
+   {
+       while (i < n-1 && orientation(p0, points[i],
+                                    points[i+1]) == 0)
+          i++;
+ 
+ 
+       points[m] = points[i];
+       m++;  
+   }
+   if (m < 3) {
+   	printf("0
+");
+   	return;
+   }
+   stack<Point> S;
+   S.push(points[0]);
+   S.push(points[1]);
+   S.push(points[2]);
+
+   long long int sizeOfStack = 3;
+ 
+   for (long long int i = 3; i < m; i++)
+   {
+      while (orientation(nextToTop(S), S.top(), points[i]) != 2){
+      	S.pop();
+      	sizeOfStack--;
+      }
+         
+      S.push(points[i]); sizeOfStack++;
+   }
+
+   struct Point* boundaryPoints = (struct Point*)calloc(sizeof(struct Point),sizeOfStack+1);
+   long long int i=0;
+   while (!S.empty())
+   {
+       Point p = S.top();
+       boundaryPoints[i].x = p.x;
+       boundaryPoints[i].y = p.y;
+       i++;
+       // cout << "(" << p.x << ", " << p.y <<")" << endl;
+       S.pop();
+   }
+   //check if sizeOfStack == i;
+
+   // printf(" i is %lld
+", i);
+   // printf("sizeOfStack is %lld
+", sizeOfStack);
+   boundaryPoints[sizeOfStack].x = boundaryPoints[0].x;
+   boundaryPoints[sizeOfStack].y = boundaryPoints[0].y;
+
+long long int res = 0;
+
+  	for(i = 1; i <= sizeOfStack; i++){
+  		res = res + (boundaryPoints[i-1].x*boundaryPoints[i].y) - boundaryPoints[i].x*boundaryPoints[i-1].y;
+  	}
+  	res = abs(res);
+  	printf("%lld
+", res);
+  	// printf(" res is %lld
+", res);
+}
+int main(){
+	long long int t,n,num,i,j,max,min,count=0;
+	scanf("%lld",&t);
+while(t>0){
+		count=0;
+		scanf("%lld",&n);
+		num=2*n;
+		long long int* arr = (long long int*) calloc(sizeof(long long int),n);
+		struct Point* points = (struct Point*)calloc(sizeof(struct Point),num);
+		for(i = 0; i < n; i++)
+			scanf("%lld",&arr[i]);
+		max=arr[0],min=arr[0];
+		 for(i = 1; i < n; i++)
+    {
+        max = (arr[i - 1] > max)? arr[i - 1]: max;
+        min = (arr[i - 1] < min)? arr[i - 1]: min;
+        points[count].x = min;
+        points[count++].y = arr[i];
+        if(max != min)
+        {
+            points[count].x = max;
+            points[count++].y = arr[i];
+        }
+    }
+		convexHull(points, count);
+		t--;
+	}
+	return 0;
+}

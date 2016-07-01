@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+unsigned long long int fun(unsigned long long int x)
+{
+    unsigned long long int b=0;
+    if(x<10)
+        return x;
+    else
+    {
+        while(x)
+        {
+            b+=(x%10);
+            x=x/10;
+        }
+        return(fun(b));
+    }
+}
+int main()
+{
+    unsigned long long int t,a1,d,l,r,a,s,i;
+    scanf("%llu",&t);
+    while(t--)
+    {
+        a=0;
+        s=0;
+        scanf("%llu %llu %llu %llu",&a1,&d,&l,&r);
+        for(i=l;i<=r;i++)
+        {
+            a=a1+((i-1)*d);
+            s+=fun(a);
+        }
+        cout<<s<<endl;
+    }
+    return 0;
+}

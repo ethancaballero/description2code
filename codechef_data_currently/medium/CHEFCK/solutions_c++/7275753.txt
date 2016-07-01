@@ -1,0 +1,78 @@
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long int
+    #define mod 1000000007
+    //https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/
+    long int tree[24][10000000];
+     
+    ll rmq(ll L,ll R)
+    {
+    L=min(L,R);
+    R=max(L,R);
+    //int k=log2(R-L+1);
+    ll k = 31 - __builtin_clz(R-L+1); // k = log2(j-i+1)
+     
+    long int ans=tree[k][L];
+    ans=min(ans,tree[k][R-(1<<k)+1]);
+    return ans;
+    }
+      
+    int main()
+    {
+    cin.sync_with_stdio(0);
+    cin.tie(0);
+    ll RR,j,N,K,Q,a,b,c,d,e,f,r,s,t,m,L1,La,Lc,Lm,D1,Da,Dc,Dm,sum=0,pro=1,i,t1=0,x,L,R;//,mini=INT_MAX;
+     
+    cin>>N>>K>>Q;
+    //memset(arr,0,sizeof(arr));
+    cin>>a>>b>>c>>d>>e>>f>>r>>s>>t>>m>>tree[0][0];
+    cin>>L1>>La>>Lc>>Lm>>D1>>Da>>Dc>>Dm;
+    RR=t;
+     
+    for(x=1;x<N;x++)
+    {
+    RR=(RR*t)%s;
+    //if(exponentiation(t,x+1,s)<=r)
+    if(RR<=r)
+    tree[0][x] = (((a%m) * tree[0][x-1] * tree[0][x-1]) + ((b%m) * tree[0][x-1]) + c%m)%m;
+    else
+    tree[0][x] = (((d%m) * tree[0][x-1] * tree[0][x-1]) + ((e%m) * tree[0][x-1]) + f%m)%m;
+    // mini=min(mini,tree[0][x]);
+    }
+     
+     
+    //for(i=0;i<=N;i++)
+    // tree[i][0]=i;
+     
+    for(j=1;(1<<j) <= N;j++)
+    for(i=0;i+(1<<j)-1 < N;i++)
+    if(tree[j-1][i] <= tree[j-1][i+(1<<(j-1))])
+    tree[j][i]=tree[j-1][i];
+    else
+    tree[j][i]=tree[j-1][i+(1<<(j-1))];
+     
+    for(i=1;i<=Q;i++)
+    {
+    L1 = ( ( La * L1 ) + Lc ) % Lm;
+    D1 = ( ( Da * D1 ) + Dc ) % Dm;
+    L=L1;
+    R=min(L1+K+D1-1,N-1); // as i have made now change in arr 0th pos ie made 0 based indexing so
+    
+    t1=rmq(L,R);
+     
+    //if(L>=1 && L<=N && R>=1 && R<=N)
+    //{
+    //t1=query(1,1,N,L,R);
+    // cout<<i<<" - "<<t1<<endl;
+    //sum=((sum%mod)+(t1%mod))%mod;
+    sum=sum+t1;
+    pro=(pro*t1)%mod;
+    //}
+    //sum=sum%mod;
+    //pro=pro%mod;
+    }
+    
+     
+    cout<<sum<<" "<<pro<<endl;
+    return 0;
+    }

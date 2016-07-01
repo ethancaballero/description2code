@@ -1,0 +1,23 @@
+T = int(raw_input())
+while T != 0:
+    L = []
+    s = raw_input()
+    s = s.split()
+    X = int(s[0])
+    K = int(s[1])
+    L.append(float(X)/2)
+    c = 0
+    seg = 0
+    iter = 1
+    i = 0
+
+    while i < K:
+        seg = float(L[i])/2
+        for j in range(iter):
+            L.append(L[i]-seg)
+            L.append(L[i]+seg)
+            i += 1
+        iter *= 2
+
+    print L[K - 1]
+    T -= 1

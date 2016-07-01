@@ -1,0 +1,22 @@
+from sys import stdin,stdout
+t = int(stdin.readline())
+for _ in xrange(t):
+	h = [0]*100
+	m,x,y = map(int,stdin.readline().split())
+	a = map(int,stdin.readline().split())
+	n = x*y
+	for i in a:
+		s = i-1-n
+		e = i-1+n
+		if s < 0:
+			s = 0
+		if e > 99:
+			e = 99
+		for j in xrange(s,e+1):
+			h[j] = 1
+	nh = 0
+	for i in h:
+		if i == 0:
+			nh += 1
+	stdout.write(str(nh)+"
+")

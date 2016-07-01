@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+int main() {
+	// your code goes here
+	// to check if a number is palindrome 
+	int l,r;
+	int i,j,k;
+	int t;
+	int rev;
+	cin>>t;
+	while(t--)
+	{
+	    cin>>l>>r;
+	    int sum=0;
+	    for(i=l;i<=r;i++)
+	    {
+	        rev=0;
+	        int p=i;
+	        while(p!=0)
+	        {
+	            rev=rev*10+p%10;
+	            p=p/10;
+	        }
+	        //cout<<"rev="<<rev<<endl;
+	        if(i==rev)
+	        {
+	            //cout<<"number="<<i<<endl;
+	            sum=sum+i;
+	       }
+	     }
+	     cout<<sum<<endl;
+	}
+	return 0;
+}

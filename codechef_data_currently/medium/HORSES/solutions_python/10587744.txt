@@ -1,0 +1,14 @@
+if __name__=="__main__":
+	t = int(raw_input())
+	while t:
+		n = int(raw_input())
+		l = raw_input()
+		s = [int(i) for i in l.split()]
+		s1 = sorted(s)
+		d = s1[-1]
+		for i in xrange(len(s1) - 1):
+			dif = s1[i+1] - s1[i]
+			if dif < d:
+				d = dif
+		print d
+		t -= 1

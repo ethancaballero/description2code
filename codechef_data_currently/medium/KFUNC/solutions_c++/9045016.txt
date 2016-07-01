@@ -1,0 +1,46 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int F(unsigned long long A)
+{
+	if (A)
+		return A % 9 == 0 ? 9 : A % 9;
+	else
+		return 0;
+}
+int main()
+{
+	unsigned int T,A,D;
+	unsigned long long R, L, i, sum, tempsum;
+	cin >> T;
+	while (T)
+	{
+		cin >> A >> D >> L >> R;
+		/*if ((R - L + 1) % 9 == 0 || A % 9 == 0)
+			sum = (R-L+1)*A;
+		else
+			sum = ((R - L+1) % 9 * A % 9) % 9;
+
+		tempsum = (((R - L)*(R + L) + 3 * L - R - 2) / 2);
+		if (tempsum % 9 == 0 || D % 9 == 0)
+			tempsum = 0;
+		else
+			tempsum = (tempsum % 9 * D % 9) % 9;
+		sum = (sum + tempsum);*/
+		if (D)
+			sum = 45 * floor((R - L+1) / 9.0);
+		else
+			sum = 9*F(A) * floor((R - L + 1) / 9.0);
+		sum = 0;
+		for (i = L/* + 9*floor((R - L+1)/9.0)*/; i <= R; i++)
+		{
+			tempsum = A + (i - 1)*D;
+			sum = sum + F(tempsum);
+		}
+
+		cout << sum << endl;
+		T--;
+	}
+	return 0;
+}

@@ -1,0 +1,23 @@
+for t in range(int(raw_input())):
+	a,b,c=map(int,raw_input().split())
+	maxi=a*100+b
+	pos=0
+	for i in range(1,10001):
+		if (b>=c):
+			b=b-c
+		else:
+			if(a>0):
+				
+				a=a-1
+				b=b+100
+				b=b-c
+			else:
+				break
+		temp=b*100+a
+		if (maxi<temp):
+			maxi=temp
+			pos=i
+		temp=a
+		a=b
+		b=temp
+	print pos

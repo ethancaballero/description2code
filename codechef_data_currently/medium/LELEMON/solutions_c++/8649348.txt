@@ -1,0 +1,30 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+main()
+{
+    int t,n,m;
+cin>>t;
+for(int z=0;z<t;z++)
+{
+cin>>n>>m;
+int p[m+1],c[n+1],i,j;
+long long int v[n+1][102],sum=0;
+for(int i=0;i<m;i++)
+cin>>p[i];
+for(int i=0;i<n;i++)
+{
+cin>>c[i];
+for(int j=0;j<c[i];j++)
+cin>>v[i][j];
+sort(v[i],v[i]+c[i]);
+}
+for(int i=0;i<m;i++)
+{
+if(c[p[i]]!=0){
+sum=sum+v[p[i]][c[p[i]]-1];
+c[p[i]]--;}
+}
+cout<<sum<<endl;
+}
+}

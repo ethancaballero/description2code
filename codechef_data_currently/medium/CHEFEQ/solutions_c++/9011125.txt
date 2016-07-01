@@ -1,0 +1,41 @@
+
+
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+#include<string>
+#include<sstream>
+
+using namespace std;
+int main(){
+
+int t;
+cin>>t;
+while(t--){
+    int n,i,max=0;
+    cin>>n;
+   int *a=new int[100000+1];
+    int *b=new int[100000+1];
+    for(i=1;i<=100000;i++){a[i]=1; b[i]=1;}
+    for(i=1;i<=n;i++)cin>>a[i];
+
+
+     for(i=1;i<=n;i++){
+        if(a[abs(a[i])]>0){
+            a[abs(a[i])]=-a[abs(a[i])];
+        }
+        else b[abs(a[i])]++;
+     }
+     for(i=1;i<=100000;i++)
+          if(b[i]>max) max=b[i];
+
+    if(max>1) cout<<n-max<<"
+";
+    else cout<<n-1<<"
+";
+}
+
+
+}

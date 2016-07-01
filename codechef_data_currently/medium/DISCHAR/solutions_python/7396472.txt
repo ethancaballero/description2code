@@ -1,0 +1,8 @@
+t=int(raw_input())
+for _ in range(t):
+	a=raw_input()
+	b=[]
+	for letters in a:
+		b.append(letters)
+	d=set(b)
+	print len(d)

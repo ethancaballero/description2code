@@ -1,0 +1,17 @@
+from math import sqrt
+
+def isPrime(n):
+        for i in range(2, int(sqrt(n))+1):
+                if n % i == 0:
+                        return True
+        return False
+
+def getNextPrime(n):
+        n += 1
+        while isPrime(n):
+                n += 1
+        return n
+
+for _ in range(input()):
+        x,y = map(int, raw_input().strip().split())
+        print getNextPrime(x+y) - (x+y)

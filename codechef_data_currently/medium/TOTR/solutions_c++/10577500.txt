@@ -1,0 +1,29 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	char a[29];
+	cin>>a;
+	while(t--)
+	{
+		char s[1001];
+		cin>>s;
+		int l=strlen(s);
+		for(int i=0;i<l;i++)
+		{
+			if(s[i]>='a'&&s[i]<='z')
+			cout<<a[s[i]-'a'];
+			else if(s[i]>='A'&&s[i]<='Z')
+			cout<<char(a[s[i]-'A']-'a'+'A')  ;
+			else if(s[i]=='_')
+			cout<<" ";
+			else
+			cout<<s[i];
+		}
+		cout<<"
+";
+	}
+}

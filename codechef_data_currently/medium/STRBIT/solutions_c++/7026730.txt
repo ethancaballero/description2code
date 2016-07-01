@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    char str[100005];
+    int t,*sum,i,n,k,l;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d",&n,&k);
+        scanf("%s",str);
+        sum=(int *)calloc(n+1,sizeof(int));
+        for(i=0;i<n;i++)
+        {
+            l=max(0,i-k+1);
+            if(str[i]=='R')
+            {
+                if((sum[i]-sum[l])%2==0)
+                {
+                    sum[i+1]=sum[i]+1;
+                }
+                else
+                {
+                    sum[i+1]=sum[i];
+                }
+            }
+            else
+            {
+                if((sum[i]-sum[l])%2==1)
+                {
+                    sum[i+1]=sum[i]+1;
+                }
+                else
+                {
+                    sum[i+1]=sum[i];
+                }
+            }
+        }
+        printf("%d
+",sum[n]);
+    }
+    //fclose(stdin);
+    return 0;
+}

@@ -1,0 +1,26 @@
+import math
+ 
+for __ in range(input()) :
+    k = input()
+    ans = []
+    rem = 103993
+    den = 33102
+    if k == 0 :
+        print 3
+    elif k == 1 :
+        print "3.1"
+    elif k == 2 :
+        print "3.14"
+    else :
+        for i in range(k) :
+            rem *= 10
+            ans.append(rem/den)
+            rem = rem%den
+        ans = list(map(list,map(str,ans)))
+        s = ""
+        for i in range(len(ans)) :
+            for j in range(len(ans[i])) :
+                if j==1 :
+                    s += '.'
+                s += ans[i][j]
+        print s

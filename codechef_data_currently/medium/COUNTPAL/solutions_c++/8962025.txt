@@ -1,0 +1,41 @@
+# include <bits/stdc++.h>
+# define mod 1000000007
+# define rep(i,a,b) for(i=a;i<=b;i++)
+# define repd(i,a,b) for(i=a;i>=b;i--)
+# define saaf(h) (h).clear()
+# define pb push_back
+# define mp make_pair
+
+using namespace std;
+typedef long long ll;
+
+char s[1005];
+int i,j,k;
+bool pal[1005][1005];
+
+int main () {
+	scanf("%s",s);
+	int n=strlen(s);
+	for (i=0 ; i < n ; i++ )
+		pal[i][i]=true;
+	
+	for (i=0 ; i < n-1 ; i++ )
+		pal[i][i+1]=(s[i]==s[i+1]);
+		
+	for (i=3 ; i <= n ; i++) {
+		for (j=0 , k=i-1 ; j <= n-i ; j++,k++ ) {
+			pal[j][k] = (pal[j+1][k-1])&&(s[j]==s[k]);
+		}
+	}
+	ll ans[1005]={0};
+	ans[n]=1;
+	for (i=n-1 ; i>=0 ; i-- ) {
+		for (j=i ; j < n ; j++) {
+			if(pal[i][j]) 
+				ans[i] = (ans[i]+ans[j+1])%mod;
+		}
+	}
+	printf("%lld
+",ans[0]);
+	return 0;
+}

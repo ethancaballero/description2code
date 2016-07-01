@@ -1,0 +1,8 @@
+t = int(raw_input())
+lister = []
+for i in range(t):
+     x = int(raw_input())
+     lister.append(x)
+lister.sort()
+for i in range(t):
+    print(lister[i])

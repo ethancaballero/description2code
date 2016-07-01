@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <iostream>
+
+
+#define LL long long
+
+
+
+using namespace std;
+int getchar_unlocked( void );
+//inline int getchar_unlocked() { return getchar(); }
+
+char s[1000005];
+int main()
+{
+
+    int i=0;
+    char c = getchar_unlocked();
+    int co=0;
+ LL ans=0;
+    while(c != '
+')
+    {
+        s[i] = c;
+        c = getchar_unlocked();
+
+        int j=i;
+
+         int  k = s[j]-'0';
+
+    if(k%8==0) {  ++ans;   }
+
+
+    if( j>=1) {
+      if(s[j-1]!='0'){
+
+        int t = 10*(s[j-1]-'0') + (s[j]-'0');
+
+        if(t%8==0) { ++ans;}
+    }
+    }
+
+    if(j>=2)
+    {
+                if(s[j-2] != '0') { ++co ; }
+            int t1 = 100*(s[j-2]-'0') + 10*(s[j-1]-'0') + (s[j]-'0') ;
+
+            if(t1%8==0) { ans += co ; }
+
+    }
+        ++i;
+    }
+
+
+    printf("%lld
+",ans);
+
+    return 0;
+}

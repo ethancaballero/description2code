@@ -1,0 +1,101 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cmath>
+#include<queue>
+#define ll long long int
+using namespace std;
+struct chef
+{
+    int x,y;
+    int x1,y1;
+    int dist;
+};
+struct cord
+{
+    int x,y;
+};
+struct comp
+{
+    bool operator ()(chef & c1,chef & c2)
+    {
+        return (c1.dist<c2.dist);
+    }
+};
+ int main()
+ {
+     int n,k,i,j,t;
+     priority_queue<chef,vector<chef>,comp>Q;
+     cord * C;
+     chef D;
+     scanf("%d",&t);
+     while(t>0)
+     {
+        t--;
+        scanf("%d",&n);
+        C=new cord[n+1];
+     for(i=0;i<n;i++)
+         scanf("%d %d",&C[i].x,&C[i].y);
+         for(i=0;i<n;i++)
+         {
+             D.x=C[i].x;
+             D.y=C[i].y;
+             for(j=i+1;j<n;j++)
+             {
+                D.x1=C[j].x;
+                 D.y1=C[j].y;
+                 D.dist=(C[i].x-C[j].x)*(C[i].x-C[j].x)+(C[i].y-C[j].y)*(C[i].y-C[j].y);
+                 Q.push(D);
+             }
+         }
+         cord X,Y;
+         int flag=0,prod;
+         double dist;
+         int r,l;
+         while(!(Q.empty()))
+         {
+             D=Q.top();
+             Q.pop();
+             r=l=0;
+             X.x=D.x1-D.x;
+             X.y=D.y1-D.y;
+             for(j=0;j<n&&!flag;j++)
+             {
+                 if(D.x==C[j].x&&D.y==C[j].y||(D.x1==C[j].x&&C[j].y==D.y1))
+                    continue;
+                 else
+                 {
+                     Y.x=C[j].x-D.x;
+                     Y.y=C[j].y-D.y;
+                     prod=X.x*Y.y-Y.x*X.y;
+                     if(prod<0)
+                     {
+                        if(r>=1)
+                        {
+                            flag=1;
+                            break;
+                        }
+                        r++;
+                     }
+                     else if(prod>0)
+                     {
+                         if(l>=1)
+                         {
+                             flag=1;
+                             break;
+                         }
+                         l++;
+                     }
+                     else
+                        continue;
+                 }
+             }
+             if(flag)
+                break;
+         }
+         dist=sqrt(double(D.dist));
+     printf("%.10lf
+",dist);
+        Q=priority_queue<chef,vector<chef>,comp>();
+        }
+ }

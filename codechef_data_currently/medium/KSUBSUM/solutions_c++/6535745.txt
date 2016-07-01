@@ -1,0 +1,54 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int merge(int a[], int b[], int k, int l){
+	int i=0, j=0, v=0;
+	int m[max(k+l, 2013)];
+	while(v< 2013 && i<k && j<l){
+		if(a[i]>b[j]){
+			m[v++] = a[i++];
+		}
+		else m[v++] = b[j++];
+	}
+	if(i==k){
+		while(j<l && v<2013) m[v++] = b[j++];
+	}
+	else if(j==l){
+		while(i<k && v<2013) m[v++] = a[i++];
+	}
+	for(i = 0; i< v; i++) a[i] = m[i];
+	return i;
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		int f[2020];
+		int s[2020];
+		int n, p, q, r;
+		cin>>n>>p>>q>>r;
+		int a[n+1];
+		int sum[n+1];
+		sum[0]=0;
+		for(int i=1; i<= n; i++){
+			cin>>a[i];
+			sum[i] = sum[i-1] + a[i];
+		}
+		s[0] = 0;
+		int y=0;
+		for(int i = 1; i<= n; i++){
+			int temp[2020];
+			for(int j = 0; j<2012 && j<i; j++){
+				temp[j] = sum[i] - s[j];				
+			}
+			s[min(2012, i)] = sum[i];
+			for(int j=min(2012, i); j>0 ; j--){
+				if(s[j]<s[j-1]) swap(s[j], s[j-1]);
+				else break;
+			}
+			y = merge(f, temp, min(2012, y), min(2012, i));				
+		}
+		cout<<f[p-1]<<" "<<f[q-1]<<" "<<f[r-1]<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 100000
+
+bool comp(int a,int b)
+{
+	return a>b;
+}
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		int a[n];
+		int sum=0;
+		for(int i=0;i<n;i++)
+		{
+			cin>>a[i];
+			sum+=a[i];
+		}
+		if(sum%n!=0)
+		{
+			cout<<"-1
+";
+		}
+		else
+		{
+			int mx=0,mn=inf;
+			int k=0;
+			int j1,j2;
+			while(mx!=mn)
+			{
+				mx=0,mn=inf;
+				for(int i=0;i<n;i++)
+				{
+					if(a[i]>mx)
+					{
+						mx=a[i];
+						j1=i;
+					}
+					if(a[i]<mn)
+					{
+						mn=a[i];
+						j2=i;
+					}
+				}
+				if(mx==mn)
+				{
+					break;
+				}
+				else
+				{
+					int x=(a[j1]-a[j2])/2.0;
+					a[j1]-=x;
+					a[j2]+=x;
+					k++;
+				}
+			}
+			cout<<k<<"
+";
+		}
+	}
+	return 0;
+}

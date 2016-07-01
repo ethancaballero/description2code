@@ -1,0 +1,201 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<string>
+#include<cstring>
+#include<sstream>
+#include<cmath>
+#include<climits>
+#include<map>
+#include<set>
+#include<stack>
+#include<queue>
+#include<iterator>
+#include<numeric>
+#include<assert.h>
+#include<functional>
+using namespace std;
+ 
+#define GI ({int t;scanf("%d",&t);t;})
+#define GD ({double t;scanf("%lf",&t);t;})
+#define GF ({float t;scanf("%f",&t);t;})
+#define GL ({long long t;scanf("%lld",&t);t;})
+#define GLD ({long double t;scanf("%Lf",&t);t;})
+#define clear(c,v) memset(c,v,sizeof(c))
+#define SET(c) memset(c,-1,sizeof(c))
+#define s(n) scanf("%d",&n)
+#define sl(n) scanf("%ld",&n)
+#define sll(n) scanf("%lld",&n)
+ 
+#define sstr(str) scanf ("%s", str); 
+ 
+// #define p(n) printf("%d ",n)
+// #define pl(n) printf("%ld ",n)
+// #define pll(n) printf("%lld ",n)
+ 
+// #define pf(n) printf("%f
+",n)
+// #define pd(n) printf("%lf
+",n)
+ 
+// #define pnl(n) printf("%d
+",n)
+// #define plnl(n) printf("%ld
+",n)
+// #define pllnl(n) printf("%lld
+",n)
+ 
+#define ll long long
+#define MAX(a,b) a>b?a:b
+#define all(c) c.begin(), c.end()
+#define rall(c) c.rbegin(), c.rend()    // reverse all 
+#define pb push_back
+#define loop(i,a,n) for(int i=a;i<n;i++)
+#define MALLOC(n,T) (T*)malloc(n*sizeof(T))
+ 
+typedef vector<int> vi;
+typedef vector<char> vc;
+typedef vector<long long> vll;
+typedef vector< vector<int> > vvi;
+typedef vector< vector<char> > vvc;
+typedef vector<string> vstr;
+typedef map<int,int> mapii;
+typedef pair<int,int> pii;
+typedef std::vector<pii> vpii;
+
+ 
+ 
+#define sz(a) int((a).size()) 
+#define szar(ar) int(sizeof(ar)/sizeof(ar[0]))
+#define osit ostream_iterator 
+ 
+#define mod 1000000007LL
+ 
+void print1Dvec(const vi & v, char* msg)
+{
+  // printf("%s
+",msg );
+  for (int i = 0; i < sz(v); ++i)
+  {
+    // printf("%d ",v[i] );
+  }
+  // printf("
+");
+}
+ 
+ 
+// http://www.codeproject.com/Articles/38381/STL-Sort-Comparison-Function
+// http://fusharblog.com/3-ways-to-define-comparison-functions-in-cpp/
+struct CompareFirst
+{
+  CompareFirst(int val) : val_(val) {}
+  bool operator()(const std::pair<int,char>& elem) const {
+    return val_ == elem.first;
+  }
+  private:
+    int val_;
+};
+ 
+struct piicomp {
+  // implementing greater<pii>
+  inline bool operator()(const pii& a, const pii& b) {
+    if(a.first != b.first) return a.first > b.first;
+    if(a.second != b.second) return a.second > b.second;
+    return false;
+ 
+  }
+};
+
+typedef priority_queue<pii,vpii,piicomp > pqpii;
+ 
+int distancesquare(const vpii& v, int i, int j)
+{
+  return (v[i].first - v[j].first)*(v[i].first - v[j].first) + (v[i].second - v[j].second)*(v[i].second - v[j].second);
+}
+ 
+const int SOURCE = 0;
+const int DESTINATION = 1;
+ 
+ 
+int ShortestPath(const vpii& v)
+{
+  vi D(sz(v), INT_MAX); 
+  pqpii Q;
+  D[0] = 0;
+  Q.push(pii(0,0));
+ 
+  while(!Q.empty()) {
+    pii least = Q.top();
+    Q.pop();
+ 
+    int idx = least.second, cost = least.first;
+    if(idx == DESTINATION) {
+      // printf("returning %d
+",cost );
+      return cost;
+    }
+ 
+    if(cost == D[idx]) {
+      // iterate through all neighbours
+      for (int i = 0; i < sz(v); ++i)
+      {
+        if(i == idx) continue;
+        int edgeCost = distancesquare(v,idx,i);
+        if(D[i] > D[idx] + edgeCost) {
+          D[i] = D[idx] + edgeCost;
+          Q.push(pii(D[i],i));
+        }
+      }
+    }
+    
+    
+  }
+  // printf("came here
+");
+}
+ 
+ 
+ 
+int main()
+{ 
+ 
+  int t; s(t);
+  while(t--) {
+ 
+    int n; s(n);
+    vpii v(n);
+    for (int i = 0; i < n; ++i)
+    {
+      int x,y;
+      s(x); s(y);
+      v[i] = pii(x,y);
+    }
+ 
+    pii src, dest;
+    s(src.first); s(src.second);
+    s(dest.first); s(dest.second);
+    v.insert(v.begin(),dest);
+    v.insert(v.begin(),src);
+ 
+    /*for (vpii::iterator it = v.begin(); it != v.end(); it++)
+    {
+      printf("(%d,%d) ; ",it->first, it->second );
+    }
+    printf("
+");*/
+ 
+    printf("%d
+",ShortestPath(v) );
+   
+ 
+ 
+    // int z; s(z);
+    //pllnl(getans(n,k));
+ 
+  }
+ 
+  return 0;
+  
+  
+}  

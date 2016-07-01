@@ -1,0 +1,18 @@
+def train():
+    tcases = int(raw_input())
+    for i in range(tcases):
+        n = int(raw_input())
+        time = 0
+        for j in range(n):
+            path = raw_input()
+            path = path.split()
+            path = map(int, path)
+            if time <= path[0]:
+                time = path[0]
+            elif (time-path[0])%path[2] != 0 :
+                time = time + path[2] - (time - path[0])%path[2]
+            time = time + path[1]
+        print time 
+
+if __name__ =="__main__":
+    train()

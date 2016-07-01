@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n,i,a;
+	int ar[6]={100,50,10,5,2,1};
+	cin>>n;
+	
+	while(n--)
+	{
+		cin>>a;
+		int count=0;
+		while(a)
+		{
+			for(i=0;i<6;i++)
+		{
+		
+		    	if(ar[i]<=a)
+				{
+					a=a-ar[i];
+					count++;
+					break;
+				}
+				
+
+			
+		}
+			
+		}
+		
+		cout<<count<<endl;
+		
+	}
+}

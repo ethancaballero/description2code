@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool isPalin(int a) {
+    int rev=0,k=a;
+    while(k!=0) {
+        rev=rev*10+k%10;
+        k=k/10;
+    }
+    return (a==rev)?true:false;
+}
+int main() {
+	int t;
+	scanf("%d",&t);
+    while(t--)
+	{
+	    int a,b,sum=0;
+	    scanf("%d%d", &a, &b);
+	    for(int i=a;i<=b;i++){
+	        if(isPalin(i)){
+	            sum+=i;
+	        }
+	    }
+	    printf("%d
+",sum);
+	}
+	return 0;
+}

@@ -1,0 +1,30 @@
+__author__ = 'deveshbajpai'
+
+def solve(x,y):
+    num = x+y+1
+
+    while True:
+        if num % 2 != 0:
+            if isPrime(num):
+                return num-(x+y)
+        num += 1
+
+
+def isPrime(num):
+
+    for i in xrange(2,num):
+        if num%i==0:
+            return False
+    return True
+
+
+if __name__ == "__main__":
+
+    cases = int(input())
+    results = []
+    for case in range(cases):
+        x,y = map(int,raw_input().split(" "))
+        results.append(solve(x,y))
+
+    for result in results:
+        print result

@@ -1,0 +1,35 @@
+def dfs(graph, visited, u, elements):
+  return elements
+  
+for _ in range(int(raw_input())):
+  n,m=map(int, raw_input().split())
+  graph = [None]*n
+  visited=[False]*n
+  for _ in range(m):
+    i,j=map(int, raw_input().split())
+    if graph[i-1]==None:
+      graph[i-1]=[j-1]
+    else:
+      graph[i-1].append(j-1)
+    if graph[j-1]==None:
+      graph[j-1]=[i-1]
+    else:
+      graph[j-1].append(i-1)
+  exits = 0
+  combinations = 1
+  for u in range(n):
+    if not visited[u]:
+      visited[u]=True
+      elements = 1
+      if graph[u] != None:
+	stack = graph[u]
+	while len(stack):
+	  current = stack.pop()
+	  if not visited[current]:
+	    visited[current]=True
+	    elements+=1
+	    if graph[current]!=None:
+	      stack.extend(graph[current])
+      combinations=combinations*elements%1000000007
+      exits+=1
+  print exits, combinations

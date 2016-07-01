@@ -1,0 +1,37 @@
+def foo(a,b):
+    x=a
+    y=b
+    while y!=0:
+        r=x%y
+        x=y
+        y=r
+        
+    return ( a/x, b/x )
+ 
+ 
+pass1={0:(0,0),1:(1,1),2:(2,1)}
+ 
+maxi=2
+tc=input()
+for xyz in xrange(tc):
+    number=input()
+    mass=max(maxi,number)
+    if(mass==maxi):
+        c,d=pass1[number]
+        if d==1:
+            print c
+        else:
+            print "%d/%d" %(c,d)
+    else:
+        for i in xrange(maxi,number):
+            m,n=pass1[i]
+            o,p=pass1[i-1]
+            pass1[i+1]=foo(n*p*((i+1)**2-3*i)+2*(i)*m*p-n*o,(2*i-1)*n*p)
+        maxi=number
+       # print pass1
+        c,d=pass1[maxi]
+        if d==1:
+            print c
+        else:
+            print "%d/%d" %(c,d)
+ 

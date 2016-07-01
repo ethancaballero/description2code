@@ -1,0 +1,15 @@
+r=int(raw_input())
+L=[]
+for i in range(r):
+    x=int(raw_input())
+    L.append(x)
+for i in range(r):
+    c=1
+    for j in range(2,2*L[i],2):
+        if (int((L[i]*L[i]-(j/2)**2)**0.5))**2==L[i]*L[i]-(j/2)**2:
+            c=0
+            break
+    if c==0:
+        print 'YES'
+    else:
+        print 'NO'

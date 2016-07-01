@@ -1,0 +1,9 @@
+for k in xrange(int(raw_input())):
+                x,y=map(int,raw_input().split())
+                if x>y:
+                      print '>'
+                elif x<y:
+                      print '<'
+                else:
+                      print '='
+                

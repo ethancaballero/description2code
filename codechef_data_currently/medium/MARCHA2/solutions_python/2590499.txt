@@ -1,0 +1,19 @@
+import sys
+for t in range(input()):
+    n=input()
+    l=map(int,sys.stdin.readline().split())
+    i=n-1
+    f=0
+    st=0
+    while i>=0:
+        st=st+l[i]
+        if (i==0 and st!=1) or (st%2!=0 and i!=0):
+            f=1
+            break
+        st/=2        
+        i-=1
+    if f:
+        print "No"
+    else:
+        print "Yes"
+        

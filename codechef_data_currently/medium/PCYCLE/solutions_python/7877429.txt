@@ -1,0 +1,16 @@
+n = int(input())
+a = [int(x) for x in raw_input().split()]
+u = [0] * n
+result = []
+for i in range(n):
+    if u[i] == 0:
+        path, k = [i + 1, a[i]], a[i]
+        u[i] = 1
+        while u[k - 1] == 0:
+            u[k - 1] = 1
+            k = a[k - 1]
+            path.append(k)
+        result.append(path)
+print len(result)
+for path in result:
+    print ' '.join([str(x) for x in path])

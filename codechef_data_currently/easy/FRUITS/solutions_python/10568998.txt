@@ -1,0 +1,9 @@
+bool=False
+t = int(raw_input())
+for q in xrange(t):
+    r = list(map(int,raw_input().split()))
+    dif=abs(r[0]-r[1])
+    if dif <= r[2] or dif is 0:
+        print 0
+    else:
+        print dif-r[2]

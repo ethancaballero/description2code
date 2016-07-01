@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+#define VAR(a,b) __typeof(b) a=(b)
+#define FOR(i,a,b) for (int _n(b), i(a); i < _n; i++)
+#define FORD(i,a,b) for(int i=(a),_b=(b);i>=_b;--i)
+#define FOREACH(it,c) for(VAR(it,(c).begin());it!=(c).end();++it)
+#define REP(i,n) FOR(i,0,n)
+#define ALL(c) (c).begin(), (c).end()
+#define SORT(c) sort(ALL(c))
+#define REVERSE(c) reverse(ALL(c))
+#define UNIQUE(c) SORT(c),(c).resize(unique(ALL(c))-(c).begin())
+#define INF 1000000000
+#define X first
+#define Y second
+#define pb push_back
+#define SZ(c) (c).size()
+typedef pair<int, int> PII;
+typedef vector<int> VI;
+typedef vector<PII> VPII;
+typedef vector<VI> VVI;
+typedef long long LL;
+#define MOD 1000000007
+
+map<string,int> ma;
+string a[100];
+int d[50][50];
+int main()
+{
+	int n;
+	cin>>n;
+	string s,x,y;
+	REP(i,n)
+	{
+		cin>>s;
+		ma[s]=i;
+	}
+	int m;
+	cin>>m;
+	REP(i,m)
+	{
+		cin>>x>>y;
+		int c;
+		cin>>c;
+		d[ma[x]][ma[y]]=c;
+	}
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int k,f=1,ans=0;
+		cin>>k;
+		set<string> s;
+		REP(i,k)
+		{
+			cin>>a[i];
+			if(ma.find(a[i])==ma.end())
+				f=0;
+			s.insert(a[i]);
+		}
+		if(SZ(s)<k)
+			f=0;
+		if(!f)
+		{
+			cout<<"ERROR"<<endl;
+			continue;
+		}
+		for(int i=1;i<k;i++)
+		{
+			if(d[ma[a[i-1]]][ma[a[i]]]==0)
+			{
+				f=0;
+				break;
+			}
+			ans+=d[ma[a[i-1]]][ma[a[i]]];
+		}
+		if(f==0)
+		{
+			cout<<"ERROR"<<endl;
+			continue;
+		}
+		cout<<ans<<endl;
+	}
+	return 0;
+}
+
+		
+

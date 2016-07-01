@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lli long long int
+#define f(i,a,b) for(i=a;i<b;i++)
+#define si(a) scanf("%d",&a);
+#define slli(a) scanf("%lld",&a);
+#define MOD 1000000007
+#define MAX 100005
+#define pb(a) push_back(a)
+lli Max(lli a,lli b)
+{
+return max(a,b);
+}
+
+int main()
+{
+	int i,j,k,m,n,t,a,b,c;
+        lli cur,max,index;
+	si(t);
+	while(t--)
+	{
+		map< pair<int,int>,int>mp;
+		map< pair<int,int>,int>::iterator it;
+		vector<lli>dp;
+
+		si(n);
+		m=0;
+		f(i,0,n)
+		{
+			scanf("%d%d%d",&a,&b,&c);
+			if(mp[make_pair(a,b)] < c)
+				mp[make_pair(a,b)]=c;
+			if(b>m)
+				m=b;
+		}
+
+		dp.pb(0);
+		f(i,1,m+1)
+		{
+			index=i;
+			cur=0;
+			max=0;
+			for(it=mp.begin();it!=mp.end();it++)
+			{
+				if((it->first).first > index)
+					break;
+
+				if((it->first).second==index)
+				{
+					cur=it->second+dp[(it->first).first];
+					if(cur>max)
+						max=cur;
+				}
+
+			}
+			max=Max(max,dp[dp.size()-1]);
+				
+			dp.pb(max);
+		}
+		printf("%lld
+",dp[dp.size()-1]);
+	}
+}

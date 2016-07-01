@@ -1,0 +1,17 @@
+from sys import stdin, stdout
+t=int(input())
+for i in range(t):
+    l,r = map( int, stdin.readline().rstrip().split() )
+    sum=0
+    for j in range(l,r+1):
+    	l=str(j)
+        b=l[::-1]
+        if l==b:
+            sum=sum+j
+    print(sum)       
+
+
+
+
+
+    

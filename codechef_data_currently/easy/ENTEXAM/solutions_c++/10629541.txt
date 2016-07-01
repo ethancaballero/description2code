@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+long long t,marks,i,j,n,k,e,m,chef,ans;
+cin>>t;
+while(t--){
+    chef=0;
+cin>>n>>k>>e>>m;
+long long array[n];
+for(i=0;i<n-1;++i){
+        array[i]=0;
+    for(j=0;j<e;++j)
+    {
+        cin>>marks;
+        array[i]+=marks;
+ 
+    }
+}
+for(i=0;i<e-1;++i)
+{
+    cin>>marks;
+    chef+=marks;
+}
+sort(array,array+n-1,greater<long long>());
+if((array[k-2]-array[k-1])==1)
+{while(1){};}
+/*for(i=k-1;i>0;--i)
+{
+    if((array[i]-array[i-1])!=1)
+        break;
+}
+//if(i==0)
+for(i=0;i<n-1;++i)
+cout<<array[i]<<" ";*/
+if((array[k-1]+1)>=chef)
+ans=(array[k-1]+1)-chef;
+else
+ans=0;
+if(ans<=m)
+cout<<ans<<endl;
+else
+printf("Impossible
+");
+}
+return 0;
+}
+ 

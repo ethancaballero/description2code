@@ -1,0 +1,14 @@
+t=input()
+for i in range(t):
+ n=input();c=0;ls=[]
+ r=raw_input()
+ ls=r.split(' ')
+ ls=map(int,ls)
+ for i in range(n):
+  s=0;m=1
+  for j in range(i,n):
+   s+=ls[j];
+   m*=ls[j];
+   if(s==m):
+    c+=1;
+ print c;

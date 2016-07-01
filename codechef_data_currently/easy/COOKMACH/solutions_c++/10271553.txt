@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int n,k,steps=0;
+		cin>>n>>k;
+		while(k%n!=0&&n>1)
+		{
+			if(n%2==0)
+				n=n/2;
+			else
+				n=(n-1)/2;
+				steps++;
+		}
+		while(n!=k)
+		{
+			n=n*2;
+			steps++;
+		}
+		cout<<steps<<endl;
+	}
+	return 0;
+}

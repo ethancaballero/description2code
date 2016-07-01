@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+#define D 1000000007
+#define gcd __gcd
+#define getcx getchar
+#define pc putchar
+#define get(x) scanf("%d",&x)
+#define getl(x) scanf("%lld",&x)
+#define print(x) printf("%d
+",x)
+#define printl(x) printf("%lld
+",x)
+#define bitcount __builtin_popcount
+#define debug(s) cout << "check : " << s << endl
+using namespace std;
+typedef long long ll;
+int main()
+{
+    int t; get(t);
+    while(t--)
+    {
+        float r,d,cost1,cost2,cost; int u,n,mxi=0;
+        cin >> d >> u >> n;
+        cost1 = d*u;
+        int m,c; cost = cost1;
+        for(int i=1;i<=n;i++)
+        {
+            cin >> m >> r >> c;
+            cost2 = r*u + c*1.0/m;
+            if(cost2<cost1)
+                cost1=cost2,mxi=i;
+
+        }
+        cout << mxi << endl;
+    }
+    return 0;
+}

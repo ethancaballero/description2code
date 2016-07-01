@@ -1,0 +1,37 @@
+#include<cstdio>
+#include<algorithm>
+#include<cstring>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        char s[1004];
+        scanf("%s", s);
+        int l;
+        l = strlen(s);
+        int a[26] = {0}, b[26] = {0}, i;
+        for(i=0;i<l/2;i++)
+        {
+            a[s[i] - 'a']++;
+        }
+        for(i=(l+1)/2;i<l;i++)
+        {
+            b[s[i] - 'a']++;
+        }
+        for(i=0;i<26;i++)
+        {
+            if(a[i] != b[i])
+                break;
+        }
+        if( i==26)
+            printf("YES
+");
+        else
+            printf("NO
+");
+    }
+    return 0;
+}

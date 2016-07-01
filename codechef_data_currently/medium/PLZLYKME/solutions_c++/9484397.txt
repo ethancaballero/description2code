@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		double l,d,c,s;
+		cin>>l>>d>>s>>c;
+		if(log(c+1)*(d-1)>=log(l/s))
+			cout<<"ALIVE AND KICKING"<<endl;
+		else
+			cout<<"DEAD AND ROTTING"<<endl;
+	}
+}

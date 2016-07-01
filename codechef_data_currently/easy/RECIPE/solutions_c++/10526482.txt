@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int gcd(int x, int y)
+{
+    if (x%y == 0)
+        return y;
+    return gcd(y, x%y);
+}
+int main()
+{
+    int t,i=0,n,a[50],j=0,m,k;
+    scanf("%d",&t);
+    for(i=0;i<t;i++)
+    {
+        scanf("%d",&n);
+        for(j=0;j<n;j++)
+            scanf("%d",&a[j]);
+        m=gcd(a[0],a[1]);
+        for(j=2;j<n;j++)
+            m=gcd(m,a[j]);
+        //cout<<m<<endl;
+        for(j=0;j<n;j++)
+            cout<<(a[j]/m)<<" ";
+        cout<<"
+";
+    }
+}
+

@@ -1,0 +1,35 @@
+  For positive integer x let define function F(x) = 1 * (1! + x) + 2 * (2! + x) + .. + x * (x! + x). 
+"k!" means factorial: k! = 1 * 2 * .. * k 
+
+Chef wants to calculate F(p1) + F(p2) + ... + F(pn). 
+As answer could be large, help him, calculate value modulo m. 
+
+Input
+First line contains two integers n and m.
+Next line contains n space separated integers pi.
+Output
+Output a single line containing one integer --- calculated value modulo m.
+Constraints
+
+1 \u2264 n \u2264  105 
+1 \u2264 pi \u2264  1018 
+1 \u2264 m \u2264  107 
+
+
+ Example
+Input:
+5 7
+1 2 3 4 5
+
+Output:
+6
+
+Explanation
+F(1) = 1 * (1! + 1) = 2
+F(2) = 1 * (1! + 2) + 2 * (2! + 2) = 3 + 8 = 11
+F(3) = 1 * (1! + 3) + 2 * (2! + 3) + 3 * (3! + 3) = 4 + 10 + 27 = 41
+F(4) = 1 * (1! + 4) + 2 * (2! + 4) + 3 * (3! + 4) + 4 * (4! + 4) = 5 + 12 + 30 + 112 = 159
+F(5) = 1 * (1! + 5) + 2 * (2! + 5) + 3 * (3! + 5) + 4 * (4! + 5) + 5 * (5! + 5) = 794
+F(1) + F(2) + F(3) + F(4) + F(5) = 2 + 11 + 41 + 159 + 794 = 1007 
+
+1007 modulo 7 = 6

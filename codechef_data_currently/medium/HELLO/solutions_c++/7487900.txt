@@ -1,0 +1,34 @@
+#include <iostream>
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include <stdlib.h>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+    		float d,u,min;
+    		int n,i,ans=0,flag=0;
+    		scanf("%f %f %d",&d,&u,&n);
+    		min=u*d;
+    		for(i=1;i<=n;i++)
+    		{
+    			float m,r,c,temp,sum=0;
+    			scanf("%f %f %f",&m,&r,&c);
+    			temp=(u*r*m+c)/m;
+    			if(temp<min)
+    			{
+    				min=temp;
+					ans=i;    				
+				}
+			}
+			printf("%d
+",ans);
+    }
+    return 0;
+}

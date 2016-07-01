@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int test,*b,j,i,max,*u,*arr;
+	long n,h,sum,ans;
+	b=new int [1000000];
+		u=new int [1000000];
+			arr=new int [1000000];
+	scanf("%d",&test);
+	while(test){
+		test--;
+		max=0;
+		scanf("%d%d",&n,&h);
+		for(i=0;i<n;i++){
+			arr[i]=0;
+		}
+		for(i=0;i<n;i++){
+			scanf("%d%d",&b[i],&u[i]);
+			for(j=b[i];j<=u[i];j++){
+				arr[j]++;
+			}
+		}
+	//	printf("%d  %d
+",arr[2],arr[3]);
+		for(i=0;i<n;i++){
+			sum=0;
+			j=i;
+			while(j<i+h&&i<=n-h){
+				sum=sum+arr[j];
+				j++;
+			}
+			if(sum>max){
+				max=sum;
+			}
+		}
+		ans=(n*h)-(max);
+		printf("%ld
+",ans);
+	}
+	return 0;
+}

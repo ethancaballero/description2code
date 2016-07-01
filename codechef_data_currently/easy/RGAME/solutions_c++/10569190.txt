@@ -1,0 +1,45 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    	
+    	int mod = 1000000007;
+    	int num,test;
+    	int arr[100010];
+    	int suff[100010];
+    	
+    	int main()
+    	{
+    		cin >> test;
+    		while(test--)
+    		{
+    			cin >> num;
+    			num++;
+    			for(int i = 1;i <= num;i++)
+    			{
+    				cin >> arr[i];
+    			}
+    			int power = 1;
+    			for(int i = num;i >= 1;--i)
+    			{
+    				suff[i] = (1ll * arr[i] * power) % mod;
+    				if(i < num)
+    				{
+    					suff[i] = (suff[i+1] + suff[i]) % mod;
+    				}
+    				power = (power * 2) % mod;
+    			}
+    			int ans = 0;
+    			power =1;
+    			for(int i = 1;i < num;i++)
+    			{
+    				int count = (1ll * power * arr[i] ) % mod;
+    				count = (1ll * count * suff[i+1])% mod;
+    				ans = (ans + count) % mod;
+    				if (i >= 2)
+    				{
+    					power = (power * 2)% mod;
+    				}
+    			}
+    			cout << (2* ans) % mod << endl;
+    		}
+    		return 0;
+    	}   

@@ -1,0 +1,18 @@
+t=int(raw_input())
+while t>0:
+    s=raw_input()
+    num=1
+    for i in range(0,len(s),+1):
+        if s[i]=='l':
+            if (i+1)%2!=0:
+                num=num*2
+            else:
+                num=num*2-1
+        elif s[i]=='r':
+            if (i+1)%2!=0:
+                num=num*2+2
+            else:
+                num=num*2+1
+    num=num%1000000007
+    print num
+    t=t-1

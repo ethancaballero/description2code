@@ -1,0 +1,30 @@
+#include <iostream>
+#include<cstdio>
+using namespace std;
+
+int main()
+{
+    int t,x,n,f,i,l;
+    double s;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        s=(n*(n+1))/2;
+        scanf("%d",&f);
+        for(i=1;i<=f;i++)
+        {
+            scanf("%d",&x);
+            s=s-x;
+        }
+        scanf("%d",&l);
+        if(n%2==0)
+        n=n/2;
+        else
+        n=(n+1)/2;
+        s=s*(n-l)/n;
+        printf("%0.4lf
+",s);
+    }
+    return 0;
+}

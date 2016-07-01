@@ -1,0 +1,28 @@
+# your code goes here
+n=int(raw_input())
+for i in range(n):
+	d1={}
+	d2=[]
+	a,b=map(int,raw_input().split())
+	lang=raw_input().split()
+	for j in lang:
+		d1[j]=0
+	for k in range(b):
+		t=raw_input().split()
+		for m in range(1,len(t)):
+			d2.append(t[m])
+	
+	for p in d1:
+		if p in d2:
+			d1[p]=1;
+	ans = ""
+	for k in lang:
+		if d1[k] == 1:
+			ans+="YES "
+		else:
+			ans+= "NO "
+
+	
+	print ans.strip()
+	d1.clear()
+	d2=[]

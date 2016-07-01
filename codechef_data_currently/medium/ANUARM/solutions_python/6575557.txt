@@ -1,0 +1,15 @@
+list=[]
+for i in xrange(input()):
+	n,m=map(int,raw_input().split())
+	# list=map(int,raw_input().split());
+	list=raw_input()
+	list=map(int,list.split())
+	ma=(max(list))
+	mi=(min(list))
+	for j in xrange(n):
+		if (ma-j)>(j-mi):
+			print ma-j,	
+		else:
+			print j-mi,
+	print ''
+	

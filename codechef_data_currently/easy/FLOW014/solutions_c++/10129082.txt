@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        float h,cc,ts;
+        cin>>h>>cc>>ts;
+        int g;
+        if((h>50)&&(cc<0.7)&&(ts>5600))
+            g=10;
+        else if((h>50)&&(cc<0.7)&&!(ts>5600))
+            g=9;
+        else if(!(h>50)&&(cc<0.7)&&(ts>5600))
+            g=8;
+        else if((h>50)&&!(cc<0.7)&&(ts>5600))
+            g=7;
+        else if((h>50)||(cc<0.7)||(ts>5600))
+            g=6;
+        else
+            g=5;
+        cout<<g<<endl;
+
+    }
+    return 0;
+}

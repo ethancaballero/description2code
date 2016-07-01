@@ -1,0 +1,68 @@
+#include<cstdio>
+ #include<iostream>
+ #include<algorithm>
+ #include<cstdlib>
+ using namespace std;
+ typedef struct co
+ {
+     int x;
+     int y;
+
+ }co;
+ int main()
+ {
+     int i,j,k,t,n,m,ans,l,minix,maxix,miniy,maxiy,f,h;
+     scanf("%d",&t);
+
+     while(t--)
+     {
+         l=-1;
+         scanf("%d %d",&n,&m);
+         char a[n][m];
+         co p[2*n];
+         for(i=0;i<n;i++)
+            for(j=0;j<m;j++)
+            scanf(" %c",&a[i][j]);
+        for(i=0;i<n;i++)
+         {
+             f=1;
+             for(j=0;j<m;j++)
+            {
+                 if(a[i][j]=='*' && f==1)
+                   {
+                       l++;
+                       p[l].x=i;
+                       p[l].y=j;
+                       f=0;
+                       l++;
+
+                   }
+                if(a[i][j]=='*')
+                {
+                    p[l].x=i;
+                    p[l].y=j;
+
+
+                }
+            }
+
+        }
+        minix=200000000,miniy=200000000,maxix=0,maxiy=0;
+      for(k=0;k<=l;k++)
+        {
+            minix=min(minix,p[k].x);
+            maxix=max(maxix,p[k].x);
+            miniy=min(miniy,p[k].y);
+            maxiy=max(maxiy,p[k].y);
+
+        }
+        if(l==-1)
+            printf("0
+");
+        else
+        {ans=max(((maxix-minix+1)/2+1),((maxiy-miniy+1)/2+1));
+        printf("%d
+",ans);
+        }
+     }
+ }

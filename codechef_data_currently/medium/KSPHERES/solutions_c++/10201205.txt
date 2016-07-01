@@ -1,0 +1,72 @@
+#include <iostream>
+#include<stdio.h>
+
+#define MOD 1000000007
+
+using namespace std;
+
+
+
+/*long long calsphere(int k,int r)
+{
+
+    if(k==1)
+    {
+        return spheres[r];
+    }
+
+    int res =  0;
+    for(int i = k-1;i<r;i++)
+    {
+        res = (res + calsphere(k-1,i))%MOD;
+    }
+    return res*spheres[r];
+}
+*/
+long long f[1001][1001];
+int main()
+{
+
+    long long spheres[1001] = {0};
+    long n,m;
+    int c;
+    int num;
+    scanf("%ld%ld%d",&n,&m,&c);
+
+    int upper[1001] = {0};
+    int lower[1001] = {0};
+
+    for(long i = 0; i<n; i++)
+    {
+        scanf("%d",&num);
+        ++upper[num];
+    }
+
+    for(long i = 0; i<m; i++)
+    {
+        scanf("%d",&num);
+        ++lower[num];
+    }
+
+    for(int i = 1; i<=c;i++)
+    {
+        spheres[i] = (lower[i] * upper[i])%MOD;
+        f[1][i] = (f[1][i-1] + spheres[i])%MOD;
+        //printf("%d %d",i,spheres[i]);
+    }
+
+    for(int i = 2; i<=c; i++)
+    {
+        for(int j = 1;j<=c; j++)
+        {
+            f[i][j] = (f[i-1][j-1]*spheres[j])%MOD;
+            f[i][j] = (f[i][j] + f[i][j-1])%MOD;
+        }
+        cout<<f[i][c]<<" ";
+
+    }
+    cout<<"0 ";
+
+
+    return 0;
+}

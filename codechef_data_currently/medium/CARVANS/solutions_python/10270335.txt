@@ -1,0 +1,13 @@
+# your code goes here
+t = input()
+while(t>0):
+	n = input()
+	s = map(int,raw_input().split())
+	min = s[0]
+	count = 1
+	for i in range(1,n):
+		if s[i]<min:
+			min = s[i]
+			count = count + 1
+	print count
+	t = t - 1

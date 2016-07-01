@@ -1,0 +1,50 @@
+#include <iostream>
+#include<bits/stdc++.h>
+#define pb push_back
+using namespace std;
+vector< int > v;//vals
+vector< int > v2;//orders
+double dp[110][110];
+double arr[110][110];
+double maxd(double a, double b)
+{
+  if(a>b)
+    return a;
+  else
+    return b;
+}
+ 
+int main()
+{
+int t,n,val;
+cin>>t;
+while(t--)
+{
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+            {scanf("%lf",&arr[i][j]);
+            }
+    }
+    for(int i=0;i<=n;i++)
+    {
+    	for(int j=0;j<=n;j++)
+    	  dp[i][j]=-1234567;
+    }
+    dp[1][1]=0.00000000;//cout<<dp[1][1]<<endl;
+        for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+            {if(i+j!=2) dp[i][j] = maxd(dp[i-1][j],dp[i][j-1])+arr[i][j];
+                //if(i+j==1)cout<<dp[i][j]<<" ";
+            }
+    }
+if(dp[n][n]>=0)printf("%0.9lf
+",dp[n][n]/(2*(double)n-3));
+else
+    printf("Bad Judges
+");
+}
+    return 0;
+}

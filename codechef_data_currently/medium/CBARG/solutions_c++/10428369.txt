@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define MOD 1000000007
+using namespace std;
+
+int main()
+{
+    ll t,n,m,ans,curr,i;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        curr=0;
+        ans=0;
+        for(i=0;i<n;i++)
+        {
+            cin>>m;
+            if(m>curr)
+                ans+=(m-curr);
+            curr=m;
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

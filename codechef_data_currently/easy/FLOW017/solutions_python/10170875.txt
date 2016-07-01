@@ -1,0 +1,15 @@
+t = input() #Takes the number of test cases
+#print t
+
+while t > 0:
+
+    numbers = map(int, raw_input().split())
+    #Takes space separated integers into the list numbers
+    #print numbers
+    numbers.remove(max(numbers)) #Removes the largest number from the list
+    #print numbers
+    numbers.remove(min(numbers)) #Removes the smallest number from the list
+    #print numbers
+    print numbers[0] #Displays second largest number in the list
+
+    t -= 1

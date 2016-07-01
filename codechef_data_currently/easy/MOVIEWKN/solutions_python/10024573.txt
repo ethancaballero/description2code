@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+from sys import exit
+
+def findMax(l, r):
+	chosenOne = {
+		'l': l[0],
+		'r': r[0],
+		'x': l[0]*r[0],
+		'i': 1
+	};
+	for i in range(len(l) - 1):
+		if (chosenOne['x'] < l[i]*r[i]) or (chosenOne['x'] == l[i]*r[i] and chosenOne['r'] < r[i]):
+			chosenOne['l'] = l[i];
+			chosenOne['r'] = r[i];
+			chosenOne['x'] = l[i]*r[i];
+			chosenOne['i'] = i+1;
+
+	print chosenOne['i'];
+
+
+def main():
+	t = int(raw_input());
+	executed = 0;	
+	while(t > executed):
+		n = int(raw_input());
+		lArr = map(int, str(raw_input()).split(" "));
+		rArr = map(int, str(raw_input()).split(" "));
+		findMax(lArr, rArr);
+		executed = executed + 1;
+
+if __name__ == '__main__':
+	main()
+	exit

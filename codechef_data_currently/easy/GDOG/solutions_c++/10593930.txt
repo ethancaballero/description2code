@@ -1,0 +1,23 @@
+#include<bits/c++io.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,i;
+    cin>>t;
+    while(t--)
+    {
+        int n,k,max=0;
+        cin>>n;
+        cin>>k;
+        for(i=2;i<=k;i++)
+        {
+            if(n%i>=max)
+            max=n%i;
+           // printf("n=%d k=%d n%k=%d max=%d
+",n,i,n%i,max);
+        }
+        cout<<max<<endl;
+        max=0;
+    }
+}

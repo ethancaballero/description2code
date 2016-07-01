@@ -1,0 +1,143 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+ 
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define For(i,a,b) for(int i=a-1;i>=0;i--)
+#define K 10000000
+#define L 400
+#define ll long long
+#define s1(a) scanf("%d",&a);
+#define s2(a) scanf("%lld",&a);
+#define s3(a,b) scanf("%d%d",&a,&b);
+#define s4(a,b,c) scanf("%d%d%d",&a,&b,&c);
+#define pb push_back
+#define mp make_pair
+#define F first
+#define S second 
+/*******************************MAIN CODE STARTS*******************************/
+
+int a[2][10];
+
+int seven(int k)
+{
+	//cout<<a[k][7];
+	int res=0;
+	int flag=0;
+	int n=a[k][7];
+	FOR(i,0,n)
+	{
+		flag=0;
+		for(int j=6;j>=0;j--)
+		{
+			if(j!=4)
+			{
+				if(a[!k][j])
+				{
+					--a[!k][j];
+					--a[k][7];
+					++res;
+					flag=1;
+					break;
+				}
+			}
+		}
+		if(flag==0)
+		{
+			if(a[!k][4])
+			{
+				--a[!k][4];
+				--a[k][7];
+				++res;
+				flag=1;
+			}
+		}
+		if(flag==0)
+		{
+			if(a[!k][7])
+			{
+				--a[!k][7];
+				--a[k][7];
+				++res;
+				flag=1;
+			}
+		}
+	}
+	return res;
+}
+
+int four(int k)
+{
+	int res=0;
+	int flag=0;
+	int n=a[k][4];
+	FOR(i,0,n)
+	{
+		flag=0;
+		for(int j=3;j>=0;j--)
+		{
+			if(a[!k][j])
+			{
+				++res;
+				--a[!k][j];
+				--a[k][4];
+				flag=1;
+				break;
+			}
+		}
+		if(flag==0)
+		{
+			if(a[!k][4])
+			{
+				++res;
+				--a[!k][4];
+				--a[k][4];
+				flag=1;
+			}
+		}
+	}
+	return res;
+}
+
+void scan()
+{
+	FOR(i,0,10)
+		a[0][i]=a[1][i]=0;
+	char c;
+	while((c=getchar())!='
+' && c!=EOF)
+	{
+		++a[0][c-'0'];
+	}
+	while((c=getchar())!='
+' && c!=EOF)
+	{
+		++a[1][c-'0'];
+	}
+}
+
+void out()
+{
+	int s=0,f=0;
+	s=s+seven(0)+seven(1);
+	f=f+four(0)+four(1);
+	FOR(i,0,s)
+		cout<<'7';
+	FOR(i,0,f)
+		cout<<'4';
+	cout<<'
+';
+}
+
+int main()
+{
+	int t;
+	s1(t)
+	getchar();
+	while(t--)
+	{
+		scan();
+		out();
+	}
+	return 0;
+}

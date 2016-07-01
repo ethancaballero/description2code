@@ -1,0 +1,39 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int d;
+        cin >> d;
+        int x = d - 1900;
+        for(int i = 1904; i < d; i++)
+        {
+            if (((i % 4 == 0) && i % 100 != 0) || (i % 400 == 0))
+               x++;
+        }
+        x = (x + 1) % 7;
+        switch(x)
+    	{
+        	case 0:{printf("sunday
+");break;}
+        	case 1:{printf("monday
+");break;}
+        	case 2:{printf("tuesday
+");break;}
+        	case 3:{printf("wednesday
+");break;}
+        	case 4:{printf("thursday
+");break;}
+        	case 5:{printf("friday
+");break;}
+        	case 6:{printf("saturday
+");break;}
+    	}
+ 
+    }
+    return 0;
+}

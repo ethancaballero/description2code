@@ -1,0 +1,21 @@
+def interaction(a,b):
+    return sum(x*y for x,y in zip(a,b))
+
+def interactions(k,a,b):
+    for i in xrange(n):
+
+        # try incrementing k times
+        a[i] += k
+        yield interaction(a,b)
+        a[i] -= k # cancel
+
+        # try decrementing k times
+        a[i] -= k
+        yield interaction(a,b)
+        a[i] += k # cancel
+
+for cas in xrange(input()):
+    n, k = map(int, raw_input().strip().split())
+    a = map(int, raw_input().strip().split())
+    b = map(int, raw_input().strip().split())
+    print max(interactions(k,a,b))

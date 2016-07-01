@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+
+const int N = 1000;
+
+int m, n, x, y, l, t;
+char s[N*N+5];
+int a[N+5][N+5];
+
+int main()
+{
+    //freopen("in.txt", "r", stdin);
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%d%d%d%d%d
+", &n, &m, &x, &y, &l);
+        x--; y--;
+        for(int i=0;i<n;i++)
+			memset(a[i],0,4*m);
+        gets(s);
+        int dx=0, dy=0;
+        for (int i=0; i<l-1; i++) {
+            dx=0, dy=0;
+            switch (s[i]) {
+                case 'U' :  dy=1; break;
+                case 'D' :  dy=-1; break;
+                case 'L' :  dx=-1; break;
+                case 'R' :  dx=1; break;
+            }
+            x+=dx; y+=dy;
+            a[x][y] = i+1;
+        }
+        bool body = false;
+        int cnt = 0;
+        while (x>=0 && x<n && y<m && y>=0 && !body) {
+            cnt++;
+            x+=dx; y+=dy;
+            if (a[x][y] >= cnt) {
+                body = true;
+            }
+        }
+        printf("%s %d
+",0<=x && x<n && 0<=y && y<m?"BODY":"WALL",cnt-1);
+    }
+    return 0;
+}

@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include <algorithm>
+long long a[100001];
+long long n;
+long long scan_int()
+{
+    long long r=0,c;
+    do {
+        c=getc(stdin);
+        if(c>=48&&c<=57)
+            r=r*10+(c-48);
+        else if(c=='
+'||c==' ')
+            return r;
+    }while(1);
+}
+
+long long binsearch(long long elem,long long x)
+{
+    long long f,l,m; f=0; l=x-1; m=(f+l)/2;
+    if(elem<=a[0])
+        return 0;
+    else if(elem>a[l])
+        return x;
+    while(f!=m)
+    {
+        if(elem>a[m])
+        {
+            f=m; m=(f+l)/2;
+        }
+        else if(elem<=a[m])
+        {
+            l=m; m=(f+l)/2;
+        }
+    }
+    return f+1;
+}
+int main()
+{
+    long long i,j,a1,a2,a3,b1,b2,b3,b4,k,t;
+    long long ans,elem;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        ans=0;
+        b1=b2=b3=b4=a1=a2=a3=0;
+        scanf("%lld",&n);
+        getchar();
+        k=0;
+        for(i=0;i<n;i++)
+        {
+            elem=scan_int();
+            if(elem>3)
+                a[k++]=elem;
+            else if(elem==1)
+                a1++;
+            else if(elem==2)
+                a2++;
+            else
+                a3++;
+        }
+        std::sort(a,a+k);
+        for(i=0;i<n;i++)
+        {
+            elem=scan_int();
+            if(elem>4)
+            {
+                ans=ans+binsearch(elem,k);
+            }
+            else if(elem==1)
+                b1++;
+            else if(elem==2)
+                b2++;
+            else if(elem==3)
+                b3++;
+            else
+                b4++;
+        }
+        ans=ans+(n-a1)*b1+a2*(n-b1-b2-b3-b4)+a3*(n-b1-b3);
+        printf("%.6lf
+",(double)ans/n);
+    }
+    return 0;
+}

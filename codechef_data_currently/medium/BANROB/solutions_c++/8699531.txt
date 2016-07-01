@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MAXN 1003
+double power(double a, int exp) {
+	double ret=1.0;
+	while(exp) {
+		if(exp&1) {
+			ret=ret*a;
+		}
+		a=a*a;
+		exp>>=1;
+	}
+	return ret;
+}
+int main() {
+	int t,m,i;
+	double bill=1000000000.0,p,minus;
+	scanf("%d",&t);
+	while(t--) {
+		scanf("%d%lf",&m,&p);
+		double powr=power(p,m-1);
+		if(m&1) {
+			minus=1+powr*p;
+			minus/=1+p;
+		}
+		else {
+			minus=1-powr*p;
+			minus/=1+p;
+		}
+		printf("%lf %lf
+",bill*minus,bill*(1-minus));
+	}
+	return 0;
+}

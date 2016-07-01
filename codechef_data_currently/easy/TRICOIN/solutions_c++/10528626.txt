@@ -1,0 +1,13 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main (){int long  x;
+float n;
+int t;
+cin>>t;
+while(t--){  cin>>x;
+n= (sqrt((1+(8*x)))-1)/2;
+n=floor(n);
+cout<<(long int)n<<endl;}
+return 0; }
+ 

@@ -1,0 +1,28 @@
+import sys
+
+n = input()
+if (1<=n and n<=10000): 
+    win = 0
+    lead = 0
+    si=0
+    ti=0   
+    for i in range(n):
+        si_ti = raw_input()
+        list = si_ti.split(" ")
+        a = int(list[0])
+        b = int(list[1])
+        
+        if((1<=a and a<=1000) and (1<=b and b<=1000)):
+            si+=a
+            ti+=b
+            if si>ti:
+                if(si-ti > lead):
+                    win = 1
+                    lead = si-ti
+            if ti>si:
+                if(ti-si > lead):
+                    win = 2
+                    lead = ti-si
+            
+        
+    print win,lead

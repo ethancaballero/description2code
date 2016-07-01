@@ -1,0 +1,32 @@
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+#define ll long long int
+using namespace std;
+int main()
+{
+	ll t,n,m;
+	scanf("%lld", &t);
+	while(t--)
+	{
+		scanf("%lld%lld", &n, &m);
+		ll i = 0, j= 0,tp = m;
+		ll mnm = 1000000, mxm = -1;
+        while(tp--)
+        {
+        	scanf("%lld", &j);
+        	if(j > mxm)
+        	 mxm = j;
+        	if(j < mnm)
+        	 mnm = j;
+        }
+        for(i=0;i<n;i++)
+        {
+        	if(abs(mxm-i)  > abs(mnm-i))
+        	  cout<<abs(mxm-i)<<" ";
+        	else
+        	  cout<<abs(mnm-i)<<" ";
+        }
+        cout<<endl;
+	}
+}

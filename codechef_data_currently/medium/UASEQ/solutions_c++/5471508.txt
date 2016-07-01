@@ -1,0 +1,58 @@
+#include<iostream>
+#include<stdio.h>
+#include<map>
+#include<vector>
+using namespace std;
+int main()
+{
+	int n,k,i,j,variableToChange,x;
+	long long int d,first, minfirst = 1000000000000000LL , minD = -1;
+	
+	scanf("%d%d",&n,&k);
+	vector<int>v(n);
+	for(i=0;i<n;i++)
+	scanf("%d",&v[i]);
+	map<pair <long long, long long> ,bool> find;
+	
+	for(i=0;i<k+2;++i)
+	{
+		for(j=i+1;j<k+2;++j)
+		{
+			d = (v[j]-v[i])	/(j-i);
+			if( d *(j-i) == v[j] - v[i])
+			{
+				first = v[i] - d*i;
+				if(find[make_pair(first,d)] == false)
+				{
+					find[make_pair(first,d)] = true;
+					variableToChange = k;
+					for(x=0;x<n;++x)
+					{
+						if(v[x]!=first)
+						{
+							variableToChange--;
+							if(variableToChange<0)
+							break;
+						}
+						first += d;
+					}
+					if(variableToChange >=0)
+					{
+						first = v[i] - d*i;
+						if(first < minfirst ||(first == minfirst && minD >  d))
+						{
+							minfirst = first;
+							minD = d;
+						}
+					}
+				}
+			}
+		}
+	}
+	for(x=0;x<n;++x)
+	{
+		printf("%lld ",minfirst);
+		minfirst += minD;
+	}
+	return 0;
+}

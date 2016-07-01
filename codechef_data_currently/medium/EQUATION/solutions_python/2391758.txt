@@ -1,0 +1,10 @@
+from sys import stdin
+#inclusion-exclusion
+ 
+def f(n):
+    if n<0: return 0
+    return ((n+1)*(n+2)*(n+3))/6
+ 
+for trial in xrange(int(stdin.readline())):
+    N,A,B,C = map(int,stdin.readline().split())
+    print f(N)-f(N-A-1)-f(N-B-1)-f(N-C-1)+f(N-A-B-2)+f(N-A-C-2)+f(N-B-C-2)-f(N-A-B-C-3) 

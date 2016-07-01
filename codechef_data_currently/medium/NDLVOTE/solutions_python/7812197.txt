@@ -1,0 +1,22 @@
+n=int(input())
+while n:
+	self=[]
+	vote=[]
+	coun=0
+	for i in xrange(n):
+		string=raw_input().split()
+		self=string[0]
+		vote=int(string[1])
+		if self == 'P':
+			vote-=1
+		elif self== 'M':
+			vote+=1
+		vote=abs(vote)
+		if coun <= vote:
+			coun=vote
+		elif (coun -vote)%2 !=0:
+			coun+=1
+	print coun
+	line=raw_input()
+	n=int(input())
+	

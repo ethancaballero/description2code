@@ -1,0 +1,9 @@
+
+T = int(raw_input())
+
+while T>0:
+	T-=1
+	D_S, D_T, D = map(int,raw_input().split())
+	min_dist = max(0, D-(D_S+D_T), D_S-(D+D_T), D_T-(D+D_S))
+	print(min_dist)
+

@@ -1,0 +1,22 @@
+//totle expense
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        float q,p;
+        cin>>q>>p;
+        if(q>1000)
+        {
+            printf("%.6f
+",q*p*0.9);
+        }
+        else
+            printf("%.6f
+",q*p);
+    }
+    return 0;
+}

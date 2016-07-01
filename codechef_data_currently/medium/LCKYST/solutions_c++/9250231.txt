@@ -1,0 +1,51 @@
+#include<stdio.h>
+long long int a[100004];
+int main()
+{
+	long long int i,n,temp;
+	scanf("%lld", &n);
+	for ( i = 0;i<n;i++)
+	{
+		scanf("%lld",&a[i]);
+	}
+	for (i = 0; i < n; i++)
+	{
+		if (a[i] % 10 == 5)
+		{
+			a[i] *= 4;
+			temp = a[i];
+			while (temp % 10 == 0)
+				temp /= 10;
+		}
+		else if(a[i]%10==0)
+		{
+			temp = a[i];
+			while (temp % 10 == 0)
+			{
+				temp = temp / 10;
+			}
+			while (1)
+			{
+				if (temp % 10 == 5)
+				{
+					a[i] *= 4;
+					temp = a[i];
+					while (temp % 10 == 0)
+					{
+						temp = temp / 10;
+					}
+				}
+				else
+					break;
+			}
+		}
+	}
+	for (i = 0; i < n; i++)
+	{
+		printf("%lld
+", a[i]);
+	}
+	getchar();
+	getchar();
+	return 0;
+}

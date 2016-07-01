@@ -1,0 +1,54 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#define mod 1000000007
+using namespace std;
+main()
+{   std:ios_base::sync_with_stdio(false);
+    int t,a[10],i,len,j,k;
+    long long int fact[19],ans=0,tmp;
+    fact[0]=1; fact[1]=1;
+    for(i=2;i<19;i++)
+    fact[i]=i*fact[i-1];
+    string n;
+    cin>>t;
+    while(t--)
+    {   len=0; ans=0;
+    	cin>>n;
+    	for(i=0;i<10;i++)
+    	a[i]=0;
+    	for(i=0;i<n.length();i++) a[n[i]-'0']++;
+        
+        
+        for(i=0;i<n.length();i++)
+        {
+           for(j=0;j<10;j++)
+		   {
+		   	  if(a[j]>0)
+		   	  {
+		   	    if((n[i]-'0')!=j)
+		   	  	{
+		   	  	    tmp=fact[n.length()-i-1];
+		   	  	    a[j]--;
+		   	  	    for(k=0;k<10;k++)
+		   	  	    {
+		   	  	 	 if(a[k]!=0)
+		   	  	 	 tmp/=fact[a[k]];
+		   	  	    }
+		   	  	    ans+=tmp;
+		   	  	    a[j]++;
+		   	  	}
+		   	  	else
+		   	  	{
+		   	  		 a[j]--;
+		   	  		 break;
+		   	  	}
+		   	  }
+		   }
+        }
+        printf("%lld
+",ans+1);
+    }
+	return 0;
+}

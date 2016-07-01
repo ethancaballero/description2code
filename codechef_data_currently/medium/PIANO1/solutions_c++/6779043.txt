@@ -1,0 +1,35 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+char s[105];
+int main()
+{
+    int t,temp,ans,inc,i,n,tot,l;
+    scanf("%d
+",&t);
+    while(t--)
+    {
+        ans=0;inc=0;
+        scanf("%s",&s);
+        scanf("%d",&n);
+        l=strlen(s);
+        tot=12*n;
+        for(i=0;i<l;i++)
+        {
+            if(s[i]=='T')
+                inc+=2;
+            else if(s[i]=='S')
+                inc++;
+        }
+        temp=inc;
+        while(inc<tot)
+        {
+            ans+=(tot-inc);
+            inc+=temp;
+        }
+        printf("%d
+",ans);
+    }
+    return 0;
+}

@@ -1,0 +1,57 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+typedef long long ll;
+ll val[11][22];
+ll c[11][11], fac[11];
+
+ll Calc(ll n) {
+	if (!n) return 0;
+	static char buf[32];
+	sprintf(buf, "%lld", n);
+	int m = strlen(buf);
+	static bool vis[10];
+	memset(vis, false, sizeof(vis));
+	ll res = 0;
+	for (int j = 1; j < m; ++ j) res += val[10][j] - val[9][j - 1];
+	for (int i = 0; i < m; ++ i) {
+		for (int j = (i == 0); j < buf[i] - '0'; ++ j)
+			if (!vis[j]) {
+				res += val[10 - 1 - i][m - 1 - i];
+			}
+			if (vis[buf[i] - '0']) break;
+			vis[buf[i] - '0'] = true;
+			if (i + 1 == m) ++ res;
+	}
+	return res;
+}
+
+int main() {
+	c[0][0] = 1;
+	for (int i = 1; i <= 10; ++ i) {
+		c[i][0] = 1;
+		for (int j = 1; j <= i; ++ j)
+			c[i][j] = c[i - 1][j - 1] + c[i - 1][j];
+	}
+	fac[0] = 1;
+	for (int i = 1; i <= 10; ++ i)
+		fac[i] = fac[i - 1] * i;
+	val[0][0] = 1;
+	for (int i = 1; i <= 10; ++ i) {
+		val[i][0] = 1;
+		for (int j = 1; j <= i; ++ j)
+			val[i][j] = c[i][j] * fac[j];
+	}
+	int t;
+	for (scanf("%d", &t); t --; ) {
+		ll l, r;
+		scanf("%lld%lld", &l, &r);
+		printf("%lld
+", Calc(r) - Calc(l - 1));
+	}
+	return 0;
+}

@@ -1,0 +1,37 @@
+#include <cstdio>
+const int MAXC = 1E5+5;
+char  des[MAXC];
+char  src[MAXC];
+int   mod[MAXC];
+int count[30][MAXC];
+int D, M, N, T;
+
+int main()
+{
+	scanf("%d", &T);
+	while(T--)
+	{
+		M = 0;
+		bool done = true;
+		scanf(" %d%d", &N, &D);
+		scanf(" %s%s", &src, &des);
+		for(int i = 0; i < N; ++i)
+		{	// Faster -> operator '%'
+			mod[i] = M++;
+			if(M == D) M = 0;
+		}
+		for(int i = 0; i < N; ++i) // Faster -> memset
+			count[src[i]-'a'][mod[i]] = count[des[i]-'a'][mod[i]] = 0;
+		for(int i = 0; i < N; ++i)
+			++count[src[i]-'a'][mod[i]];
+		for(int j = 0; j < N; ++j)
+		{
+			int k = des[j]-'a';
+			if(count[k][mod[j]])
+				--count[k][mod[j]];
+			else { done = false; break; }
+		}
+		puts((done) ? "Yes" : "No");
+	}
+	return 0;
+}

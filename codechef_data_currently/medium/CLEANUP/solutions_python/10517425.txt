@@ -1,0 +1,20 @@
+t = input()
+for j in range(t):
+	m,n = map(int,raw_input().strip().split())
+	l = map(int,raw_input().strip().split())
+	c = []
+	a = []
+	count = 0
+	for i in range(m):
+		if l.count(i+1) == 0:
+			if count%2==0:
+				c.append(i+1)
+			else:
+				a.append(i+1)
+			count += 1
+	for i in c:
+		print i,
+	print ""
+	for i in a:
+		print i,
+	print ""

@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+
+
+
+using namespace std;
+
+int main()
+{
+    int n,p,i,q,l;
+    string str,ans;
+    vector<pair<string,int> > dish(1000);
+    cin >> n;
+    for(i=0;i<n;i++)
+    {
+        cin >> str >> p;
+        dish[i].first=str;
+        dish[i].second=p;
+    }
+    cin >> q;
+    while(q--)
+    {
+        cin >> str;
+        l=str.length();
+        int max=-1000000000;
+        ans=" ";
+        for(i=0;i<n;i++)
+        {
+            if(dish[i].first.substr(0,l)==str && dish[i].second>max)
+            {
+                max=dish[i].second;
+                ans=dish[i].first;
+            }
+        }
+        if(ans==" " && max==-1000000000)
+            cout << "NO
+";
+        else
+            cout << ans << '
+';
+    }
+    return 0;
+}
+

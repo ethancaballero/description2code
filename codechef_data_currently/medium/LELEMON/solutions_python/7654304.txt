@@ -1,0 +1,22 @@
+t = int(raw_input())
+for q in xrange(t):
+	s = raw_input().split();
+	n = int(s[0])
+	m = int(s[1])
+	rooms = map(int,raw_input().split());
+	arr = [];
+	count = 0;
+	for p in xrange(n):
+		a = map(int,raw_input().split());
+		a = a[1:];
+		a.sort();
+		arr.append(a);
+	for i in xrange(m):
+		a = 0;
+		try:
+			a = arr[rooms[i]].pop();
+		except:
+			a = 0;
+		# print a;
+		count+=a;
+	print count;

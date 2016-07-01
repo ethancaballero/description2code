@@ -1,0 +1,105 @@
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <set>
+#include <map>
+#include <list>
+#include <complex>
+#pragma comment(linker, "/STACK:266777216")
+using namespace std;
+
+//#define assert(f) { if(!(f)) { fprintf(stderr,"Assertion failed: "); fprintf(stderr,#f); fprintf(stderr,"
+"); exit(1); } }
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef pair<int,int> PII;
+typedef vector<PII> VPII;
+typedef vector<double> VD;
+typedef pair<double,double> PDD;
+
+const int inf=1000000000;
+const LL INF=LL(inf)*inf;
+const double eps=1e-9;
+const double PI=2*acos(0.0);
+#define bit(n) (1<<(n))
+#define bit64(n) ((LL(1))<<(n))
+#define pb push_back
+#define sz size()
+#define mp make_pair
+#define cl clear()
+#define all(a) (a).begin(),(a).end()
+#define fill(ar,val) memset((ar),(val),sizeof (ar))
+#define MIN(a,b) {if((a)>(b)) (a)=(b);}
+#define MAX(a,b) {if((a)<(b)) (a)=(b);}
+#define sqr(x) ((x)*(x))
+#define X first
+#define Y second
+
+//clock_t start=clock();
+//fprintf(stderr,"time=%.3lfsec
+",0.001*(clock()-start));
+
+#define N 11
+LL fac[N]={1};
+LL dp[N];
+/*understand by  taking x=9876543210*/
+LL f(LL x)
+{
+	if(x>9876543210LL) return dp[10];//it is the last del. no. that
+	                                 //can be created of 10 digits
+	int a[N];
+	int n=0,j;
+     while(x!=0) {a[n++]=x%10;x/=10;}//store digits of x in a[]
+	LL ans=dp[n-1];//a[n-1] is 1st digit of x
+	//dp[1st digit of x] ans=all nos. less than 9000000000
+	int mark[10]={0};
+	//n-1 is now 10
+	for(int i=n-1;i>=0;i--)
+	{
+		int d;
+		for(d=(i==n-1?1:0);d<a[i];d++)
+		{
+		   // printf("d=%d ",d);
+		    if(!mark[d])
+			{
+			ans+=fac[9-(n-1-i)]/fac[10-n];}
+		}
+		if(mark[d]) break;
+		mark[d]=1;
+
+		//for(j=0;j<=9;j++)printf("%d ",mark[i]);printf("
+");
+	}
+	return ans;
+}
+/*see the editorial second part*/
+int main()
+{
+	for(int n=1;n<N;n++)
+		fac[n]=n*fac[n-1];
+	dp[0]=0;
+	for(int n=1;n<N;n++)
+		dp[n]=dp[n-1]+9*fac[9]/fac[10-n];
+	int T;
+	for(scanf("%d",&T);T--;)
+	{
+		LL L,R;
+		scanf("%lld%lld",&L,&R);
+		LL resL=f(L);
+		LL resR=f(R+1);
+		printf("%lld
+",resR-resL);
+	}
+	return 0;
+}

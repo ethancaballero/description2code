@@ -1,0 +1,19 @@
+# cook your code here
+def inputnumber():
+    num = raw_input().split()
+    number = map(int,num)
+    return number
+
+t=int(raw_input())
+for i in range(0, t):
+	x=inputnumber()
+	n=x[0]
+	m=x[1]
+	if n>2 and m>2 :
+		print (m*n)*(m*n-1)-4*((m-2)*(n-1)+(m-1)*(n-2))
+	elif n==2 and m>2 :
+		print 4*m*m-6*m+8
+	elif n>2 and m==2 :
+		print 4*n*n-6*n+8
+	else:
+		print (m*n)*(m*n-1)

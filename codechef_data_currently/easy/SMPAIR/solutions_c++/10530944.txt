@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+ long int test;
+  long int x,y,count;
+  long int i;
+  long int s1,s2;
+ cin >> test;
+ while(test--)
+ {
+    s1 = 100001;
+    s2 = 100001;
+    cin >> count;
+    cin >> x;
+    cin >> y;
+    
+    if(x < y)
+       {
+         s1 = x;
+         s2 = y;
+       }
+    if(y <= x)
+     {
+         s1 = y;
+         s2 = x;
+     }
+       
+   for(i = 3 ; i <= count ; i++)
+    {
+      cin >> x;
+      if(x < s1  )
+        {
+          s2 = s1;
+          s1 = x; 
+        }     
+       
+      if(x < s2 && x > s1)
+        s2 = x;
+    }
+ 
+ cout << s1 + s2<<endl;
+ 
+ }
+
+
+	return 0;
+}

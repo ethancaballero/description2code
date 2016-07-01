@@ -1,0 +1,23 @@
+#import pdb
+def main():
+    t_case_num = raw_input();
+    case_num = map(int,t_case_num.split());
+    dists = [0]*case_num[0];
+    for i in range(case_num[0]):
+      t_params = raw_input();
+      params = map(int,t_params.split());
+      DS = params[0];
+      DT = params[1];
+      D = params[2];
+      if DS+DT<D:
+          dists[i] = D-DS-DT;
+      elif DS>DT+D:
+          dists[i] = DS-DT-D;
+      elif DT>DS+D:
+          dists[i] = DT-DS-D;
+      else:
+          dists[i] = 0;
+    for i in range(case_num[0]):
+        print(dists[i]);
+
+main()

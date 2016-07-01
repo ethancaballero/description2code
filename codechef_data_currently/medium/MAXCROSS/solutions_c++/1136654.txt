@@ -1,0 +1,95 @@
+#include <iostream>
+ 
+
+using namespace std;
+
+#define INF 2147483647
+#define EL cout<<endl
+#define TI freopen("test.inp","rt",stdin)
+
+
+#define FOR(i,a,b) for(int i=a;i<=b;i++) 
+#define FORD(i,a,b) for(int i=a;i>=b;i--) 
+#define REP(i,n) for(int i=0;i<n;i++)
+
+char C[1111][1111];
+int F[8][1111][1111];
+
+int TP = 0; //trai phai
+int PT = 1;
+int TD = 2; //tren duoi
+int DT = 3;
+int CCX = 4; //cheo chinh xuong
+int CCL = 5;
+int CPX = 6; //cheo phu xuong
+int CPL = 7;
+int N;
+
+void xuly()
+{
+     scanf("%d
+",&N);
+     FOR(i,1,N)
+     {
+         scanf("%s
+",&C[i][1]);      
+     }
+     
+     FOR(i,1,N)
+     FOR(j,1,N)
+     
+     if (C[i][j]=='X')
+     {
+           F[TP][i][j]=F[TP][i][j-1]+1;
+ 
+           F[CCX][i][j]=F[CCX][i-1][j-1]+1;
+            
+           F[TD][i][j]=F[TD][i-1][j]+1;
+           
+           F[CPX][i][j]=F[CPX][i-1][j+1]+1;
+     }
+     else F[TP][i][j]=F[CCX][i][j]=F[TD][i][j]=F[CPX][i][j]=0;
+     
+     FORD(i,N,1)
+     FORD(j,N,1)
+     if (C[i][j]=='X')
+     {
+           
+           F[PT][i][j]=F[PT][i][j+1]+1;
+ 
+           F[CCL][i][j]=F[CCL][i+1][j+1]+1;
+            
+           F[DT][i][j]=F[DT][i+1][j]+1;
+           
+           F[CPL][i][j]=F[CPL][i+1][j-1]+1;   
+     }
+     else F[PT][i][j]=F[CCL][i][j]=F[DT][i][j]=F[CPL][i][j]=0;
+     
+     FOR(i,1,N)
+     {
+         FOR(j,1,N)
+         if (C[i][j]=='.') printf("0 ");
+         else
+         {
+             int rs=0;
+             rs = max(rs, F[TP][i][j]+F[PT][i][j]-1);
+             rs = max(rs, F[TD][i][j]+F[DT][i][j]-1);
+             rs = max(rs, F[CCX][i][j]+F[CCL][i][j]-1);
+             rs = max(rs, F[CPX][i][j]+F[CPL][i][j]-1);      
+             printf("%d",rs);
+             if (j<N) printf(" ");
+             //printf("%d ",F[TP][i][j]);
+         }
+         
+         if (i<N) printf("
+");
+     }
+}
+
+int main()
+{
+     
+    xuly();
+   
+    return 0;
+}

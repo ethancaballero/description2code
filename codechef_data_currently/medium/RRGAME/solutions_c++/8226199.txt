@@ -1,0 +1,18 @@
+        #include<stdio.h>
+        #define MAX(a,b) (((a)>(b))?(a):(b))
+        int main()
+        {
+        long long int n,m,k,count,max,t,min_sum,max_sum;
+        scanf("%lld %lld %lld",&n,&m,&k);
+        int i=0;count=0;max = 0;
+        for(;i<n;i++)
+        {
+        scanf("%lld",&t);
+        count = count+(m-t+k)/k;
+        max = MAX(max,(m-t+k)/k);
+        }
+        max_sum = count/2;
+        min_sum = ((count-max)%2==1)?(count-max)/2+1:(count-max)/2;
+        printf("%lld",(max_sum-min_sum+1)%1000000007);
+        return 0;
+        }  

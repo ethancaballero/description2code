@@ -1,0 +1,82 @@
+import java.io.*;
+      import java.util.*;
+      public class Main
+   
+      {
+   
+      static long m=100000007;
+   
+      public static long mod(long n,long k)
+   
+      {
+   
+      long res=1;
+   
+      while(n!=0)
+  
+     {
+  
+      if(n%2!=0)
+  
+      res=(res*k)%m;
+  
+      k=(k*k)%m;
+  
+      n/=2;
+  
+      } 
+     return(res);
+ 
+      }
+      public static void main(String args[])throws Exception
+  
+     {
+  
+      BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+  
+      int t=Integer.parseInt(in.readLine());
+  
+      StringBuffer out=new StringBuffer("");
+  
+      for(int i=1;i<=t;i++)
+  
+      { 
+      long n=Long.parseLong(in.readLine());
+  
+      if(n==1){
+  
+      out.append("0 0
+");continue;}
+  
+      else if(n==2){
+  
+      out.append("1 0
+");continue;}
+  
+      long m3=mod(n,(long)3);
+  
+      long m2=mod(n,(long)2);
+  
+      n=n%m; 
+      long a=((m3-(2*m2)%m+1)%m); 
+      if(a%2==0)  
+      a/=2;
+      else
+      a=(a+m)/2;
+     a%=m;
+      long b=(((m2+2)*(m2-2-n))%m-(3*m3%m-3-(2*n)%m-((m2)*(n+3))%m)%m);
+      if(b%2==0)
+      b/=2;
+      else
+      b=(b+m)/2;
+      b%=m;
+      if(a<=0) 
+      a+=m;
+      if(b<=0)
+      b+=m;
+      out.append(a+" "+b+"
+");
+      }
+      System.out.println(out);
+      }
+      }  

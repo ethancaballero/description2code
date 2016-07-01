@@ -1,0 +1,15 @@
+test=input()
+
+inpu=""
+t=0
+u=[]
+while test:
+	inpu=raw_input()
+	m=inpu.split()
+	n=int(m[0])
+	k=int(m[1])
+	u=[]
+	for j in range(1,k+1):
+		u.append(n%j)
+	print max(u)
+	test=test-1

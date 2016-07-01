@@ -1,0 +1,33 @@
+t = int(raw_input().strip())
+for _ in xrange(t):
+    n, k = map(int, raw_input().strip().split())
+    a = map(int, raw_input().strip().split())
+    b = map(int, raw_input().strip().split())
+    	
+    my_list = []
+    count = 0
+    for i in range(n):
+	if b[i] == 0:
+	    count += 1
+    	if b[i] < 0:
+    		my_list.append([-1, a[i], -1*b[i]])
+    	elif b[i] > 0:
+    		my_list.append([1, a[i], b[i]])
+
+    if count == n:
+	print "0"
+	continue
+    			
+    my_list.sort(key=lambda x:x[2], reverse=True)
+    #print my_list
+    sum = 0
+    if my_list[0][0] == 1:
+    	my_list[0][1] += k
+    else:
+    	my_list[0][1] -= k
+    		
+    for e in my_list:
+    	#print e[0], e[1], e[2]
+    	sum = sum + e[0]*e[1]*e[2]
+    		
+    print sum 

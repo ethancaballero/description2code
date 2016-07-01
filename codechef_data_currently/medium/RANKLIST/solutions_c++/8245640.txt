@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int i,n,t;
+    long long int s;
+    cin>>t;
+    while(t--){
+        cin>>n>>s;
+        for(i=1;i<=n;i++){
+            if(s-i>=n-i){
+                s=s-i;
+            }
+            else{
+                break;
+            }
+        }
+        cout<<n-i+1<<endl;
+    }
+return 0;
+}

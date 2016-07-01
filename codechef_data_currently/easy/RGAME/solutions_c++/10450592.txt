@@ -1,0 +1,22 @@
+#include<iostream>
+#include<cmath>
+#define D 1000000007
+using namespace std;
+int main(){
+unsigned long long  T,N,A,i,E,S;
+cin>>T;
+while(T--)
+{ cin>>N;
+  cin>>A;
+    E=2*A;
+    S=0;
+ for(i=1;i<=N;i++){
+     cin>>A;
+     S=(2*S+A*E)%D;
+     E=(unsigned long long)(E+pow(2,i)*A)%D;
+     }
+  cout<<S<<"
+";
+}
+return 0;
+}

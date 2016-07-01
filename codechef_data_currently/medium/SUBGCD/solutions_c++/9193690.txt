@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+#define D 1000000007
+#define gcd __gcd
+#define getcx getchar
+#define pc putchar
+#define get(x) scanf("%d",&x)
+#define getl(x) scanf("%lld",&x)
+#define print(x) printf("%d
+",x)
+#define printl(x) printf("%lld
+",x)
+#define bitcount __builtin_popcount
+#define debug(s) cout << "check : " << s << endl
+using namespace std;
+typedef long long ll;
+int main()
+{
+    int t; get(t);
+    while(t--)
+    {
+        int n; get(n);
+        vector <int> vec;
+        int gg;
+        for(int i=0;i<n;i++)
+        {
+            int c; get(c);
+            vec.push_back(c);
+        }
+        gg = vec[0];
+        for(int i=1;i<n;i++)
+            gg = gcd(gg,vec[i]);
+        if(gg==1)
+            print(n);
+        else
+            print(-1);
+    }
+    return 0;
+}

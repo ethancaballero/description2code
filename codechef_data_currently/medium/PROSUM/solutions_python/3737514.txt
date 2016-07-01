@@ -1,0 +1,21 @@
+import sys
+
+def prosum(array):
+  nb_integers = len(array)
+  count_two = 0
+  count_0and1 = 0
+  for index in xrange(nb_integers):
+    if array[index] == 0 or array[index] == 1:
+      count_0and1 += 1
+    elif array[index] == 2:
+      count_two += 1
+  nb_pairs_two = count_two*(count_two-1)/2
+  nb_pairs = (nb_integers - count_0and1)*(nb_integers - count_0and1 - 1)/2
+  nb_pairs -= nb_pairs_two
+  return nb_pairs
+
+t = input()
+for case in xrange(t):
+  n = input()
+  data = map(int,sys.stdin.readline().strip().split())
+  print(prosum(data))

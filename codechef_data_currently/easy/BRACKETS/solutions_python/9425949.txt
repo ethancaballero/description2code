@@ -1,0 +1,31 @@
+def process_problem_statement():
+    T = int(raw_input())
+    for x in range(0,T):
+        A = list(raw_input())
+        
+        max_bal = get_max_bal(A)
+        
+        str = ''
+        for i in range(0,max_bal):
+            str = str+ '('
+            
+        for i in range(0,max_bal):
+            str = str+ ')'
+            
+        print str
+        
+def get_max_bal(A):
+    max_bal = 0
+    bal = 0
+    for entry in A:
+        if entry == '(':
+            bal += 1
+        else:
+            bal -= 1
+            
+        if bal>max_bal:
+            max_bal = bal
+    
+    return max_bal
+
+process_problem_statement()

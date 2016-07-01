@@ -1,0 +1,22 @@
+T=int(input()) # Input the Test Cases
+
+l=[]        # Empty list to store Sums
+
+def palindrome_check(): # Function To check Palindrome
+    rang=raw_input("")
+    sp=rang.split()
+
+    L=int(sp[0])# Left num
+    R=int(sp[1])# Right num
+    sum=0
+    for i in range(L,R+1):
+      k=str(i)
+      if k[::-1]==k:
+        sum+=i
+    l.append(sum)
+
+for i in range(T):
+    palindrome_check()
+
+for i in l: # Displaying Output Sums
+    print i

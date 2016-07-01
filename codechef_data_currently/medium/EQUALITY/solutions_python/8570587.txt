@@ -1,0 +1,12 @@
+test_case = int(raw_input())
+
+for i in xrange(test_case):
+    n = int(raw_input())
+    a_vec = map(int, raw_input().split())
+    result = []
+
+    x_1 = -a_vec[0]+sum(a_vec)/(n-1)
+    result.append(x_1)
+    for k in xrange(1, n):
+        result.append(a_vec[0]-a_vec[k]+x_1)
+    print(" ".join([str(x) for x in result] ))

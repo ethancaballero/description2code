@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+
+void solve()
+{
+    int N, M, order[400], cust_status[400], cust_order[400][400], table[200];
+    int cust_counts[400];
+    for (int i = 0; i < 400; i++)
+      {
+        cust_counts[i] = -1;
+        cust_status[i] = -1;
+      }
+    scanf ("%d %d", &N, &M);
+    for (int i = 0 ; i < M ; i++)
+      {
+        scanf("%d", &order[i]);
+        order[i]--;
+        cust_order[order[i]][++cust_counts[order[i]]] = i;
+      }
+    for (int i = 0; i < 400; i++)
+      {
+        cust_order[i][++cust_counts[i]] = 10000;
+      }
+
+    int fault = 0;
+    for (int i = 0; i < M; i++)
+      {
+        if (cust_status[order[i]] > 0)
+          continue;
+        if (fault < N)
+          {
+            table[fault] = order[i];
+            cust_status[order[i]] = 1;
+            fault++;
+            continue;
+          }
+        fault++;
+        // fault
+        int max = 0, t, c_r;
+        for (int j = 0; j < N; j++)
+          {
+            for (int p = 0 ; p <= cust_counts[table[j]]; p++)
+              {
+                if (cust_order[table[j]][p] > i)
+                  {
+                    t = cust_order[table[j]][p];
+                    break;
+                  }
+              }
+            if (t > max)
+              {
+                max = t;
+                c_r = j;
+              }
+          }
+        cust_status[table[c_r]] = -1;
+        table[c_r] = order[i];
+        cust_status[order[i]] = 1;
+      }
+    printf ("%d
+", fault);
+}
+
+int main()
+{
+    int T;
+    scanf("%d", &T);
+    while (T--)
+    {
+        solve();
+    }
+    return 0;
+}

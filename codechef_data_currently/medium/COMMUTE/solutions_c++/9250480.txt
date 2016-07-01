@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t, n, x, l, f, sum, i;
+	cin>>t;
+	while(t--)
+	{
+		sum=0;
+		cin>>n;
+		cin>>x>>l>>f;
+		n--;
+		sum=x+l;
+		while(n--)
+		{
+			cin>>x>>l>>f;
+			i=sum-x;
+			if(i<=0)
+			sum=x+l;
+			else
+			{
+				if(i%f==0)
+				i=i/f;
+				else
+				{
+					i=i/f;
+					i++;
+				}
+				sum=x+i*f+l;
+			}
+		}
+		cout<<sum<<endl;
+	}
+}

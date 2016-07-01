@@ -1,0 +1,9 @@
+draw, bal = raw_input().split()
+draw, bal = [int(draw), float(bal)]
+
+
+if draw%5!=0 or (draw+.5)>bal or 0<draw>=2000 or 0<=bal>=2000:
+  print("%.2f" % bal)
+else:
+  bal=bal-(draw+.5)
+  print("%.2f" % bal)

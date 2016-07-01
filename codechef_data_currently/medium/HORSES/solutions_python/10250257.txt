@@ -1,0 +1,19 @@
+def main():
+	t=input()
+	lt2=[]
+	for i in range(t):
+		lt=[]
+		lt1=[]
+		n=input()
+		lt = [int(i1) for i1 in raw_input().strip().split()]
+		lt.sort()
+		for j in range(n-1):
+			lt1.append(lt[j+1]-lt[j])
+		mi=min(lt1)
+		lt2.append(mi)
+	for i in range(t):
+		print lt2[i]
+
+
+if __name__ == '__main__':
+	main()

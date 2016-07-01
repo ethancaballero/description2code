@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int f1=0,t,a,b,mi,ma;
+    while(f1==0)
+    {
+        cin>>t;
+        if(t>=1 && t<=100)
+            f1=1;
+    }
+    while(t--)
+    {
+        f1=0;
+        while(f1==0)
+        {
+            cin>>a;
+            if(a>=1 && a<=1000000)
+                f1=1;
+        }
+        f1=0;
+        while(f1==0)
+        {
+            cin>>b;
+            if(b>=1 && b<=1000000)
+                f1=1;
+        }
+        if(a>b)
+            mi=a;
+        else
+            mi=b;
+        ma=a+b;
+        cout<<mi<<" "<<ma<<endl;
+            }
+    return 0;
+}

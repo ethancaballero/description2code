@@ -1,0 +1,20 @@
+#include<stdio.h>
+int main()
+{
+   int T;
+   long long int X,K,i,j,k;
+   double ans,length;
+   scanf("%d",&T);
+   while(T--)
+   {
+      scanf("%lld %lld",&X,&K);
+      for(i=1;K/i;i*=2);
+         i=i/2;
+      length=((double)(X))/i;
+      ans=length*(K-i+1);
+      ans-=length/2;
+      printf("%lf
+",ans);
+   }
+   return 0;
+}

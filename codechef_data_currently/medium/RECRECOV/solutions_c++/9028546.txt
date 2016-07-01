@@ -1,0 +1,75 @@
+using namespace std;
+#include <bits/stdc++.h>
+#define S(x) scanf("%d",&x)
+#define S2(x,y) scanf("%d%d",&x,&y)
+#define wl(n) while(n--)
+#define ll long long
+#define P(x) printf("%d
+",x)
+#define PB push_back
+#define MP make_pair
+#define fl(i,n) for(i=0;i<n;i++)
+#define fil(i,a,n) for(i=a;i<n;i++)
+#define rev(i,a,n) for(i=n-1;i>=a;i--)
+#define mem(a,i) memset(a,i,sizeof(a))
+#define F first
+#define S1 second
+typedef pair<int,int> P;
+vector<int> v1;
+pair<int,int> p1;
+#define MOD 1000000007
+#define debug(x)  printf("####%d####
+",x);
+#define nl printf("
+");
+#define str string
+int a[200][200];
+int arr[200];
+int visited[200];
+int n;
+int func(int k)
+{
+ 
+  if(k<0) return 1;
+  if(visited[k]) return 0;
+  visited[k]=1;
+  for (int i=1;i<=n;i++) if(a[k][i])
+ {
+      if(func(arr[i])) 
+      {
+        arr[i]=k;
+        return 1;
+      }
+}
+  return 0;
+}
+int main()
+{
+    //std::ios_base::sync_with_stdio(0);
+    int t;
+    int i,j,k,m,l;
+    S(t);
+    wl(t)
+    {
+        S2(n,m);
+        mem(a,0);
+        fl(i,m)
+        {
+            S2(j,k);
+            if(j==k)
+                continue;
+            a[j][k]=1;
+        }
+        memset(arr, -1, sizeof(arr));
+        int ans=0;
+         for(i=1;i<=n;i++)
+        {
+            memset(visited, 0, sizeof(visited));
+            if(!func(i)) ans++;
+        }
+        cout<<ans<<"
+";
+    } 
+    S(n);
+    return 0;
+}

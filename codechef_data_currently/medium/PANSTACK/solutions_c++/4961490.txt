@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define MOD 1000000007
+using namespace std;
+//from mrkhanna17 to masterkhanna17
+//no macros for now
+ll dp[1001][1001]={0};
+int main()
+{int t,n,m,i,j;
+dp[1][1]=1;
+for(i=2;i<=1000;i++)
+{   ll sum=0;
+  dp[i][1]=1;
+    for(j=2;j<=i;j++)
+    {
+        dp[i][j]=(j*dp[i-1][j]+dp[i-1][j-1])%MOD;
+    }
+
+}
+  cin>>t;
+for(i=0;i<t;i++)
+{int n;
+    cin>>n;
+    ll sum=0;
+ for(j=1;j<=n;j++)
+sum=(sum+dp[n][j])%MOD;
+cout<<sum<<endl;
+}
+
+    return 0;
+}

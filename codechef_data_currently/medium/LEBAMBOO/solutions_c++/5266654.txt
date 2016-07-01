@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+int mod(int x)
+{	if(x>=0)return x;
+	else if(x<0)return -x;
+}
+
+int main()
+{	int test;
+	cin>>test;
+	while(test-->0)
+	{	int n;
+		cin>>n;
+		int p[n];
+		int d[n];
+		int s[n];
+		int sum1=0;
+		for(int i=0;i<n;i++)
+		{	cin>>p[i];
+			sum1-=p[i];
+		}
+		for(int i=0;i<n;i++)
+		{	cin>>d[i];
+			sum1+=d[i];
+		}
+		for(int i=0;i<n;i++)
+		{	s[i]=d[i]-p[i];
+		}
+		if(n==1)
+		{	if(s[0]<=0)
+			{	cout<<-s[0]<<endl;
+			}
+			else
+			{	cout<<-1<<endl;
+			}
+		}
+		else if(n==2)
+		{	int sum=s[0]+s[1];
+			if(sum==0)
+			{	if(s[0]>=0)
+				{	cout<<s[0]<<endl;
+				}
+				else if(s[0]<0)
+				{	cout<<-s[0]<<endl;
+				}
+			}
+			else
+			{	cout<<-1<<endl;
+			}
+		}
+		else 
+		{	int turn = sum1/(n-2);	//no of turns;
+			int pick=0;			//picking ith elementto decrease
+			int ch=0;			//indicator
+			for(int i=0;i<n;i++)
+			{	pick=(turn-s[i])/2;
+				if(pick>turn||pick<0||((turn-s[i])%2!=0))
+				{	ch=1;break;
+				}
+			}
+			if(ch==1)
+			{	cout<<-1<<endl;
+			}
+			else
+			{	cout<<turn<<endl;
+			}
+		}
+	}
+}

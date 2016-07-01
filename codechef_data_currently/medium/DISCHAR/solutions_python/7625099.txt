@@ -1,0 +1,17 @@
+import sys
+
+def DistinctCharactersSubsequence():
+    count = []
+    n = 0
+    while True:
+        v = sys.stdin.read(1)
+        if v >= 'a' and v <= 'z':
+            if v not in count:
+                count.append(v)
+        else:
+            break
+    print(len(count))
+
+T = input()
+for i in range(T):
+    DistinctCharactersSubsequence()

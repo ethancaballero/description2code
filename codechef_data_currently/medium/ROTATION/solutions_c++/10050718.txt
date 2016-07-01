@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e6 + 10;
+int A[MAXN];
+
+int main(){
+    int N, M;
+    scanf("%d%d", &N, &M);
+    for(int i = 0;i < N;++i){
+        scanf("%d", &A[i]);
+    }
+    int offset = 0;
+    while(M--){
+        char type;
+        scanf(" %c", &type);
+        if(type == 'C'){
+            int d;
+            scanf("%d", &d);
+            offset += d;
+        } else if(type == 'A'){
+            int d;
+            scanf("%d", &d);
+            offset -= d;
+        } else {
+            int d;
+            scanf("%d", &d);
+            d = d - 1 + offset;
+            while(d >= N) d -= N;
+            printf("%d
+", A[d]);
+        }
+        while(offset >= N) offset -= N;
+        while(offset < 0) offset += N;
+    }
+    return 0;
+}

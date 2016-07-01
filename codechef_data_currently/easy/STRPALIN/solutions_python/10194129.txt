@@ -1,0 +1,10 @@
+T = int(raw_input())
+
+for t in range(T):
+    A = str(raw_input())
+    B = str(raw_input())
+
+    if len(set(list(A)) & set(list(B))) > 0:
+        print "Yes"
+    else:
+        print "No"

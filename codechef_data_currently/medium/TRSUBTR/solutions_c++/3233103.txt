@@ -1,0 +1,112 @@
+
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+
+#include <stdio.h>
+
+using namespace std;
+
+
+struct Chef {
+  int  age;
+//  char c;
+  Chef * left;
+  Chef * right;
+
+  Chef (): 
+     age (0), left (0), right (0) { }
+};
+
+void print (Chef * chef, std::ostream &os) {
+  if (chef == 0) {
+    os << " 0";
+    return;
+  }
+  os << " " << chef->age;
+  print (chef->left, os);
+  print (chef->right, os);
+}
+
+void read (std::vector<Chef> &v) {
+#ifdef DEBUG
+   cerr << "v.size() =" << v.size() << "
+";
+#endif
+
+  for (int i = 0; i < v.size(); ++i) {
+#ifdef DEBUG
+    cerr << "v[" << i << "].age:
+";
+#endif
+    scanf ("%d", & v[i].age);
+  }
+
+  for (int i = 0, max = v.size() -1; i < max; ++i){
+#ifdef DEBUG
+    cerr << (i+1) <<"/" << max << " senior chef: (pos1 pos2 char)
+";
+#endif
+    
+    int headChef, subChef;
+    char c;
+    scanf ("%d %d %c", &headChef, &subChef, &c);
+    --headChef;
+    --subChef;
+    if (c == 'M')
+      v[headChef].left = &v.at(subChef);
+    else
+      v[headChef].right = &v.at(subChef);
+  }
+}
+
+int main (int argc, char ** argv) {
+#ifdef DEBUG
+  cerr << "Number of Chef in main place: 
+";
+#endif
+
+  int N = 0;
+  cin >> N;
+
+  std::vector <Chef> head (N);
+  read (head);
+  std::ostringstream os;
+  print (&head[0], os);
+  const std::string headString = os.str();
+  
+#ifdef DEBUG
+  cerr << "Number of query: 
+";
+#endif
+  int Q = 0;
+  cin >> Q;
+
+  std::vector <Chef> tmp ;
+  tmp.reserve (1000);
+
+  for (int i = 0; i < Q; ++i) {
+#ifdef DEBUG
+  cerr << "Query: " << (i+1) << "/" << Q << "
+Number Of Chef:
+";
+#endif
+    tmp.clear();
+    int M = 0;
+    cin >> M;
+    tmp.resize(M);
+
+    read (tmp);
+    std::ostringstream ts;
+    print (&tmp[0], ts);
+    if (std::string::npos != headString.find (ts.str()))
+      printf("YES
+");
+    else
+      printf("NO
+");
+  }
+  
+  return 0;
+}

@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+long long int d=0,r=0,n,t,tmp;
+cin>>t;
+while(t--)
+{
+cin>>n;
+tmp=n;
+while(n>0)
+{
+r=n%10;
+d=d*10+r;
+n=n/10;
+}
+
+if(tmp==d)
+{cout<<"wins"<<endl;}
+else
+{cout<<"losses"<<endl;}
+d=r=0;
+}// your code goes here
+	return 0;
+}

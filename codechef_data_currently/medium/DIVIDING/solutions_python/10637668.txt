@@ -1,0 +1,9 @@
+n=int(raw_input())
+s=map(int,raw_input().split())
+c=0
+for i in range(n):
+	c+=s[i]
+if(c==((n)*(n+1))/2):
+	print "YES"
+else:
+	print "NO"

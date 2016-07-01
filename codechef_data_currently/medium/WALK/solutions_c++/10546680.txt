@@ -1,0 +1,20 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n,i,j,m,k,x;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>m;
+		int arr[m];
+		for(j=0;j<m;j++)
+		{
+			cin>>x;
+			arr[j]=x+j;
+		}
+		sort(arr,arr+m);
+		cout<<arr[m-1]<<endl;
+	}
+}

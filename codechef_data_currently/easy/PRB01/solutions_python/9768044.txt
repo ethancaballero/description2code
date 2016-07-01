@@ -1,0 +1,10 @@
+def prime(n):
+    c=0
+    for i in range(2,n):
+        if not(n%i):
+            c+=1
+    if c>0:
+        return 'no'
+    return 'yes'
+for i in range(int(raw_input())):
+    print prime(int(raw_input()))

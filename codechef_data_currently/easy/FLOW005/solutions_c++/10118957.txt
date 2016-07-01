@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main(void) {
+	// your code goes here
+	int notes[] = {100, 50, 10, 5, 2, 1};
+	int t, n, s, i;
+
+	scanf ("%d", &t);
+
+	while (t--) {
+
+	    scanf ("%d", &n);
+	    s = 0;
+	    i=0;
+	    while (n>0) {
+	        if (notes[i] <= n) {
+	            s += n / notes[i];
+	            n = n % notes[i];
+	        }
+	        else
+                i++;
+	    }
+	    printf ("%d
+", s);
+	}
+	return 0;
+}

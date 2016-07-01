@@ -1,0 +1,77 @@
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cassert>
+
+const int maxn = 50;
+
+inline void readInt(int &x, int left, int right)
+{
+    assert(scanf("%d", &x) == 1);
+    assert(left <= x && x <= right);
+}
+
+inline void check()
+{
+    int n, a[maxn], b[maxn];
+    readInt(n, 1, maxn);
+    int sa = 0, sb = 0;
+    for (int i = 0; i < n; ++ i) {
+        readInt(a[i], 1, maxn);
+        sa += a[i];
+    }
+    for (int i = 0; i < n; ++ i) {
+        readInt(b[i], 1, maxn);
+        sb += b[i];
+    }
+    int delta = n - 2; // the delta of the sum
+    if (delta == 0) {
+        if (sb == sa) {
+            printf("%d
+", abs(b[0] - a[0]));
+        } else {
+            puts("-1");
+        }
+        return;
+    }
+    if ((sb - sa) % abs(delta)) {
+        puts("-1");
+        return;
+    }
+
+    int step = (sb - sa) / delta;
+    if (step < 0) {
+        puts("-1");
+        return;
+    }
+    
+    //re-check whether the total step is correct
+    int sum = 0;
+    for (int i = 0; i < n; ++ i) {
+        int d = b[i] - a[i];
+        // minus + plus = step;
+        // plus - minus  = d
+        int mi = step - d;
+        if (mi % 2 != 0 || mi / 2 < 0 || mi / 2 > step) {
+            puts("-1");
+            return;
+        }
+        sum += mi / 2;
+    }
+    if (sum == step) {
+        printf("%d
+", step);
+    } else {
+       puts("-1");
+    }
+}
+
+int main()
+{
+    int T;
+    readInt(T, 1, maxn);
+    while (T --) {
+        check();
+    }
+    return 0;
+}

@@ -1,0 +1,82 @@
+/*
+Template belongs to : Himanshu Jaju [himanshujaju]
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long int LL;
+#define pb push_back
+
+int conflict(vector<int> a, vector<int> b)
+{
+      int i = 0,j = 0;
+      while(i<a.size() && j<b.size())
+      {
+            if(a[i] == b[j]) return 1;
+            else if(a[i]<b[j]) i++;
+            else j++;
+      }
+      return 0;
+}
+
+int conflicts[20][20] = {0};
+
+int possible(vector<int> a)
+{
+      for(int i=0;i<a.size();i++)
+      {
+            for(int j=i+1;j<a.size();j++)
+                  if(conflicts[a[i]][a[j]]) return 0;
+      }
+      return 1;
+}
+
+int main()
+{
+      int n,m;
+      cin>>n>>m;
+      vector<int> arr[m];
+      for(int i=0;i<m;i++)
+      {
+            int k;
+            cin>>k;
+            while(k--)
+            {
+                  int x;
+                  cin>>x;
+                  arr[i].pb(x);
+            }
+      }
+
+      for(int i=0;i<m;i++)
+      {
+            conflicts[i][i] = 1;
+            for(int j = i+1;j<m;j++)
+                  conflicts[i][j] = conflicts[j][i] = conflict(arr[i],arr[j]);
+      }
+
+      int bits[m];
+      for(int i=0;i<m;i++) bits[i] = 1;
+
+      int ans = 1;
+      for(int zero = 0;zero<m-1;zero++)
+      {
+            do
+            {
+                  vector<int> index;
+                  for(int i=0;i<m;i++)
+                        if(bits[i])
+                              index.pb(i);
+                  if(possible(index))
+                  {
+                        ans = index.size();
+                        break;
+                  }
+            }while(next_permutation(bits,bits+m));
+            if(ans>1) break;
+            bits[zero] = 0;
+      }
+      cout<<ans<<endl;
+      return 0;
+}

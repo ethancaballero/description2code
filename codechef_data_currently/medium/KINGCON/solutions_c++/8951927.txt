@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+int visited[3010],ap[3010],low[3010],disc[3010],mc;
+int test,t;
+void mydfs(int x,int mt,int p,vector<vector<int> > &v)//mytime
+{
+	int child=0;
+	visited[x]=t;
+	disc[x]=mt;low[x]=mt;
+	vector<int>::iterator it;
+	for(it=v[x].begin();it!=v[x].end();it++)
+	{
+		if(*it==p)
+		continue;
+		else
+		{
+			if(visited[*it]!=t)
+			{
+				child++;
+				mydfs(*it,mt+1,x,v);
+				if(ap[x]!=t && p!=-1 && disc[x]<=low[*it])
+				{
+					//~ cout<<x<<endl;
+					ap[x]=t;
+					mc++;
+				}
+				if(ap[x]!=t && p==-1 && child>1)
+				{
+					//~ cout<<x<<" "<<child<<" "<<endl;
+					ap[x]=t;
+					mc++;
+				}
+				low[x]=min(low[x],low[*it]);
+			}
+			else
+			{
+				low[x]=min(low[x],disc[*it]);
+			}
+		}
+	}
+}
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	memset(visited,0,sizeof(visited));
+	memset(ap,0,sizeof(ap));
+	memset(low,0,sizeof(low));
+	memset(disc,0,sizeof(disc));
+	cin>>test;
+	for(t=1;t<=test;t++)
+	{
+		int n,m,k;
+		cin>>n>>m>>k;
+		int i,x,y;
+		vector<vector<int> > v(n);
+		for(i=0;i<m;i++)
+		{
+			cin>>x>>y;
+			v[x].push_back(y);
+			v[y].push_back(x);
+		}
+		ll int cost=0;mc=0;
+		for(i=0;i<n;i++)
+		{
+			if(visited[i]!=t)
+			{
+				mydfs(i,1ll,-1,v);
+			}
+		}
+		cost=mc*k;
+		cout<<cost<<endl;
+	}
+	return 0;
+}

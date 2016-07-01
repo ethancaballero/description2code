@@ -1,0 +1,45 @@
+def dec_to_bin(x):
+    return str(bin(x)[2:])
+
+t = int(raw_input());
+m = 1000000007;
+for i in range(t):
+	k = raw_input().split();
+	n = int(k[0]);
+	a = int(k[1]);
+	b = int(k[2]);
+	# print n;
+	# print a;
+	# print b;
+	a = dec_to_bin(a);
+	ones_in_a = 0;
+	for k in a:
+		if k == '1':
+			ones_in_a+=1;
+	b = dec_to_bin(b);
+	ones_in_b = 0;
+	for k in b:
+		if k == '1':
+			ones_in_b+=1;
+	
+	zeroes_in_a = n - ones_in_a;
+	zeroes_in_b = n - ones_in_b;
+	
+	ans = [];
+	for k in range(min(ones_in_b,zeroes_in_a)):
+		ans.append(str(1));
+
+	for k in range(min(ones_in_a,zeroes_in_b)):
+		ans.append(str(1));
+
+	ones = len(ans);
+	for k in range(n-ones):
+		ans.append(str(0));
+
+	# print ans;
+	ans = ''.join((ans));
+	ans = int(ans,2);
+
+	print ans;
+	# print ' -------- ';
+

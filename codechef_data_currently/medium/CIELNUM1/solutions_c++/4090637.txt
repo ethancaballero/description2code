@@ -1,0 +1,71 @@
+#include <cstdio>
+
+typedef long long int ll;
+
+ll getNewNo(int no) {
+  ll pow = 1;
+  int temp = no;
+  int dig;
+  ll ret = 0;
+  while(temp != 0) {
+    dig = temp % 4;
+    switch(dig) {
+    case 0:
+      break;
+    case 1:
+      ret += 3 * pow;
+      break;
+    case 2:
+      ret += 5 * pow;
+      break;
+    case 3:
+      ret += 8 * pow;
+      break;
+    }
+    temp /= 4;
+    pow *= 10;
+  }
+  return ret;
+}
+
+int main() {
+  int i, cnt = 0, temp, dig;
+  int cnt8, cnt5, cnt3;
+  int flag;
+  for(i = 1; i < 10000000; i++) {
+    //represent i as base 3 number
+    temp = i;
+    cnt8 = cnt5 = cnt3 = 0;
+    flag = 0;
+    while(temp != 0) {
+      dig = temp % 4;
+      switch(dig) {
+      case 0:
+	flag = 1;
+	break;
+      case 1:
+	cnt3++;
+	break;
+      case 2:
+	cnt5++;
+	break;
+      case 3:
+	cnt8++;
+	break;
+      }
+      temp /= 4;
+      if(flag == 1) break;
+    }
+    if(flag != 1 && cnt8 >= cnt5 && cnt5 >= cnt3) {
+      ll ans = getNewNo(i);
+      printf("%lld
+", ans);
+      cnt++;
+      if(cnt == 50000) break;
+    }
+  }
+  //printf("%d
+", cnt);
+  return 0;
+}
+      

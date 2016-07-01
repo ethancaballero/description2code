@@ -1,0 +1,11 @@
+t = int(raw_input().strip())
+for _ in range(t):
+    count = 0
+    length = -1
+    l = list(raw_input().strip())
+    for i in range(len(l)):
+        if l[i] == "<": count += 1
+        else: count -= 1
+        if count == 0: length = i
+        elif count < 0: break
+    print length + 1

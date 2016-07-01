@@ -1,0 +1,54 @@
+#include <cstdio>
+#include<math.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#define gc getchar_unlocked
+#define INF 1000000007
+# define LL long long 
+using namespace std;
+void scanint(LL &x)
+{
+register LL c = gc();
+x = 0;
+LL neg = 0;
+for(;((c<48 || c>57) && c != '-');c = gc());
+if(c=='-') {neg=1;c=gc();}
+for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+if(neg) x=-x;
+} 
+
+
+LL modpow(LL n ,LL k,LL mod)
+{LL ans=1;
+while(k>0)
+{if(k&1)
+ans=(ans*n)%mod;
+k>>=1;
+n=(n*n)%mod;
+}
+return ans%mod;}
+
+int main(){
+LL T;
+scanint(T);
+while(T--){
+LL n,m,q,k;
+scanint(n);
+scanint(m);
+scanint(q);
+scanint(k);
+if(m<=q || n==1)
+printf("0
+");
+else{
+
+LL ans=((m-q)*(((modpow(q+1,n,INF)-2*modpow(q,n,INF)+modpow(q-1,n,INF)))%INF+INF)%INF)%INF;
+printf("%lld
+",ans);
+}
+
+}
+return 0;
+}
+

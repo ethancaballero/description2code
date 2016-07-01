@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <limits.h>
+#include <algorithm>
+
+using namespace std;
+
+int input()
+{
+    int n=0;
+    char c=getchar_unlocked();
+    while(c < '0' || c >'9') {c=getchar_unlocked();}
+    while(c>='0' && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar_unlocked();
+    }
+    return n;
+}
+
+bool compare(int i, int j){
+	return (i>j);
+}
+
+int main(){
+	int T;
+	T = input();
+	int n, m, temp, res;
+	int* arr;
+	int result = 0;
+	int* visits; 
+	while(T--){
+		result = 0;
+		n = input();
+		m = input();
+		visits = new int[n];
+		for(int i = 0; i < n; i++){
+			visits[i] = 0;
+		}
+		while(m--){
+			temp = input();
+			visits[temp]++;
+		}
+		for(int p = 0; p < n; p++){
+			temp = input();
+			arr = new int[temp];
+			for(int i = 0; i < temp; i++){
+				arr[i] = input();
+			}
+			sort(arr, arr+temp, compare);
+//			for(int i = 0; i < temp; i++){
+//				cout << arr[i] << "	";
+//			}
+//			cout << endl;
+			res = 0;
+			for(int i = 0; i < min(visits[p], temp); i++){
+				res += arr[i];
+			}
+			result += res;
+			delete(arr);
+		}
+		delete(visits);
+		cout << result << endl;
+	}
+}
+
+

@@ -1,0 +1,70 @@
+//
+//  main.cpp
+//  Count Subarrays
+//
+//  Created by VIVEK GANGWAR on 21/06/16.
+//  Copyright © 2016 VIVEK GANGWAR. All rights reserved.
+//
+
+#include <iostream>
+#include <cstdio>
+#include <climits>
+#include <algorithm>
+#include <queue>
+#include <cstring>
+#include <cmath>
+#include <vector>
+#include <list>
+#include <stack>
+#include <bitset>
+#include <string.h>
+#include <stack>
+#include <set>
+#include <map>
+#include <assert.h>
+#include <deque>
+#include <ctime>
+
+#define trav(i,n)    for( i = 0; i < (n); i++)
+#define loop(i,a,b)  for(i = (a); i < (b); i++)
+#define neg(p)      memset(p,-1,sizeof(p))
+#define zero(p)      memset(p,0,sizeof(p))
+#define s(n)	    scanf("%d",&n)
+#define p(n)	    printf("%d
+",n)
+#define sl(n)	    scanf("%lld",&n)
+#define pl(n)	    printf("%lld
+",n)
+#define sf(n)       scanf("%lf",&n)
+#define ss(n)       scanf("%s",n)
+#define LL long long
+#define pb push_back
+using namespace std;
+
+
+int main(int argc, const char * argv[]) {
+    LL t;
+    sl(t);
+    while (t--) {
+        LL n;
+        sl(n);
+        LL arr[n];
+        for (int i = 0; i < n ; i++) {
+            sl(arr[i]);
+        }
+        // 1 4 2 3
+        LL count = 1;
+        LL sum = 0;
+        for (int i = 1; i < n ; i++) {
+            if (arr[i] >= arr[i-1]) {
+                count++;
+            } else {
+                sum += (count*(count+1))/2;
+                count = 1;
+            }
+        }
+        sum += (count*(count+1))/2;
+        pl(sum);
+    }
+    return 0;
+}

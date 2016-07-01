@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+long firstK(long long n,int k)
+{
+//	long double x=n*log10(n);
+//	long double y=floor(pow(10,x-floor(x)+k-1));
+long long mod =pow(10,k-1);
+long double x;
+long long ans;
+x = long(n)*log10l(long(n));
+x = pow(10,x-(int)x);
+ans = x * mod;
+	return (ans);
+}
+void lastK(long long n,int k)
+{
+	long long mod=1; 
+ for(; k > 0; k--) mod*=10; 
+ 
+int e=n;
+long long ans=1;
+long long y = long(n);
+while(e>0) {
+if(e%2==1)
+	ans = (ans*y)%mod;
+e>>=1;
+y = (y*y)%mod;
+}
+ 
+for (mod/=10; mod>1 && mod>=ans; mod/=10) {
+			printf("0");
+	}
+	printf("%ld",ans);
+}
+int main()
+{
+	int t,k;
+	long long n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		cout<<firstK(n,k)<<" ";
+		lastK(n,k);
+		cout<<endl;
+	}
+}

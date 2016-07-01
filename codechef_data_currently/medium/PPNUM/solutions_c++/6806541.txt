@@ -1,0 +1,31 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+
+#define MOD 1000000007
+
+
+int main(){
+	long long t,U,V,Res,L,R,H,count;
+	scanf("%lld", &t);
+	while(t--){
+	scanf("%lld %lld", &L, &R);
+	U=L;
+	Res=0;
+	while(U<=R){	
+		H=U; count=0;
+		while(H>0){
+			count++;
+			H/=10;
+		}
+		V=min((long long)pow(10,count)-1,R);
+		Res=(Res+(count*(((U+V)*(V-U+1))/2)%MOD)%MOD)%MOD;
+		U=V+1;
+	}
+	printf("%lld
+", Res);
+	}
+	
+	return 0;
+}

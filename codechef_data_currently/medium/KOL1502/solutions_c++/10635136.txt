@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll dp[1005][10005];
+int A[1005];
+int main()
+{
+    int t,n,i,j,sum;
+    ll res,MOD=10000000;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=1,sum=0;i<=n;i++)
+        {
+            cin>>A[i];
+            sum+=A[i];
+        }
+        dp[0][0]=1;
+        for(i=1;i<=n;i++)
+            for(j=0;j<=sum;j++)
+                if(A[i]>j)
+                    dp[i][j]=dp[i-1][j];
+                else
+                    dp[i][j]=(dp[i-1][j]+dp[i-1][j-A[i]])%MOD;
+        for(i=res=0;i<=sum;i++)
+            res=(res+(max(2*i-sum,sum-2*i)*dp[n][i])%MOD)%MOD;
+        cout<<res<<endl;
+    }
+    return 0;
+}

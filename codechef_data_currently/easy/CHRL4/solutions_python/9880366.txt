@@ -1,0 +1,28 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ for i in range(len(li)-1):
+  print li[i],
+ print li[-1]
+n,k= parseIntList(raw_input())
+n=int(n)
+wt=parseIntList(raw_input())
+logmin=[ 10000000000L]*n
+res=[10000000000L]*n
+res[0]=wt[0]
+logmin[0]=math.log(wt[0])
+i=1
+while i<n:
+ temp=logmin.index(min(logmin[max(i-k,0):i]))
+ logmin[i]=math.log(wt[i])+logmin[temp]
+ res[i]=(wt[i]*res[temp])%1000000007
+ i+=1
+print res[-1]
+ 
+  	
+ 
+ 
+
+  
+ 

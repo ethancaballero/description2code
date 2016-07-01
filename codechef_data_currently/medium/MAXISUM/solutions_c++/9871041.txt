@@ -1,0 +1,40 @@
+#include<stdio.h>
+#define N 100111
+#define LL long long int
+using namespace std;
+
+int main()
+{
+	int test;
+	LL A[N], B[N], k,n;
+	scanf("%d",&test);
+	while(test--)
+	{
+		scanf("%lld%lld", &n,&k);
+		for(int i=0;i<n;i++)
+			scanf("%lld", &A[i]);
+		
+		for(int i=0;i<n;i++)
+			scanf("%lld", &B[i]);
+		
+		LL result = 0;
+		LL max = B[0];
+		
+		for(int i=1;i<n;i++)
+		{
+			if(B[i] > max)
+				max = B[i];
+			if(-B[i] > max)
+				max = - B[i];	
+		}
+			
+		
+		for(int i=0;i<n;i++)
+			result +=(A[i]*B[i]);
+		
+		result += max * k;
+		printf("%lld
+",result);
+	}
+	return 0;
+}

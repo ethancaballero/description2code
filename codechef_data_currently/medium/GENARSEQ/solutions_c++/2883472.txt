@@ -1,0 +1,49 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int max(int a,int b)
+{
+	if(a>b)
+		return a;
+	else
+		return b;
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	int i,j;
+	while(t--)
+	{
+		int a,b,n;
+		cin>>a>>b>>n;
+		int array[n+1];
+		array[1]=1;
+		int hash[1000000];
+		for(i=0;i<1000000;i++)
+			hash[i]=0;
+		if((a-b)>0)
+			hash[a-b]=1;
+		for(i=2;i<=n;i++)
+		{
+			for(j=array[i-1]+1;j<1000000;j++)
+				if(hash[j]==0)
+					break;
+			array[i]=j;
+			for(j=1;j<=i;j++)
+			{
+				int val1=array[j]*a-array[i]*b;
+				int val2=array[i]*a-array[j]*b;
+				if(val1>0)
+					hash[val1]=1;
+				if(val2>0)
+					hash[val2]=1;
+			}
+		}
+		for(i=1;i<=n;i++)
+			printf("%d
+",array[i]);
+	}
+	return 0;
+}
+

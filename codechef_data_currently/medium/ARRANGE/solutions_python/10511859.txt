@@ -1,0 +1,32 @@
+output = list()
+string1 = raw_input()
+nums = string1.split()
+n = int(nums[0])
+for i in range(n) :
+	inp1 = raw_input()
+	stri = inp1.split()
+	k = int(stri[0])
+	mes = stri[1]
+	nmes = list()
+	nmes.append(mes[0])
+	for j in range(1,2**k) :
+		num = j
+		binary = 0
+		count = 0
+		while num>0 :
+			binary  = binary*10 + (num%2)
+			num = num/2
+			count+=1
+		if count<k :
+			binary = binary*(10**(k-count))
+		cnum=0
+		c = 0
+		while binary>0 :
+			cnum =cnum+ (binary%10)*(2**c)
+			c+=1
+			binary = binary/10
+		nmes.append(mes[cnum])
+	strin = ''.join(nmes)
+	output.append(strin)
+for i in range(n) :
+	print output[i]

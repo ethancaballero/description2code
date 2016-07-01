@@ -1,0 +1,70 @@
+#include <vector>
+#include <set>
+#include <iostream>
+using namespace std;
+ 
+int T, n, s, t;
+ 
+// neighbours[5] contains all the neighbours of 5
+vector<int> neighbours[10005];
+ 
+set<int> important;
+ 
+bool f( int this_node, int parent_node ) {
+    bool is_special = (important.find( this_node ) != important.end());
+    
+    if( is_special )
+        return true;
+ 
+    int count = 0;
+    for( int i = 0; i < neighbours[this_node].size(); i++ ) {
+        if( neighbours[this_node][i] == parent_node )
+            continue;
+        count += ( f( neighbours[this_node][i], this_node ) ) ? 1 : 0;
+    }        
+            
+    if( count <= 1 )
+        return false;
+    else
+        return true;
+    
+}
+ 
+int main() {
+	cin >> T;
+	
+	while( T-- ) {
+	    cin >> n >> s >> t;
+	    
+	    for( int i = 0; i <= n; i++ )
+	        neighbours[i].clear();
+	    
+	    important.clear();
+	    
+	    for( int i = 1; i <= n; i++ ) {
+	        
+	        int ci, temp;
+	        cin >> ci;
+	        while( ci-- ) {
+	            cin >> temp;
+	            neighbours[i].push_back( temp );
+	        }
+	        
+	    }
+	    
+	    for( int i = 0; i < t; i++ ) {
+	        int temp;
+	        cin >> temp;
+	        important.insert( temp );
+	    }
+	    
+	    // do it now
+	    cout << (f( s, -1 ) ? "no
+" : "yes
+");
+	    
+	}
+	
+	return 0;
+}
+ 

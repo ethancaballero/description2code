@@ -1,0 +1,18 @@
+testcases = int(raw_input())
+for z in range(0,testcases):
+    names = raw_input()
+    X = names.split(" ")[0] + names.split(" ")[1]
+    numchild = int(raw_input())
+    conchildnames = ""
+    fine = 0
+    temp=""
+    for i in range(0,numchild):
+        temp = raw_input()
+        conchildnames = conchildnames + temp
+    
+    for i in xrange(97,123):
+        if (conchildnames.count(chr(i)) > X.count(chr(i))):
+            fine = 1
+            break
+
+    print "YES NO".split(" ")[fine]

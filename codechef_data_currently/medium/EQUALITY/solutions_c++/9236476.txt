@@ -1,0 +1,37 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+typedef unsigned long long int ull;
+int main()
+{
+    int t;
+    ull n,s,an,i,temp;
+    scanf("%d",&t);
+    while(t--)
+    {
+        s=0;
+        scanf("%llu",&n);
+        ull a[n];
+        for(i=0;i<n;i++)
+        {
+           scanf("%llu",&a[i]);
+           s+=a[i];
+        }
+        s=s/(n-1);
+      for(i=0;i<n-1;i++)
+      {
+
+          temp=s;
+          an=temp-a[i];
+          printf("%llu ",an);
+
+      }
+          temp=s;
+          an=temp-a[i];
+          printf("%llu
+",an);
+
+    }
+
+
+}

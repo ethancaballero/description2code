@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+ int n,q,no,i,tas,ts;
+ char *ptr;
+ scanf("%d",&n);
+ char a[n][1001];
+ int v[n];
+ for(i=0;i<n;i++)
+ {
+  scanf(" %s",a[i]);
+  scanf("%d",&v[i]);
+ }
+ scanf("%d",&q);
+ char as[1001];
+ char ans[1001];
+ while(q--)
+ {
+ scanf(" %s",as);
+ no=-1000000001;
+
+ for(i=0;i<n;i++)
+ {
+  ts=tas=0;
+  while(as[tas]!=NULL)
+  {
+   if(a[i][ts]!=as[tas])
+     goto label;
+   ++tas,++ts;
+
+  }
+
+
+   if(no<v[i]){
+        no=v[i];
+        strcpy(ans,a[i]);}
+
+ label:;
+ }
+ if(no==-1000000001)
+    printf("NO
+");
+ else
+  printf("%s
+",ans);
+ }
+return 0;
+}

@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+ 
+int main ( ) { 
+	int test; 
+	cin >> test;
+	for ( int tc=1; tc<=test; ++tc ) {
+		float H, C, T;
+		cin >> H >> C >> T;
+		
+		bool hard = false, carbon = false, tensile = false;
+		if ( H > 50 ) hard = true;
+		if ( C < 0.7 ) carbon = true;
+		if ( T > 5600 ) tensile = true;
+		
+		if ( hard && carbon && tensile ) cout << "10" << endl;
+		else if ( hard && carbon ) cout << "9" << endl;
+		else if ( carbon && tensile ) cout << "8" << endl;
+		else if ( hard && tensile ) cout << "7" << endl;
+		else if ( hard || carbon || tensile ) cout << "6" << endl;
+		else cout << "5" << endl;
+	}
+} 

@@ -1,0 +1,10 @@
+import math
+t=input()
+while(t>0):
+	p,s=map(int,raw_input().strip().split())
+	p1,s1=p/4,s/2
+	z1=(p1+math.sqrt(p1*p1-3*s1))/3
+	z2=(p1-math.sqrt(p1*p1-3*s1))/3
+	res=max((z1**3-p1*z1*z1+s1*z1),(z2**3-p1*z2*z2+s1*z2))
+	print round(res,2)
+	t-=1

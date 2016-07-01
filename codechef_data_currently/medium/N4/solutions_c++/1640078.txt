@@ -1,0 +1,166 @@
+#include <cstdio>
+#include "queue"
+#define max 8000
+
+using namespace std;
+
+int ways[max];
+int prev[max];
+int rotate[max];
+int hexagon[max];
+char str[15];
+queue<int> q;
+
+//
+
+int rotate_one_ac(int top){
+	int temp,prev;
+	prev = top & (1<<12);
+	temp = top & (1<<9);	if(temp==0)	top &= ~(1<<12) ; else top |= (1<<12);
+	temp = top & (1<<6);	if(temp==0)	top &= ~(1<<9) ; else top |= (1<<9);
+	temp = top & (1<<4);	if(temp==0)	top &= ~(1<<6) ; else top |= (1<<6);
+	temp = top & (1<<7);	if(temp==0)	top &= ~(1<<4) ; else top |= (1<<4);
+	temp = top & (1<<10);	if(temp==0)	top &= ~(1<<7) ; else top |= (1<<7);
+	if(prev==0)	top &= ~(1<<10) ; else top |= (1<<10);
+	return top;
+}
+int rotate_one_c(int top){
+	int temp,prev;
+	prev = top & (1<<12);
+	temp = top & (1<<10);	if(temp==0)	top &= ~(1<<12) ; else top |= (1<<12);
+	temp = top & (1<<7);	if(temp==0)	top &= ~(1<<10) ; else top |= (1<<10);
+	temp = top & (1<<4);	if(temp==0)	top &= ~(1<<7) ; else top |= (1<<7);
+	temp = top & (1<<6);	if(temp==0)	top &= ~(1<<4) ; else top |= (1<<4);
+	temp = top & (1<<9);	if(temp==0)	top &= ~(1<<6) ; else top |= (1<<6);
+	if(prev==0)	top &= ~(1<<9) ; else top |= (1<<9);
+	return top;
+}
+int rotate_two_ac(int top){
+	int temp,prev;
+	prev = top & (1<<11);
+	temp = top & (1<<8);	if(temp==0)	top &= ~(1<<11) ; else top |= (1<<11);
+	temp = top & (1<<5);	if(temp==0)	top &= ~(1<<8) ; else top |= (1<<8);
+	temp = top & (1<<3);	if(temp==0)	top &= ~(1<<5) ; else top |= (1<<5);
+	temp = top & (1<<6);	if(temp==0)	top &= ~(1<<3) ; else top |= (1<<3);
+	temp = top & (1<<9);	if(temp==0)	top &= ~(1<<6) ; else top |= (1<<6);
+	if(prev==0)	top &= ~(1<<9) ; else top |= (1<<9);
+	return top;
+}
+int rotate_two_c(int top){
+	int temp,prev;
+	prev = top & (1<<11);
+	temp = top & (1<<9);	if(temp==0)	top &= ~(1<<11) ; else top |= (1<<11);
+	temp = top & (1<<6);	if(temp==0)	top &= ~(1<<9) ; else top |= (1<<9);
+	temp = top & (1<<3);	if(temp==0)	top &= ~(1<<6) ; else top |= (1<<6);
+	temp = top & (1<<5);	if(temp==0)	top &= ~(1<<3) ; else top |= (1<<3);
+	temp = top & (1<<8);	if(temp==0)	top &= ~(1<<5) ; else top |= (1<<5);
+	if(prev==0)	top &= ~(1<<8) ; else top |= (1<<8);
+	return top;
+}
+int rotate_three_ac(int top){
+	int temp,prev;
+	prev = top & (1<<6);
+	temp = top & (1<<3);	if(temp==0)	top &= ~(1<<6) ; else top |= (1<<6);
+	temp = top & (1<<1);	if(temp==0)	top &= ~(1<<3) ; else top |= (1<<3);
+	temp = top & 1;		if(temp==0)	top &= ~(1<<1) ; else top |= (1<<1);
+	temp = top & (1<<2);	if(temp==0)	top &= ~1 ; else top |= 1;
+	temp = top & (1<<4);	if(temp==0)	top &= ~(1<<2) ; else top |= (1<<2);
+	if(prev==0)	top &= ~(1<<4) ; else top |= (1<<4);
+	return top;
+}
+int rotate_three_c(int top){
+	int temp,prev;
+	prev = top & (1<<6);
+	temp = top & (1<<4);	if(temp==0)	top &= ~(1<<6) ; else top |= (1<<6);
+	temp = top & (1<<2);	if(temp==0)	top &= ~(1<<4) ; else top |= (1<<4);
+	temp = top & (1<<0);	if(temp==0)	top &= ~(1<<2) ; else top |= (1<<2);
+	temp = top & (1<<1);	if(temp==0)	top &= ~(1<<0) ; else top |= (1<<0);
+	temp = top & (1<<3);	if(temp==0)	top &= ~(1<<1) ; else top |= (1<<1);
+	if(prev==0)	top &= ~(1<<3) ; else top |= (1<<3);
+	return top;
+}
+
+//
+
+void init_fn(){
+	int top,temp;
+	for(int i=0;i<max;i++)	ways[i]=-1;
+	q.push(0x258);
+	ways[0x258]=0;
+	while(!q.empty()){
+		top = q.front();
+		//printf("%x -- %d
+",top,ways[top]);
+		temp = rotate_one_ac(top);
+		if(ways[temp]==-1){
+			q.push(temp);
+			ways[temp]=ways[top]+1;
+			prev[temp]=top;
+			hexagon[temp]=0;
+			rotate[temp]=1;
+		}
+		temp = rotate_one_c(top);
+		if(ways[temp]==-1){
+			q.push(temp);
+			ways[temp]=ways[top]+1;
+			prev[temp]=top;
+			hexagon[temp]=0;
+			rotate[temp]=0;
+		}
+		temp = rotate_two_ac(top);
+		if(ways[temp]==-1){
+			q.push(temp);
+			ways[temp]=ways[top]+1;
+			prev[temp]=top;
+			hexagon[temp]=1;
+			rotate[temp]=1;
+		}
+		temp = rotate_two_c(top);
+		if(ways[temp]==-1){
+			q.push(temp);
+			ways[temp]=ways[top]+1;
+			prev[temp]=top;
+			hexagon[temp]=1;
+			rotate[temp]=0;
+		}
+		temp = rotate_three_ac(top);
+		if(ways[temp]==-1){
+			q.push(temp);
+			ways[temp]=ways[top]+1;
+			prev[temp]=top;
+			hexagon[temp]=2;
+			rotate[temp]=1;
+		}
+		temp = rotate_three_c(top);
+		if(ways[temp]==-1){
+			q.push(temp);
+			ways[temp]=ways[top]+1;
+			prev[temp]=top;
+			hexagon[temp]=2;
+			rotate[temp]=0;
+		}
+		q.pop();
+	}
+}
+
+int main(){
+	int t,m,i;
+	init_fn();
+	scanf("%d",&t);
+	while(t--){
+		scanf("%s",str);
+		m=0;
+		for(i=0;str[i]=='0';i++);
+		for(;i<13;i++){		m *= 2;	m += (int)(str[i]-'0');		}	
+		printf("%d
+",ways[m]);
+		for(i=ways[m];i>0;i--){		
+			printf("%d %d
+",hexagon[m],rotate[m]);
+			m = prev[m];
+		}
+		//printf("
+");
+	}
+	return 0;
+}

@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+int main() {
+	// your code goes here
+	long t,x,y,n;
+	scanf("%ld",&t);
+	for(int i=0;i<t;i++)
+	{
+		scanf("%ld",&x);
+		scanf("%ld",&y);
+		if(x%2==0)
+		{
+			if(x<=0)
+			{
+				if(y>=x&&y<=-x)
+				{
+					printf("YES
+");
+					continue;
+				}
+			}
+		}
+		else if(x>=0)
+		{
+			if(y>=(-x+1)&&y<=(x+1))
+			{
+				printf("YES
+");
+				continue;
+			}
+		}
+		if(y%2==0)
+		{
+			if(y>=0)
+			{
+				if(x>=-y&&x<=(y-1))
+				{
+					printf("YES
+");
+					continue;
+				}
+			}
+			if(y<=0)
+			{
+				if(x>=y&&x<=(-y+1))
+				{
+					printf("YES
+");
+					continue;
+				}
+			}
+		}
+		printf("NO
+");
+	}
+	return 0;
+}

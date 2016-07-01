@@ -1,0 +1,65 @@
+#include<algorithm>
+#include<iostream>
+#include<string.h>
+#include<ctype.h>
+#include<math.h>
+#include<cstdio>
+#include<vector>
+#include<queue>
+#include<stack>
+#include<map>
+using namespace std;
+long long int i,j,k,n,m,s,t,ans,a[100005][2],x,y,z,w,l;
+map<long long int, pair<long long int, long long int> >pm;
+
+long long int Ceil(long long int x, long long int y){
+	if(x%y)
+	return x/y + 1;
+	return x/y;
+}
+int main()
+{
+	cin>>n>>w>>l;
+	for(i=1;i<=n;i++){
+		cin>>x>>y;
+		if(l>x){
+			k  = Ceil((l - x),y);
+
+		}
+		else
+		k=0;
+		
+		pair<long long int, long long int> temp = make_pair(x + k*y , y);
+		pair<long long int, long long int> val;
+		if(pm.find(k) != pm.end()){
+			val = pm[k];
+			temp.first += val.first;
+			temp.second += val.second;
+		}
+		pm[k] = temp;
+		
+	}
+	map<long long int, pair<long long int, long long int> > ::iterator it;
+	pair<long long int, long long int> val;
+	long long int last = 0;
+	for(it=pm.begin(); it!=pm.end();it++){
+		ans = it->first;
+		w = w - (it->first - last)*z;
+		if(w<0){
+			ans -= abs(w)/z;
+			break;
+		}
+
+		last = it->first;
+		val = it->second;
+		w = w - val.first;
+		z  += (val.second);
+		if(w<0)
+		break;
+	}
+	if(w>0){
+		ans += Ceil(w,z);
+	}
+	 cout<<ans<<"
+";
+}

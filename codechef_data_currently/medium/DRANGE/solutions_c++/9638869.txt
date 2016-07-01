@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define MAX 1000000
+using namespace std;
+
+ll arr[MAX+1],arr1[MAX+1];
+
+
+	int main()
+	{
+		std::ios::sync_with_stdio(false);
+		int t;
+		cin>>t;
+		while(t--)
+		{
+			int n,m,i;
+			ll min_r=LONG_MAX,max_r=LONG_MIN;
+			cin>>n>>m;
+			for(i=1;i<=n;i++)
+			{
+				arr[i]=i;
+			}
+			while(m--)
+			{
+				int w,x,y,z;
+				cin>>w>>x>>y>>z;
+				if(w==1)
+				{
+					arr1[x]+=z;
+					if(y<n)
+						arr1[y+1]-=z;
+				}
+				if(w==2)
+				{
+					arr1[x]-=z;
+					if(y<n)
+						arr1[y+1]+=z;
+				}
+			}
+			for(i=1;i<=n;i++)
+			{
+				arr[i]=arr1[i]+arr[i-1]+1;
+				max_r=max(max_r,arr[i]);
+				min_r=min(min_r,arr[i]);
+				arr1[i]=0;
+			}
+			cout<<max_r-min_r<<endl;
+
+		}
+		return 0;
+	}
+	

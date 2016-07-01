@@ -1,0 +1,9 @@
+# your code goes here
+# cook your dish here
+t=int(raw_input())
+for i in xrange(t):
+    a=int(raw_input())
+    if a%4==1:
+        print 'ALICE'
+    else:
+        print 'BOB'

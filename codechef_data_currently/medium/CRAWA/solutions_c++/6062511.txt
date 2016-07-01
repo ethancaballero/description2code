@@ -1,0 +1,69 @@
+#include <iostream>
+#include<cstdlib>
+using namespace std;
+int main()
+{  
+int t,x,y;
+cin>>t;
+while(t--)
+{
+    cin>>x>>y;
+    if(x==0&&(abs(y)%2==0))
+    {
+           cout<<"YES"<<endl;
+    }
+    else if(x>0&&(x%2!=0))
+    {
+        if(y>=(-(x-1))&&y<=(x+1))
+            cout<<"YES"<<endl;
+        else
+        {
+            if(abs(y)%2==0)
+                cout<<"YES"<<endl;
+            else
+            cout<<"NO"<<endl;
+        }
+    }
+    else if(x>0&&(x%2==0))
+    {
+        if(y>=(-(x-1))&&y<=(x+1))
+            cout<<"NO"<<endl;
+        else
+        {
+            if(abs(y)%2==0)
+                cout<<"YES"<<endl;
+            else
+            cout<<"NO"<<endl;
+        }
+            
+    }
+    else if(x<0&&(x%2!=0))
+    {
+        if(y>=(-abs(x))&&y<=(abs(x)))
+            cout<<"NO"<<endl;
+        else
+            {
+                if(abs(y)%2==0)
+                cout<<"YES"<<endl;
+              else
+               cout<<"NO"<<endl;
+            }
+    }
+    else if(x<0&&(x%2==0))
+    {
+         if(y>=(-abs(x))&&y<=abs(x))
+            cout<<"YES"<<endl;
+        else
+        {
+            if(abs(y)%2==0)
+                cout<<"YES"<<endl;
+            else
+            cout<<"NO"<<endl;
+        }
+           
+    }
+    else
+        cout<<"NO"<<endl;
+}
+    return 0;
+}

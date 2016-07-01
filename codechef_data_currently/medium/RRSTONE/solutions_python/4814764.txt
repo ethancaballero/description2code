@@ -1,0 +1,28 @@
+fr=raw_input().split()
+n=int(fr[0])
+k=int(fr[1])
+raw=raw_input().split()
+l=[]
+
+for i in range(0,n):
+	l.append(int(raw[i]))
+
+if k==0:
+	for i in l:
+		print i,
+	print ""
+
+me=max(l)
+for i in range(0,n):
+	l[i]=me-l[i]
+if k%2==1:
+	for i in l:
+		print i,
+	print ""
+
+if k%2==0 and k!=0:
+	me=max(l)
+	for i in range(0,n):
+		l[i]=me-l[i]
+		print l[i],
+	print ""

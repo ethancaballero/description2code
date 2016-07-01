@@ -1,0 +1,12 @@
+from sys import stdin as ip
+for _ in xrange(int(ip.readline())):
+    s=raw_input()
+    li=[0]*26
+    for i in s:
+        li[ord(i)-97]+=1
+    m=max(li)
+    li.remove(m)
+    if sum(li)==m:
+        print "YES"
+    else:
+        print "NO"

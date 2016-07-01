@@ -1,0 +1,33 @@
+#include <iostream>
+#include <iomanip>
+#include <algorithm>
+
+using namespace std;
+
+int main(){
+     ios_base::sync_with_stdio(false);
+    int T;
+    cin >> T;
+    for(int z=0;z<T;z++){
+        int n,k;
+        cin >> n >> k;
+
+        int a[n];
+        for(int y=0;y<n;y++){
+            int c;
+            cin >> c;
+            a[y]=c;
+        }
+        sort(a,a+n);
+        //printing average
+        double total=0;
+        double number=n-(2*k);
+        for(int y=k;y<(n-k);y++){
+            total+=a[y];
+        }
+        cout <<setprecision(6)<<fixed<<total/number << endl;
+
+    }
+
+    return 0;
+}

@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t,n,w[100000],i,k,ans;
+	cin>>t;
+	while(t--)
+	{
+	    cin>>n>>k;
+	    for(i=0;i<n;i++)cin>>w[i];
+	    sort(w,w+n);
+	    int sum3=0,sum2=0,sum=0;
+	    for(i=0;i<n;i++)
+	    sum+=w[i];
+	    for(i=0;i<k;i++)
+	    sum2+=w[i];
+	    for(i=n-1;i>=n-k;i--)
+	    sum3+=w[i];
+	    ans=max((abs((sum-sum3)-sum3)),(abs((sum-sum2)-sum2)));
+	    cout<<ans<<endl;
+	}
+	return 0;
+}

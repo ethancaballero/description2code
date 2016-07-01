@@ -1,0 +1,17 @@
+N=input()
+mi=li=0
+m=-1
+l=100000000
+count=0
+while(N):
+	x1, y1, x2, y2, x3, y3=map(float, raw_input().split())
+	area=abs(0.5*((x1*(y2-y3))+(x2*(y3-y1))+(x3*(y1-y2))))
+	if(area>=m):
+		m=area;
+		mi=count
+	if(l>=area):
+		l=area
+		li=count
+	count+=1
+	N-=1
+print li+1,mi+1

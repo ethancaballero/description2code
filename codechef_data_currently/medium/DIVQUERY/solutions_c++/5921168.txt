@@ -1,0 +1,40 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<int>fact[100002];
+vector<int>V[100002];
+int A[100002];
+ int main()
+ {
+     int count,countl,n,q,i,j;
+    for(i=1;i<=100000;i++)
+    {
+        for(j=i;j<=100000;j=j+i)
+        {
+            V[j].push_back(i);
+        }
+    }
+    scanf("%d %d",&n,&q);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&A[i]);
+        for(j=0;j<V[A[i]].size();j++)
+        {
+            fact[V[A[i]][j]].push_back(i);
+        }
+    }
+    int l,r,k,count2;
+    while(q>0)
+    {
+        q--;
+        scanf("%d %d %d",&l,&r,&k);
+        l--;r--;
+        count=(lower_bound(fact[k].begin(),fact[k].end(),l)-fact[k].begin());
+        count2=(upper_bound(fact[k].begin(),fact[k].end(),r)-fact[k].begin());
+        count=count2-count;
+        printf("%d
+",count);
+    }
+ }

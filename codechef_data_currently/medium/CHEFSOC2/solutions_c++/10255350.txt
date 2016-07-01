@@ -1,0 +1,45 @@
+#include<stdio.h>
+long long int dp[1003][1003],a[1004],mod=1000000007;
+int main()
+{
+	long long int t, i, j, s,n,sum,m;
+	scanf("%lld", &t);
+	while (t--)
+	{
+		scanf("%lld%lld%lld", &n, &m, &s);
+		for (i = 1; i <= m; i++)
+			scanf("%lld", &a[i]);
+		for (i = 1; i <= m; i++)
+		{
+			for (j = 1; j <= n; j++)
+				dp[i][j] = 0;
+		}
+		if (s - a[1] >= 1)
+			dp[1][s - a[1]] = 1;
+		if (s + a[1] <= n)
+			dp[1][s + a[1]] = 1;
+		for (i = 2; i <= m; i++)
+		{
+			for (j = 1; j <= n; j++)
+			{
+				sum = 0;
+				if (j - a[i] >= 1)
+				{
+					sum = (sum+dp[i-1][j - a[i]])%mod;
+				}
+				if (j + a[i] <= n)
+				{
+					sum = (sum+dp[i-1][j + a[i]])%mod;
+				}
+				dp[i][j] = sum;
+			}
+		}
+		for (i = 1; i <= n; i++)
+			printf("%lld ", dp[m][i]);
+		printf("
+");
+	}
+	getchar();
+	getchar();
+	return 0;
+}

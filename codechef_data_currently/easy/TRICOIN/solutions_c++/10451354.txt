@@ -1,0 +1,40 @@
+#include <iostream> 
+using namespace std;
+int main()
+{
+
+	long long int  numOfTasks = 0;
+	long long int numOfCoins = 0;
+	long long int height = 0;
+
+	cin >> numOfTasks;
+
+	while (numOfTasks > 0)
+	{
+		cin >> numOfCoins;
+
+		int temp = numOfCoins;
+		for (int i = 1; i <= numOfCoins; i++)
+		{
+			temp -= i;
+
+			if (temp < 0)
+			{
+				break;
+			}
+			else
+			{
+				height++;
+			}
+
+		}
+
+		cout << height << endl;
+
+		numOfTasks--; 
+		height = 0;
+		numOfCoins = 0;
+		temp = 0;
+	}
+	return 0;
+}

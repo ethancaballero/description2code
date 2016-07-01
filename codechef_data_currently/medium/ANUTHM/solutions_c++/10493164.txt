@@ -1,0 +1,24 @@
+#include<iostream>
+#include<stdio.h>
+ 
+using namespace std;
+ 
+
+int main() 
+{
+	
+   int t;
+   scanf("%d",&t);
+	long answer=0;
+	while(t--)
+	{
+	 int  n,m;
+	 scanf("%d%d",&n,&m);
+	  float x=(float)n+(float)m-1.0;
+	  printf("%0.6f
+",x);
+	}
+
+    return 0;
+}
+ 

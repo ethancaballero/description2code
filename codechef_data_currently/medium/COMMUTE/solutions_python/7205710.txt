@@ -1,0 +1,22 @@
+R=lambda:map(int,raw_input().split())
+I=lambda:int(raw_input())
+#S=lambda:map(str,raw_input().split())
+outp=''
+for _ in xrange(I()):
+    N=I()
+    t=0
+    for i in xrange(N):
+        A=[]
+        A=R()
+        if t<=A[0]:
+            t+=A[1]+A[0]-t
+        else:
+            x=t-A[0]
+            x%=A[2]
+            if x!=0:
+                x=A[2]-x
+            t+=x+A[1]
+    outp+=str(t)+'
+'
+                                            
+print outp

@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#define ll long long
+using namespace std;
+
+int t,n,a,b,c;
+vector<int> v[49];
+vector<int> m[49];
+int maxx[49];
+
+void clearV(){
+	for(int i=0;i<49;i++){
+		v[i].clear();
+		m[i].clear();
+		maxx[i] = 0;
+	}
+}
+
+int main() {
+	// your code goes here
+	
+	scanf("%d",&t);
+	
+	while(t--){
+		clearV();
+		scanf("%d",&n);
+		
+		for(int i=0;i<n;i++){
+			scanf("%d %d %d",&a,&b,&c);
+			b--;
+			v[b].push_back(a);
+			m[b].push_back(c);
+			
+		}
+		int cur = -1;
+		
+		for(int i=0;i<v[0].size();i++){
+			if(m[0][i]>maxx[0])
+				maxx[0] = m[0][i];
+		}
+		
+		for(int i=1;i<=48;i++){
+			maxx[i] = maxx[i-1];
+			for(int j=0;j<v[i].size();j++){
+			
+				int tmp = maxx[v[i][j]-1] + m[i][j];
+				
+				if(tmp>cur){
+					maxx[i] = tmp;
+					cur = tmp;
+				}
+			}
+		}
+		
+		printf("%d
+",cur);
+	}
+	
+	return 0;
+}

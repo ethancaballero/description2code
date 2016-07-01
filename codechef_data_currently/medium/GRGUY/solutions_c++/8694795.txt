@@ -1,0 +1,61 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t, i,l1,count,s;
+    string s1,s2;
+    cin>>t;
+    while(t--)
+    {
+        i=0;
+
+        cin>>s1>>s2;
+
+        for(l1=1;s1[l1];l1++);
+        count=0;
+
+        while(i<l1)
+        {
+
+            if(s1[i]=='.'&& s2[i]=='.')
+            {
+                i++;
+            }
+            else if(s1[i]=='#'&& s2[i]=='#')
+            {
+                cout<<"No
+";
+                break;
+            }
+            else if(s1[i]=='#'&& s2[i]=='.')
+            {
+                i++;
+                if(s1[i]=='.'&& s2[i]=='#')
+                {
+                    count++;
+                }
+
+            }
+            else if(s1[i]=='.'&&s2[i]=='#')
+            {
+                i++;
+                if(s1[i]=='#'&&s2[i]=='.')
+                {
+                    count++;
+                }
+
+            }
+        }
+
+
+        if(i==l1)
+        {
+            cout<<"Yes"<<endl;
+            cout<<count<<endl;
+        }
+
+    }
+    return 0;
+}

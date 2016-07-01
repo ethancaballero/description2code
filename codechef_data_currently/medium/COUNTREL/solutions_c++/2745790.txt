@@ -1,0 +1,58 @@
+#include <iostream>
+#include <stdio.h>
+#include <utility>
+#include <algorithm>
+#include <cstring>
+#include <vector>
+#include <map>
+#include <set>
+#include <queue>
+#include <math.h>
+#include <cstdio>
+ 
+#define FOR(i,x,y) for(int i=(x);i<(y);i++)
+#define RFOR(i,x,y) for(int i=(x);i>=(y);i--)
+#define MIN(x,y) ((x)<(y)?(x):(y))
+#define MAX(x,y) ((x)>(y)?(x):(y))
+#define ABS(x) ((x)>0?(x):-(x))
+#define SQ(x) ((x)*(x))
+#define mset(x,y) memset(x,y,sizeof(x))
+#define MOD 100000007
+typedef long long int lli;
+typedef long double ld;
+
+using namespace std;
+
+lli mpow(lli n, lli p)
+{
+	if(p==0) return 1;
+	if(p==1) return n;
+	lli temp=mpow(n,p/2);
+	temp=(temp*temp)%MOD;
+	if(p%2) return (temp*n)%MOD;
+	return temp;
+}
+
+int main()
+{
+    //freopen("inp.txt","r",stdin);
+    int t;
+    lli n;
+    lli ti=mpow(2,MOD-2);
+    scanf("%d",&t);
+    while(t--)
+    {
+    	scanf("%lld",&n);
+    	lli ans=(mpow(3,n)-mpow(2,n+1)+1)%MOD;
+    	ans=(ans*ti)%MOD;
+    	if(ans<0) ans+=MOD;
+    	printf("%lld ",ans);
+    	ans=(mpow(4,n)-mpow(3,n+1)+3*mpow(2,n)-1)%MOD;
+    	ans=(ans*ti)%MOD;
+    	if(ans<0) ans+=MOD;
+    	printf("%lld
+",ans);
+    }
+    return 0;
+    
+}

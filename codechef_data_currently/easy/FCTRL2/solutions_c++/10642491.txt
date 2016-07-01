@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        ll carry=0,temp,a[200],index_count=0,j;
+        a[0]=1;
+        for(int i=1;i<=n;i++)
+        {
+            for(j=0;j<=index_count;j++)
+            {
+                temp=a[j]*i+carry;
+                a[j]=temp%10;
+                carry=temp/10;
+            }
+            while(carry!=0)
+            {
+                a[j]=carry%10;
+                j++;
+                carry/=10;
+            }
+            index_count=j-1;
+        }
+        for(int i=index_count;i>=0;i--)
+            cout<<a[i];
+        cout<<"
+";
+    }
+}

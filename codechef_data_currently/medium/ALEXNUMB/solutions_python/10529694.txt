@@ -1,0 +1,5 @@
+for _ in range(input()):
+    n= int(raw_input())
+    arr= map(int,raw_input().split())
+    count = n*(n+1)/2 - n
+    print count

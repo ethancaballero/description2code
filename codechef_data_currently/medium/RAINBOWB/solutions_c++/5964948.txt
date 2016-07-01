@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+#define MOD 1000000007
+long long int C(long long int n,long long int r) {
+    if(r > n / 2) r = n - r; // because C(n, r) == C(n, n - r)
+    long long ans = 1;
+    int i;
+
+    for(i = 1; i <= r; i++) {
+        ans =(ans%MOD)* ((n - r + i)%MOD);
+        ans /= i;
+    }
+
+    return ans;
+}
+int main() {
+long long int n,temp,ans,i;
+cin>>n;
+if(n<13)
+{
+ cout<<"0"<<endl;
+ return 0;
+}
+temp=(n-13)/2;ans=1;
+for(i=1;i<=6;++i)
+{
+ ans=((temp+i)*ans)%MOD;
+}
+ans=ans*301388891;
+ans=ans%MOD;
+//ans=(C(temp+6,6)%MOD);
+cout<<ans<<endl;
+
+	return 0;
+}

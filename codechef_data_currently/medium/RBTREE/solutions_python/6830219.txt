@@ -1,0 +1,58 @@
+Q = int(raw_input())
+flag = False
+while Q != 0:
+    s = raw_input()
+    s = s.split()
+    q = s[0]
+    if q != 'Qi':
+        x = int(s[1])
+        y = int(s[2])
+        n = 0
+        start = 'b'
+        while True:
+            if x > y:
+                x /= 2
+                n += 1
+                if start == 'b':
+                    start = 'r'
+                else:
+                    start = 'b'
+            elif x < y:
+                y /= 2
+                n += 1
+            else:
+                n += 1
+                if x != 1:
+                    while x != 1:
+                        x = x/2
+                        if start == 'b':
+                            start = 'r'
+                        else:
+                            start = 'b'
+                if start != 'b':
+                    start = 'r'
+                break
+        B = n / 2
+        R = n / 2
+        if n % 2 != 0:
+            if start == 'b':
+                B += 1
+            else:
+                R += 1
+        if q == 'Qb':
+            if flag:
+                print R
+            else:
+                print B
+        elif q == 'Qr':
+            if flag:
+                print B
+            else:
+                print R
+
+    else:
+        if flag:
+            flag = False
+        else:
+            flag = True
+    Q -= 1

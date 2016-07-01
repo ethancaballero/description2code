@@ -1,0 +1,52 @@
+import math
+import random
+
+def modulo(a_,temp_,x_):
+    res=1
+    while temp_>0:
+        if temp_%2!=0:
+            res=(res*a_)%x_
+        a_=(a_*a_)%x_
+        temp_=temp_/2
+    return res%x_
+            
+    
+
+
+def rabin_miller(x):
+    if(x==2):
+        return True
+    if(x%2==0):
+        return False
+    temp=x-1
+    while temp%2==0:
+        temp=temp/2
+    i=0
+   
+    for i in range(3):
+        s=temp
+        a=random.randint(2,x-1)
+        m=modulo(a,temp,x)
+        while(s!=x-1 and m!=1 and m!=x-1):
+            m=(m*m)%x
+            s=s*2
+        if(s%2==0 and m!=x-1):
+            return False
+    return True
+        
+    
+    
+
+test=int(input())
+
+while(test):
+    n=long(raw_input())
+    y=n ;
+    while(y):
+        if(rabin_miller(y) is True):
+            break
+        y-=1
+    print y
+    test-=1
+    
+    

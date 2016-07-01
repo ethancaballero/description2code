@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	double a,b,da,db,h,s,max;
+	cin>>t;
+	while(t--)
+	{
+		cin>>h>>s;
+		da=1.0*sqrt(1.0*(h*h+4*s));
+		db=1.0*sqrt(1.0*(h*h-4*s));
+		a=1.0*(da+db)/2;
+		b=1.0*(da-db)/2;
+		if(a>0 && b>0)
+		{
+			if(b>a)
+			{	
+				max=b;
+				b=a;
+				a=max;
+			}
+				cout<<fixed<<setprecision(8)<<b<<" "<<a<<" "<<h<<endl;
+		}
+		else
+			cout<<-1<<endl;
+	}
+}

@@ -1,0 +1,9 @@
+t = int(raw_input())
+for i in xrange(t):
+	n = int(raw_input())
+	sum=0
+	while(n>0):
+		temp = n%10
+		n=n/10
+		sum+=temp
+	print sum

@@ -1,0 +1,10 @@
+n,k = map(int, raw_input().strip().split())
+l = map(int, raw_input().strip().split())
+max = max(l)
+min = min(l)
+if k == 0:
+        print " ".join(str(i) for i in l)
+elif k%2 == 0:
+        print " ".join(str(i-min) for i in l)
+else:
+        print " ".join([str(max-i) for i in l])

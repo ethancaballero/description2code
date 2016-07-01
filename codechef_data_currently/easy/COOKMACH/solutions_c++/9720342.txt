@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t;
+    int a,b,count1;
+    cin>>t;
+    while(t--)
+    {
+        count1=0;
+        cin>>a>>b;
+        while((a&(a-1)))
+              {
+                  a/=2;
+                  count1++;
+              }
+        if(a<b)
+        {
+            while(a<b)
+            {
+                count1++;
+                a*=2;
+            }
+        }
+        else{
+            while(a>b)
+            {
+                count1++;
+                a/=2;
+            }
+        }
+        cout<<count1<<"
+";
+    }
+
+}

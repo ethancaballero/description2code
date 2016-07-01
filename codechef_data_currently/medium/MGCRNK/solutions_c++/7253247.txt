@@ -1,0 +1,68 @@
+#include <iostream>
+#include<algorithm>
+#include<stdio.h>
+using namespace std;
+
+int max(int a, int b)
+{
+	if(a >= b)
+		return a;
+    else
+		return b;
+}
+
+
+int main()
+{
+    int t,i,j;
+
+    scanf("%d",&t);
+
+    while(t--)
+    {
+       int n;
+
+       scanf("%d",&n);
+
+       int m[n+1][n+1],d[n+1][n+1];
+
+       for(i=0;i<=n;i++)
+       {
+           d[0][i] = d[i][0] = -1000000;
+
+       }
+    for(i=1;i<=n;i++)
+        for(j=1;j<=n;j++)
+        scanf("%d",&m[i][j]);
+
+        for(i=1;i<=n;i++)
+        {
+            for(j=1;j<=n;j++)
+            {
+               if(i==1 && j==1)
+               {
+                   d[i][j] = m[i][j];
+               }
+               else
+                {
+                    d[i][j] = max(d[i-1][j], d[i][j-1]) + m[i][j];
+                }
+            }
+        }
+
+        if(d[n][n]<0)
+            printf("Bad Judges
+");
+        else
+         {
+             float ans = d[n][n]/1.0;
+             ans/=2*(n-1)-1;
+             printf("%.6f
+",ans);
+         }
+
+
+    }
+    return 0;
+
+}

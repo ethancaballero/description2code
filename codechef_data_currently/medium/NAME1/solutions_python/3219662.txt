@@ -1,0 +1,37 @@
+import itertools
+def add(p,q):
+    return p+q
+
+t=int(raw_input())
+alp=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+while t>0:
+    ab=''.join(raw_input().split())
+    n=int(raw_input())
+    ch=[]
+    i=0
+    while i<n:
+        ch.append(raw_input())
+        i+=1
+    c=reduce(add,ch)
+    i=0
+    cn=[]
+    abn=[]
+    
+    c1=0
+    c2=0
+    cnt=0
+    while i<26:
+        c1=c.count(alp[i])
+        cn.append(c1)
+        c2=ab.count(alp[i])
+        abn.append(c2)
+        #print c1,c2
+        if (c2-c1)<0:
+            print "NO"
+            break
+        else:
+            cnt+=1
+        i+=1
+    if cnt==26:
+        print "YES"
+    t-=1

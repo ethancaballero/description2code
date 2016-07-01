@@ -1,0 +1,52 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+typedef long ll;
+
+ll gcd(ll a,ll b)
+{
+    return a == 0 ? b : gcd(b%a,a);
+}    
+
+
+int main() {
+    ll T;
+    cin>>T;
+ 
+    while(T--)
+    {
+        ll N;
+        cin>>N;
+        ll k,ans;
+        
+        for(ll i=0;i<N;i++)
+        {   cin>>k;
+            ans = (i == 0 ? k:gcd(ans,k));
+        }
+        
+        if(ans == 1)
+            cout<<"-1
+";
+        else if(ans % 2 == 0)
+            cout<<"2
+";
+        else
+        {
+            for(ll i=3;i*i <= ans;i+=2)
+            {
+                if(ans % i == 0)
+                {
+                    ans=i;
+                    break;
+                }
+            }    
+            cout<<ans<<endl;
+        }    
+        
+    }    
+  return 0;
+}

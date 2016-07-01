@@ -1,0 +1,81 @@
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <memory.h>
+#include <cassert>
+#define sqr(x) ((x) * (x))
+#define fi first
+#define se second
+using namespace std;
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef vector<pii> vii;
+typedef vector<int> vi;
+typedef pair< pii, int> piii;
+const int oo = 0x7fffffff;
+const long long OO = 1000000000000000000LL;
+const int base = 1000000007;
+const int dx[] = {1, 0, 0, -1, 1, 1, -1, -1};
+const int dy[] = {0, 1, -1, 0, -1, 1, 1, -1};
+const float eps = 1e-9;
+const int N = 3000000 + 5;
+const int M = 1e6;
+const int logN = 20;
+const int LIM = 1E9;
+int nTest;
+
+int n, a, b, c, d;
+int order[M];
+
+void input() {
+   scanf("%d%d%d%d%d", &n, &a, &b, &c, &d);
+   memset(order, 0, sizeof order);
+   ++order[d];
+   for (int i = 1; i < n; ++i) {
+      d = ((ll)a * d * d + (ll)b * d + c) % 1000000;
+      ++order[d];
+      order[d] %= 2;
+   }
+
+   int answer = 0;
+   bool ok = true;
+   for (int i = 1000000; i > 0; --i)
+      if (order[i]) {
+         if (ok) answer -= i;
+         else answer += i;
+         ok = !ok;
+      }
+   printf("%d
+", abs(answer));
+}
+
+
+int main() {
+   #ifndef ONLINE_JUDGE
+      freopen("input.txt", "r", stdin);
+      freopen("output.txt", "w", stdout);
+   #endif // ONLINE_JUDGE
+//
+   scanf("%d", &nTest);
+//   nTest = 1;
+   while (nTest) {
+      --nTest;
+      input();
+   }
+}

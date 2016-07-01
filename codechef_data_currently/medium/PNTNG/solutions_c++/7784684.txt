@@ -1,0 +1,57 @@
+#include<stdio.h>
+#define ll long long 
+inline ll fastread()
+{
+    ll number = 0;
+    char c = getchar_unlocked();
+    while(c < '0')
+        c = getchar_unlocked();
+    while(c>='0' && c<='9')
+    {
+        number = (number<<3)+(number<<1)+c-'0';
+        c = getchar_unlocked();
+    }
+    return number;
+}
+/*struct sort_pred {
+    bool operator()(const std::pair<int,int> &left, const std::pair<int,int> &right) {
+        return left.second < right.second;
+    }
+}; */
+int main()
+{
+ 
+	ll n,i,m,h,req_cells,cost=0;
+	n=fastread(); m=fastread(); h=fastread();  // cin>>n>>m>>h;
+	req_cells = n*m;
+	//pair<ll,ll> point[h];
+	ll a,b,cost_arr[100009]={0};
+	//memset(cost_arr,0,sizeof(cost_arr));
+	for(i=0;i<h;i++)
+	{ 
+	   a =fastread(); 
+	   b =fastread();
+	   
+	   cost_arr[b]+=a; 
+    }
+	//sort(point,point+h,sort_pred());  //..Sorting with respect to second element
+	for(i=0;i<100009;i++)
+	{
+		if(req_cells==0)   break;
+		if(cost_arr[i]<=req_cells)
+		{
+			cost = cost + (i*cost_arr[i]);
+			req_cells = req_cells - cost_arr[i];
+		}
+		else
+		{
+			cost = cost + (i*req_cells);
+			req_cells = 0;
+		}
+	}
+	if(req_cells!=0)
+	printf("Impossible");
+	else
+	printf("%lld",cost);
+	return 0;
+} 

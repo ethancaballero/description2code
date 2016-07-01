@@ -1,0 +1,11 @@
+testcases=input()
+for cases in range(testcases):
+	totalpages=input()
+	unprinted=map(int, raw_input().split())
+	numberunprinted=unprinted.pop(0)
+	torn=input()
+	leaves=(totalpages+1)/2
+	pagesum=totalpages*(totalpages+1)/2
+	actualpagesum=pagesum-sum(unprinted)
+	esum=actualpagesum*1.0*(leaves-torn)/leaves
+	print"%.4f"%(1.0*esum)

@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+int t,n,k,ans,a[100000]={0},i;
+char b[5];
+cin>>t;
+while(t--)
+{
+	cin>>n>>k>>ans;
+	for(i=0;i<n;i++)
+	cin>>a[i];
+	cin>>b;
+	
+	
+	if(k==0)
+	{
+		cout<<ans<<endl;
+		continue;
+	}
+	if(b[0]=='O')
+	{
+		for(i=0;i<n;i++)
+		ans=ans | a[i];
+	}
+	else if(b[0]=='X')
+	{   
+		if (k%2==1)
+        {
+			for(i=0;i<n;i++)
+			ans=ans^a[i];
+        }
+	}
+	else if(b[0]=='A')
+	{
+		for(i=0;i<n;i++)
+		ans=ans&a[i];
+	}
+	
+	cout<<ans<<endl;
+}
+	return 0;
+} 

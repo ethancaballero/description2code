@@ -1,0 +1,26 @@
+t=raw_input("")
+t=int(t)
+while t>0:
+        (n,a,b)=raw_input("").split()
+        n=int(n)
+        a=int(a)
+        b=int(b)
+        a_1=0
+        b_1=0
+        while a>0:
+                temp=a
+                if temp%2==1:
+                        a_1=a_1+1
+                a=a/2
+        while b>0:
+                temp=b
+                if temp%2==1:
+                        b_1=b_1+1
+                b=b/2
+        if a_1+b_1==n:
+                print (2**n)-1
+        elif a_1+b_1<n:
+                print (2**n)-(2**(n-(a_1+b_1)))
+        else:
+                print (2**n)-(2**(a_1+b_1-n))
+        t=t-1

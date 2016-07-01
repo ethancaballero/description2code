@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdio>
+#include <climits>
+#include <cstring>
+using namespace std;
+int arr[101];
+int main()
+{
+    int t,n,m,x,atom;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+        memset(arr,0,sizeof arr);
+        for(int i=0;i<m;i++)
+        {
+           cin>>x;
+           while(x--)
+           {
+             cin>>atom;
+             arr[atom]|=(1<<i);
+           }
+        }
+        int cnt=n;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+             if(arr[i]==arr[j])
+             {
+              cnt--;
+              break;
+             }
+            }
+        }
+        cout<<cnt<<endl;
+    }
+    return 0;
+}

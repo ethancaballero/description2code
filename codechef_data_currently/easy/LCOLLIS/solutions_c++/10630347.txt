@@ -1,0 +1,53 @@
+#include <iostream>
+#include<stdio.h>
+#include<vector>
+using namespace std;
+
+#define ll long long
+
+vector<ll> f(11, 1);
+
+void fact(int n){
+
+        for(int i = 2; i<=n; i++){
+                f[i] = f[i-1]*i;
+        }
+}
+
+
+ll nCr( ll n, ll r){
+        return f[n]/(f[r] * f[n-r]);
+}
+
+int main()
+{
+        int t, row, col;
+        ll collision = 0, c;
+        char arr[11][11];
+        fact(10);
+        scanf("%d", &t);
+
+        while(t--){
+                scanf("%d %d", &row, &col);
+
+                for(int i = 0; i<row; i++){
+                        scanf("%s", arr[i]);
+                }
+
+                collision = 0;
+                for(int j = 0; j<col; j++){
+                        c = 0;
+                        for(int i = 0; i<row; i++){
+                                if (arr[i][j] == '1') c++;
+                        }
+
+                        if (c>=2){
+                                collision = collision + nCr(c,2);
+                        }
+                }
+
+                printf("%d
+", collision);
+        }
+    return 0;
+}

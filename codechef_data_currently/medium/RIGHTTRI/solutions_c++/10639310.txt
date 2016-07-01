@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long double H,h,b,s;
+        cin>>H>>s;
+        double a=sqrt(4*s+H*H);
+        double c=sqrt(H*H-4*s);
+        b=(a+c)/2.0;
+        h=(a-c)/2.0;
+        if(b+h>H)
+        {
+            cout<<fixed;
+            cout<<setprecision(8)<<h<<" "<<b<<" "<<H<<endl;
+        }
+        else
+        {
+            cout<<"-1"<<endl;
+        }
+    }
+}
+
+
+
+
+
+
+

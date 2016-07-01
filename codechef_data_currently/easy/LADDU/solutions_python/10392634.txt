@@ -1,0 +1,33 @@
+def give(str):
+    out=0
+    item = str.split()
+    if item[0]== "CONTEST_WON":
+        rank=int(item[1])
+        if rank<20:
+            out=300+20-rank
+        else:
+            out=300
+
+    elif item[0]=="TOP_CONTRIBUTOR":
+        out=300
+    elif item[0]=="BUG_FOUND":
+        out=int(item[1])
+    else:
+        out=50
+    return out
+t=int(raw_input())
+laddu=0
+for i in xrange(t):
+    word=raw_input()
+    out = 0
+    item2=word.split()
+    j=int(item2[0])
+    for p in xrange(j):
+        line=raw_input()
+        out=out+give(line)
+
+    if item2[1]=="INDIAN":
+        laddu=out/200
+    elif item2[1]=="NON_INDIAN" :
+        laddu=out/400
+    print laddu

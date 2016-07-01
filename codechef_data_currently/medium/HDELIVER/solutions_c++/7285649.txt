@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<vector>
+using namespace std;
+ vector<int>ve[101];
+int visited[101];
+int size=0,j=0;
+
+void dfs(int n)
+{ visited[n]=-j;
+  int i;
+  size++;
+  
+  for(i=0;i<ve[n].size();i++)
+    if(visited[ve[n][i]]==1)
+        dfs(ve[n][i]); 
+      
+  
+}
+int main()
+{ 
+  int t;
+  scanf("%d",&t);
+  while(t--)
+  {   j=0; size=0;
+     int n,m,i;
+     scanf("%d%d",&n,&m);
+     for(i=0;i<n;i++)
+       ve[i].clear();
+     int u,v;
+        
+     for(i=0;i<m;i++)
+      {   scanf("%d%d",&u,&v);
+          ve[u].push_back(v);
+          ve[v].push_back(u);
+      }
+      
+     for(i=0;i<n;i++)
+        visited[i]= 1;
+     dfs(0);
+     while(size<=n)
+     { 
+       for(i=0;i<n;i++)
+         if(visited[i]==1)
+          { j++;
+            dfs(i);
+          }
+       if(size==n)
+         break;
+     }
+     /* for(i=0;i<n;i++)
+      printf("%d ",visited[i]); */
+     int q;
+     scanf("%d",&q);
+      while(q--)
+      {  
+          int x,y;
+          scanf("%d%d",&x,&y);
+          if(visited[x]==visited[y])
+            printf("YO
+");
+          else
+            printf("NO
+");
+      }
+  }
+  return 0;
+}

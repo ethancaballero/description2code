@@ -1,0 +1,18 @@
+def gp(n):
+    x = 0
+    if n % 2 == 0:
+        x = pow(26 , n/2 , 1000000007)
+        x = ((((x-1)*52)%1000000007)*280000002)%1000000007
+    else:
+        x = pow(26 , n/2 , 1000000007)
+        x = (((((x-1)*52)%1000000007)*280000002)%1000000007 + pow(26 ,  n/2 + 1 , 1000000007))%1000000007
+    return x
+                 
+cases = int(raw_input())
+while cases:
+    cases -= 1
+    num = int(raw_input())
+    if num == 1:
+        print 26
+        continue
+    print gp(num)

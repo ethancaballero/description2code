@@ -1,0 +1,16 @@
+import math;
+t=int(input());
+while t>0:
+	t=t-1;
+	inp=raw_input();
+	x=int(inp.split()[0]);
+	k=int(inp.split()[1]);
+	roun=int(math.log(k,2))+1;
+	deno=pow(2,roun-1);
+	points=0;
+	if roun==1:
+		points=0;
+	else:
+		points=pow(2,roun-1)-1;
+	pos=k-points;
+	print format(((x*1.0)/(deno*1.0))*(pos-1)+(1.0*x)/(2.0*deno),'0.30f');	

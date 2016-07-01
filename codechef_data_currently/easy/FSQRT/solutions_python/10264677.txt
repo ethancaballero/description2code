@@ -1,0 +1,4 @@
+import math
+
+for i in range(0, int(raw_input())):
+    print int(math.sqrt(int(raw_input())))

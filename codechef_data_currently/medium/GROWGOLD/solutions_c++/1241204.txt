@@ -1,0 +1,103 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+const int N = 110;
+const int mod = 100000007;
+int size;
+struct matrix
+{
+	int a[N][N];
+	matrix() {
+		memset(a,0,sizeof(a));
+	}
+};
+
+matrix mul(matrix a,matrix b)
+{
+	matrix c;
+	long long x;
+	for(int i = 0; i < size; i ++)
+		for(int j = 0; j < size; j ++) {
+			x = 0;
+			for(int k = 0; k < size; k ++) {
+				x = (x + 1LL * a.a[i][k] * b.a[k][j]);
+			}
+			c.a[i][j] = x % (mod - 1);
+		}
+	return c;
+}
+
+matrix b;
+matrix pow(matrix a,int k)
+{
+	if(k == 1) return a;
+	bool flag = false;
+	while(k) {
+		if(k & 1) {
+			if(!flag) b = a;
+			else b = mul(a,b);	
+			flag = true;
+		}
+		a = mul(a,a);
+		k /= 2;
+	}
+	return b;
+}
+
+long long pow2(long long a,long long k)
+{
+	int ans = 1;
+	while(k) {
+		if(k & 1) ans = 1LL * ans * a % mod;
+		a = 1LL * a * a % mod;
+		k /= 2;
+	}
+	return ans;
+}
+
+int main()
+{
+	matrix a;
+	int f[N];
+	int t;
+	scanf("%d",&t);
+	int slot1,slot2,k,n;
+	while(t --) {
+		scanf("%d%d%d%d%d",&f[1],&slot1,&slot2,&k,&n);
+		int m = 1;
+		for(int i = 1; i <= slot1; i ++) {
+			++ m;
+			f[m] = (f[m - 1] + 1) % mod;
+		}
+		for(int i = 1; i <= slot2; i ++) {
+			++ m;
+			f[m] = f[m - 1] * 2 % mod;
+		}
+		if(n <= m) {
+			printf("%d
+",f[n]);
+			continue;
+		}
+		memset(a.a,0,sizeof(a.a));
+		for(int i = 0; i < k; i ++)
+			a.a[0][i] = a.a[i + 1][i] = 1;
+		size = k;
+		a = pow(a,n - m);
+		long long ans = 1;
+		for(int i = 0; i < k; i ++)
+			ans = ans * pow2((long long)f[m - i],(long long)a.a[0][i]) % mod;
+		printf("%lld
+",ans);
+	}
+	return 0;
+}
+
+/*
+3
+1 50 50 101 100000000
+1 50 50 101 100000000
+1 50 50 101 100000000
+*/

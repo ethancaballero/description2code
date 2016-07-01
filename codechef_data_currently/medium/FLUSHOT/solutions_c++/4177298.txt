@@ -1,0 +1,121 @@
+#include <cctype>
+#include <cstdio>
+#include <cmath>
+ 
+using namespace std;
+ 
+const int BUFSIZE = 4096;
+const char MINUS = '-';
+const char ZEROCHAR = '0';
+const char DOT = '.';
+const double TEN = 10;
+ 
+char r_buffer[BUFSIZE];
+int r_bufpos = BUFSIZE;
+ 
+double readdouble()
+{
+    bool dotright = false;
+    double n = 0.0;
+    double precision = 1.0;
+    int sign = 1;
+    for (; r_bufpos < BUFSIZE && r_buffer[r_bufpos] != MINUS
+            && r_buffer[r_bufpos] != DOT && !isdigit(r_buffer[r_bufpos]);
+            r_bufpos++);
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE && r_buffer[r_bufpos] != MINUS
+                && r_buffer[r_bufpos] != DOT && !isdigit(r_buffer[r_bufpos]);
+                r_bufpos++);
+    }
+    if (r_buffer[r_bufpos] == MINUS)
+    {
+        sign = -1;
+        r_bufpos += 1;
+    }
+    for (; r_bufpos < BUFSIZE; r_bufpos++)
+    {
+        if (isdigit(r_buffer[r_bufpos]))
+        {
+            n = TEN * n + r_buffer[r_bufpos] - ZEROCHAR;
+            if (dotright)
+                precision *= TEN;
+        }
+        else if (r_buffer[r_bufpos] == DOT)
+        {
+            dotright = true;
+        }
+        else
+            break;
+    }
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE; r_bufpos++)
+        {
+            if (isdigit(r_buffer[r_bufpos]))
+            {
+                n = TEN * n + r_buffer[r_bufpos] - ZEROCHAR;
+                if (dotright)
+                    precision *= TEN;
+            }
+            else if (r_buffer[r_bufpos] == DOT)
+            {
+                dotright = true;
+            }
+            else
+                break;
+        }
+    }
+    return sign * n / precision;
+}
+ 
+const double EP=0.00005;
+ 
+const int MAX=10001;
+double dist[MAX];
+ 
+inline bool f(double len, double T, int N)
+{
+    double pos = dist[N-1] + len;
+    for(int i=N-2; i>=0; i--)
+    {
+        pos -= T; // ië²�ì§¸ ì�¬ë��ì�´ ì��ì�¬ë��ì�¼ë¡�ë¶�í�° ë�¨ì�´ì ¸ ì��ì�´ì�¼ í��ë�� ê±°ë¦¬
+        if (pos > dist[i] + len)
+            pos = dist[i] + len;
+        else if (pos < dist[i] - len)
+            return false;
+    }
+    return pos >= 0;
+}
+ 
+int main()
+{
+    int K, N;
+    double T;
+ 
+    K = readdouble();
+    for(; K>0; K--)
+    {
+        double left, right, mid;
+        N = readdouble();
+        T = readdouble();
+        for(int i=0; i<N; i++)
+            dist[i] = readdouble();
+        left = 0.0, right = 10000.0 * 1000001;
+        while( right - left >= EP )
+        {
+            if ( f(mid = ((right + left) / 2), T, N) )
+                right = mid;
+            else
+                left = mid;
+ 
+        }
+        printf("%.4f
+", mid);
+    }
+    return 0;
+}

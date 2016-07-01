@@ -1,0 +1,9 @@
+T=int(input())
+for i in range(T):
+
+    n=int(input())
+    f=1
+    while  n>=1:
+        f*=n
+        n-=1
+    print f

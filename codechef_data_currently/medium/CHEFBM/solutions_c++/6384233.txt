@@ -1,0 +1,105 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define s second
+#define f first
+int main()
+{
+	int n,m,p,i,j;
+	cin>>n>>m>>p;
+	vector<pair<int,int> >v;
+	v.resize(p);
+	for(i=0;i<p;i++)
+	{
+		cin>>v[i].f>>v[i].s;
+	}
+   sort(v.begin(),v.end());	
+	j=0;
+/*	int main()
+{
+    int n,m,p,i,j;
+    cin >> n >> m >> p;
+    vector<pair<int,int> >v;
+    v.resize(p);
+    for(i=0; i<p; i++)
+        cin >> v[i].f >> v[i].s;
+    sort(v.begin(),v.end());
+    j=0;*/
+	for(i=1;i<=n;i++)
+{
+	map<int,int>mymap;
+	while(j<v.size()&&v[j].f==i)
+	{
+		mymap[v[j].s]++;
+		if(v[j].s>1&&mymap.count(v[j].s-1)==0)
+		mymap[v[j].s-1]=0;
+		if(v[j].s<m&&mymap.count(v[j].s+1)==0)
+		mymap[v[j].s+1]=0;
+		j++;
+	}
+	
+	int ans=m-1;
+/*	for(i=1; i<=n; i++)
+    {
+        //process for i
+        map < int, int > mymap;
+        while(j<v.size()  && v[j].f==i)
+        {
+            // increase in map value of v[j].s
+            mymap[v[j].s]++;
+            // store in map, v[j].s-1 and v[j].s+1
+            if(v[j].s>1 && mymap.count(v[j].s-1)==0)
+                mymap[v[j].s-1]=0;
+            if(v[j].s<m && mymap.count(v[j].s+1)==0)
+                mymap[v[j].s+1]=0;
+            j++;
+        }*/
+        // answer normally
+//        int ans=m-1;
+/*	for(map<int,int>::iterator it=mymap.begin();it!=mymap.end();++it)
+	{
+		if(it->f==(m))
+		continue;
+		if(mymap.count(it->f+1)!=0)
+		{
+			if((it->f+it->s)>(mymap[1+it->f]+1+it->f)){ans=-1;break;
+			}
+		ans+=(mymap[it->f+1]-(it->s));
+	}*/for(map<int,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+        {
+            // no processing if j==m
+            if(it->f==(m))continue;
+ 
+            // j+1 is in map
+            if(mymap.count(it->f+1)!=0)
+            {
+                // if (value at j+1) < (value at j)+1, our answer is -1
+                if((it->f+it->s)>(mymap[it->f+1]+it->f+1)){ans=-1;break;}
+                // else, add difference to ans. subtract 1.
+                ans+=(mymap[it->f+1])-it->s;
+            }
+/*	else
+	{
+		if(it->s>1){ans=-1;break;
+		}
+		else 
+		ans+=it->s;
+	}
+//	cout<<ans<<endl;
+}
+cout<<ans<<endl;
+}
+return 0;
+}*/
+ else
+            {
+                // if (value at j+1) which will be j+1 < value at j ie. it->s, our answer is -1
+                if(it->s>1){ans=-1;break;}
+                // else, add difference to ans. subtract 1.
+//                ans+=it->s;
+            }
+        }
+        // print answer
+        cout << ans << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+#define _ ios_base::sync_with_stdio(false);cin.tie(0);
+using namespace std;
+#define pb push_back
+#define pob pop_back
+#define pf push_front
+#define pof pop_front
+#define mp make_pair
+#define all(a) a.begin(),a.end()
+#define bitcnt(x) __builtin_popcountll(x)
+#define MOD 1000000007
+#define total 500005
+#define NIL 0
+#define EPS 1e-5
+#define INF (1<<28)
+#define MAXN 1000
+typedef unsigned long long int uint64;
+typedef long long int int64;
+ 
+double dp[2][(1<<16)+1];
+double prob[101];
+int a[101],b[101];
+int main(){
+	int t,n,i;
+	cin>>t;
+	while(t--){
+		cin>>n;
+		for(i=0;i<n;i++){
+			cin>>prob[i]>>a[i]>>b[i];
+			a[i]--;
+			b[i]--;
+			if(a[i]==b[i])
+			prob[i]=100;
+			prob[i]/=100;
+		}
+		 double ans=0;
+		if(n>16){
+			printf("%.9lf
+",ans);
+			continue;
+		}
+		if(n==1){
+			ans=1.0;
+			printf("%.9lf
+",ans);
+			continue;
+		}
+		memset(dp,0,sizeof(dp));
+		dp[0][(1<<a[0])]=prob[0];
+		dp[0][(1<<b[0])]+=1-prob[0];
+		int mask=(1<<16);
+		for(i=1;i<n;i++){
+			int val1=(1<<a[i]);
+			int val2=(1<<b[i]);
+			for(int j=0;j<mask;j++){
+			if((j&val1)==0){
+				dp[i%2][j|val1]+=prob[i]*dp[1-(i%2)][j];
+			}
+			if((j&val2)==0){
+				dp[i%2][j|val2]+=(1-prob[i])*dp[1-(i%2)][j];
+			}
+			dp[1-(i%2)][j]=0;
+			}
+		}
+		
+		i--;
+		for(int j=0;j<mask;j++)
+		ans+=dp[i%2][j];	
+		printf("%.9lf
+",ans);
+	}
+	return 0;
+} 

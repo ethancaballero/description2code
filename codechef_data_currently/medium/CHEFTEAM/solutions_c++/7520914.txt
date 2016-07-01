@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ull unsigned long long
+#define FOR(i,a,b)  for(ull int i = a; i < b ; i++)
+ull gcd(ull a, ull b)
+{
+    ull r;
+    while(b)
+    {
+        r = a%b;
+        a = b;
+        b = r;
+    }
+    return a;
+}
+ull ncr(ull n, ull k)
+{
+    ull c = 1, d;
+    if(k>n) return 0;
+    if(k>n-k)
+        k = n-k;
+    FOR(i,1,k+1)
+    {
+        d=gcd(c,i);
+        c/=d;
+        c*=(n-i+1)/(i/d);
+    }
+    return c;
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+
+    FOR(i,1,t+1)
+    {
+        ull int n, k, res;
+        scanf("%llu %llu",&n,&k);
+        printf("%llu
+",ncr(n,k));
+    }
+
+    return 0;
+}

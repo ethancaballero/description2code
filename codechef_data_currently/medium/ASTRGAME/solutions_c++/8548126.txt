@@ -1,0 +1,70 @@
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define si(x) scanf("%d",&x)
+#define pri(x) printf("%d",x)
+#define sll(x) scanf("%lld",&x)
+#define pll(x) printf("%lld",x)
+#define sstr(s) scanf("%s",s)
+#define pstr(s) printf("%s",s)
+#define nl printf("
+")
+#define ll long long int
+
+char s[35];
+char d[35][35];
+int n,grundy[31][31];
+
+int func(int st, int end) {
+    if(st>end) return 0;
+    if(grundy[st][end]!=-1) {
+	return grundy[st][end];
+    }
+    int visited[200]={0};
+    for(int i=0;i<n;++i) {
+	int len=strlen(d[i]);
+	for(int j=st;j<=end;++j) {
+	    int k=0,l=j;
+	    while(k<len && l<=end && s[l]==d[i][k]) {
+		k++;
+		l++;
+	    }
+	    if(k==len) {
+		visited[func(st,j-1)^func(j+len,end)]=1;
+	    }
+	}
+    }
+    int i;
+    for(i=0;;i++) {
+	if(visited[i]==0) break;
+    }
+    grundy[st][end]=i;
+    return i;
+}
+
+int main()
+{
+    int t;
+    si(t);
+    while(t--) {
+	memset(grundy,-1,sizeof(grundy));
+	cin>>s;
+	int l=strlen(s);
+	si(n);
+	for(int i=0;i<n;++i) {
+	    cin>>d[i];
+	}
+	int res = func(0,l-1);
+	if(res) {
+	    cout<<"Teddy
+";
+	}
+	else {
+	    cout<<"Tracy
+";
+	}
+    }
+    return 0;
+}

@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<string.h>
+#define ll long long int
+int main()
+{
+
+    ll t,n,k,Q,l,r;
+
+    scanf("%lld",&t);
+
+    while(t--)
+    {
+     scanf("%lld %lld %lld",&n,&k,&Q);// for the values of n,k,Q
+     char s[n]; // for the string
+     scanf("%s",s);
+     ll far[n];
+     ll count0=0,count1=0;
+    ll j=0;
+     if(s[0]=='1')
+       count1++;
+     else
+       count0++;
+    for(ll i=0;i<n;i++){
+
+    while(j<n&&(count0)<=k&&(count1)<=k)
+    {
+        j++;
+        if(j>n) break;
+
+        if(s[j]=='1') count1++;
+         else   count0++;
+
+    }
+       far[i]=j;
+
+       if(s[i]=='1')
+        count1-=1;
+        else
+        count0-=1;
+
+    }
+
+     while(Q--)
+     {
+        ll ans=0;
+        scanf("%lld %lld",&l,&r);
+        // int j;
+        for(ll i=l-1;i<r;i++){
+
+        j=(far[i])<r?far[i]:r;
+        // printf("%d ",j);
+        ans+=j-i;
+       // printf("%d ",(j-i));
+
+       }
+     // printf("
+");
+    printf("%lld
+",ans);
+     }
+
+    }
+    return 0;
+}

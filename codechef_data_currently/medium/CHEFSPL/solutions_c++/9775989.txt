@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char str[1000005];
+
+bool check(int mid,int end,bool flag,int fs){
+	int i,fptr=0,sptr=mid+1;
+	while(fptr<=mid && sptr<=end){
+		if(str[fptr] != str[sptr] ){
+			if(flag == 0 ){
+				flag =1;
+				if(fs == 0 )
+					fptr++;
+				else
+					sptr++;
+			}
+			else
+			return 0;
+		}
+		else{
+			fptr++;sptr++;
+		}
+	}
+	return 1;
+}
+int main(){
+	int d,i,len,flag;
+	cin>>d;
+	while(d--){
+		cin>>str;
+		len = strlen(str);
+		if(len%2 ==0)
+			flag = check(len/2 -1, len -1,1,0);
+		else
+			flag = check(len/2 ,len -1,0,0) || check(len/2-1, len -1, 0, 1) ;
+		if(flag == 1 && len!=1)
+			cout<<"YES
+";
+		else 
+			cout<<"NO
+";
+	}
+	return 0;
+}

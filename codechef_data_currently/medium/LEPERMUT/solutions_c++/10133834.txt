@@ -1,0 +1,47 @@
+// LEPERMUT
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	vector<int> v;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		int p = 0;
+		int local = 0;
+		for(int i=0;i<n;i++)
+		{
+			int temp;
+			cin>>temp;
+			v.push_back(temp);
+			if(i>0)
+			{
+				if(v[i-1]>v[i])
+				local++;
+				
+			}
+			
+		}
+		for(int i=0;i<(n-1);i++)
+		{
+			for(int j=i+1;j<n;j++)
+			{
+				if(v[i]>v[j])
+				{
+					p++;
+				}
+			}
+		}
+		if(local == p)
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+		v.clear();
+		
+	}
+	return 0;
+}

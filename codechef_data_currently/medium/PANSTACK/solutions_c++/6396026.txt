@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+#define  ll long long
+#define mod 1000000007
+#define maxn 1234
+using namespace std;
+int dp[maxn][maxn];
+int dp1[maxn];
+int main()
+{
+	memset(dp,0,sizeof(dp));
+	for (int i = 0; i <maxn; ++i)
+	{
+		dp[i][i]=1;
+	}
+	for (int i = 1; i <maxn; ++i)
+	{
+		dp[i][0]=1;
+	}
+	for (int i = 1; i <maxn; ++i)
+	{
+		for (int j = 1; j <i; ++j)
+		{
+			dp[i][j]=dp[i-1][j]+dp[i-1][j-1];
+			dp[i][j] = (dp[i][j] >= mod)?(dp[i][j]%mod):dp[i][j];
+		}
+	}
+	dp1[0]=1;
+	dp1[1]=1;
+		for (ll i = 2; i <maxn; ++i)
+		{
+			ll  ans=0;
+			for (ll k = 0; k <i; ++k)
+			{
+				ans+=((ll)dp1[k]*dp[i-1][k])%mod;
+			}
+			dp1[i]=ans%mod;
+		}
+		
+	int t;
+	cin>>t;
+	 while(t--) {
+        int n;
+        scanf("%d",&n);
+        printf("%d
+",dp1[n]);
+    }
+	return 0;
+}

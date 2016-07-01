@@ -1,0 +1,20 @@
+import sys
+print '1'
+sys.stdout.flush()
+print '3 1 1 2'
+sys.stdout.flush()
+print '3 3 3 5'
+sys.stdout.flush()
+diff=input()
+print '2'
+sys.stdout.flush()
+if not diff:
+	print '4'
+elif diff==1:
+	print '2'
+elif diff>1:
+	print '1'
+elif diff==-1:
+	print '5'
+else:
+	print '3'

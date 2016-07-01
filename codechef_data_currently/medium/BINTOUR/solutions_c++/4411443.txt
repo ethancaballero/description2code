@@ -1,0 +1,34 @@
+#include<cstdio>
+#include<vector>
+#include<cstring>
+#include<iostream>
+#include<algorithm>
+#define rep(i,n) for(int i=0;i<n;++i)
+#define For(i,n) for(int i=1;i<=n;++i)
+#define FORD(i,a,b) for(int i=a;i>=b;--i)
+using namespace std;
+typedef long long ll;
+const int mo=1000000000+9,N=1048576+10;
+int n,h,ans[N];
+ll tmp,Fact[N];
+int main()
+{
+    scanf("%d",&n);
+    n=1<<n;
+    h=n>>1;
+ 
+    Fact[0]=1;
+    For(i,n) Fact[i]=Fact[i-1]*i%mo;
+ 
+    rep(i,h-1) puts("0");
+ 
+    tmp=n;
+    rep(i,h+1)
+    {
+        ans[i]=tmp*Fact[n-i-1]%mo;
+        tmp=tmp*(h-i)%mo;
+    }
+    FORD(i,h,0) printf("%d
+",ans[i]);
+    return 0;
+}

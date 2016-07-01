@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <set>
+#include <map>
+#include <cmath>
+#pragma comment(linker,"/STACK:16777216")
+#define inf 1000000000
+using namespace std;
+typedef long long L;
+typedef unsigned long long UL;
+int t,n;
+string res,resprev,prev;
+ 
+bool canput(char a,char b){
+prev[0]=a; prev[1]=b;
+for(int i=2;i<n;i++){
+if(prev[i-1]==res[i-1])prev[i]=prev[i-2];
+else{
+if(prev[i-2]=='0')prev[i]='1';
+else prev[i]='0';
+}
+}
+//cout<<prev<<endl;
+if(prev[n-1]==res[n-1]){
+if(prev[n-2]!=prev[0])return false;
+}
+else{
+if(prev[n-2]==prev[0])return false;
+}
+if(prev[0]==res[0]){
+if(prev[n-1]!=prev[1])return false;
+}
+else{
+if(prev[n-1]==prev[1])return false;
+}
+resprev.assign(prev);
+return true;
+}
+ 
+int main()
+{
+cin>>t;
+ 
+for(int i=1;i<=t;i++){
+cin>>res;
+n=res.size();
+prev.resize(res.size());
+int s=0;
+if(canput('0','1'))s++;
+if(canput('0','0'))s++;
+if(canput('1','0'))s++;
+if(canput('1','1'))s++;
+if(s==0)cout<<"No solution"<<endl;
+else if(s>1)cout<<"Multiple solutions"<<endl;
+else cout<<resprev<<endl;
+}
+ 
+ 
+return 0;
+}

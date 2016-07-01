@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <string.h>
+#define MOD 1000000007
+#define lli long long int
+ 
+using namespace std;
+ 
+int n,total;
+ 
+struct ura{
+    int ini,fin;
+};
+ 
+ura num[105];
+ 
+int dp[105][105];
+ 
+/*int DP(int i,int costo){
+    if(memo[i][costo]!=-1)return memo[i][costo];
+    if(costo==total && i==n){return 1;}
+    if(costo!=total && i==n){return 0;}
+    int res=0;
+    for(int h=num[i].ini;h<=num[i].fin;h++)
+        if(costo+h<=total)
+            res=(res+DP(i+1,costo+h))%MOD;
+    return memo[i][costo]=res%MOD;
+}*/
+ 
+int main(){
+    int t,a,b;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d %d",&total,&n);
+        for(int i=0;i<n;i++)
+            scanf("%d %d",&num[i].ini,&num[i].fin);
+        for(int i=0;i<total;i++)
+            dp[n][i]=0;
+        dp[n][total]=1;
+        for(int i=n-1;i>=0;i--){
+            for(int costo=total;costo>=0;costo--){
+                dp[i][costo]=0;
+                for(int h=num[i].ini;h<=num[i].fin;h++){
+                    if(costo+h<=total)
+                        dp[i][costo]=(dp[i][costo]+dp[i+1][costo+h])%MOD;
+                    else break;
+                }
+            }
+        }
+        printf("%d
+",dp[0][0]);
+    }
+    return 0;
+} 

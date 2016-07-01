@@ -1,0 +1,34 @@
+#include<stdio.h>
+int main()
+{
+	int test,n,k;
+	int coin[1000],prev,input,count,t;
+	scanf("%d",&test);
+	while(test-->0)
+	{
+		count=0;t=0;
+		scanf("%d %d",&n,&k);
+		for(int i=0;i<n;i++)
+		{
+			scanf("%d",&coin[i]);
+		}
+		prev=coin[n-1];
+		count=1;
+		for(int i=n-2;i>=0;i--)
+		{
+			input=coin[i];
+			if(prev-input==1)
+				count++;
+			else
+			{
+				t+=(prev-input-1)*(count%k==0?count/k:((count)/k+1));
+				count++;
+			}
+			prev=input;
+		}
+		t+=(prev-1)*(count%k==0?count/k:(count/k+1));
+		printf("%d
+",t);
+		
+	}
+}

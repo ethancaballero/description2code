@@ -1,0 +1,76 @@
+# Recently Chef bought a bunch of robot-waiters. And now he needs to know how much to pay for the electricity that robots use for their work. All waiters serve food from the kitchen (which is in the point (0, 0)) and carry it to some table (which is in some point (x, y)) in a shortest way. But this is a beta version of robots and they can only do the next moves: turn right and make a step forward or turn left and make a step forward. Initially they look in direction of X-axis. Your task is to calculate for each query the number of moves they'll do to reach corresponding table.
+
+# Input
+# The first line of the input contains an integer T denoting the number of test cases. The description of T test cases follows. For each test case there is a sing line containing two space-separated integers - x and y.
+
+# Output
+# For each test case, output a single line containing number of moves that robot will make to reach point (x, y)
+
+# Constraints
+#     1 <= T <= 10^5
+#     -10^9 <= x, y <= 10^9
+ 
+# Example
+
+# Input:
+# 2
+# 3 3
+# 3 4
+
+# Output:
+# 6
+# 7
+
+# Explanation
+# Example case 1. Sequence of moves would be LRLRLR
+
+# Status - Successful
+
+# Logic - A direct relationship can be determined between the point (x,y and the number of steps (count) required to get to the point.
+	# if x >= y:
+	# 	count = x + y + ( x-y + (x-y)%2 )
+	# else:
+	# 	count = x + y + ( y-x - (y-x)%2 )
+
+import sys
+
+T=input()
+
+for testcases in xrange(T):
+	
+	x,y=map(int,sys.stdin.readline().split())
+	# print abs(x)+abs(y)
+
+	x,y=abs(x),abs(y)
+
+	# Method 1 (brute force) ---
+	# count=0
+	# a,b=0,0
+	# while True:
+		
+	# 	if a==x and b==y:
+	# 		break
+
+	# 	if b<=y:
+	# 		b+=1
+	# 		count+=1
+	# 	else:
+	# 		b-=1
+	# 		count+=1
+
+	# 	if a==x and b==y:
+	# 		break
+
+	# 	if a<=x:
+	# 		a+=1
+	# 		count+=1
+	# 	else:
+	# 		a-=1
+	# 		count+=1
+	# ----------
+
+	if x>=y:
+		count2 = x + y + (x-y + (x-y)%2)
+	else:
+		count2 = x + y + (y-x - (y-x)%2)
+	print count2

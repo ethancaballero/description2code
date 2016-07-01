@@ -1,0 +1,36 @@
+t = input()
+
+for i in range(t):
+	r = raw_input()
+	r = [int(i) for i in r.split()]
+
+	f = [0 for i in range(r[0])]
+	r = raw_input()
+	r = [int(i) for i in r.split()]
+
+	for i in r:
+		f[i-1] = 1
+
+	flag = 0
+	l1 = []
+	l2 = []
+
+	for i in range(len(f)):
+
+		if flag == 0 and f[i] == 0:
+			l1.append(i+1)
+			flag = 1
+			f[i] = 1
+
+		elif flag == 1 and f[i] == 0:
+			l2.append(i+1)
+			flag = 0
+			f[i] = 1
+
+	for i in l1:
+		print i,
+	print
+
+	for  i in l2:
+		print i,
+	print 

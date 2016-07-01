@@ -1,0 +1,23 @@
+# cook your code here
+t=int(raw_input())
+for _ in range(t):
+	n=int(raw_input())
+	l=map(int, raw_input().split())
+	r=map(int, raw_input().split())
+	max_p=0
+	max_r=0
+	min_i=0
+	for i in range(n):
+		p=l[i]*r[i]
+		if p > max_p:
+			max_p=p
+			max_r=r[i]
+			min_i=i
+		else:
+			if p == max_p:
+				if r[i]>max_r:
+					max_p=p
+					max_r=r[i]
+					min_i=i
+
+	print min_i+1

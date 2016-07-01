@@ -1,0 +1,11 @@
+t=int(raw_input())
+for asd in range(t):
+	ds,dt,d=map(int,raw_input().split())
+	if (d>=ds+dt):
+		print d-(ds+dt)
+	elif (ds+dt>d and ds+d>dt and dt+d>ds):
+		print 0
+	elif (ds>=dt+d):
+		print ds-(d+dt)
+	elif (dt>=ds+d):
+		print dt-(d+ds)

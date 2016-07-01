@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int r,b,g,m;
+        scanf("%d %d %d %d",&r,&g,&b,&m);
+        int maxr=0;
+        int maxb=0;
+        int maxg=0;
+        int c;
+        int i=0;
+        while(i<r)
+        {
+            scanf("%d",&c);
+            if(maxr<c)
+                maxr=c;
+            i++;
+        }
+        i=0;
+        while(i<g)
+        {
+            scanf("%d",&c);
+            if(maxg<c)
+                maxg=c;
+            i++;
+        }
+        i=0;
+        while(i<b)
+        {
+            scanf("%d",&c);
+            if(maxb<c)
+                maxb=c;
+            i++;
+        }
+
+        i=0;
+        while(i<m)
+        {
+            if(maxr>maxb)
+            {
+                if(maxr>maxg)
+                {maxr/=2;}
+                else
+                {maxg/=2;}
+            }
+            else
+            {
+                if(maxb>maxg)
+                {maxb/=2;}
+                else maxg/=2;
+            }
+        i++;}
+        int big=(maxr>maxb&&maxr>maxg?maxr:maxb>maxg?maxb:maxg);
+        printf("%d
+",big);
+    }
+    return 0;
+}

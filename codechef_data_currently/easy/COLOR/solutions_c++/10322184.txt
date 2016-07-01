@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+//	freopen("input.txt","r",stdin);
+	int t;
+	cin>>t;
+	
+	while(t--)
+	{
+		string s;
+		int l;
+		cin>>l>>s;
+		
+		int c1=0,c2=0,c3=0;
+		
+		for(int i=0;i<l;i++)
+		{
+			if(s[i]=='R')
+				c1++;
+			
+			if(s[i]=='G')
+				c2++;
+			
+			if(s[i]=='B')	
+				c3++;
+		}
+		
+		if(c1>=c2&&c1>=c3)
+			cout<<l-c1<<endl;
+		
+		else if(c2>=c1&&c2>=c3)
+			cout<<l-c2<<endl;
+		
+		else if(c3>=c1&&c3>=c2)
+			cout<<l-c3<<endl;		
+		
+	}
+	return 0;
+}

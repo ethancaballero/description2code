@@ -1,0 +1,33 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+int main()
+{
+	int T;
+	scanf("%d",&T);
+	while(T--)
+	{
+		char a[101];
+		scanf("%s",a);
+		int i=0,sum=0;
+		while(a[i]=='S'||a[i]=='T')
+		{
+			if(a[i]=='S')
+				sum=sum+1;
+			else
+				sum=sum+2;
+			i++;
+		}
+		int N,rep;
+		scanf("%d",&N);
+		N=N*12;
+		if(N%sum==0)
+			rep=N/sum -1;
+		else
+			rep=N/sum;
+
+		printf("%d
+",N*rep - (rep*(rep+1)*sum/2));
+	}
+	return 0;
+}

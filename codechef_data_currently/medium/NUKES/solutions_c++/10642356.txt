@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    
+    int a=0,n=0,k=0,i=0,nc=0,rc=0;
+    cin>>a>>n>>k;
+    n++;
+    //n is the radix
+    
+    if(a>=0 && a<=1000000000 && n>=0 && n<=100 && k>=0 && k<=100)
+    {
+       
+        int reactor[k];
+        for(i=0;i<k;i++)
+            reactor[i]=0;
+        i=0;
+        
+        
+        for(i=0;i<k;i++)
+        {
+            reactor[i]=a%n;
+            a=a/n;
+        }
+    
+        
+    
+        for(i=0;i<k;i++)
+        {
+            cout<<reactor[i]<<" ";
+        }
+        cout<<endl;
+    }
+    return 0;
+}

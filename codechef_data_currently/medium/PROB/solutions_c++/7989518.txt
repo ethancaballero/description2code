@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int a,b,c,d;
+		scanf("%d%d%d%d",&a,&b,&c,&d);
+		printf("%f
+", ((float)a)/(a+b));
+	}
+	return 0;
+}

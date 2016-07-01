@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+#define M 1000000007
+int gcd(int a,int b)
+{
+   if(b==0)
+      return a;
+   return gcd(b,a%b);
+}
+int main()
+{
+   long long int N,ans,i,j,k;
+   int factorial6,hcf;
+   cin>>N;
+   if(N<13)
+      cout<<0<<endl;
+   else
+   {
+      N=N-13;
+      N=N/2;
+      N=N+6;
+      factorial6=720;
+      for(ans=1,i=6;i;N--,i--)
+      {
+         hcf=gcd(N,factorial6);
+         factorial6=factorial6/hcf;
+         ans=ans*(N/hcf)%M;
+      }
+      cout<<ans<<endl;
+   }
+return 0;
+}

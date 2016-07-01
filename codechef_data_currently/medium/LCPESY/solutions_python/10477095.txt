@@ -1,0 +1,24 @@
+testCase=int(raw_input())
+while testCase>0:
+    testCase=testCase-1
+    firststring=raw_input()
+    secondString=raw_input()
+    diff=0
+    x=48
+    while x<123 :
+        c=str(unichr(x))
+        if c in firststring:
+            if c in secondString:
+                a=firststring.count(c)
+                b=secondString.count(c)
+                if a>b:
+                    diff+=b
+                else:
+                    diff+=a
+        x=x+1
+        if x==58:
+            x=65
+        else:
+            if x==91:
+                x=97
+    print diff 

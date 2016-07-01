@@ -1,0 +1,19 @@
+from collections import Counter
+
+N = int(raw_input())
+
+strings = []
+for _ in xrange(N):
+    strings.append(Counter(raw_input().strip()))
+
+intersection = strings[0]
+for s in strings:
+    intersection &= s
+
+chars = list(intersection.elements())
+chars.sort()
+if not len(chars):
+    print 'no such string'
+else:
+    print ''.join(chars)
+    

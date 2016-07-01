@@ -1,0 +1,30 @@
+import sys
+def main():
+	maxN = 1010
+	c = [[0]*maxN for x in xrange(maxN)]
+	for i in range(maxN):
+		c[i][0]=1
+		c[i][i]=1
+	for i in range(1,maxN):
+		for j in range(1,maxN):
+			if i!=j:
+				c[i][j] = c[i-1][j] + c[i-1][j-1]
+	t = int(sys.stdin.readline())
+	for i in xrange(t):
+		s,n,m,k=map(int, sys.stdin.readline().split(' '))
+		D = float (c[s-1][n-1])
+		#print D
+		N = 0.000000
+		if s == n:
+			print 1.000000
+			continue
+		if k > n:
+			print 0.000000
+			continue
+		upper = min(m, n)
+		for j in range(k, upper):
+			N += c[m-1][j] * c[s-m][n-1-j]
+		#print N
+		ans = float (N/D)
+		print "%f" %ans
+main()

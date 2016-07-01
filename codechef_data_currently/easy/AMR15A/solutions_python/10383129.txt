@@ -1,0 +1,18 @@
+n=int(raw_input())
+odd,eve=0,0
+str=raw_input()
+lis=list(str.split())
+
+for i in range(0,n):
+	lis[i]=int(lis[i])
+
+for i in range(0,n):
+	if lis[i]%2==0:
+		eve+=1
+	else:
+		odd+=1
+		
+if eve>odd:
+	print "READY FOR BATTLE"
+else :
+	print "NOT READY"

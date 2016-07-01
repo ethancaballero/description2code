@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define rep(i,a,b) for(int i=(int)a;i<=(int)b;i++)
+#define rip(i,a,b) for(int i=(int)a;i>=(int)b;i--)
+#define ll long long
+#define MOD 1000000007
+#define N 100005
+#define PI acos(-1)
+int dp[35][35];
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        int l=s.length();
+        cin>>n;
+        map<string,int> mp;
+        rep(i,1,n)
+        {
+            string k;
+            cin>>k;
+            mp[k]=1;
+        }
+        rep(i,0,l-1)
+        dp[i][i]=0;
+        rep(v,1,l)
+        {
+            rep(i,0,l)
+            {
+                int j=i+v;
+                if(j>l)
+                continue;
+                int used[50]={};
+                rep(k,i,j)
+                {
+                    for(int m=1;k+m<=j;m++)
+                    {
+                        string q=s.substr(k,m);
+                        if(mp[q])
+                        used[dp[i][k]^dp[k+m][j]]=1;
+                    }
+                }
+                dp[i][j]=0;
+                while(used[dp[i][j]])
+                dp[i][j]++;
+                //cout<<i<<" "<<j<<" "<<dp[i][j]<<endl;
+            }
+        }
+        if(dp[0][l]==0)
+        cout<<"Tracy
+";
+        else
+        cout<<"Teddy
+";
+    }
+}

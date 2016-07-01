@@ -1,0 +1,28 @@
+t=int(raw_input())
+for i in range(t):
+    a=raw_input()
+    flag=0
+    if(len(a)!=5):
+        flag=1
+        print "Error"
+    else:
+        a1=ord(a[0])
+        a2=ord(a[1])
+        a3=ord(a[2])
+        a4=ord(a[3])
+        a5=ord(a[4])
+        a=ord('a')
+        z=ord('h')
+        o=ord('1')
+        n=ord('8')
+        if(a<=a1 and a1<=z and a<=a4 and a4<=z and a3==ord('-') and o<=a2 and a2<=n and o<=a5 and a5<=n  ):
+            flag=1
+            if(abs(a1-a4)>=1 and abs(a1-a4)<=2 and abs(a2-a5)>=1 and abs(a2-a5)<=2 and abs(a2-a5)+abs(a1-a4)==3 ):
+                print "Yes"
+            else:
+                print "No"
+    if(flag==0):
+        print "Error"
+                
+    #else    
+        

@@ -1,0 +1,7 @@
+for i in xrange(int(raw_input())) :
+    n = int(raw_input())
+    sum_n = 0
+    while(n>0) :
+        sum_n += n % 10
+        n /= 10
+    print sum_n    

@@ -1,0 +1,73 @@
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+typedef long long ll;
+const int lim=16,mod=1e9+7;
+ll T,N,L,K,lim2;
+ll matrix[lim][lim],ma[lim][lim],mb[lim][lim],mc[lim][lim];
+ll arr[lim]; ll trans[lim];
+
+void multma(ll a[lim][lim], ll b[lim][lim]) {
+	memcpy(mb,a,sizeof(mb)); memcpy(mc,b,sizeof(mc));
+	memset(a,0,sizeof(mb));
+	for (int i=0; i<lim2; ++i) for (int j=0; j<lim2; ++j) for (int k=0; k<lim2; ++k) {
+		a[i][j]=(a[i][j]+mb[i][k]*mc[k][j])%mod;
+	}
+}
+
+int main() {
+	scanf("%lld",&T);
+	while (T--) {
+		scanf("%lld%lld",&N,&K);
+		for (int i=0; i<K; ++i) scanf("%lld",&arr[i]);
+		lim2=*max_element(arr,arr+K);
+		memset(matrix,0,sizeof(matrix));
+		for (int i=0; i<K; ++i) ++matrix[lim2-1][lim2-arr[i]];
+		for (int i=1; i<lim2; ++i) matrix[i-1][i]=1;
+		trans[0]=1;
+		for (int i=1; i<lim2; ++i) {
+			trans[i]=0;
+			for (int j=0; j<K; ++j) if (arr[j]<=i) trans[i]=(trans[i]+trans[i-arr[j]])%mod;
+		}
+		if (N<lim2) printf("%lld
+",trans[N]);
+		else {
+			bool flag=1;
+			ll b=N;
+			while (b) {
+				if (b&1) {
+					if (flag) {
+						flag=0;
+						memcpy(ma,matrix,sizeof(ma));
+					} else {
+						multma(ma,matrix);
+					}
+				}
+				multma(matrix,matrix);
+				b>>=1;
+			}
+			ll ans=0;
+			for (int i=0; i<lim2; ++i) ans=(ans+trans[i]*ma[0][i])%mod;
+			printf("%lld
+",ans);
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

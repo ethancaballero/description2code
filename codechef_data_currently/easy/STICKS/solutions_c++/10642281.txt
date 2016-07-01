@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define boost ios::sync_with_stdio(true); cin.tie(0); cout.tie(0);
+#define pii pair<int,int>
+#define vpii vector<pair<int,int> >
+#define vvpii vector<vector<pair<int,int> > >
+#define vi vector<int>
+#define vii vector<vector<int> >
+#define pb push_back 
+#define mp make_pair 
+#define onebit(n) __builtin_popcount(n) //get number of one-bits in the bit representation of n
+#define rep(i,n) for(i=0;i<n;i++)
+
+
+int main()
+{
+	boost;
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		int i,j;
+		vi a(1004,0);
+		vi result;
+		for(i=0;i<n;i++)
+		{
+			int x;
+			cin>>x;
+			a[x]++;
+		}
+		for(i=1000;i>=1;i--)
+		{
+			if(a[i]>=2)
+				result.pb(i);
+		}
+		if(a[result[0]]>=4)
+		{
+			cout<<result[0]*result[0]<<endl;
+		}
+		else if(result.size()>=2)
+		{
+			cout<<result[0]*result[1]<<endl;
+		}
+		else
+		{
+			cout<<-1<<endl;
+		}
+	}
+	return 0;
+}

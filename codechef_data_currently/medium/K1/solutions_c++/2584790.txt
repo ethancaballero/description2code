@@ -1,0 +1,71 @@
+    #include <stdio.h>
+    #include <math.h>
+    
+    int x[2500],y[2500];
+    int n;
+    double a,b,c,d;
+    #define EPS 0.000000001
+    
+    double square_root(double x, double y)
+    {
+    return sqrt(x*x+y*y);
+    }
+    
+    double fun(double tt)
+    {
+    double no=0;
+    int i;
+    for(i=0;i<n;i++)
+    no+=(a*(a*tt+b-x[i])+c*(c*tt+d-y[i]))/square_root(a*tt+b-x[i],c*tt+d-y[i]);
+    return no;
+    }
+    
+    double fun2(double tt)
+    {
+    double no=0;
+    int i;
+    for(i=0;i<n;i++)
+    no+=square_root(a*tt+b-x[i],c*tt+d-y[i]);
+    return no;
+    }
+    
+    int main()
+    {
+    int t,i,stop;
+    int aa,bb,cc;
+    double aaa,bbb,ccc;
+    scanf("%d",&t);
+    while(t--)
+    {
+    scanf("%d",&n);
+    scanf("%d %d %d",&aa,&bb,&cc);
+    for(i=0;i<n;i++)
+    scanf("%d %d",&x[i],&y[i]);
+    a=bb;
+    c=-aa;
+    if (aa==0)
+    {
+    b=0;
+    d=-(double)cc/bb;
+    }
+    else
+    {
+    d=0;
+    b=-(double)cc/aa;
+    }
+    for(aaa=1;fun(aaa)<0;aaa*=2);
+    for(bbb=-1;fun(bbb)>0;bbb*=2);
+    while(aaa-bbb>=EPS)
+    {
+    ccc=(aaa+bbb)/2;
+    if (fun(ccc)>0)
+    aaa=ccc;
+    else
+    bbb=ccc;
+    }
+    printf("%.6lf
+",fun2(ccc));
+      
+    }
+    return 0;
+    } 

@@ -1,0 +1,15 @@
+T = int(raw_input())
+
+while T:
+        N = int(raw_input())
+        C = map(int, raw_input().split())
+
+        count = 0
+        min = C[0]
+        for i in C:
+                if min >= i:
+                        min = i
+                        count += 1
+
+        print count
+        T-=1

@@ -1,0 +1,11 @@
+t=input()
+
+while t>0:
+    a,b=map(int,raw_input().split())
+    if a==b:
+        print "="
+    if a>b:
+        print ">"
+    if a<b:
+        print "<"
+    t = t-1

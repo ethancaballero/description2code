@@ -1,0 +1,48 @@
+#include <cstdio>
+#include <cstring>
+
+
+#define MXT 1000
+#define MXN 10000
+
+int grundy[MXN+3];
+int vis[MXN+3];
+
+void preprocess()
+{
+	int n, g, x, y;
+
+	grundy[0] = grundy[1] = 0; 
+
+	for(n = 2; n <= MXN; ++n )
+	{
+		memset(vis,0,sizeof vis);
+		
+		for(x = 0, y = n - 2; x <= y; ++x, --y)
+			vis[ grundy[x] ^ grundy[y] ] = 1;
+		
+		for(g=0;vis[g]!=0;++g){}
+		
+		grundy[n] = g;
+	}
+}
+
+int main()
+{
+	int t, n;
+	
+	preprocess();
+
+	scanf("%d",&t); 
+	
+	while(t--)
+	{
+		scanf("%d",&n); 
+		printf( grundy[n] ? "Arjuna
+" : "Bhima
+" );
+	}
+	
+	return 0;
+}
+ 

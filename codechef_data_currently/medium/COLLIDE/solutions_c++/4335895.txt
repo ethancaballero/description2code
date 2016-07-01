@@ -1,0 +1,91 @@
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+using namespace std;
+struct astro{
+	float x;
+	float y;
+	char z;
+};
+
+astro val( astro obj)
+{
+	if ( obj.z =='L')
+		obj.x= obj.x-0.5;
+	else if (obj.z =='R')
+		obj.x = obj.x+0.5;
+	else if (obj.z =='U')
+		obj.y= obj.y+0.5;
+	else
+		obj.y= obj.y-0.5;
+	return obj;
+}
+
+int coll ( astro earth , astro a[], int num)
+{
+	int i,flag=0; 
+	int count=0;
+	while (!flag)
+	{
+		earth = val( earth);
+		if ( fabs(earth.x)>100 || fabs(earth.y)>100){
+			count=-2;
+			break;
+		}
+			
+		for (i=0; i<num; ++i)
+		{
+			a[i]= val(a[i]);
+			if( a[i].x == earth.x && a[i].y == earth.y)
+				flag=1;
+		}	
+		count++;
+	}
+	return count;
+}
+
+int main() 
+{
+	int cases,i,num;
+	float time;
+	int x,y; 
+	char z;
+	astro earth, a[2013];
+
+	cin>>cases;
+	while(cases--)
+	{
+		cin>>x>>y>>z;
+		earth.x = x; 
+		earth.y = y; 
+		earth.z = z; 
+		cin >> num;
+		for (i=0; i<num;++i)
+		{
+			cin>>x>>y>>z;
+			a[i].x= x;
+			a[i].y= y;
+			a[i].z= z;
+		}
+		time = coll( earth , a, num);
+		
+		if (time!= -2)
+			cout<<std::fixed<<std::setprecision(1)<<time/2	<<endl;
+		else
+			cout<<"SAFE"<<endl;
+	}
+	
+}
+/*
+3
+0 0 R
+2
+1 -2 U
+2 2 D
+1 1 U
+1
+1 0 U
+0 0 R
+1
+3 0 L
+*/

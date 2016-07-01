@@ -1,0 +1,48 @@
+from heapq import *
+
+def push_to_young(young, item):
+    heappush(young, (-item[0], item[1]))
+
+def pop_from_young(young):
+    i = heappop(young)
+    return (-i[0], i[1])
+
+def push_to_old(old, item):
+    heappush(old, item)
+
+def pop_from_old(old):
+    return heappop(old)
+
+N = int(raw_input())
+young = []
+old = []
+sum_young = 0
+sum_old = 0
+for _ in range(N):
+    [A, R] = [int(x) for x in raw_input().rstrip().split(" ")]
+    if len(young) == 0:
+        push_to_young(young, (A, R))
+        sum_young += R
+    elif len(young) == len(old):
+        if A <= old[0][0]:
+            push_to_young(young, (A, R))
+            sum_young += R
+        else:
+            x = pop_from_old(old)
+            push_to_old(old, (A, R))
+            push_to_young(young, x)
+            sum_young += x[1]
+            sum_old += R-x[1]
+    else:
+        if A < -young[0][0]:
+            x = pop_from_young(young)
+            push_to_young(young, (A, R))
+            push_to_old(old, x)
+            sum_old += x[1]
+            sum_young += R-x[1]
+        else:
+            push_to_old(old, (A, R))
+            sum_old += R
+    #print(young)
+    #print(old)
+    print(abs(sum_young - sum_old))

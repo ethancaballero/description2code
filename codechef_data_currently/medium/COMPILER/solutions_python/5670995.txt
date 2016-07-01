@@ -1,0 +1,13 @@
+for _ in range(int(raw_input())):
+  s = raw_input()
+  opened,ans=0,0
+  for i in range(len(s)):
+    if s[i]=='<':
+      opened+=1
+    else:
+      opened-=1
+      if opened<0:
+	break
+      elif opened==0:
+	ans = i+1
+  print ans

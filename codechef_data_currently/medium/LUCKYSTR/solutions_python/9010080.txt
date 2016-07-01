@@ -1,0 +1,20 @@
+k, n = map(int, raw_input().split())
+
+lucky = []
+array = []
+
+for i in xrange(k):
+    lucky.append(raw_input())
+    
+for i in xrange(n):
+    array.append(raw_input())
+
+for i in array:
+    flag = 0
+    for j in lucky:
+        if len(i) >= 47 or j in i:
+            flag = 1
+    if flag == 1:
+        print "Good"
+    else:
+        print "Bad"

@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,a,b,x=1,r,ca=0,cb=0,j,res=0,temp;
+        cin>>n>>a>>b;
+        temp=n;
+        while(temp--)
+        {
+        
+        
+            r=a&x;
+            if(r)
+                ca++;
+               
+            a=a>>1;
+       
+        
+            r=b&x;
+            if(r)
+                cb++;
+            b=b>>1;
+        }
+        if(n-ca-cb>0)
+        j=ca+cb;
+        else
+        j=n-(ca+cb-n);
+        
+        n--;
+        while(j--)
+        {
+        res+=pow(2,n);
+        n--;
+        }
+        
+      cout<<res<<"
+";  
+
+
+    }
+    return 0;
+}

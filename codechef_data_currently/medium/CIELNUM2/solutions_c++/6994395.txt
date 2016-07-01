@@ -1,0 +1,41 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+class Chef{
+	int n;
+	char p[110];
+	public:
+		Chef()
+		{
+			int ans=0,a3=0,a5=0,a8=0,l,i;
+			cin>>n;
+			cin.ignore();
+			cin.ignore();
+			while(n--)
+			{
+			  a3=a5=a8=0;
+			  cin.getline(p,109);
+			  l=strlen(p);
+			  for(i=l-1;p[i]<48;i--);
+			  for(;p[i]!=' ';i--)
+			  {
+			  	if(p[i]=='3')
+			  	a3++;
+			  	else if(p[i]=='5')
+			  	a5++;
+			  	else if(p[i]=='8')
+			  	a8++;
+			  	else
+			  	break;
+			  }
+			  if(a8>=a5&&a5>=a3&&p[i]==' ')
+			  ans++;
+			}
+			cout<<ans<<endl;
+		}
+};
+int main()
+{
+	Chef c;
+	return 0;
+}

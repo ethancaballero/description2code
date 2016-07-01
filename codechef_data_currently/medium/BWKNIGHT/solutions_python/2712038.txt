@@ -1,0 +1,15 @@
+t = int(input())
+for i in range(t):
+	n,m = raw_input().split()
+	n = int(n)
+	m = int(m)
+	
+	if(n == 1):
+		ans = m*(m-1)
+	elif(m == 1):
+		ans = n*(n-1)
+	else:
+		ans = (n*m)*(n*m-1) - 4*( (n-1)*(m-2) + (n-2)*(m-1))
+	
+	print(ans)
+		

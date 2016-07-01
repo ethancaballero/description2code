@@ -1,0 +1,58 @@
+#include<iostream>
+#include<cstring>
+#include<cstdio>
+using namespace std;
+
+void InsertionSort(char S[],int len)
+{
+    char key;
+    for(int j=1;j<len;j++)
+    {
+        key=S[j];
+        int i=j-1;
+        while(i>=0 && S[i]>key)
+        {
+            S[i+1]=S[i];
+            i--;
+        }
+        S[i+1]=key;
+    }
+}
+int main()
+{
+    char S[52];
+    int cases,counter=0,maxN,len;
+    scanf("%d",&cases);
+
+    while(cases--)
+    {
+        scanf("%s",&S);
+        len=strlen(S);
+        InsertionSort(S,len);
+        maxN=0;
+        for(int i=0;i<len;i++)
+        {
+            if(S[i] == S[i+1])
+            {
+                counter++;
+            }
+            else
+            {
+                counter++;
+                (maxN < counter) ? maxN=counter : maxN;
+                counter=0;
+            }
+        }
+        if((2*maxN) == len)
+        {
+            printf("YES
+");
+        }
+        else
+        {
+            printf("NO
+");
+        }
+    }
+    return 0;
+}

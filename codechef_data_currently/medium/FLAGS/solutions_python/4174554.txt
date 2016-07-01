@@ -1,0 +1,4 @@
+T = int(raw_input())
+for _ in range(T):
+    k = int(raw_input())
+    print 2*k*(k-1)*(k-1) + k*(k-1)*(k-2) + 2*k*(k-1)*(k-2)*(k-2)

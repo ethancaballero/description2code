@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	
+	while(t--)
+	{
+		char b[100000];
+		long long int i,d,sum=0;
+		long long int a[100000]={0}; 
+		scanf("%s",b);
+		for(i=0;i<strlen(b);i++)
+		{
+			d=b[i];
+			
+			if(a[d]==0)
+			{
+				a[d]++;
+				sum++;
+			}
+		}
+		printf("%lld
+",sum);
+	}
+	return 0;
+}

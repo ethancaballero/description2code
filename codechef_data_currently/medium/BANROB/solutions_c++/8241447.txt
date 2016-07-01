@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+using namespace std;
+int main()
+{
+	int t,m,n;
+	double p,amt = 1000000000,next,now,r;
+	scanf("%d",&t);
+	while(t--)
+	{
+		amt = 1000000000;
+		scanf("%d %lf",&m,&p);
+		if(m >= 2)
+		{
+			r = -1*p;
+			now = amt * ((pow(r,m) - 1)/(r - 1));
+			next = amt - now;
+			printf("%.3lf %.3lf
+",now,next);
+		}
+		else
+		{
+			now = amt;
+			next = 0;
+			printf("%.3lf %.3lf
+",now,next);
+		}
+	}
+	return 0;
+}

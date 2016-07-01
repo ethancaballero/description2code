@@ -1,0 +1,51 @@
+#include <iostream>
+#include <queue>
+#include <algorithm>
+using namespace std;
+int desc(int a,int b){
+	return (a>b)?1:0;
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		long int n,m;
+		cin>>n>>m;
+		long int p[m];
+		queue <int> q[n];
+		for (long int i = 0; i < m; ++i)
+		{
+			cin>>p[i];
+		}
+		int j=0;
+		while(n--){
+			long int a;
+			cin>>a;
+			int b[a];
+			for (long int i = 0; i < a; ++i)
+			{
+				cin>>b[i];
+			}
+			sort(b,b+a,desc);
+			for (long int i = 0; i < a; ++i)
+			{
+				
+				q[j].push(b[i]);
+				//cout<<q[j].front()<<" ";
+			}
+			//cout<<endl;
+			j++;
+		}
+
+		long int ans_vol=0;
+		for (long int i = 0; i < m; ++i)
+		{
+			if(q[p[i]].size()!=0){
+				ans_vol+=q[p[i]].front();
+				q[p[i]].pop();
+			}
+		}
+		cout<<ans_vol<<endl;
+	}
+	return 0;
+}

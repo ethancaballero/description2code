@@ -1,0 +1,5 @@
+MOD = 10**9 + 7
+for _ in xrange(input()):
+	a, b, c = map(int, raw_input().split())
+	a, b, c = sorted([a,b,c])
+	print (a*(b-1)*(c-2))%MOD

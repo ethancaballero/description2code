@@ -1,0 +1,59 @@
+from itertools import product
+from operator import mul
+def get_root(lis,item):
+    """
+    return the root of an item
+    """
+    root=item
+    while lis[root] != root:
+        root = lis[root]
+    return root    
+def connected(lis,item1,item2):
+    """
+    Checks if two items are connected
+    or not.
+    Connected means both items have the
+    same root
+    """
+    root1=get_root(lis,item1)
+    root2= get_root(lis,item2)
+    return True if root1==root2 else False
+ 
+def quick_union(lis,item1,item2):
+    """
+    Join two nodes(join the root of smaller tree to root of bigger tree)
+    """
+    root1=get_root(lis,item1)
+    root2= get_root(lis,item2)
+    
+    if root1 != root2:
+        if tree_sz[root1]==tree_sz[root2]:       #if size of both tree is same
+            lis[root2]=root1
+            tree_sz[root1]+=tree_sz[root2]
+            tree_sz[root2]=0
+ 
+        elif tree_sz[root1] < tree_sz[root2]:   
+            lis[root1]=root2
+            tree_sz[root2]+=tree_sz[root1]
+            tree_sz[root1]=0
+        elif tree_sz[root1] > tree_sz[root2]:
+            lis[root2]=root1
+            tree_sz[root1]+=tree_sz[root2]
+            tree_sz[root2]=0
+    else:pass
+        
+T=int(raw_input())
+for _ in xrange(T):
+    N,M=map(int,raw_input().split())
+    lis=range(N)
+    tree_sz=[1]*N
+    for r in xrange(M):
+        a,b=map(int,raw_input().split())
+        a-=1
+        b-=1
+        quick_union(lis,a,b)
+    tree_sz=filter(None,tree_sz)
+    res=reduce(mul,tree_sz)
+    print len(tree_sz),res%((10**9) + 7)
+    
+lis=range(5)

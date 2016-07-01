@@ -1,0 +1,10 @@
+t = int(raw_input())
+for j in range(t):
+	n = int(raw_input())
+	A = [int(x) for x in raw_input().split()]
+	ans = 0
+	curr = 0
+	for i in range(n):
+		curr += A[i]
+		ans += abs(curr)
+	print ans

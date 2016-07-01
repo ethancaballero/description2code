@@ -1,0 +1,14 @@
+test=raw_input()
+test=int(test)
+M=10000
+N=10000
+while(test):
+	Pa=raw_input()
+	Pa=float(Pa)
+	Ans=0.5
+	if(Pa>=0.5):
+		Ans = M + M*(1 - Pa)*(2*Pa -1)
+	else:
+		Ans = N+N*Pa*(2*(1-Pa)-1)
+	print(Ans)
+	test=test-1

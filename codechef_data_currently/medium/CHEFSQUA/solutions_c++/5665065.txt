@@ -1,0 +1,72 @@
+// vector rotations
+
+#include <iostream>
+#include <map>
+using namespace std;
+
+map<pair<int,int>, int> freq;
+
+int main() {
+    int n, xi, yi, mfreq, x1, x2, x3, x4, y1, y2, y3, y4, px1, px2, py1, py2;
+    pair<int,int> p1, p2;
+
+    cin >> n;
+    for(int i=0;i<n;++i) {
+        cin >> xi >> yi;
+        freq[make_pair(xi,yi)]++;
+    }
+
+    mfreq = 0;
+    for(map<pair<int,int>, int>::iterator it=freq.begin(); it!=freq.end(); ++it)
+        mfreq = max(mfreq, it->second);
+
+    if (mfreq == 4) {
+        cout << 0 << endl;
+        return 0;
+    }
+
+    if (n < 2) {
+        if (n == 0) cout << 4 << endl;
+        else cout << 3 << endl;
+        return 0;
+    }
+
+    mfreq = max(mfreq, 2);
+    for(map<pair<int,int>, int>::iterator it1=freq.begin(); mfreq!=4 && it1!=freq.end(); ++it1) {
+        p1 = it1->first;
+        px1 = p1.first;
+        py1 = p1.second;
+        for(map<pair<int,int>, int>::iterator it2=freq.begin(); mfreq!=4 && it2!=freq.end(); ++it2) {
+            if (it1 == it2) continue;
+
+            p2 = it2->first;
+            px2 = p2.first;
+            py2 = p2.second;
+
+            x1 = px1 - py2 + py1;
+            y1 = py1 + px2 - px1;
+            x2 = px2 - py2 + py1;
+            y2 = py2 + px2 - px1;
+
+            x3 = px1 + py2 - py1;
+            y3 = py1 - px2 + px1;
+            x4 = px2 + py2 - py1;
+            y4 = py2 - px2 + px1;
+
+            if (freq.find(make_pair(x1,y1)) != freq.end()) {
+                mfreq = 3;
+                if (freq.find(make_pair(x2,y2)) != freq.end())
+                    mfreq = 4;
+            }
+
+            if (mfreq != 4 && freq.find(make_pair(x3,y3)) != freq.end()) {
+                mfreq = 3;
+                if (freq.find(make_pair(x4,y4)) != freq.end())
+                    mfreq = 4;
+            }
+        }
+    }
+
+    cout << (4-mfreq) << endl;
+    return 0;
+}

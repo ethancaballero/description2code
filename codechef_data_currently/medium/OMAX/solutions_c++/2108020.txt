@@ -1,0 +1,91 @@
+#include<iostream>
+#include<stdio.h>
+#include<assert.h>
+#include<string.h>
+#include<time.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string>
+#include<sstream>
+#include<map>
+#include<set>
+#include<queue>
+#include<stack>
+#include<vector>
+#include<algorithm>
+#pragma comment(linker, "/STACK:16777216")
+#define pb push_back
+#define ppb pop_back
+#define mp make_pair
+#define all(x) (x).begin(),(x).end()
+#define sz(x) (int)(x).size()
+#define LL long long
+#define bit __builtin_popcountll
+#define sqr(x) (x) * (x)
+using namespace std;
+typedef pair<int, int> pii;
+const double eps = 1e-9;
+const double pi = acos(-1.0);
+int a[77][77],sum[78][78],dp[3003][3003],id[77][77];
+int getSum(int lx, int ly, int rx, int ry) {
+	return sum[rx + 1][ry + 1] - sum[rx + 1][ly] - sum[lx][ry + 1] + sum[lx][ly];
+}
+int main()
+{
+	#ifndef ONLINE_JUDGE
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+	#endif
+	int cnt = 0;
+	for (int i = 0; i < 77; i++) {
+		for (int j = i; j < 77; j++) {
+			id[i][j] = cnt++;
+		}
+	}
+	while(true) {
+		int n,m; cin >> n >> m;
+		if (n == 0 && m == 0) break;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				cin >> a[i][j];
+				sum[i + 1][j + 1] = sum[i][j + 1] + sum[i + 1][j] - sum[i][j] + a[i][j];
+				dp[id[i][i]][id[j][j]] = a[i][j];
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			for (int d = 1; d < m; d++) {
+				for (int j = d; j < m; j++) {
+					dp[id[i][i]][id[j - d][j]] = min(min(dp[id[i][i]][id[j - d + 1][j]],dp[id[i][i]][id[j - d][j - 1]]),getSum(i,j - d,i,j));
+				}
+			}
+		}
+		for (int j = 0; j < m; j++) {
+			for (int d = 1; d < n; d++) {
+				for (int i = d; i < n; i++) {
+					dp[id[i - d][i]][id[j][j]] = min(min(dp[id[i - d + 1][i]][id[j][j]],dp[id[i - d][i - 1]][id[j][j]]),getSum(i - d,j,i,j));
+				}
+			}
+		}
+		for (int di = 1; di < n; di++) {
+			for (int dj = 1; dj < m; dj++) {
+				for (int i = di; i < n; i++) {
+					for (int j = dj; j < m; j++) {
+						dp[id[i - di][i]][id[j - dj][j]] = min(min(min(dp[id[i - di + 1][i]][id[j - dj][j]],dp[id[i - di][i - 1]][id[j - dj][j]]),min(dp[id[i - di][i]][id[j - dj + 1][j]],dp[id[i - di][i]][id[j - dj][j - 1]])),getSum(i - di,j - dj,i,j));
+					}
+				}
+			}
+		}
+		int res = -1000000;
+		for (int di = 2; di < n; di++) {
+			for (int dj = 2; dj < m; dj++) {
+				for (int i = di; i < n; i++) {
+					for (int j = dj; j < m; j++) {
+						res = max(res,getSum(i - di,j - dj,i,j) - dp[id[i - di + 1][i - 1]][id[j - dj + 1][j - 1]]);
+					}
+				}
+			}
+		}
+		cout << res << endl;
+	}
+	return 0;
+}

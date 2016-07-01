@@ -1,0 +1,38 @@
+#include <iostream>
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+
+int main() {
+	int l,i,c,ch,che,chef;
+	c=ch=che=chef=0;
+	char a[100001];
+	scanf("%s",a);
+	l=strlen(a);
+	for(i=0;i<l;i++)
+	{
+		if(a[i]=='C')
+		{
+			c++;
+		}
+	 if(a[i]=='H'&& c>0)
+		{
+			ch++;
+			c--;
+		}
+	 if(a[i]=='E' && ch>0)
+		{
+			che++;
+			ch--;
+		}
+		
+		 if(a[i]=='F' && che>0)
+			{
+				chef++;
+				che--;
+			}
+		
+	}
+	printf("%d",chef);
+	return 0;
+}

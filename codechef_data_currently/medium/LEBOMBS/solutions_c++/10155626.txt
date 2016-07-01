@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int arr[]={-1,0,1};
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,i,j;
+        char s[1009];bool flag[1009];
+        memset(flag,0,sizeof(flag));
+        scanf("%d",&n);
+        scanf("%s",s);
+        for(i=0;i<n;i++){
+            if(s[i]=='1'){
+                for(int j=0;j<3;j++){
+                    int i1=i+arr[j];
+                    if(i1>=0 && i1<n)
+                        flag[i1]=1;
+                }
+            }
+        }
+        int ans=0;
+        for(i=0;i<n;i++) if(flag[i]) ans++;
+        printf("%d
+",n-ans);
+    }
+    return 0;
+}

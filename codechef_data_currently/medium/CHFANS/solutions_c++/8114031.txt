@@ -1,0 +1,27 @@
+#include<stdio.h>
+ 
+int gcd(int a, int b)
+{
+if(a%b==0)
+return b;
+return gcd(b,a%b);
+}
+int main()
+{
+int t,a,b,c,d,i;
+scanf("%d",&t);
+while(t--)
+{
+scanf("%d%d",&a,&b);
+c=a<0?-a:a;
+d=b<0?-b:b;
+i=gcd(c,d);
+if(a<0&&b>0||a>0&&b<0)
+printf("%d
+",(c+d)/i);
+else
+printf("%d
+",c>d?(c-d)/i:(d-c)/i);
+}
+return 0;
+}

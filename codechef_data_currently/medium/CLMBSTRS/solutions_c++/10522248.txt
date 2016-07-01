@@ -1,0 +1,90 @@
+//Just a beginner :P
+#include<bits/stdc++.h>
+#define ll long long
+#define maxe 2147483647
+#define INF 1e16
+#define si(x) scanf("%d",&x)
+#define sc(x) scanf("%c",&x)
+#define sl(x) scanf("%ld",&x)
+#define sll(x) scanf("%lld",&x)
+#define ss(x) scanf("%s",x)
+#define pi(x) printf("%d
+",x)
+#define pl(x) printf("%ld
+",x)
+#define pll(x) printf("%lld
+",x)
+#define ps(x) printf("%s
+",x)
+#define iter(i,a,b) for(int i=a; i<b; i++)
+#define ited(i,a,b) for(int i=a;i>=b;i--)
+#define mp make_pair 
+#define pb push_back 
+#define max(a,b) a>b?a:b
+#define min(a,b) a<b?a:b
+//#define pop pop_back 
+#define mod 1000000007
+using namespace std;
+ll m[2][2]={1,1,1,0};
+ll c[2][2],an[2][2],a[2][2];
+void mmul(ll t1[][2],ll t2[][2])
+{
+	iter(i,0,2)
+		iter(j,0,2)
+			c[i][j]=0;
+	iter(i,0,2)
+		iter(j,0,2)
+			iter(k,0,2)
+				c[i][j]=(c[i][j]+((t1[i][k]*t2[k][j])%mod))%mod;
+}
+void mpowe(ll b)
+{
+	iter(i,0,2)
+		iter(j,0,2)
+			an[i][j]=abs(1-i-j);
+	while(b!=0)
+	{
+		if(b%2==1)
+		{
+			mmul(an,a);
+			iter(i,0,2)
+				iter(j,0,2)
+					an[i][j]=c[i][j];
+		}
+		b/=2;
+		mmul(a,a);
+		iter(i,0,2)
+			iter(j,0,2)
+				a[i][j]=c[i][j];
+	}
+}
+int main()
+{
+	int t;
+	si(t);
+	while(t--)
+	{
+		int n,g;
+		si(n);si(g);
+		iter(i,0,2)
+			iter(j,0,2)
+				a[i][j]=m[i][j];
+		mpowe(n); 
+		ll ans=an[0][0];
+		//pll(ans);
+		int cnt=0;
+		while(ans!=0)
+		{
+			if(ans%2==1)
+				cnt++;
+			ans/=2;
+		}
+		if(g==cnt)
+			printf("CORRECT
+");
+		else
+			printf("INCORRECT
+");
+	}	
+	return 0;
+}

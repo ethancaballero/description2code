@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <unistd.h>
+#include <stdio.h>
+
+
+int main()
+{
+    printf("1
+");
+    fflush(stdout);
+    
+    printf("3 1 1 2
+");
+    fflush(stdout);
+    
+    printf("3 3 4 4
+");
+    fflush(stdout);
+    
+    int output,ans;
+    
+	read(0, &output, sizeof(int));
+
+    if(output==2)
+	 {  
+	    printf("2
+");
+		fflush(stdout);	
+        printf("1
+");
+        fflush(stdout);
+	   }
+    else if(output==1)
+    {
+      printf("2
+");	
+      fflush(stdout);
+	  printf("2
+");
+  	  fflush(stdout); 
+     } 	    
+	else if(output==0)
+	{
+		 printf("2
+");
+		 fflush(stdout);	
+         printf("5
+");
+		fflush(stdout);
+	}
+	else if(output==-1)
+	{
+		printf("2
+");
+		fflush(stdout);	
+		printf("3
+");
+	    fflush(stdout);
+	}
+	else   //output==-2
+	{
+		printf("2
+");
+		fflush(stdout);	
+		printf("4
+");
+	    fflush(stdout);
+	}
+	    			  
+	 exit(0);
+	 
+return 0;
+}

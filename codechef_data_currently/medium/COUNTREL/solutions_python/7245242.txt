@@ -1,0 +1,59 @@
+#include<stdio.h>
+ 
+long long int mulmod(long long int a,long long int b,long long int c)
+{
+    long long int x = 0,y=a%c;
+    while(b > 0)
+	{
+        if(b%2 == 1)
+		{
+            x = (x+y)%c;
+        }
+        y = (y*2)%c;
+        b /= 2;
+    }
+    return x%c;
+}
+long long int power_modulo(int a,long long int b,long long int c)
+{
+    long long int x=1,y=a; 
+    while(b > 0)
+	{
+        if(b%2 == 1)
+		{
+            x=(x*y)%c;
+        }
+        y = (y*y)%c; 
+        b /= 2;
+    }
+    return x%c;
+}
+int main()
+{
+	int i,j,test;
+	long long int n,c,t1,p,t2,q;
+	scanf("%d",&test);
+	c=100000007ll;
+	while(test--)
+	{
+		scanf("%lld",&n);
+		if(power_modulo(3,n,c)<power_modulo(2,n+1,c))
+			t1=power_modulo(3,n,c)-power_modulo(2,n+1,c)+1+c;
+		else
+			t1=power_modulo(3,n,c)-power_modulo(2,n+1,c)+1;
+		t1=t1%c;
+		p=(c+1)/2;
+		p=(p*t1)%c;
+		if((power_modulo(2,2*n,c)+3*power_modulo(2,n,c))<(power_modulo(3,n+1,c)+1))
+			t2=power_modulo(2,2*n,c)-power_modulo(3,n+1,c)+3*power_modulo(2,n,c)-1+c;
+		else
+			t2=power_modulo(2,2*n,c)-power_modulo(3,n+1,c)+3*power_modulo(2,n,c)-1;
+		t2=t2%c;
+		q=(c+1)/2;
+		q=(q*t2)%c;
+		
+		printf("%lld %lld
+",p,q);
+	}
+	return 0;
+} 

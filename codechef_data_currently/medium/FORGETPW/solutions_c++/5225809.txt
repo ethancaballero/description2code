@@ -1,0 +1,95 @@
+#include<cstdio>
+#include<cstring>
+
+int main() {
+	int test;
+	scanf("%d",&test);
+	while(test--)
+	{
+	   int r;
+	   scanf("%d",&r);
+	   char c[r+2],p[r+2];
+	   char a[257];
+	   for(int i=0;i<=256;i++)
+	   {
+	   	a[i]=i;
+	   }
+	    char encrStr[1000002];
+	   for(int i=0;i<r;i++)
+	   {
+	   		scanf(" %c",&c[i]);
+	   		scanf(" %c",&p[i]);
+	   		a[c[i]]=p[i];
+	   }
+	   scanf(" %s",encrStr);
+	   int n=strlen(encrStr);
+	   if(r!=0)
+	   for(int i=0;i<n;i++)
+	   {
+	   			
+	   			encrStr[i]=a[encrStr[i]];
+	   			
+	   		
+	   }
+	   int k=0;
+	   int y;
+	   for(int i=0;i<n;i++)
+	   {
+	   	if(encrStr[i]=='.')
+	   	{
+	   	k++;
+	   	y=i;
+	   	break;
+	   	}
+	   }
+	   //finding first index
+	   int t=0;
+	   for(int i=0;i<n;i++)
+	   {
+	   	if(encrStr[i]=='.' || encrStr[i]!='0')
+	   	break;
+	   	else if(encrStr[i]=='0' && encrStr[i+1]!='.' && i!=(n-1))
+	   	{
+	   	t=i+1;
+	   	}
+	   	else if(encrStr[i]=='0' && i!=(n-1))
+	   	{
+	   		t=i+1;
+	   	}
+	   }
+	   
+	  
+	   int l=n-1;
+	   //finding last index l
+	   if(k==1)
+	   {
+	   for(int i=n-1;i>=y+1;i--)
+	   {
+	   	if(encrStr[i]=='0')
+	   	{
+	   	   l--;
+	   	}
+	   	else
+	   	{
+	   		break;
+	   	}
+	   }
+	   }
+	   if(encrStr[l]=='.')
+	   l--;
+	
+	   if(t<=l)
+	   for(int h=t;h<=l;h++)
+	   {
+	   	printf("%c",encrStr[h]);
+	   }
+	   else
+	   {
+	        char q='0';
+	   	printf("%c",q);
+	   }
+	   printf("
+");
+	}
+	return 0;
+}

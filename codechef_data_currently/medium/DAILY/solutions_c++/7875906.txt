@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+int main()
+{
+	int x,n;
+	char arr[60];
+	cin >> x >> n;
+	int sum = 0;
+    while(n--){
+    	int i,pos1 = 1,ava_pla;
+    	for(i=1;i<=54;i++) cin >> arr[i];
+		//for(i=1;i<=54;i++) cout << arr[i];
+		//cout << endl;
+    	int pos2 = 54;
+    	int val = 9;
+    	while(val--){
+    		ava_pla = 0;
+    		//cout << pos1 << ".." << pos2 << endl;
+    		for(i=pos1;i<pos1+4;i++){
+    			//cout << arr[i] << " ";
+    			if(arr[i] == '0') ava_pla += 1;
+    		}
+    		for(i=pos2;i>pos2-2;i--){
+    			//cout << arr[i] << " ";
+    			if(arr[i] == '0') ava_pla += 1;
+    		}
+    		pos1 = pos1 + 4;
+    		pos2 = pos2 - 2;
+    		//cout << ava_pla << "..... 
+";
+    		if(ava_pla >= x){
+    			int nume = 1;
+    			int den = 1;
+    			int temp = ava_pla - x;
+    			while(ava_pla > x){
+    				nume = nume * ava_pla;
+    				ava_pla -= 1;
+    			}
+    			while(temp > 0){
+    				den =den*temp;
+    				temp--;
+    			}
+    			temp = nume/den;
+    			sum = sum + temp;
+    		}
+    	}
+	}
+	cout << sum << endl;
+    return 0;
+}
+ 

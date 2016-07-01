@@ -1,0 +1,68 @@
+//DFS
+
+#include<stdio.h>
+#include <vector>
+using namespace std;
+
+vector<int> V[101];
+int visited[101], Size=0, j=0;
+
+void dfs(int N)
+{
+    visited[N]=-j;
+    Size++;
+    for (int i=0; i<V[N].size(); i++)
+    {
+        if (visited[V[N][i]]==1)    //call dfs() in case node adjacent to Nth node is unvisited
+            dfs(V[N][i]);
+    }
+}
+
+int main()
+{
+
+    int T, N, M, Q, A, B;
+    scanf("%d", &T);
+    while (T--)
+    {
+        scanf("%d%d", &N, &M);
+        j=0;
+        Size=0;
+        for (int i=0; i<N; i++)
+            V[i].clear();
+        for (int i=0; i<M; i++)
+        {
+            scanf("%d%d", &A, &B);
+            V[A].push_back(B);
+            V[B].push_back(A);
+        }
+
+        for (int i=0; i<N; i++)
+            visited[i]=1;   //unvisited node
+        dfs(0);
+        while (Size<=N)
+        {
+            for (int i=0; i<N; i++)
+                if (visited[i]==1)  //if node is unvisited, visit it
+                {
+                    j++;
+                    dfs(i);
+                }
+            if (Size==N)    //if all nodes are visited
+                break;
+        }
+
+        scanf("%d", &Q);
+        for (int i=0; i<Q; i++)
+        {
+            scanf("%d%d", &A, &B);
+            if (visited[A]==visited[B])
+                printf("YO
+");
+            else
+                printf("NO
+");
+        }
+    }
+    return 0;
+}

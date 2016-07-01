@@ -1,0 +1,38 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	cin >> n;
+	int lead, winner;
+	int p1Sum = 0, p2Sum = 0;
+	int leadMax = 0, winnerPlayer;
+	for (int i = 0; i < n; i++)
+	{
+		int p1, p2;
+		cin >> p1 >> p2;
+		p1Sum += p1;
+		p2Sum += p2;
+		if (p1Sum > p2Sum)
+		{
+			lead = p1Sum - p2Sum;
+			winner = 1;
+		}
+		else
+		{
+			lead = p2Sum - p1Sum;
+			winner = 2;
+		}
+
+		if (lead > leadMax)
+		{
+			leadMax = lead;
+			winnerPlayer = winner;
+		}
+
+	}
+
+	cout << winnerPlayer <<  " " << leadMax;
+}

@@ -1,0 +1,15 @@
+def EO(x):
+    return x%2==0
+t=int(raw_input())
+
+while(t>0):
+    t-=1
+    n1,n2=[int(i) for i in raw_input().split()]
+    ans=0
+    while(n1!=n2):
+        if(n1>n2):
+            n1=n1>>1
+        else:
+            n2=n2>>1
+        ans+=1
+    print ans

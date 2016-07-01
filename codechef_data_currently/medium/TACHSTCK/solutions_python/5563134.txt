@@ -1,0 +1,14 @@
+n,d = map(int,raw_input().split())
+sticks = []
+count =0
+poi = 0
+for i in xrange(n):
+	sticks.append(input())
+sticks.sort()
+while poi<=len(sticks)-2:
+	if sticks[poi+1]-sticks[poi]<=d:
+		count+=1
+		poi+=2
+	else:
+		poi+=1
+print count

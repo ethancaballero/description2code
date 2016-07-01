@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t,s=0,rem=0,a;
+    cin>>t;
+    while(t--)
+    {
+        cin>>a;
+        while(a!=0)
+        {
+            rem=a%10;
+            s=s*10+rem;
+            a/=10;
+        }
+        cout<<s<<endl;
+        s=0;
+    }
+    return 0;
+}

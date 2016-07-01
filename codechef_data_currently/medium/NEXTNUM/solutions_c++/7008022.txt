@@ -1,0 +1,52 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+
+int main()
+{
+    ll t, fact[20], i, ans, x, j, k, tmp, tmp2;
+    string s;
+    fact[0] = 1;
+    for (i = 1; i < 20; i++)
+        fact[i] = fact[i-1] * i;
+    cin >> t;
+    while (t--) {
+        cin >> s;
+        ll a[10];
+        memset(a, 0, sizeof(a));
+        for (i = 0; i < s.size(); i++)
+            a[s[i]-48]++;
+        ans = 0;
+        for (i = 0; i < s.size(); i++) {
+            x = s[i]-48;
+            tmp = 0;
+            for (j = 0; j < x; j++) {
+                if (a[j])
+                    tmp++;
+            }
+            if (tmp) {
+                for (j = 0; j < x; j++) {
+                    if (a[j]) {
+                        //cout << i << " " << j << endl;
+                        a[j]--;
+                        tmp2 = 0;
+                        for (k = 0; k < 10; k++)
+                            tmp2 += a[k];
+                        tmp2 = fact[tmp2];
+                        for (k = 0; k < 10; k++)
+                            tmp2 /= fact[a[k]];
+                        ans += tmp2;
+                        a[j]++;
+                    }
+                }
+            }
+            a[x]--;
+        }
+        cout << ans+1 << endl;
+    }
+    return 0;
+}

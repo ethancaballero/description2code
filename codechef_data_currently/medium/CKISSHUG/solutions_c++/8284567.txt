@@ -1,0 +1,35 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+long  long int m=1000000007;
+long long int rem(long long int x)
+{
+	long long int y=1,a=2;
+	while(x>0)
+	{
+	if(x%2==1)
+	y=(y*a)%m;
+	a=(a*a)%m;
+	x=x/2;
+    }
+    return (y%m);
+}
+int main()
+{
+	long long int t,n,ans;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		if(n%2==1)
+		{
+			ans=(rem((n+3)/2)-2)%m;
+		}
+		else
+		{
+		ans=(rem((n+2)/2)%m+rem(n/2)%m-2)%m;
+	}
+		cout<<ans<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,14 @@
+def p(b):
+    for k in range(2,int(b**0.5)+1,1):
+        if b%k==0:
+            return 0
+    return 1
+
+for i in range(int(raw_input())):
+    a=map(int,raw_input().split())
+    j=1
+    while 1:
+        if p(j+a[0]+a[1])==1:
+            print j
+            break
+        j+=1

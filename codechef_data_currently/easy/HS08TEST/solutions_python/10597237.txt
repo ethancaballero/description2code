@@ -1,0 +1,12 @@
+a,b=raw_input().split()
+a=int(a)
+b=float(b)
+c=(b-a)-0.50
+
+if b >= (a+0.5):
+	if not a%5 :
+		print "%.2f"%c
+	elif a%5 :
+		print "%.2f"%b	
+else :
+	print "%.2f"%b	

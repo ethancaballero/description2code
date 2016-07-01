@@ -1,0 +1,21 @@
+def power( x, y):
+    if y == 0:
+        return 1;
+    temp = power(x, y/2);
+    t=(temp*temp)%1000000007
+    if y%2 == 0:
+        return t;
+    else:
+        return (x*t)%1000000007;
+	
+
+T = int(raw_input())
+while T>0:
+	N,K=raw_input().strip().split(' ')
+	N=int(N)
+	K=int(K)
+	if K<=1:
+		print 0
+	else:
+		print (K*power(K-1,N-1))%1000000007	
+	T-=1		

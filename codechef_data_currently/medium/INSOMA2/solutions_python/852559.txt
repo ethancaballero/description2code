@@ -1,0 +1,157 @@
+# codechef easy - exploding search - insoma2.py
+
+import copy
+
+"""
+This gets Time Limit
+
+my soln is O( len(target) * n^2 )
+
+n^2 in example is wasting time looking at "X" cells
+   that aren't in string.  Could make a list of cells with each
+   letter and go through the appropriate list at stage k
+
+maybe could do some kind of bifurcation on target string.
+
+E.g. score1[x][y] = ways to find 0..L/2 string ending at x,y
+     score2[x][y] = ways to find L/2+1..L-1 starting at x,y
+     total score = score1*score2
+
+     not sure there is anything here, though
+
+
+     Try list thing.
+
+"""
+
+TESTING = False
+
+if not TESTING:
+    n = int(raw_input())
+else:
+    n = 5
+
+empty = [' ']*(n+2)
+grid = [ empty ]
+
+
+inp = [
+"B X A X X",
+"X A X X X",
+"X B B X X",
+"X A X A X",
+"X X B X X"]
+
+for nn in xrange(n):
+    if not TESTING:
+        line = [' '] + raw_input().split() + [' ']
+    else:
+        line = [' '] + inp[nn].split() + [' ']
+    
+    grid.append( line )
+grid.append(empty)
+
+##for line in grid:
+##    print line
+
+# using buffer around grid to save work with edge effects
+
+if not TESTING:
+    target = raw_input().strip()
+else:
+    target = "ABA"
+
+
+
+"""
+initialize:
+
+k=1
+set score[x][y] =1 if grid[x][y] = target[0], 0 otherwise
+
+This will always represent the number of strings of length k that end
+   at x,y
+
+for each iteration
+   k+=1
+   for each x,y
+       score1[x][y] = 0
+       for each adjacent square to x,y
+           score1[x][y] += score[x][y]
+
+
+"""
+
+# create score arrays filled with zero
+zero = []
+for nn in xrange(n+2):
+    zero.append( [0]*(n+2) )
+
+score = copy.deepcopy(zero)
+
+
+# create letter lists:
+loc = {}
+for c in target:
+    loc[c] = []
+##print loc
+
+# initialize score
+k=0
+for x in xrange(1,n+1):
+    for y in xrange(1,n+1):
+        if target[k]==grid[x][y]:
+            score[x][y] = 1
+        if grid[x][y] in loc:
+            loc[ grid[x][y] ] += [(x,y)]
+
+##for c in loc:
+##    print c, loc[c]
+
+##print
+##for line in score:
+##    print line
+##print
+
+
+# at start of each iteration k, score[] is valid for k-length strings,
+#     score1 will be k+1 level score being constructed
+
+# note : they only want diagonals, not verts/horiz
+
+for c in target[1:]:
+    score1 = copy.deepcopy(zero)
+    for x,y in loc[c]:
+        score1[x][y] = 0
+        for x1 in xrange(x-1,x+2,2):
+            for y1 in xrange(y-1,y+2,2):
+                score1[x][y] += score[x1][y1]
+
+    # now score1 is complete, make it the new score
+    score = score1
+
+##for c in target[1:]:
+##    for x in xrange(1,n+1):
+##        for y in xrange(1,n+1):
+##            score1[x][y] = 0
+##            if c==grid[x][y]:
+##                for x1 in xrange(x-1,x+2,2):
+##                    for y1 in xrange(y-1,y+2,2):
+##                        score1[x][y] += score[x1][y1]
+##    # now score1 is complete, make it the new score
+##    t= score
+##    score = score1
+##    score1 = t            # don't need these values, but need structure
+####    print
+####    for line in score:
+####        print line
+####    print    
+
+print sum(map(sum, score))
+                        
+
+
+
+
+
+    

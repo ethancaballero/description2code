@@ -1,0 +1,26 @@
+t = int(raw_input())
+while t:
+	t = t - 1
+	s = raw_input()
+	cmm = 0
+	cpp = 0
+	for i in range(0,len(s),2):
+		sub = s[i:i+2]
+		i = i + 1
+		if len(sub) < 2:
+			if sub == '+':
+				cmm += 1
+			else:
+				cpp += 1
+		else:
+			if sub == '+-':
+				cmm += 2
+			elif sub == '-+':
+				cpp += 2
+			else:
+				cmm += 1
+				cpp += 1
+	if cmm < cpp:
+		print cmm
+	else:
+		print cpp

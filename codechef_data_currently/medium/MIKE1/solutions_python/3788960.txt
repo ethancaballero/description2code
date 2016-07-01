@@ -1,0 +1,15 @@
+N,M = (int(a) for a in raw_input().rsplit())
+A = [ [ int(a) for a in raw_input().split()] for b in xrange(N) ]
+L = input()
+E1, E2 = 0,0
+for l in xrange(L):
+  i,j = (int(a)-1 for a in raw_input().rsplit())
+  if (E1 != -1 and i < N and j < M):
+    E1 += A[i][j]
+  else:
+    E1 = -1
+  if (E2 != -1 and i < M and j < N):
+    E2 += A[j][i]
+  else:
+    E2 = -1
+print max(E1,E2)

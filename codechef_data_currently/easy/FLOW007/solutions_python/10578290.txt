@@ -1,0 +1,4 @@
+t=input()
+for i in range(0,t):
+ n=input()
+ print int(str(n)[::-1])

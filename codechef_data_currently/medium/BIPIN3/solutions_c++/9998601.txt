@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cstdio>
+#include <math.h>
+using namespace std;
+long long int t,n,k,x;
+int main()
+{
+
+    scanf("%d",&t);
+    while(t--){
+        scanf("%lld %lld",&n,&k);
+        x=k;
+        k--;
+        n--;
+        while(n!=0){
+            if(n%2==1){
+                x=(x*k)%1000000007;
+                k=(k*k)%1000000007;
+                n=n/2;
+            }
+            else if(n%2==0){
+                k=(k*k)%1000000007;
+                n=n/2;
+            }
+        }
+        printf("%lld
+",x);
+
+    }
+    return 0;
+}

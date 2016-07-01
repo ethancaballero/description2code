@@ -1,0 +1,141 @@
+#include<cstdio>
+#include<algorithm>
+#include<cmath>
+
+
+typedef long long LL;
+#define max(a,b) (a>b ? a : b)
+#define min(a,b) (a<b ? a : b)
+#define mod(a)(a>0 ? a : -a)
+
+double Evaluate(int n,int m,int cm,int c[41],int p[41])
+{
+int i,j;
+LL  res1,res2;
+LL  num,den,DP1[41][41],DP2[41][41];
+
+
+
+for(i=0;i<=cm;i++)
+{
+DP1[0][i]=0;
+DP1[i][0]=1;
+DP2[i][0]=0;
+DP2[0][i]=0;
+}
+
+
+for(i=1;i<=cm;i++)
+{
+
+	for(j=1;j<=cm;j++)
+	{
+		DP1[i][j]=DP1[i-1][j]+DP1[i-1][j-1]*((((LL)1)<<c[i])-1);
+
+
+	}
+
+
+
+}
+
+
+
+for(i=1;i<=cm;i++)
+{
+
+	for(j=1;j<=cm;j++)
+	{
+		DP2[i][j]=DP2[i-1][j]+DP2[i-1][j-1]*((((LL)1)<<c[i])-1)+DP1[i-1][j-1]*((LL)1<<(c[i]-1))*p[i];
+
+
+	}
+
+
+
+}
+
+
+num=den=0;
+for (i=m;i<=cm;i++)
+{	
+    num += DP2[cm][i];
+    den += DP1[cm][i];
+
+}
+
+//printf("valuee %d  %d
+",num,den);
+
+return (double)num/den;
+
+
+
+
+
+
+
+
+}
+
+int main()
+{
+	int t,c[41],p[41],n,m,cm;
+
+int ct,pt,i,j;
+
+	scanf("%d",&t);
+
+	while(t--)
+	{
+
+		for(i=0;i<41;i++)
+		{
+			
+
+				c[i]=p[i]=0;
+
+
+		}
+
+		cm=-1;
+
+
+
+		scanf("%d%d",&n,&m);
+
+      for(i=1;i<=n;i++)
+      {
+           scanf("%d%d",&ct,&pt);
+    
+           if(ct>cm)
+           {
+			cm=ct;
+           }
+
+           c[ct]++;
+           p[ct]+=pt;
+
+      }
+
+
+
+      printf("%.7f
+",Evaluate(n,m,cm,c,p));
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+	return 0;
+}

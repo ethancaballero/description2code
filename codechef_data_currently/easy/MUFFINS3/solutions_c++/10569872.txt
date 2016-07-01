@@ -1,0 +1,35 @@
+# include <iostream>
+using namespace std;
+
+int main()
+{ 
+	int t;  //no. of test cases
+	cin>>t;
+	long int N[t];
+	long int A; 
+	for(int i=0;i<t;i++)
+	{
+		cin>>N[i];
+		if (N[i]%2==0)
+		{
+			A=(N[i]/2)+1;
+			cout<<A<<endl;
+		}
+		else
+		{
+			A=(N[i]+1)/2;
+			cout<<A<<endl;
+		}
+	}	
+	return 0;
+}
+
+			
+		
+		
+		
+			
+		
+
+		
+	

@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+#define tr(c,it) for(typeof(c.begin()) it=c.begin();it!=c.end();it++)
+using namespace std;
+long long maxm(long long a, long long b)
+{
+	if(a>b) return a;
+	return b;
+}
+long long a[100005],sol[100005][505];
+static int neg[100005],minm[100005],l,r,c,vis[100005];
+static bool ne[100005];
+vector< pair< int,pair<int,int> > > v;
+long long tot=0;
+int len=0;
+int main()
+{
+    int t,n,m,k,i,j;
+    scanf("%d",&t);
+    while(t--)
+    {   tot=0;
+        len=0;
+        int cou=0;
+        scanf("%d%d%d",&n,&k,&m);
+        for(i=0;i<n;i++)
+        {
+            scanf("%lld",&a[i]);
+            tot+=a[i];
+            if(a[i]<0)
+            {  // printf("yo %d
+",a[i]);
+                neg[len++]=i;
+                ne[i]=1;
+                minm[i]=10000;
+            }
+        }
+        for(i=0;i<m;i++)
+        {
+            scanf("%d%d%d",&l,&r,&c);
+            l--;r--;
+            v.push_back(make_pair(c,make_pair(l,r)));
+        }
+        sort(v.begin(),v.end());
+        tr(v,it)
+        {   if(cou==len) break;
+            for(i=(*it).second.first;i<=(*it).second.second;i++)
+            {
+                if(ne[i]&&!vis[i])
+                {
+                    minm[i]=(*it).first;
+                    vis[i]=1;
+                    cou++;
+                }
+            }
+ 
+        }
+  /*      for(i=0;i<len;i++)
+        {
+            printf("%lld  %d
+",-a[neg[i]],minm[neg[i]]);
+        }*/
+        for(i=0;i<=len;i++)
+        {
+            for(j=0;j<=k;j++)
+            {
+                if(i==0||j==0) sol[i][j]=0;
+                else if(minm[neg[i-1]]>j) sol[i][j]=sol[i-1][j];
+                else sol[i][j]=maxm(sol[i-1][j],sol[i-1][j-minm[neg[i-1]]]-a[neg[i-1]]);
+            }
+        }
+        printf("%lld
+",tot+sol[len][k]);
+        for(i=0;i<n;i++)
+        {
+            ne[i]=0;
+            vis[i]=0;
+        }
+        v.clear();
+    }
+    return 0;
+}

@@ -1,0 +1,12 @@
+def check(x, y, i1, i2, i3):
+    return ((x[i2] - x[i1]) * (x[i3] - x[i2]) + (y[i2] - y[i1]) * (y[i3] - y[i2])) == 0
+
+
+result = 0
+for t in range(int(raw_input())):
+    a = [int(x) for x in raw_input().split()]
+    x = [i for i in a[0::2]]
+    y = [i for i in a[1::2]]
+    if check(x, y, 0, 1, 2) or check(x, y, 1, 2, 0) or check(x, y, 2, 0, 1):
+        result += 1
+print result

@@ -1,0 +1,27 @@
+t=int(raw_input())
+while t>0:
+	t=t-1
+	no=int(raw_input())
+	ca=raw_input()
+	ga=raw_input()
+	points=raw_input().split(" ")
+	c=0	#no of correct answers
+	w=0	#no of wrong answers
+	i=0
+	while i<len(ga):
+		if ga[i]==ca[i]:
+			c=c+1
+		else:
+			w=w+1
+		i=i+1
+	m=0	#max points
+	i=0
+	while i<=c:
+		point=int(points[i])
+		if point>m:
+			m=point
+		i=i+1
+	if w>0:
+		print m
+	else:
+		print points[c]

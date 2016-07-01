@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+const int MAXN = 1e6 + 10;
+const LL INF = 1e17;
+LL A[MAXN];
+LL Lmin [MAXN];
+LL Rmin [MAXN];
+LL Lmax [MAXN];
+LL Rmax [MAXN];
+int main(){
+    int t;
+    scanf("%d", &t);
+    while(t--){
+        int N;
+        scanf("%d", &N);
+        for(int i = 1;i <= N;++i){
+            scanf("%lld", &A[i]);
+        }
+        Lmin[0] = Lmax[0] = 0;
+        for(int i = 1;i <= N;++i){
+            Lmax[i] = max(Lmax[i - 1] + A[i], A[i]);
+            Lmin[i] = min(Lmin[i - 1] + A[i], A[i]);
+        }
+        for(int i = 2;i <= N;++i){
+            Lmax[i] = max(Lmax[i], Lmax[i - 1]);
+            Lmin[i] = min(Lmin[i], Lmin[i - 1]);
+        }
+
+        Rmin[N + 1] = Rmax[N + 1] = 0;
+        for(int i = N;i >= 1;--i){
+            Rmax[i] = max(Rmax[i + 1] + A[i], A[i]);
+            Rmin[i] = min(Rmin[i + 1] + A[i], A[i]);
+        }
+        for(int i = N - 1;i >= 1;--i){
+            Rmax[i] = max(Rmax[i], Rmax[i + 1]);
+            Rmin[i] = min(Rmin[i], Rmin[i + 1]);
+        }
+        LL ans = -INF;
+        for(int i = 1;i < N;++i){
+            ans = max(ans, abs(Lmax[i] - Rmin[i + 1]));
+            ans = max(ans, abs(Lmin[i] - Rmax[i + 1]));
+        }
+        printf("%lld
+", ans);
+    }
+    return 0;
+}

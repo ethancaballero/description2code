@@ -1,0 +1,13 @@
+def ME(A,N,M):
+    res = 1
+    while N > 0:
+        if N % 2 == 1: res = (res * A) % M
+        A = (A * A) % M
+        N >>= 1
+    return res
+T = int(raw_input())
+M = int(1e9) + 7
+while T:
+    N = int(raw_input())
+    print ME(2,N,M) - 1
+    T -= 1

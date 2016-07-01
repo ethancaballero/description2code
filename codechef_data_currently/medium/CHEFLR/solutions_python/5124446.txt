@@ -1,0 +1,21 @@
+t = int(raw_input())
+
+for i in range(t):
+    ui = raw_input()
+    ans = 1
+        
+    for i in range(len(ui)):
+        lvl = i+1
+        if ui[i]=='r':
+            if lvl%2 == 1:
+                ans = ans*2 + 2
+            if lvl%2 == 0:
+                ans = ans*2 + 1
+
+        if ui[i]=='l':
+            if lvl%2 == 1:
+                ans = ans*2  
+            if lvl%2 == 0:
+                ans = ans*2 - 1
+
+    print ans%1000000007

@@ -1,0 +1,81 @@
+#include <cstdio>
+#include <algorithm>
+#define MAX_N_VALUE 10000
+
+int arr_n[MAX_N_VALUE + 5];
+int arr_k[MAX_N_VALUE + 5];
+int arr_m[MAX_N_VALUE + 5];
+
+bool dec_comp(int a, int b) {
+    return a > b;
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n, k, m;
+        scanf("%d %d %d", &n, &k, &m);
+        for (int i = 0; i < n; i++)
+            scanf("%d", arr_n + i);
+        for (int i = 0; i < n; i++) {
+            int temp;
+            scanf("%d", &temp);
+            arr_n[i] -= temp;
+        }
+        for (int i = 0; i < k; i++)
+            scanf("%d", arr_k + i);
+        for (int i = 0; i < m; i++)
+            scanf("%d", arr_m + i);
+
+        std::sort(arr_n, arr_n + n, dec_comp);
+        std::sort(arr_k, arr_k + k, dec_comp);
+        std::sort(arr_m, arr_m + m, dec_comp);
+//        for (int i = 0; i < n; i++) {
+//            printf("%d	", arr_n[i]);
+//        }
+//        printf("
+");
+//        for (int i = 0; i < k; i++) {
+//            printf("%d	", arr_k[i]);
+//        }
+//        printf("
+");
+//        for (int i = 0; i < m; i++) {
+//            printf("%d	", arr_m[i]);
+//        }
+//        printf("
+");
+
+        int arr_mk[MAX_N_VALUE + MAX_N_VALUE + 5];
+        int k_ptr = 0;
+        int m_ptr = 0;
+        int mk_ptr = 0;
+        while (k_ptr < k || m_ptr < m) {
+            if (arr_k[k_ptr] >= arr_m[m_ptr])
+                arr_mk[mk_ptr++] = arr_k[k_ptr++];
+            else
+                arr_mk[mk_ptr++] = arr_m[m_ptr++];
+        }
+        int mk = mk_ptr;
+        mk_ptr = 0;
+        int n_ptr = 0;
+        while (n_ptr < n && mk_ptr < mk) {
+            while (
+                mk_ptr < mk && arr_mk[mk_ptr] > arr_n[n_ptr])
+                mk_ptr++;
+            if (mk_ptr < mk) {
+                arr_n[n_ptr] -= arr_mk[mk_ptr];
+                n_ptr++;
+                mk_ptr++;
+            }
+        }
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr_n[i];
+        }
+        printf("%d
+", sum);
+    }
+    return 0;
+}

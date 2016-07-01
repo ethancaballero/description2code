@@ -1,0 +1,12 @@
+def is_subseq(x, y):
+    i = 0
+    for c in x:
+        while i < len(y) and y[i] != c: i += 1
+        if i == len(y): return False
+        i += 1
+    return True
+
+for cas in xrange(input()):
+    a = raw_input()
+    n = len(a)
+    print 'YES' if n > 1 and (is_subseq(a[:n/2], a[n/2:]) or is_subseq(a[(n+1)/2:], a[:(n+1)/2])) else 'NO'

@@ -1,0 +1,94 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+#define gc getchar_unlocked
+using namespace std;
+long long mod=1000000007;
+long long fibo[100005];
+void scanint(long long &x)
+{
+    register long long c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+long long mexp(long long p,long long q)
+{
+    long long x,y,z,w,n;
+    long long haha[][2]={{1,0},{0,1}};
+    for(int i=p;i<=q;i++)
+    {
+        long long res[][2]={{1,1},{1,0}};
+        long long m[][2]={{1,1},{1,0}};
+        n=fibo[i];
+        n--;
+        while(n>0)
+        {
+            if(n%2==1)
+            {
+                w=((res[0][0]*m[0][0])%mod+(res[0][1]*m[1][0])%mod)%mod;
+                x=((res[0][0]*m[0][1])%mod+(res[0][1]*m[1][1])%mod)%mod;
+                y=((res[1][0]*m[0][0])%mod+(res[1][1]*m[1][0])%mod)%mod;
+                z=((res[1][0]*m[0][1])%mod+(res[1][1]*m[1][1])%mod)%mod;
+                res[0][0]=w;
+                res[0][1]=x;
+                res[1][0]=y;
+                res[1][1]=z;
+                n-=1;
+            }
+            else
+            {
+                w=((m[0][0]*m[0][0])%mod+(m[0][1]*m[1][0])%mod)%mod;
+                x=((m[0][0]*m[0][1])%mod+(m[0][1]*m[1][1])%mod)%mod;
+                y=((m[1][0]*m[0][0])%mod+(m[1][1]*m[1][0])%mod)%mod;
+                z=((m[1][0]*m[0][1])%mod+(m[1][1]*m[1][1])%mod)%mod;
+                m[0][0]=w;
+                m[0][1]=x;
+                m[1][0]=y;
+                m[1][1]=z;
+                n=n/2;
+            }
+        }
+        res[0][0]+=1;
+        res[1][1]+=1;
+        w=((haha[0][0]*res[0][0])%mod+(haha[0][1]*res[1][0])%mod)%mod;
+        x=((haha[0][0]*res[0][1])%mod+(haha[0][1]*res[1][1])%mod)%mod;
+        y=((haha[1][0]*res[0][0])%mod+(haha[1][1]*res[1][0])%mod)%mod;
+        z=((haha[1][0]*res[0][1])%mod+(haha[1][1]*res[1][1])%mod)%mod;
+        haha[0][0]=w;
+        haha[0][1]=x;
+        haha[1][0]=y;
+        haha[1][1]=z;
+    }
+    haha[0][0]-=1;
+    haha[1][1]-=1;
+    long long inv[][2]={{0,1},{1,-1}};
+    w=inv[0][0]*haha[0][0]+inv[0][1]*haha[1][0];
+    return w;
+}
+int main()
+{
+    long long n,ans,b,k,t,m,x,y;
+    scanf("%lld %lld",&n,&m);
+    for(int i=0;i<n;i++)scanint(fibo[i]);
+    while(m--)
+    {
+        char p;
+        scanf("%c",&p);
+        if(p=='C')
+        {
+            scanf("%lld %lld",&x,&y);
+            fibo[x-1]=y;
+        }
+        else
+        {
+            scanf("%lld %lld",&x,&y);
+            printf("%lld
+",mexp(x-1,y-1));
+        }
+        scanf("%c",&p);
+    }
+    return 0;
+}
+

@@ -1,0 +1,10 @@
+import math
+
+t = input()
+
+for i in range(t):
+	n = input()
+	k = -1+math.sqrt(1+8*n)
+	print int(math.floor(k/2))
+
+

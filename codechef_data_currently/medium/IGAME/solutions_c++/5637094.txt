@@ -1,0 +1,68 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+using namespace std;
+
+int scanint(){
+	register int c = getchar();
+	int x=0;
+	bool neg=false;
+	for(;(c<48 || c>57) && c!=45 ;c=getchar());
+	if(c==45){
+		neg=true;
+		c=getchar();
+	}
+	for(;c>47 && c<58;c=getchar())
+	{
+		x=(x<<1)+(x<<3)+c-48;
+	}
+	if(neg==true)
+	x=x*(-1);
+	return x;
+}
+
+const int N = 1000 ;
+bool NP[N+1][N+1];
+
+void preProcess(){
+	
+	for(int i=0 ; i<=N ; i++)
+		for(int j=0; j<=N ; j++)
+			NP[i][j] = false;
+	
+	for(int i=0; i<=N ; i++)
+		for(int j=0 ; j<=N ; j++){
+			if(!NP[i][j]){
+				for(int k=i+1 ; k<=N ; k++)
+					NP[k][j]=true;
+				for(int k=j+1 ; k<=N ; k++)
+					NP[i][k]=true;
+				for(int k=1 ; i+k<=N && j+k<=N ; k++)
+					NP[i+k][j+k]=true;
+			}
+		}
+
+}
+
+int main(){
+	int t,m,n,p,q;
+	t = scanint();
+	preProcess();
+	while(t--){
+		m = scanint();
+		n = scanint();
+		p = scanint();
+		q = scanint();
+		m = m-p ;
+		n = n-q ;
+		p = std::min(m,n);
+		q = m+n-p;
+		if(NP[p][q])
+			cout<<"Alice
+";
+		else
+			cout<<"Bob
+";
+	}
+}

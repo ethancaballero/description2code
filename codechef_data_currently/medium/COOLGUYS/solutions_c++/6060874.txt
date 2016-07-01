@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+#include<algorithm>
+#include<vector>
+#define M 1000000009 
+#define size 1000
+#define ull long long int
+#define FOR(i,j,k) for(i=j;i<k;i++)
+#define s(a) scanf("%lld",&a)
+#define p(a) printf("%lld
+",a)
+using namespace std;
+ull gcd(ull a,ull b)
+{
+    while(b)
+    {
+            b^=a^=b^=a%=b;
+    }
+    return a;
+}
+int main()
+{
+    ull t,m,n,i,j,mul,count,g,k,root,ans;
+    s(t);
+    FOR(k,0,t)
+    {
+              s(n);
+              count=0;
+              mul=n*n;
+              root=sqrt(n);
+              FOR(i,1,root+1)
+              {
+                             count+=n/i;
+              }
+              ans=2*count - (root*root);
+              g=gcd(mul,ans);
+              printf("%lld/%lld
+",ans/g,mul/g);
+    }                      
+    return 0;
+}
+              

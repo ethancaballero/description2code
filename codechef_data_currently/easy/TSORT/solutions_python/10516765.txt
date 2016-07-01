@@ -1,0 +1,10 @@
+arr=[]
+n=int(raw_input())
+
+for i in range(0,n):
+	arr.append(int(raw_input()))
+
+arr.sort()
+
+for i in range(0,n):
+	print arr[i]			

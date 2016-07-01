@@ -1,0 +1,32 @@
+__author__ = 'Anurag Gautam'
+
+
+def reach_the_point(x, y):
+    _x, _y = abs(x), abs(y)
+    w = min([_x, _y])
+    dx, dy = _x - w, _y - w
+    sx, sy = 0, 0
+    if dx % 2 == 0:
+        sx += 2 * dx
+    else:
+        sx += 2 * dx + 1
+    if dy % 2 == 0:
+        sy += 2 * dy
+    else:
+        sy += 2 * dy - 1
+    return w + w + sx + sy
+
+
+def main():
+    t = int(raw_input())
+    output = []
+    while t > 0:
+        x, y = map(int, raw_input().split())
+        output += [str(reach_the_point(x, y)) + "
+"]
+        t -= 1
+    print(''.join(output))
+
+
+if __name__ == "__main__":
+    main()

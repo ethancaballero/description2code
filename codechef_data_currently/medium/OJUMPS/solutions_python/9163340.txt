@@ -1,0 +1,10 @@
+# your code goes here
+t = input()
+if t == 0 or t == 1 or t == 3 or t == 6 :
+	print "yes"
+else :
+	t = t % 6 
+	if t == 0 or t == 1 or t == 3 :
+		print "yes"
+	else :
+		print "no"

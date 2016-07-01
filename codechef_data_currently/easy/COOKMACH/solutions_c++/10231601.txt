@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long a,b,count=0;
+        cin>>a>>b;
+        while(b%a!=0)
+        {
+            a=a/2;
+            count++;
+        }
+        while(a!=b)
+        {
+           a=a*2;
+           count++;
+        }
+       cout<<count<<endl;
+    }
+}

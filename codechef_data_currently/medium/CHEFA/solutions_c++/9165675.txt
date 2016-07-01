@@ -1,0 +1,24 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+#define LL long long
+int main()
+{	ios::sync_with_stdio(false);
+	LL t,n,i,j;
+	cin>>t;
+	while(t--)
+	{	cin>>n;
+		LL x[n];
+		for(i=0;i<n;i++)
+			cin>>x[i];
+		sort(x,x+n);
+		i=n-1;j=0;
+		while(i>=0)
+		{	j+=x[i];
+			i-=2;
+		}
+		cout<<j<<"
+";
+	}
+	return 0;
+}

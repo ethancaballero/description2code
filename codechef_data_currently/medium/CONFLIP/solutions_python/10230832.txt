@@ -1,0 +1,21 @@
+from __future__ import division
+t=int(raw_input())
+while t>0:
+	g=int(raw_input())
+	while g>0:
+		i,n,q=map(int,raw_input().split())
+		if i==1 :
+			if q==1:
+				m=n//2
+			else:
+				m=n-(n//2)
+		if i==2 :
+			if q==1:
+				m=n-(n//2)
+			else:
+				m=n//2
+		print m	
+		g-=1
+	
+	t-=1
+	

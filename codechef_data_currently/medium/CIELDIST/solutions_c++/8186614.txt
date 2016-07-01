@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+  int t;
+  float ds,dt,d;
+  scanf("%d",&t);
+  while(t--)
+  {
+      scanf("%f%f%f",&ds,&dt,&d);
+      float ans;
+      if(ds + dt < d)
+        ans = d - (ds+dt);
+      else
+      {
+          if(ds < d && dt < d)
+            ans = 0.0000000;
+          else if(ds > dt)
+          {
+               if(ds <= dt + d)
+                ans =0.0000000;
+               else
+                ans = ds - (dt+d);
+          }
+          else
+          {
+              if(dt <= ds + d)
+                ans = 0.0000000;
+              else
+                ans = dt - (ds + d);
+          }
+      }
+      printf("%0.7f
+",ans);
+  }
+  return 0;
+}

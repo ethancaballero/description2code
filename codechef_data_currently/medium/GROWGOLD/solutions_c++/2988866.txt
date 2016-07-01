@@ -1,0 +1,108 @@
+#include <string>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <cstdlib>
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+#include <list>
+#include <map>
+#include <set>
+#include <utility>
+#include <iostream>
+#include <iomanip>
+#include <string.h>
+ 
+using namespace std;
+ 
+typedef long long ll;
+#define debug(args...) dbg(),args
+#define S(N) scanf("%d",&N)
+#define FOR(A,B,C) for(int A=B;A<C;A++)
+#define EFOR(A,B,C) for(int A=B;A<=C;A++)
+#define PB(A,B) A.push_back(B);
+#define ALL(A) A.rbegin(),A.rend()
+#define MEM(A,B) memset(A,B,sizeof(A))
+#define MAX(A,B) (A > B) ? A : B
+#define MIN(A,B) (A < B) ? A : B
+#define DBGCHECK if (argc > 1) DBG = ((*argv[1] == '0') ? 0 : 1)
+#define tr(container, it) for(typeof(container.begin()) it = container.begin(); it != container.end(); it++)
+#define MS 105
+#define MOD 100000007
+#define MOD2 100000006
+bool DBG;
+struct dbg { template<typename T> dbg& operator , (const T& v) { if (DBG) cerr << v << " "; return *this; } ~dbg() { if (DBG) cerr << endl; } };
+ 
+int sz, tmul[MS][MS], tpow[MS][MS];
+int Amat[105][105], R[MS][MS], tax[MS];
+ 
+void mat_mul(int ab[MS][MS], int a[MS][MS], int b[MS][MS])
+{
+for(int i=0;i<sz;i++) for(int j=0;j<sz;j++)
+{
+ll x = 0;
+for(int k=0;k<sz;k++)
+x = x + (1ll*a[i][k]*b[k][j]);
+if(x>=MOD2) x%=MOD2;
+tmul[i][j] = x;
+}
+ 
+for(int i=0;i<sz;i++) for(int j=0;j<sz;j++) ab[i][j] = tmul[i][j];
+}
+ 
+void mat_pow(int R[MS][MS], int A[MS][MS], int P, int s)
+{
+sz = s;
+for(int i=0;i<sz;i++) for(int j=0;j<sz;j++)
+R[i][j]=(i==j), tpow[i][j] = A[i][j];
+while(P)
+{
+if(P&1) mat_mul(R,R,tpow);
+if((P>>=1)) mat_mul(tpow,tpow,tpow);
+}
+}
+ 
+int modpow(ll a,ll p)
+{
+ll r = 1;
+while(p){
+if(p&1)
+r = (r*a)%MOD;
+a = (a*a)%MOD;
+p >>= 1;
+}
+return r;
+}
+ 
+int main()
+{
+int t;
+S(t);
+while(t--)
+{
+int slot1, slot2, K, N;
+scanf("%d %d %d %d %d", &tax[0], &slot1, &slot2, &K, &N);
+--N;
+int m = slot1 + slot2;
+EFOR(i,1,slot1)
+tax[i] = tax[i-1] + 1;
+EFOR(i,slot1+1,m)
+tax[i] = (2*tax[i-1])%MOD;
+if(N<=m)
+printf("%d
+",tax[N]);
+else
+{
+memset(Amat,0,sizeof Amat);
+for(int i=0;i<K;i++) Amat[0][i] = Amat[i+1][i] = 1;
+mat_pow(R,Amat,N-m,K);
+ll ans = 1;
+for(int i=0;i<K;i++) ans = ( ans * modpow(tax[m-i],R[0][i]) ) % MOD;
+printf("%lld
+",ans);
+}
+}
+return 0;
+}

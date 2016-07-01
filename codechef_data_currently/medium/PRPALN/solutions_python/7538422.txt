@@ -1,0 +1,20 @@
+def check(t,u):
+	x=len(t)/2+1
+	for i in range (x):
+		if (t[i]!=u[i]):
+			return 0
+	return 1
+for asd in range(int(raw_input())):
+	s=raw_input()
+	l=len(s)
+	flag=0
+	for i in range (l):
+		t=s[:i]+s[i+1:]
+		u=t[::-1]
+		if (check (t,u)):
+			flag=1
+			break
+	if (flag):
+		print "YES"
+	else:
+		print "NO"

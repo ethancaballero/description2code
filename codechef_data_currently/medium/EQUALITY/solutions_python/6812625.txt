@@ -1,0 +1,14 @@
+# your code goes here
+t=input()
+j=0
+while j<t:
+	n=input()
+	arr = map(int,raw_input().split())
+	s=sum(arr)
+	s=s/(n-1)
+	i=0
+	while i<n:
+		print s-arr[i],
+		i=i+1
+	print
+	j=j+1

@@ -1,0 +1,30 @@
+def grade(g,c,t):
+    list = [0,0,0]
+    if(g>50):
+        list[0]=1
+    if(c<0.7):
+        list[1]=1
+    if(t>5600):
+        list[2]=1
+    return list
+
+t = input()
+for i in range(t):
+    g_c_t = raw_input().split()
+    g = int(g_c_t[0])
+    c = float(g_c_t[1])
+    t = int(g_c_t[2])
+    count_list = grade(g,c,t)
+    
+    if(count_list.count(1) == 3):
+        print "10"
+    elif(count_list[0] == 1 and count_list[1] == 1 and count_list[2] == 0):
+        print "9"
+    elif(count_list[0] == 0 and count_list[1] == 1 and count_list[2] == 1):
+        print "8"
+    elif(count_list[0] == 1 and count_list[1] == 0 and count_list[2] == 1):
+        print "7"
+    elif(count_list.count(0) == 2):
+        print "6"
+    elif(count_list.count(0) == 3):
+        print "5"

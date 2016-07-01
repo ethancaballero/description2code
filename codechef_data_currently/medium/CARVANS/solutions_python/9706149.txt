@@ -1,0 +1,14 @@
+T = int(raw_input(""))
+for i in range(0,T):
+	N = int(raw_input(""))
+	carList = map(int,raw_input("").split())
+	carCount = 0
+	curMin = carList[0]
+	#print curMin
+	for i in carList:
+		if (curMin>i):
+			curMin = i
+		if(i<=curMin):
+			carCount+=1
+	
+	print carCount

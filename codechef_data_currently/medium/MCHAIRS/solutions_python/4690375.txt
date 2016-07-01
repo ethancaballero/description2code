@@ -1,0 +1,6 @@
+t=input()
+mod=10**9+7
+while t>0:
+    n=input()
+    print pow(2,n,mod)-1
+    t-=1

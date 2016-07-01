@@ -1,0 +1,31 @@
+MAX = 10**6
+MAX = MAX*5 + 2
+arr_slow = [False]*MAX
+
+def pythagoreanTriplets_slow(limit) :
+	c=0
+	m = 2
+	while c < limit :
+		n = 1
+		while n<m :
+			c = m**2 + n**2 
+			if c > limit :
+				break
+			if not arr_slow[c] :
+				arr_slow[c]=True
+				temp = c 
+				while temp < limit:
+					arr_slow[temp]=True
+					temp+=c
+			n+=1
+		m+=1
+
+pythagoreanTriplets_slow(MAX)
+t = int(raw_input())
+while t:
+	t-=1
+	n = int(raw_input())
+	if arr_slow[n] :
+		print "YES"
+	else :
+		print "NO"

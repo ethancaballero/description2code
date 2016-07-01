@@ -1,0 +1,148 @@
+#include<stdio.h>
+int main()
+{
+	char query[4];
+	long long int pow[35],q,temp,x,y,res,i,xi,yi,xl,yl,st,flag,divx,divy;
+	pow[0] = 0;
+	pow[1] = 1;
+	for (i = 2; i <= 31; i++)
+	{
+		pow[i] = (pow[i - 1] + 1) * 2;
+		pow[i]--;
+	}
+	scanf("%lld", &q);
+	flag = 0;
+	while (q--)
+	{
+		res = 0;
+		scanf("%s", query);
+		if (query[1] == 'i')
+			flag++;
+		else
+		{
+			scanf("%lld%lld", &x, &y);
+			if (x > y)
+			{
+				temp = x;
+				x=y;
+				y = temp;
+			}
+			for (i = 1; i <= 31; i++)
+			{
+				if (x <= pow[i])
+					break;
+			}
+			st = pow[i - 1] + 1;
+			xi = x - st ;
+			xl = i;
+			for (i = 1; i <= 31; i++)
+			{
+				if (y <= pow[i])
+					break;
+			}	
+			st = pow[i - 1] + 1;
+			yi = y - st ;
+			yl = i;
+			divx = 1;
+			divy = (pow[yl] - pow[yl - 1]) / (pow[xl] - pow[xl - 1]);
+			for (i = xl; i >=1; i--)
+			{
+				if ((xi / divx) == (yi / divy))
+					break;
+				divx *= 2;
+				divy *= 2;
+			}
+			temp = i;
+			if (flag%2)
+			{
+				if (query[1] == 'r')
+				{
+					if (i % 2==0)
+						i++;
+					if (xl % 2 == 0)
+						xl--;
+					res = res+1+((xl - i) / 2);
+				}
+				else
+				{
+					if (i % 2)
+						i++;
+					if (xl % 2)
+						xl--;
+					res= res+1+((xl - i) / 2);
+				}
+			}
+			else
+			{
+				if (query[1] == 'r')
+				{
+					if (i % 2)
+						i++;
+					if (xl % 2)
+						xl--;
+					res = res+1+((xl - i) / 2);
+				}
+				else
+				{
+					if (i % 2 == 0)
+						i++;
+					if (xl % 2 == 0)
+						xl--;
+					res = res+1+((xl - i) / 2);
+				}
+			}
+			if (flag % 2)
+			{
+				if (query[1] == 'r')
+				{
+					if (yl % 2 == 0)
+						yl--;
+					if (temp % 2 == 0)
+						temp++;
+					else
+						res--;
+					res =res+1+ ((yl - temp) / 2);
+				}
+				else
+				{
+					if (yl % 2)
+						yl--;
+					if (temp % 2)
+						temp++;
+					else
+						res--;
+					res = res+1+((yl - temp) / 2);
+				}
+			}
+			else
+			{
+				if (query[1] == 'r')
+				{
+					if (yl % 2)
+						yl--;
+					if (temp % 2)
+						temp++;
+					else
+						res--;
+					res = res+1+((yl - temp) / 2);
+				}
+				else
+				{
+					if (yl % 2 == 0)
+						yl--;
+					if (temp % 2 == 0)
+						temp++;
+					else
+						res--;
+					res =res+1+ ((yl - temp) / 2);
+				}
+			}
+			printf("%lld
+", res);
+		}
+	}
+	getchar();
+	getchar();
+	return 0;
+
+}

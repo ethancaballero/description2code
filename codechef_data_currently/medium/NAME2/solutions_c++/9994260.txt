@@ -1,0 +1,39 @@
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    int t,marker;
+    string a,b,c,d;
+    scanf("%d",&t);
+    while(t--)
+    {
+        cin >> a >> b;
+        if(a.length() >= b.length())
+        {
+            c = a;
+            d = b;
+        }
+        else
+        {
+            c = b;
+            d = a;
+        }
+        marker = 0;
+        for(int i = 0;i < c.length();i++)
+        {
+            if(c[i] == d[marker])
+                marker++;
+        }
+        if(marker == d.length())
+            printf("YES
+");
+        else
+            printf("NO
+");
+    }
+}

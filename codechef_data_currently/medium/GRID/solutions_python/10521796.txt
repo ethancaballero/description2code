@@ -1,0 +1,19 @@
+T = int(raw_input())
+while T:
+    N = int(raw_input()); L,c,N1 = [],0,N
+    while N1:
+        s = raw_input()
+        L.append(list(s))
+        N1 -= 1
+    R = [[1 for i in range(N+1)] for j in range(N+1)]
+    C = [[1 for i in range(N+1)] for j in range(N+1)]
+    for i in range(N-1,-1,-1):
+        for j in range(N-1,-1,-1):
+            if L[i][j] == '#': R[i][j],C[i][j] = 0,0; continue
+            if R[i][j+1] == 0: R[i][j] = 0
+            if C[i+1][j] == 0: C[i][j] = 0
+    for i in range(N):
+        for j in range(N):
+            if R[i][j] & C[i][j]: c += 1
+    print c
+    T -= 1

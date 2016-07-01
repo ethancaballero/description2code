@@ -1,0 +1,93 @@
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+#define int long long 
+#define fi first
+#define se second
+#define ll long long 
+using namespace std;
+ll t,n,mod,res,i,j,k,kok;
+ll pw(ll a,ll b){
+   b%=mod;
+   a%=mod;
+   ll rs=1,i;
+   for(i=1;i<=4;i++)
+   rs=rs*a%mod;
+   rs=rs*b%mod;
+   return rs;
+}
+ll power(ll a){
+   a%=30*mod;
+   bool ok[3]={0,0,0};
+   ll x=a,y=a+1,z=2*a+1,t=3*a*a+3*a-1;
+   if(x%2==0 && !ok[0])
+   ok[0]=true,x/=2;
+   if(y%2==0 && !ok[0])
+   ok[0]=true,y/=2;
+   if(z%2==0 && !ok[0])
+   ok[0]=true,z/=2;
+   if(t%2==0 && !ok[0])
+   ok[0]=true,t/=2;
+   
+   if(x%3==0 && !ok[1])
+   ok[1]=true,x/=3;
+   if(y%3==0 && !ok[1])
+   ok[1]=true,y/=3;
+   if(z%3==0 && !ok[1])
+   ok[1]=true,z/=3;
+   if(t%3==0 && !ok[1])
+   ok[1]=true,t/=3;
+   
+   if(x%5==0 && !ok[2])
+   ok[2]=true,x/=5;
+   if(y%5==0 && !ok[2])
+   ok[2]=true,y/=5;
+   if(z%5==0 && !ok[2])
+   ok[2]=true,z/=5;
+   if(t%5==0 && !ok[2])
+   ok[2]=true,t/=5;
+   x%=mod;
+   y%=mod;
+   z%=mod;
+   t%=mod;
+   ll rs=1;
+   rs=rs*x%mod;
+   rs=rs*y%mod;
+   rs=rs*z%mod;
+   rs=rs*t%mod;
+   return rs;
+}
+main(){
+	scanf("%d",&t);
+	while(t--){
+		scanf("%lld %lld",&n,&mod);
+		res=0;
+		kok=0;
+		while(kok*kok<=n)
+		kok++;
+		kok--;
+		for(i=1;i<=kok;i++){
+			ll g=pw(i,n/i);
+			res=(res+g)%mod;
+		}
+		for(i=1;i<=kok;i++){
+			ll rs1=power(n/i);
+			ll rs2=power(n/(i+1));
+			rs1-=rs2;
+			if(rs1<0)
+			rs1+=mod;
+			rs1=rs1*(i%mod)%mod;
+			res=(res+rs1)%mod;
+		}
+		if(n/kok==kok){
+			ll rs2=pw(kok,kok);
+			res-=rs2;
+		}
+		if(res<0)
+		res+=mod;
+		printf("%lld
+",res);	
+	}
+	return 0;
+}

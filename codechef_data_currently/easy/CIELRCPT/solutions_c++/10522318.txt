@@ -1,0 +1,24 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+int main()
+{
+    int t,i,sum,j;
+    long p;
+    scanf("%d",&t);
+    while(t--)
+    {
+        sum=0;
+        scanf("%ld",&p);
+        for(i=11;i>=0;i--)
+        {
+            j=p/pow(2,i);
+            sum+=j;
+            p=p-(j*pow(2,i));
+        }
+        cout<<sum<<"
+";
+    }
+    return 0;
+}

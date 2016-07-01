@@ -1,0 +1,29 @@
+testcases = int(raw_input())
+
+for i in range(0, testcases):
+    sum = 0
+    inputarray = [float(x) for x in raw_input().split(' ')]
+    #print inputarray
+    
+    if inputarray[0] > 50.0:
+        sum = sum + 4
+        
+    if inputarray[1] < 0.7:
+        sum = sum + 2
+        
+    if inputarray[2] > 5600.0:
+        sum = sum + 1
+        
+    if sum == 7:
+        print 10
+    elif sum == 0:
+        print 5
+    elif sum == 1 or sum == 2 or sum == 4:
+        print 6
+    elif sum == 6:
+        print 9
+    elif sum == 3:
+        print 8
+    else:               # for sum = 5
+        print 7
+    

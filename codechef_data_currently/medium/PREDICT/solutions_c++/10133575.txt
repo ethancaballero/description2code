@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long double LD;
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        LD pa;
+        cin >> pa;
+        LD ans = max((LD)0, 1 - 2*pa) * 10000 + 10000 * pa + 2 * pa * (1 - pa) * 10000;
+        printf("%.6Lf
+", ans);
+    }
+
+    return 0;
+}

@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int a,b,c;
+        a=b=c=0;
+        if(360%n==0)
+        {
+            a=1;
+        }
+        if(n<=360)
+            b=1;
+        if((n*(n+1)/2)<=360)
+            c=1;
+        if(a==0)
+            cout<<"n ";
+        else
+            cout<<"y ";
+        if(b==0)
+            cout<<"n ";
+        else
+            cout<<"y ";
+        if(c==0)
+            cout<<"n";
+        else
+            cout<<"y";
+        cout<<endl;
+    }
+}

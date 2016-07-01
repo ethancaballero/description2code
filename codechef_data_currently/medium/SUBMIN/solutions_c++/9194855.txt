@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int n;
+    int array[50];
+    int *hash = new int[1000001];
+    for(int i = 0; i < 1000001; i ++) {
+        hash[i] = 0;
+    }
+    cin >> n;
+    for(int i = 0; i < n; i ++) {
+        cin >> array[i];
+    }
+    for(int i = 0; i < n; i ++) {
+        int left = 1;
+        for(int j = i - 1; j >= 0 && array[j] > array[i]; j --) {
+            left ++;
+        }
+        int right = 1;
+        for(int j = i + 1; j < n && array[j] >= array[i]; j ++) {
+            right ++;
+        }
+        hash[array[i]] += (left * right);
+    }
+    int x, k;
+    cin >> k;
+    while(k --) {
+        cin >> x;
+        cout << hash[x] << endl;
+    }
+    return 0;
+}

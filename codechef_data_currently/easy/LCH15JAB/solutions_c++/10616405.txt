@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+#include<string.h>
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+    int arr[256]={0},max=0,i;
+    char a[60];
+    cin>>a;
+    for(i=0;i<strlen(a);i++)
+    arr[a[i]]++;
+    for(i=0;i<256;i++)
+    {
+        if(arr[i]>=max)
+        max=arr[i];
+    }
+    if(max==strlen(a)/2&&strlen(a)%2==0)
+    cout<<"YES"<<endl;
+    else
+    cout<<"NO"<<endl;
+    max=0;
+}
+}

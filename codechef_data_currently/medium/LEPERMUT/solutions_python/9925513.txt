@@ -1,0 +1,16 @@
+t = int(raw_input())
+for i in xrange(t):
+    n = int(raw_input())
+    lis = map(int, raw_input().split())
+    local = 0
+    nlocal = 0
+    for j in xrange(n - 1):
+        for k in xrange(j + 1, n):
+            if lis[j] > lis[k]:
+                nlocal += 1
+        if lis[j] > lis[j + 1]:
+            local += 1
+    if local == nlocal:
+        print 'YES'
+    else:
+        print 'NO'

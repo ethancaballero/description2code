@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
+#define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
+#define s(n)                        scanf("%d",&n)
+#define p(n)			    printf("%d
+",n)
+#define sl(n)                       scanf("%lld",&n)
+#define pl(n)			    printf("%lld
+",n)
+#define ll long long int
+int main()
+{
+    ll n,m,first, size;
+    sl(n); sl(m);
+    ll a[100005];
+    f(i,0,n)
+        sl(a[i]);
+    size=n;
+    first=0;
+    while(m--)
+    {
+        char c;
+        ll x;
+        cin>>c;
+        sl(x);
+
+         switch (c)
+		{
+		  case 'R': x=first+x-1;
+                x=x%size;
+                pl(a[x]);
+                break;
+		  case 'C': first+=x;
+                first=first%size;
+                    break;
+		  case 'A': first=(first-x+size)%size;
+                    break;
+		  default : break;
+     	 }
+	}
+	return 0;
+ }

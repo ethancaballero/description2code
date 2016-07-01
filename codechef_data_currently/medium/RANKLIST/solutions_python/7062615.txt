@@ -1,0 +1,30 @@
+import sys
+def solve(n,s):
+    if n==s:
+        return n-1
+    sum=(n*(n+1))/2
+    if s==sum:
+        return 0
+    i=n-1
+    temp=sum
+    count=0
+    while i>0:
+        temp-=i
+        count+=1
+        if temp>s:
+            i-=1
+            continue
+        if temp<=s:
+            break
+        
+    return count
+
+
+def main():
+    t=int(sys.stdin.readline())
+    for unused in range(t):
+        n,s=map(int,sys.stdin.readline().split())
+        print solve(n,s)
+
+if __name__=='__main__':
+    main()

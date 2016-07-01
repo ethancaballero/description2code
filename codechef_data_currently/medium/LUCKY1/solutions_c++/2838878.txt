@@ -1,0 +1,42 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include<map>
+#include<climits>
+#include<algorithm>
+using namespace std;
+int arr[100010];
+//int stored[100010];
+map <int,int> ma;
+int main()
+{
+    int t;
+    ma[0]=1;
+    arr[0]=0;
+    int count4=0;
+    int count7=0,j;
+    for(int i=1;i<100010;i++)
+    {
+        j=i;
+        while(j)
+        {
+            if((j%10)==4)
+                count4++;
+            if((j%10)==7)
+                count7++;
+            j/=10;
+        }
+        arr[i]=ma[count4-count7]+arr[i-1];
+        ma[(count4-count7)]++;
+    }
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n;
+        scanf("%d",&n);
+        printf("%d
+",arr[n]);
+    }
+    return 0;
+}

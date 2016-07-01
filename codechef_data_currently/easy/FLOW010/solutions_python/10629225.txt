@@ -1,0 +1,27 @@
+t=input()
+
+def record(a):
+    list= ["BattleShip","Cruiser","Destroyer","Frigate"]
+
+    print list[k]
+
+    
+    
+
+while t>0:
+
+    test=raw_input()
+    if(test.lower()=='b'):
+        k=0
+    if(test.lower()=='c'):
+        k=1
+    if(test.lower()=='d'):
+        k=2
+    if(test.lower()=='f'):
+        k=3
+    
+    record(k)
+    
+    t-=1
+    
+    

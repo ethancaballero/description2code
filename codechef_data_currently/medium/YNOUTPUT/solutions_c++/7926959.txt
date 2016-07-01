@@ -1,0 +1,75 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+ 
+bool
+IsSame (
+    bool Arr1[],
+    bool Arr2[],
+    int T
+    )
+{
+    for (int i = 0; i < T; ++i)
+    {
+        if (Arr1[i] != Arr2[i])
+        {
+            return false;
+        }
+    }
+ 
+    return true;
+}
+ 
+ 
+int
+main ()
+{
+    int t;
+    char word[4];
+    bool arr[100][100];
+ 
+    cin >> t;
+ 
+    for (int i = 0; i < t; ++i)
+    {
+        for (int j = 0; j < t; ++j)
+        {
+            cin >> word;
+            arr[i][j] = (word[0] == 'Y');
+        }
+    }
+ 
+    int correct = -1;
+    for (int i = 0; (i < t) && (correct == -1); ++i)
+    {
+        if (!arr[i][i])
+        {
+            continue;
+        }
+ 
+        correct = i;
+        for (int j = 0; (j < t) && (correct == i); ++j)
+        {
+            if (arr[i][j] != IsSame(arr[i], arr[j], t))
+            {
+                correct = -1;
+            }
+        }
+    }
+ 
+    for (int i = 0; i < t; ++i)
+    {
+        if ((correct != -1) && arr[correct][i])
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
+        }
+    }
+ 
+    return 0;
+}
+ 

@@ -1,0 +1,39 @@
+#include <iostream>
+#include <map>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int t, n, k, m, i;
+    string dump;
+    cin >> t;
+    map <string, int> m1;
+    map <string, int> :: iterator it;
+    for ( ; t; t--) {
+        cin >> n >> k;
+        string s[n];
+        for (i = 0; i < n; i++) {
+            cin >> s[i];
+            m1[s[i]] = 0;
+        }
+        for ( ; k; k--) {
+            cin >> m;
+            for ( ; m; m--) {
+                cin >> dump;
+                m1[dump] += 1;
+            }
+        }
+        for (i = 0; i < n; i++) {
+            it = m1.find (s[i]);
+            if (it->second != 0) {
+                cout<<"YES";
+            } else {
+                cout<<"NO";
+            }
+            cout<<" ";
+        }
+        cout<<endl;
+        m1.clear();
+    }
+	return 0;
+}

@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long l,r;
+        cin>>l>>r;
+        long long ans=0;
+        long long value=2,current=2;
+        while(value<=r)
+        {
+           // cout<<"Checking "<<value<<"
+";
+            if(value>=l and value<=r)
+            {
+             //   cout<<"Incrementing ans
+";
+                ans++;
+            }
+            current=value*3;
+            while(current<=r)
+            {
+             //   cout<<"Checking "<<current<<"
+";
+                if(current>=l and current<=r)
+                {
+                //    cout<<"Incrementing ans
+";
+                   ans++;
+                }
+                current*=3;
+            }
+            value*=2;
+        }
+    if(l==1)
+      ans++;
+    cout<<ans<<"
+";
+    }
+}

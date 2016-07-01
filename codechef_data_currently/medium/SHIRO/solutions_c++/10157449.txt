@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 1e2 + 10;
+typedef double LL;
+int A[MAXN];
+LL P[MAXN];
+LL dp[MAXN][MAXN * MAXN];
+int main(){
+	memset(dp, 0, sizeof dp);
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		int N;
+		scanf("%d", &N);
+		int sum = 0;
+		for(int i = 1;i <= N;++i){
+			scanf("%d", &A[i]);
+			sum += A[i];
+		}
+		for(int i = 1;i <= N;++i){
+			scanf("%lf", &P[i]);
+			P[i] /= 100;
+		}
+		dp[0][0] = 1;
+		for(int i = 1;i <= N;++i){
+			for(int j = 0;j <= sum;++j){
+				dp[i][j] = 0;
+				//give it to Abra
+				if(A[i] <= j)
+					dp[i][j] += dp[i - 1][j - A[i]] * P[i];
+				//give it to Kadabara
+				dp[i][j] += dp[i - 1][j] * (1 - P[i]);
+			}
+		}
+		// for(int i = 1;i <= N;++i){
+		// 	for(int j = 0;j <= sum;++j){
+		// 		printf("%8lld ",dp[i][j]);
+		// 	}
+		// 	cout << "
+";
+		// }
+		LL ans = 0;
+		for(int i = (sum + 1)/2;i <= sum;++i){
+			ans += dp[N][i];
+		}
+		printf("%.6f
+", ans);
+	}
+
+
+
+	return 0;
+}

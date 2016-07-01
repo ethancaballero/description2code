@@ -1,0 +1,26 @@
+import sys
+
+n, w, l = map(int, sys.stdin.readline().split())
+tr = []
+
+for i in xrange(n):
+	h, g = map(int, sys.stdin.readline().split())
+	tr.append((h,g))
+
+low = -1
+high = 10**18+11
+while high -low > 1:
+	mid = (high + low) >> 1
+	check = 0
+	# print (low, high, mid)
+	for h,g in tr:
+		# print (h,g)
+		temp = h + (g * mid)
+		# print temp
+		if temp >= l:
+			check = check + temp
+	if check >= w:
+		high = mid
+	else:
+		low = mid
+print high

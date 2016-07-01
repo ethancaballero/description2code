@@ -1,0 +1,53 @@
+#include<iostream>
+using namespace std;
+ int bst(long long int b[],long long int x,int siz)
+{
+    int low=0,high=siz,ans=siz;
+    while(low<=high)
+    {
+        int mid=(low+high)/2;
+        if(b[mid]>x)
+        {
+            ans=mid;
+            high=mid-1;
+        }
+        else
+        {
+           low=mid+1;
+        }
+    }
+    return ans;
+}
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+int n,i,siz;
+cin>>n;
+long long int a[n],b[100005]={0};
+for(i=0;i<n;i++)
+    cin>>a[i];
+b[0]=a[0];
+siz=1;
+for(i=1;i<n;i++)
+{
+ int ind=bst(b,a[i],siz);
+if(ind==siz)
+    siz++;
+b[ind]=a[i];
+}
+cout<<siz<<" ";
+i=0;
+while(b[i]>0)
+{
+    //cout<<"hah";
+    cout<<b[i]<<" ";
+    i++;
+}
+cout<<"
+";
+}
+return 0;
+}

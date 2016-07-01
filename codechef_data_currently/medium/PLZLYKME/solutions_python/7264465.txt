@@ -1,0 +1,16 @@
+t=int(raw_input())
+for i in xrange(t):
+    n=map(int,raw_input().split())
+    l=n[0]
+    d=n[1]
+    s=n[2]
+    c=n[3]
+    lo=s
+    for j in xrange(d-1):
+        if(lo>=l):
+            break
+        lo=lo*(c+1)
+    if(lo>=l):
+        print "ALIVE AND KICKING"
+    else:
+        print "DEAD AND ROTTING" 

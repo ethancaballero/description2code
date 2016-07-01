@@ -1,0 +1,122 @@
+#include <cctype>
+#include <cmath>
+#include <cstdio>
+ 
+using namespace std;
+ 
+const int BUFSIZE = 4096;
+const char MINUS = '-';
+const char ZEROCHAR = '0';
+ 
+char r_buffer[BUFSIZE];
+int r_bufpos = BUFSIZE;
+ 
+int readint()
+{
+    int sign = 1;
+    int n = 0;
+    for (; r_bufpos < BUFSIZE && r_buffer[r_bufpos] != MINUS &&
+            !isdigit(r_buffer[r_bufpos]); r_bufpos++);
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE && r_buffer[r_bufpos] != MINUS &&
+                !isdigit(r_buffer[r_bufpos]); r_bufpos++);
+    }
+    if (r_buffer[r_bufpos] == MINUS)
+    {
+        sign = -1;
+        r_bufpos += 1;
+    }
+    for (; r_bufpos < BUFSIZE && isdigit(r_buffer[r_bufpos]); r_bufpos++)
+        n = 10 * n + r_buffer[r_bufpos] - ZEROCHAR;
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE && isdigit(r_buffer[r_bufpos]); r_bufpos++)
+            n = 10 * n + r_buffer[r_bufpos] - ZEROCHAR;
+    }
+    return sign * n;
+}
+ 
+const int MAXSIZE = 2000;
+const double LOBOUND = -5.0e+3;
+const double UPBOUND = 5.0e+3;
+ 
+int X[MAXSIZE];
+int Y[MAXSIZE];
+int T, N, A, B, C;
+double EPSILON = 5.0e-7;
+ 
+inline double euclidean(double x, double x0, double y, double y0)
+{
+    return sqrt(pow(x - x0, 2) + pow(y - y0, 2));
+}
+ 
+inline double f(double x)
+{
+    double y = -1.0 * (A * x + C) / B;
+    double dist = 0.0;
+    for (int i=0; i < N; i++)
+        dist += euclidean(x, X[i], y, Y[i]);
+    return dist;
+}
+ 
+/*
+ SUM (2(x - x0) + 2(y - y0)y') / 2sqrt((x - x0)^2 + (y - y0)^2))
+ */
+inline double dxfp(double x)
+{
+    double y = -1.0 * (A * x + C) / B;
+    double dy = -1.0 * A / B;
+    double res = 0.0;
+    for (int i=0; i < N; i++)
+        res += (x - X[i] + (y - Y[i]) * dy) / euclidean(x, X[i], y, Y[i]);
+    return res;
+}
+ 
+double newton(double left, double right)
+{
+    double res;
+    double mid = left + (right - left) / 2;
+    while (fabs(res = dxfp(mid)) >= EPSILON)
+    {
+        if (res < 0)
+            left = mid;
+        else
+            right = mid;
+        mid = left + (right - left) / 2;
+    }
+    return mid;
+}
+ 
+int main()
+{
+    double xhat;
+    double a, b;
+    T = readint();
+    for(; T > 0; T--)
+    {
+        N = readint();
+        A = readint();
+        B = readint();
+        C = readint();
+        for(int i=0; i < N; i++)
+        {
+            X[i] = readint();
+            Y[i] = readint();
+        }
+        for (a = -1.0; dxfp(a) > 0; a *= 2);
+        for (b = 1.0; dxfp(b) < 0; b *= 2);
+        xhat = newton(a, b);
+        if ( xhat < LOBOUND || xhat > UPBOUND )
+            printf("NO
+");
+        else
+            printf("%.6f
+", f(xhat));
+    }
+    return 0;
+} 

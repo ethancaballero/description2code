@@ -1,0 +1,18 @@
+def fun(n):
+    x=dict()
+    for i in n:
+        if i in x:
+            x[i]+=1
+        else:
+            x[i]=1
+    return len(n)-max(x.values())
+x=input()
+m=list()
+for i in range(0,x,1):
+    a=input()
+    b=raw_input()
+    a=b.rsplit()
+    c=fun(a)
+    m.append(c)
+for i in m:
+    print i

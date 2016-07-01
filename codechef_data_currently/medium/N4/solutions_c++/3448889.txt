@@ -1,0 +1,265 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+struct gameCase {
+	int h1;
+	int h2;
+	int h3;
+	int nextLink;
+}allCases[242];
+ 
+bool gameEqual (gameCase t1,gameCase t2) {
+	if(t1.h1 == t2.h1 && t1.h2 == t2.h2 && t1.h3 == t2.h3)
+		return true;
+	if(t1.h1 == t2.h2 && t1.h2 == t2.h3 && t1.h3 == t2.h1)
+		return true;
+	if(t1.h1 == t2.h3 && t1.h2 == t2.h1 && t1.h3 == t2.h2)
+		return true;
+	return false;
+}
+ 
+gameCase acShift (int a,int b,int c) {
+ 
+	int h1=a,h2=b,h3=c;
+ 
+	
+	h2 = h2 & 15;
+	h3 = h3 & 30;
+ 
+	
+	h1 = h1<<1;
+ 
+	
+	if (h1 & 64) {
+		h1 = (h1 & 62) | 1;
+		h2 = h2 | 16;
+	}
+ 
+	
+	if (h1 & 32) {
+		h2 = h2 | 32;
+		h3 = h3 | 32;
+	}
+ 
+	
+	if (h1 & 16)
+		h3 = h3 | 1;
+ 
+	gameCase g={h1,h2,h3,-1};
+	return g;
+}
+gameCase cShift (int a,int b,int c) {
+	int h1=a,h2=b,h3=c;
+ 
+	
+	h2 = h2 & 15;
+	h3 = h3 & 30;
+ 
+	
+	if (h1 & 1) {
+		h1 = h1 | 64;
+ 
+		
+		h2 = h2 | 32;
+		h3 = h3 | 32;
+	}
+	
+	h1 = (h1>>1)&63;
+ 
+	if (h1 & 1) {
+		h2 = h2 | 16;
+	}
+ 
+	if (h1 & 16)
+		h3 = h3 | 1;
+ 
+	gameCase g={h1,h2,h3,-1};
+	return g;
+}
+ 
+gameCase getGame(){
+	register int a=0,b=0;
+	gameCase g;
+	a=(getchar()-'0')<<1;
+	b=(getchar()-'0')<<3;
+	a=a | ((getchar()-'0')<<2);
+	a=a | ((getchar()-'0'));
+	b=b | ((getchar()-'0')<<2);
+	a=a | ((getchar()-'0')<<3);
+	a=a | (getchar()-'0')<<5;
+	b=b | ((getchar()-'0')<<1);
+	a=a | ((getchar()-'0')<<4);
+	g.h1=a;
+	b=b | ((a&1)<<4);
+	b=b | (a&32);
+	b=b | ((getchar()-'0'));
+	g.h2=b;
+	a=(a&16)>>4;
+	a=a | (b&32);
+	a=a | ((b&1)<<4);
+	a=a | ((getchar()-'0')<<1);
+	a=a | ((getchar()-'0')<<3);
+	a=a | ((getchar()-'0')<<2);
+	g.h3=a;
+	getchar(); 
+	return g;
+}
+inline int scanInt() {
+      register int retInt = 0,d;
+      while ((d = getchar()) >= '0') {
+            retInt = (retInt<<3) + (retInt<<1) + (d-'0');
+      }
+      return retInt;
+}
+ 
+int main(void) {
+	
+	int a,b,c;
+	gameCase base;
+	base.h1 = 49;
+	base.h2 = 49;
+	base.h3 = 49;
+	base.nextLink = -1;
+	int gameIndex=0;
+	allCases[gameIndex++] = base;
+	int processing = 0,x;
+	while (processing<=gameIndex) {
+		a=allCases[processing].h1;
+		b=allCases[processing].h2;
+		c=allCases[processing].h3;
+ 
+		gameCase t=cShift(a,b,c);
+		for (x=0;x<gameIndex;x++) {
+			if (gameEqual(allCases[x],t)) {
+				break;
+			}
+		}
+		if (x==gameIndex) {
+			t.nextLink = processing;
+			allCases[gameIndex++] = t;
+		}
+		t=cShift(b,c,a);
+		for (x=0;x<gameIndex;x++) {
+			if (gameEqual(allCases[x],t)) {
+				break;
+			}
+		}
+		if (x==gameIndex) {
+			t.nextLink = processing;
+			allCases[gameIndex++] = t;
+		}
+		t=cShift(c,a,b);
+		for (x=0;x<gameIndex;x++) {
+			if (gameEqual(allCases[x],t)) {
+				break;
+			}
+		}
+		if (x==gameIndex) {
+			t.nextLink = processing;
+			allCases[gameIndex++] = t;
+		}
+		t=acShift(a,b,c);
+		for (x=0;x<gameIndex;x++) {
+			if (gameEqual(allCases[x],t)) {
+				break;
+			}
+		}
+		if (x==gameIndex) {
+			t.nextLink = processing;
+			allCases[gameIndex++] = t;
+		}
+		t=acShift(b,c,a);
+		for (x=0;x<gameIndex;x++) {
+			if (gameEqual(allCases[x],t)) {
+				break;
+			}
+		}
+		if (x==gameIndex) {
+			t.nextLink = processing;
+			allCases[gameIndex++] = t;
+		}
+		t=acShift(c,a,b);
+		for (x=0;x<gameIndex;x++) {
+			if (gameEqual(allCases[x],t)) {
+				break;
+			}
+		}
+		if (x==gameIndex) {
+			t.nextLink = processing;
+			allCases[gameIndex++] = t;
+		}
+		processing++;
+	}
+	gameIndex--;
+	
+	int testCases=scanInt();
+	while (testCases--) {
+          
+    	int count=0;
+    	gameCase start = getGame();
+    	for (count=0;count<gameIndex;count++) {
+            if(gameEqual(start,allCases[count])){
+                start.nextLink=allCases[count].nextLink;
+                break;
+            }
+        }
+    	int moves[8],value=0;
+    	count=0;
+    	while(start.nextLink!=-1) {
+            //printGame(start);
+            gameCase t=acShift(start.h1,start.h2,start.h3);
+    	    if (gameEqual(allCases[start.nextLink],t)) {
+                    moves[count++]=value+1;
+                    t.nextLink = allCases[start.nextLink].nextLink;
+                    start=t;
+    				continue;
+    	    }
+            t=acShift(start.h2,start.h3,start.h1);
+    	    if (gameEqual(allCases[start.nextLink],t)) {
+                    value=(value+1)%3;
+                    moves[count++]=value+1;
+                    t.nextLink = allCases[start.nextLink].nextLink;
+                    start=t;
+    				continue;
+    	    }
+            t=acShift(start.h3,start.h1,start.h2);
+    	    if (gameEqual(allCases[start.nextLink],t)) {
+                    value=(value+2)%3;
+                    moves[count++]=value+1;
+                    t.nextLink = allCases[start.nextLink].nextLink;
+                    start=t;
+    				continue;
+    	    }
+            t=cShift(start.h1,start.h2,start.h3);
+    	    if (gameEqual(allCases[start.nextLink],t)) {
+                    moves[count++]=value+4;
+                    t.nextLink = allCases[start.nextLink].nextLink;
+                    start=t;
+    				continue;
+    	    }
+            t=cShift(start.h2,start.h3,start.h1);
+    	    if (gameEqual(allCases[start.nextLink],t)) {
+                    value=(value+1)%3;
+                    moves[count++]=value+4;
+                    t.nextLink = allCases[start.nextLink].nextLink;
+                    start=t;
+    				continue;
+    	    }
+            t=cShift(start.h3,start.h1,start.h2);
+    	    if (gameEqual(allCases[start.nextLink],t)) {
+                    value=(value+2)%3;
+                    moves[count++]=value+4;
+                    t.nextLink = allCases[start.nextLink].nextLink;
+                    start=t;
+    				continue;
+    	    }
+        }
+        printf("%d
+",count);
+        for(int i=0;i<count;i++) {
+             printf("%d %d
+",(moves[i]-1)%3,(moves[i]>3));
+        }
+    }
+	return 0;
+}

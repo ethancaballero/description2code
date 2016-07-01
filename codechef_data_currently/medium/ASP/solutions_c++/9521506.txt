@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std ;
+#define ll long long int
+#define sc(n) scanf("%lld",&n)
+int main()
+{
+    ll i,j,k,n,m,p,t ;
+    sc(t) ;
+    while(t--) {
+        sc(n) ;
+        ll a[100001] ;
+        for(i=0;i<n;i++) sc(a[i]) ;
+        i = 0 ;
+        while(i+2<n) {
+            if(a[i] > a[i+2]) break ;
+            else{
+                if(a[i+1] >= a[i] && a[i+1] <= a[i+2]) i += 2 ;
+                else i += 1 ;
+            }
+        }
+        if(i<n-2) {
+            printf("NO
+") ;
+        }
+        else {
+            if(i<=n-1) {
+                printf("YES
+") ;
+            }
+        }
+    }
+    return 0 ;
+}

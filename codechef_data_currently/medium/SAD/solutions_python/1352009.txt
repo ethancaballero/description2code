@@ -1,0 +1,33 @@
+#! /usr/bin/python
+
+def main():
+    tmp = raw_input().split(' ')
+    r = int(tmp[0])
+    c = int(tmp[1])
+    cells = []
+    for i in range(r):
+        tmp = raw_input().split(' ')
+        tlst = []
+        for j in range(len(tmp)):
+            tlst.append(int(tmp[j]))
+        cells.append(tlst)
+    mn = [];mx = []
+    for i in range(r):
+        mn.append(min(cells[i]))
+    for i in range(c):
+        templst = []
+        for k in range(r):
+            templst.append(cells[k][i]) 
+        mx.append( max(templst))
+    flag = False
+    for i in range(r):
+        for j in range(c):
+            if mx[j] == mn[i]:
+                if (not flag):
+                    print mx[j]
+                    flag = True
+    if not flag:
+        print "GUESS"
+    return 0;
+if __name__:
+    main()

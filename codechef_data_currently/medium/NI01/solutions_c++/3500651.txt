@@ -1,0 +1,66 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{int N, p,r,i,j,n,*t,m,q;
+long int k;
+scanf("%d",&N);
+while(N--)
+{scanf("%d %d %d %d %d %ld",&n,&m,&q,&p,&r,&k);
+
+t=new int [k];
+
+if(n>=q)
+  {t[0]=q;
+  n-=q;
+   q=0;
+   }
+else if(n<q)
+ {t[0]=n;
+ q-=n;
+ n=0;
+  }
+for(i=1;i<k;i++)
+{if(i%r==0 && i<=m*r)
+ q++;
+if(i>=p)	
+ n+=t[i-p];
+if(n>=q)
+  {t[i]=q;
+  n-=q;
+   q=0;
+   }
+else if(n<q)
+ {t[i]=n;
+ q-=n;
+  n=0;
+  }
+
+}
+n+=t[k-p];
+if(k%r==0 && k<=r*m)
+ q++;
+if(n>=q)
+  {t[k]=q;
+  n-=q;
+   q=0;
+   }
+else if(n<q)
+ {t[k]=n;
+ q-=n;
+  n=0;
+ }
+long int l=0;
+for(j=0;j<=k-p;j++)
+ l+=t[j];
+m=m-k/r;
+if(m<0)
+ m=0;
+printf("%d ", n);
+printf("%d ",l);
+printf("%d ",m);
+printf("%d ",q);
+cout<<endl;
+}
+return 0;
+}

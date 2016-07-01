@@ -1,0 +1,58 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <map>
+using namespace std;
+
+map<string,long int>m;
+
+int main()
+{
+    int n;
+    string s,q;
+    int i,k;
+    long int v;
+
+    cin>>n;
+    m.clear();
+    while (n--)
+    {
+        cin>>s;
+        cin>>v;
+        m[s]=v;
+
+    }
+     long int small;
+     string temp;
+     cin>>k;
+     int flag;
+    map<string,long int>::iterator iter;
+    while (k--)
+    {
+        cin>>q;
+        small=-1000000001;
+        flag=0;
+        for (iter=m.begin();iter!=m.end();iter++)
+        {
+
+
+          if ((iter->first).substr(0,q.length())==q)
+           {
+            if ((iter->second)>small)
+            {
+                small=iter->second;
+                temp=iter->first;
+                flag=1;
+            }
+           }
+
+        }
+       if (flag)
+       cout<<temp<<endl;
+       else
+        cout<<"NO"<<endl;
+
+
+    }
+    return 0;
+}

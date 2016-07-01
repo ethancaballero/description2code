@@ -1,0 +1,63 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+using namespace std;
+typedef vector<int> vi;
+typedef vector<vi>vvi;
+int T,n,s,t;
+bool visited[10003],protect[10003];
+inline bool dfs(const vvi& adj,int node)
+{
+	int c1[2],count=0;
+	
+	visited[node]=true;
+	if(protect[node])return true;
+	
+	for(int j=0;j<adj[node].size();j++)
+	if(!visited[adj[node][j]])
+	{
+		c1[count++]=adj[node][j];
+	}
+	
+	if(count==0||count==1)return false;
+	else return dfs(adj,c1[0])&&dfs(adj,c1[1]);
+}
+
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	{
+		memset(visited,0,sizeof(visited));
+		memset(protect,0,sizeof(protect));
+		
+		scanf("%d%d%d",&n,&s,&t);
+		vvi adj(n,vi(0));
+		for(int c,x,i=0;i<n;i++)
+		{
+			scanf("%d",&c);
+			while(c--)
+			{
+				scanf("%d",&x);
+				adj[i].push_back(x-1);				
+			}
+		}
+		
+		for(int x,i=0;i<t;i++)
+		{
+			scanf("%d",&x);
+			protect[x-1]=true;
+		}
+		
+		if(dfs(adj,s-1))printf("no
+");
+		else printf("yes
+");
+		//printf(dfs(adj,s-1)?"no
+":"yes
+");
+	}
+	return 0;
+}

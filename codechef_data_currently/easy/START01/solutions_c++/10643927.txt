@@ -1,0 +1,10 @@
+#include<bits/stdc++.h>
+using namespace std;
+char a[1000000];
+int main()
+{
+    scanf("%s",&a);
+    printf("%s
+",a);
+    return 0;
+}

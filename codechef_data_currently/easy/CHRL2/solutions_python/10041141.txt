@@ -1,0 +1,15 @@
+chef=raw_input()
+c,h,e,f=0,0,0,0
+for i in chef:
+    if i=='C':
+        c+=1
+    elif i=='H':
+        if h<c:
+            h+=1
+    elif i=='E':
+        if e<h:
+            e+=1
+    elif i=='F':
+        if f<e:
+            f+=1
+print f

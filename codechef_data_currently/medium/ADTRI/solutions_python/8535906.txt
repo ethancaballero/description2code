@@ -1,0 +1,23 @@
+s=[False,False,True]
+s+=[True,False]*(2500000-1)
+final=[False]*(5000001)
+for x in xrange(3,2238,2):
+    if s[x]:
+        for i in xrange(x*x,5000000,2*x):
+            s[i]=False
+
+
+for x in xrange(5,5000000+1,4):
+    if s[x]:
+        k=1
+        while x*k<=5000000:
+            final[x*k]=True
+            k+=1
+
+t=input()
+for x in xrange(t):
+    n=input()
+    if final[n]:
+        print "YES"
+    else:
+        print "NO"

@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int t;
+    float hr, da, g;
+    cin>>t;
+    int sal[t];
+    for(int i=0; i<t; i++)
+    {
+       cin>>sal[i];
+       if(sal[i]<1500)
+       {
+           da=0.9*sal[i];
+           hr=0.1*sal[i];
+       }
+       else
+       {
+           da=0.98*sal[i];
+           hr=500;
+       }
+       g=sal[i]+hr+da;
+       cout<<g<<"
+";
+    }
+}

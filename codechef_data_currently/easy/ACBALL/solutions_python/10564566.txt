@@ -1,0 +1,9 @@
+import sys
+for _ in range(int(sys.stdin.readline())):
+    x,y=list(sys.stdin.readline().strip()),list(sys.stdin.readline().strip())
+    for i in range(len(x)):
+        if x[i] =='W' or y[i]=='W':
+            x[i] = 'B'
+        else:
+            x[i]='W'
+    print ''.join(x)

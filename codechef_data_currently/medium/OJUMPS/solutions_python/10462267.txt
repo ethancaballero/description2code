@@ -1,0 +1,4 @@
+a = int(raw_input())
+if a == 0: print 'yes'
+elif (a - 1) % 6 and (a - 3) % 6 and (a - 6) % 6: print 'no'
+else: print 'yes'

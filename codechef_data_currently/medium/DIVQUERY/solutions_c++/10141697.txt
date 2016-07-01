@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string.h>
+#include <algorithm>
+#include <math.h>
+#include <vector>
+#include <queue>
+#include <set>
+#include <stack>
+#include <map>
+#define INF_MAX 2147483647
+#define INF_MIN -2147483647
+#define INF_LL 9223372036854775807LL
+#define INF 2000000000
+#define PI acos(-1.0)
+#define inf INT_MAX
+#define llu unsigned long long int
+#define all(v) v.begin(),v.end()
+#define pb push_back
+#define mp make_pair
+#define F first
+#define S second
+#define si(n) scanf("%d",&n)
+#define slli(n) scanf("%lld",&n);
+#define ss(n) scanf("%s",n);
+using namespace std;
+typedef long long int LL;
+
+//freq[K] at some index stores the number of numbers which are divisible by k and occuring between 1 and index
+int freq[100010], u[100010] , v[100010] , K[100010] , A[100010];
+std::map< pair<int , int > , int > mpp;
+std::vector<int > queriesat[100010];
+
+
+
+int main()
+{
+
+int N , Q , j;
+si(N);si(Q);
+for(int i=1;i<=N;i++)
+	si(A[i]);
+
+for(int i=1;i<=Q;i++)
+{
+	si(u[i]);si(v[i]);si(K[i]);
+	mpp[mp(u[i]-1 , K[i])] = 0;
+	mpp[mp(v[i] , K[i])] = 0;
+	queriesat[(u[i]-1)].pb(K[i]);
+	queriesat[(v[i])].pb(K[i]);
+	if(u[i]==1)
+		mpp[mp(0 , K[i])] = 0;
+}
+
+memset(freq , 0 , sizeof(freq));
+
+for(int i=1;i<=N;i++)
+{
+	j = 1;
+	for(;(j*j)<A[i];j++)
+	{
+		if((A[i]%j)==0)
+		{
+			freq[(A[i]/j)]++;
+			freq[j]++;
+		}
+	}
+	if((j*j)==A[i])
+		freq[j]++;
+	for(int k=0;k<queriesat[i].size();k++)
+	{
+		// cout << i << "#" << queriesat[i][k] << "###" << freq[queriesat[i][k]] << endl;
+		mpp[mp(i , queriesat[i][k])] = freq[queriesat[i][k]];
+	}
+}
+int ans;
+for(int i=1;i<=Q;i++)
+{
+	ans =  mpp[mp(v[i] , K[i])]- mpp[mp(u[i]-1 , K[i])];
+	
+	printf("%d
+", ans);
+}
+
+
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

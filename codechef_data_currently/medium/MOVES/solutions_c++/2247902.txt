@@ -1,0 +1,43 @@
+#include <cstdio>
+#define m 1000000007
+typedef long long int ll;
+ll fact[5001];
+
+ll qpow(ll base, ll exp){
+	ll ans=1;
+	while (exp){
+		if (exp&1){
+			ans = (ans * base)%m;
+		}
+		exp/=2;
+		base = (base*base)%m;
+	}
+	return ans;
+}
+
+inline ll inv(ll i){
+	return qpow(i, m-2);
+}
+
+inline ll nck(int n, int k){
+	ll den = (fact[k] * fact[n-k])%m;
+	return (fact[n] * inv(den))%m;
+
+}
+
+int main(){
+	int n, k;
+
+	fact[0]=1;
+	for (int i=1; i<5001; i++){
+		fact[i] = (i * fact[i-1])%m;
+	}
+
+	while (1){
+		scanf("%d%d", &n, &k);
+		if (!n && !k) break;
+		printf("%lld
+", (nck(n-2, (k-1)/2) * nck(n-2, k/2) * 2)%m);
+	}
+	return 0;
+}

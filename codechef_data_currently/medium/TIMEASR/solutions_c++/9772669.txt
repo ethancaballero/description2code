@@ -1,0 +1,43 @@
+#include <cmath>
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+const int MAXN = 60 * 12;
+const double EPS = 1e-9;
+
+int Tn;
+double ang[MAXN], required;
+int hh[MAXN], mm[MAXN];
+
+int main(int argc, const char * argv[]) {
+    ios_base::sync_with_stdio(false);
+    
+    double hour_angle = 0.0;
+    double minute_angle = 0.0;
+    for(int i = 0; i < 60 * 12; i++) {
+        if (i % 60 == 0)
+            minute_angle = 0;
+        else
+            minute_angle += 360.0 / 60.0;
+        hh[i] = i / 60;
+        mm[i] = i % 60;
+        ang[i] = fabs(minute_angle - hour_angle);
+        if (ang[i] - EPS > 180.0)
+            ang[i] = 360.0 - ang[i];
+        hour_angle += 360.0 / (12.0 * 60.0);
+    }
+    
+    double fault_tolerance = 1.0 / 120.0;
+    
+    scanf("%d", &Tn);
+    while (Tn--) {
+        scanf("%lf", &required);
+        for(int i = 0; i < 60 * 12; i++)
+            if (fabs(ang[i] - required) < fault_tolerance + EPS) printf("%.2d:%.2d
+", hh[i], mm[i]);
+    }
+    return 0;
+}

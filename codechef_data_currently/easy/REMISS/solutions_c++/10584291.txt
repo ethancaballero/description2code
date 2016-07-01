@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	std::ios_base::sync_with_stdio(false);
+	int t,i,j;
+	cin>>t;
+	while(t--)
+	{
+		cin>>i>>j;
+		if(i>j)
+		cout<<i;
+		else
+		cout<<j;
+		cout<<" "<<i+j<<"
+";
+	}
+return 0;
+}

@@ -1,0 +1,98 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std ;
+int i;
+int partition(int *a, int l, int h) 
+{ 
+	int p=a[l];
+	int left=l+1,right=h;
+	while (left<right) 
+	{
+		while (a[left] <=p&&left<h) left++;
+		while (a[right] >=p&&right>l) right--;
+		if(left<right) { int temp=a[right];
+		a[right] =a[left];
+		a[left] =temp;}
+	}
+	if (p>a[right])
+{	a[l]=a[right];
+	a[right] =p;} 
+	return right;
+}
+void qsort (int *a, int l, int h) 
+{
+	if (l>=h)
+	return ;
+	int p=partition(a, l, h);
+	if (p!=0)
+	qsort (a, l, p-1);
+	qsort (a, p+1, h);
+}
+int main()
+{
+	int t, n, m, temp, sum;
+	scanf("%d", &t) ;
+	while (t--) 
+	{ 
+		scanf("%d%d", &n,&m) ;
+		i=0;
+		int note[n];
+		while (n--)
+		{
+		scanf("%d", &temp) ;
+		if (temp<=m) note[i++]=temp;
+		} 
+		if (i==1)
+		if (note[0]==m) 
+		{
+			printf("Yes
+");
+			continue ;
+		}
+		if (i==0||i==1) 
+		{
+			printf("No
+");
+			continue ;
+		}
+		int stack[i], top, a[i][2];
+		sum=0;
+		qsort(note,0,i-1) ;
+		int te=0;
+		while (te<i) {
+sum=sum+note[te];
+		a[te][0]=note[te];
+		a[te][1]=sum;
+		te++;
+		}
+		sum=0;
+		te=i-1;
+		top=-1;
+		while (1)
+		{
+			if (te>=0)
+			if (a[te][0]+sum<=m)
+			{
+				sum=sum+a[te][0];
+				stack[++top]=te;
+			}
+			if (sum==m) goto next;
+		if (top>=0) 
+		if (te<=0||a[te-1][1]<m-sum)
+			{ 
+				te=stack[top];
+				sum=sum-a[te][0] ;
+				top--;
+			}
+//				cout<<"te=" <<te<<" top="<<top<<" stop="<<stack[top]<<" sum="<<sum<<endl ;
+			if (te==0&&top==-1) break;
+			te--;
+		}
+		printf("No
+");
+		continue;
+		next:
+		printf("Yes
+") ;
+	}
+}

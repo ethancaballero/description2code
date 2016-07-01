@@ -1,0 +1,79 @@
+#include<iostream>
+#include<stdlib.h>
+#include<string.h>
+using namespace std;
+
+int main()
+{
+
+    char s[1000005],a,b,L[200];
+   int T,N,flag;
+   long int g,i,m;
+    cin>>T;
+    while(T--)
+    {
+        flag=0;
+        cin>>N;
+        for(i=33;i<=127;i++)
+        {
+            L[i]=0;
+        }
+     for(i=0;i<N;i++)
+        {
+       cin>>a;
+       cin>>b;
+        L[a]=b;
+        }
+          cin>>s;
+          g=strlen(s);
+          for(i=0;i<g;i++)
+          {
+              if(L[s[i]])
+             {
+
+              s[i]=L[s[i]];
+             }
+             if(s[i]=='.')
+                flag=1;
+          }
+          m=0;
+          if(s[m]=='0')
+          {
+              while(s[m]=='0')
+              {
+                  m++;
+              }
+          }
+if(flag==1)
+        {
+
+         if(s[g-1]=='0')
+        {
+            while(s[g-1]=='0')
+            {
+                g--;
+            }
+        }
+
+        if(s[g-1]=='.')
+        {
+            g--;
+        }
+        }
+        if(m>g-1)
+        {
+            cout<<"0";
+        }
+        else
+        {
+       for(i=m;i<=g-1;i++)
+        {
+           cout<<s[i];
+        }
+        }
+cout<<"
+";
+    }
+
+                return 0;
+}

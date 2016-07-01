@@ -1,0 +1,21 @@
+#codechef feb long quest
+M=[0]*100001
+A=[0]*100001
+M[0]=1
+s4=0
+s7=0
+ret=0
+for el in range(1,100001):
+    n=el
+    while n>0:
+        k=n%10
+        if(k==4):s4+=1
+        if(k==7):s7+=1
+        n=n/10
+    ret+=M[s4-s7]
+    A[el]=ret
+    M[s4-s7]+=1
+t=int(raw_input())
+for i in range(t):
+    n=int(raw_input())
+    print(A[n])

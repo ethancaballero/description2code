@@ -1,0 +1,27 @@
+left = True
+right = True
+n, m = map(int, raw_input().split())
+lim = min(n, m)
+lis = [[0 for x in xrange(m)] for x in xrange(n)]
+for i in xrange(n):
+    lis[i] = map(int, raw_input().split())
+l = int(raw_input())
+suml = 0
+sumr = 0
+for i in xrange(l):
+    x, y = map(int, raw_input().split())
+    x = x - 1
+    y = y - 1
+    if x >= lim:
+        left = False
+    if y >= lim:
+        right = False
+    if left == True:
+        suml += lis[x][y]
+    if right == True:
+        sumr += lis[y][x]
+if left == False:
+    suml = -1
+if right == False:
+    sumr = -1
+print max(suml, sumr)

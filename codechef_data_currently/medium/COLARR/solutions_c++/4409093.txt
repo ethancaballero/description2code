@@ -1,0 +1,103 @@
+    #include <cstdio>
+    #include <algorithm>
+     
+    using namespace std;
+     
+    typedef struct cellpaint
+    {
+    	int cell;
+    	int color;
+    	int profit;
+    }cellpaint;
+     
+    bool comp(cellpaint a, cellpaint b)
+    {
+    	return a.profit > b.profit;
+    }
+     
+    int* A;
+    int* B[1000];
+    int* C[1000];
+    cellpaint* P;
+    int main()
+    {
+    	int T,N,M,K,i,j,k,p,ans;
+    	scanf("%d",&T);
+
+    	A = (int*)malloc(sizeof(int)*1000);    	 
+    	for(i = 0; i < 1000; ++i)
+    	B[i] = (int*)malloc(sizeof(int)*1000);
+    	for(i = 0; i < 1000; ++i)
+    	C[i] = (int*)malloc(sizeof(int)*1000);
+    	P = (cellpaint*)malloc(sizeof(cellpaint)*1000001);
+    	 
+    	while(T--)
+    	{
+    		scanf("%d",&N);
+    		scanf("%d",&M);
+    		scanf("%d",&K);
+    		 
+    		for(i = 0; i < N; ++i)
+    			scanf("%d",&A[i]);
+    		 
+    		for(i = 0; i < N; ++i)
+    			for(j = 0; j < M; ++j)
+    				scanf("%d", &B[i][j]);
+    		 
+    		for(i = 0; i < N; ++i)
+    			for(j = 0; j < M; ++j)
+    				scanf("%d", &C[i][j]);
+    		 
+    		k = 0;
+    		int tco,tp;
+    		for(i = 0; i < N; ++i)
+    		{
+    			p = 0;
+    			tco = 0;
+    			tp = 0;
+    			for(j = 0; j < M; ++j)
+    			{
+    				tp = (B[i][j] - C[i][j]) - B[i][A[i]-1];
+    				if(tp > p)
+    				{
+    					tco = j+1;
+    					p = tp;
+    				}
+    			}
+
+    			if(tco != 0)
+    			{
+    				P[k].cell = i;
+    				P[k].color = tco;
+    				P[k++].profit = p;
+    			}
+    		}
+    		 
+    		/*for(i = 0; i < k; ++i)
+    			printf("%d %d
+", P[i].cell, P[i].color);*/
+    		sort(P,P+k,comp);
+    		 
+    		ans = 0;
+    		for(i = 0; i < k && i < K; ++i)
+    		{
+    			A[P[i].cell] = P[i].color;
+    			ans -= C[P[i].cell][P[i].color-1];
+    		}
+    		 
+    		for(i = 0; i < N; ++i)
+    			ans += B[i][A[i]-1];
+    		 
+    		printf("%d
+", ans);
+    	}
+    	 
+    	 
+    	free(A);
+    	for(i = 0; i < N; ++i)
+    	free(B[i]);
+    	for(i = 0; i < N; ++i)
+    	free(C[i]);
+    	free(P);
+    	return 0;
+    } 

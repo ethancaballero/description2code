@@ -1,0 +1,12 @@
+t = int(raw_input().strip())
+c1 = c2 = c1_t = c2_t = 0
+for i in xrange(t) :
+    a = map(int,raw_input().strip().split(' '))
+    c1_t += a[0]
+    c2_t += a[1]
+    if c1_t > c2_t :
+        c1 =  max(c1,c1_t-c2_t)
+    else :
+        c2 = max(c2,c2_t-c1_t)
+if c1 > c2 : print 1,c1
+else : print 2,c2

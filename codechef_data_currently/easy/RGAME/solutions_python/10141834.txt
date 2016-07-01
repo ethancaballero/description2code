@@ -1,0 +1,14 @@
+for t in xrange(int(raw_input())):
+    n = int(raw_input())
+    
+    a = map(int, raw_input().split())
+    p = 2 * (a[0] * a[1])
+    s = a[0] + a[1]
+    c = 2
+    mod = (10**9 + 7)
+    for i in a[2:]:
+        # print "p c s c i", p, c, s, c, i
+        p = 2 * (p + (i * s))%mod
+        s = ((c * i) + s)%mod
+        c = (c*2)%mod
+    print p 

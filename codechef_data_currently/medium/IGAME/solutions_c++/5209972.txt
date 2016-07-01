@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+#define swap(m,n) m^=n^=m^=n
+#define eps 1e-9
+int main()
+{
+int T;
+for(scanf("%d",&T);T--;)
+{
+int m,n,p,q;
+scanf("%d%d%d%d",&m,&n,&p,&q);
+m-=p;
+n-=q;
+if(m<n) swap(m,n);
+puts(n-int((m-n)*(1+sqrt(5.0))/2)?"Alice":"Bob");
+}
+return 0;
+} 

@@ -1,0 +1,7 @@
+num=input()
+for j in range(num):
+	n=input()
+	fact=1
+	for i in range(n):
+		fact = fact * (i+1)
+	print fact

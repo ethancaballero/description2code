@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    long long l,d,s,c;
+	    cin>>l>>d>>s>>c;
+	    if (pow((c+1),(d-1))*s >=l)
+	    cout<<"ALIVE AND KICKING"<<endl;
+	    else
+	    cout<<"DEAD AND ROTTING"<<endl;
+	}
+	return 0;
+}

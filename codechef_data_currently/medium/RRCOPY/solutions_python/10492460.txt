@@ -1,0 +1,9 @@
+
+T = int(raw_input(""))
+for t in xrange(0,T):				#We need to remove all duplicates from the array.
+	N = int(raw_input(""))
+	mylist = map(int,raw_input("").split())
+	mydict = {}
+	for num in mylist:					#Dump the elements into a hash table. The size is our result.
+		mydict[num] = 1
+	print len(mydict)

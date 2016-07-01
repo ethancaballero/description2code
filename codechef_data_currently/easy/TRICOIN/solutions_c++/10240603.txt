@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+long sum(long H){
+	return (H*(H-1))/2;
+}
+int main()
+{
+	/* code */
+	ios_base::sync_with_stdio(false);
+	int t, ans[500],x=0;
+	long N,h;
+	cin>>t;
+	while(t--){
+		h=1;
+		cin>>N;
+		while(sum(h)<=N)
+			h++;
+		ans[x]=h-2;
+		x++;
+	}
+	for(int i=0;i<x;++i)
+		cout<<ans[i]<<'
+';
+	return 0;
+}

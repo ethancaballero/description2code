@@ -1,0 +1,55 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+string str;
+int n,i;
+cin>>n;
+string r[40];
+int dir[n];
+getline(cin,str);
+for(i=0;i<n;i++)
+{
+getline(cin,str);
+int l=str.length();
+if(str[0]=='B')
+{
+dir[i]=2;
+r[i]=str.substr(9,l-9);
+}
+if(str[0]=='L')
+{
+r[i]=str.substr(8,l-8);
+dir[i]=1;
+}
+if(str[0]=='R')
+{
+r[i]=str.substr(9,l-9);
+dir[i]=0;
+}
+}
+
+cout<<"Begin on "<<r[n-1]<<"
+";
+
+for(i=n-2;i>=0;i--)
+{
+if(dir[i+1]==1)
+cout<<"Right on "<<r[i]<<"
+";
+if(dir[i+1]==0)
+cout<<"Left on "<<r[i]<<"
+";
+}
+
+
+}
+return 0;
+}

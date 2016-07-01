@@ -1,0 +1,28 @@
+import sys
+
+
+def solve(n, k, a):
+    min_value = None
+    count_min = 0
+    for i in xrange(len(a)):
+        for j in xrange(len(a)):
+            if i != j:
+                v = abs(a[i] + a[j] - k)
+                if min_value is None or v < min_value:
+                    min_value = v
+                    count_min = 1
+                elif min_value == v:
+                    count_min += 1
+
+    print "%d %d" % (min_value, count_min // 2)
+
+
+def main():
+    t = int(sys.stdin.readline().strip())
+
+    for i in xrange(t):
+        n, k = [int(x) for x in sys.stdin.readline().strip().split(' ')]
+        a = [int(x) for x in sys.stdin.readline().strip().split(' ')]
+        solve(n, k, a)
+
+main()

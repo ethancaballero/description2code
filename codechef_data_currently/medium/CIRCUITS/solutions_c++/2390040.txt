@@ -1,0 +1,88 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<cstring>
+#include<algorithm>
+#include<set>
+#include<cmath>
+#include<bitset>
+#include<map>
+#define test(t) while(t--)
+#define cin(n) scanf("%d",&n)
+#define cout(n) printf("%d
+",n)
+#define rep(i,a,n) for(i=a;i<=n;i++)
+#define vi vector<int>
+#define vii vector< vector<int> >
+#define vpii vector< pair<int,int> >
+#define mii map<int,int>
+#define pb push_back
+#define mp make_pair
+#define imax (int) 1000000007
+#define ill long long
+#define gc getchar_unlocked
+using namespace std;
+#define mod 1000000007
+int a[105][4];
+int n;
+
+double recurse(double prob1,int node,int value)
+{
+    double val[109];
+    double ans=double(0);
+    for(int i=1;i<=n;i++)
+    {
+      if(a[i][0]==0)
+        val[i]=prob1;
+      else if(a[i][0]==1)
+      {
+        val[i]=1-((1-val[a[i][2]])*(1-val[a[i][1]]));
+      }
+      else
+      {
+        val[i]=val[a[i][1]]*val[a[i][2]];
+      }
+    }
+    return val[n];
+}
+double recurse2(double prob1,int node,int value)
+{
+    if(a[node][0]==0)
+        return prob1;
+    if(a[node][0]==1)
+        return 1-(recurse2(prob1,a[node][2],0)*recurse2(prob1,a[node][1],0));
+    if(a[node][0]==2)
+        return (recurse2(prob1,a[node][2],1)*recurse2(prob1,a[node][1],1));
+}
+
+double binary(double low,double high)
+{
+    double mid=(low+high)/2,k;
+    k=recurse(mid,n,1);
+    if(fabs(k-0.5)<0.0000001)
+        return mid;
+    else if(k>0.5)
+        return binary(low,mid);
+    else
+        return binary(mid,high);
+
+}
+int main()
+{
+    int t,m,i,j,k,l,o;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d",&a[i][0]);
+            if(a[i][0]!=0)
+                scanf("%d%d",&a[i][1],&a[i][2]);
+        }
+        printf("%.5lf
+",binary(0.0,1.0));
+
+    }
+return 0;
+}

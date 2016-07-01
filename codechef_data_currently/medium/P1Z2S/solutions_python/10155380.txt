@@ -1,0 +1,14 @@
+l= list()
+s=0
+n=int(raw_input())
+x= raw_input()
+l= map(int, x.split())
+for i in range(n):
+     s=s+l[i]
+if s>(2*n):
+    s=(s+1)/2
+    print s
+else:
+    print n
+
+

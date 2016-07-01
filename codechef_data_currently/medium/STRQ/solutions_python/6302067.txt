@@ -1,0 +1,34 @@
+def main():
+    ### inputs
+    special = raw_input()
+    n = int(raw_input())
+    #countstuff
+    letters = {'c':0,'h':0,'e':0,'f':0}
+    dictall = {'c':[0],'h':[0],'e':[0],'f':[0]}
+    dictpairs = {'c':{'h':[0],'e':[0],'f':[0]},'h':{'c':[0],'e':[0],'f':[0]},'e':{'c':[0],'h':[0],'f':[0]},'f':{'c':[0],'h':[0],'e':[0]}}
+    for x in special:
+        letters[x]+=1
+        for i in letters:
+            dictall[i].append(letters[i])
+            if i==x:
+                for k in dictpairs[i]:
+                    dictpairs[k][i].append(dictpairs[k][i][-1]+letters[k])
+            else:
+                for k in dictpairs[i]:
+                    dictpairs[k][i].append(dictpairs[k][i][-1])
+                
+    result=[]
+    for i in xrange(n):
+        a, b, l, r = raw_input().split()
+        l = int(l)
+        r = int(r)
+        if l == 1:
+            result.append(str(dictpairs[a][b][r]))
+        else:
+            result.append(str(dictpairs[a][b][r] - dictpairs[a][b][l-1] - ( dictall[a][l-1] * (dictall[b][r] - dictall[b][l-1]))))
+
+    print '
+'.join(result)
+
+if __name__ == '__main__':
+    main()

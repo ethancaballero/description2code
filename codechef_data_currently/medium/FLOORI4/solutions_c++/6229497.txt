@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define Int long long
+#define LL long long
+Int sumof4(Int n,Int m)
+{
+    Int M=m*30;
+	LL a=n%M;
+	LL b=(a*(n+1))%M;
+	LL c=(b*((2*n)+1))%M;
+	LL d=((n)%M*(n)%M)%M;
+	LL e=(3*d)%M;
+	LL f=(3*n)%M;
+	LL g=(e+f-1)%M;
+	LL h=(g*c)%M;
+	return h/30;
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+    Int N,M,sum=0;
+    scanf("%lld %lld",&N,&M);
+    int sq=sqrt(N);
+    for(Int i=1;i<=sq;i++){
+    sum=(sum+((((i*i)%M*i)%M*i)%M*(N/i))%M)%M;
+    }
+    for(Int i=1;i<N/sq;i++)
+    {
+        Int a=N/i;
+        Int b=N/(i+1);
+        sum=(sum+((sumof4(a,M)-sumof4(b,M))*i))%M;
+    }
+    sum=(sum+M)%M;
+    printf("%lld
+",sum);
+    }
+    return 0;
+}

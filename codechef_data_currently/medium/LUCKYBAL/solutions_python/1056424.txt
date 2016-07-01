@@ -1,0 +1,17 @@
+#Program question at: http://www.codechef.com/problems/LUCKYBAL
+
+t = int(raw_input())
+
+for t in range(t):
+	s = raw_input()
+	n=0
+	l = len(s)
+	s += '4'
+	ans = (l*(l+1))/2
+	for ch in s:
+		if ch == '7': n+=1
+		else:
+			ans -= (n*(n+1))/2
+			n=0
+	print ans
+

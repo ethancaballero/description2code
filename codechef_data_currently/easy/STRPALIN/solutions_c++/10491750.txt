@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int str[27];
+
+int main(){
+    int t ;
+    cin >> t;
+    while(t--){
+        string a,b;
+        cin >> a >> b;
+        int flag = 0;
+        for(int i = 0; i <= 27; i++) str[i] = 0;
+        for(int i = 0; i < a.length(); i++) str[a[i]-'a'] = 1;
+        for(int i = 0; i < b.length(); i++){
+            if(str[b[i]-'a'] == 1) flag = 1;
+        }
+        if(flag) cout << "Yes" << endl;
+        else{cout << "No" << endl;}
+    }
+}

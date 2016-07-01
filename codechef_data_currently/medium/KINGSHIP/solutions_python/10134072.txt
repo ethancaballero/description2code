@@ -1,0 +1,16 @@
+for _ in range(int(raw_input())):
+    n=int(raw_input())
+    arr=map(int,raw_input().split())
+    num=min(arr)
+    ans=1
+    done=False
+    sum=0
+    for each in arr:
+        if each==num and done==False:
+            done=True
+            
+        else:
+            sum+=num*each
+            
+    print sum
+            

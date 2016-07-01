@@ -1,0 +1,15 @@
+t=int(raw_input())
+l=[]
+for x in range(2,31):
+    l.append(2**x -1)
+    
+for cas in xrange(t):
+    
+    n=int(raw_input())
+    if n==1:
+        print 2
+    elif n in l:
+        print n>>1
+        
+    else:
+        print -1

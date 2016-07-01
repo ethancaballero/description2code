@@ -1,0 +1,35 @@
+#include<iostream>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+int main(){
+int N,M,i,j,p,s,g,d,k,y;
+int t[250][250];
+cin>>N;
+bool b=1;
+for(i=0;i<N;i++){
+    for(j=0;j<N;j++){
+        cin>>t[i][j];
+    }}
+    while(b)
+    for(i=0,b=0;i<N;i++)
+        for(j=0;j<N;j++)
+         for(p=0;p<N;p++)
+         if(t[i][j]>t[i][p]+t[p][j])
+         {
+             t[i][j]=t[i][p]+t[p][j];
+             b=1;
+         }
+
+
+    cin>>M;
+    while(M--){
+        cin>>s;
+        cin>>g;
+        cin>>d;
+    k=(t[s][g]+t[g][d]);
+    y=(k-t[s][d]);
+    cout<<k<<" "<<y<<endl;
+
+
+}}

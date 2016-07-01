@@ -1,0 +1,15 @@
+i, k, s = map(int, raw_input().strip().split())
+a, b = map(int, raw_input().strip().split())
+
+from math import sqrt
+sqrt2 = sqrt(2)
+sqrt6 = sqrt(6)
+if (i ^ k) & 1:
+    i += 1
+    a, b = (
+        sqrt2 * (a + b) - sqrt6 * (a - b),
+        sqrt2 * (a - b) + sqrt6 * (a + b),
+    )
+
+ans = (a + b) * pow(0.5, s + 2*(i - k))
+print "%.11lf" % ans

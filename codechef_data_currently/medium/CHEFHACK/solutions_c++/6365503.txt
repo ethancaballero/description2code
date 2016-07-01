@@ -1,0 +1,117 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+#include<map>
+using namespace std;
+map<int,int> mp;
+map<int,int> :: iterator it ;
+vector<char> prime(10000000,true);
+int arr[351][351];
+bool flag[351][351];
+int n;
+
+void chain(int a,int b,int c)
+{
+     if(a<0 || b<0)return ;
+     if(a>=n || b>=n)return ;
+     if(flag[a][b])return ;
+     if(arr[a][b]%2==c && !prime[arr[a][b]])
+     {
+                       flag[a][b] = true;
+//                       cout<<"
+ flag["<<a<<"]["<<b<<"] : true
+";
+                       chain(a+1,b,c);
+                       chain(a-1,b,c);
+                       chain(a,b+1,c);
+                       chain(a,b-1,c);
+                       }
+     }
+
+void seive()
+{
+     int cnt = 0;
+     prime[0] = prime[1] = false;
+     for(int i=2;i<=10000000;i++)
+     {
+             if(prime[i])
+             {
+                         mp.insert(make_pair(i,cnt++));
+                         if(i*1ll*i <= 10000000)
+                                    for(int j=i*i;j<=10000000;j+=i)prime[j]=false;
+                         }
+             }
+     }
+
+int main()
+{
+//    cout<<"
+ calling seive 
+";
+    seive();
+//    cout<<"
+ seive omplete 
+";
+    int t;
+    long long int ans;
+    scanf("%d",&t);
+    while(t--)
+    {
+              scanf("%d",&n);
+              for(int i=0;i<n;i++)
+                      for(int j=0;j<n;j++)
+                              scanf("%d",&arr[i][j]);
+/*              cout<<"
+ arr : 
+ ";
+              for(int i=0;i<n;i++){
+                      for(int j=0;j<n;j++)
+                              cout<<arr[i][j]<<" ";
+                      cout<<endl;}
+              cout<<"
+ false flag ";
+*/              for(int i=0;i<n;i++)
+                      for(int j=0;j<n;j++)
+                              flag[i][j] = false;
+              ans = 0;
+//              cout<<"
+ ans  = "<<ans<<endl;
+              //computation begins  here
+              for(int i=0;i<n;i++)
+              {
+                      for(int j=0;j<n;j++)
+                      {
+//                              cout<<"
+ current (i,j) = ("<<i<<","<<j<<") with val = "<<arr[i][j]<<endl;
+                              if(!flag[i][j]) //locked
+                              {
+//                                              cout<<"
+ first vosot 
+";
+                                              if(prime[arr[i][j]])
+                                              {
+                                                       it = mp.find(arr[i][j]);
+                                                       ans += it->second;           
+//                                                       cout<<"
+ ans prime = "<<ans<<endl;
+                                                       }
+                                              else if(arr[i][j]%2==0)
+                                              {
+                                                   ans+= (arr[i][j]/2);
+                                                   chain(i,j,0);
+                                                   }
+                                              else 
+                                              {
+                                                   ans += ((arr[i][j]+4)/2);
+                                                   chain(i,j,1);
+                                                   }
+                                              }
+                              }
+                      }
+              printf("%lld
+",ans);            
+              }
+    return 0;
+    }

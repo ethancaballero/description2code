@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool chk(char c[6][7],int i,int j,int k)
+{
+	return (strcmp(c[i],c[j])==0 && strcmp(c[j],c[k])==0);
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		char c[6][7]={};
+		scanf("%s %s %s %s %s %s",c[0],c[1],c[2],c[3],c[4],c[5]);
+		if(chk(c,4,1,2) || chk(c,4,2,0) || chk(c,4,0,3) || chk(c,4,3,1) ||
+			chk(c,5,1,2) || chk(c,5,2,0) || chk(c,5,0,3) || chk(c,5,3,1) )
+			printf("YES
+");
+		else
+			printf("NO
+");
+	}
+	return 0;
+}

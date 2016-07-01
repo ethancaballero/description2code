@@ -1,0 +1,9 @@
+from fractions import gcd
+test = input()
+for t in xrange(test):
+	n = input()
+	arr = map(int, raw_input().split())
+	g = 0
+	for i in arr:
+		g = gcd(g, i)
+	print g

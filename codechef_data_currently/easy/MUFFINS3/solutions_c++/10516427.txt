@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,n,f1=0,f2;
+    while(f1==0)
+    {
+        cin>>t;
+        if(t>=1 && t<=1000)
+            f1=1;
+    }
+
+    while(t>0)
+    { f2=0;
+     while(f2==0)
+    {
+        cin>>n;
+        if(n>=1 && n<=100000000)
+            f2=1;
+    }
+        cout<<((n/2)+1)<<endl;
+    t--;
+    }
+
+    return 0;
+}

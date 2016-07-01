@@ -1,0 +1,19 @@
+t=int(raw_input())
+while(t):
+	t-=1
+	n=int(raw_input())
+	a=map(int,raw_input().strip().split(" "))
+	count=0
+	for i in range(n):
+		sum=0
+		product=1
+		for j in range(i,n):
+			sum+=a[j]
+			product*=a[j]
+			
+			if sum==product:
+				count+=1
+ 	print count
+			
+ 
+ 

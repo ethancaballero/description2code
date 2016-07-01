@@ -1,0 +1,14 @@
+test=int(raw_input())
+for i in range(test):
+    k=int(raw_input())
+    a=str(raw_input()).split()
+    
+    for i in range (len(a)):
+        a[i]=int(a[i])
+    
+    a.sort()
+    m=0
+    while k>=1:
+        m=m+int(a[k-1])
+        k=k-2
+    print m

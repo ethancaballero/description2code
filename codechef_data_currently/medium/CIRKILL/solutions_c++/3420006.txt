@@ -1,0 +1,66 @@
+#include <iostream>
+#include <complex>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+typedef complex<int> CPX;
+typedef vector<CPX> VC;
+
+int cross(CPX const &a, CPX const &b) {
+    return imag(conj(a)*b);
+}
+
+bool isCircle(CPX &a, CPX &b, CPX &c) {
+    if(cross(b-a, c-a) == 0) return false; // to check if all of them lye on the same line
+    return true;
+}
+
+int det(CPX &a, CPX &b, CPX &c) {
+    return norm(a)*cross(b,c) - norm(b)*cross(a,c) + norm(c)*cross(a,b);
+}
+
+/**
+ * Considered matrix is
+ * |    x^2+y^2         x   y   1   |
+ * |    (x1)^2+(y1)^2   x1  y1  1   |
+ * |    (x2)^2+(y2)^2   x2  y2  1   |
+ * |    (x3)^2+(y3)^2   x3  y3  1   |
+ */
+int getSign(CPX &a, CPX &b, CPX &c) {
+    CPX t = (a+b)/2; // since mid-pt always lye inside the circle
+    int v = -det(a,b,c) + det(t,b,c) - det(t,a,c) + det(t,a,b);
+    if(v < 0) return -1;
+    return 1;
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while(T--) {
+        int N;
+        cin >> N;
+        VC A(N);
+        for(int i=0;i<N;++i) {
+            int x,y;
+            cin >> x >> y;
+            A[i] = CPX(2*x,2*y); // because of taking mid point in getSign();
+        }
+        double r,t;
+        r = t = 0;
+        for(int i=0;i<N;++i) for(int j=i+1;j<N;++j) for(int k=j+1;k<N;++k) {
+            if(isCircle(A[i],A[j],A[k])) {
+                int sgn = getSign(A[i],A[j],A[k]);
+                int a = -det(A[i],A[j],A[k]);
+                for(int l=0;l<N;++l) {
+                    if(l==i || l==j || l==k) continue;
+                    int v = a + det(A[l],A[j],A[k]) - det(A[l],A[i],A[k]) + det(A[l],A[i],A[j]);// using similar matrix as in getSign()
+                    if(v*sgn >= 0) r++; // if both the signs are same then the point lies inside the circle
+                }
+            }
+            t += N-3;
+        }
+        cout << r/t << endl;
+    }
+    return 0;
+}

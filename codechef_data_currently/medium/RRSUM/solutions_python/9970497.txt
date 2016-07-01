@@ -1,0 +1,14 @@
+N,M = map(int, raw_input().strip().split())
+
+for _ in range(M):
+        Q = input()
+        if Q <= N:
+                print 0
+        elif Q/N < 2:
+                 print (Q%N)-1
+        elif Q == 2*N:
+                print N-1
+        elif Q == 3*N:
+                print 1
+        else :
+                print (N+1)-(Q%(2*N))

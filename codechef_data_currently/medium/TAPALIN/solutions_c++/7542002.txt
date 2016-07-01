@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+ using namespace std;
+#define MOD 1000000007
+long long pw(long long a, long long b){
+	if(!b) return 1;
+	long long r = pw(a,b/2);
+	r = (r*r)%MOD;
+	if(b%2) r = (r*a)%MOD;
+	return r;
+}
+long long solve(long long n){
+	return (2*((pw(26,n/2+1)-1)*pw(25,1000000005)%MOD)%MOD-2 + ((n%2)?pw(26,n/2+1):0))%MOD;
+}
+int main(){
+	int t; cin >> t;
+	while(t--){
+		int n; cin >> n;
+		cout << solve(n) << endl;
+	}
+	return 0;
+}

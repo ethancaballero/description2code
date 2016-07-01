@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+int main(){
+int t ;
+cin >> t;
+while(t--){
+	int size;
+	cin >> size;
+	int count=0;
+	int a[size];
+	for(int i=0 ; i<size; i++){
+		cin >> a[i];
+	}
+	for(int i=0;i<size;i++){
+		int product =1;
+		int sum =0;
+		for(int j=i; j>=0; j--){
+			product = product * a[j];
+			sum = sum + a[j];
+			if(sum ==product)
+			count++;
+		}
+	}
+	cout << count << endl;
+
+}
+}

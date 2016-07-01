@@ -1,0 +1,40 @@
+#include<iostream>
+#include<vector>
+#include<climits>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string str;
+        cin>>str;
+        int len = str.size(), count1 = 0, count2 = 0,i;
+        for(i = 0; i < len ;i++){
+            if(i%2){
+                if(str[i] == '-')
+                    count1++;
+            }
+            else{
+                if(str[i] == '+')
+                    count1++;
+            }
+        }
+        for(i = 0; i < len ;i++){
+            if(i%2){
+                if(str[i] == '+')
+                    count2++;
+            }
+            else{
+                if(str[i] == '-')
+                    count2++;
+            }
+        }
+        if(count1 > count2)
+            cout<<count2<<endl;
+        else
+            cout<<count1<<endl;
+    }
+}

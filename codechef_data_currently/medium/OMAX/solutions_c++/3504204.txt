@@ -1,0 +1,89 @@
+#include<iostream>
+#include<stdlib.h>
+#include<assert.h>
+#include<algorithm>
+#include<stdio.h>
+#include<map>
+#include<queue>
+#include<climits>
+#include<math.h>
+using namespace std;
+
+int arr[77][77], sum[77][77];
+int min_sum[77][77][77][77];
+int main()
+{
+	int m,n;
+	
+	
+	while(1)
+	{
+		scanf("%d %d",&m,&n);
+		if(m==0 && n==0)
+			return 0;
+		assert(m>=3 && m<=77);
+		assert(n>=3 && n<=77);
+		
+
+		for(int i=0;i<=m-1;i++)
+			for(int j=0;j<=n-1;j++)
+			{	
+				scanf("%d",&arr[i][j]);
+
+				sum[i][j]= arr[i][j];
+
+				if(i>=1) 
+					sum[i][j]+= sum[i-1][j];
+				if(j>=1)
+					sum[i][j]+=sum[i][j-1];
+				if(i>=1 && j>=1)
+					sum[i][j]-=sum[i-1][j-1];
+			}
+	
+		int max=INT_MIN; 
+		
+
+		for(int j=2;j<=m-1;j++) //botr
+			for(int i=j-2;i>=0;i--) //topr
+				for(int l=2;l<=n-1;l++) //rightc
+					for(int k=l-2;k>=0;k--) //leftc
+					{
+						int temp = sum[j][l];
+						if(i>=1) temp-= sum[i-1][l];
+						if(k>=1) temp-= sum[j][k-1];
+						if(i>=1 && k>=1)
+						temp+= sum[i-1][k-1];
+
+						int topr = i+1,botr=j-1, leftc = k+1, rightc = l-1;
+			
+						int temp2 = sum[botr][rightc] - sum[topr-1][rightc] - sum[botr][leftc-1] + sum[topr-1][leftc-1];					
+						min_sum[topr][botr][leftc][rightc]=temp2;					
+	
+						
+						if(topr+1 <= botr)
+						min_sum[topr][botr][leftc][rightc]=min(min_sum[topr][botr][leftc][rightc],min_sum[topr+1][botr][leftc][rightc]);
+						
+						if(topr<=botr-1)
+						min_sum[topr][botr][leftc][rightc]=min(min_sum[topr][botr][leftc][rightc],min_sum[topr][botr-1][leftc][rightc]);
+						
+						if(leftc + 1 <=rightc)
+						min_sum[topr][botr][leftc][rightc]=min(min_sum[topr][botr][leftc][rightc],min_sum[topr][botr][leftc+1][rightc]);
+						
+						if(leftc<=rightc-1)
+						min_sum[topr][botr][leftc][rightc]=min(min_sum[topr][botr][leftc][rightc],min_sum[topr][botr][leftc][rightc-1]);
+						temp = temp - min_sum[topr][botr][leftc][rightc];
+						
+						if(max < temp)
+							max=temp;
+
+					}		
+		
+		printf("%d
+",max);
+
+		
+		
+	}
+
+	return 0;		
+}

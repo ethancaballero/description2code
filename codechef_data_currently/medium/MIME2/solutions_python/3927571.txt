@@ -1,0 +1,20 @@
+import sys
+
+[num,test_case] = [int(s) for s in raw_input().split()]
+media_tict = {}
+while num != 0:
+	[extension,file_type] = raw_input().split()
+	media_tict[extension] = file_type
+	num -= 1
+
+while test_case!= 0:
+	filename = raw_input().split()[0]
+	if '.' in filename:
+		ext = filename.split('.')[-1]
+		if ext in media_tict:
+			print media_tict[ext]
+		else:
+			print "unknown"
+	else:
+		print "unknown"
+	test_case -= 1

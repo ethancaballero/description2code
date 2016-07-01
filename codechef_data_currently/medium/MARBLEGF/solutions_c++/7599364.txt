@@ -1,0 +1,82 @@
+#include<iostream>
+#include<string.h>
+#include<stdlib.h>
+using namespace std;
+#define lld long long int
+
+lld *tree,*a,n,i,ans;
+
+void update( int index, int value )
+{
+	while(index<=n)
+	{
+		tree[index]+=value;
+		
+		index+= (index&-index);
+	}
+}
+
+
+lld sum(int index)
+{
+	ans=a[index];
+	
+	while(index>0)
+	{
+		ans+=tree[index];
+		
+		index-=(index&-index);
+	}
+	
+return ans;	
+}
+
+
+int main()
+{
+	int q,x,y;char ch;
+	
+	lld result;
+	
+	cin>>n>>q;
+	
+    tree=(lld*)calloc(n+10,sizeof(lld));	
+	
+	a=(lld*)calloc(n+10,sizeof(lld));
+	
+	cin>>a[1];
+	
+    for(i=2; i<=n; i++)
+    {
+    	cin>>a[i];
+    	
+        a[i]=a[i] +a[i-1];
+    }
+    
+    while(q--)
+    {
+    	cin>>ch>>x>>y;
+    	
+    	if( ch=='G' )
+    	 {
+    	    update(x+1,y);	
+    	 }
+    	else if(ch=='T')
+    	 {
+    	 	update(x+1,-y);
+    	 }
+    	else
+    	{
+    		x++,y++;
+    		
+    	    if(x==1)
+    	        result=sum(y);
+    	     else
+			    result=sum(y)-sum(x-1);
+				 		  
+		   cout<<result<<endl; 		  
+    	}
+
+    }
+return 0;
+}

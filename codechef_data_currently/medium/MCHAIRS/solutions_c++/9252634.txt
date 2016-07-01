@@ -1,0 +1,32 @@
+//This problem is a variant of an equality based on the binomial theorem, 
+//which states that (a+b)^N = sum of k from 0 to N of Combination(N,k)*a^k*b^(n-k) 
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+#define MOD 1000000007
+using namespace std;
+
+long long int fast_exp(long long int a, long long int b)
+{
+	if(b == 0) return 1;
+	long long int x = fast_exp(a, b/2);
+	x = (x * x)%MOD;
+	if(b&1) x = (x * a)%MOD;
+	return x;
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int N;
+		scanf("%d",&N);
+		printf("%lld
+", (fast_exp(2,N) - 1 + MOD)%1000000007);
+	}
+	return 0;
+}

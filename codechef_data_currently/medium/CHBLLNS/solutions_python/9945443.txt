@@ -1,0 +1,4 @@
+for i in range(int(raw_input())):
+    data=map(int,raw_input().split())
+    k = int(raw_input())
+    print min(data[0],k-1)+min(data[1],k-1)+min(data[2],k-1)+1

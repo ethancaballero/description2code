@@ -1,0 +1,15 @@
+a,c=raw_input().split()
+b="abcdefghijklmnopqrstuvwxyz"
+for i in range(int(a)):
+    d=raw_input()
+    s=""
+    for j in d:
+        if 'A'<=j and j<="Z":
+            s+=(c[b.index(j.lower())]).upper()
+        elif j=="_":
+            s+=" "
+        elif "a"<=j and j<="z":
+            s+=c[b.index(j)]
+        else:
+            s+=j
+    print s

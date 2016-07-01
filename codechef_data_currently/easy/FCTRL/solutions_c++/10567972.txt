@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+int main()
+{int n,t,flag=0,i,j;
+cin>>t;
+for(j=0;j<t;j++)
+{
+cin>>n;
+for(i=5; n/i>=1;i*=5)
+flag+=n/i;
+cout<<flag<<"
+";
+flag=0;
+}
+return 0;
+}

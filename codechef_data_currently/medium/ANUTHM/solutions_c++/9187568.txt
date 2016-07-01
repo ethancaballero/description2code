@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_v) (int)(_v).size()
+#define all(_v) (_v).begin(),(_v).end()
+#define pii pair<int,int>
+typedef long long ll;
+const int INF = 1000000000;
+const ll MOD = 1e9 + 7;
+
+const int maxn = 1000010;
+
+ll fast_expo(ll a,ll b) {
+	if(b == 0) return 1;
+	ll p;
+	if(b % 2 == 0) {
+		p = fast_expo(a,b / 2);
+		p = (p * p) % MOD;
+	}
+	else p = (a * fast_expo(a,b - 1)) % MOD;
+	return p;
+}
+
+int main() {
+    int t; cin >> t;
+	while (t --) {
+		int n,m; cin >> n >> m;
+		cout << n + m - 1 << "
+";
+	}
+	return 0;
+}

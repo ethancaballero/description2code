@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int r, c, i, j;
+    scanf("%d %d",&r, &c);
+    long long int gift[r][c], copy_row[c], minrow[r], copy_col[r], maxcol[c];
+    for(i=0; i<r; i++)
+    {
+        for(j=0; j<c; j++)
+            cin>>gift[i][j];
+    }
+
+    for(i=0; i<r; i++)
+    {
+        for(j=0; j<c; j++)
+            copy_row[j]=gift[i][j];
+        std::sort(copy_row, copy_row+c);
+        minrow[i]=copy_row[0];
+    }
+    for(j=0; j<c; j++)
+    {
+        for(i=0; i<r; i++)
+            copy_col[i]=gift[i][j];
+        std::sort(copy_col, copy_col+r);
+        maxcol[j]=copy_col[r-1];
+    }
+    int flag=0;
+    for(i=0; i<r; i++)
+    {
+        for(j=0; j<c; j++)
+        {
+            if(minrow[i]==maxcol[j]&&minrow[i]==gift[i][j])
+            {
+               flag=1;
+               break;
+            }
+        }
+        if(flag==1)
+            break;
+    }
+    if(flag==1)
+    printf("%lld
+", gift[i][j]);
+    else printf("GUESS
+");
+	return 0;
+}

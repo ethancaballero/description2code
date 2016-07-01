@@ -1,0 +1,21 @@
+def twstr():
+	n=int(raw_input())
+	s=[]
+	v=[]
+	for i in range(n):
+		x=raw_input().split()
+		s.append(x[0])
+		v.append(int(x[1]))
+	qn=int(raw_input())
+	for i in range(qn):
+		q=raw_input().strip()
+		maxs='NO'
+		maxv=min(v)-1
+		for j in range(n):
+			if q==s[j][:len(q)] and v[j]>maxv:
+				maxv=v[j]
+				maxs=s[j]
+		print(maxs)
+
+if __name__=="__main__":
+	twstr()

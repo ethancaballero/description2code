@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef pair<int,int> pi;
+
+inline int sqr(int x){return x*x;
+}
+int dist(pi A,pi B)
+{
+    return sqr(B.second-A.second)+sqr(B.first-A.first);
+}
+
+int area(pi A,pi B,pi C)
+{
+     return A.first*(B.second-C.second)+B.first*(C.second-A.second)+C.first*(A.second-B.second);
+}
+int check(pi A,pi B,pi C)
+{
+    int a,b,c;
+    a=dist(A,B);
+    b=dist(B,C);
+    c=dist(C,A);
+
+
+    if(a+b==c || b+c==a || c+a==b)
+    {
+        return 1;
+    }
+    return 0;
+}
+int main()
+{
+    int n;
+    int ans=0;
+    cin>>n;
+
+    pi A,B,C;
+    while(n--)
+    {
+        cin>>A.first>>A.second>>B.first>>B.second>>C.first>>C.second;
+        if(check(A,B,C))
+            ans++;
+    }
+    cout<<ans;
+    return 0;
+}

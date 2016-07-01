@@ -1,0 +1,72 @@
+#include<iostream>
+#include<map>
+#include<vector>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#include<cstdio>
+#include<fstream>
+using namespace std;
+#define abs(x) ((x)>0?(x):-(x))
+#define M 1000000007
+#define lld signed long long int
+#define pp pop_back()
+#define ps(x) push_back(x)
+#define tkint(n) scanf("%d",&n)
+#define tkchar(ch) scanf("%c",&ch)
+#define tklong(n) scanf("%I64d",&n)
+int n,m,dp[5][5][102][102],f[5][5][102][102],d[102][102],s[102][102];
+//x=1 from up//0 from left
+int rec(int t,int x,int i,int j)
+{
+	if(i>n or j>m)return M;
+	if(f[t][x][i][j])return dp[t][x][i][j];
+	if(x)
+	{
+		//it has com from up
+		if(t==0)dp[t][x][i][j]=s[i][j]-d[i][j]-d[i-1][j]+min(rec(0,1,i+1,j),rec(1,0,i,j+1));
+		else dp[t][x][i][j]=s[i][j]-d[i][j]-d[i-1][j]-d[i][j-1]+min(rec(0,1,i+1,j),rec(1,0,i,j+1));
+	}
+	else
+	{
+		//it has com from left
+		if(t==0)dp[t][x][i][j]=s[i][j]-d[i][j]-d[i][j-1]+min(rec(1,1,i+1,j),rec(0,0,i,j+1));
+		else dp[t][x][i][j]=s[i][j]-d[i][j]-d[i][j-1]-d[i-1][j]+min(rec(1,1,i+1,j),rec(0,0,i,j+1));
+	}
+	f[t][x][i][j]=1;
+	if(i==n&&j==m)dp[t][x][i][j]-=M;
+	return dp[t][x][i][j];
+}
+int main()
+{
+	int t;
+	char ch;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m;
+		for(int i=1;i<=n;++i)
+		{
+			for(int j=1;j<=m;++j)
+			{
+				cin>>ch;
+				d[i][j]=ch-'0';
+			}
+			d[i][m+1]=0;
+		}
+		for(int i=1;i<=m;++i)
+		{
+			d[n+1][i]=0;
+		}
+
+		for(int i=1;i<=n;++i)
+		{
+			for(int j=1;j<=m;++j)
+			{
+				f[1][0][i][j]=f[1][1][i][j]=f[0][0][i][j]=f[0][1][i][j]=0;
+				s[i][j]=d[i][j]+d[i-1][j]+d[i+1][j]+d[i][j+1]+d[i][j-1];
+			}
+		}
+		cout<<min(rec(0,0,1,1)+d[1][1],rec(0,1,1,1)+d[1][1])<<endl;
+	}
+}

@@ -1,0 +1,81 @@
+
+def rational(a, b):
+	if(a%2):
+		return a,b	
+	cnt = bin(a)
+	cnt = cnt.split('1')
+	cnt = cnt[len(cnt)-1]
+	cnt = len(cnt)
+	b = b >> cnt
+	a = a >> cnt
+	return a, b		
+
+class frac:
+	def __init__(self, a, b):
+		a, b = rational(a, b)
+		self.num = a
+		self.den = b	
+	def __sub__(a, b):
+		n1 = a.num
+		n2 = b.num
+		b1 = a.den
+		b2 = b.den
+		de = b1*b2
+		nu = n1*b2 - n2*b1
+		nu = abs(nu)
+		return frac(nu, de)		
+
+def estimate_sines(nu):
+	zx = nu.den
+	zx = bin(zx)
+	zx = zx.split('1')
+	zx = zx[len(zx) - 1]
+	zx = len(zx)
+	re = 0
+	rw = 0
+	if(s-zx > 0):
+		re = s - zx
+	if(c == 0):
+		return re
+	if((nu.num)%2):
+		nu = nu.den
+		nu = bin(nu)
+		nu = nu.split('1')
+		nu = nu[len(nu) - 1]
+		nu =len(nu)
+		if(nu <= c):
+			return re + 1
+	return re
+
+tst = int(raw_input())
+for l in range(tst):
+	sck = raw_input()
+	sck = sck.strip()
+	sck = sck.split()
+	s = int(sck[0])
+	c = int(sck[1])
+	k = int(sck[2])
+	if(s + c < k):
+		ze = 0
+		print(ze)
+		continue
+	sc = max(s, c)
+	#lst = []
+	#kw = []
+	ans = 0
+	va = (1 << sc)
+	#for i in range(va):
+	#	lst.append(frac(i, va))
+	#kw.append(s)
+	if(s >= k):
+		ans = ans + 1
+	for i in range(1, va):
+		ky = estimate_sines(frac(i, va))
+		#kw.append(ky)
+		if(ky >= k):
+			ans = ans + 1
+	ans = 2*ans
+	#kw.append(s)
+	if(s >= k):
+		ans = ans + 1
+	print(ans)

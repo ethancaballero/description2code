@@ -1,0 +1,48 @@
+t=int(input())
+k=0;
+while k<t:
+    n,m=map(int,raw_input().split())
+    if(n==0):
+        raw_input()
+        print
+        print
+        
+    if(m!=0):
+        varn=[]
+        i=1
+        for num in range(n):
+            varn.append(i)
+            i=i+1
+        varm=raw_input().split()
+        varm=[int(x) for x in varm]
+        varm.sort()
+        for num in varm:
+            varn.pop(varn.index(num));
+        i=0
+        while i<len(varn):
+            print varn[i],
+            i=i+2;
+        i=1
+        print
+        while i<len(varn):
+            print varn[i],
+            i=i+2
+        print
+    if(m==0 and n!=0):
+        varn=[]
+        i=1;
+        varm=raw_input()
+        for num in range(n):
+            varn.append(i)
+            i=i+1
+        i=0
+        while i<len(varn):
+            print varn[i],
+            i=i+2;
+        i=1
+        print
+        while i<len(varn):
+            print varn[i],
+            i=i+2
+        print    
+    k=k+1

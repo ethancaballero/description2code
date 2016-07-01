@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+inline int nChoosek( int n, int k )
+{
+    if (k > n) return 0;
+    if (k * 2 > n) k = n-k;
+    if (k == 0) return 1;
+
+    int result = n;
+    for( int i = 2; i <= k; ++i ) {
+        result *= (n-i+1);
+        result /= i;
+    }
+    return result;
+}
+
+int main() {
+    int t,n,q,sum,l,i,j,ways,query;
+    string s,sb;
+    cin >> t;
+    while(t--){
+        cin >> n >> q >> s;
+        l=n;
+        sum=l*(l+1)/2;
+        vector<string> sb(sum);
+        int p=0;
+        for(i=0;i<l;++i)
+            for(j=1;j<l-i+1;++j)
+                sb[p++]=s.substr(i,j);
+        sort(sb.begin(),sb.end());
+        vector<int> freq;
+        for(i=0;i<sum;){
+            for(j=i+1; i+1<sum && sb[j].compare(sb[i])==0; ++j);
+            freq.push_back(j-i);
+            i=j;
+        }
+        sort(freq.begin(),freq.end());
+       // for(i=0;i<freq.size();++i) cout << freq[i] << ' ';
+        for(j=0;j<q;++j){
+            ways=0;
+            cin >> query;
+            for(i=0; i<freq.size(); ++i)
+                    ways += nChoosek( freq[i], query);
+            cout << ways << endl;
+        }
+    }
+    return 0;
+}

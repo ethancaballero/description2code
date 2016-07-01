@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,a,b,c,cur,m,count;
+    cin>>t;
+    while(t--)
+    {
+        cin>>a>>b>>c;
+        m=a*100+b;
+        int k=0;
+        count=0;
+        while(1)
+        {
+            if(b<c)
+            {
+                if(a==0)
+                    break;
+                else
+                {
+                    k++;
+                    a--;
+                    b=b+100-c;
+                    int temp=a;
+                    a=b;
+                    b=temp;
+                    cur=a*100+b;
+                    if(cur==m)
+                        break;
+                    if(cur>m)
+                    {
+                        count=k;
+                        m=cur;
+                    }
+                }
+            }
+            else
+            {
+                b=b-c;
+                int temp=a;
+                a=b;
+                b=temp;
+                cur=a*100+b;
+                k++;
+                if(cur==m)
+                    break;
+                if(cur>m)
+                {
+                    count=k;
+                    m=cur;
+                }
+            }
+            if(k==10001)
+                break;
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}

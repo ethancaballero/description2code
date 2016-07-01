@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#define gc getchar
+typedef long long int ll;
+using namespace std;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll t,k,i,b,leaves;
+    t=read_int();
+    while(t--)
+    {
+        k=read_int();
+        b=1;
+        for(i=0;i<k-1;i++)
+        {
+            leaves=read_int();
+            if(leaves>b)
+                break;
+            b=b-leaves;
+            b*=2;
+        }
+        leaves=read_int();
+        if(i==k-1 && leaves==b)
+            printf("Yes
+");
+        else
+            printf("No
+");
+    }
+    return 0;
+}

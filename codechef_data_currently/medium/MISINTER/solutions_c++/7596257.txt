@@ -1,0 +1,50 @@
+    #include<iostream>
+    using namespace std;
+    #define MODNUMBER 1000000007
+     
+    long long int modPow(long long int base, long long int e, long long int           modnumber){
+     
+        long long int result = 1;
+        while (e > 0){
+            if (e%2 == 1){
+                result = (result * base)%modnumber;
+            }
+            e = e >> 1;
+            base = (base * base)%modnumber;
+        }
+        return result;
+    }
+     
+    int main(){
+        int test_cases;
+    /* words at even position brought to starting..rest the same order = should be same as original word */
+    // p[...p[i]] = i : 26^no of cycles: each participant in cycle has same characters
+        cin >> test_cases;
+        while(test_cases--){
+            bool visited[100001] = {false};      // for the positions already visited in cycles
+            int digits, cycles = 0;
+            cin >> digits;
+            for(int i=1; i<= digits; i++){
+                if(visited[i] == false){
+                    cycles++;
+                    int ans = i;
+                    while (1){
+                      //  cout << ans << " ans " << endl;
+                        visited[ans] = true;
+                        if ( ans%2 == 1)
+                            ans = (digits/2) + (ans/2) + 1;
+                        else if (ans%2 == 0){
+                            ans = (ans/2);
+                        }
+                        if(ans == i)
+                            break;
+                   }
+              //      cout << "out" << endl;
+                }
+            }
+        //    cout << "Cycles " << cycles << endl;
+           long long int answer = modPow(26, cycles, MODNUMBER);
+           cout << answer << endl;
+        }
+        return 0;
+    } 

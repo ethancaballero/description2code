@@ -1,0 +1,17 @@
+minpos = -1
+maxpos = -1
+maxV = -1
+minV =  100000000000
+ans = -1
+n = input()
+for i in range(n):
+	x1,y1,x2,y2,x3,y3 = [int(u) for u in raw_input().split()]
+	ans = (x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2))
+	ans = abs(ans)
+	if(ans <= minV):
+		minV = ans
+		minpos = i+1
+	if(ans >= maxV):
+		maxV = ans
+		maxpos = i+1
+print minpos,maxpos

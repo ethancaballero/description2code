@@ -1,0 +1,45 @@
+#include <cstdio>
+#include <algorithm>
+ 
+using namespace std;
+ 
+int t, n, m, f[1000],  s;
+long long r1, r2, l[1000];
+pair<long long,long long> r[1000];
+ 
+int main() {
+	scanf("%d", &t);
+	while(t--) {
+		scanf("%d", &n);
+		for (int i=0; i<n; i++){ 
+			scanf("%lld", &l[i]);
+			l[i]*=7;
+        }
+		
+		sort(l, &l[n]);
+	
+		scanf("%d", &m);
+		for (int i=0; i<m; i++) {
+			scanf("%lld%lld",&r1,&r2);
+ 
+			f[i]=-1;
+			
+			r[i]=make_pair(11*r2,11*r1);
+		}
+		sort(r, &r[m]);
+		
+		s=0;
+		for (int i=0; i<n; i++) {
+			for (int j=0; j<m; j++) if (f[j]<0) {
+				if (r[j].second<=l[i] && l[i]<=r[j].first) {
+					f[j]=0;
+					s++;
+					break;
+				}
+			}
+		}
+		printf("%d
+", s);
+		
+	}
+}

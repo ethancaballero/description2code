@@ -1,0 +1,15 @@
+t=int(raw_input())
+while(t>0):
+  s=int(raw_input())
+  gross_salary=0
+  if s<1500:
+    hra=s*0.1
+    da=s*0.9
+    gross_salary=hra+da+s
+  elif s>=1500:
+    hra=500
+    da=s*0.98
+    gross_salary=hra+da+s
+  t=t-1 
+  print "%g" % gross_salary
+        

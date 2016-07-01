@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+ long long int jc,sc,m,t;
+ cin>>jc>>sc>>m;
+ t=(m-jc)/sc;
+ if(t%2==1)
+    {
+    cout<<"Unlucky Chef"<<endl;
+    }
+   else
+   {
+   cout<<"Lucky Chef"<<endl;
+   } 
+} 

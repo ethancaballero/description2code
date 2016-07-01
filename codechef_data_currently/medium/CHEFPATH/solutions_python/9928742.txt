@@ -1,0 +1,22 @@
+t=int(raw_input())
+while t>0:
+    (n,m)=raw_input().split()
+    n=int(n)
+    m=int(m)
+    flag = 0
+    if n == 1 or m == 1:
+        if n == 1:
+            if m == 2:
+                print("Yes")
+                flag = 1
+        if m == 1:
+            if n==2:
+                print("Yes")
+                flag = 1
+    else:
+        if n%2==0 or m%2==0:
+            print("Yes")
+            flag = 1
+    if flag == 0:
+        print("No")
+    t-=1

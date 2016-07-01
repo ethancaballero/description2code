@@ -1,0 +1,44 @@
+#include<iostream>
+#include<cstdio>
+#include<math.h>
+using namespace std;
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        int sqt = (int )sqrt(1.0*n);
+        int ans =0;
+        for(int i=1; i<=sqt; i++)
+        {
+            if(n % i  == 0)
+            {
+                int tmp = i;
+                while(tmp != 0)
+                {
+                    int md = tmp%10;
+                    if(md == 4 || md == 7)
+                        break;
+                    tmp /= 10;
+                }
+                if(tmp  != 0)
+                    ans++;
+                tmp = n/i;
+                while(tmp != 0)
+                {
+                    int md = tmp%10;
+                    if(md == 4 || md == 7)
+                        break;
+                    tmp /= 10;
+                }
+                if(tmp  != 0)
+                    ans++;
+            }
+        }
+        printf("%d
+",ans);
+    }
+   return 0;
+}

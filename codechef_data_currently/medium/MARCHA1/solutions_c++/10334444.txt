@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool sum[25][1000000];
+
+void subsetsum(int *a,int n,int m)
+{
+    int i,j;
+    for(i=0;i<=m;i++)
+    {
+        sum[0][i]=false;
+    }
+    for(i=0;i<=n;i++)
+    {
+        sum[i][0]=true;
+    }
+    for(i=1;i<=n;i++)
+{
+    for(j=1;j<=m;j++)
+    {
+        if(j>=a[i])
+            sum[i][j]=(sum[i-1][j] || sum[i-1][j-a[i]]);
+        else
+            sum[i][j]=sum[i-1][j];
+    }
+}
+if(sum[n][m]==true)
+    printf("Yes
+");
+else
+    printf("No
+");
+}
+
+int main()
+{
+    int t,n,m,i;
+    scanf("%d",&t);
+    int a[25];
+    while(t--)
+    {
+        memset(a,0,sizeof(a));
+      memset(sum,false,sizeof(sum));
+        scanf("%d %d",&n,&m);
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d",&a[i]);
+        }
+        subsetsum(a,n,m);
+    }
+    return 0;
+}

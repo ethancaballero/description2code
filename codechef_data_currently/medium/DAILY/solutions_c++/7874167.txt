@@ -1,0 +1,59 @@
+#include <iostream>
+#define ll long long int
+using namespace std;
+
+ll fact[10];
+
+void fill_fact()
+{
+    fact[0] = 1;
+    for(int i = 1; i<9; ++i)
+    {
+        fact[i] = i * fact[i-1];
+    }
+}
+
+int main()
+{
+    fill_fact();
+    ll sum = 0;
+    int x, n;
+    cin >> x >> n;
+    while(n--)
+    {
+        char seat[55];
+        cin >> seat;
+        int empty_seat[9] = {0},count = 2,c = 8;
+        for(int i = 0; i<=35; ++i)
+        {
+            if(seat[i] == '0')
+            {
+                ++empty_seat[i/4];
+            }
+        }
+         
+        for(int i = 36; i<=53; ++i)
+        {
+            if(count == 0)
+            {
+                count = 2;
+                --c;
+            }
+            if(seat[i] == '0')
+            {
+                ++empty_seat[c];
+            }
+            count--; 
+        }
+         
+        for(int i = 0; i<9; ++i)
+        {
+            if(empty_seat[i] >= x)
+            {
+                sum += fact[empty_seat[i]]/(fact[x] * fact[empty_seat[i] - x]);
+            }
+        }
+    }
+    cout << sum << endl;
+    return 0;
+}

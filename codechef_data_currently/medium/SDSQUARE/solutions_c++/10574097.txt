@@ -1,0 +1,49 @@
+#include<iostream>
+#include<math.h>
+int check(long long);
+using namespace std;
+int main()
+{
+	long long int t;
+	long long int a,b;
+	long long int x,y;
+	long long int i;
+	int count=0;
+	bool arr[100001];
+	for(i=1;i<=100000;i++)
+	{
+		arr[i]=false;
+        	x=i*i;
+        	if(check(x)) arr[i]=true;
+        }
+	cin>>t;
+	while(t--)
+	{
+		count=0;
+		cin>>a>>b;
+		x=ceil(sqrt(a));
+		y=sqrt(b);
+		for(i=x;i<=y;i++)
+		{
+			if(arr[i])
+				count++;
+		}
+		cout<<count<<endl;
+	}
+	return(0);
+}
+int check(long long n)
+{
+	long long r;
+	while(n>0)
+	{	r=n%10;
+		if(r==1||r==0||r==4||r==9)
+		{
+			n=n/10;
+		}
+		else 
+			return(0);
+	}
+		return(1);
+}
+	

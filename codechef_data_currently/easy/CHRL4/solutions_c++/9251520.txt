@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define mod 1000000007
+#define F first
+#define S second
+#define inf 1e18
+#define mp make_pair
+#define lf long double
+pair<int,lf> T[400010];
+ll D[100010];
+lf A[100010];
+ll P[100010];
+void build(int i,int a,int b)
+{
+    if(a>b)
+        return ;
+    else if(a==b)
+    {
+        T[i].F=i;
+        T[i].S=inf;
+    }
+    else{
+        build(2*i,a,(a+b)/2);
+        build(2*i+1,((a+b)/2)+1,b);
+        T[i].S=inf;
+        T[i].F=min(T[2*i].F,T[2*i+1].F);
+    }
+}
+void update(int i,int a,int b,int pos,lf val)
+{
+    if(b<pos||a>pos||a>b)
+        return ;
+    else if(a>=pos&&b<=pos)
+    {
+        T[i].S=val;
+        T[i].F=pos;
+        return ;
+    }
+    else{
+        update(2*i,a,(a+b)/2,pos,val);
+        update(2*i+1,((a+b)/2)+1,b,pos,val);
+        if(T[2*i].S<T[2*i+1].S)
+        {
+            T[i].F=T[2*i].F;
+            T[i].S=T[2*i].S;
+        }
+        else
+        {
+            T[i].F=T[2*i+1].F;
+            T[i].S=T[2*i+1].S;
+        }
+    }
+}
+pair<int,lf > query(int i,int a,int b,int s,int e)
+{
+
+    if(b<s||a>e||a>b)
+        return mp(1000,inf);
+    else if(a>=s&&b<=e)
+        return T[i];
+    else
+    {
+        pair<int,lf>q1,q2,q3;
+        q1=query(2*i,a,(a+b)/2,s,e);
+        q2=query(2*i+1,((a+b)/2)+1,b,s,e);
+        if(q1.S<q2.S)
+        {
+            return q1;
+        }
+        else
+            return q2;
+    }
+}
+int main()
+{
+    int t,n,k,i,j;
+    ios_base::sync_with_stdio(false);
+    cin>>n>>k;
+    for(i=1;i<=n;i++)
+    {
+        cin>>P[i];
+        A[i]=(lf)P[i];
+    }
+    ll ans;
+    build(1,1,n);
+    update(1,1,n,1,log10(A[1]));
+    D[1]=-1;
+    for(i=2;i<=k+1;i++)
+    {
+        update(1,1,n,i,log10(A[i])+log10(A[1]));
+        D[i]=1;
+        //ans=(A[1]*A[i])%mod;
+    }
+    pair<int,lf>p1;
+    for(;i<=n;i++)
+    {
+        p1=query(1,1,n,i-k,i-1);
+       // cout<<p1.S<<endl;
+        D[i]=p1.F;
+        update(1,1,n,i,p1.S+log10(A[i]));
+    }
+    i=n;
+    ans=P[1];
+    while(D[i]!=-1)
+    {
+        ans=(ans*P[i])%mod;
+        i=D[i];
+       // cout<<i<<" ";
+    }
+    cout<<ans<<endl;
+}

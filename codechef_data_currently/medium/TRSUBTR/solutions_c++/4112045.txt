@@ -1,0 +1,91 @@
+#include<bits/stdc++.h>
+using namespace std ;
+
+const int MAXN = 1e5;
+
+#define foreach(it,a) for(__typeof((a).begin()) it = (a).begin() ; it != (a).end() ; it ++)
+
+struct Tree{
+    int age,left,right;
+    Tree(){}
+    Tree(int age):
+        age(age),left(0),right(0){}
+    Tree(int age,int left,int right):
+        age(age),left(left),right(right){}
+    inline static Tree null(){
+        return Tree(-1,0,0);
+    }
+    bool operator < (const Tree& that) const{
+        return make_pair(age,make_pair(left,right)) < make_pair(that.age,make_pair(that.left,that.right));
+    }
+};
+
+vector<vector<int> > G;
+map<Tree,int> id;
+int n;
+int age[MAXN+5];
+bool seniored[MAXN+5];
+Tree root;
+
+set<int> subtrees;
+
+int treeId(const Tree& tree){
+    return id.insert(make_pair(tree,id.size())).first->second;
+}
+
+int getId(int u){
+    if (u == -1)return treeId(Tree::null()); // zero ya3ni
+    Tree cur(age[u]);
+    cur.left = getId(G[u][0]);
+    cur.right = getId(G[u][1]);
+    return treeId(cur);
+}
+
+int scanGraph(){
+    int c,c2;
+    scanf("%d",&n);
+    for (c=0;c<n;c++)
+        scanf("%d",&age[c]);
+    G.clear();
+    G.resize(n);
+    for (c=0;c<n;c++)
+        G[c].assign(2,-1);
+    for (c=0;c+1<n;c++){
+        int u,v;
+        char ch;
+        scanf("%d%d %c",&u,&v,&ch);
+        u--;v--;
+        G[u][ch == 'E'] = v;
+        seniored[v] = true;
+    }
+    int chef;
+    for (c=0;c<n;c++){
+        if (!seniored[c])
+            chef = c;
+        seniored[c] = false;
+    }
+    return chef;
+}
+
+int main(){
+    //freopen("subtree.in","r",stdin);
+    int c,c2;
+    int chef = scanGraph();
+    
+    getId(chef);
+    foreach(it,id)
+        subtrees.insert(it->second);
+    
+    int qs;
+    scanf("%d",&qs);
+    while (qs--){
+        chef = scanGraph();
+        if (subtrees.count(getId(chef)) > 0)
+            printf("YES
+");
+        else printf("NO
+");
+    }
+    
+    return 0;
+}

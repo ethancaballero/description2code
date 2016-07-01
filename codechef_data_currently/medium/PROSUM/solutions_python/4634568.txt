@@ -1,0 +1,12 @@
+import sys
+
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	length = int(sys.stdin.readline().rstrip())
+	array = [int(s) for s in sys.stdin.readline().rstrip().split()] 
+	c, c2 = 0, 0
+	c = sum(i > 2 for i in array)
+	c2 = sum(i == 2 for i in array)
+	result = c2 * c + c * (c - 1) / 2.
+	print int(result)
+	num -= 1

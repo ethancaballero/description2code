@@ -1,0 +1,57 @@
+#include<stdio.h>
+#define gc getchar
+
+void scanint(int &x)
+{
+    register long int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+void scanlint(long long int &x)
+{
+    register long int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+int main()
+{
+    int t;
+    scanint(t);
+    while(t--)
+    {
+        long long int n,i,j, count=0;
+        scanlint(n);
+        for(i=1; i*i<=n; i++)
+        {
+            j=i;
+            if(n%j==0)
+            {
+                while(j!=0)
+                {
+                    if(j%10==4||j%10==7)
+                       {
+                           count++;
+                           break;
+                       }
+                    j/=10;
+                }
+                j=n/i;
+                while(j!=0)
+                {
+                    if(j%10==4||j%10==7)
+                       {
+                           count++;
+                           break;
+                       }
+                    j/=10;
+                }
+            }
+        }
+        printf("%lld
+",count);
+    }
+    return 0;
+}

@@ -1,0 +1,10 @@
+import sys;
+for i in xrange(int(sys.stdin.readline())):
+    s = sys.stdin.readline().strip()
+    n=len(s)
+    f=s.count('4')
+    sv=s.count('7')
+    print n-f-sv 
+
+
+

@@ -1,0 +1,28 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+	int t, n, g, dif, minm;
+	cin>>t;
+	while(t--)
+	{
+		dif=0;
+		minm=10000000;
+		cin>>n;
+		while(n--)
+		{
+		scanf("%d",&g);
+		if(dif<g-minm)
+		dif=g-minm;
+		if(minm>g)
+		minm=g;
+	    }
+		if(dif!=0)
+		printf("%d
+",dif);
+		else
+		cout<<"UNFIT"<<endl;
+	}
+	return 0;
+}

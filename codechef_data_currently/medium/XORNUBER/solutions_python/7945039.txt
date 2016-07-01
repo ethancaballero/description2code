@@ -1,0 +1,26 @@
+# https://www.codechef.com/COOK61/problems/XORNUBER
+import sys, math
+
+ff = sys.stdin
+T = int(ff.readline())
+
+
+for tc in xrange(T):
+	minValue = -1
+	N = int(ff.readline().strip())
+		
+	
+	x  = math.log(N, 2)
+	if N == 1 :
+		print(2)
+		continue
+
+	if (2 ** (int(x) + 1)) - 1  == N :
+		print(2 ** int(x) - 1)
+	else :
+		print(-1)
+
+
+
+
+

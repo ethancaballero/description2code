@@ -1,0 +1,32 @@
+#include <iostream>
+#include <set>
+#include <vector>
+using namespace std;
+
+int main() {
+	set<int> ig,tr;
+	int t,n,m,k,i,first,second,val;
+	cin>>t;
+	while(t--){
+		ig.clear();
+		tr.clear();
+		first=second=0;
+		cin>>n>>m>>k;
+		for(i=0;i<m;i++){
+		cin>>val;
+		ig.insert(val);
+		}
+		for(i=0;i<k;i++){
+		cin>>val;
+		tr.insert(val);
+		}
+		for(i=1;i<=n;i++){
+			if(ig.find(i)!=ig.end() && tr.find(i)!=tr.end())
+				first++;
+			else if(!(ig.find(i)!=ig.end()) && !(tr.find(i)!=tr.end()))
+				second++;
+		}
+		cout<<first<<" "<<second<<endl;
+	}
+	return 0;
+}

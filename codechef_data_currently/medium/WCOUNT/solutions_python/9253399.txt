@@ -1,0 +1,19 @@
+def fact(a):
+    if a == 1:
+        return 1
+    else:
+        return a * fact(a-1)
+
+t = int(raw_input())
+for i in range(t):
+    wor = raw_input()
+    swor = set(list(wor))
+    denom = []
+    for i in swor:
+        co = wor.count(i)
+        if co > 1:
+            denom.append(co)
+    dval = 1
+    for j in denom:
+        dval *= fact(j)
+    print (fact(len(wor))/dval)%1000000007

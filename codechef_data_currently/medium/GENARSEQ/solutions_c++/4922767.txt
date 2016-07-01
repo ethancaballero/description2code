@@ -1,0 +1,34 @@
+#include <cstdio>
+#include <vector>
+using namespace std;
+
+const int maxV = 54000;
+
+int main()
+{
+	int TST;
+	scanf("%d",&TST);
+	for(int tst=0;tst<TST;tst++)
+	{
+		int a,b,n;
+		scanf("%d%d%d",&a,&b,&n);
+		vector<int> x(n);
+		int y=0;
+		vector<int> mark(maxV,0);
+		for(int i=0;i<n;i++)
+		{
+			for(y++;mark[y];y++);
+			x[i]=y;
+			printf("%d%c",y,i<n-1?' ':'
+');
+			for(int j=0;j<=i;j++)
+			{
+				int z=a*x[i]-b*x[j];
+				if(y<z && z<maxV) mark[z]=1;
+				z=a*x[j]-b*x[i];
+				if(y<z && z<maxV) mark[z]=1;
+			}
+		}
+	}
+	return 0;
+}

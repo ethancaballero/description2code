@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	int tc;
+	cin>>tc;
+	
+	string s1,s2;
+	int q,d;
+	
+	while(tc>0)
+	{
+		q=0;
+		d=0;
+		cin>>s1;
+		cin>>s2;
+		
+		for(int i=0;i<s1.length();i++)
+		{
+			if(s1[i]!=s2[i]&&(s1[i]=='?'||s2[i]=='?'))
+			{	
+					q++;
+			}
+			else if(s1[i]!=s2[i]&&(s1[i]!='?'&&s2[i]!='?'))
+			{
+					d++;
+			}
+			else if(s1[i]==s2[i]&&s2[i]=='?')
+			{
+				q++;
+			}
+			
+			
+		}
+				cout<<d<<" "<<d+q<<endl;
+		
+	
+	tc--;	}	
+}

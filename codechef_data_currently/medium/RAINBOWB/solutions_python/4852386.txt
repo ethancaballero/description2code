@@ -1,0 +1,18 @@
+import sys
+ 
+f=sys.stdin
+ 
+mod=1000000007
+ 
+n=int(f.readline())
+ 
+if n<13:
+  print 0
+else :
+  n+=1
+  n/=2
+  n-=1
+  ans=n*(n-1)*(n-2)*(n-3)*(n-4)*(n-5)
+  ans/=720
+  ans%=mod
+  print ans 

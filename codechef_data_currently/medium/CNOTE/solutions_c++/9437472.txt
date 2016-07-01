@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_v) (int)(_v).size()
+#define all(_v) (_v).begin(),(_v).end()
+#define pii pair<int,int>
+typedef long long ll;
+const int INF = 1000000000;
+const ll MOD = 1e9 + 7;
+
+const int maxn = 1000010;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+
+	int t; cin >> t;
+	while (t --) {
+		int x,y,k,n; cin >> x >> y >> k >> n;
+		x = x - y;
+		bool flag = false;
+
+		while (n --) {
+			int pages,price; cin >> pages >> price;
+			if(pages >= x and price <= k) flag = true;
+		}
+
+		if(flag) puts("LuckyChef");
+		else puts("UnluckyChef");
+	}
+	return 0;
+}

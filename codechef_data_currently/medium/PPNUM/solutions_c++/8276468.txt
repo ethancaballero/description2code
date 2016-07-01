@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include<iostream>
+#include<string.h>
+#include<stdlib.h>
+#include<math.h>
+#define MOD 1000000007
+using namespace std;
+
+long long even(long long e){
+    return e/2;
+}
+ 
+int main()
+{
+    std::ios_base::sync_with_stdio(false);
+    int t;
+    cin>>t;
+    while(t--){
+        long long  l,r,tl,tr;
+        int dl=0,dr=0;
+        cin>>l>>r;
+        tl = l; tr = r;
+        while(tl){
+           tl/= 10;
+            dl++;
+        }
+        while(tr){
+            tr/= 10;
+            dr++;
+        }
+       // cout<<dl<<" "<<dr<<"
+";
+        long long j = pow(10,dl)-1 , k = pow(10,dr-1)-1,sum = 0,n,e,temp;
+        float f;
+        if(dr-dl==0){
+            temp = l+r;
+            f = (float)temp/2;
+            //cout<<"f"<<temp;
+            temp = (long long int)(f*((r+1)-l));
+
+            temp = ((temp%MOD)*dl)%MOD;
+            sum = temp;
+            cout<<sum<<"
+";
+            continue;
+        }else{
+            temp = l+j;
+            f = (float)temp/2;
+            temp = (long long int)(f*((j+1)-l));
+            sum = temp%MOD;
+            sum = (sum*dl)%MOD;
+            n = j+1;
+            j = (j*10)+9;
+            dl++;
+           // cout<<"j"<<j<<" 
+";
+       //    cout<<"sum"<<sum<<"
+";
+           while(j<=k){
+                temp = n+j;
+                f = (float)temp/2;
+                temp = (long long int)(f*((j+1)-n));
+                temp = ((temp%MOD)*dl)%MOD;
+                sum = (sum+temp)%MOD;
+                n = j+1;
+                j = (j*10)+9;
+                dl++;
+           //     cout<<"sum"<<sum<<"
+";
+            }
+            temp = k+r+1;
+            f = (float)temp/2;
+            temp = (long long int)(f*((r+1)-(k+1)));
+            temp = ((temp%MOD)*dl)%MOD;
+          //  cout<<"temp"<<temp<<"
+";
+            sum = (sum+temp)%MOD;
+            cout<<sum<<"
+";
+            continue;
+        }
+        
+    }
+        return 0;
+}

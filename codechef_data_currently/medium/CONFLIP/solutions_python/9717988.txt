@@ -1,0 +1,19 @@
+import sys
+
+for __ in range(input()) :
+    for __ in range(input()) :
+        i , n , q = map(int,sys.stdin.readline().split())
+        if i==1 :
+            head , tail = n , 0
+            tail = n/2
+            if n&1 :
+                tail += 1
+            head -= tail
+            print tail if q==2 else head
+        if i==2 :
+            head , tail = 0 , n
+            head = n/2
+            if n&1 :
+                head += 1
+            tail -= head
+            print tail if q==2 else head

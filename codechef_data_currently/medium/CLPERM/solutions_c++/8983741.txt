@@ -1,0 +1,45 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+	int t,n,k,i;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		int a[k];
+		for(i=0;i<k;i++)
+		{
+			cin>>a[i];
+		}
+		sort(a,a+k);
+		int sum1=0,sum2;
+		for(i=0;i<k;i++)
+		{
+		sum2=(a[i]-1)*(a[i])/2;
+		if(sum2-sum1<a[i])
+		{
+		//cout<<"Missing="<<a[i]<<endl;
+		//means this number cannot be made
+			if(a[i]%2 ==0)//means even number cannot b made
+			{
+			cout<<"Mom"<<endl;
+			}
+			else
+			cout<<"Chef"<<endl;
+		//If all missing numbers can be made
+		break;
+		}
+		sum1+=a[i];
+		}
+		int number=1LL*n*(n+1)/2;
+		number-=sum1;
+		if(number%2!=0 && i==k)
+		cout<<"Mom"<<endl;
+		else if(i==k)
+		cout<<"Chef"<<endl;
+	}
+	return 0;
+}

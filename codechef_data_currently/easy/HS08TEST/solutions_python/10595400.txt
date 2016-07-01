@@ -1,0 +1,5 @@
+withdraw, balance = map(float, raw_input().split())
+if withdraw % 5 != 0 or withdraw > (balance - 0.5):
+    print balance
+else:
+    print (balance - withdraw - 0.5)

@@ -1,0 +1,50 @@
+import heapq
+import collections
+import sys
+
+def solve(vv):
+
+    if len(vv) == 0:
+        return 0
+    vv = map(int, vv)
+
+    m = collections.defaultdict(set)  # m[digit] = set of indices
+    for i, v in enumerate(vv):
+        m[v].add(i)
+
+    n = len(vv)
+    heap = [(0,0)]  # (dist, i)        
+    loops = 0
+    d = [None] * n
+
+    while len(heap) > 0:
+        loops += 1
+        dist, i = heapq.heappop(heap)         
+        if i == n-1:     
+            #print loops, 'loops'
+            return dist    
+        if d[i] is None or dist < d[i]:
+            d[i] = dist 
+            v = vv[i]
+            if i > 0:                          
+                heapq.heappush(heap, (dist+1, i-1))                    
+            if i < n-1:                          
+                heapq.heappush(heap, (dist+1, i+1))                    
+ 
+            for idx in m[v]:     
+                if idx == i:     
+                    continue     
+                heapq.heappush(heap, (dist+1, idx))                   
+            m[v] = set()
+
+    return -1
+
+
+def ingest():
+
+    vv = map(int, sys.stdin.readline().strip())
+    print solve(vv)
+
+
+if __name__ == '__main__':
+    ingest()

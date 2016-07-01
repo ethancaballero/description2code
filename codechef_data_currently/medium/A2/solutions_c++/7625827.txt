@@ -1,0 +1,45 @@
+#include <stdio.h>
+ 
+#define getcx() getchar_unlocked()
+ 
+inline int inp ()
+{
+	int n=0;
+	int ch=getcx();
+	while( ch < '0' || ch > '9' )
+		ch=getcx();
+ 
+	while( ch >= '0' && ch <= '9' )
+		n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+ 
+	return n;
+}
+ 
+int main(void) {
+	int T, K, count, i, expcount, ans = 1;
+	scanf("%d", &T);
+ 
+	while (T--) {
+		scanf("%d", &K);
+		expcount = 1;
+ 
+		for (i=1; i<=K; i++) {
+			count = inp();
+			expcount -= count;
+			expcount *= 2;
+			//printf("%d-",expcount);
+			if(expcount < 0 && i != K) {
+				ans = 0;
+				break;
+			}
+		}
+ 
+		if (expcount == 0 && ans == 1)
+			printf("Yes
+");
+		else
+			printf("No
+");
+	}
+	return 0;
+}

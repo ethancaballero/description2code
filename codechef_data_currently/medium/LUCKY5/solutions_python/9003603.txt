@@ -1,0 +1,11 @@
+import sys
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    number = sys.stdin.readline().strip()
+    l = number.__len__()
+    count = 0
+    for i in range(0, l):
+        if number[i] != '4' and number[i] != '7': count += 1
+    print count

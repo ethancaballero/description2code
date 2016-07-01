@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int  main()
+{
+	//freopen("in","r",stdin);
+	int n;
+	cin>>n;
+	int a[n+1];
+	bool visited[n+1];
+	memset(visited,0,sizeof visited);
+	for(int i=1;i<=n;i++)
+		cin>>a[i];
+	int c=0;
+	for(int i=1;i<=n;i++)
+	{
+		if(!visited[i])
+		{
+			c++;
+		while(!visited[i])
+		{
+			//cout<<i<<" ";
+			visited[i]=true;
+			i=a[i];
+		}
+	}
+	}
+	cout<<c<<endl;
+	memset(visited,0,sizeof visited);
+	for(int i=1;i<=n;i++)
+	{
+		if(!visited[i])
+		{
+			int x=i;
+		while(!visited[i])
+		{
+			cout<<i<<" ";
+			visited[i]=true;
+			i=a[i];
+		}
+		cout<<x<<endl;
+	}
+	}
+}

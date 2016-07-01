@@ -1,0 +1,17 @@
+import sys
+sys.setrecursionlimit(20000)
+t=input()
+t=int(t)
+
+
+def calculate_count(b):
+    if(b<=2):
+        return 0
+    return b/2-1+calculate_count(b-2)
+
+while(t>0):
+    b=input()
+    b=int(b)
+    result=calculate_count(b)
+    print result
+    t=t-1

@@ -1,0 +1,73 @@
+#include<iostream>
+#include<algorithm>
+#include<stdio.h>
+#include<cstdlib>
+#include<sstream>
+#include<string.h>
+#include<set>
+#include<map>
+#include<ctime>
+#include<queue>
+#include<vector>
+#include<stack>
+#include<list>
+#include<math.h>
+using namespace std;
+typedef vector<int> vi;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long int lli;
+
+#define MAXN 1000005
+#define INF 2147483647
+#define MOD	1000000007
+#define pb push_back 
+#define sz(a) int((a).size())
+#define FOR(x,a,b) for(int (x) = (a);(x)<=(b);(x)++)
+#define rep(x,n)   for(int (x)=0;(x)<(n);(x)++)
+#define tr(c,it) for(typeof((c).begin()) it = (c).begin(); it != (c).end(); it++)
+#define all(c) c.begin(),c.end()
+
+
+
+int main()
+{
+	int n,t,max1,c;
+	char x;
+	//freopen("input.txt","r",stdin);
+//	freopen("output.txt","w",stdout);
+	scanf("%d",&t);
+	while(t!=0)
+   {
+   	max1 = 0;
+   	rep(i,t)
+   	{
+ 		cin>>x>>n;
+ 		if(n==0)
+ 		 c = 1;
+ 		else
+ 		{
+ 		if(x=='P')
+ 			c=n-1;
+ 		else
+ 			c  =n+1;
+ 		}
+ 		c = (int)abs(c);
+ 	//	cout<<"
+c = "<<c;
+ 		if(c<max1)
+ 			{
+ 			 if((max1-c)%2!=0)
+ 				max1++;}
+ 		else
+ 		{
+ 			max1+=(c-max1);
+ 		}
+
+ 	}
+ 	  printf("%d
+",max1);
+ 	  scanf("%d",&t);
+   }
+	return 0;
+}

@@ -1,0 +1,81 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+const int N = 1e6 + 10;
+
+map<char, int> mp;
+map<int, char> mp1;
+
+long long cum[4][4][N];
+long long cum1[4][N];
+
+void preprocess(string s) {
+	int n = s.size();
+	mp['c'] = 0;
+	mp['e'] = 1;
+	mp['f'] = 2;
+	mp['h'] = 3;
+	mp1[0] = 'c';
+	mp1[1] = 'e';
+	mp1[2] = 'f';
+	mp1[3] = 'h';
+	for(int i = 0; i < 4; i++) {
+		char c = mp1[i];
+		cum1[i][0] = ((s[i] == c) ? 1 : 0);
+		for(int j = 1; j < n; j++)
+			cum1[i][j] = cum1[i][j-1] + ((s[j] == c) ? 1 : 0);
+	}
+	for(int i = 0; i < 4; i++) {
+		for(int j = 0; j < 4; j++) {
+			if(i == j)
+				continue;
+			char c1 = mp1[i];
+			char c2 = mp1[j];
+			for(int k = 1; k < n; k++) {
+				cum[i][j][k] = cum[i][j][k-1];
+				if(s[k] == c2) {
+					cum[i][j][k] += cum1[i][k-1];
+				} 
+			}
+		}
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	//freopen("in", "r", stdin);
+	string s;
+	int q;
+	cin >> s >> q;
+	preprocess(s);
+	/*
+	for(int i = 0; i < 4; i++) {
+		cout << mp1[i] << endl;
+		for(int j = 0; j < s.size(); j++)
+			cout << cum1[i][j] << " ";
+		cout << endl;
+	}
+	*/
+	while(q--) {
+		char a,b;
+		int l,r;
+		cin >> a >> b >> l >> r; 
+		if(l == r) {
+			cout << 0 << "
+";
+			continue;
+		}
+		l--;
+		r--;
+		int p = mp[a], q = mp[b];
+		long long ans = cum[p][q][r];
+		if(l > 0) {
+			ans -= cum[p][q][l-1];
+			ans -= cum1[p][l-1]*(cum1[q][r] - cum1[q][l-1]);
+		}
+		cout << ans << "
+";
+	}
+}

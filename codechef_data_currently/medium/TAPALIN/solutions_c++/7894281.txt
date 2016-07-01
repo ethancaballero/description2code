@@ -1,0 +1,52 @@
+// URL : https://www.codechef.com/problems/TAPALIN
+
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+typedef long long ll;
+
+ll md = 1000000007;
+
+ll modexp(ll a, ll b, ll n)
+{
+	ll r = 1,  z = a % n;
+	while(b)
+	{
+		if(b & 1)r = r * z % n;
+		z = z * z % n;
+		b >>= 1;
+	}
+	return r;
+}
+
+ll cal_1(ll n)
+{
+	ll r = (n + 1) / 2;
+	ll a = modexp(25, md - 2, md);
+	ll b = ((modexp(26, r, md) - 1 + md) * 52) % md;
+	return (a * b) % md;
+}
+
+int main()
+{
+	int tc;
+	cin >> tc;
+	while(tc--)
+	{
+	   ll n;
+	   cin >> n;
+	   if(!(n & 1))
+	   {
+	   	  cout << cal_1(n) << endl;
+	   }
+	   else
+	   {
+	   	  ll ans = cal_1(n - 1);
+	   	  ans += modexp(26, (n + 1) / 2, md);
+	   	  cout << ans % md << endl;
+	   }
+	}
+	return 0;
+}

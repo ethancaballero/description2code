@@ -1,0 +1,5 @@
+from math import sqrt
+T=int(raw_input())
+for i in range(T):
+    n=int(raw_input())
+    print int(sqrt(n))

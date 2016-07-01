@@ -1,0 +1,15 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+  int t,n;//,a[101],i,j,c,d;
+  cin>>t;
+  while(t--)
+  { cin>>n;
+   if((n-1)%4!=0)cout<<"BOB
+";
+   else cout<<"ALICE
+";
+  }return 0;
+}

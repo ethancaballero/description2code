@@ -1,0 +1,42 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+
+
+using namespace std;
+
+int main()
+{
+ int t;
+ cin>>t;
+
+ while(t--)
+    {
+     char one[50], two[50];
+
+     cin>>one;
+     cin>>two;
+
+     bool flag = false;
+
+     for(int i = 0; i < strlen(one); i++)
+        {
+         for(int j = 0; j < strlen(two); j++)
+            {
+             if(one[i] == two[j])
+                {
+                 flag = true;
+                 break;
+                }
+            }
+        }
+
+     if(flag)
+        cout<<"Yes"<<endl;
+     else
+        cout<<"No
+";
+    }
+
+ return 0;
+}

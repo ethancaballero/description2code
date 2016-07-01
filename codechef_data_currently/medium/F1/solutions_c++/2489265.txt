@@ -1,0 +1,157 @@
+#include <iostream>
+using namespace std;
+char input[50000000];
+char output[50000000];
+int inpos = 0, outpos = 0;
+int numcharsin;
+int ret[500][500][2];
+int curmax, curfreq;
+short precomp[1024][1024][2];
+int pow2[1024];
+int grid[512][512], tM, tN;
+int M,N,K;
+int x,y;
+int rev[2][512][12];
+int lowv[2][1024][2];
+int revpow[513];
+int firstbit[512];
+void update(int val, int freq) {
+if (val>curmax) {
+curmax = val;
+curfreq = freq;
+} else if (val==curmax) {
+curfreq += freq;
+}
+}
+void solve() {
+for (int i=2*tM-1; i>=1; i--)
+for (int j=2*tN-1; j>=1; j--) {
+      if (i>=tM && j>=tN) {
+      precomp[i][j][0] = grid[i-tM][j-tN];
+      precomp[i][j][1] = 1;
+      } else {
+curmax = -2;
+curfreq = 0;
+      if (j<tN) {
+      if (2*j<2*tN) update(precomp[i][2*j][0],precomp[i][2*j][1]);
+      if (2*j+1<2*tN) update(precomp[i][2*j+1][0],precomp[i][2*j+1][1]);
+      } else {
+      if (2*i<2*tM) update(precomp[2*i][j][0],precomp[2*i][j][1]);
+      if (2*i+1<2*tM) update(precomp[2*i+1][j][0],precomp[2*i+1][j][1]);
+      }
+      precomp[i][j][0] = curmax;
+      precomp[i][j][1] = curfreq;
+      }
+      }
+      for (x=0; x<=M-K; x++) {
+      for (y=0; y<=N-K; y++) {
+      curmax = -2;
+      curfreq = 0;
+      int tx = x;
+      while (tx <= x+K-1) {
+      int pow2x = min(tx&-tx,firstbit[x+K-1-tx]);
+      if (!pow2x) pow2x=1;
+      int nodex = rev[0][tx][revpow[pow2x]];
+      int ty = y;
+      while (ty <= y+K-1) {
+      int pow2y = min(ty&-ty,firstbit[y+K-1-ty]);
+      if (!pow2y) pow2y=1;
+      int nodey = rev[1][ty][revpow[pow2y]];
+      update(precomp[nodex][nodey][0],precomp[nodex][nodey][1]);
+      ty += pow2y;
+      }
+      tx += pow2x;
+      }
+      ret[x][y][0] = curmax;
+      ret[x][y][1] = curfreq;
+      }}
+      }
+      int getint() {
+      while (input[inpos]<'0' || input[inpos]>'9') inpos++;
+      int ret = 0;
+      while (inpos<numcharsin && input[inpos]>='0' && input[inpos]<='9') ret = 10*ret+input[inpos++]-'0';
+      return ret;
+      }
+void writeint(int a) {
+      if (a==0) {
+      output[outpos++]='0';
+      return;
+      }
+      char tmp[10];
+      int tp = 0;
+      while (a) {tmp[tp++]=a%10;a/=10;}
+      while (tp--) {
+      output[outpos++]=tmp[tp]+'0';
+      }
+      }
+      int main() {
+      int xxx = clock();
+      revpow[0] = 1;
+      for (int i=1, ii=0; i<=512; i*=2,ii++) {
+      revpow[i] = ii;
+      }
+      firstbit[0]=1;
+      firstbit[1]=1;
+      for (int i=2; i<512; i++) {
+      firstbit[i] = firstbit[i/2]*2;
+      }
+      cin.read(input,50000000);
+      numcharsin = cin.gcount();
+      char tmp[6] = "Case ";
+      int T = getint();
+      for (int t=1; t<=T; t++) {
+      M = getint();
+      N = getint();
+      tM = 1; while (tM<M) tM*=2;
+      tN = 1; while (tN<N) tN*=2;
+      for (int i=2*tM-1; i>=tM; i--) {
+      lowv[0][i][0] = i-tM;
+      lowv[0][i][1] = 0;
+      rev[0][lowv[0][i][0]][lowv[0][i][1]] = i;
+      }
+      for (int i=tM-1; i>=1; i--) {
+      lowv[0][i][0] = lowv[0][2*i][0];
+      lowv[0][i][1] = lowv[0][2*i][1]+1;
+      rev[0][lowv[0][i][0]][lowv[0][i][1]] = i;
+      }
+      for (int i=2*tN-1; i>=tN; i--) {
+      lowv[1][i][0] = i-tN;
+      lowv[1][i][1] = 0;
+      rev[1][lowv[1][i][0]][lowv[1][i][1]] = i;
+      }
+      for (int i=tN-1; i>=1; i--) {
+      lowv[1][i][0] = lowv[1][2*i][0];
+      lowv[1][i][1] = lowv[1][2*i][1]+1;
+      rev[1][lowv[1][i][0]][lowv[1][i][1]] = i;
+      }
+      K = getint();
+     for (int i=0; i<tM; i++)
+      for (int j=0; j<tN; j++) {
+      if (i>=M || j>=N) grid[i][j]=-1;
+      else grid[i][j] = getint();
+      }
+      solve();
+      for (int i=0; i<5; i++) output[outpos++]=tmp[i];
+      writeint(t);
+      output[outpos++]=':';
+      output[outpos++]='
+';
+      for (int i=0; i<=M-K; i++) {
+      for (int j=0; j<=N-K; j++) {
+      writeint(ret[i][j][0]);
+      if (ret[i][j][1]>1) {
+      output[outpos++]='(';
+      writeint(ret[i][j][1]);
+      output[outpos++]=')';
+      }
+      output[outpos++]=' ';
+      }
+      output[outpos++]='
+';
+      }
+      output[outpos++]='
+';
+      }
+      cout.write(output,outpos);
+      }
+ 

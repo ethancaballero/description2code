@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+inline long long scan()
+{
+    long long  n=0;
+    char ch=getchar();
+
+    while (ch<'0'||ch>'9')
+    ch=getchar();
+
+    while (ch>='0'&&ch<='9')
+    {
+        n=n*10+ch-'0';
+        ch=getchar();
+    }
+    return n;
+}
+inline void write (long long  n)
+{
+    long long  N = n, rev, count = 0;
+    rev = N;
+    if (N == 0) { putchar('0'); putchar('
+'); return ;}
+    while ((rev % 10) == 0) { count++; rev /= 10;}
+    rev = 0;
+    while (N != 0) { rev = (rev<<3) + (rev<<1) + N % 10; N /= 10;}
+    while (rev != 0) { putchar(rev % 10 + '0'); rev /= 10;}
+    while (count--) putchar('0');
+}
+ // ***************************************************************************************************
+int main()
+{
+long long t,n,i,k;
+t=scan();
+while(t--)
+{
+    k=0;
+n=scan();
+while(n%2==0)
+n=n/2;
+for(i=3;i<=sqrt(n);i=i+2)
+{
+while(n%i==0)
+{
+n=n/i;
+if((i-1)%4==0)
+    k=1;
+}
+if(k==1)
+    break;
+}
+if(n>2)
+{
+  if((n-1)%4==0)
+    k=1;
+}
+if(k==1)
+    cout<<"YES"<<"
+";
+else
+    cout<<"NO"<<"
+";
+}
+}

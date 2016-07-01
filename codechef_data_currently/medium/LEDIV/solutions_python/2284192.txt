@@ -1,0 +1,45 @@
+'''
+Created on Jun 21, 2013
+
+@author: psgada
+'''
+
+ 
+import sys
+from math import sqrt
+
+def gcd(num1, num2):
+    
+    while num2 != 0:
+        oldnum1 = num1
+        num1 = num2
+        num2 = oldnum1 % num2
+    
+    return num1
+
+def find_least_prime_factor():
+    num_cases = int(sys.stdin.readline().strip())
+    
+    for i in range(0, num_cases):
+        num_count = int(sys.stdin.readline().strip())
+        num_list = map(int, sys.stdin.readline().strip().split())
+        
+        gcd_val = reduce(gcd, num_list)
+        
+        if gcd_val == 1:
+            print -1
+            continue
+        
+        least_prime = -1
+        
+        for i in range(2, int(sqrt(gcd_val))+1):
+            if gcd_val % i == 0:
+                least_prime = i
+                break
+        
+        if least_prime > 0:
+            print least_prime
+        else:
+            print gcd_val
+        
+find_least_prime_factor()

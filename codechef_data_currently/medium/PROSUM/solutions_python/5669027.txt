@@ -1,0 +1,7 @@
+for _ in range(int(raw_input())):
+  n = int(raw_input())
+  array = map(int, raw_input().split())
+  n-=array.count(0)+array.count(1)
+  two = array.count(2)
+  n-=two
+  print (n*(n-1))/2 + n*two

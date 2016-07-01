@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+def case():
+    raw_input()
+    ns = sorted(map(int, raw_input().split()))
+    print min(ns[i+1] - ns[i] for i in xrange(len(ns) - 1))
+
+if __name__ == "__main__":
+    for _ in xrange(int(raw_input())):
+        case()

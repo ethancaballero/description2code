@@ -1,0 +1,37 @@
+from heapq import heappush, heappop
+def GetList(n):
+    return [[] for _ in xrange(n)]
+ 
+n, m = map(int, raw_input().split())
+adj = GetList(n)
+rev = GetList(n)
+ 
+for _ in xrange(m):
+    a, b = map(int, raw_input().split())
+    adj[a-1].append(b-1)
+    rev[b-1].append(a-1)
+ 
+def Solve():
+    dist = [m*2 for _ in xrange(n)]
+    heap = []
+    heappush(heap, (0,0))
+    dist[0] = 0
+    while heap:
+        d, v = heappop(heap)
+        if v == n-1:
+            return d
+        if d != dist[v]:
+            continue
+        for i in adj[v]:
+            if dist[i] > d:
+                dist[i] = d
+                heappush(heap, (d, i))
+        for i in rev[v]:
+            if dist[i] > d+1:
+                dist[i] = d+1
+                heappush(heap, (d+1, i))
+    return -1
+ 
+print Solve()
+ 
+ 

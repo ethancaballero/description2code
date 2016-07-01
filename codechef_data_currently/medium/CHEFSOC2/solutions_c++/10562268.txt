@@ -1,0 +1,47 @@
+#include<iostream>
+#include<stdio.h>
+#define mod 1000000007
+using namespace std;
+int arr[1001][1001];
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+        {
+            int n;
+            int m;
+            int s;
+
+            scanf("%d%d%d",&n,&m,&s);
+            int arrm[m+1];
+            int i;
+            int j;
+            for(i=1;i<=m;i++)
+                scanf("%d",&arrm[i]);
+            for(i=0;i<=m;i++)
+                for(j=0;j<=n;j++)
+                    arr[i][j]=0;
+
+            arr[0][s]=1;
+            for(i=1;i<=m;i++)
+                for(j=1;j<=n;j++)
+                    {
+                        long long sum=0;
+                        if (j-arrm[i]>=1)
+                            sum=sum+arr[i-1][j-arrm[i]];
+                        if (j+arrm[i]<=n)
+                            sum=sum+arr[i-1][j+arrm[i]];
+                        sum=sum%mod;
+                        arr[i][j]=sum;
+                    }
+
+            for(j=1;j<=n;j++)
+                printf("%d ",arr[m][j]);
+
+            printf("
+");
+        }
+
+    return 0;
+}

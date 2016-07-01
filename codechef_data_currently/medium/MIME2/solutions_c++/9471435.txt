@@ -1,0 +1,48 @@
+#include<iostream>
+#include<map>
+using namespace std;
+int main()
+{
+    int n,q;
+    string s1,s2;
+    map<string,string> m;
+    cin>>n>>q;
+    while(n--)
+    {
+        cin>>s1>>s2;
+        m.insert(make_pair(s1,s2));
+    }
+    int i=0;
+    while(q--)
+    {
+        cin>>s1;
+        int pos = s1.rfind('.');
+        if( pos == string::npos)
+        {
+        	cout<< "unknown"<<endl;
+        	continue;
+		}
+		else
+		{
+			string ext = s1.substr(pos + 1);
+			if(m.find(ext)==m.end())
+            	cout<<"unknown
+";
+        	else
+            	cout<<m[ext]<<endl;
+		}
+    }
+}
+
+/*5 6
+html text/html
+htm text/html
+png image/png
+svg image/svg+xml
+txt text/plain
+index.html
+this.file.has.lots.of.dots.txt
+nodotsatall
+virus.exe
+dont.let.the.png.fool.you
+case.matters.TXT*/

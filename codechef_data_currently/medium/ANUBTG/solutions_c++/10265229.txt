@@ -1,0 +1,36 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int test,n,arr[1000],i,turn,sum;
+	scanf("%d",&test);
+	while(test){
+		test--;
+		sum=0;
+		turn=1;
+		scanf("%d",&n);
+		for(i=0;i<n;i++){
+			scanf("%d",&arr[i]);
+		}
+		sort(arr,arr+n);
+		i=n-1;
+		while(i>=0){
+			if(turn==1){
+				sum=sum+arr[i];
+				i--;
+				sum=sum+arr[i];
+				i--;
+				turn=2;
+			}
+			if(turn==2){
+				i=i-2;
+				turn=1;
+			}
+		}
+		printf("%d
+",sum);
+	}
+	
+	return 0;
+}

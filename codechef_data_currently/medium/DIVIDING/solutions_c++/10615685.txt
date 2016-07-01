@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+#define int long long
+main()
+{
+  int n,a,i,sum=0;
+  cin>>n;
+  for(i=0;i<n;i++)
+  {
+      cin>>a;
+      sum+=a;
+      if(sum>(n*(n+1))/2)
+      {
+          cout<<"NO"<<endl;
+          return 0;
+      }
+  }
+  if(sum==(n*(n+1))/2)
+   cout<<"YES"<<endl;
+  else
+   cout<<"NO"<<endl;
+  sum=0;
+}

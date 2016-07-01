@@ -1,0 +1,5 @@
+testCases = int(raw_input())
+for x in xrange(testCases):
+	num = raw_input()
+	rev = num[::-1]
+	print int(rev)

@@ -1,0 +1,31 @@
+import sys,math
+
+for __ in range(input()) :
+    n , k = map(int,sys.stdin.readline().split())
+    lists = list(map(int,sys.stdin.readline().split()))
+    ans , tot ,i = 1 , sum(lists) , 0
+    curneed , curhold , solved = lists[0] , k , 0
+    while i < n:
+        curneed = lists[i]
+        if curhold == -1 :
+            curhold = k
+            ans += 1
+        if curneed > curhold :
+            curneed -= curhold
+            need = math.ceil(float(curneed)/k)
+            ans += need
+            curhold = curneed%k
+            curhold = k-curhold if curhold !=0 else 0
+            curhold = curhold-1 if curhold > 0 and curhold!=k else curhold
+            i += 1
+        else :
+            if curhold == curneed :
+                curhold = 0
+                solved += lists[i]
+                i += 1
+            else :
+                solved += lists[i]
+                curhold -= curneed
+                curhold -= 1
+                i += 1
+    print int(ans)

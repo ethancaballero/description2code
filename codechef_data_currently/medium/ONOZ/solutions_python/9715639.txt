@@ -1,0 +1,16 @@
+def isIdentical(s):
+	
+	z = set(list(s))
+	return len(z)==1
+
+t = input()
+for i in xrange(t):
+	h,m = map(int, raw_input().split())
+	c = 0
+	
+	for j in xrange(h):
+		for k in xrange(m):
+			
+			if isIdentical(str(j)+str(k)):
+				c+=1
+	print c

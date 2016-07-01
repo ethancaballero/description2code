@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+ long int t,count=0;
+ int x1,y1,x2,y2,x3,y3,l1,l2,l3;
+ cin>>t;
+ while(t--)
+ {
+ cin>>x1>>y1>>x2>>y2>>x3>>y3;
+ l1=((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2));
+ l2=((x1-x3)*(x1-x3))+((y1-y3)*(y1-y3));
+ l3=((x3-x2)*(x3-x2))+((y3-y2)*(y3-y2));
+if(l3==l1+l2||l1==l2+l3||l2==l1+l3)
+count++;
+}
+cout<<count;
+return 0;
+}

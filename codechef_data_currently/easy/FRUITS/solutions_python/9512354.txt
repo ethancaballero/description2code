@@ -1,0 +1,10 @@
+t=input()
+while t:
+	n,m,k=map(int,raw_input().split())
+	if n-m<=k and m-n<=k:
+		print "0"
+	elif n-m>k:
+		print n-(k+m)
+	elif m-n>k:
+		print m-(k+n)
+	t=t-1

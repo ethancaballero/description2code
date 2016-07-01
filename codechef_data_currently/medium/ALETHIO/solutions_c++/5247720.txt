@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+string s;
+
+
+bool character(char c){
+	if(c >= '0' && c <='9')
+		return false;
+	return true;
+}
+string maxnum(int start, int end){
+	// cout << start << ":" << end << endl;
+	string s1=s.substr(start, end-start+1);
+	for(int i=0;i<s1.length();i++)
+		if(character(s1[i])){
+			s1[i] = '9';
+			break;
+		}
+	return s1;
+}
+
+string mymax(string a, string b){
+	int index = 0;
+	while(b[index] == '0')
+		index++;
+	b = b.substr(index);
+	int blength = b.length();
+	int alength = a.length();
+	if(blength == 0)
+		return a;
+	else if(blength > alength)
+		return b;
+	else if(alength > blength)
+		return a;
+	else{
+		for(int i=0;i<alength;i++){
+			if(a[i] > b[i])
+				return a;
+			else if(a[i] < b[i])
+				return b;
+		}
+		return a;
+	}
+}
+
+int main(){
+	cin >> s;
+	int count, j;
+	string ans = "";
+	for(int i=0;i<s.length();i++){
+		count = 0;
+		for(j = i; j >= 0;j--){
+			if(character(s[j]))
+				count++;
+			if(count == 2){
+				break;
+			}
+		}
+		j++;
+		// cout << j << ":" << i << endl;
+		ans = mymax(ans, maxnum(j,i));
+	}
+	if(ans == "")
+		cout << "0" << endl;
+	else
+		cout << ans << endl;
+	return 0;
+}

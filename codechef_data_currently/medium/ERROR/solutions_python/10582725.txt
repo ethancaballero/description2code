@@ -1,0 +1,24 @@
+
+
+txt ='010'
+txt2='101'
+t=input()
+
+while t>0:
+    t=t-1
+    flag11=0
+    flag1=0
+    pat = raw_input()
+    if txt in pat:
+        flag11=1
+    else:
+        flag11=0
+    if flag11==0:
+        if txt2 in pat:
+            print "Good"
+        else:
+            print "Bad"
+    else:
+        print "Good"
+        
+    

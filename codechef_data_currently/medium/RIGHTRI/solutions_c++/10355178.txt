@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int main()
+{
+	int n,ans,x1,x2,x3,y1,y2,y3,d1,d2,d3,t1,t2,t3;
+	scanf("%d",&n);
+	ans=0;
+	while(n--)
+	{
+		scanf("%d %d %d %d %d %d",&x1,&y1,&x2,&y2,&x3,&y3);
+		d1=((x3-x1)*(x3-x1))+((y3-y1)*(y3-y1));
+		d2=((x3-x2)*(x3-x2))+((y3-y2)*(y3-y2));
+		d3=((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1));
+		t1=d1-(d2+d3);
+		t2=d2-(d1+d3);
+		t3=d3-(d1+d2);
+		if((t1==0)||(t2==0)||(t3==0))
+			ans++;
+	}
+	printf("%d
+",ans);
+	return 0;
+}	

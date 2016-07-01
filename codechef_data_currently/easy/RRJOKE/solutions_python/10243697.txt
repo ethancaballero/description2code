@@ -1,0 +1,7 @@
+f = lambda n: reduce(lambda x,y:x^y,range(1,n+1))
+T=input()
+for t in range(T):
+	N = input()
+	for n in range(N):
+		raw_input()
+	print f(N)

@@ -1,0 +1,10 @@
+t=int(raw_input())
+
+while t>0:
+    h=raw_input();
+    k=h[::-1]
+    if h==k:
+        print 1
+    else:
+        print 2
+    t-=1

@@ -1,0 +1,97 @@
+	#include <iostream>
+	#include <fstream>
+	#include <set>
+	#include <utility>
+	#include <string>
+	#include <vector>
+	#include <math.h>
+	#include <algorithm>
+	#include <stdio.h>
+	using namespace std;
+
+	#define gc getchar_unlocked
+
+
+	int main(){
+		//multiset< float , float > ang;
+		//ifstream cin("input.txt");
+		vector <int> hour , min ;
+		vector <float>angle;
+		string str;
+		int h , m ;
+
+		float diff, cal1 ,cal2 ,  i , j;;
+		h = 11 ;
+		m = 59;
+		for ( i = 0 ; i <= h ; i++ ){
+			for ( j = 0 ; j <= m ; j = j + 1){
+				cal1 = (i*60/2) + (j/2); // hour angle
+				cal2 = (j*6); // min angle;
+				diff = fabs(cal1 - cal2) ;
+				if ( diff > 180 ){
+					
+					diff = 360 - diff ;
+				}
+				//cout << cal1 << " " << cal2 << " " << diff << endl;
+				
+				hour.push_back(i);
+				min.push_back(int(j));
+				angle.push_back(diff);
+				//cout << diff << endl;
+				
+
+			}
+		}
+
+
+		int t , size;
+		float value;
+		cin >> t;
+		size = hour.size();
+		while( t-- ){
+			//cin >> value;
+			scanf("%f",&value);
+			if ( ((value*120) - int(value*120) )!= 0){
+				value = int(value*100)/100.00;
+				//cout << value << endl;
+			}
+
+			for ( int i = 0 ; i < size;i++ ){
+				//cout << angle[i] << endl;
+
+				if ( value == angle[i] ){
+					if ( hour[i] > 9 && min[i] > 9 ){
+						//cout << hour[i] <<":" << min[i] << endl;
+						printf("%d:%d
+" ,&hour[i] ,&min[i]);
+					}
+					else if ( hour[i] <= 9 && min[i] > 9 ){
+						//cout << "0" << hour[i] <<":" << min[i] << endl;
+						printf("0%d:%d
+" ,hour[i],min[i] );
+					}
+					else if ( hour[i] > 9 && min[i] <= 9 ){
+						//cout << hour[i] <<":" << "0" << min[i] << endl;
+						printf("%d:0%d
+",hour[i],min[i]);
+					}
+					else {
+						//cout << "0" << hour[i] <<":" << "0" << min[i] << endl;
+						printf("0%d:0%d
+",hour[i],min[i]);
+					}
+
+					
+					
+				}
+
+
+			}
+		}
+
+
+
+
+
+
+	}

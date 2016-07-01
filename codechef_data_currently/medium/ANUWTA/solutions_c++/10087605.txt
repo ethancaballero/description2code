@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    long long *array=new long long[100002];
+    array[1]=0;
+    array[2]=2;
+    array[3]=5;
+    for(long long i=4;i<=100001;i++){
+        array[i]=array[i-1]+i;
+    }
+    while(t--){
+        int n;
+        cin>>n;
+        cout<<array[n+1]<<endl;
+    }
+}

@@ -1,0 +1,23 @@
+#include<vector>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t-->0)
+    {
+        int a,b;
+        cin>>a>>b;
+        int max1=0;
+        for(int i=2;i<=b;i++)
+        {
+            if((a%i)>max1)
+                max1=a%i;
+        }
+        cout<<max1<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,15 @@
+t = input()
+if((1<=t)and(t<=5)):
+    for i in range(t):
+        p = input()
+        if((1<=p)and(p<=100000)):
+            count = 0
+            quotient = p/2048
+            count = count+quotient
+            remainder = p%2048
+            if(remainder>0 or quotient>0):
+                r_value = "{0:b}".format(remainder)
+                for i in r_value:
+                    if i == '1':
+                        count+=1
+                print count

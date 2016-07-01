@@ -1,0 +1,71 @@
+#include<iostream>
+#include<cstdio>
+ 
+using namespace std;
+ 
+int prime[11]={2,3,5,7,11,13,17,19,23,29};
+ 
+int main()
+{
+    int t,n,i=0;
+    cin>>t;
+    while(t--)
+    {
+        int flag=0, b[10]= {0}, j=0, count=0, s=0, k, l, tmp, p, r;
+        cin >> n;
+        for(i=0;i<n;i++)
+    		cin >> tmp;
+		for(i=0;i<n;i++)
+		if(prime[i] == n)
+		{
+			flag = 1;
+			break;
+		}
+		if(flag)
+		{
+			cout<<"1 " << endl << n << " ";
+			for(i=1;i<=n;i++)
+				cout<<i<<" ";
+			cout<<endl;
+			continue;
+		}
+		else
+		{
+			tmp = n;
+			while(tmp!=1)
+			{
+				for(i=0;i<11;i++)
+				{
+					if(tmp%prime[i]==0)
+					{
+						b[j]=prime[i];
+						j++;
+						break;
+					}
+				}
+				tmp = tmp/prime[i];
+				s = n/prime[i];
+				count = count + s;
+			}
+			cout << count << endl;
+			p = 1;
+			for(k=j-1;k>=0;k--)
+			{
+				p=p*b[k];
+				for(i=0;i<n;i+=p)
+				{
+					for(r=0;r<(p/b[k]);r++)
+					{
+						cout << b[k] << " ";
+						for(l=1;l<=(p);l+=(p/b[k]))
+						{
+						   cout << (l+r+i) << " ";
+						}
+						cout << endl;
+					}
+				}
+			}
+		}
+    }
+    return 0;
+} 

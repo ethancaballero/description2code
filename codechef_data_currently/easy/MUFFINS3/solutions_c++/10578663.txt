@@ -1,0 +1,30 @@
+#include <iostream>
+#define gu getchar_unlocked
+using namespace std;
+ void scant(int &x)
+{
+    register int c = gu();
+    x = 0;
+    for(;(c<48 || c>57);c = gu());
+    for(;c>47 && c<58;c = gu()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+ 
+ 
+int main()
+{
+ int t,i,k,max=0,c=0,n;
+ 
+ 
+ 
+    scant(t);
+ 
+          while(t--)
+          {
+              scant(n);
+              i=n/2;
+i=i+1;
+std::cout<<i<<endl;
+
+          }
+    return 0;
+}

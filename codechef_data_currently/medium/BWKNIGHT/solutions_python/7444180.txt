@@ -1,0 +1,11 @@
+for t in range(int(raw_input())):
+	n,m=map(int,raw_input().split())
+	if (n==1):
+		print m*(m-1)
+	elif (m==1):
+		print n*(n-1)
+	else:
+		print (n*m)*(n*m-1) - 4*((n-2)*(m-1) + (n-1)*(m-2))
+
+#(n*m)*(n*m-1) == total ways to select 2 position on board
+#http://d...content-available-to-author-only...f.com/questions/4254/bwknight-editorial - answer

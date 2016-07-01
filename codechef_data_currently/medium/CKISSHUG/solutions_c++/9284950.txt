@@ -1,0 +1,33 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+long long num=1000000007;
+unsigned long long power(int a,long long n)
+{
+    if(n==0)
+        return 1;
+    if(n==1)
+        return a;
+  unsigned  long long x = power(a,n/2);
+    if(n%2==0)
+        return ((x%num)*(x%num));
+    else
+        return (a*(x%num)*(x%num))%num;
+
+}
+int main()
+{
+    long long n,t;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        if(n%2)
+        cout<<((4*power(2,n/2))-2)%num<<"
+";
+        else
+        cout<<((3*power(2,n/2))-2)%num<<"
+";
+    }
+    return 0;
+}

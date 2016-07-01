@@ -1,0 +1,12 @@
+t = input()
+for i in range(t):
+    initial, desired = map(int, raw_input().split())
+    count = 0
+    while initial != desired:
+        if desired % initial == 0:
+            initial *= 2
+            count += 1
+        else:
+            initial /= 2
+            count += 1
+    print count

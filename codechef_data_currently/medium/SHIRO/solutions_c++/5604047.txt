@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+ 
+	int main()
+{
+	int t;
+ 
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,i,j;
+ 
+		double p[200];
+		double dp[101][10001];
+		int a[200],s=0;
+		scanf("%d",&n);
+ 
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d",&a[i]);
+		s+=a[i];
+	}
+int m;
+  if(s%2==0)
+	m=s/2;
+  else
+	m=(s/2)+1;
+ 
+	for(i=1;i<=n;i++)
+	{
+		scanf("%lf",&p[i]);
+ 
+p[i]/=100;
+ 
+	}
+	dp[0][0]=1;
+	double temp=1;
+    for(i=1;i<=n;i++)
+	{
+ 
+ 
+		temp=(temp*(1-p[i]));
+		dp[i][0]=temp;
+	}
+ 
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=s;j++)
+		{
+ 
+ 
+			if(j>=a[i])
+			dp[i][j]=((dp[i-1][j-a[i]]*p[i])+(dp[i-1][j]*(1-p[i])));
+			else
+				dp[i][j]=dp[i-1][j]*(1-p[i]);
+ 
+			//else if(j>a[i])
+				//dp[i][j]=dp[i][j-1];
+ 
+ 
+		}
+	}
+	/*for(i=0;i<=n;i++)
+	{
+		for(j=0;j<=s;j++)
+		printf(" %lf ",dp[i][j]);
+ 
+		printf("
+
+");
+	}*/
+	double ans=0;
+	for(j=m;j<=s;j++)
+		{
+ 
+           ans+=dp[n][j];
+ 
+		}
+		printf("%.6lf
+",ans);
+	}
+ 
+	return 0;
+}

@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+#define gc getchar
+using namespace std;
+typedef long long int ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll n,k,i,x,dist,tt;
+    n=read_int();
+    k=read_int();
+    vector<ll> v(1000002,INT_MAX);
+    vector<ll> a(1000002,INT_MAX);
+    for(i=0;i<n;i++)
+    {
+        x=read_int();
+        a[i]=x;
+        dist=min(1+i,n-i);
+        v[x]=min(v[x],dist);
+    }
+    tt=INT_MAX;
+    for(i=0;i<n;i++)
+    {
+        x=a[i];
+        if(x!=(k-x) && (k-x)>0)
+        {
+            tt=min(tt,max(v[x],v[k-x]));
+        }
+    }
+    if(tt!=INT_MAX)
+        cout<<tt;
+    else
+        cout<<-1;
+    return 0;
+}

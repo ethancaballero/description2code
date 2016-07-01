@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int main()
+{ 
+    int array[100];int k;int i;
+	for(i=0;i<100;i++)
+	{
+	    cin>>array[i];
+	    if(array[i]==42)
+	    {
+		k=i;
+	    }
+	}
+	cout<<"
+
+";
+	for(i=0;i<k;i++)
+	{
+	    cout<<array[i]<<"
+";
+	}
+	return 0;
+}

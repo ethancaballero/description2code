@@ -1,0 +1,151 @@
+  #include <iostream>
+    #include <cstdio>
+    #include <stack>
+    #include <algorithm>
+    #include <cstring>
+    using namespace std;
+    int g[1001][1001];
+    int n,m;
+    int parent[1000001];
+    int csize[1000001];
+    int wall1[1001][1001];
+    int wall2[1001][1001];
+    struct node {
+    int type,x1,y1,x2,y2;
+    };
+    void unionint1() {
+    for (int i = 1; i <= (n*m); i++) {
+    parent[i] = i;
+    }
+    }
+    int find(int x) {
+    if (x != parent[x])
+    parent[x] = find(parent[x]);
+    return parent[x];
+    }
+    void unioncon(int x,int y) {
+    x = find(x);
+    y = find(y);
+    if (x != y) {
+    parent[y] = x;
+    }
+    }
+    void unionint () {
+    for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= m; j++) {
+    if (wall1[i][j] == 0 && (j+1) <= m)
+    unioncon(g[i][j],g[i][j+1]);
+    if (wall2[i][j] == 0 && (i+1) <= n)
+    unioncon(g[i][j],g[i+1][j]);
+    }
+    }
+    }
+    int main() {
+    stack <node> query;
+    int t;
+    scanf("%d",&t);
+    while (t--) {
+    int q;
+    // scanf("%d%d%d",&n,&m,&q);
+    int maxx = 0;
+    long long int ans = 0;
+    scanf("%d%d%d",&n,&m,&q);
+    int ctr = 1;
+    for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= m; j++) {
+    g[i][j] = ctr;
+    ctr++;
+    csize[g[i][j]] = 0;
+    wall1[i][j] = 0;
+    wall2[i][j] = 0;
+    }
+    }
+    while (q--) {
+    int j;
+    scanf("%d",&j);
+    if (j == 1 || j == 2) {
+    int x,y;
+    scanf("%d%d",&x,&y);
+    if (j == 1) {
+    if (wall1[x][y] == 0) {
+    wall1[x][y] = 1;
+    node a;
+    a.type = j;
+    a.x1 = x;
+    a.y1 = y;
+    query.push(a);
+    }	
+    }
+    else {
+    if (wall2[x][y] == 0) {
+    wall2[x][y] = 1;
+    node a;
+    a.type = j;
+    a.x1 = x;
+    a.y1 = y;
+    query.push(a);
+    }	
+    }
+    }	
+    else if (j == 3) {
+    int e,f,g,h;
+    scanf("%d%d%d%d",&e,&f,&g,&h);
+    node a;
+    a.type = j;
+    a.x1 = e;
+    a.y1 = f;
+    a.x2 = g;
+    a.y2 = h;
+    query.push(a);
+    }	
+    else {
+    node a;
+    a.type = j;
+    query.push(a);
+    }
+    }
+    unionint1();
+    unionint();
+    for (int i = 1; i <= (n*m); i++) {
+    int k = find(i);
+    csize[k] += 1;
+    maxx = max(maxx,csize[k]);
+    }
+    while (!query.empty()) {
+    node a = query.top();
+    query.pop();
+    // cout << a.type << "	";
+    if (a.type == 1 || a.type == 2) {
+    int x = a.x1;
+    int y = a.y1;
+    int p1 = find(g[x][y]);
+    if (a.type == 1 && --wall1[x][y] == 0) {
+    int p2 = find(g[x][y+1]);
+    if (p1 != p2) {
+    unioncon(p1,p2);
+    csize[p1] += csize[p2];
+    }
+    }
+    else if (a.type == 2 && --wall2[x][y] == 0) {
+    int p2 = find(g[x+1][y]);
+    if (p1 != p2) {
+    unioncon(p1,p2);
+    csize[p1] += csize[p2];
+    }
+    }
+    maxx = max(maxx,csize[p1]);
+    }
+    else if (a.type == 3) {
+    int temp = find(g[a.x1][a.y1]);
+    if (temp == find(g[a.x2][a.y2]))
+    ans += 1;
+    }
+    else {
+    ans += maxx;
+    }
+    }
+    printf("%lld
+",ans);
+    }
+    return 0;
+    }  

@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+int t;
+scanf("%d",&t);
+while(t--)
+{
+long long a;
+int m;
+int n,k,e,i,j;
+scanf("%d%d%d%d",&n,&k,&e,&m);
+long long sum[n+10],su;
+for(i=0;i<n;i++)
+{
+for(j=0;j<e;j++)
+{
+if(i==n-1&&j==e-1)
+{
+sum[i]=su;
+break;
+}
+scanf("%lld",&a);
+su=su+a;
+}
+sum[i]=su;
+su=0;
+}
+/*for(i=0;i<n;i++)
+{
+for(j=0;j<e;j++)
+{
+printf("%d ",a[i][j]);
+}
+printf("
+");
+}*/
+sort(sum,sum+n-1);
+reverse(sum,sum+n-1);
+//for(i=0;i<n;i++)
+//printf("%d
+",sum[i]);
+long long remain=sum[k-1]-sum[n-1]+1;
+if(remain<0)
+remain=0;
+if(remain>m)
+printf("Impossible
+");
+else
+printf("%lld
+",remain);
+}
+return 0;
+}

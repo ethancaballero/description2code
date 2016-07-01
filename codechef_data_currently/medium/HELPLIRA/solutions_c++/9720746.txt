@@ -1,0 +1,85 @@
+#include <stdio.h>
+ 
+#define NUM_OF_SIDES 3
+ 
+#define READ_INT(_x)					  {							    int _n_flag = 0;					    int _tmp = 0, _ch = getchar_unlocked();		    while (_ch < 48 || _ch > 57)			      {                                                 	if (_ch == '-') break;                          	_ch = getchar_unlocked();			      }                                                     if (_ch == '-')					      {								_n_flag = 1;						_ch = getchar_unlocked();			      }							    while (48 <= _ch && _ch <= 57)			      {								_tmp = (_tmp << 3) + (_tmp << 1) + _ch - 48;		_ch = getchar_unlocked();			      }							    (_x) = ((_n_flag) ? -1 : 1) * _tmp;			  }							 
+char _str[10];
+#define WRITE_INT(_x)				  {						    register int _i = 0;			    int _tmp = (_x);				    do						      {							*(_str + _i++) = _tmp % 10 + 48;		_tmp /= 10;				      } while (_tmp != 0);			    for (_i--; _i >= 0; _i--)			      putchar_unlocked(*(_str + _i));		  }						 
+int main(void)
+{
+  long long x[NUM_OF_SIDES], y[NUM_OF_SIDES], area2, max_area2, min_area2;
+  int i, j, max_index, min_index, n;
+ 
+  READ_INT(n);
+  for (j = 0; j < NUM_OF_SIDES; j++)
+    {
+      READ_INT(*(x + j));
+      READ_INT(*(y + j));
+    }
+ 
+#ifdef DEBUG
+  printf("triangle: 0
+");
+  for (j = 0; j < NUM_OF_SIDES; j++)
+    printf("(%lld, %lld)
+", *(x + j), *(y + j));
+  printf("
+");
+#endif
+ 
+  area2 = (*x - *(x + 2)) * (*(y + 1) - *y) - (*x - *(x + 1)) * (*(y + 2) - *y);
+  max_area2 = min_area2 = (area2 < 0) ? -area2 : area2;
+  max_index = min_index = 0;
+ 
+#ifdef DEBUG
+  printf("area2: %lld
+", min_area2);
+#endif
+ 
+  for (i = 1; i < n; i++)
+    {
+      for (j = 0; j < NUM_OF_SIDES; j++)
+	{
+	  READ_INT(*(x + j));
+	  READ_INT(*(y + j));
+	}
+ 
+#ifdef DEBUG
+      printf("triangle: %d
+", i);
+      for (j = 0; j < NUM_OF_SIDES; j++)
+	printf("(%lld, %lld)
+", *(x + j), *(y + j));
+      printf("
+");
+#endif
+ 
+      area2 = (*x - *(x + 2)) * (*(y + 1) - *y) - (*x - *(x + 1)) * (*(y + 2) - *y);
+      if (area2 < 0)
+	area2 = -area2;
+ 
+#ifdef DEBUG
+      printf("area2: %lld
+", area2);
+#endif
+ 
+      if (area2 >= max_area2)
+	{
+	  max_index = i;
+	  max_area2 = area2;
+	}
+      if (area2 <= min_area2)
+	{
+	  min_index = i;
+	  min_area2 = area2;
+	}
+    }
+ 
+  WRITE_INT(min_index + 1);
+  putchar_unlocked(' ');
+  WRITE_INT(max_index + 1);
+  putchar_unlocked('
+');
+ 
+  return 0;
+}

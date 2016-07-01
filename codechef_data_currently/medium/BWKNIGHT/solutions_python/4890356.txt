@@ -1,0 +1,10 @@
+t = int(raw_input())
+for q in range(t):
+	s =raw_input()
+	m,n =s.split(' ')
+	m=int(m)
+	n=int(n)
+	ans = (m*n)*(m*n-1)
+	if(m>1 and n>1):
+		ans -= 4*(n-1)*(m-2) + 4*(m-1)*(n-2)
+	print ans

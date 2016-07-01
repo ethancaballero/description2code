@@ -1,0 +1,51 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while(t--)
+	{
+		long k, n;
+		scanf("%ld", &k);
+		if( k>1 )
+		{
+			long h=1;			
+			bool flag=true;
+			for(int i=0; i<k; i++)
+			{
+				scanf("%ld", &n);
+				if( flag )
+				{
+					if( i==0 && n==1 )
+						flag=false;
+					else if( i==k-1 && n!=h )
+						flag = false;
+					else if( n>h )
+						flag=false;
+					h-=n;
+					h*=2;
+				}			
+			}
+			if( flag )
+				printf("Yes 
+");
+			else
+				printf("No 
+");
+		}
+		else
+		{
+			scanf("%ld", &n);
+			if( n==1 )
+				printf("Yes 
+");
+			else
+				printf("No 
+");
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,39 @@
+max_country=0
+max_chef=0
+def f(x):
+	return x[1]
+def g1(x):
+	if (x[1]==max_country):
+		return x[0]
+	return 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+def g2(x):
+	if (x[1]==max_chef):
+		return x[0]
+	return 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+n,m=map(int,raw_input().split())
+connection={}
+votecountry={}
+votechef={}
+for i in range(n):
+	name,country=raw_input().split()
+	connection[name]=country
+	votechef[name]=0
+	votecountry[country]=0
+for i in range(m):
+	name=raw_input()
+	votechef[name]+=1
+	votecountry[connection[name]]+=1
+listcountry=sorted(votecountry.items(),key=f,reverse=True)
+listchef=sorted(votechef.items(),key=f,reverse=True)
+max_country=listcountry[0][1]
+max_chef=listchef[0][1]
+listcountry=sorted(listcountry)
+listchef=sorted(listchef)
+for tup in listcountry:
+	if (tup[1]==max_country):
+		print tup[0]
+		break
+for tup in listchef:
+	if (tup[1]==max_chef):
+		print tup[0]
+		break

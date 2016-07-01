@@ -1,0 +1,14 @@
+import sys
+
+test_cases = int(sys.stdin.readline())
+while test_cases > 0:
+    test_cases -= 1
+    no_of_weights = int(sys.stdin.readline())
+    weights = map(int, sys.stdin.readline().split())
+    weights.sort()
+    steps = 0
+    count = 1
+    for i in range(no_of_weights - 2, -1, -1):
+        steps += (weights[i + 1] - weights[i])*count
+        count += 1
+    print steps

@@ -1,0 +1,11 @@
+t=input()
+for i in range(t):
+    a=input()
+    s=raw_input()
+    ans ='NOT SURE'
+    for j in range(len(s)):
+        if (s[j]=='Y'):
+            ans='NOT INDIAN'
+        elif (s[j]=='I'):
+            ans='INDIAN'
+    print ans

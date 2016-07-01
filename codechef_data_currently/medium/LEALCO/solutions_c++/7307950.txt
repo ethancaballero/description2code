@@ -1,0 +1,102 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+#include<stack>
+#include<queue>
+#include<deque>
+#include<bitset>
+#include<cmath>
+#include<list>
+#include<set>
+#include<map>
+#define vi vector<int>
+#define vvi vector< vi >
+#define pii pair<int,int>
+#define pb push_back
+#define mp make_pair
+#define all(c) c.begin(),c.end() 
+#define sz(c) c.size()
+#define tr(c,it)  for(typeof(c.begin()) it=c.begin();it!=c.end();it++)  
+#define max(a,b) (a>b?a:b)
+#define min(a,b) (a<b?a:b)
+#define abs(a)  (a>=0?a:-a)
+#define present(c,x) find(all(c),x)!=c.end()
+#define cpresent(c,x) c.find(x)!=c.end()  
+#define permute(c) next_permutation(all(c))
+int isBad(int newR[],int N,int K,int M){
+	  int i,j;
+	  //printf("newR[i]:
+");
+	 // for(i=0;i<N;i++)
+	   //  printf("%d ",newR[i]);
+	  for(i=0;i<N-K+1;i++){
+	  	  int maxm=0;
+	  	  for(j=i;j<K+i;j++){
+	  	  	  if(newR[j]>maxm)
+	  	         maxm=newR[j];
+	  	  }
+	  	 // printf("maxm=%d
+",maxm);
+	  	  int count=0;      
+	  	  for(j=i;j<K+i;j++){
+	  	  	  if(newR[j]==maxm)
+	  	  	     count++;
+	  	  }   
+	  	  //printf("count=%d
+",count);
+		  if(count>=M)
+		     return 1;	    
+	  }
+	  return 0;
+}
+int bitCount(int n){
+	int res=0;
+	while(n>0){
+		res+=n%2;
+		n=n/2;
+	}
+	return res;
+}
+using namespace std;
+int main(){
+    int T,N,K,M,i,j,newR[20],R[20];
+    scanf("%d",&T);
+    while(T--){
+    	scanf("%d%d%d",&N,&K,&M);
+    	for(i=0;i<N;i++)
+    	    scanf("%d",&R[i]);
+    	int res=N+1,size;
+    	for(i=0;i<(1<<N);i++){
+    		size=bitCount(i);
+    		if(res<=size)
+    		 continue;
+    		//printf("size=%d
+",size);
+    		for(j=0;j<N;j++){
+    			  if(i&(1<<j))
+    			     newR[j]=R[j]+1;
+    			  else
+				     newR[j]=R[j];   
+    		}   
+    		//printf("isBAD()=%d
+",isBad(newR,N,K,M));
+    		if(!isBad(newR,N,K,M)){
+    			res=size;
+    		   // printf("res=%d
+",res); 
+    		}
+    		         
+    	}
+    	if(res==N+1)
+    	   printf("-1
+");
+    	else   
+    	printf("%d
+",res);   
+    }
+	return 0;
+}

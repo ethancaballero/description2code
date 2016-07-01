@@ -1,0 +1,16 @@
+from sys import stdin
+
+for trial in xrange(int(stdin.readline())):
+    R,C = map(int,stdin.readline().split())
+    matrix = [stdin.readline().strip() for r in range(R)]
+    spoonFound = False
+    for line in matrix:
+        if "spoon" in line.lower():
+            spoonFound = True
+            break
+    if not spoonFound:
+        for line in zip(*matrix):
+            if "spoon" in ''.join(line).lower():
+                spoonFound = True
+                break
+    print "There is a spoon!" if spoonFound else "There is indeed no spoon!"

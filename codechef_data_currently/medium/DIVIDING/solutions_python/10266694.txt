@@ -1,0 +1,12 @@
+
+
+N = int(raw_input(""))
+stamp_list = map(int,raw_input("").split())
+total = 0
+for c in stamp_list:
+	total+=c
+res = N*(N+1)/2
+if res==total:
+	print "YES"
+else:
+	print "NO"

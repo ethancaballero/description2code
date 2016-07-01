@@ -1,0 +1,31 @@
+T = int(raw_input())
+while T >=1:
+    N = int(raw_input())
+    s = raw_input()
+    s = s.split(' ')
+    s = map(int, s)
+    count = 1
+    dict = {}
+    for i in s:
+        dict[i] = 0
+        
+    for i in s:
+        if dict[i] != 0:
+            dict[i] = dict[i] +1
+            
+        else:
+            dict[i] = count
+
+    max = 0
+    key = 0
+    for i in s:
+        if dict[i] > max:
+            max = dict[i]
+            key = i
+    print (len(s) - max)
+    T = T-1
+
+
+
+    
+    

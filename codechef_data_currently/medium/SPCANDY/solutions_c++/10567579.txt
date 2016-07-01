@@ -1,0 +1,40 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#define F(i,x,y) for(i=x;i<y;i++)
+#define S(n) scanf("%lld",&n)
+#define s(n) scanf("%d",&n)
+#define P(n) printf("%lld
+",n)
+#define p(n) printf("%d
+",n)
+#define LLI long long int
+#define R return 0
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		LLI n,k,flag,count; S(n); S(k);
+		if(n==0)
+		{
+			flag=0;
+			count=0;
+		}
+		else if(k==0)
+		{			
+			flag=0;
+			count=n;
+		}
+		else
+		{
+			flag=n/k;
+			count=n%k;
+		}
+		printf("%lld %lld
+",flag,count);
+		
+	}
+	R;
+}

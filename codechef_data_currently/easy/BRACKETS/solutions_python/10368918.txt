@@ -1,0 +1,48 @@
+def check_sequence(sequence):
+    balance = 0
+    count = 0
+    length = len(sequence)
+    
+    while balance >= 0 and count < length:
+        if sequence[count] == '(':
+            balance += 1
+        elif sequence[count] == ')':
+            balance -= 1
+        else:
+            balance = -1
+        count += 1
+        
+    if balance < 0:
+        return False
+    return True
+            
+   
+def test():
+    test_cases = input()
+    final = []
+    for _ in range(test_cases):
+        sequence = raw_input()
+        max_balance = 0
+        balance = 0
+        result = ''
+        if check_sequence(sequence):
+            for e in sequence:
+                if e == '(':
+                    balance += 1
+                if e == ')':
+                    balance -= 1
+                max_balance = max(max_balance,balance)
+
+        for _ in range(max_balance):
+            result += '('
+        for _ in range(max_balance):
+            result += ')'
+
+        final.append(result)
+    
+
+    for t in final:
+        print t
+
+
+test()

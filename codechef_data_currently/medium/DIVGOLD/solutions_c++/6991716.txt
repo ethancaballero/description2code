@@ -1,0 +1,29 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t, i, n, j, k;
+    string s, x, y;
+    cin >> t;
+    char ch;
+    while (t--) {
+        cin >> n >> s;
+        vector <string> v;
+        for (i = 0; i < n; i++) {
+            x = s;
+            x.erase(x.begin()+i);
+            for (j = 0; j < n; j++) {
+                y = x;
+                y.insert(y.begin()+j, s[i]);
+                v.push_back(y);
+            }
+        }
+        sort(v.begin(), v.end());
+        cout << v[0] << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	
+	long long int n,p;
+	cin>>n;
+	long long int a[n];
+	for(long long int i=0;i<n;i++)
+	{
+		cin>>a[i];
+		
+	}
+	p=((n-1)*n)/2;
+	cout<<p<<endl;
+  }
+	
+}

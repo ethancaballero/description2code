@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int T;
+	cin>>T;
+	
+	while(T-->0)
+	{
+		int count=0;
+		char str[1005];
+		cin>>str;
+		int l=strlen(str),pos;
+		for(int i=0;i<l;i++)
+		{			
+			count++;
+			if(i!=0)
+			{
+				if(str[i]==str[i-1])
+				{
+					continue;
+				}
+			}
+			else
+			{
+				count++;
+				pos = (int)str[i]-97;
+				continue;
+			}
+			pos = ((int)str[i]-97)-pos;
+			if(pos<0)
+				count=count+26+pos;
+			else
+				count+=pos;
+			pos=(int)str[i]-97;
+		}
+		if(count<=11*l)
+			cout<<"YES"<<endl;
+		else cout<<"NO"<<endl;
+	}	
+	
+}

@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    double t1,t2,t3,t4;
+    cin>>t;
+    while(t--){
+        cin>>t1>>t2>>t3>>t4;
+        t3=t1+t2;
+        cout<<t1/t3<<endl;
+    }
+}

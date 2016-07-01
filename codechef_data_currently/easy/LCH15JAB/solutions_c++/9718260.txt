@@ -1,0 +1,55 @@
+#include <iostream>
+#include<string.h>
+using namespace std;
+
+int main()
+{
+    int t,l,i,j,sum,flag;
+    char str[51];
+    cin>>t;
+    while(t--)
+    {
+        flag=0;
+        int num[26]={0};
+        cin>>str;
+        l=strlen(str);
+        if(l%2!=0)
+        {
+            cout<<"NO
+";
+        }
+        else
+        {
+            for(i=0;i<l;i++)
+            num[str[i]-'a']++;
+           for(i=0;i<26;i++)
+           {
+               sum=0;
+              if(num[i]>0)
+              {
+                  for(j=0;j<26;j++)
+                  {
+                      if(j==i)
+                        continue;
+                      else
+                        sum+=num[j];
+                  }
+                  if(sum==num[i])
+                  {
+                     cout<<"YES
+";
+                     flag=1;
+                     break;
+                  }
+
+              }
+
+           }
+           if(flag==0)
+            cout<<"NO
+";
+        }
+
+    }
+    return 0;
+}

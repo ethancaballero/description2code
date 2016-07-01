@@ -1,0 +1,19 @@
+def match_strings(a,b):
+    i=0
+    j=0
+    while((i<len(a))& (j<len(b))):
+        if(a[i]==b[j]):
+            i+=1
+        j+=1
+    return i==len(a)            
+            
+            
+no_cases =int(raw_input())
+for t in range(no_cases):
+    a,b=raw_input().split(' ')
+    if(len(b)<len(a)):
+        a,b=b,a
+    if(match_strings(a,b)):
+        print 'YES'
+    else:
+        print 'NO'

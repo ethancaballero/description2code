@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[100010];
+int cumul[100001][25];
+int primes[]={2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
+int power[101][25];//rows from 1 to 100 and primes as columns
+typedef unsigned long long int ulli;
+ulli modPow(ulli base, ulli exp, ulli mod)
+
+{
+    ulli ans = 1;
+    while(exp)
+    {
+        if(exp%2)ans = (ans*base)%mod;
+        base = (base*base)%mod;
+        exp/=2;
+    }
+    return ans;
+}
+int main()
+{
+    int t;scanf("%d",&t);
+    for(int i = 2;i<101;i++)
+    {
+        int a = i;
+        for(int j = 0;j<25;j++)
+        {
+           // cout<<a<<" ";
+            while(a%primes[j]==0)
+            {
+                a/=primes[j];
+                power[i][j]++;
+                if(a==1)break;
+            }
+        }
+    }
+    //powers calculated
+    for(int i = 0;i<t;i++)scanf("%d",&arr[i]);
+    for(int j = 0;j<25;j++){cumul[0][j] = power[arr[0]][j];}
+    for(int i = 1;i<t;i++)
+    {
+       for(int j = 0;j<25;j++)
+       {
+            cumul[i][j]+= cumul[i-1][j]+power[arr[i]][j];
+         //  cout<<cumul[i][j]<<" ";
+       }
+       //cout<<endl;
+    }
+    int q,beg,end,mod;
+    scanf("%d",&q);
+    while(q--)
+    {
+        scanf("%d%d%d",&beg,&end,&mod);
+        ulli ll = 1;
+        for(int j = 0;j<25;j++)
+        {
+int bb = end - 1;
+int ss = beg - 2;
+int k ;
+
+/// if begin is one then we don't have to subtract anything but you we subtracting and there is an
+/// overflow in you power function.
+if(ss>=0)
+ k = cumul[bb][j]-cumul[ss][j];
+else
+k = cumul[bb][j];
+            if(k){ll = (ll * modPow(primes[j],k,mod))%mod;}
+        }
+        ll = ll % mod;
+        printf("%llu
+",ll);
+    }
+    return 0;
+}

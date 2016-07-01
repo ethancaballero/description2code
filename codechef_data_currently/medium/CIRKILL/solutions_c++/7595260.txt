@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+double det(int a1,int a2,int a3,int a4,int a5,int a6,int a7,int a8,int a9)
+{
+	return (a1*(a5*a9-a6*a8))-a2*(a4*a9-a6*a7)+a3*(a4*a8-a5*a7);
+}
+struct res{
+	int x,y;
+};
+res ar[35];
+int main()
+{
+	int t,n;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		for(int i=0;i<n;i++)
+		scanf("%d%d",&ar[i].x,&ar[i].y);
+		double ans=0,total=0;
+		for(int i=0;i<n;i++)
+		{
+			for(int j=i+1;j<n;j++)
+			{
+				for(int k=j+1;k<n;k++)
+				{
+					total+=n-3;
+					double area=det(ar[i].x,ar[i].y,1,ar[j].x,ar[j].y,1,ar[k].x,ar[k].y,1);
+					if(area)
+					{
+						for(int l=0;l<n;l++)
+						{
+							if(l==i||l==j||l==k)
+							continue;
+							{
+								double d1=det(ar[i].x*ar[i].x+ar[i].y*ar[i].y,ar[i].y,1,ar[j].x*ar[j].x+ar[j].y*ar[j].y,ar[j].y,1,ar[k].x*ar[k].x+ar[k].y*ar[k].y,ar[k].y,1);
+								double d2=det(ar[i].x*ar[i].x+ar[i].y*ar[i].y,ar[i].x,1,ar[j].x*ar[j].x+ar[j].y*ar[j].y,ar[j].x,1,ar[k].x*ar[k].x+ar[k].y*ar[k].y,ar[k].x,1);
+								double d3=det(ar[i].x*ar[i].x+ar[i].y*ar[i].y,ar[i].x,ar[i].y,ar[j].x*ar[j].x+ar[j].y*ar[j].y,ar[j].x,ar[j].y,ar[k].x*ar[k].x+ar[k].y*ar[k].y,ar[k].x,ar[k].y);
+								double d4=area;
+								double d5=(ar[l].x*ar[l].x+ar[l].y*ar[l].y)*d4-ar[l].x*d1+ar[l].y*d2-d3;
+								if(area>0&&d5<=0)
+								ans++;
+								else if(area<0&&d5>=0)
+								ans++;
+							}
+						}
+					}
+				}
+			}
+		}
+		printf("%.6lf
+",ans/total);
+	}
+}

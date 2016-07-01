@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main()
+{
+
+ll n;
+cin>>n;
+ll A[n],s=0;
+    ll i;
+    for(i=0;i<n;i++){cin>>A[i];s+=A[i];}
+ll p=(n*(n+1))/2;
+    if(s==p)
+       cout<<"YES
+";
+    else
+        cout<<"NO
+";
+
+return 0;
+} 

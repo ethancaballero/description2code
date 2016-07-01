@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int color[51]={0},cost[51]={0};
+//used someone's full code to learn https://www.codechef.com/viewsolution/3914562
+int main()
+{
+  int t;
+  scanf("%d",&t);
+  while(t--)
+  {
+  	int n,c;
+  	scanf("%d%d",&n,&c);
+  	memset(color,0,sizeof(color));
+  	memset(cost,0,sizeof(cost));
+    long long int dp1[51][51]={0},dp2[51][51]={0};
+  	
+  	for(int i=0;i<n;i++)
+  	{
+  		int a,b;
+  		scanf("%d%d",&a,&b);
+  		color[a]++;
+  		cost[a] += b;
+  	}
+  	dp1[0][0]=1.0;
+  	for(int i=1;i<41;i++)
+  	{
+  		dp1[i][0]=1.0;
+  		for(int j=1;j<i+1;j++)
+  		{
+  			if(color[i]>0)
+  		  	dp1[i][j]= dp1[i-1][j] + dp1[i-1][j-1]*((1LL<<color[i])-1);
+  		  	else
+  		  	dp1[i][j]=dp1[i-1][j];
+  		}
+  	}
+  	
+  	for(int i=1;i<41;i++)
+  	{
+  		
+  		for(int j=1;j<i+1;j++)
+  		{
+  			if(color[i]>0)
+  			dp2[i][j]= dp2[i-1][j] + dp2[i-1][j-1]*((1LL<<color[i])-1) + cost[i]*(1LL<<(color[i]-1))*dp1[i-1][j-1]; 
+  			else
+  			dp2[i][j]=dp2[i-1][j];
+  		}
+  	}
+  	double num=0, den=0;
+  	for(int i= c;i<=n;i++)
+  	 {
+  	   
+	   	num += dp2[40][i];
+  	 	den += dp1[40][i];
+  	 }
+  	 
+    printf("%.9lf
+",(double)(num/den));
+  }	
+} 

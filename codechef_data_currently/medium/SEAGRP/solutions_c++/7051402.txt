@@ -1,0 +1,105 @@
+/*brute force solution*/
+#include "bits/stdc++.h"
+using namespace std;
+int a[101][101];
+int find_partner(int node , int *visited , int *match_of_node , int n)
+{
+	for(int i = 0; i < n; i++) //  try for each node whether it matches or not
+	{
+		if(a[node][i] == 1 && visited[i] == 0)
+		{
+			visited[i] = 1;
+			visited[node]  = 1;
+			if(match_of_node[i] == -1 || find_partner(match_of_node[i] , visited , match_of_node , n) == 1)
+			{
+				match_of_node[i] = node;
+				match_of_node[node] = i;
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+int main(int argc, char const *argv[])
+{
+	int t;
+	cin >> t;
+
+	while(t--)
+	{
+		int n , m;
+
+		cin >> n >> m;
+
+		for(int i = 0 ;i < n ;i++)
+		{
+			for(int j = 0; j < n ;j++)
+			{
+				a[i][j] = 0;
+			}
+		}
+
+		// int a , b;
+		for(int i = 0; i < m ; i++)
+		{
+			int x , y;
+			cin >> x >> y;
+			x--; y--;
+			a[x][y]  = 1;
+			a[y][x] = 1;
+		}
+
+		if(n % 2 != 0)
+			{cout << "NO
+";}
+		else
+		{
+			int match_of_node[n];
+			for(int i = 0; i < n; i++)
+			{
+				match_of_node[i] = -1; // -1 tells there is no matching node for i
+			}
+
+			for(int i = 0; i < n; i++)
+			{
+				if(match_of_node[i] == -1) // no partner available to i
+				{
+					int visited[n];
+
+					for(int j = 0; j < n; j++)
+					{
+						visited[j] = 0; // 0 signifies we have not tried finding a partner for j
+					}
+					visited[i] = 1;
+					int flag = find_partner(i , visited , match_of_node , n);
+
+				}
+			}
+
+
+		
+
+int flag = 1;
+	for (int i = 0; i < n; ++i)
+{
+if(match_of_node[i]==-1){
+printf("NO
+");
+flag=0;
+break;
+}
+}
+if(flag==1 && m>n/2){
+printf("YES
+");
+}
+else if(flag==1 && m<=n/2)
+{
+printf("NO
+");
+}
+ }
+}
+
+return 0;
+}

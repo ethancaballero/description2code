@@ -1,0 +1,15 @@
+arr=[]
+def fact(k):
+	if k==1:
+		return 1
+	else:
+		return k*fact(k-1)	
+ 
+n=int(raw_input())
+ 
+for i in range(0,n):
+	arr.append(int(raw_input()))
+ 
+for i in range(0,n):
+	x=fact(arr[i])
+	print x

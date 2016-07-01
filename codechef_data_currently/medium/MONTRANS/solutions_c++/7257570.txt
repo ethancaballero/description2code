@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        double a,b,c;
+        cin>>a>>b>>c;
+        double k=a*100+b;
+        double max=0;
+        int i;
+        for(i=1;i<10000;i++)
+        {
+            double y=0;
+            if(a>0)
+            {
+            if(b>=c)
+            {
+                double temp=a;
+                a=b-c;
+                b=temp;
+            }
+            else
+            {
+                a--;
+                b=b+100;
+                double temp=a;
+                a=b-c;
+                b=temp;
+
+
+            }
+            y=a*100+b;
+            if(y>k)
+            {
+                k=y;
+                max=i;
+            }
+
+        }
+        else
+        {
+        if(b>=c)
+        {
+                double temp=a;
+                a=b-c;
+                b=temp;
+        }
+        else
+            break;
+
+
+
+
+        }
+        }
+        cout<<max<<endl;
+
+
+
+
+    }
+
+
+
+
+}

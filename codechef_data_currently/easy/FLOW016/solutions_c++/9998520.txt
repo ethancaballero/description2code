@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int gcd(int l, int s) {
+    while(s!=0){
+        int t=s;
+        s=l%s;
+        l=t;
+    }
+   return l;
+}
+int main() {
+	int t;
+	scanf("%d",&t);
+    while(t--)
+	{
+	    int a,b,g;
+	    scanf("%d%d", &a, &b);
+	    if(a>b)
+	    g=gcd(a,b);
+	    else
+	    g=gcd(b,a);
+	    printf("%d %ld
+", g,(a*b)/g);
+	}
+	return 0;
+}

@@ -1,0 +1,16 @@
+# cook your code here
+for _ in range(input()):
+    text1 = []
+    text1 = map(int,raw_input().split())
+    text2 = []
+    text2 = map(str,raw_input().split())
+    text3 = [] 
+    for i in range(text1[1]):
+        text3 += map(str,raw_input().split())
+    ans = ""
+    for i in text2:
+        if i in text3:
+            ans += "YES "
+        else:
+            ans += "NO "
+    print ans[0:-1]       

@@ -1,0 +1,14 @@
+x=int(raw_input())
+for i in xrange(x):
+    s=raw_input()
+    c=len(s)+1
+    for j in range(1,len(s)):
+        if ord(s[j])>=ord(s[j-1]):
+            c+=ord(s[j])-ord(s[j-1])
+        else:
+            c+=122-ord(s[j-1])+ord(s[j])-97+1
+    if c<=11*len(s):
+        print 'YES'
+    else:
+        print 'NO'
+        

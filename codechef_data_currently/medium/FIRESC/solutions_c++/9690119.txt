@@ -1,0 +1,86 @@
+#include<cstdio>
+#include<cstring>
+using namespace std;
+
+int t,n,m,cvor,sused;
+long long rez1,rez2;
+
+struct ee{
+   int parent,nofes,rank;
+}unions[100010];
+void make_set(int x){
+   unions[x].parent=x;
+   unions[x].rank=0;
+   unions[x].nofes=1;
+}
+
+int findu(int x){
+    if(x!=unions[x].parent)
+        x=findu(unions[x].parent);
+    else return unions[x].parent;
+}
+
+void make_union(int x,int y){
+
+    int xRoot=findu(x);
+    int yRoot=findu(y);
+
+    if(xRoot==yRoot)return;
+
+    if(unions[xRoot].rank>unions[yRoot].rank){
+       unions[xRoot].nofes+=unions[yRoot].nofes;
+       unions[yRoot].nofes=0;
+       unions[yRoot].parent=xRoot;
+       unions[xRoot].rank++;
+    }
+    else if(unions[xRoot].rank<unions[yRoot].rank){
+       unions[yRoot].nofes+=unions[xRoot].nofes;
+       unions[xRoot].nofes=0;
+       unions[xRoot].parent=yRoot;
+       unions[yRoot].rank++;
+    }
+    else{
+       unions[xRoot].nofes+=unions[yRoot].nofes;
+       unions[yRoot].nofes=0;
+       unions[yRoot].parent=xRoot;
+       unions[xRoot].rank++;
+    }
+
+}
+
+int main(){
+    scanf("%d",&t);
+    for(int i=1;i<=t;i++){
+
+        memset(unions,0,sizeof(unions));
+
+        scanf("%d %d",&n,&m);
+
+        for(int j=1;j<=n;j++){
+            make_set(j);
+        }
+
+        for(int j=1;j<=m;j++){
+
+            scanf("%d %d",&cvor,&sused);
+            make_union(cvor,sused);
+
+        }
+        rez2=1;
+        rez1=0;
+        for(int j=1;j<=n;j++){
+            if(unions[j].nofes>0){
+
+                rez2=(rez2*unions[j].nofes)%1000000007;
+                ///printf("%d %d
+",unions[j].nofes,j);
+                rez1++;
+            }
+        }
+
+        printf("%lld %lld
+",rez1,rez2);
+
+    }
+return 0;
+}

@@ -1,0 +1,15 @@
+n1, n2, n3=map(int, raw_input().split())
+l=[]
+for _ in range(n1+n2+n3):
+	l.append(input())
+d={}
+for e in l:
+	if e in d:
+		d[e]=d[e]+1
+	else:
+		d[e]=1
+e=[x for x in d.keys() if d[x]>1]
+e.sort()
+print len(e)
+for ee in e:
+	print ee

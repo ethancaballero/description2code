@@ -1,0 +1,14 @@
+from sys import stdin
+
+for trial in xrange(int(stdin.readline())):
+    A,B,C = map(int,stdin.readline().split())
+    numConversions = 0
+    maxMoney = 0
+    for i in xrange(0,10000):
+        if A==0 and B<C: break
+        totCents = A*100+B-C
+        A,B = totCents%100,totCents/100
+        if totCents > maxMoney:
+            maxMoney = totCents
+            numConversions=i
+    print numConversions

@@ -1,0 +1,32 @@
+#include <iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	long long t;
+	cin>>t;
+    while(t--)
+    {
+        long long n,counting = 1;
+        cin>>n;
+        long long a[n],s;
+        for(long i =0;i<n;i++)
+        {
+            cin>>a[i];
+
+
+        }
+        sort (a,a+n);
+
+
+        s = a[0];
+         for(long i =1;i<n;i++)
+         {
+             if (s!=a[i]) {counting++;
+
+
+             }s = a[i];
+         }
+         cout<<counting<<endl;
+    }
+}

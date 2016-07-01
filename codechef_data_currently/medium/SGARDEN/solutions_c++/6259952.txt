@@ -1,0 +1,101 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <limits.h>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cmath>
+using namespace std;
+#define getcx getchar_unlocked
+#define MOD 1000000007
+inline void inp( int &n )//fast input function
+{
+   n=0;
+   int ch=getcx();int sign=1;
+   while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();}
+
+   while(  ch >= '0' && ch <= '9' )
+           n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+   n=n*sign;
+}
+
+#include <iostream>
+using namespace std;
+ 
+int gcd(int a, int b)
+{
+    for (;;)
+    {
+        if (a == 0) return b;
+        b %= a;
+        if (b == 0) return a;
+        a %= b;
+    }
+}
+
+int lcm(int a, int b)
+{
+    int temp = gcd(a, b);
+
+    return temp ? (a / temp * b) : 0;
+}
+
+
+int A[100009];
+bool B[100009];
+
+int main() {
+    
+    int t;
+    int n;
+    long long ans;
+    inp(t);
+    int steps = 0;
+    while(t--) {
+        
+        inp(n);
+        ans = 1;
+        map<int, int> factors;
+        memset(B, 0, sizeof(B));
+        
+        for(int i=1; i<=n; i++) {
+            inp(A[i]);
+        }
+        
+        for(int i=1; i<=n; i++) {
+            steps = 0;
+            if(B[i] == true)
+                continue;
+            for(int next = i; !B[next] ; next = A[next]) {
+                steps++;
+                B[next] = true;
+            }
+        //int tempsteps = steps;
+        for(int j=2; j<= sqrt(steps); j++) {
+            int number = 0;
+            while(steps%j == 0) {
+                steps /= j;
+                number++;
+            }
+            if(number)
+                factors[j] = max(factors[j], number);
+         }
+         if(steps != 1) {
+             factors[steps] = max(factors[steps], 1);
+         }
+        }
+        
+       map<int, int>::iterator it;
+       for (it = factors.begin(); it != factors.end(); it++)
+       {
+            for(int num = 0; num < it->second; num++) {
+                ans = (ans*it->first)%MOD;
+            }
+       }
+        
+        cout<<ans<<endl;
+    }
+    
+    return 0;
+}

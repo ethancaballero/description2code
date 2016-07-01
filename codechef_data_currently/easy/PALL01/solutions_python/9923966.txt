@@ -1,0 +1,7 @@
+t = input()
+for _ in xrange(t):
+    n = raw_input()
+    if n == n[::-1]:
+        print "wins"
+    else:
+        print "losses"

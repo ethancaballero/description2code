@@ -1,0 +1,15 @@
+t = int(raw_input())
+ 
+while t>0:
+	n=int(raw_input())
+	ans=0
+	if n==1:
+		print ans
+	elif n==2:
+		print 2*(ans+2)
+	elif n==3:
+		print 2*(ans+21)
+	elif n>3:
+		ans+=(n*(n-1)*(2+5*(n-2)+2*(n-2)*(n-3)))
+		print ans 
+	t=t-1		

@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int dp[2001][27][27];
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        string str;
+        cin >> str;
+        int len = str.size();
+        for(int i=0;i<=len;++i) {
+            for(int j=0;j<27;++j) {
+                for(int k=0;k<27;++k) {
+                    dp[i][j][k] = 0;
+                }
+            }
+        }
+        for(int i=1;i<=len;++i) {
+            int x=str[i-1]-'a';
+            for(int j=0;j<26;++j) {
+                for(int k=0;k<26;++k) {
+                    dp[i][j][k] = max(dp[i][j][k],dp[i-1][j][k]);
+                    if ( j<=x ) dp[i][x][k] = max(dp[i][x][k], dp[i-1][j][k]+1);
+                    if ( k>=x ) dp[i][j][x] = max(dp[i][j][x], dp[i-1][j][k]+1);
+                }
+            }
+        }
+        int ans=0;
+        for(int j=0;j<26;++j) {
+            for(int k=0;k<26;++k) {
+                ans = max(ans,dp[len][j][k]);
+            }
+        }
+        cout << ans << endl;
+    }
+    return 0;
+}

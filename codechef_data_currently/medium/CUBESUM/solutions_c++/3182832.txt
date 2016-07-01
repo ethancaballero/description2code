@@ -1,0 +1,160 @@
+// laflare
+// CUBESUM
+#include<iostream>
+#include<vector>
+#include<set>
+#include<map>
+#include<queue>
+#include<stack>
+#include<string>
+#include<algorithm>
+#include<functional>
+#include<iomanip>
+#include<cstdio>
+#include<cmath>
+#include<limits.h>
+#include<cstring>
+#include<cstdlib>
+#include<cfloat>
+#include<cassert>
+#define maxm(a,b) a>b?a:b;
+#define minm(a,b) a<b?a:b;
+using namespace std;
+//M lazy ;)
+typedef long long ll;
+typedef vector <int> vi;
+typedef pair< int ,int > pii;
+typedef istringstream iss;
+typedef ostringstream oss;
+typedef map<int,int> mp;
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define ln length()
+#define repb(i,n) for(i=n-1;i>=0;i--)
+#define rep(i,n) for(int i=0;i<n;i++)
+#define fu(i,a,n) for(int i=a;i<=n;i++)
+#define fd(i,n,a) for(int i=n;i>=a;i--)
+#define all(a)  a.begin(),a.end()
+#define ESP (1e-9)
+#define gi(n) scanf("%d",&n)
+#define gl(n) cin >> n
+#define pi(n) printf("%d",n)
+#define pl(n) cout << n
+#define ps printf(" ")
+#define pn printf("
+")
+#define dg(n,s); printf("%s %d",s,n)
+#define imax numeric_limits<int>::max()
+#define imin numeric_limits<int>::min()
+#define lmax numeric_limits<ll>::max()
+#define lmin numeric_limits<ll>::min()
+#define traverse_map(a,b) for(mp::iterator it=a;it!=b;++it)
+#define MOD 1000000007
+#define MAX 1000001
+#define cases() int t; cin>>t; while(t--)
+// fast input function
+#define getcx getchar_unlocked
+// fast input function
+#ifdef ONLINE_JUDGE
+ inline void inp( int &n )
+ {
+    n=0;
+    int ch=getcx();int sign=1;
+    while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();}
+
+    while(  ch >= '0' && ch <= '9' )
+            n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+    n=n*sign;
+  }
+#else
+inline void inp(int &n){
+ cin>>n;
+}
+#endif
+/*
+inline long long inp(){
+	char c = getchar_unlocked();
+	long long n = 0;
+	while(c < '0' || c > '9') c = getchar_unlocked();
+	while(c >= '0' && c <= '9')
+		n = (n<<3) + (n<<1) + c - '0', c = getchar_unlocked();
+	return n;
+}
+
+#define pc putchar_unlocked
+inline void oup(int n){
+	if(!n) pc('0');
+	char pb[2];
+	int pi = 0;
+	while(n) pb[pi++] = (n%10) + '0', n /= 10;
+	while(pi) pc(pb[--pi]);
+}*/
+int main(){
+ int t;
+ inp(t);
+ while(t--)
+ {
+		int x,y,z,i,j,k;
+		
+		inp(x);
+		inp(y);
+		inp(z);
+            int mat_3d[x][y][z];
+
+		rep(i,x)
+		 rep(j,y)
+		   rep(k,z)
+		      inp(mat_3d[i][j][k]);
+
+		int a,b,c,d;
+            repb(i,x)
+		 repb(j,y)
+		 {
+				repb(k,z)
+				{
+					
+					 if(j>0)
+					  mat_3d[i][j][k]-=mat_3d[i][j-1][k];
+
+					//  mat_3d[i][j][k]=a-b-c+d;
+
+				//	a=0;
+					//b=0;
+				//	c=0;
+				//	d=0;
+					if(i>0)
+					{
+						mat_3d[i][j][k]-=mat_3d[i-1][j][k];
+						if(j>0)
+						 mat_3d[i][j][k]+=mat_3d[i-1][j-1][k];
+					}
+					if(k>0)
+					{
+						mat_3d[i][j][k]-=mat_3d[i][j][k-1];
+						if(j>0)
+						 mat_3d[i][j][k]+=mat_3d[i][j-1][k-1];
+					}
+					if(i>0&&k>0)
+					{
+						mat_3d[i][j][k]+=mat_3d[i-1][j][k-1];
+						if(j>0)
+						 mat_3d[i][j][k]-=mat_3d[i-1][j-1][k-1];
+					}
+					
+					 				}
+		 }
+		 
+		 rep(i,x)
+		   rep(j,y)
+		   {
+				rep(k,z)
+				 printf("%d ",mat_3d[i][j][k]);
+				   printf("
+");
+		  }
+ }
+ return 0;
+}

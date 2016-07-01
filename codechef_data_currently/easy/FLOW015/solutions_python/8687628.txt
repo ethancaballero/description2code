@@ -1,0 +1,5 @@
+from datetime import date
+L = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] 
+for _ in range(int(raw_input())):
+    a = int(raw_input())
+    print L[date(a, 01,01).weekday()] 

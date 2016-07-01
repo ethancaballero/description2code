@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while(t--)
+	{
+		string a, b;
+		cin>>a;
+		cin>>b;
+		a+=b;
+		b = "";
+		string temp;
+		int n;
+		scanf("%d", &n);
+		while(n--){
+			cin>>temp;
+			b+=temp;
+		}
+		int alpha[26];
+		memset(alpha, 0, sizeof(alpha));
+		for(int i=0; i<a.length(); i++){
+			alpha[(int)(a[i]-'a')]++;
+			alpha[(int)(b[i]-'a')]--;
+		}
+		bool res=true;
+		for(int i=0; i<26; i++)
+			if(alpha[i]<0)
+			{
+				res=false;
+				break;
+			}
+		if(res)
+			printf("YES
+");
+		else
+			printf("NO
+");
+	}
+	return 0;
+}

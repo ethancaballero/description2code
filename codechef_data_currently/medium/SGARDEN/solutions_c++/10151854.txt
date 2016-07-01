@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e5 + 10;
+typedef long long LL;
+const int MOD = 1e9 + 7;
+int A[MAXN];
+bool vis[MAXN];
+int wp[MAXN];
+int f[MAXN];
+int pf[MAXN];
+void go(){
+	for(int i = 1;i < MAXN;++i){
+		f[i] = i;
+		pf[i] = i;
+	}
+	for(int i = 2;i * i < MAXN;++i){
+		if(pf[i] == i){
+			for(int j = i, z = 1;j < MAXN;j += i, ++z){
+				pf[j] = i;
+				if(pf[z] == pf[j]){
+					f[j] = f[z] * i;
+				}
+				else {
+					f[j] = i;
+				}
+			}
+		}
+	}
+}
+int main(){
+	go();
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		int N;
+		scanf("%d", &N);
+		for(int i = 1;i <= N;++i){
+			scanf("%d", &A[i]);
+			vis[i] = false;
+			wp[i] = 1;
+		}
+		for(int i = 1;i <= N;++i){
+			if(!vis[i]){
+				int cnt = 1;
+				int j = A[i];
+				while(j != i){
+					vis[j] = true;
+					j = A[j];
+					++cnt;
+				}
+				while(cnt > 1){
+					wp[pf[cnt]] = max(wp[pf[cnt]], f[cnt]);
+					cnt /= f[cnt];
+				}
+			}
+		}
+		LL ans = 1;
+		for(int i = 1;i <= N;++i){
+			ans = (ans * wp[i]);
+			if(ans >= MOD) ans %= MOD;
+		}
+		printf("%lld
+", ans);
+	}
+	return 0;
+}

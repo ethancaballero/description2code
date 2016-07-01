@@ -1,0 +1,17 @@
+#Greedy puppy 
+#https://www.codechef.com/problems/GDOG
+#!/usr/bin/env python
+
+def greedy(n,k):
+	l=[]
+	for i in range(1,k+1):
+		per_person = n/i
+		total_spent = per_person*i
+		l.append(n-total_spent)
+	print max(l)
+
+t= input()
+while t!=0:
+	t-=1
+	n,k=(map(int,raw_input().split()))
+	greedy(n,k)

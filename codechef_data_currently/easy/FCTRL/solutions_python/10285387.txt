@@ -1,0 +1,20 @@
+#this algorithm calculates the number of trailing zeroes in a factorial of a number and works in less than 1s for digits upto n>100000000 in constant time
+
+import time
+n=int(input())
+counter=[]
+for j in range(n):
+    count=0
+    p=int(input())
+    i=1
+    div=1
+    while div!=0:
+        num=5**i
+        div=p/num
+        count=count+div
+        i=i+1
+    counter.append(count)
+m=len(counter)
+for i in range(m):
+    print counter[i]
+

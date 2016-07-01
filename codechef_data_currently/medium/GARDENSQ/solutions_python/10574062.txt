@@ -1,0 +1,30 @@
+def iterF(arr,n,m,iter1):
+	#print "fyuv"
+	i=iter1;j=iter1;count=0
+	while(i<n):
+		j=iter1
+		while(j<m):
+			#print "i,j,iter",i,j,iter1
+			if(arr[i][j]==arr[i][j-iter1] and arr[i][j]==arr[i-iter1][j]				and arr[i-iter1][j-iter1]==arr[i][j] ):
+				#print "i,j,iter",i,j,iter1,"trure re"
+				count+=1
+			j+=1
+		i+=1
+	return count
+
+t=input()
+while(t>0):
+	t-=1
+	n,m=map(int,raw_input().split())
+	arr=[[] for i in range(n)]
+	#print arr
+	i=0
+	while(i<n):
+		arr[i][:]=list(raw_input())
+		i+=1
+	iter1=min(n,m)
+	i=1;count=0
+	while(i<n):
+		count+=iterF(arr,n,m,i)
+		i+=1
+	print count

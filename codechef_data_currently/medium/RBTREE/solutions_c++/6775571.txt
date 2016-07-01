@@ -1,0 +1,137 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+	int q,i,count=0,l,r,even=2,count1=0,x,y;
+	char ch[3];
+	cin>>q;
+	while(q--)
+	{
+		cin>>ch;
+		if(ch[1]=='i')
+		{
+			count1++;
+		}
+		if(count1%2!=0)
+		{
+			if(ch[1]=='b')
+			ch[1]='r';
+			else
+			if(ch[1]=='r')
+			ch[1]='b';
+		}    
+		if(ch[1]=='b')
+		{
+			cin>>l>>r;
+			i=0;
+			while(1)
+			{
+				if(l/pow(2,i)>=1)
+				i++;
+				else
+				{
+					x=i-1;
+					break;
+				}
+			}
+			//cout<<"x="<<x<<"
+";
+			i=0;
+			while(1)
+			{
+				if(r/pow(2,i)>=1)
+				i++;
+				else
+				{
+					y=i-1;
+					break;
+				}
+			}
+			//cout<<"y="<<y<<"
+";
+			while(1)
+			{
+				if(l==r)
+				{
+					if(x%even==0)
+					count++;
+					break;
+				}
+				if(r>l)
+				{
+					if(y%even==0)
+					count++;
+					r=r/2;
+					y--;
+				}
+				else
+				if(l>r)
+				{
+					if(x%even==0)
+					count++;
+					l=l/2;
+					x--;
+				}
+			}
+			cout<<count<<"
+";
+			count=0;
+		}
+		if(ch[1]=='r')
+		{
+			cin>>l>>r;
+			i=0;
+			while(1)
+			{
+				if(l/pow(2,i)>=1)
+				i++;
+				else
+				{
+					x=i-1;
+					break;
+				}
+			}
+			i=0;
+			while(1)
+			{
+				if(r/pow(2,i)>=1)
+				i++;
+				else
+				{
+					y=i-1;
+					break;
+				}
+			}
+			while(1)
+			{
+				if(l==r)
+				{
+					if(x%even!=0)
+					count++;
+					break;
+				}
+				if(r>l)
+				{
+					if(y%even!=0)
+					count++;
+					r=r/2;
+					y--;
+				}
+				else
+				if(l>r)
+				{
+					if(x%even!=0)
+					count++;
+					l=l/2;
+					x--;
+				}
+			}
+			cout<<count<<"
+";
+			count=0;
+		}
+		count=0;
+	}
+	return 0;
+}

@@ -1,0 +1,72 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+int main() {
+    int n,m,l;
+    scanf("%d %d",&n,&m);
+    int array[500][500];
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+           scanf("%d", &array[i][j]); 
+        }
+    }
+    scanf("%d",&l);
+    int array1[250000];
+    int array2[250000];
+    long long e1=0;
+    long long e2=0;
+    for(int i=0;i<l;i++)
+    {
+        
+        int x,y;
+        scanf("%d %d", &x,&y);
+       array1[i]=x-1;
+       array2[i]=y-1;
+       
+      
+       
+    }
+    if(e1!=-1)
+    {
+         for(int i=0;i<l;i++)
+    {
+        int x=array1[i];
+        int y=array2[i];
+         if(x>n || y>m)
+       {
+           e1=-1;
+           break;
+       }
+       
+        {
+          e1+=array[x][y];  
+        }
+    } 
+    }
+     if(e2!=-1)
+    {
+         for(int i=0;i<l;i++)
+    {
+        int x=array1[i];
+        int y=array2[i];
+         if(y>n || x>m)
+       {
+           e2=-1;
+           break;
+       }
+        {
+          e2+=array[y][x];  
+        }
+    } 
+    
+    }
+  
+    
+    long long ans=e1>e2 ? e1:e2;
+    cout<<ans;
+	// your code goes here
+	return 0;
+}

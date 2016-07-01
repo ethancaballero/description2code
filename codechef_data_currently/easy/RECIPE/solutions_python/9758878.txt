@@ -1,0 +1,9 @@
+from fractions import gcd
+for _ in range(int(raw_input())):
+    inplst=map(int,raw_input().split())
+    n=inplst[0]
+    lst=inplst[1:]
+    val=reduce(gcd,lst)
+    for i in lst:
+        print i/val,
+    print

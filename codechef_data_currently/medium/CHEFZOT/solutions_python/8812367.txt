@@ -1,0 +1,11 @@
+n=input()
+s=map(int,raw_input().split())
+l=0
+a=[0]*n
+for i in range(n):
+	if s[i]==0:
+		l=0
+	else:
+		l+=1
+		a[i]=l
+print max(a)		

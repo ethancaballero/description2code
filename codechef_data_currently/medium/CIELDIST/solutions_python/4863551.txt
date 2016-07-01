@@ -1,0 +1,3 @@
+for t in range(int(raw_input())):
+    ds,dt,d=map(int,raw_input().split())
+    print float(max(ds-dt-d,dt-ds-d,d-ds-dt,0))

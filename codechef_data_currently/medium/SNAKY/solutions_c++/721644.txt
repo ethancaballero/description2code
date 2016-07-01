@@ -1,0 +1,95 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    int arr[ 1001 ][ 1001 ];
+    char str[ 1000003 ];
+    int
+    main()
+    {
+    int t, n, m, x, y, l, headx, heady, i;
+    scanf( "%d", &t );
+    while( t-- )
+    {
+    scanf( "%d%d%d%d%d", &n, &m, &x, &y, &l );
+    scanf( "%s", str );
+    headx = x;
+    heady = y;
+    for( i = 0; i < l - 1; i++ ) {
+    arr[ headx ][ heady ] = i + 1;
+    switch( str[ i ] ) {
+    case 'U':
+    heady++;
+    break;
+    case 'D':
+    heady--;
+    break;
+    case 'L':
+    headx--;
+    break;
+    case 'R':
+    headx++;
+    break;
+    }
+    }
+    switch( str[ l - 2 ] ) {
+    case 'U':
+    y = heady + 1;
+    while( y <= m ) {
+    if( arr[ headx ][ y ] > y - heady ) {
+    printf( "BODY %d
+", y - heady - 1 );
+    break;
+    }
+    y++;
+    }
+    if( y > m )
+    printf( "WALL %d
+", m - heady );
+    break;
+    case 'D':
+    y = heady - 1;
+    while( y >= 1 ) {
+    if( arr[ headx ][ y ] > heady - y ) {
+    printf( "BODY %d
+", heady - y - 1 );
+    break;
+    }
+    y--;
+    }
+    if( y < 1 )
+    printf( "WALL %d
+", heady - 1 );
+    break;
+    case 'L':
+    x = headx - 1;
+    while( x >= 1 ) {
+    if( arr[ x ][ heady ] > headx - x ) {
+    printf( "BODY %d
+", headx - x - 1 );
+    break;
+    }
+    x--;
+    }
+    if( x < 1 )
+    printf( "WALL %d
+", headx - 1 );
+    break;
+    case 'R':
+    x = headx + 1;
+    while( x <= n ) {
+    if( arr[ x ][ heady ] > x - headx ) {
+    printf( "BODY %d
+", x - headx - 1 );
+    break;
+    }
+    x++;
+    }
+    if( x > n )
+    printf( "WALL %d
+", n - headx );
+    break;
+    }
+    memset( arr, 0, sizeof( arr ) );
+    }
+    return EXIT_SUCCESS;
+    } 

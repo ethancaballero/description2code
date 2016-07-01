@@ -1,0 +1,43 @@
+ 
+CodeChef has received a package of N ingredients from Aloo uncle and Kachori aunty as their Christmas gift. CodeChef decides to make dishes with every possible combination of these N ingredients. (Note: A dish with 0 ingredients is also possible. CodeChef uses it as an excuse for serving air to their airy customers). Every ingredient from the package has a taste score between 1 and 10.
+
+
+Now CodeChef has customers on two planets, planet A and planet B. People from planet A like all the ingredients very much. And hence for every dish given to them, planet A will pay CodeChef an amount, which, in Alterian dollars, equals the sum of the taste scores of all the ingredients present in the dish minus the sum of the taste scores of all the ingredients not present in the dish.
+
+
+People from planet B don't like the ingredients at all. So for every dish given to planet B, planet B will pay CodeChef Alterian dollars equal to the sum of the taste scores of all the ingredients not present in the dish minus the sum of the taste scores of all the ingredients present in the dish.
+
+
+CodeChef can only make a single dish from a particular combination of ingredients. And they can send a dish either to planet A or planet B, but not both. You have to find out the maximum amount of money CodeChef will make by distributing all the dishes made with these ingredients on planet A and planet B.
+
+
+Report the maximum amount modulo 107.
+Input
+The first line contains T, the number of test cases.
+Each test case begins with N, the number of ingredients
+The next line for the test case contains N space-separated integers, which are the taste scores of the ingredients.
+Output
+For each test case, output the value as asked in a separate line.
+Constraints
+
+1 \u2264 T \u2264 100
+1 \u2264 N \u2264 1000
+1 \u2264 Taste scores of ingredients \u2264 10
+1 \u2264 Sum of N over all Test Cases \u2264 1000
+
+Example
+Input:
+1
+2
+1 2
+Output:
+8
+Explanation
+Example case 1. The dishes made by CodeChef and the amounts collected:
+
+Dish 1: Contains both ingredients: Sold to Planet A for 3 Alterian dollars.
+Dish 2: Contains first ingredients: Sold to Planet B for 1 Alterian dollars.
+Dish 3: Contains second ingredients: Sold to Planet A for 1 Alterian dollars.
+Dish 4: Does not contain any ingredients: Sold to Planet B for 3 Alterian dollars.
+
+Total Amount : 8 Alterian dollars.

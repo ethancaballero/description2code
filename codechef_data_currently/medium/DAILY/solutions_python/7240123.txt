@@ -1,0 +1,24 @@
+#not strictly original :(
+from sys import stdin
+ 
+def comb(n, k):
+    if 0 <= k <= n:
+        n2k = 1
+        k2k = 1
+        for t in xrange(1, min(k, n - k) + 1):
+            n2k *= n
+            k2k *= t
+            n -= 1
+        return n2k // k2k
+    else: return 0
+ 
+X,N = map(int,stdin.readline().split())
+numWays = 0
+A=[1,6,15,20,15,6,1] 
+for n in xrange(N):
+    S = '0' + stdin.readline().strip()
+    for i in xrange(1,37,4):
+        compartment = S[i:i+4]+S[54-i+(i-1)/2:56-i+(i-1)/2]
+        count = compartment.count('0')
+        if count >= X: numWays += comb(count,X)
+print numWays

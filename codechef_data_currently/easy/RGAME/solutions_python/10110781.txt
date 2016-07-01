@@ -1,0 +1,28 @@
+# cook your code here
+
+M = 1000000007
+S = 0
+B = 0
+P = 1
+
+T = int(raw_input())
+for i in range(T):
+    n = int(raw_input()) + 1
+    if n <= 1:
+        print 0
+        continue
+    L = [int(x) for x in raw_input().split()]
+    S = 0
+    B = 2 * L[0] % M
+    P = 2
+    for j in xrange(1, n):
+        a = L[j]
+        S *= 2
+        S %= M
+        S += a * B
+        S %= M
+        B += P * a
+        B %= M
+        P *= 2
+        P %= M
+    print S

@@ -1,0 +1,60 @@
+#include<iostream>
+#define ll long long
+#define MOD 1000000007
+using namespace std;
+
+
+struct mat{
+	ll a[4];
+};
+
+mat matmul(mat x, mat y){
+	mat ans;
+	ans.a[0]= ((x.a[0]*y.a[0])%MOD + (x.a[1]*y.a[2])%MOD)%MOD;
+	ans.a[1]= ((x.a[0]*y.a[1])%MOD + (x.a[1]*y.a[3])%MOD)%MOD;
+	ans.a[2]= ((x.a[2]*y.a[0])%MOD + (x.a[3]*y.a[2])%MOD)%MOD;
+	ans.a[3]= ((x.a[2]*y.a[1])%MOD + (x.a[3]*y.a[3])%MOD)%MOD;
+	
+	return ans;
+}
+
+mat pow(mat x, ll exp){
+	mat y;
+	y.a[0]= y.a[3]=1;
+	y.a[1]= y.a[2]=0;
+	
+	while(exp>0){
+		if(exp &1 == 1){
+			y=matmul(y, x);
+		}
+		x=matmul(x, x);
+		exp/=2;
+	}
+	return y;
+}
+
+int main(){
+	ll t, n;
+	cin>>t;
+	
+	mat x;
+	x.a[0]=2; x.a[1]=2; x.a[2]=1; x.a[3]=0;
+	
+	while(t--){
+		cin>>n;
+		if(n==1){
+			cout<<1<<endl;
+			continue;
+		}else if(n==2){
+			cout<<3<<endl;
+			continue;
+		}
+		
+		x.a[0]=2; x.a[1]=2; x.a[2]=1; x.a[3]=0;
+		x=pow(x, n-2);
+		
+		
+		ll ans=(x.a[0]*3 + x.a[1])%MOD;
+		cout<<ans<<endl;
+	}
+}

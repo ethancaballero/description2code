@@ -1,0 +1,39 @@
+#include<iostream>
+#include <climits>
+#define loop(x,n) for(int x = 0; x < n; x++)
+
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int tab[n];
+    loop(j,n)
+    {
+        int gameCount;
+        cin>>gameCount;
+        int min=INT_MAX;
+        int res=INT_MIN;
+        if(gameCount)  cin>>min;
+        else  tab[j]=0;
+        loop(i,gameCount-1)
+        {
+            int wczytana;
+            cin>>wczytana;
+            if(min>wczytana)
+                min=wczytana;
+            else
+                if(res<wczytana-min)
+                    res=wczytana-min;
+        }
+        tab[j]=res;
+    }
+    loop(i,n)
+    {
+        if(tab[i]<=0)
+            cout<<"UNFIT"<<endl;
+        else
+            cout<<tab[i]<<endl;
+    }
+    return 0;
+}

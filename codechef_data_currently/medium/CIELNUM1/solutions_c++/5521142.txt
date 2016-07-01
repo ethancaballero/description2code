@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+#include <vector>
+using namespace std;
+int ret=50000;
+bool ok(string a)
+{
+	int ret1=0,ret2=0,ret3=0;
+	for(int i=0;i<a.size();i++)
+		ret1+=a[i]=='8',ret2+=a[i]=='5',ret3+=a[i]=='3';
+	return ret1>=ret2 && ret2>=ret3;
+}
+void solve(string a,int n)
+{
+	if(ret<=0) return;
+	if(!n || ret<=0)
+	{
+		if(ok(a)) {
+			cout<<a<<"
+";
+			ret--;
+		}
+		return;
+	}
+	solve(a+'3',n-1);
+	solve(a+'5',n-1);
+	solve(a+'8',n-1);
+}
+main()
+{
+	int i=1;
+	while(1)
+	{
+		if(ret<=0) break;
+		solve("",i);
+		i++;
+	}
+//	cout<<"ret "<<ret<<"
+";
+}

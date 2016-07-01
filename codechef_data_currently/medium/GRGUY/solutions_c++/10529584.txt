@@ -1,0 +1,60 @@
+#include<iostream>
+#include<cstring>
+
+using namespace std;
+
+#define MAX 900000
+
+int main()
+{
+	int n,t,i;
+	string a,b;
+
+	cin>>t;
+
+	while(t--)
+	{
+		cin>>a>>b;
+		n=a.size();
+
+		if( (a[0]=='#' && b[0]=='#') || (a[n-1]=='#' && b[n-1]=='#') )
+			cout<<"No
+";
+		else
+		{
+			int arr1[n],arr2[n];
+
+			arr1[0]=arr2[0]=0;
+
+			if(a[0]=='#')
+				arr1[0]=MAX;
+			if(b[0]=='#')
+				arr2[0]=MAX;
+
+			for(i=1;i<n;i++)
+			{
+				if(a[i]=='#')
+					arr1[i]=MAX;
+				else
+					arr1[i]=min(arr1[i-1],arr2[i-1]+1);
+				
+				if(b[i]=='#')
+					arr2[i]=MAX;
+				else
+					arr2[i]=min(arr1[i-1]+1,arr2[i-1]);
+			}
+
+			if(arr1[n-1]==MAX && arr2[n-1]==MAX)
+				cout<<"No
+";
+			else 
+				cout<<"Yes
+"<<min(arr1[n-1],arr2[n-1])<<"
+";
+
+		}
+		
+	}
+
+	return 0;
+}

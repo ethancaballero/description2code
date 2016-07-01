@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAX = 35;
+int N;
+string word[MAX];
+string s;
+vector<int> inter[MAX];
+int dp[MAX][MAX];
+
+int rec(int L, int R) {
+    if(L > R)
+        return 0;
+    int& ret = dp[L][R];
+    if(ret != -1) return ret;
+    bool flag[32];
+    memset(flag, 0, sizeof flag);
+    for(int i=L; i<=R; i++){
+        for(int j=0; j<(int)inter[i].size(); j++){
+            if(inter[i][j] <= R){
+                flag[ rec(L, i-1) ^ rec(inter[i][j]+1, R) ] = true;
+            }
+        }
+    }
+    for(int i=0; ; i++){
+        if(flag[i] == false)
+            return ret = i;
+    }
+    return ret = 0;
+}
+
+void process(int L) {
+    for(int i=0; i<L; i++) inter[i].clear();
+    for(int j=0; j<N; j++) {
+        int siz = word[j].size();
+//        cout<<"j: "<<j<<" word: "<<word[j]<<endl;
+        for(int i=0; i<L; i++) {
+//            cout<<"i: "<<i<<" substr: "<<s.substr(i, siz)<<endl;
+            if(s.substr(i,siz) == word[j]) inter[i].push_back(i+siz-1);
+        }
+    }
+
+//    for(int i=0; i<L; i++){
+//        printf("i: %d	", i);
+//        for(int j=0; j<(int)inter[i].size(); j++) printf(" %d", inter[i][j]);
+//        puts("");
+//    }
+
+    return ;
+}
+
+int main() {
+    int test;
+    scanf("%d", &test);
+    while(test--) {
+        cin>>s;
+        scanf("%d", &N);
+        for(int i=0; i<N; i++) cin>>word[i];
+        int L = s.size();
+        process(L);
+        memset(dp, -1, sizeof dp);
+        int res = rec(0, L-1);
+        puts(res ? "Teddy" : "Tracy");
+    }
+    return 0;
+}

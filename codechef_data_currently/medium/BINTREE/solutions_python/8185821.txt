@@ -1,0 +1,55 @@
+def BinarySearch(Arr,ele,low,high):
+    mid=long((low+high)/2)
+    if(low>high):
+        return high
+    if(Arr[mid]==ele):
+        return mid
+    elif (Arr[mid]>ele):
+        return BinarySearch(Arr,ele,low,mid-1)
+    else:
+        return BinarySearch(Arr,ele,mid+1,high)
+        
+
+
+A=[0]*33
+for i in range(1,33):
+    A[i]=(1<<i)
+    #print A[i]
+n=long(raw_input(''))
+while n>0:
+    [l,r]=map(long,raw_input().split(' '))
+    i=BinarySearch(A,l,0,32)
+    j=BinarySearch(A,r,0,32)
+    count=0
+    if(i==j):
+        while(l!=r):
+            l=long(l/2)
+            r=long(r/2)
+            count+=1
+        print 2*count
+    elif(i<j):
+        k=j-i
+        while k>0:
+            r=long(r/2)
+            count+=1
+            k=k-1
+        while(l!=r):
+
+            l=long(l/2)
+            r=long(r/2)
+            count+=2
+        print count
+    else:
+        k=i-j
+        while k>0:
+            l=long(l/2)
+            count+=1
+            k=k-1
+        while(l!=r):
+            l=long(l/2)
+            r=long(r/2)
+            count+=2
+        print count
+    n=n-1
+        
+        

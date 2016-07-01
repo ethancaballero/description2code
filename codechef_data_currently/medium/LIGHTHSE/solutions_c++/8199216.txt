@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+inline long long int numinp(){
+   long long int n=0;
+   long long int ch=getchar_unlocked();int sign=1;
+   while(ch < '0' || ch > '9'){
+        if(ch=='-')sign=-1;
+        ch=getchar_unlocked();
+    }
+   while(ch >= '0' && ch <= '9')
+           n = (n<<3)+(n<<1) + ch-'0', ch=getchar_unlocked();
+   return n*sign;
+}
+inline void numout(long long int a){
+	char snum[20];
+	long long int i=0;
+	do{
+		snum[i++]=a%10+48;
+		a=a/10;
+	}
+	while(a!=0);
+	i=i-1;
+	while(i>=0)
+	putchar_unlocked(snum[i--]);
+	putchar_unlocked(' ');
+}
+int main() {
+    long long int t,n; t = numinp();
+    while(t--) {
+        n = numinp(); long long int x[n+1],y[n+1];
+        for(int i=1;i<=n;i++) { x[i] = numinp(); y[i] = numinp(); }
+        long long int maxx=1,maxy=1,minx=1,miny=1;
+        for(long long int i=2;i<=n;i++) {
+            if(x[i]<x[minx]) minx = i;
+            if(x[i]>x[maxx]) maxx = i;
+            if(y[i]<y[miny]) miny = i;
+            if(y[i]>y[maxy]) maxy = i;
+        }
+        if(x[minx]==x[miny] || y[minx]==y[miny]) {
+            numout(1);printf("
+");numout(minx);printf(" NE
+");
+        }
+        else if(x[maxx]==x[miny] || y[maxx] == y[miny]) {
+            numout(1);printf("
+");numout(maxx);printf(" NW
+");
+        }
+        else if(x[maxx]==x[maxy] || y[maxx]==y[maxy]) {
+            numout(1);printf("
+");numout(maxx);printf(" SW
+");
+        }
+        else if(x[minx]==x[maxy] ||y[minx]==y[maxy]) {
+            numout(1);printf("
+");numout(minx);printf(" SE
+");
+        }
+        else if(y[maxx]>y[minx]){
+            numout(2);printf("
+");numout(maxx);printf(" SW
+");numout(minx);printf(" NE
+");
+        }
+        else {
+            numout(2);printf("
+");numout(maxx);printf(" NW
+");numout(minx);printf(" SE
+");
+        }
+    }
+return 0;
+}

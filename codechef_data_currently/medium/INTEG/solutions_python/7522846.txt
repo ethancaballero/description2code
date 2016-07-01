@@ -1,0 +1,9 @@
+import sys
+
+n , lists , x = input(),map(int,sys.stdin.readline().split()),input()
+
+k = filter(lambda x : x < 0,lists)
+if len(k) >= x :
+    print abs(sum(sorted(k)[:x:]))
+else :
+    print abs(sum(k))

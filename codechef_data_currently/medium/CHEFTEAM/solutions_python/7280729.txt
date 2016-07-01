@@ -1,0 +1,21 @@
+def comb(n,r):
+    if r>n:
+        return 0
+    else:
+        if r>(n/2):
+            return comb(n,n-r)
+        else:
+            prod=1
+            for i in range(0,r,1):
+                prod=prod*(n-i)
+                prod=prod/(i+1)
+            return prod
+x=input()
+m=list()
+for i in range(0,x,1):
+    a=raw_input()
+    b=a.rsplit()
+    c=comb(int(b[0]),int(b[1]))
+    m.append(c)
+for i in m:
+    print i

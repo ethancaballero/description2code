@@ -1,0 +1,11 @@
+test = int(raw_input())
+for _ in range(test):
+    S = raw_input()
+    l = len(S)
+    left = S[:l / 2]
+    right = S[l - l / 2:]
+
+    if sorted(left) == sorted(right):
+        print 'YES'
+    else:
+        print 'NO'

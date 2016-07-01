@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,i,j,count;
+	char s[100001];
+	cin>>t;
+	while(t--)
+	{count=0;
+	int l;
+		cin>>s;
+		j=strlen(s);
+		l=strlen(s)/2;
+		for(i=0;i<l;i++)
+		{
+			if(s[i]==s[--j])
+			continue;
+			else
+			{
+				if(s[i]==s[j-1])
+				{
+				i--;}
+				else if(s[i+1]==s[j])
+				{
+					j++;
+				}
+				else
+				{
+					count=1;
+					break;
+				}
+				
+			}
+		}
+		if(count==1)
+		cout<<"NO"<<endl;
+		else
+		cout<<"YES"<<endl;
+	}
+	return 0;
+}

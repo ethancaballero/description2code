@@ -1,0 +1,26 @@
+a = input()
+for b in range(a):
+    c = raw_input().split()
+    arr = int(c[0])
+    d = raw_input().split()
+    l1 = []
+    for k in d:
+        l1.append(int(k))
+    e = raw_input().split()
+    l2 = []
+    for j in e:
+        l2.append(int(j))
+    list3 = []
+    lul = 0
+    for b in range(1,arr+1):
+        list3.append(b)
+        if b in l1 and b in l2:
+            lul += 1
+    for o in l1:
+        if o in list3:
+            list3.remove(o)
+    for q in l2:
+        if q in list3:
+            list3.remove(q)
+    
+    print lul, len(list3)

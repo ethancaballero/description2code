@@ -1,0 +1,17 @@
+def digitalClock():
+	t = int(raw_input())
+	while t > 0:
+		hour, minute = map(int, raw_input().split())
+		count = 1 # includes 0:0
+		for i in range(1,10):
+			h = i
+			while h < hour:
+				min = i
+				while min < minute:
+					count += 1
+					min = min*10 + i
+				h = h*10+i
+		print count
+		t-=1
+
+digitalClock()

@@ -1,0 +1,17 @@
+#is it in? - @VigzMv
+
+for i in range(int(raw_input())):
+    n1=int(raw_input())
+    s1=list(raw_input().split())
+    n2=int(raw_input())
+    s2=list(raw_input().split())
+    
+    flag=1
+    for i in s2:
+        if i not in s1:
+            flag=0
+            
+    if flag==1:
+        print 'Yes'
+    else:
+        print 'No'

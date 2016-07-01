@@ -1,0 +1,121 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long     LL;
+typedef pair<int,int> pii;
+
+double PI  = acos(-1);
+double EPS = 1e-7;
+int INF    = 1000000000;
+LL INFLL   = 1000000000000000000LL;
+
+#define fi            first
+#define se            second
+#define mp            make_pair
+#define pb            push_back
+
+#define input(in)     freopen(in,"r",stdin)
+#define output(out)   freopen(out,"w",stdout)
+
+#define MIN(a, b)     (a) = min((a), (b))
+#define MAX(a, b)     (a) = max((a), (b))
+
+#define RESET(a, b)   memset(a,b,sizeof(a))
+#define ALL(a)        (a).begin(), (a).end()
+#define SIZE(a)       (int)a.size()
+#define SORT(a)       sort(ALL(a))
+#define UNIQUE(a)     (a).erase( unique( ALL(a) ), (a).end() )
+#define FOR(a, b, c)  for (int (a)=(b); (a)<=(c); (a)++)
+#define FORD(a, b, c) for (int (a)=(b); (a)>=(c); (a)--)
+#define FORIT(a, b)   for (__typeof((b).begin()) a=(b).begin(); a!=(b).end(); a++)
+
+int mx[8] = {-1,1,0,0,-1,-1,1,1};
+int my[8] = {0,0,-1,1,-1,1,-1,1};
+
+// ----- //
+
+char s[10005];
+
+int n;
+
+inline char getLeft(int k) {
+	return s[(k+n-1)%n];
+}
+
+inline char getRight(int k) {
+	return s[(k+1)%n];
+}
+
+int main() {
+	int t,tc=0;
+	scanf("%d",&t);
+	while(t--) {
+		int k;
+		scanf("%d",&k);
+		scanf("%s",s);
+		n = strlen(s);
+		bool fail = 0;
+		FOR(a,0,n-1) {
+			if (s[a] == '?') {
+				if (k == 1) {
+					if (getLeft(a) == '?' && getRight(a) == '?') {
+						s[a] = '0';
+					}
+					else {
+						fail = 1;
+					}
+				}
+				else if (k == 2) {
+					int it = 0;
+					while(it < n && s[it] == '?') it++;
+					if (it == n) {
+						s[0] = '0';
+						it = 0;
+					} 
+					//cout << "YO " << it << endl;
+					FOR(a,1,n-1) {
+						if (s[(it+a)%n] == '?')
+							s[(it+a)%n] = 97-getLeft(it+a);
+						else if (s[(it+a)%n] != 97-getLeft(it+a))
+							fail = 1;
+					}
+
+				}
+				else {
+
+					if (getLeft(a) == '0') {
+
+						if (getRight(a) != '1') {
+							s[a] = '1';
+						}
+						else {
+							s[a] = '2';
+						}
+					}
+					else if (getLeft(a) == '1') {
+						if (getRight(a) != '0') {
+							s[a] = '0';
+						}
+						else {
+							s[a] = '2';
+						}
+					}
+					else {
+						if (getRight(a) == '0') {
+							s[a] = '1';
+						}
+						else {
+							s[a] = '0';
+						}
+					}
+				}
+			}
+			if (n > 1 && (getLeft(a) == s[a] || getRight(a) == s[a])) {
+				fail = 1;
+			}
+		}
+		printf("%s
+",fail?"NO":s);
+	}
+}

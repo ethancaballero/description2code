@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <algorithm>
+#include <map>
+#include <set>
+#include <iostream>
+#include <vector>
+#include <string.h>
+
+using namespace std;
+
+typedef pair<int,int> pii;
+
+const int MAXSIZE = 500;
+
+int d[MAXSIZE][MAXSIZE];
+
+vector<pii> cols[500];
+int poss[500];
+
+inline void push(vector<pii> &col, int &pos, pii p)
+{
+    while( col.size() > pos && col.back().first < p.first ) col.pop_back();
+    if(col.size() > pos && col.back().first == p.first) col.back().second += p.second;
+    else col.push_back(p);
+}
+
+inline void pop(vector<pii> &col, int &pos, pii p)
+{
+    if(pos >= col.size() || col[pos].first > p.first) return;
+    if(col[pos].first == p.first)
+    {
+        col[pos].second -= p.second;
+        if(col[pos].second==0) pos++;
+    }
+}
+
+inline void update(int a, int b, int &D, int &C) {
+    if(a > D) {
+        D = a;
+        C = b;
+    }
+    else if(a == D) {
+        C += b;
+    }
+}
+
+void solve()
+{
+    int M,N,K;
+    scanf("%d%d%d",&M,&N,&K);
+    for(int i = 0; i < M; ++i) for(int j = 0; j < N; ++j) scanf("%d",&d[i][j]);
+    memset(poss,0,sizeof(poss));
+    for(int j = 0; j < N; ++j) cols[j].clear();
+
+    for(int i = 0; i < K; ++i)
+        for(int j = 0; j < N; ++j)
+            push(cols[j], poss[j], pii(d[i][j],1));
+
+    vector<pii> row;
+    int rpos = 0;
+    for(int j = 0; j < K; ++j) push(row, rpos, cols[j][poss[j]]);
+    pii maxp = row[rpos];
+    printf("%d", maxp.first);
+    if(maxp.second > 1) printf("(%d)", maxp.second);
+
+    for(int j = K; j < N; ++j)
+    {
+        push(row, rpos, cols[j][poss[j]]);
+        pop(row, rpos, cols[j-K][poss[j-K]]);
+        maxp = row[rpos];
+        printf(" %d", maxp.first);
+        if(maxp.second > 1) printf("(%d)", maxp.second);
+    }
+    printf("
+");
+
+    for(int i = K; i < M; ++i)
+    {
+        row.clear();
+        rpos = 0;
+        for(int j = 0; j < N; ++j)
+        {
+            push(cols[j],poss[j], pii(d[i][j],1));
+            pop(cols[j],poss[j], pii(d[i-K][j],1));
+        }
+        for(int j = 0; j < K; ++j) push(row, rpos, cols[j][poss[j]]);
+        maxp = row[rpos];
+        printf("%d", maxp.first);
+        if(maxp.second > 1) printf("(%d)", maxp.second);
+
+        for(int j = K; j < N; ++j)
+        {
+            push(row, rpos, cols[j][poss[j]]);
+            pop(row, rpos, cols[j-K][poss[j-K]]);
+            maxp = row[rpos];
+            printf(" %d", maxp.first);
+            if(maxp.second > 1) printf("(%d)", maxp.second);
+        }
+        printf("
+");
+    }
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	for(int i = 1; i <= t; ++i)
+	{
+		printf("Case %d:
+",i);
+		solve();
+		printf("
+");
+	}
+	return 0;
+}

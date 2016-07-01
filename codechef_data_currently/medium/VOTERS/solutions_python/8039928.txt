@@ -1,0 +1,76 @@
+from __future__ import print_function, division
+import fractions
+import sys
+# input format
+# The first line of the input contains 3 integers
+# N1, N2 and
+# N3. N1 is the number of
+# voters in the first list, N2 is the number of
+# voters in the second list and N3 is the number of
+# voters in the third list. The next N1 lines
+# (lines 2,...,N1+1) contain one positive integer
+# each and describe the first list in ascending order. The following
+# N2 lines (lines
+#         N1+2,...,N1+N2+1)
+# describe the second list in ascending order and the final
+# N3 lines (lines
+#         N1+N2+2,...,N1+N2+N3+1)
+# describe the third list in ascending order.
+# Output format
+# The first line of the output should contain a single integer
+# M indicating the number voters in the final list. The next
+# M lines (lines 2,...,M+1) should contain one
+# positive integer each, describing the list of voters in the final
+# list, in ascending order.
+
+
+def majority_vote(li_votes1, li_votes2, li_votes3):
+
+    max_candidate = max(max(max(li_votes1), max(li_votes2)), max(li_votes3))
+    list_vote_counts = [0 for _ in xrange(int(max_candidate))]
+
+    for cand in li_votes1: list_vote_counts[cand-1] += 1
+    for cand in li_votes2: list_vote_counts[cand-1] += 1
+    for cand in li_votes3: list_vote_counts[cand-1] += 1
+
+    list_votes = [ind+1 for ind,count in enumerate(list_vote_counts) if 
+            count >= 2]
+    list_votes.sort()
+    return list_votes
+
+
+# list_1 = [23,30,42,57,90]
+# list_2 = [21,23,35,57,90,92]
+# list_3 = [21,23,30,57,90]
+
+f = sys.stdin
+if len(sys.argv) > 1:
+    # python life_and_everything.py infile.txt returns 
+    # ['life_and_everything.py', 'infile.txt']
+    f = open(sys.argv[1])
+
+
+# Solve problem
+list_len_lists = map(int, f.readline().split())
+len1 = list_len_lists[0]
+len2 = list_len_lists[1]
+len3 = list_len_lists[2]
+
+list1 = []
+list2 = []
+list3 = []
+for i in xrange(len1):
+    list1.append(int(f.readline()))
+
+for i in xrange(len2):
+    list2.append(int(f.readline()))
+
+for i in xrange(len3):
+    list3.append(int(f.readline()))
+
+op_list = majority_vote(list1, list2, list3)
+print('{n}
+{op_list}'.format(
+    n=len(op_list),
+    op_list='
+'.join(map(str, op_list))))

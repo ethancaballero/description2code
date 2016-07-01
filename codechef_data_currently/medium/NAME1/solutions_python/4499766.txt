@@ -1,0 +1,25 @@
+x=int(input())
+d=raw_input
+alpha=[chr(i) for i in xrange(97,123)]
+while x>0:
+    x-=1
+    string=d()
+    string=string.split(" ")
+    A=string[0]
+    B=string[1]
+    A=A+B
+    n=int(d())
+    C=""
+    while n>0 :
+        n-=1
+        B=d()
+        C+=B
+    flag=1
+    for y in alpha:
+        if(C.count(y)>A.count(y)):
+            flag=0
+            break
+    if flag==1:
+        print "YES"
+    else :
+        print "NO"

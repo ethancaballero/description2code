@@ -1,0 +1,17 @@
+t=int(raw_input())
+while t>0:
+    n,k=map(int,raw_input().split())
+    #n=int(raw_input())
+    #k=int(raw_input())
+    if n==0 and k!=0:
+        print 0,0
+    elif k==0:
+        print 0,n
+    else:
+        print n/k,n%k
+    t=t-1
+
+
+
+
+

@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+#include<algorithm>
+ 
+int gcd(int l , int b)
+{
+    if(l==0) return b;
+    if(b==0) return l;
+    
+    if(l>b) return gcd(l%b, b);
+    else return gcd(b%l, l);
+}
+ 
+int main() {
+	bool arr[100];
+	int tst, l, b, tmp;
+	
+	cin>>tst;
+	
+	while(tst--)
+	{
+	    cin>>l>>b;
+	    tmp=gcd(l,b);
+	    cout<<(l/tmp)*(b/tmp)<<endl;
+	}
+	return 0;
+}

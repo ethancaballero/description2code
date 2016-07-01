@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// my choco pie
+#define pb push_back
+#define VI vector<int>
+#define VL vector<long long int >
+
+// my fastest car series
+#define scan(x) scanf("%d",&x)
+#define print(x) printf("%d
+",x)
+#define scanll(x) scanf("%lld",&x)
+#define printll(x) printf("%lld
+",x)
+#define ms(x) memset(x,0,sizeof(x))
+
+// data pies
+#define ll long long int
+#define li long int
+#define ff float
+#define db double
+
+// loopi loops
+#define rep(i,a,b) for(i=a;i<b;i++)
+#define repr(i,a,b) for(i=a;i>=b;i--)
+
+// debugger
+#define print_v(x) for(int i=0;i<x.size();i++) cout << x[i] << " "
+
+#define MOD 1000000007
+int main(){
+	int n,q;
+	scan(n);
+	vector<string> rec;
+	VL pr;
+	int i=0;
+	string inp;
+	ll ip;
+	rep(i,0,n){
+		cin>>inp;
+		cin>>ip;
+		rec.pb(inp);
+		pr.pb(ip);
+	}
+//	print_v(rec);cout<<endl;print_v(pr);
+	scan(q);
+	rep(i,0,q){
+		cin>>inp;
+		int j=0;
+		string ans;
+		ll max = -1000000009;
+		rep(j,0,n){
+			if(inp==rec[j].substr(0,inp.size())){
+				if(pr[j]>max){
+					max = pr[j];
+					ans = rec[j];
+				}
+			}
+		}
+		if(max==-1000000009){
+			cout<<"NO
+";
+		}else{
+			cout<<ans<<endl;
+		}
+	}
+	return 0;
+}

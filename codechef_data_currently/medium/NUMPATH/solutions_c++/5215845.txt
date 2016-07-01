@@ -1,0 +1,28 @@
+#include <iostream>
+#define M 1000000007
+
+using namespace std;
+int N,B,Q;
+int v[200010],s[200010],res[200010];
+
+int main()
+{
+    int T;
+    cin >> N >> B;
+    for(int i=1;i<=N;++i)
+        cin >> v[i];
+    s[B]=1;
+    res[B]=1;
+    for(int i=B-1;i>=1;--i)
+    {
+        res[i]=((s[i+1]-s[i+1+v[i]])%M+M)%M;
+        s[i]=(res[i]+s[i+1])%M;
+    }
+    cin >> Q;
+    while(Q--)
+    {
+        cin >> T;
+        cout << res[T] << endl;
+    }
+    return 0;
+}

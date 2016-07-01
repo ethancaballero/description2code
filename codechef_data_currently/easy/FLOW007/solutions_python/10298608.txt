@@ -1,0 +1,9 @@
+t = int(raw_input())
+for i in xrange(t):
+	n = int(raw_input())
+	rev=0
+	while(n>0):
+		temp = n%10
+		rev = rev*10 + temp
+		n=n/10
+	print rev

@@ -1,0 +1,136 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+#include<math.h>
+#define ull unsigned long long
+#define ll long long
+#define D 3
+	ll m=1000000007;
+template <class T>
+class matrix
+{
+//	private:
+//		vector<vector<T> >M;
+	public:
+		vector<vector<T> >M;
+		matrix(){}
+		
+		matrix(int r,int c){
+			M.assign(r,vector<T>(c));
+		}
+		
+		int rowSize(){
+			return M.size();
+		}
+		int colSize(){
+			if(M.size()==0)
+			return 0;
+			
+			return M[0].size();
+		}
+		
+		matrix<T> operator*(matrix<T> &B){
+					
+			matrix<T> &A=*this;				//& to reflect back changes
+			int r=A.rowSize();
+			int c=B.colSize();
+			
+
+			matrix<T> F(A.rowSize(),B.colSize());
+			
+			for(int i=0;i<r;i++){
+				for(int j=0;j<c;j++){
+					for(int k=0;k<A.colSize();k++)
+				   {	F.M[i][j]+=A.M[i][k]*B.M[k][j];}
+					F.M[i][j]=F.M[i][j]%m;
+				}
+			}
+			return F;
+		
+		}
+	
+		
+		void identity(){
+			for(int i=0;i<(*this).rowSize();i++)
+					(*this).M[i][i]=1;
+		}	
+		void printMatrix(){
+			matrix<T> &A=(*this);
+			for(int i=0;i<A.rowSize();i++)				//(*this)
+			{
+				for(int j=0;j<A.colSize();j++)
+				cout<<(*this).M[i][j]<<" ";
+				cout<<endl;
+			}
+//			A.M[0][0]=100;
+		}
+};
+//non-member function
+template<class T>
+matrix<T> power(matrix<T> a,ll n){
+	matrix<T>R(a.rowSize(),a.colSize());
+	
+	R.identity();
+	
+	while(n){
+		if(n&1)
+			R=(R*a);
+	
+		a=(a*a);
+		n=n>>1;
+		
+	}
+	return R;
+}
+ll powerTwo(ll base,ll p)
+{
+	ll ans=1;
+	while(p)
+	{
+		if(p&1) ans=(ans*base)%m;
+		
+		base=(base*base)%m;
+		p=p>>1;
+	//	cout<<ans<<" ";
+	}
+//cout<<ans;	
+return ans;
+}
+	matrix<ll>T(D,D);
+	matrix<ll>T2(D,D);
+	matrix<ll>mat(D,1);matrix<ll>mat2(D,1);
+	int t[][D]={{0,1,0},{0,0,1},{1,1,1}};
+
+ 
+ 
+int main(){
+	
+	ios::sync_with_stdio(false);	
+	ll n;
+	int tes;
+	int a,b;
+ 
+		for(int i=0;i<D;i++)
+		for(int j=0;j<D;j++)
+			T.M[i][j]=t[i][j] ;
+			
+		mat.M[0][0]=2;mat.M[1][0]=4;mat.M[2][0]=7;
+			
+	cin>>tes;
+	for(int pp=1;pp<=tes;pp++){
+		
+		//cin>>a>>b>>n>>m;
+		cin>>n;	
+	
+		if(n<=D)
+		cout<<((powerTwo(2,n)-(mat.M[n-1][0]))+m)%m<<endl;
+		else{
+		
+		T2=power<ll>(T,(ll)(n-(D)));
+		mat2=(T2*mat);
+
+ 
+		cout<<(((powerTwo(2,n))-((mat2.M[D-1][0])+m)%m)+m)%m<<endl;	//+m
+		}
+	}	
+} 

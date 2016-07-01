@@ -1,0 +1,60 @@
+	#include<iostream>
+	#include<map>
+	#include<math.h>
+	#include<algorithm>
+	using namespace std;
+	typedef pair< int,int > iil;
+	
+	
+	int gcd(int a,int b)
+	{
+		if(b>a)
+			swap(a,b);
+		if(b==0)
+			return a;
+		else
+			return gcd(b,a%b);
+	}
+	int a[110];
+	int n;
+	map< iil,long long int> mymap;
+	long long int function(int index,int g)
+	{
+		iil key=make_pair(index,g);
+		if(index==n)
+		{
+			if(g==1)
+				return 1;
+			else
+				return 0;
+		}	
+		//if(g==1)
+		//	return pow(2,n-index);
+		if(mymap.find(key)!=mymap.end())
+			return mymap[key];
+		else
+			return mymap[key]=function(index+1,g)+function(index+1,gcd(g,a[index])); 
+	}
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			
+			cin>>n;
+			mymap.clear();
+			for(int i=0;i<n;i++)
+			{
+				cin>>a[i];
+			}	
+			long long int result=0;
+			for(int i=0;i<n;i++)
+			{
+				result+=function(i+1,a[i]);
+			}		
+			cout<<result<<endl;
+			t--;
+
+		}	
+	}

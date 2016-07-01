@@ -1,0 +1,25 @@
+import sys
+
+def bwnight(n,m):
+	if n <= 0 or m <= 0:
+		return 0
+	casilleros = n * m
+	horizontal =  4 * (n-1) * (m-2)
+	vertical =  4 * (n-2) * (m-1)
+	if m < 3:
+		horizontal = 0
+	if n < 3:
+		vertical = 0
+	return casilleros * (casilleros - 1) - horizontal - vertical
+
+def main():
+	
+	cases = int(sys.stdin.readline())
+	write = sys.stdout.write
+	for i in range(cases):
+		line = sys.stdin.readline().split(' ')
+		n = int(line[0])
+		m = int(line[1])
+		print bwnight(n,m)
+
+main()

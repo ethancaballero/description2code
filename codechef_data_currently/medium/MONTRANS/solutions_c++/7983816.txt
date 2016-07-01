@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+int foo(int& a, int& b, int c) {
+  if (a == 0 && b < c) {
+    return 0;
+  } else {
+    if (b >= c) {
+      b -= c;
+      a ^= b ^= a ^= b;
+    } else {
+      a -= 1;
+      b += 100;
+      b -= c;
+      a ^= b ^= a ^= b;
+    }
+    return a*100+b;
+  }
+}
+
+
+int main() {
+  int T;
+  cin >> T;
+  for (int t = 0 ; t < T ; ++t) {
+    int A, B, C;
+    cin >> A >> B >> C;
+    int count = 0;
+    int remains = A * 100 + B;
+    int max = remains;
+    int max_count = 0;
+    while(count < 10000) {
+      count++;
+      remains = foo(A, B, C);
+      if (remains > max) {
+        max = remains;
+        max_count = count;
+      }
+      if (remains == 0) {
+        break;
+      }
+    }
+    cout << max_count << endl;
+  }
+}

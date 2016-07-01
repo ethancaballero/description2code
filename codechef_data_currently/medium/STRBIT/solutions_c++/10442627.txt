@@ -1,0 +1,74 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+
+char ch[100005];
+int BIT[100005];
+int myarr[100005];
+int arr[100005];
+int t,n,k;
+
+void update(int x, int val)
+{
+      for(; x <= n; x += x&-x){
+        BIT[x] += val;
+       // BIT[x] %= 2;
+      }
+}
+int query(int x)
+{
+     int sum = 0;
+     for(; x > 0; x -= x&-x)
+        sum += BIT[x];
+     //sum %= 2;
+     return sum;
+}
+
+void solve(){
+	for(int i=2;i<=n;i++) myarr[i] = arr[i] - arr[i-1];
+	myarr[1] = arr[1];
+	for(int i=1;i<=n;i++)
+		update(i,myarr[i]);
+	
+	int count = 0;
+	for(int i=1;i<=n;i++){
+		if(query(i)%2==1){
+			
+			count++;
+			update(i,1);
+			int qq = i+k;
+			qq = qq>n+1 ? n+1 : qq;
+			update(qq,-1);
+		}
+
+	}
+	
+	printf("%d
+",count);
+	
+}
+
+int main() {
+	// your code goes here
+	
+	scanf("%d",&t);
+	
+	while(t--){
+		memset(BIT, 0 ,sizeof BIT);
+		scanf("%d %d",&n,&k);
+		scanf("%s",&ch);
+		for(int i=1;i<=n;i++) {
+			if(ch[i-1]=='R')
+				arr[i] = 1;
+			else
+				arr[i] = 0;
+			
+		}
+		
+		solve();
+	
+	}
+	
+	return 0;
+}

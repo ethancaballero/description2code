@@ -1,0 +1,11 @@
+for i in range(int(raw_input())):
+    j = map(int,(raw_input().split()))
+    k = map(int,(raw_input().split()))
+    c = 0
+    for h in k:
+        t = h%j[1]
+        if h-t != 0:
+            c += min(t,j[1]-t)
+        else:
+            c += j[1]-t
+    print c

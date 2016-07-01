@@ -1,0 +1,9 @@
+import math
+test_case = int(raw_input())
+for t in range(test_case):
+	l, d , s ,c = map(int, raw_input().split())
+	#print 'log value =', math.log(s) + (d-1) * math.log(c+1) - math.log(l), 'log(s) =', math.log(s), '(d-1) * log(c+1) =', (d-1)* math.log(c+1), 'log(l) =', math.log(l)
+	if math.log(s) + (d-1)*math.log(c+1) - math.log(l) < 0:
+		print 'DEAD AND ROTTING'
+	else:
+		print 'ALIVE AND KICKING'

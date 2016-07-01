@@ -1,0 +1,13 @@
+for t in range(int(raw_input())):
+        a=raw_input()
+        b=raw_input()
+        minm=maxm=0
+        for i in range(len(a)):
+                if a[i]<>'?' and b[i]<>'?':
+                        if a[i]<>b[i]:
+                                minm+=1
+                                maxm+=1
+                if a[i]=='?' and b[i]=='?':
+                        maxm-=1
+        maxm+=a.count('?')+b.count('?')
+        print minm,maxm

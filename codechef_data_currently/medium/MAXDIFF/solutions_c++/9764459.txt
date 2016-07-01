@@ -1,0 +1,33 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+int n,k;
+cin>>n>>k;
+long long int w[n],s=0;
+for(int i=0;i<n;i++)
+cin>>w[i];
+sort(w,w+n);
+if(k<=n/2)
+{
+for(int i=0;i<k;i++)
+s+=-(w[i]);
+for(int i=k;i<n;i++)
+s+=w[i];
+}
+else
+{
+for(int i=n-1;i>=n-k;i--)
+s+=w[i];
+for(int i=n-k-1;i>=0;i--)
+s+=-(w[i]);
+}
+cout<<s<<endl;
+}
+return 0;
+}

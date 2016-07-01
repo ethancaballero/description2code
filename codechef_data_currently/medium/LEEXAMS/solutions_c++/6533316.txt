@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[60],b[60],dis[20]={0},n;
+double ans,p[60];
+void prob(int n1,double p1)
+{
+	//printf("%d  %lf
+",n1,p1);
+	if(n==n1)
+	{
+		ans+=p1;return;
+	}
+	if(dis[a[n1]]!=1)
+	{
+		dis[a[n1]]=1;
+		prob(n1+1,p1*(0.01*p[n1]));
+		dis[a[n1]]=0;
+	}
+	if(dis[b[n1]]!=1)
+	{
+		dis[b[n1]]=1;
+		prob(n1+1,p1*(1.0-0.01*p[n1]));
+		dis[b[n1]]=0;
+	}
+}
+main()
+{
+	int tc,i;
+	scanf("%d",&tc);
+	while(tc--)
+	{
+		ans=0.0;
+		for(i=0;i<20;i++)dis[i]=0;
+		scanf("%d",&n);
+		for(i=0;i<n;i++)
+		{
+			scanf("%lf %d %d",&p[i],&a[i],&b[i]);
+		}
+		prob(0,1.0);
+		printf("%lf
+",ans);
+	}
+}

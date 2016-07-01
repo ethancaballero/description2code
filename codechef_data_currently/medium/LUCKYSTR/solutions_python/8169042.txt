@@ -1,0 +1,11 @@
+k,n=map(int ,raw_input().split())
+substr=[raw_input() for i in range(k)]
+str=[raw_input() for i in range(n)]
+for i in str:
+    if (len(i)>=47):print "Good";continue;
+    for el in substr:
+        if el in i:
+            print("Good")
+            break;
+    else:
+        print "Bad"

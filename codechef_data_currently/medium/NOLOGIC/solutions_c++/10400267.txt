@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <limits.h>
+#include <stdbool.h>
+#include <ctype.h>
+ 
+#define LL long long
+#define ULL unsigned long long
+#define MA(a,b) (((a)>(b))?(a):(b))
+#define MI(a,b) (((a)<(b))?(a):(b))
+ 
+void losen()
+{
+bool stat=true;
+bool b[400];
+bool *p, *q;
+char a[400];
+ 
+memset(b,0,sizeof(b));
+ 
+{
+char *p, *q;
+gets(a);
+for(q=(p=a)+strlen(a); p<q; p++)
+	b[toupper(*p)]=b[tolower(*p)]=true;
+}
+ 
+for(p=b+65,q=b+90; p<=q&&stat; p++)
+	if(*p==false) stat=false;
+if(stat)
+	{
+	for(p=b+97,q=b+122; p<=q&&stat; p++)
+		if(*p==false) stat=false;
+	}
+ 
+if(stat)
+	{
+	puts("~");
+	return;
+	}
+ 
+for(p=b+65,q=b+90; p<=q; p++)
+	if(*p==false)
+		{
+		printf("%c
+",p-b);
+		return;
+		}
+for(p=b+97,q=b+122; p<=q; p++)
+	if(*p==false)
+		{
+		printf("%c
+",p-b);
+		return;
+		}
+ 
+}
+ 
+int main()
+{
+int fall;
+char a[100];
+for(gets(a),fall=atoi(a); fall--; losen());
+return 0;
+}

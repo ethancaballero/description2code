@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+	    int n,a[50002],min;
+	    scanf("%d",&n);
+	    scanf("%d",&min);
+	    for(int i=1;i<n;i++) {
+	        scanf("%d",&a[i]);
+	        if(a[i]<min)
+	        min=a[i];
+	    }
+	    long long int ans = (n-1)*min;
+	    printf("%lld
+",ans);
+	}
+	return 0;
+}

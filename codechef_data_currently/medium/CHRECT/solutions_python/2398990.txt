@@ -1,0 +1,19 @@
+t=input()
+for i in xrange(t):
+    n,m,k=map(int,raw_input().split())
+
+    if n==1 and m==1:
+        print 0
+    elif n==1 and m==2:
+        print 0
+    elif n==2 and m==1:
+        print 0
+    elif n==1 or m==1:
+        print k
+    else:
+        if k%2==0:
+            print k/2
+        else:
+            print k/2+1
+        
+    

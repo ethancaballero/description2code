@@ -1,0 +1,152 @@
+///Author : Sharath Chandran
+//Handle : sharad07
+ 
+#include<bits/stdc++.h>
+#define lld long long int
+#define llu unsigned long long int
+#define pb(x) push_back(x)
+#define sz size()
+#define inp1(x) scanf("%d",&x)
+#define inp2(x,y) scanf("%d%d",&x,&y)
+#define inp3(x,y,z) scanf("%d%d%d",&x,&y,&z)
+#define print(x) printf("%d",x)
+#define println(x) printf("%d
+",x)
+#define _for(i,x,y) for(int i=x;i<y;i++)
+#define pii pair<int,int> pii
+#define mp(x,y) make_pair(x,y)
+using namespace std;
+const int maxx=2e5+3;
+struct exch
+{
+    int day,A,B;
+};
+ 
+int A[maxx],C[maxx],ans[maxx];
+int P[maxx],M,N,Rank[maxx];
+bool done[maxx];
+vector<exch> E;
+ 
+inline bool cmp(const exch &a,const exch &b)
+{
+    if(a.day==b.day) return (a.B>b.B);
+    return a.day>b.day;
+}
+ 
+void create_set(int x)
+{
+    P[x]=x; Rank[x]=0;
+}
+ 
+inline int find_parent(int x)
+{
+    if(x!=P[x]) P[x]=find_parent(P[x]);
+    return P[x];
+}
+ 
+inline void DSU(int x,int y)
+{
+    int Px,Py;
+    Px=find_parent(x);
+    Py=find_parent(y);  
+    if(Rank[Px]>Rank[Py]) 
+    {
+        P[Py]=Px;
+    }
+    else
+    {
+        P[Px]=Py;
+    } 
+    if(Rank[Px]==Rank[Py]) Rank[Py]++;
+    //cout<<x<<" "<<Px<<".."<<y<<" "<<Py<<"--"<<P[4]<<endl;
+}
+ 
+inline void process(int l,int r) //for each day create connected components
+{
+    memset(Rank,0,sizeof(Rank));
+    memset(P,0,sizeof(P));
+    memset(done,0,sizeof(done));
+    memset(C,0,sizeof(C));
+    _for(i,l,r+1)
+    {
+        if(!P[E[i].A]) create_set(E[i].A);
+        if(!P[E[i].B]) create_set(E[i].B);
+        DSU(E[i].A,E[i].B);
+    }
+    
+    _for(i,l,r+1)
+    {
+        if(!done[E[i].A]) 
+        {
+            P[E[i].A]=find_parent(E[i].A);
+            done[E[i].A]=1;
+        }
+        if(!done[E[i].B])
+        {
+            P[E[i].B]=find_parent(E[i].B);
+            done[E[i].B]=1;
+        }
+    }
+    int val,index;
+    _for(i,l,r+1)
+    {
+        index=P[E[i].A];
+        val=max(ans[index],ans[E[i].A]);
+        C[index]=max(C[index],val);
+        index=P[E[i].B];
+        val=max(ans[index],ans[E[i].B]);
+        C[index]=max(C[index],val);
+    }
+    
+    _for(i,l,r+1)
+    {
+        index=P[E[i].A];
+        ans[E[i].A]=max(ans[E[i].A],C[index]);
+        index=P[E[i].B];
+        ans[E[i].B]=max(ans[E[i].B],C[index]);
+    }
+    //_for(i,1,11) cout<<ans[i]<<" "; cout<<endl;
+}
+ 
+int main()
+{
+    int t,l,r;
+    exch tmp;
+    inp1(t);
+    while(t--)
+    {
+        _for(i,0,maxx) ans[i]=i;
+        inp2(N,M);
+        _for(i,0,N) 
+        {
+            inp1(A[i]);
+            ans[A[i]]=A[i];
+        }
+        _for(i,0,M) 
+        {
+            inp3(tmp.day,tmp.A,tmp.B);
+            E.pb(tmp);
+        }
+        tmp.day=tmp.A=tmp.B=0;
+        E.pb(tmp);
+        sort(E.begin(),E.end(),cmp);
+        l=0;
+        //_for(i,0,M) cout<<E[i].day<<" "<<E[i].A<<" "<<E[i].B<<endl;
+        _for(i,0,M+1)
+        {
+            if(E[i].day!=E[i+1].day)
+            {
+                r=i;
+                assert(l<=r);
+                process(l,r);
+                l=i+1;
+            }
+        }
+        lld sum=0;
+        _for(i,0,N) sum+=(lld)ans[A[i]];
+        printf("%lld
+",sum);
+        E.clear();
+    }
+    return 0;
+}  

@@ -1,0 +1,14 @@
+t=int(raw_input())
+while t>0 :
+    t-=1
+    a = raw_input().strip()
+    b = raw_input().strip()
+    flag = 0
+    for i in xrange(len(a)) :
+        if a[i] != b[i] and b[i] != '?' and a[i] != '?' :
+            flag = 1
+            print 'No'
+            break
+    if flag == 0 :
+        print 'Yes'
+    

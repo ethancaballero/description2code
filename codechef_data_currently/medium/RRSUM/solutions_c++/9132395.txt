@@ -1,0 +1,29 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+long long  m,n,q;
+    cin>>n>>m;
+    while(m--)
+    {
+    cin>>q;
+    if(q<n+2)
+    cout<<"0
+";
+    else
+        {
+        //cout<<n-abs((2*n)+1 - q)<<"
+";
+        long long mid;
+        if(2*n + 1 > q)
+        mid=(2*n)+1-q;
+        else
+        mid=q-((2*n)+1);
+        cout<<n-mid<<"
+";
+        }
+    }
+    return 0;
+}

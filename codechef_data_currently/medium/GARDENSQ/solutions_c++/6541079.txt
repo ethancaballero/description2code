@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+int minimum(int a,int b)
+{
+   if(a>b)
+      return b;
+      return a;
+}
+int main()
+{
+   int T,N,M,i,j,k,ans,K;
+   cin>>T;
+   char *str;
+   while(T--)
+   {
+      cin>>N>>M;
+      cin.ignore();
+      str=new char[N*M+5];
+      for(i=0;i<N;i++)
+      cin.getline(str+i*M,M+3);
+      for(ans=i=0;i<N-1;i++)
+      for(j=0;j<M-1;j++)
+      {
+         K=minimum(N-1-i,M-1-j);
+         for(k=1;k<=K;k++)
+         if(str[i*M+j]==str[(i+k)*M+j]&&str[(i+k)*M+j]==str[i*M+j+k]&&str[i*M+j+k]==str[(i+k)*M+j+k])
+         ans++;
+
+      }
+      delete []str;
+      cout<<ans<<endl;
+   }
+return 0;
+}

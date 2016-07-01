@@ -1,0 +1,9 @@
+case = int(input())
+for i in range(0, case):
+	n = int(input())
+	sum = 0
+	while n > 0:
+		temp = n % 10
+		n = n // 10
+		sum += temp
+	print(sum)

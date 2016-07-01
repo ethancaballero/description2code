@@ -1,0 +1,31 @@
+using namespace std;
+#include<iostream>
+#include<stdlib.h>
+
+int main()
+{
+int n,*a,*b,i,no;
+cin >>n;
+while(n>0) {
+a=(int *)malloc(sizeof(int)*(n+1));
+b=(int *)malloc(sizeof(int)*(n+1));
+for(i=1;i<=n;i++) {
+cin>>no;
+a[i]=no;
+b[no] = i;
+}
+for(i=1;i<=n;i++) {
+if(a[i]!=b[i]) {
+ cout<<"not ambiguous
+";
+ break;
+ }
+}
+if(i>n)
+cout<<"ambiguous
+";
+free(a);
+free(b);
+cin>>n;
+}
+}

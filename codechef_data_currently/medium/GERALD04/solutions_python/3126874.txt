@@ -1,0 +1,14 @@
+t=int(raw_input())
+for i in range(0,t):
+    h1,m1= map(int, raw_input().split(':'))
+    h2,m2= map(int, raw_input().split(':'))
+    dist=int(raw_input())
+    t1 = h1*60 + m1
+    t2 = h2*60 + m2
+    diff = float(t1 - t2)
+    c1 = diff + dist
+    if( diff >= 2*dist):
+        c2 = diff
+    if( diff < 2*dist):
+        c2 = diff/2 + dist
+    print str(float(c1))+' '+str(float(c2))

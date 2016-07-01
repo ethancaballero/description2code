@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std; 
+int main(){
+int t,num;
+cin>>t;
+while(t--){
+	cin>>num;
+	long long int fac=1;
+	for(int i=1;i<=num;i++){
+		fac=fac*i;
+	}	
+	cout<<fac<<endl;
+}
+return 0;
+}

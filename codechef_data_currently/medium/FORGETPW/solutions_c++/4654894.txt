@@ -1,0 +1,67 @@
+#include <iostream>
+#include <stdio.h>
+#include <map>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+    int t, n;
+    char c1, c2, line[1000001];
+    map<char, char> m;
+    scanf ("%d
+", &t);
+    while (t--)
+    {
+        m.clear();
+        scanf ("%d
+", &n);
+        while (n--)
+        {
+            scanf ("%c %c
+", &c1, &c2);
+            m[c1] = c2;
+        }
+        scanf ("%s
+", line);
+        int len = strlen(line);
+        for (int i = 0; i < len; i++)
+            if (m.find(line[i]) != m.end())
+                line[i] = m[line[i]];
+        int start = 0, dot = -1;
+        while (line[start] == '0' && start < len)
+            start++;
+        if (start == len)
+        {
+            printf ("0
+");
+            continue;
+        }
+        for (int i = 0; i < len; i++)
+            if (line[i] == '.')
+            {
+                dot = i;
+                break;
+            }
+        if (dot >= 0)
+        {
+            len--;
+            while (line[len] == '0' && len > dot)
+                len--;
+            if (len == dot && start == dot)
+            {
+                printf ("0
+");
+                continue;
+            }
+            else if (len == dot)
+                len--;
+            len++;
+        }
+        for (int i = start; i < len; i++)
+            printf ("%c", line[i]);
+        printf ("
+");
+    }
+    return 0;
+}

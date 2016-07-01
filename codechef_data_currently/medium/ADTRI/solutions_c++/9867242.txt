@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 5000000;
+bitset <N+5> pflag,possible;
+void sieve(){
+    long long i,j;
+    for (i=2; i<=N; i++) {
+        if (pflag[i]) continue;
+        for (j=i*i; j<=N; j+=i){
+            pflag[j] = 1;
+        }
+    }
+    for(i=2;i<=N;++i){
+    	if(!pflag[i] and i%4==1){
+    		for(j=1;j*i<=N;++j){
+    			possible[j*i]=1;
+    		}
+    	}
+    }
+}
+int main(){
+	ios::sync_with_stdio(0);
+	sieve();
+	int t,n;
+	cin >> t;
+	while(t--){
+		cin >> n;
+		if(possible[n]) cout << "YES
+";
+		else cout << "NO
+";
+	}
+} 

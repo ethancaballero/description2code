@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <vector>
+#include <map>
+#include <utility>
+
+using namespace std ; 
+
+typedef map<int,int> mi ;
+typedef pair<int,int> ii ; 
+#define all(c) (c.begin(),c.end()) 
+#define rall(c) (c.rbegin(),c.rend())
+#define tr(c,i) for(typeof((c).begin()) i = (c).begin() ; i!=(c).end() ; i++) 
+int main()
+{ int n,m,p ; int i,j ; int ans = 0  ; ii x,y ;  
+  scanf("%d%d%d",&n,&m,&p) ; 
+  vector<mi> v(n+1) ; 
+  while(p--)
+  {  scanf("%d%d",&i,&j) ;
+     typeof(v[i].begin()) it = v[i].find(j) ;  
+     if(it==v[i].end())
+     { v[i].insert(ii(j,j+1)) ; }
+     else
+     { it->second+=1 ; } }
+for(int ctr = 1 ; ctr<=n ; ctr++)
+{  ans = 0 ; 
+   if(v[ctr].empty()) { printf("%d
+",m-1) ; continue ; }
+   x = *(v[ctr].begin()) ;
+   if (x.first!=1)
+   { ans+=x.second-1 ; } int flag = 1 ; 
+   tr(v[ctr],i)
+   { if(i==v[ctr].begin()) continue ; 
+     y = *i ; 
+     if(y.first!=x.first+1)
+     { if(x.second-x.first>1)
+       { printf("%d
+",-1) ;   flag = 0 ; break ; } 
+       ans+= y.second-x.second ;  }
+     else
+     { if(y.second<x.second)
+       { printf("%d
+",-1) ;  flag = 0 ; break ; }
+       ans+= y.second-x.second ; }
+     x = y ; }
+   if(!flag) continue ; 
+   if(x.first==m)
+   { printf("%d
+",ans) ; continue ; }
+   if(x.second-x.first>1)
+   {  printf("%d
+",-1) ; continue ; }
+   ans+=m-x.second ; printf("%d
+",ans) ; } return 0 ; }
+    
+         
+   
+   
+            

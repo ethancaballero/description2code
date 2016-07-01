@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+void pre()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+}
+inline int get_int()
+{
+  int n=0,neg=0,c=getchar_unlocked();
+  while((c<'0'||c>'9')&&c!='-')c=getchar_unlocked();
+  if(c=='-') {neg=1;c=getchar_unlocked();}
+  while(c>='0'&&c<='9')n=(n<<3)+(n<<1)+c-'0',c=getchar_unlocked();
+  if(neg) n=-n;
+  return n;
+}
+void solve(string s)
+{
+    int t=0,ans=0,i;
+    for(i=0;i<s.length();i++)
+    {
+        if(s[i]=='<')
+          t++;
+        else
+          t--;
+        if(t==0)
+          ans=max(ans,i+1);
+        else if(t<0)
+          break;
+    }
+    cout<<ans<<endl;
+}
+int main()
+{
+  pre();
+  int t;
+  cin>>t;
+  while(t--)
+  {
+    string str;
+    cin>>str;
+    solve(str);
+  }
+  return 0;
+}

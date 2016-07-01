@@ -1,0 +1,10 @@
+import math
+t = int(input())
+res=[]
+for i in range(t):
+	s = int(input())
+	ans = (-1 + math.sqrt(1+8*s))/2.0
+	ans = int(math.floor(ans))
+	res.append(ans)
+for i in res:
+	print i	

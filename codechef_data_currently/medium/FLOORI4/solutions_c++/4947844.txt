@@ -1,0 +1,75 @@
+#include <algorithm>
+#include <stdio.h>
+using    namespace std;
+typedef  long long LL;
+
+LL T,n,mod;
+
+LL getpow4(LL x)
+{
+  x%=mod;
+  x=(x*x)%mod;
+  x=(x*x)%mod;
+  return x;
+}
+
+LL sumpow4(LL x)
+{
+  x%=mod*30;
+  LL a=x,b=x+1,c=2*x+1,d=3*x*x+3*x-1;
+  bool ok[3]={0,0,0};
+  if(a%2==0 && !ok[0]) { a/=2; ok[0]=1; }
+  if(a%3==0 && !ok[1]) { a/=3; ok[1]=1; }
+  if(a%5==0 && !ok[2]) { a/=5; ok[2]=1; }
+  if(b%2==0 && !ok[0]) { b/=2; ok[0]=1; }
+  if(b%3==0 && !ok[1]) { b/=3; ok[1]=1; }
+  if(b%5==0 && !ok[2]) { b/=5; ok[2]=1; }
+  if(c%2==0 && !ok[0]) { c/=2; ok[0]=1; }
+  if(c%3==0 && !ok[1]) { c/=3; ok[1]=1; }
+  if(c%5==0 && !ok[2]) { c/=5; ok[2]=1; }
+  if(d%2==0 && !ok[0]) { d/=2; ok[0]=1; }
+  if(d%3==0 && !ok[1]) { d/=3; ok[1]=1; }
+  if(d%5==0 && !ok[2]) { d/=5; ok[2]=1; }
+  a%=mod;
+  b%=mod;
+  c%=mod;
+  d%=mod;
+  return (((((a*b)%mod)*c)%mod)*d)%mod;
+}
+
+int main()
+{
+  scanf("%lld",&T);
+  while(T--)
+  {
+    scanf("%lld%lld",&n,&mod);
+    LL kok=1;
+    while(kok*kok<=n) kok++;
+    kok--;
+    LL ans=0;
+    for(LL i=1 ; i<=kok ; i++)
+    {
+      LL a=(n/i)%mod;
+      LL b=getpow4(i);
+      ans=(ans+(a*b)%mod)%mod;
+    }
+    for(LL i=1 ; i<=kok ; i++)
+    {
+      LL a=sumpow4(n/i);
+      LL b=sumpow4(n/(i+1));
+      LL add=(a-b+mod)%mod;
+      add=(add*(i%mod))%mod;
+      ans=(ans+add)%mod;
+    }
+    if(n/kok==kok)
+    {
+      LL i=kok;
+      LL neg=getpow4(i);
+      neg=(neg*(i%mod))%mod;
+      ans=(ans-neg+mod)%mod;
+    }
+    printf("%lld
+",ans);
+  }
+  return 0;
+}

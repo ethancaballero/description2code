@@ -1,0 +1,39 @@
+	#include<iostream>
+	#include<stdlib.h>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int x,y;
+			int k,flag=0;
+			cin>>x>>y;
+			if(x>0 && x%2)
+			{
+				if(y>=-(x-1) && y<=x+1)
+					flag=1;
+			}		
+			if(x<=0 && x%2==0)	
+			{
+				if(y>=x && y<= -x)	
+					flag=1;
+			}
+ 
+			if(y%2==0)
+			{
+				if(x>= -y && x<=y-1 && y>0)
+					flag=1;
+				else if(y<=0 && x>=y && x<=(-y+1))
+					flag=1;
+			}	
+			if(flag==1)
+				cout<<"YES
+";
+			else
+				cout<<"NO
+";
+			t--;
+		}	
+	}

@@ -1,0 +1,9 @@
+a,n,k=map(int, raw_input().split())
+n=n+1
+s=[0]*k
+i=0
+while (a>0 and i<k):
+	s[i]=a%n
+	i=i+1
+	a=a/n
+for e in s[:k]:print e,

@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+typedef long long int lli ;
+#include<bits/stdc++.h>
+#define mod 1000000007
+ int main()
+  {
+  	 int t;
+  	  cin>>t;
+  	   while(t--)
+  	    {
+  	    	  int n,p;
+  	    	   cin>>n>>p;
+  	    	   lli dp[n+10][p+10];
+  	    	    for(int i=0;i<=n+1;i++)
+  	    	     {
+  	    	     	 for(int j=0;j<=p+1;j++)
+  	    	     	  {
+  	    	     	  	 dp[i][j]=0;
+						 }
+  	    	     	
+				   }
+				   dp[0][0]=1;
+				   for(int i=1;i<=n;i++)
+				    {
+				    	 for(int j=0;j<=p;j++)
+				    	  {
+				    	  	 for(int k=0;k<=p;k++)
+				    	  	  {
+				    	  	  	if(j!=k)
+				    	  	  	dp[i][j]=(dp[i][j]+dp[i-1][k]%mod)%mod;
+								}
+				    	  	 
+						  }
+					}
+  	    	   cout<<dp[n][0]%mod<<endl;
+		  }
+		  return 0;
+  }

@@ -1,0 +1,100 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+#define mod 1000000007ll
+using namespace std;
+int P[510];
+void sieve()
+{
+	for(int i=2;i<=502;i++)P[i]=1;
+	for(int i=4;i<=502;i+=2)P[i]=0;
+	for(int i=3;i<=23;i+=2)
+	if(P[i]==1)
+	{
+		for(int j=i*i;j<=510;j+=i+i)P[j]=0;
+	}
+	for(int i=2;i<=500;i++)P[i]+=P[i-1];
+	//cout<<P[100]<<endl;
+}
+
+int T,R,C,B[4][502][502];
+char S[501];
+bool A[502][502];
+
+void pre()
+{
+	for(int k=0;k<4;k++)
+		for(int i=R+1;i>=0;i--)
+			for(int j=C+1;j>=0;j--)B[k][i][j]=0;
+	
+	for(int i=1;i<=R;i++)
+		for(int j=1;j<=C;j++)
+		if(A[i][j])
+		{
+			B[0][i][j]=B[0][i][j-1]+1;
+		}
+		else B[0][i][j]=0;
+
+	for(int i=1;i<=R;i++)
+		for(int j=C;j>0;j--)
+		if(A[i][j])
+		{
+			B[1][i][j]=B[1][i][j+1]+1;
+		}
+		else B[1][i][j]=0;
+
+	for(int i=1;i<=C;i++)
+		for(int j=1;j<=R;j++)
+		if(A[j][i])
+		{
+			B[2][j][i]=B[2][j-1][i]+1;
+		}
+		else B[2][j][i]=0;
+
+	for(int i=1;i<=C;i++)
+		for(int j=R;j>0;j--)
+		if(A[j][i])
+		{
+			B[3][j][i]=B[3][j+1][i]+1;
+		}
+		else B[2][j][i]=0;
+}
+	
+int main()
+{
+	sieve();
+  	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d %d",&R,&C);
+		for(int i=1;i<=R;i++)
+		{
+			scanf("
+%[^
+]",S);
+			for(int j=0;j<C;j++)
+			if(S[j]=='^')A[i][j+1]=1;
+			else A[i][j+1]=0;
+		}
+		pre();
+		
+		long long res=0;
+		for(int i=1;i<=R;i++){
+			for(int j=1;j<=C;j++)
+			if(A[i][j])
+			{
+				res+=P[min(B[0][i][j-1],min(B[1][i][j+1],min(B[2][i-1][j],B[3][i+1][j])))];
+				
+			}
+		}
+		cout<<res<<"
+";
+	}
+	return 0;
+}
+
+
+
+

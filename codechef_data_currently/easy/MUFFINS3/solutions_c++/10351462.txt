@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t, i;
+    long long *n;
+    cin>>t;
+    n=new long long[t];
+    for(i=0;i<t;i++)
+        cin>>n[i];
+    for(i=0;i<t;i++)
+        cout<<(n[i]/2)+1<<"
+";
+    return 0;
+}

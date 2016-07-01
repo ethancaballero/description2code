@@ -1,0 +1,34 @@
+
+
+#include<iostream>
+using namespace std;
+
+int main(void){
+	
+	int t,h,ts,h1=0,cc1=0,ts1=0;
+	double cc;
+	cin>>t;
+	while(t--){
+		h1=cc1=ts1=0;
+		cin>>h>>cc>>ts;
+		if( h>50 ){
+			h1 = 1;
+		}if( cc<0.7 ){
+			cc1 = 1;
+		}if( ts>5600 ){
+			ts1 = 1;
+		}if( h1==1 && cc1==1 && ts1==1 ){
+			cout<<10<<endl;continue;
+		}if( h1==1 && cc1==1 ){
+			cout<<9<<endl;continue;
+		}if( cc1==1 && ts1==1 ){
+			cout<<8<<endl;continue;
+		}if( h1==1 && ts1==1 ){
+			cout<<7<<endl;continue;
+		}if( h1==1 || cc1==1 || ts1==1 ){
+			cout<<6<<endl;continue;
+		}else{
+			cout<<5<<endl;
+		}	
+	}
+}

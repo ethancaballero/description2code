@@ -1,0 +1,16 @@
+l=map(int,raw_input().split())
+n=abs(l[0]-l[1])
+m=str(n)
+d=len(m)
+l1=[]
+l2=[]
+ans=''
+for i in m:
+    l1.append(i)
+if n/pow(10,d-1)==1:
+    l1[0]=n/pow(10,d-1)+1
+else:
+    l1[0]=n/pow(10,d-1)-1
+for j in l1:
+    ans=ans+str(j)
+print int(ans) 

@@ -1,0 +1,19 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+    unsigned long long a,rem;
+    cin>>a;
+    rem=a%6;
+    if(rem==0)
+        cout<<"yes";
+    else if(rem==3)
+        cout<<"yes";
+    else if(rem==1)
+        cout<<"yes";
+    else
+        cout<<"no";
+
+    return 0;
+}

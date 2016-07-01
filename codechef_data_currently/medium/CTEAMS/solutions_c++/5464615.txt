@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+#define VAR(a,b) __typeof(b) a=(b)
+#define FOR(i,a,b) for (int _n(b), i(a); i < _n; i++)
+#define FORD(i,a,b) for(int i=(a),_b=(b);i>=_b;--i)
+#define FOREACH(it,c) for(VAR(it,(c).begin());it!=(c).end();++it)
+#define REP(i,n) FOR(i,0,n)
+#define ALL(c) (c).begin(), (c).end()
+#define SORT(c) sort(ALL(c))
+#define REVERSE(c) reverse(ALL(c))
+#define UNIQUE(c) SORT(c),(c).resize(unique(ALL(c))-(c).begin())
+#define INF 1000000000
+#define X first
+#define Y second
+#define pb push_back
+#define SZ(c) (c).size()
+typedef pair<int, int> PII;
+typedef vector<int> VI;
+typedef vector<PII> VPII;
+typedef vector<VI> VVI;
+typedef long long LL;
+#define MOD 1000000007
+
+
+int main()
+{
+	int n,x=0,y=0;
+	cin>>n;
+	priority_queue<int> yt;
+	priority_queue<int,vector<int>,greater<int> > ot; 
+	map<int,int> m;
+	REP(i,n)
+	{
+		int a,r;
+		cin>>a>>r;
+		m[a]=r;
+		
+		if(!(i&1))
+		{
+			if(ot.empty()||a<ot.top())
+			{
+				yt.push(a);
+				x+=r;
+//				cout<<"#1.1$"<<endl;
+			}
+			else 
+			{
+				int temp;
+				temp=ot.top();
+				ot.pop();
+				y-=m[temp];
+				x+=m[temp];
+				yt.push(temp);
+				ot.push(a);
+				y+=r;
+//				cout<<"#1.2$"<<endl;
+			}
+		}
+		else
+		{
+			int temp;
+			if(a<yt.top())
+			{
+				temp=yt.top();
+				yt.pop();
+				x-=m[temp];
+				ot.push(temp);
+				y+=m[temp];
+				x+=r;
+				yt.push(a);
+//				cout<<"#2.1$
+";
+
+			}
+			else
+			{
+				ot.push(a);
+				y+=r;
+//				cout<<"#2.2$
+";
+			}
+		}
+		cout<<abs(x-y)<<endl;
+		
+	}
+	return 0;
+}
+
+
+			
+
+			
+

@@ -1,0 +1,6 @@
+import sys
+
+for __ in range(input()) :
+    n , m = map(int,sys.stdin.readline().split())
+    gcd = lambda x,y: x if y==0 else gcd(y,x%y)
+    print "Yes" if gcd(n,m)==1 else "No "+str(n/gcd(n,m))

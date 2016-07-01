@@ -1,0 +1,23 @@
+#include<stdio.h>
+int main()
+{
+    long int N;
+    int G,T,I,Q;
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%d",&G);
+        while(G--)
+        {
+            scanf("%d%ld%d",&I,&N,&Q);
+            if(N%2==0 || I==Q) //whenever total coins are even or initial arrangement and the queryed face are same (irrespective of even or odd number of coins) then exactly half of the total coins will be with same face
+                printf("%ld
+",N/2);
+            else
+                printf("%ld
+",N/2+1);
+
+        }
+    }
+    return 0;
+}

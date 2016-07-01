@@ -1,0 +1,11 @@
+# cook your code here
+t = int(raw_input())
+for _ in range(0,t):
+    n = int(raw_input())
+    A = raw_input().split()
+    sum = 0
+    for i in range(0,n):
+        A[i] = int(A[i])
+        sum += A[i]
+    b = min(A)
+    print sum - n*b

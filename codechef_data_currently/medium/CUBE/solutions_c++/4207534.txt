@@ -1,0 +1,69 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+	int t,n,prob,i,j,k,flag=0,size;
+	long long int count,temp,tot;
+	char cubeA[80000],cubeB[80000];
+	//char cubeA,cubeB;
+	cin>>t;
+	while(t--)
+	{	int dp[42][42][42]={{{0}}};
+		//cout<<dp[0][0][0];
+		cin>>n;
+		cin>>prob;
+		getchar();
+		gets(cubeA);
+		gets(cubeB);
+		//cout<<cubeA<<cubeB;
+		for(i=0;i<n;i++)
+			for(j=0;j<n;j++)
+				for(k=0;k<n;k++)
+				{	if(cubeA[i*n*n+j*n+k]==cubeB[i*n*n+j*n+k])
+						dp[i+1][j+1][k+1]=1;
+					else
+						dp[i+1][j+1][k+1]=0;
+				}
+		for(i=2;i<=n;i++)
+		{	dp[i][1][1] += dp[i-1][1][1];
+			dp[1][i][1] += dp[1][i-1][1];
+			dp[1][1][i] += dp[1][1][i-1];
+		}
+		for(i=2;i<=n;i++)
+			for(j=2;j<=n;j++)
+			{	dp[i][j][1] += dp[i-1][j][1]+dp[i][j-1][1]-dp[i-1][j-1][1];
+				dp[i][1][j] += dp[i-1][1][j]+dp[i][1][j-1]-dp[i-1][1][j-1];
+				dp[1][i][j] += dp[1][i-1][j]+dp[1][i][j-1]-dp[1][i-1][j-1];
+			}
+		for(i=2;i<=n;i++)
+			for(j=2;j<=n;j++)
+				for(k=2;k<=n;k++)
+					dp[i][j][k] += dp[i-1][j][k]+dp[i][j-1][k]+dp[i][j][k-1] - dp[i-1][j-1][k]-dp[i-1][j][k-1]-dp[i][j-1][k-1] + dp[i-1][j-1][k-1]; 
+		flag=0;
+		for(size=n;size>0;size--)
+		{	count=0;	
+			tot = size*size*size;
+			for(i=0;i<n-size+1;i++)				
+				for(j=0;j<n-size+1;j++)
+					for(k=0;k<n-size+1;k++)	
+					{	temp=dp[i+size][j+size][k+size] - dp[i][j+size][k+size]-dp[i+size][j][k+size]-dp[i+size][j+size][k] + dp[i][j][k+size]+dp[i+size][j][k]+dp[i][j+size][k] - dp[i][j][k];
+						//cout<<"temp"<<temp;
+						double match = (static_cast<double>(temp)/tot)*100.0;
+						if(match >= prob)
+						{	flag=1;
+							count++;
+						}
+					}
+			if(flag==1)
+			{	printf("%d %lld
+",size,count);
+				break;
+			}		
+		}
+		if(flag==0)
+			printf("-1
+");
+	}
+	return 0;
+}

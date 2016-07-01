@@ -1,0 +1,25 @@
+ A Jurassic Park consists of a dinosaur museum and a park for safari riding. There are many passengers and n single-passenger cars. Passengers wander around the museum for a while and then line up at the park gate to take a ride in a safari car. Note that each passenger is allowed for one ride only. When a car is available, it loads the one passenger it can hold and rides the park for a specific amount of time say p. If all the n cars are out riding passengers around, then a passenger who wants a ride waits; if a car is ready to load but there are no waiting passengers, then the car waits. After every r units of time one passenger from the museum gets ready to take the safari car ride. Assume that the Jurassic Park is open for k units of time. Write a program to find the status of the passengers and safari cars after k units of time.
+Input
+The input to this program is the total number of safari cars available in the park n (0 \u2264 n \u2264 50). The number of passengers wandering in the museum m (0 \u2264 m \u2264 5000) and the number of passengers q (0 \u2264 q \u2264 100) in the park gate ready to take a ride in the park at time zero. The other inputs are the values of p (1 \u2264 p \u2264 100), r (1 \u2264 r \u2264 100) and k (r \u2264 k \u2264 100000). Note that there can be no negative or fractional inputs.
+Input Format
+First line contains an integer N (1 \u2264 N \u2264 100) indicating number of test cases. Each of the following N lines contains input data, separated by single space, for different test cases in the given order: 
+No. of Safari Cars, No. passengers in Museum at time zero, No. of passengers at park gate ready for ride at time zero, p, r, k
+Output
+The output of this program is the number of cars waiting at the park gate, the number of passengers who have completed taking one ride in the park, the number of passengers still waiting at the park gate to take a ride and the number of passengers still wandering in the museum, respectively, after k units of time.
+Output Format
+Output for each test case will be on separate lines. Each line will contain: 
+No. of cars waiting at the park gate, No. of passengers completed the park ride, No. of passengers wandering in the museum, No. of passengers still waiting to take a ride, respectively.
+The output parameters should be in the above order with one space gap. 
+Example
+
+Input:
+3
+3 20 5 3 1 10
+2 30 3 3 4 14
+4 15 6 5 2 18
+
+Output:
+0 9 10 3
+1 5 27 0
+1 12 6 0
+

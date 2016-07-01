@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int i,j,k,l,m,n,x;
+	cin>>n;
+	for(m=0;m<n;m++)
+	{
+		cin>>x;
+		int sum=0,arr[x][x],c=0,a,b;
+		for(k=0;k<x;k++)
+		{
+			for(l=0;l<x;l++)
+			{
+				cin>>arr[k][l];
+			}
+		}
+		for(k=1;k<=x*x;k++)
+		{
+			for(i=0;i<x;i++)
+			{
+				for(j=0;j<x;j++)
+				{
+					if(arr[i][j]==k)
+					{
+						++c;
+						if(c!=1)
+						{
+							sum=sum+abs(a-i)+abs(b-j);
+						}
+						a=i;
+						b=j;
+						
+					}
+				}
+			}
+		}
+		cout<<sum<<endl;
+		
+	}
+}

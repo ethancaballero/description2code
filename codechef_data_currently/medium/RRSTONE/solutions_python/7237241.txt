@@ -1,0 +1,15 @@
+import sys
+
+n , k = map(int,sys.stdin.readline().split())
+lists = list(map(int,sys.stdin.readline().split()))
+ma , mi = max(lists) , min(lists)
+if k==0 :
+    ""
+elif k&1 :
+    for i in range(n) :
+        lists[i] = ma - lists[i]
+else :
+    for i in range(n) :
+        lists[i] = lists[i] - mi
+
+print " ".join(str(i) for i in lists)

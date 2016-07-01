@@ -1,0 +1,8 @@
+#!/usr/bin/python
+for i in range(input()):
+	x=raw_input()
+	if x==x[::-1]:
+		print "wins"
+	else:
+		print "losses"
+

@@ -1,0 +1,23 @@
+def test():
+    matches = input()
+    for _ in range(matches):       
+        jobs, done = map(int,raw_input().split())
+        complete = map(int,raw_input().split())
+        chef = ''
+        assist = ''
+        not_complete = []
+        for index in range(1,jobs+1):
+            if index not in complete:
+                not_complete.append(index)
+
+        for index in range(len(not_complete)):
+            if index%2 == 0:
+                chef += str(not_complete[index]) + ' '
+            else:
+                assist += str(not_complete[index]) + ' '
+
+        print chef
+        print assist
+                
+
+test()

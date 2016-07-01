@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdio>
+#include <queue>
+#include <vector>
+#include <cstring>
+using namespace std;
+const int N = 10100;
+int t, n;
+int p[N];
+int vis[N];
+
+int main()
+{
+    p[0] = p[1] = 0;
+    for (n=2; n<N; n++) {
+        memset(vis, 0, sizeof vis);
+        for (int i=0; i<=n-2; i++) {
+            int j = n-2-i;
+            vis[p[i]^p[j]] = 1;
+        }
+        int cur = 0;
+        while (vis[cur]) cur++;
+        p[n] = cur;
+    }
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%d", &n);
+        if (p[n]) {
+            printf("Arjuna
+");
+        } else {
+            printf("Bhima
+");
+        }
+    }
+    return 0;
+}

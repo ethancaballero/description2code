@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	int r,c;
+	string tofind="spoon";
+	while(t--)
+	{
+	cin>>r>>c;
+	char a[r][c];
+	for(int i=0;i<r;i++)
+	{
+		for(int j=0;j<c;j++)
+		{
+			cin>>a[i][j];
+		if(a[i][j]>='A' && a[i][j]<='Z')
+		{
+			a[i][j]=a[i][j]-'A'+'a';
+		}
+	 }
+  }
+  vector<string>foo;
+  for(int i=0;i<r;i++)
+  {
+  	string s="";
+  	for(int j=0;j<c;j++)
+  	{
+    s+=a[i][j];
+  	}
+  	foo.push_back(s);
+  }
+  	for(int i=0;i<c;i++)
+  	{
+  		string s="";
+  	for(int j=0;j<r;j++)
+  	{
+    s+=a[j][i];
+  	}
+  	foo.push_back(s);
+  	}
+  	int flag=0;
+  for(int i=0;i<foo.size();i++)
+  	{
+  		int found=foo[i].find(tofind);
+  		if(found>=0)
+  		{
+  			flag=1;
+  			//cout<<found;
+  			break;
+  		}
+  		else
+  			flag=0;
+  	}
+  	if(flag)
+  	{
+  		cout<<"There is a spoon!"<<endl;
+  	}
+  	else
+  		cout<<"There is indeed no spoon!"<<endl;
+}}

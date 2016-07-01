@@ -1,0 +1,41 @@
+#include<algorithm>
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+pair<int,int> q[30];
+
+int main()
+{
+	int t, n, k, count;
+	char str[2015];
+	scanf("%d",&t);
+	while(t--)
+	{		
+		scanf("%d%d",&n,&k);
+		for(int i=0;i<n;i++)
+			str[i]='(';
+		for(int i=0;i<k;i++)
+			scanf("%d%d",&q[i].first,&q[i].second);
+		sort(q,q+k);
+		for(int i=0;i<k;i++)	
+		{			
+			count=0;
+			for(int j=q[i].first;j<=q[i].second;j++)
+			{
+				if(count%2==0)
+					str[j]='(';
+				else
+					str[j]=')';
+				count++;
+				
+			}
+		}
+		for(int i=0;i<n;i++)
+			printf("%c",str[i]);
+		printf("
+");
+	}
+	return 0;
+}		

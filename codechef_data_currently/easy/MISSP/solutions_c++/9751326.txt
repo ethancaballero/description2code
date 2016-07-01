@@ -1,0 +1,42 @@
+#include<iostream>
+#include<map>
+using namespace std;
+typedef map<int,bool> Pairs;
+
+int UnpairedDoll(int n)
+{
+    int elem;
+    Pairs pairs;
+
+    while(n--)
+    {
+        cin>>elem;
+        if(pairs[elem] == 0)
+        {
+            pairs[elem]=true;
+        }
+        else
+        {
+            pairs.erase(elem);
+        }
+    }
+
+    Pairs :: iterator p;
+    p=pairs.begin();
+
+    return (*p).first;
+}
+
+int main()
+{
+    int cases,n;
+    cin>>cases;
+
+    while(cases--)
+    {
+        cin>>n;
+        cout<<UnpairedDoll(n)<<endl;
+    }
+
+    return 0;
+}

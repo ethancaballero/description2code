@@ -1,0 +1,15 @@
+def gcd(a,b):
+    if b==0:
+        return a
+    return gcd(b,a%b)
+
+t=input()
+while t>0:
+    t=t-1
+    n=input()
+    a=map(int,raw_input().split())
+    g=a[0]
+    for i in range(1,n):
+        g=gcd(a[i],g)
+    print g
+    

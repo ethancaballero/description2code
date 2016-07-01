@@ -1,0 +1,13 @@
+n=int(raw_input())
+a=list(map(int,raw_input().split()))
+counteven=0
+countodd=0
+for i in range(0,n):
+	if a[i]%2==0:
+		counteven+=1
+	else:
+		countodd+=1
+if counteven>countodd:
+	print 'READY FOR BATTLE'
+else:
+	print 'NOT READY'

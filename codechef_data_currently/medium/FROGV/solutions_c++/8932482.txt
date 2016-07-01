@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+struct node
+{
+    long long int d;
+    int index,cat;
+};
+node a[100005];
+bool comp1(node a,node b)
+{
+    if(a.d<b.d)
+    return true;
+    return false;
+    //return(a.d<b.d)?true:false;
+}
+bool comp2(node a,node b)
+{
+    if(a.index<b.index)
+    return true;
+    return false;
+    //return (a.index<b.index)?true:false;
+}
+int main()
+{
+    int n,k,p,i,x,y;
+    cin>>n>>k>>p;
+    for(i=0;i<n;i++)
+    {
+        cin>>a[i].d;
+        a[i].index=i;
+    }
+    sort(a,a+n,comp1);
+    a[0].cat=0;
+    for(i=1;i<n;i++)
+    {
+        if(a[i-1].d+k>=a[i].d)
+        {
+            a[i].cat=a[i-1].cat;
+        }
+        else
+        {
+            a[i].cat=a[i-1].cat+1;
+        }
+    }
+
+//    for(i=0;i<n;i++)
+//    {
+//        cout<<a[i].index<<" "<<a[i].d<<" "<<a[i].cat<<endl;
+//    }
+     sort(a,a+n,comp2);
+    for(i=0;i<p;i++)
+    {
+        cin>>x>>y;
+    if(a[x-1].cat==a[y-1].cat)
+    {
+        cout<<"Yes"<<endl;
+    }
+    else
+    {
+       cout<<"No"<<endl;
+    }
+    }
+    return 0;
+}

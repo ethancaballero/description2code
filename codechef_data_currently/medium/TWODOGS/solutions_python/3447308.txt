@@ -1,0 +1,38 @@
+a=[0]*1000001
+t,k=[int(x) for x in raw_input().split()]
+e=[int(x) for x in raw_input().split()]
+flag=0
+count=0
+i=0
+while i<t/2:
+    f=e[i]
+    b=e[t-i-1]
+    if((f!=b)&(f+b==k)):
+        count+=1
+        flag=1
+        break
+    elif(a[f]==1):
+        count+=1
+        flag=1
+        break
+    elif(a[b]==1):
+        count+=1
+        flag=1
+        break
+    else:
+       if(f<k):
+         if(2*f!=k):
+          a[k-f]=1
+       if((b<k)):   
+         if(2*b!=k): 
+          a[k-b]=1
+       count+=1
+    i+=1
+if((t%2!=0)&(flag==0)):
+    if(a[e[t/2]]==1):
+        count+=1
+        flag=1
+if(flag==1):
+    print count
+else:
+    print "-1"

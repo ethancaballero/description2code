@@ -1,0 +1,9 @@
+a,b,c = map(int, raw_input().split())
+l = [int(raw_input()) for i in xrange(a+b+c)]
+n1 = l[:a]
+n2 = l[a:a+b]
+n3 = l[a+b:]
+final = sorted(list(set( list(set(n1) & set(n2))+ list(set(n2) & set(n3))+ list(set(n1) & set(n3)))))
+print len(final)
+for i in final:
+        print i

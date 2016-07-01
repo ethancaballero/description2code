@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,n,i,q,g;
+	cin>>t;
+	while(t--){
+		cin>>g;
+		while(g--){
+			cin>>i>>n>>q;
+			if(i==q)
+				cout<<n/2;
+			else
+				cout<<(n+1)/2;
+			cout<<endl;	
+		}
+	}
+	return 0;
+} 

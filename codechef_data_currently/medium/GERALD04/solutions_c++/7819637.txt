@@ -1,0 +1,64 @@
+
+#include <stdio.h>
+
+#include <iostream>
+
+ 
+
+ 
+
+using namespace std;
+
+int main(){
+
+ 
+
+int t, h1, h2, m1, m2, time, dist;
+
+char b;
+
+ 
+
+cin>>t;
+
+ 
+
+while(t--)
+
+{
+
+scanf("%d%c%d", &h1,&b,&m1);
+
+scanf("%d%c%d", &h2,&b,&m2);
+
+ 
+
+time = (h1-h2)*60 + m1-m2;
+
+scanf("%d", &dist);
+
+printf("%d.0 ", time + dist);
+
+ 
+
+if(2*dist<=time)
+
+printf("%d.0
+",time);
+
+else{
+
+float a = 0.5*time + dist;
+
+printf("%.1f
+", a);
+
+}
+
+};
+
+return(0);
+
+}
+
+ 

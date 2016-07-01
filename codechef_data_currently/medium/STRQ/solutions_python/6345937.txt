@@ -1,0 +1,50 @@
+__author__ = 'mullapudi'
+from collections import defaultdict
+def good_strings():
+    input_string=raw_input()
+
+    start_letter_indexes=defaultdict(list)
+
+    x=0
+    for i in input_string:
+        start_letter_indexes[i].append(x)
+        x=x+1
+    #for loop ---->O(N)  ie O(len(input_string)) ,appending ----> O(1),incrementing ----> O(1)
+    #ie O(N)+O(1)+O(1)=O(N)
+
+    test_cases=int(raw_input())
+
+    for i in range(test_cases):
+        start_letter,end_letter,start_index,end_index=[i for i in raw_input().split()]
+
+        start_index=int(start_index)-1
+        end_index=int(end_index)-1
+
+        if len(input_string) == (end_index-start_index)+1:  #O(1)
+            A=start_letter_indexes[start_letter]
+            B=start_letter_indexes[end_letter]
+        else:
+            A=[]
+            for i in start_letter_indexes[start_letter]:   #O(m)
+                if i >= start_index:                       #O(1)
+                    A.append(i)                            #O(!)
+            B=[]
+            for i in start_letter_indexes[end_letter]:      #O(n)
+                if i <= end_index:                          #O(1)
+                    B.append(i)                             #O(1)
+
+        i=0
+        j=0
+        result=0
+        while i < len(A) and j < len(B):                   #O(m+n)
+            if A[i] <= B[j]:                               #O(1)
+                result=result+len(B)-j
+                i=i+1
+            else:
+                j=j+1
+        print result
+
+if __name__ == "__main__":
+   good_strings()
+
+#total complexity is O(N)+O(m)+O(n)+O(m+n) ,,,,in worst case O(N),where N is the length of the string

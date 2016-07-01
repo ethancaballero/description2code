@@ -1,0 +1,34 @@
+def drail(s):
+	s = s.split()
+	x,n,w = int(s[0]), int(s[1]),0
+	for i in range(n):
+		c = raw_input()
+		c1,c2 = c[:36],c[53:35:-1]
+		a,b = 0,0
+		for j in range(9):
+			t = 0
+		 	for k in range(4):
+		 		if c1[a+k] == '0':
+		 			t+=1
+		 	for k in range(2):
+		 		if c2[b+k] == '0':
+		 			t+=1
+			a += 4
+			b += 2
+		 	if t == x:
+		 		w += 1
+		 	elif t > x:
+		 		w += fact(t)/(fact(t-x)*fact(x))
+		 	
+	print w
+	
+def fact(n):
+	p = 1
+	if n == 1 or n == 0:
+		return 1
+	else:
+		for i in range(1,n+1):
+			p = p*i
+		return p
+		
+drail(raw_input())

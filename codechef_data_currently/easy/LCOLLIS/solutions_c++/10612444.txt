@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+using namespace std ;
+
+#define ft first
+#define sd second
+#define pb push_back
+#define all(x) x.begin(),x.end()
+
+#define ull unsigned long long int
+#define ui unsigned int
+#define ll long long int
+#define vi vector<int>
+#define vii vector<pair<int,int> >
+#define pii pair<int,int>
+#define vl vector<ll>
+#define vll vector<pair<ll,ll> >
+#define pll pair<ll,ll>
+#define mp make_pair
+
+#define sc(x) scanf("%d",&x)
+#define sc2(x,y) scanf("%d%d",&x,&y)
+#define sc3(x,y,z) scanf("%d%d%d",&x,&y,&z)
+
+#define scll1(x) scanf("%lld",&x)
+#define scll2(x,y) scanf("%lld%lld",&x,&y)
+#define scll3(x,y,z) scanf("%lld%lld%lld",&x,&y,&z)
+
+#define pr1(x) printf("%d
+",x)
+#define pr2(x,y) printf("%d %d
+",x,y)
+#define pr3(x,y,z) printf("%d %d %d
+",x,y,z)
+
+#define prll1(x) printf("%lld
+",x)
+#define prll2(x,y) printf("%lld %lld
+",x,y)
+#define prll3(x,y,z) printf("%lld %lld %lld
+",x,y,z)
+
+#define pr_vec(v) for(int i=0;i<v.size();i++) cout << v[i] << " " ;
+
+#define f_in(st) freopen(st,"r",stdin)
+#define f_out(st) freopen(st,"w",stdout)
+
+#define fr(i, a, b) for(i=a; i<=b; i++)
+#define fb(i, a, b) for(i=a; i>=b; i--)
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#define debug( s ) cout << s << "
+"
+
+
+const int maxn = 1e5 + 10;
+const int mod = 1e9 + 7;
+int main()
+{
+    ll t,n,m;
+    scll1(t);
+    while(t--)
+    {
+        ll qual=0;
+        scll2(n,m);
+        ll dell[10];
+        for(ll i=0;i<10;i++)
+            dell[i]=0;
+        string s[n];
+        for(ll i=0;i<n;i++)
+            //for(ll j=0;j<m;j++)
+            cin>>s[i];
+        for(ll i=0;i<n;i++)
+        {
+            for(ll j=0;j<m;j++)
+            {
+                if(s[i][j]=='1')
+                    dell[j]++;
+            }
+        }
+        for(ll i=0;i<m;i++)
+        {
+            if(dell[i]>1)
+            {
+                qual+=((dell[i]*(dell[i]-1))/2);
+            }
+        }
+        prll1(qual);
+    }
+}

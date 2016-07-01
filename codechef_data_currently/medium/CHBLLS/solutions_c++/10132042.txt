@@ -1,0 +1,69 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+
+
+int main()
+{
+    cout<<"1
+";
+    fflush(stdout);
+    
+    cout<<"3 1 1 2
+"<<endl;
+    fflush(stdout);
+    
+    cout<<"3 3 4 4
+";
+    fflush(stdout);
+    
+    int output,ans;
+    
+	cin>>output;
+
+    if(output==2)
+	 {  
+	    cout<<"2
+";
+		fflush(stdout);	
+        cout<<"1";
+        fflush(stdout);
+	   }
+    else if(output==1)
+    {
+      cout<<"2
+";	
+      fflush(stdout);
+	  cout<<"2";
+  	  fflush(stdout); 
+     } 	    
+	else if(output==0)
+	{
+		 cout<<"2
+";
+		 fflush(stdout);	
+         cout<<"5";
+		fflush(stdout);
+	}
+	else if(output==-1)
+	{
+		cout<<"2
+";
+		fflush(stdout);	
+		cout<<"3";
+	    fflush(stdout);
+	}
+	else   //output==-2
+	{
+		cout<<"2
+";
+		fflush(stdout);	
+		cout<<"4";
+	    fflush(stdout);
+	}
+	    			  
+	 exit(0);
+	 
+return 0;
+}

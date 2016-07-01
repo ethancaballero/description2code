@@ -1,0 +1,23 @@
+import sys
+
+
+input = sys.stdin.readlines()[1:]
+
+mod = 10**9 + 7
+
+for i, line in enumerate(input):
+    if i % 2 == 1:
+        a = map(int, line.split())
+
+        stp = 2 * a[0]
+        tot = stp * a[1]
+
+        if len(a) == 2:
+            print tot % mod
+        else:
+            pow = 2
+            for i in xrange(2,len(a)):
+                stp += (pow * a[i-1]) % mod
+                tot = (2*tot + a[i]*stp) % mod
+                pow = (pow * 2) % mod
+            print tot % mod

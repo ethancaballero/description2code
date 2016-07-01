@@ -1,0 +1,18 @@
+#include <iostream>
+
+int main()
+{
+        unsigned int n, k;
+        std::cin >> n >> k;
+        int cnt = 0;
+
+        while(n--)
+        {
+                unsigned int num;
+                std::cin >> num;
+                if(num % k == 0)
+                        cnt++;
+        }
+        std::cout << cnt << std::endl;
+        return 0;
+}

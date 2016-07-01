@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int is_overlucky(ll x)
+{
+    if(x==4||x==7)
+        return 1;
+    ll p=x;
+    while(p!=0)
+    {
+        ll r=p%10;
+        if(r==4||r==7)
+            return 1;
+        p=p/10;
+    }
+    return 0;
+}
+int main()
+{
+    ll t,n,md,i,a;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        md=0;
+        if(n==4 || n==7 ||n==8)
+            cout<<1<<'
+';
+        else if(n<=11)
+        {
+            cout<<0<<'
+';
+        }
+        else
+        {
+            for(i=1;i<=sqrt(n);i++)
+            {
+                if(n%i==0)
+                {
+                    if(is_overlucky(i))
+                        md++;
+                    a=n/i;
+                    if(a!=i)
+                    {
+                        if(is_overlucky(a))
+                            md++;
+                    }
+                }
+            }
+            cout<<md<<'
+';
+        }
+    }
+
+    return 0;
+}

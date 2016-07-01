@@ -1,0 +1,143 @@
+
+
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<cstdlib>
+#include<cmath>
+#include<algorithm>
+#include<vector>
+#include<queue>
+#include<stack>
+#include<set>
+#include<map>
+
+using namespace std;
+
+#define ll long long
+#define inf 2000000000
+#define mod 1000000007
+#define vv vector<ll>
+#define pp pair<ll,ll>
+#define vvp vector<pp>
+#define pb push_back
+#define st set<int>
+#define mst multiset<int>
+#define mp map<ll,ll>
+#define pr(cn,x) ((cn).find(x)!=(cn).end())
+#define tr(cn,it) for(typeof((cn).begin()) it=(cn).begin();it!=(cn).end();it++)
+
+vv v[50005];
+ll w[50005],vis[50005];
+ll s1;
+ll ans1=0,ans2=0;
+
+
+void dfs1(ll p)
+{
+    ll i;
+    if(vis[p])
+        return;
+
+    vis[p]=1;
+    if(w[p])
+        s1++;
+
+    for(i=0;i<v[p].size();i++)
+    {
+        if(!vis[v[p][i]])
+        {
+            dfs1(v[p][i]);
+        }
+    }
+
+}
+
+ll dfs2(ll p)
+{
+    ll i,x,tot=0;
+
+
+
+    vis[p]=1;
+
+
+    for(i=0;i<v[p].size();i++)
+    {
+        if(!vis[v[p][i]])
+        {
+            x=dfs2(v[p][i]);
+            if(x)
+            {
+                tot+=x;
+            }
+
+        }
+    }
+   // printf("%lld %lld
+",p,tot);
+
+
+    if(tot)
+        return tot+1;
+
+
+    if(w[p])
+        return 1;
+    else
+        return 0;
+
+}
+
+ll sol(ll n,ll m)
+{
+    ll i,j,x;
+    memset(vis,0,sizeof(vis));
+    for(i=1;i<=n;i++)
+    {
+        if(!vis[i])
+        {
+            s1=0;
+            dfs1(i);
+            ans1+=(s1*(s1-1))/2;
+
+        }
+    }
+
+
+    memset(vis,0,sizeof(vis));
+    for(i=1;i<=n;i++)
+    {
+        if((!vis[i]) && (w[i]))
+        {
+            x=dfs2(i);
+            if(x>1)
+            ans2+=x;
+
+        }
+
+    }
+}
+
+int main()
+{
+    ll n,m,i,x,y;
+
+    scanf("%lld%lld",&n,&m);
+
+    for(i=1;i<=n;i++)
+        scanf("%lld",&w[i]);
+
+    for(i=1;i<=m;i++)
+    {
+        scanf("%lld%lld",&x,&y);
+        v[x].pb(y);
+        v[y].pb(x);
+    }
+    s1=0;
+    sol(n,m);
+    printf("%lld %lld",ans1,ans2);
+
+
+    return 0;
+}

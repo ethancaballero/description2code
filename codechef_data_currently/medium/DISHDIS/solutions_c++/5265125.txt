@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define mod 1000000007
+#define fast() {cin.sync_with_stdio(false);cin.tie(false);cout.tie(false);}
+int main()
+{
+	int t;
+	fast();
+	cin>>t;
+	//scanf("%d",&t);
+	while(t--)
+	{
+		int n,m;
+		cin>>n>>m;
+		//scanf("%d%d",&n,&m);
+		int x[m+1],y[m+1];
+		for(int i=0;i<m;i++)
+		{
+			cin>>x[i]>>y[i];
+			//scanf("%d%d",&x[i],&y[i]);
+		}
+		int dp[101][101]= {0};
+		for(int i=x[0];i<=y[0];i++)
+		{
+			dp[0][i]=1;
+		}
+		for(int i=1;i<m;i++)
+		{
+			for(int j=0;j<n+1;j++)
+			{
+			  for(int k=x[i];k<=y[i];k++)
+			  {
+			  	if(j-k>=0)
+			  	{
+			  		dp[i][j] += dp[i-1][j-k];
+			  		if(dp[i][j]>=mod)
+			  		{
+			  			dp[i][j] %=mod;
+			  		}
+			  	}
+			  }  	
+			}
+		}
+		cout<<dp[m-1][n]<<endl;
+		//printf("%d
+",dp[m-1][n]);
+	}
+}

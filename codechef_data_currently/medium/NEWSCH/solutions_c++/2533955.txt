@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+#define MOD 1000000007
+
+int rsq(int n) {
+  long long r=1;
+  long long a=3L;
+  while(n) {
+    if(n%2) r=(r*a)%MOD;
+    if(n/=2) a = (a*a)%MOD;
+  }
+  return r;
+}
+
+int main() {
+  int t, n;
+  int res;
+  cin >> t;
+  while(t--) {
+    cin >> n;
+    res = rsq(n);
+    if(n%2) res-=3;
+    else res+=3;
+    cout << res << endl;
+  }
+  return 0;
+}

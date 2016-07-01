@@ -1,0 +1,55 @@
+#include <iostream>
+#include <stdio.h>
+#include <cmath>
+#include <string.h>
+#include <stack>
+#include <set>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+	int t;
+	int m,n;
+	int i,j;
+	cin >> t;
+	int x;
+	while (t--)
+	{
+		cin >> n >> m;
+		int arr[m];
+		int ans[n];
+		int min = n-1;
+		int max1 = 0;
+		int x;
+		for (i=0;i<m;i++)
+		{
+			cin >> x;
+			if (x < min)
+				min = x;
+			if (x>max1)
+				max1 = x;
+		}
+		if (min == max1)
+		{
+			ans[min] = 0;
+			for (i=min+1;i<n;i++)
+				ans[i] = ans[i-1]+1;
+			for (i=min-1;i>=0;i--)
+				ans[i] = ans[i+1]+1;
+		}
+		else
+		{
+			for (i=0;i<n;i++)
+			
+				ans[i] = max(abs(i-max1),abs(i-min));
+		}
+
+		for (i=0;i<n;i++)
+			cout << ans[i] << " ";
+		cout << endl;
+	}
+	return 0;
+
+}

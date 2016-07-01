@@ -1,0 +1,9 @@
+t = input()
+
+for i in range(t):
+    n = input()
+    result = 0
+    for j in range(1, n+1):
+        p1, p2 = map(int, raw_input().split())
+        result = result ^ j
+    print result

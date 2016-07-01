@@ -1,0 +1,8 @@
+import string
+
+for __ in range(input()) :
+    s = raw_input()
+    ins , ins1 = 2 , 0
+    for i in range(1,len(s)) :
+        ins += ((ord(s[i])-ord(s[i-1]))+26)%26+1
+    print "YES" if ins <= 11*len(s) else "NO"

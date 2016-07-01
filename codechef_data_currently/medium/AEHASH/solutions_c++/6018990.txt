@@ -1,0 +1,100 @@
+#include <bits/stdc++.h>
+
+#define MP           make_pair
+#define PB           push_back
+#define SZ(a)        ((int)a.size())
+#define LENGTH(a)    ((int)a.length())
+#define ALL(a)       a.begin(), a.end()
+#define REP(i, n)    for(int i = 0; i < n; i++)
+#define INC(i, a, b) for(int i = a; i <= b; i++)
+#define DEC(i, a, b) for(int i = a; i >= b; i--)
+#define CLEAR(a, b)  memset(a, b, sizeof a)
+#define X            first
+#define Y            second
+#define si(a)        scanf("%d", &a)
+#define ss(a)        scanf("%s", a)
+#define sll(a)       scanf("%lld", &a)
+
+using namespace std;
+
+typedef long long          LL;
+typedef unsigned long long ULL;
+typedef vector<int>        VI;
+typedef pair<int, int>     II;
+typedef vector<II>         VII;
+
+const double PI  = acos(-1.0);
+const double EPS = 1e-9;
+const int    inf = 1000000000;
+const LL     INF = ((LL)inf)*inf;
+
+#define MOD 1000000007
+#define LIM1 52
+#define LIM2 1010
+
+LL dp[LIM1][LIM1][LIM2];
+LL ssm[LIM1][LIM1][LIM2];
+/**
+ * f(a, e, v) := number of strings with a 'A's, e 'E's and hash v
+ * f(0, i, 0) = 1 for i in [0, LIM1]
+ * f(1, 0, i) = 1 if i == 1 else 0
+ * f(0, i, j) = 0 if j > 0
+ * f can be recursively defined??
+ * f(a, e, v) = sum {f(a1, e1, v1)*f(a2, e2, v2)}
+ *     a1+a2 = a
+ *     e1+e2 = e
+ *     a1+e1 = (a+e)/2
+ *     a2+e2 = (a+e) - ((a+e)/2)
+ *     v = a+max(v1, v2)
+ * s(a, e, v) := sum {f(a, e, v1)} where 0 <= v1 < v
+ */
+
+LL cal_sum(int a, int e, int v);
+LL cal_dp(int a, int e, int v) {
+    if(a < 0 || e < 0 || v < 0) return 0;
+    if(dp[a][e][v] == -1) {
+        if(a == 0)
+            dp[a][e][v] = (v == 0);
+        else if(a == 1 && e == 0)
+            dp[a][e][v] = (v == 1);
+        else {
+            dp[a][e][v] = 0;
+            REP(a1, a+1) {
+                int a2 = a - a1;
+                int e1 = ((a+e)/2) - a1;
+                int e2 = e - e1;
+                if(a1 < 0 || a2 < 0 || e1 < 0 || e2 < 0) continue;
+                dp[a][e][v] += (cal_dp(a1, e1, v-a) * cal_dp(a2, e2, v-a))%MOD;
+                dp[a][e][v] %= MOD;
+                dp[a][e][v] += (cal_dp(a1, e1, v-a) * cal_sum(a2, e2, v-a))%MOD;
+                dp[a][e][v] %= MOD;
+                dp[a][e][v] += (cal_sum(a1, e1, v-a) * cal_dp(a2, e2, v-a))%MOD;
+                dp[a][e][v] %= MOD;
+            }
+        }
+    }
+    return dp[a][e][v];
+}
+
+LL cal_sum(int a, int e, int v) {
+    if(a < 0 || e < 0 || v < 0) return 0;
+    if(ssm[a][e][v] == -1)
+        ssm[a][e][v] = (cal_dp(a, e, v-1) + cal_sum(a, e, v-1))%MOD;
+    return ssm[a][e][v];
+}
+
+int main(int argc, char const *argv[])
+{
+    int tcase;
+    si(tcase);
+    REP(i, LIM1) REP(j, LIM1) REP(k, LIM2)
+        dp[i][j][k] = ssm[i][j][k] = -1;
+
+    while(tcase--) {
+        int a, e, v;
+        si(a); si(e); si(v);
+        printf("%lld
+", cal_dp(a, e, v));
+    }
+    return 0;
+}

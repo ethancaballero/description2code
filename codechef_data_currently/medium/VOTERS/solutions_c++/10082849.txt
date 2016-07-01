@@ -1,0 +1,37 @@
+#include<iostream>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n1,n2,n3;
+    cin>>n1>>n2>>n3;
+    int tot=n1+n2+n3;
+    int a[150000];
+    int k=0;
+    while(k!=(tot))
+        cin>>a[k++];
+    sort(a,a+tot);
+    int i=0;
+    int vot=0;
+    while(i<tot)
+    {
+        int j=i,count=0;
+        while(a[j]==a[i]&&j<tot)
+           { count++;j++;}
+        if(count>=2)
+            vot++;
+        i=i+count;
+    }
+    cout<<vot<<endl;
+    i=0;
+    while(i<tot)
+    {
+        int j=i,count=0;
+        while(a[j]==a[i]&&j<tot)
+          {  count++;j++;}
+        if(count>=2)
+            cout<<a[i]<<endl;
+        i=i+count;
+    }
+}

@@ -1,0 +1,21 @@
+t=int(raw_input())
+while(t):
+	t-=1
+	n=int(raw_input())
+	table={}
+	ans="Nobody wins."
+	while(n):
+		n-=1
+		name,num=map(str,raw_input().split())
+		num=int(num)
+		if num in table:
+			table[num].append(name)
+		else:
+			table[num]=[name]
+	
+	for i in sorted(table):
+		if len(table[i])==1:
+			ans=table[i][0]
+			break	
+	print ans			
+				

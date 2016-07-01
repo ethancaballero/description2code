@@ -1,0 +1,63 @@
+#include<iostream>
+#include<vector>
+
+int sum(int a[],int low,int high);
+int product(int a[],int low,int high);
+
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t)
+	{
+		int n;
+		cin>>n;
+		int i,a[n];
+		for(i=0;i<n;i++)
+		{
+			cin>>a[i];
+		}
+		int j;
+		int count=0;
+		for(i=0;i<n;i++)
+		{
+			for(j=i;j<n;j++)
+			{
+				
+				int s=sum(a,i,j);
+				int p=product(a,i,j);
+				if(s==p)
+				{
+					count++;
+				}
+			}
+		}
+		cout<<count<<endl;
+		t--;
+	}
+	return 0;
+}
+int sum(int a[],int low,int high)
+{
+	int s=0;
+	int i;
+	for(i=low;i<=high;i++)
+	{
+		s+=a[i];
+	}
+	return s;
+}
+
+int product(int a[],int low,int high)
+{
+	int p=1;
+	int i;
+	for(i=low;i<=high;i++)
+	{
+		p*=a[i];
+		
+	}
+	return p;
+}

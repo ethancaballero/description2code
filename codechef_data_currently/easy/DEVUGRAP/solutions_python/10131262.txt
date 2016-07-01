@@ -1,0 +1,9 @@
+for t in range(int(raw_input())):
+    n,k=map(int,raw_input().split())
+    lst=map(int,raw_input().split())
+    ans=0
+    for i in lst:
+        r=i%k
+        if i>=k:ans+=min(r,k-r)
+        else:ans+=k-r
+    print ans

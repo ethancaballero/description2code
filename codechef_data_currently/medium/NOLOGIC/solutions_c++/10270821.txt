@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    for(cin>>t,cin.ignore();t--;){
+        string s;
+        getline(cin,s);
+        map<char,int>count;
+        for(int i=0;i<s.length();i++){
+            count[tolower(s[i])]++;
+        }
+        bool flag=false;
+        for(char i='a';i<='z';i++){
+            if(count[i]==0){
+                flag=true;
+                cout<<i;
+                break;
+            }
+        }
+        if(!flag) cout<<"~";
+        cout<<endl;
+    }
+	return 0;
+}

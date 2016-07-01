@@ -1,0 +1,8 @@
+a, b = map(int, raw_input().split(' '))
+c = a - b
+d = c % 10
+if d < 9:
+    c += 1
+else:
+    c -= 1
+print c    

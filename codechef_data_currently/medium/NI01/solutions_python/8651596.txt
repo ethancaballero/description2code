@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+
+#define PB push_back
+#define MP make_pair
+#define F first
+#define S second
+
+#define RI(a) scanf("%d",&a);
+#define RIL(a) scanf("%lld",&a);
+#define PI(a) printf("%d
+",a);
+#define PIL(a) printf("%lld
+",a);
+
+#define SZ(a) (int)(a.size())
+
+#define SET(a,b) memset(a,b,sizeof(a))
+
+#define TR(a,t) for(__typeof(a.begin()) t=a.begin();t!=a.end();t++)
+
+#define REP(i,l,h) for(int i=(l); i<=(h);i++)
+#define REPD(i,h,l) for(int i=(h);i>=(l);i--)
+
+#define ALL(a) a.begin(),a.end()
+
+#define DRT()  int t; cin>>t; while(t--)
+
+#define PRSNT(a,e) (a.find(e) != a.end())
+
+#define MINH priority_queue<int, vector<int>, greater<int> >
+
+#define trace1(x) cerr << #x << ": " << x << endl;
+#define trace2(x, y) cerr << #x << ": " << x << " | " << #y << ": " << y << endl;
+#define trace3(x, y, z) cerr << #x << ": " << x << " | " << #y << ": " << y << " | " << #z << ": " << z << endl;
+
+#define N 100001
+#define MOD 1000000007
+
+typedef long long LL;
+
+using namespace std;
+
+int main()
+{
+        queue< pair <int, int> > curr;
+        DRT() {
+                int n, m, q, p, r, k, w, saf, ans=0, comp=0;
+                cin>>n>>m>>q>>p>>r>>k;
+                int tmp=n;
+                while(!curr.empty()) curr.pop();
+                REP(i,0,k) {
+                        if(!curr.empty() && curr.front().F+p==i) {
+                                n += curr.front().S;
+                                curr.pop();
+                        }
+                        if(i%r == 0 && i!=0) {
+                                if(m) {
+                                        q++;
+                                        m--;
+                                }
+                        }
+                        if(i%p == 0 || q) {
+                                saf = min(n,q);
+                                if(saf) curr.push(MP(i,saf));
+                                q -= saf;
+                                n -= saf;
+                                if(i+p<=k) comp+=saf;
+                        }
+//                        trace3(i,n,q);
+                }
+
+                cout<<n<<" "<<comp<<" "<<m<<" "<<q<<endl;
+        }
+        return 0;
+}

@@ -1,0 +1,14 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+int main() {
+	long int t,m,n;
+	cin>>t;
+	while(t--){
+	cin>>n>>m;
+	cout<<"
+"<<abs(n-m);
+	}
+	return 0;
+}

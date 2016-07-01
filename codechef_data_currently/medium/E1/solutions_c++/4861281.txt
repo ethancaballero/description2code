@@ -1,0 +1,84 @@
+#include<iostream>
+#include<vector>
+#include<map>
+#include<set>
+using namespace std;
+int max_pawns(vector<string> &rows, int i, int j) {
+	if(j>=rows.size())
+		return 0;
+	if(i < 0 || i >= rows.size())
+		return 0;
+	cout << i << " " << j << endl;
+	int l1 = max_pawns(rows, i-1, j+2);
+	int l2 = max_pawns(rows, i-2, j+1);
+	int l3 = max_pawns(rows, i+1, j+2);
+	int l4 = max_pawns(rows, i+2, j+1);
+	if(rows[i][j]=='P')
+		return 1 + max(l1, max(l2, (max(l3, l4))));
+	else
+		return max(l1, max(l2, (max(l3, l4)))); 
+}
+int main() {
+	int n, k;
+	cin >> n;
+	string row;
+	int ki=0, kj=0;
+	while(n--) {
+		cin >> k;
+		vector<string> rows(k);
+		vector<vector<int> > maxp(k, vector<int>(k, 0));
+		for(int i=0;i<k;i++) {
+			cin >> rows[i];
+			for(int j =0;j<k;j++)
+				if(rows[i][j]=='K'){
+					ki=i;
+					kj=j;
+				}
+		}
+		for(int i=0;i<k;i++) {
+			if(rows[i][k-1]=='P')
+				maxp[i][k-1]=1;
+		}
+		for(int i=0;i<k;i++) {
+			int pws=0;
+			if(rows[i][k-2]=='P')
+				pws=1;
+			int up=0, down=0;
+			if(i-2 >=0)
+				up = maxp[i-2][k-1];
+			if(i+2 <k)
+				down = maxp[i+2][k-1];
+			maxp[i][k-2] = max(up, down) + pws;
+		}
+		for(int j = k-3;j>kj;j--) {
+			for(int i=0;i<k;i++) {
+				int pws=0;
+				if(rows[i][j]=='P')
+					pws=1;
+				int up=0, down=0, up1=0, down1=0;
+				if(i-2 >=0)
+					up = maxp[i-2][j+1];
+				if(i+2 <k)
+					down = maxp[i+2][j+1];
+				if(i-1 >=0)
+					up1 = maxp[i-1][j+2];
+				if(i+1 < k)
+					down1 = maxp[i+1][j+2];
+				maxp[i][j] = pws + max(up, max(up1, max(down1, down)));
+			}
+		}
+		int up = 0, down = 0, up1 = 0, down1= 0;
+		if(ki + 1 < k && kj+2 < k)
+			up = maxp[ki+1][kj+2];
+		if(ki - 1 >=0 && kj +2 < k)
+			up1 = maxp[ki-1][kj+2];
+		if(ki + 2 < k && kj +1 >=0)
+			down = maxp[ki+2][kj + 1];
+		if(ki -2 >=0 && kj +1 >=0)
+			down1 = maxp[ki-2][kj + 1];
+		cout << max(up, max(up1, max(down, down1))) << endl;
+
+	}
+	return 0;
+}
+

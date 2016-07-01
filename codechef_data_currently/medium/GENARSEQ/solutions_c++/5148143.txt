@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+bool used[1000001];
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        memset(used,false,sizeof used);
+        int a,b,n;
+        scanf("%d%d%d",&a,&b,&n);
+        int x[n];
+        x[0] = 1;
+        used[a - b] = true;
+        for(int i = 1; i < n; i++)
+        {
+            int j = x[i - 1] + 1;
+            while( used[j] )
+            {
+                j++;
+            }
+
+            x[i] = j ;
+            int t1 = a * j - b * j;
+            if(t1 >= 0 && t1 <= 1000000)
+                used[t1] = true;
+            for(int j = i - 1;j >= 0; j--)
+            {
+                t1 = a * x[i] - b * x[j];
+                if(t1 >= 0 && t1 <= 1000000)
+                    used[t1] = true;
+                t1 = a * x[j] - b * x[i] ;
+                if(t1 >= 0 && t1 <= 1000000)
+                    used[t1] = true;
+            }
+
+        }
+
+        for(int i = 0; i < n; i++)
+            printf("%d ",x[i]);
+        printf("
+");
+
+    }
+
+    return 0;
+}

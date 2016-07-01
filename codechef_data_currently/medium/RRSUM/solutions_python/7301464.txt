@@ -1,0 +1,10 @@
+n,m=map(int,raw_input().split())
+for z in range (0,m):
+	temp=int(raw_input())
+	if (temp<(n+2) or temp>3*n):
+		print '0'
+	else:
+		if (temp>(2*n+1)):
+			print 3*n-temp+1
+		else:
+			print temp-(n+2)+1

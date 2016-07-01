@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<string.h>
+ 
+#define STATES 1<<13
+int transform[3][2][6]={
+{{10,12,9,6,4,7},{12,9,6,4,7,10}},
+{{11,8,5,3,6,9},{8,5,3,6,9,11}},
+{{4,6,3,1,0,2},{6,3,1,0,2,4}}
+};
+int nextdest[STATES][3][2];
+int parent[STATES];
+int mindist[STATES];
+int hash(const char *s)
+{
+int ans=0;
+while(*s){
+ans=(ans*2)+(*s-'0');
+s++;
+}
+return ans;
+}
+int successor(int prev,int which, int dir)
+{
+int *from=transform[which][dir];
+int *to=transform[which][1^dir];
+int next=prev,i,bit;
+for(i=0;i<6;i++){
+bit=((1<<from[i])&prev)?1:0;
+if(next&(1<<to[i]))
+next-=(1<<to[i]);
+if(bit) next+=(1<<to[i]);
+}
+return next;
+}
+void init()
+{
+int sptr,eptr,q[STATES];
+int curr,next;
+int i,j;
+sptr=0;
+eptr=1;
+memset(parent,-1,sizeof(parent));
+q[sptr]=hash("0001001011000");
+parent[q[0]]=q[0];
+mindist[q[0]]=0;
+while(sptr<eptr){
+curr=q[sptr];
+sptr++;
+for(i=0;i<3;i++)
+for(j=0;j<2;j++){
+next=successor(curr,i,j);
+if(parent[next]<0){
+parent[next]=curr;
+mindist[next]=mindist[curr]+1;
+q[eptr]=next;
+eptr++;
+}
+nextdest[curr][i][j]=next;
+}
+}
+}
+int main()
+{
+int cases;
+int i,j,k,n;
+int vert,prev;
+char in[20];
+init();
+for(scanf("%d",&cases);cases;cases--){
+scanf("%s",in);
+vert=hash(in);
+n=mindist[vert];
+printf("%d
+",n);
+for(i=0;i<n;i++){
+prev=parent[vert];
+for(j=0;j<3;j++){
+for(k=0;k<2;k++)
+if(nextdest[prev][j][k]==vert) break;
+if(k<2) break;
+}
+printf("%d %d
+",j,k);
+vert=prev;
+}
+}
+return 0;
+}

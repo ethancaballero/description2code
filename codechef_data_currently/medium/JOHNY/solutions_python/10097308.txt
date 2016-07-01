@@ -1,0 +1,8 @@
+T=int(raw_input())
+for i in range(T):
+	n=int(raw_input())
+	plist=map(int,raw_input().split())
+	k=int(raw_input())
+	x=plist[k-1]
+	plist.sort()
+	print plist.index(x)+1 

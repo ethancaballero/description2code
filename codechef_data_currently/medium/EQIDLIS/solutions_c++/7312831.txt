@@ -1,0 +1,55 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define s(x) scanf("%d", &x)
+#define pb push_back
+#define mp make_pair
+
+int main()
+{
+    int t, n, i, x, y, ans, k, sum, j;
+    s(t);
+    while (t--) {
+        s(n);
+        int cnt[n+1];
+        sum = 0;
+        memset(cnt, 0, sizeof(cnt));
+        for (i = 0; i < n; i++) {
+            s(x);
+            sum += x;
+            cnt[x]++;
+        }
+        if (sum % n) {
+            printf("-1
+");
+            continue;
+        }
+        x = sum / n;
+        ans = 0;
+        for (i = n, j = 0; i > x; ) {
+            while (!cnt[j])
+                j++;
+            while (!cnt[i])
+                i--;
+            if (i == x)
+                break;
+            k = i - j;
+            k += (k & 1);
+            k >>= 1;
+            y = min(cnt[i], cnt[j]);
+            cnt[i] -= y;
+            cnt[j] -= y;
+            cnt[i-k] += y;
+            cnt[j+k] += y;
+            ans += y;
+            if (!cnt[i])
+                i--;
+        }
+        printf("%d
+", ans);
+    }
+    return 0;
+}

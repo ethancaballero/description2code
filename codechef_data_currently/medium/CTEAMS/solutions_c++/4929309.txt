@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    priority_queue<pair<int,int> >P;
+    priority_queue<pair<int,int> ,vector<pair<int,int> > ,greater<pair<int,int> > >Q;
+    int n,x,a,y,b,i;
+    scanf("%d",&n);
+    scanf("%d %d",&x,&a);
+    printf("%d
+",a);
+    scanf("%d %d",&y,&b);
+    printf("%d
+",abs(a-b));
+    if(x<y)
+    {
+         P.push(make_pair(x,a));
+         Q.push(make_pair(y,b));
+    }
+    else
+    {
+        Q.push(make_pair(x,a));
+        P.push(make_pair(y,b));
+    }
+    n-=2;
+    int sumy=(P.top()).second;
+    int sumo=(Q.top()).second;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d %d",&x,&a);
+        if(i%2==0)
+        {
+            if(x<=(Q.top()).first)
+            {
+                P.push(make_pair(x,a));
+                sumy+=a;
+            }
+            else
+            {
+                pair <int,int> z;
+                z=Q.top();
+                Q.pop();
+                Q.push(make_pair(x,a));
+                P.push(z);
+                sumy=sumy+z.second;
+                sumo=sumo+(a-z.second);
+            }
+        }
+        else
+        {
+            if(x>=(P.top()).first)
+            {
+                Q.push(make_pair(x,a));
+                sumo+=a;
+            }
+            else
+            {
+                pair <int,int> z;
+                z=P.top();
+                P.pop();
+                P.push(make_pair(x,a));
+                Q.push(z);
+                sumy=sumy+(a-z.second);
+                sumo=sumo+z.second;
+            }
+        }
+        printf("%d
+",abs(sumy-sumo));
+    }
+    return(0);
+}

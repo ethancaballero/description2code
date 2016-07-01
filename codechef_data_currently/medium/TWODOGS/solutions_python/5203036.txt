@@ -1,0 +1,46 @@
+s=raw_input().split()
+n=int(s[0])
+k=int(s[1])
+
+t=map(int,raw_input().split())
+
+dist=[]
+for i in xrange(0,1000002):
+	x=[]
+	dist.append(x)
+
+for i in xrange(0,n):
+	dist[t[i]].append(i+1)
+	
+#for i in xrange(0,n):
+ #   print dist[i]
+
+ans=-1
+for i in xrange(1,k+1):
+	#print "d1=",dist[i]
+	#print "d2=",dist[k-i]
+	if dist[i] and dist[k-i]:
+		if i==k-i:
+			#print "hi"
+			ans=-1
+		else:
+			x=len(dist[i])
+			#print "x=",x
+			y=len(dist[k-i])
+			a=max(dist[i][0],dist[k-i][0])
+			b=max(dist[i][0],n-dist[k-i][y-1]+1)
+			c=max(n-dist[i][x-1]+1,dist[k-i][0])
+			d=max(n-dist[i][x-1]+1,n-dist[k-i][y-1]+1)
+			if ans==-1:
+				#print "in 1 if ans befor=",ans
+				ans=min(a,b,c,d)
+				#print "in 1 if ans after=",ans
+			else:
+				#print "in 2 if ans befor=",ans
+				ans=min(ans,a,b,c,d)
+				#print "in 2 if ans afterr=",ans
+print ans
+
+
+
+

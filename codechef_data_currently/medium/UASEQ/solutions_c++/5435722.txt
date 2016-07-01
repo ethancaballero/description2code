@@ -1,0 +1,100 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <cmath>
+#include <list>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cassert>
+#include <climits>
+#include <functional>
+#include <bitset>
+#include <math.h>
+
+#define pb push_back
+#define all(x) x.begin(),x.end()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define print(x) cout<<x<<endl;
+#define input(x) cin>>x;
+#define SWAP(a, b)  a ^= b; b ^= a; a ^= b; 
+#define MOD 1000000007
+#define max(a,b) a < b ? b : a
+
+using namespace std;
+
+long long int a[100005], a0[200], d[200];
+
+
+long long int store(int i, int j, long long int count){
+    long long x, diff, start;
+    x = a[j] - a[i];
+    if(x % (j-i) == 0)
+        diff = x / (j-i);
+    else
+        return count;
+    start = a[i] - (diff*i);
+    a0[count] = start;
+    d[count] = diff;
+    count++;
+    return count;
+}
+
+int main(){
+    long long int n, k, start, diff, best_a0, best_d, value, count=0;
+    int i, j, flag=0, changes;
+    
+    cin >> n >> k;
+    for(i=0;i<n;i++){
+        cin >> a[i];
+    }
+    
+    for(i=0;i<k+2;i++)
+        for(j=i+1;j<k+2;j++)
+            count = store(i, j, count);
+    
+    for(i=0;i<count;i++){
+        start = a0[i];
+        diff = d[i];
+        //cout << i << " " << start << " " << diff << endl;
+        changes = 0;
+        for(j=0;j<n;j++){
+            value = start + diff*j;
+            //cout << value << " ";
+            if(value != a[j])
+                changes++;
+            if(changes > k)
+                break;
+            //cout << "Changes" << changes << endl;
+        }
+        
+        if(changes <= k){
+            if(flag == 0){
+                best_a0 = start;
+                best_d = diff;
+            }
+            else{
+                if(start < best_a0){
+                    best_a0 = start;
+                    best_d = diff;
+                }
+                else if(start == best_a0 && diff < best_d){
+                    best_a0 = start;
+                    best_d = diff;
+                }
+            }
+        }
+    }
+    
+    for(i=0;i<n;i++){
+        value = best_a0 + best_d*i;
+        cout << value << " ";
+    }
+    return 0;
+}
+

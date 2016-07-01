@@ -1,0 +1,80 @@
+#include <cstdio>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <set>
+#include <map>
+#include <cstring>
+#include <cstdlib>
+#include <cmath>
+#include <string>
+#include <memory.h>
+#include <sstream>
+#include <complex>
+#include <cassert>
+#include <functional>
+
+#define REP(i,n) for(int i = 0, _n = (n); i < _n; i++)
+#define REPD(i,n) for(int i = (n) - 1; i >= 0; i--)
+#define FOR(i,a,b) for (int i = (a), _b = (b); i <= _b; i++)
+#define FORD(i,a,b) for (int i = (a), _b = (b); i >= _b; i--)
+#define FORN(i,a,b) for(int i=a;i<b;i++)
+#define FOREACH(it,c) for (__typeof((c).begin()) it=(c).begin();it!=(c).end();it++)
+#define RESET(c,x) memset (c, x, sizeof (c))
+
+#define PI acos(-1)
+#define sqr(x) ((x) * (x))
+#define PB push_back
+#define MP make_pair
+#define F first
+#define S second
+#define Aint(c) (c).begin(), (c).end()
+#define SIZE(c) (c).size()
+
+#define DEBUG(x) { cerr << #x << " = " << x << endl; }
+#define PR(a,n) {cerr<<#a<<" = "; FOR(_,1,n) cerr << a[_] << ' '; cerr <<endl;}
+#define PR0(a,n) {cerr<<#a<<" = ";REP(_,n) cerr << a[_] << ' '; cerr << endl;}
+#define LL long long
+
+using namespace std;
+
+#define MOD 10000007
+#define MAXN 20
+
+int n, m;
+long long sum[50];
+
+int nextInt(int l, int r) {
+
+	int x;
+	assert(scanf("%d", &x) == 1);
+	assert(l <= x && x <= r);
+
+	return x;
+}
+
+int main() {
+	//freopen("a.in", "r", stdin);
+	//freopen("a.out", "w", stdout);
+	
+	n = nextInt(1, 47);
+	m = nextInt(1, 38);
+
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= m; j++) {
+			int u = nextInt(-100, 100);
+
+			sum[j] += u;
+		}
+
+	long long res = 1;
+	for (int i = 1; i <= m; i++)
+		res = (res * sum[i]) % MOD;
+
+	res = (res + MOD) % MOD;
+	cout << res << endl;
+	return 0;
+}

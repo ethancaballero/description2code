@@ -1,0 +1,16 @@
+# cook your code here
+n=int(raw_input())
+a=map(int,raw_input().split())
+l=0
+k=0 
+for i in range(len(a)):
+    if(a[i]!=0):
+        k=k+1
+    else:
+        
+        if(k>l):
+            l=k
+        k=0
+if(k>l):
+    l=k
+print l

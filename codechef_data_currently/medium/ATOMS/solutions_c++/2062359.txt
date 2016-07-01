@@ -1,0 +1,104 @@
+#include<stdio.h>
+using namespace std;
+struct node 
+{
+       int num;
+       struct node *par;
+}s[100];
+int main()
+{
+    int no,n,m,i,j,k,l,t,ch,ans;
+    struct node *x,*y;
+    scanf("%d",&t);
+    while(t--)
+    {
+              bool a[30][100]={0};
+              scanf("%d",&n);
+              scanf("%d",&m);
+              for(i=0;i<m;i++)
+              {
+                         scanf("%d",&no);
+                         for(j=0;j<no;j++)
+                         {     
+                                 scanf("%d",&k);
+                                 a[i][k]=true;
+                         }
+                        // printf("yes");
+              }
+              for(i=0;i<n;i++)
+              {
+                                s[i].num=1;
+                                s[i].par=&s[i];
+              }
+              for(i=n-1;i>=0;i--)
+              {
+                                for(j=0;j<i;j++)
+                                {
+                                                ch=0;
+                                                for(k=0;k<m;k++)
+                                                {
+                                                                if(a[k][i]&&a[k][j]);
+                                                                else if(!a[k][i] && !a[k][j]);
+                                                                else 
+                                                                {    
+                                                                     ch=1;
+                                                                     break;
+                                                                }
+                                                }
+                                                if(ch==0)
+                                                {
+                                                        // printf("%d %d
+",i,j);
+                                                         x=&s[i];
+                                                         y=&s[j];
+                                                        while(x->par!=x)
+                                                        {
+                                                                    x=x->par;
+                                                        }
+                                                        while(y->par!=y)
+                                                        {
+                                                                        y=y->par;
+                                                        }
+                                                        if(x->num>y->num)
+                                                        {
+                                                                         y->par=x;
+                                                                         x->num=y->num+x->num;
+                                                        }
+                                                        else
+                                                        {
+                                                            x->par=y;
+                                                            y->num=y->num+x->num;
+                                                        }
+                                                }
+                                }
+              }   
+              ans=0;
+              for(i=0;i<n;i++)
+              {
+                              if(s[i].par==&s[i])
+                              {
+                                                ans++;
+                              }
+              }
+              printf("%d
+",ans);
+    }
+}
+                                                                       
+
+                                                                
+                                                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+

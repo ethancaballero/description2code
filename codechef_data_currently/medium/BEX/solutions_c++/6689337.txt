@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<iostream>
+#include<stack>
+#include<string.h>
+using namespace std;
+struct book{
+  int num,minval;
+  char name[17];  
+};
+int main()
+{ int n,min=100001;
+  stack<book> s;
+  book y;
+  scanf("%d",&n);
+  while(n--)
+       { book x;
+         int t,count=0;
+         scanf("%d",&t);
+         if(t>0)
+           { if(t<min)
+               min=t;
+		     char bname[17];
+             scanf("%s",bname);
+             strcpy(x.name,bname);
+             x.num=t;
+             x.minval=min;
+             //if(t==min) y=x;
+             s.push(x);
+           }
+         else if(t==-1)
+		     { while(s.top().num!=min)
+		            { s.pop();
+		              count++;
+		            }
+		       printf("%d %s
+",count,s.top().name); 
+			   s.pop();    
+			   if(!s.empty()) min=s.top().minval;
+			   else min=100001;
+		     }
+		 else
+		 {
+		 	 char bname[17];
+		 	scanf("%s",bname);
+		 }
+       }
+}

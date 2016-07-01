@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+
+int main()
+{
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll a, b;
+        cin>>a>>b;
+        ll ans=0;
+        for(int i=1;;i++)
+        {
+            ll num = (1LL<<i);
+            if(num>b)
+                break;
+            for(int j=0;;j++)
+            {
+                ll temp = num*pow(3, j);
+                if(temp>=a && temp<=b)
+                    ans++;
+                if(temp>b)
+                    break;
+            }
+        }
+        if(a==1)
+            ans++;
+        cout<<ans<<"
+";
+    }
+    return 0;
+}

@@ -1,0 +1,54 @@
+#include<iostream>
+#include<map>
+using namespace std;
+int main()
+{
+	long long int t,i,mask,j;
+//	freopen("C://Users//Badri//Desktop//input.txt", "r", stdin);
+ //   freopen("C://Users//Badri//Desktop//output.txt", "w", stdout);
+	cin>>t;
+	while(t--)
+	{
+		string s;
+		cin>>s;
+		long int size=s.length();
+		//for(i=0;i<s.length();i++)
+		//s.at(i)=='A'?s.at(i)='1':s.at(i)='0';
+		long int len=(1<<s.length())-1;
+		//cout<<len;
+		map<string,int> mp;
+		bool flag=false;
+		for(mask=0;mask<=len;mask++)
+		{
+			string str("");
+			for(j=0;j<size;j++)
+			{
+				if(mask & 1<<j)
+				{
+					str+=s[j];
+		//			flag=true;
+				}
+			}
+			mp[str]++;
+		}
+			map<string,int>::iterator it;
+			for(it=mp.begin();it!=mp.end();it++)
+			{
+				if(it->second==2)
+				{
+					//	cout<<it->first<<"
+";
+					break;
+				}
+			}
+			if(it==mp.end())
+ 			{
+ 				cout<<"-1
+";
+ 			}
+ 			else
+ 				cout<<it->first<<"
+";
+	}
+	return 0;
+}

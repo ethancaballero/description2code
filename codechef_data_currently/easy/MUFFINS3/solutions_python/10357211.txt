@@ -1,0 +1,5 @@
+T = int(raw_input())
+
+for _ in range(T):
+    N = int(raw_input())
+    print '%d' %(N/2+1)

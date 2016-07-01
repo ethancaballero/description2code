@@ -1,0 +1,18 @@
+for z in xrange(int(raw_input())):
+    n_rooms,n_visits=map(int,raw_input().split())
+    visits=sorted(list(map(int,raw_input().split())))
+    rooms=[0]*n_rooms
+    ans=0
+    for x in xrange(n_visits):
+        rooms[visits[x]]+=1
+    #print rooms    
+    for x in xrange(n_rooms):
+        bottle=map(int,raw_input().split())
+        num=bottle[0]
+        bottle=sorted(bottle[1:],reverse=True)
+        i=0
+        while rooms[x]>0 and i<num:
+            ans=ans+bottle[i]
+            rooms[x]-=1
+            i+=1
+    print ans

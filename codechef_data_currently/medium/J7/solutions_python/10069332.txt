@@ -1,0 +1,11 @@
+import math
+import sys
+a =  int(raw_input())
+while a>0:
+    p,s = map(int,sys.stdin.readline().split())
+    z=p**2
+    y=math.sqrt(z-(24*s))
+    w=(p-y)/12
+    v=(w**3)+(s*((w)/2))-((p*(w**2)/4))
+    print round(v,2)
+    a-=1

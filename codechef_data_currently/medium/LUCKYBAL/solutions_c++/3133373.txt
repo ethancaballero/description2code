@@ -1,0 +1,44 @@
+/*
+ * we need to find the number of pairs(L,R) such that there exists
+ *  at least one i(L<=i+1<=R) such that c4[i]-c4[L-1]=c7[R]-c7[i].
+ * Rewriting it c4[i]+c7[i]-c4[L-1]=c7[R]
+ *  But the string contains only 4 or 7. So c4[i]+c7[i]=i.
+ *  Hence i-c4[L-1] = c7[R]. Rewriting it, i=c7[R]+c4[L-1].
+ * Substituting in the initial condition, L<=c7[R]+c4[L-1]+1<=R.
+ * 1st condition is always true, c7[R]-c7[L-1]+c7[L-1]+c4[L-1]+1 = c7[R]-c7[L-1]+L >= L
+ * so we need to see only the 2nd one
+ * which is true when the right substring contains atleast one 4
+ * If s is the string, lastseen4 is the index[1-based] where 4 is last seen (initially 0) and ans is the answer,
+ * The formula is
+ *   if(s[i]=='4') ans=ans+i; and lastseen4=i
+ *   else ans=ans+lastseen4
+ */
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string s;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        cin >> s;
+        s = "#"+s;
+        int len = s.length();
+        long long ans=0;
+        int last4 = 0;
+        char c;
+        for(int i=1;i<len;++i) {
+            if(s[i]=='4') {
+                ans += i;
+                last4 = i;
+            } else {
+                ans += last4;
+            }
+        }
+        cout << ans << endl;
+    }
+    return 0;
+}

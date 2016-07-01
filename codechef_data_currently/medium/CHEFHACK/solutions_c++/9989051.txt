@@ -1,0 +1,135 @@
+#include<bits/stdc++.h>
+using namespace std;
+int seive[10000009]={0};
+long grr[352][352],N;
+void DFS(int ,int ,int ,int **);
+
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    for (int p=2; p*p<10000009; p++)
+    {
+        if (seive[p] == 0)
+        {
+            for (int i=p*2; i<10000009; i += p)
+                seive[i] = -1;
+        }
+    }
+    seive[0]=-1;seive[1]=-1;
+    int z=0;
+    for(int p=2;p<10000009;p++)
+        if(seive[p]==0)
+            seive[p]=z++;
+
+    int T;
+
+    scanf("%d",&T);
+    while(T-->0)
+    {
+        long long countT=0;
+        scanf("%d",&N);
+        int **farr = (int **)malloc((N+1)*sizeof(int *));
+        for(int i=0;i<=N;i++)
+        {
+            farr[i] = (int *)malloc((N+1)*sizeof(int));
+        }
+        for(int i=1;i<=N;i++)
+        {
+            for(int j=1;j<=N;j++)
+            {
+                scanf("%d",&grr[i][j]);
+                farr[i][j]=0;
+            }
+        }
+
+        for(int i=1;i<=N;i++)
+        {
+            for(int j=1;j<=N;j++)
+            {
+                if(farr[i][j]==0)
+                {
+                    farr[i][j]==1;
+                    if(seive[grr[i][j]]!=-1)
+                    {
+                        countT+=seive[grr[i][j]];
+                    }
+                    else
+                    {
+                        if(grr[i][j]%2==0)
+                        {
+                            countT+=grr[i][j]/2;
+                            DFS(i,j,1,farr);
+                        }
+                        else
+                        {
+                            countT+=(grr[i][j]+3)/2;
+                            DFS(i,j,0,farr);
+                        }
+                    }
+                }
+            }
+        }
+    printf("%lld
+",countT);
+    }
+
+}
+void DFS(int u,int v,int f,int **farr)
+{
+    // Mark the current node as visited and print it
+    farr[u][v]=1;
+    // Recur for all the vertices adjacent to this vertex
+    if(u>1)
+    {
+        if(farr[u-1][v]==0)
+        {
+            if(seive[grr[u-1][v]]==-1)
+            {
+                if(f==1 && grr[u-1][v]%2==0)
+                    DFS(u-1,v,1,farr);
+                else if(f==0 && grr[u-1][v]%2!=0)
+                    DFS(u-1,v,0,farr);
+            }
+        }
+    }
+    if(u<N)
+    {
+        if(farr[u+1][v]==0)
+        {
+            if(seive[grr[u+1][v]]==-1)
+            {
+                if(f==1 && grr[u+1][v]%2==0)
+                    DFS(u+1,v,1,farr);
+                else if(f==0 && grr[u+1][v]%2!=0)
+                    DFS(u+1,v,0,farr);
+            }
+        }
+    }
+    if(v>1)
+    {
+        if(farr[u][v-1]==0)
+        {
+            if(seive[grr[u][v-1]]==-1)
+            {
+                if(f==1 && grr[u][v-1]%2==0)
+                    DFS(u,v-1,1,farr);
+                else if(f==0 && grr[u][v-1]%2!=0)
+                    DFS(u,v-1,0,farr);
+            }
+        }
+    }
+    if(v<N)
+    {
+        if(farr[u][v+1]==0)
+        {
+            if(seive[grr[u][v+1]]==-1)
+            {
+                if(f==1 && grr[u][v+1]%2==0)
+                    DFS(u,v+1,1,farr);
+                else if(f==0 && grr[u][v+1]%2!=0)
+                    DFS(u,v+1,0,farr);
+            }
+        }
+    }
+
+}

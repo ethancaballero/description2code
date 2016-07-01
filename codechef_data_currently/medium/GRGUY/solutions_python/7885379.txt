@@ -1,0 +1,31 @@
+t=input()
+
+for i in range(t):
+    l1=raw_input()
+    l2=raw_input()
+    count=-1
+    x=l2
+    if l1.count('#')<l2.count('#'):
+        x=l1
+    j=0
+    possible='t'
+    jumpcount=0
+    while j< len(l1):
+        if x[count+1]=='#':
+            
+            if x==l1:
+                x=l2
+                jumpcount+=1
+            else:
+                x=l1
+                jumpcount+=1
+        if x[count+1]=='#':
+            print "No"
+            possible='f'
+            break
+        j+=1
+        count+=1
+    if possible=='t':
+        print "Yes"
+        print jumpcount
+            

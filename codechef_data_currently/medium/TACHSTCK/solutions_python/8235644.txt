@@ -1,0 +1,17 @@
+n,d = map(int,raw_input().split())
+a = []
+for _ in range(n):
+	p = int(raw_input())
+	a.append(p)
+	
+a.sort()
+
+count=0
+i=0
+while(i<=n-2):
+	if(a[i+1]-a[i]<=d):
+		count+=1
+		i+=1
+	i+=1
+		
+print count

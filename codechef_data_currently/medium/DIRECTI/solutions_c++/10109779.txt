@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+class node{
+  public:
+    char d;
+    string road;
+};
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        string s;
+        node *array=new node[n];
+        getline(cin,s);
+        for(int i=0;i<n;i++){
+            
+            getline(cin,s);
+            array[i].d=s[0];
+            if(s[0]=='L'){
+                string road;
+                for(int j=8;j<s.length();j++){
+                    road=road+s[j];
+                }
+                array[i].road=road;
+            }
+            else{
+                string road;
+                for(int j=9;j<s.length();j++){
+                    road=road+s[j];
+                }
+                array[i].road=road;
+            }
+            
+        }
+        cout<<"Begin on "<<array[n-1].road<<endl;
+        for(int i=n-2;i>=0;i--){
+            if(array[i+1].d=='L'){
+                cout<<"Right on "<<array[i].road<<endl;
+            }
+            else{
+                cout<<"Left on "<<array[i].road<<endl;
+            }
+        }
+    }
+}

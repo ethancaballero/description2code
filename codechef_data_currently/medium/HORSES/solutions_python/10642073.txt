@@ -1,0 +1,23 @@
+
+def calculateMin(l):
+    l = sorted(l)
+    j=2
+    dis = abs(l[0]-l[1])
+    for i in range(1, len(l)-1):
+        val = abs(l[i]-l[j])
+        if(val<dis):
+            dis=val
+        j+=1
+        if(j>=len(l)):
+            break
+    return dis
+
+t = input()
+while(t>0):
+    n = input()
+    l = list(map(int, raw_input().split()))
+    dis = calculateMin(l)
+    print dis
+    t-=1
+        
+    

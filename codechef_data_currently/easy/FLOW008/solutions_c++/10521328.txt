@@ -1,0 +1,19 @@
+#include <iostream>
+#include<cstdio>
+using namespace std;
+
+int main() {
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		if(n<10)
+		puts("What an obedient servant you are!");
+		else
+		cout<<"-1
+";
+	}
+		
+	return 0;
+}

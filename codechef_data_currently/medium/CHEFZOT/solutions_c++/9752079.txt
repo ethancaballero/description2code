@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,temp,k=0,z=1;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++)
+	{
+		cin>>temp;
+		if(temp!=0)
+		{
+			a[i]=z;
+			z++;
+		}
+		else
+		{
+			a[i]=0;
+			z=1;
+		}
+	}
+	sort(a,a+n);
+	cout<<a[n-1];
+	return 0;
+}

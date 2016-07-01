@@ -1,0 +1,120 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+int input[100000];
+
+void init_arr()
+{
+
+    for(int i=1;i<10;i++)
+        input[i]=i;
+
+        long r,n,sum;
+        for(long i=10;i<=100000;i++)
+        {
+            n=i;
+            while(n)
+            {
+                 sum=0;
+                r=n%10;
+                sum+=input[r];
+                n=n/10;
+                sum+=input[n];
+                if(sum<10)
+                    break;
+
+                    n=sum;
+            }
+            input[i]=sum;
+        }
+
+}
+
+int get_value(long x)
+{
+    int len;
+
+    if(x<=100000)
+        return input[x];
+    else if(x>100000 && x<1000000)
+    {
+        len=6;
+        int n=len/2;
+        int exp=pow(10,n);
+        int r=x%exp;
+        int y=x/exp;
+        return (input[r]+input[y]);
+    }
+    else if(x>=1000000 && x<10000000)
+    {
+        len=7;
+        int n=len/2;
+        int exp=pow(10,n);
+        int r=x%exp;
+        int y=x/exp;
+        return (input[r]+input[y]);
+    }
+    else if(x>=10000000 && x<100000000)
+    {
+        len=8;
+        int n=len/2;
+        int exp=pow(10,n);
+        int r=x%exp;
+        int y=x/exp;
+        return (input[r]+input[y]);
+    }
+    else if(x>=100000000 && x<1000000000)
+    {
+        len=9;
+        int n=len/2;
+        int exp=pow(10,n);
+        int r=x%exp;
+        int y=x/exp;
+        return (input[r]+input[y]);
+    }
+    else if(x>=1000000000 )
+    {
+        len=10;
+        int n=len/2;
+        int exp=pow(10,n);
+        int r=x%exp;
+        int y=x/exp;
+        return (input[r]+input[y]);
+    }
+}
+
+
+
+int main()
+{
+init_arr();
+
+ long t,sum,temp,index;
+ int D,L,R;
+ long start_value,A[100]={0};
+ cin>>t;
+ while(t--)
+ {
+     sum=0;
+     cin>>start_value>>D>>L>>R;
+     A[0]=start_value;
+     for(int i=1;i<100;i++)
+        A[i]=A[i-1]+D;
+     for(int i=L-1;i<R;i++)
+     {
+         index=A[i];
+         while(1)
+         {
+             temp=get_value(index);
+             if(temp<10)
+                break;
+             index=temp;
+         }
+         sum+=temp;
+     }
+     cout<<sum<<endl;
+ }
+        return 0;
+}

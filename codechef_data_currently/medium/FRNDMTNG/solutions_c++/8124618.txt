@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long int
+
+ll T1,t1,T2,t2;
+
+ll fun(ll t)
+ {
+     ll left = t-t2;
+     ll rt = t + t1;
+     left = max(left,(ll)0);
+     rt = min(T2,rt);
+     if(left < rt) return rt-left;
+     return 0;
+ }
+ 
+ 
+ ll findin(ll l,ll r)
+  {
+      while(l <= r)
+       {
+           ll mid = (l+r)/2;
+           if(mid == T1) return mid;
+           if(mid == l) return r;
+           ll ml = fun(mid-1);
+           ll m = fun(mid);
+           ll mr = fun(mid+1);
+           if(ml < m && m == mr)
+            return mid;
+            if(ml <m && m< mr) l = mid;
+            else r = mid;
+       }
+  }
+  
+  ll findeq(ll l,ll r,ll x)
+  {
+      while(l <= r)
+       {
+           ll mid = (l+r)/2;
+           if(mid == T1) return mid;
+           if(mid == l) return r;
+           ll ml = fun(mid-1);
+           ll m = fun(mid);
+           ll mr = fun(mid+1);
+           if(ml == m && mr<m)
+            return mid;
+            if(m == x) l = mid;
+            else r = mid;
+       }
+  }
+
+ll findde(ll l,ll r)
+  {
+      while(l <= r)
+       {
+           ll mid = (l+r)/2;
+           if(mid == T1) return mid;
+           if(mid == l) return r;
+           ll ml = fun(mid-1);
+           ll m = fun(mid);
+           ll mr = fun(mid+1);
+           if(ml > m && m == mr)
+            return mid;
+            if(m == mr) r = mid;
+            else l = mid;
+       }
+  }
+
+int main() {
+	// your code goes here
+
+     int test;
+     
+     
+     cin>>test;
+     
+     while(test--)
+      {
+          cin>>T1>>T2>>t1>>t2;
+          
+          double ans = 0; 
+          ll l = 0,far;
+          
+          if(fun(l+1) > fun(l))
+           {
+               far = findin(0,T1);
+               ans += .5 * far * (fun(l) + fun(far));
+               l = far;
+           }
+           
+           if(l+1 <= T1 && fun(l+1) == fun(l))
+            {
+                far = findeq(l,T1,fun(l));
+                ans += (far - l) * (fun(l));
+                l = far;
+            }
+            
+           if(l+1 <= T1 && fun(l+1) < fun(l))
+            {
+                far = findde(l,T1);
+                ans += .5 * (far - l) * (fun(far) + fun(l));
+            }
+           
+          ans = ans / (T1*T2);
+          
+          printf("%.9lf
+",ans);
+          
+      }
+    
+	return 0;
+}

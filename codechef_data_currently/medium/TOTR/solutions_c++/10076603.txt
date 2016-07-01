@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    string s;
+    cin>>s;
+    while(t--){
+        string b;
+        cin>>b;
+        string out="";
+        int length=b.length();
+        for(int i=0;i<length;i++){
+            if((int)b[i]==95){
+                out=out+' ';
+            }
+            else if((int)b[i]>=97 && (int)b[i]<=122){
+                out=out+s[b[i]-97];
+            }
+            else if((int)b[i]>=65 && (int)b[i]<=90){
+                out=out+(char)((int)s[b[i]-65]-32);
+            }
+            else{
+                out=out+b[i];
+            }
+        }
+        cout<<out<<endl;
+    }
+}

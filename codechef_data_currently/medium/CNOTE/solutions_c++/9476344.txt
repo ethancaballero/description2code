@@ -1,0 +1,26 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+int x,y,k,n,i,mini=INT_MAX;
+cin>>x>>y>>k>>n;
+int a[n],b[n];
+for(i=0;i<n;i++)
+{
+cin>>a[i]>>b[i];
+if(a[i]>=(x-y)&&b[i]<=k&&mini>b[i])
+    mini=b[i];
+}
+if(mini==INT_MAX)
+    cout<<"UnluckyChef";
+else
+    cout<<"LuckyChef";
+cout<<endl;
+}
+return 0;
+}

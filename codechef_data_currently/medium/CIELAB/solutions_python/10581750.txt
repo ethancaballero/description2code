@@ -1,0 +1,7 @@
+x, y = map(int, raw_input().split())
+z = x - y
+y=z%10
+if y == 9 :
+    print z-1
+else :
+    print z+1

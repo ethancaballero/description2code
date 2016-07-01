@@ -1,0 +1,52 @@
+# include <stdio.h>
+# include <string.h>
+# define lenmax (int)(1e6+1)
+int D;
+char S[lenmax];
+int L1,P2,N2,H1,len;
+int main()
+{
+	scanf("%d",&D);
+	while(D--)
+	{
+		scanf("%s",S);
+		len=strlen(S);
+		//printf("len is %d
+",len);
+		if(len%2) //len is odd
+			if(len==1)
+				printf("NO
+");
+			else
+			{
+				for(L1=1;L1<=(len-1)/2&&S[L1-1]==S[(len+1)/2+L1-1];L1++);
+				for(H1=(len-1)/2;H1>=1&&S[H1+1-1]==S[(len+1)/2+H1-1];H1--);
+				if(H1<L1)
+					printf("YES
+");
+				else
+				{
+					for(P2=1;P2<=(len-1)/2&&S[P2-1]==S[(len-1)/2+P2-1];P2++);
+					for(N2=(len-1)/2;N2>=1&&S[N2-1]==S[(len+1)/2+N2-1];N2--);
+					if(N2<P2)
+						printf("YES
+");
+					else
+						printf("NO
+");
+				}
+			}
+		else // len is even
+		{
+			int i;
+			for(i=0;i+1<=len/2&&S[i]==S[i+len/2];i++);
+			if(i==len/2)
+				printf("YES
+");
+			else
+				printf("NO
+");
+		}
+	}
+	return 0;
+}

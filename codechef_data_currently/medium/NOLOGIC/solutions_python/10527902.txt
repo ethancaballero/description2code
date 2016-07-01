@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <string>
+#include <cctype>
+#include <algorithm>
+#include <map>
+#include <set>
+
+using namespace std;
+void io() {ios_base::sync_with_stdio(0);}
+
+int main() {
+  io();
+
+
+  int t;
+  cin >> t;
+  cin.get();
+  while (t--) {
+    string s;
+    getline(cin,s); 
+
+    string check = "abcdefghijklmnopqrstuvwxyz";
+    string res;
+    for (auto &e: s)
+      if (isalpha(e))
+	res += tolower(e);
+    stable_sort(res.begin(),res.end());
+    string ans;
+    for (const auto &e: check)
+      if (!binary_search(res.begin(),res.end(),e))
+	ans += e;
+    if (ans.empty())
+      cout << "~
+";
+    else
+      cout << ans << '
+';
+  }
+
+
+  return 0;
+}

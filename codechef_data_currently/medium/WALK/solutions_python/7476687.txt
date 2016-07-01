@@ -1,0 +1,8 @@
+t=int(raw_input())
+for i in xrange(t):
+    n=int(raw_input())
+    l=list(map(int,raw_input().split()))
+    for j in xrange(n):
+        l[j]+=j
+    print max(l)
+    

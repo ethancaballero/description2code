@@ -1,0 +1,49 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<algorithm>
+#define intt long long int
+using namespace std;
+int main()
+{
+    intt t;
+    cin >>t;
+    while (t--)
+    {
+        intt n,k,m,tp;
+        cin >>n>>k>>m;
+        intt A[100007]={0},B[200007]={0};
+        for(int i=0;i<n;i++)
+            scanf("%lld",&A[i]);
+        for(int i=0;i<n;i++)
+        {
+             scanf("%lld",&tp);
+             A[i]=A[i]-tp;
+        }
+        for(int i=0;i<k+m;i++)
+        {
+            scanf("%lld",&tp);
+            B[i]=tp;
+        }
+        sort(A,A+n);
+        sort(B,B+k+m);
+       /* for(int i=0;i<n;i++)
+            cout<<B[i];*/
+        intt p=k+m-1;
+        intt c=0;
+        for(int i=n-1;i>=0&&p>=0;)
+        {
+            if(A[i]>=B[p])
+            {
+                A[i]=A[i]-B[p];
+                i--;p--;
+            }
+            else
+                p--;
+        }
+        for(int i=0;i<n;i++)
+            c=c+A[i];
+
+        cout<<c<<endl;
+    }
+}

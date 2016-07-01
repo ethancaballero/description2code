@@ -1,0 +1,30 @@
+import sys
+
+def F(n,k,ans,op,l):
+	temp = l[0]
+	for i in l[1:]:
+		if op == "XOR":
+			temp ^= i
+		elif op == "OR":
+			temp |= i
+		else:
+			if temp == 0:
+				return 0
+			temp &= i
+	if op == "XOR":
+		if k % 2 == 0:
+			return ans
+		return ans^temp
+	elif op == "OR":
+		return ans|temp
+	else:	
+		return ans&temp
+
+for cases in xrange(int(sys.stdin.readline())):
+	n,k,ans = map(int,sys.stdin.readline().split())
+	l = list(map(int,sys.stdin.readline().split()))
+	op = sys.stdin.readline().strip()
+	if k == 0:
+		print ans
+		continue
+	print F(n,k,ans,op,l)

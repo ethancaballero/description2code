@@ -1,0 +1,24 @@
+n,m=map(int,raw_input().split())
+a=[]
+while(n):
+	b=[]
+	b=map(int,raw_input().split())
+	a.append(b)
+	n-=1
+E1=0
+E2=0
+l=int(raw_input())
+while(l):
+	i,j=map(int,raw_input().split())
+	if i>len(a) or j>m:
+		E1=-1
+	elif E1!=-1:
+		E1+=a[i-1][j-1]
+	i,j=j,i
+	if i>len(a) or j>m:
+		E2=-1
+	elif E2!=-1:
+		E2+=a[i-1][j-1]
+	 			
+	l-=1
+print max(E1,E2)		

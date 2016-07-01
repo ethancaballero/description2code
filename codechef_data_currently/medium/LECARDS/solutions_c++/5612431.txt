@@ -1,0 +1,60 @@
+/*
+ID : monyetc1
+PROG :
+LANG : C++
+*/
+#include<fstream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<algorithm>
+#include<string.h>
+#include<vector>
+#include<utility>
+#include<iostream>
+#include<math.h>
+#include<stack>
+#include<queue>
+#include<set>
+using namespace std;
+
+#define pb push_back
+#define mp make_pair
+#define fi first
+#define se second
+#define INF 1000000000
+#define LL long long int
+#define EPS 1e-11
+#define PI 3.14159265359
+#define MOD 1000000007
+
+int C[1003][1003] , tc , n , bil,ans;
+
+int main(void)
+{
+    for (int i = 1; i<=1000; i++) C[i][1] = i;
+    for (int j = 2; j<=1000; j++) C[1][j] = 0;
+    
+    for (int j = 2; j<=1000; j++)
+    for (int i = 2; i<=1000; i++)
+    {
+        C[i][j] = C[i-1][j-1] + C[i-1][j];
+        C[i][j] %= MOD;
+    }
+    
+    scanf("%d",&tc);
+    for (int cases = 1; cases<=tc; cases++)
+    {
+        scanf("%d",&n);
+        for (int i = 1; i<=n; i++) scanf("%d",&bil);
+        
+        ans = 0;
+        for (int i = 1 + n/2; i<=n; i++) 
+        {
+            ans += C[n][i];
+            ans %= MOD;
+        }
+        
+        printf("%d
+",ans);
+    }
+}

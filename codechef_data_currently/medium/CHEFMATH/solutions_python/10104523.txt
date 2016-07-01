@@ -1,0 +1,37 @@
+'''input
+5
+12 1
+13 1
+13 2
+13 3
+13 4
+'''
+ 
+#~~~~~~~~~~~~~~~~~~~~dwij28 == Abhinav Jha~~~~~~~~~~~~~~~~~~
+ 
+from sys import stdin, stdout
+from math import sqrt, floor, ceil, log
+from collections import defaultdict, Counter
+ 
+def read(): return stdin.readline().rstrip()
+def write(x): stdout.write(str(x))
+def endl(): write("
+")
+ 
+chef, mod = [1, 2], 1000000007
+while chef[-1] <= 1e9: chef.append(chef[-1] + chef[-2])
+ 
+def solve(x, k, n):
+	if k == 0: return int(x == 0)
+	ans = 0
+	for i in xrange(n, -1, -1):
+		if (chef[i]*k < x):
+			return ans
+		if (chef[i] <= x):
+			ans = (ans + solve(x - chef[i], k-1, i)) % mod
+	return ans
+ 
+for Q in xrange(int(read())):
+	x, k = map(int, read().split())
+	write(solve(x, k, 43))
+	endl()

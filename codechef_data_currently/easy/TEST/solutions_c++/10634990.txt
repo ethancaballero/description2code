@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+int main()
+{  
+ int n, a[100];
+ for(int i=0 ;i<100;i++)
+ {cin>>a[i];
+ if(a[i]==42)
+{ 
+ n=i;
+break; 
+}
+}
+ for(int j=0;j<n;j++)
+ {cout<<a[j]<<endl;
+ }
+ return 0;
+}

@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+ 
+void int_letters(char* A, int N, int* cnt, int D, int start)
+{
+  int i;
+  for (i=start;i<N; i+= D) {
+    char c = A[i];
+    if (c >= 'a' && c <= 'z')
+      ++cnt[c-'a'];
+  }
+}
+ 
+void dec_letters(char* A, int N, int* cnt, int D, int start)
+{
+  int i;
+  for (i=start;i<N; i+= D) {
+    char c = A[i];
+    if (c >= 'a' && c <= 'z')
+      --cnt[c-'a'];
+  }
+}
+ 
+int is_zero(int* cnt)
+{
+  int i;
+  for (i=0;i<26;i++)
+    if (cnt[i]) return 0;
+  return 1;
+}
+ 
+int main()
+{
+  int T, i;
+ 
+  scanf("%d
+", &T);
+  for (i=0;i<T;++i) {
+    int N, D;
+    static char A[100000], B[100000];
+    scanf("%d %d
+", &N, &D);
+    fread(A, N, 1, stdin);
+    fgetc(stdin);
+    fread(B, N, 1, stdin);
+    fgetc(stdin);
+ 
+    int matches = 1;
+    int cnt[26] = {0};
+    int j;
+ 
+    if (D > N) D = N; 
+    int limit = D;
+    if (D*2 > N) {
+      if (memcmp(A+(N-D), B+(N-D), D*2 - N)) {
+        printf("No
+");
+        continue;
+      }
+      limit = N-D;
+    }
+    for (j=0;j<limit;++j) {
+      int_letters(A, N, cnt, D, j);
+      dec_letters(B, N, cnt, D, j);
+      if (!is_zero(cnt)) {
+          matches = 0;
+          break;
+      }
+    }
+    printf("%s
+", matches ? "Yes" : "No");
+  }
+  return 0;
+}

@@ -1,0 +1,87 @@
+//Author: Aman Choudhary
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <cmath>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <map>
+#include <cassert>
+#define mod  1000000007
+#define PHI 1000000006
+#define ull unsigned long long
+#define ill long long int
+#define pii pair<int,int>
+#define pb(x) push_back(x)
+#define F(i,a,n) for(i=(a);i<(n);++i)
+#define FD(i,a,n) for(i=(a);i>=(n);--i)
+#define FE(it,x) for(it=x.begin();it!=x.end();++it)
+#define V(x) vector<x>
+#define S(x) scanf("%d",&x)
+#define S1(x) scanf("%llu",&x)
+#define dholu -9999999999999LL
+#define MAX 2200
+#define INF (1<<28)
+#define NIL 0
+using namespace std;
+
+int f (char ch, int x, int sum)
+{
+	if (ch == 'P') {
+		x--;
+	} else {
+		x++;
+	}
+	if (sum == -1) {
+		return abs(x);
+	}
+	x = abs(x);
+	if (x > sum) {
+		return x;
+	}
+	if (sum%2 ==  x%2) {
+		return sum;
+	}
+	
+	return sum+1;
+}
+
+int main()
+{
+ //  freopen ("input.txt", "r", stdin);
+  
+    while (1) {
+	int n;
+	S (n);
+	if (n == 0) {
+		break;
+	}
+	int sum = -1;
+	while (n--) {
+		int x;
+		char ch;
+		cin >> ch;
+		S (x);
+		sum = f (ch, x, sum);
+	}      
+	printf ("%d
+", sum);
+    }
+
+    return 0;
+}

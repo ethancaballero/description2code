@@ -1,0 +1,32 @@
+import math
+m=10**9+7
+def inverse(n,m):
+    return pow(n,m-2,m)
+def fac(n):
+    if n<2:
+        return 1
+    else:
+        s=1
+        for i in range(2,n+1):
+            s=(s*i)%m
+        return s
+t=input()
+while(t):
+    t=t-1
+    s=raw_input()
+    d={}
+    l=len(s)
+    c=[]
+    for i in range(0,l):
+        if s[i] in d:
+            d[s[i]]=d[s[i]]+1
+        else:
+            d[s[i]]=1
+            c.append(s[i])
+    p=fac(l)
+    l=len(c)
+    for i in range(0,l):
+        p=(p*inverse(fac(d[c[i]]),m))%m
+    print p
+        
+    

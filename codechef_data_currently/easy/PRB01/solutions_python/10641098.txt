@@ -1,0 +1,16 @@
+import math
+t = int(input())
+while t:
+    num = int(input())
+    count=0
+    sqrt_num = int(math.sqrt(num))+1
+    for i in range(2,sqrt_num):
+        if num%i==0:            
+            count=count+1
+            break
+    if count==1:
+        print "no"
+    else:
+        print "yes"
+    t=t-1
+    

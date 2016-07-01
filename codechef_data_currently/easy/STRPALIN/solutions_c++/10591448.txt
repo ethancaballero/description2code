@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    char a[1001],b[1001];
+    int t,i;
+    cin>>t;
+    while(t--)
+    {
+        int flag=0;
+        int j;
+        cin>>a>>b;
+        for(i=0;i<strlen(a);i++)
+        {
+            for(j=0;j<strlen(b);j++)
+            {
+                if(a[i]==b[j])
+                {
+                    flag=1;break;
+                }
+            }
+            if(flag==1)
+            break;
+        }
+        
+        if(flag==1)
+        cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
+    }
+	// your code goes here
+	
+	
+	return 0;
+}

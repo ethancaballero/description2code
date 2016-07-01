@@ -1,0 +1,22 @@
+t=int(raw_input())
+
+while(t>0):
+    t-=1
+    u=list()
+    v=list()
+    reserved=list()
+    ans=list()
+    n,m=[int(i) for i in raw_input().split()]
+    for i in range(m):
+        x,y=[int(i) for i in raw_input().split()]
+        u.append(x)
+        v.append(y)
+    for i in range(m-1,-1,-1):
+        if(u[i] not in reserved and v[i] not in reserved):
+            ans.append(i)
+            reserved.append(u[i])
+            reserved.append(v[i])
+    ans.sort()
+    for i in ans:
+        print i,
+    print

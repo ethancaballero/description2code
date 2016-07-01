@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t,n,c,q,l,r,a[100000];
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>c>>q;
+		for(int i=1;i<=n;i++)
+		a[i]=i;
+		
+		while(q--)
+		{
+			cin>>l>>r;
+			if(c>=l&&c<=r)
+			c=l+r-c;
+		}
+		cout<<c<<endl;
+		
+	}
+	return 0;
+}

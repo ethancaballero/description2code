@@ -1,0 +1,105 @@
+// @ nk17kumar ;)
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cstring>
+ 
+using namespace std;
+
+ double ticktock(void);
+#define fastinput()     ios_base::sync_with_stdio(false);cin.tie(0);ticktock();
+#define arrin(ax,sz)    for(int i=0;i<sz;i++) cin>>ax[i];
+#define rocknroll()     int t;cin>>t;while(t--)
+#define gc              getchar_unlocked
+#define ui              unsigned int
+#define ll              long long
+#define ld              long double
+#define mod             1000000007
+#define rep(i,a,b)      for(__typeof(a) i=a; i<b; ++i)
+#define repr(i,a,b)     for(__typeof(a) i=a; i>=b; --i)
+#define fill(a,b)       memset(a, b, sizeof(a))
+#define sz(a)           int((a).size())
+#define pb              push_back
+#define mp              make_pair
+#define X               first
+#define Y               second
+#define all(c)          (c).begin(),(c).end()
+#define loop(c,i)       for(__typeof(c.begin()) i = c.begin(); i != c.end(); ++i)
+#define exeTime()       cout << "Execution time : " << ticktock() << " seconds" ;
+ 
+double ticktock() 
+{
+    static clock_t prevtime;
+    clock_t newtime = clock();
+    double diff = 1.0*(newtime - prevtime)/CLOCKS_PER_SEC;
+    prevtime = newtime;
+    return diff;
+}
+
+template <typename T> inline void scan(T &x)
+{
+    x = 0; register T c = gc();
+    while(((c<48) || (c>57)) && (c!='-')) c = gc();
+    bool neg = false; if(c == '-') neg = true; 
+    for(;c<48 || c>57; c = gc());
+    for(;c>47 && c<58; c = gc()) x=(x<<3)+(x<<1)+(c-48);
+    if(neg) x = -x;
+}
+ 
+template <typename T> T exp(T e, T n, T m) {T x=1,p=e;while(n){if(n&1)x=mod(x*p, m);p=mod(p*p, m);n>>=1;}return x;}
+template <typename T> T inverseEuler(T a, T m){return (a==1? 1 : power(a, m-2, m));}
+template <typename T> T gcd(T a, T b){return (!b)? a:gcd(b,a%b);}
+template <typename T> T lcm(T a, T b){return (a*(b/gcd(a,b)));}
+
+// end of my template :)
+  string a,b;
+    map <string,string> mp1;
+    map <string,int> mp2;
+    map <string,int> mp3;
+int main()
+{   
+    fastinput();
+    int n,m;
+    cin >> n >> m;
+  
+    while(n--)
+    {
+      cin >> a; cin >> b;
+      mp1[a] = b;
+    }
+    while(m--)
+    {
+        cin >> a;
+        mp2[a]++;
+    }
+    string chefofyear;
+    int  tmp=0;
+    loop(mp2,it)
+    {
+      mp3[mp1[it->first]] += it->second;
+      if(it->second > tmp)
+      {
+		  tmp=it->second;
+		  chefofyear = it->first;
+	  }
+    }
+    tmp = 0;
+    string ans;
+    loop(mp3,it)
+    {
+		if(it->second > tmp)
+		{
+			tmp = it->second;
+			ans = it->first;
+		}
+	}
+	
+	cout << ans << endl;
+    cout << chefofyear ;
+
+    // remove the below function
+    //exeTime();
+    return 0;
+}

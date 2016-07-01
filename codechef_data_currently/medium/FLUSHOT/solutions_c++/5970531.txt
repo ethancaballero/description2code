@@ -1,0 +1,69 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <map>
+#include <math.h>
+#include <sstream>
+#define scanfloat(n) scanf("%lf", &n)
+#define FOR(i,n) for (int i = 0; i < n; ++i)
+using namespace std;
+
+int N;
+double pos[10000], T;
+
+double minMove(){
+	double move = 0, p = pos[0];
+	int h = 0;
+	for(int i = 1; i < N; ++i){
+		p += T;
+		if(p - pos[i] > move){
+			move = p - pos[i];
+			h = i;	// this one has to move the highest
+		}
+		p = max(p, pos[i]);
+		pos[i] = p;
+	}
+
+	move /= 2;
+	double res = move;
+	if(res > pos[0]){ // first person cannot move the half to the left
+		p = 0;
+		double diff = 0, diff2 = 0;
+		FOR(i,h+1){
+			if(pos[i] - p >= res){
+				res = 0;
+				break;
+			}else{
+				diff2 = pos[i] - p;
+				diff += diff2;
+				res -= diff2;
+				pos[i] -= diff2;
+				p = pos[i] + T;
+				pos[i+1] -= diff;
+			}
+		}
+		if(res > 0)
+			move += res;
+	}
+
+	return move;
+}
+
+int main(){
+
+	int cases;
+	scanf("%d", &cases);
+	while(cases--){
+		scanf("%d %lf", &N, &T);
+		for(int i = 0; i < N; ++i)
+			scanfloat(pos[i]);
+		printf("%.4lf
+", minMove());
+	}
+	return 0;
+}

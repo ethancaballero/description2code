@@ -1,0 +1,32 @@
+#include<stdio.h>
+
+int main()
+{
+    int t;
+    long long n,k,teacher,stud;
+    scanf("%d",&t);
+
+    while(t--)
+    {
+        scanf("%lld %lld",&n,&k);
+
+        if(k==0)
+        {
+            teacher=n;
+            stud=0;
+        }
+        else if(n==0)
+        {
+            stud=0;
+            teacher=0;
+        }
+        else
+        {
+            stud=n/k;
+            teacher=n%k;
+        }
+      printf("%lld %lld
+",stud,teacher);
+    }
+    return 0;
+}

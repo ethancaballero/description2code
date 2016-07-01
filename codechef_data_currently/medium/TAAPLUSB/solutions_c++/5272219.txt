@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	double res[100010],ans[100010];
+	int T,n;
+	res[0]=0.45;
+	ans[0]=0.45;
+	for(int i=1;i<100000;i++) {
+		res[i]=0.45+(0.1*res[i-1]);
+		ans[i]=res[i]+ans[i-1];
+	}
+	cin>>T;
+	while(T--) {
+		cin>>n;
+		printf("%0.6f
+",ans[n-1]);
+	}
+}

@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+double c[2005][2005];
+int main()
+{
+	for(int i=1;i<=2000;i++)
+	{
+		for(int j=1;j<=i;j++)
+		c[i][j]=1-(c[i-1][j-1]+c[i-1][j])/2;
+	}
+	int t,v,n;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		double ans=0;
+		for(int i=1;i<=n;i++)
+		{
+			scanf("%d",&v);
+			ans+=c[n][i]*v;
+		}
+		printf("%.3lf
+",ans);
+	}
+}

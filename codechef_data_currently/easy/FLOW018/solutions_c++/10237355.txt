@@ -1,0 +1,40 @@
+//codechef problem name: small factorial
+
+#include<bits/stdc++.h>
+
+#define ll long long int
+
+using namespace std;
+
+vector<ll>array(1001,-1);
+
+ll factorial(int num1)
+{
+	if(num1 == 0 || num1 == 1)
+		return array[num1];
+	else if(array[num1] != -1)
+		return array[num1];
+	else
+		return array[num1] = num1 * factorial(num1 - 1);
+}
+
+int main()
+{
+	int test;
+	cin>>test;
+	
+	array[0] = 1;
+	array[1] = 1;
+	
+	for(int i=0; i!=test; i++)
+	{
+		int num;
+		cin>>num;
+		
+		ll res = factorial(num);
+		cout<<res;
+		cout<<"
+";
+		
+	}
+}

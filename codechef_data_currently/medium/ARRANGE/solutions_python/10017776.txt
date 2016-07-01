@@ -1,0 +1,19 @@
+def binInt(n):
+        b = bin(n)[2:].zfill(k)
+        r = b[::-1]
+        return [int(b,2),int(r,2)]
+
+
+for _ in range(input()):
+        k,s = raw_input().strip().split()
+        k = int(k)
+        sl = [i for i in s]
+        l = [0] * (2**k)
+
+        for i in range(2**k):
+                b,r = binInt(i)
+                if l[b] == 0 or l[r] == 0:
+                        sl[b],sl[r] = sl[r],sl[b]
+                        l[b] = 1
+                        l[r] = 1
+        print "".join(sl)

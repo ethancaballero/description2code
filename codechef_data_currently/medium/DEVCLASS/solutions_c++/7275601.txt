@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long t;
+	scanf("%lld",&t);
+	while (t--)
+	{
+	 	long long type;
+	 	scanf("%lld",&type);
+	 	char s[100009];
+	 	scanf("%s",s);
+	 	long long boy=0,girl=0,len = strlen(s);
+	 	for (long long i=0; i<len; i++)
+	 	{
+	 		if (s[i]=='B') ++boy;
+	 		else if (s[i]=='G') ++girl;
+	 	}
+	 	if (abs(boy-girl)>1)
+	 	{
+	 		printf("-1
+");
+	 		continue;
+	 	}
+	 	if (boy!=girl)
+	 	{
+	 		stack<long long> b,g;
+	 		for (long long i=0; i<len; i++)
+	 		{
+	 			if (boy>girl)
+	 			{
+		 			if (i%2==1 && s[i]=='B') b.push(i);
+		 			if (i%2==0 && s[i]=='G') g.push(i);
+		 		}
+		 		else
+		 		{
+		 			if (i%2==0 && s[i]=='B') b.push(i);
+		 			if (i%2==1 && s[i]=='G') g.push(i);
+		 		}
+	 		}
+	 		long long ans=0;
+	 		if (type==0) ans=b.size();
+		 	else
+		 	 while (!b.empty())
+		 	  ans+=abs(b.top()-g.top()), b.pop(), g.pop();
+		 	printf("%lld
+",ans);
+	 	}
+	 	if (boy == girl)
+	 	{
+	 		stack<long long> b1,b2,g1,g2;
+	 		for (long long i=0; i<len; i++)
+	 		{
+	 			if (i%2==1 && s[i]=='B') b1.push(i);
+		 		if (i%2==0 && s[i]=='G') g1.push(i);
+		 		if (i%2==0 && s[i]=='B') b2.push(i);
+	 			if (i%2==1 && s[i]=='G') g2.push(i);
+	 		}
+	 		long long ans1=0,ans2=0;
+	 		if (type==0) ans1=b1.size(),ans2=b2.size();
+	 		else
+	 		{
+	 		 while (!b1.empty())
+	 	          ans1+=abs(b1.top()-g1.top()), b1.pop(), g1.pop();
+	 
+	 		 while (!b2.empty())
+	 		  ans2+=abs(b2.top()-g2.top()), b2.pop(),g2.pop();
+	 		}
+	 		printf("%lld
+",min(ans2,ans1));
+	 	}
+	}
+}

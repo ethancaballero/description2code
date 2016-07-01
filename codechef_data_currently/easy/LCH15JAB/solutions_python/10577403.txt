@@ -1,0 +1,18 @@
+#piece of cake
+t=input()
+for i in range(t):
+ s=raw_input()
+ l=""
+ count=0
+ for c in s:
+  if l.count(c)==0:
+   l=l+c
+  
+ for c in l:
+  if s.count(c)==len(s)-s.count(c):
+   print "YES"
+   count=1
+   break
+ if count==0:
+  print "NO" 
+ 

@@ -1,0 +1,72 @@
+	#include<iostream>
+	#include<stdio.h>
+	#define x getchar_unlocked()
+	using namespace std;
+
+	inline void inp( int &n )
+	{
+		n=0;
+		long long int ch=x,sign=1;
+		while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=x;}
+		while( ch >= '0' && ch <= '9' )
+		n=(n<<3)+(n<<1)+ ch-'0', ch=x;
+		n=n*sign;
+	}
+
+	void update(long long  int bit[], int n, int index,int cost)
+	{
+	//	index++;
+		while(index<=n)
+		{
+			bit[index]+=(long long int )cost;
+			index=index+(index & -index);
+		}	
+
+	}	
+
+	long long int get(long long  int bit[], int index)
+	{
+		//index++;
+		long  long int sum=0;
+		while(index>0)
+		{
+			sum+=bit[index];
+			index=index-(index & -index);
+		}	
+		return sum;
+	}	
+
+	int main()
+	{
+		 int n,m,c;
+		long long int arr[1000005];
+		long long int bit[1000005]={0};
+		inp(n);
+		inp(m);
+		inp(c);
+		char ch;
+		int u,v,cost;
+		for(int i=0;i<m;i++)
+		{
+			//char temp=getchar();
+			//scanf("%c",&ch);
+			ch=getchar_unlocked();
+			while(!(ch=='Q'||ch=='S'))
+				ch=getchar();
+			if(ch=='S')
+			{
+				inp(u);
+				inp(v);
+				inp(cost);
+				update(bit,n,u,cost);
+				update(bit,n,v+1,-1*cost);
+			}	
+			else
+			{
+				inp(u);
+				long long int sum=get(bit,u);
+				printf("%lld
+",sum+c);
+			}	
+		}	
+	}

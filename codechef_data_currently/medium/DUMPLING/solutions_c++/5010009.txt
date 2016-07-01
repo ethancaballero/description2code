@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+long long int gcd(long long int a ,long long int b)
+{
+	if(b==0)
+	 return a;
+	return gcd(b,a%b);
+}
+int main()
+{
+	int t ,n,y;
+	cin >> t ;
+	long long int a,b,c,d,k;
+	while(t--)
+	{
+	   cin >> a >> b >> c >> d >> k ;
+	   long long int g1=gcd(a,b);
+	   long long int g2=gcd(c,d);
+	   long long int x=(gcd(g1,g2));
+	   g1=g1/x;
+	   k=k/g1;
+	   k=k/g2;
+	   cout << 2*(k)+1<<endl;
+	}
+	return 0;
+}

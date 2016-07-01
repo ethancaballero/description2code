@@ -1,0 +1,52 @@
+#include<cstdio>
+#include<vector>
+ 
+#define	pb			push_back
+#define	rep(i,n)	for(int i=0;i<n;i++)
+ 
+using namespace std;
+ 
+typedef	long long		ll;
+typedef	vector<bool>	vb;
+ 
+const ll L=100000007,inv2=50000004;
+ 
+vb toBinary(ll a){
+	vb res;
+	do{
+		res.pb(a&1);
+		a>>=1;
+	}while(a);
+	return res;
+}
+ 
+int main(){
+	ll pow2[128],pow3[128];	// pow2[i]=2^(2^i), pow3[i]=3^(2^i)
+	pow2[0]=2,pow3[0]=3;
+	rep(i,126){
+		pow2[i+1]=(pow2[i]*pow2[i])%L;
+		pow3[i+1]=(pow3[i]*pow3[i])%L;
+	}
+ 
+	int t;	scanf("%d",&t);
+	while(t--){
+		ll n;	scanf("%lld",&n);
+		vb bits=toBinary(n-1);
+ 
+		ll t1=1,t2=3;	// t1=2^(n-1), t2=3^n
+		rep(i,bits.size()){
+			if(bits[i]){
+				t1=(t1*pow2[i])%L;
+				t2=(t2*pow3[i])%L;
+			}
+		}
+ 
+		ll r1,r2;
+		r1=( ((t2+1)*inv2)%L - (2*t1)%L + L )%L;
+		r2=( (t1*(2*t1+3))%L - ((3*t2+1)*inv2)%L + L )%L;
+		printf("%lld %lld
+",r1,r2);
+	}
+ 
+	return 0;
+}

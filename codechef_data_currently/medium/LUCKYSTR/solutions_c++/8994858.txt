@@ -1,0 +1,53 @@
+#include <iostream>
+#include<vector>
+#include<string>
+#include<string.h>
+using namespace std;
+
+int main()
+{
+    int n,k;
+    cin>>k>>n;
+    vector <string> strings;
+    string s;
+    for(int i=0;i<k;i++)
+    {
+        cin>>s;
+        strings.push_back(s);
+    }
+
+    vector <string> nstrings;
+    for(int i=0;i<n;i++)
+    {
+        cin>>s;
+        nstrings.push_back(s);
+    }
+    int flag=0;
+
+    for(int i=0;i<nstrings.size();i++)
+    {
+        flag=0;
+        for(int j=0;j<strings.size();j++)
+        {
+            int len=nstrings[i].size();
+            if(len>=47)
+            {
+                flag=1;
+                break;
+            }
+            int found=nstrings[i].find(strings[j]);
+            if(found != string::npos)
+                {flag=1;
+                    break;}
+        }
+        if(flag==1)
+            {cout<<"Good
+";
+            }
+        else
+            cout<<"Bad
+";
+
+    }
+    return 0;
+}

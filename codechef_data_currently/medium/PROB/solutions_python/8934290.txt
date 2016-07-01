@@ -1,0 +1,3 @@
+for _ in xrange(input()):
+    a,b,c,d=map(int,raw_input().split())
+    print float(a)/(a+b)

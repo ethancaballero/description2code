@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+inline int min(int a, int b){
+	return a<b ? a : b;
+}
+inline int readInt(){
+	int number = 0;
+	char c = getchar_unlocked();
+	while(c<'0')
+		c = getchar_unlocked();
+	while(c>='0'){
+		number = (number<<3)+(number<<1)+c-'0';
+		c = getchar_unlocked();
+	}
+	return number;
+}
+
+void fill(int toFill[]){
+	char c = getchar_unlocked();
+	while(c<'0')
+		c = getchar_unlocked();
+	while(c>='0'){
+		toFill[c-'0'] += 1;
+		c = getchar_unlocked();
+	}
+}
+
+void remove(int A[], int B[], int C[], int number){
+	int curmin;
+	for(int i=number-1; i>=0 && A[number]>0; --i){
+		if(i==4) continue;
+		curmin = min(A[number], B[i]);
+		C[number] += curmin;
+		A[number] -= curmin;
+		B[i] -= curmin;
+	}
+	if(number==7 && A[number]>0){
+		curmin = min(A[7], B[4]);
+		C[7] += curmin;
+		A[7] -= curmin;
+		B[4] -= curmin;
+	}
+	if(A[number]>0){
+		curmin = min(A[number], B[number]);
+		C[number] += curmin;
+		A[number] -= curmin;
+		B[number] -= curmin;
+	}
+}
+
+int main(){
+	int t = readInt();
+	while(t--){
+		int A[10] = {0};
+		int B[10] = {0};
+		int C[10] = {0};
+		fill(A);
+		fill(B);
+		remove(A,B,C,7);
+		remove(B,A,C,7);
+		remove(A,B,C,4);
+		remove(B,A,C,4);
+		while(C[7]--) printf("7");
+		while(C[4]--) printf("4");
+		printf("
+");
+	}
+	return 0;
+}

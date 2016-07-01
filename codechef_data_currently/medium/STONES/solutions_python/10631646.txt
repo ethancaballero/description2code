@@ -1,0 +1,18 @@
+T = input()
+for i in range(T):
+   n = raw_input()
+   m = raw_input()
+   n = list(set(n))
+   m = list(m)
+   
+   n.sort()
+   m.sort()
+   
+   l1 = len(n)
+   l2 = len(m)
+   count = 0
+   
+   for j in range(l2):
+     if m[j] in n:
+       count = count + 1
+   print count

@@ -1,0 +1,141 @@
+#include<iostream>
+#include<cstdio>
+//468 46594 1351 153153
+using namespace std;
+
+#define ll long long
+
+ll f(ll x)
+{
+    if(x < 10)return x;
+    else
+    {
+        ll temp = 0;
+        while(x)
+        {
+            temp += x%10;
+            x = x/10;
+        }
+        return f(temp);
+    }
+}
+ll ans[20], mark[20];
+int main()
+{
+    int ct = 0;
+    /*for(int i = 1; i < 1555; i += 3)
+    {
+        cout << f(i) << " ";
+        ct++;
+        if(ct == 9)
+        {
+            ct = 0;
+            cout << endl;
+        }
+    }*/
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        ll a, d, l, r;
+        scanf("%lld%lld%lld%lld", &a, &d, &l, &r);
+        //cin >> a >> d >> l >> r;
+        ll x = f(a), y = f(d), ct = 0;
+        ll ttl = 0;
+        //cout << (r - l + 1)*9 << endl;
+        /*for(ll i = l-1; i <= (r-1); i++)
+        {
+            ttl += f(a + (i*d));
+            //cout << f(a + (i*d)) << endl;
+            //cout << i << " " << ttl << endl;
+        }
+        //cout << ttl << endl;*/
+
+        ll ss = 0;
+        for(ll i = 1; i <= 9; i++)
+        {
+            ss += f(a + (i-1)*d);
+        }
+
+
+
+        ll fs = 0;
+        for(ll i = l; i <= r;)
+        {
+            if(i % 9 != 0)
+            {
+                fs += f(a + (i-1)*d);
+                i++;
+            }
+            else
+            {
+                ll num = (r - i + 1);
+                ll q = num / 9;
+                fs += (q*ss);
+                i += q*(9);
+                if(q == 0)
+                {
+                    fs += f(a + (i-1)*d);
+                    i++;
+                }
+            }
+        }
+        printf("%lld
+", fs);
+        //cout << fs << endl;
+        /*for(int i = 0; i < 10; i++)
+        {
+            ans[i] = 0;
+            mark[i] = 0;
+        }
+        ll sum = 0;
+        for(ll i = 0; i <= 9; i++)
+        {
+            ans[i] = f(x);
+
+            if(mark[ans[i]] != 1)sum += ans[i];
+            //cout << f(a + (i-1)*d) << " " << f(x) << endl;
+            x = x + y;
+            if(mark[ans[i]] == 1)
+            {
+                ct = i;
+            }
+            mark[ans[i]] = 1;
+
+        }
+        //for(int i = 0; i <= 9; i++)cout << ans[i] << " "; cout << endl;
+        //cout << ct <<" :: "<<sum <<endl;
+        //ct++;
+        //cout << l-1 << " " << r-1 << " " << ct << endl;
+        ll tl = 0;
+        for(ll i = l-1; i <= r-1;)
+        {
+            //if(i > 10)break;
+            //cout << i << endl;
+            if(i % ct != 0)
+            {
+                tl = tl + ans[i%ct];
+                //cout << ans[i%ct] << " : " << endl;
+                i++;
+            }
+            else
+            {
+                ll xx = (r - i);
+                ll q = xx / ct;
+                tl += (q * sum);
+                if(q == 0)
+                {
+                    tl += ans[i%ct];
+                    //cout << ans[i%ct] << " : " << endl;
+                }
+                //else cout << (q * sum) << " : " << endl;
+                i += q*ct;
+                if(q == 0)i++;
+            }
+            //cout << i << " :i 
+";
+        }
+        //cout << tl << endl;
+        */
+    }
+}

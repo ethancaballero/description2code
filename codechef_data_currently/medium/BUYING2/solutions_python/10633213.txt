@@ -1,0 +1,36 @@
+#include <stdio.h>
+ 
+int main ()
+{
+	int T, N, X, A, min, current_buy, buy, money;
+	
+	scanf ("%d", &T);
+	
+	while (T--)
+	{
+		scanf ("%d %d", &N, &X);
+		
+		min = -1;
+		money = 0;
+		
+		while (N--)
+		{
+			scanf ("%d", &A);
+			money += A;
+			if (min == -1 || A < min)
+				min = A;
+		}
+		
+		current_buy = money / X;
+		buy = (money - min) / X;
+		
+		if (!current_buy || buy == current_buy)
+			printf ("-1
+");
+		else
+			printf ("%d
+", current_buy);
+	}
+	
+	return 0;
+} 

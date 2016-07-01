@@ -1,0 +1,14 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ s=[str(i) for i in li]
+ print " ".join(s)
+no=long(raw_input())
+if no%6 in (0,1,3):
+ print 'yes'
+else: print 'no'
+
+
+  
+ 

@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define N 400000
+#define W 400000
+int Ar[N + 10],que[W + 10],mx[N + 10],mn[N + 10];
+int main()
+{
+    int n,w,i;
+    scanf("%d %d",&n,&w);
+    for(i = 1 ; i<=n ; i++)
+        scanf("%d",&Ar[i]);
+    int front,rear;
+
+    front = 1;
+    rear = 1;
+    que[1] = 1;
+
+    for(i = 2 ; i<=w ; i++)
+    {
+        while(front<=rear && Ar[que[rear]] <= Ar[i])
+            rear--;
+        rear++;
+        que[rear] = i;
+    }
+    for(i = w + 1 ; i<=n ; i++)
+    {
+        //printf("%d
+",que[front]);
+        mx[i - w] = Ar[que[front]];
+
+        while(front<=rear && Ar[que[rear]] <= Ar[i])
+            rear--;
+        rear++;
+        que[rear] = i;
+
+        while(front<=rear && que[front]<=(i - w))
+            front++;
+    }
+    //printf("%d %d
+",front,que[front]);
+    mx[n - w + 1] = Ar[que[front]];
+
+    front = 1;
+    rear = 1;
+    que[1] = 1;
+
+    for(i = 2 ; i<=w ; i++)
+    {
+        while(front<=rear && Ar[que[rear]] >= Ar[i])
+            rear--;
+        rear++;
+        que[rear] = i;
+    }
+    for(i = w + 1 ; i<=n ; i++)
+    {
+        //printf("%d
+",que[front]);
+        mn[i - w] = Ar[que[front]];
+
+        while(front<=rear && Ar[que[rear]] >= Ar[i])
+            rear--;
+        rear++;
+        que[rear] = i;
+
+        while(front<=rear && que[front] <= (i - w))
+            front++;
+    }
+    //printf("%d
+",que[front]);
+    mn[n - w + 1] = Ar[que[front]];
+    int ans = 0;
+    for(i = 1 ; i<=n - w + 1 ; i++)
+    {
+        if(mx[i] - mn[i] + 1 == w)
+            ans++;
+    }
+    printf("%d
+",ans);
+    return 0;
+}

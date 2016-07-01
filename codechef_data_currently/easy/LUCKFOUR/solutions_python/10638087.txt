@@ -1,0 +1,8 @@
+t=int(raw_input())
+for i in range(t):
+    a=raw_input()
+    a=map(int,a)
+    cnt=a.count(4)
+    print cnt
+    
+    

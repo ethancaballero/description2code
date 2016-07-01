@@ -1,0 +1,16 @@
+#!/usr/bin/python
+from math import log
+N=input()
+for i in range(N):
+	P=input()
+	count=0
+	while P!=0:
+		if P>2048:
+			P=P-2048
+			count+=1
+		else:
+			P=P-2**(int(log(P,2)))
+			count+=1
+	print count
+
+	

@@ -1,0 +1,31 @@
+#include <cstdio>
+#include <map>
+#define MAX_N_VALUE 100000
+
+int a[MAX_N_VALUE + 3];
+
+void clear() {
+    for(int i = 0; i <= MAX_N_VALUE; i++)
+        a[i] = 0;
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while(t--) {
+        clear();
+        int n;
+        scanf("%d", &n);
+        int max = 0;
+        for(int i = 0; i < n; i++) {
+            int temp;
+            scanf("%d", &temp);
+            a[temp]++;
+            if(a[temp] > max)
+                max = a[temp];
+        }
+        printf("%d
+", n-max);
+    }
+    return 0;
+}

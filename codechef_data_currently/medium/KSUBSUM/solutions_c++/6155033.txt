@@ -1,0 +1,114 @@
+#include<cstdio>
+#include<set>
+#include<queue>
+#include<algorithm>
+#include<vector>
+#define ll long long
+ 
+int t,n,k1,k2,k3,a[10002],kans1,kans2,kans3;
+ 
+class comp
+{
+    public:
+    int operator()(const int &i,const int &j)
+    {
+        return (i>j) ;
+    }
+};
+ 
+int readint() {
+    int n = 0;
+    int sign=1;
+    char c = getchar_unlocked();
+    if(c=='-')
+    {
+        sign=-1;
+        c = getchar_unlocked();
+    }
+    while ( !( '0' <= c && c <= '9' ) ) {
+        c = getchar_unlocked();
+    }
+    while ( '0' <= c && c <= '9' ) {
+        n = (n<<3) + (n<<1) + c - '0';
+        c = getchar_unlocked();
+    }
+    return sign*n;
+}
+ 
+ 
+using namespace std;
+ 
+int main()
+{
+    //scanf("%d",&t);
+    t=readint();
+    while(t--)
+    {
+        //scanf("%d%d%d%d",&n,&k1,&k2,&k3);
+        n=readint();
+        k1=readint();
+        k2=readint();
+        k3=readint();
+        priority_queue< int,vector< int >,comp > pq;
+        multiset< int > ms;
+        multiset< int >::iterator it;
+        a[0]=0;
+        for(int i=1;i<=n;i++)
+            a[i]=readint(),a[i]+=a[i-1];
+        int el=1;
+        ms.insert(0);
+        for(int i=1;i<=n;i++)
+        {
+            int val=a[i];
+            for(it=ms.begin();it!=ms.end();it++)
+            {
+                int d=val-*it;
+                //printf("%d ",d);
+                if(pq.size()<k3)
+                    pq.push(d);
+                else if(pq.top()<d)
+                {
+                    //printf("%d ",pq.top());
+                    pq.pop();
+                    pq.push(d);
+                }
+                else                    //after this, all other values present in set will give smaller d
+                    break;
+            }
+ 
+            if(el<k3)                    //no. of values in set are less than k3
+                ms.insert(val),el++;
+            else
+            {
+                int temp=*(ms.rbegin());
+                if(val<temp)
+                {
+                    it=ms.end();
+                    it--;
+                    ms.erase(it);
+                    ms.insert(val);
+                }
+            }
+        }
+        int ind=1;
+        int sz=pq.size();
+        while(!pq.empty())
+        {
+            int val=pq.top();
+            //printf("%d ",val);
+            pq.pop();
+            if(ind==sz-k1+1)
+                kans1=val;
+            else if(ind==sz-k2+1)
+                kans2=val;
+            else if(ind==sz-k3+1)
+                kans3=val;
+            ind++;
+        }
+        printf("%d %d %d
+",kans1,kans2,kans3);
+    }
+ 
+    return 0;
+}
+ 

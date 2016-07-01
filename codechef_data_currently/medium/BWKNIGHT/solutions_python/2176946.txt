@@ -1,0 +1,156 @@
+import sys
+
+T = int(raw_input())
+
+while T :
+
+	T-=1
+	n , m = map(int , sys.stdin.readline().split())
+	
+	ans = 0 
+	
+	p = []
+	a = ((n-4)*(m-4)*(n*m-9))
+	p.append(a)
+	
+	a = (2*(n-4)*(n*m-7))
+	p.append(a)
+	a = (2*(m-4)*(n*m-7))
+	p.append(a)
+	
+	a = (4*(n*m-5))
+	p.append(a)
+	
+	a = 4*(n*m-4)
+	p.append(a)
+	
+	a = (2*(n-4)*(n*m-5))
+	p.append(a)
+	
+	a = (2*(m-4)*(n*m-5))
+	p.append(a)
+	
+	a = (4*(n*m-4))
+	p.append(a)
+	a = (4*(n*m-3))
+	p.append(a)
+	
+	
+	if n >=5 and m >=5 :
+		
+		for i in range(len(p)) :
+			ans+=p[i]
+			
+		print ans
+		continue
+		
+	else :
+	
+		if n < m :
+			a = n
+			n = m
+			m = a
+			
+		ans = 0
+		if m == 1 :
+			ans = n*(n-1)
+			print ans
+			continue
+		elif m == 2 :
+			
+			if n == 2 :
+				ans = 4*3
+				print ans
+				continue
+			elif n == 3 :
+				ans = 0
+				ans+=10
+				ans+=16
+				print ans
+				continue
+			elif n == 4	:
+				ans = 0
+				ans+=48
+				print ans
+				continue
+			else :
+				ans = 0
+				a = 2*(n-4)*(n*m-3)
+				ans+=a
+				
+				a = 8*(2*n-2)
+				ans+=a
+				
+				print ans
+				continue
+				
+		elif m == 3 :
+			
+			if n == 3 :
+			
+				ans = 0
+				a = 8*(3*3-3)
+				ans+=a
+				ans+=8
+				print ans
+				continue
+				
+			elif n == 4 :
+				
+				ans = 0
+				a = 8*(4*3-3)
+				ans+=a
+				
+				a = 4*(4*3-4)
+				ans+=a
+				
+				print ans
+				continue
+				
+				
+			else :
+				ans = 0
+				a = 3*(n-4)*(3*n-5)
+				ans+=a
+				a = 8*(n*3-3)
+				ans+=a
+				a = 4*(n*3-4)
+				ans+=a
+				print ans
+				continue
+			
+		else :
+		
+			if n == 4 :
+			
+				ans = 0
+				a = 4*(4*4-5)
+				ans+=a
+				
+				a = 8*(4*4-4)
+				ans+=a
+				
+				a = 4*(4*4-3)
+				ans+=a
+				
+				print ans
+				continue
+				
+				
+			else :
+			
+				ans = 0
+				a = (n-4)*2*(n*4-7)
+				ans+=a
+				a = (n-4)*2*(n*4-5)
+				ans+=a
+				a = 4*(n*4-5)
+				ans+=a
+				a = 8*(n*4-4)
+				ans+=a
+				a = 4*(n*4-3)
+				ans+=a
+				
+				print ans
+				continue
+				

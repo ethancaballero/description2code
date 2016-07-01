@@ -1,0 +1,93 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pb push_back
+vector <pair<ll,ll> > v;
+ll prev[100005],pos[100005];
+ll *id, cnt, *sz;
+map<ll,ll> mp;  //use this map to map indexes with data.
+
+void init(ll N)
+{
+    cnt = N;
+	id = new ll[N+1];
+	sz = new ll[N+1];
+    for(ll i=1; i<=N; i++)
+    {
+        id[i] = i;
+	    sz[i] = 1;
+	}
+}
+
+ll find(ll p)
+{
+    ll root = p;
+    while (root != id[root])
+        root = id[root];
+    while (p != root) {
+        ll newp = id[p];
+        id[p] = root;
+        p = newp;
+    }
+    return root;
+}
+// Replace sets containing x and y with their union.
+void merge(ll x, ll y)
+{
+    ll i = find(x);
+    ll j = find(y);
+    if (i == j) return;
+    // make smaller root point to larger one
+    if(sz[i]<sz[j])
+    {
+        id[i] = j;
+        sz[j] += sz[i];
+    }
+    else
+    {
+        id[j] = i;
+        sz[i] += sz[j];
+    }
+    cnt--;
+}
+
+int main()
+{
+ll n,k,p,i,num,x,y,prevx,prevnum,temp;
+cin>>n>>k>>p;
+init(n);
+for(i=1;i<=n;i++)
+{
+    cin>>x;
+    pos[i]=x;
+    v.pb(make_pair(x,i));
+}
+sort(v.begin(),v.end());
+
+x=v[0].first;
+num=v[0].second;
+prev[num]=num;
+
+for(i=1;i<v.size();i++)
+{
+    x=v[i].first;
+    num=v[i].second;
+    prevx=v[i-1].first;
+    prevnum=v[i-1].second;
+    if(prevx>=x-k)
+        merge(num,prevnum);
+}
+
+for(i=0;i<p;i++)
+{
+    cin>>x>>y;
+    if(find(x)!=find(y))
+    cout<<"No
+";
+    else
+        cout<<"Yes
+";
+}
+
+return 0;
+}

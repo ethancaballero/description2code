@@ -1,0 +1,160 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+	long long int index;
+	long long int value;
+};
+node z[1000000+5];
+int bs_less_than(int l,int h,int v)
+{
+	int mid,found=-1;
+	while(l<=h)
+	{
+		mid=(l+h)/2;
+		if(z[mid].index<v)
+		{
+			found=mid;
+			l=mid+1;
+		}
+		else
+		h=mid-1;
+	}
+	if(found==-1)
+	return -1;
+	else
+	return found; 
+}
+int bs_equal_to(int l,int h,int v)
+{
+	int mid,found=-1;
+	while(l<=h)
+	{
+		mid=(l+h)/2;
+		if(z[mid].index==v)
+		{
+			found=mid;
+			return found;
+		}
+		else if(z[mid].index>v)
+		h=mid-1;
+		else
+		l=mid+1;
+	}
+	return -1;
+}
+int bs_more_than(int l,int h,int v)
+{
+	int mid,found=-1;
+	while(l<=h)
+	{
+		mid=(l+h)/2;
+		if(z[mid].index>v)
+		{
+			found=mid;
+			h=mid-1;
+		}
+		else
+		l=mid+1;
+	}
+	if(found==-1)
+	return -1;
+	else
+	return found; 
+}
+int main()
+{
+	long long int n,i,j,m;
+	scanf("%lld%lld",&n,&m);
+	int a[n];
+	for(i=0;i<n;i++)
+	scanf("%d",&a[i]);
+	map<int,long long int> mp;
+	map<int,long long int> :: iterator it;
+	for(i=0;i<n;i++)
+	{
+		long long int leftpos,rightpos;
+		for(j=i-1;j>=0;j--)
+		{
+			if(a[i]<=a[j])
+			break;
+		}
+		leftpos=j+1;
+		for(j=i+1;j<n;j++)
+		{
+			if(a[i]<a[j])
+			break;
+		}
+		rightpos=j-1;
+		long long int count=(i-leftpos+1)*(rightpos-i+1);
+		if(mp[a[i]]!=0)
+		mp[a[i]]+=count;
+		else
+		mp[a[i]]=count;
+	}
+	long long int v=0;
+	i=0;
+	for(it=mp.begin();it!=mp.end();it++)
+	{
+		z[i].index=it->first;
+		v=v+it->second;
+		z[i].value=v;
+		i++;
+	}
+	/*for(j=0;j<i;j++)
+	cout<<z[j].index<<" "<<z[j].value<<endl;*/
+	char ch,ch1,ch2;
+	int b,size=i;
+	long long int sum=0;
+	while(m--)
+	{
+		ch=getchar();
+		scanf("%c",&ch1);
+		ch=getchar();
+		scanf("%d",&b);
+		ch=getchar();
+		scanf("%c",&ch2);
+		sum=0;
+	//	printf("%c %d %c
+",ch1,b,ch2);
+		//long long int sum=0;
+		if(ch1=='=')
+		{
+		int index=bs_equal_to(0,size-1,b);
+	    if(index==-1)
+	    sum=0;
+	    else if(index!=0)
+	    sum=z[index].value-z[index-1].value;
+	    else 
+	    sum=z[index].value;
+	    }
+	    else if(ch1=='<')
+	    {
+	    int index=bs_less_than(0,size-1,b);
+	    if(index==-1)
+	    sum=0;
+	    else
+	    sum=z[index].value;
+	    }
+	    else if(ch1=='>')
+	    {
+	    //long long int sum=0;
+		int index=bs_more_than(0,size-1,b);
+	    if(index==-1)
+	    sum=0;
+	    else if(index!=0)
+	    sum=z[size-1].value-z[index-1].value;
+	    else 
+	    sum=z[size-1].value;
+	    }
+	    if(sum%2 && ch2=='D')
+	    cout<<'D';
+	    else if(sum%2 && ch2=='C')
+	    cout<<'C';
+	    else if(sum%2==0 && ch2=='D')
+	    cout<<'C';
+	    else
+	    cout<<'D';
+	}
+	return 0;
+} 

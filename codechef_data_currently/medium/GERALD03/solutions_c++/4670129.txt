@@ -1,0 +1,113 @@
+#include <iostream>
+using namespace std;
+#include <math.h> 
+#include <string>
+#ifndef ONLINE_JUDGE
+    #define getcx getchar
+#else
+    #define getcx getchar_unlocked
+#endif
+#define MOD 1000000007
+
+inline int inp ( )
+{
+   int n=0;
+   int ch=getcx();
+   int sign=1;
+   while( ch < '0' || ch > '9' )
+   {
+     if(ch == '-')
+     {
+         sign=-1;
+     }
+     ch=getcx();
+   }
+   while(  ch >= '0' && ch <= '9' )
+       n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+   n=n*sign;
+   return n;
+}
+
+int main()
+{
+	int T, N, Li, Ri, L_init, L_fin, R_init, R_fin, count ;
+	bool step_done = false;
+	string out; 
+    T = inp() ;
+
+    for (int i=0; i<T; i++)
+	{
+        out = "";
+        count = 0;
+        N = inp();
+        L_init = inp();
+        R_init = inp();
+        for (int j=1; j<N; j++)
+	    {
+            L_fin = inp();
+            R_fin = inp();
+            while ( (L_init != L_fin) || (R_init != R_fin) )
+            {
+                step_done = false;
+                // Want to reach from L_init, R_init to L_fin, R_fin
+                //Try L+/L-
+                //cout<<"L_init: "<<L_init<<" L_fin : "<<L_fin<<" R_init :  "<< R_init<<" R_fin : "<<R_fin ;
+                if (L_fin > L_init)
+                {
+                    // Can increase L_init
+                    if ( (L_init + 1) != R_init )
+                    {
+                       // should increase L_init
+                       L_init++;
+                       count++;
+                       out.append("L+");
+                       step_done = true;
+                       //cout<<"L+ "<<out<<endl;
+                    }
+                }
+                else if (L_fin < L_init)
+                {
+                    // Can decrease L_init
+                    if ( (L_init - 1) != R_init )
+                    { 
+                       // should decrease L_init
+                       L_init--;
+                       count++;
+                       out.append("L-");
+                       step_done = true;
+                       //cout<<"L- "<<out<<endl;
+                    }
+                }
+                if (step_done == false)
+                {
+                    //Try R+/R-
+                    if (R_fin > R_init)
+                    {
+                        //Should increase R_init
+                        R_init++;
+                        count++;
+                        out.append("R+");
+                        //cout<<"R+ "<<out<<endl;
+                    }
+                    else if (R_fin < R_init)
+                    {
+                        //Should decrease R_init
+                        R_init--;
+                        count++;
+                        out.append("R-");
+                        //cout<<"R- "<<out<<endl;
+                    }
+                   
+                }
+            }
+        }
+        //printf("%d
+",count);
+        //printf("%s
+",out);
+        cout<<count<<endl<<out<<endl;
+    }
+    cin.get();
+	cin.ignore();
+	return 0; 	
+} 

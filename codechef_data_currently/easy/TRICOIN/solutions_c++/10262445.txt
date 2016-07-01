@@ -1,0 +1,36 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+long long binarysearch(long long a[],long long n,int l,int h){
+
+int m=(h+l)/2;
+if(a[m]==n)
+    return m;
+if(a[m]<n && a[m+1]>n)
+    return m;
+if(a[m]<n)
+     binarysearch(a,n,m+1,h);
+else if(a[m]>n)
+     binarysearch(a,n,l,m-1);
+
+
+
+
+}
+int main()
+{
+    int t;
+    cin>>t;
+    long long a[100001];
+    a[0]=0;
+    a[1]=1;
+    for(int i=2;i<=100000;i++){
+        a[i]=a[i-1]+i;
+    }
+    while(t--){
+    long long n;
+    cin>>n;
+    cout<<binarysearch(a,n,0,100000)<<"
+";
+    }
+}

@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n1,n2,i,j,k=0,c=0;
+	    cin>>n1;
+	    int a[n1];
+	    for(i=0;i<n1;i++)
+	    cin>>a[i];
+	    cin>>n2;
+	    int b[n2];
+	    for(i=0;i<n2;i++)
+	    cin>>b[i];
+	    for(i=0;i<n2;i++)
+	    {
+	       for(j=k;j<n1;j++)
+	       {
+	           if(b[i]==a[j])
+	           {
+	             k=j;
+	             c++;
+	             break;
+	           }
+	       }
+	    }
+	    if(c==n2)
+	    cout<<"Yes"<<endl;
+	    else
+	    cout<<"No"<<endl;
+	    
+	    
+	}
+	return 0;
+}

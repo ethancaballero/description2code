@@ -1,0 +1,12 @@
+#!/usr/bin/python 
+t=input()
+for i in range(t):
+	gh,gm=map(int,raw_input().split(':'))
+	ch,cm=map(int,raw_input().split(':'))	
+	gh=gh*60+gm;
+	ch=ch*60+cm;
+	dist=input()
+	if(2*dist<=(gh-ch)) :
+		print float(gh-ch+dist) ,float(gh-ch);
+	else:
+		print float(gh-ch+dist), float(gh-ch+2*dist)/2

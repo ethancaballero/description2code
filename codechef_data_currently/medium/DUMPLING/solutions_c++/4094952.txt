@@ -1,0 +1,41 @@
+#include <cstdio>
+
+typedef long long int ll;
+
+ll euclid_gcd(ll a, ll b) {
+  if(a < b) {
+    ll temp = a;
+    a = b;
+    b = temp;
+  }
+  if(b == 0) return a;
+  else return euclid_gcd(b, a % b);
+}
+
+
+
+void work() {
+  ll A, B, C, D, K;
+  scanf("%lld %lld %lld %lld %lld", &A, &B, &C, &D, &K);
+  ll gcd1 = euclid_gcd(A, B);
+  ll gcd2 = euclid_gcd(C, D);
+  ll g = euclid_gcd(gcd1, gcd2);
+  ll lcm = (gcd1 / g) * gcd2;
+  ll ans;
+  if((lcm / (gcd1 / g)) != gcd2)
+    ans = 0;
+  else
+    ans = K / lcm;
+  ans *= 2;
+  ans += 1;
+  printf("%lld
+", ans);
+}
+
+
+int main() {
+  int T;
+  scanf("%d", &T);
+  while(T--) work();
+  return 0;
+}

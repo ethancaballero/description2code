@@ -1,0 +1,57 @@
+from collections import Counter
+
+# compute factorials and inverse factorials
+mod = 10**9 + 7
+N = 10**5 + 11
+fac = [1]*N
+ifc = [1]*N
+for i in xrange(2,N):
+    ifc[i] = (mod - mod/i) * ifc[mod%i] % mod
+
+for i in xrange(2,N):
+    fac[i] = fac[i-1] *     i  % mod
+    ifc[i] = ifc[i-1] * ifc[i] % mod
+
+for cas in xrange(input()):
+    # only the frequencies of letters matter
+    A = Counter(raw_input().strip()).values()
+    t = 0
+
+    # no swap
+    t += 1
+
+    # 1 swap
+    for i in xrange(len(A)):
+        for j in xrange(i):
+            t += A[i] * A[j]
+
+    # 2 swaps, ab cd
+    for i in xrange(len(A)):
+        for j in xrange(i):
+            for k in xrange(j):
+                for l in xrange(k):
+                    t += 3 * A[i] * A[j] * A[k] * A[l]
+
+    # 2 swaps, ab ac
+    for i in xrange(len(A)):
+        for j in xrange(len(A)):
+            if i != j:
+                for k in xrange(j):
+                    if i != k:
+                        t += A[i] * (A[i]-1) * A[j] * A[k]
+
+    # 2 swaps, ab ab
+    for i in xrange(len(A)):
+        for j in xrange(i):
+            t += A[i] * (A[i]-1)/2 * A[j] * (A[j]-1)/2
+
+    # 2 swaps, abc
+    for i in xrange(len(A)):
+        for j in xrange(i):
+            for k in xrange(j):
+                t += A[i] * A[j] * A[k] * 2
+
+    p = fac[sum(A)]
+    for i in xrange(len(A)):
+        p = p * ifc[A[i]] % mod
+    print (p * p - p * t) % mod

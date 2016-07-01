@@ -1,0 +1,5 @@
+import math
+T= int(raw_input()) # number of cases
+for i in range(T):
+    x,y=str(raw_input()).split() #reads size of base
+    print str(max(long(x),long(y)))+" "+str(long(x)+long(y))

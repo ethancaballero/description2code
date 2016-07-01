@@ -1,0 +1,36 @@
+import math
+import sys
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ if len(li) is 0:
+  print
+ else:
+  for i in range(len(li)-1):
+   print li[i],
+  print li[-1]
+cases=input()
+for case in range(cases):
+ p,s=parseIntList(raw_input())
+ t=math.sqrt(p*p-24.0*s)/12.0
+ l=p/12.0-t
+ b=p/12.0+2*t
+ print "%.2f"%(l*l*b)
+
+  
+  
+ 
+ 
+ 
+
+  
+ 
+
+  
+  
+ 
+ 
+ 
+
+  
+ 

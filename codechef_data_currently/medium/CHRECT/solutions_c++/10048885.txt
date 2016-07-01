@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int N, M, K;
+        scanf("%d%d%d", &N, &M, &K);
+        if(N > M) {
+            int temp = N;
+            N = M;
+            M = temp;
+        }
+        int ans = 0;
+        if(N == 1){
+            if(M <= 2){
+                ans = 0;
+            } else ans = K;
+        }
+        else ans = (K + 1)/2;
+        printf("%d
+", ans);
+    }
+    return 0;
+}

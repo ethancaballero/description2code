@@ -1,0 +1,13 @@
+t=input()
+for i in range(0,t):
+	sstr=raw_input()
+	jstr=raw_input()
+	ct=0
+	for j in range(0,len(jstr)):
+		ch=jstr[j]
+		for k in range(0,len(sstr)):
+			if ch==sstr[k]:
+				ct+=1
+				break
+				
+	print ct

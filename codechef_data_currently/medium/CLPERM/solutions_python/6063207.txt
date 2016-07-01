@@ -1,0 +1,27 @@
+A = []
+def series(n):
+    return int(( n * (n + 1) ) / 2)
+t = input()
+while t > 0:
+    n,k = list(map(int,raw_input().split()))
+    if k != 0:
+        A = list(map(int,raw_input().split()))
+    A.append(n + 1)
+    A.sort()
+    s = 0
+    i = 0
+    if k == 0:
+        s = series(n)
+    else:
+        for i in range(0,k + 1):
+            if i == 0:
+                s = series(A[i] - 1)
+            else:
+                s += max(0 ,series(A[i] - 1) - series(A[i - 1]))
+            if s < A[i]:
+                break
+    if s % 2 == 0:
+        print "Chef"
+    else:
+        print "Mom"
+    t = t - 1

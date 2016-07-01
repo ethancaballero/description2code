@@ -1,0 +1,73 @@
+/* -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+
+ * File Name : MIKE3.cpp
+
+ * Creation Date : Sunday 17 August 2014 06:41:43 PM IST
+
+ * Last Modified : Sunday 17 August 2014 08:37:37 PM IST
+
+ _._._._._._._._._._._._._._._._._._._._._.*/
+#include <bits/stdc++.h>
+using namespace std;
+
+bool intersect (set <int> &A, set <int> &B)
+{
+    for (set <int>::iterator it = A.begin(); it != A.end(); it++)
+    {
+        if (B.find(*it) != B.end())
+            return false;
+    }
+    return true;
+}
+
+
+
+int main()
+{
+    int con[20][20] = {0}, N, M, t, lim;
+    scanf ("%d %d", &N, &M);
+    vector <set <int> > pref (M + 1);
+
+
+    for (int i = 0; i < M; ++i)
+    {
+        scanf ("%d", &lim);
+        for (int j = 0; j < lim; ++j)
+        {
+            scanf ("%d", &t);
+            pref[i].insert (t);
+        }
+    }
+
+    for (int i = 0; i < M - 1; ++i)
+        for (int j = i + 1; j < M; ++j)
+            con[i][j] = intersect (pref[i], pref[j]);
+
+    int best = 0;
+    for (int i = 1; i < (1 << M); ++i)
+    {
+        vector <int> temp;
+        for (int j = 0; j < M; ++j)
+            if ((1 << j) & i) temp.push_back (j);
+
+        for (int j = 0; j < (int) temp.size() - 1; ++j)
+        {
+            for (int k = j + 1; k < (int) temp.size(); ++k)
+            {
+                if (con[temp[j]][temp[k]] == 0)
+                    goto ff;
+            }
+        }
+        best = max (best, __builtin_popcount (i));
+ff: ;
+    }
+
+    cout << best << "
+";
+
+
+
+
+
+    return 0;
+}

@@ -1,0 +1,13 @@
+import math
+val=raw_input()
+t=int(val)
+for i in range(t):
+	lens=list()
+	stri=raw_input()
+	lens=stri.split()
+	n=int(lens[0])
+	m=int(lens[1])
+	if n>m:
+		print("%d"%(n-m))
+	else:
+		print("%d"%(m-n))

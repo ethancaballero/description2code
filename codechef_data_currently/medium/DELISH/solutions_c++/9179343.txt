@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define sz(_v) (int)(_v).size()
+#define all(_v) (_v).begin(),(_v).end()
+#define pii pair<int,int>
+typedef long long ll;
+const int INF = 1000000000;
+
+const int maxn = 100010;
+ll arr[maxn];
+ll maxl[maxn],minl[maxn],maxr[maxn],minr[maxn];
+int n;
+
+void calc() {
+	ll curr_mx = 0, curr_mn = 1e9 + 100;
+	for (int i = 0; i < n; i ++) {
+		curr_mx = max(curr_mx + arr[i],arr[i]);
+		curr_mn = min(curr_mn + arr[i],arr[i]);
+		maxl[i] = curr_mx;
+		minl[i] = curr_mn;
+	}
+
+	curr_mx = 0;
+	curr_mn = 1e9 + 100;
+	
+	for (int i = n - 1; i >= 0; i --) {
+		curr_mx = max(curr_mx + arr[i],arr[i]);
+		curr_mn = min(curr_mn + arr[i],arr[i]);
+		maxr[i] = curr_mx;
+		minr[i] = curr_mn;
+	}
+}
+
+int main() {
+    int t; cin >> t;
+	while (t --) {
+	    scanf("%d",&n);
+		for (int i = 0; i < n; i ++) scanf("%lld",arr + i);
+		calc();
+
+		ll ans = 0;
+		for (int i = 0; i < n - 1; i ++) {
+			ans = max(ans,abs(maxl[i] - minr[i + 1]));
+			ans = max(ans,abs(minl[i] - maxr[i + 1]));
+		}
+		printf("%lld
+",ans);
+	}
+	return 0;
+}

@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+int freq[100002][26]={0},cf[100002][26]={0},a[100002];
+int prime[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+ long long int  power(int a,int b,int MOD)
+    {
+    long long int x = 1,y = a;
+    while(b)
+    {
+    if(b%2)
+    {
+    x = (x*y)%MOD;
+    }
+    y = (y*y)%MOD;
+    b /= 2;
+    }
+    return x;
+    }
+int main()
+{
+    int n,i,j,left,right,num,t,mod,p,v;
+    long long int ans;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    for(i=1;i<=100;i++)
+    {
+        num=i;j=0;
+        while(j<25&&num!=1)
+        {
+            if(num%prime[j]==0&&num!=1)
+            {
+                freq[i][j]++;
+                num=num/prime[j];
+            }
+            else
+                j++;
+        }
+    }
+    for(i=0;i<25;i++)
+        cf[0][i]=0;
+    for(i=1;i<=n;i++)
+        for(j=0;j<25;j++)
+        cf[i][j]=freq[a[i-1]][j]+cf[i-1][j];
+
+    scanf("%d",&t);
+    while(t--)
+    {
+        ans=1;
+        scanf("%d%d%d",&left,&right,&mod);
+        for(i=0;i<25;i++)
+        {
+            p=cf[right][i]-cf[left-1][i];
+            ans=(ans*power(prime[i],p,mod))%mod;
+        }
+        printf("%lld
+",ans);
+    }
+    return 0;
+}

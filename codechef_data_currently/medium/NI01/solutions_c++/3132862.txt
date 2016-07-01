@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+int pass_time[5200], car_time[51];
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        int n, m, q, p, r, k, toready;
+        cin >> n >> m >> q >> p >> r >> k;
+        if(n) {
+            for(int i=0;i<n;++i) car_time[i] = 0;
+            int tot = m+q;
+            for(int i=0;i<q;++i) pass_time[i] = 0;
+            for(int i=q;i<tot;++i) pass_time[i] = r*(i-q+1);
+
+            int next_car=0, done=0, riding=0;
+            for(int i=0;i<tot;++i) {
+                int ready_time = pass_time[i];
+                if(ready_time>k) break;
+                if(car_time[next_car]>ready_time) ready_time=car_time[next_car];
+                car_time[next_car] = ready_time+p;
+                next_car = (next_car+1)%n;
+                if(ready_time+p<=k) done++;
+                else if(ready_time<=k) riding++;
+            }
+
+            int waiting_cars=0;
+            for(int i=0;i<n;++i) {
+                if(car_time[i]<=k) ++waiting_cars;
+            }
+            cout << waiting_cars << " " << done << " " << max(0,m-k/r) << " " << q+min(m,k/r)-done-riding << endl;
+        } else {
+            toready = min(m,k/r);
+            cout << "0 0 " << m-toready << " " << q+toready << endl;
+        }
+    }
+    return 0;
+}

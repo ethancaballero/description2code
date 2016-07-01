@@ -1,0 +1,11 @@
+l = list(map(int, raw_input().split()))
+A = l[0]; N = l[1]; K=l[2]
+
+lst = [0]*K
+i=0
+while(A>=0 and i<K):
+    lst[i]=A%(N+1)
+    A=A/(N+1)
+    print lst[i],
+    i+=1
+print

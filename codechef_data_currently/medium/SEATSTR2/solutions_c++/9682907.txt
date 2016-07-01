@@ -1,0 +1,192 @@
+	// Shalin
+#include <bits/stdc++.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <limits.h>
+using namespace std;
+#define si(x) scanf("%d",&x)
+#define slli(x) scanf("%lld",&x);
+#define sc(x) scanf("%c",&x);
+#define ss(x) scanf("%s",x);
+#define sd(x) scanf("%lf",&x);
+#define bitcount __builtin_popcount
+#define gcd __gcd
+#define llu long long unsigned int
+#define lli long long int
+#define fi first
+#define se second
+#define pb push_back
+#define mod 1000000007
+#define mp make_pair
+#define vi vector<int>
+#define vlli vector<long long int>
+#define pii pair<int,int>
+
+
+//*****Interesting method for mod inverse*******
+/*
+Firstly, we denote the multiplicative inverse of x mod p as inv(x,p).
+
+1) use dp method to calculation x! mod p for x=1 ~ n (1<=n<p, p is some prime)
+2) calculate inv(n!,p) utilize Extended Euclidean algorithm.
+3) use dp again to calculate inv(x!,p) for x=n-1 ~ 1 with the fact inv(x!,p) * x = inv((x-1)!, p)
+4) now, if we want to now inv(x,p) for some x in [1,n], we only need to calculate (x-1)! * inv(x!,p)
+*/
+
+lli dp[100010],inv[100010];
+
+pair<lli, pair<lli, lli> > extendedEuclid(lli a, lli b) {
+    lli x = 1, y = 0;
+    lli xLast = 0, yLast = 1;
+    lli q, r, m, n;
+    while(a != 0) {
+        q = b / a;
+        r = b % a;
+        m = xLast - q * x;
+        n = yLast - q * y;
+        xLast = x, yLast = y;
+        x = m, y = n;
+        b = a, a = r;
+    }
+    return make_pair(b, make_pair(xLast, yLast));
+}
+ 
+lli modInverse(lli a, lli m) {
+    return (extendedEuclid(a,m).second.first + m) % m;
+}
+
+
+void prec()
+{
+	lli i,j,k;
+	dp[0]=1;
+	for(i=1;i<=100000;i++)
+	{
+		dp[i]=(dp[i-1]*i)%mod; // dp[i] = i!
+	}
+	inv[100000]=modInverse(dp[100000],mod);
+	for(i=99999;i>=0;i--)
+	{
+		inv[i]=(inv[i+1]*(i+1))%mod; // inv[i] = modinverse(i!)
+	}
+}
+int main()
+{
+	//freopen("input.txt","r",stdin);
+    //freopen("output.txt","w",stdout);
+	lli t,i,j,k;
+	cin>>t;
+	prec();
+	while(t--)
+	{
+		string str;
+		cin>>str;
+		lli len=str.size();
+		vlli cnt(26,0);
+		for(i=0;i<len;i++)
+		{
+			cnt[str[i]-'a']++;
+		}
+		lli total=1;
+		for(i=0;i<26;i++)
+		{
+			for(j=i+1;j<26;j++)
+			{
+				total=(total+(cnt[i]*cnt[j])%mod)%mod;				
+			}
+		}
+		
+		for(i=0;i<26;i++)
+		{
+			for(j=i+1;j<26;j++)
+			{
+				for(k=j+1;k<26;k++)
+				{
+					total=(total+(((((cnt[i]*cnt[j])%mod)*cnt[k])%mod)*2)%mod)%mod;
+				}
+			}
+		}
+
+		for(i=0;i<26;i++)
+		{
+			for(j=i+1;j<26;j++)
+			{
+				for(k=j+1;k<26;k++)
+				{
+					for(int it=k+1;it<26;it++)
+					{
+						lli temp=(cnt[i]*cnt[j])%mod;
+						temp=(temp*cnt[k])%mod;
+						temp=(temp*cnt[it])%mod;
+						temp=(temp*3)%mod;
+						total=(total+temp)%mod;
+					}
+				}
+			}
+		}
+
+		for(i=0;i<26;i++)
+		{
+			for(j=0;j<26;j++)
+			{
+				if(j!=i)
+				{
+					for(k=j+1;k<26;k++)
+					{
+						if(k!=i)
+						{
+							lli temp=(cnt[i]*cnt[j])%mod;
+							temp=(temp*(cnt[i]-1))%mod;
+							temp=(temp*cnt[k])%mod;
+							total=(total+temp)%mod;
+						}
+					}
+				}
+			}
+		}
+
+		/*for(i=0;i<26;i++)
+		{
+			for(j=i+1;j<26;j++)
+			{
+				lli temp=cnt[i]*cnt[j];
+				for(k=j+1;k<26;k++)
+				{
+					if(cnt[i]>=1)
+						total=(total+(temp*(cnt[k]*(cnt[i]-1))%mod)%mod)%mod;
+					if(cnt[j]>=1)
+						total=(total+(temp*(cnt[k]*(cnt[j]-1))%mod)%mod)%mod;
+				}
+			}
+		}*/
+
+		for(i=0;i<26;i++)
+		{
+			for(j=i+1;j<26;j++)
+			{
+				if(cnt[i]>=1 and cnt[j]>=1)
+				{
+					lli temp=(cnt[i]*(cnt[i]-1))%mod;
+					temp=(temp*inv[2])%mod;
+					temp=(temp*cnt[j])%mod;
+					temp=(temp*(cnt[j]-1))%mod;
+					temp=(temp*inv[2])%mod;
+					total=(total+temp)%mod;
+				}
+			}
+		}
+
+		lli X=dp[len];
+		for(i=0;i<26;i++)
+		{
+			X=(X*inv[cnt[i]])%mod;
+		}
+		lli Y=X;
+		X=(X*X)%mod;
+		lli finalans=(X-(Y*total)%mod+mod)%mod;
+		cout<<finalans<<endl;
+	}					
+	return 0;
+}

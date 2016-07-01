@@ -1,0 +1,70 @@
+	#include<iostream>
+	#include<ctype.h>
+	#include<string.h>
+	#define mod 1000000007
+	using namespace std;
+	long long int temp[505];
+	long long int modular(long long int base,long long int power)
+	{
+		long long int result=1;
+		base=temp[base];
+		while(power>0)
+		{
+			if(power%2==1)
+				result=(result*base)%mod;
+			base=(base*base)%mod;
+			power/=2;
+		}	
+		return result;
+	}	
+	int main()
+	{
+		int t;
+		cin>>t;
+		temp[1]=1;
+		for(int i=2;i<501;i++)
+		{
+			temp[i]=(temp[i-1]*i)%mod;
+		}	
+		while(t>0)
+		{
+			char a[505];
+			cin>>a;
+			int l=strlen(a);
+			char ch;
+			int small[30]={0};
+			int big[30]={0};
+			long long int ans=1;
+			for(long long int i=0;i<l;i++)
+			{
+				ch=a[i];
+				if(ch<='z' && ch>='a')
+				{
+					small[ch-'a']++;
+				}	
+				else
+					big[ch-'A']++;
+				ans=(ans*(i+1))%mod;
+			}
+
+			for(int i=0;i<30;i++)
+			{
+				if(small[i]>0)
+				{
+					ans=(ans*modular(small[i],mod-2))%mod;
+				}	
+			}	
+
+			for(int i=0;i<30;i++)
+			{
+				if(big[i]>0)
+				{
+					ans=(ans*modular(big[i],mod-2))%mod;
+				}	
+			}
+			cout<<ans<<endl;
+			t--;
+
+		}	
+		return 0;
+	}

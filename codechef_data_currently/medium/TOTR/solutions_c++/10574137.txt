@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+//	freopen("input.txt","r",stdin);
+	int t;
+	string s;
+	cin>>t>>s;
+	while(t--)
+	{
+		string k,c;
+		cin>>c;
+		int l;
+		l=c.length();
+//		cout<<l<<endl;
+		for(int i=0;i<l;i++)
+		{
+			int q=(int)c[i];
+//			cout<<p<<" "<<q<<endl;
+			if(c[i]=='_')
+				k[i]=' ';
+			else if(q>96&&q<123)
+				k[i]=s[q-97];
+			else if(q>64&&q<94)		
+				k[i]=s[q-65]-32;
+			else if(c[i]=='?'||c[i]=='.'||c[i]=='!'||c[i]==',')
+				k[i]=c[i];
+//			cout<<k[i]<<endl;		
+		}
+		for(int i=0;i<l;i++)
+			cout<<k[i];
+		cout<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    long int n;
+    cin>>n;
+
+    long long int a[n];
+
+    int sum=0;
+
+    for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+            sum = sum + a[i];
+        }
+
+    sum = 2*sum;
+
+    if(n*n+n==sum)cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+
+
+}

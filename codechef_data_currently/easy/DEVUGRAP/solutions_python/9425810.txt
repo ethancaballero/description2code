@@ -1,0 +1,21 @@
+def process_problem_statement():
+    T = int(raw_input())
+    for x in range(0,T):
+        N, K = map(int, raw_input().split())
+        arr = map(int, raw_input().split())
+        count = 0
+        
+        for i in range(0,N):
+            
+            t = arr[i] % K
+            if t > K/2:
+                t = K - t
+            
+            if t == arr[i]:
+                t = K - t
+            
+            count += t
+            
+        print count
+    
+process_problem_statement()

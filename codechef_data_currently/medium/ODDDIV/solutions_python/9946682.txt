@@ -1,0 +1,20 @@
+import sys
+
+div = [0]*(10**5+1)
+
+def sieve() :
+    for i in range(1,10**5+1,2):
+        for j in range(i,10**5+1,i) :
+            div[j] += i
+
+pref = [0]*(10**5+1)
+
+def solve() :
+    for i in range(1,10**5+1) :
+        div[i] = div[i] + div[i-1]
+
+sieve()
+solve()
+for __ in range(input()) :
+    l , r = map(int,sys.stdin.readline().split())
+    print div[r] - div[l-1]

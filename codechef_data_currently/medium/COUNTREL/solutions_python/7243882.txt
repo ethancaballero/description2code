@@ -1,0 +1,96 @@
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <memory.h>
+#include <ctime>
+#include <bitset>
+#include <unordered_map>
+#include <unordered_set>
+
+using namespace std;
+
+#define ABS(a) ((a>0)?a:-(a))
+#define MIN(a,b) ((a<b)?(a):(b))
+#define MAX(a,b) ((a<b)?(b):(a))
+#define FOR(i,a,n) for (int i=(a);i<(n);++i)
+#define FI(i,n) for (int i=0; i<(n); ++i)
+#define pnt pair <int, int>
+#define mp make_pair
+#define PI 3.1415926535897
+#define MEMS(a,b) memset(a,b,sizeof(a))
+#define LL long long
+#define U unsigned
+
+int mod = 100000007;
+
+int r(int val, LL p)
+{
+	if (p == 0)
+		return 1;
+	LL res = r(val, p / 2);
+	res *= res;
+	res %= mod;
+	if (p & 1)
+	{
+		res *= val;
+		res %= mod;
+	}
+	return (int)res;
+}
+
+int main() {
+#ifdef Fcdkbear
+	freopen("in.txt", "r", stdin);
+	//freopen("out.txt", "w", stdout);
+	double beg = clock();
+#endif
+
+	LL div = r(2, mod - 2);
+	int t;
+	scanf("%d", &t);
+	LL n;
+	while (t--)
+	{
+		cin >> n;
+		LL val1 = r(2, 2 * n - 1);
+		val1 -= r(2, n - 1);
+		if (val1 < 0)
+			val1 += mod;
+		val1 += r(2, n);
+		if (val1 >= mod)
+			val1 -= mod;
+		LL res1 = r(3, n);
+		val1 -= res1;
+		if (val1 < 0)
+			val1 += mod;
+		res1 -= r(2, n + 1);
+		if (res1 < 0)
+			res1 += mod;
+		res1++;
+		res1 *= div;
+		res1 %= mod;
+		LL res2 = val1 - res1;
+		if (res2 < 0)
+			res2 += mod;
+		cout << res1 << " " << res2 << endl;
+	}
+
+
+#ifdef Fcdkbear
+	double end = clock();
+	fprintf(stderr, "*** Total time = %.3lf ***
+",
+		(end - beg) / CLOCKS_PER_SEC);
+#endif
+	return 0;
+}

@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+long a[100001];
+ 
+main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        string s1,s2;
+        cin>>s1>>s2;
+        for(int i=0; i<=n; i++){
+            cin>>a[i];
+        }
+        int l=0;
+        for(int i=0; i<=n-1; i++){
+            if(s1[i]==s2[i]) l++;
+        }
+        int ans;
+        if(l==0){ans=a[0];}
+        else if(l==n){ans=a[n];}
+        else{
+            int m = 0;
+            for(int i=0; i<=l; i++){
+                if(a[i] >= m){
+                    m = a[i];
+                }
+            }
+            ans = m;
+        }
+        cout<<ans<<endl;
+    }
+}

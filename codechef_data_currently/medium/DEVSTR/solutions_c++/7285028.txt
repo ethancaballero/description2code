@@ -1,0 +1,71 @@
+#include<cstdio>
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    int TC;
+    scanf("%d",&TC);
+    while(TC--){
+        int N,k;
+        scanf("%d %d",&N,&k);
+        string s;
+        cin >> s;
+        if(k==1){
+            string t1,t2;
+            for(int i=0;i<s.size();i++){
+                if(i%2==0){
+                    t1+='0';
+                    t2+='1';
+                }
+                else{
+                    t1+='1';
+                    t2+='0';
+                }
+            }
+            int count1=0;int count2=0;
+            for(int i=0;i<s.size();i++){
+                if(s[i]!=t1[i]) count1++;
+                if(s[i]!=t2[i]) count2++;
+            }
+            if(count1 < count2){
+                printf("%d
+",count1);
+                cout << t1 << endl;
+            }
+            else{
+                printf("%d
+",count2);
+                cout << t2 << endl;
+            }
+        }
+        else{
+            int len=1;int prev=-1;
+            int res=0;
+            for(int i=1;i<s.size();i++){
+                if(s[i]!=s[i-1] || (s[i]==s[i-1] && i==s.size()-1)){
+                    if(i==s.size()-1 && s[i]==s[i-1]) len++;
+                    if(len>k){
+                        for(int j=prev+k+1;j<=prev+len;j=j+k+1){
+                            if(j==prev+len){
+                                s[j-1]=(s[j-1]-'0')^1 +'0';
+                            }
+                            else s[j]=(s[j]-'0')^1 +'0';
+                            res++;
+                        }
+                    }
+                    prev=i-1;
+                    len=1;
+                }
+                else{
+                    len++;
+                }
+            }
+            printf("%d
+",res);
+            cout << s << endl;
+        }
+    }
+}

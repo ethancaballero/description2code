@@ -1,0 +1,30 @@
+nums = map(int, raw_input().split())
+correct = nums[0] - nums[1]
+if correct == 1:
+    print correct+1
+elif correct >= 2 and correct <= 9:
+    print correct-1
+elif correct >= 10 and correct <= 89:
+    print correct+10
+elif correct >= 90 and correct <= 98:
+    print correct+1
+elif correct == 99:
+    print correct-1
+elif correct >= 100 and correct <= 899:
+    print correct+100
+elif correct >= 900 and correct <= 989:
+    print correct+10
+elif correct >= 990 and correct <= 998:
+    print correct+1
+elif correct == 999:
+    print correct-1
+elif correct >= 1000 and correct <= 8999:
+    print correct+1000
+elif correct >= 9000 and correct <= 9899:
+    print correct+100
+elif correct >= 9900 and correct <= 9989:
+    print correct+10
+elif correct >= 9990 and correct <= 9998:
+    print correct+1
+elif correct == 9999:
+    print correct-1

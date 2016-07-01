@@ -1,0 +1,78 @@
+// problem :  
+//by Nitish Kumar
+//user id : nk17kumar
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll ;
+typedef unsigned int ui;
+#define br printf("
+")
+#define loop(i,k,n) for(int i=k;i<n;i++)
+#define loopr(i,k,n) for(int i=k;i>=n;i--)
+#define arrin(arrname,size) loop(i,0,size) cin>>arrname[i]
+#define fastinput() ios_base::sync_with_stdio(false)
+#define rocknroll() int t;cin>>t;while(t--)
+#define mod 1000000007
+#define loop1(i,k,m) for(int i=k;i<=m;i++)
+#define loop2(i,k,m) for(int i=k;i<m;i++)
+#define F first
+#define S second
+#define mp make_pair
+#define pb push_back
+#define sz(x) ((int)(x).size())
+#define each(it,v) for(__typeof((v).begin()) i = (v).begin(); i != (v).end(); ++i)
+#define DEBUG(x) cerr << #x << " = " << x << " at line " << __LINE__ << endl;
+#define all(o) (o).begin(), (o).end()
+#define pq priority_queue 
+//	freopen("7.txt","r",stdin);
+//  freopen("7out.txt","w",stdout);
+//  int memory[500]
+//  memset(memory, -1 ,500)
+
+//------------approach 1 failed !!!!!!-----------------------------------------------------------------//
+// Approach 2-----------------------------------------//
+
+ll a[1000001];
+ll d[1000001];
+int main()
+{
+	fastinput();
+	cin.tie(0);
+	cout.tie(0);
+	rocknroll()
+	{
+	    int n,k;
+		cin>>n>>k;
+//		vector <ll> a(n+1,0);
+//		vector <ll> d(n,1);
+loop(i,0,n) d[i]=1;
+		int l,r,w,z;
+		while(k--)
+		{
+			cin>>w>>l>>r>>z;
+			if(w==1)
+			{
+			d[l-1]+=z;
+			d[r]-=z;
+		    }
+		   else
+		    {
+		   	d[l-1]-=z;
+			d[r]+=z;
+		    }
+		}
+		a[1]=d[0];
+		ll mini=a[1],maxi=a[1];
+		loop(i,2,n+1)
+		{
+			a[i]=d[i-1]+a[i-1];
+			mini=min(mini,a[i]);
+			maxi=max(maxi,a[i]);
+		}	
+     printf("%lld
+",maxi-mini);
+     //printf("%lld
+",*max_element(all(a))-*min_element(a.begin(),a.end()));
+		
+	}
+}

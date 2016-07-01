@@ -1,0 +1,48 @@
+#include <iostream>
+#include<stdio.h>
+
+using namespace std;
+int check(int n,char*s)
+{int flag=0;
+    for(int i=0;i<n;i++)
+    {
+        if(s[i]=='I')
+        {
+            flag=1;
+            break;
+        }
+        else if(s[i]=='Y')
+        {
+            flag=2;
+            break;
+        }
+    }
+    return flag;
+}
+
+int main()
+{
+ int n=0,nf=0,ans[1000];
+ char s[1000];
+cin>>n;
+for(int i=0;i<n;i++)
+{
+    cin>>nf;
+    cin>>s;
+
+    ans[i]=check(nf,s);
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(ans[i]==0)
+            cout<<"NOT SURE
+";
+            else if(ans[i]==1)
+                cout<<"INDIAN
+";
+                else
+                    cout<<"NOT INDIAN
+";
+                    }
+    return 0;
+}

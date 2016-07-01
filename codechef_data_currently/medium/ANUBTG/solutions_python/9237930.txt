@@ -1,0 +1,13 @@
+for t in range(int(raw_input().split(' ')[0])):
+    n = int(raw_input().split(' ')[0])
+    st = raw_input().split(' ')[:n]
+    stn = []
+    for k in st:
+        stn.append(int(k))
+    stn.sort(reverse=True)
+    tsum = 0
+    for i in range(n):
+        if i%4 == 0 or i%4 == 1:
+            tsum = tsum + int(stn[i])
+    print tsum
+

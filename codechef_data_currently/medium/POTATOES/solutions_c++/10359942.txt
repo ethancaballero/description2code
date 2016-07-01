@@ -1,0 +1,39 @@
+#include<iostream>
+#include<cstring>
+#include<vector>
+#include<cstdio>
+#include<cmath>
+
+using namespace std;
+
+int main()
+
+{
+    int t,x,y;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d %d",&x,&y);
+        int check=x+y;
+        for(int i=1;i<1000;i++)
+        {
+            int count=0;
+            int sum=check+i;
+            for(int j=2;j<sum;j++)
+            {
+                if(sum%j==0)
+                {
+                    count++;
+                    break;
+                }
+            }
+            if(count==0)
+            {
+             printf("%d
+",i);
+             break;
+            }
+        }
+    }
+    return 0;
+}

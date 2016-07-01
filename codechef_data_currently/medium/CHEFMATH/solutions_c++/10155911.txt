@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define mod 1000000007
+using namespace std;
+ll f[46],dp[100000][11][46];
+void fib()
+{
+f[0] = 1;
+  f[1] = 2;
+  for (int i = 2; i <= 45; i++)
+  {
+      f[i] = (f[i-1]%mod + f[i-2]%mod)%mod;
+  }
+}
+ll fu(ll num,ll rem,ll ind)
+{
+	if(num<0 || num >rem*f[ind])
+	return 0;
+	if(num==0 && rem==0)
+	return 1;
+	if(rem<=0)
+	return 0;
+	ll ans=0;
+  for(int i=ind;i>=0;i--)
+   {
+  	if(f[i]<=num)
+  	   { 
+  	    	ans=(ans+fu(num-f[i],rem-1,i)%mod)%mod;
+  	   }
+   }
+   return ans;
+}
+int main()
+{
+int q;
+scanf("%d",&q);
+fib();
+memset(dp,-1,sizeof(dp));
+while(q--)
+{
+	ll x,k;
+	scanf("%lld%lld",&x,&k);
+	printf("%lld
+",fu(x,k,45)%mod);
+}
+ return 0;
+}  

@@ -1,0 +1,47 @@
+#include <map>
+#include <set>
+#include <vector>
+#include <cstdio>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+int main(){
+	int t;
+	scanf("%d", &t);
+	for (int i = 0; i < t; ++i)
+	{
+		int n,m;
+		scanf("%d %d", &n, &m);
+		vector<int> fin;
+		bool paired[n];
+		vector<pair<int, int> > pairs;
+		
+		for(int j = 0; j < n; j++){
+			paired[j] = false;
+		}
+
+		for (int j = 0; j < m; ++j)
+		{
+			int u, v;
+			scanf("%d %d", &u, &v);
+			pairs.push_back(make_pair(u,v));
+		}
+		
+		for (int j = m - 1; j >= 0; j--)
+		{
+			if(paired[pairs[j].first] == false && paired[pairs[j].second] == false){
+				paired[pairs[j].first] = true;
+				paired[pairs[j].second] = true;
+				fin.push_back(j);
+			}
+		}
+		
+		for (int j = fin.size() - 1;  j >= 0; j--)
+		{
+			printf("%d ", fin[j]);
+		}
+		printf("
+");
+	}
+}

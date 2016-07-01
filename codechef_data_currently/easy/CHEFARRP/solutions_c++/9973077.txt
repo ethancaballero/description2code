@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define mod 1000000007
+#define LL long long
+
+void solve()
+{
+    int n,a[50];
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    LL s, p,c = 0;
+    for(int i=0;i<n;i++)
+    {
+        s = 0;
+        p = 1;
+        for(int j=i;j<n;j++)
+        {
+            s += a[j];
+            p *= a[j];
+
+            if(s==p)    c++;
+        }
+    }
+    printf("%lld
+",c);
+}
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+
+    while(t--)
+        solve();
+    return 0;
+}

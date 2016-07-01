@@ -1,0 +1,31 @@
+import sys
+n,m=map(int,raw_input().split())
+input=map(int,raw_input().split())
+l=len(input)
+marker=0
+    
+i=0
+for i in range(m):
+    p,q=raw_input().split()
+    r=int(q)
+    r=r%l
+    if p=='C':
+        marker+=r
+        if marker>l-1:
+            marker-=l
+    
+    elif p=='A':
+        marker-=r
+        if marker<0:
+            marker+=l
+     
+    if p=='R':
+        temp=marker+r-1
+        if temp>l-1:
+            temp-=l
+        elif temp<0:
+            temp+=l
+        #print marker,temp
+        print input[temp]
+        marker%=l
+ 

@@ -1,0 +1,33 @@
+#include <iostream>
+#include<climits>
+using namespace std;
+
+int main()
+{
+    long long int n,k,x;
+    cin>>n>>k;
+    long long int *ar= new long long int[n];
+    for(int i=0;i<n;i++)
+    {
+    cin>>ar[i];
+    }
+    long long int maxm=INT_MIN;
+    long long int minm=INT_MAX;
+    for (int i=0;i<n;i++)
+    {   if(ar[i]>maxm)
+            maxm=ar[i];
+        if(ar[i]<minm)
+            minm=ar[i];
+    }
+    if(k==0)
+    {for(int i=0;i<n;i++)
+    cout<<ar[i]<<" ";}
+    if(k!=0 && k%2==0)
+    {for(int i=0;i<n;i++)
+    cout<<ar[i]-minm<<" ";
+    }
+    if(k!=0 && k%2!=0)
+    {for(int i=0;i<n;i++)
+    cout<<maxm-ar[i]<<" ";}
+    return 0;
+}

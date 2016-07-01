@@ -1,0 +1,73 @@
+#include<iostream>
+#include<map>
+#include<vector>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#include<cstdio>
+#include<fstream>
+using namespace std;//miller rabin primality 7 set for 64 bit int {2, 325, 9375, 28178, 450775, 9780504, 1795265022}
+#define abs(x) ((x)>0?(x):-(x))
+#define M 1000000007
+#define lld signed long long int
+#define pp pop_back()
+#define ps(x) push_back(x)
+lld n,dp[166][166],fdp[166][166],l;
+string txt;
+string dict[35];//dictionary
+bool find(int s,int e,int x)
+{
+	int xl=dict[x].length();
+	if(s+xl-1>e)return 0;
+	for(int i=0;i<xl;++i)
+	{
+		if(dict[x][i]!=txt[s+i])return 0;
+	}
+	return 1;
+}
+lld rec_grundy(int i,int j)
+{
+	//cout<<i<<' '<<j<<endl;
+	if(i>j)return 0;
+	if(fdp[i][j])return dp[i][j];
+	fdp[i][j]=1;
+	vector<int> gr;//grundy value of followers
+	for(int x=1;x<=n;++x)
+	{
+		int xl=dict[x].length();
+		for(int p=i;p<=j;++p)
+		{
+			if(find(p,j,x))
+			{
+				gr.ps(rec_grundy(i,p-1)^rec_grundy(p+xl,j));
+			}
+		}
+	}
+	int x=0,grl=gr.size();
+	sort(gr.begin(),gr.end());
+	if(grl==0 or gr[0]!=0){dp[i][j]=0;return dp[i][j];}
+	for(int i1=1;i1<grl;++i1)
+	{
+		if(gr[i1]==gr[i1-1] or gr[i1]==1+gr[i1-1]);
+		else {dp[i][j]=gr[i1-1]+1;return dp[i][j];}
+	}
+	dp[i][j]=gr[grl-1]+1;
+	return dp[i][j];
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		for(int i=0;i<=30;i++)for(int j=0;j<=30;++j)fdp[i][j]=0;
+		cin>>txt;
+		l=txt.length();
+		cin>>n;
+		for(int i=1;i<=n;++i)cin>>dict[i];
+		if(rec_grundy(0,l-1)==0)cout<<"Tracy
+";
+		else cout<<"Teddy
+";
+	}
+}

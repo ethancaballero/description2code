@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+
+int main()
+{
+	ll t,s,c,k,pts;
+	cin>>t;
+	for(int p=0;p<t;p++)
+	{
+		cin>>s>>c>>k;
+
+       if(k>=s+1)  // || (k==s+1 ) )
+		{
+			cout<<0<<"
+";
+			continue;
+		}
+		if(k==1 && k==s+1)
+		{
+			pts=0;
+			for(int i=1;i<=c;i++)
+			{
+				pts+=pow(2,i);
+			}
+			cout<<pts<<"
+";
+			continue;
+		}
+		
+		ll q=s-k+1;
+	   pts=pow(2,q)+1;
+		if(c>=q && q+1<=s)
+		{
+			pts=2*pts-1;
+		}
+		cout<<pts<<"
+";
+	}
+	return 0;
+} 

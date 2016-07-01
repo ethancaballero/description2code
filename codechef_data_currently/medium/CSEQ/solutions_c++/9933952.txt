@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define mp make_pair
+#define pb push_back
+#define ll long long
+#define debug(x) cout<<">value ("<<#x<<") : "<<x<<endl;
+#define fr(i,beg,end) for(i=beg;i<end;i++)
+#define itfr(it,stl) for(it=stl.begin();it!=stl.end();it++)
+#define PII pair<int,int>
+#define init(x,val) memset(x,val,sizeof(x))
+#define fst first
+#define snd second
+#define MOD 1000003
+using namespace std;
+ll f[MOD];
+ll power(ll a,ll b)
+{
+    ll res=1;
+    while(b>0)
+    {
+        if(b&1)
+            res=(res*a)%MOD;
+        a=(a*a)%MOD;
+        b>>=1;
+    }
+    return res;
+}
+ll invmod(ll a)
+{
+    return power(a,MOD-2);
+}
+ll SmallC(ll n,ll r)
+{
+    return (f[n]*invmod((f[n-r]*f[r])%MOD))%MOD;
+}
+long long Lucas(int n, int m)
+{
+    if (n==0 && m==0) return 1;
+    int ni = n % MOD;
+    int mi = m % MOD;
+    if (mi>ni) return 0;
+    return Lucas(n/MOD, m/MOD) * SmallC(ni, mi);
+}
+
+long long C(int n, int r)
+{
+    return Lucas(n, r);
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll t,n,l,r;
+    f[0]=1;
+    fr(n,1,MOD)
+        f[n]=(f[n-1]*n)%MOD;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>l>>r;
+        ll x=r-l+1;
+        cout<<(C(x+n,n)+MOD-1)%MOD<<endl;
+    }
+    return 0;
+}

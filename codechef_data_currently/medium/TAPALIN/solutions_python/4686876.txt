@@ -1,0 +1,40 @@
+import sys
+ 
+ 
+def invmod(a, b):
+    if a == 0: return 0
+    if b == 0: return 1
+ 
+    px, ppx = 0, 1
+    py, ppy = 1, 0
+ 
+    while b:
+        q = a // b
+        a, b = b, a % b
+        x = ppx - q * px
+        y = ppy - q * py
+        ppx, px = px, x
+        ppy, py = py, y
+ 
+    return ppx
+ 
+ 
+P = 10 ** 9 + 7
+iP = invmod(1 - 26, P)
+ 
+n = int(sys.stdin.readline().strip())
+for _ in range(n):
+    t = sys.stdin.readline().strip()
+    if not t:
+        break
+    n = int(t)
+    m = n / 2 + (n & 1)
+ 
+    r = 26 * (1 - pow(26, m, P))
+    r *= iP
+    r %= P
+    r = r * 2
+    if n & 1:
+        r -= pow(26, m, P)
+    r %= P
+    print r

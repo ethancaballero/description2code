@@ -1,0 +1,18 @@
+from sys import stdin
+
+for trial in xrange(int(stdin.readline())):
+    N,M = map(int,stdin.readline().split())
+    sointsChakras = (101)*[0]
+    sofloatsChakras = (101)*[0]
+
+    for i in xrange(N):
+        C,L = map(int,stdin.readline().split())
+        sointsChakras[L]+=C
+    for i in xrange(M):
+        C,L = map(int,stdin.readline().split())
+        sofloatsChakras[L]+=C
+    s=0
+    for L in xrange(1,100+1):
+        diff = sofloatsChakras[L]-sointsChakras[L]
+        if diff>0: s+=diff
+    print s

@@ -1,0 +1,39 @@
+ 
+t = int(raw_input())
+ 
+zero_list = [ "000", "101", "110", "011" ]
+one_list = [ "100", "001", "010", "111" ]
+ 
+
+for iter in range(t):
+	cells = list(raw_input())
+	if cells[-1] == "0":
+		possibles = zero_list[:]
+	else:
+		possibles = one_list[:]
+ 
+
+	possibles.sort()
+	#print len(cells)-1, possibles
+	for i in range(len(cells)-2, -1, -1):
+		for j in range(4):
+			if cells[i]=="0":
+				#print zero_list[j], "==", possibles[j]
+				possibles[j] = zero_list[j][0] + possibles[j]
+			else:
+				#print zero_list[j],"==", possibles[j]
+				possibles[j] = one_list[j][0] + possibles[j]
+		possibles.sort()
+		#print i, possibles
+ 
+	answers = []
+	for poss in possibles:
+		if poss[0:2] == poss[-2:]:
+			answers.append(poss[1:-1])
+	if len(answers)==0:
+		print "No solution"
+	elif len(answers)>1:
+		print "Multiple solutions"
+	else:
+		print answers[0]
+ 

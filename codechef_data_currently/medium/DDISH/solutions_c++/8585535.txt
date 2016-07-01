@@ -1,0 +1,96 @@
+#include<cstdio>
+using namespace std;
+typedef long long LL;
+LL fact[11]={1},dd[11];
+
+LL delperm(LL k,LL n)
+{
+   return fact[k]/fact[k-n];
+
+
+}
+LL fn(LL n)
+{
+    int k=1,i,j,p;
+    LL ans=0;
+    int a[11];
+    a[0]=0;
+    if(n==0)
+        return 0;
+     if(n>9876543210LL)
+    {
+        return( dd[10]);
+
+    }
+    while(n>0)
+    {
+        a[k]=n%10;
+        n=n/10;
+        k++;
+
+    }
+    k--;
+    int mark[10]={0};
+    ans+=dd[k-1];
+
+    for(i=k;i>=1;i--)
+    {
+
+
+        for(j=(i==k?1:0);j<a[i];j++)
+        {
+
+            if(!mark[j])
+            {
+
+                p=k-i+1;//starting se nikali hai position
+                ans+=delperm(10-p,k-p);
+             }
+
+
+        }
+        if(mark[j])
+        {
+            break;
+        }
+        mark[a[i]]=1;
+    }
+
+
+return ans;
+}
+
+int main()
+{
+    int t,i,j;
+    LL l,r,q,g,h;
+    fact[0]=1;
+    for(i=1;i<=10;i++)
+    {
+      fact[i]=i*fact[i-1];
+    }
+
+
+dd[0]=0;
+     for(i=1;i<=10;i++)
+     {
+         dd[i]=dd[i-1]+9*fact[9]/fact[10-i];
+
+     }
+
+
+
+    scanf("%d",&t);
+   while(t--)
+    {
+        scanf("%lld %lld",&l,&r);
+
+        q=fn(r+1)-fn(l);
+        printf("%lld
+",q);
+
+
+    }
+
+}
+

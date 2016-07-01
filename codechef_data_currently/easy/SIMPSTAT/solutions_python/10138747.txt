@@ -1,0 +1,12 @@
+t = input()
+for i in range(t):
+    n,k = map(int,raw_input().split())
+    a = map(int,raw_input().split())
+    for j in range(k):
+        min_value = min(a)
+        a.remove(min_value)
+        max_value = max(a)
+        a.remove(max_value)
+        
+    average = sum(a)*1.0/len(a)
+    print("{0:.6f}".format(average))

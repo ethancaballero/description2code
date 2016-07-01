@@ -1,0 +1,23 @@
+limit = 10000
+primes = {}
+primes[0] = False
+primes[1] = False
+for i in xrange(2, limit+1):
+    primes[i] = True
+i = 0
+while ((i*i)<limit+1):
+    if (primes[i]):
+        for j in xrange(i*i, limit+1, i):
+            primes[j] = False
+    i += 1
+primelist = [k for k, v in primes.items() if v == True]
+pairs = [0 for x in xrange(limit+1)]
+for p in primelist:
+    for q in primelist:
+        if p+(2*q)>limit:
+            break
+        pairs[p+(2*q)] += 1
+
+for tc in xrange(int(raw_input())):
+    n = int(raw_input())
+    print pairs[n]

@@ -1,0 +1,4 @@
+t=int(raw_input())
+for i in range(0,t):
+	lis=list(map(int , raw_input().split()))
+	print max(lis),sum(lis)

@@ -1,0 +1,47 @@
+#kcahdog
+
+def sieve(n):
+    candidates = range(n+1)
+    fin = int(n**0.5)
+    for i in xrange(2, fin+1):
+        if not candidates[i]:
+            continue
+        candidates[2*i::i] = [None] * (n//i - 1)
+    return [i for i in candidates[2:] if i]
+
+def sieve2(n):
+    candidates = range(n+1)
+    fin = int(n**0.5)
+    for i in xrange(2, fin+1):
+        if not candidates[i]:
+            continue
+        candidates[2*i::i] = [None] * (n//i - 1)
+    return [i for i in candidates]
+
+prime=sieve2(10000)
+prime[0]=None
+prime[1]=None
+arr=sieve(9974)
+ans=[0]*5000
+ans[0]=0
+ans[1]=0
+ans[5]=0
+for i in range(7,10000,2):
+    count=0
+    for u in arr:
+        temp=i-2*u
+        if(temp<2):
+            break
+        if(prime[temp]!=None):
+            count+=1
+    ans[i/2]=count
+
+for i in range(int(raw_input())):
+    num=int(raw_input())
+    if(num%2==0):
+        if(prime[(num-2)/2]!=None):
+            print 1
+        else:
+            print '0'
+    else:
+        print ans[num/2]        

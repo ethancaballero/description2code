@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define M 1000000007
+#define lli long long
+
+using namespace std;
+
+lli A[102];
+lli dp[102][102];
+
+lli f(int left, int right)
+{
+    if ( left > right ) return 0;
+    if ( left == right ) return 0;
+    lli &ans = dp[left][right];
+    if ( ans != -1 ) return ans;
+    ans = f(left,right-1);
+    for ( int i = left; i <= right-1; i++ ) {
+        if ( A[i] < 0 && A[i] == -A[right] ) {
+            ans = (ans + (f(left,i-1)*f(i+1,right))%M)%M;
+            ans = (ans + 1)%M;
+            ans = (ans + f(left,i-1))%M;
+            ans = (ans + f(i+1,right))%M;
+        }
+    }
+    return ans;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    memset(dp, -1, sizeof(dp));
+    for ( int i = 1; i <= n; i++ ) {
+        cin >> A[i];
+    }
+    lli ans = f(1,n) + 1;
+    if ( ans >= M ) ans -= M;
+    cout << ans << endl;
+    return 0;
+}

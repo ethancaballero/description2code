@@ -1,0 +1,88 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+class Prime{
+	int arr[1000000];
+	public:
+		Prime()
+		{
+			int i,j,k; 
+			for(i=0;i<1000000;i++)
+			arr[i]=0;
+			arr[0]=arr[1]=1;
+			fillPrime();
+		}
+		int fillPrime()
+		{
+			int i,j;
+			for(i=2;i<1000000;i++)
+			{
+				if(arr[i]==0)
+				for(j=2;i*j<1000000;j++)
+				arr[i*j]=1;
+			}
+		}
+		void solve(int a)
+		{
+			int a1=0,a2=0,a3=0,i,j,A2;
+			int A=a,b,f;
+			double d=1/3.0;
+			int c=pow(a,d);
+			for(i=c;i>=2;i--)
+			{
+				if(arr[i]==0)
+				break;
+			}
+				while(i>=2)
+				{  
+				    A=a;
+				   if(arr[i]!=0)
+				   {
+				   	i--;
+				   continue;
+			       }
+				   else{
+				   	a3=i;
+				   	A-=pow(a3,3);
+				   	A2=A;
+				   	j=pow(A,.5);
+					while(j>=2)
+					{
+						A=A2;
+						if(arr[j]!=0)
+						{
+						j--;
+						continue;
+						}
+						else
+						{
+						a2=j;
+						A-=pow(a2,2);
+						a1=A;
+						if(arr[a1]==0)
+						{
+						cout<<a1<<" "<<a2<<" "<<a3<<endl;
+						return;
+					    }
+				     	}
+				     	j--;
+					}
+			  	}
+				i--;
+		      }
+		      a1=a2=a3=0;
+			cout<<a1<<" "<<a2<<" "<<a3<<endl;
+	}
+};
+int main()
+ {
+	Prime p;
+	int a;
+	cin>>a;
+     while(a!=0)
+     {
+        p.solve(a);
+     	cin>>a;
+     }
+     return 0;
+}

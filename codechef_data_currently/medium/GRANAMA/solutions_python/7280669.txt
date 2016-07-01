@@ -1,0 +1,22 @@
+'''
+for _ in xrange(input()):
+    x,y=raw_input().split()
+    chk=True
+    for z in xrange(97,123):
+        i=x.count(chr(z));  j=y.count(chr(z))
+        if i>0 and j>0 and i!=j:
+            print 'NO'; chk=False; break
+    if chk:
+        print 'YES'
+cant find out the test cases where this code fails :(        
+'''
+for _ in xrange(input()):
+    x,y=raw_input().split()
+    x=list(x); y=list(y); x.sort(); y.sort()
+    if set(x)==set(y):
+        if x==y:
+            print'YES'
+        else:
+            print 'NO'
+    else:
+        print 'YES'

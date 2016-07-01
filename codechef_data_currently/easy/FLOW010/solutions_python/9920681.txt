@@ -1,0 +1,13 @@
+counter = int(raw_input())
+ 
+while counter > 0:
+    counter = counter - 1
+    c = raw_input().lower()
+    if(c == 'b'):
+        print 'BattleShip'
+    if(c == 'c'):
+        print 'Cruiser'
+    if(c == 'd'):
+        print 'Destroyer'
+    if(c == 'f'):
+        print 'Frigate' 

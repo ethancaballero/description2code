@@ -1,0 +1,132 @@
+#include<bits/stdc++.h>
+#ifndef ONLINE_JUDGE
+#define gc getchar
+#else
+#define gc getchar_unlocked
+#endif // ONLINE_JUDGE
+
+using namespace std;
+
+#define pr 1000000007
+#define MAX 5000
+
+long long int z[MAX+1][MAX+1];
+long long int cnt[MAX+1];
+long long int cnt_aux[MAX+1];
+long long int C[MAX+1][MAX+1];
+long long int K[MAX+1];
+
+
+inline long long int scanint(){
+    char c = gc();
+    long long int x = 0;
+    while(c<'0'||c>'9'){
+        c=gc();
+    }
+    while(c>='0'&&c<='9'){
+        x=(x<<1)+(x<<3)+c-'0';
+        c=gc();
+    }
+    return x;
+}
+
+void triangle(){
+    C[0][0] = 1;
+    for(int i=1;i<=MAX;++i){
+        C[i][0] = 1;
+        for(int j=1;j<=MAX;++j){
+            C[i][j] = (C[i-1][j]+C[i-1][j-1])%pr;
+        }
+    }
+
+}
+
+void computeZ(string s,int idx,int left,int right){
+    int i,l,r,k,n;
+    l = r = left;
+    n = s.length();
+    z[idx][left] = n-left;
+    for(i=left+1;i<n;++i){
+    if(i>r){
+        l = r = i;
+        while(r<n && s[r] == s[(r-l)+left]) r++;
+        z[idx][i] = r-l;
+        r--;
+        //cout<<idx<<" "<<i<<" "<<z[idx][i]<<endl;
+    }
+    else{
+        k = (i-l)+left;
+        if(z[idx][k]<r-i+1){
+            z[idx][i] = z[idx][k];
+        }
+        else{
+            l = i;
+            while(r<n && s[(r-l)+left] == s[r]) r++;
+            z[idx][i] = r-l;
+            r--;
+        }
+
+    }
+}
+}
+
+int main(){
+long long int i,n,q,t,k,j,ans;
+string s;
+t = scanint();
+triangle();
+
+
+
+while(t--){
+    n = scanint();
+    q = scanint();
+    s.clear();
+    cin>>s;
+    for(i=0;i<=n;++i){
+        cnt[i] = 0;
+        cnt_aux[i] = 0;
+        K[i] = 0;
+    }
+    for(i=0;i<n;++i){
+        computeZ(s,i,i,n);
+    }
+    for(i=0;i<n;++i){
+        for(j=0;j<=n;++j){
+            cnt_aux[j] = 0;
+        }
+        for(j=i;j<n;++j){
+            cnt_aux[z[i][j]]++;
+        }
+        for(j=n-1;j>=0;--j){
+            cnt_aux[j] += cnt_aux[j+1];
+        }
+        for(j=1;j<=n;++j){
+            cnt[cnt_aux[j]]++;
+        }
+
+    }
+
+    for(i=1;i<n;++i){
+        cnt[i] = cnt[i]-cnt[i+1];
+    }
+
+    for(i=1;i<=n;++i){
+        for(j=i;j<=n;++j){
+            K[i] = (K[i]+((C[j][i])*(cnt[j]))%pr)%pr;
+        }
+    }
+    while(q--){
+        k = scanint();
+        if(k>n) printf("0
+");
+        else printf("%lld
+",K[k]);
+
+    }
+
+
+}
+
+}
+

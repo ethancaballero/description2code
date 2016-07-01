@@ -1,0 +1,6 @@
+t = int(raw_input())
+while t:
+    N,K = map(int,raw_input().split())
+    L = [int(i) for i in raw_input().split()]; L.sort()
+    m = max(K,N-K); print sum(L[-m:]) - sum(L[:-m])
+    t-=1

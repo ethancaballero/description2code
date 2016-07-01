@@ -1,0 +1,29 @@
+for _ in range(int(raw_input())):
+	a=str(raw_input())
+	b="abcdeghf"
+	c="12345678"
+	if len(a)!=5:
+		print "Error"
+		continue
+	if a[0] not in b or a[1] not in c or a[2]!="-" or a[3] not in b or a[4] not in c:
+		print "Error"
+		continue
+	else:
+		if abs(ord(a[3])-ord(a[0]))==1 :
+
+			   if abs(int(a[1])-int(a[4]))==2:
+				   print "Yes"
+				   continue
+			   else:
+				   print "No"
+				   continue
+		if abs(ord(a[3])-ord(a[0]))==2:
+			if abs(int(a[1])-int(a[4]))==1:
+				print "Yes"
+				continue
+			else:
+				   print "No"
+				   continue
+
+		else:
+			print "No"

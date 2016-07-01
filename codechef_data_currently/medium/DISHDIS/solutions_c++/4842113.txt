@@ -1,0 +1,64 @@
+/* Author : Vamsi Kavala */
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
+#include <algorithm>
+#include <map>
+#include <vector>
+#include <list>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <string>
+#include <cmath>
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define FORD(i,a,b) for(int i=a;i>=b;i--)
+#define REP(i,n) FOR(i,0,n)
+#define PB push_back
+#define ITER(i,a) for( typeof(a.begin()) i=a.begin();i!=a.end();i++)	
+#define mod 1000000007
+#define MAXN 1000010
+
+typedef pair<int,int>   PI;
+typedef vector<int> VI;
+typedef long long int LL;
+
+int main(){
+
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,m,x[210],y[210],dp[210][210]={0};
+		scanf("%d%d",&n,&m);
+		REP(i,m)
+			scanf("%d%d",&x[i],&y[i]);
+
+		FOR(i,x[0],y[0]+1)
+			dp[0][i]=1;
+
+		FOR(i,1,m)
+		{
+			REP(j,n+1)
+			{
+				FOR(k,x[i],y[i]+1)
+					if(j-k>=0)
+					{
+						dp[i][j]+=dp[i-1][j-k];
+						if(dp[i][j]>=mod)
+							dp[i][j]%=mod;
+					}
+
+			}
+		}
+
+		printf("%d
+",dp[m-1][n]);
+	}
+	return 0;
+}

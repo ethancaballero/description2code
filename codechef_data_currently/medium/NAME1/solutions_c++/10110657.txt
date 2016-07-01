@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string a,b;
+        cin>>a>>b;
+        int n;
+        cin>>n;
+        string *array=new string[n];
+        for(int i=0;i<n;i++){
+            cin>>array[i];
+        }
+        long long dp[26]={0};
+        for(int i=0;i<a.length();i++){
+            dp[a[i]-97]++;
+        }
+        for(int i=0;i<b.length();i++){
+            dp[b[i]-97]++;
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<array[i].length();j++){
+                dp[array[i][j]-97]--;
+            }
+        }
+        //for(int i=0;i<26;i++){
+           // cout<<dp[i]<<" ";
+        //}
+        //cout<<endl;
+        int flag=1;
+        for(int i=0;i<26;i++){
+            if(dp[i]<0){
+                cout<<"NO"<<endl;
+                flag=0;
+                break;
+            }
+            
+        }
+        if(flag==1){
+            cout<<"YES"<<endl;
+        }
+    }
+}

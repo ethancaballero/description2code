@@ -1,0 +1,44 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		int m,x,y;
+		cin>>m>>x>>y;
+		int a[m];
+		int room[100];
+		x=x*y;
+		int f,l;
+		for(int i = 0;i<100;i++){
+			room[i]=0;
+		}
+		for(int i = 0;i<m;i++)
+	{cin>>a[i];
+	f=a[i]-x-1;
+	if(f<0)
+	f=0;
+	l = a[i]+x-1;
+	if(l>99)
+	l=99;
+	
+	for(int j = f;j<=l;j++)
+	room[j]=1;
+	
+	
+		}
+		int count = 0;
+		for(int i = 0;i<100;i++){
+			if(room[i]==0){
+			count++;
+		//	cout<<i<<" ";
+			}
+			
+		}
+		//cout<<endl;
+		cout<<count<<endl;	
+		
+	
+		
+	}
+}

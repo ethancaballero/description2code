@@ -1,0 +1,6 @@
+from collections import Counter
+for i in range(input()):
+  n = input()
+  array=map(int,raw_input().split())
+  c=Counter(array)
+  print n-max(c.values())

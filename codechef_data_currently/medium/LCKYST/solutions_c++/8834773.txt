@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int n;
+	scanf("%lld",&n);
+	while(n--)
+	{
+		long long int t,tw=0,fi=0,ans,temp;
+		scanf("%lld",&t);
+		ans=t;
+		temp=t;
+		while(temp%2==0)
+		{
+			temp=temp/2;
+			tw++;
+		}
+		temp=t;
+		while(temp%5==0)
+		{
+			temp=temp/5;
+			fi++;
+		}
+		while(fi>tw)
+		{
+			ans*=4;
+			tw+=2;
+		}
+		printf("%lld
+",ans);
+		
+	}
+	return 0;
+}

@@ -1,0 +1,16 @@
+import sys
+
+for t in xrange(int(sys.stdin.readline())):
+	s1=sys.stdin.readline()
+	s2=sys.stdin.readline()
+	a=[0]*123
+	b=[0]*123
+	for i in xrange(len(s1)):
+		a[ord(s1[i])]+=1
+	for i in xrange(len(s2)):
+		b[ord(s2[i])]+=1
+	c=0
+	for i in xrange(40,123):
+		if(a[i]!=0 and b[i]!=0):
+			c+=min(a[i],b[i])
+	print c

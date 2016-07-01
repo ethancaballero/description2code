@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<string.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+	long n,i,count=0,num=0,l;
+	cin>>n;
+	getchar();
+	getchar();
+	while(n--)
+	{
+		char arr[120];
+		gets(arr);
+		l=strlen(arr);
+		for(i=l-1;i>=1;--i)
+		if(arr[i]>='0'&&arr[i]<='9')
+		break;
+		int c3=0,c5=0,c8=0;
+		num=0;
+		long flag=1;
+		for(;i>=1;--i)
+		{
+			if(arr[i]<'0'||arr[i]>'9')
+			break;
+			if(arr[i]=='3') c3++;
+			else
+			if(arr[i]=='5') c5++;
+			else
+			if(arr[i]=='8') c8++;
+			else
+			{flag=0; break;	}
+		}
+			if(flag==1 && c8>=c5 && c5>=c3)
+			{
+				//printf("
+yes this one
+");
+				count++;
+			}
+	}
+	cout<<count<<'
+';
+}

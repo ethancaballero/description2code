@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+int main(){
+int t ;
+cin >> t;
+while(t--){
+	int M,K,N ;
+	cin >> N >>M >> K ;
+	int arr [M];
+	int i=0;
+	int both=0;
+	while(i<M){
+		cin >> arr[i];
+		i++;
+	}
+	int num;
+	int k=0;
+	while(k<K){
+		cin >> num;
+		for(int j=0; j<M ; j++){
+			if(arr[j]==num){
+				both++;
+			}
+		}
+		k++;
+	}
+	int notboth = N + both - M - K;
+	cout << both << " " << notboth << endl;
+}
+}

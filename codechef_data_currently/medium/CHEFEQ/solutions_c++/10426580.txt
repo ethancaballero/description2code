@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define MOD 1000000007
+using namespace std;
+vector<ll> x;
+int main()
+{
+    ll t,n,i,j;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        x.assign(100001,0);
+        for(i=0;i<n;i++)
+        {
+            cin>>j;
+            x[j]++;
+        }
+        j=0;
+        for(i=0;i<100001;i++)
+        {
+            if(j<x[i])
+                j=x[i];
+        }
+        cout<<n-j<<endl;
+    }
+    return 0;
+}

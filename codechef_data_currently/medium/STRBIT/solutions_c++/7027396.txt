@@ -1,0 +1,82 @@
+
+// AUTHOR: AMAN JAIN
+#include <bits/stdc++.h>
+using namespace std;
+
+#define LL long long
+#define LLU unsigned long long
+#define PI acos(-1)
+#define pb push_back
+#define mp make_pair
+#define all(x) (x).begin(), (x).end()
+#define INF 1000000007
+#define EPS 1e-9
+#define asd(x)              cout<<__LINE__<<" :: "<<#x<< ": "<<x<<endl;
+#define asdf(x, y)          cout<<__LINE__<<" :: "<<#x<< ": "<<x<<" | "<<#y<< ": "<<y<<endl;
+
+const LL N = 1e5;
+LL t[2*N];
+LL n,k;
+
+void build(){
+    for(LL i = n-1;i > 0; --i){
+        t[i] = t[i<<1] + t[i<<1|1];
+    }
+}
+void update(LL l,LL r){
+    for(l+=n,r+=n; l < r; l >>= 1, r >>= 1){
+        if(l&1)t[l++] += 1;
+        if(r&1)t[--r] += 1;
+    }
+}
+
+LL get(LL po){
+    LL ans = 0;
+    for(po+=n;po > 0; po>>=1){
+        ans += t[po];
+    }
+    return ans;
+}
+
+void push() {
+  for (int i = 1; i < n; ++i) {
+    t[i<<1] += t[i];
+    t[i<<1|1] += t[i];
+    t[i] = 0;
+    }
+}
+
+int main(){
+    LL T;
+    cin >> T;
+    while(T--){
+        memset(t,0,sizeof(t));
+        cin >> n >> k;
+        string s;
+        cin >> s;
+        for(LL i = 0;i < n; ++i){
+            t[n+i] = (s[i]=='R')?0:1;
+        }    
+
+        // build();
+        LL ans = 0;
+        for(LL i = 0; i < n; ++i){
+            LL val = get(i);
+            // cout << val <<  " ";
+            if(!(val&1)){
+                update(i,min(i+k-1,n-1)+1);
+                ++ans;
+            }
+            // push();
+            // for(int j = 0; j < n; ++j){
+            //     cout << t[j+n] << " "; 
+            // }
+            // cout << endl;
+            // build();
+        } 
+        printf("%lld
+",ans);   
+    }
+    
+    return 0;
+}

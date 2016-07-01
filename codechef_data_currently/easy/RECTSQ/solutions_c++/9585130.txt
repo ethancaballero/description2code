@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+int gcd(int a,int b)
+{
+	int r;
+	r=a%b;
+	if(r==0)
+	return b;
+	else
+	return gcd(b,r);
+}
+int main() {
+	int t,n,m,g,a,b;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m;
+		if(n>m)
+		g=gcd(n,m);
+		else
+		g=gcd(m,n);
+		a=m/g;
+		b=n/g;
+		cout<<a*b<<endl;
+	}
+	return 0;
+}

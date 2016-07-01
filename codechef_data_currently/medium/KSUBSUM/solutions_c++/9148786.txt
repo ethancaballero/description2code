@@ -1,0 +1,83 @@
+# include <stdio.h>
+# include <algorithm> //for max,min
+# define Nlimit (int)1e4
+# define klimit 2012
+int S[Nlimit+1],minK[klimit+1],maxK[klimit+1],temp[klimit],arr[Nlimit+1],minKsize,maxKsize;
+int N,K1,K2,K3,T,Klimit;
+void insertminK(int x)
+{
+	int i=1,j=0,k;
+	int upper=std::min(minKsize+1,Klimit);
+	for(k=0;k<upper;k++)
+		if(i>minKsize)// i is full 
+		{
+			temp[k]=x;
+			j++;
+		}
+		else if(j==1)// j is full
+			temp[k]=minK[i++];
+		else if(minK[i]<x)
+			temp[k]=minK[i++];
+		else
+		{
+			temp[k]=x;
+			j++;
+		}
+	if(minKsize+1<=Klimit)
+		minKsize++;
+	for(k=0;k<minKsize;k++)
+		minK[k+1]=temp[k];
+}
+void insertmaxK(int x)
+{
+	int i=1,j=1,k;
+	int upper=std::min(minKsize+maxKsize,Klimit);
+	for(k=0;k<upper;k++)
+		if(i>minKsize)// i is full
+			temp[k]=maxK[j++];
+		else if(j>maxKsize) // j is full
+			temp[k]=(x-minK[i++]);
+		else if (x-minK[i]>maxK[j])
+				temp[k]=(x-minK[i++]);
+		else
+			temp[k]=maxK[j++];
+	if(maxKsize+minKsize<=Klimit)
+		maxKsize+=minKsize;
+	else
+		maxKsize=Klimit;
+	for(k=0;k<maxKsize;k++)
+		maxK[k+1]=temp[k];
+}
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d%d%d%d",&N,&K1,&K2,&K3);
+		Klimit=K3;
+		minKsize=0;
+		insertminK(0);
+		//printf("inserted with 
+");
+		/*for(int j=1;j<=minKsize;j++)
+				printf("min at %d %d
+",0,minK[j]);*/
+		maxKsize=0;
+		for(int i=1;i<=N;i++)
+		{
+			scanf("%d",arr+i);
+			S[i]=S[i-1]+arr[i];
+			insertmaxK(S[i]);
+			/*for(int j=1;j<=maxKsize;j++)
+				printf("max at %d %d
+",i,maxK[j]);*/
+			insertminK(S[i]);
+			/*for(int j=1;j<=minKsize;j++)
+				printf("min at %d %d
+",i,minK[j]);*/
+		}
+		printf("%d %d %d
+",maxK[K1],maxK[K2],maxK[K3]);
+	}
+	return 0;
+}

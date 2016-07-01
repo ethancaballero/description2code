@@ -1,0 +1,11 @@
+while 1:
+    n = int(raw_input())
+    if n == 0:
+        break
+    a = [int(x) for x in raw_input().split()]
+    flag = 1
+    for i in range(n):
+        if a[a[i] - 1] != i + 1:
+            flag = 0
+            break
+    print("ambiguous" if flag else "not ambiguous")  

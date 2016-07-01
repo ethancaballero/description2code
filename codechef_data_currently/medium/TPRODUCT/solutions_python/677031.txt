@@ -1,0 +1,18 @@
+# tree product -   trproduct.py
+
+mod = 1000000007
+h = int(raw_input())
+while h>0:
+    v = map(int, raw_input().split())
+
+    p = [0] * (2**h -1)
+    for i in range(2**(h-1)-1, 2**h-1):
+        p[i] = v[i]
+    for level in range(h-1, 0, -1):
+        for i in range(2**(level-1)-1, 2**level-1):
+            p[i] = v[i] * max( p[2*i+1], p[2*i+2] )
+            # when level=1
+            # i from 0, <1
+    print p[0] % 1000000007
+
+    h = int(raw_input())

@@ -1,0 +1,12 @@
+t=int(raw_input())
+for i in range(t):
+    d={}
+    n=int(raw_input())
+    a=map(int,raw_input().split())
+    for i in a:
+        if i in d:
+            d[i]+=1
+        else:
+            d[i]=1 
+    print (n-max(d.values()))         
+    

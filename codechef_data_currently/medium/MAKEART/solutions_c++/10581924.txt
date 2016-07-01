@@ -1,0 +1,33 @@
+#include<iostream>
+#include<stdio.h>
+#include<cmath>
+#define rep(i, a, b) for (long long i = a; i <= b; i++)
+using namespace std;
+long long f[500000];
+int main()
+{	
+	long long t,p=0,n;
+	cin>>t;
+	l:while(t)
+	{
+		cin>>n;
+		rep(i,p,p+n-1)
+		cin>>f[i];
+		rep(i,p,p+n-3)
+		{
+			if(f[i]==f[i+1])
+			{
+				if(f[i+2]==f[i+1])
+				{
+					cout<<"Yes
+";
+					t--;goto l;p=n;
+				}
+			}
+		}
+		cout<<"No
+";
+		t--;p=n;
+	}
+	return 0;
+}

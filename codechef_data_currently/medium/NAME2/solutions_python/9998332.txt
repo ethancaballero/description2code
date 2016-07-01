@@ -1,0 +1,22 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ s=[str(i) for i in li]
+ print " ".join(s)
+cases=input()
+for case in range(cases):
+ a,b=raw_input().split()
+ minS,maxS=(a,b) if len(a)<=len(b) else (b,a)
+ i=0
+ j=0
+ while j<len(maxS):
+  if maxS[j]==minS[i]:
+   i+=1
+   if i==len(minS):break
+  j+=1
+ if i==len(minS):
+  print 'YES'
+ else: print 'NO'
+  
+ 

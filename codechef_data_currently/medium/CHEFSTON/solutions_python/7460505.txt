@@ -1,0 +1,20 @@
+t=int(raw_input())
+for i in xrange(t):
+    a=raw_input()
+    a=a.split()
+    n=int(a[0])
+    k=int(a[1])
+    a=raw_input()
+    a=a.split()
+    b=raw_input()
+    b=b.split()
+    for j in xrange(n):
+        a[j]=int(a[j])
+        b[j]=int(b[j])
+    maxim=-1
+    for j in xrange(n):
+        val=(k/a[j])*b[j]
+        #print val
+        if(val>maxim):
+            maxim=val
+    print maxim

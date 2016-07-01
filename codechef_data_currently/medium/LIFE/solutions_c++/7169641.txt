@@ -1,0 +1,178 @@
+#include<iostream>
+using namespace std;
+#include<bits/stdc++.h>
+int ans1[1000000],ans2[1000000],ans3[100000],ans4[1000000];
+int main()
+ {
+ 	int t;
+ 	 cin>>t;
+ 	  while(t--)
+ 	   {
+ 	   	int f1=0,f2=0,f3=0,f4=0;
+ 	   	 char arr[1000000];
+ 	   	  cin>>arr;
+ 	   	 int len=strlen(arr);
+ 	   	 
+ 	   	  int count =0;
+ 	   	  /* case 0 0*/
+			  int a=0;
+			  int b=0; 
+			  ans1[0]=0;
+			  ans1[1]=0;
+ 	   	   for(int i=2;i<len;i++)
+ 	   	    {
+ 	   	    	if(arr[i-1]-'0'==b)
+ 	   	    	 {
+ 	   	    	 	int temp=b;
+ 	   	    	 	b=a;
+ 	   	    	 	a=temp;
+ 	   	    	 	ans1[i]=b;
+ 	   	    	 }
+ 	   	    	 else 
+ 	   	    	  {
+ 	   	    	  	int temp=a;
+ 	   	    	  	a=b;
+ 	   	    	  	b=1-temp;
+ 	   	    	  	ans1[i]=b;
+ 	   	    	  }
+ 	   	    }
+ 	   	    
+ 	   	    if((arr[0]=='0' &&  b==0) ||(arr[0]=='1' && b==1) )
+				{
+					if(((arr[len-1]-'0'==b && a==0) || (a==1 && arr[len-1]-'0'!=b)))
+					{
+					//	cout<<"test1 sucessfull "<<endl;
+					count++;
+					f1=1;
+					}
+					 
+				}
+ 	   	    /* for(int i=0;i<len;i++) cout<<ans1[i]<<" ";
+ 	   	      cout<<endl;*/
+ 	   	     // case 0 1
+			   a=0;
+			   b=1; 
+			  ans2[0]=0;
+			  ans2[1]=1;
+ 	   	   for(int i=2;i<len;i++)
+ 	   	    {
+ 	   	    	if(arr[i-1]-'0'==b)
+ 	   	    	 {
+ 	   	    	 	int temp=b;
+ 	   	    	 	b=a;
+ 	   	    	 	a=temp;
+ 	   	    	 	ans2[i]=b;
+ 	   	    	 }
+ 	   	    	 else 
+ 	   	    	  {
+ 	   	    	  	int temp=a;
+ 	   	    	  	a=b;
+ 	   	    	  	b=1-temp;
+ 	   	    	  	ans2[i]=b;
+ 	   	    	  }
+ 	   	    }
+ 	   	    if((arr[0]=='0' &&  b==1) ||(arr[0]=='1' && b==0))
+ 	   	    {
+ 	   	    	if(((arr[len-1]-'0'==b && a==0) || a==1 && arr[len-1]-'0'!=b))
+ 	   	    	{
+ 	   	    	//	cout<<"test2 sucessfull "<<endl;
+ 	   	    	count++;
+ 	   	    	f2=1;
+ 	   	    	}
+ 	   	    	 
+ 	   	    }
+ 	   	  /*  for(int i=0;i<len;i++) cout<<ans2[i]<<" ";
+ 	   	      cout<<endl;*/
+ 	   	    
+ 	   	     // case 1 0 
+			   a=1;
+			  b=0; 
+			  ans3[0]=1;
+			  ans3[1]=0;
+ 	   	   for(int i=2;i<len;i++)
+ 	   	    {
+ 	   	    	if(arr[i-1]-'0'==b)
+ 	   	    	 {
+ 	   	    	 	int temp=b;
+ 	   	    	 	b=a;
+ 	   	    	 	a=temp;
+ 	   	    	 	ans3[i]=b;
+ 	   	    	 }
+ 	   	    	 else 
+ 	   	    	  {
+ 	   	    	  	int temp=a;
+ 	   	    	  	a=b;
+ 	   	    	  	b=1-temp;
+ 	   	    	  	ans3[i]=b;
+ 	   	    	  }
+ 	   	    }
+ 	   	     if((arr[0]=='0' &&  b==1) ||(arr[0]=='1' && b==0)) 
+ 	   	    {
+ 	   	    	 if ((arr[len-1]-'0'==b && a==1) || (a==0 && arr[len-1]-'0'!=b))
+ 	   	    	 {
+ 	   	    	 	//cout<<"test3 sucessfull "<<endl;
+ 	   	    	f3=1;
+ 	   	    	count++;
+ 	   	    	 }
+ 	   	    	 
+ 	   	    }
+ 	   	   /* for(int i=0;i<len;i++) cout<<ans3[i]<<" ";
+ 	   	      cout<<endl;*/
+ 	   	     // case 1 1 
+			  a=1;
+			 b=1; 
+			  ans4[0]=1;
+			  ans4[1]=1;
+ 	   	   for(int i=2;i<len;i++)
+ 	   	    {
+ 	   	    	if(arr[i-1]-'0'==b)
+ 	   	    	 {
+ 	   	    	 	int temp=b;
+ 	   	    	 	b=a;
+ 	   	    	 	a=temp;
+ 	   	    	 	ans4[i]=b;
+ 	   	    	 }
+ 	   	    	 else 
+ 	   	    	  {
+ 	   	    	  	int temp=a;
+ 	   	    	  	a=b;
+ 	   	    	  	b=1-temp;
+ 	   	    	  	ans4[i]=b;
+ 	   	    	  }
+ 	   	    }
+ 	   	     if((arr[0]=='0' &&  b==0) ||(arr[0]=='1' && b==1)  )
+ 	   	    {
+ 	   	    	if(((arr[len-1]-'0'==b && a==1) || a==0 && arr[len-1]-'0'!=b))
+ 	   	    {
+ 	   	    	count++;
+ 	   	         f4=1;
+ 	   	    }
+ 	   	    	
+ 	   	    }
+ 	   	  /*  for(int i=0;i<len;i++) cout<<ans4[i]<<" ";
+ 	   	      cout<<endl;*/
+ 	   	    if(count ==0 ) cout<<"No solution"<<endl;
+ 	   	    else if(count>1) cout<<"Multiple solutions"<<endl;
+ 	   	    else
+ 	   	     {
+ 	   	     	if(f1==1)
+ 	   	     	{
+ 	   	     		for(int i=0;i<len;i++)cout<<ans1[i];
+ 	   	     	}
+ 	   	     else	if(f2==1)
+ 	   	     	{
+ 	   	     		for(int i=0;i<len;i++)cout<<ans2[i];
+ 	   	     	}
+ 	   	     else	if(f3==1)
+ 	   	     	{
+ 	   	     		for(int i=0;i<len;i++)cout<<ans3[i];
+ 	   	     	}
+ 	   	     else	if(f4==1)
+ 	   	     	{
+ 	   	     		for(int i=0;i<len;i++)cout<<ans4[i];
+ 	   	     	}
+ 	   	     	cout<<endl;
+ 	   	     }
+ 	   	      
+ 	   }
+ }

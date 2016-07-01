@@ -1,0 +1,53 @@
+#include<iostream>
+#include<math.h>
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+int main()
+{
+	while(1)
+	{
+		char c[100000];
+		scanf("%s",&c);
+		if(c[0]=='~')
+		break;
+		int n=0,d=0;
+		int a[1000];
+		int i=0;
+	//	
+		while(c[0]!='#')
+		{
+			if(c[0]=='"')
+			{
+				
+				a[i]=strlen(c)-17;
+				i++;
+				
+			}
+			else
+			{a[i]=strlen(c);
+				i++;}
+			
+			scanf("%s",&c);
+		}
+	
+		int j,f=0,k=0;
+		int b[100000];
+		
+		for(int j=0;j<i;j++)
+		{
+		//	cout<<a[j]<<" ";
+			if(a[j]==1)
+			f=1;
+			else if(a[j]==2)
+			f=0;
+			else for(int l=0;l<a[j]-2;l++){ b[k++]=f;//cout<<b[k];
+			}
+		}
+		for(int i=k-1,j=0;i>=0;i--,j++)
+		{
+			n=n+b[i]*pow(2,j);
+		}
+		cout<<n<<endl;
+	}
+}

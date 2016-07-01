@@ -1,0 +1,35 @@
+	#include<iostream>
+	using namespace std;
+	int main()
+	{
+		int n;
+		cin>>n;
+		int temp;
+		int prefixsum[305][305][11]={ };
+		for(int i=1;i<=n;i++)
+		{
+			for(int j=1;j<=n;j++)
+			{
+				cin>>temp;
+				for(int k=0;k<10;k++)
+					prefixsum[i][j][k]=prefixsum[i][j-1][k]+prefixsum[i-1][j][k]-prefixsum[i-1][j-1][k];
+				prefixsum[i][j][temp-1]++;
+			}
+		}	
+		
+		int q;
+		cin>>q;
+		int x1,x2,y1,y2;
+		int count,cou;
+		for(int i=0;i<q;i++)
+		{
+			count=0,cou=0;
+			cin>>x1>>y1>>x2>>y2;
+			for(int i=0;i<=9;i++)
+			{
+				if(prefixsum[x2][y2][i]-prefixsum[x1-1][y2][i]-prefixsum[x2][y1-1][i]+prefixsum[x1-1][y1-1][i]>0)
+					count++;	
+			}
+			cout<<count<<endl;
+		}
+	}

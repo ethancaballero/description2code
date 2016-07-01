@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t,i,r,s,k,j;
+	cin>>t;
+	while(t--)
+	{
+	  char a='a';
+	  cin>>k;
+	  //cout<<char(a+1)<<endl;
+	  s=k/25;
+	  r=k%25;
+	  if(r)
+	  {
+	   for(i=r+1;i>0;i--)
+	   cout<<char(a+i-1);
+	  }
+	  for(i=s;i>0;i--)
+	  {
+	      for(j=26;j>0;j--)
+	      cout<<char(a+j-1);
+	  }
+	  cout<<endl;
+	  
+	}
+	return 0;
+}

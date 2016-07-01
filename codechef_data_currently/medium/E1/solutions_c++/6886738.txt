@@ -1,0 +1,49 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char a[1011][1011];
+int dp[1011][1011];
+
+bool valid (int i, int j, int n)
+{
+    return (i >= 0 && j >= 0 && i < n && j < n);
+}
+
+int main()
+{
+    int t, n, i, j, mx;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++)
+                cin >> a[i][j];
+        }
+        for (j = n-1; j >= 0; j--) {
+            for (i = 0; i < n; i++) {
+                if (a[i][j] == 'P')
+                    dp[i][j] = 1;
+                else
+                    dp[i][j] = 0;
+                mx = 0;
+                if (valid(i+1, j+2, n))
+                    mx = max(mx, dp[i+1][j+2]);
+                if (valid(i-1, j+2, n))
+                    mx = max(mx, dp[i-1][j+2]);
+                if (valid(i+2, j+1, n))
+                    mx = max(mx, dp[i+2][j+1]);
+                if (valid(i-2, j+1, n))
+                    mx = max(mx, dp[i-2][j+1]);
+                dp[i][j] += mx;
+                if (a[i][j] == 'K')
+                    goto l1;
+            }
+        }
+        l1: ;
+        cout << dp[i][j] << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,21 @@
+cases = int(raw_input())
+
+for _ in xrange(cases):
+    nrooms, nvisits = map(int, raw_input().split(" "))
+    
+    visits = map(int, raw_input().split(" "))
+    
+    rooms = []
+    for _ in xrange(nrooms):
+        volumes = map(int, raw_input().split(" "))[1:]
+        volumes.sort()
+        rooms.append(volumes)
+
+    result = 0
+    for room in visits:
+        volumes = rooms[room]
+        if len(volumes) > 0:
+            result += volumes.pop()
+
+    print result
+        

@@ -1,0 +1,20 @@
+t=int(raw_input())
+while (t>0):
+	t=t-1
+	n=int(raw_input())
+	goals=map(int,raw_input().split())
+	mini=goals[0]
+	diff=0
+	ans=0
+	for i in range (1,n):
+		if (mini<goals[i]):
+			diff=goals[i]-mini
+			if (ans<diff):
+				ans=diff
+		elif (mini>goals[i]):
+			mini=goals[i]
+	if (ans==0):
+		print "UNFIT"
+	else:
+		print ans
+			

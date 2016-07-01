@@ -1,0 +1,30 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    long int p;
+    cin>>t;
+    while(t--)
+    {
+        cin>>p;
+        int res=0;
+        long int n=p;
+        for(int i=11;i>=0;i--)
+        {
+            if(n<=0)
+            {
+                break;
+            }
+            if(n/pow(2,i)>0)
+            {
+                res+=n/(long int)pow(2,i);
+                n%=(long int)pow(2,i);
+            }
+        }
+        cout<<res<<endl;
+    }
+    return 0;
+}

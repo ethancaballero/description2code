@@ -1,0 +1,9 @@
+for testcases in xrange(int(raw_input() ) ) :
+    N, K = map(int, raw_input().split() )
+    maxprofit = 0
+    Ai = map(int, raw_input().split() )
+    Bi = map(int, raw_input().split() )
+    for i in xrange(N) :
+        profit = (K // Ai[i]) * Bi[i]
+        maxprofit = profit if profit > maxprofit else maxprofit
+    print maxprofit

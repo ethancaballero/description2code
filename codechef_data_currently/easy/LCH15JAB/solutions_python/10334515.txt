@@ -1,0 +1,20 @@
+T = input()
+while(T>0):
+	T-=1
+	s = raw_input()
+	d = {}
+	for c in s:
+		try:
+			d[c] += 1
+		except:
+			d[c] = 1
+	sum1 = 0
+	for key in d:
+		sum1 +=  d[key]
+	sum1/=2.0
+	ans = "NO"
+	for key in d:
+		if(sum1==d[key]):
+			ans="YES"
+			break
+	print ans

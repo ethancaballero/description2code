@@ -1,0 +1,17 @@
+t = input() #Taking the number of test cases as input
+#print t
+
+while t > 0:
+
+    num = raw_input() #Taking each number as input
+    #print num
+
+    count = 0
+
+    for i in num:
+        if i == "4":
+            count += 1
+
+    print count
+
+    t -= 1

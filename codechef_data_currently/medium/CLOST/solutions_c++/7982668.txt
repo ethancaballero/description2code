@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	ios_base::sync_with_stdio(0);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		char s[2001]={};
+		int q[31][2];
+		int n,k;
+		cin>>n>>k;
+		pair <int,int> diff[31];
+		int p[10001]={};
+		for(int i=0;i<k;i++)
+		{
+			cin>>q[i][0]>>q[i][1];
+			s[q[i][0]]='(';
+			s[q[i][1]]=')';
+			diff[i].first=q[i][1]-q[i][0];
+			diff[i].second=i;
+		}
+		sort(diff,diff+k);
+		s[0]='(';
+		s[n-1]=')';
+		int c=1;
+		
+		for(int j=0;j<k;j++)
+		{
+			int h=diff[j].second;
+			int c=0;
+			for(int i=q[h][0];i<=q[h][1];i++)
+			{
+				p[i]=1;
+				if(s[i]==')')
+					c--;
+				else if(s[i]=='(')
+					c++;
+				else if(c>0)
+				{
+					s[i]=')';
+					c--;
+				}
+				else
+				{
+					s[i]='(';
+					c++;
+				}
+			}
+		}
+		for(int i=0;i<n;i++)
+			if(s[i]!='('&&s[i]!=')')
+				cout<<'(';
+			else
+				cout<<s[i];
+		
+		cout<<endl;
+	}
+	return 0;
+}

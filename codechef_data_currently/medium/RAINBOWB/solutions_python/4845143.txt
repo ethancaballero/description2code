@@ -1,0 +1,18 @@
+import math
+
+
+MOD = 10 ** 9 + 7
+
+
+def binomial(n, k):
+    result = 1
+    for i in xrange(n, n - k, -1):
+        result *= i
+    result /= math.factorial(k)
+    return result % MOD
+    
+    
+n = int(raw_input())
+n = (n + 1) / 2
+n -= 1
+print binomial(n, 6)

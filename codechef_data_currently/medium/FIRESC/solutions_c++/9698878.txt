@@ -1,0 +1,76 @@
+#include<iostream>
+#include<cstdio>
+#define sc1(x) scanf("%d",&x);
+#define sc2(x,y) scanf("%d%d",&x,&y);
+using namespace std;
+typedef long long ll;
+int rank[100001];
+int parent[100001];
+
+ll mod = 1e9 + 7;
+int find(int a)
+{
+	if(parent[a] == a)
+	{
+		return a;
+	}
+	else
+	{
+	 	 parent[a] = find(parent[a]);
+	 	 return parent[a];
+	}
+}
+void unpair(int a,int b)
+{
+	int ap = find(a);
+	int bp = find(b);
+	if(ap!=bp)
+	{
+		if(rank[ap] > rank[bp])
+		{
+			parent[bp] = ap;
+			rank[ap]+=rank[bp];
+		}
+		else
+		{
+			parent[ap] = bp;
+			rank[bp]+=rank[ap];
+		}
+	}
+}
+int main()
+{
+	int t;
+	sc1(t);
+	int i;
+	ll ways;
+	while(t--)
+	{
+		int n,m,a,b;
+		sc2(n,m);
+		for(i=1;i<=n;i++)
+		{
+			rank[i] = 1;
+			parent[i] = i;
+		}
+		for(i=1;i<=m;i++)
+		{
+			sc2(a,b);
+			unpair(a,b);
+		}
+		int count = 0;
+		 ways = 1;
+		for(i=1;i<=n;i++)
+		{
+			if(parent[i]==i)
+			{
+				count+=1;
+				ways = (ways*rank[i])%mod;
+			}
+		}
+		printf("%d %lld
+",count,ways);
+	}
+	return 0;
+	
+}

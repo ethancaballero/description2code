@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+
+#define MOD 1000000007
+
+class matrix {
+public:
+    long long key[3][3];
+
+    matrix() {
+        key[0][0] = key[1][1] = key[2][2] = 1;
+        key[0][1] = key[0][2] = key[1][0] = key[1][2] = key[2][0] = key[2][1] = 0;
+    }
+
+    matrix(int f[]) {
+        int counter = 0;
+        for(int i=0;i<3;++i) {
+            for(int j=0;j<3;++j) {
+                key[i][j] = f[counter];
+                ++counter;
+            }
+        }
+    }
+
+    matrix(const matrix &a) {
+        for(int i=0;i<3;++i) {
+            for(int j=0;j<3;++j) {
+                key[i][j] = a.key[i][j];
+            }
+        }
+    }
+
+    void same(const matrix &a) {
+        for(int i=0;i<3;++i) {
+            for(int j=0;j<3;++j) {
+                key[i][j] = a.key[i][j];
+            }
+        }
+    }
+
+    void operator *(const matrix &b) {
+        matrix c;
+        long long sum;
+        for(int i=0;i<3;++i) {
+            for(int j=0;j<3;++j) {
+                sum = 0;
+                for(int k=0;k<3;++k) {
+                    sum = (sum+key[i][k]*b.key[k][j])%MOD;
+                }
+                c.key[i][j] = sum;
+            }
+        }
+        same(c);
+    }
+
+    void pow(const matrix &base, int power) {
+        matrix res;
+        matrix a(base);
+        while(power) {
+            if(power&1) res*a;
+            power>>=1;
+            a*a;
+        }
+        same(res);
+    }
+};
+
+int main() {
+    int b[9] = {1,4,2,1,0,0,0,1,0};
+    matrix base(b);
+    long long f[3] = {1, 5, 11};
+    int t, n;
+    cin >> t;
+    while(t--) {
+        cin >> n;
+        if(n<4) {
+            cout << f[n-1] << endl;
+        } else {
+            matrix r;
+            r.pow(base,n-3);
+            long long sum = (r.key[0][0]*f[2]+r.key[0][1]*f[1]+r.key[0][2]*f[0])%MOD;
+            cout << sum << endl;
+        }
+    }
+    return 0;
+}

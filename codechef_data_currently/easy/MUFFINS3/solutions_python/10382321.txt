@@ -1,0 +1,9 @@
+t=int(raw_input())
+while(t>0):
+ n=long(raw_input())
+ if(n<=2):
+   print n
+ if(n>2):
+   print n/2+1
+ t=t-1
+ 

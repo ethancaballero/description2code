@@ -1,0 +1,35 @@
+def main():
+	t=int(raw_input())
+	i=0
+	j=0
+	for t in range(0,t):
+		inputVar=raw_input()
+		[x1,y1,x2,y2,x3,y3] = inputVar.split(" ")
+		x1=int (x1)
+		y1=int (y1)
+		x2=int (x2)
+		y2=int (y2)
+		x3=int (x3)
+		y3=int (y3)
+		
+		area=(0.5)*(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2))
+		area=abs (area)
+		if t == 0:
+			mini = area
+			maxi = area
+			i=t+1
+			j=t+1
+		if(area<=mini):
+			mini=area
+			i=t+1
+		if(area>=maxi):
+			maxi=area
+			j=t+1;	
+	print i
+	print j
+	return 0;
+		
+
+if __name__ == '__main__':
+	main()
+

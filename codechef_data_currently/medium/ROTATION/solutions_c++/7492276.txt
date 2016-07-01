@@ -1,0 +1,88 @@
+#include<bits/stdc++.h>
+#include<cstdio>
+#include<iostream>
+#define pb push_back
+//#deine mp make_pair
+#define gc() getchar_unlocked()
+#define pc(x) putchar_unlocked(x)
+#define all(c) c.begin(),c.end()
+
+using namespace std;
+
+typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef pair<int,int> pii;
+typedef vector<pii> vpii;
+typedef map<int,int> mii;
+
+int arr[100001];
+
+static inline int fastio()
+{
+    int x=0;
+    char c=gc();
+    while(c<'0'||c>'9')
+        c=gc();
+    while(c>='0'&&c<='9')
+    {
+        x=(x<<1)+(x<<3)+c-'0';
+        c=gc();
+    }
+
+
+    return x;
+}
+
+void fastWrite(int x)
+{
+int i=0;
+char str[18]={' '};
+do
+{
+    str[i++]=x%10+'0';
+    x/=10;
+}
+while(x!=0);
+i--;
+for(;i>=0;i--)
+{
+    pc(str[i]);
+}
+pc('
+');
+return;
+}
+
+
+
+
+int main()
+{
+int n,i,q,k,shift=0;
+char str[3];
+n=fastio();q=fastio();
+for(i=0;i<n;i++)
+    arr[i]=fastio();
+while(q--)
+{
+    scanf("%s",str);
+    k=fastio();
+    if(str[0]=='A')
+    {
+        shift=(shift+(n-k))%n;
+    }
+    else if(str[0]=='C')
+    {
+        shift=(shift+k)%n;
+    }
+    else
+    {
+
+        int pos=(shift+k-1)%n;
+        fastWrite(arr[pos]);
+        //printf("%d
+",arr[pos]);
+    }
+}
+return 0;
+}

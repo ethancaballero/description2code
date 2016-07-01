@@ -1,0 +1,22 @@
+def Subsequence(m,w):
+    lenOfm=len(m)
+    lenOfw=len(w)
+    if lenOfm >lenOfw:
+        m,w=w,m
+        lenOfm,lenOfw=lenOfw,lenOfm
+    i=0
+    j=0
+    while (i<lenOfm and j <lenOfw):
+        if m[i]==w[j]:
+            i+=1
+        j+=1
+    if i==lenOfm:
+        print "YES"
+    else:
+        print "NO"
+
+a=int(raw_input())
+while a>0:
+    a-=1;
+    m ,w =raw_input().split()
+    Subsequence(m,w);

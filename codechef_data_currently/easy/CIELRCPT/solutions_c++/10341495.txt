@@ -1,0 +1,76 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int ans,x,t;
+ 
+    cin >> t;
+    while(t--){
+ 
+    cin>>x;
+ 
+    ans=0;
+ 
+        while ( x >= 2048)
+        {
+            x -= 2048;
+            ans += 1;
+        }
+        if ( x >= 1024)
+        {
+           x -= 1024;
+            ans += 1;
+        }
+        if ( x >= 512)
+        {
+            x -= 512;
+            ans += 1;
+        }
+        if ( x >= 256)
+        {
+            x -= 256;
+            ans += 1;
+        }
+        if ( x >= 128)
+        {
+            x -= 128;
+            ans += 1;
+        }
+        if ( x >= 64)
+        {
+            x -= 64;
+            ans += 1;
+        }
+        if ( x >= 32)
+        {
+           x -= 32;
+           ans += 1;
+        }
+        if ( x >= 16)
+        {
+            x -= 16;
+            ans += 1;
+        }
+        if ( x >= 8)
+        {
+            x -= 8;
+            ans += 1;
+        }
+        if ( x >= 4)
+        {
+            x -= 4;
+            ans += 1;
+        }
+        if ( x >=2)
+        {
+            x -= 2;
+            ans += 1;
+        }
+        if ( x >= 1)
+        {
+            x -= 1;
+            ans += 1;
+        }
+        cout << ans << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,41 @@
+   #include<stdio.h>
+    #include<string.h>
+    int main(void)
+    {
+        int t_cases;
+        scanf("%d",&t_cases);
+        while(t_cases--)
+        {
+            char str[12];
+            int girl[12]={0};
+            int sum=0;
+            int n,m,i,j;
+            scanf("%d%d",&n,&m);
+ 
+            for(i=1;i<=n;i++)
+            {
+ 
+                    scanf("%s",str);
+                    for(j=0;j<m;j++)
+                    {
+ 
+                        if(str[j]=='1')
+                        girl[j+1]++;
+                    }
+            }
+ 
+            for(i=1;i<=m;i++)
+            {
+                //printf("%d
+",girl[i]);
+                sum+=(girl[i]*(girl[i]-1))/2;
+ 
+            }
+            printf("%d
+",sum);
+ 
+ 
+        }
+        return 0;
+    }
+ 

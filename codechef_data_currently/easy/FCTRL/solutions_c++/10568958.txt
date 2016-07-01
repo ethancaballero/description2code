@@ -1,0 +1,22 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+ 
+# define epsilon 1e-9
+ 
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        int count=0;
+        cin>>n;
+        for(int i=5;i<=n;i*=5)
+        {
+            count+=n/i;
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}

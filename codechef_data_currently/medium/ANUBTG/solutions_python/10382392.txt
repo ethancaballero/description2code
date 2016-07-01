@@ -1,0 +1,18 @@
+t=int(raw_input())
+for i in xrange(0,t):
+    n=int(raw_input())
+    a=map(int,raw_input().split())
+    s=0
+    a.sort(reverse=True)
+    
+    while (n!=0):
+        if n<=2:
+            print sum(a)+s
+            n=0
+        elif n==4 or n==3:
+            print a[0] + a[1] + s
+            n=0
+        elif n>4:
+            s=s + a[0] + a[1]
+            a=a[4:n]
+            n=n-4

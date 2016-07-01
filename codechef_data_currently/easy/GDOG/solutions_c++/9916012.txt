@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+int main(void)
+{
+    int x,y;
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        cin >> x >> y;
+        int ans = 0;
+        for(int i=1;i<=y;i++)
+        {
+            ans = max(ans, x%i);
+        }
+        cout << ans << endl;
+    }
+    return 0;
+}

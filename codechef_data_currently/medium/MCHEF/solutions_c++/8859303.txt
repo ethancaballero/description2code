@@ -1,0 +1,120 @@
+#include <bits/stdc++.h>
+#define INF 10000
+#define MAX 100005
+#define lli long long
+
+using namespace std;
+
+int n,k;
+int cost[MAX];
+int tree[4*MAX];
+int lazy[4*MAX];
+lli A[MAX];
+int vis[MAX][502];
+lli dp[MAX][502];
+int tc;
+
+//Code for FAST INPUT :)
+template <typename T>
+inline void fi(T *a)
+{
+    register char c=0;
+    while (c<33) c=getchar_unlocked();
+    *a=0;
+    int tmp = 0;
+    while (c>33)
+    {
+        if ( c == 45 ) tmp = 1;
+        else *a=*a*10+c-'0';
+        c=getchar_unlocked();
+    }
+    if ( tmp == 1 ) *a = 0-(*a);
+}
+
+void build(int where, int left, int right)
+{
+	if ( left > right ) return;
+	if ( left == right ) {
+		tree[where] = lazy[where] = INF;
+		return;
+	}
+	int mid = (left+right)>>1;
+	build(where*2, left, mid);
+	build(where*2+1, mid+1, right);
+	tree[where] = lazy[where] = INF;
+}
+
+void push_down(int where, int left, int right)
+{
+	tree[where] = min(tree[where], lazy[where]);
+	if ( left != right ) {
+		lazy[where*2] = min(lazy[where*2], lazy[where]);
+		lazy[where*2+1] = min(lazy[where*2+1], lazy[where]);
+	}
+	return;
+}
+
+void update(int where, int left, int right, int i, int j, int val)
+{
+	push_down(where, left, right);
+	if ( left > right || left > j || right < i ) return;
+	if ( left >= i && right <= j ) {
+		lazy[where] = min(lazy[where], val);
+		push_down(where, left, right);
+		return;
+	}
+	int mid = (left+right)>>1;
+	update(where*2, left, mid, i, j, val);
+	update(where*2+1, mid+1, right, i, j, val);
+	tree[where] = min(tree[where*2], tree[where*2+1]);
+}
+
+int query(int where, int left, int right, int i, int j)
+{
+	push_down(where, left, right);
+	if ( left > right || left > j || right < i ) return INF;
+	if ( left >= i && right <= j ) return tree[where];
+	int mid = (left+right)>>1;
+	return min(query(where*2, left, mid, i, j), query(where*2+1, mid+1, right, i, j));
+}
+
+lli f(int idx, int left)
+{
+	if ( idx == n ) return 0LL;
+	if ( vis[idx][left] == tc ) return dp[idx][left];
+	vis[idx][left] = tc;
+	lli ans = A[idx] + f(idx+1, left);
+	if ( left - cost[idx] >= 0 ) ans = max(ans, f(idx+1, left - cost[idx]));
+	dp[idx][left] = ans;
+	return ans;
+}
+
+int main()
+{
+	int t,m,x,y,z;
+	
+	fi(&t);
+	
+	for ( tc = 1; tc <= t; tc++ ) {
+		
+		fi(&n), fi(&k), fi(&m);
+		
+		build(1,0,n-1);
+		
+		for ( int i = 0; i < n; i++ ) fi(&A[i]);
+		
+		for ( int i = 0; i < m; i++ ) {
+			fi(&x), fi(&y), fi(&z);
+			x--, y--;
+			update(1,0,n-1,x,y,z);
+		}
+		
+		for ( int i = 0; i < n; i++ ) cost[i] = query(1,0,n-1,i,i);
+		
+		lli ans = f(0,k);
+		
+		printf("%lld
+", ans);
+	}
+	return 0;
+}

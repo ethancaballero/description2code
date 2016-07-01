@@ -1,0 +1,34 @@
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define LL long long
+#define ULL unsigned long long
+
+using namespace std;
+
+int x,y,z;
+LL n1;
+vector<LL> v;
+
+void pre(int x,int y,int z,ULL n)
+{
+    if(x>=y&&y>=z&&n<=10000000000000LL) v.push_back(n);
+    if(n>10000000000000LL) return;
+    LL n1=10*n + 8;    pre(x+1,y,z,n1);  
+    n1=10*n + 5;       pre(x,y+1,z,n1);
+    n1=10*n + 3;       pre(x,y,z+1,n1);
+    
+     return ;
+}
+ 
+ 
+int main()
+{
+  pre(0,0,0,0);
+  sort(v.begin(),v.end());
+  FOR(i,1,50001) cout<<v[i]<<"
+";
+  return 0;
+} 

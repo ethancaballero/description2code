@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define MOD 1000000007
+using namespace std;
+ ll gcd(ll p,ll q){
+ if(q==0)
+ return p;
+ else
+ return gcd(q,p%q);
+
+ }
+int main()
+{
+ int n,i,j,t;
+cin>>t;
+for(i=0;i<t;i++){
+ll a,b,c,d,k;
+cin>>a>>b>>c>>d>>k;
+ll x=gcd(a,b);
+ll y=gcd(c,d);
+ll s=x/gcd(x,y);
+ll ans=k/s;
+ans/=y;
+cout<<2*ans+1<<endl;
+}
+return 0;
+}

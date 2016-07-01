@@ -1,0 +1,12 @@
+for i in xrange(int(raw_input())):
+	num_road = int(raw_input())
+	path = list()
+	for i in xrange(num_road):
+		path.append(raw_input())
+	print 'Begin on', path[-1][8:] if path[-1][0] == 'L' else path[-1][9:]
+	for i in xrange(1,num_road):
+		if path[-i][0] == 'R':
+			print 'Left on', path[-i-1][8:] if path[-i-1][0] == 'L' else path[-i-1][9:]
+		else:
+			print 'Right on', path[-i-1][8:] if path[-i-1][0] == 'L' else path[-i-1][9:]
+	print

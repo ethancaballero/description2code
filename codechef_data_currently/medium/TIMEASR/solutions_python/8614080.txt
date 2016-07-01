@@ -1,0 +1,32 @@
+
+def main():
+	test_case = int(raw_input())
+	precsion = 1.0/120.0
+
+	while test_case > 0:
+		input_angle = float(raw_input())
+		ans = set()
+
+		for h in range(0,12):
+			for m in range(0,60):
+				current_angle = abs((30.0*h) - (5.5*m))
+				if abs(current_angle - input_angle) <= precsion:
+					ans.add(str("%.2d:%.2d" % (h,m)))
+					if h!=0 and m!=0:
+						mirror_h = 12 - h
+						mirror_m = 60 - m
+						ans.add(str("%.2d:%.2d" % (mirror_h,mirror_m)))
+					elif h!=0:
+						mirror_h = 12 - h
+						ans.add(str("%.2d:%.2d" % (mirror_h,m)))
+					elif m!=0:
+						mirror_m = 60 - m
+						ans.add(str("%.2d:%.2d" % (h,mirror_m)))
+
+		for time in sorted(ans):
+				print time
+
+		test_case -= 1
+
+if __name__ == '__main__':
+	main()

@@ -1,0 +1,8 @@
+for i in range(int(raw_input())):
+    a=map(int,raw_input().split())
+    if a[0]<a[1]:
+        print "<"
+    elif a[0]==a[1]:
+        print "="
+    else:
+        print ">"

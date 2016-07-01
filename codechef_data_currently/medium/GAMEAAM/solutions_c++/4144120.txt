@@ -1,0 +1,76 @@
+// karanaggarwal
+#include<bits/stdc++.h>
+#define PB push_back
+#define MP make_pair
+#define F first
+#define S second
+#define SZ(a) (int)(a.size())
+#define CLR(a) a.clear()
+#define SET(a,b) memset(a,b,sizeof(a))
+#define LET(x,a) __typeof(a) x(a)
+#define TR(v,it) for( LET(it,v.begin()) ; it != v.end() ; it++)
+#define FORi(i,a,b) for(LET(i,a) ; i<b; i++)
+#define repi(i,n) FORi(i,(__typeof(n))0,n)
+#define FOR(i,a,b) for(i=a ; i<b; i++)
+#define rep(i,n) FOR(i,0,n)
+#define si(n) scanf("%d",&n)
+#define sll(n) scanf("%lld",&n)
+#define pi(n) printf("%d",n)
+#define piw(n) printf("%d ",n)
+#define pin(n) printf("%d
+",n)
+#define sortv(a) sort(a.begin(),a.end())
+#define DRT()  int t; cin>>t; while(t--)
+#define DRI(n)  int n; cin>>n; 
+#define DRII(n,m)  int n,m; cin>>n>>m; 
+
+using namespace std;
+
+//FILE *fin = freopen("in","r",stdin);
+//FILE *fout = freopen("out","w",stdout);
+
+typedef long long LL;
+typedef pair<int,int> PII;
+typedef vector<int> VI;
+typedef vector< PII > VPII;
+//LL power(LL a, LL p, LL mod)
+//{LL ret = 1;while(p){if(p&1)ret = (ret*a)%mod;a=(a*a)%mod;p/=2;}return ret;}
+
+bool f(int a, int b)
+{
+    assert(a>0 && b>0);
+    if(a==b)return false;
+    if(a>b)swap(a,b);
+    if(b%a==0) return true;
+    if(b/a > 1) return true;
+    return !f(b%a,a);
+}
+
+int grundy(int a, int b)
+{
+    assert(a>0 && b>0);
+    if(a>b)swap(a,b);
+    if(!f(a,b))return 0;
+    if(b%a==0)return b/a - 1;
+    int ret=b/a;
+    int x = grundy(b%a,a);
+    if(b/a<=x)ret--;
+    return ret;
+}
+int main()
+{
+    DRT()
+    {
+        int n,ans=0;
+        cin>>n; while(n--)
+        {
+            DRII(x,y); 
+            ans^= grundy(x,y);
+        }
+        if(ans)cout<<"YES
+"; else cout<<"NO
+";
+    }
+    return 0;
+}
+

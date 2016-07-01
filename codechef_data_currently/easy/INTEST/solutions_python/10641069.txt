@@ -1,0 +1,16 @@
+# Enormous Inputs
+# Practice : Beginner (3)
+# CodeChef
+
+# Aditya Vamsikrishna
+# 29th June 2016
+
+n, k = raw_input().split()
+n, k = (int(n),int(k))
+count = 0
+for i in range(n):
+	val = int(raw_input())
+	if val % k == 0:
+		count += 1
+
+print count

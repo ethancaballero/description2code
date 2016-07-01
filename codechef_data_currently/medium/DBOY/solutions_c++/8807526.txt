@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+
+
+    int n;
+    cin>>n;
+    int h[n+1],k[n+1],total_rides[1001],sum=0;
+    for(int i=0; i<n ; i++)
+    {
+
+        cin>>h[i];
+        h[i]*=2;
+    }
+    for(int i=0;i<=1000;i++)
+        total_rides[i] = 1001;
+
+    for(int i=0; i<n ; i++)
+        cin>>k[i];
+
+
+    for(int i=0 ; i< n ; i++)
+    {
+        total_rides[k[i]]=1;
+        for(int j = k[i]; j<=1000 ; j++)
+        {
+            total_rides[j] = min(total_rides[j-k[i]]+1 , total_rides[j]);
+        }
+
+    }
+    for(int i=0;i<n ;i++)
+            sum+=total_rides[h[i]];
+     cout<<sum<<endl;
+    }
+
+
+}

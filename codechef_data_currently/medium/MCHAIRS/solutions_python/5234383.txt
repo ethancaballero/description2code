@@ -1,0 +1,4 @@
+for T in range(int(raw_input())):
+	N = int(raw_input())
+	print pow(2,N,1000000007)-1 
+	#binomial theorem

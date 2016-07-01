@@ -1,0 +1,47 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <math.h>
+
+
+
+int main(){
+	int t, n;
+	int sum = 0;
+	int ret = 0;
+	std::vector<int> vec;
+	std::cin >> t;
+
+	for (int i = 0; i< t ; i++){
+		std::cin >> n;
+		for (int j = 0; j < n; j++){
+			int tmp;
+			std::cin >> tmp;
+			sum += tmp;
+			vec.push_back(tmp);
+		}
+		if (sum %n != 0){
+			std::cout << -1 << std::endl;
+			ret = 0;
+			vec.clear();
+			sum = 0;
+			continue;
+		}
+
+		sort(vec.begin(), vec.end());
+		while (vec.front() != vec.back()){
+			int r;
+			ret++;
+			r = ceil((vec.back() - vec.front()) / 2);
+			vec.insert(lower_bound(vec.begin(), vec.end(), vec.front() + r), vec.front() + r);
+			vec.insert(lower_bound(vec.begin(), vec.end(), vec.back() - r), vec.back() - r);
+			vec.erase(vec.begin());
+			vec.erase(--(vec.end()));
+		}
+		std::cout << ret << std::endl;
+		ret = 0;
+		vec.clear();
+		sum = 0;
+	}
+	return 0;
+}

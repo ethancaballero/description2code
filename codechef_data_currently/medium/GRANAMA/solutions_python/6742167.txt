@@ -1,0 +1,16 @@
+t = int(raw_input())
+
+for _ in range(t):
+	s, r = raw_input().strip().split()
+	s = list(s)
+	r = list(r)
+	s.sort()
+	r.sort()
+	chef = set(s) == set(r)
+	if chef:
+		if s == r:
+			print 'YES'
+		else:
+			print 'NO'
+	else:
+		print 'YES'

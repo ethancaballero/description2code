@@ -1,0 +1,13 @@
+t=input()
+for i in range(0,t):
+	c=0;d=0
+	n=[map(int, raw_input().split(' '))]
+	a=[map(int, raw_input().split(' '))]
+	b=[map(int, raw_input().split(' '))]
+	for j in a[0]:
+		for k in b[0]:
+			if j==k:
+				c+=1
+	a=list(set(a[0]+b[0]))
+	d=n[0][0]-(len(a))
+	print c,d

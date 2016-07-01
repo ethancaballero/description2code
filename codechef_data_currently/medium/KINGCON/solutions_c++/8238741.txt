@@ -1,0 +1,96 @@
+#include<iostream>
+#include<stdio.h>
+#include<limits.h>
+#include<algorithm>
+#include<vector>
+#include<string.h>
+#include<math.h>
+#include<set>
+#include<map>
+#include<string>
+#include<queue>
+#include<deque>
+#include<bitset>
+#include<assert.h>
+#define ones(A) memset(A,-1,sizeof(A))
+#define zeros(A) memset(A,0,sizeof(A))
+#define SZ size
+#define mii map<int,int>
+#define mli map<long long int,int>
+#define mil map<int,long long int>
+#define mll map<long long int,long long int>
+#define msi map<string,int>
+#define mis map<int,string>
+#define si(x) scanf("%d",&x)
+#define s2i(x,y) scanf("%d%d",&x,&y)
+#define sll(x) scanf("%lld",&x)
+#define s2ll(x,y) scanf("%lld%lld",&x,&y)
+#define pi(x) printf("%d
+",x)
+#define pll(x) printf("%lld
+",x)
+#define ss(s) scanf("%s",&s)
+#define ps(s) printf("%s
+",s)
+#define FOR(i,n) for(int i=0;i<n;i++)
+#define FOR2(i,start,end,inc) for(int i=start;i<=end;i+=inc)
+#define DEC(i,start,end,inc) for(int i=start;i>=end;i-=inc)
+#define vi vector<int>
+#define ub upper_bound
+#define lb lower_bound
+#define bs binary_search
+#define vll vector<long long int>
+#define pb push_back
+#define MOD 1000000007
+typedef long long int ll;
+typedef unsigned long long int ull;
+using namespace std;
+int disc_time=0;
+bool AP[3005];
+int vis[3005];
+vector<int> v[3005];
+int disc[3005];
+int low[3005];
+int parent[3005];
+void cut_vertex(int node,int prev){
+	parent[node]=prev;
+	vis[node]=1;
+	disc_time++;
+	disc[node]=disc_time;
+	low[node]=disc_time;
+	int sz=v[node].SZ();
+	int child=0;
+	FOR(i,sz){
+		int adj=v[node][i];
+		if(!vis[adj]){
+			child++;
+			cut_vertex(adj,node);
+			low[node]=min(low[node],low[adj]);
+			if(parent[node]==-1 && child>1)AP[node]=true;
+			else if(parent[node]!=-1 && low[adj]>=disc[node])AP[node]=true;
+		}
+		else if(adj!=parent[node])low[node]=min(low[node],disc[adj]);
+	}
+}
+int main(){
+	int t,n,m,k;
+	si(t);
+	while(t--){
+		zeros(vis);zeros(AP);zeros(disc);ones(parent);
+		zeros(low);
+		disc_time=0;
+		si(n);s2i(m,k);
+		FOR(i,m){
+			int a,b;
+			s2i(a,b);
+			v[a].pb(b);
+			v[b].pb(a);
+		}
+		cut_vertex(0,-1);
+		ll ans=0;
+		FOR(i,n)if(AP[i])ans+=k;
+		pll(ans);
+		FOR(i,n+2)v[i].clear();
+	}
+	return 0;
+}

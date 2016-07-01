@@ -1,0 +1,15 @@
+numval = input()
+counter = 0
+counter2 = 0
+sortedlist=[]
+ 
+while(counter<numval):
+    numtosort = input()
+    sortedlist.append(numtosort)
+    counter += 1
+    
+sortedlist.sort()
+ 
+while(counter2<numval):
+    print sortedlist[counter2]
+    counter2 +=1

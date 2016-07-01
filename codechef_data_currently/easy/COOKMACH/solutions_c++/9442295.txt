@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+        int t;
+        cin>>t;
+        while(1<=t && t<=200)
+        {
+                long long a,b,cnt=0;
+                cin>>a>>b;
+                
+                        while(b%a!=0)
+                        {
+                                a/=2;
+                                cnt++;
+                        }
+                        while(a!=b)
+                        {
+                                a*=2;
+                                cnt++;
+                        }
+                
+               
+                cout<<cnt<<endl;
+                  
+                t--;
+                
+        }
+        return 0;
+}

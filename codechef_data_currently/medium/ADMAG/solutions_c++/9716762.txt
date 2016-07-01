@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+
+	long long a,t,n,count,b,c;
+	cin >> t;
+	while(t--){
+
+		cin >> n;
+		count = 0;
+		a = 0;
+		b = 1;
+		c = 1;
+		while(a < n){
+	
+			a = b+c;
+			c = b;
+			b = a;
+			count++;
+		}
+		
+	if(a == n) cout << count+1 << endl;
+	else cout << count << endl;
+	}
+return 0;
+}
+
+			

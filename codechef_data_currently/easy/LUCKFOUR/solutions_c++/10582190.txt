@@ -1,0 +1,25 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    long int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        int c=0;
+        cin>>n;
+        while(n>0)
+        {
+            if(n%10==4)
+            {
+                c++;
+            }
+            n/=10;
+        }
+        cout<<c<<endl;
+     }
+    return 0;
+}

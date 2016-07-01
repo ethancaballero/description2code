@@ -1,0 +1,145 @@
+#include <cstdio>
+#include <cstring>
+ 
+// the maximal length of M
+const int maxL = 8;
+ 
+// max_digit[d] is the maximal digit that could be obtained from d
+int max_digit[10];
+ 
+// mark_digits[d1][d2] = 1 iff d2 could be obtained from d1
+int mark_digits[10][10];
+ 
+// max_smaller_digit[d1][d2] is the maximal digit less than d2 that could be obtained from d1
+// or -1 if no such digit could be obtained
+int max_smaller_digit[10][10];
+ 
+void precalc() {
+// cover[d] is the list of digits that could be obtained from d
+// it is -1 terminating list
+// note that d and 8 are always in cover[d]
+int cover[10][10]={
+{0, 8, -1}, // for 0
+{0, 1, 3, 4, 7, 8, 9, -1}, // for 1
+{2, 8, -1}, // for 2
+{3, 8, 9, -1}, // for 3
+{4, 8, 9, -1}, // for 4
+{5, 6, 8, 9, -1}, // for 5
+{6, 8, -1}, // for 6
+{0, 3, 7, 8, 9,-1}, // for 7
+{8, -1}, // for 8
+{8, 9, -1}	// for 9
+};
+for (int d1 = 0; d1 < 10; ++d1) {
+for (int i = 0; ; ++i) {
+int d2 = cover[d1][i];
+if (d2 < 0) {
+break;
+}
+mark_digits[d1][d2] = 1;
+}
+// we use the fact that 8 can be obtained from any digit
+max_digit[d1] = mark_digits[d1][9] ? 9 : 8;
+ 
+// some kind of dp
+max_smaller_digit[d1][0] = -1;
+for (int d2 = 1; d2 < 10; ++d2) {
+if (mark_digits[d1][d2-1]) {
+max_smaller_digit[d1][d2] = d2-1;
+} else {
+max_smaller_digit[d1][d2] = max_smaller_digit[d1][d2-1];
+}
+}
+}
+}
+ 
+// @a is a string representation of @S from the input
+// @b is a string representation of @M from the input
+// return the largest defacing score
+int solve(char *a, char *b) {
+int k = strlen(a);
+int n = strlen(b);
+ 
+int ans = 0;
+ 
+// @p is offset; we match a[i-p] to b[i] for 0<=i<n
+// slots outside of @a can be used to create any digit
+// we denote c[i] = a[i-p] for simplcity
+for (int p = 0; p <= n-k; ++p) {
+ 
+// we find for each position the following values
+// - maximum digit we can obtain from a[i-p]
+// - whether we can obtain b[i] from a[i-p]
+// - maximum digit we can obtain from a[i-p] that is less than b[i]
+int max_dig[maxL]; // mostly coincide with max_digit above but needed to handle empty slots
+bool can_eq[maxL];
+int max_smaller_dig[maxL]; // -1 means we can not have smaller digit
+for (int i = 0; i < n; ++i) {
+// the value from 0 to 9
+int db = b[i] - '0';
+ 
+if (0 <= i-p && i-p < k) {
+// the case of digit of @a
+int da = a[i-p] - '0';
+max_dig[i] = max_digit[da]; // simply copy value from precacluated array
+can_eq[i] = mark_digits[da][db]; // mark_digits exactly check that da --> db
+max_smaller_dig[i] = max_smaller_digit[da][db]; // here why we need this strange array
+} else {
+// empty slot - could be any digit
+max_dig[i] = 9;
+can_eq[i] = true;
+max_smaller_dig[i] = db-1;
+}
+}
+ 
+// now the maximal score for the given offset @p could be obtained as follows
+// we need to find the largest j from 0 to n, inclusive for which
+// we can obtain b[i] from c[i] for all i from 0 to j-1, inclusive
+// and can obtain some smaller digit from b[j]
+// (j=n corresponds to the case when we can make a=b)
+int j = -1;
+for (int i = 0; i <= n && (i == 0 || can_eq[i-1]); ++i) {
+if (i == n || max_smaller_dig[i] >= 0) {
+j = i;
+}
+}
+// j = -1 means that any such j exists
+if (j < 0) {
+continue;
+}
+ 
+// otherwise we should convert digits c[i] to b[i] for 0<=i<j
+int cur = 0;
+for (int i = 0; i < j; ++i) {
+cur = 10 * cur + (b[i] - '0');
+}
+// and if j<n convert c[j] to the largest possible digit smaller b[j]
+// while the rest digits could be converted to maximal possible digits
+if (j < n) {
+cur = 10 * cur + max_smaller_dig[j];
+for (int i = j + 1; i < n; ++i) {
+cur = 10 * cur + max_dig[i];
+}
+}
+if (ans < cur) {
+ans = cur;
+}
+}
+return ans;
+}
+ 
+int main() {
+precalc();
+int T;
+scanf("%d", &T);
+for (int t = 0; t < T; ++t) {
+// we read @S and @M as strings
+// since it is convenient to work with them as with strings
+char S[maxL + 1], M[maxL + 1];
+scanf("%s%s", S, M);
+int ans = solve(S, M);
+printf("%d
+", ans);
+}
+return 0;
+}    

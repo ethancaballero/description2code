@@ -1,0 +1,9 @@
+for _ in range(input()):
+        k,s = raw_input().strip().split()
+        k = int(k)
+        out = ['']*2**k
+
+        for n in range(2**k):
+                r = int(bin(n)[2:].zfill(k)[::-1],2)
+                out[n] = s[r]
+        print "".join(out)

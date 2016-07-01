@@ -1,0 +1,74 @@
+#include<iostream>
+using namespace std;
+#define M 1000000007
+long long int power(int a,int n)
+{
+   if(n==0)
+   return 1;
+   if(n==1)
+   return a;
+   long long int res;
+   res=power(a,n/2);
+   res=res*res%M;
+   if(n%2)
+   return res*a%M;
+   return res;
+}
+int  main()
+{
+   int T,i,j,p[256],arr[4];
+   long long int ans;
+   char str[501];
+   cin>>T;
+   cin.ignore();
+   while(T--)
+   {
+      for(i=0;i<256;i++)
+      p[i]=0;
+      cin.getline(str,501);
+      for(i=0;str[i];p[str[i]]++,i++);
+      arr[0]=i/2+i/4+i/8+i/16+i/32+i/64+i/128+i/256;
+      arr[1]=i/3+i/9+i/27+i/81+i/243;
+      arr[2]=i/5+i/25+i/125;
+      arr[3]=i/7+i/49+i/343;
+      for(ans=1;i>10;ans=j*ans%M,i--)
+      {
+         for(j=i;j%2==0;j=j/2);
+         for(;j%3==0;j=j/3);
+         for(;j%5==0;j=j/5);
+         for(;j%7==0;j=j/7);
+      }
+      for(i=0;i<256;i++)
+      {
+         switch(p[i])
+         {
+            case 10:
+            arr[0]--;
+            arr[2]--;
+            case 9:
+            arr[1]-=2;
+            case 8:
+            arr[0]-=3;
+            case 7:
+            arr[3]--;
+            case 6:
+            arr[0]--;
+            arr[1]--;
+            case 5:
+            arr[2]--;
+            case 4:
+            arr[0]-=2;
+            case 3:
+            arr[1]--;
+            case 2:
+            arr[0]--;
+         }
+      }
+      ans=ans*power(2,arr[0])%M;
+      ans=ans*power(3,arr[1])%M;
+      ans=ans*power(5,arr[2])%M;
+      ans=ans*power(7,arr[3])%M;
+      cout<<ans<<endl;
+   }
+return 0;
+}

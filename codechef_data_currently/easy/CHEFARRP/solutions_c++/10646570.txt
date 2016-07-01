@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n,t,i,j,k,l;
+    long long int p,s;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        l=0;
+        long long int ar[n];
+        for(i=0;i<n;i++)
+        cin>>ar[i];
+        for(i=0;i<n;i++)
+        {
+            for(j=i;j<n;j++)
+            {
+                p=1,s=0;
+                for(k=i;k<=j;k++)
+                {
+                    p*=ar[k];
+                    s+=ar[k];
+                }
+                if(p==s)
+                l++;
+            }
+        }
+        cout<<l<<endl;
+    }
+    return 0;
+}

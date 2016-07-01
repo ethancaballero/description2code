@@ -1,0 +1,38 @@
+import sys
+
+def triangle_sum(triangle):
+    def sum_helper(triangle, i, j, paths):
+
+        if (i,j) in paths:
+            return paths[(i,j)]
+
+        if i < len(triangle):
+            path1 = sum_helper(triangle, i+1, j, paths)
+            path2 = sum_helper(triangle, i+1, j+1, paths)
+
+            path = triangle[i][j] + max(path1, path2)
+            paths[(i,j)] = path
+
+            return path
+
+        return 0
+
+    return sum_helper(triangle, 0, 0, {})
+
+def read_triangle():
+    rows = int(sys.stdin.readline())
+    triangle = []
+    for i in range(rows):
+        row = [int(x) for x in sys.stdin.readline().split()]
+        triangle.append(row)
+
+    return triangle
+
+    
+if __name__ == '__main__':
+
+    test_cases = int(sys.stdin.readline())
+
+    for i in range(test_cases):
+        triangle = read_triangle()
+        print triangle_sum(triangle)

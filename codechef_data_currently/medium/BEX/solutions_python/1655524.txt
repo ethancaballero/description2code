@@ -1,0 +1,26 @@
+import sys
+filein = sys.stdin
+#filein = open("bex.in2",'r')
+
+def main() :
+  n = int(filein.readline())
+  ll = []
+  bookcnt = 0
+  outstr = []
+  for str in filein :
+    if str[0] == "-" :
+      outstr.append("%d %s" % (bookcnt-ll[-1][2],ll[-1][1]))
+      #print "%d %s" % (bookcnt-ll[-1][2],ll[-1][1])
+      bookcnt = ll[-1][2]-1
+      del ll[-1]
+    else:
+      idx = str.index(' ')
+      d = str[0:idx]
+      d = int(d)
+      if d == 0 : continue
+      bookcnt += 1
+      if (not ll) or (d <= ll[-1][0]) :
+        ll.append([d,str[idx+1:-1],bookcnt]) 
+  print "
+".join(outstr)
+main()

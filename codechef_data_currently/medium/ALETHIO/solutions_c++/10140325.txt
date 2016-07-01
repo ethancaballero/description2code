@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+string A;
+int leftMost[2000];
+int rightMost[2000];
+inline string getMax(string &a, string &b){
+    if(a.size() < b.size()){
+        return b;
+    } else if(a.size() > b.size()){
+        return a;
+    } else {
+        return max(a, b);
+    }
+}
+int main(){
+    cin >> A;
+    int N = A.size();
+    leftMost[0] = 0;
+    rightMost[N - 1] = N - 1;
+    for(int i = 1;i < N;++i){
+        leftMost[i] = i;
+        if(A[i - 1] >= '0' && A[i - 1] <= '9'){
+            if(leftMost[i - 1] == i - 1 && A[i - 1] == '0'){
+                leftMost[i] = i;
+            } else leftMost[i] = leftMost[ i - 1];
+        }
+    }
+    for(int i = N - 2;i >= 0;--i){
+        rightMost[i] = i;
+        if(A[i + 1] >= '0' && A[i + 1] <= '9'){
+            rightMost[i] = rightMost[ i + 1];
+        }
+    }
+    string ans = "0";
+    for(int i = 0;i < N;++i){
+        string curAns = "";
+        if(A[i] >= 'A' && A[i] <= 'Z'){
+            curAns += A.substr(leftMost[i], i - leftMost[i]);
+            curAns += "9";
+            if(rightMost[i] > i){
+                curAns += A.substr(i + 1, rightMost[i] - i);
+            }
+        } else if(!(leftMost[i] == i && A[i] == '0')){
+            curAns = A.substr(leftMost[i], rightMost[i] - leftMost[i] + 1);
+        } else curAns = "0";
+        //cout << i << " " << A[i] << " " << curAns << "
+";
+        ans = getMax(ans, curAns);
+    }
+    cout << ans << "
+";
+    return 0;
+}

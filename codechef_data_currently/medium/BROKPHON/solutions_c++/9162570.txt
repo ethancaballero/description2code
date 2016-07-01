@@ -1,0 +1,33 @@
+#include<stdio.h>
+long long int a[100005];
+int main()
+{
+	long long int t, n, i, count, flag;
+	scanf("%lld", &t);
+	while (t--)
+	{
+		count = 0;
+		scanf("%lld", &n);
+		for (i = 0; i < n; i++)
+		{
+			scanf("%lld", &a[i]);
+		}
+		for (i = 0; i < n; i++)
+		{
+			if ((i-1>=0)&&(a[i] != a[i - 1]))
+			{
+				count++;
+				
+			}
+			else if ((i + 1) < n&&a[i] != a[i + 1])
+			{
+				count++;
+			}
+		}
+		printf("%lld
+", count);
+	}
+	getchar();
+	getchar();
+	return 0;
+}

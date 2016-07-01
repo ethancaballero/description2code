@@ -1,0 +1,262 @@
+/*#include<iostream>
+#include<string>
+#include<cstring>
+#define MAX 1000000007
+typedef long long ll;
+using namespace std;
+int nCr_Lookup[5001][5001], cnt[5001], ans[5001], zvalue[5001], dist[5001];
+
+int main()
+{
+    int i, j, T, N, Q, K;
+
+    for(i = 1; i < 5001; i++)
+    {
+        nCr_Lookup[i][1] = i;
+        nCr_Lookup[i][i] = 1;
+    }
+
+    for(i = 3; i < 5001; i++)
+        for(j = 2; j < i; j++)
+            nCr_Lookup[i][j] = (nCr_Lookup[i - 1][j] + nCr_Lookup[i - 1][j - 1]) % MAX;
+
+    cin >> T;
+    while(T--)
+    {
+        cin >> N >> Q;
+
+        string input;
+
+        cin >> input;
+
+        memset(cnt, 0, sizeof(cnt));
+
+        memset(ans, 0, sizeof(ans));
+
+        for(i = 0; i < N; i++)
+        {
+            string current_input = input.substr(i, N - i);
+
+            int l = 0, r = 0, z_index;
+            zvalue[0] = N - i;
+            for(j = 1; j < N - i; j++)
+            {
+                if(j > r)
+                {
+                    l = r = j;
+                    while(r < N - i && current_input[r - l] == current_input[r])
+                        r++;
+                    zvalue[j] = r - l;
+                    r--;
+                }
+                else
+                {
+                    z_index = j - l;
+                    if(z_index < r - j + 1)
+                        zvalue[j] = zvalue[z_index];
+                    else
+                    {
+                        l = j;
+                        while(r < N - i && current_input[r - l] == current_input[r])
+                            r++;
+                        zvalue[j] = r - l;
+                        r--;
+                    }
+                }
+            }
+
+
+            //cout << current_input << endl;
+            memset(dist, 0, sizeof(dist));
+            for(j = 0; j < N - i; j++)
+                dist[zvalue[j]]++;
+
+            for(j = N - i - 1; j >= 0; j--)
+                dist[j] += dist[j + 1];
+
+            for(j = 1; j <= N - i; j++)
+                cnt[dist[j] - 1]++;
+                //cout << zvalue[j] << endl;
+        }
+
+
+        ans[1] = (N * (N + 1)) / 2;
+        for(i = 2; i <= N; i++)
+        {
+            for(j = i; j <= N; j++)
+            {
+                ans[i] += (1ll * (cnt[j - 1] - cnt[j]) * nCr_Lookup[j][i]) % MAX;
+                ans[i] %= MAX;
+            }
+        }
+
+        //for(i = 1; i)
+
+        while(Q--)
+        {
+            cin >> K;
+
+            if(K > N)
+                cout << "0
+";
+            else
+                cout << ans[K] << endl;
+        }
+
+    }
+    return 0;
+}
+*/
+
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#include<vector>
+#include<new>
+#include<set>
+#define pb(x) push_back(x)
+#define loop(i, a, b) for (int i=a; i<b; i++)
+#define rloop(i, a, b) for (int i=a; i>=b; i--)
+#define MOD 1000000007
+typedef long long int lli;
+using namespace std;
+inline void scan(long long int* x)
+{
+	register char c = getchar_unlocked();
+	*x = 0;
+	for(; (c<48)||(c>57);c = getchar_unlocked());
+	for(; (c>47)&&(c<58);c = getchar_unlocked())
+		*x = (long long int)((((*x)<<1) + ((*x)<<3)) + c - 48);
+}
+inline void scan(int* x)
+{
+	register char c = getchar_unlocked();
+	*x = 0;
+	for(; (c<48)||(c>57);c = getchar_unlocked());
+	for(; (c>47)&&(c<58);c = getchar_unlocked())
+		*x = (int)((((*x)<<1) + ((*x)<<3)) + c - 48);
+}
+int z[5005], cnt[5005], temp[5005], nCr[5009][5009], ans[5005];
+
+void z_algo(string s)
+{
+	int n=s.size();
+	int L, R, k;
+	z[0]=s.size();
+	L=R=0;
+	loop(i, 1, n)
+	{
+		if (i>R)
+		{
+			L=R=i;
+			while (R<n && s[R-L]==s[R]) R++;
+			z[i]=R-L;
+			R--;
+		}
+		else
+		{
+			k=i-L;
+			if (z[k]<R-i+1) z[i]=z[k];
+			else
+			{
+				L=i;
+				while (R<n && s[R-L]==s[R]) R++;
+				z[i]=R-L;
+				R--;
+			}
+		}
+	}
+
+}
+
+void solvenCr()
+{
+	loop(i, 1, 5001)
+	{
+		nCr[i][1]=i;
+	}
+	loop(i, 2, 5001)
+	{
+		loop(j, 2, i+1)
+		{
+			nCr[i][j]=(nCr[i-1][j-1]+nCr[i-1][j])%MOD;
+
+		}
+	}
+
+
+}
+
+
+int main()
+{
+	solvenCr();
+	int t, q, k, n;
+	string s;
+	scan(&t);
+	while (t--)
+	{
+
+
+		scan(&n);
+		scan(&q);
+		cin >> s;
+		loop(i, 1, n+1)
+		{
+			temp[i]=0;
+			cnt[i]=0;
+			z[i]=0;
+			ans[i]=0;
+		}
+		loop(i, 0, n)
+		{
+			loop(j, 1, n+1)
+			{
+				temp[j]=0;
+				z[j]=0;
+			}
+			z_algo(s.substr(i, n-i));
+
+			loop(j, 0, n)
+			{
+				temp[z[j]]++;
+			}
+			rloop(j, n-1, 1)
+			{
+				temp[j]+=temp[j+1];
+			}
+
+			loop(j, 1, n+1)
+			{
+				cnt[temp[j]]++;
+			}
+
+		}
+
+		ans[1]=(n*(n+1)/2);
+		loop(i, 2, n+1)
+		{
+			loop(j, i, n+1)
+			{
+
+				ans[i]=(ans[i]+((cnt[j]-cnt[j+1])*1ll*nCr[j][i])%MOD)%MOD;
+
+			}
+		}
+
+		while (q--)
+		{
+			scan(&k);
+			if (k>n) printf("0
+");
+			else printf("%d
+", ans[k]);
+		}
+
+
+
+	}
+	return 0;
+}

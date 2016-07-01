@@ -1,0 +1,29 @@
+#include <stdio.h>
+ 
+int main(void) {
+	
+	int t, i;
+	char s1[16], s2[16];
+	
+	scanf ("%d", &t);
+	while (t--) {
+	    scanf ("%s %s", s1, s2);
+	    
+	    for (i = 0; s1[i]; ++i) {
+	        if (s1[i] != s2[i] && s1[i] != '?' && s2[i] != '?')
+	        {
+	            break;
+	        }
+	    }
+	    
+	    if (s1[i]) {
+	        printf ("No
+");
+	    } else {
+	        printf ("Yes
+");
+	    }
+	}
+	return 0;
+}
+ 

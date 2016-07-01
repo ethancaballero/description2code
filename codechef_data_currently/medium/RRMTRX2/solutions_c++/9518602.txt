@@ -1,0 +1,34 @@
+#include<iostream>
+#define mod 10000007
+using namespace std;
+int main()
+{
+int n,m,i,j;
+long long int sum=0,pro=1;
+cin>>n>>m;
+int a[n][m];
+for(i=0;i<n;i++)
+{
+    for(j=0;j<m;j++)
+    {
+        cin>>a[i][j];
+    }
+}
+for(j=0;j<m;j++)
+{
+    sum=0;
+    for(i=0;i<n;i++)
+    {
+        sum+=a[i][j];
+        sum=sum%mod;
+        //cout<<sum<<"hhh";
+    }
+    pro=pro*sum;
+    pro%=mod;
+    if(pro<0)
+        pro+=mod;
+    //cout<<pro<<"hss";
+}
+cout<<pro<<endl;
+return 0;
+}

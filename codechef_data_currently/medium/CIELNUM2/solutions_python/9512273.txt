@@ -1,0 +1,6 @@
+count = 0
+for n in xrange(int(raw_input())):
+	p = raw_input().split()[-1]
+	if (p.count('8')>=p.count('5') and p.count('5')>=p.count('3') and p.count('8')+p.count('5')+p.count('3') == len(p)):
+		count+=1
+print count

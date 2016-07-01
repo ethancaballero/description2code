@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<string.h>
+#define MIN(a,b) a>b?b:a
+
+int main()
+{
+    int t;
+    int a,b;
+
+    char s[150];
+
+    scanf("%d",&t);
+
+    while(t--)
+    {
+        scanf("%s",s);
+        int i;
+        a=b=0;
+        for(i=0;s[i];i++)
+        {
+            if(s[i]=='a')
+                a++;
+            else if(s[i]=='b')
+                b++;
+        }
+        printf("%d
+",MIN(a,b));
+    }
+
+    return 0;
+}

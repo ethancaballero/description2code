@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+char findColor(long long int A)
+{
+   int i;
+   long long int power=2;
+   for(i=1;A/power;i++,power=power*2);
+   if(i%2)
+      return 'b';
+   return 'r';
+}
+int main()
+{
+   int Q,leftPath,rightPath,totalNodes,ans;
+   long long int x,y;
+   bool colorChanged;
+   char str[5],rootColor;
+   cin>>Q;
+   colorChanged=false;
+   while(Q--)
+   {
+      cin.ignore();
+      cin>>str;
+      if(str[1]=='i')
+      {
+         colorChanged=!colorChanged;
+         continue;
+      }
+      cin>>x>>y;
+      rootColor=findColor(x);
+      if(colorChanged)
+      {
+         if(str[1]=='r')
+            str[1]='b';
+         else
+            str[1]='r';
+      }
+      leftPath=0;
+      rightPath=0;
+      for(;x!=y;)
+      {
+         if(x>y)
+         {
+            leftPath++;
+            x=x/2;
+         }
+         else
+         {
+            rightPath++;
+            y=y/2;
+         }
+      }
+      totalNodes=leftPath+rightPath+1;
+      ans=totalNodes/2;
+      if(totalNodes%2)
+      {
+         if(rootColor==str[1])
+            ans++;
+      }
+      cout<<ans<<endl;
+   }
+return 0;
+}

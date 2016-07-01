@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		long long N,c=0,i,j;
+		cin>>N;
+		for(i=0;i<N;i++)
+		{
+			cin>>j;
+		}
+		c=N*(N-1)/2;
+		cout<<c<<endl;
+	}
+} 

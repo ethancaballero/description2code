@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<iostream>
+#include<algorithm>
+#include<string.h>
+using namespace std;
+int main()
+{
+	int t, p=0;
+	
+	cin>>t;
+	while(p<t)
+	{
+	int ob;
+	cin>>ob;
+	int a[ob];
+	for(int i=0;i<ob;i++)
+	{  int b;
+	  cin>>b;
+		a[i]=b;
+	}
+	sort(a,a+ob);
+	int tot=0,count=1;
+		for(int j=ob-1;j>=0;j=j-4)
+	{  
+	    tot+=a[j];
+	    if(j-1>=0)
+	    {
+	    	tot+=a[j-1];
+		}
+	}
+	cout<<tot<<endl;
+	p++;	
+		
+	}
+	return 0;
+}

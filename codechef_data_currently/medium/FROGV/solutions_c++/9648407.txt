@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e5 + 10;
+int A[MAXN];
+int packet[2][MAXN];
+int maxSend[MAXN];
+int main(){
+	int N, K, P;
+	cin >> N >> K >> P;
+	for(int i = 1;i <= N;++i){
+		cin >> A[i];
+	}
+	for(int i = 1;i <= P;++i){
+		cin >> packet[0][i] >> packet[1][i];
+		int start = A[packet[0][i]];
+		int des = A[packet[1][i]];
+		if(start > des){
+			int temp = start;
+			start = des;
+			des = temp;			
+		}
+		packet[0][i] = start;
+		packet[1][i] = des;
+		// cout << start << " " << des << "
+";
+	}
+	sort(A + 1, A + 1 + N);
+	map<int, int> maxSend;
+	for(int i = 2;i <= N;++i){
+		if(A[i] - A[i - 1] <= K){
+			maxSend[A[i]] = maxSend[A[i - 1]];
+		} else{
+			maxSend[A[i]] = A[i];
+		}
+	}
+	for(int i = 1;i <= P;++i){
+		if(maxSend[packet[1][i]] <= packet[0][i]){
+			cout << "Yes
+";
+		} else{
+			cout << "No
+";
+		}
+	}
+	return 0;
+}

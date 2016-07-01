@@ -1,0 +1,61 @@
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <map>
+#include <queue>
+#include <set>
+#include <cassert>
+
+using namespace std;
+
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+#define S(x) 			scanf("%d",&x)
+#define SS(x,y)         scanf("%d%d",&x,&y)
+#define all(c) 			(c).begin(),(c).end() 
+#define sz(c) 			int((c).size())
+#define pb 				push_back
+#define present(c,x) 	((c).find(x) != (c).end()) 
+#define rep(i,x,y) 		for(int i = x; i <= y; i++)
+#define REV(i,x,y) 		for(int i = x; i >= y; i--)
+#define foreach(c,itr)	for(__typeof((c).begin()) itr=(c).begin();itr!=(c).end();itr++)
+#define FILL(a,v) 		memset(a,v,sizeof(a))
+#define DB(x)			cerr<<#x<<" = "<<x<<endl
+#define debugarr(A,a,b) cerr<<#A<<" : ";rep(i,a,b) cerr<<A[i]<<" ";cerr<<endl;
+//#define R(x) 			((rand()%x) + 1)
+
+typedef long long int LL;
+typedef vector<int> vi; 
+typedef vector<vi> vvi; 
+typedef pair<int,int> ii;
+typedef vector<ii> vii;
+
+/* ------------------------Main Code----------------------- */
+const int MAX = 100001;
+
+LL f[MAX];
+void pre()
+{
+	for(int i = 1; i < MAX; i += 2){
+		for(int j = i; j < MAX; j += i)
+			f[j] += i;
+	}
+	debugarr(f,1,20);
+	rep(i,1,MAX-1) f[i] += f[i-1];
+}
+
+int main()
+{
+	pre();
+	int t; S(t);
+	while(t--){
+		int l, r; 
+		SS(l,r);
+		printf("%lld
+",f[r] - f[l-1]);
+	}
+	return 0;
+}

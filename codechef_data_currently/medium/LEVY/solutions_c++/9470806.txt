@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+long vis[10005],prime[10005],p=1;
+void sieve(long n)
+{
+    vis[2]=0;
+    prime[0]=2;
+    vis[1]=1;
+    for(int i=4;i<=n;i+=2)
+        vis[i]=1;
+    for(int i=3;i<=sqrt(n);i+=2)
+    {
+        if(vis[i]==0)
+        {
+            for(int j=i*i;j<=n;j+=i)
+            {
+                vis[j]=1;
+            }
+        }
+    }
+    for(int i=3;i<=n;i+=2)
+    {
+        if(vis[i]==0)
+            prime[p++]=i;
+    }
+
+}
+int main()
+{
+    sieve(10005);
+    long cs,tst;
+    cin>>cs;
+    for(tst=1;tst<=cs;tst++)
+    {
+        long n;
+        cin>>n;
+        long res=0;
+        for(int i=0;i<p;i++)
+        {
+              if(prime[i]>=n)  break;
+              if((n-prime[i])%2==0 && vis[(n-prime[i])/2]==0)
+              {
+                 // cout<<prime[i]<<" "<<(n-prime[i])/2<<endl;
+                  res++;
+              }
+        }
+        cout<<res<<endl;
+    }
+}

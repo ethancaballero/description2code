@@ -1,0 +1,18 @@
+from collections import Counter
+def factorial(n):
+	res = 1
+	for i in range(2,n+1): res*=i
+	return res
+def WCOUNT():
+	t = int(raw_input())
+	while t:
+		s = raw_input()
+		counter = Counter(s)
+		res = factorial(len(s))
+		for key in counter.keys():
+			if counter[key] not in [1]: res/=factorial(counter[key])
+		print res % 1000000007
+		t-=1
+WCOUNT()
+
+		

@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    char j[101],s[101];
+    cin>>t;
+    while(t--)
+    {
+        int i=0,c=0;
+        cin>>j;
+        cin>>s;
+        for(;i<strlen(s);)
+        {
+            if(strchr(j,s[i]))
+                c++;
+         i++;
+        }
+        cout<<c<<endl;
+    }
+    return 0;
+
+}

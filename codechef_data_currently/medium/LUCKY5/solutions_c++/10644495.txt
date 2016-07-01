@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,j,count=0;
+    scanf("%d",&t);
+    while(t--)
+    {
+        char a[100010];
+        cin>>a;
+        for(j=0;j<strlen(a);j++)
+        {
+            if(a[j]=='4'||a[j]=='7')
+            count++;
+        }
+        cout<<strlen(a)-count<<endl;
+        count=0;
+    }
+}

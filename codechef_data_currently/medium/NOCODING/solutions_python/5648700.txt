@@ -1,0 +1,6 @@
+t = int(raw_input())
+while t:
+    s = bytearray(raw_input())
+    length = len(s)
+    print "YES" if (2+sum((s[i]-s[i-1]+26)%26+1 for i in range(1, length)))<=11*length else "NO"
+    t-=1

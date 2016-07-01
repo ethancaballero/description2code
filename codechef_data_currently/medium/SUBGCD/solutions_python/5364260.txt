@@ -1,0 +1,12 @@
+from fractions import gcd
+t=input()
+for i in range(t):
+	n=input()
+	c=0
+	a=map(int,raw_input().split())
+	for i in range(0,n):
+		c=gcd(c,a[i])
+	if c==1:
+		print n
+	else:
+		print "-1"

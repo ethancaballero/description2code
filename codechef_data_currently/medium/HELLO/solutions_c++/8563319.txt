@@ -1,0 +1,25 @@
+#include<iostream>
+ using namespace std;
+ 
+int main()
+{
+    int count=0;
+    double d,r,tot,f,t,u,n,m,c;
+    cin>>t;
+    while(t--)
+    {cin>>d>>u>>n;
+    tot=u*d;
+    count=0;
+    for(int i=1;i<=n;i++)
+    {cin>>m>>r>>c;
+    f= r*u + c/m;
+    if(f<tot)
+    {
+    tot=f; count=i;}
+            }
+            
+            cout<<count<<"
+";
+              }
+              return 0;
+}

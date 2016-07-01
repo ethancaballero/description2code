@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+main()
+{
+    int T;
+    cin>>T;
+    while(T-->0)
+    {
+        int n,k,answer;
+        cin>>n>>k>>answer;
+
+    int i;
+    char s[5];
+    int a[n];
+    for(i=0;i<n;i++)
+        cin>>a[i];
+    char ch;
+    cin>>s;
+
+if(k==0)
+        {
+            cout<<answer<<endl;
+        continue;
+    }
+
+    for(i=0;i<n;i++)
+    {
+       if(s[0]=='X')
+       {
+           if(k%2!=0)
+            answer=answer^a[i];
+       }
+       else if(s[0]=='O')
+        answer=answer|a[i];
+    else
+        answer=answer & a[i];
+    }
+
+        cout<<answer<<endl;
+    }
+}

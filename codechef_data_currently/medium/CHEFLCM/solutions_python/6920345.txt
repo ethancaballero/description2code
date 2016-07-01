@@ -1,0 +1,37 @@
+t = int(raw_input())
+
+MAX = 100001
+primes = []
+isPrime = [True]*MAX
+
+for i in range(2,MAX):
+	if isPrime[i]:
+		primes.append(i)
+		for j in range(2*i, MAX, i):
+			isPrime[j] = False
+while t:
+	t-=1
+
+	n = int(raw_input())
+	ans = 1
+	for i in range(len(primes)):
+		cnt = 0
+		while n%primes[i] == 0:
+			cnt+=1
+			n /= primes[i]
+		if cnt:
+			num = (primes[i]**(cnt+1)) -1
+			den = primes[i]-1
+			num /= den
+			ans *= num
+		if n == 1:
+			break
+	if n != 1:
+		num = (n**2) -1
+		den = n-1
+		num /= den
+		ans *= num
+	print ans
+
+
+

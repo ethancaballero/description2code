@@ -1,0 +1,39 @@
+#include <iostream>
+#include <map>
+#include <bits/stl_algo.h>
+
+using namespace std;
+
+typedef pair<int,int> PII;
+typedef long long LL;
+
+int N;
+int A[110];
+map<PII,LL> cache;
+
+LL go(int ind,int g){
+    if(ind==N) 
+        return (g==1) ? 1 : 0;
+    PII key = make_pair(ind,g);
+    if(cache.find(key)!=cache.end()) 
+        return cache[key];
+    return cache[key] = go(ind+1,g) + go(ind+1,__gcd(g,A[ind]));
+}
+
+
+int main(){
+    int T;
+    cin>>T;
+    while(T--){
+        cin>>N;
+        for(int i=0;i<N;++i)
+            cin>>A[i];
+        cache.clear();
+        LL res = 0;
+        for(int i=0;i<N;++i) 
+            res+=go(i+1,A[i]);
+        cout<<res<<endl;
+    }
+    return 0;
+}
+

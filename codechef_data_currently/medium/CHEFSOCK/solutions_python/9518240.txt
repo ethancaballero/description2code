@@ -1,0 +1,1 @@
+print "".join("Unlucky Chef" if s else "Lucky Chef" for s in [True if ((a[2]-a[0])<2*a[1] or (((a[2]-a[0]>=2*a[1]))and ((a[2]-a[0])/(a[1]))&1)) else False for a in [map(int,raw_input().split())]])

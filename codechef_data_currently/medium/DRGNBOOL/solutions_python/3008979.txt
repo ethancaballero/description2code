@@ -1,0 +1,15 @@
+t=raw_input()
+for i in range(int(t)):
+	n,m=raw_input().split()
+	levels=[0]*101
+	for soint in range(int(n)):
+		c,l=map(int,raw_input().split())
+		levels[l]+=c
+	for sofloat in range(int(m)):
+		c,l=map(int,raw_input().split())	
+		levels[l]-=c
+	deficit=0
+	for x in levels:
+		if x<0:
+		 deficit+=abs(x)
+	print deficit

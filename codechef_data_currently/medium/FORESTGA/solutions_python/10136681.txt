@@ -1,0 +1,62 @@
+from operator import itemgetter
+
+def can_cut(time,limit,target):
+    total = 0
+    for i in range(number_of_trees):
+        ht = tree_list[i][0]+tree_list[i][1]*time
+        if ht>=limit:
+            total+=ht
+    return total >= target
+
+##def order_size(month,max,target):
+##    total=0
+##    i=0
+##    while(i<max and tree_list[i][2]<=month and total <= target):
+##        total+= (tree_list[i][0]+tree_list[i][1]*month)
+##        i+=1
+##    return total
+
+##def getceil(num):
+##    if num > int(num):
+##        num = int(num)+1
+##    else:
+##        num = int(num)
+##    return int(num)
+
+temp = raw_input();
+temp = temp.split();
+number_of_trees,target,limit = int(temp[0]),int(temp[1]),int(temp[2]);
+
+tree_list=list();
+
+i=0;
+total_increase = 0
+while i<number_of_trees:
+    temp = raw_input();
+    temp = temp.split();
+    height,rate = int(temp[0]),int(temp[1]);
+    #total_increase+=rate
+##    if limit <= height:
+##        eligible_in = 0;
+##        tree_list.append((height,rate,eligible_in))
+##    else:
+##        eligible_in = getceil(((limit-height)/float(rate)))
+##        tree_list.append((height,rate,eligible_in))
+    tree_list.append((height,rate))
+    i+=1;
+
+#print tree_list
+#tree_list = sorted(tree_list,key=itemgetter(2))
+#print tree_list
+
+start = -1
+end = 10**18
+
+while end-start>1:
+    #print "Start = ",start," End = ",end;
+    mid = (start+end)/2
+    if can_cut(mid,limit,target):
+        end=mid;
+    else:
+        start=mid
+print end

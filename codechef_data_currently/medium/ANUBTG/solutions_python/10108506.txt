@@ -1,0 +1,28 @@
+t = input()
+
+while t>0:
+    n = input()
+
+    cost=[]
+
+    cost = map(int,raw_input().split())
+
+    cost.sort()
+
+    cost.reverse()
+
+    c=0
+    summ = 0
+
+    for i in cost:
+
+        c += 1
+
+        if c < 3:
+            summ += i
+
+        if c == 4:
+            c=0
+    print summ
+
+    t -= 1

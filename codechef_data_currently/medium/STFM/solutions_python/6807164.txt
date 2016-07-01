@@ -1,0 +1,24 @@
+arr=[]
+def fact(x,m):
+    f=1
+    i=1;
+    while i <=x+1:
+        f=(f*i)%m
+        arr.append(f)
+        i+=1   
+def f(x):
+    if x>=m:
+        return (x*x*(x+1)/2-1)%m
+    else:
+        return arr[x]+x*x*(x+1)/2-1
+n,m=map(int,raw_input().split())
+a=map(int,raw_input().split())
+x=max(a)
+if x<=1000000:
+    fact(x,m)
+else:
+    fact(1000000,m) 
+ans=0
+for i in a:
+    ans+=f(i)
+print ans%m

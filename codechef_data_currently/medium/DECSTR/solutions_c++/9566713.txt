@@ -1,0 +1,42 @@
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+
+int main()
+{
+	int test,T,i;
+	char ch='a';
+	
+	scanf("%d",&test);
+	
+	while(test--)
+	{
+		scanf("%d",&T);
+	
+	if( T>0 && T<=25 )
+		T+=1;
+	else if( T>25 && T<=50)
+		T+=2;
+	else if( T>50 && T<=75)
+		T+=3;
+	else 
+		T+=4;
+	
+	for(i=T%26; i>0; i--)
+		printf("%c",ch-1+i);
+	
+	T=T/26;
+	
+	while(T--)
+	{
+		for(i=26; i>0; i--)
+		printf("%c",ch-1+i);
+	}
+	cout<<"
+";
+	}
+	
+	
+	return 0;
+} 

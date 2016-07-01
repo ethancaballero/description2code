@@ -1,0 +1,19 @@
+def diff(a,b,c,d) :
+    return float(((a-c)**2 + (b-d)**2)**0.5)
+for i in xrange(int(raw_input())) :
+    k = int(raw_input().strip())
+    k = float(k)
+    l = []
+    for j in xrange(3) :
+        l.append(map(int,raw_input().split(' ')))
+    diff_12 = diff(l[0][0],l[0][1],l[1][0],l[1][1])
+    diff_23 = diff(l[1][0],l[1][1],l[2][0],l[2][1])
+    diff_13 = diff(l[0][0],l[0][1],l[2][0],l[2][1])
+    if (diff_12 <= k) and (diff_23 <= k)  :
+        print 'yes'
+    elif (diff_13 <= k) and (diff_23 <= k) :
+        print 'yes'
+    elif (diff_12 <= k) and (diff_13 <= k) :
+        print 'yes'
+    else :
+        print 'no'

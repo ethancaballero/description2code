@@ -1,0 +1,145 @@
+#include <iostream>
+#include <map>
+#include <cstdio>
+#include <queue>
+#define INT_MAX 1000000000
+
+using namespace std;
+
+struct update{
+ int x;
+ int y;
+ long long int t;
+};
+long long int tym[72][72];
+bool chk[72][72];
+struct update d[5000];
+int end=0;
+
+int searchIndex(int x1,int y1)
+{
+ int i;
+ for(i=0;i<=end;i++)
+ {
+   if(d[i].x==x1 && d[i].y==y1)  return i;
+ }
+ return -1;
+}
+
+
+int main() {
+	// your code goes here
+	
+	int n,m;
+	int i,j,px,py,count=0;
+	 long long int maxtym,min=INT_MAX;
+	int i1,j1,k;
+	
+	
+	scanf("%d%d",&m,&n);
+	for(i=1;i<=m;i++)
+	{
+	 for(j=1;j<=n;j++)
+	 {   scanf("%lld",&tym[i][j]);    chk[i][j]=false;   }
+	} //scanning and initialisation ends;
+	
+	scanf("%d%d%lld",&px,&py,&maxtym); //  princess coordinates;
+	
+	d[end].x=1;  d[end].y=1;   d[end].t=tym[1][1];
+	
+	while(count<(m*n))
+	{
+	 count++;
+	 min=INT_MAX;
+	 ///// find min time from update form values already not taken;
+	 for(i=0;i<=end;i++)
+	 {
+	   if(chk[d[i].x][d[i].y]==false && min>(d[i].t))
+	   {
+	      min=d[i].t;  i1=d[i].x;   j1=d[i].y;
+	   }
+	 }
+	 ///returns min time with it indexes
+	 chk[i1][j1]=true;                         // mark as taken;
+	 
+	 if(i1==px && j1==py)   {     break;      }   //already got min time required;
+	 
+	 i=i1;  j=j1;
+	 // now chk for neighbours and update
+	 /*
+	 if index already present then just compare and update;
+	  otherwise add to structure new value;
+	 */
+	 
+	 if((i+1)<=m)
+	 {
+	   k=searchIndex(i+1,j);
+	   if(k==-1) {     //not found
+	   end++;
+	   d[end].x=i+1;   d[end].y=j;   d[end].t=min+tym[i+1][j];
+	   
+	   }
+	   else {
+	   
+	   d[k].t=(d[k].t>(min+tym[i+1][j]))?(min+tym[i+1][j]):d[k].t;
+	   }
+	 }
+	 
+	 if((i-1)>=1)
+	 {
+	  k=searchIndex(i-1,j);
+	   if(k==-1) {     //not found
+	   end++;
+	   d[end].x=i-1;   d[end].y=j;   d[end].t=min+tym[i-1][j];
+	   
+	   }
+	   else {
+	   
+	   d[k].t=(d[k].t>(min+tym[i-1][j]))?(min+tym[i-1][j]):d[k].t;
+	   }
+	 }
+	 
+	 if((j+1)<=n)
+	 {
+	  k=searchIndex(i,j+1);
+	   if(k==-1) {     //not found
+	   end++;
+	   d[end].x=i;   d[end].y=j+1;   d[end].t=min+tym[i][j+1];
+	   
+	   }
+	   else {
+	   
+	   d[k].t=(d[k].t>(min+tym[i][j+1]))?(min+tym[i][j+1]):d[k].t;
+	   }
+	 }
+	 
+	 if((j-1)>=1)
+	 {
+	  k=searchIndex(i,j-1);
+	   if(k==-1) {     //not found
+	   end++;
+	   d[end].x=i;   d[end].y=j-1;   d[end].t=min+tym[i][j-1];
+	   
+	   }
+	   else {
+	   
+	   d[k].t=(d[k].t>(min+tym[i][j-1]))?(min+tym[i][j-1]):d[k].t;
+	   }
+	 }
+	 
+	 
+	 
+	 
+	 
+	}     //while ends here
+	
+	
+	if(min<=maxtym) {  printf("YES
+%lld
+",maxtym-min);  }
+	else   printf("NO
+");
+	
+	
+	return 0;
+}

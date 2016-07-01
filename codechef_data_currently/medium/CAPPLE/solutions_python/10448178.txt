@@ -1,0 +1,12 @@
+t=input()
+while(t>0):
+	t-=1
+	n=input()
+	arr=map(int,raw_input().split())
+	arr=sorted(arr)
+	index=0;time=1
+	while(index<n-1):
+		if( arr[index]!=arr[index+1] ):
+			time+=1
+		index+=1
+	print time

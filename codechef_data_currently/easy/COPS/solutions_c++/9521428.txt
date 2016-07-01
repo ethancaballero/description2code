@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[11];
+int main()
+{
+    int t,i,m,x,y,safe,num;
+    cin>>t;
+    while(t--)
+    {
+        safe=0;
+        cin>>m>>x>>y;
+        num=x*y;
+        for(i=0;i<m;i++)
+            cin>>a[i];
+            sort(a,a+m);
+           if(a[0]-1>num)
+            safe+=a[0]-1-num;
+           if(100-(a[m-1])>num)
+            safe+=100-(a[m-1])-num;
+           for(i=1;i<=m-1;i++)
+           {
+               if(a[i]-a[i-1]-1>(2*num))
+                safe+=a[i]-a[i-1]-1-(2*num);
+           }
+           cout<<safe<<"
+";
+    }
+    return 0;
+}

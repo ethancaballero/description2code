@@ -1,0 +1,58 @@
+import java.io.*;
+ class Program {
+	static long m = 100000007;
+
+	static long modulo(long n, long t){
+		long sum = 1;
+		while(n!=0){
+			if(n%2 != 0)
+				sum = (sum*t)%m;
+			t = (t*t)%m;
+			n/=2;
+		}
+		return sum;
+	}
+	public static void main(String[] args)throws Exception {
+		int t;
+		long n;
+		StringBuffer out=new StringBuffer("");
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		t = Integer.parseInt(in.readLine());
+		for(int i = 1; i<=t; i++){
+		n = Long.parseLong(in.readLine());
+		if(n==1){
+			  
+		      out.append("0 0
+");continue;}
+		  
+		      else if(n==2){
+		  
+		      out.append("1 0
+");continue;}
+		long a2 = modulo(n,(long)2);
+		long a3 = modulo(n,(long)3);
+		long a4 = modulo(n,(long)4);
+		long r1 = (a3-(2*a2)%m +1)%m;
+		if(r1%2 == 0)
+		r1/=2;
+		else
+			r1 = (r1+m)/2;
+		r1 %= m;
+		if(r1<=0)
+			r1+=m;
+		long r2 = (a4-((3*a3)%m-(3*a2)%m+1))%m;
+		if(r2%2 == 0)
+		r2/=2;
+		else
+			r2 = (r2+m)/2;
+		r2 %= m;
+		if(r2<=0)
+			r2+=m;
+		out.append(r1+" "+r2+"
+");
+		}
+		System.out.println(out);
+		
+	}
+
+}

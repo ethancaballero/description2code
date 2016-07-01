@@ -1,0 +1,60 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+/*void sortin(long long int a[],int n)
+{
+    long long int temp;
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=0;j<n-i-1;j++)
+        {
+            if(a[j]<a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+}*/
+
+int main()
+{
+    int test;
+
+    cin>>test;
+    while(test--)
+    {
+        long long int m,s[10001],c=0,n,t,k,e;
+        cin>>n>>k>>e>>m;
+        for(int i=0;i<n-1;i++)
+        {
+            s[i]=0;
+            for(int j=0;j<e;j++)
+            {
+                cin>>c;
+                s[i]+=c;
+            }
+        }
+        c=0;
+        for(int i=0;i<e-1;i++)
+        {
+            cin>>t;
+            c+=t;
+        }
+        //sortin(s,n-1);
+        sort(s,s+n-1);
+        if(c+m>s[n-k-1])
+        {
+            if(c>s[n-k-1])
+                cout<<0;
+            else
+                cout<<s[n-k-1]-c+1;
+        }
+        else
+            cout<<"Impossible";
+       cout<<endl;
+    }
+    return 0;
+}

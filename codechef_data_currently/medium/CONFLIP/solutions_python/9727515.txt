@@ -1,0 +1,16 @@
+## CodeChef
+## Coin Flip
+## 2016.03.24
+    
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    game = int(raw_input())  ## the number of games
+
+    for j in xrange(game):
+        i,n,q = map(int,raw_input().strip().split())
+        if i == q:
+            print n/2
+        else:
+            print n - n/2

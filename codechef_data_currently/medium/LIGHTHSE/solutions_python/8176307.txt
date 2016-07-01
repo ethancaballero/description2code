@@ -1,0 +1,52 @@
+t=int(raw_input())
+
+ans=[]
+while(t):
+    X=[];
+    Y=[];
+    XY=[]
+    
+    t-=1;
+    n=int(raw_input());
+    st='';
+    for i in range(1,n+1):
+        xi,yi=map(int,raw_input().split());
+        X.append(xi);
+        Y.append(yi);
+        XY.append((xi,yi));
+    lborder=X.index(min(X));
+    rborder=X.index(max(X));
+    tborder=Y.index(max(Y));
+    bborder=Y.index(min(Y));
+    if((X[lborder],Y[tborder])in XY):
+        st='1
+'+str(XY.index((X[lborder],Y[tborder]))+1)+' SE';
+    elif((X[lborder],Y[bborder])in XY):
+        st='1
+'+str(XY.index((X[lborder],Y[bborder]))+1)+' NE';
+    elif((X[rborder],Y[tborder])in XY):
+         st='1
+'+str(XY.index((X[rborder],Y[tborder]))+1)+' SW';
+    elif((X[rborder],Y[bborder])in XY):
+         st='1
+'+str(XY.index((X[rborder],Y[bborder]))+1)+' NW';
+    elif((rborder==lborder)):
+         st='1
+'+str(tborder+1)+' SE';
+    elif(tborder==bborder):
+         st='1
+'+str(lborder+1)+' NE';
+    else:
+         if(Y[lborder]>=Y[rborder]):
+             st='2
+'+str(lborder+1)+' SE
+'+str(rborder+1)+' NW';
+         else:
+             st='2
+'+str(lborder+1)+' NE
+'+str(rborder+1)+' SW';
+
+
+    ans.append(st);
+for x in ans:
+    print x

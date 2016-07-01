@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+#define pii pair<int, int>
+#define pll pair<long long, long long>
+#define vi  vector<int>
+#define pb  push_back
+#define mp  make_pair
+#define M(a,x) memset(a,x,sizeof(a))
+#define sci(x) scanf("%d",&x);
+#define scs(x) scanf("%s",x);
+#define print(x) printf("%d",x);
+#define nl printf("
+")
+#define printl(x) printf("%lld",x)
+#define F(i,a,n) for(int i=a;i<n;i++)
+#define INF 100000000000000000LL
+#define LL long long
+const int N=71;
+int dp[N][N];
+int main() {
+    int t;sci(t);
+    while(t--) {
+        int n;sci(n);
+        M(dp,0);
+        F(i,0,n) {
+            F(j,0,n) {
+                sci(dp[i][j]);
+                if(i>0) {
+                    dp[i][j]^=dp[i-1][j];
+                }
+                if(j>0) {
+                    dp[i][j]^=dp[i][j-1];
+                }
+                if(i>0 && j>0) {
+                    dp[i][j]^=dp[i-1][j-1];
+                }
+            }
+        }
+        int mx=0;
+        int ans=0;
+        F(i,0,n) {
+            F(j,0,n) {
+                F(k,i,n) {
+                    F(l,j,n) {
+                        mx=dp[k][l];
+                        if(i>0)
+                            mx^=dp[i-1][l];
+                        if(j>0)
+                            mx=mx^dp[k][j-1];
+                        if(i>0 && j>0)
+                            mx^=dp[i-1][j-1];
+                        ans=max(mx,ans);
+                    }
+                }
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

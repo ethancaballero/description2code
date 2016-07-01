@@ -1,0 +1,10 @@
+T = int(raw_input())
+
+for t in xrange(T):
+    N, K = raw_input().split(' ')
+    N, K = int(N), int(K)
+    forgotten = raw_input().split(' ')
+    existing = set()
+    for k in range(K):
+        existing |= set(raw_input().split(' ')[1:])
+    print ' '.join(["YES" if word in existing else "NO" for word in forgotten])

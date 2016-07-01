@@ -1,0 +1,23 @@
+t = input()
+#print t
+
+while t > 0:
+
+    sides = map(str, raw_input().split())
+    #print sides
+    a = int(sides[0])
+    #print a
+    b = int(sides[1])
+    #print b
+    c = int(sides[2])
+    #print c
+
+    if (a > 0 and a < 180) and (b > 0 and b < 180) and (c > 0 and c < 180):
+        if (a + b + c) == 180:
+            print "YES"
+        else:
+            print "NO"
+    else:
+        print "NO"
+
+    t -= 1

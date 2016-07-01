@@ -1,0 +1,27 @@
+t = input()
+for i in range(t):
+    activities_str,origin = raw_input().split()
+    activities = int(activities_str)
+    total_value = 0
+    for j in range(activities):
+        value = raw_input().split()
+        if value[0] == "CONTEST_WON":
+            rank = int(value[1])
+            if rank <=20:
+                total_value+=300+20-rank
+            else:
+                total_value+=300
+        elif value[0] == "TOP_CONTRIBUTOR":
+            total_value+=300
+        elif value[0] == "BUG_FOUND":
+            severity = int(value[1])
+            total_value+=severity
+        elif value[0] == "CONTEST_HOSTED":
+            total_value+=50
+    
+    if origin =="INDIAN":
+        print total_value/200
+    else:
+        print total_value/400
+                
+ 

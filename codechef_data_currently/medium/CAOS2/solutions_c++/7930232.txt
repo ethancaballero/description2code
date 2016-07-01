@@ -1,0 +1,105 @@
+#include<cstring>
+#include<cstdlib>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+
+int up[501][501];
+int left[501][501];
+int right[501][501];
+int down[501][501];
+int check[501][501];
+
+int min[501][501];
+int counter[505];
+
+// list of primes upto 5000
+int primes[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499};
+
+void init(int r, int c) {
+  int i;
+  for(i=0;i<501;i++) {
+    up[0][i] = -1;
+    down[r+1][i] = -1;
+  }
+}
+
+void preprocess() {
+  int i, j;
+  int count;
+  for(i=1; i<501; i++) {
+    count = 0;
+    for(j=0; j<94; j++) {
+      if (i >= primes[j]) {
+        count++;
+      }
+      else {
+        counter[i] = count;
+        break;
+      }
+    }
+  }
+};
+
+int findmin(int a, int b) {
+ if (a <= b) return a;
+ else return b;
+}
+
+int main() {
+  int T, r, c, i, j;
+  char ch;
+  int mina;
+  int count, add, answer;
+  preprocess();
+  scanf("%d", &T);
+  while(T--) {
+    scanf("%d %d", &r, &c);
+    getchar();
+    init(r, c);
+    for(i=1; i<=r ;i++) {
+      count = 0;
+      for(j=1; j<=c; j++) {
+        //up[0][j] = 0;
+        ch = getchar();
+        left[i][j] = count;
+
+        if (ch == '^') {
+          count++;
+          check[i][j] = 1;
+          up[i][j] = up[i-1][j] + 1;
+          min[i][j] = findmin(up[i][j], left[i][j]);
+        } else {
+          count = 0;
+          check[i][j] = 0;
+          up[i][j] = -1;
+        }
+      }
+      getchar();
+    }
+
+    answer = 0;
+    // Run throught matrix again
+    for(i=r; i>=1 ;i--) {
+      count = 0;
+      for(j=c; j>=1; j--) {
+        //up[0][j] = 0;
+        right[i][j] = count;
+
+        if (check[i][j] == 1) {
+          count++;
+          down[i][j] = down[i+1][j] + 1;
+          mina = findmin(right[i][j], down[i][j]);
+          if (mina <= min[i][j]) min[i][j] = mina;
+          answer += counter[min[i][j]];
+        } else {
+          count = 0;
+          down[i][j] = -1;
+        }
+      }
+    } 
+    printf("%d
+", answer);
+  }  
+  return 0;
+}

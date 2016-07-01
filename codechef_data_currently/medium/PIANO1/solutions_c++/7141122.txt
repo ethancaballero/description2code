@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int T;
+    cin >> T;
+    for (int cas = 1; cas <= T; cas++) {
+        // we use 'cas' because 'case' is a keyword
+        int N;
+        string s;
+        cin >> s;
+        cin >> N;
+        int ans = 0;
+        for(int x, y, sp = 0; sp < 12 * N; sp++){
+            y = sp;
+            while(true){
+                x = y;
+                for(int i = 0; i < s.length(); i++){
+                    x += s[i] - 'R';
+                }
+                if(x >= 12 * N){
+                    break;
+                }
+                y = x;
+                ans++;
+            }
+        }
+        cout << ans << "
+";
+    }
+}

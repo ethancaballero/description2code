@@ -1,0 +1,35 @@
+import math
+
+cases = int(raw_input())
+for x in range(cases):
+	g = raw_input()
+
+	if(len(g) < 2):
+		if g == '?':
+			print '26'
+		else:
+			print '1'
+	else:
+		total = 1
+		firstHalf = list(g)
+
+		firstIndex = len(firstHalf) - 1
+		secondIndex = 0
+
+		while secondIndex < firstIndex:
+			if firstHalf[firstIndex] != firstHalf[secondIndex]:
+				if firstHalf[firstIndex] != '?' and firstHalf[secondIndex] != '?':
+					total = 0
+					break
+			else:
+				if firstHalf[firstIndex] == '?':
+					total = (total * 26) % 10000009
+			secondIndex += 1
+			firstIndex -= 1
+
+		if len(g) % 2 == 1:
+			mid = len(g) / 2
+			if g[mid:mid+1] == '?':
+				total *= 26
+
+		print total % 10000009

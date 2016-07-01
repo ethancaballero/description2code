@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+    	int n,k,ar[1001];
+    	scanf("%d %d",&n,&k);
+    	int i;
+    	for(i=0;i<n;i++)
+    		scanf("%d",&ar[i]);
+    	if(n==2)
+    		cout<<abs(ar[0]+ar[1]-k)<<" "<<1<<endl;
+    	else
+    	{
+    		int y=INT_MAX,j;
+    		for(i=0;i<n-1;i++)
+    		{
+    			for(j=i+1;j<n;j++)
+    			{
+    				if(abs(ar[i]+ar[j]-k)<y)
+    					y=abs(ar[i]+ar[j]-k);
+    			}
+    		}
+            int count=0;
+    		for(i=0;i<n-1;i++)
+    		{
+    			for(j=i+1;j<n;j++)
+    			{
+    				if(abs(ar[i]+ar[j]-k)==y)
+    					count++;
+    			}
+    		}
+    		cout<<y<<" "<<count<<endl;
+    	}
+    }
+	return 0;
+}

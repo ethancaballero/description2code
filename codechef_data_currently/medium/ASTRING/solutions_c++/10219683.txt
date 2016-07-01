@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        int k;
+        cin>>k;
+        if(k==s.length())
+        {
+            cout<<s<<endl;
+            return 0;
+        }
+        set<pair<char,int> > s1;
+        for(int i=0;i<=s.length()-k;i++)
+        {
+            s1.insert(make_pair(s[i],i));
+        }
+        set<pair<char,int> >::iterator it=s1.begin();
+        /*for(it=s1.begin();it!=s1.end();it++)
+        {
+            cout<<(*it).first<<" "<<(*it).second<<endl;
+        }
+        it=s1.begin();*/
+        string str="";
+        str+=(*it).first;
+        int a=0;
+        int b=(*it).second;
+        for(int i=s.length()-k+1;i<=s.length()-1;i++)
+        {
+            while(a<=b)
+            {
+                //cout<<"a="<<a<<" b="<<b<<endl;
+                s1.erase(make_pair(s[a],a));
+                a++;
+                //cout<<"a="<<a<<endl;
+            }
+            s1.insert(make_pair(s[i],i));
+            it=s1.begin();
+            b=(*it).second;
+            //cout<<"b="<<b<<endl;
+            //cout<<(*it).first<<endl;
+            str+=(*it).first;
+        }
+        cout<<str<<endl;
+    }
+}

@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stdlib.h>
+#include <math.h>
+#include <cstring>
+#define mod 1000000007;
+using namespace std;
+
+//Precompute (A C B modulo 1E9+7) 
+long long nCr[1001][1001];
+long long Ans[1001];
+int main()
+{
+      nCr[0][0]=1;
+      nCr[1][0]=1;
+      nCr[1][1]=1;
+     // for(int n=0;n<)
+      for(int n=2;n<=1000;n++)
+      {
+            nCr[n][0]=1;
+            for(int r=1;r<=n;r++)
+            {
+                  nCr[n][r]=(nCr[n-1][r-1] + nCr[n-1][r])%mod;
+            }
+      }
+      
+      int t;
+      cin>>t;
+      while(t--)
+      {
+            int n;
+            cin>>n;
+            memset(Ans,0,sizeof(Ans));
+            for(int i=0;i<n;i++)
+            {
+                  int x;
+                  cin>>x;
+            }
+            for(int r=n;r>n/2;r--)
+            {
+                  Ans[n]=(Ans[n] + nCr[n][r])%mod;
+            }
+            cout<<Ans[n]<<endl;
+      }
+
+}

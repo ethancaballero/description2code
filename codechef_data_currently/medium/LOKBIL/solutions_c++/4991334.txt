@@ -1,0 +1,74 @@
+    #include<iostream>
+    #include<cstdio>
+    #include<algorithm>
+    #include<vector>
+    #include<set>
+    #include<map>
+    #include<string>
+    #include<string.h>
+    #include<cstring>
+    #include<stack>
+    #include<queue>
+    #include<cassert>
+     
+    using namespace std;
+    #define PB push_back
+    
+    #define INF 1000000000
+     
+    vector<vector<int> > a;
+    bool vis[103];
+    int d[103][103];
+    int bfs(int st){
+    queue<int > q;
+    memset(vis,0,sizeof(vis));
+    int c;
+    q.push(st);
+    d[st][st]=0;
+    vis[st]=1;
+    while(!q.empty()){
+    c=q.front();
+    q.pop();
+    for(int i=0;i<a[c].size();i++)
+    if(!vis[a[c][i]]){
+    q.push(a[c][i]);
+    d[st][a[c][i]]=d[st][c]+1;
+    vis[a[c][i]]=1;
+    }
+    }
+    }
+    int main(){
+    double sum,msum=INF;
+    int n,i,j,ans,x,t;
+    char c;
+    scanf("%d",&t);
+    while(t--){
+    msum=INF;
+    memset(d,0,sizeof(d));
+    a.clear();
+    a.resize(102);
+    scanf("%d ",&n);
+    for(i=1;i<=n;i++){
+    while(1){
+    scanf("%d%c",&x,&c);
+    a[i].PB(x);
+    if(c=='
+')
+    break;
+    }
+    }
+    for(i=1;i<=n;i++){
+    bfs(i);
+    sum=0;
+    for(j=1;j<=n;j++)
+    sum+=d[i][j];
+    if(msum > sum){
+    msum=sum;
+    ans=i;
+    }
+    }
+    printf("%d %.6lf
+",ans,msum/n);
+    }
+    return 0;
+    } 

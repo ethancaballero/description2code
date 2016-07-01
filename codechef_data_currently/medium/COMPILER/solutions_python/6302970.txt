@@ -1,0 +1,15 @@
+t=input()
+for i in range(t):
+	s=raw_input()
+	k=0
+	ans=0
+	for i in range(len(s)):
+		if s[i]=='<':
+			k+=1
+		else:
+			k-=1
+			if k==0:
+				ans=max(ans,i+1)
+			elif k<0:
+				break
+	print ans

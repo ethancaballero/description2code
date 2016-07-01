@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define f(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
+#define rf(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
+#define s(n)                        scanf("%d",&n)
+#define p(n)			    printf("%d
+",n)
+#define sl(n)                       scanf("%lld",&n)
+#define pl(n)			    printf("%lld
+",n)
+#define ll long long int
+#define M 10000007
+int main()
+{
+        ll a,b,sum=0,ans=1;
+        sl(a); sl(b);
+        ll m[a][b];
+        f(i,0,a)
+        {
+            f(j,0,b)
+            sl(m[i][j]);
+        }
+        f(i,0,b)
+        {   sum=0;
+            f(j,0,a)
+            {
+                sum+=m[j][i];
+            }
+            ans=(ans*sum)%M;
+        }
+        if(ans<0)
+            ans+=M;
+        pl(ans%M);
+    return 0;
+}
+ 

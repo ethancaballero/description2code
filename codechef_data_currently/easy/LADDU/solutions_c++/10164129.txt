@@ -1,0 +1,40 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+int t,i,act,j,laddu=0,rank,ans;
+string st,origin;
+cin>>t;
+for(i=0;i<t;i++)
+{
+cin>>act>>origin;
+for(j=0;j<act;j++)
+{
+ 
+cin>>st;
+if(st[8]=='H')
+laddu+=50;
+else if(st[0]=='T')
+laddu+=300;
+else if(st[0]=='C')
+{
+    cin>>rank;
+    laddu+=300+(rank>20?0:20-rank);
+}
+else
+{
+cin>>rank;
+    laddu+=rank;
+}
+}
+if(origin[0]=='I')
+ans=laddu/200;
+else
+ans=laddu/400;
+
+cout<<ans<<endl;
+    laddu=0;
+}
+return 0;
+} 

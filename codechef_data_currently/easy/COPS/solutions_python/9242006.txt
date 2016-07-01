@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jan 26 19:41:57 2016
+
+@author: shashank
+"""
+
+import sys
+T = int(sys.stdin.readline())
+output = []
+for i in range (T):
+    houses = [i for i in range(1,101)]
+    Mxy = sys.stdin.readline().split()
+    M = int(Mxy[0])
+    xy = int(Mxy[1])*int(Mxy[2])
+    cops = [int(x) for x in sys.stdin.readline().split()]
+    
+    for j in cops:
+        minimum = max(j - xy,1)
+        maximum = min(j + xy,100)
+        for k in range(minimum,maximum+1):
+                houses[k-1] = None
+            #print houses[k]
+        count = 0
+    for l in houses:
+        if l!= None:
+            count += 1
+    print count
+            
+
+
+    

@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<bits/stdc++.h>
+#include<algorithm>
+#include<string>
+#include<math.h>
+#define S(n) scanf("%lli",&n);
+#include<iostream>
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%lli ",n);
+using namespace std;
+int main()
+{
+    int t;
+    s(t)
+    while(t--)
+    {
+       long long int n,k;
+        S(n)S(k)
+        if(k!=0){
+        p(n/k)
+        p(n%k)
+        printf("
+");
+        continue;
+        }
+        if(k==0){
+            p(k)p(n)
+            printf("
+");
+            continue;
+        }
+
+
+
+    }
+    return 0;
+}

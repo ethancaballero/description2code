@@ -1,0 +1,22 @@
+def min_absolute(list, k):
+    temp = abs(list[0]+list[1]-k)
+    suma = 0
+    for i, item in enumerate(list):
+        comp_list = list[i+1:]
+        for second_item in comp_list:
+            if abs(item+second_item-k) < temp:
+                temp = abs(item+second_item-k)
+                suma = 1
+            if abs(item+second_item-k) == temp:
+                suma += 1
+
+    return str(temp) + " " + str(suma)
+
+
+t = int(raw_input())
+while t > 0:
+    t -= 1
+    first = map(int, raw_input().split())
+    second = map(int, raw_input().split())
+
+    print min_absolute(second, first[1])

@@ -1,0 +1,20 @@
+import math
+
+def nCr(n,r):
+    f = math.factorial
+    return f(n) / f(r) / f(n-r)
+
+x,t=map(int,raw_input().split())
+ways=0
+while t>0:
+    s=raw_input()
+    for i in range(9):
+        count=0
+        s1=s[4*i:4*(i+1)] + s[53-2*i:51-2*i:-1]
+        for j in s1:
+            if j=='0':
+                count+=1
+        if count>=x:
+            ways+=nCr(count,x)
+    t-=1
+print ways

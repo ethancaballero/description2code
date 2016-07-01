@@ -1,0 +1,20 @@
+# your code goes here
+from sys import stdin, stdout
+t = int(stdin.readline())
+while t:
+	t -= 1
+	n, m = map(int, stdin.readline().strip().split(' '))
+	c = [1]*n
+	a = []
+	p = []
+	for i in xrange(m):
+		p.append(map(int, stdin.readline().strip().split(' ')))
+	for i in range(m-1, -1, -1):
+		if c[p[i][0]] and c[p[i][1]]:
+			c[p[i][0]] = 0
+			c[p[i][1]] = 0
+			a.append(i)
+	for i in a[::-1]:
+		stdout.write(str(i) + " ")
+	stdout.write('
+')

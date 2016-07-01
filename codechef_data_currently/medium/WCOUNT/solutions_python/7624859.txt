@@ -1,0 +1,12 @@
+import sys
+from math import factorial
+for _ in xrange(int(sys.stdin.readline())):
+	str = sys.stdin.readline().strip()
+	l=[0]*127
+	for i in str:
+		l[ord(i)]+=1
+	f=1
+	for j in l:
+		if j>0:
+			f*=factorial(j)
+	print (factorial(len(str))/f)%1000000007

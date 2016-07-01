@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+#define MOD 100000007
+typedef unsigned long long ull;
+ull powerExpoMod(ull b,ull p,ull mod = MOD)
+{
+    ull x = 1,y = b;
+    while(p)
+    {
+            if(p&1)
+              x = (x*y)%mod;
+              y = (y*y)%mod;
+              p >>= 1;
+    }
+    return x%mod;
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+              ull n,a,b,c,d,e,r1,r2;
+              scanf("%lld",&n);
+              a = 2*powerExpoMod(4,n-1);
+              b = powerExpoMod(3,n);
+              c = powerExpoMod(2,n-1);
+              d = powerExpoMod(2,n);
+              e = powerExpoMod(3,n,2*MOD)+1;
+              e /= 2;
+              r1 = (MOD + e -d)%MOD;
+              a = (MOD + a - b)%MOD;
+              a += (d + c);
+              r2 = (MOD+a-e)%MOD;
+              printf("%lld %lld
+",r1,r2);
+    }
+    return 0;
+}

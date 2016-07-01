@@ -1,0 +1,11 @@
+T = int(raw_input())
+
+while T:
+        num = raw_input().strip()
+
+        if "010" in num or "101" in num:
+                print "Good"
+        else:
+                print "Bad"
+
+        T -= 1

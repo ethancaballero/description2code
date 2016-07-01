@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+ 
+int main(){
+       int numbers;
+       cin>>numbers;
+       int i=0;
+       while(i<numbers){
+             int apples;
+             cin>>apples;
+             cout<<" ";
+             int oranges;
+             cin>>oranges;
+             cout<<" ";
+             int coins;
+             cin>>coins;
+             int diff=0;
+             if(apples>=oranges){
+                   diff=apples-oranges;}
+             else{
+                   diff=oranges-apples;}
+                   
+             int minDiff=0;
+             if(diff<=coins){
+                  minDiff=0;
+                  cout<<minDiff<<endl;}
+             else{
+                   minDiff=diff-coins;
+                   cout<<minDiff<<endl;}
+           
+            i=i+1;} }   

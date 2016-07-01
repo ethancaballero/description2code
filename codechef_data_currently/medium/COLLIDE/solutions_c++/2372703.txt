@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int main(){
+  int nt, dx, dy, n, xind[100], yind[100], dxe, dye;
+  xind['U'] = 0; yind['U'] = 1;
+  xind['D'] = 0; yind['D'] = -1;
+  xind['R'] = 1; yind['R'] = 0;
+  xind['L'] = -1; yind['L'] = 0;
+  int x, y, xe, ye;
+  cin>>nt;
+  while(nt--){
+    char c;
+    scanf("%d %d %c", &xe, &ye, &c);
+    dxe = xind[c];
+    dye = yind[c];
+    scanf("%d",&n);
+    int res = 1000;
+    for(int i = 0; i < n; i++){
+      scanf("%d %d %c", &x, &y, &c);
+      dx = xind[c];
+      dy = yind[c];
+      if (dx == dxe && dy == dye) continue;
+      if (dx == dxe && x == xe){
+	int t = dy*(ye - y);
+	if (t > 0) res = min(res, t);
+      }
+      else if (dy == dye && y == ye){
+	int t = dx*(xe - x);
+	if (t > 0) res = min (res, t);
+      }
+      else {
+	int t1 = (dxe - dx)*(x - xe);
+	int t2 = (dye - dy)*(y - ye);
+	if (t1 == t2 && t1 > 0) res = min (res, t1<<1);
+      }
+    }
+    if (res > 400) printf("SAFE
+");
+    else printf("%0.1f
+", 0.5*res);
+  }
+  return 0;
+}

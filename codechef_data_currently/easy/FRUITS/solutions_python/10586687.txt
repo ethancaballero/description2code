@@ -1,0 +1,9 @@
+t = int(raw_input())
+for i in range(t):
+	n,m,k = map(int,raw_input().split())
+	rem = max((n-m),(m-n))
+	if k >= rem:
+		print 0
+	else:
+		print rem - k
+		

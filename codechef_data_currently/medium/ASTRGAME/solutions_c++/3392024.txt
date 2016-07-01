@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		char word[50];
+		char dictionary[50][50];
+		int n;
+		cin >> word >> n;
+		int len=strlen(word);
+		int dlen[50];
+		for(int i=0; i<n; i++){
+            cin >> dictionary[i];
+			dlen[i]=strlen(dictionary[i]);
+		}
+		int grundy[50][50];
+		for(int i=0; i<len; i++)
+			grundy[i][i]=0;
+
+        /**
+         * bottom-top approach:
+         * first find the grundy for smaller difference
+         *  and then for larger difference using the smaller difference
+         *
+         * since here win is dependent on the substring formed the result
+         *  is xor of both sub-problems.
+         */
+		for(int k=1; k<=len; k++){
+			for(int i=0; i+k<=len; i++){
+				int mex[50]={0};
+				for(int d=0; d<n; d++){
+					for(int p=i; p+dlen[d]<=i+k; p++){
+						if(memcmp(dictionary[d], word+p, dlen[d])==0)
+							mex[grundy[i][p]^grundy[p+dlen[d]][i+k]]=1;
+					}
+				}
+				/**
+				 * finding the smallest number which is not assigned.
+				 */
+				grundy[i][i+k]=0;
+				while(mex[grundy[i][i+k]])
+					grundy[i][i+k]++;
+			}
+		}
+		if(grundy[0][len]) cout << "Teddy" << endl;
+		else cout << "Tracy" << endl;
+	}
+	return 0;
+}

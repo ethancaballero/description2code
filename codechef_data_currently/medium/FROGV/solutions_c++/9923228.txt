@@ -1,0 +1,55 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+typedef struct
+{
+    long long int v;
+    long long int i;
+
+}t;
+bool cc(t l,t r)
+{
+    return(l.v>r.v);
+
+}
+
+int main()
+{
+    long long int n,k,p,flag,pe,q,i,x,y,j;
+
+    scanf("%lld %lld %lld",&n,&k,&p);
+    t a[n];
+    long long int maxi[n+1];
+    for(j=0;j<n;j++)
+    {
+         scanf("%lld",&a[j].v);
+         a[j].i=j+1;
+    }
+
+   sort(a,a+n,cc);
+   maxi[a[0].i]=a[0].v+k;
+
+    for(j=1;j<n;j++)
+    {
+        if(a[j-1].v-a[j].v<=k)
+            maxi[a[j].i]=maxi[a[j-1].i];
+        else
+            maxi[a[j].i]=a[j].v+k;
+    }
+
+
+       for(i=0;i<p;i++)
+       {
+           scanf("%lld %lld",&x,&y);
+           if(maxi[x]==maxi[y])
+             printf("Yes
+");
+           else
+              printf("No
+");
+
+        }
+
+}
+

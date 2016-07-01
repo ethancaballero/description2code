@@ -1,0 +1,284 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <string.h>
+#include <cstdlib>
+#include <sstream>
+#include <stack>
+#include <queue>
+#include <numeric>
+#include <utility>
+#include <cctype>
+#include <list>
+#include <climits>
+#include <signal.h>
+#include <ctime>
+#include <map>
+#include <set>
+ 
+#define ll long long int
+using namespace std;
+ 
+int sign;
+int ch;
+// Fast Input
+inline void S( ll &x ) {
+	x=0;
+	while((ch<'0' || ch>'9') && ch!='-' && ch!=EOF) ch=getchar_unlocked();
+	if (ch=='-')
+		sign=-1 , ch=getchar_unlocked();
+	else
+		sign=1;
+	do
+	x=(x<<3)+(x<<1)+ch-'0';
+	while((ch=getchar_unlocked())>='0' && ch<='9');
+	x*=sign;
+}
+// FAST IO
+//{{{
+char *fstart;
+const int MAXBUF=20000000;
+char buf[MAXBUF];
+char outbuf[MAXBUF];
+int outat;
+void skip() {
+	while (*fstart != 0  && *fstart != '-' && !('0' <= *fstart && *fstart <= '9')) fstart++;
+}
+template <class T> void GETNUM(T& n){
+	skip();
+	int sign = 1;
+	if (*fstart == '-') sign = -1, ++fstart;
+	n=0;
+	while ('0' <= *fstart && *fstart <= '9') {
+		n = n*10 + *fstart-'0';
+		++fstart;
+	}
+	n *= sign;
+}
+void take_input() { // Take input using fast I/O
+	int sz=fread(buf, sizeof(char), MAXBUF, stdin);
+	buf[sz]=0;
+	fstart=buf;
+	outat=0;
+}
+void outc(char c) { outbuf[outat++] = c; }
+template <class T> void outnum(T x) {
+	char s[100]; int at = 0;
+	do { s[at++] = x%10, x/=10; } while(x>0);
+	for (int i=at-1;i>=0;--i) outbuf[outat++] = s[i]+'0';
+}
+void flushoutbuf() {
+	fwrite(outbuf,sizeof(char),outat, stdout);
+}
+
+ 
+
+#define HASH_SIZE 10001
+ 
+struct node{
+	ll arc;
+	ll art;
+	ll det;
+	ll isv;
+	struct node *left;
+	struct node *right;
+};
+ 
+struct node* push(ll det, ll arc, ll art){
+	
+	struct node *newnode = new node;
+ 
+	newnode -> arc = arc;
+	newnode -> det = det;
+	newnode -> art = art;
+	newnode -> isv = 0;	
+	newnode -> left = NULL;;
+	newnode -> right = NULL;
+ 
+	return newnode;
+}
+ 
+struct node * pushnode(struct node *r, ll det, ll arc, ll art){
+ 
+	if(r == NULL){
+		return push(det, arc, art);
+	}
+ 
+	else if( r->det > det){
+		r->left = pushnode(r->left, det, arc, art);
+	}
+	else {
+		r->right = pushnode(r->right, det, arc, art);
+	}
+ 
+	return r;
+}
+void insert( struct node* t[],ll dc, ll det, ll arc, ll art) {
+	t[dc] = pushnode( t[ dc ], det, arc, art );
+ 
+//	cout << "
+Inerting: " << dc << " " << det << " " << arc << " "<< art;
+}
+struct node *mn = new node;
+int flag;
+ 
+void search(struct node *r, ll k, ll lim){
+	if ( r == NULL || flag) {
+		return;
+	}
+ 
+	else if (lim <= r->det){
+		search(r->left, k, lim);
+	}
+	
+	//cout << "
+Checking " << r -> arc << "	" << lim << "	" << r->det << "	" << mn -> det;
+	if(r->det < mn->det && r->det >= lim ){
+		mn = r;
+		//cout << "
+Assigned MN: " << mn -> arc << mn -> det;
+		flag=1;
+	}
+//	cout << "
+Curr Min City For This: " << mn -> arc;
+	else if(lim >= r->det){
+		search(r->right, k, lim);
+	}
+}
+ 
+struct node* search_min(struct node* t[], ll k, ll lim){
+//	cout << "
+Searching for " << k;
+	mn = new node;
+	mn -> det = INT_MAX;
+	flag=0;
+	search(t[k], k,lim);
+	if (flag){
+	//	cout << "
+Returning " << mn -> arc;
+		return mn;
+	}
+	else {
+	//	cout <<"
+Returning NULL";
+		return NULL;
+	}
+ 
+}
+ 
+
+void prlllist(struct node* r){
+	if( r == NULL){
+		return;
+	}
+ 
+	prlllist(r->left);
+	cout << "	( " << r->arc  << "  " << r->det << "  " << r->art << " )";
+	prlllist(r->right);
+}
+ 
+void prll(struct node * t[], int n){
+	for(ll i=0; i < n; i++){
+		cout << i << " = " ;
+		prlllist(t[i]);
+		cout << endl;
+	}
+ 
+}
+ 
+int main(){
+ 
+	struct node *table[HASH_SIZE];
+	struct node *minpt;
+	map<int, int> m;
+ 
+	ll i, j, k, f, ct=0, n, t, w, x, y, z, s, d, st, dt;
+	
+	
+	S(t);
+	
+	for( i = 0; i < t; i++ ) {
+		for( j = 0; j < HASH_SIZE; j++ )
+			table[j] = NULL;
+ 
+		
+		S(n);
+ 
+		for(j = 0; j<n; j++ ){
+			//scanf("%lld%lld%lld%lld", &w, &x, &y, &z);
+			S(w);
+			S(x);
+			S(y);
+			S(z);
+			if(m[w] < x){
+				m[w] = x;
+			}
+			insert(table, w, x, y, z);
+		}
+ 
+
+		S(s);
+		S(st);
+		S(d);
+		S(dt);
+ 
+		ct = 0;
+		f=1;
+		while( 1 ){
+			if ( s == d && st <= dt ) {
+				//cout << "
+Reached Destination: ";
+				f=2;
+				break;
+			}
+ 
+			if(m[s] < st){
+				f = 0;
+				//cout << "
+Ended IN Map";
+				break;
+			}
+ 
+			else if( ( (minpt = search_min( table, s, st )) == NULL ) || minpt->isv == 1 ) {
+				      
+					f = 0;
+					//cout << "
+Ending Here. ";
+					break; 
+			}
+ 
+			ct++;
+			minpt->isv = 1;
+			s = minpt->arc;
+			st = minpt->art;
+			//cout << "
+Currently At Station: " << s;
+		}
+ 
+		if(f == 2){
+			//printf("Yes %lld
+", ct);
+		
+			outc('Y');
+			outc('e');
+			outc('s');
+			outc(' ');
+			outnum(ct);
+		}
+		else{
+			//printf("No
+");
+			outc('N');
+			outc('o');
+		}
+		outc('
+');
+	}
+ 
+	flushoutbuf();
+	return 0;
+}

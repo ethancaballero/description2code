@@ -1,0 +1,56 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+#define ll long long
+ll shortest_path(ll a,ll b)
+{
+	//doing same level
+	ll ans=0;
+	if(a>b)
+	{
+		ll pow=1,in_b=b;
+		while(in_b!=0)
+		{
+			in_b/=2;
+			pow*=2;
+		}
+		while(a>=pow)
+		{
+			a=a/2;
+			ans++;
+		}
+	}
+	else
+	{
+		ll pow=1,in_a=a;
+		while(in_a!=0)
+		{
+			in_a/=2;
+			pow*=2;
+		}
+		while(b>=pow)
+		{
+			b/=2;
+			ans++;
+		}
+	}
+	while(a!=b)
+	{
+		a/=2;
+		b/=2;
+		ans+=2;
+	}
+	return ans;
+}
+int main()
+{
+	ll n,a,b;
+	scanf("%lld",&n);
+	for(ll i=0;i<n;i++)
+	{
+		scanf("%lld %lld",&a,&b);
+		printf("%lld
+",shortest_path(a,b));
+	}
+	
+}

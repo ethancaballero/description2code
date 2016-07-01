@@ -1,0 +1,59 @@
+                #include<iostream>
+                #include<cstring>
+                using namespace std;
+                const int MAX=51;
+                bool fun(int size, bool *x, bool *y)
+                {
+                	for(int i=2;i<size;i++)y[i]=(y[i-2]^y[i-1]^x[i-1]);
+                	if(y[size-2]^y[size-1]^y[0]^x[size-1])return false;
+                	if(y[size-1]^y[0]^y[1]^x[0]) return false;
+                	return true;
+                }
+                int main()
+                {
+                	int t,size;
+                	scanf("%d",&t);
+                	bool a,b;
+                	bool y[MAX-1],x[MAX-1];
+                	char str[MAX];
+                	while(t--)
+                	{
+                		cin>>str;
+                		size=strlen(str);
+                		for(int i=0;i<size;i++)
+                		{
+                			x[i]=(str[i]=='1');
+                		}
+                		int ct=0;
+                		for(int i=0;i<4;i++)
+                		{
+                			y[0]=i>>1;
+                			y[1]=i&1;
+                			//ct=0;
+                			if(fun(size,x,y))
+                			{
+                				a=y[0];
+                				b=y[1];
+                				ct++;	
+                			}
+                		}
+                		if(ct>1)printf("Multiple solutions
+");
+                		else if(ct==1)
+                		{
+                			y[0]=a;
+                			y[1]=b;
+                			fun(size,x,y);
+                			for(int i=0;i<size;i++)
+                			{
+                				if(y[i])printf("1");
+                				else printf("0");
+                			}
+                			printf("
+");
+                		}
+                		else printf("No solution
+");
+                	}
+                	return 0;
+                }    

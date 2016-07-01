@@ -1,0 +1,4 @@
+T=input()
+for i in range(T):
+	N=input()
+	print N/2+1

@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+		int t;
+		cin>>t;
+		map<string,int>m;
+		m["blue"]=0;
+		m["green"]=1;
+		m["black"]=2;
+		m["orange"]=3;
+		m["yellow"]=4;
+		m["red"]=5;
+		
+		while(t--){
+				string n;
+				int c=0;
+				int flag=0;
+				int arr[6];
+				int arr2[6]={0};
+				int arr3[6]={0};
+				for(int i=0;i<6;i++){
+					cin>>n;
+					arr[i]=m[n];
+					}
+				for(int i=0;i<6;i++){
+					arr2[arr[i]]++;
+					}	
+			
+			for(int i=0;i<6;i++){
+					if(arr2[i]>=3){
+						if(arr[0]==arr[1]){c++;}
+						if(arr[2]==arr[3]){c++;}
+						if(arr[4]==arr[5]){c++;}
+						}
+						arr3[i]=c;
+					}
+			for(int i=0;i<6;i++){
+			if(arr2[i]>=3){
+				if(arr2[i]-arr3[i]>=3)
+					flag=1;
+				
+				}
+			}
+			if(flag)
+			cout<<"YES"<<endl;
+			else
+			cout<<"NO"<<endl;
+		}
+	
+}
+
+
+
+

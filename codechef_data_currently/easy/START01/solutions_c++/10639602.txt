@@ -1,0 +1,11 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+	ios_base::sync_with_stdio(false);
+	long long N;
+	cin>>N;
+	cout<<N<<'
+';
+	return 0;
+}

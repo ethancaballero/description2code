@@ -1,0 +1,41 @@
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+
+#define ll long long
+
+long long gcd(ll a, ll b)
+{
+    if(b%a == 0)return a;
+    return gcd(b%a, a);
+}
+
+int main()
+{
+    //cout << gcd(24, 18) << endl;
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        long long n, m;
+        scanf("%lld%lld", &n, &m);
+        if(n == 1)printf("Yes
+");
+        else if(m == 0)
+        {
+            printf("No 1
+");
+        }
+        else
+        {
+            ll lcm = (m*n) / gcd(m, n);
+            ll ns = lcm / m;
+            //cout << lcm << " " << ns << endl;
+            if(ns == n)printf("Yes
+");
+            else printf("No %lld
+", ns);
+        }
+    }
+}

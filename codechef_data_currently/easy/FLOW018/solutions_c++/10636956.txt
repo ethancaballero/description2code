@@ -1,0 +1,39 @@
+#include <iostream>
+#include<stdio.h>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+        int t, num, carry, r, temp;
+        vector<int>arr;
+
+        scanf("%d", &t);
+        while(t--){
+               scanf("%d", &num);
+                arr.push_back(1);
+                for(int i = 2; i<=num; i++){
+                        carry = 0;
+                        for(int j = arr.size()-1; j > -1; j--){
+                                temp = arr[j]*i + carry;
+                                arr[j] = temp%10;
+                                carry = temp/10;
+                        }
+                        while(carry){
+                                //printf("
+ carry: %d", carry);
+                               r = carry%10;
+                               arr.insert(arr.begin(), r);
+                               carry /= 10;
+                        }
+                }
+                for(int i = 0; i< arr.size(); i++)
+                        printf("%d", arr[i]);
+                printf("
+");
+                arr.clear();
+
+        }
+    return 0;
+}

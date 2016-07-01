@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+  {
+      int t;
+      double h,s,x,y,a,b;
+      scanf("%d",&t);
+      while(t--)
+      {
+          scanf("%lf %lf",&h,&s);
+          if(h*h<s*4)
+            printf("%d
+",-1);
+          else
+          {
+              x=sqrt(h*h+4*s);
+              y=sqrt(h*h-4*s);
+              a=sqrt((x*y+h*h)/2);
+              b=(2*s)/a;
+              printf("%lf %lf %lf
+",min(a,b),max(a,b),h);
+          }
+      }
+  }

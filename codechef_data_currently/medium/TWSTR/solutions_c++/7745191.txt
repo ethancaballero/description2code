@@ -1,0 +1,146 @@
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+#include <math.h>
+#include <cctype>
+#include <stdlib.h>
+#include <algorithm>
+#include <map>
+#include <set>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <iterator>
+#include <climits>
+
+#define rep(i,n) for(i=1;i<=n;i++)
+#define Rep(i,n) for(i=0;i<n;i++)
+#define For(i,a,b) for(i=a;i<=b;i++)
+
+#define pb(x) push_back(x)
+#define sz(x) x.size()
+
+#define mem(ara,val) memset(ara,val,sizeof(ara))
+#define eps 1e-9
+
+#define si(x) scanf("%d",&x)
+#define sii(x,y) scanf("%d %d",&x,&y)
+#define siii(x,y,z) scanf("%d %d %d",&x,&y,&z)
+#define sl(x) scanf("%lld",&x)
+#define sll(x,y) scanf("%lld %lld",&x,&y)
+#define slll(x,y,z) scanf("%lld %lld %lld",&x,&y,&z)
+#define ss(ch) scanf("%s",ch)
+#define pi(x) printf("%d",x)
+#define pii(x,y) printf("%d %d",x,y)
+#define piii(x,y,z) printf("%d %d %d",x,y,z)
+#define pl(x) printf("%lld",x)
+#define pll(x,y) printf("%lld %lld",x,y)
+#define plll(x,y,z) printf("%lld %lld %lld",x,y,z)
+#define ps(ch) printf("%s",ch)
+#define Afridi 0
+#define NL printf("
+")
+#define debug(x) printf("wow  %d !!
+",x)
+#define Max 1000000
+#define INF INT_MAX
+
+typedef long long LL;
+typedef unsigned long long ULL;
+
+using namespace std;
+
+map <int,string> mp;
+string str;
+int ans,flag,len,X,n;
+
+struct node
+{
+    char c;
+    int val;
+    node *next[28];
+};
+node *head;
+
+void Insert(node *cur,int pos)
+{
+    if(pos == len)return;
+    if(cur != head)cur->val = max(cur->val,X);
+    char c = str[pos];
+    int my = c - 96;
+    if(c == '-')my = 0;
+    //printf("%d +++ set cur val %d
+",my,cur->val);
+    if(cur->next[my])
+    {
+        Insert(cur->next[my],pos+1);
+    }
+    else
+    {
+        node *tmp;
+        tmp = new node();
+        tmp->val = -1000000005;
+        cur->next[my] = tmp;
+        Insert(cur->next[my],pos+1);
+    }
+
+}
+
+void Search(node *cur,int pos)
+{
+    if(pos == len)
+    {
+        ans = cur->val;
+        return;
+    }
+    //ans = cur->val;
+    char c = str[pos];
+    int my = c - 96;
+    if(c == '-')my = 0;
+    if(cur->next[my])
+    {
+        //printf("going %d
+",my);
+        Search(cur->next[my],pos+1);
+    }
+    else
+    {
+        flag = 0;
+    }
+}
+
+int main()
+{
+    head = new node();
+    int i,val,q;
+    si(n);
+    rep(i,n)
+    {
+        cin >> str >> val;
+       // printf("f %d
+",val);
+        mp[val] = str;
+        len = sz(str);
+        X = val;
+        Insert(head,0);
+    }
+    si(q);
+    rep(i,q)
+    {
+        cin >> str;
+        flag = 1;
+        //ans = -1000000005;
+        len = sz(str);
+        Search(head,0);
+       // printf("falg %d val %d
+",flag,ans);
+        if(flag)
+        {
+            string my = mp[ans];
+            cout << my << endl;
+        }
+        else printf("NO
+");
+    }
+    return 0;
+}

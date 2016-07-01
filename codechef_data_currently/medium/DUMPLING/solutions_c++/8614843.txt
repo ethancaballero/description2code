@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef unsigned long long ll;
+typedef long long lg;
+lg gcd(ll a,ll b)
+{
+if (b == 0)
+       return a;
+    else
+       return gcd(b, a % b);
+}
+int main()
+{
+    //cout << "Hello world!" << endl;
+    int tst;
+    ll a,b,c,d,k,m,e,f,s,ans;
+    lg z;
+    scanf("%d",&tst);
+    while(tst--)
+    {
+        //scanf("%lld",&n);
+        scanf("%llu %llu %llu %llu %llu",&a,&b,&c,&d,&k);
+       // printf("%llu %llu %llu %llu %llu",a,b,c,d,k);
+
+        e=gcd(a,b);
+
+       f=gcd(c,d);
+       //cout<<e<<f<<x<<y;
+        z=gcd(e,f);
+        s=e/z;
+       ans=(k/s)/f;
+      // cout<<m;
+       // cout<<" "<<i;
+
+            cout<<2*ans+1<<"
+";
+
+    }
+    return 0;
+}

@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+#define m 1000000007
+#define ll long long int
+using namespace std;
+int main()
+{
+	int t,count,n,i,win[1005],len,ans;
+	string correct,given;
+	cin>>t;
+	while(t--)
+	{
+		count=0;
+		ans=0;
+		cin>>n;
+		cin>>correct;
+		cin>>given;
+		for(i=0;i<n+1;++i)
+			cin>>win[i];
+		ans=win[0];
+		len=correct.length();
+		for(i=0;i<len;++i)
+		{
+			if(correct[i]==given[i])
+				count++;
+		}
+		if(count==0)
+			ans=win[0];
+		else if(count==n)
+			ans=win[n];
+		else
+		{
+			for(i=count;i>=0;--i)
+			{
+				if(win[i]>ans)
+					ans=win[i];
+			}
+		}
+		cout<<ans<<endl;
+	}
+	return 0;
+}

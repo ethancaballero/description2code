@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;cin>>n;
+    int a[n+100],b[n+100],i;
+    for(i=1;i<=n;i++){
+        cin>>a[i];
+        b[i]=0;
+    }
+    int j,st,k=1,ans[2*n+100],countt=0;
+    for(i=1;i<=n;i++){
+        if(b[i]==0){
+                countt++;
+             j=i,st=i;
+             if(a[j]==j)
+                ans[k++]=j;
+            while(1){
+                b[j]=1;
+                if(a[j]!=j){
+                    ans[k++]=j;
+                    j=a[j];
+                }
+                if(j==st){
+                    ans[k++]=j;
+                    break;
+                }
+            }
+        }
+    }
+    cout<<countt<<endl;
+    /*for(i=1;i<k;i++)
+        cout<<ans[i]<<" ";*/
+   for(i=1;i<k;i++){
+        j=ans[i];
+        while(1){
+            cout<<ans[i]<<" ";
+            if(ans[++i]==j)
+                break;
+        }
+        cout<<ans[i]<<endl;
+       }
+    return 0;
+}

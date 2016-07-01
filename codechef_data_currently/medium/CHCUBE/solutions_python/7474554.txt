@@ -1,0 +1,43 @@
+t=int(raw_input())
+for asd in range(t):
+    s=raw_input()
+    c=s.split()
+    d1={}
+    d1['blue']=0
+    d1['yellow']=0
+    d1['green']=0
+    d1['orange']=0
+    d1['black']=0
+    d1['red']=0
+    d2={}
+    d2['blue']=0
+    d2['yellow']=0
+    d2['green']=0
+    d2['orange']=0
+    d2['black']=0
+    d2['red']=0
+    d3={}
+    d3['blue']=0
+    d3['yellow']=0
+    d3['green']=0
+    d3['orange']=0
+    d3['black']=0
+    d3['red']=0
+    temp=0
+    for x in c:
+        if (temp/2==2):
+            d1[x]=d1[x]+1
+        elif (temp/2==1):
+            d2[x]=d2[x]+1
+        else:
+            d3[x]=d3[x]+1
+        temp+=1
+    flag=0
+    for x in c:
+        if (d1[x]>=1 and d2[x]>=1 and d3[x]>=1):
+            flag=1
+            break
+    if (flag==1):
+        print "YES"
+    else:
+        print "NO"

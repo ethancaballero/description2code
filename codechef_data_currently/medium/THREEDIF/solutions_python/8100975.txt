@@ -1,0 +1,42 @@
+def swap(a, b):
+    
+    temp = a
+    a = b
+    b = temp
+    return(a, b)
+        
+
+t = int(raw_input())
+
+while t>0:
+
+    t = t-1
+    
+    n1, n2, n3  = raw_input().split()
+    
+    n1 = int(n1)
+    n2 = int(n2)
+    n3 = int(n3)
+    
+    if n1>n2:
+    
+        n1, n2 = swap(n1, n2)
+    
+    if n2>n3:
+    
+        n2, n3 = swap(n2, n3)
+    
+    if n1>n2:
+    
+        n1, n2 = swap(n1, n2)
+        
+    if n1 == 0 or n2 < 1 or n3 < 2:
+    
+        print 0
+        continue
+        
+    n1 = n1%(10**9 + 7)
+    n2 = (n2-1)%(10**9 + 7)
+    n3 = (n3-2)%(10**9 + 7)
+    
+    print (((n1*n2)%(10**9 + 7))*n3)%(10**9 + 7)

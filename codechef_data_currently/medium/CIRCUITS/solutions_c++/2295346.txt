@@ -1,0 +1,94 @@
+#include<stdio.h>
+//#include<conio.h>
+struct node
+{
+    int type;
+    int inp1;
+    int inp2;
+};
+#define struct node node
+ int compare_float(double f1, double f2)
+ {
+  double precision = 0.0000001;
+  if (((f1 - precision) < f2) &&
+      ((f1 + precision) > f2))
+   {
+    return 1;
+   }
+  else
+   {
+    return 0;
+   }
+ }
+int main()
+{
+int t;
+scanf("%d",&t);
+printf("
+");
+while(t--)
+{
+    int n;
+    scanf("%d",&n);
+    node a[n];
+    int i;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i].type);
+        if(a[i].type==0)
+        {
+             a[i].inp1=0;
+            a[i].inp2=0;
+        }
+        else
+        {
+            scanf("%d",&a[i].inp1);
+             scanf("%d",&a[i].inp2);
+        }
+    }
+        double b[n];
+        double mid;
+        double high=1;
+        double low=0;
+        double x= .5000000;
+        while(1)
+        {
+        mid=(low+high)/2;
+     //  printf("%f",mid);
+      // getch();
+        for(i=0;i<n;i++)
+        {
+            if(a[i].type==0)
+            {
+                b[i]=mid;
+            }
+         else if(a[i].type==1)
+            {
+                b[i]=b[a[i].inp1-1] + b[a[i].inp2-1] - (b[a[i].inp1-1]*b[a[i].inp2-1]);
+            }
+            else if(a[i].type==2)
+            {
+                 b[i]=(b[a[i].inp1-1]*b[a[i].inp2-1]);
+            }
+        }
+    //    printf("hello %f
+",b[n-1]);
+        if(compare_float(b[n-1],x))
+        {
+            printf("%.5lf
+
+",mid);
+            break;
+        }
+        else if(b[n-1]>x)
+        {
+            high=mid;
+        }
+        else
+        {
+        low=mid;
+        }
+        }
+    }
+}
+

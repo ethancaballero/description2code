@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>    
+#define ll long long int
+#define s(a) scanf("%lld",&a)
+#define mp make_pair
+#define pb push_back
+#define fr first
+#define sc second
+    
+using namespace std;
+     
+ll v[20001]={0};
+ll cant[21]={0};
+vector <ll> w[21];
+ll ans=0;
+     
+ll recur(ll cur,ll mask,ll m)
+{
+	if(cur>m) return 0;
+	ll x=0,y=0;
+	if(!(mask & (1<<cur)))
+		x=1+recur(cur+1,mask|cant[cur],m);
+	y=recur(cur+1,mask,m);
+	return max(x,y);
+}
+     
+int main()
+{
+	ll n,m,i,k,x,j;
+    	s(n);s(m);
+    	for(i=1;i<=m;i++) {
+    		s(k);
+    		for(j=1;j<=k;j++) {
+    			s(x);
+			w[i].pb(x);
+			v[x]=v[x]|(1<<i);
+    		}
+    	}
+
+   	for(i=1;i<=m;i++) {
+    		for(j=0;j<w[i].size();j++) {
+			cant[i]=cant[i]|v[w[i][j]];
+    		}
+    	}
+	cout<<recur(1,0,m)<<endl;
+
+   	return 0;
+}

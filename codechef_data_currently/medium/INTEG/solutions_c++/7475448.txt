@@ -1,0 +1,67 @@
+
+ 
+#include<iostream>
+#include<map>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#include<cstdlib>
+#include<cctype>
+#include<cstdio>
+#include<vector>
+#include<set>
+using namespace std;
+ 
+typedef long long int lli;
+typedef long int li;
+ 
+// input macros
+#define inp_int(t) scanf("%d",&t)
+#define inp_long(t) scanf("%ld",&t)
+#define inp_lli(t) scanf("%lld",&t)
+#define inp_str(t) scanf("%s",&t)
+#define inp_flt(t) scanf("%f",&t)
+#define inp_dbl(t) scanf("%lf",&t)
+// output macros
+#define out_int(t) printf("%d",t)
+#define out_long(t) printf("%ld",t)
+#define out_lli(t) printf("%lld",t)
+#define out_flt(t) printf("%f",t)
+#define out_dbl(t) printf("%lf",t)
+#define out_str(t) printf("%s",t)
+#define outln_int(t) printf("%d
+",t)
+#define outln_long(t) printf("%ld
+",t)
+#define outln_lli(t) printf("%lld
+",t)
+#define outln_flt(t) printf("%f
+",t)
+#define outln_dbl(t) printf("%lf
+",t)
+#define outln_str(t) printf("%s
+",t)
+// string macros
+#define copy(a,b) strcpy(b,a)
+// for loops
+#define REP(i,j,n) for(int i=j;i<n;i++)
+#define rep(i,n) REP(i,0,n)
+ 
+int main()
+{
+	lli c,n,m,cost=0;
+	inp_lli(n);
+	vector<lli> a;
+	rep(i,n)
+	{
+		inp_lli(c);
+		if(c<0)
+		a.push_back(c);
+	}
+	sort(a.begin(),a.end());
+	inp_lli(m);
+	for(int i=0;i<m && i<a.size();i++)
+        cost-=a[i];
+    	outln_lli(cost);
+	return 0;
+}

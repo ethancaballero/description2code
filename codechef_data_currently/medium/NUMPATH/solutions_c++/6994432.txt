@@ -1,0 +1,83 @@
+#include <cstdio>
+#include <vector>
+using namespace std;
+
+typedef vector<int> vi;
+typedef long long int ll;
+typedef vector<ll> vll;
+
+
+#define MOD 1000000007
+vll t;
+
+int LSOne(int no) {
+  return no & (-no);
+}
+
+//note ft is 1-indexed
+
+ll ft_query(vll &t, int vertex) {
+  ll sum = 0;
+  while(vertex > 0) {
+    sum = (sum + t[vertex]) % MOD;
+    vertex -= LSOne(vertex);
+  }
+  return sum;
+}
+
+ll ft_rsq(vll &t, int L, int R) {
+  ll ret = (ft_query(t, R) - ft_query(t, L - 1)) % MOD;
+  if(ret < 0) ret += MOD;
+  return ret;
+}
+
+void ft_create(vll &t, int size) {
+  t.assign(size + 1, 0);
+}
+
+void ft_update(vll &t, int vertex, ll value) {
+  while(vertex < (int)t.size()) {
+    t[vertex] = (t[vertex] + value) % MOD;
+    vertex += LSOne(vertex);
+  }
+}
+
+int arr[200005] = {0};
+ll ans[200005] = {0};
+int N, B;
+void work() {
+  ft_create(t, B);
+  ft_update(t, 1, 1);
+  int i, ti;
+  int low, high;
+  for(i = B - 2; i >= 0; i--) {
+    ti = B - i;
+    low = ti - arr[i];
+    if(low < 1) low = 1;
+    high = ti - 1;
+    ans[i + 1] = ft_rsq(t, low, high) % MOD;
+    ft_update(t, ti, ans[i + 1]);
+  }
+}
+
+int main() {
+
+  scanf("%d %d", &N, &B);
+  int i;
+  for(i = 0; i < N; i++) {
+    scanf("%d", &arr[i]);
+  }
+  int Q;
+  scanf("%d", &Q);
+  work();
+  int temp;
+  for(i = 0; i < Q; i++) {
+    scanf("%d", &temp);
+    printf("%lld
+", ans[temp]);
+  }
+  return 0;
+}
+
+    
+

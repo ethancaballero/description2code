@@ -1,0 +1,65 @@
+import sys
+ 
+MAXN = 1000000000
+MAXHINTS = 100000
+TLT = (0,1,1)    # good if <, bad if = or >
+TEQ = (1,0,1)    # etc.
+TGT = (1,1,0)
+TGE = (1,0,0)
+TNE = (0,1,0)
+TLE = (0,0,1)
+ 
+ncases = int(sys.stdin.readline())
+for cn in xrange(ncases):
+    nhints = int(sys.stdin.readline())
+ 
+    h = []  # hint list; each a tuple starting with n
+    for hn in xrange(nhints):
+        p = sys.stdin.readline().rstrip().split()
+        n = int(p[1])
+        relsymb = p[0]
+        if p[2]=="Yes":
+            if relsymb=='<':
+                h.append( (n,TLT) )
+            elif relsymb=='=':
+                h.append( (n,TEQ) )
+            else:
+                # '>', Yes
+                h.append( (n,TGT) )
+        else:  # "No" (false relation)
+            if relsymb=='<':
+                h.append( (n,TGE) )
+            elif relsymb=='=':
+                h.append( (n,TNE) )
+            else:
+                # '>', No
+                h.append( (n,TLE) )
+ 
+    h.sort()
+    prevbad = MAXHINTS
+    laterbad = 0
+    lastn = 1
+    n=1
+    sublt = subeq = subgt = 0
+    for x in h:
+        n = x[0]
+        if n != lastn:
+            # advancing to new value; update minimums
+            prevbad += sublt
+            curbad = subeq + laterbad
+            prevbad = (curbad if curbad < prevbad else prevbad)
+            laterbad += subgt
+            lastn = n
+            sublt = subeq = subgt = 0
+        rcnt = x[1]
+        sublt += rcnt[0]
+        subeq += rcnt[1]
+        subgt += rcnt[2]
+    # update for last value and output        
+    prevbad += sublt
+    curbad = subeq + laterbad
+    prevbad = (curbad if curbad < prevbad else prevbad)
+    laterbad += subgt
+    if laterbad < prevbad and n < MAXN:
+        prevbad = laterbad
+    print prevbad

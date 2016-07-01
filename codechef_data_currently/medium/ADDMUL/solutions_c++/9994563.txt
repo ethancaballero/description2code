@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll; 
+const int N = 1<<18;
+const int M = 1000000007;
+ 
+enum {ADD, MUL, ASG};
+ 
+int n, m, h;
+ll t[N], lazyM[N], lazyA[N];
+ 
+void update(int a, int b, int k, int l, int r, ll v, int type){
+	
+	if(r <= a || b <= l) return;
+	if(a <= l && r <= b){
+		
+		if(type == ADD){
+			(lazyA[k] += v) %= M;
+			t[k] = (t[k] + (r - l) * v) % M;
+		}
+		else if(type == MUL){
+			lazyM[k] = lazyM[k] * v % M;
+			lazyA[k] = lazyA[k] * v % M;
+			t[k] = t[k] * v % M;
+		}
+		else{
+			lazyM[k] = 0;
+			lazyA[k] = v;
+			t[k] = (r - l) * v % M;
+		}
+		return;
+	}
+	int lch = (k<<1) + 1, rch = (k<<1) + 2;
+	
+	if(lazyM[k] == 0){
+		update(l, (l + r) / 2, lch, l, (l + r) / 2, lazyA[k], ASG);
+		update((l + r) / 2, r, rch, (l + r) / 2, r, lazyA[k], ASG);
+	}
+	else{
+		if(lazyM[k] != 1){
+			update(l, (l + r) / 2, lch, l, (l + r) / 2, lazyM[k], MUL);
+			update((l + r) / 2, r, rch, (l + r) / 2, r, lazyM[k], MUL);
+		}
+		if(lazyA[k] != 0){
+			update(l, (l + r) / 2, lch, l, (l + r) / 2, lazyA[k], ADD);
+			update((l + r) / 2, r, rch, (l + r) / 2, r, lazyA[k], ADD);
+		}
+	}
+	update(a, b, lch, l, (l + r) / 2, v, type);
+	update(a, b, rch, (l + r) / 2, r, v, type);
+	
+	lazyM[k] = 1;
+	lazyA[k] = 0;
+	t[k] = (t[lch] + t[rch]) % M;
+}
+ 
+ll query(int a, int b, int k, int l, int r){
+	if(r <= a || b <= l) return 0;
+	if(a <= l && r <= b) return t[k];
+	
+	int lch = (k<<1) + 1, rch = (k<<1) + 2;
+	if(lazyM[k] == 0){
+		update(l, (l + r) / 2, lch, l, (l + r) / 2, lazyA[k], ASG);
+		update((l + r) / 2, r, rch, (l + r) / 2, r, lazyA[k], ASG);
+	}
+	else{
+		if(lazyM[k] != 1){
+			update(l, (l + r) / 2, lch, l, (l + r) / 2, lazyM[k], MUL);
+			update((l + r) / 2, r, rch, (l + r) / 2, r, lazyM[k], MUL);
+		}
+		if(lazyA[k] != 0){
+			update(l, (l + r) / 2, lch, l, (l + r) / 2, lazyA[k], ADD);
+			update((l + r) / 2, r, rch, (l + r) / 2, r, lazyA[k], ADD);
+		}
+	}
+	
+	lazyM[k] = 1;
+	lazyA[k] = 0;
+	t[k] = (t[lch] + t[rch]) % M;
+	
+	return (query(a, b, lch, l, (l + r) / 2)
+		  + query(a, b, rch, (l + r) / 2, r)) % M;
+}
+ 
+int main(){
+	cin.tie(0); cin.sync_with_stdio(0);
+	int i;
+	cin >> n >> m;
+	
+	for(h = 1; h < n; h <<= 1);
+	for(i=0; i<n; ++i) cin >> t[h+i- 1];
+	
+	for(i = h - 2; i >= 0; i--){
+		t[i] = (t[(i<<1) + 1] + t[(i<<1) + 2]) % M;
+		lazyM[i] = 1;
+	}
+	
+	while(m--){
+		int t, x, y, v;
+		cin >> t >> x >> y;
+		x--;
+		if(t < 4) cin >> v;
+		
+		if(t == 4) printf("%lld
+", query(x, y, 0, 0, h));
+		else update(x, y, 0, 0, h, v, t - 1);
+		
+	}
+	return 0;
+}

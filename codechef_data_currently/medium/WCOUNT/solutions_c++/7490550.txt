@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+#define lli long long int
+#define MOD 1000000007
+using namespace std;
+int GCDW(lli a, lli b, lli & l, lli & k) {
+	if (!a) {
+		// gcd(0, b) = 0 * 0 + 1 * b
+		l = 0;
+		k = 1;
+		return b;
+	}
+	int d = GCDW(b % a, a, k, l);
+	l -= (b / a) * k;
+	return d;
+}
+lli inverse(lli a, lli m)
+{
+	lli x, y;
+	if (GCDW(a, m, x, y) != 1) return -1;
+	x %= m;
+	if (x < 0) x += m;
+	return x;
+}
+
+int main()
+{
+	lli l,i,deno,j,k,m,n,t,ans,fac[505];
+	fac[1]=1;
+	for(i=2;i<=505;i++)
+	{
+		fac[i]=(fac[i-1]*i)%MOD;
+	}
+	string str;
+	char c;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		cin>>str;
+		l=str.length();
+		lli small[26]={0},capital[26]={0};
+		for(i=0;i<l;i++)
+		{
+			c=str[i];
+			if(c>='a' && c<='z')
+				small[c-'a']+=1;
+
+			else 
+				capital[c-'A']+=1;
+		}
+//for(i=0;i<26;i++)
+//cout<<small[i]<<" ";
+		deno=1;
+		for(i=0;i<26;i++)
+		{
+			if(small[i]>1)
+			{
+				deno=deno*fac[small[i]];
+				deno=deno%MOD;
+			}
+			if(capital[i]>1)
+			{
+				deno=deno*fac[capital[i]];
+				deno=deno%MOD;
+			}
+		}
+		m=inverse(deno,MOD)%MOD;
+		ans=(fac[l]*m)%MOD;
+		printf("%lld
+",ans);
+	}
+}

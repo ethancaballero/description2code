@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int hash[100100];
+
+void go (){
+    for(int i=2;i<100100;i++){
+        if(hash[i]==0)
+            for(int j=i;j<100100;j+=i)
+                hash[j]++;
+    }
+}
+
+int main()
+{
+    long tt;
+    go();
+    //ifstream cin("a.txt");
+    cin>>tt;
+    int a,b,k;
+    while(tt--){
+        int c=0;
+        cin>>a>>b>>k;
+        for(int i=a;i<=b;i++){
+            if(hash[i]==k)
+                c++;
+        }
+        cout<<c<<endl;
+    }
+}

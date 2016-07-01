@@ -1,0 +1,4 @@
+for testcases in xrange(int(raw_input() ) ) :
+    n = raw_input()
+    L = map(int, raw_input().split())
+    print len(set(L))

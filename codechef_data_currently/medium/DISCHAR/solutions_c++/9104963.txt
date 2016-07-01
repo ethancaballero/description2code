@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t,count,i;
+	char str[10001];
+	scanf("%d",&t);
+	while(t--){
+		count=0;
+		bool a[26];
+		for(i=0;i<26;i++)
+			a[i]=0;
+		scanf("%s",str);
+		for(i=0;i<strlen(str);i++){
+			if(a[str[i]-'a']==0)
+				count++;
+			a[str[i]-'a']=1;
+		}
+		printf("%d
+",count);
+	}
+
+}

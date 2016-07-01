@@ -1,0 +1,32 @@
+# include <stdio.h>
+# include <algorithm>
+# define limit 100
+int t;
+int cost[limit+1],C[limit+1],P[limit+1],T[limit+1],maxval[limit+1][limit+1];
+//		W=0 W=1
+// N=0
+// N=1
+int main()
+{
+	int N,W;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d",&N,&W);
+		for(int i=1;i<=N;i++)
+		{
+			scanf("%d%d%d",C+i,P+i,T+i);
+			cost[i]=C[i]*P[i];
+		}
+		for(int i=1;i<=N;i++)
+			for(int j=1;j<=W;j++)
+			{
+				maxval[i][j]=maxval[i-1][j];// do not take that item
+				if(j>=T[i])
+					maxval[i][j]=std::max(maxval[i][j],maxval[i-1][j-T[i]]+cost[i]);
+			}
+		printf("%d
+",maxval[N][W]);
+	}
+	return 0;
+}

@@ -1,0 +1,39 @@
+l3=[]
+while True:
+    try:
+        N=input()
+        l=map(int,raw_input().split())
+        l3.append(l)
+    except EOFError:
+        break
+for t in range(len(l3)):
+    l=l3[t]
+    l4=[]
+    l1=[]
+    count=0
+    while len(l1)!=len(l):
+        l2=[]
+        for i in range(1,len(l)+1):
+            if i not in l1:
+                j=i
+                l1.append(j)
+                l2.append(j)
+                break
+        a=l[j-1]
+        while a!=l2[0]:
+            l1.append(a)
+            l2.append(a)
+            b=l[a-1]
+            a=b
+        l2.append(l2[0])
+        l4.append(l2)
+        count+=1
+    print count
+    for m in range(len(l4)):
+        for k in l4[m]:
+            print k,
+        print '
+'
+
+        
+    

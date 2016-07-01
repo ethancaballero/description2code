@@ -1,0 +1,107 @@
+// C++ code to demonstrate operations of Binary Index Tree
+#include <iostream>
+typedef long long ll;
+using namespace std;
+ 
+/*            n  --> No. of elements present in input array.
+    BITree[0..n] --> Array that represents Binary Indexed Tree.
+    arr[0..n-1]  --> Input array for whic prefix sum is evaluated. */
+ 
+// Returns sum of arr[0..index]. This function assumes
+// that the array is preprocessed and partial sums of
+// array elements are stored in BITree[].
+ll getSum(ll BITree[], ll n, ll index)
+{
+    ll sum = 0; // Iniialize result
+ 
+    // index in BITree[] is 1 more than the index in arr[]
+    index = index + 1;
+ 
+    // Traverse ancestors of BITree[index]
+    while (index>0)
+    {
+        // Add current element of BITree to sum
+        sum += BITree[index];
+ 
+        // Move index to parent node
+        index -= index & (-index);
+    }
+    return sum;
+}
+ 
+// Updates a node in Binary Index Tree (BITree) at given index
+// in BITree.  The given value 'val' is added to BITree[i] and
+// all of its ancestors in tree.
+void updateBIT(ll *BITree, ll n, ll index, ll val)
+{
+    // index in BITree[] is 1 more than the index in arr[]
+    index = index + 1;
+ 
+    // Traverse all ancestors and add 'val'
+    while (index <= n)
+    {
+       // Add 'val' to current node of BI Tree
+       BITree[index] += val;
+ 
+       // Update index to that of parent
+       index += index & (-index);
+    }
+}
+ 
+// Constructs and returns a Binary Indexed Tree for given
+// array of size n.
+ll *constructBITree(ll arr[], ll n)
+{
+    // Create and initialize BITree[] as 0
+    ll *BITree = new ll[n+1];
+    for (ll i=1; i<=n; i++)
+        BITree[i] = 0;
+ 
+    // Store the actual values in BITree[] using update()
+    for (ll i=0; i<n; i++)
+        updateBIT(BITree, n, i, arr[i]);
+ 
+    // Uncomment below lines to see contents of BITree[]
+    //for (int i=1; i<=n; i++)
+    //      cout << BITree[i] << " ";
+ 
+    return BITree;
+}
+ 
+ 
+// Driver program to test above functions
+int main()
+{
+    ll n,q,i,j;
+    char ch;
+    cin>>n>>q;
+    ll freq[n];
+    for(i=0;i<n;i++)
+        cin>>freq[i];
+    ll *BITree = constructBITree(freq, n);
+    while(q--)
+    {
+        cin>>ch;
+        if(ch=='S')
+        {
+            cin>>i>>j;
+            if(i==0)
+                cout<<getSum(BITree, n, j)<<endl;
+            else
+                cout<<getSum(BITree, n, j)-getSum(BITree, n, i-1)<<endl;
+        }
+        else if(ch=='G')
+        {
+            cin>>i>>j;
+            updateBIT(BITree, n, i, j);
+        }
+        else if(ch=='T')
+        {
+            cin>>i>>j;
+            j*=-1;
+            updateBIT(BITree, n, i, j);
+        }
+    }
+    return 0;
+}
+ 

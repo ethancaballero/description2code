@@ -1,0 +1,14 @@
+import sys
+
+for cases in xrange(int(sys.stdin.readline())):
+    t2 = raw_input().split(':')
+    t1 = raw_input().split(':')
+    dist = int(raw_input())
+    t1 = int(t1[0])*60 + int(t1[1])
+    t2 = int(t2[0])*60 + int(t2[1])
+    case1 = (t2 - t1) + dist
+    if t1 + (2 * dist) <= t2:
+        case2 = t2 - t1
+    else:
+        case2 = dist + (t2-t1)/2.0
+    print "%.1f %.1f"%(case1, case2)

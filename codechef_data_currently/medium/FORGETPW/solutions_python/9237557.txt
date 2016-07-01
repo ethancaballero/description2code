@@ -1,0 +1,28 @@
+for _ in range(int(raw_input())):
+    n = int(raw_input())
+    rules = {}
+    for i in range(n):
+        a = raw_input().split()
+        rules[a[0]] = a[1]
+    s = raw_input()
+    sol = ""
+    for i in s:
+        if rules.get(i):
+            sol += rules[i]
+        else:
+            sol += i
+    sol = sol.lstrip('0')
+    if sol.find('.') != -1:
+        sol = sol.rstrip('0')
+
+    try:
+        if sol[-1] == '.':
+            sol = sol[:-1]
+            if sol == "":
+                print 0
+            else:
+                print sol
+        else:
+            print sol
+    except:
+        print 0

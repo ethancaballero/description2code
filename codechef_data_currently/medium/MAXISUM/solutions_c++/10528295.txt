@@ -1,0 +1,36 @@
+#include<iostream>
+
+using namespace std;
+int abs(int a)
+{
+	if(a<0)return-a;
+	else return a;
+}
+int main()
+{
+	long int T,N,K,*a,*b,i,max;
+	long long int ans;
+	cin>>T;
+	
+	while(T--)
+	{
+		ans=0;
+		max=0;
+		cin>>N>>K;
+		a=new long int[N];
+		b=new long int[N];
+		for(i=0;i<N;i++)
+		{
+			cin>>a[i];
+		}
+		for(i=0;i<N;i++)
+		{
+			cin>>b[i];
+			ans+=(long long int)(a[i])*(long long int)(b[i]);
+			if(abs(b[i])>max)max=abs(b[i]);
+		}
+		ans+=(long long int)K*(long long int)max;
+		cout<<ans<<endl;
+	}
+	return 0;
+}

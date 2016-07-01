@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct range
+{
+	long long r1;
+	long long r2;
+}temp[1000];
+
+bool sort_by_first( const range & a, const range & b )
+{
+   if(a.r2 == b.r2)
+    return a.r1 < b.r1;
+  return a.r2 < b.r2;
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n;
+		scanf("%d",&n);
+		long long a[1000];
+		for(int i=0;i<n;i++){scanf("%lld",&a[i]);a[i]*=7;}
+		sort(a,a+n);
+		int r;
+		scanf("%d",&r);
+		for(int i=0;i<r;i++){scanf("%lld %lld",&temp[i].r1,&temp[i].r2);temp[i].r1*=11;temp[i].r2*=11;}
+		sort(temp,temp+r,sort_by_first);
+		int ans=0;
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<r;j++)
+			{
+				if(a[i]>=temp[j].r1 && a[i]<=temp[j].r2){ans++;temp[j].r1=1<<30;break;}
+
+			}
+		}
+
+		printf("%d
+",ans);
+
+	}
+	return 0;
+}

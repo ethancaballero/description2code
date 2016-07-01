@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+char s[5000005];
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        scanf("%s", s);
+        int l, i, c = 1, d=0;
+        l = strlen(s);
+        int lim = 0;
+        for(i=0;i<l;i++)
+        {
+            if(s[i] == '.')
+            {
+                for(c = i; s[c] != '#'; c++);
+                if(c-i > lim)
+                {
+                    lim = c-i;
+                    d++;
+                }
+                i = c-1;
+            }
+        }
+        printf("%d
+", d);
+    }
+    return 0;
+}

@@ -1,0 +1,9 @@
+'''
+Created on 11-Dec-2015
+
+@author: Lenovo
+'''
+for _ in xrange(input()):
+    n=input()
+    ans=2*n*(n-1)**2+ n*(n-1)*(n-2) +2*n*(n-1)*(n-2)**2
+    print ans

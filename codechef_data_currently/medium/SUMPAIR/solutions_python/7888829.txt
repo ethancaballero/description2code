@@ -1,0 +1,20 @@
+T = input()
+
+for _ in range(T):
+    N, D = map(int, raw_input().split())
+
+    A = map(int, raw_input().split())
+
+    A.sort()
+
+    res = 0
+    i = 1
+    while i<N:
+        if A[N-i]-A[N-i-1]<D:
+            res += (A[N-i] + A[N-i-1])
+            i += 2
+        else:
+            i += 1
+
+    print res
+    

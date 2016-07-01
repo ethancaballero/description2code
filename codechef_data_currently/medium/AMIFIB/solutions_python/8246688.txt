@@ -1,0 +1,22 @@
+#-------------------------------------------------------------------------------
+# Name:        module1
+# Purpose:
+#
+# Author:      USER
+#
+# Created:     26-09-2015
+# Copyright:   (c) USER 2015
+# Licence:     <your licence>
+#-------------------------------------------------------------------------------
+
+l1=[0,1]
+for a in range(2,5000):
+    l1.append(l1[a-1]+l1[a-2])
+test=int(raw_input())
+while test>=1:
+    n=int(raw_input())
+    if n in l1:
+        print "YES"
+    else:
+        print "NO"
+    test-=1

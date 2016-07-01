@@ -1,0 +1,43 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+	int n,m[100],n1[100],notes[2000],i,k,sum=0,a=0,flag=0;
+	int j;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+	    cin>>m[i]>>n1[i];
+	    for(j=0;j<m[i];j++)
+	    cin>>notes[a++];
+	}
+	a=0;
+	for(i=0;i<n;i++)
+	{
+	    flag=0;
+	    sum=0;
+	    for(j=0;j<pow(2,m[i]);j++)
+	    {   
+	        for(k=0;k<m[i];k++)
+	        {
+	            if(((j>>k)&1)==1)
+	            sum+=notes[k+a];
+	        }
+	        if(sum==n1[i])
+	        {
+	            flag=1;
+	            cout<<"Yes
+";
+	            break;
+	        }
+	        sum=0;
+	    }
+	    if(flag==0)
+	    cout<<"No
+";
+	    a+=m[i];
+	}
+	return 0;
+}

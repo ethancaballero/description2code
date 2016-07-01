@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+#include <stdio.h>
+int main()
+{
+	long int t,i,n;
+	scanf("%ld",&t);
+	long a[t+10];
+    for(i=0;i<t;i++)
+	scanf("%ld",&a[i]);
+    sort(a,a+t);
+	for(i=0;i<t;i++)
+	printf("%ld
+",a[i]);
+	return 0;
+}

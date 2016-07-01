@@ -1,0 +1,22 @@
+from __future__ import division
+def read_mapped(func=lambda x:x):
+    return map(func, raw_input().strip().split(" "))
+def read_int():
+    return int(raw_input().strip())
+def read_str():
+    return raw_input().strip()
+def read_float():
+    return float(raw_input().strip())
+
+T = read_int()
+
+for case in xrange(T):
+    a = read_str()
+    b = read_str()
+    a2 = set(a)
+
+    common = 0
+    for char in a2:
+        common += min(a.count(char), b.count(char))
+
+    print common

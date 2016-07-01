@@ -1,0 +1,61 @@
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+#include <algorithm>
+using std::sort;
+
+
+int main()
+{
+	int T; //number of test cases
+	cin >> T;
+	
+	for(int i = 0; i < T; i++)
+	{
+		int N, //number of students
+			K, //max students who'll get enrolled
+			E, //number of entrance exams
+			M; //max number of points for exams
+		
+		cin >> N >> K >> E >> M;
+		
+		long long scores[N-1]; //array of scores of other students
+		
+		for(int j = 0; j < N-1; j++)
+		{
+			long long sum = 0;
+			
+			for(int k = 0; k < E; k++)
+			{
+				long long s;
+				cin >> s;
+				sum += s;
+			}
+			
+			scores[j] = sum;
+		}
+		
+		sort(scores, scores + (N - 1));
+		
+		long long sergeySum = 0;
+		for(int j = 0; j < E - 1; j++)
+		{
+			long long s;
+			cin >> s;
+			sergeySum += s;
+		}
+		
+		long long scoreToBeat = scores[N - K - 1];
+		long long minScoreRequired = scoreToBeat - sergeySum + 1;
+		
+		minScoreRequired = minScoreRequired > 0 ? minScoreRequired:0;
+		
+		if(minScoreRequired > M)
+			cout << "Impossible" << endl;
+		else
+			cout << minScoreRequired << endl;
+	}
+	
+	return 0;
+}

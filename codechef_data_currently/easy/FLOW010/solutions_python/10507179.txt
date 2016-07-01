@@ -1,0 +1,5 @@
+t=input()
+for i in range(t):
+    dic={'b':'BattleShip','B':'BattleShip','c':'Cruiser','C':'Cruiser','d':'Destroyer','D':'Destroyer','f':'Frigate','F':'Frigate'}
+    s=raw_input()
+    print dic[s]

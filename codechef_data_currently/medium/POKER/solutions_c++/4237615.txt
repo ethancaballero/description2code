@@ -1,0 +1,151 @@
+#include<iostream>
+#include<cctype>
+using namespace std;
+bool royal_flush(int *rank,int *suit){
+	if(rank[0] == 1 && rank[1] == 10 && rank[2] == 11 && rank[3] == 12 && rank[4] == 13 && suit[0] == suit[1] && suit[0] == suit[2] && suit[0] == suit[3] && suit[0] == suit[4]){
+		return true;
+	}
+	return false;
+}
+bool straight_flush(int *rank,int *suit){
+	if(rank[0] == rank[1]-1 && rank[0] == rank[2]-2 && rank[0] == rank[3]-3 && rank[0] == rank[4]-4 && suit[0] == suit[1] && suit[0] == suit[2] && suit[0] == suit[3] && suit[0] == suit[4]){
+		return true;
+	}
+	return false;
+}
+bool four_of_a_kind(int *rank,int *suit){
+	if((rank[0] == rank[1] && rank[0] == rank[2] && rank[0] == rank[3] ) || (rank[1] == rank[2] && rank[1] == rank[3] && rank[1] == rank[4])){
+		return true;
+	}
+	return false;
+}
+bool full_house(int *rank,int *suit){
+	if((rank[0] == rank[1] && rank[0] == rank[2] && rank[3] == rank[4])||(rank[0] == rank[1] && rank[2] == rank[3] && rank[3] == rank[4])){
+		return true;
+	}
+	return false;
+}
+bool flush(int *rank,int *suit){
+	if(suit[0] == suit[1] && suit[0] == suit[2] && suit[0] == suit[3] && suit[0] == suit[4]){
+		return true;
+	}
+	return false;
+}
+bool straight(int *rank,int *suit){
+	if((rank[0]==rank[1]-1 && rank[0]==rank[2]-2 && rank[0]==rank[3]-3 && rank[0]==rank[4]-4) || (rank[0]==1 && rank[1]==10 && rank[2]==11 && rank[3]== 12 && rank[4]==13)){
+		return true;
+	}
+	return false;
+}
+bool three_of_a_kind(int *rank,int *suit){
+	if((rank[0]==rank[1] && rank[0]==rank[2]) || (rank[1]==rank[2] && rank[1]==rank[3])||(rank[2]==rank[3] && rank[2]==rank[4])){
+		return true;
+	}
+	return false;
+}
+bool two_pairs(int *rank,int *suit){
+	if((rank[0] == rank[1] && rank[2] == rank[3])||(rank[0] == rank[1] && rank[3] == rank[4])||(rank[1] == rank[2] && rank[3] == rank[4])){
+		return true;
+	}
+	return false;
+}
+bool pairs(int *rank,int *suit){
+	if(rank[0] == rank[1] || rank[1] == rank[2] || rank[2] == rank[3] || rank[3] == rank[4]){
+		return true;
+	}
+	return false;
+}
+int main(){
+	int n;
+	cin >>n;
+	char card[200];
+	int rank[5],suit[5],temp;
+	for(int j=0;j<n;j++){
+		for(int i=0;i<5;i++){
+			scanf("%s",card);
+			if(isdigit(card[0])){
+				rank[i] = card[0]-48;
+			}
+			else if(card[0] == 'A'){
+				rank[i] = 1;
+			}
+			else if(card[0] == 'K'){
+				rank[i] = 13;
+			}
+			else if(card[0] == 'Q'){
+				rank[i] = 12;
+			}
+			else if(card[0] == 'J'){
+				rank[i] = 11;
+			}
+			else{
+				rank[i] = 10;
+			}
+			if(card[1] == 'S'){
+				suit[i] = 1;
+			}
+			else if(card[1] == 'H'){
+				suit[i] = 2;
+			}
+			else if(card[1] == 'D'){
+				suit[i] = 3;
+			}
+			else {
+				suit[i] = 4;
+			}
+		}
+		for(int i=0;i<5;i++){
+			for(int j=i+1;j<5;j++){
+				if(rank[i] > rank[j]){
+					temp = rank[i];
+					rank[i] = rank[j];
+					rank[j] = temp;
+					temp = suit[i];
+					suit[i] = suit[j];
+					suit[j] = temp;
+				}
+			}
+		}
+		if(royal_flush(rank,suit)){
+			cout << "royal flush
+";
+		}
+		else if(straight_flush(rank,suit)){
+			cout << "straight flush
+";
+		}
+		else if(four_of_a_kind(rank,suit)){
+			cout << "four of a kind
+";
+		}
+		else if(full_house(rank,suit)){
+			cout << "full house
+";
+		}
+		else if(flush(rank,suit)){
+			cout << "flush
+";
+		}
+		else if(straight(rank,suit)){
+			cout << "straight
+";
+		}
+		else if(three_of_a_kind(rank,suit)){
+			cout <<"three of a kind
+";
+		}
+		else if(two_pairs(rank,suit)){
+			cout << "two pairs
+";
+		}
+		else if(pairs(rank,suit)){
+			cout << "pair
+";
+		}
+		else {
+			cout << "high card
+";
+		}
+	}
+	return 0;
+}

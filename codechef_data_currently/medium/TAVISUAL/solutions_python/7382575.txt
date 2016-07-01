@@ -1,0 +1,8 @@
+t=int(raw_input())
+for _ in range(0,t):
+	a,b,c=map(int,raw_input().split())
+	for y in range(0,c):
+		e,f=map(int,raw_input().split())
+		if (e<=b and f>=b):
+		 b=e+f-b
+	print b

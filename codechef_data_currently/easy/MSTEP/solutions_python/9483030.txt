@@ -1,0 +1,20 @@
+testcases = input()
+
+for i in range(0, testcases):
+    #print "test case: " + str(i+1)
+    n = input()
+    array = [[0,0]]*(n*n)
+    #print array
+    for j in range(0,n):
+        inputstring = [int(x) for x in raw_input().split(' ')]
+        for x in inputstring:
+            array[x-1] = [j,inputstring.index(x)]
+            
+    steps = 0
+    for j in range(0,n*n-1):
+        #print "a "+str(abs(array[j][0] - array[j+1][0])) + " b "+str(abs(array[j][1] - array[j+1][1]))
+        steps = steps + abs(array[j][0] - array[j+1][0]) + abs(array[j][1] - array[j+1][1])
+    #print array
+    print steps
+            
+            

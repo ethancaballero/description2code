@@ -1,0 +1,60 @@
+def main():
+	t=input()
+	lt=[]
+	for i1 in range(t):
+		n,m=raw_input().split()
+		n,m=int(n),int(m)
+		lt1=[]
+		lt2=[]
+		# intialize all jobs with 1 indecates not completed 0 completed 1-chef 2-assistant#
+		for i in range(n):
+			lt2.append("1")
+
+		#lt1-> has index of completed jobs
+		lt1=[int(i2) for i2 in raw_input().strip().split()]
+		#print lt1,lt2
+		for j in range(n):
+			for i in range(m):
+				if(lt1[i]-1==j):
+					lt2[j]='0'
+		#print lt2
+		turn=0
+
+		for i in range(n):
+			if(lt2[i]!='0'):
+				if(turn==0):
+					turn=1
+				else:
+					lt2[i]='2'
+					turn=0
+
+		#print lt2
+
+		c1=0
+		c2=0
+		for i in range(n):
+			if(lt2[i]=='1'):
+				print i+1,
+				c1=c1+1
+		
+		if(c1==0):
+			print 
+		for i in range(n):
+			if(lt2[i]=='2'):
+				print i+1,
+				c2=c2+1
+		if(c2==0):
+			print 
+
+
+
+		
+
+
+
+
+
+
+
+if __name__ == '__main__':
+	main()

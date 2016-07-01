@@ -1,0 +1,102 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <cstdlib>
+#include <sstream>
+#include<string.h>
+#include <set>
+#include <cassert>
+#include <map>
+#include <set>
+#include<limits.h>
+#include <queue>
+#include <stack>
+using namespace std;
+typedef long long ll;
+#define in(a) scanf("%lld",&a)
+#define F(i,a,b) for(ll i=a;i<=b;i++)
+#define mp make_pair
+#define pb push_back 
+#define X first
+#define Y second
+#define MOD (ll)1000000007
+ 
+#define gc getchar_unlocked
+ 
+/*void in(ll &x)
+{
+    register ll c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+*/
+
+int main(){	 
+ll t;
+char s[10010];
+ll dp[10010][26];
+
+in(t);
+
+while(t--){
+	memset(dp,0,sizeof(dp));
+	scanf("%s",s);
+	ll n=strlen(s);
+	s[n]='#';
+	
+	ll count=0;
+	
+	F(i,0,n)
+	if(s[i]!='#')
+	dp[count][s[i]-'a']++;
+	else {count++;
+		F(j,0,25)
+		dp[count][j]=dp[count-1][j];
+	}
+	
+	if(count<4)
+	printf("0
+");
+	
+	else {ll m=0;
+		F(i,0,count-4){
+			ll a1=*max_element(dp[i],dp[i]+26);
+			
+			ll m2[26];
+			F(j,0,25)
+			m2[j]=dp[i+1][j]-dp[i][j];
+			
+			ll m3[26];
+			F(j,0,25)
+			m3[j]=dp[i+2][j]-dp[i+1][j];
+	        
+	        ll m4[26];
+	        
+	        F(j,0,25)
+			m4[j]=dp[count][j]-dp[i+2][j];
+			
+			ll a2=*max_element(m2,m2+26);
+			
+			ll a3=*max_element(m3,m3+26);
+			
+			ll a4=*max_element(m4,m4+26);
+			
+			
+			if( a1!=0 && a2!=0 && a3!=0 && a4!=0   && a1+a2+a3+a4>m )
+			m=a1+a2+a3+a4;
+	}
+	
+	if(m>=4)
+	printf("%lld
+",m+3);
+	else printf("0
+");
+}
+
+}
+return 0;
+}

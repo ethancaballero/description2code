@@ -1,0 +1,19 @@
+def driver(M) :
+        length = len(M)
+        # flag = False
+        for j in range(0,length-2):
+            s = M[j]+M[j+1]+M[j+2]
+            # print s
+            if s == '101' or s == '010':
+                return True
+        return False
+if __name__=='__main__' :
+    t=int(raw_input())
+    for i in range(t):
+        x = list(raw_input())
+        a = driver("".join(x))
+        # b = driver("".join(x[::-1]))
+        if a :
+            print 'Good'
+        else :
+            print 'Bad'

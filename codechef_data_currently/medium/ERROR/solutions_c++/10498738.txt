@@ -1,0 +1,19 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int n,i;
+	string s;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>s;
+		int x1=s.find("010");
+		int x2=s.find("101");
+		if((x1<s.length())||(x2<s.length()))
+		cout<<"Good"<<endl;
+		else
+		cout<<"Bad"<<endl;
+	}
+}

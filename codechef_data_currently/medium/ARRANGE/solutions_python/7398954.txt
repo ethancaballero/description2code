@@ -1,0 +1,16 @@
+t=int(raw_input())
+for asd in range(t):
+	s=raw_input()
+	pos=s.find(" ")
+	n=int(s[:pos])
+	s=s[pos+1:]
+	ans=""
+	for i in range(len(s)):
+		temp=bin(i)
+		temp=temp[2:]
+		if (len(temp)<n):
+			temp='0'*(n-len(temp))+temp
+		temp=temp[::-1]
+		temp=int(temp,2)
+		ans+=s[temp]
+	print ans

@@ -1,0 +1,167 @@
+#include<algorithm>
+#include<iostream>
+#include<cassert>
+#include<cmath>
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<sstream>
+#include<string>
+#include<ctime>
+#include<deque>
+#include<map>
+#include<queue>
+#include<set>
+#include<stack>
+#include<vector>
+using namespace std;
+
+#define MOD 1000000007
+#define MAX 1000000000000000000LL
+typedef long long LL;
+typedef pair<int, int> pii;
+
+// http://www.codechef.com/problems/CROWD
+
+void print_mat (LL Out[3][3] )
+{
+	for (int i=0; i < 3; i++){
+							for (int j =0; j < 3; j++){
+								cout << Out[i][j]<<" ";
+							}
+							cout << "
+";
+				}
+}
+
+void mult_mat( LL A[3][3], LL B[3][3], LL C[3][3])
+{
+	LL D[3][3];
+	for (int i=0; i < 3; i++)
+		for (int j =0; j < 3; j++)
+			D[i][j] =0;
+
+	//print_mat(A);
+	//print_mat(B);
+
+	for (int i=0; i < 3; i++)
+	{
+		for (int j=0; j < 3; j++)
+		{
+			for (int k=0; k < 3; k++)
+			{
+				D[i][j] += (A[i][k]*B[k][j])%MOD ;
+
+			}
+		//	cout  << i << " " << j << " " << D[i][j] << "
+";
+		}
+	}
+
+	//print_mat(D);
+
+	for (int i=0; i < 3; i++)
+			for (int j =0; j < 3; j++)
+				C[i][j] = D[i][j];
+
+	//print_mat(C);
+}
+
+void fast_power (LL A[3][3], LL n, LL Out[3][3])
+{
+	if (  n == 1 )
+	{
+		// Out = A;
+		for (int i=0; i < 3; i++)
+			for (int j =0; j < 3; j++)
+				Out[i][j] = A[i][j];
+
+		return;
+	}
+	if (n %2 == 0)
+	{
+		fast_power(A,n/2,Out);
+		mult_mat(Out,Out,Out);
+	}
+	else
+	{
+		fast_power(A,n-1,Out);
+		mult_mat(A,Out,Out);
+	}
+
+}
+
+LL pw (LL x, LL n)
+{
+	if ( n == 0 )
+		return 1;
+
+	LL out = 1;
+	if ( n%2 == 0)
+	{
+		 out = (pw(x,n/2))%MOD;
+		out = (out*out)%MOD;
+	}
+	else
+	{
+		 out = (x*pw(x,n-1))%MOD;
+	}
+	return out%MOD;
+}
+
+int main()
+{
+	int T;
+	scanf("%d",&T);
+
+	while(T--)
+	{
+		LL n;
+		scanf("%lld",&n);
+
+		if ( n == 1 )
+			cout << "0
+" ;
+		else if ( n == 2 )
+			cout << "0
+" ;
+		else if ( n == 3 )
+			cout << "1
+" ;
+		else
+		{
+			LL A[3][3] =   {{1,1,1},
+							{1,0,0},
+							{0,1,0}};
+			LL Out[3][3] = {{0}};
+
+			LL pow_2_n = pw(2,n);
+
+		//	cout << pow_2_n << "
+";
+
+			fast_power(A,n-3,Out);
+
+//			for (int i=0; i < 3; i++){
+//						for (int j =0; j < 3; j++){
+//							cout << Out[i][j]<<" ";
+//						}
+//						cout << "
+";
+//			}
+
+			LL out_put = ((Out[0][0]*7)%MOD + (Out[0][1]*4)%MOD + (Out[0][2]*2)%MOD)%MOD;
+
+			//cout << out_put << "
+";
+			out_put =  pow_2_n - out_put;
+			if ( out_put < 0)
+				out_put += MOD;
+
+			cout << out_put << "
+";
+		}
+
+	}
+	return 0;
+}

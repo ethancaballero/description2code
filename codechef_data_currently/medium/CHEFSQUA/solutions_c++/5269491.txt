@@ -1,0 +1,170 @@
+#include<iostream>
+#include<cstring>
+#include<cmath>
+#include<map>
+#include<utility>
+
+using namespace std;
+
+map<pair<int,int>,int>m;
+int x[2001];
+int y[2001];
+
+
+int gcd(int a,int b)
+{
+      
+      if(b==0)
+      return a;
+      
+      if(a < b)
+      return gcd(b,a);
+      
+      return gcd(b,a%b);
+}
+
+bool case1(int i,int j)
+{
+      int x1,y1,x2,y2,x0,y0;
+        int v1,v2,v3,v4;
+        pair<int,int> temp;
+        
+                    x0 = x[i];
+                    y0 = y[i];
+                    x1 = x[j];
+                    y1 = y[j];                
+                    
+                    v1 = x0 + y1 - y0;
+                    v2 = x0  - y1 + y0;
+                    
+                    v3 = y0 + x1 - x0;
+                    v4 = y0 - x1 + x0;
+                    
+                    temp.first = v1;
+                    temp.second = v4;
+                     
+                  //   cout<<"x0: "<<x0<<"y0: "<<y0<<endl;
+                    // cout<<"checking case1 "<<v1<<" "<<v4<<endl;
+                   //  getchar();
+                     
+                    if(m.find(temp)!= m.end())
+                    {      
+                            return true;
+                    }
+                    else
+                    {
+                            return false;
+                    }
+}
+
+bool case2(int i,int j)
+{
+      int x1,y1,x2,y2,x0,y0;
+        int v1,v2,v3,v4;
+        pair<int,int> temp;
+        
+                    x0 = x[i];
+                    y0 = y[i];
+                    x1 = x[j];
+                    y1 = y[j];                
+                    
+                    v1 = x0 + y1 - y0;
+                    v2 = x0  - y1 + y0;
+                    
+                    v3 = y0 + x1 - x0;
+                    v4 = y0 - x1 + x0;
+                    
+                    temp.first = v2;
+                    temp.second = v3;
+                    
+                    
+                //    cout<<"checking case2 "<<v2<<" "<<v3<<endl;
+                  //  getchar();
+                    
+                    if(m.find(temp)!= m.end())
+                    {   
+                            return true;      
+                    }
+                    else
+                    {
+                            return false;
+                    }
+}
+
+int pro(int n)
+{
+    if(n==0)
+    return 4;
+    
+    if(n==1)
+    return 3;
+    
+    int ans=-1;
+    int x1,y1,x2,y2,x0,y0;
+    int m1,m2,gc;
+    int d;
+    int v1,v2,v3,v4;
+    pair<int,int> temp;
+    
+    for(int i=0;i<n;i++)
+    {
+          for(int j=i+1;j<n;j++)
+          {
+                //   cout<<"current points: "<<x[i]<<" "<<y[i]<<" "<<x[j]<<" "<<y[j]<<endl;
+                   
+                    bool one = case1(i,j); 
+                    bool two = case2(j,i);
+                    
+                    if(one && two)
+                    {
+                          ans = max(ans,4);
+                          return 0;
+                    }
+                    else if(one || two)
+                    ans = max(ans,3);
+                    else
+                    ans = max(ans,2);
+    //////////////////////////////////////////////////////////////
+                   
+    
+                    one = case2(i,j);
+                    two = case1(j,i);
+                    
+                    if(one && two){
+                    ans = max(ans,4);
+                    return 0;}
+                    else if(one || two)
+                    ans = max(ans,3);
+                    else
+                    ans = max(ans,2);
+                    
+                   
+          }
+    }
+    
+    return 4-ans;
+}
+
+int main()
+{
+    int n,x1,y1;
+    int p;
+    cin>>n;
+    p=n;
+    pair<int,int> temp;
+    
+    for(int i=0;i<n;i++)
+    {
+             cin>>x1>>y1;
+             temp.first = x1;
+             temp.second = y1;
+             m[temp]=1;
+             x[i]=x1;
+             y[i]=y1;
+    }
+    
+    cout<<pro(n)<<endl;
+           
+    //system("pause");
+    return 0;
+}

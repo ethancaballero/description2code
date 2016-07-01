@@ -1,0 +1,7 @@
+#!/usr/bin/python
+t=int(raw_input())
+for i in range(t):
+	x=raw_input().split()
+	n=int(x[0])
+	d=int(x[1])
+	print n%d

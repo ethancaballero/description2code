@@ -1,0 +1,18 @@
+import sys
+
+f = sys.stdin
+c = int(f.readline().strip())
+
+for i in xrange(c):
+    [stones, time] = map(int, list(f.readline().strip().split()))
+    n_stones = map(int, list(f.readline().strip().split()))
+    p_stones = map(int, list(f.readline().strip().split()))
+    m_profit = 0
+    for j in xrange(stones):
+        number_stones = int(time/n_stones[j])
+        gp = number_stones*p_stones[j]
+        if gp > m_profit:
+            m_profit = gp
+    print m_profit
+        
+    

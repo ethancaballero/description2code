@@ -1,0 +1,29 @@
+	#include<iostream>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n;
+			cin>>n;
+			int a;
+			cin>>a;
+			int min=a;
+			int sum=a;
+			for(int i=1;i<n;i++)
+			{
+				cin>>a;
+				sum+=a;
+				if(a<min)
+					min=a;
+			}
+			if(min<2)
+				cout<<"-1
+";
+			else
+				cout<<sum+2-min<<endl;
+			t--;
+		}	
+	}

@@ -1,0 +1,101 @@
+#include<cstdio>
+#include<cmath>
+#include<climits>
+#include<algorithm>
+#include<set>
+using namespace std;
+ 
+struct point{
+int x;
+int y;
+};
+ 
+struct point points[2000];
+set<int> scan[2000];
+int ord[2000];
+bool compare(struct point p1,struct point p2){
+if(p1.x == p2.x) return p1.y < p2.y;
+else return p1.x < p2.x;
+}
+bool found4 = false, found3 = false;
+ 
+void checksquare(int n){
+for(int i=0;i<n;i++)
+for(int j=i+1;j<n;j++){
+int diff = ord[j] - ord[i];
+for(set<int>::iterator it = scan[i].begin();it!=scan[i].end();it++){
+int y = *it;
+if(scan[j].count(y)){
+int fi = scan[i].count(y+diff);
+int fj = scan[j].count(y+diff);
+if(fi && fj) found4 = true;
+if(fi || fj) found3 = true;
+ 
+}
+}
+}
+}
+inline int scanint()
+{
+int t=0;
+char c;
+c=getchar_unlocked();
+while(c<'0' || c>'9')
+c=getchar_unlocked();
+while(c>='0' && c<='9')
+{
+t=(t<<3)+(t<<1)+c-'0';
+c=getchar_unlocked();
+}
+return(t);
+}
+inline void print(int a)
+{
+char num[20];
+int i=0;
+do
+{
+num[i++]=a%10+48;
+a=a/10;
+}while(a!=0);
+i=i-1;
+while(i>=0)
+putchar_unlocked(num[i--]);
+putchar_unlocked('
+');
+}
+ 
+ 
+int main(){
+int n;
+n=scanint();
+ 
+for(int i=0;i<n;i++)
+scanf("%d%d",&points[i].x,&points[i].y);
+if(n<=2){
+print(4-n);
+ 
+return 0;
+}
+sort(points,points+n,compare);
+ord[0] = points[0].x;
+scan[0].insert(points[0].y);
+int i = 0;
+for(int j=1;j<n;j++){
+if(points[j].x == ord[i]){
+scan[i].insert(points[j].y);
+} else {
+i++;
+ord[i] = points[j].x;
+scan[i].insert(points[j].y);
+}
+}
+checksquare(i+1);
+if(found4) printf("0
+");
+else if(found3) printf("1
+");
+else printf("2
+");
+return 0;
+} 

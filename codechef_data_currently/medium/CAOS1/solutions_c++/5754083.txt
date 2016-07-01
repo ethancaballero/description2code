@@ -1,0 +1,97 @@
+#include<iostream>
+#include<string>
+#include<cmath>
+using namespace std;
+
+char grid[50][50];
+
+bool isPrime(int n) {
+	if(n== 2 || n==3 || n==5)
+		return true;
+	double sqr = sqrt((double)n);
+	for(int i=2;i<=sqr;i++){
+		if(n%i == 0)
+			return false;
+	}
+	return true;
+}
+
+int main() {
+	int T;
+	cin >> T;
+	int R,C;
+	string s;
+	int l,r,t,b;
+	int cl,cr,ct,cb;
+	int minVal;
+	int count;
+	while(T--) {
+		cin >> R >> C;
+		for(int i=0;i<R;i++) {
+			cin >> s;
+			for(int j=0;j<s.size();j++) {
+				grid[i][j] = s[j];
+			}
+		}
+		count = 0;
+		for(int i=2;i<R-2;i++) {
+			for(int j=2;j<C-2;j++) {
+				if(grid[i][j] == '#')
+					continue;
+				cl = cr = ct = cb = 0;
+				//check left
+				for(l=j-1;l>=0;l--) {
+					if(grid[i][l] == '#') {
+						break;
+					}
+					cl++;
+					if(cl>=2)break; 
+				}
+				if(cl<2) {
+					continue;
+				}
+				//check right
+				for(r=j+1;r<C;r++) {
+					if(grid[i][r] == '#') {
+						break;
+					}
+					cr++;
+					if(cr>=2)break; 
+				}
+				if(cr<2) {
+					continue;
+				}
+				//check top
+				for(t=i-1;t>=0;t--) {
+					if(grid[t][j] == '#') {
+						break;
+					}
+					ct++;
+					if(ct>=2)break; 
+				}
+				if(ct<2) {
+					continue;
+				}
+				//check bottom
+				for(b=i+1;b<R;b++) {
+					if(grid[b][j] == '#') {
+						break;
+					}
+					cb++;
+					if(cb>=2)break; 
+				}
+				if(cb<2) {
+					continue;
+				}
+				minVal = min(min(cr,cl),min(ct,cb));
+				if(minVal >= 2) {
+					//if(isPrime(minVal)){
+						count++;
+					//}
+				}
+			}
+		}
+		cout << count << endl;
+	}
+	return 0;
+}

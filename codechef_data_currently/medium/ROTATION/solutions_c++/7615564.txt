@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	ll n;
+	int m;
+	cin>>n>>m;
+	int a[n];
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	ll k=0;
+	for(int i=0;i<m;i++)
+	{
+		char b[10];
+		ll j;
+		cin>>b>>j;
+		if(b[0]=='R')
+		{
+			j--;
+			// cout<<k<<" "<<(j+n+k)%n<<endl;
+			cout<<a[(j+n+k)%n]<<"
+";
+		}
+		else if(b[0]=='C')
+		{
+			k+=j;
+		}
+		else
+		{
+			k+=(n-j);
+		}
+	}
+	return 0;
+}

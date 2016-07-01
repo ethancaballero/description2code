@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lint long long
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int k;
+        string str;
+        scanf("%d",&k);
+        cin>>str;
+        //cout<<str;
+        lint pw= 1<<k;
+        for(lint i=0;i<pw;i++)
+        {
+            lint j=i;
+            lint x=0;
+            for(int l=0;l<k;l++)
+            {
+                x<<=1;
+                x |= (j&1);
+                j>>=1;
+                //cout<<x<<" " <<j<<endl;
+            }
+            printf("%c",str.at(x));
+        }
+        printf("
+");
+    }
+}

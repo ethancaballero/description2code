@@ -1,0 +1,32 @@
+__author__ = 'pravi1'
+
+
+def main():
+    num_test = int(raw_input());
+    for x in range(0,num_test):
+        n, k = map(int, raw_input().split());
+        sanskars = list(map(int, raw_input().split()));
+        total = sum(sanskars);
+        requiredNum = total/k;
+        newList = list(sanskars);
+        result = True;
+        for x in range(0,k):
+            var = list(newList);
+            result = result & findCombinations(newList,var, requiredNum);
+        if(result):
+            print("yes");
+        else:
+            print("no");
+
+
+def findCombinations(newList, var, requiredNum):
+    if (requiredNum in var):
+        newList.remove(requiredNum)
+        var.pop(var.index(requiredNum));
+        return True;
+    for x in var:
+        if(findCombinations(newList,var[var.index(x)+1:len(var)], requiredNum - x)):
+            newList.remove(x);
+            return True;
+    return False;
+main();

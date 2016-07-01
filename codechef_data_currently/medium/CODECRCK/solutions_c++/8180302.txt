@@ -1,0 +1,29 @@
+#include <cstdio>
+#include<math.h>
+#include <stdlib.h>
+
+using namespace std;
+
+int main() {
+    int i, k, s;
+    scanf("%d %d %d", &i, &k, &s);
+
+    int ai, bi;
+    scanf("%d %d",&ai, &bi);
+
+    double t1, t2;
+
+    t1 = ai;
+    t2 = bi;
+    if( (i&1) != (k&1) ) {
+        i++;
+        t1 = ( sqrt(2) * (ai+bi) ) - (sqrt(6) * (ai - bi));
+        t2 = ( sqrt(2) * (ai-bi) ) + (sqrt(6) * (ai + bi));
+    }
+
+    double ans = ( t1 + t2 );
+
+    ans *= (pow(2.0, 2*(k-i) - s));
+    printf("%.10f
+", ans);
+}

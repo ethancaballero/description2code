@@ -1,0 +1,17 @@
+#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+int main()
+{
+    int t,b,ls;
+    scanf("%d",&t);
+    while(t--)
+    {
+        cin>>b>>ls;
+        cout<<sqrt((ls*ls)-(b*b))<<" ";
+        cout<<sqrt((ls*ls)+(b*b));
+        cout<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,i,j,k,p;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>p;
+		float a,b,c;
+		int arr[6];
+		for(j=0;j<6;j++)
+		cin>>arr[j];
+		a=sqrt(abs((arr[0]-arr[2])*(arr[0]-arr[2])+(arr[1]-arr[3])*(arr[1]-arr[3])));
+		b=sqrt(abs((arr[0]-arr[4])*(arr[0]-arr[4])+(arr[1]-arr[5])*(arr[1]-arr[5])));
+		c=sqrt(abs((arr[2]-arr[4])*(arr[2]-arr[4])+(arr[3]-arr[5])*(arr[3]-arr[5])));
+		if((a<=p&&b<=p)||(a<=p&&c<=p)||(b<=p&&c<=p))
+		cout<<"yes"<<endl;
+		else
+		cout<<"no"<<endl;
+	}
+}

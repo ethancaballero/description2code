@@ -1,0 +1,44 @@
+ Chef likes rectangles. Among all possible rectangles, he loves rectangles that can be drawn like a grid, such that they have N rows and M columns. Grids are common in Byteland. Hence, Chef has drawn such a rectangle and plans on moving around in it.
+The rows of the rectangle are labeled from 1 to N from top to bottom. The columns of the rectangle are labeled form 1 to M from left to right. Thus, the cell in the top left can be denoted by (1,1). The 5th cell from the left in the 4th row form the top can be denoted by (4,5). The bottom right cell can be denoted as (N,M).
+Chef wants to move from the cell in the top left to the cell in the bottom right. In each move, Chef may only move one cell right, or one cell down. Also, Chef is not allowed to move to any cell outside the boundary of the rectangle.
+Of course, there are many ways for Chef to move from (1,1) to (N,M). Chef has a curious sport. While going from (1,1) to (N,M), he drops a stone on each of the cells he steps on, except the cells (1,1) and
+(N,M). Also, Chef repeats this game exactly K times.
+Let us say he moved from (1,1) to (N,M), exactly K times. At the end of all the K journeys, let the number of stones, in the cell with the maximum number of stones, be equal to S. Chef wants to know what is the smallest possible value for S.
+Input
+The first line contains single integer T, the number of test cases. Each of the next T lines contains 3 integers N, M and K, respectivily.
+Output
+For each test case, output the smallest value possible for S, if the Chef chooses the K paths smartly.
+Constraints
+1 \u2264 T \u2264 100
+1 \u2264 N, M, K \u2264 70
+
+Sample
+
+Input
+3
+2 2 1
+3 3 2
+1 5 12
+
+Output
+1
+1
+12
+
+Explanation
+Test Case 1: Chef may choose any way. The maximum value on any cell would be 1.
+Test Case 2: If Chef selects two paths that have a common cell, such as
+
+
+(1,1)->(1,2)->(2,2)->(3,2)->(3,3)
+(1,1)->(2,1)->(2,2)->(3,2)->(3,3)
+
+
+Then the value of S will be equal to 2, since the number of stones in (2,2) and (3,2) is equal to 2. But, if Chef selects two paths which do not have any common cells, such as
+
+
+(1,1)->(1,2)->(1,3)->(2,3)->(3,3)
+(1,1)->(2,1)->(3,1)->(3,2)->(3,3)
+
+
+Then the value of S will be equal to 1.

@@ -1,0 +1,62 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,n,m,i,x,y,j,k,q;
+
+    scanf("%d",&t);
+    while(t--)
+    {
+         scanf("%d %d",&n,&m);
+         int a[n][n];
+            for(i=0;i<n;i++)
+             {
+                 for(j=0;j<n;j++)
+                 {
+
+                      a[i][j]=0;
+                 }
+
+             }
+
+         for(i=0;i<m;i++)
+         {
+             scanf("%d %d",&x,&y);
+             a[x][y]=1;
+             a[y][x]=1;
+
+         }
+
+
+         for(k=0;k<n;k++)
+         {
+             for(i=0;i<n;i++)
+             {
+                 for(j=0;j<n;j++)
+                 {
+                     if(a[i][k]>0 && a[k][j]>0)
+                        a[i][j]=1;
+
+                 }
+
+             }
+
+         }
+
+         scanf("%d",&q);
+         for(i=0;i<q;i++)
+         {
+             scanf("%d %d",&x,&y);
+            if(a[x][y]==1 || x==y)
+                printf("YO
+");
+            else
+                printf("NO
+");
+         }
+
+
+    }
+
+}

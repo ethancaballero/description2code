@@ -1,0 +1,7 @@
+T=int(raw_input())
+
+for i in range(T):
+	a,b=raw_input().split()
+	a=int(a)
+	b=int(b)
+	print "%d"%(a+b)

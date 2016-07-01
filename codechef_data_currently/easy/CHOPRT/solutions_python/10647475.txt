@@ -1,0 +1,12 @@
+t = int(input())
+while t:
+    a,b = raw_input().split()
+    a = int(a)
+    b = int(b)
+    if a==b:
+        print "="
+    elif a>b:
+        print ">"
+    else:
+        print "<"
+    t=t-1

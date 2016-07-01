@@ -1,0 +1,13 @@
+def cal_goodness(s,e):
+    l=len(str(e))
+    if len(str(s))==len(str(e)):
+        return ((s+e)*(e-s+1)/2)*l
+    else:
+        ans=((e+1-10**(l-1))*(10**(l-1)+e)/2)*l
+        return ans+cal_goodness(s,10**(l-1)-1)
+
+
+t=int(raw_input())
+for t in range(t):
+    s,e=map(int,raw_input().split())
+    print  (cal_goodness(s,e))%1000000007

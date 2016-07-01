@@ -1,0 +1,72 @@
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <queue>
+
+using namespace std;
+vector<int> v[10];
+int visited[1000004];
+
+int main()
+{
+	string s;
+	cin >> s;
+	int len = s.length();
+	for(int i = 0;i < len;i++)
+	{
+		v[s[i]-'0'].push_back(i);
+		visited[i] = -1;
+	}
+	int steps = 0,index;
+	queue<int> q;
+	visited[0] = 0;
+	q.push(0);
+	/*
+	for(int i = 0;i < 10;i++)
+	{
+		for(int j = 0;j < v[i].size();j++)
+			printf("%d ", v[i][j]);
+		printf("
+");
+	}
+	*/
+
+	while(!q.empty())
+	{
+		index = q.front();
+		if(index == len-1)
+			break;
+		//printf("index : %d 
+",index );
+		q.pop();
+		if(index > 0 && visited[index-1] == -1)
+		{
+			//printf("%d",index-1);
+			q.push(index-1);
+			visited[index-1] = visited[index] + 1;
+		}
+		if(index < len-1 && visited[index+1] == -1)
+		{
+			//printf("%d",index+1);
+			q.push(index+1);
+			visited[index+1] = visited[index] + 1;
+		}
+		int i = s[index]-'0';
+		for(int j = 0;j < v[i].size();j++)
+		{
+			if(visited[v[i][j]] == -1)
+			{
+				//printf("%d",index);
+				q.push(v[i][j]);
+				visited[v[i][j]] = visited[index]+1;
+			}
+			//printf("%d
+",v[i][j]);
+		}
+		v[i].clear();
+	}
+	printf("%d
+",visited[len-1]);
+	
+}

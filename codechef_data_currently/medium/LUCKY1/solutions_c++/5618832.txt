@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define N 100000
+typedef long long int ll;
+ll ways[N + 1];
+map <int,int> mp;
+void PreCompute()
+{
+    int c4=0,c7=0;
+    mp[0] = 1;
+    for(int i = 1 ; i<=N ; i++)
+    {
+        int j = i;
+        while(j > 0)
+        {
+            if(j%10 == 4) c4++;
+            if(j%10 == 7) c7++;
+            j/=10;
+        }
+        int ans = 0;
+        if(mp.count(c4-c7) == 1)
+        {
+            ans = mp[c4-c7];
+        }
+        ll ANS = (ll) ans;
+        ways[i] = ways[i-1] + ANS;
+        mp[c4-c7]++;
+        //printf("%d %d %lld
+",c4,c7,ways[i]);
+    }
+}
+int main()
+{
+    PreCompute();
+    int tc,t;
+    scanf("%d",&tc);
+    for(t = 1 ; t<=tc ; t++)
+    {
+        int n;
+        scanf("%d",&n);
+        ll ans = ways[n];
+        printf("%lld
+",ans);
+    }
+    return 0;
+}
+

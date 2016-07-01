@@ -1,0 +1,32 @@
+#include<iostream>
+#include<cstdio>
+#include<string.h>
+using namespace std;
+int main()
+{
+   int t,len;
+   scanf("%d",&t);
+   getchar();
+   while(t--)
+   {
+       char s[100001];
+       scanf("%s",s);
+       len = strlen(s);
+       int flg = 1;
+       for(int i=0, j=len-1; i<=j; i++,j--)
+        {
+            if(s[i] != s[j])
+            {
+               flg = 0;
+               break;
+            }
+        }
+        if(flg)
+            printf("1
+");
+        else
+            printf("2
+");
+   }
+    return 0;
+}

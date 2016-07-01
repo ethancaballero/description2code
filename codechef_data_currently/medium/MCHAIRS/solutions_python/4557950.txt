@@ -1,0 +1,13 @@
+import math
+def main():
+    t=int(input())
+    while t>0:
+        n=int(input())
+        ans=pow(2,n,1000000007)
+        ans=ans-1
+        if ans<0:
+            ans=ans+1000000007
+        print ans
+        t=t-1
+    return 0
+main()             

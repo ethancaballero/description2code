@@ -1,0 +1,10 @@
+for t in range(int(raw_input())):
+        a=raw_input()
+        b=raw_input()
+        flag=15
+        for i in range(len(a)):
+                if a[i]<>'?' and b[i]<>'?':
+                        if a[i]<>b[i]:
+                                flag=0
+        if flag: print "Yes"
+        else:print "No"

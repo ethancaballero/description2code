@@ -1,0 +1,9 @@
+#!/usr/bin/python
+for i in range(input()):
+	N,M,K=map(int,raw_input().split())
+	L=map(int,raw_input().split())
+	M=map(int,raw_input().split())
+	P=set(L);Q=set(M)
+	print len(P&Q),N-len(P|Q)
+
+	

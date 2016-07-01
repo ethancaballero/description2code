@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+string bit(long long a){
+    string s="";
+    while(a!=0){
+        s=(char)((a%2)+48)+s;
+        a=a/2;
+        
+    }
+    return s;
+}
+int main(){
+    long long n;
+    cin>>n;
+    while(n--){
+        long long i,j;
+        cin>>i>>j;
+        string i1=bit(i);
+        string i2=bit(j);
+        long long length1=i1.length();
+        long long length2=i2.length();
+        long long k=0;
+        long long count=0;
+        while(k<length1 && k<length2){
+            if(i1[k]==i2[k]){
+                count++;
+                k++;
+            }
+            else{
+                break;
+            }
+        }
+        cout<<length1+length2-2*count<<endl;
+    }
+}

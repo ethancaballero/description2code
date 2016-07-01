@@ -1,0 +1,51 @@
+#include<iostream>
+#include<stdio.h>
+#include<cmath>
+#define rep(i, a, b) for (int i = a; i < b; i++)
+using namespace std;
+int main()
+{	
+	int t,n,k=0,f[1000],g[1000],m,j,o;
+	cin>>t;
+	while(t--)
+	{
+		k=0;
+		cin>>n;
+		rep(i,0,n)
+		cin>>f[i];
+		rep(i,0,n-1)
+		{
+			rep(j,i+1,n)
+			{
+				if(f[i]==f[j]&&f[i]!=0)
+				{
+					g[k++]=f[i];
+					f[i]=f[j]=0;j=n;
+				}
+			}
+		}
+		if(k<2)
+		cout<<"-1
+";
+		else
+		{
+		
+		m=g[0];n=0;
+		rep(i,1,k)
+		if(g[i]>m)
+		{
+			m=g[i];n=i;
+		}
+		g[n]=0;
+		o=(g[0])?g[0]:g[1];
+		rep(i,0,k)
+		if(g[i]>o)
+		{
+			o=g[i];
+		}
+		cout<<o*m<<"
+";
+	}
+	}
+	return 0;
+}

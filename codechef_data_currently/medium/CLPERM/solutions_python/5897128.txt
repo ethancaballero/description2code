@@ -1,0 +1,21 @@
+for _ in range(input()):
+    n,k=map(int,raw_input().split())
+    K=map(int,raw_input().split())
+    N=list(xrange(n))
+    N=[x+1 for x in N]
+    if len(K):
+        for x in K:
+            N.remove(x)
+        smlno=1
+        for i in xrange(len(N)):
+            if N[i]<=smlno:
+                smlno+=N[i]
+        if smlno %2:
+            print "Chef"
+        else:
+            print "Mom"
+    else:
+        if sum(N)%2:
+            print "Mom"
+        else:
+            print "Chef"

@@ -1,0 +1,182 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char c[14];
+int b[13][13];
+char a[13][13];
+int d[13][13];
+int n;
+int dist[15][15];
+
+
+
+void dfs(int s)
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+            d[i][j] = 1000;
+    }
+    d[s/n][s%n] = 0;
+    queue <int> q;
+    q.push(s);
+    while(!q.empty())
+    {
+        int p = q.front();
+        int i = p/n;
+        int j = p%n;
+        int val = d[i][j]+1;
+        q.pop();
+        if(i>0 && a[i-1][j]!='#')
+        {
+            if(d[i-1][j]>val)
+            {
+                d[i-1][j] = val;
+                q.push(p-n);
+            }
+        }
+        if(j>0 && a[i][j-1]!='#')
+        {
+            if(d[i][j-1]>val)
+            {
+                d[i][j-1] = val;
+                q.push(p-1);
+            }
+        }
+        if(i<n-1 && a[i+1][j]!='#')
+        {
+            if(d[i+1][j]>val)
+            {
+                d[i+1][j] = val;
+                q.push(p+n);
+            }
+        }
+        if(j<n-1 && a[i][j+1]!='#')
+        {
+            if(d[i][j+1]>val)
+            {
+                d[i][j+1] = val;
+                q.push(p+1);
+            }
+        }
+    }
+}
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        int h=1;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+                b[i][j] = -1;
+        }
+        b[0][0]=0;
+        for(int i=0;i<n;i++)
+        {
+            scanf("%s",&c);
+            for(int j=0;j<n;j++)
+            {
+                if(c[j]=='*')
+                    b[i][j] = h++;
+                a[i][j] = c[j];
+            }
+        }
+        a[0][0]='*';
+        a[n-1][n-1] = '*';
+        b[n-1][n-1] = h++;
+        for(int i=0;i<h;i++)
+        {
+            for(int j=0;j<h;j++)
+                dist[i][j]=1000;
+        }
+        int flag=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(a[i][j]=='*')
+                {
+                    dfs(i*n+j);
+                    for(int u=0;u<n;u++)
+                    {
+                        for(int v=0;v<n;v++)
+                        {
+                            if(b[u][v]!=-1)
+                            {
+                                if(d[u][v]==1000)
+                                {
+                                    flag=1;
+                                    break;
+                                }
+                                dist[b[i][j]][b[u][v]] = d[u][v];
+                            }
+                        }
+                        if(flag)
+                            break;
+                    }
+                }
+                if(flag)
+                    break;
+            }
+            if(flag)
+                break;
+        }
+        if(flag)
+        {
+            cout<<"-1
+";
+        }
+        else
+        {
+            int m = 1<<h-1;
+            int dp[m][h-1];
+            for(int i=2;i<m;i++)
+            {
+                int r = i;
+                if(r%2)
+                {
+                    int k=0;
+                    vector <int> ans,f;
+                    while(r!=0)
+                    {
+                        if(r%2)
+                        {
+                            f.push_back(i-(1<<k));
+                            ans.push_back(k);
+                        }
+                        r=r/2;
+                        k++;
+                    }
+                    if(ans.size()==2)
+                    {
+                        dp[i][ans[1]] = dist[0][ans[1]];
+                        continue;
+                    }
+                    for(int j=1;j<ans.size();j++)
+                    {
+                        int g = 1000;
+                        for(int k=1;k<ans.size();k++)
+                        {
+                            if(k!=j)
+                                g = min(g,dp[f[j]][ans[k]] + dist[ans[k]][ans[j]]);
+                        }
+                        dp[i][ans[j]] = g;
+                    }
+                }
+            }
+            int answer=1000;
+            for(int i=1;i<h-1;i++)
+            {
+                answer = min(answer,dp[m-1][i]+dist[i][h-1]);
+            }
+            cout<<answer<<endl;
+        }
+    }
+    return 0;
+}

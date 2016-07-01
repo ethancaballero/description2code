@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std; long long int mod=1000000007;
+
+long long int findd(long long int parent[], long long int i)
+{
+    if (parent[i] <0)
+        return i;
+    return (parent[i]=findd(parent, parent[i]));
+}
+void Union(long long int s[], long long int p,long long  int q)
+{
+    long long  int r1 = findd(s, p);
+    long long  int r2 = findd(s, q);
+
+
+            if(s[r1]==s[r2] && r1!=r2)
+            {
+                s[r1]+=s[r2];
+                s[r2]=r1;
+
+            }
+            else if(s[r1]>s[r2] && r1!=r2)
+            {
+                s[r2]+=s[r1];
+                s[r1]=r2;
+
+            }
+            else if(s[r2]>s[r1] && r1!=r2)
+            {
+                s[r1]+=s[r2];
+                s[r2]=r1;
+            }
+}
+
+int main()
+{
+    long long int t,n,m;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+        long long int p,q,count=0,s[n+1],res=1;
+        for(long long int i=1;i<=n;i++)
+        {
+            s[i]=-1;
+        }
+        for(long long int i=0;i<m;i++)
+        {
+
+            cin>>p>>q;
+            Union(s,p,q);
+
+
+        }
+for(long long int i=1;i<=n;i++)
+        {
+            if(s[i]<0)
+            {
+                count++;
+                res=(res*abs(s[i]))%mod;
+            }
+        }
+        cout<<count<<" "<<res<<endl;
+
+
+
+
+
+
+
+    }
+    return 0;
+}

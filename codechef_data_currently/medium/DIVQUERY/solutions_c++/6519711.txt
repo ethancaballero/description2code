@@ -1,0 +1,54 @@
+//Online Query Processing 
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<set>
+#include<queue>
+#include<utility>
+#include<cstring>
+#include<cmath>
+#define LL long long int
+#define mod 1000000007
+#define vi vector<int>
+#define vvi vector < vi >
+#define pii pair<int,int>
+#define all(c) c.begin(),c.end()
+#define sf(x) scanf("%d",&x);
+#define sf2(x,y) scanf("%d%d",&x,&y);
+#define mem(a,val) memset(a,val,sizeof(a))
+#define nl printf("
+");
+#define pb push_back
+#define mp make_pair
+#define f first
+#define s second
+using namespace std;
+vector<int> vec[100005];
+int main()
+{	int t,i,x,j,N,Q,L,R,K,ptr1,ptr2;
+	sf(N);sf(Q);
+	for(i=0;i<N;i++) 
+	{	sf(x);
+		for(j=1;j*j<x;j++)
+		{	if(x%j==0)
+			{	vec[j].pb(i);
+				vec[x/j].pb(i);
+			}
+		}
+		if(j*j==x)vec[j].pb(i);
+	}
+	vector<int>:: iterator low,high;
+	for(i=0;i<Q;i++)
+	{	sf2(L,R);sf(K);
+		L--;R--;
+		//vec[K] lower bound upper bound
+		low=lower_bound(vec[K].begin(),vec[K].end(),L);
+		high=upper_bound(vec[K].begin(),vec[K].end(),R);
+		printf("%d
+",high-low);
+	}
+	
+	return 0;
+}

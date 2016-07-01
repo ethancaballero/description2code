@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+
+using namespace std;
+
+#define NAME "DIVQUERY"
+
+const int N = 1e5 + 5;
+const int LEN = 320;
+int n, len, a[N], n_query;
+int b[LEN][N];
+
+void add(int idx, int v) {
+    int sqrt_v = (int) sqrt(v + .0);
+    for (int i=1; i<=sqrt_v; ++i)
+    if (v%i == 0) {
+        int j = v/i;
+        ++b[idx][i]; ++b[idx][j];
+        if (i==j) --b[idx][i];
+    }
+}
+
+void enter() {
+    scanf("%d%d", &n, &n_query);
+    for (int i=1; i<=n; ++i) scanf("%d", &a[i]);
+    len = 0; while (len*len<n) ++len;
+    int l = 1; int r = len; int cnt = 0;
+    while (l<=r) {
+        for (; l<=r; ++l) add(cnt, a[l]);
+        r += len; if (r>n) r = n;
+        ++cnt;
+    }
+}
+
+void solve() {
+    for (int i=1; i<=n_query; ++i) {
+        int x, y, k;
+        scanf("%d%d%d", &x, &y, &k);
+        int st = (x-1)/len;
+        int en = (y-1)/len;
+        int ans = 0;
+        if (st==en) {
+            for (int j=x; j<=y; ++j)
+                if (a[j]%k == 0) ++ans;
+        }
+        else {
+            for (int j = st+1; j<=en-1; ++j)
+                ans += b[j][k];
+            for (int j=x; j<=(st+1)*len; ++j)
+                if (a[j]%k == 0) ++ans;
+            for (int j=en*len+1; j<=y; ++j)
+                if (a[j]%k == 0) ++ans;
+        }
+        printf("%d
+", ans);
+    }
+}
+
+int main() {
+    //freopen(NAME".INP", "r", stdin);
+    //freopen(NAME".OUT", "w", stdout);
+    enter();
+    solve();
+}

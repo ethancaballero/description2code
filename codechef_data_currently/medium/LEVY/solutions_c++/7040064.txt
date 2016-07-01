@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+#define gc getchar_unlocked
+int count[100001],m;
+long long  getnum()
+{
+      char ch;
+      long long num=0;
+      
+           
+      while( !isdigit(ch= gc()) );
+      
+      while(isdigit(ch))
+      {
+	    num= num*10 + ch-'0';
+	    ch=gc();
+      }
+      
+      return num;  
+          
+   
+  
+}
+int arr[5000];
+ 
+ int generate(int n)
+{
+	int i;
+	for(i=0; arr[i]*arr[i]<=n; i++)
+	{
+		if(n%arr[i]==0)
+		 return 0;
+	}
+	return 1;
+	
+}
+int prime()
+{
+	m=1;
+	arr[0]=2;
+	int k,i;
+	for(i=3; i<10000; i++)
+	{
+	k=generate(i);
+	if(k==1)
+	arr[m++]=i;
+	}
+}
+void countfill()
+{
+	int i,j;
+	
+	for(i=0;i<m;++i)
+	  for(j=0;j<m;++j)
+	  {
+	      if(arr[i]+2*arr[j] > 10000)
+		  break;
+	      else
+		count[arr[i]+2*arr[j] ]++;
+	  }
+}
+int main()
+{
+	int i,j,k,n,t;
+  t=getnum();
+   //cin>>t;
+	prime();
+	countfill();
+	while(t--)
+	{
+	   n=getnum();
+//	cin>>n;
+		  cout<<count[n]<<endl;
+	
+	}
+	return 0;
+}

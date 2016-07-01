@@ -1,0 +1,12 @@
+def get_decr_str(k):
+    pattern = "zyxwvutsrqponmlkjihgfedcba"
+    result = ""
+    if k >= 25:
+        result += pattern*(k/25)
+    if k%25 > 0:
+        result = pattern[-(k%25+1):]+result
+    return result
+t = int(raw_input())
+for i in range(t):
+    k = int(raw_input())
+    print get_decr_str(k)

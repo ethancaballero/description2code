@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+#define ll long long
+#define rep(j,a,b) for(int j=a;j<b;j++)
+#define mod 1000000007
+ll fib[100];
+ll q,k,x;
+void pre_compute(){
+	fib[0]=1,fib[1]=2;
+	int i=2;
+	while( fib[i-1]+fib[i-2] <=mod-7){
+		fib[i]=fib[i-1]+fib[i-2];
+		i++;
+	}
+}
+ll ans(ll x,ll n,ll k){
+	if(k==0)
+		if(x==0)return 1;
+		else return 0;
+	if(x==0 || n==0)return 0;
+	ll a=0,b=0,sum=0;
+	b=ans(x,n-1,k)%mod;
+	if(x>=fib[n-1] && x<=k*fib[n-1]){
+		a=ans(x-fib[n-1],n,k-1)%mod;
+	}
+	sum=a+b;
+	sum%=mod;
+	return sum;
+}
+int main() {
+	// your code goes here
+	pre_compute();
+	scanf("%lld",&q);
+	while(q--){
+		scanf("%lld%lld",&x,&k);
+		printf("%lld
+",ans(x,43,k));
+	}
+	return 0;
+}

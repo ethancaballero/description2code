@@ -1,0 +1,16 @@
+from __future__ import division
+t=int(raw_input())
+for i in range(0,t):
+	lis=list(map(float,raw_input().split()))
+	if lis[0]>50 and lis[1]<0.7 and lis[2]>5600:
+		print 10
+	elif lis[0]>50 and lis[1]<0.7:
+		print 9
+	elif lis[1]<0.7 and lis[2]>5600:
+		print 8
+	elif lis[0]>50 and lis[2]>5600:
+		print 7
+	elif lis[0]>50 or lis[1]<0.7 or lis[2]>5600:
+		print 6
+	else:
+		print 5

@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int a,n,k,i,b[101]={0};
+	cin>>a>>n>>k;
+	for(i=0;i<k;i++)
+	{
+		b[i]=a%(n+1);
+		a=a/(n+1);
+	}
+	for(i=0;i<k;i++)
+	cout<<b[i]<<" ";
+	return 0;
+}

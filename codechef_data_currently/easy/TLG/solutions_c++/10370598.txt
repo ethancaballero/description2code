@@ -1,0 +1,33 @@
+#include <iostream>
+#include<algorithm>
+using namespace std;
+int main() {
+    int n;
+    cin>>n;
+    int i,p1[n],p2[n],lead[n],maxi;
+    for(i=0;i<n;i++)
+    {
+        cin>>p1[i]>>p2[i];
+        if(i>0)
+        {
+            p1[i]=p1[i]+p1[i-1];
+            p2[i]=p2[i]+p2[i-1];
+        }
+        lead[i]=abs(p1[i]-p2[i]);
+        if(i==0)
+        maxi=lead[i];
+        else if(maxi<lead[i])
+        maxi=lead[i];
+        
+    }
+    for(i=0; i<n; i++)
+    {
+        if(lead[i]==maxi)
+        break;
+    }
+    if(p1[i]>p2[i])
+    cout<<"1"<<"	"<<maxi;
+    else
+    cout<<"2"<<"	"<<maxi;
+    return 0;
+}

@@ -1,0 +1,23 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+int main() {
+    int T, n;
+    char s[105];
+    scanf("%d", &T);
+    while (T--) {
+        scanf("%s %d", s, &n);
+        int cnt = 0;
+        for (int i = 0; s[i]; i++) {
+            if (s[i] == 'S')
+                cnt++;
+            else
+                cnt += 2;
+        }
+        int ans = 0;
+        for (int i = cnt; i < 12 * n; i += cnt)
+            ans += 12 * n - i;
+        printf("%d
+", ans);
+    }
+}

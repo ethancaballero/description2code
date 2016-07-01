@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string.h>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+int main()
+{
+	
+	char a[1000006];
+	int t,i;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%s",a);
+		for(i=strlen(a)-1;i>=0;i--)
+		{
+			if((a[i]=='F'||a[i]=='?')&&(a[i-1]=='E'||a[i-1]=='?')&&(a[i-2]=='H'||a[i-2]=='?')&&(a[i-3]=='C'||a[i-3]=='?'))
+			{
+				a[i]='F';a[i-1]='E';a[i-2]='H';a[i-3]='C';
+				//cout<<"*";
+			}
+
+
+		}
+		for(i=strlen(a)-1;i>=0;i--)
+		{
+			if(a[i]=='?')
+			{a[i]='A';
+			}
+		}
+	
+		printf("%s
+",a);		
+	}
+	return 0;
+}

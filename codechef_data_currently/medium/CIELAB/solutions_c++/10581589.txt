@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int a,b;
+	cin>>a>>b;
+	int d=a-b,e=a-b;
+		if((e%10)!=9){
+			cout<<e+1;	
+		}
+		else if(e%10!=0){
+			cout<<e-1;
+		}
+}

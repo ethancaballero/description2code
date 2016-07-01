@@ -1,0 +1,33 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	long long int n,i,h[200000],q,k[200000],d;
+	scanf("%lld",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%lld",&h[i]);
+	}
+	scanf("%lld",&q);
+	for(i=0;i<q;i++)
+	{
+		scanf("%lld",&k[i]);
+	}
+	sort(h,h+n);
+	for(i=1;i<n;i++)
+	{
+		h[i]=h[i]+h[i-1];
+	}
+	for(i=0;i<q;i++)
+	{
+		d=n/(k[i]+1);
+		if(n%(k[i]+1))
+		{
+			d++;
+		}
+		printf("%lld
+",h[d-1]);
+	}	
+	return 0;
+}

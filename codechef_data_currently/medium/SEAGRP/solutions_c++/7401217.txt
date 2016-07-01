@@ -1,0 +1,180 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+using namespace std;
+#define N 100
+vector <int> vec[N + 1];
+vector <int> copy[N + 1];
+int match[N + 1];
+int p[N + 1];
+int base[N + 1];
+int blossom[N + 1];
+int mark[N + 1];
+int que[N + 1];
+
+int maxmatch(int);
+int findpath(int,int);
+int lca(int,int,int);
+void makepath(int,int,int);
+/*int main()
+{
+    int tc,t;
+}*/
+int main()
+{
+    int k,tc,i,j,n,m;
+    scanf("%d",&tc);
+    for(k = 1 ; k<= tc ; k++)
+    {
+
+        scanf("%d %d",&n,&m);
+        for(i = 1 ; i<=m ; i++)
+        {
+            int u,v;
+            scanf("%d %d",&u,&v);
+            vec[u].push_back(v);
+            vec[v].push_back(u);
+        }
+        int ans = maxmatch(n);
+        if(ans*2 == n)
+        printf("YES
+");
+        else
+        printf("NO
+");
+        for(i = 1 ; i<= n ; i++)
+        vec[i].clear();
+    }
+    return 0;
+}
+int maxmatch(int n)
+{
+    for(int i = 1 ; i<= n ; i++)
+    {
+        match[i] = -1;
+        p[i] = 0;
+    }
+
+    for(int i = 1 ; i<= n ; i++)
+    {
+        if(match[i] == -1)
+        {
+            int v = findpath(i,n);
+            int pv,ppv;
+            while (v != -1)
+            {
+                pv = p[v];
+                ppv = match[pv];
+                match[v] = pv;
+                match[pv] = v;
+                v = ppv;
+            }
+        }
+    }
+    int matchings = 0;
+    for(int i = 1 ; i<= n ; i++)
+    {
+        if(match[i] != -1)
+        matchings++;
+    }
+    return matchings/2;
+}
+int findpath(int root,int n)
+{
+    for(int i = 1 ; i<= n ; i++)
+    {
+        mark[i] = 0;
+        p[i] = -1;
+        base[i] = i;
+        que[i] = 0;
+    }
+    mark[root] = 1;
+    int f = 0;
+    int r = 1;
+    que[r] = root;
+    while(f < r)
+    {
+        f++;
+        int v = que[f];
+        int sz = vec[v].size();
+        for(int i = 0 ; i<sz ; i++)
+        {
+            int u = vec[v][i];
+            if(base[u] == base[v] || match[v] == u) continue;
+
+            if(u == root || match[u] != -1 && p[match[u]] != -1)
+            {
+                int x = lca(v,u,n);
+
+                for(int i = 1 ; i<=n ; i++)
+                {
+                    blossom[i] = 0;
+                }
+                makepath(v,x,u);
+                makepath(u,x,v);
+
+                for (int i = 0; i < n; ++i)
+                {
+
+                    if (blossom[base[i]] == 1)
+                    {
+                        base[i] = x;
+                        if (mark[i] == 0)
+                        {
+                            mark[i] = 1;
+                            r++;
+                            que[r] = i;
+                        }
+                    }
+                }
+            }
+            else if(p[u] == -1)
+            {
+                p[u] = v;
+                if (match[u] == -1)
+                return u;
+                u = match[u];
+                mark[u] = 1;
+                r++;
+                que[r] = u;
+            }
+        }
+    }
+    return -1;
+}
+
+
+
+
+void makepath(int v,int b,int children)
+{
+    for (; base[v] != b; v = p[match[v]])
+    {
+
+        blossom[base[v]] = blossom[base[match[v]]] = true;
+        p[v] = children;
+        children = match[v];
+    }
+}
+int lca(int a,int b,int n)
+{
+    for(int i = 1 ; i<=n ; i++)
+    mark[i] = 0;
+
+    while (1)
+    {
+        a = base[a];
+        mark[a] = 1;
+        if (match[a] == -1)
+        break;
+        a = p[match[a]];
+    }
+
+    while (1)
+    {
+        b = base[b];
+        if (mark[b] == 1)
+        return b;
+        b = p[match[b]];
+    }
+}

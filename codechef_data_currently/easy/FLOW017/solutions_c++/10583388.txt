@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int f1=0,i,t,n,m,x;
+    while(f1==0)
+    {
+        cin>>t;
+        if(t>=1 && t<=1000)
+                f1=1;
+    }
+    while(t--)
+    {
+        m=0;n=0;
+        for(i=0;i<3;i++)
+        {
+            f1=0;
+            while(f1==0)
+            {
+                cin>>x;
+                if(x>=1 && x<=1000000)
+                    f1=1;
+            }
+            if(m==0)
+               m=x;
+            else if(n==0)
+            {
+                if(m<=x)
+                    n=x;
+                else
+                {
+                    n=m;
+                    m=x;
+                }
+            }
+            else
+            {
+                if(x<=m)
+                {
+                    n=m;
+                    m=x;
+                }
+                else if(x<=n)
+                     n=x;
+
+            }
+        }
+        cout<<n<<endl;
+    }
+    return 0;
+}

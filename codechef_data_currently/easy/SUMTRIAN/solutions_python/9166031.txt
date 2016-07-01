@@ -1,0 +1,16 @@
+t=input()
+for _ in xrange(t):
+    n=input()
+    a=[]
+    
+   
+    for i in xrange(n):
+        a.append(map(int,raw_input().split()))
+    
+    for i in xrange(n-1):
+        for j in xrange(i):
+            a[i+1][j+1]+=max(a[i][j+1],a[i][j])
+        a[i+1][0]+=a[i][0]
+        a[i+1][i+1]+=a[i][i]
+    print max(a[n-1])
+            

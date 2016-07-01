@@ -1,0 +1,36 @@
+def digits(N):
+    if N == 0:
+        return 1
+    d = 0
+    while N > 0:
+        d += 1
+        N /= 10
+    return d
+
+
+def gauss(N):
+    return (N * (N + 1)) / 2
+
+
+def sum_between(f, to):
+    return gauss(to) - gauss(f - 1)
+
+
+def ans(L, R):
+    if L > R:
+        return 0
+
+    d = digits(L)
+    n = 10 ** (d)
+    if n > R:
+        n = R + 1
+
+    s = sum_between(L, n - 1) % ((10 ** 9) + 7)
+    s = (s * d) % ((10 ** 9) + 7)
+    return (s + ans(n, R)) % ((10 ** 9) + 7)
+
+
+cases = int(raw_input())
+for _ in xrange(cases):
+    L, R = map(int, raw_input().split())
+    print ans(L, R)

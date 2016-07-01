@@ -1,0 +1,10 @@
+T=input()
+for i in range(T):
+    N=input()
+    S=raw_input()
+    A={'R':0,'G':0,'B':0}
+    for s in S:
+        A[s]+=1
+    m=max(A.values())
+    print N-m
+    

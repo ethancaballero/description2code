@@ -1,0 +1,14 @@
+while True:
+    n=int(raw_input())
+    if n==0:
+        break
+    else:
+        A=map(int,raw_input().split())
+        flag=1
+        for i in range(n):
+            if A[A[i]-1]<>i+1:
+                flag=0
+                print "not ambiguous"
+                break
+        if flag:print "ambiguous"
+    

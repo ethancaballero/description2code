@@ -1,0 +1,93 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <set>
+#include <map>
+#include <cmath>
+#pragma comment(linker,"/STACK:16777216")
+#define inf 1000000000
+#define MP make_pair
+using namespace std;
+typedef long long L;
+typedef unsigned long long UL;
+UL rem;
+int test,n,m,l,k;
+UL res,C[1001][1001];
+int F[5],S[5][5],T;
+char A[1001][4];
+ 
+void initC(){
+for(int i=0;i<=1000;i++)
+C[i][0]=C[i][i]=1;
+for(int i=2;i<=1000;i++)
+for(int j=1;j<i;j++)
+C[i][j]=(C[i-1][j-1]+C[i-1][j])%rem;
+}
+ 
+UL comb(int a,int b){
+if(b==-1)return 1;
+}
+ 
+int main()
+{
+rem=1000000080;
+rem=rem*(UL)inf+798150871;
+ 
+ 
+initC();
+cin>>test;
+while(test--){
+ 
+cin>>n>>m>>l>>k;
+for(int i=0;i<n;i++)cin>>A[i];
+res=0;
+ 
+if(n>=l&&m>=k){
+memset(F,0,sizeof(F));
+memset(S,0,sizeof(S));
+T=0;
+if(k==1){
+for(int i=0;i<n;i++){
+for(int j=0;j<m;j++)
+if(A[i][j]=='1'){
+res=(res+C[F[j]][l-1])%rem;
+F[j]++;
+}
+}
+}
+else if(k==2){
+for(int i=0;i<n;i++){
+for(int j1=0;j1<m;j1++)
+for(int j2=0;j2<j1;j2++){
+if(A[i][j1]=='1'&&A[i][j2]=='1'){
+res=(res+C[S[j1][j2]][l-1])%rem;
+S[j1][j2]++;
+}
+}
+}
+}
+else if(k==3){
+for(int i=0;i<n;i++){
+if(A[i][0]=='1'&&A[i][1]=='1'&&A[i][2]=='1'){
+res=(res+C[T][l-1])%rem;
+T++;
+}
+}
+}
+ 
+ 
+}
+ 
+cout<<res<<endl;
+}
+ 
+ 
+ 
+return 0;
+}

@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+int nimber(int a, int b) 
+{
+    if(a < b) 
+      swap(a, b);
+    int ans;
+    if(a % b == 0) ans = a / b - 1;
+    else 
+    {
+        int tmp = nimber(b, a % b);
+        if(tmp) 
+        {
+            ans = a / b - 1;
+            if(ans >= tmp) ++ans;
+        }
+        else ans = a / b;
+    }
+    return ans;
+}
+int main()
+{
+  int t , n , a , b , ans;
+  scanf("%d" , &t);
+  while(t--)
+  {
+    scanf("%d" , &n);
+    ans = 0;
+    while(n--)
+    {
+      scanf("%d %d" , &a , &b);
+      ans ^= nimber(a , b);
+    }
+    if( ans)
+      puts("YES");
+    else puts("NO");
+  }
+  return 0;
+}

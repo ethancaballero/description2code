@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<math.h>
+ 
+int main()
+{
+	int t,i,P,S;
+	double p,s,l;
+	
+	scanf("%d",&t);
+ 
+	for(i=0;i<t;i++)
+	{
+		scanf("%d %d",&P,&S);
+		
+		p=P/4.0; s=S/2.0;
+ 
+		l=(p-sqrt(p*p-3*s))/3;
+ 
+		printf("%.2lf
+",l*l*l-p*l*l+s*l);
+	}
+ 
+	return 0;
+}

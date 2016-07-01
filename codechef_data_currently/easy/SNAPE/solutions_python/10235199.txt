@@ -1,0 +1,21 @@
+from math import sqrt
+
+t = input()
+#print t
+
+while t > 0:
+
+    numbers = map(str, raw_input().split())
+    #print numbers
+
+    #b = int(numbers[0])
+    #print b
+    #ls = int(numbers[1])
+    #print ls
+
+    #max_rs = sqrt((ls ** 2) + (b ** 2))
+    print "%.5f" %(sqrt((int(numbers[1]) ** 2) - (int(numbers[0]) ** 2))),
+    #min_rs = sqrt((ls ** 2) - (b ** 2))
+    print "%.5f" %(sqrt((int(numbers[1]) ** 2) + (int(numbers[0]) ** 2)))
+
+    t -= 1

@@ -1,0 +1,5 @@
+t=int(raw_input())
+for asd in range(t):
+	n=int(raw_input())
+	a=map(int,raw_input().split())
+	print min(a)*(sum(a)-min(a))

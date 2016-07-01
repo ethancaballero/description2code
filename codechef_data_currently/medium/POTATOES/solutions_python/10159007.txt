@@ -1,0 +1,15 @@
+def isprime(n):
+	if n == 3:
+		return True
+	else:
+		for i in range(2, int(n ** 0.5) + 1):
+			if n % i == 0:
+				return False
+		return True
+test_case = int(raw_input())
+for t in range(test_case):
+	x, y = map(int , raw_input().split())
+	z = 1
+	while not isprime(x + y + z):
+		z += 1
+	print z

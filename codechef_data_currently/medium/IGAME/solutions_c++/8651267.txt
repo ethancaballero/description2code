@@ -1,0 +1,51 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+#define max 1003
+
+int grid[max][max];
+int r[max],c[max],d[max];
+
+void positions()
+{
+    grid[0][0]=0;
+    for(int i=1;i<max;i++)
+    {
+        r[i]=c[i]=d[i]=0;
+        grid[i][0]=grid[0][i]=grid[i][i]=1;
+    }
+    for(int i=1;i<max;i++)
+    {
+        for(int j=i+1;j<max;j++)
+        {
+            grid[i][j]=grid[j][i]=r[i]+c[j]+d[j-i];
+            if(grid[i][j]==0)
+            {
+                r[i]=r[j]=c[j]=d[j-i]=1;
+            }
+            //cout<<grid[i][j]<<" ";
+        }
+        //cout<<"
+";
+    }
+}
+
+int main() {
+	int t;
+	cin>>t;
+	positions();
+	while(t--)
+	{
+	    int m,n,p,q;
+	    cin>>m>>n>>p>>q;
+	    m=m-p;
+	    n=n-q;
+	    if(grid[m][n]!=0)
+	        printf("Alice
+");
+	    else
+	        printf("Bob
+");
+	}
+	return 0;
+}

@@ -1,0 +1,12 @@
+T = input()
+for _ in xrange(T):
+	ans = "NO"
+	f = raw_input().split()
+	f1 = f[0:2]
+	f2 = f[2:4]
+	f3 = f[4:]
+	for side in f1:
+	    if side in f2 and side in f3:
+	        ans = "YES"
+	        break
+	print ans

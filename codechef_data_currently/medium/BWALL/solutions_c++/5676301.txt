@@ -1,0 +1,63 @@
+#include<stdio.h>
+//#include<conio.h>
+using namespace std;
+typedef long long LL;
+#define MOD  1000000007
+void mul(LL a[3][3],LL b[3][3],LL c[3][3])
+{
+	for(int i=0;i<3;i++)
+		for(int j=0;j<3;j++)
+        {
+			c[i][j]=0;
+			for(int k=0;k<3;k++) c[i][j]+=a[i][k]*b[k][j];
+			c[i][j]%=MOD;
+		}
+}
+void copy(LL (*a)[3],LL (*b)[3]){
+	for(int i=0;i<3;i++) for(int j=0;j<3;j++) a[i][j]=b[i][j];
+}
+LL modulo(int n)
+{
+	LL x[3][3]={0},y[3][3]={0};
+	for(int i=0;i<3;i++) x[i][i]=1;
+	y[0][0]=1;y[0][1]=4;y[0][2]=2; 
+    y[1][0]=1;y[1][1]=0;y[1][2]=0;
+    y[2][0]=0;y[2][1]=1;y[2][2]=0;
+	LL c[3][3];
+    while(n)
+    {
+   	   if(n%2)
+       { 
+   		 mul(x,y,c);
+   		 copy(x,c);
+       }
+    	mul(y,y,c);
+   	    copy(y,c);
+	    n>>=1; 
+     }
+     LL v[3]={5,1,1};
+     LL ans[3]={0};
+     for(int i=0;i<3;i++)
+     {
+   		for(int kk=0;kk<3;kk++)ans[i]+=x[i][kk]*v[kk];
+   		ans[i]%=MOD;
+     }
+	 return ans[2]%MOD;
+}
+int main()
+{
+     int t;
+     scanf("%d",&t);
+     while(t--)
+     {
+         int n;
+         LL res;
+         scanf("%d",&n);
+         res=modulo(n);
+         printf("%lld
+",res);
+     }
+     //getch();
+     return 0;
+}
+ 

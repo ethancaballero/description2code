@@ -1,0 +1,11 @@
+t = int(raw_input())
+for _ in xrange(t):
+    n = int(raw_input())
+    curr_time = 0
+    for _ in range(n):
+        a, b, c = (int(x) for x in raw_input().split())
+        d = a
+        while curr_time > d:
+            d += c
+        curr_time = d + b
+    print(curr_time) 

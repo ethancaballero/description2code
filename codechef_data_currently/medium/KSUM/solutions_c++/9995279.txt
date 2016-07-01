@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+priority_queue<ll>pq;
+ll n,k,i,a[100001],sum[100001],cnt;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	
+	cin>>n;
+	cin>>k;
+	
+	for(i=1;i<=n;i++)
+	{
+		cin>>a[i];
+	}
+	sum[1]=a[1];
+	pq.push(sum[1]);
+	for(i=2;i<=n;i++)
+	{
+		sum[i]=sum[i-1]+a[i];
+		pq.push(sum[i]);
+	//	cout<<sum[i]<<" ";
+	}
+	//i=i+1;
+	//cout<<i;
+	ll val=1;
+	while(n>1)
+	{
+		
+		//cout<<sum[i]<<" ";
+		pq.push(sum[n]-sum[n-val]);
+		val++;
+		cnt++;
+		if(val==n)
+		{
+			n=n-1;
+			val=1;
+		}
+		  if(cnt>=1000*1001/2) break;
+
+	}
+	for(i=0;i<k;i++)
+	{
+		ll x=pq.top();
+		pq.pop();
+		cout<<x<<" ";
+	}
+}

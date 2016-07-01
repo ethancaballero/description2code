@@ -1,0 +1,12 @@
+tc = int(raw_input())
+while tc > 0:
+    tc = tc - 1
+    n = int(raw_input())
+    fc = [0]*30
+    fc[0] = 1
+    fc[1] = 1
+    fc[2] = 2
+    fc[3] = 6
+    for i in xrange(4, 21):
+        fc[i] = fc[i-1] * i
+    print fc[n]

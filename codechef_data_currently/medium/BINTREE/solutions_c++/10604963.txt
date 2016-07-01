@@ -1,0 +1,35 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+      int i,j;
+      cin>>i>>j;
+    
+      vector<int> a,b;
+      while(i)
+      {a.push_back(i);i=i/2;} 
+ 
+      while(j)
+      {b.push_back(j);j=j/2;}
+
+
+      int cnt1=0,cnt2=0;
+      for(int i=0,j=0;i<a.size(),j<b.size();)
+      { 
+         if(a[i]<b[j])
+         {j++;cnt1++;}
+         else if(a[i]>b[j])
+         {i++;cnt2++;}
+         else
+         break;  
+      } 
+     
+       cout<<cnt1+cnt2<<endl;
+    }
+
+}

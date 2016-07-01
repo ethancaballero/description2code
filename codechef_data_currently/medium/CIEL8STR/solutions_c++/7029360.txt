@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<string.h>
+#define max 1000002
+int main(){
+long long res;
+int n;
+char s[max];
+scanf("%s",s);
+n=strlen(s);
+
+//1-digit
+for(int i=0;i<n;i++)
+{
+int v=s[i]-'0';	
+if(v%8==0) res++;
+}
+
+for(int i=1;i<n;i++){
+	if(s[i-1]=='0') continue;
+	int v=(s[i-1]-'0')*10+(s[i]-'0');
+	if(!(v%8)) res++;
+}
+int non=0;
+for(int i=2;i<n;i++)
+{
+int v=(s[i-2]-'0')*100+(s[i-1]-'0')*10+(s[i]-'0');
+if(s[i-2]!='0') non++;	
+if(!(v%8)) res+=non;
+//non	
+}
+printf("%lld
+",res);
+return 0;}

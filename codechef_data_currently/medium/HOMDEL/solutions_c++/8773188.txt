@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int i,n,m,j,k,ans,s,g,d;
+	scanf("%d",&n);
+	int dist[n][n];
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			scanf("%d",&(dist[i][j]));
+		}
+	}
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			for(k=0;k<n;k++)
+			{
+				if(dist[j][k]>dist[j][i]+dist[i][k])
+				{
+					dist[j][k]=dist[j][i]+dist[i][k];
+				}
+			}
+		}
+	}
+	scanf("%d",&m);
+	while(m--)
+	{
+		scanf("%d%d%d",&s,&g,&d);
+		ans=dist[s][g]+dist[g][d]-dist[s][d];
+		printf("%d %d
+",dist[s][g]+dist[g][d],ans);
+	}
+	return 0;
+}

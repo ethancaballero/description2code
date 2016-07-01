@@ -1,0 +1,12 @@
+tests = int(raw_input())
+for _ in xrange(tests):
+    l,r = [int(num) for num in raw_input().split()]
+    x = l
+    res = 0
+    while x <= r:
+        digits = len(str(x))
+        maxVal = (10**digits) - 1
+        minVal = min(maxVal,r)
+        res = res + digits * (minVal + x)*(minVal - x + 1) / 2
+        x = int(minVal) + 1
+    print int(res) % 1000000007

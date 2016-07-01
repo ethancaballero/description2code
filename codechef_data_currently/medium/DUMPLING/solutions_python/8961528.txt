@@ -1,0 +1,19 @@
+def gcd(a,b):
+    if(b==0):
+        return a
+    return gcd(b,a%b)
+
+t=int(raw_input())
+for j in range(t):
+    z=raw_input().split()
+    a=int(z[0])
+    b=int(z[1])
+    c=int(z[2])
+    d=int(z[3])
+    k=int(z[4])
+    first=gcd(a,b)
+    second=gcd(c,d)
+    interval=(first*second)/gcd(first,second)
+    ans=k/interval
+    ans=ans*2+1
+    print ans

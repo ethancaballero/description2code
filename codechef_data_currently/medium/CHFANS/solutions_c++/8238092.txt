@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long int
+
+#define sc1(x) scanf("%d",&x)
+#define sc2(x,y) scanf("%d%d",&x,&y)
+#define sc3(x,y,z) scanf("%d%d%d",&x,&y,&z)
+
+
+#define pr1(x) printf("%d
+",x)
+#define pr2(x,y) printf("%d %d
+",x,y)
+#define pr3(x,y,z) printf("%d %d %d
+"x,y,z)
+int main()
+{
+    int t;
+    sc1(t);
+    while(t--)
+    {
+        int a,b,c,d;
+        sc2(a,b);
+        c=a<0?-a:a;
+        d=b<0?-b:b;
+        if(a<0&&b>0||b<0&&a>0)
+            pr1((c+d)/__gcd(c,d));
+        else if(c>d)
+            pr1((c-d)/__gcd(c,d));
+        else if(d>c)
+            pr1((d-c)/__gcd(c,d));
+
+    }
+    return  0;
+}

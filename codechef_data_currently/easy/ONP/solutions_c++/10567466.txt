@@ -1,0 +1,84 @@
+#include<iostream>
+#include<cstring>
+#include<ctype.h>
+using namespace std;
+int main()
+{
+    int  t,len,i,a,j,flag;
+    string exp,sta;
+    cin>>t;
+    while(t--)
+    {
+        j=0;
+        flag=0;
+        cin>>exp;
+        len=exp.length();
+        for(i=0;i<len;i++)
+        {
+            if(isalpha(exp[i]))
+            {
+               cout<<exp[i];
+            }
+            else
+            {   a=0;
+                sta[j]=exp[i];
+                if(sta[j]=='(')
+                    {
+                        flag++;
+                    }
+                    else if(sta[j]==')')
+                    {
+                        while(j--)
+                        {
+                            if(sta[j]=='(')
+                                break;
+                            cout<<sta[j];
+                        }
+                        flag--;
+                        a=1;
+                    }
+                else if(j>0)
+                {
+                    if(flag==0)
+                    {
+                        if(sta[j-1]=='+' || sta[j-1]=='-')
+                        {
+                            if(sta[j]=='+' || sta[j]=='-')
+                            {
+                                cout<<sta[j-1];
+                                sta[j-1]=sta[j];
+                                j--;
+                            }
+                        }
+                        else if(sta[j-1]=='*' || sta[j-1]=='/' || sta[j-1]=='%')
+                        {
+                            if(sta[j]=='*' || sta[j]=='/' || sta[j]=='%' || sta[j]=='+' || sta[j]=='-')
+                            {
+                                cout<<sta[j-1];
+                                sta[j-1]=sta[j];
+                                j--;
+                            }
+                        }
+                        else if(sta[j-1]!='(')
+                        {
+                            cout<<sta[j-1];
+                            sta[j-1]=sta[j];
+                            j--;
+                        }
+                    }
+                }
+            if(a==0)
+            j++;
+            }
+
+        }
+        while(j--)
+        {
+            if(sta[j]!='(')
+                cout<<sta[j];
+        }
+        cout<<endl;
+
+    }
+    return 0;
+}

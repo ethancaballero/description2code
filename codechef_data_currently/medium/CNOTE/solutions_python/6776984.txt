@@ -1,0 +1,11 @@
+for i in range(input()):
+    x,y,k,n=map(int,raw_input().split())
+    found= False
+    for j in range(n):
+        p,c=map(int,raw_input().split())
+        if k>=c and x-y<=p:
+            found= True
+    if found==True:
+        print "LuckyChef"
+    else:
+        print "UnluckyChef"

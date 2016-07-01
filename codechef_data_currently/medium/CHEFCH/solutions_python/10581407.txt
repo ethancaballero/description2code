@@ -1,0 +1,25 @@
+val = raw_input()
+t = int(val)
+for i in range(t) :
+	string1 = raw_input()
+	nums = len(string1)
+	ck1 = list()
+	ck2 = list()
+	ck1c = 0
+	ck2c = 0
+	for j in range(nums) :
+		if j%2==0 :
+			ck1.append('+')
+			ck2.append('-')
+		else :
+			ck1.append('-')
+			ck2.append('+')
+	for j in range(nums) :
+		if string1[j]!=ck1[j] :
+			ck1c+=1
+		if string1[j]!=ck2[j] :
+			ck2c+=1
+	if ck1c<ck2c :
+		print ck1c
+	else :
+		print ck2c

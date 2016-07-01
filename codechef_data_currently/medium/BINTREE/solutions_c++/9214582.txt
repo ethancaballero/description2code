@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t,n,m,a,b,c1,c2,sum;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d",&n,&m);
+		a=n;
+		b=m;
+		sum=c1=c2=0;
+		while(a)
+		{
+			a=a>>1;
+			c1++;
+		}
+		while(b)
+		{
+			b=b>>1;
+			c2++;
+		}
+		a=n;
+		b=m;
+		if(c1>c2)
+		a=a>>(c1-c2);
+		else if(c2>c1)
+		b=b>>(c2-c1);
+		sum+=(abs(c1-c2));
+		while(a!=b)
+		{
+			sum+=2;
+			a=a>>1;
+			b=b>>1;
+		}
+		printf("%d
+",sum);
+	}
+	return 0;
+}

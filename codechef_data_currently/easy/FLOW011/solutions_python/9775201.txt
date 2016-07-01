@@ -1,0 +1,9 @@
+a=input()
+for i in range(a):
+	b=input()
+	if b<1500:
+		sal=b+(0.1*b)+(0.9*b)
+		print "%g"%sal
+	else:
+		sal=b+500+(0.98*b)
+		print "%g"%sal

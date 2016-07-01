@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+unsigned int gcd(unsigned int a,unsigned int b)
+{
+	if(a < b) return gcd(b,a);
+	if(0 == b) return a;
+	if(1 == b) return 1;
+	return gcd(b,a%b);
+}
+
+int main()
+{
+	unsigned int nCases = 0;scanf("%d",&nCases);
+	for(unsigned int iCases = 1;iCases <= nCases;++iCases)
+	{
+		unsigned int n = 0,m = 0;scanf("%d%d",&n,&m);
+		unsigned int d = gcd(n,m);
+		if(1 == d) printf("Yes
+");
+		else printf("No %u
+",n/d);
+	}
+	return 0;
+}

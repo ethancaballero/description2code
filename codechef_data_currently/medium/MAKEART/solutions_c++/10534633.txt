@@ -1,0 +1,37 @@
+    #include <iostream>
+    #include<stdio.h>
+    using namespace std;
+    int main() {
+    int t, n , arr[100001];
+    scanf("%d",&t);
+    while(t--)
+    {
+       
+    	scanf("%d",&n);
+       	for(int i=0;i<n;i++)
+    	scanf("%d",&arr[i]);
+    	int c=1,i;
+    if(n<3){printf("No
+");continue;}
+    for(i=1;i<n;i++)
+    {
+    if((c%3) == 0)
+    {printf("Yes
+");break;}
+    if(arr[i]==arr[i-1])c++;
+    else
+    c=1;
+    }
+   if(i==n)
+   {
+   if((c%3) == 0)
+    printf("Yes
+");
+   else 
+    printf("No
+");
+   }
+    
+    }
+    	return 0;
+    } 

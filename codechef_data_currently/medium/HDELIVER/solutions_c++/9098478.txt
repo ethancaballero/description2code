@@ -1,0 +1,71 @@
+	#include<iostream>
+	#include<list>
+	#include<stdio.h>
+	using namespace std;
+	list<int> mylist[105];
+	int visited[105];
+	int color[105];
+	int assigncolor;
+	void dfs(int node)
+	{
+	//	if(visited[node]==0)
+		{
+			visited[node]=1;
+			color[node]=assigncolor;
+			for(list<int>::iterator it=mylist[node].begin();it!=mylist[node].end();it++)
+			{	
+				if(visited[*it]==0)
+					dfs(*it);
+			}	
+		}	
+	}	
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			
+			int n,m;
+			int x,y;
+			assigncolor=1;
+			scanf("%d%d",&n,&m);
+			
+			for(int i=0;i<101;i++)
+			{
+				mylist[i].clear();
+				visited[i]=0;
+				color[i]=0;
+			}
+			
+			for(int i=0;i<m;i++)
+			{
+				scanf("%d%d",&x,&y);
+				mylist[x].push_back(y);
+				mylist[y].push_back(x);
+			}	
+			for(int i=0;i<n;i++)
+			{	
+				if(visited[i]==0)
+				{
+					dfs(i);
+					assigncolor++;
+				}
+			}
+			int q;
+			scanf("%d",&q);
+			for(int i=0;i<q;i++)
+			{
+				scanf("%d%d",&x,&y);
+				if(color[x]==color[y])
+					printf("YO
+");
+				else
+					printf("NO
+");
+			}	
+			t--;
+
+		}	
+
+	}

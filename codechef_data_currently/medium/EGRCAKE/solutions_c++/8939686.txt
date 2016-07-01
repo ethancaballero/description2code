@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+long long gcd(long long a,long long b)
+{
+	if(a%b==0)
+	return b;
+
+	else return gcd(b,a%b);
+}
+int main()
+{
+long long n,m,t,i;
+cin>>t;
+while(t--)
+{
+cin>>n>>m;
+if(n==1)
+{
+cout<<"Yes"<<endl;
+continue;
+}
+if(m==n || m==0){ cout<<"No 1"<<endl;
+continue;
+}
+long long p=gcd(m,n);
+if(p!=1)
+{
+cout<<"No "<<n/p<<endl;
+continue;
+}
+cout<<"Yes"<<endl;
+}
+return 0;
+}

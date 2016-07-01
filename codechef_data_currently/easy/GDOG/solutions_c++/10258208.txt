@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int N,K,n,l,t,T,k,m;
+cin>>T;
+for(t=1;t<=T;t++)
+{
+cin>>N>>K;
+m=0;
+for(k=1;k<=K;k++)
+{
+n=N/k;
+l=N-(n*k);
+if(l>m)
+{
+m=l;
+}
+}
+cout<<m<<endl;
+}
+return 0;
+}

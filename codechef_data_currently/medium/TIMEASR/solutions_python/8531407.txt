@@ -1,0 +1,21 @@
+def format(h,m):
+	if (h<10):
+		h="0"+str(h)
+	else:
+		h=str(h)
+	if (m<10):
+		m="0"+str(m)
+	else:
+		m=str(m)	
+	return h+":"+m
+for t in xrange(int(raw_input())):
+	a=float(raw_input())
+	for i in xrange(12):
+		for j in xrange(60):
+			da=abs(30*i-5.5*j)
+			#print (a-1.0/120),da,(a+1.0/120),da>=(a-1.0/120),da<=(a+1.0/120),da>=(a-1.0/120) and da<=(a+1.0/120)format (i,j)
+	        	if (da>=(a-1.0/120) and da<=(a+1.0/120)):
+	        		print format(i,j)
+	           	if (da>=360-a-(1.0/120) and  da<=360-a+(1.0/120) and da!=a):
+	           		print format(i,j)
+            

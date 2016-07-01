@@ -1,0 +1,18 @@
+import sys
+def paint(s):
+	n,m,h = map(int,s.split())
+	topaint,cost = n*m,0
+	param = []
+	for i in xrange(h):
+		tk,ck = map(int,sys.stdin.readline().split())
+		param.append([tk,ck])
+	param =  sorted(param,key = lambda x: x[1])
+	for i in xrange(h):
+		canpaint = min(topaint,param[i][0])
+		cost += (param[i][1]*canpaint)
+		topaint -= canpaint
+	if topaint > 0:
+		print 'Impossible'
+	else:
+		print cost
+paint(sys.stdin.readline())

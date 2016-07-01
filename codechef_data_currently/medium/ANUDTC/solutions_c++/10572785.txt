@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#define S(n) scanf("%li",&n);
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%d
+",n);
+using namespace std;
+int main()
+{
+    int t;
+    s(t)
+    while(t--)
+    {
+        int n;
+        s(n)
+        if(360%n==0)
+            printf("y ");
+        else
+         printf("n ");
+        if(360>=n)
+            printf("y ");
+        else
+         printf("n ");
+
+        if(360>=(n*(n+1))/2)
+            printf("y ");
+        else
+         printf("n ");
+        printf("
+");
+    }
+    return 0;
+}

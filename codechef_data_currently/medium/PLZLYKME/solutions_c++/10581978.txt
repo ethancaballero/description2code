@@ -1,0 +1,27 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int l,d,s,c;
+        cin>>l>>d>>s>>c;
+       long long int sum=s;
+        for(int i=1;i<d;i++)
+        {
+            sum=sum*(1+c);
+            if(sum>=l)
+                break;
+        }
+       // cout<<sum<<endl;
+        if(sum<l)
+            cout<<"DEAD AND ROTTING"<<endl;
+        else
+            cout<<"ALIVE AND KICKING"<<endl;
+
+    }
+}
+

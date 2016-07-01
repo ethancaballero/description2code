@@ -1,0 +1,9 @@
+for _ in range(input()):
+    n,k=map(int,raw_input().split())
+    #a=map(int,raw_input().split())
+    s=n*(n+1)/2
+    s+=1
+    if s&1:
+        print 'Chef'
+    else:
+        print 'Mom'

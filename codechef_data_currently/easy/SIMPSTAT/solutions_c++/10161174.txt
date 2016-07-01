@@ -1,0 +1,25 @@
+/* coder: Anh Tuan Nguyen */
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+#ifdef gsdt
+    freopen("input.txt","r",stdin);
+#endif // gsdt
+
+    int T;
+    cin>>T;
+    for(int qq=0; qq<T; qq++)
+    {
+        int n,k,a[10005];
+        scanf("%d%d",&n, &k);
+        for(int i=0; i<n; i++) scanf("%d",a+i);
+        sort(a,a+n);
+        double res=0;
+        for(int i=k; i<n-k; i++) res+=a[i];
+        printf("%0.9f
+",res/(n-2*k));
+    }
+    return 0;
+}

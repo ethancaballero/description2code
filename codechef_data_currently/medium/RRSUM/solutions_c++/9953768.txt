@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int n,q;
+    cin>>n>>q;
+    while(q--)
+    {
+        long long int num;
+        cin>>num;
+        if(num>=n+2 && num<=3*n)
+        {
+            if(num<=(n+2+(3*n))/2)
+            {
+                long long int x=num-n-2;
+                cout<<x+1<<endl;
+            }
+            else
+               {
+
+                long long int x=(3*n)-num;
+                cout<<x+1<<endl;
+               }
+        }
+        else
+            cout<<0<<endl;
+    }
+}

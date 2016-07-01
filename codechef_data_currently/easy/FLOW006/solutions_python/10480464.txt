@@ -1,0 +1,8 @@
+testCases = int(raw_input())
+for x in xrange(testCases):
+	num = int(raw_input())
+	tot = 0
+	while num > 0:
+		tot += num % 10
+		num /= 10
+	print tot

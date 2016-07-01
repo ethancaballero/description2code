@@ -1,0 +1,84 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+long long int arr[1000001];
+long long int tree[4000001];
+void create_tree(int lo, int hi, int idx)
+{
+    if(lo == hi)
+        tree[idx] = arr[lo];
+    else
+    {
+        int mid = (lo + hi)/2;
+        create_tree(lo, mid, 2*idx + 1);
+        create_tree(mid+1, hi, 2*idx + 2);
+        tree[idx] = tree[2*idx + 1] + tree[2*idx + 2];
+    }
+}
+long long int query(int lo, int hi, int left, int right, int node)
+{
+    if( (right < lo) || (left > hi) )
+        return 0;
+
+    if( (left <= lo ) && (hi <= right) )
+        return tree[node];
+
+    int mid = (lo + hi)/2;
+    long long int p1 = query(lo, mid, left, right, 2*node + 1);
+    long long int p2 = query(mid+1, hi, left, right, 2*node + 2);
+    return p1 + p2;
+}
+void update(int lo, int hi, int idx, int val, int node)
+{
+    if(lo == hi)
+    {
+        tree[node] += 1ll*val;
+        arr[lo] += 1ll*val;
+    }
+    else
+    {
+        int mid = (lo + hi)/2;
+        if( (lo <= idx) && (idx <= mid))
+            update(lo, mid, idx, val, 2*node+1);
+        else
+            update(mid+1, hi, idx, val, 2*node+2);
+        tree[node] = tree[node*2+1] + tree[node*2+2];
+    }
+}
+int main()
+{
+   int q,n;
+   scanf("%d%d",&n,&q);
+   for(int i=0; i<n; i++)
+    scanf("%d",&arr[i]);
+   create_tree(0,n-1,0);
+//   for(int i=0; i<2*n; i++)
+//    printf("%d ",tree[i]);
+   for(int i=0; i<q; i++)
+   {
+       char s;
+       int a,b;
+//       getchar();
+//       scanf("%c%d%d",&s,&a,&b);
+       //printf("%c %d %d
+",s,a,b);
+       cin>>s>>a>>b;
+       if(s == 'S')
+       {
+           long long int ans = query(0,n-1,a,b,0);
+           printf("%lld
+",ans);
+       }
+       else if(s == 'G')
+        {
+            update(0,n-1,a,b,0); //give
+//            for(int i=0; i<2*n; i++)
+//                printf("%d ",tree[i]);
+//            printf("
+");
+        }
+        else
+            update(0,n-1,a,(-1)*b,0); //take
+   }
+   return 0;
+}

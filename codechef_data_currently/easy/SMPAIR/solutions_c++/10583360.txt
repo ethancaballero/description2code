@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int f1=0,t,sum,n,m,no,x;
+    while(f1==0)
+    {
+        cin>>t;
+        if(t>=1 && t<=100000)
+                f1=1;
+    }
+    while(t--)
+    {
+        f1=0;m=0;n=0;
+        while(f1==0)
+        {
+            cin>>no;
+            if(no>=1 && no<=100000)
+                f1=1;
+        }
+        while(no--)
+        {
+            cin>>x;
+            if(m==0)
+               m=x;
+            else if(n==0)
+            {
+                if(m<=x)
+                    n=x;
+                else
+                {
+                    n=m;
+                    m=x;
+                }
+            }
+            else
+            {
+                if(x<=m)
+                {
+                    n=m;
+                    m=x;
+                }
+                else if(x<=n)
+                     n=x;
+
+            }
+        }
+        sum=n+m;
+        cout<<sum<<endl;
+    }
+    return 0;
+}

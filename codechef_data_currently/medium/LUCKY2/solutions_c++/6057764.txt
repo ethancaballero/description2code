@@ -1,0 +1,147 @@
+/* Supto
+   Dept. Of CSE
+   University Of Dhaka
+*/
+//#include<bits/stdc++.h>
+#include <cstdio>
+#include <sstream>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <algorithm>
+#include <set>
+#include <queue>
+#include <stack>
+#include <list>
+#include <iostream>
+#include <fstream>
+#include <numeric>
+#include <string>
+#include <vector>
+#include <cstring>
+#include <map>
+#include <iterator>
+
+#define pb push_back
+#define ins insert
+#define ff first
+#define ss second
+#define ll long long int
+#define llu long long unsigned
+#define sss stringstream
+#define oss ostringstream
+#define iss istringstream
+#define pii pair<int,int>
+#define _sq(x) ((x)*(x))
+#define lcm(a,b) ((a)*((b)/gcd(a,b)))
+#define mem(a) memset(a,0,sizeof(a))
+#define _set(a) memset(a,-1,sizeof(a))
+#define popcount(n) __builtin_popcount(n)
+#define popcountl(n) __builtin_popcountll(n)
+#define ctz(x) __builtin_ctz(x) //number of trailing zeroes in a digit
+#define ctzl(x) __builtin_ctzll(x)
+#define clz(x) __builtin_clz(x)
+#define clzl(x) __builtin_clzll(x) //number of leading zeroes in a digit
+//If Long Long (mask & (1LL << k))
+#define check(mask, k) (mask & (1 << k))
+#define set1(mask, k) (mask | (1 << k))
+#define set0(mask ,k) (mask & (~(1<<k)))
+#define READ(f) freopen(f, "r", stdin)
+#define WRITE(f) freopen(f, "w", stdout)
+
+using namespace std;
+#define pi acos(-1.0)
+#define inf (1<<30)
+#define eps 1e-9
+#define MAX 100005
+#define MAXL 15
+
+const ll mod = 1000000007;
+//int dx[] = {0,0,1,-1};
+//int dy[] = {1,-1,0,0};
+//int dx[] = {-1,-1,-1,0,0,1,1,1};
+//int dy[] = {-1,0,1,-1,1,-1,0,1};
+char L[1005], R[1005], num[1005];
+int l, lucky[1005];
+ll dp[1005][800][2];
+bool vis[1005][800][2];
+void gen()
+{
+    for(int i = 4; i <= 777; i++)
+    {
+        int j = i;
+        while(j)
+        {
+            if(j%10 != 4 && j%10 != 7) break;
+            j /= 10;
+        }
+        if(j == 0) lucky[i] = 1;
+    }
+}
+ll call(int pos, int cnt, int flag)
+{
+    if(pos == l) return (ll) lucky[cnt];
+    if(cnt > 777) return 0;
+    if(vis[pos][cnt][flag]) return dp[pos][cnt][flag];
+    int finish;
+    ll ret = 0;
+    if(flag == 0)
+    {
+        finish = num[pos] - 48;
+        if(finish <= 4)
+        {
+            if(finish > 0) ret = (finish*call(pos+1, cnt, 1));
+            ret = (ret + call(pos+1, cnt + (finish == 4), 0));
+        }
+        else if(finish <= 7)
+        {
+            ret = ((finish-1)*call(pos+1, cnt, 1));
+            ret = (ret + call(pos+1, cnt+1, 1));
+            ret = (ret + call(pos+1, cnt + (finish == 7), 0));
+        }
+        else
+        {
+            ret = (2*call(pos+1, cnt+1, 1));
+            ret = (ret + (finish-2)*call(pos+1, cnt, 1));
+            ret = (ret + call(pos+1, cnt, 0));
+        }
+    }
+    else
+    {
+        ret = ((2*call(pos+1, cnt+1, 1)) + (8*call(pos+1, cnt, 1)));
+    }
+    vis[pos][cnt][flag] = 1;
+    return dp[pos][cnt][flag] = ret % mod;
+}
+int main()
+{
+    //READ("input.txt");
+    //WRITE("output.txt");
+    //ios_base::sync_with_stdio(false);
+    int tcase, l1, l2, i;
+    gen();
+    scanf("%d", &tcase);
+    while(tcase--)
+    {
+        scanf("%s %s", L, R);
+        l1 = strlen(L);
+        l2 = strlen(R);
+        strcpy(num, R);
+        l = l2;
+        mem(vis);
+        ll ans = call(0, 0, 0);
+        strcpy(num, L);
+        l = l1;
+        mem(vis);
+        ans = (ans - call(0, 0, 0) + mod) % mod;
+        int cnt = 0;
+        for(i = 0; i < l1; i++)
+        {
+            if(L[i]-48 == 4 || L[i]-48 == 7) cnt++;
+        }
+        ans = (ans + lucky[cnt]) % mod;
+        printf("%lld
+", ans);
+    }
+    return 0;
+}

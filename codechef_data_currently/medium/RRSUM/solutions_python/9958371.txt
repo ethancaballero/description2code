@@ -1,0 +1,10 @@
+n, m = map(int, raw_input().split())
+for i in range(m):
+    q = int(raw_input())
+    l = q-n-2
+    r = 3*n-q
+    if(l < 0 or r < 0):
+        print 0
+    else:
+        ans = 1+min(l, r)
+        print ans

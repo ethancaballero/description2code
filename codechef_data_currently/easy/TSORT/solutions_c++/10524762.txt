@@ -1,0 +1,32 @@
+//#include<iostream>
+#include<stdio.h>
+#include<set>
+#include<iterator>
+using namespace std;
+
+int main(){
+
+    int n,i;
+    //cin>>n;
+    scanf("%d",&n);
+
+    multiset<int> s;
+
+    for(i=0;i<n;i++){
+        int temp;
+        //cin>>temp;
+        scanf("%d",&temp);
+        s.insert(temp);
+
+    }
+
+    multiset<int>::iterator it;
+
+    for(it=s.begin();it!=s.end();it++)
+        //cout<<*it<<endl;
+        printf("%d
+",*it);
+
+
+
+}

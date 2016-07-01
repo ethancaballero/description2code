@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+int a[1005][1005];
+int main() {
+	int test;
+	std::ios::sync_with_stdio(false);
+	cin>>test;
+	int n,m, rmin, cmin, rmax, cmax;
+	while(test--)
+	{
+		cin>>n>>m;
+		
+		rmin=9999, cmin=9999, rmax=-1, cmax=-1;
+		char c[m+1];
+		for(int i=0; i<n; i++)
+		{	cin>>c;
+			for(int j=0;j<m;j++)
+			{
+				if(c[j]=='.')
+				a[i][j]=0;
+				else
+				{
+					a[i][j]=1;
+					if(rmin>i)
+						rmin=i;
+					if(cmin>j)
+						cmin=j;
+					if(rmax<i)
+						rmax=i;
+					if(cmax<j)
+						cmax=j;
+				}
+			}
+		}
+			//cout<<rmin<<" "<<rmax<<" "<<cmin<<" "<<cmax<<" "<<endl;
+			if(rmin==9999 && rmax==-1 && cmin==9999 && cmax==-1)
+			cout<<"0"<<endl;
+			else
+			cout<<max((rmax-((rmax+rmin)/2)),(cmax-((cmax+cmin)/2)))+1<<endl;
+	
+	}
+	
+	// your code goes here
+	return 0;
+}

@@ -1,0 +1,15 @@
+n,m = [int(i) for i in raw_input().split()]
+
+arr = [int (i) for i in raw_input().split()]
+
+i = 0
+sep = 0
+while i < m:
+	direc, numb = raw_input().split()
+	if direc == "C":
+		sep += int(numb)
+	elif direc == "A":
+		sep -= int(numb)
+	else:
+		print arr[ (int(numb)+sep)%n - 1]
+	i += 1

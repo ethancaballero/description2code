@@ -1,0 +1,118 @@
+#include<iostream>
+#include<stdlib.h>
+#include<list>
+#define MOD 1000000007;
+using namespace std;
+long long int size;
+struct node
+{
+	long int value;
+	struct node* next;
+};
+struct node* newnode(long int i)
+{
+	struct node* newnode=(struct node*)malloc(sizeof(struct node));
+	newnode->value=i;
+	newnode->next=NULL;
+}
+void insert(struct node* root,long int n)
+{
+	struct node*  newnode1=newnode(n);
+	struct node* save=root;
+	while(save->next!=NULL)
+	save=save->next;
+	save->next=newnode1;
+}
+void DFS(bool visited[],list<long int> adj[],long int n)
+{
+//	cout<<n;
+	visited[n]=true;
+	size++;
+	list<long int>::iterator it;
+	for(it=adj[n].begin();it!=adj[n].end();it++)
+	{
+		if(!visited[*it])
+		DFS(visited,adj,*it);
+	}
+	
+//	struct node* save=a[n];
+//	save=save->next;
+////	cout<<save->value;
+//  //   cout<<visited[0]<<" "<<visited[1];
+//    while(save!=NULL)
+//     {
+//	if(!visited[(save->value-1)])
+//	DFS(visited,a,(save->value-1));
+//	save=save->next;
+//}
+//	while(save!=NULL)
+//	{
+//		if(!visited[(save->value-1)]);
+//		DFS(visited,a,(save->value-1));
+//		save=save->next;		
+//	}
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long int n,m;
+		cin>>n>>m;
+		list<long int> adj[n];
+//		struct node *a[n];
+	//	for(long int i=0;i<n;i++)
+	//	{
+	//		a[i]=newnode(i+1);
+	//	}
+		for(long int k=0;k<m;k++)
+		{
+			long int i,j;
+			cin>>i>>j;
+			adj[i-1].push_back(j-1);
+			adj[j-1].push_back(i-1);
+	//		insert(a[i-1],j);
+	//		insert(a[j-1],i);
+		}
+//		for(long int i=0;i<n;i++)
+//		{
+//			struct node* save=a[i];
+//			while(save!=NULL)
+//			{
+//				cout<<save->value<<"->";
+//				save=save->next;
+//			}
+//			cout<<"
+";
+//		}
+//for(long int i=0;i<n;i++)
+//{
+//		list<long int>::iterator it;
+//	for(it=adj[i].begin();it!=adj[i].end();it++)
+//	{
+//		cout<<*it<<" ";
+//	}
+//	cout<<"
+";
+//	
+//}
+		bool visited[n];
+		for(long int i=0;i<n;i++)
+		visited[i]=false;
+		long int count=0,ans=1;
+	//	DFS(visited,a,0);
+	    for(long int i=0;i<n;i++)
+	    {
+	    	if(!visited[i])
+	    	{
+	    		size=0;
+	    		DFS(visited,adj,i);
+	    		ans=(ans*size)%MOD;
+	    		count++;
+			}
+		}
+		cout<<count<<" "<<ans<<"
+";
+	}
+}

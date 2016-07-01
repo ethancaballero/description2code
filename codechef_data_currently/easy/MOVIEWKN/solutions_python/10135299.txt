@@ -1,0 +1,21 @@
+t = input()
+for i in range(t):
+    num = input()
+    l = map(int,raw_input().split())
+    r = map(int,raw_input().split())
+    product = []
+    for j in range(num):
+        product.append(l[j]*r[j])
+    max_product = max(product)
+    if(product.count(max_product)>1):
+        max_ri = max(r)
+        if(r.count(max_ri)>1):
+            index = r.index(max_ri)
+            print index+1
+        else:
+            index = r.index(max_ri)
+            print index+1
+            
+    else:
+        index = product.index(max_product)
+        print index+1

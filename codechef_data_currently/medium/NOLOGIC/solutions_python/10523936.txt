@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t ,i;
+	cin >> t;
+
+	string str;
+	getline(cin,str);
+	for(i=0; i<t; i++){
+	
+		getline(cin, str);
+		bool test = false;
+
+		char ch;
+				
+		for(ch = 'a'; ch <='z'; ch++){
+		
+			size_t found = str.find(ch);
+			size_t found1 = str.find(toupper(ch));
+			if(found==string::npos && found1 == string::npos){
+				cout <<ch<<endl;
+				test = true;
+				break;
+			}
+		}
+		
+		if(test == false){
+			cout <<"~"<<endl;
+		}
+		
+		//cout << endl;
+	}
+}

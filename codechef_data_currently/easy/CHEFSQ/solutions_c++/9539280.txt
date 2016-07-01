@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,f,t,*a,*s,i,j;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		a = new int[n];
+		for(i=0;i<n;i++)
+			cin>>a[i];
+		cin>>f;
+		s = new int[f];
+		for(i=0;i<f;i++)
+			cin>>s[i];
+		j = 0;
+		for(i=0;i<n;i++)
+		{
+			if(a[i]==s[j])
+				j++;
+			if(j==f)
+				break;
+		}
+		if(j==f)
+			cout<<"Yes";
+		else
+			cout<<"No";
+		cout<<endl;
+	}
+	return 0;
+}

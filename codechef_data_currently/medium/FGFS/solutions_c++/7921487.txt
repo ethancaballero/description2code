@@ -1,0 +1,59 @@
+#include<iostream>
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+struct timing{
+	long long int s, f, p;
+};
+
+bool operator<(timing const &a,timing const &b)
+{
+    return(a.p!=b.p)?(a.p<b.p):(a.f<b.f);
+}
+
+int main() {
+	int T;
+	long long int N, K;
+	long long int i, s, f, p, ans, table, finish;
+	scanf("%d", &T);
+	while(T--) {
+		scanf("%llu %llu", &N, &K);
+		
+		timing T[N];
+		
+		for(i = 0; i < N; ++i) 
+			scanf("%llu %llu %llu", &T[i].s, &T[i].f, &T[i].p);
+
+		if(N == 0 || N == 1) {
+			printf("%llu
+", N);
+			continue;
+		}
+		
+		sort(T, T + N);
+		
+		ans = 1;
+		table = T[0].p;
+		finish = T[0].f;
+		for(i = 1; i< N; ++i) {
+			if(T[i].p == table) {
+				if(T[i].s >= finish) {
+					finish = T[i].f;
+					++ans;
+				}
+			}	
+			else {
+				table = T[i].p;
+				finish = T[i].f;
+				++ans;
+			}
+		}
+		
+		printf("%llu
+", ans);
+			
+	}
+}

@@ -1,0 +1,38 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+    long long int test_cases,z=0,n,ln;
+    cin>>test_cases;
+    int answer[test_cases-1];
+    for(int i=0;i<test_cases;i++){
+        cin>>  n;
+	z=0;
+        int a[n-1],b[n-1];
+        for(int j=0;j<n;j++)
+        {
+		cin>>a[j];
+        	ln=a[j];
+        	a[j]=a[j]-z;
+        	z=ln;
+        }
+        for(int j=0;j<n;j++)
+        {
+		cin>>b[j];
+        }
+        z=0;
+        for ( int k=0;k<n;k++)
+	{
+            if(b[k]<=a[k])
+	    {
+            	z=z+1;
+	    }
+        }
+	answer[i]=z; 
+    }
+    for(int x=0;x<test_cases;x++)
+    cout<<answer[x]<<"
+";
+}
+ 

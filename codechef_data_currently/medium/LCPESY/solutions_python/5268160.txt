@@ -1,0 +1,27 @@
+
+tests=int(raw_input())
+for t in range(tests):
+	A=raw_input()
+	B=raw_input()
+
+	def make_dict(A):
+		dict={}
+		for c in A:
+			if c in dict.keys():
+				dict[c]=dict[c]+1
+			else:
+				dict[c]=1
+		return dict
+
+	def get_longest_common_pattern_length(dict,B):
+		ans=0
+		for c in B:
+			if c in dict.keys():
+				if dict[c] !=0:
+					ans=ans+1
+					dict[c]=dict[c]-1
+				else:
+					continue
+		return ans
+
+	print get_longest_common_pattern_length(make_dict(A),B)

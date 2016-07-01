@@ -1,0 +1,60 @@
+#include<stdio.h>
+using namespace std;
+int main()
+{
+    bool f;
+    int t,r,c,j,i;
+    char temp[101],m[100][100];
+    scanf("%d",&t);
+    while(t--)
+    {
+        f=0;
+        scanf("%d%d",&r,&c);
+        for(i=0;i<r;++i)
+        {
+            scanf("%s",temp);
+            for(j=0;j<c;++j)
+                m[i][j]=temp[j];
+        }
+        for(i=0;i<r;++i)
+        {
+            for(j=0;j<c-4;++j)
+            {
+                if((m[i][j]=='S' || m[i][j]=='s') && (m[i][j+1]=='P' || m[i][j+1]=='p')  && (m[i][j+2]=='O' || m[i][j+2]=='o') && (m[i][j+3]=='O' || m[i][j+3]=='o') && (m[i][j+4]=='N' || m[i][j+4]=='n'))
+                {
+                    f=1;
+                    i=101;
+                    break;
+                }
+            }
+        }
+        if(f)
+        {
+            printf("There is a spoon!
+");
+            continue;
+        }
+        else
+        {
+            for(i=0;i<r-4;++i)
+            {
+                for(j=0;j<c;++j)
+                {
+                    if((m[i][j]=='S' || m[i][j]=='s') && (m[i+1][j]=='P' || m[i+1][j]=='p')  && (m[i+2][j]=='O' || m[i+2][j]=='o') && (m[i+3][j]=='O' || m[i+3][j]=='o') && (m[i+4][j]=='N' || m[i+4][j]=='n'))
+                    {
+                        f=1;
+                        i=101;
+                        break;
+                    }
+                }
+            }
+        }
+        if(f)
+            printf("There is a spoon!
+");
+        else
+            printf("There is indeed no spoon!
+");
+    }
+    return 0;
+}

@@ -1,0 +1,64 @@
+#include<cstdio>
+#include<iostream>
+#include<map>
+#include<vector>
+#include<math.h>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    map<string,pair<string,int> >m;
+    vector<string>temp,v;
+    map<string,int>x;
+    map<string,int>::iterator j;
+    int t,cost,total,i,n,num;
+    string city1,city2,start;
+    scanf("%d",&t);
+    while(t--)
+    {
+
+       scanf("%d",&n);num=n;total=0,cost=0;
+       while(--n)
+       {
+        cin>>city1>>city2;
+        scanf("%d$",&cost);
+        m[city1]= make_pair(city2,cost);
+        temp.push_back(city1);
+        //v.push_back(city2);
+        x[city2]=1;
+        total+=cost;
+       }
+       for(i=0;i<num-1;i++)
+       {
+          if(x[temp[i]]!=1)
+           {
+            start=temp[i];
+            break;
+           }
+        }
+        for(i=0;i<num-1;i++)
+        {
+            cout<<start+" "<<m[start].first+" "<<m[start].second<<"$"<<endl;
+            start=m[start].first;
+        }
+        cout<<total<<"$"<<endl;
+        v.clear();
+        temp.clear();
+        m.clear();
+        x.clear();
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

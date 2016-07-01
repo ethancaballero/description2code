@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    char *array=new char[1000002];
+    array[0]='3';
+    array[1]='.';
+    int remainder=103993%33102;
+    for(int i=2;i<=1000001;i++){
+        remainder=remainder*10;
+        array[i]=(char)((remainder/33102)+48);
+        remainder=remainder%33102;
+    }
+    while(t--){
+        long long n;
+        cin>>n;
+        string s="3.";
+        if(n==0){
+            cout<<3<<endl;
+        }
+        else{
+            for(int i=0;i<=n+1;i++){
+                cout<<array[i];
+            }
+            cout<<endl;
+            
+        }
+        
+    }
+}

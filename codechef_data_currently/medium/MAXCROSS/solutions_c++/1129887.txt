@@ -1,0 +1,150 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * 
+ */
+ 
+ #include <cstdio>
+#include <iostream>
+#include <cmath>
+#include <queue>
+#include <algorithm>
+#include <set>
+#include <map>
+#include <sstream>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <ctime>
+int arr[1000][1000][4];
+  int main()
+    {
+        
+
+        int a1=0;
+        scanf("%d",&a1);
+       
+       
+       memset(arr,0,a1*a1*4*sizeof(int));
+       char s[a1][a1]; 
+        for(int i=0;i<a1;i++)
+        {
+
+           scanf("%s",s[i]);
+          }
+          int i=0,j=0,g=0,l=0;
+       for( i=0;i<a1;i++)
+        {
+          for( j=0;j<a1;j++)
+        {
+              if(s[i][j]=='X')
+              {
+                  arr[i][j][0]=1;
+                  arr[i][j][1]=1;
+                  arr[i][j][2]=1;
+                  arr[i][j][3]=1;
+                  if(i-1>=0&&j+1<a1)
+                  {
+                      if(arr[i-1][j+1][3]>1)
+                          arr[i][j][3]=arr[i-1][j+1][3];
+                  }
+                  if(i-1>=0&&j-1>=0)
+                  {
+                      if(arr[i-1][j-1][1]>1)
+                          arr[i][j][1]=arr[i-1][j-1][1];
+                  }
+                  if(j-1>=0)
+                  {
+                      if(arr[i][j-1][2]>1)
+                          arr[i][j][2]=arr[i][j-1][2];
+                  }
+                  if(i-1>=0)
+                  {
+                      if(arr[i-1][j][0]>1)
+                          arr[i][j][0]=arr[i-1][j][0];
+                  }
+                  if(arr[i][j][0]==1)
+                  {
+                      for( g=i+1;g<a1;g++)
+                      {
+                          if(s[g][j]=='X')
+                              arr[i][j][0]++;
+                          else
+                              break;
+
+                      }
+                  }
+                  if(arr[i][j][1]==1)
+                  {
+                      for( g=i+1,l=j+1;g<a1&&l<a1;g++,l++)
+                      {
+                          if(s[g][l]=='X')
+                              arr[i][j][1]++;
+                          else
+                              break;
+
+                      }
+                  }
+                  if(arr[i][j][2]==1)
+                  {
+                      for( g=j+1;g<a1;g++)
+                      {
+                          if(s[i][g]=='X')
+                              arr[i][j][2]++;
+                          else
+                              break;
+
+                      }
+                  }
+                  if(arr[i][j][3]==1)
+                  {
+                      for( g=i+1,l=j-1;g<a1&&l>=0;g++,l--)
+                      {
+                          if(s[g][l]=='X')
+                              arr[i][j][3]++;
+                          else
+                              break;
+
+                      }
+                  }
+
+              }
+          }
+
+}
+       for( i=0;i<a1;i++)
+        {
+          for( j=0;j<a1;j++)
+        {
+              int large=0;
+              for( g=0;g<4;g++)
+                      {
+                  if(arr[i][j][g]>large)
+                      large=arr[i][j][g];
+              }
+        printf("%d ",large);
+            /*if(arr[i][j][0]>arr[i][j][1])
+            {
+                if(arr[i][j][0]>arr[i][j][2])
+                    System.out.print(arr[i][j][0]);
+                else
+                    System.out.print(arr[i][j][2]);
+
+
+            }
+ else
+            {
+                if (arr[i][j][1] > arr[i][j][2])
+         System.out.print(arr[i][j][1]);
+                else
+                    System.out.print(arr[i][j][2]);}*/
+          }printf("
+");}
+          
+   return 0;
+    }
+

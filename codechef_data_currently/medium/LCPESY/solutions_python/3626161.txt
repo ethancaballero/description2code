@@ -1,0 +1,10 @@
+t=int(raw_input())
+s=set('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+while t>0:
+	t-=1
+	s1=raw_input()
+	s2=raw_input()
+	coun=0
+	for e in s:
+		coun+=min(s1.count(e),s2.count(e))
+	print coun

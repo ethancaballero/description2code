@@ -1,0 +1,14 @@
+for _ in range(input()):
+        n = input()
+        if 360%n == 0:
+                print 'y',
+        else:
+                print 'n',
+        if n < 361:
+                 print 'y',
+        else:
+                print 'n',
+        if n*(n+1)/2 < 361:
+                print 'y'
+        else:
+                print 'n'

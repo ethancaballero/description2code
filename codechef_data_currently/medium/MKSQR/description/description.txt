@@ -1,0 +1,46 @@
+ Statement
+
+You are give a set of 2-d vectors (x,y) [ -10^8 \u2264 x,y \u2264 10^8, x \u2260 y ] of size n (1 \u2264 n \u2264 50000 ). Lets denote the ith vector as vi. 
+You are to determine if the following system of equations has a solution : 
+        a1*v1 + a2*v2 + a3*v3 + ... ai*v1 + ... an*vn = (k,k) for some arbitrary k.  
+All ai's are non-negative integers [ 0 \u2264 ai \u2264 10^16 ] and 
+ALL ai's CANNOT BE ZERO ;). 
+In other words, you need to find some linear combination of these vectors with positive coefficient such that you end up with a vector(a,b) with a=b. 
+
+
+Input
+
+First line of the input contains an integer t ( 1 \u2264 t \u2264 100 ) which denotes the number of test cases to follow. 
+For each test case, the first line contains n ( number of vectors in the set) . n lines follow, each containing a pair of space separated integers a and b which denote the vector(a,b). 
+
+
+Output
+
+Output should contain exactly t lines, with "YES" or "NO" ( without the quotes - see the sample test case for more details ).
+
+
+Sample Input
+
+2
+3
+0 1
+-1 0
+1 0
+
+4
+1 2
+10 -6
+-5 -1
+1 -1
+
+
+Sample Output
+
+YES
+YES
+
+
+Explanation
+
+Test case 1 : a1 = 0 , a2 = 1, a3 = 1. 
+Test case 2 : a1 = 2 , a2 = 0 , a3 = 1, a4 = 3.  

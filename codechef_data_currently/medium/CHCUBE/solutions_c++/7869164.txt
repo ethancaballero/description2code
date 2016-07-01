@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+int main()
+{
+	long long int t;
+	scanf("%lld",&t);
+	char a[8][1000];
+	for(long long int y = 0 ;y < t; y++)
+	{
+		scanf("%s",a[0]);
+		scanf("%s",a[1]);
+		scanf("%s",a[2]);
+		scanf("%s",a[3]);
+		scanf("%s",a[4]);
+		scanf("%s",a[5]);
+		if(!strcmp(a[0],a[4]) && !strcmp(a[4],a[2]))
+			cout << "YES
+";
+		else if(!strcmp(a[0],a[4]) && !strcmp(a[4],a[3]))
+			cout << "YES
+";
+		else if(!strcmp(a[1],a[4]) && !strcmp(a[4],a[3]))
+			cout << "YES
+";
+		else if(!strcmp(a[1],a[4]) && !strcmp(a[4],a[2]))
+			cout << "YES
+";
+		else if(!strcmp(a[0],a[5]) && !strcmp(a[5],a[2]))
+			cout << "YES
+";
+		else if(!strcmp(a[0],a[5]) && !strcmp(a[5],a[3]))
+			cout << "YES
+";
+		else if(!strcmp(a[5],a[1]) && !strcmp(a[5],a[3]))
+			cout << "YES
+";
+		else if(!strcmp(a[5],a[1]) && !strcmp(a[5],a[2]))
+			cout << "YES
+";
+		else
+			cout << "NO
+";
+	}	
+	return 0;
+}

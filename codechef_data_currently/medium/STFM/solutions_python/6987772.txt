@@ -1,0 +1,25 @@
+mfact=[0]
+def calcmfact(n,m):
+	x=1
+	lfact=1
+	fsum=0
+	while x<=n:
+			if x>m:
+				x=x%m
+			lfact=lfact*x
+			if lfact>m:
+				lfact=lfact%m
+			fsum=(fsum+(lfact*x))
+			if fsum>m:
+			   fsum=fsum%m
+			mfact.append(fsum)
+			x+=1
+n,m=map(int, raw_input().split())
+res=0
+pil=[]
+for x in raw_input().split():
+	pil.append(int(x)%m)
+calcmfact(max(pil),m)
+for x in pil:
+	res=(res+mfact[x]+(x*x*(x+1)/2)%m)%m
+print str(res) 

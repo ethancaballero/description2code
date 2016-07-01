@@ -1,0 +1,15 @@
+t = int(raw_input())
+for i in range(t):
+	directions = []
+	n = int(raw_input())
+	for d in range(n):
+		directions.append(raw_input())
+	d = len(directions)-1
+	while d >= 0:
+		if d == len(directions) - 1:
+			print "Begin on", " ".join(directions[d].split()[2:])
+		elif directions[d+1].split()[0] == "Left":
+			print "Right on", " ".join(directions[d].split()[2:])
+		else:
+			print "Left on", " ".join(directions[d].split()[2:])
+		d -= 1

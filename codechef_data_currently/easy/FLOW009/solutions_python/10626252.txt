@@ -1,0 +1,11 @@
+T=int(raw_input(""))
+
+for i in range(T):
+    q,p=map(int,raw_input().split())
+
+    if q>1000:
+        tot=0.9*q*p
+    else:
+        tot=q*p*1.0
+
+    print '%.6f' % tot

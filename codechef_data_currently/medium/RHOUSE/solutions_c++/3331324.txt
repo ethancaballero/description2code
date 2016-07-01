@@ -1,0 +1,149 @@
+
+#define TRACE
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <cstring>
+#include <sstream>
+#include <cmath>
+#include <climits>
+#include <cstdio>
+
+using namespace std;
+
+#ifdef TRACE
+#define trace1(x) cerr << #x << ": " << x << endl;
+#define trace2(x, y) cerr << #x << ": " << x << " | " << #y << ": " << y << endl;
+#define trace3(x, y, z) cerr << #x << ": " << x << " | " << #y << ": " << y << " | " << #z << ": " << z << endl;
+#define trace4(a, b, c, d) cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " << #d << ": " << d << endl;
+#define trace5(a, b, c, d, e) cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " << #d << ": " << d << " | " << #e << ": " << e << endl;
+#define trace6(a, b, c, d, e, f) cerr << #a << ": " << a << " | " << #b << ": " << b << " | " << #c << ": " << c << " | " << #d << ": " << d << " | " << #e << ": " << e << " | " << #f << ": " << f << endl;
+ 
+#else
+ 
+#define trace1(x)
+#define trace2(x, y)
+#define trace3(x, y, z)
+#define trace4(a, b, c, d)
+#define trace5(a, b, c, d, e)
+#define trace6(a, b, c, d, e, f)
+ 
+#endif
+
+typedef pair<int, int> pl;
+typedef pair<int, pl> pll;
+
+bool isres[1000009];
+int num;
+
+
+class him
+{
+	vector<int> id;
+	vector<int> sz;
+	public:
+		him(int n) {
+			id.resize(n+1);
+			sz.resize(n+1);
+			for (int i = 1; i <= n; i++) {
+				id[i] = i;
+				sz[i] = 1;
+			}
+		}
+
+		int root(int i)
+		{
+			while (id[i] != i) {
+				id[i] = id[id[i]];
+				i = id[i];
+			}
+			return i;
+		}
+
+		bool connected(int i, int j)
+		{
+			return root(i) == root(j);
+		}
+
+		void unionn(int i, int j)
+		{
+			i = root(i);
+			j = root(j);
+
+			if (sz[i] < sz[j]) {
+				sz[j] += sz[i];
+				id[i] = j;
+			}else {
+				sz[i] += sz[j];
+				id[j] = i;
+			}
+		}
+};
+
+
+
+int main()
+{
+	int test;
+	int n, m;
+
+	scanf("%d", &test);
+	
+	while (test--) {
+		
+		vector<pll> v;
+
+		string s;
+		scanf("%d%d", &n, &m);
+		cin >> s;
+
+		for (int i = 0; i < s.size(); i++) {
+			isres[i+1] = (s[i] == 'R') ? true : false;
+		}
+
+		int x, y, cost;
+		long long ans = 0;
+		him *ob = new him(n);
+
+		for (int i = 0; i < m; i++) {
+			scanf("%d%d%d", &x, &y, &cost);
+			v.push_back(pll(cost, pl(x,y)));
+		}
+
+		sort(v.begin(), v.end());
+		
+
+		for (int i = 0; i < m; i++) {
+			cost = v[i].first;
+			x = v[i].second.first;
+			y = v[i].second.second;
+			
+			x = ob->root(x);
+			y = ob->root(y);
+			
+
+			if (cost < 0) {
+				ans += cost;
+				ob->unionn(x, y);
+				isres[x] = isres[x] | isres[y];
+				isres[y] = isres[x] | isres[y];
+			}else if (x == y || (isres[x] && isres[y]) )
+				continue;
+			else {
+				ans += cost;
+				ob->unionn(x, y);
+				isres[x] = isres[x] | isres[y];
+				isres[y] = isres[x] | isres[y];
+
+			}
+		}
+
+		printf("%lld
+", ans);			
+	}
+
+	return 0;
+}

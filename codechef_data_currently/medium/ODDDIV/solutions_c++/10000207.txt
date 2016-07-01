@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,a[100009]={0},l,r,i,j;
+	for(i=0;i<100009;i++)
+	{
+		a[i]=1;
+	}
+	for(i=2;i<100009;i++)
+	{
+		if(i%2)
+		{
+			for(j=i;j<100009;j+=i)
+			{
+				a[j]+=i;
+			}
+		}
+	}
+	long long int ans;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d %d",&l,&r);
+		ans=0;
+		for(i=l;i<=r;i++)
+		{
+			ans+=a[i];
+		}
+		printf("%lld
+",ans);
+	}
+	return 0;
+}

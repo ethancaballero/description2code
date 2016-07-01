@@ -1,0 +1,157 @@
+#include <stdio.h>
+#include <string.h>
+#define mod 1000000007
+#define  ll long long int
+using namespace std;
+
+ll f[100005];
+
+void calc()
+{
+	 f[0]=f[1]=1;
+	 for (int i=2;i<100005;i++)
+	 f[i]=(f[i-1]*i)%mod;
+}
+
+ll pow(ll a)
+{
+	 ll y=a;ll x=1;ll z=mod-2;
+	 while (z>0)
+	 {
+	 	  if (z&1)
+	 	  x*=y;
+
+	 	  x%=mod;
+	 	  y*=y;
+	 	  y%=mod;
+	 	  z=z/2;
+	 }
+
+	 return x%mod;
+}
+
+ll inverse(ll a)
+{
+	 return pow(a);
+}
+
+ll coeff(ll n,ll r)
+{
+	  if (n<r)
+	  return 0;
+
+	  ll ret=f[n];
+
+	  ret=(ret*inverse(f[n-r]))%mod;
+	  ret=(ret*inverse(f[r]))%mod;
+
+	  return ret;
+}
+
+int main()
+{
+	 calc();
+
+	 int t;
+	 scanf("%d",&t);
+	 while (t--)
+	 {
+	      char s[100005];
+	      int a[26]={0};
+	      ll p[26]={0};
+	      scanf("%s",s);
+	      ll n=strlen(s);
+
+	      if (n==2)
+	      {
+	      	printf("0
+");
+	        continue;
+	      }
+
+	      for (ll i=0;i<n;i++)
+	      a[s[i]-'a']++;
+
+	      ll total=f[n];
+	      ll x=0;ll y=0;ll z=0;
+	      int count=0;
+	      for (int i=0;i<26;i++)
+	      {
+            total=(total*inverse(f[a[i]]))%mod;
+	      	for (int j=i+1;j<26;j++)
+                x=(x+(ll)((a[i]*a[j]))%mod)%mod;
+	      }
+
+	      ll tot=total;
+
+	      total=(total*total)%mod;
+	    //  printf("%lld
+",total);
+	      for (int i=0;i<26;i++)
+	      {
+	      	  for (int j=i+1;j<26;j++)
+	      	  {
+	      	  	 for (int k=j+1;k<26;k++)
+	      	  	 {
+	      	  	 	 for (int l=k+1;l<26;l++)
+                        y=(y+( (a[i]*a[j])%mod * (a[k]*a[l])%mod)%mod)%mod;
+	      	  	 	 	      //y=(y+(a[k]*a[l])%mod)%mod;
+
+	      	  	 	 }
+	      	  	 }
+	      	  }
+
+
+            y=(y*3)%mod;
+
+            for (int i=0;i<26;i++)
+            {
+                for (int j=0;j<26;j++)
+                {
+                    for (int k=j+1;k<26;k++)
+                    {
+                         if (i!=j&&i!=k &&a[i]){
+                         y=(y+((coeff(a[i],2)*a[j])%mod *  a[k])%mod)%mod;
+                         y=(y+((coeff(a[i],2)*a[j])%mod *  a[k])%mod)%mod;
+                         }
+                    }
+                }
+            }
+
+            for (int i=0;i<26;i++)
+            {
+                for (int j=i+1;j<26;j++)
+                {
+                      y=(y+(coeff(a[i],2)*coeff(a[j],2))%mod)%mod;
+                }
+            }
+	     //  y=(y*inverse(8))%mod;
+
+
+	      for (int i=0;i<26;i++)
+	      {
+	      	 for (int j=i+1;j<26;j++)
+	      	 {
+	      	 	 for (int k=j+1;k<26;k++)
+	      	 	 {
+
+	      	 	 	     z=(z+((ll)(a[i]*a[j])%mod * (ll)(1*a[k])%mod)%mod)%mod;
+	      	 	 	     z=(z+((ll)(a[i]*a[j])%mod * (ll)(1*a[k])%mod)%mod)%mod;
+
+	      	 	 }
+	      	 }
+	      }
+
+
+          ll ans=(x+y)%mod;
+	      ans=(ans+z)%mod;
+
+	      ans=(ans+1)%mod;
+	      ans=(ans*tot)%mod;
+
+	      printf("%lld
+",total-ans);
+	 }
+
+	 return 0;
+}

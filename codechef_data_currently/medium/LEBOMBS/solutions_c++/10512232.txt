@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+		int count;
+		count=0;
+		cin>>n;
+		count=0;
+		char s[n];
+		cin>>s;
+		
+		
+		for(int i=0;i<n;i++)
+		{
+	
+		if(s[i]=='1')
+			{
+				s[i]='2';
+				s[i-1]='2';
+				if(s[i+1]=='1')
+				s[i-1]='2';
+				else
+					s[i+1]='2';
+			
+		
+				
+			}
+			
+		}
+		
+	for(int i=0;i<n;i++)
+	{
+		if(s[i]!='2')
+		count++;
+	}
+		cout<<count<<endl;
+	}
+	
+}

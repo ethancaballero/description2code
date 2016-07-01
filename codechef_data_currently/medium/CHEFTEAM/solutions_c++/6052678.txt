@@ -1,0 +1,35 @@
+#include<iostream>
+#include<stdio.h>
+#include<iomanip>
+
+using namespace std;
+typedef unsigned long long ULL;
+
+ULL gcd(ULL a, ULL b) { return b?gcd(b,a%b):a; }
+ULL solve(ULL n,ULL k)
+{
+   if(n<k)
+        return 0;
+   
+       k=min(n-k,k);
+       ULL p=1;
+       for(ULL i=1;i<=k;i++)
+       {
+          ULL g=gcd(p,i);
+          p/=g;
+          p*=(n-i+1)/(i/g);
+       }
+       return p;
+   
+}
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   {
+      ULL k,n;
+      cin>>n>>k;
+      cout<<solve(n,k)<<endl;
+   }
+}

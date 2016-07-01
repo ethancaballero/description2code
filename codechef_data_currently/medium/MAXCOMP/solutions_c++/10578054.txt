@@ -1,0 +1,78 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+struct eventDetails
+{
+	int startTime, endTime, compensation;
+}eventData[100000];
+
+long long int compensation[100000];
+int noOfEvents = 0;
+
+bool comp(const struct eventDetails &a, const struct eventDetails &b)
+{
+	return a.endTime < b.endTime;
+}
+
+void pre()
+{
+	sort(eventData+1, eventData+noOfEvents+1, comp);
+}
+
+int getIndex(int eventNo, int startTimeOfCurr)
+{
+	while(eventNo > 0){
+		int endTime = eventData[eventNo].endTime;
+		if(endTime <= startTimeOfCurr){
+			return eventNo;
+		}
+		eventNo--;
+	}
+	return 0;
+}
+
+void calc()
+{
+	compensation[1] = eventData[1].compensation;
+	for(int i=2; i<=noOfEvents; i++){
+		if(eventData[i-1].endTime <= eventData[i].startTime){
+			compensation[i] = compensation[i-1] + eventData[i].compensation;
+		}else{
+			int prev = getIndex(i-1, eventData[i].startTime);
+			compensation[i] = max(compensation[i-1], compensation[prev] + eventData[i].compensation);
+		}
+		// cout<<eventData[i].startTime<<" "<<eventData[i].endTime<<","<<compensation[i]<<endl;
+	}
+	cout<<compensation[noOfEvents]<<endl;
+}
+
+void readInp()
+{
+	cin>>noOfEvents;
+	for(int i=0; i<=2000; i++)
+	{
+		eventData[i].startTime = eventData[i].endTime = eventData[i].compensation = 0;
+	}
+	
+	for(int i=1; i<=noOfEvents; i++){
+		int start, end, compensation;
+		cin>>start>>end>>compensation;
+		eventData[i].startTime = start;
+		eventData[i].endTime = end;
+		eventData[i].compensation = compensation;
+	}
+}
+
+int main(int argc, char const *argv[])
+{
+	int t;
+	cin>>t;
+	while(t){
+	readInp();
+	pre();
+	calc();
+	t--;
+	}
+	return 0;
+}

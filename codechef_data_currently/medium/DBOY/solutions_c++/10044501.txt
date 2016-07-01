@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 2000;
+const int INF = 1e8;
+int H[MAXN];
+int K[MAXN];
+int dp[MAXN][MAXN];
+int main(){
+    int t;
+    cin >> t;
+    for(int i = 0;i < MAXN;++i){
+        for(int j = 0;j < MAXN;++j){
+            dp[i][j] = INF;
+        }
+    }
+    while(t--){
+        int N;
+        scanf("%d", &N);
+        int LM = 0;
+        for(int i = 1;i <= N;++i){
+            scanf("%d", &H[i]);
+            LM = max(LM, H[i]);
+        }
+        for(int i = 1;i <= N;++i){
+            scanf("%d", &K[i]);
+        }
+        LM <<= 1;
+        dp[0][0] = 0;
+        for(int i = 1;i <= N;++i){
+            dp[i][0] = 0;
+            for(int fuel = 1;fuel <= LM;++fuel){
+                dp[i][fuel] = dp[i - 1][fuel];
+                if(fuel >= K[i]){
+                    int last = dp[i - 1][fuel - K[i]];
+                    dp[i][fuel] = min(dp[i][fuel], last + 1);
+
+                    last = dp[i][fuel - K[i]];
+                    dp[i][fuel] = min(dp[i][fuel], last + 1);
+
+                }
+            }
+        }
+        int ans = 0;
+        for(int i = 1;i <= N;++i){
+            ans += dp[N][(H[i] << 1)];
+        }
+        printf("%d
+", ans);
+    }
+    return 0;
+}

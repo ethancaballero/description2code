@@ -1,0 +1,19 @@
+val = raw_input()
+t = int(val)
+for i in range(t) :
+	val1 = raw_input()
+	n = int(val1)
+	a = list()
+	val2 = raw_input()
+	val3 = val2.split()
+	for i in range(n) :
+		a.append(int(val3[i]))
+	num = max(a)
+	c = a.count(num)
+	print ((2**c) - 1 )% 1000000007
+
+
+
+
+
+

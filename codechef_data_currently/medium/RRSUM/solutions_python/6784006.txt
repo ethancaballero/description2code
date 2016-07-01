@@ -1,0 +1,11 @@
+n,m=map(int,raw_input().split())
+while m:
+    a=int(raw_input())
+    if a<n+2 or a>3*n:
+        print 0
+    else:
+        if a<=2*n+1:
+            print a-n-1
+        else:
+            print 3*n-a+1
+    m-=1

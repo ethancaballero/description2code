@@ -1,0 +1,25 @@
+#-------------------------------------------------------------------------------
+# Name:        module1
+# Purpose:
+#
+# Author:      hp
+#
+# Created:     26-02-2015
+# Copyright:   (c) hp 2015
+# Licence:     <your licence>
+#-------------------------------------------------------------------------------
+
+def fun(a,b,c):
+    return(min(a,b)*c)
+t=int(raw_input())
+for i in range(0,t):
+    h=[]
+    h=map(int,raw_input().split())
+    s=h[0]*h[1]*h[2]
+    s=s+2*min(min(h[0],h[1]),h[2])
+    s=s-fun(h[0],h[1],h[2])
+    s=s-fun(h[1],h[2],h[0])
+    s=s-fun(h[0],h[2],h[1])
+    if(s<0):
+        s=s+1000000007
+    print s%1000000007

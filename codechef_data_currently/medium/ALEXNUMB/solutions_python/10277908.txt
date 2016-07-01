@@ -1,0 +1,6 @@
+T=input()
+for i in range(T):
+    n=input()
+    l=map(int,raw_input().split())
+    m=n*(n-1)/2
+    print m

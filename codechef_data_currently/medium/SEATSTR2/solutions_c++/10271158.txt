@@ -1,0 +1,149 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+long long modu=1000000007;
+long long fact[100002];
+
+void gen_fact(){
+	fact[0]=1%modu;
+	long long j=1;
+	while(j<100002){
+		fact[j]=(fact[j-1]*j)%modu;
+		j++;
+	}
+}
+
+long long fast_powmod(long long a, long long k, long long m){
+	if(k==1){
+		return a%m;
+	}
+	else{
+		if(k%2==0){
+			long long temp=fast_powmod(a,k/2,m)%m;
+			return (temp*temp)%m;
+		}
+		else{
+			long long temp=fast_powmod(a,k/2,m)%m;
+			return ((a%m)*((temp*temp)%m))%m;
+		}
+	}
+}
+
+long long invmodulo(long long a,long long m){
+	return fast_powmod(a,m-2,m);
+}
+
+long long multmod(long long a, long long b, long long m){
+	return ((a%m)*(b%m))%m;
+}
+
+int main(){
+	long long t,i=0,ans,freq_arr[26],j=0,temp,P,S,k=0,l=0,m=0;
+	char inp[100002];
+	cin>>t;
+	i=0;
+	gen_fact();
+	while(i<t){
+		cin>>inp;
+		j=0;
+		while(j<26){
+			freq_arr[j]=0;
+			j++;
+		}
+		j=0;
+		while(j<strlen(inp)){
+			temp=inp[j]-97;
+			freq_arr[temp]++;
+			freq_arr[temp]=freq_arr[temp]%modu;
+			j++;
+		}
+		j=0;
+		P=fact[strlen(inp)]%modu;
+		while(j<26){
+			P=(P*(invmodulo(fact[freq_arr[j]],modu)%modu))%modu;
+			j++;
+		}
+
+
+		S=0;
+		S=1;//No swaps
+		//One Swap
+		j=0,k=0;
+		while(j<26){
+			k=0;
+			while(k<j){
+				S=(S+(freq_arr[j]*freq_arr[k])%modu)%modu;
+				k++;
+			}
+			j++;
+		}
+		//Two Swaps
+		j=0,k=0,l=0;
+		while(j<26){
+			k=0;
+			while(k<j){
+				l=0;
+				while(l<k){
+					S=(S+(((2*freq_arr[j]*freq_arr[k])%modu)*freq_arr[l])%modu)%modu;
+					l++;
+				}
+				k++;
+			}
+			j++;
+		}
+
+		//Two completely disjoint
+		j=0,k=0,l=0,m=0;
+		while(j<26){
+			k=0;
+			while(k<j){
+				l=0;
+				while(l<k){
+					m=0;
+					while(m<l){
+						S=(S+((3*freq_arr[m]*freq_arr[l])%modu*(freq_arr[k]*freq_arr[j])%modu)%modu)%modu;
+						m++;
+					}
+					l++;
+				}
+				k++;
+			}
+			j++;
+		}
+
+		//One letter common
+		j=0,k=0,l=0;
+		while(j<26){
+			k=0;
+			while(k<26){
+				l=0;
+				while(l<k){
+					if((l!=j)&&(k!=j)){
+					S=(S+((freq_arr[k]*freq_arr[l])%modu*((freq_arr[j]-1)*freq_arr[j])%modu)%modu)%modu;
+					}
+					l++;
+				}
+				k++;
+			}
+			j++;
+		}
+
+		j=0,k=0,l=0;
+		while(j<26){
+			k=0;
+			while(k<j){
+				S=(S+(((((freq_arr[j]*(freq_arr[j]-1))%modu)*(freq_arr[k]*(freq_arr[k]-1))%modu)%modu)*invmodulo(4,modu))%modu)%modu;
+				k++;
+			}
+			j++;
+		}
+		P=P%modu;
+		cout<<"
+"<<(P%modu*(P-S)%modu)%modu;
+		i++;
+	}
+
+	return 0;
+}

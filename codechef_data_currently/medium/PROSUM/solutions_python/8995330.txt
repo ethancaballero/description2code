@@ -1,0 +1,12 @@
+for t in range(input()):
+	c=0
+	h=0
+	n=input()
+	l=list(map(int,raw_input().split()))
+	for k in range(len(l)):
+		if l[k]>2:
+			c+=1
+		if l[k]==2:
+			h+=1
+	print (c*(c-1))/2 + c*h
+	

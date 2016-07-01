@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,n,i;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        int a[n];
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d",&a[i]);
+        }
+        sort(a,a+n);
+        int min=1000000007;
+        for(int i=0;i<n-1;i++)
+        {
+            //ans=min(ans,a[i+1]-a[i]);
+            if(a[i+1]-a[i]<min)
+            {
+                min=a[i+1]-a[i];
+            }
+        }
+       // cout<<ans<<endl;
+        printf("%d
+",min);
+    }
+}

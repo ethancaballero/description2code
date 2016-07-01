@@ -1,0 +1,74 @@
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#define FOR(i,m,n) for(i=m;i<=n;i++)
+#define MAX 1000000
+#define sqrt_max 1000
+#define length 168
+
+using namespace std;
+
+long int phi[MAX+10],remain[MAX+10];
+long long int pairs[MAX+10];
+int primes[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229
+,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509,521,523
+,541,547,557,563,569,571,577,587,593,599,601,607,613,617,619,631,641,643,647,653,659,661,673
+,677,683,691,701,709,719,727,733,739,743,751,757,761,769,773,787,797,809,811,821,823,827,829
+,839,853,857,859,863,877,881,883,887,907,911,919,929,937,941,947,953,967,971,977,983,991,997};
+
+void generate_phi()
+{
+    long int j,temp;
+    int i,cur_prime;
+
+    phi[1]=0;
+
+    FOR(i,2,MAX)
+         phi[i]=remain[i]=i;
+
+    FOR(i,0,length-1)
+    {
+        cur_prime=primes[i];
+        for(j=cur_prime;j<=MAX;j+=cur_prime)
+            {
+                phi[j] = phi[j] * (cur_prime - 1) / cur_prime;
+                while(!(remain[j]%cur_prime)) {remain[j] = remain[j] / cur_prime;}
+            }
+    }
+
+    FOR(i,sqrt_max+1,MAX)
+       {
+           temp = remain[i];
+           if(temp!=1) phi[i]=phi[i]/ temp * (temp-1);
+       }
+}
+
+void count_pairs()
+{
+    long int i,counter=0;
+    generate_phi();
+
+    pairs[1]=0;
+
+    FOR(i,2,MAX)
+        pairs[i] = pairs[i-1] + phi[i];
+}
+
+int main()
+{
+    int i,t; long int n;
+
+    count_pairs();
+
+    scanf("%i",&t);
+
+    FOR(i,1,t)
+    {
+            scanf("%ld",&n);
+            cout<<pairs[n]<<'
+';
+    }
+
+    return 0;
+}

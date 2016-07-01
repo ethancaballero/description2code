@@ -1,0 +1,52 @@
+/*
+jai shree ram _/\_
+A hacker from NITP
+*/
+ 
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define mod 1000000007
+typedef set<string> ss;
+typedef vector<int> vs;
+typedef map<int,char> msi;
+typedef pair<int,int> pa;
+ 
+ int fact[5001];
+long long int modPow(long long int a, long long int x, long long int p) {
+    long long int res = 1;
+    while(x > 0) {
+        if( x % 2 != 0) {
+            res = (res * a) % p;
+        }
+        a = (a * a) % p;
+        x /= 2;
+    }
+    return res;
+}
+ 
+long long int modInverse(long long int a, long long int p) {
+    return modPow(a, p-2, p);
+}
+long long int modBinomial(long long int n, long long int k, long long int p) {
+    return ( (fact[n]* modInverse(fact[k],p))%p *modInverse(fact[n-k],p) ) % p;
+}
+void init(){
+	fact[0]=1;
+	for(int i=1; i<=5000; i++)
+		fact[i]=(long long)i*fact[i-1]%mod;
+}
+long long int n,ans,k,i,j,x,y;
+int main()
+{
+	init();
+	while(cin>>n>>k){
+		//cout<<n<<" "<<k;
+		if(n==0 && k==0)
+		break;
+		ans=((modBinomial(n-2,k/2,mod))%mod)*((modBinomial(n-2,(k-1)/2,mod))%mod);
+		cout<<2*ans%mod<<"
+";
+	}
+	return 0;
+} 

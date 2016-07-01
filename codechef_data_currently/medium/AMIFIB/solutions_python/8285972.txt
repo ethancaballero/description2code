@@ -1,0 +1,14 @@
+t = int(raw_input())
+for i in xrange(t):
+	n = int(raw_input())
+	a = 0
+	b = 1
+	c = 0
+	while c<n:
+		c = a+b
+		a = b
+		b = c
+	if c == n:
+		print "YES"
+	else:
+		print "NO"

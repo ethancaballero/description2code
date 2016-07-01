@@ -1,0 +1,30 @@
+import sys
+x = lambda : [int(n) for n in sys.stdin.readline().rstrip().split()]
+t = int(sys.stdin.readline().rstrip())
+def f(a, n, s):
+    if s==0:
+        return 1
+    if n==0 and s != 0:
+        return 0
+    if a[n-1] > s or a[n-1] == 0:
+        return f(a, n-1, s)
+    if f(a, n-1, s - a[n-1]):
+        a[n-1] = 0
+        return 1
+    return f(a,n-1, s)
+while t:
+    (n,k) = x()
+    a = x()
+    a.sort()
+    s = sum(a)
+    done = False
+    if n>=k and s % k == 0:
+        avg = s/k
+        if a[len(a)-1]<=avg:
+            done = True
+            for i in range(k):
+                if(not f(a, n, avg)):
+                    done = False
+                    break
+    print "yes" if done else "no"
+    t-=1

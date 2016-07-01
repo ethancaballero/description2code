@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 10000009
+char ch[1000001];
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        scanf("%s",ch);
+        int n=strlen(ch);
+        int i=0,j=n-1;
+        long long int ans=1;
+        while(i<j){
+            if(ch[i]=='?'){
+                if(ch[j]=='?'){
+                    ans=ans*26;
+                    ans=ans%mod;
+                }
+            }
+            else{
+                if(ch[j]!='?' and ch[i]!=ch[j]){
+                    ans=0;
+                    break;
+                }
+            }
+            i++;
+            j--;
+        }
+        if(i==j and ch[i]=='?'){
+            ans*=26;
+            ans%=mod;
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

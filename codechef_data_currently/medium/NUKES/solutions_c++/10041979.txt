@@ -1,0 +1,25 @@
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+int main()
+{
+    int N,K;
+    long A;
+    long ele;
+
+    int i, j;
+    cin>>A;
+    cin>>N;
+    cin>>K;
+
+    long rem ;
+
+    for(i= 0; i < K; i++)
+    {
+        cout<<A%(N+1)<<" ";
+        A = A/(N+1);
+    }
+    cout<<endl;
+}

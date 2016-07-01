@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+int score[10005];
+int arr[10005];
+int root(long long i)
+{
+	while(arr[ i ] != i)
+    {
+        arr[ i ] = arr[ arr[ i ] ] ; 
+i = arr[ i ]; 
+    }
+return i;
+}
+void w_union(int a,int b)
+{
+	int x=root(a);
+	int y=root(b);
+	if(score[x]>score[y])
+	arr[y]=arr[x];
+	else if(score[x]<score[y])
+	arr[x]=arr[y];
+}
+int main()
+{
+	int t,i,q,num,a,b;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		for(i=1;i<=n;i++)
+		{
+			scanf("%d",&score[i]);
+			arr[i]=i;
+		}
+		scanf("%d",&q);
+		while(q--)
+		{
+			scanf("%d",&num);
+			if(num==0)
+			{
+				scanf("%d %d",&a,&b);
+				if(root(a)==root(b))
+				{
+					printf("Invalid query!
+");
+					continue;
+				}
+				else
+				{
+					w_union(a,b);
+				}
+			}
+			else if(num==1)
+			{
+				scanf("%d",&a);
+				printf("%d
+",root(a));
+			}
+		}
+	}
+	return 0;
+} 

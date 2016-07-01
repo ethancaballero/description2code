@@ -1,0 +1,187 @@
+#include <iostream>
+#include <cstdio>
+#include <iomanip>
+#include <iterator>
+#include <cmath>
+#include <cassert>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#include <list>
+#include <queue>
+#include <climits>
+ 
+using namespace std;
+ 
+#define fastio          std::ios_base::sync_with_stdio(false)
+#define LL              long long
+#define inchar          getchar_unlocked
+#define MAX             1000005
+#define REP(i,n)	    for(__typeof(n) i=0; i<n; i++)
+#define REP1(i,n)	    for(__typeof(n) i=1; i<=n; i++)
+#define REP2(i,n)	    for(__typeof(n) i=1; i<n; i++)
+#define CREP(i,n)	    for(__typeof(n) i=n-1; i>=0; i--)
+#define CREP1(i,n)	    for(__typeof(n) i=n; i>=1; i--)
+#define MYREP(i,a,b)    for(__typeof(a) i=a; i<=b; i++)
+#define MYCREP(i,a,b)   for(__typeof(a) i=b; i>=a; i--)
+#define sz(a)           int((a).size()) 
+#define pb              push_back 
+#define mp              make_pair
+#define fi              first
+#define sec             second
+#define all(c)          (c).begin(),(c).end() 
+#define allr(c)         (c).rbegin(),(c).rend() 
+#define loop(c,i)       for(typeof(c.begin()) i = c.begin(); i != c.end(); i++) 
+#define loop2(c,i)      for(typeof(c.begin()) i = c.end(); i != c.begin(); i--) 
+#define present(c,x)    ((c).find(x) != (c).end()) 
+#define cpresent(c,x)   (find(all(c),x) != (c).end())
+ 
+template <typename T>
+void inPos(T &x)
+{
+	register T c = inchar();
+	while(((c<48) || (c>57)) && (c!='-')) c = inchar();
+	x = 0;
+	for(;c<48 || c>57; c = inchar());
+	for(;c>47 && c<58; c = inchar())	x=(x<<3)+(x<<1)+(c-48);
+}
+ 
+int b[MAX], f[MAX];
+ 
+LL s[MAX], before[MAX], after[MAX], solve[MAX];
+ 
+map <int, LL> magic;
+ 
+int main()
+{
+    LL total, y;
+    int i, j, n, m, x, high, mid, low, maximum = 0, minimum = INT_MAX;
+    char type, c;
+    inPos(n);
+    inPos(m);
+    total = ((LL)n*(n+1))>>1;
+    REP(i, n)
+    {
+        inPos(f[i]);
+        if (f[i]<minimum)
+            minimum = f[i];
+        if (f[i]>maximum)
+            maximum = f[i];
+    }
+    for(i=0; i<n; ++i)
+    {
+        for (j=i-1; j>=0 && f[j]<f[i]; j-=before[j]+1)
+            before[i] += before[j]+1;
+    }
+    for(i=n-1; i>=0; --i)
+    {
+        for (j=i+1; j<n && f[j]<=f[i]; j+=after[j]+1)
+            after[i] += after[j]+1;
+    }
+    for(i=0; i<n; ++i)
+        s[i] = (before[i]+1)*(after[i]+1);
+    for(i=0; i<n; ++i)
+        magic[f[i]] += s[i];
+    map<int, LL>::iterator it_m = magic.begin();
+    i = 0;
+    b[i] = it_m->fi;
+    solve[i] = it_m->sec;
+    i++;
+    it_m++;
+    for (; it_m!=magic.end(); it_m++)
+    {
+        b[i] = it_m->fi;
+        solve[i] = solve[i-1] + it_m->sec;
+        i++;
+    }
+    n = i;
+    while (m--)
+    {
+        scanf("
+");
+        type = inchar();
+        inPos(x);
+        c = inchar();
+        y = 0;
+        if (type=='=')
+        {
+            if (x==minimum)
+                y = solve[0];
+            else if (x==maximum)
+                y = solve[n-1] - solve[n-2];
+            else if (x>minimum && x<maximum)
+            {
+                low = 0;
+                high = n-1; 
+                while (low<=high)
+                {
+                    mid = (low+high)>>1;
+                    if (b[mid] == x)
+                    {
+                        if (mid>0)
+                            y = solve[mid] - solve[mid-1];
+                        else
+                            y = solve[mid];
+                        break;
+                    }
+                    if (b[mid] < x)
+                        low = mid+1;
+                    else
+                        high = mid-1;
+                }
+            }
+        }
+        else if (type=='<')
+        {
+            if (x>=maximum)
+                y = total;
+            else if (x>minimum)
+            {
+                low = 0;
+                high = n-1; 
+                while (low<high)
+                {
+                    mid = (low+high)>>1;
+                    if (b[mid] >= x)
+                        high = mid;
+                    else
+                        low = mid+1;
+                }
+                if (low>=0 && low<n)
+                    y = solve[low-1];
+            }
+        }
+        else
+        {
+            if (x<minimum)
+                y = total;
+            else if (x<=maximum)
+            {
+                low = 0;
+                high = n-1; 
+                while (low<high)
+                {
+                    mid = (low+high)>>1;
+                    if (b[mid] <= x)
+                        low = mid+1;
+                    else
+                        high = mid;
+                }
+                if (low>=0 && low<n)
+                    y = total - solve[low-1];
+            }
+        }
+        if (y&1)
+            putchar_unlocked(c);
+        else
+        {
+            if (c=='D')
+                putchar_unlocked('C');
+            else
+                putchar_unlocked('D');
+        }
+    }
+    return 0;
+}

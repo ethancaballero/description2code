@@ -1,0 +1,41 @@
+ #include<bits/stdc++.h>
+ using namespace std;
+
+int main()
+{
+    int t;cin>>t;
+    while(t--){
+
+        long long int i,j,c=0,k,l,ans=0,r;
+        scanf("%lld%lld",&i,&j);
+        k=i;l=j;
+        while(++c && (k=k/2));
+        k=--c;
+        c=0;
+        while(++c && (l=l/2));
+        l=--c;
+        if(k>l){
+            r=k-l;
+            ans=r;
+            while(r--){
+                i=i/2;
+            }
+        }
+        else{
+            r=l-k;
+            ans=r;
+            while(r--){
+                j=j/2;
+            }
+        }
+        while(1){
+            if(i==j)
+                break;
+            i=i/2;
+            j=j/2;
+            ans+=2;
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int input()
+{
+    int n=0;
+    char c=getchar_unlocked();
+    while(c < '0' || c >'9') {c=getchar_unlocked();}
+    while(c>='0' && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar_unlocked();
+    }
+    return n;
+}
+
+bool myfunc(pair<int, int> a, pair<int, int> b){
+	if(a.second == b.second){
+		return (a.first > b.first);
+	}
+	return (a.second < b.second);
+}
+
+string fillbasic(int n){
+	string ret = "";
+	for(int i = 0; i < n; i++){
+		ret += '.';
+	}
+	return ret;
+}
+
+int main(){
+	int T,N,K;
+	int x, y, count;
+	string str;
+	vector<pair<int, int> > pairs;
+	scanf("%d", &T);
+	while(T--){
+		scanf("%d", &N);
+		scanf("%d", &K);
+		pairs.clear();
+		count = 0;
+		str = fillbasic(N);
+		for(int i = 0; i < K; i++){
+			scanf("%d", &x);
+			scanf("%d", &y);
+			pairs.push_back(make_pair(x, y));
+			str[x] = '(';
+			str[y] = ')';
+		}
+		sort(pairs.begin(), pairs.end(), myfunc);
+//		for(int i = 0; i < K; i++){
+//			cout << pairs[i].first << " " << pairs[i].second << endl;
+//		}
+		for(int i = 0; i < K; i++){
+			count = 0;
+			x = pairs[i].first;
+			y = pairs[i].second;
+			for(int j = x; j <= y; j++){
+				if(str[j] == '('){
+					count++;
+				}
+				else if(str[j] == ')'){
+					count--;
+				}
+				else if(str[j] == '.'){
+					if(count > 0){
+						str[j] = ')';
+						count--;
+					}
+					else{
+						count = 1;
+						str[j] = '(';
+					}
+				}
+			}
+		}
+		for(int i = 0; i < N; i++){
+			if(str[i] == '.'){
+				str[i] = '(';
+			}
+		}
+		cout << str << endl;		
+	}
+}
+
+
+

@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+#define lli long long
+#define mp make_pair
+
+const int limit = 100005;
+const int oo = numeric_limits<int>::max();
+vector< vector<int> > adj(limit);
+bool visited[limit];
+int cost[limit];
+
+int loc = oo;
+int lowest = oo;
+	
+void DFS(int x){
+	if(visited[x]) return;
+	visited[x] = true;
+	for(int i=0;i<adj[x].size();i++){
+		DFS(adj[x][i]);
+	}
+	if(cost[x] >= 0)
+		loc = min(loc,cost[x]);
+	return;
+}
+
+int main(){
+	int n,m,a,b;
+	memset(visited,0,sizeof(visited));
+	scanf("%d %d",&n,&m);
+	for(int i=0;i<m;i++){
+		scanf("%d %d",&a,&b);
+		adj[a].pb(b);
+		adj[b].pb(a);
+	}
+	for(int i=1;i<=n;i++)
+		scanf("%d",&cost[i]);
+	lli ans = 0;
+	int cnt = 0;
+	bool posi = true;
+	for(int i=1;i<=n;i++){
+		if(!visited[i]){
+			cnt++;
+			loc = oo;
+			DFS(i);	
+			if(loc==oo){
+				posi = false;
+				break;
+			}
+			lowest = min(lowest,loc);
+			ans += (long long)loc;
+		}
+	}
+	if(cnt==1){
+		printf("0
+");
+		return 0;
+	}
+	if(!posi){
+		printf("-1
+");
+		return 0;
+	}
+	ans = ans + (long long)(cnt-2)*(lowest);
+	printf("%lld
+",ans);
+	return 0;
+}

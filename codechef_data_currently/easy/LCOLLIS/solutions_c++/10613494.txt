@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std ;
+int main () {
+    int t;
+    scanf ( "%d" , &t ) ;
+    while ( t-- ) {
+        int n , m , a[11][11] ;
+        string s ;
+        scanf ( "%d %d" , &n , &m ) ;
+        for ( int i = 0 ; i < n ; i++ ) {
+            cin >> s ;
+            for ( int j = 0 ; j < s.size() ; j++ ) {
+                a[i][j] = 0 ;
+                if ( s[j] == '1' )
+                    a[i][j] = 1 ;
+            }
+        }
+        int i , j , ans = 0 ;
+        for ( i = 0 ; i < m ; i++ ) {
+            int col = 0 ;
+            for ( j = 0 ; j < n ; j++ ) {
+                if ( a[j][i] == 1 )
+                    col++ ;
+            }
+            int x = (col-1)*col ;
+            x /= 2 ;
+            ans += x ;
+        }
+        cout << ans << endl ;
+    }
+}

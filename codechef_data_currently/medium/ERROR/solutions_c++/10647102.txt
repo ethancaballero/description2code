@@ -1,0 +1,15 @@
+#include<iostream>
+#include<algorithm>
+#include<string>
+using namespace std;
+int main(){int long t;
+cin>>t;
+string g,b,a;
+while(t--){cin>>a;
+g="010";
+b="101";
+if((a.find(g) !=string::npos )|| (a.find(b)!=string::npos))
+cout<<"Good"<<endl;
+else
+cout<<"Bad"<<endl;}
+return 0;}

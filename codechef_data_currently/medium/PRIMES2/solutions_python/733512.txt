@@ -1,0 +1,58 @@
+# codechef easy - prime conjecture -  primes2.py
+
+
+
+#start = clock()
+
+def main():
+    maxPrime = 10**6
+    prime = [True]*maxPrime
+    prime[0] = prime[1] = 0
+    primeList = []
+    p2List = []
+    p3List = []
+
+    for p in xrange(2,maxPrime):
+        if prime[p]:
+            primeList.append(p)
+            p2 = p*p
+            if p2<maxPrime:
+                p2List.append(p2)
+                p3 = p*p2
+                if p3<maxPrime:
+                    p3List.append(p3)
+            for i in xrange(p+p, maxPrime, p):
+                prime[i] = False
+
+    #print clock()-start
+
+    x = int(raw_input())
+    while x>0:
+        done = False
+        for c in xrange(len(p3List)):
+            pc = p3List[c]
+            xc = x-pc
+            #print c, xc
+            if xc<2+4:
+                print "0 0 0"
+                break
+            for b in xrange(len(p2List)):
+                pb = p2List[b]
+                xb = xc-pb
+                if xb<2:
+                    break
+                if prime[xb]:
+                    print xb, primeList[b], primeList[c]
+                    done = True
+                    break
+            if done:
+                break
+        x = int(raw_input())
+
+if __name__=="__main__":
+    try:
+        import psyco
+        psyco.full()
+    except ImportError:
+        pass
+    main()

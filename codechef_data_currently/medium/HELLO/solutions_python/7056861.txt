@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This temporary script file is located here:
+/home/aman/.spyder2/.temp.py
+"""
+
+import sys
+
+#f = open('test.txt','r')
+f = sys.stdin
+ncases = int(f.readline())
+
+for line in range(ncases):
+    header = map(float,f.next().strip().split(' '))
+    minutes = header[1]
+    best = 0
+    bestcost = minutes * header[0]
+    for nplan in range(int(header[2])):
+        plan = map(float,f.next().strip().split(' '))
+        thiscost = minutes*plan[1]+(1.0*plan[2]/plan[0])
+        if thiscost<bestcost:
+            best = nplan+1
+            bestcost = thiscost
+    print best

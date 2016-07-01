@@ -1,0 +1,27 @@
+#include <cstdlib>
+#include <cstdio>
+#include <iostream>
+
+using namespace std;
+
+//expected profit when we bet 1 Rs for the team with the probability of winning is p
+double expectedProfit(double p) {
+    return p * (2 * (1 - p) + 1);
+}
+
+int main() {
+    int ntest;
+    cin >> ntest;
+
+    while (ntest--) {
+        double p;
+        scanf("%lf", &p);
+
+        double a = expectedProfit(p);
+        double b = expectedProfit(1 - p);
+        double res = max(10000 * a, 10000 * b);
+        printf("%.9lf
+", res);
+    }
+    return 0;
+}

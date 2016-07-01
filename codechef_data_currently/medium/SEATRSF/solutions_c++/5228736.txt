@@ -1,0 +1,34 @@
+#include<iostream>
+#include<vector>
+#include<cmath>
+
+using namespace std;
+
+inline long long po(long long a,long long b)
+{
+     int p=1000000007;
+     long long res = a, ans = 1;
+	for (int i = 0; i < 31; i ++){
+		if ((1 << i) & b) ans = ans * res % p;
+		res = res * res % p;
+	}
+	return ans;
+}
+
+int main()
+{
+    int T;
+    cin>>T;
+    while(T--)
+    {
+              long long N,m,q,k;
+              cin>>N>>m>>q>>k;
+              if(m<=q ||(N==1 && q!=0)) cout<<0<<endl;
+              else
+              {
+                  cout<<((m-q)*((long long)2*1000000007+(po(q+1,N)+po(q-1,N))%1000000007-(2*po(q,N))%1000000007))%1000000007<<endl;
+              }
+    }
+    //cout<<po(1000000006,5);
+    //system("pause");
+}

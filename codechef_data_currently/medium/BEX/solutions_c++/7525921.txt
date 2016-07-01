@@ -1,0 +1,69 @@
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+#include<cstring>
+using namespace std;
+int scan()
+{
+int flag=0,t=0;
+char c;
+c=getchar();
+while(c<'0' || c>'9'){
+if(c=='-')
+flag=1;
+c=getchar();
+}
+while(c>='0' && c<='9')
+{
+t=(t<<3)+(t<<1)+c-'0';
+c=getchar();
+}
+if(flag)
+t*=-1;
+return(t);
+}
+char stbk[1000005][16],s[20];
+int stexr[1000005],stcur[1000005];
+char outp[1000005];
+int cur;
+
+int main()
+{
+//	#ifndef ONLINE_JUDGE
+//		freopen("in.txt","r",stdin);
+//	#endif
+	long long int n,top=0;
+	int r;
+	n=scan();
+	
+	stcur[top]=100000000;
+	stexr[top]=100000000;
+	while(n--)
+	{
+		r=scan();
+//		cin>>r;
+		if(r>0)
+		{	
+			if(r<=stcur[top])
+			{
+				scanf("%s",s);
+//				cin>>s;
+				top++;
+				stcur[top]=r;
+				stexr[top]=0;
+				strcpy(stbk[top],s);
+			}
+			else
+			{
+				stexr[top]++;
+			}
+		}
+		else if(r==-1)
+		{
+			printf("%d %s
+",stexr[top],stbk[top]);
+			top--;			
+		}
+	}
+	return 0;
+}

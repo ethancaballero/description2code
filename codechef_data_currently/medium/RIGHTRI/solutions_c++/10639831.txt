@@ -1,0 +1,35 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int max(int a, int b, int c){
+	if(a>b && a>c)
+		return a;
+	if(b>a && b>c)
+		return b;
+	return c;
+}
+
+bool isRT(int a,int b, int c){
+	int m = max(a,b,c);
+	return 2*m==(a+b+c);
+}
+
+int main(){
+	int N;
+	cin >> N;
+	int ans=0;
+	int a1,a2,b1,b2,c1,c2;
+	for(int i=0;i<N;i++){
+		cin >> a1 >> a2 >> b1 >> b2 >> c1 >> c2;
+		int a = (a1-b1)*(a1-b1) + (a2-b2)*(a2-b2);
+		int b = (a1-c1)*(a1-c1) + (a2-c2)*(a2-c2);
+		int c = (b1-c1)*(b1-c1) + (b2-c2)*(b2-c2);
+		if(isRT(a,b,c))
+			ans++;
+		
+	}
+	cout << ans;
+	return 0;
+}
+	

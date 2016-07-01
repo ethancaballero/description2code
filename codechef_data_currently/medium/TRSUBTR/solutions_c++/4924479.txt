@@ -1,0 +1,164 @@
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+
+struct node{
+    int age,height;
+    node *left;
+    node *right;
+};
+
+int height(node *n)
+{
+    int res=0;
+    if(n->left == NULL && n->right==NULL)
+        return 1;
+    if(n->left != NULL)
+    {
+        n->left->height = height(n->left);
+        res=max(res, n->left->height );
+    }
+    if(n->right != NULL)
+    {
+        n->right->height = height(n->right);
+        res=max(res,n->right->height );
+    }
+    return (res + 1);
+}
+
+bool match(node *n1, node *n2)
+{
+    if(n1->age != n2->age)
+        return false;
+    else
+    {
+        bool b1 = false, b2 = false;
+        if(n1->left != NULL && n2->left != NULL)
+            b1=match(n1->left,n2->left);
+        else if(n1->left == NULL && n2->left == NULL)
+            b1=true;
+
+        if(n1->right != NULL && n2->right != NULL)
+            b2=match(n1->right,n2->right);
+        else if(n1->right == NULL && n2->right == NULL)
+            b2=true;
+        return (b1 && b2);
+    }
+
+}
+
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int age[n + 1];
+    bool isRoot[n + 1];
+    memset( isRoot, true, sizeof(isRoot) );
+    node tr[n + 1];
+    for(int i = 1;i <= n;i++)
+    {
+        scanf("%d",&age[i]);
+        tr[i].age = age[i];
+        tr[i].left = tr[i].right = NULL;
+    }
+
+    for(int i = 0;i < n - 1;i++)
+    {
+        int a,b;
+        char c;
+        scanf("%d %d %c",&a,&b,&c);
+        if(c == 'M')
+            tr[a].left = &tr[b];
+        else
+            tr[a].right = &tr[b];
+        isRoot[b]=false;
+    }
+    int root;
+    for(int i=1;i<=n;i++)
+    {
+        if(isRoot[i])
+        {
+            root=i;
+            break;
+        }
+    }
+
+    tr[root].height = height(&tr[root]);
+
+    int q;
+    scanf("%d",&q);
+    while(q--)
+    {
+        int m;
+        scanf("%d",&m);
+        int agem[m + 1];
+        bool isRootm[m + 1];
+        memset(isRootm, true, sizeof(isRootm));
+        node trm[m + 1];
+        for(int i = 1;i <= m;i++)
+        {
+            scanf("%d",&agem[i]);
+            trm[i].age = agem[i];
+            trm[i].left = trm[i].right = NULL;
+        }
+
+        for(int i = 0;i < m - 1;i++)
+        {
+            int a,b;
+            char c;
+            scanf("%d %d %c",&a,&b,&c);
+            if(c == 'M')
+                trm[a].left = &trm[b];
+            else
+                trm[a].right = &trm[b];
+            isRootm[b]=false;
+        }
+        int rootm;
+        for(int i = 1; i <= m; i++)
+        {
+            if(isRootm[i])
+            {
+                rootm=i;
+                break;
+            }
+        }
+
+        trm[rootm].height = height( &trm[rootm ] );
+
+        vector<int> v1;
+        for(int i=1;i<=n;i++)
+        {
+            if(tr[i].height == trm[rootm].height)
+                v1.push_back(i);
+        }
+
+        int i=0;
+        for(;i<v1.size();i++)
+        {
+            if( match( &tr[ v1[i] ], &trm[rootm] ) )
+            {
+                printf("YES
+");
+                break;
+            }
+        }
+        if( i == v1.size() )
+            printf("NO
+");
+
+
+    }
+
+
+
+
+
+
+
+
+    return 0;
+}

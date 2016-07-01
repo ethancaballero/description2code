@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,n,ans,index,i;
+	long long int s,temp,term;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d %lld",&n,&s);
+		index=1;
+		if(s<n)
+		{
+			ans=n;
+		}
+		else
+		{
+			s=s-n;
+			if(s==0)
+				ans=n-1;
+			else
+			{
+			for(i=1;i<=n-1;i++)
+			{
+				if((s-i)>=0)
+				{
+					s=s-i;
+				}
+				else
+				{
+					index=i;
+					break;
+				}
+			}
+			if(i==n)
+				ans=0;
+			else
+				ans=n-index;
+			}
+			printf("%d
+",ans);
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,19 @@
+t=int(raw_input())
+for case in range(t):
+    s=raw_input()
+    d=0
+    r=s[::-1]
+    if s==r :
+        d=1
+    else :
+        for i in range(1,len(s)):
+            s1=s[:i-1]
+            s2=s[i:]
+            ss=s1+s2
+            if ss==ss[::-1]:
+                d=1
+                break
+    if d==0:
+        print "NO"
+    else :
+        print "YES"

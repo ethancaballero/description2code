@@ -1,0 +1,26 @@
+from collections import defaultdict
+def preprocess():
+	# arr = defaultdict(list)
+	my_arr = defaultdict(list)
+	for h in xrange(12) :
+		for m in xrange(60):
+			formated_time = "%02d:%02d"%(h,m)
+			angle_h_hand = 30.0*h + 0.5*m
+			angle_m_hand = 6.0*m
+			diff  = abs(angle_m_hand - angle_h_hand)
+			if diff > 180.0 :
+				diff = abs(360.0 - diff)
+			# arr[int(diff)].append({diff : formated_time})			
+			my_arr[float(diff)].append(formated_time)			
+	return my_arr
+
+my_arr = preprocess()
+
+t = int(raw_input())
+while t:
+	t-=1
+	angle = 0.0
+	i  = float(raw_input())
+	temp = my_arr[i]
+	print "
+".join(temp)

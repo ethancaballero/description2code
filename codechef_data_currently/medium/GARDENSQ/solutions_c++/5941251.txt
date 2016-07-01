@@ -1,0 +1,31 @@
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+    int t,i,j,k,ans,n,m;
+    char str[51][51];
+    scanf("%d",&t);
+    while(t--)
+    {
+        ans=0;
+        scanf("%d%d",&n,&m);
+        for(i=0;i<n;i++)
+            scanf("%s",str[i]);
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<m;j++)
+            {
+                for(k=1;i+k<n&&j+k<m;k++)
+                {
+                    ans+=(str[i][j]==str[i+k][j])&&(str[i][j]==str[i][k+j])&&(str[i][j]==str[i+k][j])&&(str[i][j]==str[i+k][j+k]);
+
+                }
+            }
+        }
+        printf("%d
+",ans);
+    }
+    return 0;
+}

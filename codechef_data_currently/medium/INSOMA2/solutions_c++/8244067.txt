@@ -1,0 +1,44 @@
+import java.util.Scanner;
+class Explode {
+	static int n;
+public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		 n = in.nextInt();
+		char[][] m = new char[n][n];
+		for(int i=0;i<n;i++)
+			for(int j=0;j<n;j++){
+				m[i][j]=in.next().charAt(0);
+				
+			}
+		
+		String str = in.next();
+		int c=0;
+		
+		for(int i=0;i<n;i++)
+			for(int j=0;j<n;j++)
+				if(m[i][j]==str.charAt(0))
+					c = c + count(i,j,str.substring(1),m);
+		
+		
+		System.out.println(c);
+	}
+ 
+	private static int count(int i, int j, String str, char[][] m) {
+ 
+		int c=0;
+		if(str.length()==0)
+			return 1;
+			
+		if(i+1!=n && j+1!=n && m[i+1][j+1]==str.charAt(0))
+				c = c + count(i+1,j+1,str.substring(1),m);
+		if((i-1!=-1 && j+1!=n) && m[i-1][j+1]==str.charAt(0))
+				c = c + count(i-1,j+1,str.substring(1),m);
+		if(i+1!=n && j-1!=-1 && m[i+1][j-1]==str.charAt(0))
+				c = c + count(i+1,j-1,str.substring(1),m);
+		if(i-1!=-1 && j-1!=-1 && m[i-1][j-1]==str.charAt(0))
+				c = c + count(i-1,j-1,str.substring(1),m);		
+		
+		return c;
+	}
+ 
+}

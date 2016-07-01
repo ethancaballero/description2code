@@ -1,0 +1,15 @@
+for _ in range(int(raw_input())):
+    n, m = map(int, raw_input().split())
+    a = []
+    t = []
+    ans =[]
+    for __ in range(m):
+        a.append([map(int, raw_input().split())])
+    a.reverse()
+    for i in range(len(a)):
+        for p, q in a[i]:
+            if p not in t and q not in t:
+                t.append(p)
+                t.append(q)
+                ans.append(len(a) - 1 - i)
+    print " ".join(str(k) for k in sorted(ans))

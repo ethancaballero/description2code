@@ -1,0 +1,79 @@
+// ...............................$$.....................................//
+ 
+//BIG OH
+//prob-
+ 
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+#include<sstream>
+#include<stdlib.h>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#include<map>
+#include<set>
+#include<list>
+#include<stack>
+#include<queue>
+#include<iomanip>
+#include<ctype.h>
+#include<complex>
+#include<utility>
+#include<functional>
+#include<bitset>
+#include<numeric>
+#include<cassert>
+#include<limits>
+ 
+using namespace std;
+#define ll long long 
+#define M 1000000007
+#define inchar getchar_unlocked
+int read() 
+{
+  int n=0, ch;
+  while((ch = inchar()) < '0');
+    n=(ch-'0');
+ while((ch=inchar())>='0') n=(n<<3)+(n<<1)+(ch-'0');
+   return n;
+}
+int i,j;
+#define rep(n)    for(i=0;i<n;i++)
+#define rep2(a,b) for(i=0;i<a;i++)for(j=0;j<b;j++)
+#define rep3(a,b) for(i=a;i>b;i--)
+#define  rep4(a,b) for(i=a;i<=b;i++)
+#define mx 100
+#define newln cout<<"
+"; 
+#define rd(n) scanf("%d",&n)
+int main()
+{
+	int n;
+	int i,p,q,r;
+	int t;
+	rd(t);
+	char temp1,temp2;
+	while(t--)
+	{
+		rd(n);
+		map<char,char>ab;
+		rep(n)
+		{
+		   cin>>temp1>>temp2;
+		   ab[temp1]=temp2;
+	    }
+	    string str;
+	    cin>>str;
+	    int len=str.length();
+	    if(n!=0) rep(len)  if(ab[str[i]]!=NULL) str[i]=ab[str[i]];
+        rep(len-1)   if(str[i]=='.') break;  p=i;
+        rep3(len-1,p)  if(str[i]!='0') break;  r=i;
+        rep(len-1)   if(str[i]!='0') break;    q=i;
+     	if(str[r]=='.' and r!=q)    r--;
+		if(q==r && str[q]=='.')  cout<<"0";
+		else
+		  rep4(q,r) printf("%c",str[i]);
+		newln
+	}
+}

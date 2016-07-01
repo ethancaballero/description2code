@@ -1,0 +1,68 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<string>
+#include<cmath>
+using namespace std;
+int findlength(int n){
+    int res=0;
+    while(n){
+        res++;
+        n=n/2;
+    }
+    return res;
+}
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    int Q;
+    scanf("%d",&Q);
+    int flip=0;
+    while(Q--){
+        string s;int L,R;
+        cin >> s;
+        if(s=="Qi") flip=1-flip;
+        else{
+            scanf("%d %d",&L,&R);
+            //cout << s << " " << L << " " << R << endl;
+            int color;
+            if(s=="Qr"){
+                color=1;
+            }
+            else color=0;
+            if(flip==1) color=1-color;
+            //printf("color = %d
+",color);
+            int l=findlength(L);
+            int r=findlength(R);
+            int lnode,rnode,lcanode;
+            int lca;
+            if(l>r){
+                for(int i=0;i<(l-r);i++) L=L/2;
+            }
+            else if(r>l){
+                for(int i=0;i<(r-l);i++) R=R/2;
+            }
+            while(L!=R){
+                L=L/2;
+                R=R/2;
+            }
+            lca=findlength(L);
+            int LCA=lca;
+            //printf("lengths : ");
+            //printf("%d %d %d
+",l,r,lca);
+            l=(color==0)?ceil((double)l/2):(l/2);
+            r=(color==0)?ceil((double)r/2):(r/2);
+            lca=(color==0)?ceil((double)lca/2):(lca/2);
+            //printf("nodes: ");
+            //printf("%d %d %d
+",l,r,lca);
+            int lcacolor=(LCA%2==0)?1:0;
+            int res=l + r - 2*lca;
+            if(color==lcacolor) res++;
+            printf("%d
+",res);
+        }
+    }
+}

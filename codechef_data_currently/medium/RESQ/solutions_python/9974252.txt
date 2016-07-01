@@ -1,0 +1,7 @@
+for i in range(int(raw_input())):
+    a=int(raw_input())
+    min=a-1
+    for j in range(1,int(a**0.5) +1,1):
+        if a%j==0 and min>abs(a/j-j) :
+            min=abs(a/j-j)
+    print min

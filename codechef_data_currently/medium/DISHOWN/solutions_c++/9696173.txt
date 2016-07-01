@@ -1,0 +1,54 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int parent[10001];
+int find_parent(int i)
+{
+	int j;
+    if(parent[i]==i)
+        return i;
+    j=find_parent(parent[i]);
+    parent[i]=j;
+    return j;
+}
+int main()
+{
+	int t,n,i,q,s[10001],z,x,y;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		for(i=1;i<=n;i++)
+		{
+			scanf("%d",&s[i]);
+			parent[i]=i;
+		}
+		scanf("%d",&q);
+		for(i=0;i<q;i++)
+		{
+			scanf("%d",&z);
+			if(z==1)
+			{
+				scanf("%d",&x);
+				printf("%d
+",find_parent(x));
+			}
+			else
+			{
+				scanf("%d %d",&x,&y);
+				if(find_parent(x)==find_parent(y))
+				printf("Invalid query!
+");
+				else
+				{
+					int p1=find_parent(x);
+					int p2=find_parent(y);
+					if(s[p1]>s[p2])
+						parent[p2]=p1;
+					else if(s[p2]>s[p1])
+						parent[p1]=p2;	
+				}
+			}
+		}
+	}
+} 

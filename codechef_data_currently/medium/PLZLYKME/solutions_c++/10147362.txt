@@ -1,0 +1,27 @@
+#include<cstdio>
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int l, c, d, s;
+        scanf("%d %d %d %d", &l, &d, &s, &c);
+        long long int p = s;
+        int i;
+        for(i=2; i<=d ; i++)
+        {
+            p = p*(c+1);
+            if(p >= l)
+                break;
+        }
+        if(p >= l)
+            printf("ALIVE AND KICKING
+");
+        else
+            printf("DEAD AND ROTTING
+");
+
+    }
+    return 0;
+}

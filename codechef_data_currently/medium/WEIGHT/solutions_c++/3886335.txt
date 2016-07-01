@@ -1,0 +1,26 @@
+#define MOD 1000007
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int a[21][201][10];
+int main(void)
+{
+	int tc, n, w, i, j;
+	for(i=1;i<10;i++)
+		a[1][0][i]=1;
+	for(n=2;n<=20;n++)
+		for(w=0;w<=200;w++)
+			for(i=0;i<10;i++)
+				for(j=0;j<10;j++)
+					a[n][w+abs(i-j)][i]=(a[n][w+abs(i-j)][i]+a[n-1][w][j])%MOD;
+	scanf("%d", &tc);
+	while(tc--) {
+		scanf("%d%d", &n, &w);
+		for(i=0,j=0;i<10;i++)
+			j+=a[n][w][i];
+		printf("%d
+", j%MOD);
+	}
+	return 0;
+}

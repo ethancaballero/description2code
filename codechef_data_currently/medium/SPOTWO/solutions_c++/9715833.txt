@@ -1,0 +1,133 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+#define mod 1000000007
+//definitions
+#define llu long long unsigned
+#define lld long long
+#define ld long
+ 
+//end of definitions
+#ifndef ONLINE_JUDGE
+#define getchar_unlocked() getchar()
+#define putchar_unlocked(x) putchar(x)
+#endif 
+int dp[600002];
+int mask[600002];
+ 
+ 
+ 
+ 
+ 
+int scan_d()    {register int ip=getchar_unlocked(),ret=0,flag=1;for(;ip<'0'||ip>'9';ip=getchar_unlocked())if(ip=='-'){flag=-1;ip=getchar_unlocked();break;}for(;ip>='0'&&ip<='9';ip=getchar_unlocked())ret=ret*10+ip-'0';return flag*ret;}
+ld scan_ld()    {register int ip=getchar_unlocked(),flag=1;ld ret=0;for(;ip<'0'||ip>'9';ip=getchar_unlocked())if(ip=='-'){flag=-1;ip=getchar_unlocked();break;}for(;ip>='0'&&ip<='9';ip=getchar_unlocked())ret=ret*10+ip-'0';return flag*ret;}
+lld scan_lld()    {register int ip=getchar_unlocked(),flag=1;lld ret=0;for(;ip<'0'||ip>'9';ip=getchar_unlocked())if(ip=='-'){flag=-1;ip=getchar_unlocked();break;}for(;ip>='0'&&ip<='9';ip=getchar_unlocked())ret=ret*10+ip-'0';return flag*ret;}
+llu scan_llu()    {register int ip=getchar_unlocked();llu ret=0;for(;ip<'0'||ip>'9';ip=getchar_unlocked());for(;ip>='0'&&ip<='9';ip=getchar_unlocked())ret=ret*10+ip-'0';return ret;}
+string scan_str()   {register char ip=getchar_unlocked();string s="";for(;ip<'A' || ip>'z';ip=getchar_unlocked());for(;(ip>='A' && ip<='Z')||(ip>='a' && ip<='z');ip=getchar_unlocked()){if(ip>='A' && ip<='Z') s+=(ip+32); else s+=ip;} return s;}  
+//end of fast input
+ 
+//fast output
+ 
+//no line break
+void print_d(int n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=10;char output_buffer[10];do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<10);}
+void print_ld(ld n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=11;char output_buffer[11];do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<11);}
+void print_lld(lld n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=21;char output_buffer[21];do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<21);}
+void print_llu(llu n)     {int i=21;char output_buffer[21];do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<21);}
+ 
+//new line
+void println_d(int n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=10;char output_buffer[11];output_buffer[10]='
+';do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<11);}
+void println_ld(ld n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=11;char output_buffer[12];output_buffer[11]='
+';do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<12);}
+void println_lld(lld n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=21;char output_buffer[22];output_buffer[21]='
+';do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<22);}
+void println_llu(llu n)     {int i=21;char output_buffer[22];output_buffer[21]='
+';do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<22);}
+ 
+//special char
+char sp;
+void printsp_d(int n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=10;char output_buffer[11];output_buffer[10]=sp;do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<11);}
+void printsp_ld(ld n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=11;char output_buffer[12];output_buffer[11]=sp;do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<12);}
+void printsp_lld(lld n)     {if(n<0){n=-n;putchar_unlocked('-');}int i=21;char output_buffer[22];output_buffer[21]=sp;do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<22);}
+void printsp_llu(llu n)     {int i=21;char output_buffer[22];output_buffer[21]=sp;do{output_buffer[--i]=(n%10)+'0';n/=10;}while(n);do{putchar_unlocked(output_buffer[i]);}while(++i<22);}
+ 
+ 
+inline int power(int a,int b)
+{
+    int ans=1;
+    while(b>0)
+    {
+        if(b&1)
+        {
+            b--;
+            ans=(1LL*ans*a)%mod;
+        }
+        else
+        {
+            b>>=1;
+            a=(1LL*a*a)%mod;
+        }
+    }
+    return ans;
+}
+ 
+inline bool ispowerof2(int h)
+{
+    return (h & (h - 1)) == 0;
+}
+ 
+inline void masking()
+{
+    int prev=2;
+    for(int i=3;i<=600000;i++)
+       {
+        if(ispowerof2(i)) prev=i;
+        mask[i]=prev;
+       }
+}
+ 
+inline void settingpow()
+{
+    dp[2]=1048576;
+    int previdx=2;
+    int i = 4;
+   while(i<=600000)
+     {
+        dp[i]=(1LL*power(dp[previdx],10))%mod;
+        previdx=i;
+        i <<= 1;
+     }
+ 
+}
+inline void solve()
+{
+    for(int i=3;i<=600000;i++)
+    dp[i]=(1LL*dp[mask[i]]*dp[i-mask[i]])%mod;
+ 
+}
+int main()
+{int t,n;
+ 
+for(int i=0;i<=600001;i++)
+    dp[i]=1;
+ 
+dp[1]=4;
+settingpow();
+masking();
+solve();
+/*for(int i=0;i<=60;i++)
+printf("%d ",dp[i]);
+printf("
+");*/
+//scanf("%d",&t);
+t=scan_d();
+ 
+ 
+while(t--)
+{
+    n=scan_d();
+    println_d(dp[n]);
+}
+return 0;
+ 
+}  

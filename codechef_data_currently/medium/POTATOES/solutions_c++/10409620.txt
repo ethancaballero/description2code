@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t,x,y,sum,z;
+    cin>>t;
+    while(t--)
+    {
+            cin>>x>>y;
+          sum=x+y;
+          z=sum;
+          sum%2==0?y=1:y=2;
+          sum=sum+y;
+          while(1)
+          {
+               x=2;
+               //cout<<y<<" ";
+               while(sum%x!=0  && x<sum)
+               {
+                 x++;
+               }
+               if(x==sum)
+               {
+                    break;
+             }
+             else
+             sum=sum+2;
+          }
+          cout<<sum-z<<"
+";
+    }
+    return 0;
+}

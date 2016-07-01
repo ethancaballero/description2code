@@ -1,0 +1,26 @@
+t = int(raw_input())
+for a0 in range(t):
+    s = raw_input()
+    length = len(s)
+    if length%2==0:
+        a = s[0:len(s)/2]
+        b = s[len(s)/2:]
+    else:
+        a = s[0:len(s)/2]
+        b = s[((len(s)/2)+1):]
+    a1 = {}
+    b1 = {}
+    for i in range(len(a)):
+        if a[i] in a1:
+            a1[a[i]] +=1
+        else:
+            a1[a[i]] = 1
+    for j in range(len(b)):
+        if b[j] in b1:
+            b1[b[j]] +=1
+        else:
+            b1[b[j]] = 1
+    if a1==b1:
+        print "YES"
+    else:
+        print "NO"

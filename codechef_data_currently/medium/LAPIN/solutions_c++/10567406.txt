@@ -1,0 +1,54 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <set>
+using namespace std;
+#define ll long long
+#define ull unsigned long long
+#define pb push_back
+#define sz size()
+#define sqr(x) ((x) * (x))
+#define mp make_pair
+#define F first
+#define S second
+int main(int argc, char* argv[]) {
+	ios_base::sync_with_stdio(false); cin.tie(NULL);
+	#ifndef ONLINE_JUDGE
+  	freopen("in", "r", stdin); freopen("out", "w", stdout);
+  	#endif
+	int t, cnt = 0;
+	cin >> t;
+	string str;
+	while(t--) {
+		cin >> str;
+		if(str.size() % 2 == 0) {
+			string s1 = str.substr(0, str.size() / 2);
+			string s2 = str.substr(str.size() / 2 , str.size() / 2);
+			sort(s1.begin(), s1.end());
+			sort(s2.begin(), s2.end());
+		//	cout << s1 << " " << s2 << endl;
+			for (int i = 0; i < s1.sz; ++i) {
+				if(s1[i] == s2[i])
+					cnt++;
+			}
+			if(cnt == s1.sz) cout << "YES" << endl;
+			else cout << "NO" << endl;
+		}
+		else {
+			string s1 = str.substr(0, str.size() / 2);
+			string s2 = str.substr(str.size() / 2  + 1, str.size() / 2);
+			sort(s1.begin(), s1.end());
+			sort(s2.begin(), s2.end());
+			for (int i = 0; i < s1.sz; ++i) {
+				if(s1[i] == s2[i])
+					cnt++;
+			}
+		//	cout << s1 << " " << s2 << endl;
+			if(cnt == s1.sz) cout << "YES" << endl;
+			else cout << "NO" << endl;
+		}
+		cnt = 0;
+	}
+
+	return 0;
+}

@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+int main()
+{
+	int t;
+	char s[100005];
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%s",s);
+		long long ans=1;
+		for(int i=0;i<strlen(s);i++)
+		{
+			if(i%2==0)
+			{
+				if(s[i]=='l')
+				ans=(2*ans)%MOD;
+				else
+				ans=((2*ans)%MOD+2)%MOD;
+			}
+			else
+			{
+				if(s[i]=='l')
+				ans=((2*ans)%MOD-1)%MOD;
+				else
+					ans=((2*ans)%MOD+1)%MOD;
+			}
+		}
+		printf("%lld
+",ans);
+	}
+}

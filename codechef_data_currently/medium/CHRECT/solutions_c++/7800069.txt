@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int input()
+{
+    int n=0;
+    char c=getchar_unlocked();
+    while(c < '0' || c >'9') {c=getchar_unlocked();}
+    while(c>='0' && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar_unlocked();
+    }
+    return n;
+}
+
+int main(){
+	int T, l, b, k;
+	T = input();
+	while(T--){
+		l = input();
+		b = input();
+		k = input();
+		if(l == 1 && b == 1)
+			cout << 0 << endl;
+		else if(l == 1 && b == 2)
+			cout << 0 << endl;
+		else if(l == 2 && b == 1)
+			cout << 0 << endl;
+		else if(b == 1 || l == 1)
+			cout << k << endl;
+		else{
+			if(k % 2 == 1)
+				cout << (k+1)/2 << endl;
+			else
+				cout << k/2 << endl;
+		}
+	}
+}
+
+

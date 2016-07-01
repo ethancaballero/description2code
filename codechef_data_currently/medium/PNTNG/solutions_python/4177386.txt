@@ -1,0 +1,27 @@
+n, m, h = map(int, raw_input().split())
+costs = []
+c_to_t = {}
+total = n*m
+for _ in range(h):
+    t, c = map(int, raw_input().split())
+    if c_to_t.get(c) is None:
+        c_to_t[c] = t
+        costs.append(c)
+    else:
+        c_to_t[c] += t
+
+if sum(c_to_t.values()) < total:
+    print 'Impossible'
+else:
+    costs.sort()
+    total_cost = 0
+    for cost in costs:
+        if total > c_to_t[cost]:
+            total_cost += cost*c_to_t[cost]
+            total -= c_to_t[cost]
+            c_to_t[cost] = 0
+        else:
+            total_cost += cost*total
+            print total_cost
+            break
+            

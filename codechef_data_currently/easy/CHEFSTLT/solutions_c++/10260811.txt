@@ -1,0 +1,39 @@
+#include<iostream>
+
+using namespace std;
+int main()
+{
+	int n;
+	string a,b;
+	cin>>n;
+	
+	while(n--)
+	{
+		cin>>a>>b;
+		int min=0;
+	    int max=0;
+		for(int i=0;i<a.length();i++)
+		{
+			if(a[i]=='?'||b[i]=='?')
+			{
+				max++;
+				
+			}
+			
+			else if(a[i]==b[i])
+			{
+			
+				//continue;
+			}
+			
+			
+			else
+			{
+			min++;
+			max++;
+				
+			} 
+			
+		}
+		cout<<min<<" "<<max<<endl;	}
+}

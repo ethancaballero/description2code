@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n,i,j,x;
+    cin>>n;
+    while(n!=0)
+    {
+        x=0;
+        int ar[n],arr[n];
+        for(i=0;i<n;i++)
+        cin>>ar[i];
+        for(i=0;i<n;i++)
+        arr[ar[i]-1]=i+1;
+        for(j=0;j<n;j++)
+        {
+            if(arr[j]!=ar[j])
+            x++;
+        }
+        if(x>0)
+        cout<<"not ambiguous"<<endl;
+        else
+        cout<<"ambiguous"<<endl;
+        cin>>n;
+    }
+    return 0;
+}

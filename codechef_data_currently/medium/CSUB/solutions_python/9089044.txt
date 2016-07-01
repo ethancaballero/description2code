@@ -1,0 +1,5 @@
+for _ in range(input()):
+	n=input()
+	s=raw_input()
+	c=s.count('1')
+	print c*(c+1)//2

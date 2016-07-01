@@ -1,0 +1,18 @@
+tst, key = raw_input().split()
+for t in range(int(tst)):
+	cipher = raw_input()
+	plaintext = ""
+   	for ch in cipher:
+        	if(ch.isalpha()):
+            		pos = ord(ch.lower())-ord('a')
+            		pt = key[pos]
+            		if(ch.isupper()):
+                		plaintext += pt.upper()
+            		else:
+                		plaintext += pt
+        	else:
+            		if(ch=='_'):
+                		plaintext += ' '
+            		else:
+                		plaintext += ch
+    	print plaintext

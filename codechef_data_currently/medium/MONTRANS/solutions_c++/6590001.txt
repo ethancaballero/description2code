@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+	int test,dollar,cent,c;
+	cin>>test;
+	int i,max,temp,count;
+	while(test-->0)
+	{
+		i=0;
+		scanf("%d %d %d",&dollar,&cent,&c);
+		max=dollar*100+cent;
+		count=0;
+		while(100*dollar+cent>c)
+		{
+			
+			if(cent<c)
+			{
+				cent=cent+100;
+				dollar--;
+			}
+			cent-=c;
+			temp=dollar;
+			dollar=cent;
+			cent=temp;
+			i++;
+			if(dollar*100+cent>max)
+			{
+				max=dollar*100+cent;
+				count=i;
+			}
+			if(i>10000)
+				break;
+		}
+		cout<<count<<endl;
+	}
+}

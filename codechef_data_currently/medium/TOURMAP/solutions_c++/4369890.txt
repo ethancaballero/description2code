@@ -1,0 +1,52 @@
+#include<iostream>
+#include<map>
+#include<string>
+using namespace std;
+int main()
+{
+    int t,n,c[5002],C,idx,k,ans;
+    scanf("%d",&t);
+    char a[5002][55],b[5002][55];
+    map<string,int>cmap,fidx;
+    string A,B;
+    while(t--)
+    {
+              int ind[5002]={0};
+              cmap.clear();
+              fidx.clear();
+              idx=0;
+              ans=0;
+              scanf("%d",&n);
+              for(int i=0;i<n-1;i++)
+              {
+                      scanf("%s%s%d$",&a[i],&b[i],&c[i]);
+                      A=a[i];B=b[i];C=c[i];
+                      ans+=C;
+                      if(cmap.find(A)==cmap.end())
+                      cmap[A]=idx++;
+                      if(cmap.find(B)==cmap.end())
+                      cmap[B]=idx++;
+                      ind[cmap[B]]++;
+                      fidx[A]=i;
+                      }
+                      map<string,int>::iterator it;
+                      for(it=cmap.begin();it!=cmap.end();it++)
+                      {
+                                                              if(ind[it->second]==0)
+                                                              {
+                                                                                    A=it->first;break;
+                                                                                    }
+                                                              }
+                                                              while(fidx.find(A)!=fidx.end())
+                                                              {
+                                                                     k=fidx[A];
+                                                                     printf("%s %s %d$
+",a[k],b[k],c[k]);
+                                                                     A=b[k];
+                                                                     }
+                                                                     printf("%d$
+",ans);
+                                                              
+              }
+              return 0;
+    }

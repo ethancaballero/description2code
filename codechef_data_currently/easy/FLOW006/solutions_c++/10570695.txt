@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int test;
+    cin>>test;
+    int i;
+    if(test>=1 && test<=1000)
+    {
+    for(i=0;i<test;i++)
+    {
+        long int num;
+        long int j;
+        long int rem;
+        int sum=0;
+        cin>>num;
+        if(num>=1 && num<=1000000)
+        while(num>0)
+        {
+            rem=num%10;
+            sum=sum+rem;
+            num=num/10;
+        }
+        cout<<sum<<endl;
+
+
+    }
+    }
+    return 0;
+}

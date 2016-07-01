@@ -1,0 +1,9 @@
+t=int(raw_input())
+for i in xrange(0,t):
+    c,s=map(int,raw_input().split())
+    if s==0:
+        print s , c
+    else:
+        candiesperstudent= c/s
+        candiesleft= c%s
+        print candiesperstudent , candiesleft

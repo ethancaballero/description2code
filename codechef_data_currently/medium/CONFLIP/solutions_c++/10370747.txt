@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin >>t;
+	while (t--)
+	{
+		int g;
+		cin >>g;
+		while (g--)
+		{
+			int i,n,q,c=0;
+			cin >> i >> n >> q;
+			
+			if (n%2==0)
+			c=n/2;
+			
+			else if (n%2!=0)
+			{
+				if (i==q)
+				c=n/2;
+				else 
+				c= n/2 + 1;
+			}
+			
+			cout <<c <<"
+";
+		}
+	}
+	return 0;
+} 

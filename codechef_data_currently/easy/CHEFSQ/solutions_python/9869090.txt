@@ -1,0 +1,17 @@
+#!/usr/bin/python
+for i in range(input()):
+	N=input()
+	L=map(int,raw_input().split())
+	M=input()	
+	F=map(int,raw_input().split())
+	j=0
+	for i in L:
+		if i==F[j]:
+			j+=1
+		if j==M:
+			break
+	if j==M:
+		print "Yes"
+	else:
+		print "No"
+	

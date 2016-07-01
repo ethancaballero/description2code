@@ -1,0 +1,35 @@
+import math
+def modpow(b,e,m):
+    pro=1l
+    while e>0:
+        if e%2==1:
+            pro=(pro*b)%m
+        e=e>>1
+        b=(b*b)%m
+
+    return pro
+
+
+
+def dish(n):
+        if n%2==0:
+            return (modpow(3,n,1000000007) + 3)%1000000007
+        else:
+            return (modpow(3,n,1000000007) - 3)%1000000007
+
+
+
+t = input()
+
+ans=[]
+
+for i in range(t):
+
+	n=input()
+	z=int(dish(long(n)))
+
+	ans.append(z)
+
+
+for x in ans:
+        print x

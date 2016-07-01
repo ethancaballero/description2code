@@ -1,0 +1,76 @@
+#include<iostream>
+#include<cstdio>
+#define MOD 1000000007
+using namespace std;
+long long int get_expo(long long int n,long long int mul)
+{
+    long long int ans = 1;
+    while(n != 0)
+    {
+        if(n % 2 == 1)
+            ans *= mul;
+        mul *= mul;
+        n /= 2;
+        if(ans >= MOD)
+            ans %= MOD;
+        if(mul >= MOD)
+            mul %= MOD;
+    }
+    return ans;
+}
+
+long long int get_ans(long long int n)
+{
+    // sum of geometric progression
+    if(n == 0)
+        return 0;
+    long long int  expo = get_expo(n,26);
+    long long int ans = expo - 1;
+    if(ans < 0)
+        ans += MOD;
+    ans *= 26;
+    if(ans >= MOD)
+        ans %= MOD;
+    return ans;
+}
+int main()
+{
+   long long int t,n;
+   scanf("%lld",&t);
+   //modular multiplicative inverse
+   long long int modular_inverse = get_expo(MOD-2, 25);
+   while(t--)
+   {
+       scanf("%lld",&n);
+       long long int tmp;
+       if(n % 2 == 0)
+       {
+           n /= 2;
+           tmp = get_ans(n);
+           tmp *= modular_inverse;
+           if(tmp >= MOD)
+            tmp %= MOD;
+           tmp *= 2;
+           if(tmp >= MOD)
+            tmp %= MOD;
+       }
+       else
+       {
+           n /= 2;
+           tmp = get_ans(n+1);
+           tmp *= modular_inverse;
+           if(tmp >= MOD)
+              tmp %= MOD;
+           long long int tmp1 = get_ans(n);
+           tmp1 *= modular_inverse;
+           if(tmp1 >= MOD)
+              tmp1 %= MOD;
+           tmp += tmp1;
+           if(tmp >= MOD)
+              tmp %= MOD;
+       }
+       printf("%lld
+",tmp);
+   }
+   return 0;
+}

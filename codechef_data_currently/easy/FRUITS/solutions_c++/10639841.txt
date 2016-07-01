@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int d,t,n,m,k;
+cin>>t;
+while(t--)
+{
+cin>>n>>m>>k;
+if(m>n)
+d=m-n;
+else
+d=n-m;
+if(k>d)
+cout<<"0"<<endl;
+else
+cout<<d-k<<endl;
+}
+return 0;
+} 

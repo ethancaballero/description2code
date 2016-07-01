@@ -1,0 +1,5 @@
+for _ in range(input()):
+        n = input()
+        a = map(int, raw_input().strip().split())
+        a.sort(reverse=True)
+        print sum(a[::2])

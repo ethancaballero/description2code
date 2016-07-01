@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int T, N, K, array[1001], last, num, count, steps;
+    scanf("%d", &T);
+
+    while(T--) {
+        count = 0;
+        steps = 0;
+        scanf("%d %d", &N, &K);
+        for(int i = 0; i <= 1000; i++) {
+            array[i] = 0;
+        }
+
+        for(int i = 1; i <= N; i++) {
+            scanf("%d", &num);
+            array[num] = 1;
+            last = num;
+        }
+
+
+        for(int i = last; i >= 1; i--) {
+            if(array[i] == 1) {
+                count++;
+            } else {
+                steps += (K + count - 1) / K;
+            }
+        }
+
+        printf("%d
+", steps);
+    }
+
+    return 0;
+}

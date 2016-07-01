@@ -1,0 +1,10 @@
+import math
+T = int(raw_input())
+while T:
+    b, ls = map(int, raw_input().split())
+    min_rs = math.sqrt((ls * ls) - (b * b))
+    max_rs = math.sqrt((ls * ls) + (b * b))
+    print min_rs,
+    print " ",
+    print max_rs
+    T -= 1

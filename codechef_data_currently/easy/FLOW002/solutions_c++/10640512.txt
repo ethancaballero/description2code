@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    long long int t;
+    cin>>t;
+    long long int i;
+    long long int a,b;
+    for(i=1;i<=t;i++)
+    {
+        cin>>a>>b;
+        long long int rem=a%b;
+        cout<<rem<<endl;
+    }
+}

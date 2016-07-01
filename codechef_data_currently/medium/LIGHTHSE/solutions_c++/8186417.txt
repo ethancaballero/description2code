@@ -1,0 +1,84 @@
+#include<stdio.h>
+using namespace std;
+int main()
+{
+ int T,lightHouse;
+ long long int limits[4][3],xMin,xMax,yMin,yMax,x,y;
+ // limits
+ // [xMin] [x] [y]
+ // [xMax] [x] [y]
+ // [yMin] [x] [y]
+ // [yMax] [x] [y]
+ long int N,temp;
+ scanf("%d",&T);
+ while(T--)
+ {
+  scanf("%ld",&N);
+  scanf("%lld%lld",&x,&y);temp=1;
+  xMin=xMax=limits[0][1]=limits[1][1]=limits[2][1]=limits[3][1]=x;
+  yMin=yMax=limits[0][2]=limits[1][2]=limits[2][2]=limits[3][2]=y;
+  limits[0][0]=limits[1][0]=limits[2][0]=limits[3][0]=temp++;
+  while(temp<=N)
+  {
+   scanf("%lld%lld",&x,&y);
+   if(x<xMin){limits[0][1]=x;limits[0][2]=y; limits[0][0]=temp; xMin=x;}
+   else if(x>xMax){limits[1][1]=x;limits[1][2]=y; limits[1][0]=temp; xMax=x;}
+   if(y<yMin){limits[2][1]=x;limits[2][2]=y; limits[2][0]=temp; yMin=y;}
+   else if(y>yMax){limits[3][1]=x;limits[3][2]=y; limits[3][0]=temp; yMax=y;}
+   temp++;
+  }
+
+//printf("xMin: %lld  %lld  %lld
+",limits[0][0],limits[0][1],limits[0][2]);
+//printf("xMax: %lld  %lld  %lld
+",limits[1][0],limits[1][1],limits[1][2]);
+//printf("yMin: %lld  %lld  %lld
+",limits[2][0],limits[2][1],limits[2][2]);
+//printf("yMax: %lld  %lld  %lld
+",limits[3][0],limits[3][1],limits[3][2]);
+ 
+
+
+  if(limits[0][2]<=yMin){printf("1
+%lld NE
+",limits[0][0]);}
+  else if(limits[0][2]>=yMax){printf("1
+%lld SE
+",limits[0][0]);}
+
+  else if(limits[1][2]<=yMin){printf("1
+%lld NW
+",limits[1][0]);}
+  else if(limits[1][2]>=yMax){printf("1
+%lld SW
+",limits[1][0]);}
+
+  else if(limits[2][1]<=xMin){printf("1
+%lld NE
+",limits[2][0]);}
+  else if(limits[2][1]>=xMax){printf("1
+%lld NW
+",limits[2][0]);}
+
+  else if(limits[3][1]<=xMin){printf("1
+%lld SE
+",limits[3][0]);}
+  else if(limits[3][1]>=xMax){printf("1
+%lld SW
+",limits[3][0]);}
+  
+  else if(limits[0][2]>limits[1][2]){printf("2
+%lld SE
+%lld NW
+",limits[0][0],limits[1][0]);}
+  else{printf("2
+%lld NE
+%lld SW
+",limits[0][0],limits[1][0]);}
+
+ }
+
+
+
+ return 0;
+}

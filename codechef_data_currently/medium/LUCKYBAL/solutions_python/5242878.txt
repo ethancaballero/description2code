@@ -1,0 +1,19 @@
+t=int(raw_input())
+for z in xrange(t):
+    s=raw_input()
+    n=len(s)
+    c=s.count('4')+(n*(n-1))/2
+    i=0
+    while (i<(n-1)):
+        cur=s[i]
+        l=0
+        while (i<n and s[i]==cur):
+            i+=1
+            l+=1
+        if (cur=='7'):
+            c-=(l*(l-1))/2
+        
+            
+    print c
+                
+            

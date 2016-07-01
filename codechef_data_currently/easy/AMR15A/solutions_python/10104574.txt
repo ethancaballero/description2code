@@ -1,0 +1,14 @@
+n = input()
+a = raw_input().split()
+a = map(int, a)
+l1=0
+l2=0
+for i in a:
+	if i%2==0:
+		l1+=1
+	else:
+		l2+=1
+if l1>l2:
+	print 'READY FOR BATTLE'
+else:
+	print 'NOT READY'

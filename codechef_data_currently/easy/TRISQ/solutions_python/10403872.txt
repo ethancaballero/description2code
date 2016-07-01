@@ -1,0 +1,9 @@
+for x in xrange(int(raw_input())):
+	input = int(raw_input())
+
+	if input % 2 == 0:
+		input = (input - 2)/2
+	else:
+		input = (input - 3)/2
+	
+	print (input * (input + 1)) / 2

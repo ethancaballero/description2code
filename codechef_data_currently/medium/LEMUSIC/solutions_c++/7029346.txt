@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<utility>
+#include<algorithm>
+#include<iostream>
+using namespace std;
+#define max 100005
+typedef long long ll;
+main()
+{
+	pair<int,int> p[max];
+	int a[max];
+	int n,i,j,b,t,l;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&b);
+			scanf("%d",&l);
+			p[i].first=b;
+			p[i].second=l;
+		}
+		sort(p,p+n);
+		int present=-1;
+		ll sum=0;
+		int k=0;
+		for(i=0;i<n;i++)
+		{
+			if(present!=p[i].first)
+				a[k++]=p[i].second;
+			else
+				sum=sum+p[i].second;
+			present=p[i].first;
+			
+		}
+		sort(a,a+k);
+		ll ans=0;
+		ans=sum*(k);
+		for(i=0;i<k;i++)
+			ans=ans+((i+1)*(ll)a[i]);
+		printf("%lld
+",ans);
+	}
+}

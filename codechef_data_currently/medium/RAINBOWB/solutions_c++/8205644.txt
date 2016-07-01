@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+
+#define MD 1000000007
+ 
+unsigned long long int NChooseK(int n, int k)
+{
+	int i,temp,pr = 720;
+	unsigned long long int arr[6];
+	unsigned long long int num = 1;
+	
+	for (i = 1 ; i <= k ; i++) {
+		temp = n + i;
+		while(temp%2 == 0 && pr%2 == 0) {
+			temp /= 2;
+			pr /= 2;
+		}
+		while(temp%3 == 0 && pr%3 == 0) {
+			temp /= 3;
+			pr /= 3;
+		}
+		while(temp%5 == 0 && pr%5 == 0) {
+			temp /= 5;
+			pr /= 5;
+		}
+		
+		arr[i] = temp;
+	}
+	
+	for (i = 1 ; i <= k ; i++) {
+   		num = (num * arr[i]) % MD;
+	}
+   	
+   	return num/pr;
+}
+ 
+int main(void) {
+	int n,i;
+	unsigned long long int ncr = 0;
+	scanf("%d",&n);
+	
+	if(n > 12) {
+		if(n%2 == 0)
+			n = n-1;
+		n = (n-13)/2;
+		
+		ncr = NChooseK(n,6);
+	}
+		
+	cout<<ncr<<"
+";
+	return 0;
+} 

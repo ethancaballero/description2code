@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+#define FOR(i,a,b) for(int i= a; i<= b; i++)
+#define FORD(i,a,b) for(int i= a; i>= b; i--)
+#define For(i,a,b) for(int i= a; i< b; i++)
+#define Ford(i,a,b) for(int i= a; i> b; i--)
+#define FORE(i,v) for (__typeof((v).begin()) i=(v).begin();i!=(v).end();i++)
+#define Fill(s,a) memset(s,a,sizeof(s));
+#define pb push_back
+#define mp make_pair
+#define fi first
+#define se second
+
+using namespace std;
+
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+typedef unsigned long long ull;
+
+const int N = 1001;
+const ll base = 1e7;
+
+ll n, a[N], res, sum;
+ll f[N][10*N];
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    //freopen("test.inp","r",stdin);
+    //freopen("test.out","w",stdout);
+    int tests;
+    cin >> tests;
+    while (tests--)
+    {
+        res = 0;
+        sum = 0;
+        cin >> n;
+        FOR(i,1,n)
+        {
+            cin >> a[i];
+            sum += a[i];
+        }
+
+        f[0][0] = 1;
+        FOR(i,1,n)
+            FOR(j,0,sum)
+            {
+                f[i][j] = f[i-1][j];
+                if (j >= a[i]) f[i][j] = (f[i][j] + f[i-1][j - a[i]]) % base;
+            }
+        FOR(j,0,sum)
+            res = (res + max(j - (sum - j),(sum - j) - j) * f[n][j]) % base;
+        cout << res << endl;
+    }
+    return 0;
+}

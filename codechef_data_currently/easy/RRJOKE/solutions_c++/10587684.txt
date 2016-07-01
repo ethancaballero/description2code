@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int x,y,j,k,t,l,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		for(j=0;j<n;j++)
+		{
+			cin>>x>>y;		//no need  to make array we wont use valyes further
+		}	
+		k=0;
+		for(l=1;l<=n;l++)
+		k^=l;
+		cout<<k<<endl;
+	}	
+			
+	return 0;
+}

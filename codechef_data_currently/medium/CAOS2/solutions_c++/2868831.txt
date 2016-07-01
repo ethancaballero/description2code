@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <string.h>
+#include<iostream>
+using namespace std;
+#define fr(i,n)   for(int i=0;i<n;i++)
+ 
+int p[500];
+void markMultiples(int arr[], int a, int n)
+{
+    int i = 2, num;
+    while ( (num = i*a) <= n )
+    {
+        arr[ num-1 ] = 1; 
+        ++i;
+    }
+}
+ 
+
+void prime(int n)
+{
+	
+	//int count=0;
+   int w=0;
+    if (n >= 2)
+    {
+       
+        int *arr;
+		arr=new int[n]();
+       
+        for (int i=1; i<n; ++i)
+        {
+            if ( arr[i] == 0 )
+            {
+                
+                p[w]=i+1;
+                markMultiples(arr, i+1, n);
+				w++;
+            }
+        }
+    }
+	//return count;
+}
+ 
+
+
+int min(int a,int b,int c,int d)
+{
+	return (a<=b?(a<=c?(a<=d?a:d):(c<=d?c:d)):(b<=c?(b<=d?b:d):(c<=d?c:d)));
+}
+int compute(char *m[],int i,int j,int x,int y)
+{
+    int a,b,c,d,small;
+	a=i;
+	b=j;
+	c=x-i-1;
+	d=y-j-1;
+	small=min(a,b,c,d);
+	int k=1;
+	if(m[i][j]!='#')
+	{
+
+	
+	while(k<=small)
+	{
+		if(m[i-k][j]!='^'||m[i][j-k]!='^'||m[i+k][j]!='^'||m[i][j+k]!='^')
+		{
+			break;
+		}
+            
+		else
+			k++;
+
+	}
+	return (k-1);
+	}
+	else
+		return 1;
+}
+int main()
+{
+   int input,x,y,count,i,j;
+   cin>>input;
+   bool cpc;
+   char **a;
+  prime(500);
+   while(input--)
+   {
+	  cin>>x>>y;
+	  count=0;
+	   a=new  char*[x];
+	   fr(i,x)
+	   {
+          a[i]=new char[y];
+	   }
+
+	  fr(i,x)
+	   {
+		  fr(j,y)
+		   {
+			   cin>>a[i][j];
+		   }
+	   }
+	  int sum=0,c,o;
+	     for(int i=0;i<x;i++)
+		{
+			
+			for(int j=0;j<y;j++)
+			{
+				o=0;
+				c=compute(a,i,j,x,y);
+				while(p[o]<=c)
+				{
+					sum++;
+					o++;
+				}
+				
+			}
+				
+				
+
+   }
+		 cout<<sum<<"
+";
+   }
+   getchar();
+}

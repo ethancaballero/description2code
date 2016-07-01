@@ -1,0 +1,50 @@
+#include<iostream>
+#include<algorithm>
+#include<stdlib.h>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+	unsigned long long int T,N,M,i,pos,newM,j,logn;
+	double p;
+	cin >> T;
+	while(T--)
+	{
+		cin >> N >> M >> p;
+		pair< int , double > prob[10000];
+		for(i=0;i<M;i++)
+		{
+			cin >> pos;
+			prob[i].first=pos;
+			prob[i].second=100;
+		} 
+		sort(prob,prob+M);
+		newM=N;
+		logn=0;
+		while(newM!=1)
+			newM/=2,logn++;
+		newM=M;
+		//cout << logn << endl;
+		for(i=0;i<logn;i++)
+		{
+			newM=0;
+			for(j=0;j<M;j++)
+			{
+				if(prob[j].first&1==1)
+				{
+				if(j+1!=M && prob[j+1].first==prob[j].first+1)
+					prob[newM].first=prob[j+1].first/2,prob[newM++].second=(prob[j+1].second*prob[j].second*(1-p/50) + (prob[j].second+prob[j+1].second)*p)/100,j++;
+				else
+					prob[newM].first=(prob[j].first+1)/2,prob[newM++].second=(prob[j].second*p)/100;
+				}
+				else
+					prob[newM].first=(prob[j].first)/2,prob[newM++].second=(prob[j].second*p)/100;
+
+			}
+			M=newM;
+	}
+	printf("%.6lf
+",prob[0].second);
+	}
+	return 0;
+}

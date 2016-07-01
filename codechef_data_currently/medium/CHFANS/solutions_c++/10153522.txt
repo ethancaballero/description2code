@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+int gcd(int a, int b);
+int main() {
+    
+   int t,a,b,a1,b1;
+   cin>>t;
+   while(t--)
+   {
+       cin>>a>>b;
+      if(a>0)a1=a;
+      else a1=(-1)*a;
+      if(b>0)b1=b;
+      else b1=(-1)*b;
+      
+       {if(a>b)cout<<(a-b)/gcd(a1,b1)<<endl;
+       else cout<<(b-a)/gcd(a1,b1)<<endl;}
+      
+       
+   }
+	return 0;
+}
+int gcd(int a,int b)
+{
+    if(a>b)return gcd(a-b,b);
+    else if(a<b)return gcd(a,b-a);
+    else return b;
+}

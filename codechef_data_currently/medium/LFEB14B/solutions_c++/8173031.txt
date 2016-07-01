@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<algorithm>
+#include<cmath>
+typedef long long ll;
+ll power(ll x,ll y)
+{
+    ll temp;
+    if( y == 0)
+        return 1;
+    temp = power(x, y/2);
+    if (y%2 == 0)
+        return temp*temp;
+    else
+        return x*temp*temp;
+}
+bool sorting(ll a,ll b)
+{
+return a>b;
+}
+int main()
+{
+    ll t,n,i,count,ans,max;
+    ll ar[100005];
+    scanf("%lld",&t);
+    while(t--)
+    {
+              count=0;
+              scanf("%lld",&n);
+              for(i=0;i<n;i++)
+              scanf("%lld",&ar[i]);
+              std::sort(ar,ar+n,sorting);
+              max=ar[0];
+              for(i=0;i<n;i++)
+              {
+                              if(max==ar[i])
+                              count++;
+                              else
+                              break;
+                              }
+                      ans=power(2,count);
+                      ans--;
+                      printf("%lld
+",ans);
+                      }
+                      return 0;
+                      }

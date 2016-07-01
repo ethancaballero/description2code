@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main(){
+ios::sync_with_stdio(false);
+int t,n,a;
+cin>>t;
+while(t--){
+    cin>>n;
+    int count=0;
+    int c[100000]={0};
+    for(int i=0;i<n;i++){
+        cin>>a;
+        c[a]++;
+        if(c[a]>1) count++;
+    }
+    cout<<n-count<<endl;
+}
+}
+//Attempt to reduce time consumption.

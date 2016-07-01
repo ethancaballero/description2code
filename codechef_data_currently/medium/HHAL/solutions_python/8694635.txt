@@ -1,0 +1,25 @@
+hannes = int(raw_input())
+for l in xrange(hannes):
+    arr = ""
+    arr = raw_input()
+
+    a = True
+    for i in range(0,len(arr)//2):
+        if arr[i] != arr[len(arr)-i-1]:
+            a = False
+            break
+
+    if a:
+        print 1
+    else:
+        print 2
+
+
+
+
+
+
+
+
+
+

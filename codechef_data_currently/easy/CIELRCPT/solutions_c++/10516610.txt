@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+int con(int p)
+{
+    if(p>=2048)
+        return p-2048;
+    else if(p>=1024)
+        return p-1024;
+        else if(p>=512)
+        return p-512;
+        else if(p>=256)
+        return p-256;
+        else if(p>=128)
+        return p-128;
+        else if(p>=64)
+        return p-64;
+        else if(p>=32)
+        return p-32;
+        else if(p>=16)
+        return p-16;
+        else if(p>=8)
+        return p-8;
+        else if(p>=4)
+        return p-4;
+        else if(p>=2)
+        return p-2;
+        else if(p=1)
+        return p-1;
+}
+int main()
+{
+    int t,p,f1=0,f2,x;
+    while(f1==0)
+    {
+        cin>>t;
+        if(t>=1 && t<=5)
+            f1=1;
+    }
+    while(t--)
+    {
+        f2=0;x=0;
+        while(f2==0)
+        {
+            cin>>p;
+            if(p>=1 && p<=100000)
+                f2=1;
+        }
+        while(p>0)
+        {
+            p=con(p);
+            x++;
+        }
+    cout<<x<<endl;
+    }
+
+    return 0;
+}

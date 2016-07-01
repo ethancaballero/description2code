@@ -1,0 +1,7 @@
+for i in range(int(raw_input())):
+    for j in range(int(raw_input())):
+        a=map(int,raw_input().split())
+        if a[0]==a[2]:
+            print a[1]/2
+        else:
+            print a[1]-a[1]/2

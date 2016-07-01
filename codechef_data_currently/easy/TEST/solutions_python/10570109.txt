@@ -1,0 +1,6 @@
+while True:
+    num = raw_input()
+    if int(num) != 42:
+        print num
+    else:
+        break

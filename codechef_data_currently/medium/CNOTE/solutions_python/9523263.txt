@@ -1,0 +1,14 @@
+t=input()
+while t:
+	flag="false"
+	x,y,k,n=map(int,raw_input().split())
+	while n:
+		p,c=map(int,raw_input().split())
+		if x-y<=p and c<=k:
+			flag="true"
+		n=n-1
+	if flag=="true":
+		print "LuckyChef"
+	else:
+		print "UnluckyChef"
+	t=t-1

@@ -1,0 +1,14 @@
+test=int(raw_input())
+dp=[[0 for _ in range(0,1002)] for _ in range(0,1002)]
+mod=1e9+7
+for i in range(1,1001):
+	dp[i][i]=1
+for i in range(1,1001):
+	for j in range(1,i):
+		dp[i][j]=(dp[i-1][j]*j+dp[i-1][j-1])%mod
+for _ in range(0,test):
+	n=int(raw_input())
+	ans=0
+	for i in range(0,n+1):
+		ans=(ans+dp[n][i])%mod
+	print int(ans)

@@ -1,0 +1,29 @@
+#http://www.codechef.com/JUNE14/problems/CHEFZOT
+
+
+import sys
+
+n = int(sys.stdin.readline().lstrip().rstrip())
+line = sys.stdin.readline().lstrip().rstrip()
+aSList = line.split()
+a = []
+
+for i in range(n):
+    a.append(int(aSList[i]))
+
+maxLen = 0
+len = 0
+
+for i in range(n):
+    if a[i] == 0:
+      if len > maxLen:
+        maxLen = len
+      len = 0
+    else:
+      len += 1
+
+if len > maxLen:
+    maxLen = len
+    
+print(maxLen)      
+ 

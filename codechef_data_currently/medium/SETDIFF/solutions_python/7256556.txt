@@ -1,0 +1,28 @@
+def solve(groups, biggestN):
+	for i in range(len(groups)):
+		groups[i].sort()
+	total = [0 for i in range(len(groups))]
+	lastDiff = [0 for i in range(len(groups))]
+	power = 1
+	for i in range(0, biggestN):
+		for x in range(len(groups)):
+			if i < len(groups[x]):
+				lastDiff[x] += groups[x][-i - 1] - groups[x][i]
+				total[x] += lastDiff[x] * power
+		power *= 2
+	for i in range(len(total)):
+		total[i] %= 1000000007
+	return total
+
+
+t = int(raw_input())
+qs = []
+biggest = 0
+for i in range(t):
+	biggest = max(biggest, int(raw_input()))
+	group1 = map(int, raw_input().split())
+	qs.append(group1)
+ans = solve(qs, biggest)
+for i in ans:
+	print i
+	

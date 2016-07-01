@@ -1,0 +1,6 @@
+T = int(raw_input())
+while T:
+    N = int(raw_input())
+    L = [int(i) for i in raw_input().split()]; s = sum(L)
+    for i in L: print s/(N-1) - i,
+    print; T-=1

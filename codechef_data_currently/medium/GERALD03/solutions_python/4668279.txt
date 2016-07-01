@@ -1,0 +1,32 @@
+t=input()
+while t:
+    t-=1
+    n=input()
+    l=[0]*(n+1)
+    r=[0]*(n+1)
+    for i in range(n):
+        l[i],r[i]=map(int,raw_input().split())
+    i=0
+    count=0
+    ans=""
+    while i<(n-1):
+        if l[i+1]>=r[i]:
+            ans=ans+"L+"*(r[i]-l[i]-1)+"R+L+"*(l[i+1]-r[i]+1)+"R+"*(r[i+1]-l[i+1]-1)
+        elif r[i+1]>=r[i] and l[i+1]>=l[i]:
+            ans=ans+"L+"*(l[i+1]-l[i])+"R+"*(r[i+1]-r[i])
+        elif r[i+1]>=r[i] and l[i+1]<=l[i]:
+            ans=ans+"L-"*(l[i]-l[i+1]) +"R+"*(r[i+1]-r[i])
+        elif r[i+1]>=l[i] and l[i+1]>=l[i]:
+            ans=ans+"L+"*(l[i+1]-l[i])+"R-"*(r[i]-r[i+1])
+        elif r[i+1]>=l[i] and l[i+1]<=l[i]:
+            ans=ans+"L-"*(l[i]-l[i+1]) +"R-"*(r[i]-r[i+1])
+        else:
+            ans=ans+"L-"*(l[i]-l[i+1])+"R-"*(r[i]-r[i+1])
+        i+=1
+    print len(ans)/2
+    print ans
+                          
+                          
+                                                                    
+                                                            
+            

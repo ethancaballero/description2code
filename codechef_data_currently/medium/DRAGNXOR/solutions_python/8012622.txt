@@ -1,0 +1,45 @@
+def find_bits(n, a):
+
+    bits = 0
+    mod = 2
+    for x in range(0,n):
+        if a % mod:
+            bits += 1
+            a -= a % mod
+        mod *= 2
+
+    return bits
+
+def calc_bits(n, a):
+
+    if a > n:
+        a = n - (a - n)
+
+    mod = pow(2,(n-1))
+    bits = 0
+
+    for x in range(0,a):
+        bits = bits + mod
+        mod /= 2
+
+    return bits
+
+
+if __name__ == "__main__":
+
+    tests = int(raw_input())
+
+    for x in range(0, tests):
+
+        strn, stra, strb = raw_input().split()
+
+        n = int(strn)
+        a = int(stra)
+        b = int(strb)
+
+        abits = find_bits(n,a)
+        bbits = find_bits(n,b)
+
+        print calc_bits(n,(abits+bbits))
+
+

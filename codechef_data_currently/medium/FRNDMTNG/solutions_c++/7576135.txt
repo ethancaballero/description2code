@@ -1,0 +1,38 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    float f1, f2, t1, t2,a,b,c,d;
+    cin>>f1>>f2>>t1>>t2;
+    float p;
+       a=(f2-t1)*(f2-t1)/2;
+       b=(f1-t2)*(f1-t2)/2;
+       c=f1*f2;
+       d=(f1*f1)+(f2*f2);
+        if(t1==0&&t2==0)
+        {
+            p=0;
+        }
+          else if(t1<=f2&&t2<=f1)
+        {
+          p= (c-(a+b))/c;
+        }
+        else if(t1>f2&&t2<f1)
+            p=(c-b)/c;
+
+        else if(t1<f2&&t2>f1)
+            p=(c-a)/c;
+            else if(t1>f2&&t2>f1)
+            {
+                p=1;
+            }
+            cout<<p<<"
+";
+    }
+
+}

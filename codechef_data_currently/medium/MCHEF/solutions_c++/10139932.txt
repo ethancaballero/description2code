@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+#include <vector>
+#include <set>
+
+using namespace std;
+
+#define NMAX 100001
+#define KMAX 501
+
+int A[NMAX], C[NMAX], MIN[NMAX];
+long long dp[NMAX][KMAX];
+bool flag[NMAX][KMAX];
+
+long long solve( int i, int j ) {
+    if ( i < 0 )
+        return 0;
+
+    if ( flag[i][j] )
+        return dp[i][j];
+
+    long long ret = solve( i-1, j) + A[i];
+
+    if (j >= MIN[i])
+        ret = max( solve( i-1, j-MIN[i] ), ret );
+
+    flag[i][j] = true;
+    return dp[i][j] = ret;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    while (T--){
+        int N, K, M;
+        scanf("%d%d%d", &N, &K, &M);
+
+        for (int i = 0; i < N; ++i) scanf("%d", &A[i]);
+        vector<int> L[N], R[N];
+
+        int l, r;
+        for (int i = 0; i < M; ++i) {
+            scanf("%d%d%d", &l, &r, &C[i]);
+            L[l-1].push_back(i);
+            R[r-1].push_back(i);
+        }
+
+        set<pair<int,int> > S;
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < L[i].size(); ++j) {
+                S.insert(make_pair( C[L[i][j]], L[i][j] ));
+            }
+            int cost = S.begin()->first;
+            if (cost != 0) MIN[i] = cost;
+            else MIN[i] = 200;
+
+            for (int j = 0; j < R[i].size(); ++j) {
+                S.erase(make_pair( C[R[i][j]], R[i][j] ));
+            }
+        }
+        long long ans = solve(N-1, K);
+        memset(flag, 0, sizeof(flag));
+        printf("%lld
+", ans);
+    }
+
+}

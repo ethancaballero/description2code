@@ -1,0 +1,12 @@
+from __future__ import division
+t=int(raw_input())
+for i in range(0,t):
+	n=int(raw_input())	
+	if n<1500:
+		print 2*n
+	else:
+		hra=500
+		da=98*n/100
+		gs = hra+da+n
+		print '%g' %gs
+	

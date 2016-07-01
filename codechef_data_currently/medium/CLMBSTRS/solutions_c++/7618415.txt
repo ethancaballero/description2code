@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+#define HODOR        long long int
+#define MOD          1000000007
+#define rep(i, a, b) for(int i = (a); i < (b); ++i)
+#define dwn(i, a, b) for(int i = (a); i >= (b); --i)
+#define REP(c, it)   for( typeof( (c).begin()) it = (c).begin();  it != (c).end(); ++it)
+#define DWN(c, it)   for( typeof( (c).end()) it = (c).end()-1;  it >= (c).begin(); --it)
+#define ss(n)        scanf("%s",n)
+#define FILL(x,y)    memset(x,y,sizeof(x))
+#define pb           push_back
+#define mp           make_pair
+#define ALL(v)       v.begin(), v.end()
+#define sz(a)        ((int)a.size())
+#define SET(v, i)    (v | (1 << i))
+#define TEST(v, i)   (v & (1 << i))
+#define TOGGLE(v, i) (v ^ (1 << i))
+#define gc           getchar_unlocked
+#define pc           putchar_unlocked
+ 
+template<typename X> inline void inp(X &n ) {
+    register int ch=gc();int sign=1;n=0;
+    while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=gc();}
+    while(  ch >= '0' && ch <= '9' ) n = (n<<3)+(n<<1) + ch-'0', ch=gc();
+    n=n*sign;
+}
+ 
+template<typename X> inline void out(X a) {
+    char snum[20]; int i=0,sign=0;
+    if(a<0) sign=1,a=-a;
+    do {snum[i++]=a%10+48; a=a/10; }while(a!=0);
+    i=i-1;
+    if(sign) pc('-');
+    while(i>=0) pc(snum[i--]);
+    pc('
+');
+}
+
+#define testcases(l)  int l,t; for(inp(t),l=0;l<t;++l)
+
+int fib(int n) {
+    HODOR M[2][2]= {{1,1},{1,0}}, res[2][2]= {{1,1},{1,0}}, tmp[2][2];
+    int i, j, k;
+    while ( n ) {
+        if ( n&1 ) {
+            for(i=0; i<2; i++) for(j=0; j<2; j++) for(tmp[i][j] = k=0; k<2; k++)
+                        tmp[i][j] = (tmp[i][j] + res[i][k]*M[k][j])%MOD;
+            for(i=0; i<2; i++) for(j=0; j<2; j++) res[i][j]= tmp[i][j];
+        }
+        for(i=0; i<2; i++) for(j=0; j<2; j++) for(tmp[i][j] = k=0; k<2; k++)
+                    tmp[i][j] = (tmp[i][j] + M[i][k]*M[k][j])%MOD;
+        for(i=0; i<2; i++) for(j=0; j<2; j++) M[i][j] = tmp[i][j];
+        n >>= 1;
+    }
+    return res[0][0];
+}
+
+int main() {
+	int n, g;
+    testcases(l) {
+    	inp(n), inp(g);
+    	if ( __builtin_popcount(fib(n-1)) == g )
+    		printf("CORRECT
+");
+    	else
+    		printf("INCORRECT
+");
+    }
+    return 0;
+}

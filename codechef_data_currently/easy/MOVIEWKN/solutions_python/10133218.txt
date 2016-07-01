@@ -1,0 +1,16 @@
+t = int(raw_input())
+while t>0:
+    n = int(raw_input())
+    a = map(int, raw_input().split())
+    b = map(int, raw_input().split())
+    max_prod = 0
+    max_index = -1
+    for i in range(0, n):
+        prod = a[i]*b[i]
+        if max_prod < prod:
+            max_prod = prod
+            max_index = i
+        elif max_prod == prod and b[max_index] < b[i]:
+            max_index = i
+    print max_index+1
+    t -= 1

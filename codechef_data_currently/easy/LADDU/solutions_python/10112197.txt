@@ -1,0 +1,40 @@
+# cook your code here
+#O(n)
+def isint(d):
+    try:
+        d=int(d)
+        return True
+    except ValueError:
+        return False
+t=int(raw_input())
+for i in range(t):
+    laddu = 0
+    denom = 400
+    act,orig=raw_input().split()
+    act = int(act)
+    if(orig == "INDIAN"):
+        denom = 200
+    for j in range(act):
+        l = list(raw_input())
+        length = len(l)
+        point=0
+        # print l
+        # int_conv(d1,d2,d3)
+        for k in range (1,5):
+            k = k-5
+            if isint(l[k]):
+                point = point*10 + int(l[k])
+        # print point
+        if(l[8]=='W'):
+            # print l[-1]
+            laddu += 300
+            if point <= 20:
+                laddu += 20 - point
+        elif(l[8]=='R'):
+            laddu += 300
+        elif(l[8]=='D'):
+            laddu += point
+        elif(l[8]=='H'):
+            laddu += 50
+    laddu = laddu // denom
+    print laddu

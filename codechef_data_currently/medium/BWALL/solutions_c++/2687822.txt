@@ -1,0 +1,116 @@
+/*
+author :  R Anirudh 
+*/
+
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+#include <queue>
+#include <cassert>
+#include <climits>
+#include <limits>
+using namespace std;
+#define SIZE(A) ((int)(A.size()))
+#define MSET(A,x) memset(A,x,sizeof(A));
+#define FILL(A,x) fill(A.begin(),A.end(),x)
+#define REP(i,N) for(int i=0;i<(int)(N);i++)
+#define FOR(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
+#define REV(i,a,b) for(int i=(int)(a);i>=(int)(b);i--)
+#define TR(c,i) for(typeof((c).begin()) i = (c).begin(); i != (c).end(); i++)
+#define ALL(x) x.begin(),x.end()
+#define INF (INT_MAX/2)
+#define LLINF (LONG_LONG_MAX/2LL)
+#define EPS 1e-12
+#define GI ({int t;scanf("%d",&t);t;})
+#define GL ({long long t;scanf("%lld",&t);t;})
+#define GF ({double t;scanf("%lf",&t);t;})
+#define bitCount(n) __builtin_popcount(n)
+#define MOD 1000000007
+#define MAXN 1000005
+#define FIX(a) (((a)%MOD+MOD)%MOD)
+typedef long long LL;
+typedef unsigned long long ULL;
+#define pb push_back
+
+vector<vector<LL> > multiply_matrix(vector<vector<LL> > , vector<vector<LL> >);
+
+vector<vector<LL> > power(vector<vector<LL> > a , LL p){
+ if(p==1) return a;
+ vector<vector<LL> > temp(3,vector<LL> (3));
+ temp=power(a,p/2);
+ if(p%2==0)
+  return multiply_matrix(temp,temp);
+ else
+ return multiply_matrix(multiply_matrix(temp,temp),a);
+
+}
+
+vector<vector<LL> > multiply_matrix(vector<vector<LL> > a, vector<vector<LL> > b){
+vector<vector<LL> > c(23,vector<LL> (3));
+FOR(i,0,3){
+FOR(j,0,3){
+c[i][j]=0;
+FOR(k,0,3){
+c[i][j]+=(a[i][k]* b[k][j])%MOD;
+}
+}
+}
+return c;
+}
+
+LL solve(LL n){
+	if(n==1)
+	return 1;
+	if(n==2)
+	return 5;
+	if(n==3)
+	return 11;
+	vector<vector<LL> > T(3,vector<LL> (3));
+	T[0][0]=1;
+	T[0][1]=4;
+	T[0][2]=2;
+	T[1][0]=1;
+	T[2][1]=1;
+	
+	vector<LL> f(3);
+	f[0]=11;
+	f[1]=5;
+	f[2]=1;
+		
+	T=power(T,n-3);
+	LL sum=0;
+	for(int i=0;i<3;i++){
+		sum = (sum + T[0][i]*f[i] ) % MOD;
+		}
+	return sum;
+	}
+
+int main(){  
+int t;
+scanf("%d",&t);
+while(t--){
+	LL n;
+	scanf("%lld",&n);
+	cout<<solve(n)<<endl;
+	}
+ 
+return 0;
+}
+
+

@@ -1,0 +1,13 @@
+from collections import Counter
+test=int(input())
+for i in range(test):
+    x=list(raw_input())
+    x1=Counter(x)
+    y=list(raw_input())
+    y1=Counter(y)
+    total=0
+    for j in y1:
+        if j in x1:
+            total=total+min(x1[j],y1[j])
+    print total      
+    

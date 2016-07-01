@@ -1,0 +1,65 @@
+#include <cstdio>
+#include <cstring>
+#include <queue>
+#include <algorithm>
+#include <iostream>
+#include <cmath>
+#include <map>
+#include <vector>
+#include <set>
+#include <string>
+#define PB push_back
+#define FT first
+#define SD second
+#define MP make_pair
+#define INF 0x3f3f3f3f
+using namespace std;
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef pair<int,int>  P;
+const int N=10+5e6,MOD=7+1e9;
+bool vis[N],flag[N];
+int prime[N/3],p[N/3];
+void init()
+{
+    int i,j,k;  
+    memset(flag,false,sizeof(flag));  
+    k=0;  
+    for(i=2;i<N;i++){  
+        if(!flag[i]) prime[k++]=i;  
+        for(j=0;j<k&&i*prime[j]<N;j++){  
+            flag[i*prime[j]]=true;              
+            if(i%prime[j]==0)  break;  //代码关键部分
+        }  
+    }  
+	int cnt = 0;
+	for(int i = 0;i < k;i ++) {
+		if(prime[i]%4==1) {
+			p[cnt++] = prime[i];
+		} 
+	}
+	memset(vis,0,sizeof(vis));
+	for(int i = 0;i < cnt;i ++) {
+		for(int j = p[i];j < N; j += p[i]) {
+			vis[j]=1;
+		}
+	}
+	//cout<<"KK: "<<cnt<<endl;
+}
+
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+    init();
+    int T;
+    scanf("%d",&T);
+    while(T --) {
+    	int x;
+    	scanf("%d",&x);
+    	if(vis[x]) puts("YES");
+    	else puts("NO");
+    }
+    //system("pause");
+    return 0;
+}

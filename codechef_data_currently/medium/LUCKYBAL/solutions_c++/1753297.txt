@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+#define ll long long int
+
+using namespace std;
+ 
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string str;
+        cin>>str;
+        ll len=str.length();
+        ll ans=0;
+        ans=(len*(len+1))/2;
+        int ptr=0;
+        while(ptr<len)
+        {
+            ll count=0;
+            while(str[ptr]=='7')
+            {
+                count++;
+                ptr++;
+            }    
+            ptr++;
+            ans-=((count*(count+1))/2);
+        }    
+        printf("%lld
+",ans);
+    }    
+    //system("pause");
+    return 0;
+}

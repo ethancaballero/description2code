@@ -1,0 +1,29 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+int t,i,slena,slenb,len,j,k,p=0;
+string stra,strb;
+cin>>t;
+for(i=0;i<t;i++)
+{
+cin>>stra>>strb;
+slena=stra.length();
+slenb=strb.length();
+for(j=0;j<slena;j++)
+{
+for(k=0;k<slenb;k++)
+{
+if(stra[j]==strb[k])
+p=1;
+}
+}
+if(p==1)
+cout<<"Yes"<<endl;
+else
+cout<<"No"<<endl;
+p=0;
+}
+return 0;
+}

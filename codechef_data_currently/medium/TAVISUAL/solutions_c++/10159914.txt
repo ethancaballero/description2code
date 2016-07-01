@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+  long int t,n,c,q,l,r;
+  cin>>t;
+  while(t--)
+  {
+   cin>>n>>c>>q;
+   while(q--)
+   {
+   cin>>l>>r;
+   if(c>=l&&c<=r)
+   c=r-(c-l);
+  }
+  cout<<c<<"
+";
+}
+return 0;
+}

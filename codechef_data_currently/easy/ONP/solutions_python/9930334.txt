@@ -1,0 +1,15 @@
+t = input()
+for _ in xrange(t):
+    expr = raw_input()
+    stack = []
+    out_expr = ""
+    for c in expr:
+        if c == ')':
+            out_expr += stack.pop()
+        elif c == '(':
+            pass
+        elif c.isalpha():
+            out_expr += c
+        else:
+            stack.append(c)
+    print out_expr

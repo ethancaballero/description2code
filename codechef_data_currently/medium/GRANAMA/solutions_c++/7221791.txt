@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+
+int main()
+{	
+	int t,i; string a,b;
+	scanf("%d",&t);
+	while(t--)
+	{
+		cin>>a>>b;
+		map<char,int> ma,mb;
+		for(i=0;i<a.size();i++)
+		ma[a[i]]++;
+		for(i=0;i<b.size();i++)
+		mb[b[i]]++;
+		
+		int s1=1,s2=1;
+		for(i=0;i<a.size();i++)
+		if(mb[a[i]]==0)
+		{
+			s1=0;
+			break;
+		}
+		
+		for(i=0;i<b.size();i++)
+		if(ma[b[i]]==0)
+		{
+			s1=0;
+			break;
+		}
+		
+		if(s1==0)
+		printf("YES
+");
+		else
+		{
+			for(i=0;i<a.size();i++)
+			if(ma[a[i]]!=mb[a[i]])
+			{
+				s2=0;
+				break;
+			}
+			if(s2==0)
+			printf("NO
+");
+			else
+			printf("YES
+");
+		}
+	}
+	return 0;
+}

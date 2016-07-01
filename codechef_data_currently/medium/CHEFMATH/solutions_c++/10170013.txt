@@ -1,0 +1,40 @@
+#include <stdio.h>
+#define N 1000000000
+#define ll long long
+
+ll fib[51];
+int F;
+
+ll ans(int f, int n, int k) {
+    if (n < 0) {
+        return 0;
+    }
+    if (n == 0 && k == 0) {
+        return 1;
+    }
+    if (n > 0 && k > 0 && f > 0 && n <= fib[f-1]*k) {
+        return ans(f-1, n, k) + ans(f, n - fib[f-1], k-1);
+    }
+    return 0;
+}
+
+int main() {
+    fib[0] = 1;
+    fib[1] = 2;
+    F = 2;
+    for (int i = 2;; i++) {
+        ll nfib = fib[i-2] + fib[i-1];
+        if (nfib <= N) {
+            fib[F++] = nfib;
+        } else break;
+    }
+
+    int z;
+    scanf("%d", &z);
+    while (z--) {
+        int n, k;
+        scanf("%d%d", &n, &k);
+        printf("%lld
+", ans(F,n,k));
+    }
+}

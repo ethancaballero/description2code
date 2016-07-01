@@ -1,0 +1,10 @@
+import collections
+for _ in range(input()):
+	s=str(raw_input())
+	l=len(s)
+	s1=s[:l/2]
+	s2=s[l/2:] if l%2==0 else s[l/2+1:]
+	if(cmp(collections.Counter(s1), collections.Counter(s2))==0):
+		print "YES"
+	else:
+		print "NO"

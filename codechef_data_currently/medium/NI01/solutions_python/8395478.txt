@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+	int test;
+	cin>>test;
+	for (int x=0;x<test;x++){
+		int cars,men_zero,total,p,r,k;
+		cin>>cars>>total>>men_zero>>p>>r>>k;
+
+		int j=1,t=0;
+		int waiting;
+		int completed = 0;
+		queue<pair<int,int> > time_car;
+		if (cars > men_zero) {
+			waiting = 0;
+			cars = cars - men_zero;
+			time_car.push(make_pair(p,men_zero));
+		}
+		else {
+			waiting = men_zero - cars;
+			if (cars!=0){
+				time_car.push(make_pair(p,cars));
+			}
+			cars = 0;
+		}
+		
+
+		while (t <= k){
+			int car_time=0;
+			if (!time_car.empty())
+				car_time = time_car.front().first;
+
+			if (time_car.empty() || car_time > j*r){
+				t = j*r;
+				if (t > k) break;
+				j++;
+				if (total >0){
+					waiting++;
+					total--;
+				}
+			}
+			else if (car_time < j*r){
+				t = car_time;
+				if (t > k) break;
+				cars+=time_car.front().second;	
+				completed+=time_car.front().second;
+				time_car.pop();
+			}
+			else if (car_time == j*r){
+				t = car_time;
+				if (t > k) break;
+				cars+=time_car.front().second;
+				completed+=time_car.front().second;
+				j++;
+				if (total >0){
+					waiting++;
+					total--;
+				}
+				time_car.pop();
+			}
+			
+			
+			if (waiting > 0){
+					if (cars > waiting) {
+						
+						cars = cars - waiting;
+						time_car.push(make_pair(t + p,waiting));
+						waiting = 0;
+					}
+					else {
+						waiting = waiting - cars;					
+						time_car.push(make_pair(t + p,cars));
+						cars = 0;
+					}
+			}
+			//cout <<"time = "<<t<<" "<<cars << " "<<completed<<" "<<total<<" "<<waiting<<endl;
+		}
+		cout <<cars <<" "<<completed<< " "<<total<<" "<<waiting<<endl;
+
+	}
+
+}

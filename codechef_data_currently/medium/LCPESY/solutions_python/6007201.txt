@@ -1,0 +1,13 @@
+test=input()
+from collections import Counter
+while test:
+    test-=1
+    s1=raw_input()
+    s2=raw_input()
+    a=Counter(s1)
+    b=Counter(s2)
+    count=0
+    for i in a:
+        if i in b:
+            count+=min(a[i],b[i])
+    print count

@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <math.h>
+#include <string.h>
+
+using namespace std;
+
+int main()
+{
+//    int t;
+//    scanf("%d", &t);
+//    while(t--)
+//    {
+        int n;
+        long long int k, max = 0, min = 2000000000;
+        scanf("%d %lld", &n, &k);
+        long long int arr[n];
+        for(int i = 0; i < n; i++)
+        {
+            scanf("%lld", &arr[i]);
+            if(arr[i] > max)
+            {
+                max = arr[i];
+            }
+
+            if(arr[i] < min)
+            {
+                min = arr[i];
+            }
+        }
+
+        if(k == 0)
+        {
+            for(int i = 0; i < n; i++)
+            {
+                printf("%lld ", arr[i]);
+            }
+        }
+        else if(k % 2 == 0)
+        {
+            for(int i = 0; i < n; i++)
+            {
+                printf("%lld ", arr[i] - min);
+            }
+        }
+        else
+        {
+            for(int i = 0; i < n; i++)
+            {
+                printf("%lld ", max - arr[i]);
+            }
+        }
+//    }
+    return 0;
+}

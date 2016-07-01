@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+    int t;
+
+    cin >> t;
+    int adj[102][102] = {0};
+    for(int i = 0; i < t; i++) {
+        for(int j = 0; j < t; j++) {
+            string s;
+            cin >> s;
+            if(s == "YES") {
+                adj[i][j] = 1;
+            }
+        }
+    }
+
+    for(int i = 0; i < t; i++) {
+        int flag = 0;
+        for(int j = 0; j < t; j++) {
+            int k = 0;
+            while(adj[i][k] == adj[j][k] && k < t) k++;
+            if(k == t && adj[i][j]) {
+                continue;
+            }
+            else if(k != t && !adj[i][j]) {
+                continue;
+            }
+            else {
+                flag = 1;
+                break;
+            }
+        }
+        if(!flag) {
+            for(int j = 0; j < t; j++) {
+                if(adj[i][j]) {
+                    cout << "YES
+";
+                    continue;
+                }
+                cout << "NO
+";
+            }
+            return 0;
+        }
+    }
+
+    for(int i = 0; i < t; i++) cout << "NO
+";
+
+    return 0;
+}

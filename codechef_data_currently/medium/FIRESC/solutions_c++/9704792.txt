@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define MAX 1000000
+#define MOD 1000000007
+using namespace std;
+
+int parent[MAX+1],hash[MAX+1];
+
+int find_parent(int);
+
+void merge(int x,int y)
+{
+	int parent_x=find_parent(x);
+	int parent_y=find_parent(y);
+	if(parent_x!=parent_y)
+		parent[parent_x]=parent_y;
+}
+
+int find_parent(int x)
+{
+	if(parent[x]==x)
+		return x;
+	parent[x]=find_parent(parent[x]);
+	return parent[x];
+}
+
+int main()
+{
+	std::ios::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m,j=0,ans=1,i;
+		cin>>n>>m;
+		for(i=1;i<=n;i++)
+			parent[i]=i;
+		for(i=1;i<=m;i++)
+		{
+			int x,y;
+			cin>>x>>y;
+			merge(x,y);
+		}
+		for(i=1;i<=n;i++)
+		{
+			hash[find_parent(i)]++;
+		}
+		/*for(i=1;i<=n;i++)
+		{
+			cout<<hash[i]<<" ";
+		}*/
+		for(i=1;i<=n;i++)
+		{
+			if(hash[i])
+			{
+				j++;
+				ans=(1LL*ans*hash[i])%MOD;
+			}
+			hash[i]=0;
+		}
+		cout<<j<<" "<<ans<<endl;
+	}
+	return 0;
+}

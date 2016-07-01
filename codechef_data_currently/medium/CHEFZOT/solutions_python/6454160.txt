@@ -1,0 +1,15 @@
+import sys
+
+length = int(sys.stdin.readline())
+data = map(int,sys.stdin.readline().split())
+arr_len = 0
+temp_len = 0
+for i in data:
+    if i == 0:
+        temp_len = 0
+    else:
+        temp_len += 1
+    if temp_len > arr_len:
+        arr_len = temp_len
+
+print arr_len

@@ -1,0 +1,8 @@
+t=int(raw_input())
+for i in range(0,t):
+	n=int(raw_input())
+	lis=map(int,raw_input().split())
+	k=int(raw_input())
+	p=lis[k-1]
+	lis.sort()
+	print lis.index(p)+1

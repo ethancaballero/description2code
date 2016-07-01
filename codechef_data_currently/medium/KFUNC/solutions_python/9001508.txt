@@ -1,0 +1,21 @@
+def f(x):
+    if x < 10:
+        return x
+    else:
+        return ((x - 1) % 9) + 1
+
+
+testCases = int(raw_input())
+for c in range(0, testCases):
+    str = raw_input()
+    list = map(int, str.split())
+    a1 = list[0]
+    d = list[1]
+    l = list[2]
+    r = list[3]
+    sum = 0
+    for i in range(l, r + 1):
+        term = a1 + d * (i - 1)
+        sum += f(term)
+
+    print(sum)

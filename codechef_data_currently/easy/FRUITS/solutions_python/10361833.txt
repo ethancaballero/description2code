@@ -1,0 +1,8 @@
+t=int(raw_input())
+while t > 0 :
+    t-=1
+    n,m,k = map(int,raw_input().strip().split())
+    if abs(n-m) <= k :
+        print '0'
+    else :
+        print abs(n-m)-k    

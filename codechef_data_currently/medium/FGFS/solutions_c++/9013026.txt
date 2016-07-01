@@ -1,0 +1,67 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+#include<map>
+using namespace std;
+map<int,int> m;
+vector< pair<int,int> > v[100005];
+int Activity_selection(vector<pair<int,int> > v1)
+{
+	if(v1.size()==0)
+		return 0;
+	sort(v1.begin(),v1.end());
+	int i=0;
+	int count=1;
+	for(int j=1;j<v1.size();j++)
+	{
+		if(v1[j].second>=v1[i].first)
+		{
+			count++;
+			i=j;
+		}
+	}
+	return count;
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		m.clear();
+		int n,k;
+		scanf("%d %d",&n,&k);
+		for(int i=0;i<=n;i++)
+	    	v[i].clear();
+		int s,f,p;
+		int pos=0;
+		for(int i=0;i<n;i++)
+		{
+			scanf("%d %d %d",&s,&f,&p);
+			p--;
+			if(m.count(p)==0)
+			{
+				m[p]=pos++;
+			}
+			v[m[p]].push_back(make_pair(f,s));
+		}
+		int count=0;
+		for(int i=0;i<pos;i++)
+		{
+			count=count+Activity_selection(v[i]);
+		}
+		cout<<count<<endl;
+		/*int i, j;
+		i = 0;
+		printf("%d ", i);
+		for (j = 1; j < n; j++)
+		{
+			if (s[j] >= f[i])
+			{
+				printf ("%d ", j);
+				i = j;
+			}
+		}*/
+	}
+}

@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<bitset>
+using namespace std;
+
+int main()
+{
+    long long int i,k,s,j;
+    double a,b,x=sqrt(2.0),y=sqrt(3.0),ans;
+    scanf("%lld%lld%lld",&i,&k,&s);
+    scanf("%lf%lf",&a,&b);
+    if((i&1)!=(k&1))
+        {double an,bn;
+           an=x*((a+b)-y*(a-b));
+           bn=x*((a-b)+y*(a+b));
+           a=an;
+           b=bn;
+           i++;
+        }
+        ans=(a+b)*pow(2.0,((k-i)*2)-s);
+
+        printf("%.10f
+",ans);
+    return 0;
+
+}

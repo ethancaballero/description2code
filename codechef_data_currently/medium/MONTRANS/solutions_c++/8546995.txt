@@ -1,0 +1,144 @@
+#include<bits/stdc++.h>
+//#include<stdio.h>
+using namespace std;
+#define for1(i,n) for(i=0;i<n;i++)
+#define for2(i,n) for(i=n-1;i>=0;i--)
+#define rep(i, begin, end) for (__typeof(end) i = (begin) - ((begin) > (end)); i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+#define ll long long int
+#define CLEAR(array, value) memset(array, value, sizeof(array));
+#define si(a)     scanf("%d", &a)
+#define sl(a)     scanf("%lld", &a)
+#define sc(a)     scanf(" %c", &a)
+#define ss(a)     scanf("%s", a)
+#define pi(a)     printf("%d
+", a)
+#define pl(a)     printf("%lld
+", a)
+#define pn        printf("
+")
+
+#define mod long(1e9+7)
+
+void swap(int *x, int *y);
+
+ 
+
+int main()
+
+{
+
+	int test,a,b,c,max_a,max_b,max_i,i,per_a,per_b;
+
+	scanf("%d",&test);
+
+	while(test != 0)
+
+	{
+
+		scanf("%d %d %d",&a,&b,&c);
+
+		per_a = a;
+
+		per_b = b;
+
+		max_a = a;
+
+		max_b = b;
+
+		i = 0;
+
+		max_i = 0;
+
+		while( (a*100 + b) >= c)
+
+		{
+
+			if(b < c)
+
+			{
+
+				a = a -1;
+
+				b = b + 100;
+
+				b = b - c;
+
+				swap(&a,&b);
+
+				//printf("in if part  : %d %d
+",a,b);
+
+			}
+
+			else
+
+			{
+
+				b = b - c;
+
+				swap(&a,&b);
+
+				//printf("in else part  : %d %d
+",a,b);
+
+			}
+
+ 
+
+			i++;
+
+ 
+
+			if( (max_a*100 + max_b) < (a*100 + b) )
+
+			{
+
+				max_a = a;
+
+				max_b = b;
+
+				max_i = i;
+
+				if(max_i == 9999)
+
+					break;
+
+			}
+
+ 
+
+			if(a == per_a && b == per_b)
+
+				break;
+
+			
+		}
+
+		printf("%d
+",max_i);
+
+		
+		test--;
+
+	}
+
+	return 0;
+
+}
+
+ 
+
+void swap(int *x, int *y)
+
+{
+
+	int t;
+
+	t = *x;
+
+	*x = *y;
+
+	*y = t;
+
+}
+

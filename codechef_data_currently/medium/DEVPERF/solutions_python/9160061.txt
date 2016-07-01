@@ -1,0 +1,38 @@
+for t in xrange(int(raw_input())):
+	n, m = map(int, raw_input().split())
+	r, c = n, m
+	row = []
+	col = []
+	
+	for i in xrange(m):
+		col.append("")
+	for i in xrange(n):
+		s = raw_input()
+		row.append(s)
+		for j in xrange(m):
+			col[j] += s[j]
+			
+	for i in range(n):
+		if (row[i].count(".") == m):
+			r -= 1
+		else:
+			break
+	for i in range(n-1,n-r-1,-1):
+		if (row[i].count(".") == m):
+			r -= 1
+		else:
+			break
+	for i in range(m):
+		if (col[i].count(".") == n):
+			c -= 1
+		else:
+			break
+	for i in range(m-1,m-c-1,-1):
+		if (col[i].count(".") == n):
+			c -= 1
+		else:
+			break
+	if (r+c):
+		print max(r,c)/2+1
+	else:
+		print 0

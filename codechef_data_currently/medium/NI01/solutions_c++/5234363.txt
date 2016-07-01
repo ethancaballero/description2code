@@ -1,0 +1,39 @@
+#include <cstdio>
+#include <iostream>
+#define ll long long int
+
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	while(n--){
+		ll c,m,g,p,r,k;
+		cin >> c >> m >> g >> p >> r >> k;
+		ll temp[100001];
+		temp[0] = min(c,g);
+		c -= temp[0];
+		g -= temp[0];
+		ll sum = 0;	
+		for(ll i=1; i<=k; i++){
+			if(i>=p){
+			//	if(temp[i-p]==1)
+				//	cout << i << " : " << p << endl;
+				c += temp[i-p]; 
+			    sum += temp[i-p];
+			}
+			if(m>0 && i%r==0) {
+				m--;
+				g++;
+			}
+			if(c==c){
+				temp[i] = min(c,g);
+				c -= temp[i];
+				g -= temp[i];
+			}
+		}
+	//	cout << c << " " << m << " " << g << endl;
+		cout << c << " " << sum << " " << m << " " << g << endl;
+	}
+	return 0;
+}

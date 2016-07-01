@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    int t,r[1000][1000]={0},p[1000][1000]={0};
+    long int i,n,j;
+    long long int ans;
+    string s[1001];
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        ans=0;
+        for(i=0;i<n;++i)
+            cin>>s[i];
+        for(i=0;i<n;++i)
+        {
+            for(j=n-1;j>=0;--j)
+            {
+                if(s[i][j]=='#')
+                    break;
+                r[i][j]=1;
+            }
+            for(j=n-1;j>=0;--j)
+            {
+                if(s[j][i]=='#')
+                    break;
+                p[j][i]=1;
+            }
+        }
+        for(i=0;i<n;++i)
+        {
+            for(j=0;j<n;++j)
+            {
+                if(r[i][j] && p[i][j])
+                    ++ans;
+                r[i][j]=p[i][j]=0;
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

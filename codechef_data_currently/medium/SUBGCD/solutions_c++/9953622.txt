@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[100001],tree[400004];
+
+int gcd(int a,int b)
+{
+	if(b==0)
+		return a;
+	return gcd(b,a%b);
+}
+
+void buildTree(int ss,int se,int si)
+{
+	if(ss==se)
+	{
+		tree[si] = a[ss];
+		return;
+	}
+	int mid = (ss+se)/2;
+	buildTree(ss,mid,2*si);
+	buildTree(mid+1,se,2*si+1);
+	tree[si] = gcd(tree[2*si],tree[2*si+1]);
+}
+int query(int ss,int se,int si,int l,int r)
+{
+	if(l>r || l>se || r<ss)
+		return 0;
+	if(l<=ss && r>=se)
+		return tree[si];
+	int mid = (ss+se)/2;
+	int left = query(ss,mid,2*si,l,r);
+	int right = query(mid+1,se,2*si+1,l,r);
+	return gcd(left,right);
+}
+
+int main()
+{
+	int t,n,i,l,r,len,x;
+	scanf("%d",&t);
+	while(t--)
+	{
+		len = 0;
+		scanf("%d",&n);
+		for(i=1;i<=n;i++)
+			scanf("%d",&a[i]);
+		buildTree(1,n,1);
+		x = query(1,n,1,1,n);
+		if(x==1)
+			printf("%d
+",n);
+		else
+			printf("-1
+");
+	}
+	return 0;
+}

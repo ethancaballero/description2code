@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e4 + 10;
+typedef long long LL;
+LL dp[65][MAXN];
+int A[MAXN];
+inline int gcd(int x, int y){
+	int newx;
+	while(y > 0){
+		newx = y;
+		y = x % y;
+		x = newx;
+	}
+	return x;
+}
+int main(){
+	int t;
+	scanf("%d", &t);
+	memset(dp, 0, sizeof dp);
+	while(t--){
+		int N;
+		scanf("%d", &N);
+		int m = 0;
+		for(int i = 1;i <= N;++i){
+			scanf("%d", &A[i]);
+			m = max(m, A[i]);
+		}
+		for(int i = 1;i <= N;++i){
+			for(int gc = 1;gc <= m;++gc){
+				dp[i][gc] = dp[i - 1][gc];
+			}
+			dp[i][A[i]] += 1;
+			for(int gc = 1;gc <= m;++gc){
+				if(dp[i - 1][gc] > 0){
+					int g = gcd(A[i], gc);
+					dp[i][g] += dp[i - 1][gc];
+				}
+			}
+		}
+		printf("%lld
+", dp[N][1]);
+	}
+	return 0;
+}

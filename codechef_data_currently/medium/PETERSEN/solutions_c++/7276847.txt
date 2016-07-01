@@ -1,0 +1,146 @@
+
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+
+using namespace std;
+
+string s;
+int a[10][3],w1[100000],w2[100000],c1,c2,len;
+
+int init()
+{
+    a[0][0]=1;
+    a[0][1]=4;
+    a[0][2]=5;
+    a[1][0]=0;
+    a[1][1]=2;
+    a[1][2]=6;
+    a[2][0]=1;
+    a[2][1]=3;
+    a[2][2]=7;
+    a[3][0]=2;
+    a[3][1]=4;
+    a[3][2]=8;
+    a[4][0]=0;
+    a[4][1]=3;
+    a[4][2]=9;
+    a[5][0]=0;
+    a[5][1]=7;
+    a[5][2]=8;
+    a[6][0]=1;
+    a[6][1]=8;
+    a[6][2]=9;
+    a[7][0]=2;
+    a[7][1]=5;
+    a[7][2]=9;
+    a[8][0]=3;
+    a[8][1]=5;
+    a[8][2]=6;
+    a[9][0]=4;
+    a[9][1]=6;
+    a[9][2]=7;
+}
+
+int main()
+{
+    init();
+    int test;
+    cin >> test;
+    while(test--)
+    {
+        bool f1,f2;
+        int start;
+        c1=c2=1;
+        f1=f2=true;
+
+        cin >> s;
+        len=s.length();
+
+        start=s[0]-65;
+        w1[0]=start;
+        for(int i=1;i<len;i++)
+        {
+            int in=start;
+            for(int j=0;j<3;j++)
+            {
+                if(a[start][j]==s[i]-65)
+                {
+                    start=s[i]-65;
+                    w1[c1]=start;
+                    c1++;
+                    break;
+                }
+                else if(a[start][j]==s[i]-60)
+                {
+                    start=s[i]-60;
+                    w1[c1]=start;
+                    c1++;
+                    break;
+                }
+            }
+            if(in==start)
+            {
+                f1=false;
+                break;
+            }
+        }
+
+        start=s[0]-60;
+        w2[0]=start;
+        for(int i=1;i<len;i++)
+        {
+            int in=start;
+            for(int j=0;j<3;j++)
+            {
+                if(a[start][j]==s[i]-65)
+                {
+                    start=s[i]-65;
+                    w2[c2]=start;
+                    c2++;
+                    break;
+                }
+                else if(a[start][j]==s[i]-60)
+                {
+                    start=s[i]-60;
+                    w2[c2]=start;
+                    c2++;
+                    break;
+                }
+            }
+            if(in==start)
+            {
+                f2=false;
+                break;
+            }
+        }
+
+        if(f1 && f2)
+        {
+            if(w1[0]<w2[0])
+            {
+                for(int i=0;i<c1;i++)
+                    cout << w1[i];
+            }
+            else
+            {
+                for(int i=0;i<c2;i++)
+                    cout << w2[i];
+            }
+        }
+        else if(f1)
+        {
+            for(int i=0;i<c1;i++)
+                cout << w1[i];
+        }
+        else if(f2)
+        {
+            for(int i=0;i<c2;i++)
+                cout << w2[i];
+        }
+        else
+            cout << -1;
+        cout << "
+";
+    }
+}

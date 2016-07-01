@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t,k;
+    cin>>t;
+
+    while(t--)
+    {
+      cin>>k;
+      if(k==0)
+      cout<<"3"<<endl;
+      else{
+        long y=4687,x=33102;
+        int a[k],i;
+        for( i=0;i<k;i++)
+        {    y=y*10;
+        int count=0;
+          if(y<x)
+          {
+              y=y*10;
+              a[i]=0;
+              i++;
+            }
+            while(y>x)
+            {
+                y=y-x;
+                count++;
+            }
+            a[i]=count;
+        }
+        cout<<"3.";
+        for(i=0;i<k;i++)
+        cout<<a[i];
+        cout<<endl;
+      }
+
+    }
+    return 0;
+}

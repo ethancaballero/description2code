@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,n,m,k,i,j,max,maxb,bal;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m>>k;
+        int arr[n],arr1[m],arr2[k];
+        for(i=0;i<n;i++)
+          arr[i]=0;
+          for(i=0;i<m;i++)
+          {
+              cin>>j;
+              arr[j-1]++;
+
+          }
+          for(i=0;i<k;i++)
+          {
+              cin>>j;
+              arr[j-1]++;
+          } bal=0;maxb=0;
+          for(i=0;i<n;i++)
+          {
+              if(arr[i]==2)  bal++;
+              if(arr[i]==0)  maxb++;
+          }
+          cout<<bal<<" "<<maxb<<endl;
+    }
+}

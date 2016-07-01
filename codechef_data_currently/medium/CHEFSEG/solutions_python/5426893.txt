@@ -1,0 +1,10 @@
+from math import *
+t = long(raw_input())
+while t:
+    t-=1
+    a = raw_input().split(' ')
+    x = float(a[0])
+    k = float(a[1])
+    n = 2**(long(log(k,2))+1)
+    l = k - 2**long(log(k,2))
+    print '%.16f' %float((x/n)+(l*(x/(2**(long(log(k,2)))))))

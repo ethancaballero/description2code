@@ -1,0 +1,5 @@
+import math
+testCases = int(raw_input())
+for x in xrange(testCases):
+	num = int(raw_input())
+	print int(math.sqrt(num))

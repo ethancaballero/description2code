@@ -1,0 +1,5 @@
+T = int(raw_input())
+
+for t in range(T):
+    coins = int(raw_input())
+    print str(int(((1+8*coins)**(0.5))/2 - 0.5))

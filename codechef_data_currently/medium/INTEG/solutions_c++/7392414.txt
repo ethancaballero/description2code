@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+long c[100005];
+int main()
+{
+	long n,x,y;
+	scanf("%ld",&n);
+	long long  ans=0,count=1;
+	for(int i=0;i<n;i++)
+	{
+		scanf("%ld",&y);
+		if(y<0)
+		{
+		c[count++]=-y;;
+		ans+=-y;
+		}
+	}
+	scanf("%ld",&x);
+	if(count-1<=x)
+	printf("%lld
+",ans);
+	else{
+	sort(c,c+count);
+    long long sum=0;
+    int l=0;
+	for(int i=count-1;l!=x;i--,l++)
+	{
+		sum+=c[i];
+	}
+      printf("%lld
+",sum);
+    }
+}

@@ -1,0 +1,86 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <set>
+#include <map>
+#include <queue>
+#include <iostream>
+#include <sstream>
+
+#include <cassert>
+#include <limits>
+#define rep(i,n) for(int (i)=0;(i)<(int)(n);++(i))
+#define reu(i,l,u) for(int (i)=(int)(l);(i)<(int)(u);++(i))
+#define each(it,o) for(auto it= (o).begin(); it != (o).end(); ++ it)
+#define all(o) (o).begin(), (o).end()
+#define mp(x,y) make_pair((x),(y))
+#define mset(m,v) memset(m,v,sizeof(m))
+#define INF 0x3f3f3f3f
+#define INFL 0x3f3f3f3f3f3f3f3fLL
+#define inrep int t;cin>>t; while(t--)
+using namespace std;
+
+typedef vector<int> vi;
+typedef pair<int,int> pii;
+typedef vector<pii > vpii;
+typedef long long ll;
+typedef vector<ll> vll;
+typedef pair<ll,ll> pll;
+typedef vector<pll > vpll;
+typedef vector<string> vs;
+typedef long double ld;
+
+template<typename T> ostream& operator<< ( ostream &o,vector<T> v ) {
+    if ( v.size() >0 )
+        o<<v[0];
+    for ( unsigned   i=1; i<v.size(); i++ )
+        o<<" "<<v[i];
+    return o<<endl;
+}
+template<typename U,typename V> ostream& operator<< ( ostream &o,pair<U,V> p ) {
+    return o<<"("<<p.first<<", "<<p.second<<") ";
+}
+template<typename T> istream& operator>> ( istream &in,vector<T> &v ) {
+
+    for ( unsigned   i=0; i<v.size(); i++ )
+        in>>v[i];
+    return in;
+}
+int main() {
+    ios_base::sync_with_stdio ( false );
+    inrep {
+        int n,m,pp;
+        cin>>n>>m>>pp;
+
+        double p=double ( pp ) /100;
+        vector<pair<int,double>> players;
+        rep ( i,m ) {
+            int x;
+            cin>>x;
+            players.push_back ( mp ( x-1,1 ) );
+
+        }
+        sort ( all ( players ) );
+        while ( n>1 ) {
+            vector<pair<int,double>> nPlayers;
+            rep ( i,players.size() ) {
+                pair<int,double> p1=players[i];
+                if ( i+1< ( int ) players.size() &&players[i].first/2==players[i+1].first/2 ) {
+                    pair<int,double> p2=players[i+1];
+                    nPlayers.push_back ( mp ( p1.first/2,p* ( p1.second+p2.second ) + ( 1-2*p ) *p1.second*p2.second ) );
+                    i++;
+                } else {
+                    nPlayers.push_back ( mp ( p1.first/2,p*p1.second ) );
+                }
+             }
+                swap ( players,nPlayers );
+            n/=2;
+        }
+        assert ( players.size() ==1 );
+        cout.precision(14);
+        cout.setf(ios::fixed);
+        cout<<100*players[0].second<<endl;
+
+    }
+}

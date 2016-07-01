@@ -1,0 +1,24 @@
+for t in range(0, input()):
+    input()
+    first = True
+    prev = 0
+    unique = []
+    person = 0
+
+    for i in raw_input().split():
+        person += 1
+        if first:
+            prev = int(i)
+            first = False
+            continue
+        else:
+            if prev != int(i):
+                prev = int(i)
+
+                if len(unique) == 0 or unique[-1] != person:
+                    unique.append(person - 1)
+                    unique.append(person)
+                
+    out = len(set(unique))
+
+    print out

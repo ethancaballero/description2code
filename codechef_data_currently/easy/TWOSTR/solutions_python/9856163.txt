@@ -1,0 +1,19 @@
+#!/usr/bin/python
+import string
+database=list(string.lowercase+'?')
+for i in range(input()):
+	X=raw_input()
+	Y=raw_input()
+	if len(X)!=len(Y):
+		print "No"
+		continue
+	for j in range(len(X)):
+		if X[j] not in database or Y[j] not in database:
+			print "No"
+			break
+		if X[j]!=Y[j] and X[j]!="?" and Y[j]!="?":
+			print "No"
+			break
+	else:
+		print "Yes"
+

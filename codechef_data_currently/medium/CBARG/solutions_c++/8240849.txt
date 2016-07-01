@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,n,l,l1,i;
+    long long int a;
+    scanf("%d",&t);
+    while(t--)
+    {
+        a=0;
+        scanf("%d",&n);
+        l1 = 0;
+        for(i=0;i<n;i++)
+        {
+            scanf("%d",&l);
+            if(l>l1)
+            {
+                a+=(l-l1);
+                l1=l;
+            }
+            else
+            l1=l;
+        }
+        printf("%lld",a);
+        cout<<endl;
+    }
+    return 0;
+}

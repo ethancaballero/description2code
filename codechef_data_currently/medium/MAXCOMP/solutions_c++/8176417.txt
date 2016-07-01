@@ -1,0 +1,50 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+const int maxN = 2000;
+
+struct order {
+	int S, E, C;
+
+	void read() {
+		cin >> S >> E >> C;
+	}
+
+	bool operator<(const order &ord) const {
+		return E < ord.E;
+	}
+};
+
+order a[maxN + 1];
+int maxC[maxN + 1];
+
+int main() {
+	int T;
+	cin >> T;
+	for (int t = 0; t < T; ++t) {
+		int N;
+		cin >> N;
+		for (int i = 1; i <= N; ++i) {
+			a[i].read();
+		}
+		sort(a + 1, a + 1 + N);
+		maxC[0] = 0;
+		for (int i = 1; i <= N; ++i) {
+			int L = 0;
+			int R = i;
+			while (L + 1 < R) {
+				int M = (L + R) / 2;
+				if (a[M].E <= a[i].S) {
+					L = M;
+				} else {
+					R = M;
+				}
+			}
+			// L = ind[i] from the editorial
+			maxC[i] = max(maxC[i - 1], maxC[L] + a[i].C);
+		}
+		cout << maxC[N] << endl;
+	}
+	return 0;
+}

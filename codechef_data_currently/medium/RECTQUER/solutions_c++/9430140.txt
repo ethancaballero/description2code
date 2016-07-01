@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long 
+int ar[505][505];
+int dp[505][505][11];
+int main()
+{
+	int n;
+	cin>>n;
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=n;j++)
+		{
+			cin>>ar[i][j];
+			for(int k=1;k<=10;k++)
+			{
+				dp[i][j][k]=dp[i-1][j][k]+dp[i][j-1][k]-dp[i-1][j-1][k];
+				if(k==ar[i][j])
+				dp[i][j][k]++;
+			}
+		}
+		
+	}
+	int q;
+	cin>>q;
+	while(q--)
+	{
+		int ans[11];
+		for(int i=0;i<11;i++)
+		ans[i]=0;
+		int x1,y1,x2,y2;
+		cin>>x1>>y1>>x2>>y2;
+		for(int i=1;i<=10;i++)
+		{
+			ans[i]=dp[x2][y2][i]-(dp[x2][y1-1][i]+dp[x1-1][y2][i])+dp[x1-1][y1-1][i];
+		}
+		int count=0;
+		for(int i=1;i<=10;i++)
+		{
+			if(ans[i]>0)
+			{
+				count++;
+			}
+		}
+		cout<<count<<endl;
+	}
+	
+
+	/*for(int k=1;k<=1;k++)
+	{
+		cout<<"   "<<k<<"    "<<endl;
+		for(int i=1;i<=n;i++)
+		{
+			for(int j=1;j<=n;j++)
+			{
+				cout<<dp[i][j][k]<<" ";
+			}
+			cout<<endl;
+		}
+	}*/
+	return 0;
+}

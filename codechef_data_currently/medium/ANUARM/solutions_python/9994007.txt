@@ -1,0 +1,13 @@
+for _ in range(int(raw_input())):
+    n, m = map(int, raw_input().split())
+    p = map(int, raw_input().split())
+    r = range(n - min(p))
+    o = min(p) * [0] + r
+    l = range(max(p) + 1)[::-1]
+    for i in range(len(l)):
+        if l[i] > o[i]:
+            o[i] = l[i]
+        else:
+            break
+    for i in o: print i,
+    print

@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+    using  namespace std;
+    int main()
+    {
+        long long n,m,q,l;
+        cin>>n>>m;
+        while(m--)
+        {
+            cin>>q;
+            if(q<n+2)
+            {
+                cout<<"0"<<"
+";
+                continue;
+            }
+            if(q<((2*n) +1))
+                cout<<q - n -1<<"
+";
+                else
+
+                {
+                    l=q-((2*n)+1);
+                    q=(2*n) + 1 -l;
+                    cout<<q-n-1<<"
+";
+                }
+
+            }
+
+        return 0;
+    }

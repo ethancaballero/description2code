@@ -1,0 +1,15 @@
+s=raw_input()
+n=len(s)
+t=range(0,10)
+t=map(str,t)
+d=[[0 for i in xrange(2)] for i in xrange(n+1)]
+ans=0
+for i in xrange(1,n+1):
+    if s[i-1] in t:
+        d[i][0]=d[i-1][0]*10+int(s[i-1])
+        d[i][1]=d[i-1][1]*10+int(s[i-1])
+    else:
+        d[i][1]=d[i-1][0]*10+9
+        d[i][0]=0
+    ans=max(ans,d[i][0],d[i][1])
+print ans

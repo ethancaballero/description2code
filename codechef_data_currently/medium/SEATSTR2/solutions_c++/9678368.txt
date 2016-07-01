@@ -1,0 +1,155 @@
+            #include<bits/stdc++.h>
+            const int N = 1e5 + 5;
+            using namespace std;
+            int n , m , k;
+            int u , v , w;
+            int res;
+            long long multiplicativeInverseOf4;
+            int tt;
+            int cur = 0;
+            const int lim = 499999;
+            const int mod = 1e9 + 7;
+ 
+            inline long long add(long long x , long long y , long long mod){
+                long long ret = x;
+                ret += y;
+                if(ret >= mod) ret -= mod;
+                return ret;
+            }
+ 
+            inline long long mul(long long x , long long y , long long mod){
+                return(x % mod * y % mod) % mod;
+            }
+ 
+            inline long long power(long long u , long long v, long long mod){
+                long long ret = 1LL;
+                while(v > 0){
+                    if(v & 1)
+                        ret = mul(ret , u , mod);
+                    u = mul(u , u , mod);
+                    v /= 2LL;
+                }
+                return ret;
+            }
+ 
+            inline long long invmd(long long x){
+                return power(x  , mod - 2LL , mod);
+            }
+ 
+        #define RRQ 26
+ 
+        long long f[N] , finverse[N];
+ 
+        inline void preprocess(){
+            f[0] = finverse[0] = 1LL;
+            f[1] = finverse[1] = 1LL;
+            for(int i = 2; i < N; ++i){
+                f[i] = mul(f[i - 1] , 1LL * i , mod);
+                finverse[i] = invmd(f[i]);
+            }
+        }
+ 
+ 
+        inline long long QUERY(string u){
+ 
+            map < int , int > mtp;
+ 
+            int to = (int)(u.size());
+ 
+            for(int i = 0; i < to; ++i){
+                    ++mtp[u[i] - 'a'];
+            }
+            long long ret = 0LL;
+ 
+            for(int i = 0; i < RRQ; ++i){
+ 
+            if(mtp[i] > 0){
+ 
+            for(int j = i + 1; j < RRQ; ++j){
+ 
+                if(mtp[j] > 0){
+ 
+                ret = add(ret , mul(mtp[i] , mtp[j] , mod) , mod);
+ 
+                ret = add(ret , mul(mul(mul(mul(mtp[i] , mtp[j] , mod) , mtp[i] - 1LL , mod) , mtp[j] - 1LL , mod) ,multiplicativeInverseOf4 , mod) , mod);
+ 
+                for(int k = j + 1; k < RRQ; ++k){
+ 
+                    if(mtp[k] > 0){
+ 
+                     ret = add(ret , mul(mul(mul(mtp[i] , mtp[j] , mod) , mtp[k] , mod) , 2LL , mod) , mod);
+ 
+                     ret = add(ret , mul(mul(mul(mtp[i] , mtp[j] , mod) , mtp[k] , mod) , mtp[i] - 1LL , mod) , mod);
+ 
+                     ret = add(ret , mul(mul(mul(mtp[i] , mtp[j] , mod) , mtp[k] , mod) , mtp[j] - 1LL , mod) , mod);
+ 
+                     ret = add(ret , mul(mul(mul(mtp[i] , mtp[j] , mod) , mtp[k] , mod) , mtp[k] - 1LL , mod) , mod);
+ 
+                     for(int y = k + 1; y < RRQ; ++y){
+ 
+                        if(mtp[y] > 0){
+ 
+                        ret = add(ret , mul(mul(mul(mul(mtp[i] , mtp[j] , mod) , mtp[k] , mod) , mtp[y] , mod) , 3LL , mod) , mod);
+                    }
+                }
+            }
+          }
+        }
+      }
+    }
+   }
+ ret += 1LL;
+return ret;
+}
+            inline long long getTotal(string s){
+ 
+                map < char , int > mtp;
+ 
+                int to = (int)(s.size());
+ 
+                for(int i = 0; i < to; ++i) ++mtp[s[i]];
+ 
+                map < char , int > :: iterator it;
+ 
+                long long ret = f[to];
+ 
+                for(it = mtp.begin(); it != mtp.end(); ++it){
+ 
+                        ret = mul(ret , finverse[it->second] , mod);
+                }
+                return ret;
+            }
+ 
+            int main(){
+ 
+                ios_base::sync_with_stdio(false);
+ 
+                cin.tie(NULL);
+ 
+                int tt;
+ 
+                string s;
+ 
+                multiplicativeInverseOf4 = invmd(4);
+ 
+                preprocess();
+ 
+                cin >> tt;
+ 
+                while(tt--){
+ 
+                    cin >> s;
+ 
+                    long long term = getTotal(s);
+ 
+                    long long TotalPermutations = mul(term , term , mod);
+ 
+                    long long retSwaps = mul(QUERY(s) , term , mod);
+ 
+                    long long ans = (TotalPermutations - retSwaps + mod)%mod;
+ 
+                    cout << ans << endl;
+                }
+ 
+                return 0;
+            }

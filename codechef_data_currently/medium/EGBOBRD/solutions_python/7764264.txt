@@ -1,0 +1,15 @@
+import math
+T = input()
+for _ in range(T):
+    n, k = map(int, raw_input().split())
+    p = map(int, raw_input().split())
+    left, total = 0, 0
+    for i in p:
+        if left > 0:
+            left -= 1
+        if i > left:
+            temp = (i - left + k - 1) / k
+            total += temp
+            left += temp * k
+        left -= i
+    print total

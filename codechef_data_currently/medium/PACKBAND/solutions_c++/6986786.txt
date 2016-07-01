@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<map>
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(0);
+	int t; cin>>t;
+	while(t--)
+	{
+		int n; cin>>n;
+		long long a[n];
+		 for(int i=0;i<n;i++)
+		  cin>>a[i];
+		  sort(a,a+n);
+		 int m; cin>>m; 
+		 pair<int,int> band[m];
+		 long long x,y,count=0;
+		 int used[m];
+		 for(int j=0;j<m;j++)
+		 { 
+		     cin>>x; cin>>y;
+		      band[j]=make_pair(y,x);
+		      used[j]=0;
+	     }
+	     sort(band,band+m);
+			 for(int i=0;i<n;i++)
+			 {
+			 	for(int j=0;j<m;j++)
+			 	{
+				 
+			 	if(used[j]!=1 &&((11*band[j].second)<=(7*a[i])) && ((7*a[i])<=(11*band[j].first)))
+			 	 {
+			 	 	count++;
+			 	 	used[j]=1;
+			 	 	break;
+				  }
+				 }	
+              
+		  } 
+		  printf("%lld
+",count);
+	}
+	return 0;
+	
+}

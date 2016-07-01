@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+#define ll long long int
+
+using namespace std;
+
+char B[255];
+
+ll gcd(ll a,ll b){
+	if(b==0)
+		return a;
+	else 
+		return gcd(b,a%b);
+}
+
+int main(){
+	ll A,t,s,a,b,ans,i;
+	cin>>t;
+	while(t--){
+        scanf("%lld",&A);
+        scanf("%s",B);
+
+        if(A==0) cout<<B<<endl;
+        else if(B[0]=='0') cout<<A<<endl;
+        else{
+       
+        b=0;
+
+        for(i=0;i<strlen(B);i++){
+
+            s=B[i]-'0';
+            
+        	b=((b*10)+(s))%A;
+        }
+        
+        ans=gcd(A,b);
+
+        cout<<ans<<endl;
+      }
+	}
+	return 0;
+}

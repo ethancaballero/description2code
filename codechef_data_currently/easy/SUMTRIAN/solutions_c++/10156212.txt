@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+#define MEM(a, b) memset(a, (b), sizeof(a))
+#define FORN(i, n) for(i = 0; i < n; i++)
+#define FORAB(i, a, b) for(i = a; i <= b; i++)
+#define FORR(i,n) for(i=n-1;i>=0;--i)
+#define elif else if
+#define mp make_pair
+#define pb push_back
+#define ff first
+#define ss second
+#define MOD 1000000007
+typedef pair<int,int> PII;
+typedef pair<double, double> PDD;
+typedef pair<long,long> PLL;
+typedef pair<long long,long long> PLLLL;
+typedef vector<int> VI;
+typedef vector<long> VL;
+typedef vector<long long> VLL;
+typedef vector<VI> VVI;
+typedef vector<VL> VVL;
+typedef vector<PII > VPII;
+typedef vector<PLL > VPLL;
+typedef vector<PLLLL> VPLLLL;
+typedef vector<VPII> VVPII;
+#define ll long long
+#define l long
+/*freopen("test.txt","r",stdin);
+  freopen("out.txt","w",stdout);*/
+
+
+
+main()
+ { int T,N,j,i,x;
+   l ans;
+   ios::sync_with_stdio(false);
+   cin>>T;
+
+   while(T--)
+
+      {   ans=LONG_MIN;
+          cin>>N;
+          VVI arr(N);
+          FORN(i,N)
+          {
+
+              FORN(j,i+1)
+              {
+                 cin>>x;
+                 if(i==0)
+                    arr[i].pb(x);
+                 else if(j==0)
+                 {
+                     arr[i].pb(arr[i-1][j]+x);
+                     //cout<<arr[i][j];
+                 }
+                 else if(j==i)
+                 {
+                     arr[i].pb(arr[i-1][j-1]+x);
+                 }
+                 else
+                 {
+                     arr[i].pb(max(arr[i-1][j]+x,arr[i-1][j-1]+x));
+                 }
+                 if(i==N-1&&arr[i][j]>ans)
+                    ans=arr[i][j];
+                 //cout<<arr[i][j]<<endl;
+
+             }
+
+
+
+
+
+        }
+       cout<<ans<<endl;
+
+    }
+ }

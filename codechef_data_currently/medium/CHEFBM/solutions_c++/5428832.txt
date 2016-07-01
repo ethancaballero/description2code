@@ -1,0 +1,83 @@
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <map>
+
+using namespace::std;
+
+int main()
+{
+	int N, M, P;
+	scanf("%d", &N);
+	scanf("%d", &M);
+	scanf("%d", &P);
+
+	vector<map<int, int> > mp(1 + N, map<int, int>());
+	for (int i = 0; i < P; i++)
+	{
+		int x, y;
+		scanf("%d", &x);
+		scanf("%d", &y);
+
+		if (mp[x].find(y) != mp[x].end())
+			mp[x][y]++;
+		else
+			mp[x][y] = 1 + y;
+	}
+
+	for (int i = 1; i <= N; i++)
+	{
+		bool ok = true;
+		for (map<int, int>::iterator it = mp[i].begin(); it != mp[i].end(); it++)
+		{
+			int x = it->first;
+			int y = it->second;
+
+			if (x > 1)
+			{
+				int z = x - 1;
+				if (mp[i].find(z) != mp[i].end())
+					z = mp[i][z];
+
+				if (z > y)
+				{
+					ok = false;
+					break;
+				}
+			}
+
+			if (x < M)
+			{
+				int z = x + 1;
+				if (mp[i].find(z) != mp[i].end())
+					z = mp[i][z];
+
+				if (y > z)
+				{
+					ok = false;
+					break;
+				}
+			}
+		}
+
+		if (!ok)
+			printf("-1
+");
+		else
+		{
+			int a = M;
+			int b = 1;
+
+			if (mp[i].find(a) != mp[i].end())
+				a = mp[i][a];
+
+			if (mp[i].find(b) != mp[i].end())
+				b = mp[i][b];
+
+			printf("%d
+", a - b);
+		}
+	}
+
+	return 0;
+}

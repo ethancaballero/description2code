@@ -1,0 +1,28 @@
+t=int(raw_input())
+j=0
+while j<t :
+    s = raw_input()
+    a = float(s.split()[0])
+    b = float(s.split()[1])
+    c = float(s.split()[2])
+    b1 = b2 = b3 = False
+    if a > 50 :
+        b1 = True
+    if b < 0.7 :
+        b2 = True
+    if c > 5600 :
+        b3 = True
+    if b1 or b2 or b3 :
+        if b1 and b2 and b3 :
+            print '10'
+        elif b1 and b2 :
+            print '9'
+        elif b2 and b3 :
+            print '8'
+        elif b1 and b3 :
+            print '7'
+        else :
+            print '6'
+    else :
+        print '5'
+    j+=1    

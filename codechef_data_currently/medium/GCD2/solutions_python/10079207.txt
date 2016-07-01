@@ -1,0 +1,34 @@
+import sys
+
+#print "AMIT"
+n=raw_input("")
+def module(a2,b2):
+    if len(a2)<len(b2):
+        return a2
+    else:
+        c =int(a2)%int(b2)
+        c1=str(c)
+        return c1
+def hcf(a,b):
+    a1=a
+    b1=b
+    b2=b
+    if b1=='0':
+        print a1
+        return
+    b1=module(a1,b1)
+    hcf(b2,b1)
+i=0
+while i<int(n):
+    a, b = raw_input("").split()
+    #tokenizedInput = sys.stdin.read().split()
+    #a, b = map(str, tokenizedInput[:2])
+    
+    hcf(a,b)
+    i=i+1
+    
+
+
+
+
+

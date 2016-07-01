@@ -1,0 +1,15 @@
+n,k=map(int,raw_input().split())
+l=[]
+for _ in xrange(n):
+	l.append(raw_input())
+for _ in xrange(k):
+	s=raw_input()
+	if len(s)>46:
+		print 'Good'
+	else:
+		for __ in xrange(n):
+			if l[__] in s:
+				print 'Good'
+				break
+		else:
+			print 'Bad'

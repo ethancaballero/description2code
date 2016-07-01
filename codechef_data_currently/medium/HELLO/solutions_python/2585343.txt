@@ -1,0 +1,23 @@
+#2013-08-27
+#http://www.codechef.com/AUG13/problems/HELLO
+
+import sys
+
+collect_data = lambda:map(float,sys.stdin.readline().split())
+
+nb_cases = int(raw_input())
+
+for case in range(nb_cases):
+    data = collect_data()
+    default_rate, last_month, nb_plans = data[0], data[1], int(data[2])
+    best_plan = 0
+    best_price = default_rate*last_month
+    for plan in range(nb_plans):
+        data = collect_data()
+        validity, new_rate, activation_cost = data[0], data[1], data[2]
+        new_price = new_rate*last_month + activation_cost/validity
+        if best_price > new_price:
+            best_price = new_price
+            best_plan = plan+1
+    print(best_plan)
+        

@@ -1,0 +1,37 @@
+testcases=int(raw_input())
+for i in range(0,testcases):
+    jobnum=map(int,raw_input().split())
+    jobcum=map(int,raw_input().split())
+    job=[]
+    for j in range(0,jobnum[0]):
+	    job.append(j+1)
+    job=set(job)
+    jobcum=set(jobcum)
+    # print job
+    # print jobcum
+    final=list(set(job)-set(jobcum))
+    # print final
+    final.sort()
+    # print final
+    if len(final)==0:
+		print
+		print
+    elif len(final)==1:
+		print final[0]
+		print
+    else:
+		for j in range(0,len(final)):
+			if j%2==0:
+				print final[j],
+		print
+		for j in range(0,len(final)):
+			if j%2!=0:
+				print final[j],
+                print
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+MOD = 1000000007
+
+def _sum(x, y):
+	return y*(y+1)/2 - x*(x-1)/2
+
+def f(x, y):
+	sx = str(x)
+	sy = str(y)
+	if len(sx) == len(sy):
+		return (_sum(x, y) * len(sx)) % MOD
+	else:
+		s = _sum(x, int('9' * len(sx))) * len(sx)
+		s += _sum(int('9' * (len(sy)-1)) + 1, y) * len(sy)
+		s %= MOD
+		for ll in xrange(len(sx) + 1, len(sy)):
+			s += _sum(10**(ll-1), 10**ll - 1) * ll
+			s %= MOD
+		return s
+
+t = int(raw_input())
+for tt in xrange(t):
+	[l, r] = [int(i) for i in raw_input().split()]
+	print f(l, r)

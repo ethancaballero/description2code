@@ -1,0 +1,10 @@
+from sys import stdin
+
+s=0            
+for trial in xrange(int(stdin.readline())):
+    item = stdin.readline().strip().split()
+    p = item[-1]
+    t,f,e = p.count('3'), p.count('5'), p.count('8')
+    if (t+f+e)==len(p) and e>=f>=t:
+        s+=1
+print s

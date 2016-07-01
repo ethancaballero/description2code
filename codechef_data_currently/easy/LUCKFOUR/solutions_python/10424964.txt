@@ -1,0 +1,10 @@
+t=input()
+a=[]
+for i in range(0,t):
+	a.append(input())
+for i in range(0,t):
+	n=0
+	for j in str(a[i]):
+		if j=='4':
+			n+=1
+	print n

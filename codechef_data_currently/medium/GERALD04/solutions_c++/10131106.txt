@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string time1;
+        string time2;
+        cin>>time1>>time2;
+        double dist;
+        cin>>dist;
+        double h1=0,h2=0,m1=0,m2=0;
+        h1=10*time1[0]+time1[1];
+        m1=10*time1[3]+time1[4];
+        h2=10*time2[0]+time2[1];
+        m2=10*time2[3]+time2[4];
+        double plan1,plan2;
+        plan1=(h1-h2)*60+(m1-m2)+dist;
+        if(2*dist<=(h1-h2)*60+(m1-m2)){
+            plan2=(h1-h2)*60+(m1-m2);
+        }
+        else{
+            plan2=((2*dist)-((h1-h2)*60+(m1-m2)))/2+((h1-h2)*60+(m1-m2));
+        }
+        cout<<fixed<<setprecision(1)<<plan1<<" ";
+        cout<<fixed<<setprecision(1)<<plan2<<endl;
+    }
+}

@@ -1,0 +1,101 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+
+#define isInside(i, j) (((i) >= 0 && (i) < n && (j) >= 0 && (j) < n) ? (1) : (0))
+
+vector<bool> isPrime(10000001, true);
+int *countPrimes;
+int arr[360][360];
+int dx[] = {0, 0, -1, 1};
+int dy[] = {-1, 1, 0, 0};
+int n;
+
+void fillCountPrime() {
+	int i,j;
+	for(i=3;i<=3163; i+=2) {
+	  if(isPrime[i]) {
+	    for(j=i*i; j< 10000000; j+= (i+i)) {
+	      isPrime[j] = false;
+	    }
+	  }
+	}
+
+	countPrimes[0] = 0;
+	countPrimes[1] = 0;
+	countPrimes[2] = 0;
+	countPrimes[3] = 1;
+	for(i=3; i<9999998; i+=2) {
+	  countPrimes[i+2] = countPrimes[i] + isPrime[i]; 
+	}
+}
+bool isEvenNum(int n) {
+	if(n == 2) return false;
+	return !(n%2);
+}
+bool isOddNum(int n) {
+	return !isEvenNum(n);
+}
+bool isPrimeNum(int n) {
+	if(isEvenNum(n)) return false;
+	return isPrime[n];
+}
+
+void travelAndMark(int i, int j, int type) {
+	arr[i][j] = -1;
+	int k = 0;
+ 
+    for (k = 0; k < 4; k++){
+        int x = i + dx[k], y = j + dy[k];
+        if (isInside(x, y) && (arr[x][y] != -1) && !isPrimeNum(arr[x][y]) && ((arr[x][y] & 1) == type)) { 
+        	travelAndMark(x, y, arr[x][y] & 1); 
+        }
+    }
+
+}
+
+int main(){
+	int t;
+	cin>>t;
+	countPrimes = new int[10000001];
+	isPrime[0] = false, isPrime[1] = false, isPrime[2] = true, isPrime[3] = true;
+	fillCountPrime();
+	//for(int i=0;i<100;i++) cout<<isPrime[i]<<" ";
+    //cout<<"
+
+";
+	//for(int i=0;i<100;i++) cout<<countPrimes[i]<<" ";
+	while(t--) {
+		cin>>n;
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				cin>>arr[i][j];
+			}
+		}
+		long long sum = 0;
+		int password[360][360] ={0};
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(arr[i][j]!=-1) {
+					if(isPrimeNum(arr[i][j])) {
+						sum+=countPrimes[arr[i][j]];
+						password[i][j] = countPrimes[arr[i][j]];
+					} else {
+						if(isEvenNum(arr[i][j])) {
+							sum+=(arr[i][j]/2);
+							password[i][j] = arr[i][j]/2;
+							travelAndMark(i, j, 0);
+						} else {
+							sum+=((arr[i][j]+3)/2);
+							password[i][j] = ((arr[i][j]+3)/2);
+							travelAndMark(i, j, 1);
+						}
+					}
+				}
+			}
+		}
+		cout<<sum<<"
+";
+	}
+}

@@ -1,0 +1,84 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int _max = (long long int)(1e18);
+vector<long long int> v;
+void pre()
+{
+    vector<long long int> two,three;
+
+    for(long long int i=2; i<=_max; i*=2)
+    {
+        two.push_back(i);
+    }
+    for(long long int i=3; i<=_max; i*=3)
+    {
+        three.push_back(i);
+    }
+
+    for(int i=0; i<two.size(); i++)
+    {
+        v.push_back(two[i]);
+        for(int j=0; j<three.size(); j++)
+        {
+            if(two[i]*three[j]<=_max)
+            {
+                v.push_back(two[i]*three[j]);
+            }
+        }
+    }
+    return ;
+}
+int main()
+{
+    pre();
+
+    vector<long long int> f;
+    for(int i=0; i<v.size(); i++)
+    {
+        if(v[i]<=1 || v[i]>_max)
+        {
+            continue;
+        }
+        long long int num=v[i];
+        int cnt=0;
+        while(v[i]%2==0)
+        {
+            v[i]/=2;
+            cnt++;
+        }
+        while(v[i]%3==0)
+        {
+            v[i]/=3;
+        }
+        if(cnt>=1 && v[i]==1)
+        {
+            f.push_back(num);
+        }
+    }
+    f.push_back(1);
+    set<long long int> S;
+    for(int i=0; i<f.size(); i++)
+    {
+        S.insert(f[i]);
+    }
+    f.clear();
+    for(set<long long int>::iterator it=S.begin(); it!=S.end(); it++)
+    {
+        f.push_back(*it);
+    }
+    //printf("sizes are %d %d
+",f.size(),S.size());
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int l,r;
+        cin>>l>>r;
+
+        int ans = upper_bound(f.begin(),f.end(),r) - lower_bound(f.begin(),f.end(),l);
+        printf("%d
+",ans);
+    }
+    return 0;
+}
+

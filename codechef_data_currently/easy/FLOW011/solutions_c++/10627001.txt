@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t;
+float n,hra,da,salary;
+cin>>t;
+while(t--)
+{
+cin>>n;
+if(n<1500)
+{
+hra=0.1*n;
+da=0.9*n;
+}
+else
+{
+hra=500;
+da=0.98*n;
+}
+salary=n+hra+da;
+cout<<salary<<endl;
+}
+return 0;
+}

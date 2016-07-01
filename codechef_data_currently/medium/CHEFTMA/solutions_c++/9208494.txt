@@ -1,0 +1,67 @@
+#include <cstdio>
+#include <algorithm>
+#define MAX_N_VALUE 100000
+
+int arr[MAX_N_VALUE + 5];
+int dec_arr[MAX_N_VALUE + MAX_N_VALUE + 5];
+bool dec_comp(int a, int b) {
+    return a > b;
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n, k, m;
+        scanf("%d %d %d", &n, &k, &m);
+        for (int i = 0; i < n; i++)
+            scanf("%d", arr + i);
+        for (int i = 0; i < n; i++) {
+            int temp;
+            scanf("%d", &temp);
+            arr[i] -= temp;
+        }
+        for (int i = 0; i < k; i++)
+            scanf("%d", dec_arr + i);
+        for (int i = 0; i < m; i++)
+            scanf("%d", dec_arr + k + i);
+
+        std::sort(arr, arr + n, dec_comp);
+        std::sort(dec_arr, dec_arr + k + m, dec_comp);
+//        for (int i = 0; i < n; i++) {
+//            printf("%d	", arr_n[i]);
+//        }
+//        printf("
+");
+//        for (int i = 0; i < k; i++) {
+//            printf("%d	", arr_k[i]);
+//        }
+//        printf("
+");
+//        for (int i = 0; i < m; i++) {
+//            printf("%d	", arr_m[i]);
+//        }
+//        printf("
+");
+
+        int mk = k + m;
+        int dec_index = 0;
+        int index = 0;
+        while (index < n && dec_index < (k + m)) {
+            while (dec_index < (k + m) && dec_arr[dec_index] > arr[index])
+                dec_index++;
+            if (dec_index < (k + m)) {
+                arr[index] -= dec_arr[dec_index];
+                index++;
+                dec_index++;
+            }
+        }
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+        }
+        printf("%d
+", sum);
+    }
+    return 0;
+}

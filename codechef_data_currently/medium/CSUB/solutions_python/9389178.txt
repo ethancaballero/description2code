@@ -1,0 +1,13 @@
+t=t=int(input())
+
+
+for i in range(t):
+    n=int(input())
+    arr=raw_input()
+    l=list(arr)
+    ct=l.count('1')
+    if ct == 1:
+        print 1
+    else:
+        k=(ct*(ct-1))/2
+        print k+ct

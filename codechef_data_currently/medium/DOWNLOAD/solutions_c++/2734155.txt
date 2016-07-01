@@ -1,0 +1,128 @@
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <set>
+#include <map>
+#include <list>
+#include <complex>
+#pragma comment(linker, "/STACK:266777216")
+using namespace std;
+ 
+#define assert(f) { if(!(f)) { fprintf(stderr,"Assertion failed: "); fprintf(stderr,#f); fprintf(stderr,"
+"); exit(1); } }
+ 
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef pair<int,int> PII;
+typedef vector<PII> VPII;
+typedef vector<double> VD;
+typedef pair<double,double> PDD;
+ 
+const int inf=1000000000;
+const LL INF=LL(inf)*inf;
+const double eps=1e-9;
+const double PI=2*acos(0.0);
+#define bit(n) (1<<(n))
+#define bit64(n) ((LL(1))<<(n))
+#define pb push_back
+#define sz size()
+#define mp make_pair
+#define cl clear()
+#define all(a) (a).begin(),(a).end()
+#define fill(ar,val) memset((ar),(val),sizeof (ar))
+#define MIN(a,b) {if((a)>(b)) (a)=(b);}
+#define MAX(a,b) {if((a)<(b)) (a)=(b);}
+#define sqr(x) ((x)*(x))
+#define X first
+#define Y second
+ 
+//clock_t start=clock();
+//fprintf(stderr,"time=%.3lfsec
+",0.001*(clock()-start));
+ 
+#define N 111010
+PII a[N];
+int R[N];
+pair<PII,int> b[N];
+int ans[N];
+int f[N];
+int m;
+ 
+void add(int x,int d)
+{
+	for(;x<=m;x+=x&-x) f[x]+=d;
+}
+ 
+int sum(int x)
+{
+	int s=0;
+	for(;x>0;x-=x&-x) s+=f[x];
+	return s;
+}
+ 
+int main()
+{
+#ifndef ONLINE_JUDGE
+	freopen("1.in","r",stdin);
+#endif
+	int n;
+	scanf("%d",&n);
+	{
+		int i,j;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d%d",&a[i].X,&a[i].Y);
+			R[i]=a[i].Y;
+		}
+		sort(a,a+n);
+		sort(R,R+n);
+		m=unique(R,R+n)-R;
+		int q;
+		scanf("%d",&q);
+		int len=0;
+		for(int it=0;it<q;it++)
+		{
+			ans[it]=n;
+			int k;
+			scanf("%d",&k);
+			int t[33];
+			for(j=0;j<k;j++)
+				scanf("%d",t+j);
+			t[k++]=-inf/2;
+			t[k++]=inf/2*3;
+			sort(t,t+k);
+			k=unique(t,t+k)-t;
+			for(i=1;i<k;i++)
+				b[len++]=mp(mp(t[i-1]+1,t[i]),it);
+		}
+		sort(b,b+len);
+		fill(f,0);
+		i=n-1;
+		for(int it=len;it--;)
+		{
+			int l=b[it].X.X;
+			int r=b[it].X.Y;
+			for(;i>=0 && a[i].X>=l;i--)
+			{
+				int ind=lower_bound(R,R+m,a[i].Y)-R+1;
+				add(ind,1);
+			}
+			int ind=lower_bound(R,R+m,r)-R;
+			ans[b[it].Y]-=sum(ind);
+		}
+		for(i=0;i<q;i++)
+			printf("%d
+",ans[i]);
+	}
+	return 0;
+} 

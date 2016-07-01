@@ -1,0 +1,11 @@
+from sys import stdin as ip
+for _ in xrange(int(ip.readline())):
+    n=int(ip.readline())
+    li=list(map(int,ip.readline().split()))
+    ct=1
+    for i in xrange(1,n):
+        if li[i]<=li[i-1]:
+            ct+=1
+        else:
+            li[i]=li[i-1]
+    print ct

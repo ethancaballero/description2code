@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+stack<char> st;
+
+int main()
+{
+	int i,j,m,n,k,t;
+	cin>>t;
+	string s;
+	
+	while(t--)
+	{
+		while(!st.empty())
+		st.pop();
+	
+		cin>>s>>k;
+		int K=k;
+		k=s.size()-k;
+        n=s.size();
+		string temp="";
+		for(i=0;i<n;i++)
+		{
+	       while( k>0 && !st.empty() && st.top()>s[i])
+		   {
+		     st.pop();k--;
+		   }
+	       st.push(s[i]);
+		}
+	
+		while(!st.empty())
+		{
+			temp+=st.top();
+			st.pop();
+		}
+		j=0;
+		for(i=temp.size()-1;i>=0 && j<K;i--,j++)
+		cout<<temp[i];
+        cout<<endl;
+       
+    }
+	
+}
+/*
+1
+abdc 3
+*/

@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+#define MOD 1000000007
+#define ll  long long
+#define N 10100
+using namespace std;
+
+int fac[N]={1,1};
+// int inv[N]={0,1};
+// int invfac[N]={1,1};
+char s[N];
+ 
+ll fast_expo(ll a,ll b)
+{
+    if(b==1)return a%MOD;
+    
+    ll z=fast_expo(a,b/2);
+    
+    z=(z*z)%MOD;
+    
+    if(b%2==0)return z;
+    
+    else return (a*z)%MOD;
+}
+ 
+int main()
+{
+	ll n,T;
+	for(n=2;n<N;n++)
+	{
+		fac[n]=(ll)(n)*fac[n-1]%MOD;
+		// inv[n]=LL(inv[MOD%n])*(MOD-MOD/n)%MOD;
+		// inv[n]=(inv[n]^(MOD-2))%MOD;
+		// invfac[n]=LL(inv[n])*invfac[n-1]%MOD;
+	}
+	for(scanf("%lld",&T);T--;)
+	{
+		scanf("%s",s);
+		ll num[255]={0};
+		for(n=0;s[n];n++)
+			num[s[n]]++;
+		ll ans=fac[n];
+		for(ll i=0;i<255;i++)
+			ans=((ll)(ans)%MOD)*(fast_expo(fac[num[i]],MOD-2))%MOD;
+		printf("%lld
+",ans);
+	}
+	return 0;
+}

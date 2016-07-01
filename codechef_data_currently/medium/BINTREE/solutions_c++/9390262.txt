@@ -1,0 +1,26 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int dist(int i,int j,int c)
+{   int x;
+    if(i>j)
+       x=dist(i/2,j,c+1);
+    else if(j>i)
+        x=dist(i,j/2,c+1);
+    else
+        return c;
+    return x;
+}
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    while(n--)
+    {
+        int i,j,o,c=0;
+        scanf("%d%d",&i,&j);
+        o=dist(i,j,c);
+        printf("%d
+",o);
+    }
+}

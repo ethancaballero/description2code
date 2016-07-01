@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,i,j,k;
+	string s1,s2;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>s1>>s2;
+		for(j=0;j<s1.length();j++)
+		{
+			for(k=0;k<s2.length();k++)
+			{
+				if(s1[j]==s2[k])
+				break;
+			}
+			if(k!=s2.length())
+			break;
+		}
+		if(j!=s1.length())
+		cout<<"Yes"<<endl;
+		else
+		cout<<"No"<<endl;
+	}
+}

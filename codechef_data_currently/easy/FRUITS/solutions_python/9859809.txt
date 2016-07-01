@@ -1,0 +1,9 @@
+from math import *
+t=eval(raw_input())
+for i in range(t):
+   a,b,k=map(int,raw_input().split(' '))
+   x=abs(a-b)
+   if x<=k : 
+     print 0
+   else :
+     print (x-k) 

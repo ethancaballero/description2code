@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+typedef long long ll;
+#define sl(l) scanf("%lld",&l)
+#define swap(m,n) m^=n^=m^=n
+int main()
+{
+	ll t;
+	sl(t);
+	while(t--)
+	{
+		ll m,n,p,q;
+		sl(m);sl(n);sl(p);sl(q);
+		m-=p;n-=q;
+		if(m<n)swap(m,n);
+		puts(n-int((m-n)*(1+sqrt(5.0))/2)?"Alice":"Bob");
+	}
+	return 0;
+}

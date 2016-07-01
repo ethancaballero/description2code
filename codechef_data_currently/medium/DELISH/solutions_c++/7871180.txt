@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+		ll n;
+		cin>>n;
+		ll a[n];
+		//int f=0;
+		for(ll i=0;i<n;i++)
+		{
+		 cin>>a[i];}
+		 ll leftMin[n],leftMax[n],rightMin[n],rightMax[n];
+		 leftMin[0]=a[0];
+		 leftMax[0]=a[0];
+		 for(ll i=1;i<n;i++)
+		 {
+		 	leftMin[i]=min(a[i],leftMin[i-1]+a[i]);
+		 	leftMax[i]=max(a[i],leftMax[i-1]+a[i]);
+		 }
+		 rightMin[n-1]=a[n-1];
+		 rightMax[n-1]=a[n-1];
+		 for(ll i=n-2;i>=0;i--)
+		 {
+		 	rightMin[i]=min(a[i],rightMin[i+1]+a[i]);
+		 	rightMax[i]=max(a[i],rightMax[i+1]+a[i]);
+		 }
+		 ll mx=0;
+		 for(ll i=0;i<n-1;i++)
+		 {
+		 	mx=max(mx,abs(leftMax[i]-rightMin[i+1]));
+		 	mx=max(mx,abs(leftMin[i]-rightMax[i+1]));
+		 }
+		 cout<<mx<<endl;
+		
+	}
+	return 0;
+}

@@ -1,0 +1,39 @@
+# 0 - unclear
+# 1 - clear
+t = input()
+
+def safe(houses, cops, time):
+    min = cops - time
+    max = cops + time
+
+    if min <= 1:
+        min = 1
+    if max >= 100:
+        max = 100
+
+    for i in range(min-1, max):
+        if houses[i-1] == 0:
+            houses[i-1] = 1
+        else:
+            pass
+    return houses
+
+for i in range(t):
+    m, x, y = map(int, raw_input().split())
+    cops = []
+    cops = list(map(int, raw_input().split()))
+    search_time = x * y
+
+    houses = []
+    for i in range(100):
+        houses.append(0)
+
+    for i in range(m):
+        houses = safe(houses, cops[i], search_time)
+
+    n = 0
+    for i in range(100):
+
+        if houses[i-1] == 0:
+            n += 1
+    print n

@@ -1,0 +1,9 @@
+#Number mirror
+
+def main():
+    T = int(raw_input())
+    print T
+        
+
+if __name__ == '__main__':
+    main()

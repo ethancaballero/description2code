@@ -1,0 +1,45 @@
+#include <iostream>
+#include<stdio.h>
+#include<algorithm>
+#include<math.h>
+#include<string.h>
+using namespace std;
+
+#define ll long long
+#define endl '
+'
+
+inline long long scan( ) {
+ long long n=0;
+ int ch=getchar_unlocked();
+ while( ch <48 )ch=getchar_unlocked();
+ while( ch >47 )
+ n = (n<<3)+(n<<1) + ch-'0', ch=getchar_unlocked();
+ return n;
+}
+
+int main() {
+    ios::sync_with_stdio(false);cin.tie(0);
+	// your code goes here
+	int t=scan();
+	
+	while(t--){
+	    int a=103993,b=33102,temp;
+    int n=scan();
+    if(n==0)
+    cout<<"3";
+    else
+    {
+        cout<<"3.";
+        a=(a%b)*10;
+	for(int i=1;i<=n;i++)
+	{
+	    cout<<a/b;
+	    temp=a%b;
+	    a=temp*10;
+	}
+    }
+	cout<<endl;
+	}
+	return 0;
+}

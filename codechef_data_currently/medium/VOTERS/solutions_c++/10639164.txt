@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <limits.h>
+
+using namespace std;
+
+int findMin(int x, int y, int z){
+	if(x<=y && x<=z)
+		return x;
+	if(y<=x && y<=z)
+		return y;
+	if(z<=x && z<=y)
+		return z;
+}
+
+int main() {
+	vector<int> ans;
+	int N1,N2,N3;
+	cin >> N1 >> N2 >> N3;
+	int arr1[N1], arr2[N2], arr3[N3];
+	for (int i=0; i<N1; i++)
+		cin >> arr1[i];
+	for (int i=0; i<N2; i++)
+		cin >> arr2[i];
+	for (int i=0; i<N3; i++)
+		cin >> arr3[i];
+	int i=0,j=0,k=0;
+	int temp[3];
+	while(1){
+		if (i==N1 && j==N2 && k==N3)
+			break;
+		temp[0] = (i<N1) ? arr1[i]:INT_MAX;
+		temp[1] = (j<N2) ? arr2[j]:INT_MAX;
+		temp[2] = (k<N3) ? arr3[k]:INT_MAX;
+		int min = findMin(temp[0],temp[1],temp[2]);
+		int count=0;
+		for(int p=0;p<3;p++){
+			if(temp[p]==min)
+				count++;
+		}
+		if(count>=2)
+			ans.push_back(min);
+		if(temp[0]==min)
+			i++;
+		if(temp[1]==min)
+			j++;
+		if(temp[2]==min)
+			k++;
+	}	
+	cout << ans.size() << endl;
+	for(i=0; i<ans.size(); i++)
+		cout << ans[i] << endl;
+}

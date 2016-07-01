@@ -1,0 +1,14 @@
+import sys
+
+for cases in xrange(int(sys.stdin.readline())):
+    s = raw_input()
+    if len(s) != 5 or not (ord('a') <= ord(s[0]) <= ord('h') and         ord('1') <= ord(s[1]) <= ord('8') and         ord('a') <= ord(s[3]) <= ord('h') and         ord('1') <= ord(s[4]) <= ord('8') and s[2] == '-'):
+            print "Error"
+    elif abs(ord(s[0]) - ord(s[3])) == 1 and abs(int(s[1])-int(s[4])) == 2:
+        print "Yes"
+    elif abs(ord(s[0]) - ord(s[3])) == 2 and abs(int(s[1])-int(s[4])) == 1:
+        print "Yes"
+    else:
+        print "No"
+        
+        

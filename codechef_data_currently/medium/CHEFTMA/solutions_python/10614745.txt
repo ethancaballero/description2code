@@ -1,0 +1,39 @@
+t=int(raw_input().strip())
+while t:
+	t=t-1
+	n, k, m=map(int, raw_input().split())
+	a = map(int, raw_input().split())
+	b = map(int, raw_input().split())
+	c = map(int, raw_input().split())
+	d = map(int, raw_input().split())
+	dif = [0]*n
+	for i in range(n):
+		dif[i] = a[i]-b[i]
+	c = c+d
+	c.sort(reverse=True)
+	dif.sort(reverse=True)
+	# d.sort(reverse=True)
+	for i in range(n):
+		temp = dif[i]
+		change = 0
+		# black = 0
+		for x in range(len(c)):
+			if c[x]<=temp:
+				change = c[x]
+				# white = c[x]
+				break
+		if change:
+			dif[i]-=change
+			c.remove(change)
+		# for y in range(len(d)):
+		# 	if d[y]<=temp:
+		# 		black = d[y]
+		# 		break
+		# if white or black:
+		# 	if white>=black:
+		# 		dif[i]-=white
+		# 		c.remove(white)
+		# 	else:
+		# 		dif[i]-=black
+		# 		d.remove(black)
+	print sum(dif)

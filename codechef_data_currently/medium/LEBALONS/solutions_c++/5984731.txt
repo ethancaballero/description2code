@@ -1,0 +1,118 @@
+
+
+/**
+AUTHOR:Rahul Shah
+LINK:
+WEBSITE:Codechef
+PROBLEM:
+**/
+
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<map>
+#include<cmath>
+#include<cstring>
+#include<stack>
+#include<cstdlib>
+using namespace std;
+#define MOD 1000000007
+#define ll long long
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ll int vis[41];
+		vector<ll int> v[41];
+		ll int dpsum[41][41],dpnum[41][41],sum[41],num[41];
+		int n,k;
+		scanf("%d %d",&n,&k);
+		for(int i=0;i<41;i++)
+		{	
+			vis[i]=-1;
+			for(int j=0;j<41;j++)
+				dpnum[i][j]=dpsum[i][j]=sum[j]=num[j]=0;
+		}
+		int top=0;
+		for(int i=0;i<n;i++)
+		{
+			int x,y;
+			scanf("%d %d",&x,&y);
+			if(vis[x]==-1)
+			{
+			    v[top].push_back(y);
+			    vis[x]=top;
+			    top++;
+			}
+			else
+			{
+				v[vis[x]].push_back(y);
+			}
+		}
+		for(int i=0;i<top;i++)
+		{
+			num[i]=(1<<v[i].size())-1;
+			for(int j=0;j<v[i].size();j++)
+			{
+				sum[i]+=v[i][j];
+			}
+			sum[i]*=(num[i]+1);
+			sum[i]/=2;
+		}
+		for(int i=0;i<=top;i++)
+		{
+			dpnum[i][0]=0;
+		}
+		for(int i=0;i<=top;i++)
+		{
+			dpnum[0][i]=1;
+		}
+		for(int i=1;i<=top;i++)
+		{
+			for(int j=1;j<=top;j++)
+			{
+				dpnum[i][j]=dpnum[i-1][j-1]*num[j-1]+dpnum[i][j-1];
+			}
+		}
+		for(int i=1;i<=top;i++)
+		{
+			for(int j=1;j<=top;j++)
+			{//cout<<dpsum[i-1][j-1]<<" "<<num[j-1]<<" "<<dpnum[i-1][j-1]<<" "<<sum[i-1]<<"
+";
+				dpsum[i][j]=dpsum[i-1][j-1]*num[j-1]+dpnum[i-1][j-1]*sum[j-1]+dpsum[i][j-1];
+			}
+		}/*
+		for(int i=0;i<=top;i++)
+		{
+			for(int j=0;j<=top;j++)
+			{
+				cout<<dpsum[i][j]<<" ";
+			}
+			cout<<endl;
+		}
+		cout<<k<<" "<<top<<"
+";
+		for(int i=0;i<=top;i++)
+		{
+			for(int j=0;j<=top;j++)
+			{
+				cout<<dpnum[i][j]<<" ";
+			}
+			cout<<endl;
+		}*/
+		double nm=0,dn=0;
+		for(int i=k;i<=top;i++)
+		{
+			nm+=dpsum[i][top];
+			dn+=dpnum[i][top];
+		}
+		printf("%0.6f
+",nm/dn);
+		
+	}
+return 0;
+}

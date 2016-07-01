@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define gc getchar
+void scanint(int &x)
+{
+    register int c = 0;
+    x = 0;
+    for (; (c < 48 || c > 57); c = gc());
+    for (; (c > 47 && c < 58); c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+int main() {
+	int t;
+	scanint(t);
+	while(t--){
+		int n;
+		scanint(n);
+		int arr[n+1][n+1];
+		int i,j;
+		for(i=1;i<n+1;i++){
+			for(j=1;j<n+1;j++){
+				cin >> arr[i][j];
+			}
+		}
+		double sum;
+		for(i=1;i<n+1;i++){
+			for(j=1;j<n+1;j++){
+				if(i==1 && j >=2){
+					arr[i][j] = arr[i][j-1] + arr[i][j];
+				}else if(j == 1 && i>=2){
+					arr[i][j] = arr[i - 1][j] + arr[i][j];
+				}else if(i >=2 && j>=2){
+					int temp = max(arr[i][j-1],arr[i-1][j]);
+					arr[i][j] = temp + arr[i][j];
+				}
+			}
+		}
+		sum = arr[n][n];
+		sum = sum / (2*n - 3);
+		//cout << sum << endl;
+		if(sum >=0)
+		printf("%.6lf
+",sum);
+		else
+		printf("Bad Judges
+");
+	}	
+	return 0;
+}

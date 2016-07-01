@@ -1,0 +1,6 @@
+for _ in range(input()):
+	n=int(input())
+	s=map(int,raw_input().split())
+	l=list(s)
+	le=len(set(s))
+	print le

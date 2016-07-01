@@ -1,0 +1,30 @@
+import math
+cases = int(raw_input())
+while cases:
+    cases -= 1
+    raw_input()
+    n = int(raw_input())
+    path = {}
+    s = 0
+    for i in range(n):
+        idx , val = [int(x) for x in raw_input().split()]
+        if idx in path:
+            path[idx].append(val)
+        else:
+            path[idx] = [val]
+    s = 0.0
+    for p in path:
+        path[p]  = sorted(path[p] , reverse = True)
+    cnt = 0
+    prev = 0
+    for i in path:
+        if cnt != 0:
+            s += math.sqrt((prev-i)**2 + (path[prev][-1] - path[i][0])**2)
+        cnt = -1
+        l = len(path[i])
+        j = 0
+        while j+1 < l:
+            s += path[i][j] - path[i][j+1]
+            j += 1
+        prev = i
+    print "%.2f" %s

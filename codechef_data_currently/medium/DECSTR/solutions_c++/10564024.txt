@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<string>
+#include<iostream>
+#define s(n) scanf("%d",&n);
+#define p(n) printf("%d
+",n);
+using namespace std;
+int main()
+{
+    int t;
+    s(t)
+    string s="zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba";
+    while(t--)
+    {
+        string s1;
+        s1.clear();
+        int k;
+        s(k)
+       k=k+((k-1)/25)+1;
+    s1.assign(s.end()-k,s.end());
+       cout<<s1<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+       int n,k;
+       int maxi=0,sum=0;
+       cin>>n>>k;
+       int a[n],b[n];
+       int ans=-1;
+       for(int i=0;i<n;i++)
+            cin>>a[i];
+       for(int i=0;i<n;i++)
+                cin>>b[i];
+       for(int i=0;i<n;i++){
+            int temp=k/a[i];
+            sum=temp*b[i];
+            if(sum>maxi)
+                maxi=sum;
+       }
+       cout<<maxi<<endl;
+    }
+}

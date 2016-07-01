@@ -1,0 +1,18 @@
+t=int(raw_input())
+for i in range(t):
+	n=int(raw_input())
+	b=[]
+	index=0
+	for j in range(n):
+		b.append(list(raw_input().split()))
+	for x in xrange(1,n):
+		b[x][0]=int(b[x-1][0])+int(b[x][0])
+	for x in xrange(1,n):
+		b[0][x]=int(b[0][x-1])+int(b[0][x])
+	for x in xrange(1,n):
+		for y in xrange(1,n):
+			b[x][y]=max(int(b[x-1][y]),int(b[x][y-1]))+int(b[x][y])	
+	if(b[n-1][n-1]>=0):
+		print float(b[n-1][n-1])/(2*n-3)
+	else:
+		print "Bad Judges"

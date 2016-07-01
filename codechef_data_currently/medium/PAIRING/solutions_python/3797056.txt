@@ -1,0 +1,20 @@
+T = int(raw_input())	#T<=50
+
+while T>0:
+	T-=1
+	N, M = map(int, raw_input().split())	#N<=1000 M<=10000
+	Pairs = []
+	for i in xrange(M):
+		Pairs.append(map(int, raw_input().split()))
+	hash = {}
+	indices = []
+	for i in xrange(M-1, 0-1, -1):
+		pair = Pairs[i]
+		if (not pair[0] in hash) and (not pair[1] in hash):  #none of the employees were taken
+			indices.append(i)
+			hash[pair[0]]=1
+			hash[pair[1]]=1
+	#indices were added in decreasing order, we need it to be increasing
+	indices = indices[::-1]
+	print(" ".join(map(str, indices)))
+

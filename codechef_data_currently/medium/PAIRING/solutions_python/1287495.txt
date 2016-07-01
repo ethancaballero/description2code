@@ -1,0 +1,24 @@
+def solve (lis, n, m) :
+	final = [0] * n
+	indices = [0] * m
+	for idx,tup in enumerate(reversed(lis)):
+		if final[tup[0]] == 0 and final[tup[1]] == 0 :
+			final[tup[0]] = 1
+			final[tup[1]] = 1
+			indices[m - idx - 1] = 1
+
+	for i,v in enumerate(indices):
+		if v == 1:
+			print i,
+	print
+
+t = int(raw_input())
+while (t > 0):
+	t = t - 1
+	st = raw_input()
+	n, m = map(int, st.split())
+	lis = []
+	for i in range(m):
+		st = raw_input()
+		lis.append (map(int, st.split()))
+	solve(lis, n, m)

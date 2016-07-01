@@ -1,0 +1,95 @@
+#include <cstdio>
+#include <vector>
+#include <algorithm>
+using namespace std;
+typedef long long ll;
+
+const int lim=16,mod=1e9+7;
+ll t,N,K,lim2;
+ll arr[lim],T[lim];
+vector<ll> M,A;
+
+inline int make(int x,int y) {
+	return x+y*lim2;
+}
+
+vector<ll> m_mult(vector<ll> &B,vector<ll> &C) {
+	vector<ll> ans(lim2*lim2,0);
+	for (int i=0; i<lim2; ++i) for (int j=0; j<lim2; ++j) for (int k=0; k<lim2; ++k) {
+		ans[make(i,j)]=(ans[make(i,j)]+B[make(i,k)]*C[make(k,j)])%mod;
+	}
+	return ans;
+}
+
+int main() {
+	scanf("%lld",&t);
+	while (t--) {
+		scanf("%lld%lld",&N,&K);
+		lim2=0;
+		for (int i=0; i<K; ++i) {
+			scanf("%lld",&arr[i]);
+			lim2=max(lim2,arr[i]);
+		}
+		M=vector<ll>(lim2*lim2);
+		T[0]=1;
+		for (int i=1; i<lim2; ++i) {
+			T[i]=0;
+			for (int j=0; j<K; ++j) {
+				if (i>=arr[j]) T[i]+=T[i-arr[j]];
+			}
+		}
+		for (int i=1; i<lim2; ++i) M[make(i-1,i)]=1;
+		for (int i=0; i<K; ++i) M[make(lim2-1,lim2-arr[i])]=1;
+		if (N<lim2) printf("%lld
+",T[N]);
+		else {
+			A=M; ll b=N; bool flag=1;
+			while (b) {
+				if (b&1) {
+					if (flag) {
+						M=A; flag=0;
+					}
+					else M=m_mult(M,A);
+				}
+				A=m_mult(A,A);
+				b>>=1;
+			}
+			ll ans=0;
+			for (int i=0; i<lim2; ++i) {
+				ans=(ans+T[i]*M[make(0,i)])%mod;
+			}
+			printf("%lld
+",ans);
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+final=list();	
+	
+def foo():	
+	a=list();
+	res=0;
+	n=int(raw_input());
+	inp=raw_input().split(" ");
+	for x in range(n):
+		a.append(int(inp[x]));
+	for y in range(n):
+		if(y%2==0):
+			res+=max(a);
+		a.pop(a.index(max(a)));
+	final.append(res);
+	
+t=int(raw_input());
+for x in range(t):
+	foo();
+for y in final: 
+	print y
+

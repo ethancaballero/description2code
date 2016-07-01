@@ -1,0 +1,28 @@
+#!/usr/bin/python
+import numpy as np
+isPrime=[bool(1) for num in range(1000000)]
+primes=[]
+idx1=-1
+idx2=-1
+isPrime[0]=isPrime[1]=bool(0)
+for num in range(2,1000000):
+		if(isPrime[num]==bool(1)):
+			for k in range(num*num,1000000,num):
+				isPrime[k]=bool(0)
+			if(num>100 and idx1==-1): idx1=len(primes)
+			if(num>1000 and idx2==-1): idx2=len(primes)
+			primes.append(num)
+num=input()
+while num!=0:
+	found=0
+	for i in range(0,idx1):
+		if (num-primes[i]*primes[i]*primes[i])>0: 
+			for j in range(0,idx2):
+				if(num-primes[i]*primes[i]*primes[i]-primes[j]*primes[j])>0:
+					if(isPrime[num-primes[i]*primes[i]*primes[i]-primes[j]*primes[j]]):
+						print "{0} {1} {2}".format((num-primes[i]*primes[i]*primes[i]-primes[j]*primes[j]),primes[j],primes[i])
+						found=1
+				if found==1: break
+		if found==1: break
+	if found==0: print "0 0 0"
+	num=input()

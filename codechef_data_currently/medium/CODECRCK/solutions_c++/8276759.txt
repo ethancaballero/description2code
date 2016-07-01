@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+#include <math.h>
+#define sqrt2 1.4142135623730950488
+#define sqrt6 2.44948974278317809
+
+using namespace std;
+
+int main()
+{
+    long long int i,k;
+    double q,ai,bi,s,ak,bk;
+    scanf("%lld %lld %lf",&i,&k,&s);
+    scanf("%lf %lf",&ai,&bi);
+    if(i<=k)
+    {
+        if((k-i)%2==0)
+        {
+            ak=ai*pow(16,(k-i)/2);
+            bk=bi*pow(16,(k-i)/2);
+            q=(ak+bk)/pow(2,s);
+        }
+        else
+        {
+            if(k%2!=0)
+            {
+                ai=ai*pow(16,(k-i-1)/2);
+                bi=bi*pow(16,(k-i-1)/2);
+                ak=(sqrt2-sqrt6)*ai+(sqrt2+sqrt6)*bi;
+                bk=(sqrt2+sqrt6)*ai-(sqrt2-sqrt6)*bi;
+                q=(ak+bk)/pow(2,s);
+            }
+            else if(i%2!=0)
+            {
+                ak=(sqrt2-sqrt6)*ai+(sqrt2+sqrt6)*bi;
+                bk=(sqrt2+sqrt6)*ai-(sqrt2-sqrt6)*bi;
+                ak=ak*pow(16,(k-i-1)/2);
+                bk=bk*pow(16,(k-i-1)/2);
+                q=(ak+bk)/pow(2,s);
+            }
+        }
+    }
+    else
+    {
+        if((i-k)%2==0)
+        {
+            ak=ai/pow(16,(i-k)/2);
+            bk=bi/pow(16,(i-k)/2);
+            q=(ak+bk)/pow(2,s);
+        }
+        else
+        {
+            if(k%2!=0)
+            {
+                ai=ai/pow(16,(i-k+1)/2);
+                bi=bi/pow(16,(i-k+1)/2);
+                ak=(sqrt2-sqrt6)*ai+(sqrt2+sqrt6)*bi;
+                bk=(sqrt2+sqrt6)*ai-(sqrt2-sqrt6)*bi;
+                q=(ak+bk)/pow(2,s);
+            }
+            else if(i%2!=0)
+            {
+                ak=(sqrt2-sqrt6)*ai+(sqrt2+sqrt6)*bi;
+                bk=(sqrt2+sqrt6)*ai-(sqrt2-sqrt6)*bi;
+                ak=ak/pow(16,(i-k+1)/2);
+                bk=bk/pow(16,(i-k+1)/2);
+                q=(ak+bk)/pow(2,s);
+            }
+        }
+    }
+    printf("%.20lf
+",q);
+    return 0;
+}

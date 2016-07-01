@@ -1,0 +1,13 @@
+t = input()
+for _ in xrange(t):
+    n = input()
+    array = map(int, raw_input().split())
+    i = 0
+    count = n
+    while i < n:
+        j = i
+        while j + 1 < n and array[j] <= array[j + 1]:
+            j += 1
+        count += (j - i) * (j - i + 1) / 2
+        i = j + 1 
+    print count

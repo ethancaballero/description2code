@@ -1,0 +1,111 @@
+n=input()
+k=[raw_input().split() for i in range(0,n)]
+def mergeSort(alist):
+    #print("Splitting ",alist)
+    if len(alist)>1:
+        mid = len(alist)//2
+        lefthalf = alist[:mid]
+        righthalf = alist[mid:]
+
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
+
+        i=0
+        j=0
+        k=0
+        while i<len(lefthalf) and j<len(righthalf):
+            if lefthalf[i]<righthalf[j]:
+                alist[k]=lefthalf[i]
+                i=i+1
+            else:
+                alist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i<len(lefthalf):
+            alist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j<len(righthalf):
+            alist[k]=righthalf[j]
+            j=j+1
+            k=k+1
+    #print("Merging ",alist)
+    return alist
+def st(l):
+    
+    #print b
+    t=True  
+    for i in range(0,4):
+      j=i+1
+      if l==[2,3,4,5,14]:
+          return t
+           
+      elif l[j]-l[i] != 1:
+            t=False
+            return t
+       
+        
+    return t 
+def color(l):
+    
+    t=True
+    for i in range(0,4):
+        j=i+1
+        if l[i]!=l[j]:
+            t=False
+            return t
+    return t        
+def pairs(l):
+    
+    c=0
+    k=[]
+    for i in range(0,4):
+        j=i+1
+        
+        if l[i]==l[j]:
+            c=c+1
+            k.append(l[i])
+            
+    return [c,k]        
+def main():
+    global k
+    for item in k:
+        b=[]
+        c=[]
+        cards={'A':14,'K':13,'Q':12,'J':11,'T':10,'9':9,'8':8,'7':7,'6':6,'5':5,'4':4,'3':3,'2':2}
+        for it in item:
+           if it[0] in cards.keys():
+                b.append(cards[it[0]])
+        for it in item:
+                c.append(it[1])        
+
+        b=mergeSort(b)
+        straight=st(b)
+        flush=color(c)
+        z=pairs(b)
+        if b==[10, 11, 12, 13, 14] and flush==True and straight==True:
+              print "royal flush"
+        elif straight==True and flush==True:
+              print"straight flush"
+        elif straight==True:
+            print "straight"
+        elif flush==True:
+           print "flush" 
+        elif z[0]==1:
+           print "pair"
+        elif z[0]== 2:
+            if z[1][0]==z[1][1]:
+               print "three of a kind"
+            else:       
+              print"two pairs" 
+        elif z[0]== 3:
+            if z[1][0]==z[1][1] and z[1][1]==z[1][2]:
+               print"four of a kind"
+            else:
+             print"full house"
+        else:
+           print "high card"
+                          
+main()

@@ -1,0 +1,20 @@
+cases=int(raw_input().strip())
+while(cases):
+	n=int(raw_input().strip())
+	a=raw_input().strip()
+	a=map(int,a.split())
+	count=0
+	ct=0;
+	
+#	total=(n*(n-1))/2
+	for i in range(len(a)):
+		if ( a[i]>2):
+			count+=1
+			
+		if ( a[i]==2):
+			ct+=1
+	total = (count*(count-1))/2
+	#print count," ",ct
+	ct= ct*count
+	print total+ct
+	cases-=1

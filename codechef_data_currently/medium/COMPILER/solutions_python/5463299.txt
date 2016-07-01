@@ -1,0 +1,38 @@
+import sys
+
+class Stack :
+    def __init__(self,n) :
+        self.lists=[]
+        self.top=-1
+        self.N=n
+    def EmptyStack(self) :
+         if self.top==-1 :
+            return 1
+    def FullStack(self) :
+         if self.top==self.N-1 :
+            return 1
+    def push(self,n) :
+            self.top+=1
+            self.lists.append(n)
+    def pop(self) :
+            self.top-=1
+            return self.lists[self.top]
+
+def main(*args,**kwargs) :
+    for __ in range(input()) :
+        sym=raw_input()
+        s=[]
+        answer,result=0,0
+        for i in range(len(sym)) :
+            if sym[i] == "<" :
+                answer+=1
+            elif sym[i] == ">" :
+                    answer-=1
+            if answer==0 :
+                result=max(0,i+1)
+            if answer < 0 :
+                break
+        print result
+
+if __name__ == "__main__" :
+    main()

@@ -1,0 +1,111 @@
+#include<stdio.h>
+#include<limits.h>
+struct node
+{
+	long int x,y;
+	int index;
+}min,max,min1,max1,arr[100001];
+int main()
+{
+	int t,flag;
+
+  	long int n;
+	long int x,y;
+	scanf("%d",&t);
+	while(t)
+	{
+	min.x=LONG_MAX;
+	min.y=LONG_MAX;
+	max.x=LONG_MIN;
+	max.y=LONG_MIN;
+	min1.x=LONG_MAX;
+	min1.y=LONG_MAX;
+	max1.x=LONG_MIN;
+	max1.y=LONG_MIN;
+	scanf("%ld",&n);
+	for(int i=0;i<n;i++)
+	{
+		scanf("%d%d",&arr[i].x,&arr[i].y);
+		if(min.x>arr[i].x)
+		{   
+		    min.index=i+1;
+			min.x=arr[i].x;
+	    	min.y=arr[i].y;
+		}
+		 if(max.x<arr[i].x)
+		{   
+		    max.index=i+1;
+			max.x=arr[i].x;
+	    	max.y=arr[i].y;
+		}
+		if(min1.y>arr[i].y)
+		{   
+		    min1.index=i+1;
+			min1.x=arr[i].x;
+	    	min1.y=arr[i].y;
+		}
+		 if(max1.y<arr[i].y)
+		{   
+		    max1.index=i+1;
+			max1.x=arr[i].x;
+	    	max1.y=arr[i].y;
+		}
+	
+	}
+	flag=0;
+	int i;
+	for( i=0;i<n;i++)
+	{
+	if(max.x==arr[i].x)	
+    { 
+	if(max1.y==arr[i].y)
+	{flag=1;break;}
+	if(min1.y==arr[i].y)
+	{flag=2;break;
+	}
+	}
+	if(min.x==arr[i].x)
+	{
+	if(max1.y==arr[i].y)
+	{flag=3;break;}
+	if(min1.y==arr[i].y)
+	{flag=4;break;}
+    }
+    }
+	if(flag)
+	{
+	if(i==n)i--;
+	printf("1 
+");
+	if(flag==1)printf("%d SW
+",i+1);
+	if(flag==2)printf("%d NW
+",i+1);
+	if(flag==3)printf("%d SE
+",i+1);
+	if(flag==4)printf("%d NE
+",i+1);	
+	}
+	else
+	{
+			if(max.y > min.y)
+		{
+			printf("2
+%d SW
+",max.index);
+	        printf("%d NE
+",min.index);
+		}
+		else
+		{
+			printf("2
+%d NW
+",max.index);
+	        printf("%d SE
+",min.index);
+		}
+	}
+		
+	t--;
+	}
+}

@@ -1,0 +1,24 @@
+T=int(input())
+winner=[]
+for i in range(0,T):
+    N=int(input())
+    name,num=[],[]
+    for j in range(0,N):
+        n=raw_input()
+        name.append(n.split()[0])
+        num.append(int(n.split()[1])) 
+    try:
+        while num.count(min(num))>1:
+            tmp=min(num)
+            for o in range(0,len(num)):
+                if tmp in num:
+                    del name[num.index(tmp)]
+                    del num[num.index(tmp)]
+    except:
+        pass
+    try:
+        winner.append(name[num.index(min(num))])
+    except:
+        winner.append('Nobody wins.')
+for t in range(0,T):
+    print winner[t] 

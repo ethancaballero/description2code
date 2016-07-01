@@ -1,0 +1,15 @@
+output = list()
+val1 = raw_input()
+t = int(val1)
+for i in range(t) :
+	val2 = raw_input()
+	fin = list()
+	n = int(val2)
+	string1 = raw_input()
+	nums = string1.split()
+	for j in range(n) :
+		if nums[j] not in fin :
+			fin.append(nums[j])
+	output.append(len(fin))
+for i in range(t) :
+	print output[i]

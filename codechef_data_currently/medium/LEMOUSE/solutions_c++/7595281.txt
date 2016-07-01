@@ -1,0 +1,105 @@
+#include <iostream>
+#include<vector>
+#include<climits>
+using namespace std;
+
+int main()
+{
+    int t,row,col;
+    int a;
+    string s;
+    cin>>t;
+    while(t--)
+    {
+        cin>>row>>col;
+        vector<vector<int> > v(row,vector<int> (col));
+        vector<vector<vector<int> > > dp(row,vector<vector<int> > (col,vector<int>(2,INT_MAX)));
+        vector<vector<int> > shadow(row, vector<int> (col,0));  
+        cin.ignore();
+        int xdis[]={-1,0,0,1};
+        int ydis[]={0,-1,1,0};
+        
+        for(int i=0;i<row;i++)
+        {
+                getline(cin,s);
+            
+            for(int j=0;j<col;j++)  
+                 v[i][j]=s[j]-'0';
+                   
+         }       
+         
+         for(int i=0;i<row;i++)
+         {
+             for(int j=0;j<col;j++)
+             {
+                 if(v[i][j]==1)
+                 {
+                     for(int k=0;k<4;k++)
+                     {
+                         int newi=i+xdis[k];
+                         int newj=j+ydis[k];
+                         if((newi>=0)&&(newi<row)&&(newj>=0)&&(newj<col))
+                            shadow[newi][newj]++;
+                     }
+                     
+                 }
+                 
+                 
+             }
+             
+         }
+        /* cout<<"Shadow
+";
+         for(int i=0;i<row;i++)
+         {
+             for(int j=0;j<col;j++)
+                cout<<shadow[i][j]<<" ";
+            cout<<"
+";    
+             
+         }*/
+         
+         dp[0][0][0]=dp[0][0][1]=shadow[0][0]-v[0][0];
+         
+         for(int i=0;i<row;i++)
+         {
+             for(int j=0;j<col;j++)
+             {
+                 if(!((i==0)&&(j==0)))
+                 {
+                     if((j-1)<0)
+                     {
+                         dp[i][j][0]=dp[i-1][j][0]+shadow[i][j]-v[i][j];
+                         
+                     }
+                     else if((i-1)<0)
+                     {
+                         
+                         dp[i][j][1]=dp[i][j-1][1]+shadow[i][j]-v[i][j];
+                     }
+                     
+                     else
+                     {
+                         dp[i][j][0]=shadow[i][j]-v[i][j]+min(dp[i-1][j][0],dp[i-1][j][1]-v[i][j-1]);
+                         dp[i][j][1]=shadow[i][j]-v[i][j]+min(dp[i][j-1][1],dp[i][j-1][0]-v[i-1][j]);
+                         
+                     }
+                     
+                 }
+                 
+               //  cout<<"dp["<<i<<"]"<<"["<<j<<"]"<<"["<<0<<"]"<<dp[i][j][0]<<"
+";
+                // cout<<"dp["<<i<<"]"<<"["<<j<<"]"<<"["<<1<<"]"<<dp[i][j][1]<<"
+";
+                 
+             }
+             
+         }
+         
+         cout<<min(dp[row-1][col-1][0],dp[row-1][col-1][1])+v[row-1][col-1]+v[0][0]<<"
+";
+     
+        
+    }
+    return 0;
+}

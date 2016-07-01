@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int cost[1005][1005],profit[1005][1005],t_profit[1005][1005];
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n,m,k;
+        scanf("%d%d%d",&n,&m,&k);
+        int col[n+1],max_profit[n+1],orig_profit[n+1];
+        for(int i=1;i<=n;i++)
+            scanf("%d",&col[i]);
+        for(int i=1;i<=n;i++)
+            for(int j=1;j<=m;j++)
+                scanf("%d",&profit[i][j]);
+        for(int i=1;i<=n;i++)
+            for(int j=1;j<=m;j++)
+                scanf("%d",&cost[i][j]);
+
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                if(col[i]==j)
+                    t_profit[i][j]=profit[i][j];
+                else
+                    t_profit[i][j]=profit[i][j]-cost[i][j];
+              //  printf("%d ",t_profit[i][j]);
+            }
+            //printf("
+");
+        }
+
+        for(int i=1;i<=n;i++)
+            orig_profit[i]=profit[i][col[i]];
+
+        for(int i=1;i<=n;i++)
+        {
+            max_profit[i]=orig_profit[i];
+            for(int j=1;j<=m;j++)
+            {
+                if(t_profit[i][j] > max_profit[i])
+                    max_profit[i]=t_profit[i][j];
+            }
+            //printf("maxp=%d ",max_profit[i]);
+        }
+
+        multimap<int,int> diff_profit;
+        for(int i=1;i<=n;i++)
+        {
+            diff_profit.insert(    pair<int,int>(max_profit[i]-orig_profit[i],i));
+          //  printf("%d ",max_profit[i]-orig_profit[i]);
+        }
+        int res=0,ii;
+
+        //printf("%d ",diff_profit.size());
+        for(multimap<int,int>::reverse_iterator rit=diff_profit.rbegin();rit!=diff_profit.rend();rit++)
+        {
+            //printf("k=%d ",k);
+            int res1=orig_profit[rit->second];
+            if(k!=0 && rit->first!=0)
+            {
+                res1=max_profit[rit->second];
+                k--;
+            }
+            res=res+res1;
+            //printf("res1=%d ",res1);
+        }
+
+        printf("%d
+",res);
+    }
+
+    return 0;
+}

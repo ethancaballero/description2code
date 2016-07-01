@@ -1,0 +1,11 @@
+t = int(raw_input())
+
+for i in xrange(t):
+	n = int(raw_input())
+	D = map(int, raw_input().strip().split())
+	x = 0
+	y = 0
+	for j in xrange(n):
+		x += D[j]
+		y += abs(x)
+	print y

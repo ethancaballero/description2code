@@ -1,0 +1,102 @@
+//ALL HAIL MEGATRON
+
+using namespace std;
+
+#include<bits/stdc++.h>
+
+#define wl(n) while(n--)
+#define fl(i,a,b) for(i=a; i<b; i++)
+#define rev(i,a,b) for(i=a; i>=b; i--)
+#define scan(n) scanf("%d", &n)
+#define scans(s) scanf("%s", s)
+#define scanc(c) scanf("%c", &c)
+#define scanp(f) scanf("%f", &f)
+#define scanll(l) scanf("%lld", &l)
+#define scanllu(u) scanf("%llu", &u)
+#define print(n) printf("%d
+", n)
+#define prints(s) printf("%s
+", s)
+#define printc(c) printf("%c
+", c)
+#define printp(f) printf("%f
+", f)
+#define printll(l) printf("%lld
+", l)
+#define printllu(u) printf("%llu
+", u)
+#define nline printf("
+")
+#define mclr(strn) strn.clear()
+#define ignr cin.ignore()
+#define MOD 1000000007
+#define ll long long int
+#define u64 unsigned long long int
+#define PB push_back
+
+vector< set<int> > v(21);
+set<int>::iterator it;
+int mat[21][21] = {0};
+
+void chk(int a, int b)
+{
+	int f=1;
+	for(it = v[a].begin();it!= v[a].end();it++)
+	{
+		if(v[b].find(*it)!=v[b].end())
+		{
+			mat[a][b] = 0;
+			f=0;
+			break;
+		}
+	}
+	if(f)
+	mat[a][b] = 1;
+}
+
+int main()
+{
+	int n,m,s,i,j,t,ans=0,f=1,k;
+	scan(n);scan(m);
+		
+	fl(i,0,m)
+	{
+		scan(s);
+		fl(j,0,s)
+		{
+			scan(t);
+			v[i].insert(t);
+		}
+	}
+	
+	fl(i,0,m)
+	fl(j,i+1,m)
+	chk(i,j);	
+	
+	for(i=1;i<pow(2,m);i++)
+	{
+		vector<int> v1;
+		f = 1;
+		for(j=0;j<m;j++)
+		{
+			if(i&(1<<j))
+			v1.PB(j);
+		}
+		
+		fl(j,0,v1.size())
+		{
+			fl(k,j+1,v1.size())
+			{
+				if(mat[v1[j]][v1[k]]==0)
+				{
+					f = 0;
+					break;
+				}
+			}
+		}
+		if(f)
+		ans = max(ans, __builtin_popcount (i));
+	}
+	print(ans);
+	return 0;	
+}

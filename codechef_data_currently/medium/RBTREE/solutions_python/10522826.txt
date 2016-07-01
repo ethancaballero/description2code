@@ -1,0 +1,45 @@
+from sys import stdin
+from math import log
+def printBS(li):
+ print " ".join([str(x) for x in li])
+def listInput():
+ return map(int,stdin.readline().split())
+def lcaP(a,b):
+ if a==b: return a
+ parents=set([])
+ while a!=0:
+  parents.add(a)
+  a/=2
+ while b!=0:
+  if b in parents:
+   return b
+  b/=2
+ return 1
+#returns whether node black or red,blackcount,red count pair
+def calc(node,rootBlack):
+ if node==0: return (0,0,0)
+ if node==1: level=1
+ else: level=int(log(node,2))+1
+ if level%2:
+  if rootBlack:
+   return (True,(level+1)/2,level/2)
+  else: return (False,level/2,(level+1)/2)
+ return (not rootBlack,level/2,level/2)
+n=input()
+blackRoot=True
+for i in xrange(n):
+ q=stdin.readline().split()
+ if q[0]=="Qi":
+  blackRoot=not blackRoot
+ else: 
+  a=int(q[1])
+  b=int(q[2])
+  ad=calc(a,blackRoot)
+  bd=calc(b,blackRoot)
+  lcan=lcaP(a,b)
+  if q[0]=="Qb":
+   print ad[1]+bd[1]-calc(lcan,blackRoot)[1]-calc(lcan/2,blackRoot)[1]
+  else:
+   print ad[2]+bd[2]-calc(lcan,blackRoot)[2]-calc(lcan/2,blackRoot)[2]
+
+  

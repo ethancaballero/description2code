@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+long long int t,i,x,n,y;
+
+cin>>t;
+while(t--)
+{
+cin>>n;
+x=1,y=0;
+long long int a[n];
+for(i=0;i<n;i++)
+cin>>a[i];
+for(i=0;i<n-1;i++)
+{
+if(a[i]!=a[i+1])
+   {
+    if(x==0)
+    y=y+1;
+    else
+    y=y+2;
+    x=0;
+    }
+    else
+    x++;
+    }
+    cout<<y<<endl;
+    }
+    return 0;
+    }

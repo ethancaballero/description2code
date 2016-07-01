@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+#define SIZE 1000005
+#define MAX(a,b) ((a)>(b)?(a):(b))
+
+double arr[SIZE];
+double pre = 1e-5;
+
+int solve(int n, double t, double d) {
+	double x;
+	x = MAX(0.0,arr[0]-d);
+	for(int i=1;i<n;i++) {
+		if(arr[i]+d < t+x) return 0;
+		x = MAX(x+t,arr[i]-d);
+	}
+	return 1;
+}
+
+int main() {
+	int t_case;
+	cin>>t_case;
+	while(t_case--) {
+		int n;
+		double t;
+		scanf("%d%lf",&n,&t);
+		for(int i=0;i<n;i++) {
+			scanf("%lf",&arr[i]);
+		}
+		double lo=0;
+		double hi=1;
+		while(!solve(n,t,hi)) hi*=2;
+		while(lo+pre<hi) {
+			double mid = (lo+hi)/2;
+			if(solve(n,t,mid)) hi = mid;
+			else lo = mid;
+		}
+		printf("%.4lf
+",lo);
+	}
+	return 0;
+}

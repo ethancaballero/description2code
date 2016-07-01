@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int h,m,res=0,s,g,i;
+        cin>>h>>m;
+        g=max(h,m);
+        s=min(h,m);
+        if(s<10)
+        res+=s;
+        else
+        res+=10;
+        for(i=11;i<=g;i=i+11)
+        {
+            if(i<g&&i<s)
+            res+=3;
+            else if(i<g&&(i%10)<s)
+            res++;
+        }
+        cout<<res<<endl;
+        
+    }
+return 0;
+}

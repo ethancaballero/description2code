@@ -1,0 +1,13 @@
+import sys
+
+n , k = map(int,sys.stdin.readline().split())
+lists = [input() for __ in range(n)]
+lists.sort()
+ans , i = 0 , 0
+while i < n-1:
+    if lists[i] >= lists[i+1]-k :
+        i += 2
+        ans += 1
+    else :
+        i += 1
+print ans

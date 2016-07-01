@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t,g,i,q;
+	long int n;
+	cin>>t; //no of test cases
+	while(t--)
+	{
+		cin>>g;  //no of games played by elephant
+		while(g--)
+		{
+			cin>>i>>n>>q;  //i->initial state of coins, n->no of coins and rounds,q->guess showing head or tail
+			if(n%2==0)
+			{
+				cout<<n/2;
+			}
+			else if( i==q )
+			{
+			    cout<<n/2;	
+			}
+			else
+			{
+				cout<<((n/2) + 1);
+			}
+			cout<<endl;
+		}
+	}
+ //fflush(stdin);
+ //getchar();
+ return 0;
+}

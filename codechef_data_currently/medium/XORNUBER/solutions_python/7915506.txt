@@ -1,0 +1,11 @@
+import sys,math
+
+for __ in range(input()) :
+    n = input()+1
+    if n==2 :
+        print 2
+        continue
+    if not n&(n-1) :
+        print int(pow(2,math.log(n,2)-1)-1)
+    else :
+        print -1

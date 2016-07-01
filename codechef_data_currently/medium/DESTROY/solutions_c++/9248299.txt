@@ -1,0 +1,45 @@
+#include <iostream>
+#include <queue>
+#include <map>
+using namespace std;
+
+int main(){
+	int test;
+	cin>>test;
+	for(int tell = 0 ; tell < test ; tell++){
+		map<int, int> host;
+		int val, N, count = 0;
+		cin>>N;
+		for(int i = 0 ; i < N ; i++){
+			cin>>val;
+			if(host.find(val) != host.end()){
+				host[val]++;
+			}else{
+				host[val] = 1;
+			}
+		}
+		priority_queue<int> q;
+		map<int, int>::iterator it;
+		for(it = host.begin(); it != host.end() ; it++){
+			q.push(it->second);
+		}
+		while(q.size() > 1){
+			int one = q.top();
+			q.pop();
+			int two = q.top();
+			q.pop();
+			if(one > 1){
+				q.push(one - 1);
+			}
+			if(two > 1){
+				q.push(two - 1);
+			}
+			count++;
+		}
+		if(q.size() == 1){
+			count += q.top();
+		}
+		cout<<count<<endl;
+	}
+	return 0;
+}

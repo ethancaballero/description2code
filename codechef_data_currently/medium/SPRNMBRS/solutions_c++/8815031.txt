@@ -1,0 +1,58 @@
+#include<set>
+#include<map>
+#include<list>
+#include<cmath>
+#include<queue>
+#include<vector>
+#include<bitset>
+#include<cstdio>
+#include<cctype>
+#include<cstdlib>
+#include<climits>
+#include<sstream>
+#include<cstring>
+#include<utility>
+#include<iostream>
+#include<algorithm>
+//#include<$@!> // lAzY pRoGrAmMeR :)
+using namespace std;
+#define MAX 1002
+#define INF 9999999
+#define LL long long
+#define pb push_back
+#define vl vector<LL>
+#define vi vector<int>
+#define vs vector<string>
+#define maxi(a,b) a>b?a:b
+#define mini(a,b) a>b?b:a
+#define len(x) x.length()
+#define pii pair<int,LL>
+#define pi2 pair<pii,int>
+#define ri(x) scanf("%d",&x)
+#define rl(x) scanf("%lld",&x)
+#define FOR(i,a,n) for(int i=a;i<n;i++)
+#define FORE(i,a,n) for(int i=a;i<=n;i++)
+int main()
+{
+	int t;
+	ri(t);
+	while(t--)
+	{
+		LL l,r,val=2,cur=1,ans=0;
+		rl(l);rl(r);
+		while(val<=r)
+		{
+			cur=val;
+			while(cur<=r)
+			{
+				if(cur<=r and cur >=l)
+				ans++;
+				cur*=3;
+			}
+			val*=2;
+		}
+		if(l<=1 and 1<=r)
+		ans++;
+		cout<<ans<<endl;
+	}
+}

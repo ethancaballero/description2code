@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<string.h>
+long long int factorial(int x);
+int main(){
+	int test,i,n,k,j,l,p,max,temp,index,globalmax;
+	long long int rank,fact1,fact2;
+	int array3[20],array2[20];
+	scanf("%d",&test);
+	for(i=1;i<=test;i++){
+		char array1[20];
+		scanf("%s",array1);
+		rank=1;
+		n=strlen(array1);
+		l=n;
+		for(j=0;j<n;j++)
+		array3[j]=0;
+		for(k=n;k>=1;k--){
+			max=-1;
+			for(j=0;j<n;j++){
+			    temp=(int)array1[j]-48;
+			    if(temp>max){
+			    max=temp;
+			    index=j;
+			    }
+		    }
+		if(k==n)
+		globalmax=max;
+		if(max!=globalmax){
+		l--;
+		globalmax=max;
+	    }
+		array2[index]=l;
+		array1[index]='.';
+		array3[l-1]++;
+    }
+    for(j=0;j<n;j++){
+    	temp=array2[j];
+    	for(k=l;k<temp;k++){
+    		if(array3[k-1]!=0){
+    	        fact1=factorial(n-1-j);
+    			for(p=l;p<=n;p++){
+    			if(array3[p-1]!=0){
+    				if(p==k)
+    			    fact2=factorial(array3[p-1]-1);
+    			    else
+    			    fact2=factorial(array3[p-1]);
+    			fact1=fact1/fact2;
+    		    }
+    		    }
+    		rank+=fact1;
+    	    }
+    	}
+    	array3[temp-1]--;
+}
+    printf("%lld
+",rank);
+}
+return 0;
+}
+long long int factorial(int x){
+	long long int p=1;
+	while(x>=2){
+		p*=x;
+		x--;
+	}
+	return p;
+}

@@ -1,0 +1,35 @@
+#include<math.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,r,flag,i,j,tx,ty,x[3],y[3];
+    float dis;
+    cin>>t;
+    while(t--)
+    {
+        cin>>r;
+        for(i=0;i<3;i++)
+        {
+            cin>>x[i];
+            cin>>y[i];
+        }
+        flag=0;
+        for(j=0;j<2;j++)
+        {
+            for(i=j+1;i<3;i++)
+            {
+                tx=pow((x[i]-x[j]),2);
+                ty=pow((y[i]-y[j]),2);
+                dis=pow((tx+ty),0.5);
+                if(r>=dis)
+                    flag++;
+            }
+        }
+        if(flag>=2)
+            cout<<"yes"<<endl;
+        else
+        cout<<"no"<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,6 @@
+t = int(raw_input())
+while t != 0:
+	n = int(raw_input())
+	b = int(bin(n)[2:])
+	print pow(2,2*b,10**9+7)
+	t = t-1

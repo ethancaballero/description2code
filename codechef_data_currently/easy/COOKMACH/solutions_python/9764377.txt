@@ -1,0 +1,37 @@
+import math
+T= input();
+while T>0:
+	T-=1
+	A,B= map(long, raw_input().split())
+	c=0
+	while A!=B:
+		if A<B:
+			if A%2==0:
+				t= math.log(A)/(math.log(2))
+				if (t- math.floor(t))==0:
+					break
+				else:
+					A/=2
+					c+=1
+			else:
+				if A!= 1:
+					A= (A-1)/2
+				else:
+					c+=1
+					A*=2
+					break
+				c+=1
+		if A>B:
+			if A%2==0:
+				A/=2
+				c+=1
+			else:
+				if A!= 1:
+					A= (A-1)/2
+				else:
+					c+=1
+					A*=2
+					break
+				c+=1
+	c+= int(math.log(B/A)/(math.log(2)))
+	print c

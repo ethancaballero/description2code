@@ -1,0 +1,23 @@
+import sys
+
+n = int(sys.stdin.readline().rstrip())
+
+for i in xrange(0,n):
+    num,m = [int(x) for x in sys.stdin.readline().rstrip().split()]
+    pairlist = []
+    visited = dict()
+    indices = []
+    for j in xrange(0,m):
+        pairlist.append(sys.stdin.readline().rstrip())
+    for k in xrange(m-1,-1,-1):
+        a,b = pairlist[k].split()
+        if a not in visited and b not in visited:
+            indices.append(k)
+            visited[a] = 1
+            visited[b] = 1
+    for c in xrange(len(indices)-1,-1,-1):
+        sys.stdout.write(str(indices[c]))
+        sys.stdout.write(str(' '))
+        
+            
+        

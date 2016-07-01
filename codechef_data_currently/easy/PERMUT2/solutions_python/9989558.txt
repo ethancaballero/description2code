@@ -1,0 +1,15 @@
+from sys import stdin,stdout
+while 1:
+	n = int(stdin.readline())
+	if n == 0:
+		break
+	a = map(int,stdin.readline().split())
+	b = [0]*len(a)
+	for i in xrange(len(a)):
+		b[a[i]-1] = i+1
+	if a == b:
+		stdout.write("ambiguous
+")
+	else:
+		stdout.write("not ambiguous
+")

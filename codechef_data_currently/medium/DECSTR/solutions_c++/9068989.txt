@@ -1,0 +1,21 @@
+#include <stdio.h>
+int main()
+{int i,k,t,x,y;
+ 
+ scanf("%d",&t);
+ while(t--)
+ {scanf("%d",&k);
+  x=k/25;
+  y=k%25;
+  if(y!=0)
+  {
+  for(i=y;i>=0;i--)
+  printf("%c",97+i);
+  }
+  for(i=x;i>0;i--)
+  printf("zyxwvutsrqponmlkjihgfedcba");
+  printf("
+");
+ }
+ return 0;
+}

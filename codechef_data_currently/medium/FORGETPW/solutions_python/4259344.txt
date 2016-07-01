@@ -1,0 +1,36 @@
+t=int(raw_input())
+
+for k in xrange(t) :
+	d={}
+	n=int(raw_input())
+	for j in xrange(n) :
+		c,p = raw_input().split()
+		d[c]=p
+#		n-=1
+	s=raw_input()
+	ans=''
+#	l=len(s)
+#	s=list(s)
+	for i in s :
+		if i in d :
+			ans += d[i]
+		else :
+			ans += i
+
+#	ans=''.join(s)
+	d.clear()
+	if '.' in ans :
+		ans=ans.strip('0')
+	else :
+		ans=ans.lstrip('0')
+#	if ans[-1]== '.' :
+#		ans=ans[0:-1]
+	if '.' in ans and len(ans)-1 == ans.index('.') :
+		ans=ans[:-1]
+	if ans=='':
+		print '0'
+	else :
+		print ans
+#	t-=1
+		
+		

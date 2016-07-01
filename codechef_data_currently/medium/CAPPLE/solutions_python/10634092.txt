@@ -1,0 +1,9 @@
+import sys
+for _ in range(int(sys.stdin.readline())):
+    n = int(sys.stdin.readline())
+    a=map(int,sys.stdin.readline().split())
+    b=[]
+    for i in range(n):
+	    if a[i] not in b:
+		    b.append(a[i])
+    print len(b)

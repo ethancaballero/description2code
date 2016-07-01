@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int a[1000004];
+ll tree[1000004];
+int n;
+ll getsum(int ind)
+{  ll ans=0;
+   ind=ind+1;
+   while(ind>0)
+     {
+        ans+=tree[ind];
+        ind-=(ind & (-ind));
+     }
+     return ans;
+}
+void update(int ind,int val)
+{   ind=ind+1;
+
+    while(ind<=n)
+    {
+       tree[ind]+=val;
+       ind+=(ind & (-ind));
+
+    }
+}
+int main()
+{
+    int i,j,q;
+    cin>>n>>q;
+    char c;
+    for(i=0;i<n;i++)
+       {cin>>a[i];
+       }
+    for(i=0;i<n;i++)
+       update(i,a[i]);
+
+    while(q--)
+    {cin>>c>>i>>j;
+    if(c=='S')
+       {
+          ll res=getsum(j)-getsum(i-1);
+          cout<<res<<'
+';
+       }
+    else if(c=='G')
+       {
+          update(i,j);
+       }
+    else
+       update(i,-j);
+    }
+}

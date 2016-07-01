@@ -1,0 +1,102 @@
+/* Author : RISHAV GOYAL */
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define LL long long int
+#define UL unsigned long long int
+
+#define FOR(i,a,b) for(int i= (int)a; i<= (int)b; i++)
+#define rep(i,n) for(int i= int(1); i<= (int)n; i++)
+#define FORd(i,a,b,d) for(int i=(int)a; i<= (int)b; i+=(int)d)
+
+#define pr() printf("Reached here 1...
+");
+#define pr1() printf("Reached here 2...
+");
+#define gc getchar_unlocked
+
+#define si(a) scanf("%d",&a);
+#define sl(a) scanf("%lld",&a);
+#define ss(a) scanf("%s",a);
+#define sc(a) scanf("%c",&a);
+#define su(a) scanf("%llu",&a);
+
+#define pi(a) printf("%d
+",a);
+#define pl(a) printf("%lld
+",a);
+#define ps(a) printf("%s
+",a);
+#define pu(a) printf("%llu
+",a);
+
+#define arg(a,N) rep(i,N)si(a[i]);
+
+#define CLR(a) memset(a,0,sizeof(a));
+#define SET(a) memset(a,-1,sizeof(a));
+
+#define str strlen
+#define pb(x) push_back(x)
+
+#define VI vector<int>
+#define VL vector<LL>
+#define VS vector<string>
+#define VC vector<char>
+
+int gcd ( int a, int b ){int c;while(a!= 0){c=a;a=b%a;b=c;}return b;}
+LL powmod(LL a,int b,int n){LL rm=1;while (b){if (b % 2) { rm = (rm * a) % n; }a = (a * a) % n;b /= 2;}return rm;}
+
+void sint(int &x)
+{
+	register int c = gc();
+	x = 0;
+	for(;(c<48 || c>57);c = gc());
+	for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+void sll(LL &x)
+{
+	register LL c = gc();
+	x = 0;
+	for(;(c<48 || c>57);c = gc());
+	for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+LL dp[2][10];
+
+VI mp[10];
+
+char s[1000100];
+
+int main()
+{
+	int t,prv,cur,l;
+	LL sum=0;
+	for(int j=0;j<8;++j) mp[ (j*10)%8].pb(j);
+	scanf("%s",s);
+	l = strlen(s);
+	CLR(dp);
+	t=0;
+	dp[t][(s[0]-48)%8]=1;
+	sum += dp[t][0];
+	t=1;
+	for(int i=1;i<l;++i){
+		cur = (s[i]-48)%8;
+		dp[t][cur]=1;
+		for(int j=0;j<8;++j) {
+			prv = (j - cur + 8)%8;
+			for(int k=0;k<mp[prv].size();++k){
+				dp[t][j] += dp[1-t][mp[prv][k]];
+			}
+		}
+		if ( s[i-1]=='0') dp[t][(s[i]-48)%8] --;
+		sum += dp[t][0];
+		t = !t;
+		CLR(dp[t]);
+	}
+	pl(sum);
+	
+	return 0;
+}

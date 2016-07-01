@@ -1,0 +1,87 @@
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<cmath>
+#include<set>
+#include<map>
+#include<deque>
+#include<stack>
+#include<queue>
+#include<algorithm>
+#include<utility>
+#include<vector>
+#include<iostream>
+using namespace std;
+
+#define MAX 100005
+
+int four[MAX],sev[MAX],ans[MAX];
+map<int,int> Map;
+
+int Four(int n)
+{
+	if(n==0)
+		return 0;
+	else if(four[n]>=0);
+	else
+		four[n]=(n%10==4) + Four(n/10);
+	
+	return four[n];
+}
+
+int Sev(int n)
+{
+	if(n==0)
+		return 0;
+	else if(sev[n]>=0);
+	else
+		sev[n]=(n%10==7) + Sev(n/10);
+	
+	return sev[n];
+}
+
+void init()
+{
+	for(int i=1;i<MAX;i++)
+		four[i]+=four[i-1];
+	for(int i=1;i<MAX;i++)
+		sev[i]+=sev[i-1];
+		
+	map<int,int>::iterator it;
+	for(int i=0;i<=MAX;i++)
+	{
+		it=Map.find(four[i]-sev[i]);
+		if(it!=Map.end())	
+		{
+			ans[i]=it->second;
+			it->second++;
+		}
+		else
+		Map.insert(make_pair(four[i]-sev[i],1));
+	}
+	for(int i=1;i<MAX;i++)
+		ans[i]+=ans[i-1];
+}
+
+int main()
+{
+	memset(four,-1,sizeof(four));
+	memset(sev,-1,sizeof(sev));
+	
+	for(int i=1;i<MAX;i++)
+	{
+		Four(i);
+		Sev(i);
+	}
+	
+	init();
+	int T,N;
+	cin>>T;
+	while(T--)
+	{
+		cin>>N;
+		cout<<ans[N]<<endl;
+	}
+	
+	return 0;
+}

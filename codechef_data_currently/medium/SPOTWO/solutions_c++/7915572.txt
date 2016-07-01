@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef unsigned long long ll;
+#define MOD 1000000007
+ll pow_mod(int b,ll e,ll m)
+{
+	if(e==0)
+		return 1;
+	ll r=pow_mod(b,e>>1,m);
+	r=(r*r)%m;
+	if(e&1)
+		r=(r*b)%m;
+	return r;
+}
+int main()
+{
+	int t,n;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		int a[25],i=1;
+		while(n>0)
+		{
+			a[i++]=n&1;
+			n>>=1;
+		}
+		ll num=0,ans;
+		while(i>1)
+			num=num*10+a[--i];
+		ans=pow_mod(2,num,MOD);
+		printf("%lld
+", (ans*ans)%MOD);
+	}
+	return 0;
+}

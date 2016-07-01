@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <map>
+using namespace std;
+int main() {
+    int a,b,c,temp,val;
+    map<int, int >mm,mm1,mm2,mm3;
+    scanf("%d %d %d",&a,&b,&c);
+    vector<int> v,ans;
+    while (a--) {
+        scanf("%d",&temp);
+        if(mm.find(temp)==mm.end())
+        {
+            mm[temp]=1;
+            v.push_back(temp);
+        }
+        mm1[temp]=a;
+    }
+    while (b--) {
+        scanf("%d",&temp);
+        if(mm.find(temp)==mm.end())
+        {
+            mm[temp]=1;
+            v.push_back(temp);
+        }
+        mm2[temp]=b;
+    }
+    while (c--) {
+        scanf("%d",&temp);
+        if(mm.find(temp)==mm.end())
+        {
+            v.push_back(temp);
+            mm[temp]=1;
+        }
+        mm3[temp]=c;
+    }
+    for(int i=0;i<v.size();i++)
+    {
+        val=0;
+       if(mm1.find(v[i])!=mm1.end())
+           val++;
+        if(mm2.find(v[i])!=mm2.end())
+            val++;
+        if(mm3.find(v[i])!=mm3.end())
+            val++;
+        if(val>=2)
+            ans.push_back(v[i]);
+    }
+    cout<<ans.size()<<endl;
+    sort(ans.begin(), ans.end());
+    for(int i=0;i<ans.size();i++)
+        cout<<ans[i]<<endl;
+    return 0;
+}
+ 

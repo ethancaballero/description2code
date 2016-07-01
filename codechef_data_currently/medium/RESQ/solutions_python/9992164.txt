@@ -1,0 +1,7 @@
+test_case = int(raw_input())
+for t in range(test_case):
+	number = int(raw_input())
+	a = int(number**0.5)
+	while number % a > 0:
+		a -= 1
+	print abs(a - number/a)

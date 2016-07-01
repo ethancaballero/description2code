@@ -1,0 +1,15 @@
+t=input()
+
+def calculate_count(b):
+    result=0
+    if(b<=2):
+        return result
+    while(b>2):
+        result+=b/2-1
+        b=b-2
+    return result
+while(t>0):
+    b=input()
+    result=calculate_count(b)
+    print result
+    t=t-1

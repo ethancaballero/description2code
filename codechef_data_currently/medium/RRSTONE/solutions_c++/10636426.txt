@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+main()
+{
+    int n,k,i;
+    long long max=-2000000000,min=2000000000;
+    cin>>n;
+    cin>>k;
+    int a[n+10];
+    for(i=0;i<n;i++)
+    {
+        cin>>a[i];
+        if(max<a[i])
+        max=a[i];
+        if(min>a[i])
+        min=a[i];
+    }
+    if(k==0)
+    {
+        for(i=0;i<n;i++)
+        printf("%d ",a[i]);
+    }
+      else if(k&1)
+       {
+           for(i=0;i<n;i++)
+            printf("%lld ",max-a[i]);
+       }
+       else
+       {
+           for(i=0;i<n;i++)
+            printf("%lld ",a[i]-min);
+       }
+}  

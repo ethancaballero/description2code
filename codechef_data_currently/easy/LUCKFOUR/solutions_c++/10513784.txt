@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,i,j,n,s;
+	scanf("%d",&t);
+	for(i=0;i<t;i++)
+	{
+		int count = 0,x=0;
+		scanf("%d",&n);
+		if(n == 4)
+		{
+			count = 1;
+		}
+		else
+		{
+		
+			while(n !=0)
+			{
+				x= n%10;
+				n = n/10;
+				if(x == 4)
+				{
+					count++;
+				
+				}
+			}
+		}
+		
+		printf("%d
+",count);
+	}
+	return 0;
+}

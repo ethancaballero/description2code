@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+char a[200001];
+char b[200001];
+int dp[200001][2];
+int main()
+{
+    int t,n,i,j;
+    cin>>t;
+    while(t--)
+    {
+        cin>>a;
+        cin>>b;
+        int k=strlen(a);
+        if(a[0]=='.')
+            dp[0][0]=0;
+        else
+            dp[0][0]=10000000;
+        if(b[0]=='.')
+            dp[1][0]=0;
+        else
+            dp[1][0]=10000000;
+        for(i=1;i<k;i++)
+        {
+            if(a[i]=='#')
+                dp[0][i]=10000000;
+                else
+            dp[0][i]=min(dp[0][i-1],1+dp[1][i-1]);
+            if(b[i]=='#')
+                dp[1][i]=10000000;
+            else
+                dp[1][i]=min(dp[1][i-1],1+dp[0][i-1]);
+        }
+       if(dp[0][k-1]>=10000000&&dp[1][k-1]>=10000000)
+            cout<<"No";
+        else
+        {
+            cout<<"Yes"<<"
+";
+            cout<<min(dp[0][k-1],dp[1][k-1]);
+        }
+      //  for(i=0;i<k;i++)
+        //    cout<<dp[0][i]<<" "<<dp[1][i]<<"
+";
+        cout<<"
+";
+    }
+}

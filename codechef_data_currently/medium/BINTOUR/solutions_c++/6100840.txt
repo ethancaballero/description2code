@@ -1,0 +1,49 @@
+#include <cstdio>
+
+using namespace std;
+const long long MOD = 1e9 + 9;
+const int MAX = (1 << 20) + 5;
+long long fact[MAX], ifact[MAX];
+
+long long mpow(long long a, long long b)
+{
+    long long ret = 1;
+    while(b)
+    {
+        if(b & 1) ret = (ret * a) % MOD;
+        b >>= 1;
+        a = (a * a) % MOD;
+    }
+    return ret;
+}
+
+int main()
+{
+    int k, j;
+    long long n, i, x, y;
+    scanf("%d", &k);
+    n = 1 << k;
+    fact[0] = 1;
+    ifact[0] = 1;
+    for(i = 1;i <= n;++i)
+    {
+        fact[i] = (fact[i-1] * i) % MOD;
+        ifact[i] = mpow(fact[i], MOD - 2);
+    }
+    for(j = 1;j <= (n / 2) - 1;++j)
+        printf("0
+");
+    for(;j < n;++j)
+    {
+        y = (fact[j - 1] * ifact[n / 2 - 1]) % MOD;
+        y = (y * ifact[j - n / 2]) % MOD;
+        x = (y * fact[n / 2]) % MOD;
+        x = (x * fact[n / 2]) % MOD;
+        x = (2 * x) % MOD;
+        printf("%lld
+", x);
+    }
+    printf("%lld
+", fact[n]);
+    return 0;
+}

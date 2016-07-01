@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef pair<int, int> PI;
+#define MAXN (500+5)
+
+int T, N;
+PI inx[MAXN * MAXN];
+
+int main() {
+	scanf("%d", &T);
+	while (T--) {
+	    scanf("%d", &N);
+	    int v;
+	    for (int i = 0; i < N; i++) {
+	    	for (int j = 0; j < N; j++) {
+	    		scanf("%d", &v);	
+				inx[v] = PI(i, j);
+	    	}
+	    }
+	    
+	    int ans = 0;
+	    for (int i = 2; i <= N*N; i++) {
+	    	ans += abs(inx[i].first - inx[i-1].first);
+			ans += abs(inx[i].second - inx[i-1].second);
+	    }
+	    printf("%d
+", ans);
+	}
+}

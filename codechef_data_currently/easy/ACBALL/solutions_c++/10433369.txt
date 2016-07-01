@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	char x[100000] , y[100000],z[100000];
+	long int n,t;
+	cin>>n;
+	while(n--)
+	{
+		cin>>x>>y;
+		t=strlen(x);
+		for (int i=0;i<t;i++)
+		{
+			if(x[i]==y[i])
+			{
+				if(x[i]=='W')
+				z[i]='B';
+				else
+				z[i]='W';
+				
+			}
+			else
+			z[i]='B';
+		}
+       cout<<z<<endl;		
+	}
+	
+}

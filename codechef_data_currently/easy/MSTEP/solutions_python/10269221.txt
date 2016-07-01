@@ -1,0 +1,18 @@
+ans=0
+def f(x,y):
+    global ans
+    ans+=abs(x[0]-y[0])+abs(x[1]-y[1])
+    return y
+for t in range(int(raw_input())):
+    global ans
+    n=int(raw_input())
+    arr=[0]*(n*n)
+    for i in range(n):
+        lst=map(int,raw_input().split())
+        for j in range(n):
+            arr[lst[j]-1]=(i,j)
+    reduce(f,arr)
+    print ans
+    ans=0
+    
+            

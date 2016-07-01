@@ -1,0 +1,77 @@
+import sys
+lines = sys.stdin.readlines()
+cases = int(lines[0])
+
+def get_data(data):
+    pos = {}
+    pos['x'] = float(data[0])
+    pos['y'] = float(data[1])
+
+    if (data[2] == 'R'):
+        velocity = {'x': 1, 'y':  0}
+    elif (data[2] == 'U'):
+        velocity = {'x': 0, 'y':  1}
+    elif (data[2] == 'L'):
+        velocity = {'x': -1, 'y':  0}
+    elif (data[2] == 'D'):
+        velocity = {'x': 0, 'y':  -1}
+    else:
+        velocity = {'x': 0, 'y': 0}
+
+    return {'p': pos, 'v': velocity}
+
+def check_for_collision(earth, asteriod):
+    delta_pos = {'x': earth['p']['x'] - asteriod['p']['x'], 'y': earth['p']['y'] - asteriod['p']['y']}
+    delta_vel = {'x': asteriod['v']['x'] - earth['v']['x'] , 'y': asteriod['v']['y'] - earth['v']['y']}
+
+    t = {}
+    if (delta_vel['x'] == 0):
+        """ x co-ordinate will always remain the same or will never be same """
+        if (delta_pos['x'] == 0):
+            t['x'] = 'ALL'
+        else:
+            t['x'] = 'INF'
+    else:
+        t['x'] = delta_pos['x']/float(delta_vel['x'])
+
+    if (delta_vel['y'] == 0):
+        """ y co-ordinate will always remain the same or will never be same """
+        if (delta_pos['y'] == 0):
+            t['y'] = 'ALL'
+        else:
+            t['y'] = 'INF'
+    else:
+        t['y'] = delta_pos['y']/float(delta_vel['y'])
+
+    if (t['x'] == 'INF' or t['y'] == 'INF'):
+        return 'INF'
+    elif (t['x'] == 'ALL'):
+        return t['y']
+    elif (t['y'] =='ALL'):
+        return t['x']
+    elif (t['x'] == t['y']):
+        return t['x']
+    else:
+        return 'INF'
+
+i = 1
+l = len(lines)
+while (i < l):
+    earth = get_data(lines[i].split())
+    num_asteroids = int(lines[i+1])
+    t = 'INF'
+    tmin = 'INF'
+    for j in range(i+2, i+2+num_asteroids):
+        asteroid = get_data(lines[j].split())
+        t = check_for_collision(earth, asteroid)
+        if (t != 'INF' and tmin == 'INF' and t >= 0 ):
+            tmin = t
+        elif (t != 'INF' and t < tmin and t >= 0):
+            tmin = t
+
+    if (tmin != 'INF'):
+        print '%.1f' % tmin
+    else:
+        print "SAFE"
+
+    i = j + 1

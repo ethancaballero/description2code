@@ -1,0 +1,65 @@
+#define DEBUG 0
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
+#include <algorithm>
+using namespace std;
+ 
+int main() {
+int tc, N, M, C[400], i, j, t[200], nx[401], nx_t[200], nx_c[401], ans;
+scanf("%d", &tc);
+while(tc--) {
+scanf("%d%d", &N, &M);
+for(i = 0; i < M; i++)
+scanf("%d", &C[i]);
+memset(t, 0, sizeof(t));
+memset(nx_c, -1, sizeof(nx_c));
+for(i = M - 1; i >= 0; i--) {
+nx[i] = nx_c[C[i]];
+nx_c[C[i]] = i;
+}
+for(i = ans = 0; i < M; i++) {
+int done = 0, best = -1, best_j;
+for(j = 0; j < N; j++) //already seated
+if(t[j] == C[i]) {
+done = 1;
+nx_t[j] = nx[i];
+break;
+}
+if(!done)
+for(j = 0; j < N; j++) //empty table
+if(t[j] == 0) {
+done = 1;
+ans++;
+t[j] = C[i];
+nx_t[j] = nx[i];
+break;
+}
+if(!done) {
+for(j = 0; j < N; j++) //replace customer that is not eating again
+if(nx_t[j] == -1) {
+done = 1;
+ans++;
+t[j] = C[i];
+nx_t[j] = nx[i];
+break;
+}
+if(!done) {
+for(j = 0; j < N; j++) //replace customer that is eating again next the longest in the future
+if(nx_t[j] > best) {
+best = nx_t[j];
+best_j = j;
+}
+ans++;
+t[best_j] = C[i];
+nx_t[best_j] = nx[i];
+}
+}
+}
+printf("%d
+", ans);
+}
+return 0;
+}

@@ -1,0 +1,16 @@
+def solve(I,N,Q):
+    if N % 2 == 0: return N/2
+    else:
+        if I == Q: return N/2
+        else: return N/2 + 1
+
+def conflip():
+    T = int(raw_input())
+    for i in range(T):
+        G = int(raw_input())
+        for g in range(G):
+            I,N,Q = map(int, raw_input().split())
+            print solve(I,N,Q)
+
+if __name__ == '__main__':
+    conflip() 

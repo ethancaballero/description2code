@@ -1,0 +1,52 @@
+o = raw_input()
+ls =[int(j) for j in o.split()]
+k = raw_input()
+noof1 = 0
+noof0 = 0
+noof2 = 0
+noof3 = 0
+noof4 = 0
+noof5 = 0
+noof6 = 0
+noof7 = 0
+noof8 = 0
+noof9 = 0
+ps = []
+co = 0
+while(co < ls[0]):
+    if (k[co]) == "0":
+        ps.append(1*noof1+2*noof2+3*noof3+4*noof4+5*noof5+6*noof6+7*noof7+8*noof8+9*noof9)
+        
+        noof0+=1
+    if (k[co]) == "1":
+        ps.append(2*noof2+3*noof3+4*noof4+5*noof5+6*noof6+7*noof7+8*noof8+9*noof9-(noof2+noof3+noof4+noof5+noof6+noof7+noof8+noof9-noof0)*1)
+        noof1+=1
+    if (k[co]) == "2":
+        ps.append(-1*noof1+3*noof3+4*noof4+5*noof5+6*noof6+7*noof7+8*noof8+9*noof9-(-noof1+noof3+noof4+noof5+noof6+noof7+noof8+noof9-noof0)*2)
+        noof2+=1
+    if (k[co]) == "3":
+        ps.append(-2*noof2-1*noof1+4*noof4+5*noof5+6*noof6+7*noof7+8*noof8+9*noof9-(-noof2-noof1+noof4+noof5+noof6+noof7+noof8+noof9-noof0)*3)
+        noof3+=1
+    if (k[co]) == "4":
+        ps.append(-2*noof2-3*noof3-1*noof1+5*noof5+6*noof6+7*noof7+8*noof8+9*noof9-(-noof2-noof3-noof1+noof5+noof6+noof7+noof8+noof9-noof0)*4)
+        noof4+=1
+    if (k[co]) == "5":
+        ps.append(-2*noof2-3*noof3-4*noof4-1*noof1+6*noof6+7*noof7+8*noof8+9*noof9-(-noof2-noof3-noof4-noof1+noof6+noof7+noof8+noof9-noof0)*5)
+        noof5+=1
+    if (k[co]) == "6":
+        ps.append(-2*noof2-3*noof3-4*noof4-1*noof1-5*noof5+7*noof7+8*noof8+9*noof9-(-noof2-noof3-noof4-noof1-noof5+noof7+noof8+noof9-noof0)*6)
+        noof6+=1
+    if (k[co]) == "7":
+        ps.append(-2*noof2-3*noof3-4*noof4-1*noof1-5*noof5-6*noof6+8*noof8+9*noof9-(-noof2-noof3-noof4-noof1-noof5-noof6+noof8+noof9-noof0)*7)
+        noof7+=1
+    if (k[co]) == "8":
+        ps.append(-2*noof2-3*noof3-4*noof4-1*noof1-5*noof5-6*noof6-7*noof7+9*noof9-(-noof2-noof3-noof4-noof1-noof5-noof7-noof6+noof9-noof0)*8)
+        noof8+=1
+    if (k[co]) == "9":
+        ps.append(-2*noof2-3*noof3-4*noof4-1*noof1-5*noof5-6*noof6-7*noof7-8*noof8-(-noof2-noof3-noof4-noof1-noof5-noof7-noof6-noof8-noof0)*9)
+        noof9+=1
+    co=co+1
+while(ls[1] > 0):
+    ls[1] = ls[1]-1
+    j = int(raw_input())
+    print ps[j-1]

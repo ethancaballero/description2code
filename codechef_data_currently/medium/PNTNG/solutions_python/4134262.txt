@@ -1,0 +1,20 @@
+n,m,h = map(int, raw_input().split())
+con = {}
+for i in xrange(h):
+	t,c = map(int, raw_input().split())
+	con[i] = [t, c]
+
+con = sorted(con.items(), key=lambda x:x[1][1])
+toPaint = n*m
+ans = 0
+for i in con:
+	if toPaint>0:
+		canPaint = min(toPaint, i[1][0])
+		ans += canPaint * i[1][1]
+		toPaint -= canPaint
+	else:
+		break
+if toPaint>0:
+	print "Impossible"
+else:
+	print ans

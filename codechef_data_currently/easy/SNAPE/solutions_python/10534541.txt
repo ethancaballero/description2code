@@ -1,0 +1,16 @@
+import math as m
+t=input()
+ans=[]
+for i in range(t):
+    temp=raw_input()
+    a=temp.split()
+    for j in range(len(a)):a[j]=int(a[j])
+    an=[]
+    an.append(m.sqrt((a[1]**2)-(a[0]**2)))
+    an.append(m.sqrt((a[0]**2)+(a[1]**2)))
+    ans.append(an)
+for i in range(t):
+    for j in range(len(ans[i])):
+        print format(ans[i][j],'.5f'),
+    print'
+',

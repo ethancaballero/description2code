@@ -1,0 +1,16 @@
+for _ in range(int(raw_input())):
+    s=raw_input()
+    l=len(s)
+    ans=0
+    for each in s:
+        if s.count(each)==l/2:
+            ans=1
+            break
+
+    if l%2:
+        ans=0
+
+    if ans:
+        print "YES"
+    else:
+        print "NO"

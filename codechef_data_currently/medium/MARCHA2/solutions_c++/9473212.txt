@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t,j;
+long int leaf,total_node,level;
+
+cin>>t;
+for(int i=0;i<t;++i)
+{
+cin>>level;
+total_node=1;
+int flag=1;
+for(j=1;j<level;++j)
+{
+cin>>leaf;
+if( leaf>total_node )
+{
+flag=0; 
+}
+total_node=(total_node-leaf)*2;
+}
+cin>>leaf;
+
+if( leaf!=total_node )
+{
+flag=0;
+}
+
+if( flag==1 )
+{
+cout<<"Yes
+";
+}
+else
+{
+cout<<"No
+";
+}
+}
+return 0;
+}

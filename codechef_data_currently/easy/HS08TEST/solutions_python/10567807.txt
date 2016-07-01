@@ -1,0 +1,8 @@
+w, curr_balance = [float(x) for x in raw_input().strip().split(' ')]
+
+if w + 0.5 > curr_balance:
+    print '{:.2f}'.format(curr_balance)
+elif w % 5 != 0:
+    print '{:.2f}'.format(curr_balance)
+else:
+    print '{:.2f}'.format(curr_balance - w - 0.5)

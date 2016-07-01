@@ -1,0 +1,28 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	cin.ignore();
+	while(t--)
+	{
+		int l;
+		char str[11];
+		cin.getline(str,11);
+		l=strlen(str);
+		if(l==5&&str[0]>='a'&&str[0]<='h'&&str[1]>='1'&&str[1]<='8'&&str[2]=='-'&&str[3]>='a'&&str[3]<='h'&&str[4]>='1'&&str[4]<='8')
+		{
+			if((str[0]==str[3]+1||str[3]==str[0]+1)&&(str[1]==str[4]+2||str[4]==str[1]+2))
+			cout<<"Yes"<<endl;
+			else if((str[0]==str[3]+2||str[3]==str[0]+2)&&(str[1]==str[4]+1||str[4]==str[1]+1))
+			cout<<"Yes"<<endl;
+			else 
+			cout<<"No"<<endl;		
+		}
+		else
+		cout<<"Error"<<endl;
+	}
+	return 0;
+} 

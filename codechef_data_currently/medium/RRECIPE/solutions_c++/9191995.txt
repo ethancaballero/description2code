@@ -1,0 +1,50 @@
+#include <cstring>
+#include <iostream>
+using namespace std;
+int main() 
+{
+    int t,notpall,output;
+    string s;
+    cin>>t;
+    while(t--)
+    {
+        cin>>s;
+        output=1;
+        notpall=0;
+        if(s.length()==1)
+            {
+                if(s=="?")
+                    cout<<"26"<<endl;
+                else
+                cout<<"1"<<endl;
+            continue;
+            }
+        for(int i=0;i<s.length()/2;i++)
+        {
+            if(s.at(i)!=s.at(s.length()-1-i) && (s.at(i)!='?' && s.at(s.length()-1-i)!='?'))
+            {
+                notpall=1;
+                break;
+            }
+            if(s.at(i)=='?' && s.at(s.length()-1-i)=='?')
+            {
+                 output*=26;
+                 output%=10000009;
+            }
+        }
+        if(notpall==0)
+        {
+            if(s.length()%2==1)
+            {
+                int len=s.length()/2;
+                if(s.at(len)=='?')
+                    output*=26;
+            }
+        }
+        if(notpall==1)
+            cout<<"0"<<endl;
+        else
+            cout<<output<<endl;
+    }
+	return 0;
+}

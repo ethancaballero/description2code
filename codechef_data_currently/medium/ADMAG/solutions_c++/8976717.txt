@@ -1,0 +1,27 @@
+#include<iostream>
+#include<vector>
+#include<utility>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+	long long t,n,j,c;
+	cin>>t;
+	while(t--)
+	{
+		long long n;
+		cin>>n;
+		long long a=1,b=1;
+		long long sum=0;
+		while(b<=n)
+		{
+		c=a+b;
+		a=b;
+		b=c;
+		sum++;
+		}
+		cout<<sum<<endl;
+	}
+return 0;
+}

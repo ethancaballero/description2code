@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long int
+#define MOD 10000007
+
+int main()
+{
+	ll i,j,n,m,pro,sum;
+
+	cin>>n>>m;
+	
+	ll mat[n][m];
+	
+	for(i=0;i<n;i++) {
+		for(j=0;j<m;j++) {
+			cin>>mat[i][j];
+		}
+	}
+
+	pro = 1;
+
+	for(j=0;j<m;j++) {
+		sum = 0;
+		for(i=0;i<n;i++) {
+			sum = ((sum + mat[i][j])%MOD + MOD)%MOD;
+		}
+		pro = ((pro * sum)%MOD + MOD)%MOD;
+	}
+
+	cout<<pro<<endl;
+
+	return 0;
+}

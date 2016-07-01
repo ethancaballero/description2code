@@ -1,0 +1,36 @@
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int t;
+	int j,i,f,p,a,c=0;
+    cin>>t;
+    int n;
+    while(t--)
+    {
+        cin>>n;
+        vector <int> x;
+        for(i=0;i<n;i++)
+            {
+                cin>>a;
+                x.push_back(a);
+            }
+        sort(x.begin(),x.end());
+        for(i=0;i<n;i+=2)
+        {
+            j=i+1;
+            if(x[i]!=x[j])
+            {
+               cout<<x[i]<<endl;
+               break;
+            }
+        }
+
+    }
+
+
+}

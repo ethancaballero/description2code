@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+#define gc getchar
+using namespace std;
+typedef long long ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+double v[100];
+void calc(double x,double g)
+{
+    ll n=log2(x);
+    double b=g;
+    ll i;
+    for(i=0;i<=n+1;i++)
+    {
+        v[i]=b/2;
+        b=b/2;
+    }
+}
+int main()
+{
+    ll t,p;
+    double x,k,i,q,r;
+    cin>>t;
+    while(t--)
+    {
+        cin>>x>>k;
+        if(x>k)
+          calc(x,x);
+        else
+          calc(k,x);
+        p=log2(k);
+        q=v[p];
+        r=q*2;
+        i=k-pow(2,p);
+        printf("%.16lf
+",q+i*r);
+    }
+    return 0;
+}

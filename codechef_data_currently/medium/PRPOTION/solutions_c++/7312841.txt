@@ -1,0 +1,61 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define get getchar_unlocked
+
+int scan()
+{
+    int n = 0, ch = get();
+    while (ch < '0' || ch > '9')
+        ch = get();
+    while (ch >= '0' && ch <= '9') {
+        n = (n << 3) + (n << 1) + ch - '0';
+        ch = get();
+    }
+    return n;
+}
+
+int main()
+{
+    int t = scan(), r, g, mn, m, mr, mg, mb, a, b, c;
+    while (t--) {
+        r = scan() - 1;
+        g = scan() - 1;
+        b = scan() - 1;
+        m = scan();
+        mr = scan();
+        while (r--)
+            mr = max(mr, scan());
+        mg = scan();
+        while (g--)
+            mg = max(mg, scan());
+        mb = scan();
+        while (b--)
+            mb = max(mb, scan());
+        a = mr;
+        b = mb;
+        c = mg;
+        mn = max(max(a,b),c);
+        while (m--) {
+            if (a >= b) {
+                if (a >= c)
+                    a >>= 1;
+                else
+                    c >>= 1;
+            }
+            else {
+                if (b >= c)
+                    b >>= 1;
+                else
+                    c >>= 1;
+            }
+            mn = min(mn, max(max(a,b),c));
+        }
+        printf("%d
+", mn);
+    }
+    return 0;
+}

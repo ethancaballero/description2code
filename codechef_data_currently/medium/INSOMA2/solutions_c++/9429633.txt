@@ -1,0 +1,54 @@
+import java.io.*;
+
+public class Main {
+	
+	public static long getCountWords(char a[][], int x, int y, int n, int index, String input) {
+		if(index==input.length())
+			return 1;
+		
+		long cnt=0;
+		if(x-1>=0 && y-1>=0 && a[x-1][y-1]==input.charAt(index))
+			cnt+=getCountWords(a,x-1,y-1,n,index+1,input);
+		
+		if(x-1>=0 && y+1<n && a[x-1][y+1]==input.charAt(index))
+			cnt+=getCountWords(a,x-1,y+1,n,index+1,input);
+		
+		if(x+1<n && y-1>=0 && a[x+1][y-1]==input.charAt(index))
+			cnt+=getCountWords(a,x+1,y-1,n,index+1,input);
+		
+		if(x+1<n && y+1<n && a[x+1][y+1]==input.charAt(index))
+			cnt+=getCountWords(a,x+1,y+1,n,index+1,input);
+		
+		return cnt;
+	}
+	
+	public static long getCount(int n, char a[][], String input) {
+		
+		long cnt=0;
+		int i,j;
+		for(i=0; i<n; i++)
+			for(j=0; j<n; j++)
+				if(a[i][j]==input.charAt(0))
+					cnt += getCountWords(a, i, j, n, 1, input);
+		
+		return cnt;
+	}
+	
+	public static void main(String args[]) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int n = Integer.parseInt(br.readLine().trim());
+		char arr[][] = new char[n][n];
+		
+		int i,j;
+		for(i=0; i<n; i++) {
+			String sa[] = (br.readLine().trim()).split("( )+");
+			for(j=0; j<n; j++)
+				arr[i][j] = sa[j].charAt(0);
+		}
+		
+		String input = br.readLine().trim();
+		
+		System.out.println(getCount(n, arr, input));
+	}
+}

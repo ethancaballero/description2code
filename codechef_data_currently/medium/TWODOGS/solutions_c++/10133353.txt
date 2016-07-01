@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e6 + 10;
+const int INF = 1e8;
+int T[MAXN];
+int D[MAXN];
+int main(){
+    int N, K;
+    scanf("%d%d", &N, &K);
+    for(int i = 1;i < MAXN;++i)
+        D[i] = INF;
+    for(int i = 1;i <= N;++i){
+        scanf("%d", &T[i]);
+        D[T[i]] = min(D[T[i]], min(i, N - i + 1));
+    }
+    int ans = INF;
+    for(int i = 1;i <= N;++i){
+        int th = T[i];
+        int oth = K - T[i];
+        //cout << th << " " << oth << "
+";
+        if(th != oth && oth > 0 && D[oth] != INF){
+            ans = min(ans, max(D[th], D[oth]));
+        }
+    }
+    if(ans == INF) ans = -1;
+    printf("%d
+", ans);
+    return 0;
+}

@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+#include<algorithm>
+#include<vector>
+#include<utility>
+#define MOD 1000000009
+using namespace std;
+bool comp( pair<char, int> i, pair<char, int>j)
+{
+    return i.second < j.second;
+}
+int main(){
+    ios_base::sync_with_stdio(false);
+
+    cin.tie(NULL);
+    int t;
+    cin>>t;
+
+    while(t--)
+    {
+         long long ans=1;
+        int n,m;
+        cin>>n>>m;
+	vector<pair<char,int> > v;
+	v.resize(m);
+
+	for(int i=0;i<m;i++)
+    {
+        char a;int b;
+        cin>>v[i].first>>v[i].second;
+        }
+
+     sort(v.begin(),v.end(),comp);
+    for(int i=1;i<m;i++)
+        {
+            if(v[i].first!=v[i-1].first)
+                ans*=v[i].second-v[i-1].second;
+            ans%=MOD;
+
+        }
+        cout<<ans<<endl;
+    }
+
+}

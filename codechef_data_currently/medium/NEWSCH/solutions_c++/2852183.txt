@@ -1,0 +1,54 @@
+#include<stdio.h>
+void multiply(long long F[2][2],long long n);
+void product(long long a[2][2],long long b[2][2]);
+long long fib(long long n)
+{
+    if(n==2)
+        return 12;
+    if(n==3)
+        return 24;
+    long long F[2][2];
+    F[0][0]=2;F[0][1]=1;
+    F[1][0]=3;F[1][1]=0;
+    multiply(F,n-3);
+    return (24*F[0][0]+12*F[1][0])%1000000007;
+}
+
+
+void product(long long a[2][2],long long b[2][2])
+{
+    long long x=(a[0][0]*b[0][0]+a[0][1]*b[1][0])%1000000007;
+    long long y=(a[0][0]*b[0][1]+a[0][1]*b[1][1])%1000000007;
+    long long z=(a[1][0]*b[0][0]+a[1][1]*b[1][0])%1000000007;
+    long long w=(a[1][0]*b[0][1]+a[1][1]*b[1][1])%1000000007;
+    a[0][0]=x;
+    a[0][1]=y;
+    a[1][0]=z;
+    a[1][1]=w;
+}
+
+
+void multiply(long long F[2][2],long long n)
+{
+    if(n==0 || n==1)
+        return ;
+    multiply(F,n/2);
+    product(F,F);
+    if(n%2!=0)
+    {   long long M[2][2];
+    M[0][0]=2;M[0][1]=1;M[1][0]=3;M[1][1]=0;
+        product(F,M);
+    }
+}
+
+int main()
+{   int cases;
+    scanf("%d",&cases);
+    while(cases>0)
+    {long long n;
+    scanf("%lld",&n);
+    printf("%lld
+",fib(n));
+    cases--;
+}
+}

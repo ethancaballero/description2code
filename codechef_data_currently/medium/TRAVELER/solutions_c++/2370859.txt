@@ -1,0 +1,105 @@
+#include<iostream>
+#include<map>
+#include<vector>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+int main(void)
+{
+    int n,i,j,k,l,t,x,flag;
+    string arr,arr1;
+    map<string,int>m;
+    scanf("%d",&n);
+    for(i=0;i<=n-1;i++)
+    {
+        scanf("
+");
+        cin>>arr;
+        m[arr]=i+1;
+    }
+    scanf("%d",&l);
+    int edges[n][n];
+    for(i=0;i<=n-1;i++)
+    {
+        for(j=0;j<=n-1;j++)
+        edges[i][j]=0;
+    }
+    for(i=0;i<=l-1;i++)
+    {
+        scanf("
+");
+        cin>>arr>>arr1;
+        scanf("%d",&j);
+        edges[m[arr]-1][m[arr1]-1]=j;
+    }
+    //printf("%d
+",m["a"]);
+    vector<int>v;
+    scanf("%d",&t);
+    string arr2[51];
+    for(i=0;i<=t-1;i++)
+    {
+        v.clear();
+        x=0;
+        flag=0;
+        scanf("%d",&k);
+        for(j=0;j<=k-1;j++)
+        {
+            scanf("
+");
+            cin>>arr2[j];
+        }
+        /*for(j=0;j<=k-1;j++)
+        cout<<arr2[j]<<' ';
+        cout<<'
+';*/
+        if(m[arr2[0]]==0)
+        {
+           printf("ERROR
+");
+        }
+        else
+        {
+        v.push_back(m[arr2[0]]);
+        for(j=1;j<=k-1;j++)
+        {
+            if(m[arr2[j]]==0)
+            {
+                flag=1;
+                break;
+            }
+            for(l=0;l<=j-1;l++)
+            {
+                if(v[l]==m[arr2[j]])
+                {
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==1)
+            break;
+            if(edges[v[j-1]-1][m[arr2[j]]-1]==0)
+            {
+                flag=1;
+                //printf("a
+");
+                break;
+            }
+            v.push_back(m[arr2[j]]);
+            x+=edges[v[j-1]-1][m[arr2[j]]-1];
+        }
+        if(flag==1)
+        {
+            printf("ERROR
+");
+            /*while(scanf("%c",&ch)!='
+')
+            cin>>arr;*/
+        }
+        else
+        printf("%d
+",x);
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,72 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int n,m;
+int l;
+int co;
+bool visited[20];
+int matrix[100][100];
+ void  go(int k,int len){
+     if(len>l )
+     return;
+ if(k==n)// if kth intersection is  nth intersection
+ {
+     //printf("k is %d 
+",k);
+    // printf("l is %d 
+",l);
+    // printf("len is %d 
+",len);
+     if(l>len)// if
+     {
+        l=len;
+        co=1;
+     }
+        else if(len==l){
+            co++;
+            //printf("co inside go incremented to  %d 
+",co);
+            return;
+        }
+
+ }
+        visited[k]=true;
+        for(int j=1;j<=n;j++){
+            if(visited[j]==false && matrix[k][j]>0)
+            go(j,len+matrix[j][k]);
+        }
+         visited[k]=false;
+ }
+
+
+int main()
+{
+  int t;
+  scanf("%d",&t);
+  while(t--){
+    scanf("%d %d",&n,&m);// n intersections m two roads
+     for(int i=1;i<=n;i++)// if n is 4 m can be upto 6
+        for(int j=1;j<=n;j++)
+        matrix[i][j]=-1;
+
+    for(int i=1;i<=m;i++){
+    int u,v,w;
+    scanf("%d %d %d",&u,&v,&w);
+    matrix[u][v]=w;
+    matrix[v][u]=w;
+    }
+
+for(int i=1;i<=n;i++)
+    visited[i]=false;
+co=0;l=1000;
+//printf("co is %d 
+",co);
+go(1,0);
+printf("%d
+",co);
+
+
+  }
+
+    return 0;
+}

@@ -1,0 +1,7 @@
+a = input()
+for x in range(a):
+    test = raw_input().split()
+    if int(test[0]) + int(test[1]) + int(test[2]) == 180:
+        print 'YES'
+    else:
+        print 'NO'

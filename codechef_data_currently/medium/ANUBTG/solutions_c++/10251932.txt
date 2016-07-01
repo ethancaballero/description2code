@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+inline void read(int &n){
+        n=0;
+        char c = getchar_unlocked();
+        while (!('0' <= c && c <= '9'))
+        c = getchar_unlocked();
+
+        while ('0' <= c && c <= '9') {
+            n = (n << 3) + (n << 1) + (c - '0');
+            c = getchar_unlocked();
+        }
+    }
+
+/*inline void write(int x){
+
+         register char buffor[35];
+         register int i=0;
+         do{
+               buffor[i++]=(x%10)+'0';
+               x/=10;
+            } while(x);
+           i--;
+            while(i>=0) putchar_unlocked(buffor[i--]);
+            putchar_unlocked('
+');
+       }
+
+*/
+
+
+int main()
+{
+    int test,i,sum,temp,n;
+    vector <int> A;
+
+    //scanf("%d",&test);
+    read(test);
+
+    while (test > 0) {
+
+        scanf("%d",&n);
+
+        for (i = 0; i < n; i++) {
+            //scanf("%d",&temp);
+            read(temp);
+            A.push_back(temp);
+        }
+
+        sort(A.begin(),A.end());
+
+        i = n-1;
+        sum = 0;
+
+        while (i > 0) {
+            sum += A[i] + A[i-1];
+            i-=4;
+        }
+
+        if (i == 0) {
+            sum += A[0];
+        }
+
+        printf("%d
+",sum);
+
+        A.clear();
+
+        test--;
+    }
+   return 0;
+}

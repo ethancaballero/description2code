@@ -1,0 +1,24 @@
+T=int(raw_input())
+vol=[0]*T
+for i in range(T):
+	arr=[]
+	tmp=raw_input()
+	tmp=tmp.split(' ')
+	n=int(tmp[0]); m=int(tmp[0])
+	pi=raw_input()
+	pi=pi.split(' ')
+	pi=[int(x) for x in pi]
+	for j in range(n):
+		tmp=raw_input(); tmp=tmp.split(' ')
+		tmp=[int(x) for x in tmp]
+		tmpVar=tmp[0]
+		del(tmp[0]); tmp.sort()
+		arr=arr+[[tmpVar]+tmp]
+	for el in pi:
+		if arr[el][0]>0:
+			vol[i]+=arr[el][arr[el][0]]
+			arr[el][0]-=1
+		
+for el in vol:
+	print el
+

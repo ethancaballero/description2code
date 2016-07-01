@@ -1,0 +1,55 @@
+def merge(arr, left, mid, right):
+    inv = 0
+    i = left
+    j = mid + 1
+    k = left
+    temp = [0] * len(arr)
+    while i <= mid and j <= right:
+        if arr[i] <= arr[j]:
+            temp[k] = arr[i]
+            i += 1
+            k += 1
+        else:
+            temp[k] = arr[j]
+            inv += mid + 1 - i
+            j += 1
+            k += 1
+    while i <= mid:
+        temp[k] = arr[i]
+        i += 1
+        k += 1
+    while j <= right:
+        temp[k] = arr[j]
+        j += 1
+        k += 1
+    for x in range(left, right+1):
+        arr[x] = temp[x]
+
+    return inv
+
+
+def merge_sort(arr, left, right):
+    inv = 0
+    if right > left:
+        mid = (left + right) / 2
+        inv += merge_sort(arr, left, mid)
+        inv += merge_sort(arr, mid + 1, right)
+        inv += merge(arr, left, mid, right)
+    return inv
+
+for _ in xrange(input()):
+    n = input()
+    l = map(int, raw_input().split())
+    arr2 = []
+    for x in l:
+        arr2.append(x)
+    global_inv = merge_sort(l, 0, len(l)-1)
+    local_inv = 0
+    for p in range(0, len(arr2) - 1):
+        if arr2[p] > arr2[p + 1]:
+            local_inv += 1
+
+    if local_inv == global_inv:
+        print "YES"
+    else:
+        print "NO"

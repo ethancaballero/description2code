@@ -1,0 +1,25 @@
+n=int(raw_input())
+s=[]
+while(n):
+    s+=[raw_input().split()]
+    n-=1
+    
+s=sorted(s, key=lambda x: int(x[1]), reverse=True)
+
+
+q=int(raw_input())
+while(q):
+    flag=0
+    query=raw_input()
+    for x in s:
+        len_q=len(query)
+        if (query ==  x[0][:len_q]):
+            
+            print x[0]
+            flag=1
+            break
+          
+    
+    if flag==0:
+        print "NO"
+    q-=1

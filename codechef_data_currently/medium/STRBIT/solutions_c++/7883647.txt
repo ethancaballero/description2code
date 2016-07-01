@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+#define pii pair<int, int>
+#define pll pair<long long, long long>
+#define vi  vector<int>
+#define pb  push_back
+#define mp  make_pair
+#define M(a,x) memset(a,x,sizeof(a))
+#define sci(x) scanf("%d",&x);
+#define scl(x) scanf("%lld",&x);
+#define scs(x) scanf("%s",x);
+#define print(x) printf("%d",x);
+#define nl printf("
+")
+#define printl(x) printf("%lld",x)
+#define F(i,a,n) for(int i=a;i<n;i++)
+#define INF 100000000000000000LL
+#define LL long long
+
+const int N=1e5+5;
+int tree[N];
+int a[N];
+char s[N];
+inline void update(int idx,int val) {
+    while(idx<N) {
+        tree[idx]+=val;
+        idx+=idx&-idx;
+    }
+}
+inline int query(int idx) {
+    int sm=0;
+    while(idx>0) {
+        sm+=tree[idx];
+        idx-=idx&-idx;
+    }
+    return sm;
+}
+int main() {
+    int t;sci(t);
+    while(t--) {
+        M(tree,0);
+        M(s,0);
+        int n;sci(n);
+        int k;sci(k);
+        scanf("%s",s+1);
+        for(int i=1;i<=n;i++) {
+            if(s[i]=='R')
+                a[i]=1;
+            else
+                a[i]=0;
+        }
+        int ans=0;
+        for(int i=1;i<=n;i++) {
+            int temp=query(i);
+            if((a[i]+temp)%2) {
+                ans++;
+                update(i+1,1);
+                update(min(i+1+k-1,n+1),-1);
+            }
+        }
+        cout<<ans<<endl;
+    }
+}

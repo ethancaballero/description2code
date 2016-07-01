@@ -1,0 +1,12 @@
+from collections import Counter
+t = input()
+while t:
+    t=~(-t)
+    a = Counter(raw_input())
+    b = Counter(raw_input())
+    count = 0
+    for i in a:
+        if i in b:
+            count = count + min(a[i],b[i])
+    print count
+    

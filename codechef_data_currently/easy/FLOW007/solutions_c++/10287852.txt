@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t, n=0;
+    long long int a;
+    
+    cin >> t;
+    
+    while(t--)
+    {
+        cin >> a;
+        n=0;
+        while(a)
+        {
+            n = a % 10 + n * 10;
+            a /= 10;
+        }
+        
+        cout << n << endl;
+    }
+    return 0;
+}

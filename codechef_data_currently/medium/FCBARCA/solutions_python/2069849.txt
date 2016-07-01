@@ -1,0 +1,6 @@
+t = int(raw_input())
+for i in xrange(t):
+	n,k = map(int,raw_input().split())
+	if n%2 == 0: print ((k**n + k)/(k+1)) % (10**9 + 7)
+	else: print ((k**n - k)/(k+1)) % (10**9 + 7)
+		

@@ -1,0 +1,44 @@
+#include <stdio.h> // for scanf , printf
+//#include <bits/stdc++.h> // for map
+//#include <stdlib.h> // for malloc,sqrt
+//#include <string.h> // for memset,strcmp
+ #include <iostream> // for cout
+ //# include <iomanip>
+# define limit 1000000
+//#define gc getchar_unlocked
+using namespace std;
+int n,t;
+char s[limit+2];
+int count;
+
+int main()
+{
+	int i,p;
+	cin>>t;
+	while(t-->0)
+	{
+		count=0;
+		p=-1;// last i till where prfix is valid
+		//cin>>n;
+		scanf("%s",s);
+		//printf("%s
+",s);
+		for(i=0;s[i];i++)
+		{
+			if(s[i]=='<')
+				count++;
+			else // symbol is '>'
+				count--;
+			if(count==0)
+				p=i;
+			else if(count<0)
+				break;
+			//printf("The symbol is %c at %d and count is %d
+",s[i],i,count);
+		}
+		printf("%d
+",(p+1));
+	}
+	
+	return 0;
+}

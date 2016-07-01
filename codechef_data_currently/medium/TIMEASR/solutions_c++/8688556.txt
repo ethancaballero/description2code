@@ -1,0 +1,30 @@
+#include <iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+ 
+int main() {
+        ios_base::sync_with_stdio(false);
+	long long int t,i,j,v;
+	double a1,a2;
+	cin>>t;
+	for(v=0;v<t;v++)
+	{
+		cin>>a1;
+		for(i=0;i<12;i++)
+		{
+			for(j=0;j<60;j++)
+			{
+				a2=30*i -5.5*j;
+				if(a2>180.0)
+				a2=360.0-a2;
+				if(fabs(a1-a2)<1.0/120.0)
+				 printf("%02lld:%02lld
+",i,j);
+			}
+		}
+	}
+	
+	// your code goes here
+	return 0;
+}  

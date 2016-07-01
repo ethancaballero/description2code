@@ -1,0 +1,17 @@
+﻿t=int(raw_input())
+while t>0:
+    t-=1
+    fab=False
+    a=int(raw_input())
+    first,second,another=0,1,0;
+    if first==a or second==a:
+        print "YES"
+        continue
+    while(another < a):
+        another=first+second;
+        if (another==a):
+            fab=True
+            break
+        first,second=second,another
+    if fab:print "YES"
+    else:print "NO"

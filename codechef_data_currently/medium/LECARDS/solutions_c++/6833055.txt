@@ -1,0 +1,49 @@
+#include<stdio.h>
+ 
+#define MOD 1000000007
+ 
+unsigned long long int c[1100][1100];
+ 
+void calc()
+{
+    int i,j;
+    for(i=0;i<1100;i++)
+        {c[i][0]=1;
+         c[i][i]=1;
+        }
+ 
+     for(i=1;i<1100;i++)
+      for(j=1;j<i;j++)
+        {
+            c[i][j]=(c[i-1][j]+c[i-1][j-1])%MOD;
+        }
+ 
+}
+ 
+int main()
+{
+ 
+    int t;
+    scanf("%d",&t);
+    calc();
+    while(t--)
+    {
+        int n;
+        scanf("%d",&n);
+        int inp[1100];
+        int i;
+ 
+        for(i=0;i<n;i++)
+            scanf("%d",&inp[i]);
+ 
+        unsigned long long int sol=0;
+ 
+        for(i=(n/2)+1;i<=n;i++)
+            sol=(sol+(c[n][i]))%MOD;
+ 
+        printf("%llu
+",sol);
+    }
+ 
+    return 0;
+}

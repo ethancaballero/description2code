@@ -1,0 +1,13 @@
+#devide and eat <VigzMv/>
+for i in range(0,int(raw_input())):
+    a = 'n'
+    b = 'n'
+    c = 'n'
+    n = int(raw_input())
+    if 360 % n == 0:
+        a = 'y'
+    if n <= 360:
+        b = 'y'
+    if n < 27:
+        c = 'y'
+    print a, b, c

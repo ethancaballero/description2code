@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#define pt(n) printf("%d
+",n)
+#define gc getchar_unlocked
+typedef int ll;
+ 
+void sct(ll &x)
+{
+    register ll c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+using namespace std;
+int main()
+{
+  ll i,m,n,p=0;
+  sct(n);sct(m);
+  ll a[n];
+ for(i=0;i<n;i++) sct(a[i]);
+ 
+  while(m--)
+  {
+    char x;
+    ll c;
+    cin>>x;sct(c);
+    
+    if(x == 'R')
+      cout<<a[(p+c-1)%n]<<"
+";
+    else if(x == 'C')
+      p = (p+c)%n;
+    else
+      p = (p-c+n)%n;
+    
+     // cout<<x<<" "<<p<<"
+";
+  }      
+	return 0;
+}

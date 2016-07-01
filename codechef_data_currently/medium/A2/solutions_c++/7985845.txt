@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int main() {
+	int t,k,n,a,f;
+	cin>>t;
+	while(t--)
+	{a=1;
+		cin>>k;
+		while(k--)
+	    {
+	    	cin>>n;
+	    	a-=n;
+	    	if(a<0)break;
+	    	a*=2;
+	    }
+	    if(!a)
+	    cout<<"Yes
+";
+	    else cout<<"No
+";
+	}
+	return 0;
+}

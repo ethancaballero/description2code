@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main()
+{
+    int t,i,j,n,d;
+    bool flag;
+    int v1[30],v2[30];
+    string a,b;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>d>>a>>b;
+        flag=true;
+        for(i=0;i<d&&i<n;i++)
+        {
+            memset(v1,0,sizeof v1);
+            memset(v2,0,sizeof v2);
+            for(j=i;j<n;j+=d)
+            {
+                v1[a[j]-'a']++;
+                v2[b[j]-'a']++;
+            }
+            for(j=0;j<26;j++)
+                if(v1[j]!=v2[j])
+                {
+                    flag=false;
+                    break;
+                }
+        }
+        if(flag)
+            cout<<"Yes"<<endl;
+        else
+            cout<<"No"<<endl;
+    }
+    return 0;
+}

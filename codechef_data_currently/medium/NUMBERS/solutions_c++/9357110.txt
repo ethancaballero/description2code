@@ -1,0 +1,65 @@
+/**
+* He who forgives and acknowledges himself... that is what it truly means to be strong!
+*/
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <cstdio>
+#include <cstring>
+#include <cctype>
+#include <queue>
+#include <set>
+#include <climits>
+#include <iomanip>
+#include <cassert>
+#include <cmath>
+#include <stack>
+using namespace std;
+
+#define trace(x) {cerr << #x << "=" << x <<endl;}
+#define trace2(x, y) {cerr << #x << "=" << x << " " << #y << "=" << y <<endl;}
+#define track(x) {cerr << #x << ":" << endl; for (int q = 0; q < x.size(); q++) {cerr << x[q] << " ";} cerr << endl;}
+#define trackarr(x, n) {cerr << #x << ":" << endl; for (int q = 0; q < n; q++) {cerr << x[q] << " ";} cerr << endl;}
+#define trackvv(x) {cerr << #x << ":" << endl; for (int i = 0; i < x.size(); i++) { cerr << "i:" << i << endl; for (int j = 0; j < x[i].size(); j++){cerr << x[i][j] << " ";} cerr << endl;} cerr << endl;}
+#define trackcr(x) {cerr << #x << ":" << endl; for (auto i = x.begin(); i != x.end(); i++) {cerr << *i << " ";} cerr << endl;}
+template <typename Tk, typename Tv> ostream& operator<<(ostream& os, const pair<Tk, Tv> &p){os << "{" << p.first << ',' << p.second << "}";return os;}
+
+typedef unsigned int ll;
+typedef vector<int> vi;
+typedef vector<vector<int> > vvi;
+typedef vector<ll> vll;
+typedef pair<int,int> ii;
+typedef vector<pair<int,int> > vii;
+
+const int MAX = 100005;
+const int INF = 1e9;
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int,int> h;
+        map<int,string> name;
+        for (int i = 0; i < n; i++) {
+            string s;
+            int v;
+            cin >> s >> v;
+            h[v]++;
+            name[v] = s;
+        }
+        bool printed = false;
+        for (map<int,int>::iterator i = h.begin(); i != h.end(); i++) {
+            if (i->second == 1) {
+                cout << name[i->first] << endl;
+                printed = true;
+                break;
+            }
+        }
+        if (!printed) {
+            cout << "Nobody wins." << endl;
+        }
+    }
+}

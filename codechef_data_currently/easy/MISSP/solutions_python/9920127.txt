@@ -1,0 +1,12 @@
+t = input()
+for _ in xrange(t):
+    n = input()
+    s = set()
+    sum_d = 0
+    for i in xrange(n):
+        k = input()
+        if k in s:
+            s.remove(k)
+        else:
+            s.add(k)
+    print list(s)[0]

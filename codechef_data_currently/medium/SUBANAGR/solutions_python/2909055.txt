@@ -1,0 +1,28 @@
+import string
+import sys
+import bisect
+from collections import defaultdict
+num = int(raw_input())
+
+def freq(item):
+    d = defaultdict(int)
+    for i in item:
+        d[i] +=1
+    return d
+
+menor = raw_input()
+
+palavras = map(freq, map(string.strip, sys.stdin.readlines()))
+
+resp = []
+for letra in menor:
+    for p in palavras:
+        if p[letra] == 0:
+            break
+        p[letra] -=1
+    else:
+        bisect.insort(resp,letra)
+if resp:
+    print ''.join(resp)
+else:
+    print 'no such string'

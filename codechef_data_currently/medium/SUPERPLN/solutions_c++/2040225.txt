@@ -1,0 +1,67 @@
+#include <cstdio>
+#include <map>
+#include <tr1/unordered_map>
+
+using namespace std;
+using namespace std::tr1;
+
+int main()
+{
+	int t;
+	scanf("%d
+", &t);
+	while (t-->0)
+	{
+		unordered_map< int, map<int, pair<int, int> > > a;
+		unordered_map<int, unordered_map<int, int> > b;
+
+		int n;
+		scanf("%d
+", &n);
+		int citySrc, timeSrc, cityDst, timeDst;
+		while (n-->0)
+		{
+			scanf("%d%d%d%d
+", &citySrc, &timeSrc, &cityDst, &timeDst);
+			a[citySrc][timeSrc] = make_pair(cityDst, timeDst);
+		}
+
+		int cityCurr, timeCurr, cityFin, timeFin;
+		scanf("%d%d%d%d
+", &cityCurr, &timeCurr, &cityFin, &timeFin);
+		b[cityCurr][timeCurr] = 1;
+
+		int ans = 0;
+		while (!(cityCurr == cityFin && timeCurr <= timeFin))
+		{
+			unordered_map< int, map<int, pair<int, int> > >::const_iterator departures = a.find(cityCurr);
+			if (departures == a.end())
+			{
+				break;
+			}
+			pair<map<int, pair<int, int> >::const_iterator, map<int, pair<int, int> >::const_iterator> destination = departures->second.equal_range(timeCurr);
+			if (destination.first == departures->second.end())
+			{
+				break;
+			}
+			else
+			{
+				cityCurr = destination.first->second.first;
+				timeCurr = destination.first->second.second;
+				if (b[cityCurr][timeCurr] == 1)
+					break;
+				else
+				{
+					b[cityCurr][timeCurr] = 1;
+					++ans;
+				}
+			}
+		}
+		if (cityCurr == cityFin && timeCurr <= timeFin)
+			printf("Yes %d
+", ans);
+		else
+			printf("No
+");
+	}
+}

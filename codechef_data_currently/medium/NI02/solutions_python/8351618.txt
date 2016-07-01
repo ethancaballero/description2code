@@ -1,0 +1,117 @@
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+const int MAX = 2505;
+
+int adj[MAX][MAX];
+
+int min_vertex(int d[],bool visited[],int n)
+{
+
+    int min_i,min_d=INT_MAX;
+
+    for(int i=0;i<n;i++)
+    {
+
+        if(d[i]<min_d && !visited[i])
+        {
+
+            min_d=d[i];
+            min_i=i;
+
+        }
+
+    }
+
+    return min_i;
+
+}
+
+int dijkstra(int p[][MAX],int n,int source,int des)
+{
+
+    int i,j;
+    int d[n];
+    bool visited[n];
+
+    for(i=0;i<n;i++)
+    {
+
+        d[i]=INT_MAX;
+        visited[i]=false;
+
+    }
+
+    d[source]=0;
+
+    for(i=0;i<n;i++)
+    {
+
+        int u=min_vertex(d,visited,n);
+
+        visited[u]=true;
+
+        for(j=0;j<n;j++)
+        {
+
+            if(!visited[j] && p[u][j]!=0 && d[u]!=INT_MAX && d[u]+p[u][j]<d[j])
+            d[j]=d[u]+p[u][j];
+
+        }
+
+    }
+
+    return d[des];
+
+}
+
+int main()
+{
+
+    int t,i,x,y,n,j;
+
+    scanf("%d",&t);
+
+    while(t--)
+    {
+
+        scanf("%d",&n);
+
+        n=n+2;
+
+        vector<pair<int,int> > p;
+
+        for(i=0;i<n;i++)
+        {
+
+            scanf("%d%d",&x,&y);
+
+            p.push_back(make_pair(x,y));
+
+        }
+
+        for(i=0;i<n;i++)
+        {
+
+            for(j=0;j<n;j++)
+            {
+
+                if(i==j)
+                adj[i][j]=0;
+
+                else adj[i][j]=(p[i].first-p[j].first)*(p[i].first-p[j].first)+(p[i].second-p[j].second)*(p[i].second-p[j].second);
+
+            }
+
+        }
+
+        printf("%d
+",dijkstra(adj,n,n-2,n-1));
+
+    }
+
+    return 0;
+
+}

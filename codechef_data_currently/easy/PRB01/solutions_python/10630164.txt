@@ -1,0 +1,23 @@
+# codechef
+# Primality Test - PRB01
+
+T=int(raw_input())
+
+def primes(n):
+    if n==2:
+        print "yes"
+    elif n!=2:
+        count=0
+        for i in range(2,n):
+            if n%i==0:
+                count=count+1
+        if count==0:
+            print "yes"
+        else:
+            print "no"
+
+
+for i in range(T):
+    num=int(raw_input())
+    primes(num)
+    

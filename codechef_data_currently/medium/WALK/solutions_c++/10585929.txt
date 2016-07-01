@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+#define p(n) printf("%d
+",n);
+#define s(n) scanf("%d",&n);
+#define S(n) scanf("%li",&n);
+using namespace std;
+ inline unsigned int fastread()
+    {
+      unsigned int i=0;
+      char c=gc();
+      while(c<'0' || c>'9')
+        c=gc();
+      for(;c>='0' && c<='9';c=gc())
+        i=(i<<3)+(i<<1)+c-'0';
+      return i;
+    }
+ int main()
+ {
+     int t;
+     t=fastread();
+   // scanf("%d",&t);
+    while(t--)
+    {
+        int n;
+        n=fastread();
+        //scanf("%d",&n);
+        int a;
+       int  max=0;
+        int temp;
+        for(int i=0;i<n;i++){
+           //scanf("%d",&a[i]);
+           a=fastread();
+            if(a+i>max){
+                max=a+i;
+            }
+               }
+               printf("%d
+",max);
+                }
+                return 0;
+ }

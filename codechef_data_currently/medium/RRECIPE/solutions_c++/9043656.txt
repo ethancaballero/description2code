@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+#define endll "
+";
+int main()
+{
+	ios_base::sync_with_stdio(false);
+  int t;
+  string input;
+  cin>>t;
+  while(t--){
+    cin>>input;
+    long long int s_ptr=0;
+    long long int e_ptr=input.size()-1;
+    long long int result=1;
+    while(e_ptr>=s_ptr){
+      if(input[s_ptr]=='?'&&input[e_ptr]=='?'){
+        result=(result*26)%10000009;
+      }
+      else if(input[s_ptr]!='?'&&input[e_ptr]!='?'&&input[s_ptr]!=input[e_ptr]){
+        result=0;
+        break;
+      }
+      e_ptr--;
+      s_ptr++;
+    }
+    cout<<result<<endll;
+  }
+	return 0;
+}

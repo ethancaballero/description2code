@@ -1,0 +1,16 @@
+cases = int(raw_input())
+maxRange = 101
+for i in range(cases):
+     ans = 0
+     soint = [0 for x in range(maxRange)]
+     n, m = map(int, raw_input().split())
+     for j in range(n):
+          c, l = map(int, raw_input().split())
+          soint[l] += c
+     for j in range(m):
+          c, l = map(int, raw_input().split())
+          soint[l] -= c
+     for j in range(maxRange):
+          if soint[j] < 0:
+              ans -= soint[j]
+     print ans  

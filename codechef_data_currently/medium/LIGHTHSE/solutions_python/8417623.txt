@@ -1,0 +1,90 @@
+def find_lighthouse(island_num, islands):
+  northest = [islands[0]]
+  norther = []
+  southest = [islands[0]]
+  eastest = [islands[0]]
+  westest = [islands[0]]
+
+  for i in range(1, island_num):
+    if islands[i][0] > eastest[0][0]:
+      eastest = [islands[i]]
+    elif islands[i][0] == eastest[0][0]:
+      eastest.append(islands[i])
+
+    if islands[i][0] < westest[0][0]:
+      westest = [islands[i]]
+    elif islands[i][0] == westest[0][0]:
+      westest.append(islands[i])
+
+    if islands[i][1] < southest[0][1]:
+      southest = [islands[i]]
+    elif islands[i][1] == southest[0][1]:
+      southest.append(islands[i])
+
+    if islands[i][1] > northest[0][1]:
+      norther = northest
+      northest = [islands[i]]
+    elif islands[i][1] == northest[0][1]:
+      northest.append(islands[i])
+    elif not norther:
+      norther = [islands[i]]
+    elif islands[i][1] > norther[0][1]:
+      norther = [islands[i]]
+
+  south_west = set(southest) & set(westest)
+  if south_west:
+    print 1
+    print islands.index(south_west.pop())+1, "NE"
+    return
+  south_east = set(southest) & set(eastest)
+  if south_east:
+    print 1
+    print islands.index(south_east.pop())+1, "NW"
+    return
+  north_west = set(northest) & set(westest)
+  if north_west:
+    print 1
+    print islands.index(north_west.pop())+1, "SE"
+    return
+  north_east = set(northest) & set(eastest)
+  if north_east:
+    print 1
+    print islands.index(north_east.pop())+1, "SW"
+    return
+
+  if len(northest) >= 2:
+    left = right = northest[0]
+    for i in range(1, len(northest)):
+      if northest[i][0] < left[0]:
+        left = northest[i]
+      if northest[i][0] > right[0]:
+        right = northest[i]
+    print 2
+    print islands.index(left)+1, "SE"
+    print islands.index(right)+1, "SW"
+    return
+
+  top = northest[0]
+  bottom = norther[0]
+  if top[0] >= bottom[0]:
+    print 2
+    print islands.index(top)+1, "SW"
+    print islands.index(bottom)+1, "SE"
+    return
+  else:
+    print 2
+    print islands.index(top)+1, "SE"
+    print islands.index(bottom)+1, "SW"
+    return
+
+dataset = int(raw_input())
+
+while dataset > 0:
+  dataset -= 1
+  island_num = int(raw_input())
+  islands = []
+  for i in range(0, island_num):
+    x, y = map(int, raw_input().split())
+    islands.append((x, y))
+
+  find_lighthouse(island_num, islands)

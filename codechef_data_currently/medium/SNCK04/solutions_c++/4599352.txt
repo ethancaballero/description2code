@@ -1,0 +1,33 @@
+#include<iostream>
+
+using namespace std;
+
+long long int arr[1000001];
+long long int sum[1000001];
+
+int main()
+{
+	for(int i=2; i<=1000000; ++i)
+		arr[i] = i;
+	for(int i=2; i<=1000000; ++i)
+	{
+		if(arr[i] == i)
+		{
+			for(int j=i; j<=1000000; j+=i)
+			{
+				arr[j] = (arr[j] * (i - 1))/i;
+			}
+		}
+		sum[i] = sum[i - 1] + arr[i];
+	}
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		cout<<sum[n]<<endl;
+	}
+	return 0;
+}
+

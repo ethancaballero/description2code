@@ -1,0 +1,42 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+  int t,n,bottles[101][101],m,room;
+  scanf("%d",&t);
+  while(t--)
+  {
+      int len[101],arr[101]={0};
+      scanf("%d%d",&n,&m);
+      for(int i=0; i<m; i++)
+      {
+          scanf("%d",&room);
+          arr[room]++;
+      }
+      for(int i=0; i<n; i++)
+      {
+          scanf("%d",&len[i]);
+          for(int j=0; j<len[i]; j++)
+            scanf("%d",&bottles[i][j]);
+      }
+      int sm = 0;
+      for(int i=0; i<n; i++)
+      {
+          for(int j=0; j<min(arr[i],len[i]); j++)
+          {
+             int idx = j;
+             for(int k=j+1; k<len[i]; k++)
+                if(bottles[i][k] > bottles[i][idx])
+                 idx = k;
+             sm += bottles[i][idx];
+             int tmp = bottles[i][idx];
+             bottles[i][idx] = bottles[i][j];
+             bottles[i][j] = tmp;
+          }
+      }
+      printf("%d
+",sm);
+  }
+  return 0;
+}

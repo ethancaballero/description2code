@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t,n,c,q,l,r;
+    cin>>t;
+    while(t--)
+    {
+         cin>>n>>c>>q;
+        while(q--)
+        {
+                cin>>l>>r;
+            if(c<=r && c>=l)
+                {
+                        while(c!=l)
+                        {
+                           l++;
+                           r--;
+                         }
+                         c=r;
+                }
+        }
+    cout<<c<<"
+";
+    }
+    return 0;
+}

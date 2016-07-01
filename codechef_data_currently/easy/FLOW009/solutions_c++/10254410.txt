@@ -1,0 +1,22 @@
+    #include<iostream>
+    #include <stdio.h>
+    using namespace std;
+     
+    int main()
+    {
+    	int a;
+    	float p,q;
+    	cin>>a;
+    	for(int x=0;x<a;x++)
+    	{
+    		scanf("%f %f",&q,&p);
+    		if(q>1000)
+    			printf("%f
+",(q*(p*0.9)));
+    		else
+    			printf("%f
+",q *p);
+    	}
+    	return 0;
+     
+    } 

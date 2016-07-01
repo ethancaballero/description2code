@@ -1,0 +1,10 @@
+t=int(raw_input())
+li=[]
+while t>0:
+	val=int(raw_input())
+	li.append(val)
+	t-=1
+for x in li:
+	ans=2*x*(x-1)*(x-1)+x*(x-1)*(x-2)+ 2*x*(x-1)*(x-2)*(x-2)
+	print ans
+

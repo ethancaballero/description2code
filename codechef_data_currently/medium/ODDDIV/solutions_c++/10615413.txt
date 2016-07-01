@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long sum[100005];
+void prec()
+{
+	for(int i=1;i<=100000;i++)
+	{	
+		for(int j=1;j*j<=i;j++)
+		{
+			if(i%j==0)
+			{     
+				if(j*j==i)
+				{
+					if(j%2!=0)
+						sum[i]+=j;
+				}
+				else
+				{
+					if(j%2!=0)
+						sum[i]+=j;
+					if(i/j % 2 !=0)
+						sum[i]+= i/j;
+				}
+			}
+		}
+	}
+	for(int i=1;i<=100000;i++)
+	{
+		sum[i]+=sum[i-1];
+	}
+		
+}
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+	int t;
+	prec();
+	cin>>t;
+//	for(int i=1;i<=10;i++)
+//		cout<<sum[i]<<" ";
+//	cout<<endl;
+	while(t--)
+	{
+		int l,r;
+		cin>>l>>r;
+		cout<<sum[r]-sum[l-1]<<endl;
+	}
+	return 0;
+}	

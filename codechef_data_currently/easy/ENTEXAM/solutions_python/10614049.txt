@@ -1,0 +1,24 @@
+def test():
+    matches = input()
+    for _ in range(matches):       
+        n,k,e,m = map(int,raw_input().split())
+        results = []
+        for i in range(n-1):
+            total = sum(map(int,raw_input().split()))
+            results.append(total)
+
+        results = sorted(results)  
+        lazy_man = sum(map(int,raw_input().split()))
+
+        score = 0
+        kscore = results[-k]
+
+        if lazy_man < kscore:
+            score = kscore - lazy_man + 1
+
+        if score > m:
+            print 'Impossible'
+        else:
+            print score   
+  
+test()

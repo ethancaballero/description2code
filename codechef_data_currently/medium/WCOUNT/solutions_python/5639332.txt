@@ -1,0 +1,23 @@
+f = [0] * 501
+f[0] = 0
+f[1] = 1
+for i in range(2, 501):
+    f[i] = i * f[i - 1]
+
+t = int(raw_input())
+a = []
+for _ in range(t):
+    a = raw_input()
+    l = len(a)
+    ans = 1
+    d = {}
+    for c in a:
+        if c in d:
+            d[c] += 1
+        else:
+            d[c] = 1
+    for c in d:
+        if d[c] > 1:
+            ans *= f[d[c]]
+
+    print  (f[l]/ans)%1000000007

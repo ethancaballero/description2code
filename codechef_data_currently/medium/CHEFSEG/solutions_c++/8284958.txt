@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int bits(long int n)
+{
+    int f=0;
+    while(n!=0)
+    {
+        n=n/2;
+        f++;
+    }
+    return f;
+}
+int main()
+{
+    int t,m;
+    cin>>t;
+    double z;
+    long int x,k;
+    while(t--)
+    {
+        cin>>x>>k;
+        m=bits(k);
+        k++;
+
+        z=(x/(pow(2,m)))+((x/(pow(2,m-1)))*((k-1)-(pow(2,m-1))));
+        printf("%.8lf
+",z);
+    }
+    return 0;
+}

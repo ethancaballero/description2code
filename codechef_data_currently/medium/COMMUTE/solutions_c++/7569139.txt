@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+int main(){
+int t;
+cin>>t;
+while(t--){
+	int n,x=0,a,b,c;
+	cin>>n;
+	for(int i=0;i<n;i++){
+		cin>>a>>b>>c;
+		if(a>x){
+			x=a+b;
+		}
+		else if(x>a&&x==a+c){
+			x+=b;
+		}
+		else if(x>a){
+			while(x>a)
+			a+=c;
+			x=a+b;
+		}
+		else{
+			x+=b;
+		}
+	}
+	cout<<x<<endl;
+	}
+}

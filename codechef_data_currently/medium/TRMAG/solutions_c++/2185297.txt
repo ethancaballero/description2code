@@ -1,0 +1,30 @@
+#include<stdio.h>
+int main()
+{
+    float sum;
+    int n,f,x,y,t;
+    scanf("%d",&t);
+    while(t--)
+    {
+              scanf("%d %d",&n,&f);
+              sum=0;
+              y=(n+1)/2;
+              while(f--)
+              {
+                        scanf("%d",&x);
+                        sum=sum+x;
+              }
+              scanf("%d",&x);
+              sum=(n*n+n)/2-sum;
+              sum=sum*(y-x);
+              sum=sum/y;
+              printf("%0.4f
+",sum);
+    }
+    return 0;
+}
+              
+
+
+
+

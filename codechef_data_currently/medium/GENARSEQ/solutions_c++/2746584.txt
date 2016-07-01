@@ -1,0 +1,64 @@
+#include<iostream>
+#include<math.h>
+#include<algorithm>
+#include<stdio.h>
+#include<queue>
+#include<string.h>
+#include<set>
+#include<map>
+#include<vector>
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define FORL(i,a,b) for(int i=a;i<=b;i++)
+#define FORI(i,a,b,inc) for(int i=a;i<b;i=i+inc)
+#define FORD(i,a,b) for(int i=a;i>=b;i--)
+#define LL long long
+#define MAX 1100000
+#define INF 100000000010ll
+#define MOD 1000000007
+#define pb push_back
+using namespace std;
+bool valid[MAX];
+int main()
+{
+     int t;
+     scanf("%d",&t);
+     while(t--)
+     {
+          memset(valid,true,sizeof(valid));     
+          int a,b,n;
+          vector<int> v;
+          scanf("%d%d%d",&a,&b,&n);
+          v.pb(1);
+          if(a-b > 0)
+                 valid[a-b] = false;
+          int size = 1;
+          int val  = 2;
+          while(size < n)
+          {  
+                while(valid[val] == false) 
+                    val++;
+                v.pb(val);
+                int temp;
+                FOR(i,0,v.size())
+                {
+                             
+                       temp = a*v[i] - b*val;            
+                       if( temp > 0)
+                           valid[temp] = false;
+                        
+                       temp = a*val - b*v[i];            
+                       if( temp > 0)
+                           valid[temp] = false;
+                 }
+                val++;
+                size++;
+           }     
+           FOR(i,0,n)
+                     printf("%d ",v[i]);
+           printf("
+");                     
+     }
+    
+    //system("pause");
+    return 0;
+}

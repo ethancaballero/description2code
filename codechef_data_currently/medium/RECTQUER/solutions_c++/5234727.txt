@@ -1,0 +1,156 @@
+//CodeChef--Rectangle Query
+#include<bits/stdc++.h>
+#define MAX 310
+
+using namespace std;
+
+inline void fast_read(int *number){
+	
+	*number=0;
+	
+	register char currentChar=getchar_unlocked();
+	
+	while(currentChar<'0'||currentChar>'9')
+	   currentChar=getchar_unlocked();
+	   
+	while(currentChar>='0'&&currentChar<='9'){
+		
+		*number=*number*10+currentChar-'0';
+		currentChar=getchar_unlocked();
+		
+	}   	
+	
+}
+
+inline void writeFast(int Number){
+	
+	if(Number==0){	putchar_unlocked('0'); putchar_unlocked('
+'); return; }
+	int reversedNumber=0,count=0;
+	while(Number%10==0){  count++; Number/=10;	}
+	while(Number){ reversedNumber=reversedNumber*10+Number%10; Number/=10;}   
+	while(reversedNumber){	putchar_unlocked(reversedNumber%10+'0'); reversedNumber/=10;	}
+	while(count--) putchar_unlocked('0');
+	putchar_unlocked('
+');
+	
+}   
+
+struct node{
+	
+	int frequency[11];
+	int distinctness;
+	
+	struct node operator +(struct node rightOperand){
+		
+		struct node result=*this;
+		int i;
+		
+		result.distinctness=0;
+		for(i=0;i<11;i++)
+		   result.frequency[i]=0;
+		
+		for(i=0;i<11;i++)
+		   result.frequency[i]=this->frequency[i]+rightOperand.frequency[i];	
+		
+		for(i=0;i<11;i++)
+		  if(result.frequency[i])
+		    result.distinctness++;
+		
+		return result;
+		
+	}
+    
+	struct node operator +(int number){
+		
+		struct node result=*this;
+		
+		if(result.frequency[number]==0)
+		   result.distinctness++;
+		
+		result.frequency[number]++;
+	   
+	   return result;
+	   	
+	}
+		
+	struct node operator -(struct node rightOperand){
+		
+		struct node result;
+		
+		int i;
+		
+		result.distinctness=0;
+		for(i=0;i<11;i++)
+		   result.frequency[i]=0;
+		
+		for(i=0;i<11;i++){
+	
+		   result.frequency[i]=this->frequency[i]-rightOperand.frequency[i];
+		   if(result.frequency[i])
+		      result.distinctness++; 
+		
+	    }
+		
+		return result;
+		
+	}	
+		
+};
+
+struct node queryMatrix[MAX][MAX];
+int Matrix[MAX][MAX];
+
+int main(void){
+	
+	
+	int dimension,i,j,k;
+	
+	//Refershing part
+	for(i=0;i<MAX;i++)
+		for(j=0;j<MAX;j++){
+			
+			queryMatrix[i][j].distinctness=0;
+			for(k=0;k<11;k++)
+			   queryMatrix[i][j].frequency[k]=0;			
+			
+		}
+		
+	scanf("%d",&dimension);
+	
+	for(i=1;i<=dimension;i++)	
+		for(j=1;j<=dimension;j++)
+		  fast_read(&Matrix[i][j]);
+		  
+		  // scanf("%d",&Matrix[i][j]);
+		
+   //form the matrix for answering queries
+	
+	for(i=1;i<=dimension;i++)	
+		for(j=1;j<=dimension;j++)
+		   queryMatrix[i][j]=(queryMatrix[i-1][j]+queryMatrix[i][j-1]+Matrix[i][j]-queryMatrix[i-1][j-1]);		
+		
+    int queries,startX,startY,endX,endY;
+	
+//	scanf("%d",&queries);
+    fast_read(&queries);
+	while(queries--){
+		
+	//	scanf("%d%d%d%d",&startX,&startY,&endX,&endY);
+	     fast_read(&startX);
+	     fast_read(&startY);
+	     fast_read(&endX);
+	     fast_read(&endY);
+	   
+		node answer=(queryMatrix[endX][endY]-queryMatrix[startX-1][startY-1]-queryMatrix[startX-1][endY]-queryMatrix[endX][startY-1]);
+		
+		answer=(answer+queryMatrix[startX-1][startY-1]+queryMatrix[startX-1][startY-1]);
+		
+		writeFast(answer.distinctness);
+			
+		
+	}	
+	
+	return 0;
+	
+}

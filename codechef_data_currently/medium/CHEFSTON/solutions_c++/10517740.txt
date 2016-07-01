@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+long long int t;
+cin>>t;
+while(t--)
+{
+long long int n,i,k,max=0,val,newval;
+cin>>n>>k;
+int a[n],b[n];
+for(i=0;i<n;i++)
+cin>>a[i];
+for(i=0;i<n;i++)
+cin>>b[i];
+for(i=0;i<n;i++)
+{
+val=k/a[i];
+newval=val*b[i];
+if(newval>max)
+max=newval;
+}
+cout<<max<<endl;
+}
+return 0;
+}

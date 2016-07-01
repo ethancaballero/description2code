@@ -1,0 +1,11 @@
+test=int(raw_input())
+a=0
+while(a<test):
+	a=a+1
+	q,p=map(int,raw_input().split())
+	if q > 1000:
+		total = p * q
+		total =total -(total/float(10))
+	else:
+		total = p *q
+	print "%.6f"%total

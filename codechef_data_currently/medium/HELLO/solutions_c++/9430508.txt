@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+#define pb push_back
+
+int main(void)
+{
+     int t; scanf("%d",&t);
+     while(t--)
+     {
+         double d; int u,n;
+         scanf("%lf %d %d",&d,&u,&n);
+         
+         vector<double> plans;
+         for(int i=0;i<n;i++)
+         {
+             int m,c; double r;
+             scanf("%d %lf %d",&m,&r,&c);
+             
+             double temp=  ((double)c/(double)m + (double)u * r);
+             plans.pb(temp);
+         }
+         
+         double pcost=(double)u*d;
+         bool bplan=false; int ind=0;
+         
+         double lcost=plans[0];
+         for(int i=0;i<n;i++)
+         {
+             if(plans[i]<lcost)
+             {
+                ind=i;
+                lcost=plans[i];
+             }
+            // printf("%lf ",plans[i]);
+         }
+         
+         //cout<<endl;
+         //cout<<pcost<<endl;
+         if(plans[ind]<pcost)
+         {
+             printf("%d
+",ind+1);
+         }
+         else
+         {
+              printf("0
+");
+         }
+    
+    }
+    
+    return 0;
+
+}

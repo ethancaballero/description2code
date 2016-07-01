@@ -1,0 +1,44 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+#define mod 1000000007ll
+using namespace std;
+int T,n,A[55],B[55];
+double res,P[55];
+void solve(int x,int mask,double prb)
+{
+	if(x==n){
+		res+=prb;
+		return;
+	}
+	if((mask&(1<<A[x+1]))==0)solve(x+1,mask^(1<<A[x+1]),prb*P[x+1]);
+	if((mask&(1<<B[x+1]))==0)solve(x+1,mask^(1<<B[x+1]),prb*(1-P[x+1]));
+}
+
+int main()
+{
+  	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d",&n);
+		for(int i=1;i<=n;i++){
+			scanf("%lf %d %d",&P[i],&A[i],&B[i]);
+			P[i]/=100;
+		}
+		res=0;
+		if(n<17){
+			solve(1,1<<A[1],P[1]);
+			solve(1,1<<B[1],1.00-P[1]);
+		}
+		cout<<res<<"
+";
+	}
+	return 0;
+}
+
+
+
+

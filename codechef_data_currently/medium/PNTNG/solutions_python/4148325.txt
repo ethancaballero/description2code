@@ -1,0 +1,35 @@
+n,m,h = raw_input().strip().split(" ")
+n=int(n)
+m=int(m)
+h=int(h)
+t=int(n)
+cells = n*m
+count=h
+sum=0
+t=[]
+c=[]
+while(count>0):
+    t1,c1 = raw_input().strip().split(" ")
+    t1=int(t1)
+    c1=int(c1)
+    t.append((t1,c1))
+    sum+=t1
+    count=count-1
+
+if(sum<cells):
+    print "Impossible"
+else:
+    sum=0
+    cost=0
+    t.sort(key=lambda tup: tup[1])
+    for p in t:
+        if(sum<cells):
+            sum+=p[0]
+            cost+=p[1]*p[0]
+            if(sum>cells):
+                diff=sum-cells
+                cost-=p[1]*diff
+        else:
+            break
+    print cost
+

@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	long salary;
+	float gsalary,hra,da;
+	cin>>t;
+	while(t--)
+	{
+		cout<<endl;
+		cin>>salary;
+		if(salary<1500)
+		{
+		hra=float(salary)*0.1;
+		da=float(salary)*0.9;
+		}
+		else
+		{
+		hra=500.0;
+		da=float(salary)*0.98;
+		};
+		gsalary=salary+da+hra;
+		cout<<gsalary;
+	}
+	return 0;
+}

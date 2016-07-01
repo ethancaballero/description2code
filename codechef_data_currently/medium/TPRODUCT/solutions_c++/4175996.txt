@@ -1,0 +1,54 @@
+// Only_love97
+
+using namespace std;
+#include<bits/stdc++.h>
+
+#define BG begin()
+#define ED end()
+#define SZ size()
+#define st first
+#define nd second
+#define PB push_back
+#define FOR(i,a,b) for (int i=(a),_b=(b);i<_b;i++)
+#define FORE(i,a,b) for (int i=(a),_b=(b);i<=_b;i++)
+#define FORD(i,a,b) for (int i=(a),_b=(b);i>=_b;i--)
+#define ri(n)({    int neg=0;    n=0;    char ch;    for(ch=getchar(); ch<'0' || ch>'9'; ch=getchar()) if (ch=='-') neg=1-neg;    n=ch-48;    for(ch=getchar(); ch>='0' && ch<='9'; ch=getchar()) n=(n<<3)+(n<<1)+ch-48;    if (neg) n=-n;})
+
+typedef long long ll;
+typedef pair<int,int> II;
+const int INF=1000000000+7;
+const double esp=1e-13;
+const double pi=3.141592653589;
+
+int n,m;
+ll a[40000+10];
+double b[40000+10];
+
+int main()
+{
+ //   freopen("TPRODUCT.inp", "r", stdin);
+ //   freopen("TPRODUCT.out", "w", stdout);
+    while (1)
+    {
+        ri(n);
+        if (n==0) return 0;
+        m=(1 << n )-1;
+        FORE(i,1,m) ri(a[i]), b[i]=a[i];
+        FORD(i,m/2,1)
+        {
+            if (b[i*2]>b[i*2+1])
+            {
+                b[i]*=b[i*2];
+                a[i]*=a[i*2];
+            }
+            else
+            {
+                b[i]*=b[i*2+1];
+                a[i]*=a[i*2+1];
+            }
+            a[i]%=INF;
+        }
+        cout << a[1] << "
+";
+    }
+}

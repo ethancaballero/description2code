@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+typedef long long int ll;
+bool bachgya(int a[],int n,int m)
+{	bool seriously=false;
+	for(int i=0;i<(1<<n);i++)
+	{	ll hafta=0;
+		for(int j=0;j<n;j++)
+		if(i&(1<<j))
+		hafta+=a[j];
+		
+		if(hafta==m)
+		return true;
+	}
+	return seriously;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int rupeya,hafta;
+		cin>>rupeya>>hafta;
+		int batua[rupeya];
+		for(int i=0;i<rupeya;i++)
+		cin>>batua[i];
+		if(bachgya(batua,rupeya,hafta))
+		cout<<"Yes
+";
+		else cout<<"No
+";
+	}
+}

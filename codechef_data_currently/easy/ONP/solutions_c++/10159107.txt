@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string rtn(string s)
+{
+	string x = "";
+	string y = "";
+	string z = "";
+	if (s == "")
+		return s;
+	if (s.length() == 1)
+		return s;
+	if (s.length() == 3)
+	{
+		x += s[0];
+		y += s[1];
+		z += s[2];
+		return x + z + y;
+	}
+	if (s[0] == '(')
+	{
+		int zag = 1;
+		int i = 1;
+		for (i = 1; i < s.length(); i++)
+		{
+			if (s[i] == '(')
+				zag += 1;
+			if (s[i] == ')')
+				zag -= 1;
+			if (zag!=0)
+				x += s[i];
+			else
+				break;
+		}
+		if (s.length() < i + 2)
+		{
+			y = "";
+			z = "";
+		}
+		else
+		{
+			y += s[i + 1];
+			for (int j = i + 2; j < s.length(); j++)
+				z += s[j];
+		}		
+	}
+	else
+	{
+		x += s[0];
+		y += s[1];
+
+		for (int i = 3; i < s.length() - 1; i++)
+			z += s[i];
+	}
+	return rtn(x) + rtn(z) + rtn(y);
+}
+
+int main()
+{
+	string s;
+	int n;
+	cin >> n;
+	while (n--)
+	{
+		cin >> s;
+		cout << rtn(s) << endl;
+	}
+	return 0;
+}

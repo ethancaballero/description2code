@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+int four(int x)
+{
+    int c=0,rem=0;
+	while(x!=0)
+	{
+	rem=x%10;
+	x=x/10;
+	if(rem==4)
+	c++;
+	}
+	return c;
+}
+int main() {
+	int t,n,d;
+	cin>>t;
+	while(t--)
+	{
+	cin>>n;
+	d=four(n);
+	cout<<d<<"
+";
+	}
+	return 0;
+}

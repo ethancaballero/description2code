@@ -1,0 +1,90 @@
+#include<map>
+#include<stdio.h>
+#include<string.h>
+#include<iostream>
+using namespace std;
+
+map<string,int> city_route;
+
+inline int indexOf(char * cityName)
+{
+        map<string,int>::iterator it;
+        it=city_route.find(cityName);
+        if(it==city_route.end())
+            return -1;
+        else
+            return it->second;
+}
+int main()
+{
+
+    int numberOfCities,length,numberOfRoads,sum,flag,route_number,my_city_number,index,index2,len;
+    scanf("%d",&numberOfCities);
+    char cityName[20],source[20],dest[20],s1[20],s2[20];
+    int lengthOfRoutes[50][50]={{0}};
+
+    for(int i=0;i<numberOfCities;i++)
+    {
+        scanf("%s",&cityName);
+        city_route.insert(pair<string,int>(cityName,i));
+    }
+
+    scanf("%d",&numberOfRoads);
+   for (int var = 0; var < numberOfRoads; ++var) {
+		scanf("%s",&s1);
+		index = indexOf(s1);
+		scanf("%s",&s2);
+		index2 = indexOf(s2);
+		scanf("%d", lengthOfRoutes[index] + index2);
+	}
+
+    scanf("%d",&route_number);
+    for(int i=0;i<route_number;i++)
+    {
+        sum=0;
+        bool flag=false;
+        bool visited_city[50]={0};
+        scanf("%d",&my_city_number);
+
+        scanf("%s",&s1);
+        index=indexOf(s1);
+        if(index==-1)
+        {
+           flag=true;
+        }
+            visited_city[index]=true;
+            for(int i=1;i<my_city_number;i++)
+            {
+                scanf("%s",&s2);
+                if(!flag)
+                {
+                    index2=indexOf(s2);
+                    if((index2==-1))
+                    {
+                        flag=true;
+                        continue;
+                    }
+                    if(visited_city[index2])
+                    {
+                        flag=true;
+                        continue;
+                    }
+                    visited_city[index2]=true;
+                    len=lengthOfRoutes[index][index2];
+                    if(len>0)
+                        sum+=len;
+                    else
+                    {
+                        flag=1;
+                    }
+                }
+                index=index2;
+            }
+    if(flag)
+        printf("ERROR
+");
+    else
+        printf("%d
+",sum);
+    }
+}

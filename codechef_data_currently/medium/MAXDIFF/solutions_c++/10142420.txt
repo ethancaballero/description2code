@@ -1,0 +1,44 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+  int t,n,w[500],i,j,k,c=0,p=0,temp;
+  cin>>t;
+  while(t--)
+  {
+   c=0;p=0;
+    cin>>n>>k;
+    for(i=0;i<n;i++)
+    {
+     cin>>w[i];
+     }
+     for(i=0;i<n;i++)
+     {
+      for(j=0;j<n-i-1;j++)
+      {
+	if(w[j]>w[j+1])
+	{
+	  temp=w[j];
+	  w[j]=w[j+1];
+	  w[j+1]=temp;
+	}
+       }
+      }
+      if(k>n/2)
+      k=n-k;
+       for(i=0;i<n;i++)
+       {
+	if(i<k)
+	c+=w[i];
+	else
+	p+=w[i];
+      }
+      if(p>c)
+      cout<<p-c<<"
+";
+      else
+      cout<<c-p<<"
+";
+    }
+    return 0;
+    }

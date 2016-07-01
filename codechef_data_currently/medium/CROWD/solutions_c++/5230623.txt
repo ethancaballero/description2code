@@ -1,0 +1,68 @@
+//gskhirtladze
+
+#include <iostream>
+#include <stdio.h>
+
+#define P7 1000000007
+#define LL long long
+
+using namespace std;
+
+LL d[3][3],x[3][3],a[3],b[3],z;
+LL st[3][3]={0,0,1,
+             1,0,1,
+             0,1,1};
+
+void mult(LL A[3][3],LL B[3][3]){
+ for (int i=0;i<3;i++)
+ for (int j=0;j<3;j++){
+    x[i][j]=0;
+    for (int r=0;r<3;r++)
+    x[i][j]=(x[i][j]+A[i][r]*B[r][j])%P7;
+ }}
+
+void p(LL u){
+ if (!u) return;
+ p(u/2);
+ z*=z;
+ z%=P7;
+ for (int i=0;i<3;i++)
+  for (int j=0;j<3;j++)
+   d[i][j]=x[i][j];
+ mult(d,d);
+ if (u%2){
+  z*=2;
+  z%=P7;
+  for (int i=0;i<3;i++)
+   for (int j=0;j<3;j++)
+    d[i][j]=x[i][j];
+  mult(d,st);
+ }
+}
+
+int t;
+LL n;
+
+main()
+{
+  cin>>t;
+  while (t--) {
+
+  cin>>n;
+  if (n < 3) {printf("0
+");continue;}
+  for (int i=0;i<3;i++)
+    for (int j=0;j<3;j++) x[i][j]=0,d[i][j]=0,a[i]=0,b[i]=0;
+  a[0]=1;x[0][0]=1;
+  a[1]=2;x[1][1]=1;
+  a[2]=4;x[2][2]=1;
+  z=1;
+  p(n-2);
+  z*=4; z%=P7;
+  for (int i=0;i<3;i++)
+   for (int j=0;j<3;j++)
+    b[i]=(b[i]+a[j]*x[j][i])%P7;
+  z-=b[2]; z+=P7; z%=P7;
+  cout<<z<<endl;
+ }
+}

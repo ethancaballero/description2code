@@ -1,0 +1,13 @@
+def fact(n) :
+	f = 1
+	while n > 1 :
+		f = f * n
+		n = n - 1
+	print f
+t = raw_input()
+t =int(t)
+while t > 0 :
+	n = raw_input()
+	n =int(n)
+	fact(n)
+	t = t - 1

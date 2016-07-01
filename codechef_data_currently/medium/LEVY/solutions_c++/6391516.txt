@@ -1,0 +1,52 @@
+#include<iostream>
+#include<vector>
+#define MAX 10001
+using namespace std;
+
+vector <int> coun(MAX);
+int main()
+{
+    //int isprime[10001];
+    vector <int> isprime(MAX);
+    int i,j;
+    for(i=0;i<MAX;i++)
+        isprime[i]=1;
+    isprime[0]=0;
+    isprime[1]=0;
+
+    for(i=2;i*i<=10000;i++)
+        for(j=i*i;j<=10000;j=j+i)
+        isprime[j]=0;
+
+    vector <int> listprimes;
+
+    for(i=0;i<MAX;i++)
+    {
+        if (isprime[i])
+            listprimes.push_back(i);
+    }
+
+
+    int length=listprimes.size();
+
+    for(i=0;i<length;i++)
+        for(j=0;j<length;j++)
+    {
+        if (listprimes[i]+2*listprimes[j]>=MAX)
+            break;
+        coun[listprimes[i]+2*listprimes[j]]++;
+    }
+
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+
+        cout<<coun[n]<<'
+';
+    }
+    return 0;
+
+}

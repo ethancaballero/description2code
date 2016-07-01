@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct point{
+  int x,y;
+  point(bool int_val=1)
+  {
+      if(int_val==1)
+      {
+          cin>>x;
+          cin>>y;
+      }
+  }
+  point operator-(const point p)
+  {
+      point q(0);
+      q.x=x-p.x;
+      q.y=y-p.y;
+
+      return q;
+  }
+  int operator*(const point p)
+  {
+      return x*p.x+y*p.y;
+  }
+};
+
+int main()
+{
+    int n;
+    cin>>n;
+    int cnt=0;
+    while(n--)
+    {
+        point A,B,C;
+        cnt+=((B-A)*(C-B)==0 or (B-C)*(A-C)==0 or (B-A)*(C-A)==0)? 1:0;
+    }
+    cout<<cnt;
+    return 0;
+}

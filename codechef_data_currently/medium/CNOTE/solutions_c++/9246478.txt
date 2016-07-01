@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+	int t,n,x,y,k;
+	cin>>t;
+	while(t--){
+		cin>>x>>y>>k>>n;
+		int left=x-y;
+		
+		int p,c,flag=0;
+		
+		for(int i=0;i<n;i++){
+			cin>>p>>c;
+			if(p>=left&&c<=k){
+				flag=1;
+			}
+		}
+		if(flag){
+			cout<<"LuckyChef"<<endl;
+		}
+		else
+		cout<<"UnluckyChef"<<endl;
+		flag=0;
+	}
+	return 0;
+}

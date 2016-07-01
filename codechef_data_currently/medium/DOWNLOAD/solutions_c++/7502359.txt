@@ -1,0 +1,120 @@
+#include<cstdio>
+#include<vector>
+#include<set>
+#include<map>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<utility>
+#include<cassert>
+using namespace std;
+
+#define REP(i,a,b) for(i=a;i<b;i++)
+#define rep(i,n) REP(i,0,n)
+
+void intIntSort(int d[],int m[],int s){int i=-1,j=s,k,t;if(s<=1)return;k=(d[0]+d[s-1])/2;for(;;){while(d[++i]<k);while(d[--j]>k);if(i>=j)break;t=d[i];d[i]=d[j];d[j]=t;t=m[i];m[i]=m[j];m[j]=t;}intIntSort(d,m,i);intIntSort(d+j+1,m+j+1,s-j-1);}
+void intIntIntSort(int d[],int m1[],int m2[],int s){int i=-1,j=s,k,t;if(s<=1)return;k=(d[0]+d[s-1])/2;for(;;){while(d[++i]<k);while(d[--j]>k);if(i>=j)break;t=d[i];d[i]=d[j];d[j]=t;t=m1[i];m1[i]=m1[j];m1[j]=t;t=m2[i];m2[i]=m2[j];m2[j]=t;}intIntIntSort(d,m1,m2,i);intIntIntSort(d+j+1,m1+j+1,m2+j+1,s-j-1);}
+
+/* Binary Indexed Tree */
+
+typedef struct struct_intfenwick{
+  int size, memory;
+  int *data;
+}intFenwickTree;
+
+intFenwickTree intFenwickTreeNew(int memory){
+  intFenwickTree res;
+  res.memory=memory; res.data=(int*)malloc(memory*sizeof(int));
+  return res;
+}
+
+void intFenwickTreeDelete(intFenwickTree *t){free(t->data);}
+void intFenwickTreeInit(intFenwickTree *t, int size){int i; t->size=size; rep(i,size) t->data[i]=0;}
+int intFenwickTreeAdd(intFenwickTree *t,int k,int add){while(k<t->size)t->data[k]+=add, k|=k+1;}
+int intFenwickTreeGet(intFenwickTree *t,int k){int res=0; while(k>=0)res+=t->data[k],k=(k&(k+1))-1; return res;}
+int intFenwickTreeRange(intFenwickTree *t,int a,int b){return intFenwickTreeGet(t,b)-intFenwickTreeGet(t,a-1);}
+
+
+int start[100000], end[100000];
+int t[100000][20], K[100000];
+int st[2200000], ed[2200000], ind[2200000], ss;
+int res[100000];
+
+int val[210000];
+
+int main(){
+  int i, j, a, b, c, mx;
+  int N, Q;
+  map<int,int>::iterator it;
+  map<int,int> m;
+  intFenwickTree ft = intFenwickTreeNew(410000);
+
+  assert( scanf("%d",&N)==1 );
+  assert( 1<=N && N<=100000 );
+  rep(i,N){
+    assert( scanf("%d%d",start+i,end+i)==2 );
+    assert( 1 <= start[i] && start[i] < end[i] && end[i] <= 1000000000 );
+  }
+
+  /* compress time and sort videos and queries */
+  rep(i,N){
+    val[2*i]   = start[i]; ind[2*i]   = 2*i;
+    val[2*i+1] = end[i];   ind[2*i+1] = 2*i+1;
+  }
+  intIntSort(val,ind,2*N);
+  a = -1;
+  rep(i,2*N){
+    if(i==0 || val[i]!=val[i-1]){
+      a+=2;
+      m[val[i]] = a;
+    }
+    if(ind[i]%2==0) start[ind[i]/2] = a;
+    else            end[ind[i]/2] = a;
+  }
+  mx = a+2;
+
+  assert( scanf("%d",&Q)==1 );
+  rep(i,Q){
+    assert( scanf("%d",K+i)==1 );
+    assert( 1<=K[i] && K[i]<=20 );
+    rep(j,K[i]){
+      assert( scanf("%d",t[i]+j)==1 );
+      assert( 1<=t[i][j] && t[i][j]<=1000000000 );
+    }
+    sort(t[i], t[i]+K[i]);
+  }
+
+  intIntSort(start, end, N);
+
+  ss = 0;
+  rep(i,Q){
+    res[i] = N;
+    rep(j,K[i]){
+      it = m.lower_bound(t[i][j]);
+      if(it->first == t[i][j]){ t[i][j] = it->second; continue; }
+      if(it == m.end()){ t[i][j] = mx-1; continue; }
+      t[i][j] = it->second - 1;
+    }
+    if(t[i][0] != 0) st[ss]=0, ed[ss]=t[i][0], ind[ss++] = i;
+    if(t[i][K[i]-1] != mx-1) st[ss]=t[i][K[i]-1], ed[ss]=mx-1, ind[ss++] = i;
+    REP(j,1,K[i]) if(t[i][j-1]!=t[i][j]) st[ss]=t[i][j-1], ed[ss]=t[i][j], ind[ss++] = i;
+  }
+  intIntIntSort(st,ed,ind,ss);
+
+  intFenwickTreeInit(&ft, mx);
+
+  /* calculate the answer for each query */
+  a = N-1;
+  for(i=ss-1;i>=0;i--){
+    while(a >= 0 && start[a] > st[i]){
+      intFenwickTreeAdd(&ft ,end[a], 1);
+      a--;
+    }
+    res[ind[i]] -= intFenwickTreeRange(&ft,st[i]+1,ed[i]-1);
+  }
+
+  rep(i,Q) printf("%d
+",res[i]);
+
+  return 0;
+}

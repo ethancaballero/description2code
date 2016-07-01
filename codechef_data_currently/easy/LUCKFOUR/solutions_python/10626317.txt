@@ -1,0 +1,15 @@
+#Lucky Four
+
+def main():
+    T = int(raw_input())
+    while(T!=0):
+        T-=1
+        I = raw_input()
+        count = 0
+        for i in range(0, len(I)):
+            if I[i] == '4':
+                count+=1
+        print count
+
+if __name__ == '__main__':
+    main()

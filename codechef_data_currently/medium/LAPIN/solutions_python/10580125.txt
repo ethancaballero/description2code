@@ -1,0 +1,37 @@
+t=input()
+while t>0:
+    t=t-1
+    a=raw_input()
+    l=len(a)
+    a=list(a)
+    if l%2==0:
+        first=a[0:l/2]
+        second=a[l/2:]
+    else:
+        first=a[0:l/2]
+        second=a[(l/2)+1:]
+    
+    f=list(set(first))
+    s=list(set(second))
+    first.sort()
+    second.sort()
+    f.sort()
+    s.sort()
+    flag=0
+    for i in range(0,len(f)):
+        if f[i]==s[i]:
+            flag=1
+        else:
+            flag=0
+            break
+    flag1=0
+    for i in range(0,len(first)):
+        if first[i]==second[i]:
+            flag1=1
+        else:
+            flag=0
+            break
+    if flag==1 and flag1==1:
+        print "YES"
+    else:
+        print "NO"

@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define INF 0x7f7f7f7f
+#define mk make_pair
+#define pb push_back
+ 
+using namespace std;
+ 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef vector<int> vi;
+typedef pair<int,int> ii;
+typedef vector<ii> vii;
+#define N 100000
+ 
+int main(){
+ 
+        int T;cin >> T;
+        ll n, a[N], b[N]; 
+        ll K;
+        while( T-- )
+        {
+                ll ans = 0;
+                cin >> n >> K;
+                for( int i = 0;i < n; i++ )
+                        cin >> a[i];
+                for( int i = 0;i < n; i++ )
+                        cin >> b[i];
+ 
+                for( int i = 0; i<n; i++ )
+                {
+                        ans = max( ans, (K/a[i])*b[i] );
+                }
+                cout << ans << "
+";
+ 
+        }
+ 
+ 
+ 
+        return 0;
+}

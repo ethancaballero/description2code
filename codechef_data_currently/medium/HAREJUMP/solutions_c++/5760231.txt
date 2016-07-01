@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+#define mp(x,y) make_pair(x,y)
+#define F first
+#define S second
+using namespace std;
+typedef long long ll;
+typedef vector<vector<ll> > vvi;
+ll n,k,x[16],qw[16];
+vvi mt(15);
+ll ans(vvi v)
+{
+    ll temp=0;
+    for(int i=0;i<15;i++)temp=(temp+v[0][i]*qw[i+1])%1000000007;
+    return temp;
+}
+vvi mtp(vvi v1,vvi v2)
+{
+    int i,j,k;
+    ll temp;
+    vvi v3(15);
+    for(i=0;i<15;i++)for(j=0;j<15;j++)
+    {
+        temp=0;
+        for(k=0;k<15;k++)temp=(temp+v1[i][k]*v2[k][j])%1000000007;
+        v3[i].push_back(temp);
+    }
+    return v3;
+}
+vvi func(ll idx)
+{
+    if(idx==1)return mt;
+    vvi v=func(idx/2);
+    if(idx%2)return mtp(mtp(v,v),mt);
+    return mtp(v,v);
+}
+int main()
+{
+    int i,j,jj,t;
+    vvi v;
+    qw[0]=1;
+    for(i=0;i<14;i++)for(j=0;j<15;j++)
+    {
+        if(i==j-1)mt[i].push_back(1);
+        else mt[i].push_back(0);
+    }
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%lld %lld",&n,&k);
+        for(i=0;i<k;i++)scanf("%lld",&x[i]);
+        sort(&x[0],&x[k]); x[k]=100;
+        j=0;
+        for(i=1;i<x[0];i++)qw[i]=0;
+        for(;i<=15;i++)
+        {
+            qw[i]=0;
+            if(x[j+1]==i)j++;
+            for(jj=0;jj<=j;jj++)qw[i]+=qw[i-x[jj]];
+        }
+        j=k-1;
+        mt[14].clear();
+        for(i=15;i>0;i--)
+        {
+            if(i==x[j])mt[14].push_back(1),j--;
+            else mt[14].push_back(0);
+        }
+        if(n>1)
+        {
+            v=func(n-1);
+            /*
+            for(i=0;i<15;i++)
+            {
+                for(j=0;j<15;j++)printf("%lld ",v[i][j]);
+                printf("       %lld
+",qw[i+1]);
+            }
+            */
+            printf("%lld
+",ans(v));
+        }
+        else
+        {
+            if(x[0]==1)printf("1
+");
+            else printf("0
+");
+        }
+    }
+}

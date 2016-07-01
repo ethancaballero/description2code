@@ -1,0 +1,58 @@
+#include <stdio.h>
+//#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main()
+{
+    int T,balance,maxBalance,length;
+    char string[1000000];
+    
+    scanf("%d ",&T);
+    
+    while(T--){
+        balance=0;
+        maxBalance=0;
+      // commonPresent=0;
+    
+        //commonNotPresent=0;
+     
+        scanf("%s",string);
+        length=(int)strlen(string);
+      
+        
+       // long * a=(long *)malloc(sizeof(long)*N);
+      //  int * b=(int *)malloc(sizeof(int)*K);
+        
+        
+        for (int  i=0; i<length; i++) {
+            if (string[i]=='(') {
+                balance++;
+            }
+            else if (string[i]==')')
+                balance--;
+            if (balance>maxBalance) {
+                maxBalance=balance;
+            }
+            
+        }
+      //  mergeSort(a,0,N-1);
+        for (int i=0; i<maxBalance;i++) {
+            printf("(");
+        }
+        for (int i=0; i<maxBalance; i++) {
+            printf(")");
+        }
+        
+     //   printf("%ld",count);
+        
+        printf("
+");
+        
+        
+    }
+    
+    // your code goes here
+    
+    return 0;
+}

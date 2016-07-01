@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int main()
+{int a,b,n;
+cin>>n;
+for(int i=0;i<n;i++)
+{cin>>a;
+if(a<=3)
+cout<<"0"<<endl;
+else
+{if(a%2==0)
+cout<<(((a*a)/4)-a/2)/2<<endl;
+else
+cout<<(((a-1)*(a-1))/4-(a-1)/2)/2<<endl;}
+}
+return 0;
+}

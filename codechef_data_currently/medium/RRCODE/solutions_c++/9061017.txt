@@ -1,0 +1,73 @@
+#include<iostream>
+using namespace std;
+ 
+int yo(int n, int k, int ans,char s[], int a[])
+  {
+      int j,b,o,x;
+      if(k==0)
+        return ans;
+      else
+    {
+      if(s[0]=='O')
+      {
+          o=a[0];
+          for(j=1;j<n;j++)
+          {
+              o=(o|a[j]);
+          }
+          ans=ans|o;
+      return ans;
+      }
+ 
+      else if(s[0]=='A')
+      {
+          b=a[0];
+          for(j=1;j<n;j++)
+          {
+              b=b&a[j];
+          }
+          ans=ans&b;
+            return ans;
+ 
+ 
+      }
+      else if(s[0]=='X')
+      {
+          if(k%2==0)
+            return ans;
+          else{
+                x=a[0];
+          for(j=1;j<n;j++)
+          {
+              x=x^a[j];
+          }
+          ans=ans^x;
+            return ans;}
+ 
+      }
+    }
+}
+ 
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+ 
+        int n,i,ans,k,a[1001];
+        char s[5];
+        cin>>n>>k>>ans;
+ 
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+        cin.get();
+        scanf("%s",s);
+ 
+        cout<<yo(n,k,ans,s,a)<<endl;
+ 
+    }
+    return 0;
+} 

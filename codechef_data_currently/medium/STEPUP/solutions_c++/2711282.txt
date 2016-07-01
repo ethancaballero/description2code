@@ -1,0 +1,93 @@
+#include<cstdio>
+#include<iostream>
+#include<cassert>
+#include<cctype>
+#include<cfloat>
+#include<climits>
+#include<cstring>
+#include<bitset>
+#include<deque>
+#include<map>
+#include<set>
+#include<stack>
+#include<queue>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<climits>
+#include<cmath>
+using namespace std;
+vector<vector<int> >vec(10009);
+int col[10009];
+int work[10009];
+int flag=-1;
+int cur;
+void dfs(int x,int j)
+{
+	//cout<<x<<" "<<j<<endl;
+	cur=max(cur,j);
+	col[x]=1;
+	int i;
+	for(i=0;i<vec[x].size();i++)
+	{
+		if(col[vec[x][i]]==1)
+		{
+			flag=-1;
+			return;
+		}
+		else
+		{
+			dfs(vec[x][i],j+1);
+		}
+	}
+	col[x]=2;
+}
+int main()
+{
+	int temp,i,j,k,n,m,maxi,ff;
+	scanf("%d",&temp);
+	//cout<<temp<<endl;
+	while(temp--)
+	{
+		//cout<<temp<<endl;
+		scanf("%d %d",&n,&m);
+		for(i=0;i<=n;i++)
+		{
+			col[i]=0;
+			work[i]=0;
+			vec[i].clear();
+		}
+		for(i=0;i<m;i++)
+		{
+			scanf("%d %d",&j,&k);
+			vec[j].push_back(k);
+			work[k]=1;
+		}
+		maxi=0;
+		flag=0;
+		ff=0;
+		for(i=1;i<=n&&flag!=-1;i++)
+		{
+			cur=1;
+			if(work[i]==0)
+			{
+				for(j=1;j<=n;j++)
+				{
+					col[j]=0;
+				}
+				ff=1;
+				dfs(i,1);
+				maxi=max(maxi,cur);
+ 
+			}
+		}
+		if(flag!=-1&&ff==1)
+			printf("%d
+",maxi);
+		else
+			printf("IMPOSSIBLE
+");
+ 
+	}
+	return 0;
+}

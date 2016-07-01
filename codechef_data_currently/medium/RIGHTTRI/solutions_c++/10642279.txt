@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define boost ios::sync_with_stdio(true); cin.tie(0); cout.tie(0);
+#define pii pair<int,int>
+#define vpii vector<pair<int,int> >
+#define vvpii vector<vector<pair<int,int> > >
+#define vi vector<int>
+#define vii vector<vector<int> >
+#define pb push_back 
+#define mp make_pair 
+#define onebit(n) __builtin_popcount(n) //get number of one-bits in the bit representation of n
+#define rep(i,n) for(i=0;i<n;i++)
+
+
+int main()
+{
+	boost;
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long s;
+		double h;
+		cin>>h>>s;
+		if(h*h<4*s)
+			cout<<-1<<endl;
+		else
+		{
+			
+			double a=sqrtl(h*h+4*s);
+			double b=sqrtl(h*h-4*s);
+		//	cout<<a<<"&&"<<b<<endl;
+			printf("%0.6lf %0.6lf %0.6lf
+",((a-b)/2),((a+b)/2),h);
+		}		
+	}
+	return 0;
+}

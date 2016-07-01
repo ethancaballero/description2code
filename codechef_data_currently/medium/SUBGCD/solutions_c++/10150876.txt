@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+int gcd(int a, int b){
+    if (b!=0)
+       return gcd(b, a%b);
+    else 
+       return a;
+}
+int main(){
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		int i,n, arr[100005], count=0, temp;
+		scanf("%d", &n);
+		for(i=0; i<n; i++){
+			scanf("%d", &arr[i]);
+		}
+		temp = arr[0];
+		for(i=0; i<n; i++){
+				temp = gcd(temp, arr[i]);
+		}
+		if (temp ==1) printf("%d
+", n );
+		else printf("-1
+");
+}
+return 0;
+}

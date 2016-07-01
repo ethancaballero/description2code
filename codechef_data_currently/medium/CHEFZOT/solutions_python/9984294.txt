@@ -1,0 +1,11 @@
+n = input()
+l = map(int, raw_input().strip().split())
+
+z = [i for i in range(n) if l[i] == 0]
+if len(z) == 1:
+        print max(z[0], n-z[0]-1)
+elif len(z) == 0:
+        print n
+else:
+        d = [(z[i+1]-z[i])-1 for i in range(len(z)-1)]
+        print max(d) if d else 0

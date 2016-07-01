@@ -1,0 +1,27 @@
+t=input()
+for i in range(t):
+    a=raw_input()
+    p=(int)(a.split()[0])
+    q=(int)(a.split()[1])
+    n=0
+    flag=0
+    while True:
+        if(p==q):
+            break
+        if(flag!=1):
+            for x in range(24):
+                if(p==pow(2,x)):
+                    flag=1
+        n+=1
+        if(flag==1):
+            if(p<q):
+                p=p*2
+            else:
+                p=p/2
+        if(flag==0):
+            if(p%2!=0):
+                p=(p-1)/2
+            elif(p%2==0):
+                p=p/2
+    print n   
+        

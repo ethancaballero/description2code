@@ -1,0 +1,19 @@
+t=int(input())
+while t>0:
+	t-=1
+	x,y,k,n=map(int,raw_input().split())
+	p,c=[],[]
+	for i in xrange(n):
+		pi,ci=map(int,raw_input().split())
+		p.append(pi)
+		c.append(ci)
+	r=x-y
+	flag=False
+	for i in xrange(n):
+		if p[i]>=r and c[i]<=k:
+			flag=True
+			break
+	if flag==True: 
+		print "LuckyChef" 
+	else: 
+		print "UnluckyChef"

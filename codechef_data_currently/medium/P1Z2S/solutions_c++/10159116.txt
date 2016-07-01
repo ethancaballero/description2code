@@ -1,0 +1,73 @@
+/*
+	Author : Amar Prakash Pandey
+	contact : http://amarpandey.me
+*/
+#include <string.h>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <complex>
+#include <math.h>
+#include <set>
+#include <vector>
+#include <map>
+#include <queue>
+#include <stdio.h>
+#include <stack>
+#include <algorithm>
+#include <list>
+#include <ctime>
+#include <memory.h>
+#include <ctime>
+#include <assert.h>
+
+#define pi 3.14159
+#define mod 1000000007
+#define max(a,b) (a > b ? a : b)
+#define rep(i,a,n) for (int i=a;i<=n;i++)
+#define per(i,n,a) for (int i=n;i>=a;i--)
+
+#define pb push_back
+#define mp make_pair
+#define clr(x) x.clear()
+#define sz(x) ((int)(x).size())
+#define F first
+#define S second
+#define pdn(n) printf("%d
+",n);
+#define sl(n) scanf("%lld",&n);
+#define sd(n) scanf("%d",&n);
+#define pn printf("
+");
+
+#define PII pair<int,int>
+#define VPII vector<PII>
+#define VI vector<int>
+#define VVI vector<VI>
+typedef long long LL;
+
+using namespace std;
+
+int main() {
+	ios::sync_with_stdio(false);
+	long long int n,x,i;
+	long long sum=0,ans;
+	cin >> n;
+	rep(i,1,n)
+	 {
+			 cin>>x;
+			 sum+=x;
+	 }
+
+	if(sum%2==0)
+	 ans=sum/2;
+	else
+	 ans=(sum/2)+1;
+
+	if(ans<n)
+		cout<<n;
+	else
+		cout<<ans;
+
+	return 0;
+}

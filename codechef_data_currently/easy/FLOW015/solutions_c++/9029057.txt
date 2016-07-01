@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+char *arr[]={
+	"monday",
+	"tuesday",
+	"wednesday",
+	"thursday",
+	"friday",
+	"saturday",
+	"sunday",
+};
+
+int main()
+{
+	//freopen( "input.txt" , "r" ,stdin);
+	int test=0;
+	scanf("%d",&test);
+	
+	while(test--)
+	{
+		int year1 = 2001 ;
+		int year2 = 0;
+		scanf("%d",&year2);
+
+		int day = 0;
+		if( year2 < year1 )
+		{
+			int leapYrsTillYr1 = (year1-1)/4 - (year1-1)/100 + (year1-1)/400;
+			int leapYrsTillYr2 = year2/4 - year2/100 + year2/400;
+
+			int daysBetween = ( year1 - year2)*365 + leapYrsTillYr1-leapYrsTillYr2;
+			if( !(year2 % 4) && ( (year2 % 100) || !(year2 % 400) ))
+				daysBetween+=1;
+
+			day = (7-(daysBetween%7))%7;
+		}
+		else if( year2 > year1 )
+		{
+			int leapYrsTillYr1 = year1/4 - year1/100 + year1/400;
+			int leapYrsTillYr2 = (year2-1)/4 - (year2-1)/100 + (year2-1)/400;
+
+			int daysBetween = ( year2 - year1)*365 + leapYrsTillYr2-leapYrsTillYr1 ;
+			day = daysBetween%7;
+		}
+		printf("%s
+",arr[day]);
+	}
+
+}

@@ -1,0 +1,13 @@
+import sys
+
+cases = 1 #int(raw_input())
+for _dummy in range(cases):
+	particles,threshold,nchambers = map(int, raw_input().split())
+	threshold += 1
+	chambers = [0 for _ in range(nchambers+1)]
+	chambers[0] = particles % threshold
+	chambers[1] = particles / threshold
+	for i in range(1, nchambers):
+		chambers[i + 1] = chambers[i] / threshold
+		chambers[i] %= threshold
+	print ' '.join(map(str,chambers[:-1]))

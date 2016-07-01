@@ -1,0 +1,35 @@
+//hashing
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int a[101]={0};
+        int n,m,k;
+        cin>>n>>m>>k;
+        int c,i;
+        for(i=0;i<m;i++)
+        {
+            cin>>c;
+            a[c]++;
+        }
+        for(i=0;i<k;i++)
+        {
+            cin>>c;
+            a[c]++;
+        }
+        int it=0,uu=0;
+        for(i=1;i<=n;i++)
+        {
+            if(a[i]==0)
+                uu++;
+            if(a[i]==2)
+                it++;
+        }
+        cout<<it<<" "<<uu<<endl;
+    }
+    return 0;
+}

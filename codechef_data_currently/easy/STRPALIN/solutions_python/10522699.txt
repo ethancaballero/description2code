@@ -1,0 +1,12 @@
+def check(str1, str2):
+	for i in str1:
+		if i in str2:
+			print "Yes"
+			return
+	print "No"
+
+T = input()
+for i in xrange(T):
+	str1 = raw_input()
+	str2 = raw_input()
+	check(str1, str2)

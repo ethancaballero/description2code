@@ -1,0 +1,15 @@
+def gcd(a,b):
+        if b == 0:
+                return a
+        else:
+                return gcd(b, a%b)
+
+for _ in range(input()):
+        n = input()
+        l = map(int, raw_input().strip().split())
+        g = l[0]
+        for i in range(1,n):
+                g = gcd(g,l[i])
+                if g == 1:
+                        break
+        print n if g == 1 else -1

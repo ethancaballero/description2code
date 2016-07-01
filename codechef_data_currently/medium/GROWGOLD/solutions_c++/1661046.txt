@@ -1,0 +1,133 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<iostream>
+#include<assert.h>
+#define REP(i,a,b) for(i=a;i<b;i++)
+#define rep(i,n) REP(i,0,n)
+
+#define ll long long
+#define ull unsigned ll
+#define M 100000007
+
+using namespace std;
+
+ull LIM = (1ull<<63) - 1 + (1ull<<63) - (ull)(M-2)*(M-2);
+
+typedef struct ll_matrix{
+  int r,c;
+  ull **data;
+}llMatrix;
+
+llMatrix newLLMatrix(int r,int c){
+  int i; llMatrix res;
+  res.r=r; res.c=c;
+  res.data    = (ull**) malloc(r*sizeof(ull*));
+  res.data[0] = (ull*) malloc(r*c*sizeof(ull));
+  REP(i,1,r) res.data[i] = res.data[i-1]+c;
+  return res;
+}
+
+void* setMemoryLLMatrix(llMatrix *a,int r,int c,void *WorkMemory){
+  int i;
+  a->r=r; a->c=c;
+  a->data = (ull**)WorkMemory; WorkMemory = (void*)(a->data + r);
+  rep(i,r){a->data[i] = (ull*)WorkMemory; WorkMemory = (void*) (a->data[i] + c);}
+  return WorkMemory;
+}
+
+void deleteLLMatrix(llMatrix *a){
+  free(a->data[0]); free(a->data);
+}
+
+void llMatrixSetZero(llMatrix *a){
+  int i,j;
+  rep(i,a->r) rep(j,a->c) a->data[i][j]=0;
+}
+
+void llMatrixSetIdentity(llMatrix *a){
+  int i,mx;
+  mx=a->r; if(mx>a->c) mx=a->c;
+  llMatrixSetZero(a); rep(i,mx) a->data[i][i]=1;
+}
+
+void llMatrixMultipleMod(llMatrix *a,llMatrix *b,llMatrix *res,ull m){
+  int i,j,k;
+  llMatrixSetZero(res);
+  rep(i,res->r) rep(k,b->r) if(a->data[i][k]) rep(j,res->c) {
+    res->data[i][j]+=a->data[i][k]*b->data[k][j];
+    if(res->data[i][j]>LIM) res->data[i][j]%=m;
+  }
+  rep(i,res->r) rep(j,res->c) if(res->data[i][j] >= m) res->data[i][j] %= m;
+}
+
+void llMatrixPowerMod(llMatrix *a,llMatrix *res,int k,ull m,void *WorkMemory){
+  int i,j,n=a->r;
+  llMatrix tmp1,tmp2;
+
+  res->r=res->c=n;
+  if(k==0){ llMatrixSetIdentity(res); return; }
+  if(k==1){ rep(i,n)rep(j,n)res->data[i][j]=a->data[i][j]; return; }
+  if(k==2){ llMatrixMultipleMod(a,a,res,m); return; }
+
+  WorkMemory = setMemoryLLMatrix(&tmp1,n,n,WorkMemory);
+  llMatrixPowerMod(a, &tmp1, k/2, m, WorkMemory);
+  if(k%2==0) llMatrixMultipleMod(&tmp1,&tmp1,res,m);
+  else {
+    WorkMemory = setMemoryLLMatrix(&tmp2,n,n,WorkMemory);
+    llMatrixMultipleMod(&tmp1,&tmp1,&tmp2,m);
+    llMatrixMultipleMod(a,&tmp2,res,m);
+  }
+}
+
+ll pw(ll a,ll b, ll md){
+  ll r;
+  if(!b) return 1;
+  r = pw(a,b/2,md);
+  r = (r*r)%md;
+  if(b%2) r = (r*a)%md;
+  return r;
+}
+
+int main(){
+  int i, j, t;
+  int T, initTax, slot1, slot2, K, N;
+  ll Tax[500], res;
+  llMatrix mt = newLLMatrix(101,101);
+  llMatrix pm = newLLMatrix(101,101);
+  void *mem = malloc(54000000);
+
+  assert( scanf("%d",&T)==1 );
+  assert(1 <= T && T <= 3);
+  while(T--){
+    assert( scanf("%d%d%d%d%d",&initTax,&slot1,&slot2,&K,&N)==5 );
+    assert(1 <= slot1 && slot1 <= 50);
+    assert(1 <= slot2 && slot2 <= 50);
+    assert(1 <= K && K <= slot1+slot2+1);
+    assert(1 <= N && N <= 1000000000);
+
+    N--;
+
+    Tax[0] = initTax;
+    rep(i,slot1) Tax[i+1] = Tax[i] + 1;
+    rep(i,slot2) Tax[i+slot1+1] = (Tax[i+slot1] * 2) % M;
+
+    if(N <= slot1 + slot2){ printf("%d
+",(int)Tax[N]); continue; }
+    t = N - slot1 - slot2;
+
+    mt.r = mt.c = K;
+    rep(i,K) rep(j,K) mt.data[i][j] = 0;
+    REP(i,1,K) mt.data[i-1][i] = 1;
+    rep(i,K) mt.data[K-1][i] = 1;
+    llMatrixPowerMod(&mt,&pm,t,M-1,mem);
+
+    res = 1;
+    rep(i,K) {res = (res * pw(Tax[slot1+slot2-i], pm.data[K-1][K-1-i], M)) % M;
+    }
+    printf("%d
+",(int)res);
+  }
+
+  return 0;
+}

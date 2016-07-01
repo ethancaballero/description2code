@@ -1,0 +1,8 @@
+t = input()
+while t > 0:
+    bsal = input()
+    if bsal < 1500:
+        print "%g" % (bsal * 2)
+    else:
+        print "%g" % (bsal + 500 + bsal * 0.98)
+    t -= 1

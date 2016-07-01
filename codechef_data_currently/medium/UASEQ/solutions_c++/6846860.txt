@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct block
+{
+    long long int dif,stop,pos,no,start;
+};
+bool compare(block a,block b)
+{
+    return b.start>=a.start;
+}
+int main()
+{
+    long long int n,cop,a[100005],k,co=0,diff,poss,stopp,startt;
+    scanf("%lld %lld",&n,&k);
+    for(int i=0;i<n;i++)
+        scanf("%lld",&a[i]);
+    block nodes;
+    //cout<<"##";
+    for(int i=0;i<k+2;i++)
+    {
+        for(int j=i+1;j<k+2;j++)
+        {
+            //cout<"$$";
+            diff=(a[j]-a[i])/(j-i);
+            if(diff*(j-i)==(a[j]-a[i]))
+            {
+                //nodes[co].dif=diff;
+                poss=j;
+                stopp=a[j];
+                startt=a[j]-j*diff;
+
+                cop=0;
+                for(int p=0;p<n;p++)
+                {
+                    if(a[p]!=(startt+(p)*diff))
+                        cop++;
+                }
+                if(cop<=k)
+                {
+                    if(co==0)
+                    {
+                        nodes.start=startt;
+                        nodes.dif=diff;
+                        co++;
+                    }
+                    else
+                    {
+                        if(startt<nodes.start)
+                        {
+                            nodes.start=startt;
+                            nodes.dif=diff;
+                        }
+                        if(startt==nodes.start)
+                        {
+                            if(diff<nodes.dif)
+                            {
+                                nodes.start=startt;
+                                nodes.dif=diff;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+    }
+
+    //sort(nodes,nodes+k+2,compare);
+   //for(int i=0;i<k+2;i++)
+        //cout<<nodes[i].start<<" "<<nodes[i].stop<<" "<<nodes[i].dif<<" "<<nodes[i].no<<endl;
+    /*int i=0,minn=0;
+    while(nodes[i].start==nodes[0].start)
+    {
+        if(nodes[i].dif<nodes[minn].dif)
+        {
+            minn=i;
+        }
+        i++;
+    }*/
+    for(int i=0;i<n;i++)
+    {
+        printf("%lld ",nodes.start+i*nodes.dif);
+    }
+    printf("
+");
+    return 0;
+
+}

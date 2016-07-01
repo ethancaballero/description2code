@@ -1,0 +1,66 @@
+T=input()
+while T:
+      done=0
+      found=0
+      T-=1
+      count={'a':0,'b':0,'c':0,'d':0,'e':0,'f':0,'g':0,'h':0,'i':0,'j':0,'k':0,'l':0,'m':0,'n':0,'o':0,'p':0,'q':0,'r':0,'s':0,'t':0,'u':0,'v':0,'w':0,'x':0,'y':0,'z':0}
+      R,S=raw_input().split()
+      for a in R:
+            count[a]+=1
+      for b in S:
+            count[b]-=1
+      actual=True
+      for x in range(97, 123):
+            if count[chr(x)]!=0:
+                  actual=False
+                  break
+      chef=True
+      let1=set(R)
+      let2=set(S)
+      if list(let1^let2)==[]:
+            chef=True
+      else:
+            chef=False
+      '''
+      for a in count.keys():
+            if count[a]!=0:
+                  
+            found=0
+            for b in S:
+                  if a==b:
+                        found=1
+                        break
+            if found!=1:
+                  print "HELL"
+                  chef=False
+                  break
+                  '''
+      if actual==chef:
+            print "YES"
+      else:
+            print "NO"
+      
+'''
+
+
+
+      for x in range(97,123):
+            if count1[chr(x)]==0:
+                  notfound.append(chr(x))
+      for b in S:
+            if b in notfound:
+                  print "YES" ###Found A Letter In S which was not in R###
+                  done=1
+                  break
+            else:
+                  count1[b]-=1
+      if done!=1:
+            for x in range (97,123):
+                  if count1[chr(x)]!=0:
+                        print "NO" ###Found Unequal Count Of A Letter###
+                        done=1
+                        break
+            
+      if done!=1:
+            print "YES"
+      ''' 

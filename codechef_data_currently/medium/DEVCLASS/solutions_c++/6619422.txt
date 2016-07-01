@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define FI(i,a,b) for(i=a;i<b;i++)
+#define F(i,n) FI(i,0,n)
+#define INF 1000000000000000000LL
+#define lli long long
+
+int main ()
+{
+	int t, n; scanf("%d", &t);
+	int a[100001], b1[100001], x, y;
+	char s[100001];
+	int type, b, g, i, j;
+	lli sum, temp;
+	while (t--) {
+		scanf("%d", &type);
+		scanf("%s", s);
+		sum = INF;
+		n = strlen(s);
+		
+		F(j, 2) {
+			F(i, n) {
+				if (s[i] == 'B') s[i] = 'G';
+				else s[i] = 'B';
+			}
+			
+			b = g = 0;
+			F(i, n) {
+				if (s[i] == 'B') b++;
+				else g++;
+			}
+			if (b != g && b != g+1) continue;
+			
+			if (type == 0) {
+				temp = 0;
+				for (i = 0; i < n; i += 2) {
+					if (s[i] != 'B') temp++;		
+				}
+				sum = min(sum, temp);
+			} else {
+				temp = 0;
+				x = 0; y = 0;
+				for (i = 0; i < n; i += 2) if (s[i] != 'B') a[x++] = i;
+				for (i = 1; i < n; i += 2) if (s[i] != 'G') b1[y++] = i;
+				F(i, x) temp += abs(a[i]-b1[i]);
+				sum = min(sum, temp);
+			}
+		}
+		
+		if (sum == INF) sum = -1;
+		printf("%lld
+", sum);
+	}
+	return 0;
+}

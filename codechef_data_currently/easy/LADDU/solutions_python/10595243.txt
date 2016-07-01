@@ -1,0 +1,36 @@
+t=int(raw_input())
+
+for i in range(t):
+    a, o=raw_input().split()
+    a=int(a)
+    #o=o(str)
+    ladoo=0
+    m=0
+    for j in range(a):
+        role=map(str,raw_input().split())
+        if role[0]=='CONTEST_WON':
+            #rank=int(raw_input())
+            role[1]=int(role[1])
+            if role[1]<20:
+               ladoo=ladoo+300+20-role[1]
+            else:
+                ladoo=ladoo+300
+            
+        elif role[0]=='TOP_CONTRIBUTOR':
+            ladoo=ladoo+300
+        elif role[0]=='BUG_FOUND':
+            role[1]=int(role[1])
+            ladoo=ladoo+role[1]
+        else:
+             ladoo=ladoo+50
+    if o=='INDIAN':
+        m=ladoo/200;
+        
+    else:
+        m=ladoo/400
+    print m
+        
+        
+            
+            
+        

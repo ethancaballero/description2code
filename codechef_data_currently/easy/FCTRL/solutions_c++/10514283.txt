@@ -1,0 +1,27 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+ long b=0, i=1, k;
+ cin>>k;
+ long a[k];
+ for(int j=0; j<k; j++)
+ {
+  cin>>a[j];
+ }
+ for(int j=0; j<k; j++)
+ {
+  while(a[j]>pow(5,i-1))
+  {
+    b+=a[j]/pow(5,i);
+    i++;
+  }
+  cout<<b<<"
+";
+  b=0;
+  i=1;
+ }
+ return 0;
+}

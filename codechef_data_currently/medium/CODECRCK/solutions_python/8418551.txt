@@ -1,0 +1,17 @@
+#!/bin/python
+import math
+
+i, k, s = map(int, raw_input().split())
+a, b = map(int, raw_input().split())
+x = math.sqrt(2.0)
+y = math.sqrt(3.0)
+
+sum = float(a+b)
+
+remain = (k-i) % 2
+if remain:
+  sum = 2*x*a+2*x*y*b
+
+s1 = 4*((k-i)/2) - s
+c = sum * (2 ** s1)
+print c

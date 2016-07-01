@@ -1,0 +1,121 @@
+
+
+#include <cstdio>      // fscanf,fprintf
+#include <cstdlib>     // exit
+#include <cerrno>
+#include <cstring>     // strncmp,strncpy
+#include <ctime>       // clock_t type,clock()
+#include <cmath>
+
+#include <iostream>      //
+#include <vector>        // vector
+#include <algorithm>     // max,min,
+#include <numeric>       // accumulate
+
+//MACROS for algorithmic programming
+
+// for codechef
+
+using namespace std;
+
+#define SMALL_INPUT_FILE "B-small-attempt0.in"
+#define LARGE_INPUT_FILE "B-large.in"
+#define OUTPUT_FILE "pancakeflip-output.txt"
+#define MAX_B 40000
+
+long multiply( long a, long b ,long M)
+{
+    long res= 0;
+    a = a % M;
+
+    while( b > 0)
+    {
+        if (b % 2 == 1)
+            res = (res + a) % M;
+        a = (a*2) % M;
+        b /= 2;
+    }
+    return res % M;
+
+}
+
+
+
+
+
+int main( int argc  , char ** argv )
+{
+  //FILE * inpfile, * outfile ;
+  char filename[20] , c;
+  clock_t curtime;
+  /*if ( argc == 2)
+  {
+      if ( strncmp( argv[1] , "small" , 5 ) == 0)
+      {
+          inpfile = fopen(SMALL_INPUT_FILE , "r");
+
+      }
+
+  }
+
+   else
+   {
+       c = getchar();-
+       if ( c == 's')
+       {
+           strncpy( filename , SMALL_INPUT_FILE , sizeof(filename));
+       }
+       else
+       {
+           strncpy( filename , LARGE_INPUT_FILE , sizeof(filename) );
+       }
+
+   }
+
+   */
+
+
+   /*
+   inpfile = fopen( filename , "r");
+   outfile = fopen( OUTPUT_FILE , "w+");
+
+   if ( !inpfile || !outfile )
+   {
+       perror( "Error: ");
+       exit(1);
+   }
+
+
+   */
+   //int T,i = 1 , k;
+
+   int T;
+   long N;
+   scanf( "%d", &T);
+
+   while (T--)
+   {
+      scanf("%ld", &N);
+
+      if ( N % 4 == 1)
+      {
+          //losing position
+          printf("ALICE
+");
+      }
+      else
+      {
+          printf("BOB
+");
+      }
+
+   }
+
+
+/*
+    fclose(inpfile);
+    fclose(outfile);
+    */
+    return 0;
+}
+

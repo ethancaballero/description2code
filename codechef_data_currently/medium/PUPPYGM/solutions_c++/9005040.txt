@@ -1,0 +1,14 @@
+#include <iostream>
+
+using namespace std;
+
+main()
+{ int t,a,b;
+	cin>>t;
+   while(t--)
+   {  cin>>a>>b;
+   	if((a%2!=0)&&(b%2!=0))
+   	cout<<"Vanka"<<endl;
+      else cout<<"Tuzik"<<endl;
+   }
+}

@@ -1,0 +1,55 @@
+#define DEBUG 0
+ 
+#include <stdio.h>
+ 
+double eval(double p, int a[101][3], int i) {
+  double in1, in2;
+  if(DEBUG)
+    printf("eval i=%d
+", i);
+  if(a[i][0]==0)
+    return p;
+  else if(a[i][0]==2) //AND
+    return (eval(p, a, a[i][1])*eval(p, a, a[i][2]));
+  else { //OR
+    in1=eval(p, a, a[i][1]);
+    in2=eval(p, a, a[i][2]);
+    return (in1*in2+in1*(1-in2)+(1-in1)*in2);
+  }
+}
+ 
+int main(void) {
+  int tc, n, a[101][3], i, done;
+  double high, low, mid, r;
+ 
+  scanf("%d", &tc);
+  while(tc--) {
+    scanf("%d", &n);
+    for(i=1;i<=n;i++) {
+      scanf("%d", &a[i][0]);
+      if(a[i][0])
+        scanf("%d%d", &a[i][1], &a[i][2]);
+    }
+    high=1.0,low=0.0,mid=0.5,done=0;
+    while(!done) {
+      r=eval(mid, a, n);
+      if(DEBUG)
+        printf("low=%lf mid=%lf high=%lf r=%lf
+", low, mid, high, r);
+      if(r==0.5)
+        done=1;
+      else {
+        if(r<0.5)
+          low=mid;
+        else
+          high=mid;
+        mid=(low+high)/2.0;
+        if(high-low<0.0000001)
+          done=1;
+      }
+    }
+    printf("%.5lf
+", mid);
+  }
+  return 0;
+}

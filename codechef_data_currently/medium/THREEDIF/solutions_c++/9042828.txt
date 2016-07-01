@@ -1,0 +1,28 @@
+#include<cstdio>
+#include<iostream>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+long long t,n[5],mil,res;
+int main () {
+    cin>>t;
+    while(t--){
+        cin>>n[1]>>n[2]>>n[3];
+        sort(n+1,n+4);
+        mil=1000000007;
+        n[2]--;
+        n[3]-=2;
+        n[1]=n[1]%mil;
+        n[2]=n[2]%mil;
+        n[3]=n[3]%mil;
+        res=n[1]*n[2];
+        res=res%mil;
+        res=res*n[3];
+        res=res%mil;
+        cout<<res<<endl;
+    }
+    return 0;
+
+
+
+}

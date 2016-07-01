@@ -1,0 +1,25 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+ int t,ds,dt,d;
+ cin>>t;
+ while(t--)
+ {
+  cin>>ds>>dt>>d;
+  if(ds+dt<=d)
+  cout<<d-dt-ds<<"
+";
+  else if(d+dt<=ds)
+  cout<<ds-d-dt<<"
+";
+  else if(d+ds<=dt)
+  cout<<dt-d-ds<<"
+";
+  else
+  cout<<"0
+";
+ }
+ return 0;
+}

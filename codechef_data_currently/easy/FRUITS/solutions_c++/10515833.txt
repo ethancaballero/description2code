@@ -1,0 +1,32 @@
+//
+//  main.cpp
+//  practice
+//
+//  Created by Grover Harsh on 16/06/16.
+//  Copyright © 2016 harsh. All rights reserved.
+//
+
+#include <iostream>
+#include<stdio.h>
+
+
+int main(){
+    int t,n,k,m;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d %d %d", &n,&m,&k);
+        int diff;
+        if(n > m)
+            diff = n-m;
+        else
+            diff = m-n;
+        if(k >= diff)
+            printf("0
+");
+        else
+            printf("%d
+",diff-k);
+    }
+    return 0;
+}

@@ -1,0 +1,4 @@
+for t in xrange(int(raw_input())):
+	a = sorted(map(int, raw_input().split()), reverse=True)
+	k = int(raw_input())
+	print k+min(a[1],k-1)+min(a[2],k-1)

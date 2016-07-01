@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	long long int t,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		long long int i;
+		for(i=0;i<n;i++)
+		{
+			cout<<char((i%4)+'a');
+		}
+		cout<<endl;
+	}
+	// your code goes here
+	return 0;
+} 

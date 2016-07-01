@@ -1,0 +1,37 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int depth(long long n)
+{long long i=0;
+    while(n>1)
+	{
+		n=n/2;
+		i++;
+	}
+	return i;
+}
+int main() {
+int n;
+cin>>n;
+while(n--)
+{  long long i,j,num;
+    cin>>i>>j;
+    if(i!=j)
+    {
+    num=depth(i)+depth(j);
+    while(i!=j)
+    {
+        if(i>j)
+        i=i/2;
+        else
+        j=j/2;
+    }
+    cout<<num-2*(depth(i))<<"
+";
+    }
+    else
+    cout<<"0
+";
+}
+	return 0;
+}

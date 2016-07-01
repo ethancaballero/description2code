@@ -1,0 +1,85 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int t;cin>>t;
+    while(t--){
+   int n;
+   cin>>n;
+   pair<int,int>p[n],xmax,xmin,ymax,ymin,xmax_up,xmax_down,ymax_right,ymax_left,xmin_up,xmin_down,ymin_right,ymin_left;
+   int lno1,lno2,lno3,lno4;
+   xmax.first=-1000000009,xmin.first=1000000009,ymin.second=1000000009,ymax.second=-1000000009;
+   for(int i=0;i<n;i++){
+    cin>>p[i].first>>p[i].second;
+    if(p[i].first>=xmax.first){
+        xmax=p[i];
+     }
+    if(p[i].second>=ymax.second){
+        ymax=p[i];
+     }
+     if(p[i].first<=xmin.first){
+        xmin=p[i];
+     }
+     if(p[i].second<=ymin.second){
+        ymin=p[i];
+     }
+   }
+   int l1,l2,l3,l4,l5,l6,l7,l8;
+   xmax_up=xmax;  xmax_down=xmax;
+   xmin_up=xmin;  xmin_down=xmin;
+   ymax_right=ymax; ymax_left=ymax;
+   ymin_right=ymin; ymin_left=ymin;
+   for(int i=0;i<n;i++){
+      if(xmax_up==p[i]){
+        if(xmax_up.second >= p[i].second){
+            xmax_up=p[i]; l1=i+1;}
+        }
+         if(xmin_up==p[i]){
+            if(xmin_up.second>=p[i].second){
+               xmin_up=p[i];   l2=i+1;}
+        }
+        if(xmax_down==p[i]){
+            if(xmax_down.second <= p[i].second){
+            xmax_down=p[i];  l3=i+1;}
+        }
+         if(xmin_down==p[i]){
+            if(xmin_down.second <= p[i].second){
+            xmin_down=p[i];  l4=i+1;}
+        }
+        if(ymax_right==p[i]){
+            if(ymax_right.first>=p[i].first){
+                ymax_right=p[i];  l5=i+1;}
+        }
+         if(ymax_left==p[i]){
+            if(ymax_left.first<=p[i].first){
+                ymax_left=p[i];  l6=i+1;}
+        }
+         if(ymin_right==p[i]){
+            if(ymin_right.first>=p[i].first){
+                ymin_right=p[i];  l7=i+1;}
+        }
+       if(ymin_left==p[i]){
+            if(ymin_left.first<=p[i].first){
+                ymin_left=p[i];  l8=i+1;}
+        }
+    }
+      if(ymax_right==xmax_up)
+      cout<<"1"<<endl<<l1<<" SW"<<endl;
+      else if(ymin_right==xmax_down)
+         cout<<"1"<<endl<<l3<<" NW"<<endl;
+      else if(ymin_left==xmin_up)
+          cout<<"1"<<endl<<l4<<" NE"<<endl;
+      else if(ymax_left==xmin_up)
+        cout<<"1"<<endl<<l6<<" SE"<<endl;
+      else if(xmax_up.second>=xmin_down.second)
+       cout<<"2"<<endl<<l1<<" SW"<<endl<<l4<<" NE"<<endl;
+      else if(xmin_down.second>xmax_up.second)
+        cout<<"2"<<endl<<l4<<" SE"<<endl<<l1<<" NW"<<endl;
+       
+   }
+    return 0;
+}

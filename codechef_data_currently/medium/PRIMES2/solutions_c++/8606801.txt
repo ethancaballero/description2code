@@ -1,0 +1,70 @@
+#include<iostream>
+#include<cstdio>
+long long int arr[1000001]={0},p_square[100000],p_cube[100000];
+int main()
+{
+   long long int t,n;
+   arr[0] = 1;
+   arr[1] = 1;
+   for(int i=2; i<=1000000; i++)
+   {
+       if(arr[i] == 0)
+       {
+           for(int j=i+i; j<=1000000; j+=i)
+            arr[j] = 1;
+       }
+   }
+   int cnt_primes = 0;
+   for(int i=2; i<=1000000; i++)
+   {
+       if(arr[i] == 0)
+       {
+           p_square[cnt_primes] = i;
+           p_cube[cnt_primes++] = i;
+       }
+   }
+   //printf("%d",cnt_primes);
+   //scanf("%d",&t);
+   while(1)
+   {
+       scanf("%lld",&n);
+       if(n==0)
+        break;
+       int i,j,flg = 0;
+       long long int tmp;
+       for(i=0; i<cnt_primes; i++)
+       {
+           tmp = n - 1ll*p_cube[i]*p_cube[i]*p_cube[i];
+            if(tmp <= 0)
+                break;
+            long long int tmp_n = tmp;
+            for(j = 0; j<cnt_primes; j++)
+            {
+                tmp = tmp_n - 1ll*p_square[j]*p_square[j];
+                if(tmp <= 0)
+                    break;
+                else
+                {
+                    if(arr[tmp] == 0)
+                    {
+                        //printf("tmp:%lld tmp + j:%lld tmp+i:%lld
+",tmp,tmp+1ll*p_square[j]*p_square[j],tmp+1ll*p_square[j]*p_square[j]+1ll*p_cube[i]*p_cube[i]*p_cube[i]);
+                        flg = 1;
+                        break;
+                    }
+                }
+            }
+            if(flg)
+                break;
+       }
+       if(flg)
+       {
+           printf("%lld %lld %lld
+",tmp,p_square[j],p_cube[i]);
+       }
+       else
+        printf("0 0 0
+");
+   }
+
+}

@@ -1,0 +1,10 @@
+case=int(raw_input())
+for cases in xrange(case):
+    x=raw_input()
+    a=''
+    for c in x:
+        if c in a:
+            continue
+        else:
+            a+=c
+    print len(a)

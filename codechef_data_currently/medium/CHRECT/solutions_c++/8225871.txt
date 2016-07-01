@@ -1,0 +1,40 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t,m,n,k,temp=0;
+    cin>>t;
+    while(t--)
+    {
+        cin>>m>>n>>k;
+        if(m == 1 and n == 2)
+        {
+             cout<<temp<<'
+';
+        }
+        else if(m == 2 and n == 1)
+        {
+            cout<<temp<<'
+';
+        }
+        else if(m == 1 and n == 1)
+        {
+          cout<<temp<<'
+';
+        }
+        else if(m == 1 or n == 1)
+        {
+            cout<<k<<'
+';
+        }
+        else
+        {
+            int ans = (k+1)/2;
+            cout<<ans<<'
+';
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,28 @@
+import sys
+from operator import itemgetter
+
+n,k,p = map(int,sys.stdin.readline().split())
+
+l = list(map(int,sys.stdin.readline().split()))
+
+l1 = sorted(enumerate(l,1),key=itemgetter(1))
+
+d = {}
+
+path = 0
+
+item,prev_dist = l1[0]
+d[item] = 0
+
+for item,dist in l1[1:]:
+    if dist-prev_dist > k:
+        path += 1
+    d[item] = path
+    prev_dist = dist
+
+for i in xrange(p):
+    x1,x2 = map(int,sys.stdin.readline().split())
+    if d[x1]==d[x2]:
+        print "Yes"
+    else:
+        print "No"

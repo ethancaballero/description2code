@@ -1,0 +1,87 @@
+#include<stdio.h>
+
+int main()
+{
+	int T,j;
+	char str[10];
+	bool output[100][100];
+	bool fixed[100];
+	bool skip;
+
+	scanf("%d",&T);
+
+	for(int i=0; i<T; ++i)
+	{
+		for(j=0; j<T; ++j)
+		{
+			scanf("%s",str);
+			output[i][j] = (str[0] == 'Y')?true:false;
+		}
+	}
+
+	for(int i=0; i<T; ++i)
+	{
+		if(!output[i][i])
+		{
+			fixed[i] = false;
+			continue;
+		}
+
+		skip = false;
+		for(int k=0; k<i; ++k)
+		{
+			if(output[i][k] != fixed[k])
+			{
+				fixed[i] = false;
+				skip = true;
+				break;
+			}
+		}
+
+		if(skip) continue;
+
+		for(int k=i+1; k<T; ++k)
+		{
+			if(output[i][k])
+			{
+				for(j=0; j<T; ++j)
+				{
+					if(output[i][j] != output[k][j])
+					{
+						fixed[i] = false;
+						skip = true;
+						break;
+					}
+				}
+			}
+			else
+			{
+				for(j=0; j<T; ++j)
+				{
+					if(output[i][j] != output[k][j])
+					{
+						break;
+					}
+				}
+				if(j == T)
+				{
+					fixed[i] = false;
+					skip = true;
+				}
+			}
+			if(skip) break;
+		}
+
+		if(!skip)
+		{
+			for(int k=0; k<T; ++k) printf("%s
+",output[i][k]?"YES":"NO");
+			return 0;
+		}
+	}
+
+	for(int i=0; i<T; ++i) printf("NO
+");
+
+	return 0;
+}

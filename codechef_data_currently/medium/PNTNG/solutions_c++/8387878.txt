@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int lli;
+
+#define test()    int test_case;cin>>test_case;while(test_case--)
+#define fr(i,n) for(int i=0;i<n;i++)
+#define frr(i,a,n) for(int i=a;i<n;i++)
+#define sll(a) scanf("%lld",&a)
+#define sl(a) scanf("%ld",&a)
+#define si(a) scanf("%i",&a)
+#define sd(a)  scanf("%ld",&a)
+#define sf(a) scanf("%f",&a)
+#define rn(a) return a
+#define pai pair<int,int>
+#define pal pair<li,li>
+#define pall pair<lli,lli>
+#define ff first
+#define ss second
+#define mod  1000000007
+#define mp make_pair
+#define pb push_back
+#define pll(a) printf("%lld
+",a)
+#define pl(a) printf("%lld
+",a)
+#define pi(a) printf("%d
+",a)
+#define pd(a) printf("%lf
+",a)
+#define pf(a) printf("%f
+",a)
+#define lc (start+end)/2
+#define rc  lc+1
+int main()
+ {
+ 	
+ 	 lli n,m,k;
+ 	  cin>>n>>m>>k;
+ 	  vector<pall> v;
+ 	  for(lli i=0;i<k;i++)
+ 	   {
+ 	   	lli a,b;
+ 	   	 cin>>a>>b;
+ 	   	 v.pb(mp(b,a));
+		}
+		sort(v.begin(),v.end());
+		lli maxi=n*m;
+	//	 cout<<maxi<<endl;
+		lli ans=0;
+		
+		for(lli i=0;i<k;i++)
+		 {
+	//	 	cout<<i<<endl;
+		 	 if(v[i].ss<maxi)
+		 	  {
+		 	  	maxi-=v[i].ss;
+		 	  	ans+=v[i].ss*v[i].ff;
+		 	  	
+			   }
+			   else 
+			   {
+			   	
+			   	ans+=maxi*v[i].ff;
+				   maxi=0;
+			   	
+			   }
+			   if(maxi==0) break;
+		 }
+		 if(maxi==0) cout<<ans<<endl;
+		 else
+		 cout<<"Impossible"<<endl;
+ }

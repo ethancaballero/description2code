@@ -1,0 +1,46 @@
+#include<stdio.h>
+ 
+      inline void read(int *input){
+       char ch = 0;
+       while(ch<33)
+       ch = getchar_unlocked();
+       *input = 0; 
+       while(ch>33){
+       *input = *input*10 + ch - '0';
+        ch = getchar_unlocked();
+	   }
+      }
+ 
+      int main(){
+		  
+      int N;
+      int M;
+      int max;
+      int curr;
+      bool end;
+      
+      read(&N);
+      for(int i = 0; i < N; i++){
+      read(&M);
+      end = false;
+      max = 1;
+      for(int j = 0; j < M; j++){
+      read(&curr);
+        if(curr > max){
+			 printf("No
+");
+			 end = true;
+			 break;
+		 }
+		 max -= curr;
+		 max *= 2;
+      }
+      if(!end){
+		  if(max == 0) printf("Yes
+");
+		  else printf("No
+");
+	  }
+}
+return 0;
+} 

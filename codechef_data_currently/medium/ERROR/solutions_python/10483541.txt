@@ -1,0 +1,9 @@
+for _ in range(input()):
+    a = raw_input()
+    
+    if '010' in a:
+        print "Good"
+    elif '101' in a:
+        print "Good"
+    else:
+        print "Bad"

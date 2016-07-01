@@ -1,0 +1,77 @@
+
+#include<iostream>
+#include<map>
+#include<algorithm>
+#include<utility>
+#include<vector>
+using namespace std;
+typedef unsigned long long  llu;
+
+int main()
+{	int test;
+	scanf("%i",&test);
+	for(int p = 0 ; p < test ; p++)
+	{	llu n;
+		cin>>n;
+		map <llu ,llu>mapin;
+		llu ba[n];
+		vector<pair<llu ,llu> > l(n);
+		llu b[n];
+		for(int i =0 ; i <n ; i++)
+		{	llu k;
+			scanf("%llu%llu",&ba[i],&k);
+			l[i]=make_pair(k,ba[i]);
+			mapin[l[i].second]=1;
+			
+		}
+		llu count=0;
+		sort(l.begin(),l.end());
+		llu  ans=0;
+		llu num=0;
+		for(int i = 0 ; i < n ; i++)
+		{
+		
+	//		cout<<s<<endl;
+			if(mapin[l[i].second]==1)
+			{		count++;
+					ans+=count*l[i].first;
+					mapin[l[i].second]+=1;
+		//			cout<<"s"<<s<<endl;
+			}
+			else if(mapin[l[i].second]!=1)
+			{	num+=l[i].first;
+			}
+			b[i]=count;
+			
+//			cout<<i<<b[i]<<endl;
+		}
+		long k = 1;
+//		cout<<l[2].second<<endl;
+	
+	/*	while(k!=n)
+		{	int ch= 0;
+			int pos= k; 
+			sum += (band+b[k])*l[k];
+			while(ch==0&&pos!=0)
+			{	if(l[pos]*b[pos-1]<l[pos-1]*b[pos])
+				{	sum += 	l[pos-1]*b[pos] - l[pos]*b[pos-1];
+					int temp = l[pos];
+					l[pos]  = l [pos-1];
+					l[pos-1]=temp;
+					int temp2 = b[pos];
+					b[pos]= b[pos-1];
+					b[pos-1]=temp2;
+					pos--;
+					cout<<sum<<" "<<pos<<endl;
+				}
+				else
+				{	ch=1;
+				}
+			}
+			band += b[k];
+			k++;
+		}*/
+
+		cout<<ans+num*count<<endl;
+	}
+} 

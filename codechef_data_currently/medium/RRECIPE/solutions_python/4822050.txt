@@ -1,0 +1,20 @@
+def main():
+    for i in xrange(int(raw_input())):
+        s = raw_input()
+        ctr = 1
+        st = 0
+        end = len(s)-1
+        while st <= end:
+            if s[st] == "?":
+                if s[end] == "?":
+                    ctr = ctr*26%10000009
+            elif not s[end] == "?":
+                if not s[end] == s[st]:
+                    ctr = 0
+                    break
+            st += 1
+            end -= 1
+        print ctr
+    return
+ 
+main() 

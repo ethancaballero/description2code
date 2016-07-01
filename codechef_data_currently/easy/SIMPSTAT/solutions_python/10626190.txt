@@ -1,0 +1,22 @@
+T=int(raw_input(""))
+
+def main():
+
+    L=[]
+    n,k=map(int,raw_input().split())
+
+    L=map(int,raw_input().split())
+    L.sort()
+
+    for i in range(k):
+        L.pop(0)
+        L.pop()
+
+    length=len(L)
+    s=1.0*sum(L)
+
+    average=s/length
+    print '%.6f' % average
+
+for i in range(T):
+    main()

@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+	int n;
+	cin>>n;
+	string s;
+	int i, j, k;
+	bool arr[n][n];
+	for(i=0;i<n;i++) {
+		for(j=0;j<n;j++) {
+			cin>>s;
+			if(s[0]=='Y')
+				arr[i][j] = true;
+			else
+				arr[i][j] = false;
+		}
+	}
+	int output = -1;
+	bool possible, found, equal;
+	possible = false;
+	found = false;
+	for(i=0;i<n;i++) {
+		if(arr[i][i]) {
+			possible = true;
+			for(j=0;j<n;j++) {
+				if(i==j)
+					continue;
+				equal = true;
+				for(k=0;k<n;k++) {
+					if(arr[i][k] != arr[j][k]) {
+						equal = false;
+						break;
+					}
+				}
+				if((arr[i][j] && !equal) || (!arr[i][j] && equal)) {
+					possible = false;
+					break;
+				}
+			}
+		}
+		if(possible) {
+			output = i;
+			break;
+		}
+	}
+	if(output != -1) {
+		for(i=0;i<n;i++) {
+			if(arr[output][i])
+				cout<<"YES
+";
+			else
+				cout<<"NO
+";
+		}
+	}
+	else {
+		for(i=0;i<n;i++)
+			cout<<"NO
+";
+	}
+	return 0;
+
+}

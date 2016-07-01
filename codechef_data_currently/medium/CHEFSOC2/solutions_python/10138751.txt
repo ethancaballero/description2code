@@ -1,0 +1,30 @@
+__author__ = 'user'
+t = input()
+from array import array
+mval = 1000000007
+for l in xrange(t):
+    N, M, s = map(int,raw_input().split())
+    A = map(int, raw_input().split())
+    res = array('i', [0]*N)
+    pres = array('i', [0]*N)
+    def f(i):
+        if not 0 <= i < N:
+            return 0
+        return pres[i]
+    for i in xrange(N):
+        pres[i]=0
+    pres[s-1]=1
+    #for i in res:
+    #    print i
+    for j in xrange(0,M):
+        for i in xrange(0,N):
+            res[i] = (f(i-A[j])+f(i+A[j]))%mval
+        pres = res
+        res = array('i', [0]*N)
+    tres = []
+    for i in xrange(0,N):
+        tres.append(pres[i])
+    #for i in res:
+    #   print i
+    print " ".join(map(str,map(lambda x:x%mval,tres)))
+

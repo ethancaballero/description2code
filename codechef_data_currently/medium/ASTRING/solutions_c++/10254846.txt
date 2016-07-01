@@ -1,0 +1,56 @@
+//FIND THE SMALLEST LEXICOGRAPHICAL SUBSEQUENCE OF LENGTH K FROM A STRING OF LENGTH N.
+
+#include<cstdio>
+#include<cstdlib>
+#include<vector>
+#include<map>
+#include<set>
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+#define MAX 100
+using namespace std;
+
+int main(){
+
+   int tst;
+   cin>>tst;
+
+   while(tst--){
+    string str;
+    int k;
+
+    cin>>str>>k;
+    int len=str.length(),i;
+
+    set< pair<char,int> > s;
+
+    for(i=0;i<=len-k;i++)
+    {
+    	s.insert(make_pair(str[i],i));
+    }
+
+    string ans="";
+
+    ans+=s.begin()->first;
+    
+    int prvIdx=s.begin()->second,from=0;
+   
+
+    for(i=len-k+1;i<len;i++){
+      while(from<=prvIdx)
+      	{s.erase( make_pair(str[from],from));
+        from++;
+        }
+        s.insert(make_pair(str[i],i));
+        prvIdx=s.begin()->second;
+        ans+=s.begin()->first;
+        
+
+    }
+    cout<<ans<<endl;
+   }
+
+
+	return 0;
+}

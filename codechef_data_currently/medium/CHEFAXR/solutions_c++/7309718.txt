@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define rf freopen("in.in", "r", stdin)
+#define wf freopen("out.out", "w", stdout)
+#define rep(i, s, n) for(int i=int(s); i<=int(n); ++i)
+using namespace std;
+const int mx = 1e6+10, m = 1e9+7;
+ 
+int n, t;
+int mat[71][71];
+ 
+int main()
+{
+	//rf;// wf;
+ 
+	scanf("%d", &t);
+	while(t--)
+	{
+		scanf("%d", &n);
+		rep(i, 1, n) rep(j, 1, n)
+			scanf("%d", &mat[i][j]),
+			mat[i][j] ^= (mat[i][j-1]^mat[i-1][j]^mat[i-1][j-1]);
+ 
+		int ans = 0;
+		rep(i, 1, n) rep(j, 1, n)
+		{
+			int tans = 0;
+			rep(k, 1, i) rep(l, 1, j)
+				tans = max(tans, mat[i][j]^mat[i][l-1]^mat[k-1][j]^mat[k-1][l-1]);
+			ans = max(tans, ans);
+		}
+		printf("%d
+", ans);
+	}
+ 
+	return 0;
+}

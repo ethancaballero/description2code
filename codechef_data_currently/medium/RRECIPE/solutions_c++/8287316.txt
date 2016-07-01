@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        string pal;
+        long long int sum=1;
+        int i,j;
+        cin>>pal;
+        j=pal.length();
+        //cout<<j;
+        for(i=0;i<j/2;i++)
+        {
+            if((pal[i]==pal[j-i-1])&&pal[i]!='?')
+            {
+                sum=sum*1%10000009;
+             //   cout<<" t";
+            }
+          else  if(pal[i]!=pal[j-i-1]&&pal[i]!='?'&&pal[j-i-1]!='?')
+            {
+                sum=sum*0%10000009;
+              //  cout<<"f";
+            }
+            else if(pal[i]=='?'&&pal[j-i-1]!='?')
+            {
+                sum=sum*1%10000009;
+              //  cout<<"k";
+            }
+            else if(pal[i]=='?'&&pal[j-i-1]=='?'&&(i!=j-i-1))
+            {
+                sum=sum*26%10000009;
+              //  cout<<"m
+";
+            }
+
+
+        }
+        if(j%2!=0)
+            {
+               // cout<<"x";
+                if(pal[(j-1)/2]=='?')
+                {
+                    sum=sum*26%10000009;
+                }
+                else
+                {
+                    sum=sum*1%10000009;
+                }
+            }
+        cout<<sum<<"
+";
+
+
+    }
+    return 0;
+}

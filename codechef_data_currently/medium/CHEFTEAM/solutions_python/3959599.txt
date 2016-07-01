@@ -1,0 +1,19 @@
+import sys
+T = input()
+for i in range(T):
+     n,r = map(int,sys.stdin.readline().split())
+     if n==r:
+        print "1"
+     if n<r:
+        print "0"
+     if n>r:
+        N=1
+        D=1
+        if (r>(n/2)):
+            r = n-r
+        for j in range(r):
+            I = j+1
+            N = N*(n-r+I)
+            D = D*I
+        print N/D
+sys.exit(0)

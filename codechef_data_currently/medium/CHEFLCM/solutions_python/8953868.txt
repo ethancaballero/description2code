@@ -1,0 +1,21 @@
+import sys
+import math
+
+f = sys.stdin
+c = int(f.readline().strip())
+
+for i in xrange(c):
+    n = int(f.readline().strip())
+    divisores = []
+    j = 1
+    a = math.sqrt(n)
+    while j <= a:
+        if n%j == 0:
+            divisores.append(j)
+            b = n/j
+            if not b in divisores:
+                divisores.append(b)
+        j += 1
+    print sum(divisores)
+    
+            

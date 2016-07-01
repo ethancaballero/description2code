@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int main()
+{
+	
+	vector< vector<int> >store ;
+	store.resize(100005);
+	int num,q;
+	int low , high , div_quer , k;
+	cin>>num>>q;
+	int *arr = new int[100005];
+	for( int i=1;i <= num ; i++)
+		{
+			scanf("%d" , &arr[i]);
+			for (k = 1 ; k*k < arr[i] ; k++)
+			{
+				if(arr[i] % k == 0)
+					{
+						store[k].push_back(i);
+						store[arr[i]/k].push_back(i);
+					}
+			}
+			if(k*k == arr[i])
+				store[k].push_back(i);
+		}
+	while(q--)
+	{
+		scanf("%d" , &low);
+		scanf("%d" , &high);
+		scanf("%d" , &div_quer);
+		printf("%d
+" , upper_bound(store[div_quer].begin() , store[div_quer].end() , high) - lower_bound(store[div_quer].begin() , store[div_quer].end() , low) );
+
+	} 
+
+}

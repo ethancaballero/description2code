@@ -1,0 +1,27 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int p,i,j,x,c=0;
+		cin>>p;
+		int d;
+		for(i=11;i>=0;i--)
+		{
+			x=pow(2,i);
+		 d=p/x;
+		 if(d>0)
+		 {
+		 	c=c+d;
+		 	p=p%x;
+		 }
+		 
+		}
+	cout<<c<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n,c=0,d12,d23,d31;
+    cin>>n;
+    int x1,x2,x3,y1,y2,y3;
+     for(int i=0;i<n;i++)
+     {
+         cin>>x1 >>y1>> x2>> y2>> x3>> y3;
+        d12=(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
+		d23=(x3-x2)*(x3-x2)+(y3-y2)*(y3-y2);
+		d31=(x1-x3)*(x1-x3)+(y1-y3)*(y1-y3);
+		if((d12==d23+d31) || (d23==d12+d31) || (d31==d12+d23))
+		c++;
+     }
+     cout<<c;
+}

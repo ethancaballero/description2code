@@ -1,0 +1,22 @@
+# include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+	int t,i,j;
+	scanf("%d",&t);
+	while (t--) {
+		string a,b;
+		cin >> a >> b;
+		int h[256]={0},w[256]={0};
+		for(i=0;i<a.length();i++)
+			h[a[i]]++;
+		for(i=0;i<b.length();i++)
+			w[b[i]]++;
+		j=0;
+		for (i=0 ; i < 256 ; i++)
+			j += min(h[i],w[i]);
+		cout << j << endl;
+	}
+	return 0;
+}

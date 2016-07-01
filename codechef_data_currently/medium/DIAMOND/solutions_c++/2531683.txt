@@ -1,0 +1,94 @@
+#include <iostream>
+#include <fstream>
+#include <string.h>
+#include <math.h>
+#include <cfloat>
+#include <limits>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <map>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<complex>
+#define _USE_MATH_DEFINES//M_PI
+
+// Input macros
+#define s(n)                        scanf("%d",&n)
+#define sc(n)                       scanf("%c",&n)
+#define sl(n)                       scanf("%I64d",&n)
+#define sf(n)                       scanf("%lf",&n)
+#define ss(n)                       scanf("%s",n)
+#define p(n)                       printf("%d
+",n)
+#define pc(n)                       printf("%c
+",n)
+#define ps(n)                       printf("%s
+",n)
+#define pf(n)                       printf("%lf
+",n)
+#define pl(n)                      printf("%I64d
+",n)
+
+// Useful constants
+#define INF                         (int)1e9
+#define EPS                         1e-9
+
+// Useful hardware instructions
+#define bitcount                    __builtin_popcount
+#define gcd                         __gcd
+
+// Useful container manipulation / traversal macros
+#define forall(i,a,b)               for(i=a;i<b;i++)
+#define foralle(i,a,b)               for(i=a;i<=b;i++)
+#define foreach(v, c)               for( typeof( (c).begin()) v = (c).begin();  v != (c).end(); ++v)
+#define all(a)                      a.begin(), a.end()
+#define in(a,b)                     ( (b).find(a) != (b).end())
+#define pb                          push_back
+#define fill(a,v)                    memset(a, v, sizeof a)
+#define sz(a)                       ((int)(a.size()))
+#define MOD                           1000000007
+
+// Some common useful functions
+#define maX(a,b)                     ( (a) > (b) ? (a) : (b))
+#define miN(a,b)                     ( (a) < (b) ? (a) : (b))
+#define checkbit(n,b)                ( (n >> b) & 1)
+#define DREP(a)                      sort(all(a)); a.erase(unique(all(a)),a.end())
+#define INDEX(arr,ind)               (lower_bound(all(arr),ind)-arr.begin())
+typedef long long ll;
+//#include <conio.h>
+
+using namespace std;
+double c[2001][2001],prob;
+
+int main(int argc, char *argv[])
+{
+    
+    //memset(c,0,sizeof(c[0][0])*2001*2001);
+    int i,j,t,n,v[2001];
+    c[1][1]=1;
+    for(i=2;i<=2000;i++)
+     {
+                        for(j=1;j<=i;j++)
+                         {
+                                         c[i][j]=1-(c[i-1][j]+c[i-1][j-1])/2;
+                         }
+     }
+    s(t);
+    while(t--)
+     {
+              s(n);
+              prob=0;
+              for(i=1;i<=n;i++)
+               {
+                               s(v[i]);
+                               prob+=c[n][i]*v[i];
+               }
+              pf(prob);
+     }
+    //getch();
+    return 0;
+}
+

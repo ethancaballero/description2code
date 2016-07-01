@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+char found[98765433]={0};
+int Q[1000000];
+int power(int a,int b)
+{
+  int i,j;
+  for(i=0,j=1;i<b;j*=a);
+  return j;
+}
+int main()
+{
+  int prime_num[18]={0};
+  int H,T,val,newVal,i,j,k,temp,test,a[3][3];
+  prime_num[2]=prime_num[3]=prime_num[5]=prime_num[7]=prime_num[11]=prime_num[13]=prime_num[17]=1;
+  found[12345678]=1;
+  Q[0]=123456789;
+  H=0;
+  T=1;
+  while(H<T){
+      val=Q[H];
+      for(i=2;i>=0;i--)
+	for(j=2;j>=0;j--){
+	    a[i][j]=val%10;val/=10;
+	  }
+   val=Q[H];
+   for(i=0;i<3;i++)
+	for(j=0;j<3;j++)
+	  {
+	    if(i+1<3 && prime_num[a[i][j]+a[i+1][j]]){
+		for(k=0,temp=1;k<5-i*3-j;k++,temp*=10);
+		newVal=val+(a[i+1][j]-a[i][j])*temp*1000+(a[i][j]-a[i+1][j])*temp;
+		//cout<<newVal<<"	";
+		if(!found[newVal/10]){
+		    Q[T++]=newVal;
+		    found[newVal/10]=found[val/10]+1;
+		  }
+        }
+	    if(j+1<3 && prime_num[a[i][j]+a[i][j+1]]){
+		for(k=0,temp=1;k<7-i*3-j;k++,temp*=10);
+		newVal=val+(a[i][j+1]-a[i][j])*temp*10+(a[i][j]-a[i][j+1])*temp;
+        if(!found[newVal/10]){
+		    Q[T++]=newVal;
+		    found[newVal/10]=found[val/10]+1;
+		  }
+        }
+	  }
+      H++;
+    }
+  scanf("%d",&test);
+  while(test--)
+    {
+      k=0;
+      for(i=0;i<3;i++)
+	for(j=0;j<3;j++)
+	  {
+	    scanf("%d",&a[i][j]);
+	    k=k*10+a[i][j];
+	  }
+      k/=10;
+      if(found[k])
+	     printf("%d
+",found[k]-1);
+      else
+         printf("-1
+");
+    }
+  return 0;
+}

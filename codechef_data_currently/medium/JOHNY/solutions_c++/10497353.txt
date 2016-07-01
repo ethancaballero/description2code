@@ -1,0 +1,30 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+//Problem code: JOHNY
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	int k,n;
+	while(t>=1)
+	{
+	    cin>>n;
+	    long long int a[n];
+	    for(int i=0;i<n;i++)
+	    cin>>a[i];
+	    cin>>k;
+	    int temp=a[k-1];
+	    sort(a,a+n);
+	    for(int i=1;i<n+1;i++)
+	    {
+	        if(temp==a[i-1])
+	        {
+	            cout<<i<<endl;
+	            
+	        }
+	    }
+	    t--;
+	}
+	return 0;
+}

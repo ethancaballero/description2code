@@ -1,0 +1,9 @@
+for t in range(int(raw_input())):
+    n,k=map(int,raw_input().split())
+    N=map(int,raw_input().split())
+    M=map(int,raw_input().split())
+    a=[]
+    for i in range(n):
+        b=k/N[i]
+        a.append(b*M[i])
+    print max(a)

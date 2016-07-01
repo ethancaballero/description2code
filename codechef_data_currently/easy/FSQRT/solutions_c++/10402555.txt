@@ -1,0 +1,27 @@
+#include<iostream>
+//#include<conio.h>
+#include<cmath>
+using namespace std;
+int main()
+{
+//clrscr();
+int T,N,p[5],x;
+long num=0;
+cin>>T;
+int *result=new int[T];
+for(int i=0;i<T;i++)
+{
+  cin>>N;
+  result[i]=floor(sqrt(N));
+}
+for(int l=0;l<T;l++)
+ {
+  cout<<"
+"<<result[l];
+
+  }
+
+
+//getch();
+return 0;
+}

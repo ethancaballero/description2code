@@ -1,0 +1,12 @@
+t=int(raw_input())
+while t>0:
+    
+    n,m=map(int,raw_input().split())
+    a=float((n*m)-(n*2))
+    if n==1:
+        prob=m
+    else:
+        #prob=float(1+n+(a/3))
+        prob= n+m-1
+    print "{0:0.5f}".format(prob)
+    t-=1

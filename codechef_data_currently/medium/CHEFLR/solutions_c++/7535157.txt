@@ -1,0 +1,31 @@
+#include<iostream>
+#include<string>
+using namespace std;
+const int mod = 1000000007;
+int main()
+{
+    int t;
+    cin>>t;
+    while (t--)
+    {
+        string s;
+        cin>>s;
+        int size = s.size();
+        int ans = 1;
+        for(int i = 0; i < size; ++i)
+        {
+            if (i%2 == 0)
+            {
+                if(s[i] == 'r') ans = ans*2 + 2;
+                else ans = ans*2;
+            }
+            else
+            {
+                if(s[i] == 'r') ans = ans*2 + 1;
+                else ans = ans*2 - 1;
+            }
+            ans = ans%mod;
+        }
+        cout << ans << endl;
+    }
+}

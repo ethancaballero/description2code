@@ -1,0 +1,10 @@
+import sys, bisect
+
+cases = int(raw_input())
+for _dummy in range(cases):
+	n = int(raw_input())
+	songlist = map(int, raw_input().split())
+	jpos = int(raw_input())
+	j = songlist[jpos-1]
+	songlist.sort()
+	print bisect.bisect_left(songlist, j) + 1

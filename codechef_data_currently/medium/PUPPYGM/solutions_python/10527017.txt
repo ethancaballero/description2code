@@ -1,0 +1,6 @@
+T = int(raw_input())
+while T:
+    A,B = map(int,raw_input().split())
+    if A % 2 and B % 2: print 'Vanka'
+    else: print 'Tuzik'
+    T -= 1

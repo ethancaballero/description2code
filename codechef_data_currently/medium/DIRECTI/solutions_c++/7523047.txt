@@ -1,0 +1,43 @@
+#include<cstdio>
+#include<cstring>
+using namespace std;
+int main()
+{
+	int t;
+	for(scanf("%d", &t); t--; )
+	{
+		int n;
+		int order[41];
+		char road[41][101];
+		scanf("%d", &n);
+		for(int i=0; i<n; i++){
+			char ord[101];
+			scanf("%s", ord);
+			if(strcmp(ord, "Begin")==0)
+				order[i]=0;
+			else if(strcmp(ord, "Right")==0)
+				order[i]=1;
+			else
+				order[i]=2;
+			scanf(" on %[^
+]s", road[i]);
+		}
+		int i=n-1;
+		int p=0;
+		while(i>=0){
+			if(p==0)
+				printf("Begin on ");
+			else if(p==1)
+				printf("Left on ");
+			else if(p==2)
+				printf("Right on ");
+			printf("%s
+", road[i]);
+			p=order[i];
+			i--;
+		}
+		printf("
+");
+	}
+	return 0;
+}

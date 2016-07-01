@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+const int N = 1e4 + 5;
+
+int type,q,u,v,x;
+int judge[N];
+int uf[N];
+int mx[N];
+void pre(int n){
+
+for(int i = 1; i<=n; ++i){
+    uf[i] = i;
+}
+
+}
+
+
+int FIND(int u){
+    if(uf[u]!=uf[uf[u]]){
+        uf[u] = FIND(uf[u]);
+    }
+    return uf[u];
+}
+
+
+
+
+
+bool UNION(int u, int v){
+    int xx = FIND(u);
+    int yy = FIND(v);
+    if(xx==yy) return false;
+    if(judge[xx]==judge[yy]) return true;
+    if(judge[xx] > judge[yy]){
+    uf[yy] = xx;
+    }
+    else{
+        uf[xx] = yy;
+    }
+    return true;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t,n;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d",&n);
+        pre(n);
+        for(int i = 1; i<=n; ++i){
+            scanf("%d",judge + i);
+            mx[i] = judge[i];
+        }
+        scanf("%d",&q);
+        while(q--){
+            scanf("%d",&type);
+            if(!type){
+                scanf("%d %d",&u,&v);
+                bool diffpath = UNION(u,v);
+                if(!diffpath){
+                    printf("Invalid query!
+");
+                }
+            }
+            else{
+                scanf("%d",&x);
+                printf("%d
+",FIND(x));
+            }
+        }
+
+    }
+    return 0;
+}

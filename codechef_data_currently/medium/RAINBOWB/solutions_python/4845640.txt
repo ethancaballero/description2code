@@ -1,0 +1,35 @@
+import math
+def f(k):
+    i=2
+    res=1
+    while i<=k:
+        res=res*i
+        #res=res%1000000007
+        i+=1   
+    return res
+def nck(n,k,mod):
+    i=1
+    res=1
+    while i<=k:
+        res=(res*(n-k+i)/i)
+        i+=1
+    return res%mod
+def nCr(n,r):
+    #print f(n),f(r),f(n-r)
+    l=f(r)*f(n-r)
+    return f(n)/l
+#print nCr(1000,6)%1000000007,nck(1000,6,1000000007)
+def start():
+ n=input()
+ if(n%2==0):
+    space=n/2-7
+    add=0
+    if(space>=0):
+      add=nck(space+7-1,7-1,1000000007)
+    #print add  
+    print (add%1000000007)
+ else:
+    space=n/2-6
+    add=nck(space+7-1,7-1,1000000007)
+    print (add%1000000007)
+start()

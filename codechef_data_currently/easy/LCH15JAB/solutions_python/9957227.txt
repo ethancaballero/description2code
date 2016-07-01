@@ -1,0 +1,21 @@
+r=int(raw_input())
+L=[]
+for i in range(r):
+    x=raw_input()
+    L.append(x)
+K=['NO','YES']
+for i in range(r):
+    l=[]
+    for j in range(len(L[i])):
+        l.append(L[i][j])
+    for j in range(len(l)):
+        t=0
+        c=1
+        for k in range(len(l)):
+            if k!=j:
+                if l[k]==l[j]:
+                    c+=1
+        if 2*c==len(l):
+            t=1
+            break
+    print K[t]

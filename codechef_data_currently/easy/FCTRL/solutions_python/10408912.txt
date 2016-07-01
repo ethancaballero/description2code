@@ -1,0 +1,10 @@
+def trailz(x):
+    if(x == 0):
+        return 0
+    return (x/5)+trailz(x/5)
+T = input()
+i = 0
+while(i < T):
+    N = input()
+    print trailz(N)
+    i += 1

@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	int s[3];
+	int a,c;
+	float b;
+	
+	cin>>t;
+	while(t--)
+	{
+		s[0]=0;s[1]=0;s[2]=0;
+		cin>>a>>b>>c;
+		if(a>50)s[0]=1;
+		if(b<0.7)s[1]=2;
+		if(c>5600)s[2]=4;
+		int t=s[0]+s[1]+s[2];
+		switch(t)
+		{
+			case 1:cout<<"6"<<endl;break;
+			case 2:cout<<"6"<<endl;break;
+			case 4:cout<<"6"<<endl;break;
+			case 0:cout<<"5"<<endl;break;
+			case 3:cout<<"9"<<endl;break;
+			case 6:cout<<"8"<<endl;break;
+			case 5:cout<<"7"<<endl;break;
+			case 7:cout<<"10"<<endl;break;
+		}
+		
+	}
+}

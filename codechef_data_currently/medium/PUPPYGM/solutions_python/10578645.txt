@@ -1,0 +1,13 @@
+# your code goes here
+def read():
+	return map(int,raw_input().split())
+
+t = input()
+
+while t>0:
+	a,b=read()
+	if a%2==0 or b%2==0:
+		print "Tuzik"
+	else:
+		print "Vanka"
+	t -=1

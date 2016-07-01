@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<deque>
+
+using namespace std;
+
+int main()
+{
+    long i,n,w,count=0;
+    long a[400003];
+
+    scanf("%ld %ld",&n, &w);
+    for(i=0;i<n;i++)
+    scanf("%ld",&a[i]);
+
+    deque<long> m1,m2;
+
+    for(i=0;i<w;i++)
+    {
+        while(!m1.empty() && a[i]>=a[m1.back()])  //index is saved
+            m1.pop_back();
+
+        m1.push_back(i);
+
+        while(!m2.empty() && a[i]<= a[m2.back()])
+            m2.pop_back();
+
+        m2.push_back(i);
+    }
+    for(i;i<=n;i++)
+    {
+        if((a[m1.front()]-a[m2.front()]+1 )==w)
+        count++;
+
+        if(i!=n)
+        {
+            if(m1.front()== i-w)
+            m1.pop_front();
+
+            if(m2.front()== i-w)
+            m2.pop_front();
+
+            while(!m1.empty() && a[i]>=a[m1.back()])
+                m1.pop_back();
+            m1.push_back(i);
+
+            while(!m2.empty() && a[i]<= a[m2.back()])
+                m2.pop_back();
+            m2.push_back(i);
+        }
+
+    }
+    printf("%ld
+",count);
+
+    return 0;
+
+}

@@ -1,0 +1,83 @@
+#include<iostream>
+#include<map>
+#include<queue>
+#include<stdio.h>
+using namespace std;
+
+map <int,int> M;
+queue <int> Q;
+
+int matrix[]={1,2,3,4,5,6,7,8,9};
+int prime[]={0,0,1,1,0,1,0,1,0,0,0,1,0,1,0,0,0,1};
+int first[]={0,1,3,4,6,7,0,3,1,4,2,5};
+int second[]={1,2,4,5,7,8,3,6,4,7,5,8};
+
+void addmatrix(int moves)
+{
+    int n=0;
+    for(int i=0;i<9;i++)
+        n=n*10+matrix[i];
+    if(M.find(n)==M.end())
+    {
+        M[n]=moves;
+        for(int i=0;i<9;i++)
+        {
+            Q.push(matrix[i]);
+        }
+        Q.push(moves);
+    }
+}
+
+void findallmatrices()
+{
+    int m,t,n=0;
+    addmatrix(0);
+    while(!Q.empty())
+    {
+        for(int i=0;i<9;i++)
+            {matrix[i]=Q.front();Q.pop();}
+        m=Q.front(); Q.pop();
+        for(int i=0;i<12;i++)
+        {
+            if(prime[matrix[first[i]]+matrix[second[i]]])
+            {
+                t=matrix[first[i]];
+                matrix[first[i]]=matrix[second[i]];
+                matrix[second[i]]=t;
+                addmatrix(m+1);
+                t=matrix[first[i]];
+                matrix[first[i]]=matrix[second[i]];
+                matrix[second[i]]=t;
+
+            }
+        }
+
+    }
+
+
+}
+int main()
+{
+    findallmatrices();
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        long long int n,x;
+        n=0;
+        for(int i=0;i<9;i++)
+        {
+            scanf("%d",&x);
+            n=n*10+x;
+        }
+        if(M.find(n)==M.end())
+            printf("-1
+");
+        else
+            printf("%d
+",M[n]);
+    }
+
+
+    return 0;
+}

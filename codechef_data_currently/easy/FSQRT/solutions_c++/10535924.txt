@@ -1,0 +1,16 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int T;
+	
+	cin>>T;
+	while(T--){
+	    long int N;
+	    cin>>N;
+	    cout<<(int)sqrt(N)<<endl;
+	}
+	return 0;
+}

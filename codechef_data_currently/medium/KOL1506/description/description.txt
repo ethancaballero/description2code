@@ -1,0 +1,50 @@
+ 
+Samosa Bhai got tired of the difficult tasks given by CodeChef along with meagre salary being paid to him. So he moves to Aloo uncle's village and opens a courier company there. In the village, everyone knows Aloo uncle and Kachori Aunty, so everyone sends their gifts using Samosa Bhai's courier company only.
+
+There are N houses in a row in the village. On New Year's Eve, each house sends a gift to all the other houses.
+The distance between two houses situated at positions x and y in the row is |x - y|. Samosa Bhai's courier company charges dk rupees for each delivery, where d is the distance between the 2 houses. 
+
+Everyone chose Samosa Bhai's company because of Aloo uncle and Kachori aunty. So he decides to give them the amount of money earned by him modulo 1000000007 (109 + 7). You need to compute this amount.
+
+Input
+
+The first line of input contains an integer T denoting the number of test cases. The description of T test cases follows.
+The first line of each test case contains 2 integers — N and k — denoting the number of houses and the exponent k, resepctively. The second line contains N space-separated integers A1, A2, … , AN denoting the positions of the houses. 
+
+Output
+
+For each test case, output a single line with the amount given to Aloo uncle and Kachori aunty by Samosa Bhai.
+
+Constraints
+
+1 \u2264 T \u2264 104
+2 \u2264 N \u2264 105
+0 \u2264 k \u2264 100
+0 \u2264 Ai \u2264 1000000006
+The sum of N over all test cases will be at most 100000
+2 houses can be at the same position
+
+Example
+Input:
+5
+2 2
+7 2
+2 3
+7 2
+3 2
+1 3 2
+10 2
+1 2 3 4 5 6 7 8 9 10
+10 10
+1 2 3 4 5 6 7 8 9 10
+
+Output:
+50
+250
+12
+1650
+558199159
+
+Explanation
+Example case 1. House 1 sends a gift to House 2 with cost (|2 - 7|)2 and house 2 sends a gift to house 1 with cost (|7-2|)2, for a total cost of 50
+Example case 3. The cost for gift from house with index 1 to house with index 2 is 22 = 4, from houses 1 to 3 is 1, from houses 2 to 3 is 1. Taking into account the gifts sent the other way (from 2 to 1, 3 to 1 and 3 to 2), the total cost is 4 + 1 + 1 + 4 + 1 + 1 = 12

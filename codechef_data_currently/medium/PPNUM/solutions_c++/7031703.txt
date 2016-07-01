@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<math.h>
+ 
+main()
+{
+	int c, a,b,p, e[]={0,9,99,999,9999,99999,999999,9999999,99999999,999999999},s[]={0,1,10,100,1000,10000,100000,1000000,10000000,100000000,1000000000};
+	scanf("%d", &c);
+	long long l,r, sum;
+	
+	while(c--)
+	{
+		sum =0;
+		scanf("%lld %lld",&l,&r);
+		a= log10(l)+1;  b= log10(r)+1;
+		
+		while(a!=b)
+		{
+			sum += a*(e[a]-l+1ll)*(l+e[a++])/2ll;
+			l=s[a];
+			
+		    sum %=1000000007ll;
+		}
+		
+		sum += a*(r-l+1ll)*(l+r)/2ll;
+		sum%=1000000007ll;
+		
+		printf("%lu
+",sum);
+	}
+	
+} 

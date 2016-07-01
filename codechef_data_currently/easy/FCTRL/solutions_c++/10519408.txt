@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+long long int m,n;	cin>>m;
+	while(m--){
+	    cin>>n;
+	    long long int count=0;
+	    while(n!=0){
+	        count+=(n=n/5);
+	    }
+	    cout<<count<<endl;
+	}
+	return 0;
+}

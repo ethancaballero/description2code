@@ -1,0 +1,53 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#define gc getchar
+
+using namespace std;
+
+void scanint(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+
+const int MAX=5000001;
+bool a1[MAX];
+bool a2[MAX];
+
+int main(){
+int i,j;
+for(i=2;i*i<MAX;i++){
+    if(!a1[i]){
+        for(int j=i*i;j<MAX;j+=i)
+				a1[j]=true;
+    }
+}
+for(i=5;i<MAX;i+=4)
+	{
+		if(!a1[i])
+		{
+			for(j=i;j<MAX;j+=i)
+				a2[j]=true;
+		}
+	}
+int t;
+scanint(t);
+while(t--){
+    int n;
+    scanint(n);
+    if(a2[n]) printf("%s
+","YES");
+    else printf("%s
+","NO");
+
+}
+
+return 0;
+
+}

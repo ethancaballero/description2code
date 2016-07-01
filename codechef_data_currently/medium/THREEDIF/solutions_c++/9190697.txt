@@ -1,0 +1,17 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main(){
+	long t;
+	cin>>t;
+	for(long i=0;i<t;i++)
+	{
+		long long int a[3];
+		cin>>a[0]>>a[1]>>a[2];
+		sort(a,a+3);
+		long long int m=1000000007;
+		long long int x=((((a[0]%m)*((a[1]-1)%m))%m)*((a[2]-2)%m))%m;
+		cout<<x<<endl;
+	}
+	return 0;
+}

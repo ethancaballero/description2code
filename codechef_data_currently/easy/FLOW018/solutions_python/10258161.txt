@@ -1,0 +1,5 @@
+t=input()
+for d in range(t):
+	n=input()
+	import math
+	print math.factorial(n)

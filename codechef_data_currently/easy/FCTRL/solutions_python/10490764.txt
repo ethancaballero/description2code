@@ -1,0 +1,6 @@
+for _ in xrange(input()):
+	n, d, sol = input(), 5,0
+	while(n>=d):
+		sol += n/d
+		d *= 5
+	print sol

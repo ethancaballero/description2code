@@ -1,0 +1,223 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#define inf 1000000000
+using namespace std;
+struct edge
+{
+    int dest;
+    int wt;
+};
+struct node
+{
+    vector<struct edge>v;
+};
+struct info
+{
+    int ver;
+    int key;
+};
+bool issafe(int i,int j,int m,int n)
+{
+    if(i>=0&&i<=m-1&&j>=0&&j<=n-1)
+    return true;
+    else
+    return false;
+}
+void minheapify(struct info heap[],int position[],int i,int n)
+{
+    int x,y,z,min,minindex;
+	x=2*i+1;
+	y=2*i+2;
+	if(x>=n)
+	return ;
+	else if(y>=n)
+	{
+		if(heap[i].key>heap[x].key)
+		{
+			z=position[heap[i].ver];
+			position[heap[i].ver]=position[heap[x].ver];
+			position[heap[x].ver]=z;
+			z=heap[i].key;
+			heap[i].key=heap[x].key;
+			heap[x].key=z;
+			z=heap[i].ver;
+			heap[i].ver=heap[x].ver;
+			heap[x].ver=z;
+			return ;
+		}
+	}
+	else
+	{
+		min=heap[i].key;
+		minindex=i;
+		if(heap[i].key>heap[x].key)
+		{
+			min=heap[x].key;
+			minindex=x;
+		}
+		if(min>heap[y].key)
+		{
+			min=heap[y].key;
+			minindex=y;
+		}
+		if(minindex!=i)
+		{
+			z=position[heap[i].ver];
+			position[heap[i].ver]=position[heap[minindex].ver];
+			position[heap[minindex].ver]=z;
+			z=heap[i].key;
+			heap[i].key=heap[minindex].key;
+			heap[minindex].key=z;
+			z=heap[i].ver;
+			heap[i].ver=heap[minindex].ver;
+			heap[minindex].ver=z;
+			minheapify(heap,position,minindex,n);
+		}
+		return ;
+	}
+}
+int root(struct info heap[],int position[],int size)
+{
+    int i,j,k,l;
+    k=heap[0].ver;
+    l=heap[0].key;
+    i=heap[size-1].ver;
+    j=heap[size-1].key;
+    position[i]=0;
+    position[k]=size-1;
+    heap[0].ver=i;
+    heap[0].key=j;
+    heap[size-1].ver=k;
+    heap[size-1].key=l;
+    minheapify(heap,position,0,size-1);
+    return k;
+}
+void decreasekey(struct info heap[],int position[],int i,int value)
+{
+    int x,y;
+	heap[i].key=value;
+	if(i==0)
+	return ;
+	else
+	{
+		if(i%2==0)
+		x=i/2-1;
+		else
+		x=i/2;
+		if(heap[x].key>heap[i].key)
+		{
+			y=position[heap[x].ver];
+			position[heap[x].ver]=position[heap[i].ver];
+			position[heap[i].ver]=y;
+			y=heap[x].ver;
+			heap[x].ver=heap[i].ver;
+			heap[i].ver=y;
+			y=heap[i].key;
+			heap[i].key=heap[x].key;
+			decreasekey(heap,position,x,y);
+		}
+		return ;
+	}
+}
+void dijkstras(bool visited[],struct node arr[],struct info heap[],int position[],int size)
+{
+    int i,j,n,k,value;
+    n=size;
+    vector<struct edge>::iterator p;
+    for(i=0;i<=n-1;i++)
+    {
+        j=root(heap,position,size);
+        visited[j]=true;
+        size--;
+        for(p=arr[j].v.begin();p!=arr[j].v.end();p++)
+        {
+            if(!visited[p->dest])
+            {
+                if(heap[position[p->dest]].key>heap[position[j]].key+p->wt)
+                {
+                    value=heap[position[j]].key+p->wt;
+    				decreasekey(heap,position,position[p->dest],value);
+                }
+            }
+        }
+    }
+    return ;
+}
+int main(void)
+{
+    int m,n,i,j,k;
+    int arr1[75][75];
+    scanf("%d%d",&m,&n);
+    for(i=0;i<=m-1;i++)
+    {
+        for(j=0;j<=n-1;j++)
+        scanf("%d",&arr1[i][j]);
+    }
+    struct node arr[5000];
+    for(i=0;i<=m-1;i++)
+    {
+        for(j=0;j<=n-1;j++)
+        {
+            if(issafe(i+1,j,m,n))
+            {
+                struct edge *p=new struct edge;
+                p->dest=(n*(i+1)+j);
+                p->wt=arr1[i+1][j];
+                arr[(n*i)+j].v.push_back(*p);
+            }
+            if(issafe(i-1,j,m,n))
+            {
+                struct edge *p=new struct edge;
+                p->dest=(n*(i-1)+j);
+                p->wt=arr1[i-1][j];
+                arr[(n*i)+j].v.push_back(*p);
+            }
+            if(issafe(i,j+1,m,n))
+            {
+                struct edge *p=new struct edge;
+                p->dest=(n*i+j+1);
+                p->wt=arr1[i][j+1];
+                arr[(n*i)+j].v.push_back(*p);
+            }
+            if(issafe(i,j-1,m,n))
+            {
+                struct edge *p=new struct edge;
+                p->dest=(n*i+j-1);
+                p->wt=arr1[i][j-1];
+                arr[(n*i)+j].v.push_back(*p);
+            }
+        }
+    }
+    struct info heap[5000];
+    for(i=0;i<=m*n-1;i++)
+    {
+        heap[i].ver=i;
+        heap[i].key=inf;
+    }
+    heap[0].key=0;
+    int position[5000];
+    for(i=0;i<=m*n-1;i++)
+    position[i]=i;
+    bool visited[5000];
+    for(i=0;i<=m*n-1;i++)
+    visited[i]=false;
+    dijkstras(visited,arr,heap,position,m*n);
+    int a,b,t;
+    scanf("%d%d%d",&a,&b,&t);
+    if(heap[position[n*(a-1)+b-1]].key+arr1[0][0]>t)
+    {
+        printf("NO
+");
+        //printf("%d
+",heap[position[n*(a-1)+(b-1)]].key);
+    }
+    else
+    {
+        printf("YES
+");
+        printf("%d
+",t-heap[position[n*(a-1)+(b-1)]].key-arr1[0][0]);
+    }
+    return 0;
+}

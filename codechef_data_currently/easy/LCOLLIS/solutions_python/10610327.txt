@@ -1,0 +1,21 @@
+import numpy as np
+T=int(raw_input())
+for i in xrange(T,0,-1):
+	N,M=[int(x) for x in raw_input().split()]
+	A=np.zeros((N,M))
+	ans=np.zeros(M)
+	for nl in xrange(0,N,1):
+		temp=raw_input()
+		cnt=0
+		for tc in list(temp):
+			A[nl][cnt]=int(tc)
+			cnt+=1
+	sumcnt=0		
+	for ml in xrange(0,M,1):
+	    for nlo in xrange(0,N-1,1):
+	        for nll in xrange(nlo+1,N,1):
+	           sumcnt+= A[nlo,ml] and A[nll,ml]
+	    ans[ml]=sumcnt
+	    sumcnt=0
+	final=ans.sum(dtype=np.int32)
+	print final

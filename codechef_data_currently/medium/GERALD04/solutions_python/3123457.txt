@@ -1,0 +1,14 @@
+t=input()
+while t!=0:
+    t=t-1
+    gf=map(int,raw_input().split(":"))
+    chef=map(int,raw_input().split(":"))
+    dist=input()
+    t1=(gf[0]-chef[0])*60+gf[1]-chef[1]+dist
+    t2=t1-dist
+    t2=float(t2)
+    dist=float(dist)
+    if 2*dist>t2:
+        t2=t2+(2*dist-t2)/2
+
+    print float(t1),t2

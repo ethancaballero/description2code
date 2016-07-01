@@ -1,0 +1,17 @@
+n=int(raw_input())
+
+for a in range(n):
+    t=float(raw_input())
+    a=10000.00000000
+    if t>0.50000 and t<1.00000:
+        b=(1.00-(2.0*t))*(a*(t-1.00))
+        print a+b
+    elif t==0.50000:
+        print a   
+    
+    elif t<0.50000:
+        b=(1.00-(2.0*t))*(a*t)
+        print a+b
+    
+    elif t==1.000:
+        print a        

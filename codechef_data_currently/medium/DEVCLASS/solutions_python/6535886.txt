@@ -1,0 +1,96 @@
+import sys
+import math
+
+idx=0
+
+def solve(seq,rcost):
+    cd={"B":0,"G":0}
+    for i in seq:
+        if i=="B":
+            cd["B"]+=1
+        else:
+            cd["G"]+=1
+            
+    #for odd sequence
+    if (idx&1)==1:
+        if cd['B']>cd['G']:
+            if not (cd['B']-1)==cd['G']:
+                return -1
+            mfreq='B'
+            nfreq='G'
+        else:
+            if not (cd['G']-1)==cd['B']:
+                return -1
+            mfreq='G'
+            nfreq='B'
+
+        first=[]
+        second=[]
+        errorsf=0
+        errorss=0
+        
+        for i in range(idx):
+            if (i&1)==0:
+                if not (seq[i]==mfreq):
+                    first.append(i)
+                    errorsf+=1
+            else:
+                if not (seq[i]==nfreq):
+                    second.append(i)
+                    errorss+=1
+
+        cost=0
+        if not errorsf==errorss:
+            return -1
+        elif errorsf==errorss and errorsf==0:
+            return 0
+        else:
+            for i in range(errorsf):
+                cost=cost+abs(first[i]-second[i])**rcost
+            return cost
+        
+    #for even sequence
+    else:
+        if not cd["B"]==cd["G"]:
+            return -1
+        fir1=[]
+        fir2=[]
+        sec1=[]
+        sec2=[]
+        itf=0
+        its=0
+        for i in range(idx):
+            if (i&1)==0:
+                if seq[i]=="B":
+                    fir1.append(i)
+                    itf+=1
+                else:
+                    fir2.append(i)
+                    its+=1
+            else:
+                if seq[i]=="G":
+                    sec1.append(i)
+                else:
+                    sec2.append(i)
+        cost1=0
+        cost2=0
+        for i in range(itf):
+            cost1+=abs(fir1[i]-sec1[i])**rcost
+        for i in range(its):
+            cost2+=abs(fir2[i]-sec2[i])**rcost
+            
+        if min(cost1,cost2)==0:
+            return 0
+        return min(cost1,cost2)
+    
+
+def main():
+    global idx
+    t=int(sys.stdin.readline())
+    for _ in range(t):
+        cost=int(sys.stdin.readline())
+        seq=raw_input()
+        idx=len(seq)        
+        print solve(seq,cost)
+
+main()

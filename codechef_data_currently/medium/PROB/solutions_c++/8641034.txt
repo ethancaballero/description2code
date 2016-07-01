@@ -1,0 +1,25 @@
+#include<iostream>
+#include<cassert>
+using namespace std;
+
+void solve(){
+	int tests;
+	cin>>tests;
+	while(tests--){
+		long long t1,t2,t3,t4;
+		cin>>t1>>t2>>t3>>t4;
+		assert(t1>=1 && t1<=1000000000);
+		assert(t2>=1 && t2<=1000000000);
+		assert(t3>=1 && t3<=1000000000);
+		assert(t4>=0 && t4<t1+t2);
+		printf("%.10lf
+",t1/double(t1+t2));
+		
+	}
+}
+
+int main()
+{
+	
+	solve();
+}

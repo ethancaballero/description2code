@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int test;long long sum=0;
+	cin>>test;int t;int i;
+	vector<int>arr;int temp;
+	for(t=0;t<test;t++)
+	{
+		int n;sum=0;
+		cin>>n;
+		arr.clear();
+		for(i=0;i<n;i++)
+		{cin>>temp;
+		arr.push_back(temp);
+		}
+		sort(arr.begin(),arr.end());
+		reverse(arr.begin(),arr.end());
+		for(i=0;i<arr.size();i+=2)
+		{
+			sum+=arr[i];
+		}
+		cout<<sum<<"
+";
+	}//test
+	
+	
+	return 0;
+}//main

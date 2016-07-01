@@ -1,0 +1,96 @@
+#include <iostream>
+#include <stdio.h>
+#include <cmath>
+#include <string.h>
+#include <stack>
+#include <set>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+	int t;
+	int m,n;
+	int i,j;
+	cin >> t;
+	while (t--)
+	{
+		cin >> m >> n;
+		char mat[m][n];
+		vector<int> myvector;
+		bool flag = 0;
+		for (i=0;i<m;i++)
+		{
+			for (j=0;j<n;j++)
+			{
+				cin >> mat[i][j];
+				if (mat[i][j]=='S' || mat[i][j]=='s')
+				{
+					myvector.push_back(i);
+					myvector.push_back(j);
+				}
+			}
+			getchar();
+		}
+
+		int size = myvector.size();
+		if (size > 0)
+		{
+			bool flag1 = 0;
+			for (int k=0;k<size;k+=2)
+			{
+				i = myvector[k];
+				j = myvector[k+1];
+				if (n-j>=5)
+				{
+					if (mat[i][j+1] == 'p' || mat[i][j+1] == 'P')
+					{
+						if (mat[i][j+2] == 'o' || mat[i][j+2] == 'O')
+						{
+							if (mat[i][j+3] == 'o' || mat[i][j+3] == 'O')
+							{
+								if (mat[i][j+4] == 'n' || mat[i][j+4] == 'N')
+								{
+									flag = 1;
+									break;
+								}
+							}
+						}
+					}
+				}
+
+				if (m-i>=5)
+				{
+					if (mat[i+1][j] == 'p' || mat[i+1][j] == 'P')
+					{
+						if (mat[i+2][j] == 'o' || mat[i+2][j] == 'O')
+						{
+							if (mat[i+3][j] == 'o' || mat[i+3][j] == 'O')
+							{
+								if (mat[i+4][j] == 'n' || mat[i+4][j] == 'N')
+								{
+									flag = 1;
+									break;
+								}
+							}
+						}
+					}
+				}
+
+
+			}
+		}
+
+		if (flag)
+			cout <<"There is a spoon!
+";
+		else
+			cout << "There is indeed no spoon!
+";
+
+
+	}
+	return 0;
+
+}

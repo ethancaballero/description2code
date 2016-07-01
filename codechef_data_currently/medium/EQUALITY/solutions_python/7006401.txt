@@ -1,0 +1,15 @@
+for _ in range(input()):
+    n = input()
+    ar = map(int,raw_input().split())
+    s = 0
+    ans = []
+    
+    for i in range(n):
+        s += ar[i]
+
+    s /=(n-1)
+
+    for i in range(n):
+        ans.append(s-ar[i])
+
+    print ' '.join(str(i) for i in ans)

@@ -1,0 +1,13 @@
+n=int(raw_input())
+a=map(int,raw_input().split())
+ans=0
+count=0
+for i in xrange(n):
+    if a[i]!=0:
+        count+=1
+    if count>ans:
+        ans=count
+    if a[i]==0:
+        count=0
+print ans
+    

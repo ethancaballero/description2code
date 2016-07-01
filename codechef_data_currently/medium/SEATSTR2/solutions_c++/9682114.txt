@@ -1,0 +1,201 @@
+#include<bits/stdc++.h>
+//#define DEBUG
+//#ifdef DEBUG
+//code to debug
+//#endif
+//#undef DEBUG
+using namespace std;
+
+const int mod=(int)1e9+7,maxn=100005,ln=17;
+#define F(i,p,n) for(int i=p;i<n;i++)
+#define I(i,p,q) for(int i=p;i>=q;i--)
+#define Ss(x) scanf("%s",x)
+#define S(x) scanf("%d",&x)
+#define Sl(x) scanf("%lld",&x)
+//#define getcx getchar_unlocked
+#define getcx getchar
+/*inline void S(int& n)
+{
+    n=0; int ch = getcx(); int sign = 1;
+    while(ch < '0' || ch > '9') { if(ch == '-') sign=-1; ch = getcx(); }
+    while(ch >= '0' && ch <= '9') { n = (n << 3) + (n << 1) + ch - '0', ch = getcx(); }
+    n = n * sign;
+}*/
+#define Ps(x) printf("%d  ",x)
+#define P(x) printf("%d
+",x)
+typedef long long int LL;
+#define modulo(x,y,z) (x+y)<0?x+y+z:((x+y>=z)?x+y-z:x+y)
+#define Debug(x) cout << #x << "=" << x << endl
+#define Debugarr(x,n) cout<<"array "<<#x<<":"<<endl; F(ij,0,n) cout<<ij<<". "<<x[ij]<<endl; cout<<endl
+#define Debugarr2(x,m,n) cout<<"array "<<#x<<":"<<endl; F(ij,0,m) {F(jk,0,n) cout<<x[ij][jk]<<" "; cout<<endl;} cout<<endl
+#define pii pair<LL,int>
+#define Fi first
+#define Se second
+#define chk(x,n) (x[n>>5]&(1<<(n&31))) //unsigned int
+#define set(x,n) (x[n>>5]|=(1<<(n&31)))//32 bit
+const int shift=30,etf=mod-1;
+
+const LL inf=(LL)1e18+1;
+
+const double PI=(double)3.141592653589793238,EPSILON=1e-10;
+
+LL fact[maxn],ifact[maxn];
+
+LL _pow(LL x,LL y)
+{
+    if(!y)
+        return 1;
+    if(y==1)
+        return x;
+    if(y==2)
+        return (x*x)%mod;
+    if(y&1)
+        return (x*_pow(x,y-1))%mod;
+    else
+        return (_pow(_pow(x,y/2),2))%mod;
+}
+
+
+void pre()
+{
+    fact[0]=1;
+    F(i,1,maxn)
+    {
+        fact[i]=(i*fact[i-1])%mod;
+    }
+    ifact[maxn-1]=_pow(fact[maxn-1],mod-2);
+    I(i,maxn-2,0)
+    {
+        ifact[i]=(ifact[i+1]*(i+1))%mod;
+    }
+}
+
+LL freq[26];
+
+int main()
+{
+    pre();
+    int t;
+    S(t);
+    while(t--)
+    {
+        memset(freq,0,sizeof(freq));
+        int n;
+        string s;
+        cin>>s;
+        n=s.length();
+        F(i,0,n)
+        {
+            freq[s[i]-'a']++;
+        }
+        LL tot=(fact[n]);
+        LL mul=1;
+        vector<LL> vec;
+        F(i,0,26)
+        {
+            if(freq[i])
+                vec.push_back(freq[i]);
+        }
+
+        F(i,0,vec.size())
+        {
+            tot=(tot*ifact[vec[i]])%mod;
+        }
+        //Debugarr(freq,3);
+        //Debugarr(vec,vec.size());
+
+        F(i,0,vec.size())
+        {
+            F(j,i+1,vec.size())
+            {
+                mul+=vec[i]*vec[j];
+                mul%=mod;
+                if(vec[i]>1&&vec[j]>1)
+                {
+                    LL temp1=vec[i];
+                    temp1*=vec[i]-1;
+                    temp1/=2;
+                    temp1%=mod;
+                    LL temp2=vec[j];
+                    temp2*=vec[j]-1;
+                    temp2/=2;
+                    temp2%=mod;
+                    LL temp=(temp1*temp2)%mod;
+                    mul=(mul+temp)%mod;
+                }
+            }
+        }
+        //Debug(mul);
+
+        F(i,0,vec.size())
+        {
+            F(j,i+1,vec.size())
+            {
+                F(k,j+1,vec.size())
+                {
+                    mul+=2*vec[i]*vec[j]*vec[k];
+                    mul%=mod;
+                    if(vec[i]>1)
+                    {
+                        LL temp=vec[i];
+                        temp*=vec[i]-1;
+                        //temp/=2;
+                        temp%=mod;
+                        temp=(temp*vec[j])%mod;
+                        temp=(temp*vec[k])%mod;
+                        mul=(temp+mul)%mod;
+                    }
+                    if(vec[j]>1)
+                    {
+                        LL temp=vec[j];
+                        temp*=vec[j]-1;
+                        //temp/=2;
+                        temp%=mod;
+                        temp=(temp*vec[i])%mod;
+                        temp=(temp*vec[k])%mod;
+                        mul=(temp+mul)%mod;
+                    }
+                    if(vec[k]>1)
+                    {
+                        LL temp=vec[k];
+                        temp*=vec[k]-1;
+                        //temp/=2;
+                        temp%=mod;
+                        temp=(temp*vec[j])%mod;
+                        temp=(temp*vec[i])%mod;
+                        mul=(temp+mul)%mod;
+                    }
+                }
+            }
+        }
+
+        //Debug(mul);
+
+        F(i,0,vec.size())
+        {
+            F(j,i+1,vec.size())
+            {
+                F(k,j+1,vec.size())
+                {
+                    F(l,k+1,vec.size())
+                    {
+                        mul+=(((3*vec[i]*vec[j])%mod)*((vec[k]*vec[l])%mod))%mod;
+                        mul%=mod;
+                    }
+                }
+            }
+        }
+
+
+        //Debug(mul);
+        //Debug(pro);
+        //Debug(n);
+
+        LL ans=(tot*(tot-mul+mod)%mod)%mod;
+
+        cout<<ans<<endl;
+    }
+    return 0;
+}
+

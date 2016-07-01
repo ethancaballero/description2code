@@ -1,0 +1,60 @@
+###### https://www.codechef.com/problems/CHSTR ########
+
+from math import factorial
+import sys
+
+def precompute(str):
+	count=1
+	lista=[]
+	for x in range(1,len(str)+1):
+		j=count
+		while j<=len(str):
+			lista.append(str[j-x:j])
+			j=j+1
+		count=count+1
+	return(lista)
+
+def precompute_duplicates(lista):
+	listb=[]
+	dicta={}
+	for x in lista:
+		listb.append((x,0))
+		
+	dicta=dict(listb)
+	
+	for x in lista:
+		if dicta.has_key(x):
+			dicta[x]=dicta[x]+1
+	return dicta
+
+def ncr(n,r):
+	return factorial(n)/factorial(r)/factorial(n-r)
+
+tcs=int(raw_input())
+if (tcs>100 or tcs<=0):
+	sys.exit(0)
+	
+for tc in range(tcs):
+	input=raw_input().split()
+	length,ques=int(input[0]),int(input[1])
+	if not (1<=length<=5000):
+		sys.exit(0)
+	if not (1<=ques<=10000):
+		sys.exit(0)
+	
+	str=raw_input()
+	lista=precompute(str)
+	dicta=precompute_duplicates(lista)
+	#print lista
+	#print dicta
+	
+	for x in range(ques):
+		q=int(raw_input())
+		if not(1<=q<=1000000000):
+			sys.exit(0)
+			
+		ways=0
+		for y in dicta.values():
+			if y>=q:
+				ways=ways+ncr(y,q)
+		print ways

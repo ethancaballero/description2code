@@ -1,0 +1,99 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+using namespace std;
+
+#define MOD 1000000007
+#define SIZE 26
+
+long long factorial(long long n)
+{
+    long long fact = 1;
+    for(int i=1;i<=n;i++)
+        fact = (fact * i)%MOD; 
+    return fact;
+}
+
+long long power(long long x, long long n){
+    if(n==0)
+        return 1;
+    long long p = power(x, n/2);
+    if(n%2==0)
+        return (p*p)%MOD;
+    else
+        return ((x%MOD)*((p*p)%MOD))%MOD;
+}
+
+long long calculate(string s)
+{
+    long long counter[SIZE];
+    memset(counter, 0, sizeof(counter));
+    for(int i=0;i<s.length();i++)
+        counter[s[i]-'a']++;
+
+    long long similar;
+    similar = 1;
+    
+    for(int i=0;i<SIZE;i++)
+        for(int j=i+1;j<SIZE;j++)
+            similar = (similar + (counter[i] * counter[j])%MOD)%MOD;
+
+    for(int i=0;i<SIZE;i++)
+        for(int j=i+1;j<SIZE;j++)
+            for(int k=j+1;k<SIZE;k++)
+                similar = (similar + (((2*counter[i]*counter[j])%MOD)*counter[k])%MOD)%MOD;
+
+    for(int i=0;i<SIZE;i++)
+        for(int j=i+1;j<SIZE;j++)
+            for(int k=j+1;k<SIZE;k++)
+                for(int l=k+1;l<SIZE;l++)
+                    similar = (similar + ((((3*counter[i]*counter[j])%MOD)*counter[k])%MOD)*counter[l])%MOD;
+
+    long long temp=0;
+    for(int i=0;i<SIZE;i++)
+        for(int j=i+1;j<SIZE;j++)
+            for(int k=0;k<SIZE;k++)
+                if(i!=k && j!=k)
+                {
+                    temp = (counter[i] * counter[j])%MOD;
+                    temp = (temp * counter[k])%MOD;
+                    temp = (((temp * (counter[k]-1))%MOD)+MOD)%MOD; 
+                    similar = (similar + temp)%MOD;
+                }
+
+    temp = 0;
+    for(int i=0;i<SIZE;i++)
+        for(int j=i+1;j<SIZE;j++)
+        {
+            temp = (((counter[i]*(counter[i]-1))/2)%MOD+MOD)%MOD;
+            temp = (temp * ((((counter[j]*(counter[j]-1))/2)%MOD)+MOD)%MOD)%MOD; 
+            similar = (similar + temp)%MOD;
+        }
+
+    long long fact;
+    fact = factorial(s.length());
+
+    for(int i=0;i<SIZE;i++)
+        fact = (fact * power(factorial(counter[i]), MOD-2))%MOD;
+
+    return (((fact*(fact-similar))%MOD)+MOD)%MOD;
+}
+
+int main()
+{
+    int t, ans;
+    string s;
+    cin>>t;
+    while(t--)
+    {
+        cin>>s;
+        //srand (time(NULL));
+        //string s(1000, 'x');
+        //for(int i=0;i<s.length();i++)
+            //s[i] = 'a' + rand()%26;
+        //cout<<s<<endl;
+        cout<<calculate(s)<<endl;
+    }
+    return 0;
+}
+

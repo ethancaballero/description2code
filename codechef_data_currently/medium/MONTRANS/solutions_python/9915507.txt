@@ -1,0 +1,45 @@
+import sys
+from math import *
+from string import ascii_lowercase as lcs
+from string import ascii_uppercase as ucs
+from fractions import Fraction, gcd
+from decimal import Decimal, getcontext
+from itertools import product, permutations, combinations, count
+#getcontext().prec = 500
+
+mod = 10**9 + 7
+
+raw_input = lambda: sys.stdin.readline().rstrip()
+die = lambda : exit(0)
+
+r_s = lambda: raw_input()                   #read str
+r_ss = lambda: raw_input().split()          #read stringss
+r_i = lambda: int(raw_input())              #read int
+r_is = lambda: map(int, raw_input().split())#read ints
+r_f = lambda: float(raw_input())            #read float
+r_fs = lambda: map(Decimal, raw_input().split()) #read floats
+
+'''-------------------------------------------------------------------'''
+
+
+for t in range(r_i()):
+    a,b,c=r_is()
+    count=0
+    maxm=a*100+b
+    for i in range(10000):
+        if c>(a*100+b):
+            print count
+            break
+        if c>b:
+            a-=1
+            b+=100
+        b-=c
+        a,b=b,a
+        if (a*100+b)>maxm:
+            maxm=a*100+b
+            count=i+1
+    else:
+        print count
+        
+        
+    

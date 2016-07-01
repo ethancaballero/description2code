@@ -1,0 +1,5 @@
+from math import floor
+t = input()
+for i in range(t):
+    n = input()
+    print int(floor(n/2))+1

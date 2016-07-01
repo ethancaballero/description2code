@@ -1,0 +1,20 @@
+n=input()
+li=list(map(int,raw_input().split()))
+dp=[0]*n
+temp=[]
+for i in xrange(n):
+    t=[]
+    if dp[i]==0:
+        j=i
+        t.append(j+1)
+        while dp[j]==0:
+            dp[j]=1
+            t.append(li[j])
+            j=li[j]-1
+        temp.append(t)
+print len(temp)
+for i in temp:
+    for j in i:
+        print j,
+    print
+        

@@ -1,0 +1,58 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <climits>
+using namespace std;
+
+long long adj[2510][2510];
+long long swe(pair<int,int> const &p1,pair<int,int> const & p2)
+{
+	return (long long)(p1.first - p2.first)*(p1.first-p2.first)+
+		(long long)(p1.second-p2.second)*(p1.second-p2.second);
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		vector<pair<int,int>> pos(n+2);
+		for(int i=0;i<n+2;++i)
+		{
+			cin>>pos[i].first>>pos[i].second;
+			for(int j=0;j<=i;++j)
+			{
+				adj[i][j] = adj[j][i] = swe(pos[i],pos[j]);
+			}
+		}
+		vector<long long> dis(n+2,INT_MAX);
+		dis[n]=0;
+		vector<char> visit(n+2,0);
+		while(1)
+		{
+			int idx=-1,mi=INT_MAX;
+			for(int i=0;i<n+2;++i)
+			{
+				if(visit[i]==0 && dis[i]<mi)
+				{
+					idx=i;
+					mi = dis[i];
+				}
+			}
+			if(idx==-1) break;
+			visit[idx]=1;
+			for(int i=0;i<n+2;++i)
+			{
+				if(visit[i]==0)
+				{
+					dis[i] = min(dis[i],mi+adj[i][idx]);
+				}
+			}
+		}
+		cout<<dis[n+1]<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,29 @@
+ Caroline is a huge tennis fan. She loves watching tennis and especially rooting for players of Strangeland, her native country.
+Generally, tennis tournaments are played using the Olympic system. Let's consider such a tournament with N = 2K players. This tournament is held in K rounds. In each round, every player plays exactly one match against some other player. The loser of each match is eliminated, and the winner advances to the next round. After the Kth round, there's only one non-eliminated player who is declared the champion of the tournament.
+An example of such a tournament for N = 8 can be seen in the picture below.
+
+We'll number the players from 1 to N from top to bottom in the tournament draw for a given N. In the first round players 1 and 2, 3 and 4, ..., N-1 and N play a match against each other. In the second round the winners of the match between players 1 and 2 and the match between players 3 and 4 play together, the winners of the match between players 5 and 6 and the match between players 7 and 8 play together, ..., the winners of the match between players N-3 and N-2 and the match between players N-1 and N play together. The matches are played in the same way till the Kth (final) round.
+A big tennis tournament is going to start soon. M Strangelandian players are taking part in this tournament, and their positions in the tournament draw are known in advance. Caroline wants to know the probability that a Strangelandian player will be the champion of this tournament. She collected the information from the previous ten years of tennis history and knows that a Strangelandian player wins a match over a non-Strangelandian player with probability P percents. All non-Strangelandian players look the same to Caroline, so she considers the chance of winning a match between two non-Strangelandian players to be 50 percents for both players. The same applies to all Strangelandian players. For Caroline, all of them are equally strong, and she thinks that both of them can win a Strangelandian derby with 50-percent probability.
+Help Caroline write a program which calculates the probability that a Strangelandian player will win the tournament.
+Input
+The first line of the input contains a single integer T, the number of test cases (no more than 20). Each test case is described by exactly two lines. The first of these lines contains three space-separated integers N, M and P (2 \u2264 N \u2264 230, N = 2K for some integer K, 1 \u2264 M \u2264 10000, M \u2264 N, 0 \u2264 P \u2264 100) -- the total number of players in the tournament, the number of competing Strangelandian players and the probability that a Strangelandian player beats a non-Strangelandian player in percents, respectively. The second of these lines contains M space-separated distinct integers Ai (1 \u2264 Ai \u2264 N), the 1-based positions of Strangelandian players in the tournament draw.
+Output
+For each test case output exactly one line containing the required probability in percents. Your answer will be considered correct if its absolute error doesn't exceed 10-6.
+Example
+
+Input:
+4
+2 1 42
+1
+4 2 66
+1 2
+4 2 66
+1 3
+8 3 71
+3 5 2
+
+Output:
+42.00000000000000
+66.00000000000000
+73.18080000000000
+75.47784648840000

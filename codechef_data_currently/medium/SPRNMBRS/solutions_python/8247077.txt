@@ -1,0 +1,15 @@
+t=input()
+while t:
+    t-=1
+    l,r=[int(i) for i in raw_input().split()]
+    val=2
+    ans=0
+    while val<=r:
+        cur=val
+        while cur<=r:
+            if l<=cur<=r:ans+=1
+            cur*=3
+        val*=2
+    if l<=1<=r:
+        ans+=1
+    print ans

@@ -1,0 +1,11 @@
+t = input()
+for _ in xrange(t):
+    p = input()
+    n = 2048
+    c = 0
+    while p != 0:
+        while p >= n:
+            p -= n
+            c += 1
+        n /= 2
+    print c

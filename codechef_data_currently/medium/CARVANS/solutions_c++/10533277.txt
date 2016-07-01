@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<iostream>
+#include<limits.h>
+#include<algorithm>
+#define gc getchar_unlocked
+#define P(n) printf("%li
+",n);
+#define p(n) printf("%d
+",n);
+#define s(n) scanf("%d",&n);
+#define S(n) scanf("%li",&n);
+using namespace std;
+inline int inp()
+    {
+    int noRead=0;
+    char p=getchar_unlocked();
+    for(;p<33;){p=getchar_unlocked();};
+    while(p>32)
+    {
+    noRead = (noRead << 3) + (noRead << 1) + (p - '0');
+    p=getchar_unlocked();
+    }
+    return noRead;
+    };
+int main()
+{
+int t;
+t=inp();
+while(t--)
+{
+    int n;
+    n=inp();
+    int a[n];
+    int c=1;
+    a[0]=inp();
+    for(int i=1;i<n;i++)
+    {
+        a[i]=inp();
+        if(a[i]<=a[i-1])
+            c++;
+        else
+            a[i]=a[i-1];
+    }
+    p(c)
+}
+return 0;
+}

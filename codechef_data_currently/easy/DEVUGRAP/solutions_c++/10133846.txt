@@ -1,0 +1,29 @@
+//gcd remainder trick // brute
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n,k,c;
+        long long ans=0;
+        cin>>n>>k;
+        for(int i=0;i<n;i++)
+        {
+            cin>>c;
+            if(c<k)
+            {
+                ans+=k-c;
+            }
+            else
+            {
+                ans+=min(c%k,k-(c%k));
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

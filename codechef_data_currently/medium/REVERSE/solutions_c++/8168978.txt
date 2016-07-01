@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+#define pb push_back
+#define mp make_pair
+#define f first
+#define s second
+#define ll long long int 
+#define inf 1000000000
+using namespace std;
+int dist[101010];
+typedef pair<int ,int > p ;
+vector< p > v[100100];
+set< p > dijk;
+ll val;
+int main(int argc, char const *argv[])
+{
+	int n,m,a,b;
+
+ 
+	cin>>n>>m;   for(int i=1;i<=n;i++)dist[i]=inf;	  
+	dist[1]=0;
+	for (int i = 0; i < m; ++i)
+	{
+     scanf("%d%d",&a,&b);
+     v[a].pb(mp(b,0));
+     v[b].pb(mp(a,1));
+	}
+	dijk.insert(mp(0,1));
+	while(!dijk.empty())
+	{
+		p top = *dijk.begin();
+		int dis = top.f;int u = top.s;
+		dijk.erase(top);
+		for (int i = 0; i < v[u].size(); ++i)
+		{ 
+		   int u2 = v[u][i].f;int d2 = v[u][i].s;
+		   if(dist[u2]<dis)continue;// already calc;
+		   if(dist[u2]>dis+d2)
+		   {
+		   	if(dist[u2]!=inf)//set k andar hai
+		   		dijk.erase(mp(dist[u2],u2));
+		   	dijk.insert(mp(dis+d2,u2));
+		   	dist[u2] = dis+d2;
+		   } 
+		}
+	}
+if(dist[n]!=inf)
+cout<<dist[n]<<"
+";
+else
+cout<<"-1
+";
+	return 0;
+}

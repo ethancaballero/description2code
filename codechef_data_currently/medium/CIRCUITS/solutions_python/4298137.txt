@@ -1,0 +1,43 @@
+def circuits():
+	t=int(raw_input())
+	for i in range(t):
+		n=raw_input()
+		n=int(raw_input())
+		inp=[]
+		in1=[]
+		in2=[]
+		for j in range(n):
+			x=raw_input().split()
+			inp.append(int(x[0]))
+			if x[0]=='0':
+				in1.append(0)
+				in2.append(0)
+			else:
+				in1.append(int(x[1]))
+				in2.append(int(x[2]))
+		
+		lowp=0
+		hip=1
+		q=1
+		j=0
+		while(abs(q)>0.0000001):
+			x=[]
+			p=(lowp+hip)/2.0
+			for k in range(n):
+				if inp[k]==0:
+					x.append(p)
+				elif inp[k]==1:
+					x.append(1-(1-x[in1[k]-1])*(1-x[in2[k]-1]))
+				else:
+					x.append((x[in1[k]-1])*(x[in2[k]-1]))
+			q=x[n-1]-0.5
+			if x[n-1]<0.5:
+				lowp=p
+			if x[n-1]>0.5:
+				hip=p
+			j=j+1
+		print "%.5f" %p
+		
+
+if __name__=="__main__":
+	circuits()

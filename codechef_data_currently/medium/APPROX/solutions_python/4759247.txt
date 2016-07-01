@@ -1,0 +1,27 @@
+import sys
+
+dividend = 103993
+divisor = 33102
+s = ""
+t = 1
+
+while len(s) <=  10**6+5:
+    while dividend < divisor:
+        if t == 1:
+            s += '.'
+            t += 1
+        else:
+            s += '0'
+        dividend *= 10
+    quo = dividend/divisor
+    s += str(quo)
+    dividend %= divisor
+    if t!=1:
+        dividend *= 10
+
+for cases in xrange(int(sys.stdin.readline())):
+    n = int(sys.stdin.readline())
+    if (n==0):
+        print 3
+        continue
+    print s[:n+2]

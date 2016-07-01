@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+ // your code goes here
+ int t, m, n, job[1002], k, a=1, count;
+ cin>>t;
+ while(t--) {
+  cin>>m>>n;
+  for(int i=0; i<1002; i++) job[i]=false;
+  for(int i=1; i<=m; i++) job[i]=true;
+  for(int i=1; i<=n; i++) {
+   cin>>k; job[k]=false;
+  }
+  for(int i=1, count=1; i<=m; i++) 
+  { if(job[i]&&(count%2)) cout<<i<<" ";
+   if(job[i]) count++;
+  }
+  cout<<endl;
+  for(int i=1, count=1; i<=m; i++) {
+   if(job[i]&&(count%2==0)) cout<<i<<" ";
+   if(job[i]) count++;
+  }
+  cout<<endl;
+ }
+ return 0;
+}

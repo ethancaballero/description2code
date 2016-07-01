@@ -1,0 +1,49 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<set>
+#include<map>
+#include<functional>
+#include<string>
+#include<cstring>
+#include<cstdlib>
+#include<queue>
+#include<utility>
+#include<fstream>
+#include<sstream>
+#include<cmath>
+#include<stack>
+#include<assert.h>
+using namespace std;
+
+#define CLR(a) memset(a, 0, sizeof(a))
+
+int main()
+{
+	int t,n,a,i;
+	long long int ans,cnt[4];
+	scanf("%d",&t);
+
+	while(t--)
+	{
+		int n;
+		scanf("%d",&n);
+		CLR(cnt);
+		
+		for(i = 0;i < n;i++)
+		{
+			scanf("%d",&a);
+			if(a <= 2)
+				cnt[a]++;
+			else
+				cnt[3]++;
+		}
+
+		ans = (cnt[3] * (cnt[3] -1)) / 2 + cnt[2] * cnt[3];
+		printf("%lld
+",ans);
+	}
+
+	return 0;
+}

@@ -1,0 +1,14 @@
+T = int(raw_input())
+
+for _ in range(T):
+    N = int(raw_input())
+    speed = [int(x) for x in raw_input().rstrip().split(" ")]
+    count = 1
+    index = 1
+    currMin = speed[0]
+    while index < N:
+        if speed[index] <= currMin:
+            count += 1
+            currMin = speed[index]
+        index += 1
+    print(count)

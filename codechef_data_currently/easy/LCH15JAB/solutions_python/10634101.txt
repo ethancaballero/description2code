@@ -1,0 +1,9 @@
+import collections
+t=input()
+for x in range(t):
+	s=raw_input()
+	p=collections.Counter(s).most_common(1)[0]
+	if len(s)-2*p[1]== 0:
+		print "YES"
+	else:
+		print "NO"

@@ -1,0 +1,26 @@
+from heapq import heappush as insert, heappop as extractMax
+ 
+def KSums():
+	n,k = map(int, raw_input().split())
+	a = map(int, raw_input().split())
+	heap = []
+	insert(heap, (-sum(a), (0, n-1)))
+	pairs = set()
+	pairs.add((0,n-1))
+	for x in xrange(k):
+		value = extractMax(heap)
+		print -value[0],
+		i,j = value[1]
+		if (i+1, j) not in pairs:
+			pairs.add((i+1, j))
+			insert(heap, (a[i]+value[0], (i+1,j)))
+		if (i, j-1) not in pairs:
+			pairs.add((i, j-1))
+			insert(heap, (a[j]+value[0], (i, j-1)))
+ 
+KSums() 
+        
+    
+    
+        
+        

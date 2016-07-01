@@ -1,0 +1,21 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int main() {
+
+int t;
+cin>>t;
+
+int i, j, k;
+
+while (t--) {
+    cin>>i>>j>>k;
+    if (k > i+j) cout<<k - i - j<<endl;
+    else if (i > k + j) cout<<i - j - k<<endl;
+    else if (j > i + k) cout<<j - i - k<<endl;
+    else cout<<0<<endl;
+
+}
+return 0;
+}

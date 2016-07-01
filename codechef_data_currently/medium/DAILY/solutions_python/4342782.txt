@@ -1,0 +1,31 @@
+import math
+def C(a,b):
+    return ((math.factorial(a))/((math.factorial(b))*(math.factorial(a-b))))
+def main():
+    coun=0
+    x,n=raw_input().split()
+    x=int(x)
+    n=int(n)
+    for z in range (0,n):
+        s=raw_input()
+        #print s
+        a=0
+        b=53
+        for i in range (0,9):
+            freec=0
+            for j in range (a,a+4):
+                if s[j]=='0':
+                    freec=freec+1
+            if s[b]=='0':
+            	freec=freec+1
+            if s[(b-1)]=='0':
+            	freec=freec+1
+            if freec>=x:
+                coun+=C(freec,x)
+            a=a+4
+            b=b-2
+    print coun
+    return 0
+main()
+
+            

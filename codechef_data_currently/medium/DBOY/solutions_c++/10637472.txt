@@ -1,0 +1,63 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+#define inf 99999999
+
+int dp[1001][501];
+int h[501],k[501];
+int n;
+
+void fill_dp()
+{
+    //memset(dp,0,sizeof(dp));
+    for(int dist = 0; dist <= 1000; dist++)
+    {
+    	for (int j = 0; j < n; ++j)
+    	{
+    		if(dist == 0) 
+    			{ 
+    				dp[dist][j] = 0;
+    				continue;
+    			}
+    		if(j == 0)
+    		{
+    			dp[dist][j] = (dist%k[j] == 0)? dist/k[j] : inf;
+    			continue;  
+
+    		}
+            
+            if(k[j] <= dist)
+    		dp[dist][j] = min( dp[dist][j-1] , 1 + dp[dist-k[j]][j] );
+    	    else
+    	    dp[dist][j] = dp[dist][j-1];
+
+    	}
+    }
+
+}
+
+int main(int argc, char const *argv[])
+{
+	int t; cin >> t;
+	while(t--)
+	{
+		cin >> n;
+		for (int i = 0; i < n; ++i)
+		{
+			cin >> h[i];
+		}
+		for (int i = 0; i < n; ++i)
+		{
+			cin >> k[i];
+		}
+		fill_dp();
+
+		int ans = 0;
+		for(int i=0;i<n;i++)
+		{
+			ans += dp[2*h[i]][n-1]; 
+		}
+		cout << ans << endl;
+	}
+	return 0;
+}

@@ -1,0 +1,47 @@
+from __future__ import division
+from pprint import pprint
+def read_mapped(func=lambda x:x):
+    return map(func, raw_input().split(" "))
+def read_int():
+    return int(raw_input())
+def read_str():
+    return raw_input()
+def read_float():
+    return float(raw_input())
+
+n, m = read_mapped(int)
+mat = []
+
+for case in xrange(n):
+    mat.append(read_mapped(int))
+# pprint(mat)
+
+l = read_int()
+coords = []
+for i in range(l):
+    i, j = read_mapped(int)
+    i -= 1
+    j -= 1
+    coords.append((i,j))
+
+sum1 = 0
+s1pos = True
+sum2 = 0
+s2pos = True
+
+# pprint (coords)
+
+for i, j in coords:
+    if i<=(n-1) and j<=(m-1) and s1pos:
+        sum1 += mat[i][j]
+    else:
+        sum1 = -1
+        s1pos = False
+
+    if j<=(n-1) and i<=(m-1) and s2pos:
+        sum2 += mat[j][i]
+    else:
+        sum2 = -1
+        s2pos = False
+     
+print max(sum1, sum2)

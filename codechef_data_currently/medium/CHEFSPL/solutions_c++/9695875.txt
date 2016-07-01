@@ -1,0 +1,98 @@
+//Author : Aman Sinha
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <cstring>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <climits>
+#include <queue>
+using namespace std;
+typedef long long int ill;
+#define fl(i,START,END) for(int i=START;i<END;++i)
+
+void init(int arr[],int size)
+{
+	fl(i,0,size)
+	{
+		arr[i] = 0;
+	}
+}
+
+bool checksubstring(string s, int start1,int end1,int start2,int end2)
+{
+	int count = 0;
+	for(int i=start1, j=start2;i<end1,j<end2;++i,++j)
+	{
+		if(s[i]!=s[j])
+		{
+			if(count > 0)
+			{
+				return false;
+			}
+			else
+			{
+				++count;
+				--i;
+			}
+			
+		}
+	}
+	return true;
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		string s;
+		bool flag = true;
+		cin>>s;
+		ill length = s.length();
+		if(length<2)
+		{
+			cout<<"NO"<<endl;
+			continue;
+		}
+		ill mid = length/2;
+		if(length % 2)
+		{
+			flag = checksubstring(s,0,mid,mid,length) || checksubstring(s,mid+1,length,0,mid+1);
+		}
+		else
+		{
+			fl(i,0,mid)
+			{
+				if(s[i] != s[i+mid])
+				{
+					flag = false;
+					break;
+				}
+			}
+		}
+		if(!flag)
+		{
+			cout<<"NO"<<endl;
+		}
+		else
+		{
+			cout<<"YES"<<endl;
+		}	
+	}
+	return 0;
+}
+

@@ -1,0 +1,15 @@
+t=input()
+for i in range(t):
+    n=input()
+    a="abcdefghijklmnopqrstuvwxyz"
+    b=a[::-1]
+    c=n/25;
+    d=n%25;
+    x=[]
+    if d==0:
+        print b*c
+    else:
+        for j in range(d,-1,-1):
+            x.append(a[j])
+        y=b*c
+        print ''.join(x)+y

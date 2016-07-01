@@ -1,0 +1,38 @@
+#include<cstdio>
+#include<cmath>
+#include<algorithm>
+using namespace std;
+#define MOD 1000000007
+long long int arr[100011];
+void power()
+{
+   long long int i;
+   arr[0]=1;
+   for(i=1;i<100010;i++)
+   {
+   	  arr[i]=(arr[i-1]<<1)%MOD;
+   }	
+} 
+int main()
+{
+	power();
+   int tc;
+   scanf("%d",&tc);
+   while(tc--)
+   {
+       long long int n,i,j,a[100001]={0},sum=0;
+       scanf("%lld",&n);
+	   for(i=0;i<n;i++)    	
+	   scanf("%lld",&a[i]);
+	   sort(a,a+n);
+	   for(i=0;i<n-1;i++)
+	   {
+	   	 for(j=i+1;j<n;j++)
+	    {
+	       sum=(sum+((a[j]-a[i])*arr[j-i-1]))%MOD;	 	
+		}
+	   }
+	   printf("%lld
+",sum);
+   }	
+} 

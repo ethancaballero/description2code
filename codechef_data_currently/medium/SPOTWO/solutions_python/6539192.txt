@@ -1,0 +1,10 @@
+# Credit to http://www.codechef.com/viewsolution/6277847
+# for showing how the pow function works
+def solve(n):
+	power = int(bin(n)[2:])
+	return pow(pow(2, power, 1000000007), 2, 1000000007)
+ 
+cases = int(raw_input())
+for x in range(0, cases):
+	n = int(raw_input())
+	print solve(n)

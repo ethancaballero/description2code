@@ -1,0 +1,88 @@
+#include<iostream>
+#define SIZE 1002
+using namespace std;
+
+bool visited[SIZE];
+int cycles[SIZE][SIZE];
+
+void initialize( bool visited[SIZE] ) {
+	for( int i = 0; i < SIZE; i++ )
+		visited[i] = false;
+}
+
+void initializeCycle( int cycles[SIZE][SIZE] ) {
+	for(int i = 0; i < SIZE; i++) {
+		for( int j = 0; j < SIZE; j++ ) {
+			cycles[i][j] = -1;
+		}
+	}
+}
+
+int nextUnvisited( bool visited[SIZE] ) {
+	for( int i = 1; i < SIZE; i++ )
+		if( visited[i] == false )
+			return i;
+	return -1;
+}
+
+int allVisited( bool visited[], int n ) {
+	for( int i = 1; i <= n; i++ ) {
+		if( visited[i] == false )
+			return 0;
+	}
+	return 1;
+}
+
+void output( int cycles[SIZE][SIZE], int row ) {
+	for( int i = 0; cycles[row][i] != -1; i++ ) {
+		cout<<cycles[row][i]<<" ";
+	}
+	cout<<"
+";
+}
+
+void permutationCycles( int arr[], int n ) {
+	initialize( visited );
+	initializeCycle( cycles );
+	
+	int row = 0;
+
+	while( !allVisited( visited, n )) {
+
+		int i = nextUnvisited( visited );
+		visited[i] = true;
+		cycles[row][0] = i;
+		int d = 1;
+	
+		while( arr[i-1] != cycles[row][0] ) {
+			visited[arr[i-1]] = true;
+			cycles[row][d++] = arr[i-1];
+//			cout<<arr[i-1]<<" ";
+			i = arr[i-1];
+		}
+		cycles[row][d++] = arr[i-1];
+		row++;
+//		cout<<"while
+";
+	}
+//	cout<<"
+outside";
+	cout<<row<<"
+";
+	for( int i = 0; i < row; i++ )
+		output( cycles, i );
+}
+
+int main() {
+	int n,*arr;
+	cin>>n;
+
+	arr = new int[n];
+
+	for( int i = 0; i < n; i++ ) {
+		cin>>arr[i];
+	}
+	
+	permutationCycles( arr, n );
+	return 0;
+}

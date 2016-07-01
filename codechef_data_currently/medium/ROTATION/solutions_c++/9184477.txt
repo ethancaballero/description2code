@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll a[100001];
+int main()
+{
+    ll n,m,i,j,ptr,x,diff;
+    scanf("%lld%lld",&n,&m);
+    for(i=1;i<=n;i++)
+    {
+        scanf("%lld",&a[i]);
+    }
+    ptr=1;
+    char ch;
+    while(m--)
+    {
+        cin>>ch>>x;
+        if(ch=='R')
+        {
+            if(ptr+x-1<=n)
+                printf("%lld
+",a[ptr+x-1]);
+            else
+            {
+                diff=x-(n-ptr+1);
+                printf("%lld
+",a[diff]);
+            }
+        }
+        else if(ch=='C')
+        {
+            if(ptr+x<=n)
+                ptr+=x;
+            else
+            {
+                diff=ptr+x-n;
+                ptr=diff;
+            }
+        }
+        else
+        {
+            if(ptr-x>=1)
+                ptr-=x;
+            else
+            {
+                diff=ptr-1;
+                ptr=n-(x-diff)+1;
+            }
+        }
+    }
+    return 0;
+}

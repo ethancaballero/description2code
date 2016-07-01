@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+
+#define null NULL
+
+int main (){
+
+    int i, t;
+    bool *A = null;
+    //int i, done;
+    unsigned int n, m, k;
+    unsigned int done = 0;
+
+    scanf("%d", &t);
+
+    for (i=0; i<t; i++){
+
+        scanf("%d %d", &n, &m);
+
+
+            if (A != null)
+                free(A);
+
+            A = (bool*) calloc((n/sizeof(int))+1, sizeof(int));
+
+            k = n-m;
+            done = 0;
+
+            while(A[k] == 0 && done<n)
+            {
+                A[k] = 1;
+                done++;
+                k += m;
+
+                if (k>n){
+                    k -= n;
+                }
+            }
+
+            if (done == n)
+            {
+                printf("Yes");
+            }
+            else
+            {
+                printf("No %d", done);
+            }
+
+
+
+         //if (i != t-1)
+            printf("
+"); // Check if new line in last doesn't impacts AC
+
+
+    }
+
+    return 0;
+}

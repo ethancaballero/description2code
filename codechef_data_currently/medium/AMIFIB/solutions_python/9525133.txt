@@ -1,0 +1,19 @@
+t=int(raw_input())
+while t>0:
+    p=long(raw_input())
+    a=0
+    b=1
+    if p==1 or p==0:
+        print "YES"
+    else:
+        
+        while b<p:
+            temp=b
+            b=a+b
+            a=temp
+        if b==p:
+            print "YES"
+        else:
+            print "NO"
+    t-=1
+    

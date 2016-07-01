@@ -1,0 +1,30 @@
+import sys as s
+test=int(s.stdin.readline())
+while test:
+    name1,name2=s.stdin.readline().split()
+    i=0
+    j=0
+    count=0
+    len1 = len(name1)
+    len2 = len(name2)
+    if len1<len2:
+        while i<len1 and j<len2:
+            if name1[i]==name2[j]:
+                i=i+1
+                j=j+1
+                count+=1
+            else:
+                j+=1
+    else :
+       while i<len1 and j<len2:
+            if name1[i]==name2[j]:
+                i=i+1
+                j=j+1
+                count+=1
+            else:
+                i+=1
+    if min(len1,len2)==count:
+        print 'YES'
+    else:
+        print 'NO'
+    test-=1

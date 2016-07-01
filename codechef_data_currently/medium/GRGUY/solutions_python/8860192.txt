@@ -1,0 +1,23 @@
+INF = 1000000000
+for _t in xrange(int(raw_input())):
+    board = [ raw_input() for i in xrange(2) ]
+    N = len(board[0])
+    mincost = [ [ INF for i in xrange(N) ] for i in xrange(2) ]
+
+    for i in xrange(2):
+        if board[i][-1]=='.': mincost[i][-1] = 0
+
+    for j in xrange(N-2, -1, -1):
+        for i in xrange(2):
+            if board[i][j]=='.':
+                mincost[i][j] = min(
+                    mincost[i][j+1],
+                    mincost[1-i][j]+1,
+                    mincost[1-i][j+1]+1
+                )
+    res = min(mincost[0][0], mincost[1][0])
+    if res < INF:
+        print "Yes" 
+        print res
+    else:
+        print "No"

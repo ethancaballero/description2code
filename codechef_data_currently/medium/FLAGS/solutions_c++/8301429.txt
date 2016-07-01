@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    long long int t;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        long long int n;
+        scanf("%lld",&n);
+        long long int r=n*(n-1)*(2*n*n-5*n+4);
+        printf("%lld
+",r);
+    }
+    return 0;
+}
+

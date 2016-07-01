@@ -1,0 +1,12 @@
+# cook your code here
+T = int(raw_input())
+for i in range(T):
+    n = int(raw_input())
+    l = map(int,raw_input().split())
+    k = int(raw_input())
+    x = l[k-1]
+    m = 0
+    for j in range(n):
+        if l[j]<=x:
+            m=m+1
+    print m

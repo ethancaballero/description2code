@@ -1,0 +1,21 @@
+import sys
+
+def check(s):    
+    t = 0
+    ans = 0    
+    for i in xrange(0,len(s)):    
+        if s[i]=='<': 
+          	t += 1;   
+        else:    
+            t -= 1;    
+            if t==0: 
+               	ans=max(ans,i+1)   
+            elif t<0: 
+            	break   
+    print ans
+
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	array = sys.stdin.readline().rstrip()
+	check(array)
+	num -= 1

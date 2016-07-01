@@ -1,0 +1,42 @@
+#include <iostream>
+#include <climits>
+#define mod 1000000007
+#define lld long long int
+using namespace std;
+
+lld pow(lld x,lld y)
+{
+    if(y==0) return 1;
+    else if(y==1) return x;
+        else {
+        lld temp=pow(x,y/2);
+        if(y%2==0) return ((temp%mod)*(temp%mod))%mod;
+        else return ((((temp%mod)*(temp%mod))%mod)*x)%mod;
+    }
+}      
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);     
+    int T,N;
+    int a=26,r=26,n;
+    lld S,ans;
+    cin>>T;
+    while(T--)
+    {
+        cin>>N;
+        n=(N)/2;
+        S=(((a*((pow(r,n)%mod - 1)%mod))%mod)*((pow(r-1,mod-2))%mod))%mod;
+        if(N%2==0)
+        {
+            ans=(S+S)%mod;
+        }
+        else
+        {
+            ans=(S+S+((pow(r,n)%mod)*a)%mod)%mod;
+        }
+        cout<<ans<<'
+';
+    }
+    return 0;
+}

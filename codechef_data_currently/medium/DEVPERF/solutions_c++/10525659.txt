@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int MAXN = 1000;
+
+char grid[MAXN + 5][MAXN + 5];
+
+char buf[MAXN];
+
+int main() {
+	int T;
+	scanf("%d", &T);
+	assert(T >= 1 && T <= 20);
+	while (T--) {
+		int n, m;
+		scanf("%d %d", &n, &m);
+		//printf("n : %d
+ m : %d
+", n, m);
+		assert(n >= 1 && n <= MAXN);
+		assert(m >= 1 && m <= MAXN);
+		for (int i = 0; i < n; i++) {
+			scanf("%s", &grid[i]);
+			assert(strlen(grid[i]) == m);
+		}
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				assert(grid[i][j] == '*' || grid[i][j] == '.');
+			}
+		}
+		int min_x = n, max_x = 0;
+		int min_y = m, max_y = 0;
+		bool has_a_house_with_people = false;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (grid[i][j] == '*') {
+					has_a_house_with_people = true;
+					min_x = min(min_x, i);
+					max_x = max(max_x, i);
+					min_y = min(min_y, j);
+					max_y = max(max_y, j);
+				}
+			}
+		}
+		int max_dimension = max(max_x - min_x + 1, max_y - min_y + 1);
+		int ans = max_dimension / 2 + 1;
+		if (!has_a_house_with_people) {
+			ans = 0;
+		}
+		printf("%d
+", ans);
+	}
+	scanf("%s", buf);
+	assert(strlen(buf) == 0);
+	return 0;
+}

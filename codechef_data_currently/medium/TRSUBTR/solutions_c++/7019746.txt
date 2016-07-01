@@ -1,0 +1,143 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<map>
+#include<utility>
+#include<vector>
+#include<string.h>
+#include<cstring>
+#include<string>
+#define N 2222222
+#define pii pair<int,int>
+
+using namespace std;
+int a[N],b[N];
+int ch1[N][2];
+int ch2[N][2];
+map<pii,bool> mp;
+int aptr=0,bptr=0;
+bool f[N],f2[N];
+int aa[N],bb[N];
+int in[N],out[N];
+void dfs(int cur)
+{
+    //printf("dfs(%d)
+",cur);
+    aa[aptr++] = a[cur];
+    in[cur] = aptr-1;
+    if(ch1[cur][0] != -1) dfs(ch1[cur][0]); else aa[aptr++]=-1;
+    if(ch1[cur][1] != -1) dfs(ch1[cur][1]); else aa[aptr++]=-1;
+    out[cur] = aptr;
+
+    mp[pii(in[cur],out[cur])] = true;
+    //printf("%d %d 
+",in[cur],out[cur]);
+}
+void dfs2(int cur)
+{
+    bb[bptr++] = b[cur];
+    if(ch2[cur][0] != -1) dfs2(ch2[cur][0]); else bb[bptr++]=-1;
+    if(ch2[cur][1] != -1) dfs2(ch2[cur][1]); else bb[bptr++]=-1;
+
+}
+bool KMP(int *T,int *pat,int alen,int blen)
+{
+    vector<int> next(blen+1);
+    next[0]=-1;
+    next[1]= 0;
+    int j=0;
+    for(int q=2;q<=blen;q++)
+    {
+       while(j>0 && pat[q-1] != pat[j]) j = next[j];
+       if(pat[q-1] == pat[j])
+            j++;
+       next[q] = j;
+    }
+
+    // Go KMP
+    for(int i=0,q=0;i<alen;i++)
+    {
+        while(q>0 && pat[q] != T[i]) q = next[q];
+        if(pat[q]== T[i]) q++;
+        if(q==blen)
+        {
+            if(mp.find(pii(i-blen+1,i+1)) != mp.end()) return true;
+            else
+                q=next[q];
+        }
+    }
+
+    return false;
+}
+int main()
+{
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt","r",stdin);
+    #endif // ONLINE_JUDGE
+    int n,m,q;
+    int u,v;
+    char cha;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",a+i+1);
+    }
+
+    memset(ch1,-1,sizeof ch1);
+    //for(int i=0;i<N;i++)
+   // ch1[i][0] = ch1[i][1] = -1;
+    memset(f,false,sizeof f);
+    for(int i=1;i<=n-1;i++)
+    {
+
+        scanf("%d %d %c",&u,&v,&cha);
+        if(cha == 'M')
+        ch1[u][0] = v;
+        else
+       ch1[u][1] = v;
+       //printf("%d check u: %d
+",ch1[u][1],u);
+        f[v] = true;
+    }
+    int root=-1;
+    for(int i=1;i<=n;i++)
+    {
+        if(f[i] != true) root = i;
+    }
+    //for(int i=1;i<=n-1;i++)
+      //  printf("%d L %d R %d
+",i,ch1[1][0],ch1[1][1]);
+    //printf("%d root
+",root);
+    dfs(root);
+    //for(int i=0;i<aptr;i++)
+      //  printf("%d ",aa[i]);
+    scanf("%d",&q);
+    while(q--)
+    {
+        bptr=0;
+        scanf("%d",&m);
+        for(int i=1;i<=m;i++)
+            scanf("%d",b+i),f[i]=false,ch2[i][0]=-1,ch2[i][1]=-1;
+        for(int i=1;i<=m-1;i++)
+        {
+            scanf("%d %d %c",&u,&v,&cha);
+            ch2[u][cha=='E'] = v;
+            f[v] = true;
+        }
+        int root2;
+        for(int i=1;i<=m;i++)
+            if(f[i]!= true)root2=i;
+       //     printf("%d root2
+",root2);
+        dfs2(root2);
+        if(KMP(aa,bb,aptr,bptr))
+            printf("YES
+");
+        else
+           printf("NO
+");
+    }
+
+
+    return 0;
+}

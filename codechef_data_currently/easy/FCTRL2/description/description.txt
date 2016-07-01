@@ -1,0 +1,28 @@
+ A tutorial for this problem is now available on our blog. Click here to read it. 
+
+You are asked to calculate factorials of some small positive integers.
+
+Input
+
+An integer t, 1
+Output
+
+For each integer n given at input, display a line with the value of n!
+Example
+
+Sample input:
+
+4
+1
+2
+5
+3
+
+
+Sample output:
+
+1
+2
+120
+6
+

@@ -1,0 +1,18 @@
+t = input()
+for i in range(t):
+    matrix_size = input()
+    dict = {}
+    for j in range(matrix_size):
+        num_list = map(int,raw_input().split())
+        for k in range(len(num_list)):
+            list = []
+            list.append(j)
+            list.append(k)
+            dict[num_list[k]] = list
+    step = 0
+    for l in range(1,matrix_size*matrix_size):
+        if dict.has_key(l) and dict.has_key(l+1):
+            value1 = dict[l]
+            value2 = dict[l+1]
+            step += abs(value1[0]-value2[0])+abs(value1[1]-value2[1])
+    print step

@@ -1,0 +1,44 @@
+## Codechef
+## Farmer and his plot
+## 2016.03.03. Thu
+
+## the function that finds larger number
+def largenum(m,n):
+    if m> n:
+        return m
+    else:
+        return n
+
+## the function that finds smaller number
+def smallnum(m,n):
+    if m<n:
+        return m
+    else:
+        return n
+    
+## the function that can find the greatest common divisor of two numbers
+def GCD(m,n):
+    large = largenum(m,n)
+    small = smallnum(m,n)
+    if large % small == 0:
+        return small
+    else:
+        return GCD(large-small, small)
+
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    inputArr = map(int, raw_input().strip().split())
+    length = inputArr[0]
+    breadth = inputArr[1]
+    gcd = GCD(length, breadth)
+    tnw = length / gcd ## the number of width of squares
+    tnh = breadth / gcd ## the number of height of squres
+    output = tnw * tnh
+    print output
+
+
+
+
+

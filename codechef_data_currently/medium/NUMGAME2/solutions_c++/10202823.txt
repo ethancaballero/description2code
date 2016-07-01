@@ -1,0 +1,22 @@
+
+#include<bits/stdc++.h>
+
+typedef long long LL;
+using namespace std;
+const int M = 1000000007;
+
+int main()
+{
+LL t,n,i;
+
+cin>>t;
+
+while(t--)
+{
+cin>>n;
+if(n%4!=1)
+	cout<<"BOB"<<endl;
+else
+	cout<<"ALICE"<<endl;
+}
+}

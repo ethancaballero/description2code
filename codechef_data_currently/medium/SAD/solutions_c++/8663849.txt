@@ -1,0 +1,115 @@
+#include"bits/stdc++.h"
+using namespace std;
+
+int main()
+{
+	int r,c,i,j,pos,min,max,flag=0;
+	cin>>r>>c;
+	long long int a[r][c],b[r][c],d[r][c];
+		for(i=0;i<r;i++)
+	{
+	    for(j=0;j<c;j++)
+	    {
+	        b[i][j]=0;
+	    }
+	}
+		for(i=0;i<r;i++)
+	{
+	    for(j=0;j<c;j++)
+	    {
+	      d[i][j]=0;
+	    }
+	}
+	for(i=0;i<r;i++)
+	{
+	    for(j=0;j<c;j++)
+	    {
+	        cin>>a[i][j];
+	    }
+	}
+   
+   for(i=0;i<r;i++)
+    {
+    	 	min = 111111111;
+	  for(j=0;j<c;j++)
+	   {
+	  
+	      if(a[i][j]<min)
+	      {
+		 	min=a[i][j];
+		  }
+	    }
+	   for(j=0;j<c;j++)
+	   {
+	   	if(a[i][j]==min)
+	     b[i][j]=min;
+       }
+	 }
+	 
+   for(i=0;i<c;i++)
+    {
+    	max=-1;
+	  for(j=0;j<r;j++)
+	   {
+	      if(a[j][i]>max)
+	      {
+		 	max=a[j][i];
+		  }
+		  
+	   }
+	   for(j=0;j<r;j++)
+	   {
+	   	if(a[j][i]==max)
+	     d[j][i]=max;
+       }
+   }
+  // for(i=0;i<r;i++)
+//    {
+//	  for(j=0;j<c;j++)
+//	   {
+//	    cout<<b[i][j]<<" ";
+//	}
+//	cout<<"
+";
+//}
+//  for(i=0;i<r;i++)
+//    {
+//	  for(j=0;j<c;j++)
+//	   {
+//	    cout<<d[i][j]<<" ";
+//	}
+//	cout<<"
+";
+//}
+    for(i=0;i<r;i++)
+    {
+	  for(j=0;j<c;j++)
+	   {
+	   	  if(b[i][j]==d[i][j]&&b[i][j]!=0)
+	   	  {
+	   	  	cout<<b[i][j]<<endl;
+	   	  	flag=1;
+	   	  	break;
+	   	  }
+	   	  
+	   }
+	   if(flag==1)
+	   break;
+	   
+}
+ if(flag==0)
+ cout<<"GUESS"<<endl;
+}
+
+
+	   	
+	   	
+	   	
+	   	
+	   	
+	   	
+	   	
+   
+   
+   
+   

@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+	int n; cin >> n;
+	string maxs,p,s[n]; int v[n];
+	for(int i=0;i<n;i++) cin >> s[i] >> v[i];
+	int q; cin >> q;
+	while(q--)
+	{
+	    cin >> p; int l = p.size(),maxv=INT_MIN;
+	    for(int i=0;i<n;i++)
+	    {
+	            if(s[i].substr(0,l)==p)
+    	        {
+    	            if(v[i]>maxv)
+    	            {
+    	                maxv = v[i]; maxs = s[i];
+    	            }
+    	        }
+	        
+	    }
+	    if(maxv==-1)
+	        cout << "NO";
+	   else
+	        cout << maxs;
+	    cout << endl;
+	}
+	return 0;
+}

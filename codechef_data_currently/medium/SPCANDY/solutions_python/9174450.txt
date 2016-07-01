@@ -1,0 +1,8 @@
+from __future__ import division
+T = int(raw_input())
+for t in range(T):
+	N, K = map(int, raw_input().split())
+	if K == 0:
+		print "%d %d" %(K, N)
+	else:
+		print "%d %d" %(N//K, N%K)

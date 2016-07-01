@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+	    char str[1000001];
+	    scanf("%s",str);
+	    long int i,count=0,j=0;
+	    for(i=0;i<strlen(str);i++)
+	    {
+
+	            if(str[i]=='<')
+	            {
+	               if(count==0)
+	                  j=i;
+	               count++;
+	            }
+	            else
+	            {
+	               count--;
+	               if(count<0)
+	                  break;
+	            }
+
+	    }
+	    if(count<0)
+	       printf("%ld
+",i);
+	    else if(count>0)
+	       printf("%ld
+",j);
+	    else
+	       printf("%ld
+",strlen(str));
+
+	}
+	return 0;
+}

@@ -1,0 +1,11 @@
+t=int(raw_input().strip())
+while t>0:
+	n,m,k=map(int,raw_input().strip().split())
+	arr1=list(map(int,raw_input().strip().split()))
+	s1=set(arr1)
+	arr2=list(map(int,raw_input().strip().split()))
+	s2=set(arr2)
+	s3=s1.intersection(s2)
+	s4=s1.union(s2)
+	print len(s3),(n-len(s4))
+	t-=1

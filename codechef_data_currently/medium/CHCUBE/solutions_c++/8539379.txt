@@ -1,0 +1,76 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+ //Input macros
+    #define si(n) scanf("%d",&n)
+    #define sc(n) scanf("%c",&n)
+    #define sl(n) scanf("%lld",&n)
+    #define sf(n) scanf("%lf",&n)
+    #define ss(n) scanf("%s",n)
+    #define mem(a,b) memset(a,b,sizeof(a))
+    #define f(a,b) for(int i=a;i<b;i++)
+    #define maX(a,b) ((a)>(b)?a:b)
+    #define ll long long int
+    #define s(t) scanf("%lld",&t)
+    #define p(count) printf("%lld
+",count)
+    #define gc getchar_unlocked
+
+void scanint(int &x)
+{
+    register int c = gc();
+    x = 0;
+    for(;(c<48 || c>57);c = gc());
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+
+
+int main() 
+	{
+	// your code goes here
+		ll t,y=0;
+		s(t);
+		
+		vector<string> v(6);
+		while(t--)	
+			{
+			for(int i=0;i<6;i++)
+				cin>>v[i];
+	
+			if(v[0]==v[3]&&v[3]==v[4])
+				printf("YES
+");
+			else
+			if(v[0]==v[3]&&v[3]==v[5])
+				printf("YES
+");
+			else
+			if(v[0]==v[2]&&v[2]==v[5])
+				printf("YES
+");
+			else
+			if(v[0]==v[2]&&v[2]==v[4])
+				printf("YES
+");
+			else
+			if(v[1]==v[4]&&v[4]==v[3])
+				printf("YES
+");
+			else
+			if(v[1]==v[5]&&v[5]==v[3])
+				printf("YES
+");
+			else
+			if(v[1]==v[5]&&v[5]==v[2])
+				printf("YES
+");
+			else
+			if(v[1]==v[2]&&v[2]==v[4])
+				printf("YES
+");
+			else
+				printf("NO
+");			
+			}
+	return 0;
+	}

@@ -1,0 +1,85 @@
+#include <stdio.h>
+ 
+#ifndef ONLINE_JUDGE
+#define getcx getchar
+#else
+#define getcx getchar_unlocked
+#endif
+ 
+inline long getint (void) {
+	long x = 0; char ch = getcx();
+	while (ch<'0' || '9'<ch)
+		ch = getcx();
+	while ('0'<=ch && ch<='9') {
+		x = x*10+ch-'0';
+		ch = getcx();
+	}
+	return x;
+}
+ 
+inline long getstr (char *s) {
+	long n = 0; char ch = getcx();
+	while (ch!='4' && ch!='7')
+		ch = getcx();
+	while (ch=='4' || ch=='7') {
+		s[n++] = ch;
+		ch = getcx();
+	}
+	s[n] = 0;
+	return n;
+}
+ 
+long n, k, l;
+char a [50][51];
+long c [50];
+char s [51];
+ 
+long cmpstr (char *a,char *b,long n) {
+	long i;
+	for (i=0; i<n; i++)
+		if (a[i]!=b[i])
+			return 0;
+	return 1;
+}
+ 
+int main (void) {
+#ifndef ONLINE_JUDGE
+	freopen( "TESTS\Little Elephant and Strings.TXT", "r", stdin );
+#endif
+ 
+	k = getint();
+	n = getint();
+ 
+	long i, j, ok;
+ 
+	for (i=0; i<k; i++) {
+		c[i] = getstr( a[i] );
+	}
+ 
+	while (n--) {
+		l = getstr( s );
+		if (l>=47) {
+			puts( "Good" );
+		} else {
+			ok = 0;
+			for (i=0; i<k; i++) {
+				for (j=0; j<l; j++) {
+					if (j+c[i]-1>l)
+						break;
+					if (cmpstr( a[i], &s[j], c[i] )) {
+						ok = 1;
+						break;
+					}
+				}
+				if (ok)
+					break;
+			}
+			if (ok)
+				puts( "Good" );
+			else
+				puts( "Bad" );
+		}
+	}
+ 
+	return 0;
+} 

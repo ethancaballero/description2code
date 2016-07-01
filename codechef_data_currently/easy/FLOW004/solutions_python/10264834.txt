@@ -1,0 +1,8 @@
+t = input()
+for i in range(t):
+    num = int(input())
+    last = num % 10
+    while not num == 0:
+        first = num % 10
+        num /= 10
+    print first + last

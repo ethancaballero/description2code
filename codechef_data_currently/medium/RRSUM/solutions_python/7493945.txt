@@ -1,0 +1,10 @@
+n,m=map(int,raw_input().split())
+for _ in xrange(m):
+	q=int(raw_input())
+	if q < n+2 :
+          print 0
+        else :
+          if q <= 2*n+1 :
+            print q-n-1
+          else :
+            print (4*n+2)-q-n-1

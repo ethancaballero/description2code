@@ -1,0 +1,24 @@
+import sys
+from collections import Counter
+
+unwanted_digits = ['0', '1', '2', '4', '6', '7', '9']
+ciel_number = []
+count = 0
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	lis = sys.stdin.readline().rstrip().split()
+	number = lis[-1]
+	freq = Counter(number)
+	flag = True
+	digits = freq.keys()
+	for digit in digits:
+		if digit in unwanted_digits:
+			flag = False
+			break
+	if flag:
+		if freq['8'] >= freq['5'] and freq['5'] >= freq['3']:
+			ciel_number.append(number)
+			count += 1
+	num -= 1
+
+print count

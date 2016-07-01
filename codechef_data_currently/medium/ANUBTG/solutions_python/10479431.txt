@@ -1,0 +1,24 @@
+for _ in range(input()):
+    n = int(raw_input())
+    pay = 0
+    costs = map(int,raw_input().split())
+    costs.sort()
+    costs.reverse()
+    if n%4==0:
+        for i in range(n/4):
+            split = costs[i * 4:(i + 1) * 4]
+
+            if len(split) >= 2:
+                pay = pay + split[0] + split[1]
+            else:
+                pay = pay + split[0]
+        print pay
+    else:
+        for i in range((n+4)/4):
+            split = costs[i * 4:(i + 1) * 4]
+            
+            if len(split)>=2:
+                pay = pay + split[0]+split[1]
+            else:
+                pay=pay+split[0]
+        print pay

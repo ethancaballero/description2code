@@ -1,0 +1,9 @@
+test_case = int(raw_input())
+for t in range(test_case):
+	n , c, q = map(int, raw_input().split())
+	for i in range(q):
+		l, r = map(int, raw_input().split())
+		if c <= r and c >= l:
+			c = r - (c - l)
+			#print 'c =', c
+	print c

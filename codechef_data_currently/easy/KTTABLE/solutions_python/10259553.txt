@@ -1,0 +1,15 @@
+if __name__ == "__main__":
+	tests = int(raw_input())
+	for test in range(tests):
+		total_students = int(raw_input())
+		scheudled_time = [int(time) for time in raw_input().split()]
+		actual_time = [int(time) for time in raw_input().split()]
+		init_time = 0
+		fortunate_students_count = 0
+		for s_time, a_time in zip(scheudled_time,actual_time):
+			if a_time <= abs(s_time - init_time):
+				fortunate_students_count += 1
+			init_time = s_time
+
+		print fortunate_students_count		
+	

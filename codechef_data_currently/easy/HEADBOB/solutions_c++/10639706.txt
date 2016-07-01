@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+ 
+
+int main(void) {
+
+	// your code goes here
+
+	int t;
+
+	scanf ("%d", &t);
+
+	while (t--) {
+
+	    int n, nn=0, ni=0, ns=0, i;
+
+	    char g[1001];
+
+	    scanf ("%d", &n);
+
+	    scanf ("%s", g);
+
+	    for (i=0; g[i]; i++) {
+
+	        if (g[i] == 'I') {
+
+	            ni++;
+
+	            break;
+
+	        }
+
+	        else if (g[i] == 'Y') {
+
+	            nn++;
+
+	            break;
+
+	        }
+
+	    }
+
+	    if (ni) {
+
+	        printf ("INDIAN
+");
+
+	    }
+
+	    else if (nn) {
+
+	        printf ("NOT INDIAN
+");
+
+	    }
+
+	    else {
+
+	        printf ("NOT SURE
+");
+
+	    }
+
+	}
+
+	return 0;
+
+}
+

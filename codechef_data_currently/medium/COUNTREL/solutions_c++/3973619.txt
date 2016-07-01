@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+#define MOD 100000007
+
+int powmod(long long a, long long n) {
+    long long res = 1;
+    while(n) {
+        if (n&1) res = (res*a)%MOD;
+        a = (a*a)%MOD;
+        n>>=1;
+    }
+    return res;
+}
+
+int main() {
+    // by2 is equivalent to 1/2 in modular arithmetic
+    const int by2 = powmod(2,MOD-2);
+    // cout << by2 << " " << (by2*2)%MOD << endl;
+    int t;
+    cin >> t;
+    while(t--) {
+        long long n;
+        cin >> n;
+        long long a = powmod(4,n-1);
+        long long b = powmod(3,n);
+        long long c = powmod(2,n);
+
+        long long r1 = (b+1)%MOD;
+        r1 = (r1*by2)%MOD;
+        r1 = (r1-c+MOD)%MOD;
+
+        long long r2 = (2*a)%MOD;
+        r2 = (r2-b+MOD)%MOD;
+        r2 = (r2 + (c*by2)%MOD)%MOD;
+        r2 = (r2-r1+MOD)%MOD;
+
+        cout << r1 << " " << r2 << endl;
+    }
+    return 0;
+}

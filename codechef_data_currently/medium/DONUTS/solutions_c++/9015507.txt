@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<algorithm>
+long long int a[20002];
+using namespace std;
+int main()
+{
+	long long int i, n, m ,t,rem,cut;
+	scanf("%lld", &t);
+	while (t--)
+	{
+		scanf("%lld", &n);
+		scanf("%lld", &m);
+		rem = m;
+		cut = 0;
+		for (i = 0; i < m; i++)
+			scanf("%lld", &a[i]);
+		sort(a, a + m);
+		i = 0;
+		while (rem != 0)
+		{
+			if (a[i] == rem - 1 || a[i] == rem - 2)
+			{
+				cut += a[i];
+				rem = 0;
+			}
+			else if(a[i]>=rem)
+			{
+				cut += rem-1;
+				rem = 0;
+			}
+			else
+			{
+				cut += a[i];
+				rem -= a[i] + 1;
+			}
+		}
+		printf("%lld
+", cut);
+	}
+	return 0;
+}

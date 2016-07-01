@@ -1,0 +1,13 @@
+input=map(long,raw_input().split())
+N=input[0]
+M=input[1]
+while M :
+    q=long(raw_input())
+    if q < N+2 :
+        print 0
+    else :
+        if q <= 2*N+1 :
+            print q-N-1
+        else :
+            print (4*N+2)-q-N-1
+    M-=1

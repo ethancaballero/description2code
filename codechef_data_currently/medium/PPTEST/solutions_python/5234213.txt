@@ -1,0 +1,33 @@
+
+
+
+T=int(raw_input())
+for x in range(T):
+    inp=map(int,raw_input().split())
+    N=inp[0]
+    W=inp[1]
+
+    
+    C=[0]*N
+    P=[0]*N
+    T=[0]*N
+
+    for i in range(N):
+        inp=map(int,raw_input().split())
+        C[i]=inp[0]
+        P[i]=inp[1]
+        T[i]=inp[2]
+        
+    
+    memo = [[0]*(W+1) for i in range(N+1)]
+    
+    for n in range(N+1):
+        for w in range(W+1):
+            if n==0 or w==0:
+                memo[n][w] = 0
+            elif T[n-1] <= w:
+                memo[n][w] =  max((C[n-1]*P[n-1])+memo[n-1][w-T[n-1]],memo[n-1][w])
+            else:
+                memo[n][w] =  memo[n-1][w]
+    print memo[N][W]
+      

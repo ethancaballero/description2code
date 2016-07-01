@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+#define D 1000000007
+#define gcd __gcd
+#define getcx getchar
+#define pc putchar
+#define get(x) scanf("%d",&x)
+#define getl(x) scanf("%lld",&x)
+#define print(x) printf("%d
+",x)
+#define printl(x) printf("%lld
+",x)
+#define bitcount __builtin_popcount
+#define debug(s) cout << "check : " << s << endl
+using namespace std;
+typedef long long ll;
+int visited[1005];
+stack <int> st;
+int main()
+{
+    int t; get(t);
+    while(t--)
+    {
+        int n,k; get(n);get(k);
+        for(int i=0;i<=n;i++) visited[i]=0;
+        int a[k][2],i,ans=0;
+        for(i=0;i<k;i++)
+        {
+            get(a[i][0]); get(a[i][1]);
+        }
+        st.push(k-1);
+        visited[a[k-1][0]] = visited[a[k-1][1]] = 1;
+        for(int i=k-2;i>=0;i--)
+        {
+            if(!visited[a[i][0]] && !visited[a[i][1]])
+            {
+                st.push(i);
+                visited[a[i][0]] = visited[a[i][1]] = 1;
+            }
+        }
+        while(!st.empty())
+        {
+            cout << st.top() << " "; st.pop();
+        }
+        cout << endl;
+    }
+    return 0;
+}

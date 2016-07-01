@@ -1,0 +1,109 @@
+#include<cstdio>
+#include<string>
+#include<iostream>
+#include <algorithm>
+#include<cctype>
+#include<cstring>
+typedef long long int ll;
+using namespace std;
+int main()
+{
+
+    ll d,a[200],i;
+    string s;
+#ifndef ONLINE_JUDGE
+    freopen("i_p.txt","r",stdin);
+#endif
+    cin >> d;
+    while(d--)
+    {
+        ll  flag=1,ex1=0,ex2=0,temp1=0,temp2=0,ex3=0,j,fl=0;
+        for(i=97; i<=122; i++)
+            a[i]=0;
+        cin >> s;
+        int len=s.size();
+        if(len==1)
+        {
+            cout <<"NO
+";
+            continue;
+        }
+        if(len==0)
+        {
+            cout << "NO
+";
+            continue;
+        }
+        //cout << len << "
+";
+        if(len%2==0)
+        {
+            i=0,j=len/2;
+            while(i<(len/2) && j<len)
+            {
+                if(s[i]!=s[j])
+                {
+                    flag=0;
+                    break;
+                }
+                i++;
+                j++;
+            }
+            if(flag)
+            {
+                cout << "YES
+";
+                continue;
+            }
+            else
+            {
+
+                cout <<"NO
+";
+                continue;
+            }
+        }
+        for(i=0; i<len; i++)
+        {
+            a[s[i]]++;
+        }
+        /*for(i=0;i<len;i++)
+        {
+            if(a[s[i]]%2==1)
+                fl++;
+        }
+        if(fl>1)
+        {
+            cout << "NO
+";
+            continue;
+        }*/
+        temp1=len/2;
+        temp2=temp1+1;
+        ex1=0,ex2=0,ex3=0;
+        for(i=0; i<temp1; i++)
+        {
+            if(!((s[i]==s[i+temp1])|| (s[i]==s[i+temp2])))
+                ex1++;
+        }
+        // cout << "
+";
+        for(i=len-1; i>temp1;i--)
+        {
+            if(!((s[i]==s[i-temp1]) || (s[i]==s[i-temp2])))
+                ex2++;
+        }
+        if(!(s[temp1]==s[2*temp1] || s[temp1]==s[0]))
+            ex3++;
+        // cout << ex1 << ex2 << ex3 << "
+";
+        if(ex1+ex2+ex3<=1)
+            cout << "YES
+";
+        else
+            cout << "NO
+";
+    }
+
+    return 0;
+}

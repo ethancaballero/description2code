@@ -1,0 +1,84 @@
+
+def createFrogMap (frogs, distance):
+    table = {}
+    frogs.sort()
+    frog = 1
+    peer = 0
+    reset = 0
+    
+    d = 0
+    table[frogs[0]] = 0
+    while frog < len(frogs):
+        if (distance == 0):
+            #print frog
+            table[frogs[frog]] = 0
+            frog += 1
+            continue
+        
+        if reset == 1 and frog > 1:
+            peer = frog - 1
+            reset = 0
+        
+        d = frogs[frog] - frogs[frog - 1]
+        if d < 0:
+            d = -d
+        
+        if d > distance:
+            reset = 1
+            while peer <= frog :
+                #print frogs[peer]
+                table[frogs[peer]] = frogs[frog - 1]
+                peer += 1
+        elif frog == len(frogs) - 1:
+            while peer <= frog :
+                table[frogs[peer]] = frogs[frog]
+                peer += 1
+        frog += 1
+
+    return table
+    
+params = raw_input().split()
+num = int(params[0])
+distance = int(params[1])    
+pairs = int(params[2]) 
+
+frogs = []
+
+frogLookup = []
+values = raw_input().split()
+for i in values:
+    frogs.append(int(i))
+    frogLookup.append(int(i))
+    
+    
+table = createFrogMap(frogs, distance)
+#print table
+#print frogs
+
+#for i in range(0, num):
+#    print i, frogs[0], frogLookup[i], table[frogLookup[i]]
+ 
+     
+    
+while pairs > 0:
+    f1, f2 = raw_input().split()
+    f1 = int(f1)
+    f2 = int(f2)
+    if f1 == 0 or f2 == 0 or f1 > num or f2 > num:
+        #print "No"
+        pairs -= 1
+        continue
+    f1 = frogLookup[f1 - 1]
+    f2 = frogLookup[f2 - 1]
+    if (f1 > f2):
+        t = f2
+        f2 = f1
+        f1 = t
+    if f1 == f2 or (f1 in table and table[f1] >= f2):
+        print "Yes"
+    else:
+        print "No"
+    
+    pairs -= 1
+    
+    

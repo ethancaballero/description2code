@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MOD 1000000007
+#define LL long long
+LL powerof(int x,int n)
+{
+	LL a;
+	if(n==0)
+		return 1;
+	else if(n%2==1)
+	{
+		a=powerof(x,n-1);
+		a=(x*a)%MOD;
+		return a;	
+	}
+	else
+	{
+		a=powerof(x,n/2);
+		a=(a*a)%MOD;
+		return a;
+	}
+}
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		LL power,ans;
+		if(n%2!=0)
+		{
+			power=powerof(2,n/2+1);
+			ans=2*(power-1);
+		}
+		else 
+		{
+			power=powerof(2,n/2);
+			ans=(3*power-2)%MOD;
+		}
+		ans=ans%MOD;
+		cout<<ans<<endl;
+	}
+	return 0;
+}

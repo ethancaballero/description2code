@@ -1,0 +1,32 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int m,x,y,b=0;
+        cin>>m>>x>>y;
+        int a[m];
+        x=x*y;
+        for(int i=0;i<m;i++)
+        cin>>a[i];
+        sort(a,a+m);
+        y=0;
+        b=a[0]-x-1;
+        if(b>0)
+            y+=b;
+        for(int i=1;i<m;i++)
+        {
+             b=a[i]-a[i-1]-2*x-1;
+            if(b>0)
+                y+=b;
+        }
+        b=100-a[m-1]-x;
+        if(b>0)
+            y+=b;
+            cout<<y<<endl;
+    }
+}

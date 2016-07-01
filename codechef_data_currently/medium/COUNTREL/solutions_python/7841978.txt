@@ -1,0 +1,49 @@
+//r1=(pow(3,n)+1-pow(2,n+1))/2
+//all=pow(2,2n-1)-pow(3,n)+pow(2,n-1)
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#define DIVISOR 100000007
+long long int rem(long long int base,long long int big,long long int divisor);
+int main()
+{
+    long long int times,r1,r2,all;
+    long long int n;
+    scanf("%lld",&times);
+    while(times--)
+    {
+	scanf("%lld",&n);
+	all=rem(2,(2*n)-1,DIVISOR)+rem(2,n-1,DIVISOR)-rem(3,n,DIVISOR)+DIVISOR;
+//	printf("%lld %lld %lld
+",rem(2,(2*n-1),DIVISOR),rem(2,(n-1),DIVISOR),rem(3,n,DIVISOR));
+	all=all%DIVISOR;
+	{//finding r1 -HATE THIS
+	    r1=(((int)rem(3,n,2*DIVISOR))/2+1)-rem(2,n,DIVISOR)+DIVISOR;
+	    r1=r1%DIVISOR;
+	}
+	r2=all-r1+DIVISOR;
+	r2%=DIVISOR;
+	printf("%lld %lld
+",r1,r2);
+    }
+    return 0;
+}
+long long int rem(long long int base,long long int big,long long int divisor)//ig is the exponent
+{
+    long long int result,mult,rem,quot,exp;
+    //big=big%(divisor-1);//only if divisor is prime 
+ //   printf(" %lld^^%lld%% %lld is ",base,big,divisor);
+    result=1;
+    while(big>0)
+    {
+	if(big%2==1)
+	    result=(result*base)%divisor;
+	big/=2;
+	base=(base*base)%divisor;
+    }
+    //printf("%lld
+",result);
+    return (result);
+}
+//problem for input 1000000000000 
+ 

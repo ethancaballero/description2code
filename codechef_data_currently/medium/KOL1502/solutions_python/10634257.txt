@@ -1,0 +1,81 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#define M 10000000
+using namespace std;
+long long int *a, *b, *arr, mid;
+long long int map_index(long long int t)
+{
+	return t + mid;
+}
+void swap(long long int * &p, long long int * &q)
+{
+	long long int *r = p;
+	p = q;
+	q = r;
+}
+long long int val(long long int index)
+{
+	if(index < 0 || index > 2 * mid)
+		return 0;
+	return b[index];
+}
+void update_array(long long int t)
+{
+	long long int index, index1, index2;
+	for(long long int i = -mid; i <= mid; i++)
+	{
+		index = map_index(i);
+		index1 = map_index(i - t);
+		index2 = map_index(i + t);
+		a[index] = (val(index1) + val(index2)) % M;
+	}
+}
+void print()
+{
+	cout << "Current Status
+";
+	for(long long int i = -mid; i <= mid; i++)
+		cout << "t = " << i << ", Count = " << b[map_index(i)] << endl;
+}
+int main()
+{
+	a = new long long int[20005];
+	b = new long long int[20005];
+	int t, n;
+	cin >> t;
+	while(t--)
+	{
+		long long int s = 0, index;
+		scanf("%d", &n);
+		arr = new long long int[n];
+		for(int i = 0; i < n; i++)
+		{
+			scanf("%lld", &arr[i]);
+			s += arr[i];
+		}
+		mid = s;
+		for(long long int i = -s; i <= s; i++)
+		{
+			index = map_index(i);
+			if(i != 0)
+				a[index] = 0;
+			else
+				a[index] = 1;
+		}
+		swap(a, b);
+		for(long long int i = 0; i < n; i++)
+		{
+			update_array(arr[i]);
+			swap(a, b);
+		}
+		s = 0;
+		for(long long int i = -mid; i <= mid; i++)
+			s = (s + (long long int)fabs(i) * b[map_index(i)]) % M;
+		cout << s << endl;
+		delete arr;
+	}
+	delete a;
+	delete b;
+	return 0;
+}

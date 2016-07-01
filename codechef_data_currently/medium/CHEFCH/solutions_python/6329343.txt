@@ -1,0 +1,23 @@
+import sys
+n = int(sys.stdin.readline().rstrip())
+for i in xrange(0,n):
+    inputStr = sys.stdin.readline().rstrip()
+    plus = '+'
+    minus = '-'
+    plusCount = 0
+    minusCount = 0
+    inputLength = len(inputStr)
+    for j in xrange(0,inputLength):
+        if j % 2 == 0:
+            if inputStr[j] != minus:
+                minusCount += 1
+            else:
+                plusCount += 1
+        else:
+            if inputStr[j] != plus:
+                minusCount += 1
+            else:
+                plusCount += 1
+    print min(plusCount, minusCount)
+                
+            

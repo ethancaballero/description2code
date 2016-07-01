@@ -1,0 +1,34 @@
+    #include<iostream>
+    using namespace std;
+    int gcd(int a,int b)
+    {
+    	if(a%b==0)
+    		return b;
+    	return gcd(b,a%b);
+    }
+    int main()
+    {
+    	int tc,s1,s2,a,b;
+    	cin>>tc;
+    	while(tc--)
+    	{
+    		int i;
+    		cin>>s1>>s2;
+    		a=(s1<0)?-s1:s1;
+    		b=(s2<0)?-s2:s2;
+    		i=gcd(a,b);
+    		if(s1<0&&s2>0||s2<0&&s1>0)
+    		{
+    			cout<<(a+b)/i;
+    			cout<<endl;
+    		}
+    		else
+    		{
+    			if(s1>s2)
+    				cout<<(s1-s2)/i<<endl;
+    			else
+    				cout<<(s2-s1)/i<<endl;
+    		}
+    	}
+    	return 0;
+    } 

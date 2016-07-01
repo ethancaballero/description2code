@@ -1,0 +1,130 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <math.h>
+#include <cstring>
+#include <string>
+#include <string.h>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<b;++i)
+#define INT(x) scanf("%d",&x)
+#define LLD(x) scanf("%lld",&x)
+#define CLR(x) memset(x,0,sizeof(x));
+#define F first
+#define S second
+#define PB push_back
+#define MOD 1000000007
+#define MAX 100005
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef pair<int,int> PII;
+typedef map<int,int> MII;
+typedef vector<PII> VPII;
+typedef vector<int> VI;
+typedef vector<char> VC;
+typedef vector<LL> VLL;
+typedef vector<VI> VVI;
+typedef vector<VLL> VVL;
+
+
+int main()
+{
+
+int test; INT(test);
+
+while(test>0)
+{
+--test;
+
+int n,m; INT(n); INT(m);
+
+int color[45],cost[45];
+
+CLR(color);
+CLR(cost);
+LL sum=0;
+VPII cp;
+FOR(i,1,n+1)
+{
+	int a,b; 
+	INT(a); INT(b);
+
+	cp.PB(PII(a,b));
+
+	++color[a];
+	cost[a] += b;
+
+}
+
+LL dp1[50][50]; CLR(dp1);
+
+LL a[45]; CLR(a);
+LL apos=1;
+
+FOR(i,1,41)
+{
+	if(color[i])
+	{
+		a[apos++] = (1<<color[i]) - 1;
+		//cout<<a[apos-1]<<" "<<endl;
+	}		
+
+}
+
+//cout<<"apos = "<<apos<<endl;
+FOR(i,0,40)
+ dp1[i][0]=1;
+
+
+FOR(i,1,41)
+{
+	
+	FOR(j,1,apos)
+	{
+		dp1[i][j] = dp1[i-1][j] + dp1[i-1][j-1]*(pow(2,color[i])-1);
+		//cout<<" dp1[i][j] = "<<dp1[i][j]<<endl;
+	}
+
+}
+
+
+LL dp2[50][50]; CLR(dp2);
+
+FOR(i,1,41)
+{
+
+	FOR(j,1,apos)
+	{
+
+	dp2[i][j] = dp2[i-1][j] + dp2[i-1][j-1]*(pow(2,color[i])-1) + dp1[i-1][j-1]*cost[i]*(pow(2,color[i]-1));
+	}
+
+}
+
+LL num=0;
+LL dem=0;
+
+FOR(i,m,41)
+{	num += dp2[n][i];
+	dem += dp1[n][i];
+
+}
+//cout<<"num = "<<num<<endl;
+//cout<<"dem = "<<dem<<endl;
+
+double ans = (double)num/(double)dem;
+
+printf("%0.9f
+",ans);
+
+
+}
+
+return 0;
+}

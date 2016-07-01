@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN = 1e6 + 10;
+typedef long long LL;
+const LL MOD = 1e9 + 7;
+LL fib[MAXN];
+int main(){
+    fib[0] = 1;
+    fib[1] = 1;
+    for(int i = 2;i < MAXN;++i){
+        fib[i] = fib[i - 1] + fib[i - 2];
+        while(fib[i] >= MOD)  fib[i] -= MOD;
+    }
+    for(int i = 1;i < MAXN;++i){
+        fib[i] = __builtin_popcountll(fib[i]);
+    }
+    int t;
+    cin >> t;
+    while(t--){
+        int N, G;
+        scanf("%d%d", &N, &G);
+        if(fib[N] == G){
+            printf("CORRECT
+");
+        } else {
+            printf("INCORRECT
+");
+        }
+    }
+    return 0;
+}

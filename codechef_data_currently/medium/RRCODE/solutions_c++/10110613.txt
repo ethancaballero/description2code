@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+    long long  n,k,answer;
+    cin>>n>>k>>answer;
+    long long *array=new long long[n];
+    for(int i=0;i<n;i++){
+        cin>>array[i];
+    }
+    string operator1;
+    cin>>operator1;
+    if(k==0){
+        cout<<answer<<endl;
+    }
+    else{
+    if(operator1=="AND"){
+            for(int j=0;j<n;j++){
+                answer=answer&array[j]; 
+            }
+        
+        cout<<answer<<endl;
+    }
+    else if(operator1=="OR"){
+    
+            for(int j=0;j<n;j++){
+                answer=answer|array[j]; 
+            }
+        
+        cout<<answer<<endl;
+    }
+    else{
+        if(k%2==0){
+            cout<<answer<<endl;
+            continue;
+        }
+            for(int j=0;j<n;j++){
+                answer=answer^array[j]; 
+            }
+        
+        
+            cout<<answer<<endl;
+        
+        
+    }
+    }
+    }
+}

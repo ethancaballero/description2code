@@ -1,0 +1,35 @@
+	#include<iostream>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n,m;
+			cin>>n>>m;
+			char a[55][55];
+			for(int i=0;i<n;i++)
+				cin>>a[i];
+			int dist;
+			int count=0;
+			for(int i=0;i<n;i++)
+			{
+				for(int j=0;j<m;j++)
+				{
+					for(int k=j+1;k<m;k++)
+					{
+						dist=k-j;
+						if(i+dist<n)
+						{
+							if(a[i][j]==a[i][k] && a[i][j]==a[i+dist][j] && a[i][k]==a[i+dist][k])
+								count++;
+						}	
+					}	
+				}	
+			}	
+			cout<<count<<endl;
+			t--;
+		}	
+
+	}

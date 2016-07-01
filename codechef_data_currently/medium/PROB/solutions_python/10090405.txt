@@ -1,0 +1,9 @@
+from __future__ import division
+t=input()
+while(t>0):
+	a,b,c,d=map(int,raw_input().strip().split())
+	tot=a+b+c
+	res=(a/tot)*(a-1)/(a+b-1)+(b/tot)*(a/(a+b-1))+(c/tot)*(a/(a+b))
+	print res
+	t-=1
+	

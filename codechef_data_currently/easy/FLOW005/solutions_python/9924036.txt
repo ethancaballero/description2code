@@ -1,0 +1,22 @@
+t = input()
+for _ in xrange(t):
+    n = input()
+    count = 0
+    if n >= 100:
+        count += n / 100
+        n %= 100
+    if n >= 50:
+        count += n / 50
+        n %= 50
+    if n >= 10:
+        count += n / 10
+        n %= 10
+    if n >= 5:
+        count += n / 5
+        n %= 5
+    if n >= 2:
+        count += n / 2
+        n %= 2
+    if n > 0:
+        count += n
+    print count

@@ -1,0 +1,27 @@
+#include <iostream>
+#include <stdio.h>
+#define ll long long int
+#define li long int
+
+using namespace std;
+
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while(t--)
+	{
+		li n, max, temp, count = 1;
+		scanf("%ld", &n);
+		scanf("%ld", &max);		n-- ;
+		while(n--){
+			scanf("%ld", &temp);
+			if(max >= temp){
+				max = temp ;
+				count++ ;
+			}
+		}
+		printf("%ld
+", count);
+	}
+}

@@ -1,0 +1,25 @@
+t=input()
+
+while t>0:
+    flag='o'
+    n=input()
+    k=raw_input()
+    i=0
+    while i<n:
+        if(k[i]=='I'):
+            flag='i'
+        if(k[i]=='Y'):
+            flag='n'
+        i+=1
+    if(flag=='o'):
+        print "NOT SURE"
+    if(flag=='i'):
+        print "INDIAN"
+    if(flag=='n'):
+        print "NOT INDIAN"
+    t-=1
+    
+            
+            
+    
+

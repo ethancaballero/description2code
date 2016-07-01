@@ -1,0 +1,36 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include<string>
+#define ll long long
+#define M 1000000007
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n1;
+        cin>>n1;
+        string s;
+        cin>>s;
+        string ans=s;
+        for(int i=0;i<n1;i++)
+        {
+            string temp=s;
+            temp.erase(temp.begin()+i);
+            for(int j=0;j<n1;j++)
+            {
+                temp.insert(temp.begin()+j,s[i]);
+                ans = min(ans,temp);
+                temp.erase(temp.begin()+j);
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}
+ 

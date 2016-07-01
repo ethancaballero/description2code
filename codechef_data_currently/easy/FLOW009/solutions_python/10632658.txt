@@ -1,0 +1,10 @@
+t =input()
+while t>0:
+    q,p =map(int,raw_input().split())
+    if q>1000:
+        q=q-(0.1*q)
+        print ("%.6f"%(q*p))
+    else:
+        print("%.6f"%float(q*p))
+
+    t=t-1

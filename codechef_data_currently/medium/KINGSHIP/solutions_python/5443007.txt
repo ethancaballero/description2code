@@ -1,0 +1,14 @@
+t=input()
+while t:
+    n=input()
+    a=map(int,raw_input().split())
+    min=a[0]
+    for i in range(n):
+        if min>a[i]:
+            min=a[i]
+    cost=0
+    for i in range(n):
+        cost=cost+min*a[i]
+    cost-=min*min
+    print(cost)
+    t-=1

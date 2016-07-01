@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+// Shortcuts for "common" data types in contests
+typedef long long int ll;
+typedef vector<int> vi;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+typedef set<int> si;
+typedef map<string, int> msi;
+// To simplify repetitions/loops, Note: define your loop style and stick with it!
+#define s(i) scanf("%d",&i)
+#define sl(i) scanf("%ld",&i)
+#define sll(i) scanf("%lld",&i)
+#define REP(i, a, b) for (int i = int(a); i <= int(b); i++) // a to b, and variable i is local!
+#define TRvi(c, it) for (vi::iterator it = (c).begin(); it != (c).end(); it++)
+#define TRvii(c, it) for (vii::iterator it = (c).begin(); it != (c).end(); it++)
+#define TRmsi(c, it) for (msi::iterator it = (c).begin(); it != (c).end(); it++)
+#define INF 2000000000 // 2 billion
+#define MAX ( 1 + ( 1 << 21) ) // Why? :D
+
+int main(){
+	int t,i;
+	cin >> t;
+	char s[3000];
+	while(t--){
+		cin >> s;
+		int len = strlen(s);
+		char c[4];
+		char chef[4];
+		chef[0] = 'F';
+		chef[1] = 'E';
+		chef[2] = 'H';
+		chef[3] = 'C';
+
+		for(i=len-1;i>=0;i--){
+			c[0] = s[i];c[1] = s[i-1];c[2] = s[i-2];c[3] = s[i-3];
+			if(c[0] == chef[0] || c[0] == '?'){
+				if(c[1] == chef[1] || c[1] == '?'){
+					if(c[2] == chef[2] || c[2] == '?'){
+						if(c[3] == chef[3] || c[3] == '?'){
+							s[i] = 'F';s[i-1] = 'E'; s[i-2] = 'H';s[i-3] = 'C';
+						}
+					}
+				}
+			}
+			//i = i - 4;
+		}
+		for(i=len-1;i>=0;i--){
+			if(s[i] =='?'){
+				s[i] = 'A';
+			}
+		}
+		for(i=0;i<len;i++) cout << s[i];
+		cout << endl;
+	}
+	return 0;
+}

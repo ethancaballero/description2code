@@ -1,0 +1,33 @@
+#include<cstdio>
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main(){
+    int tc,d,d1;
+    long long int ans, l ,r ,n;
+    cin >> tc;
+    while(tc--){
+        ans=0;
+        cin >> l >> r;
+        d=log10(l)+1;
+        d1=log10(r)+1;
+        if(d==d1){
+            n=r-l;
+            ans = (l*(n+1)+(n*(n+1)/2))*d;
+        }
+        else{
+            for(int j=d;j<=d1;j++){
+                if(j==d1){
+                    n=r-l;
+                    ans=ans+(l*(n+1)+(n*(n+1)/2))*j;
+                }
+                else{
+                    n=pow(10,j)-l;
+                    ans=ans+(l*n+n*(n-1)/2)*j;
+                    l=pow(10,j);
+                }
+            }
+        }
+        cout<<ans%1000000007<<endl;
+    }
+}

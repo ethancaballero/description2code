@@ -1,0 +1,14 @@
+if __name__=="__main__":
+	t = int(raw_input())
+	while t:
+		n = int(raw_input())
+		s = raw_input().split()
+		l = [int(i) for i in s]
+		k = int(raw_input())
+		n = l[k-1]
+		p = 1
+		for i in l:
+			if i < n:
+				p += 1
+		print p
+		t -= 1

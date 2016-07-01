@@ -1,0 +1,41 @@
+#include<cstdio>
+#include<vector>
+#include<set>
+#include<map>
+#include<queue>
+#include<algorithm>
+#include<string>
+#include<utility>
+#include<cassert>
+using namespace std;
+ 
+#define REP(i,a,b) for(i=a;i<b;i++)
+#define rep(i,n) REP(i,0,n)
+ 
+int f[100000];
+pair<int,int> p[100000];
+ 
+int main(){
+  int i, j;
+  int N, K;
+  int res = 0;
+ 
+  assert( scanf("%d%d",&N,&K)==2 );
+  rep(i,N) assert( scanf("%d",f+i)==1 ), assert( 1<=f[i] && f[i] <= 1000000000 );
+ 
+  rep(i,N) p[i] = make_pair(f[i], i);
+  sort(p, p+N);
+ 
+  i = 0;
+  while(i < N){
+    j = i+1;
+    while(j < N && p[i].first == p[j].first && p[j].second - p[i].second < K) j++;
+    i = j; res++;
+  }
+ 
+  printf("%d
+",res);
+ 
+  return 0;
+}
+ 

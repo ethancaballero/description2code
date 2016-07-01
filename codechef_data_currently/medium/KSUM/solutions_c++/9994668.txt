@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+    using namespace std;
+    struct compare {
+        bool operator()(const long &lhs,
+                        const long &rhs) {
+            return lhs > rhs;
+        }
+    };
+ 
+ 
+    int main()
+    {
+       long n,k,i,j,sum,k1=0;
+       scanf("%ld%ld",&n,&k);
+       int a[n];
+       for(i=0;i<n;i++)
+        scanf("%ld",&a[i]);
+       multiset <long,compare> ms;
+       for(i=0;i<n;i++)
+       {
+           sum=0;
+           for(j=i;j<n;j++)
+           {
+               sum+=a[j];
+               ms.insert(sum);
+           }
+       }
+       multiset <long,compare> ::iterator it;
+       for(it=ms.begin();it!=ms.end();it++)
+        {
+            printf("%ld ",*it);
+            k1++;
+            if(k1==k)
+                break;
+        }
+ 
+        return 0;
+    } 

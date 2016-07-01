@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+#define MEM(a, b) memset(a, (b), sizeof(a))
+#define FORN(i, n) for(i = 0; i < n; i++)
+#define FORAB(i, a, b) for(i = a; i <= b; i++)
+#define FORR(i,n) for(i=n-1;i>=0;--i)
+#define elif else if
+#define mp make_pair
+#define pb push_back
+#define ff first
+#define ss second
+#define all(x) (x).begin(),(x).end()
+#define rall(x) (x).rbegin(),(x).rend()
+#define countset(N)  __builtin_popcount(N)
+#define MOD 1000000007
+typedef pair<int,int> PII;
+typedef pair<double, double> PDD;
+typedef pair<int,long> PIL;
+typedef pair<long,long> PLL;
+typedef pair<long long,long long> PLLLL;
+typedef pair<double,PIL> PDPIL;
+typedef vector<int> VI;
+typedef vector<long> VL;
+typedef vector<double> VD;
+typedef vector<long long> VLL;
+typedef vector<VI> VVI;
+typedef vector<VL> VVL;
+typedef vector<VLL> VVLL;
+typedef vector<PII > VPII;
+typedef vector<PLL > VPLL;
+typedef vector<PIL> VPIL;
+typedef vector<PLLLL> VPLLLL;
+typedef vector<VPLL> VVPLL;
+typedef vector<PDPIL> VPDPIL;
+#define ll long long
+#define l long
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define coolreshab ios::sync_with_stdio(false);
+#define Pi 3.1415926535897
+ll fast_exp(l base,l exp)
+ {
+     if(exp==0)
+        return 1;
+     else
+     {
+         if(exp%2==0)
+         {
+             ll temp=fast_exp(base,exp/2);
+             temp=temp*temp;
+             if(temp>=MOD)
+                return temp%MOD;
+             else
+                return temp;
+         }
+         else
+         {
+             ll temp=fast_exp(base,(exp-1)/2);
+             temp=base*temp*temp;
+             if(temp>=MOD)
+                return temp%MOD;
+             else
+                return temp;
+
+         }
+     }
+ }
+/*freopen("test.txt","r",stdin);
+  freopen("out.txt","w",stdout);*/
+
+
+
+
+
+
+
+main()
+ { int T;
+   char c;
+   l N,root,no,i;
+   coolreshab;
+   cin>>T;
+   while(T--)
+
+      {
+          cin>>N;
+          c='a';
+
+          while(N)
+          {
+                root=(-1+(double)sqrt(1+8*N))/2.0;
+                root=floor(root);
+                no=((root)*(root+1))/2;
+                FORN(i,root)
+                    cout<<c;
+                if(c=='z')
+                    c='a';
+                else
+                    ++c;
+                N=N-no;
+
+
+          }
+          cout<<endl;
+
+      }
+ }

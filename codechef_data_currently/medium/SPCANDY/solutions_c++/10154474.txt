@@ -1,0 +1,38 @@
+#include<stdio.h>
+
+int main()
+{
+    int t;
+    long long int n,k,each;
+
+    scanf("%d",&t);
+
+    while(t--)
+    {
+        scanf("%lld %lld",&n,&k);
+
+        if(n==0&&k==0)
+		{
+			printf("0 0
+");
+		}
+		else if(n!=0&&k==0)
+		{
+			printf("0 %lld
+",n);
+
+		}
+		else if(n==0&&k!=0)
+		{
+			printf("0 0
+");
+		}
+
+        else{
+
+
+        printf("%lld %lld
+",n/k,n%k);
+    }
+    }
+}

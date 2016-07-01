@@ -1,0 +1,17 @@
+t=int(raw_input())
+for i in range(t):
+	n=int(raw_input())
+	number_notes=0
+	number_notes=number_notes+n/100
+	n=n%100
+	number_notes=number_notes+n/50
+	n=n%50
+	number_notes=number_notes+n/10
+	n=n%10
+	number_notes=number_notes+n/5
+	n=n%5
+	number_notes=number_notes+n/2
+	n=n%2
+	number_notes=number_notes+n/1
+
+	print number_notes

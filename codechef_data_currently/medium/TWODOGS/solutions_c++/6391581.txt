@@ -1,0 +1,115 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <stdlib.h>
+#include <math.h>
+#include <set>
+#include <iomanip>
+#include <assert.h>
+#include <cstring>
+#include <string>
+#include <string.h>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <time.h>
+#include <climits>
+
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<b;++i)
+#define FORR(i,a,b) for(int i=a;i>=b;--i)
+#define FORC(it,container) for(typeof(container.begin()) it=container.begin();it!=container.end();++it)
+#define INT(x) scanf("%d",&x)
+#define LLD(x) scanf("%lld",&x)
+#define STR(x) scanf("%s",x)
+#define CHAR(x) scanf("%c",&x)
+#define PINT(x) printf("%d
+",x)
+#define PLLD(x) printf("%lld
+",x)
+#define CLR(x) memset(x,0,sizeof(x));
+#define F first
+#define S second
+#define PB push_back
+
+const int INF = INT_MAX;
+const int MAX = 1000000;
+const int MOD = 1e9 + 7;
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef pair<int,int> PII;
+typedef map<int,int> MII;
+typedef vector<pair<int,int> > VPII;
+typedef vector<int> VI;
+typedef vector<char> VC;
+typedef vector<LL> VLL;
+typedef vector<VI> VVI;
+typedef vector<VLL> VVL;
+typedef set<int> SI;
+typedef set<char> SC;
+
+int ispresent[MAX+5];
+int pos[MAX+5];
+int a[MAX+5];
+
+int main()
+{
+	int n,k; 
+	INT(n); INT(k); 
+	int x; 
+		
+	FOR(i,1,n+1)
+	{	
+		INT(x);
+		a[i-1]=x;
+		++ispresent[x];
+		int minpos = min(i,n-i+1);
+
+		if(2*x==k && k%2==0)	
+			continue;
+
+		if(pos[x]==0)
+			pos[x] = minpos;
+		else
+			pos[x] = min(pos[x],minpos);	
+	
+	}
+	
+	int ans = INT_MAX;
+
+	FOR(i,0,n)
+	{
+
+		int num = a[i];
+
+		if(k-num>0 && num>0)
+		if(ispresent[num] && ispresent[k-num])
+		{
+
+			if(num!=k-num)
+			{
+				int time = max(pos[num],pos[k-num]);
+
+				ans = min(ans,time);
+			}
+			
+			ispresent[num]=0;
+			ispresent[k-num]=0;
+
+		}			
+
+	}
+
+	if(ans!=INT_MAX)
+		PINT(ans);
+	else
+		printf("-1
+");
+
+///remove the testcase line	
+return 0;
+}
+

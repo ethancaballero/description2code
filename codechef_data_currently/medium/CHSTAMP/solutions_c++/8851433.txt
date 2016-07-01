@@ -1,0 +1,111 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+const int MAX1 = 50005;
+
+typedef pair<int, int> PII;
+
+vector<PII>off[MAX1];
+int TB[MAX1];  //Today's Best offer's prices
+int OB[MAX1];	//Overall Best for any stamp
+int cnt[MAX1];
+int par[MAX1];
+
+void INITIALISE(int N)
+{
+	for(int i = 0 ; i <= MAX1 ; i++)
+	{
+		OB[i] = i;
+		cnt[i] = 0;
+		off[i].clear();
+	}
+}
+
+int Find_Parent(int x)
+{
+	if(x == par[x])
+		return x;
+	else return par[x] = Find_Parent(par[x]);
+}
+
+void Union(int x, int y)
+{
+	x = Find_Parent(x);
+	y = Find_Parent(y);
+	TB[x] = max(TB[x], TB[y]);
+	par[y] = par[x];
+}
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+
+	int test, N, M, i, j, x, y, mx;
+	cin>>test;
+
+	while(test--)
+	{
+		cin>>N >>M;
+
+		INITIALISE(N);
+
+		mx = -1;
+		for(i = 0 ; i < N ; i++)
+		{
+			cin>>x;
+			cnt[x]++;
+		}
+
+		for(i = 0 ; i < M ; i++)
+		{
+			cin>>j >>x >>y;
+			mx = max(mx,j);
+			off[j].push_back(make_pair(x,y));
+		}
+
+		for(j = mx; j >= 1 ; j--)
+		{
+			int sz = off[j].size();
+
+			for(i = 0 ; i < sz ; i++)
+			{
+				x = off[j][i].first;
+				y = off[j][i].second;
+
+				TB[x] = OB[x];
+				TB[y] = OB[y];
+				par[x] = x;
+				par[y] = y;
+			}
+
+			for(i = 0 ; i < sz ; i++)
+			{
+				x = off[j][i].first;
+				y = off[j][i].second;
+
+				if(x != y)
+					Union(x, y);
+			}
+
+			for(i = 0 ; i < sz ; i++)
+			{
+				x = off[j][i].first;
+				y = off[j][i].second;
+
+				OB[x] = TB[Find_Parent(x)];
+				OB[y] = TB[Find_Parent(y)];
+			}
+		}
+
+		ll ans = 0LL;
+		for(i = 1 ; i < MAX1 ; i++)
+		{
+			ans = ans + (ll)OB[i]*(ll)cnt[i];
+		}
+
+		cout<<ans<<endl;
+	}
+	return 0;
+}

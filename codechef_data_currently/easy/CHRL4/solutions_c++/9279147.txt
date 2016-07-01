@@ -1,0 +1,66 @@
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <queue>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+const long long MOD = 1e9 + 7;
+
+
+int n,k;
+
+
+
+vector <long long> a;
+double f[100002];
+int index[100002];
+
+class por
+{
+public:
+    bool operator() (const pair<double,int> &i, const pair<double,int> &j) { return i.first>j.first;}
+};
+
+
+priority_queue <pair<double,int>, vector< pair <double,int> > ,por> minimum;
+
+int main()
+{
+    long long ai;
+    scanf("%d%d",&n,&k);
+    for(int i = 0;i < n;i++)
+    {
+        scanf("%lld",&ai);
+        a.push_back(ai);
+
+    }
+     f[0] = log(a[0]);
+     index[0] = -1;
+     minimum.push(make_pair(f[0],0));
+
+    for(int i = 1;i < n;i++)
+    {
+        while(!minimum.empty() && (i - minimum.top().second >k)) minimum.pop();
+
+        f[i] = f[minimum.top().second] + log(a[i]);
+        index[i] = minimum.top().second;
+
+        minimum.push(make_pair(f[i],i));
+
+    }
+     long long res = 1;
+
+     for(int i = n-1; i>=0;i = index[i])
+     {
+         res*=a[i];
+         res%=MOD;
+     }
+
+    printf("%lld
+",res);
+
+    return 0;
+}

@@ -1,0 +1,6 @@
+t=int(raw_input())
+while(t>0):
+	a=map(int,raw_input().split())
+	a.sort()
+	print a[1]
+	t-=1

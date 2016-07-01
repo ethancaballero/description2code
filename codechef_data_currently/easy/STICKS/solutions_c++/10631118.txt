@@ -1,0 +1,49 @@
+#include <stdio.h>
+ 
+int main()
+{
+    int t,cnt[1004],x,flag,i,n;
+    long int rect;
+    
+    scanf("%d",&t);
+    
+    while(t--)
+    {
+        scanf("%d",&n); flag=0;rect=1;
+        
+        for(i=0;i<1004;i++)
+         cnt[i]=0;
+         
+        for(i=0;i<n;i++)
+        {
+            scanf("%d",&x);
+            cnt[x]++;
+        }
+        
+        for(i=1000;i>=1 && flag!=2;i--)
+        {
+            if(cnt[i]>=4 && flag!=1)
+            {
+                rect=i*i;
+                flag=2;
+                break;
+            }
+            else if(cnt[i]>1)
+            {
+                rect=rect*i;
+                flag++;
+            }
+            else
+             ;
+        }
+        
+        if(flag==2)
+         printf("%ld
+",rect);
+        else
+         printf("-1
+");
+    }
+    
+    return 0;
+} 

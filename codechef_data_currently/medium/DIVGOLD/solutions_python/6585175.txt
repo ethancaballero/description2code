@@ -1,0 +1,20 @@
+for _ in xrange(input()):
+	n=input()
+	s=raw_input()
+	s_dup=s
+	li=[]
+	for i in xrange(n):
+		c=s_dup[i]
+		s=list(s)
+		del s[i]
+		s=''.join(s)
+		for j in xrange(n):
+			if(j==0):
+				li.append(c+s)
+			elif(j==n-1):
+				li.append(s+c)
+			else:
+				li.append(s[:j]+c+s[j:])
+		s=s_dup
+	li.sort()
+	print li[0]

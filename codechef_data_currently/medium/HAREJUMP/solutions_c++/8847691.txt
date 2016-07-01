@@ -1,0 +1,85 @@
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+#define momentai(x) (cout<<#x<<" := "<<x<<endl)
+
+typedef long long ll;
+const int mod=1e9+7,lim=17;
+ll T,K,N,lim2;	
+ll M[lim][lim],A[lim][lim],B[lim][lim],C[lim][lim],arr[lim],trans[lim];
+
+void m_mult(ll m1[lim][lim],ll m2[lim][lim]) {
+	memcpy(B,m1,sizeof(B)); memcpy(C,m2,sizeof(C));
+	memset(m1,0,sizeof(B));
+	for (int i=0; i<lim2; ++i) for (int j=0; j<lim2; ++j) for (int k=0; k<lim2; ++k) {
+		m1[i][j]=(m1[i][j]+B[i][k]*C[k][j])%mod;
+	}
+}
+
+int main() {
+	scanf("%lld",&T);
+	while (T--) {
+		scanf("%lld%lld",&N,&K); lim2=0;
+		for (int i=0; i<K; ++i) scanf("%lld",&arr[i]);
+		lim2=*max_element(arr,arr+K);
+//		momentai(lim2);
+		memset(M,0,sizeof(M));
+		trans[0]=1;
+		for (int i=0; i<K; ++i) {
+			++M[lim2-1][lim2-arr[i]];
+		}
+		for (int i=1; i<lim2; ++i) {
+			trans[i]=0;
+			for (int j=0; j<K; ++j) {
+				if (i>=arr[j]) trans[i]+=trans[i-arr[j]];
+			}
+			M[i-1][i]=1;
+//			momentai(trans[i]);
+		}
+//		for (int i=0; i<lim2; ++i) {
+//			for (int j=0; j<lim2; ++j) {
+//				printf("%lld ",M[i][j]);
+//			}
+//			printf("
+");
+//		}
+		if (N<lim2) printf("%lld
+",trans[N]);
+		else {
+			ll b=N; bool flag=1;
+			while (b) {
+				if (b&1) {
+					if (flag) {
+						memcpy(A,M,sizeof(A));
+						flag=0;
+					} else m_mult(A,M);
+				}
+				m_mult(M,M);
+				b>>=1;
+			}
+			ll ans=0;
+			for (int i=0; i<lim2; ++i) {	
+				ans=(ans+trans[i]*A[0][i])%mod;
+			}
+			printf("%lld
+",ans);
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

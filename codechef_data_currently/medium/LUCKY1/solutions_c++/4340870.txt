@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+
+long long int pre[100005];
+long long int differ[10000002];
+void akku()
+{
+	int four=0,seven=0;
+	pre[0]=0;
+	differ[0]=1;
+	for(int i=1;i<=100000;i++)
+	{
+		int t=i;
+		while(t>0)
+		{
+			int s= t%10;
+			if(s==4) four++;
+			if(s==7) seven++;
+			t=t/10;
+		}
+		pre[i]=pre[i-1]+differ[four-seven];
+		differ[four-seven]++;
+	}
+	
+}
+int main()
+{
+	int t,n;
+	cin>>t;
+	akku();
+	while(t--)
+	{
+		cin>>n;
+		cout<<pre[n]<<endl;
+	}
+	return 0;
+}

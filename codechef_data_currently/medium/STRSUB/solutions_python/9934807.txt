@@ -1,0 +1,57 @@
+def sumv(fr, to):
+    num = to - fr + 1
+    return (to + fr) * num / 2
+t = int(raw_input())
+for i in xrange(t):
+    n, k, q = map(int, raw_input().split())
+    s = raw_input().rstrip()
+    cnt = 0
+    c1 = 0
+    c0 = 0
+    far = [0 for x in xrange(n)]
+    for j in xrange(n):
+        while (c0 == k and s[j] == '0') or (c1 == k and s[j] == '1'):
+            far[cnt] = j - 1
+            if s[cnt] == '0':
+                c0 -= 1
+            else:
+                c1 -= 1
+            cnt += 1
+        if s[j] == '0':
+            c0 += 1
+        else:
+            c1 += 1
+    for j in xrange(cnt, n):
+        far[j] = n - 1
+    cdf = [0 for x in xrange(n)]
+    cdf[0] = far[0]
+    for j in xrange(1, n):
+        cdf[j] = cdf[j - 1] + far[j]
+    last = [None for x in xrange(n)]
+    pre = None
+    r = n - 1
+    for j in xrange(n - 1, -1, -1):
+        if pre == None or pre != far[j]:
+            pre = far[j]
+            ind = j
+        while r >= pre:
+            last[r] = ind
+            r -= 1
+    for j in xrange(q):
+        l, r = map(int, raw_input().split())
+        l -= 1
+        r -= 1
+        res = 0
+        h = last[r]
+        if l <= h:
+            if l == 0:
+                res += cdf[h]
+            else:
+                res += cdf[h] - cdf[l - 1]
+            res += r * (r - h)
+            res -= sumv(l - 1, r - 1)
+        else:
+            res += sumv(1, r - l + 1)
+        print res
+    
+    

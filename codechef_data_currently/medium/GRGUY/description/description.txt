@@ -1,0 +1,52 @@
+  Chef likes to play games a lot. Gravity Guy is one such interesting game.
+"Gravity Guy is an arcade side-scrolling game in which the player controls Gravity Guy by tapping the screen to switch gravity. The objective in this game is to run as far as possible while avoiding being trapped by obstacles, falling, or flying off the screen. If hit by obstacles, the game is over."
+Chef is so addicted to this game that each night he dreams of himself being in the game as Gravity Guy. He has two lanes in front of him represented by two strings of equal length named as L1 and L2. Each of the two lanes consists of some clean blocks represented by '.' and some dirty blocks represented by '#'.
+Chef can start running from the beginning of any of the two lanes and cannot step over any dirty block ( '#' ) encountered during his journey. He has to complete his journey by reaching the end block of any of the two lanes.
+Chef can use the following jumps to reach his destination. Considering chef is at xth block of some lane.
+
+He can jump to x+1th block of the same lane.
+He can switch gravity quickly and jump to xth block of the other lane.
+He can switch gravity and jump to x+1th block of the other lane.
+
+You have to tell him whether he can reach his destination or not. If it is possible for him to reach his destination, then Chef is interested in knowing the minimum number of gravity switches required to reach the destination.
+Input
+First line of input contains a single integer T denoting the number of test cases. Each test case consists of 2 lines. First line of each test case contains a string denoting lane L1. Second line of each test case contains a string denoting lane L2.
+Output
+For each test case, print "Yes" (without quotes) in the first line if Chef is able to reach the destination followed by a line containing an integer denoting minimum number of gravity switches required to reach to the destination. Print a single line containing the word "No" (without quotes) otherwise.
+Constraints
+
+1 \u2264 T \u2264 105
+1 \u2264 |L1| \u2264 2 \u00d7 105, where |S| denotes the length of string S
+|L1| = |L2|
+
+Example
+Input:
+3
+#...#
+.###.
+#.#.#.
+.#.#.#
+#...
+#...
+
+Output:
+Yes
+2
+Yes
+5
+No
+Explanation
+
+Test 1: Chef will start his journey from L2, switch from L2 to L1 and finally land up at last block of L2 by switching from L1 to L2. Therefore, he requires total 2 gravity switches to reach the destination.
+Test 3: Chef cannot start his journey as starting block of both the lanes L1 & L2 are dirty and he cannot step over them.
+
+
+In Subtask 1 and Subtask 3, only "Yes"\/"No" response will be evaluated. Thus, for example, the output
+
+Yes
+1
+Yes
+8
+No
+
+is considered as a correct output for the example input.

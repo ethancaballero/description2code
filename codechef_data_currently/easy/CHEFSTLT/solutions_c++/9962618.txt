@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int t,min,max,i;
+	string s1,s2;
+	cin>>t;
+	while(t--){
+		cin>>s1>>s2;
+		min=0,max=0;
+		for(i=0;i<s1.length();i++){
+			if((s1[i]!='?'&&s2[i]!='?')&&s1[i]!=s2[i])
+			++min;
+			if((s1[i]=='?'||s2[i]=='?'))
+			++max;
+		}
+		cout<<min<<" "<<(max+min)<<endl;
+	}
+	return 0;
+}

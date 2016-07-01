@@ -1,0 +1,77 @@
+// Shalin
+#include <bits/stdc++.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <limits.h>
+using namespace std;
+#define si(x) scanf("%d",&x)
+#define slli(x) scanf("%lld",&x);
+#define sc(x) scanf("%c",&x);
+#define ss(x) scanf("%s",x);
+#define sd(x) scanf("%lf",&x);
+#define bitcount __builtin_popcount
+#define gcd __gcd
+#define llu long long unsigned int
+#define lli long long int
+#define fi first
+#define se second
+#define pb push_back
+#define mod 1000000007
+#define mp make_pair
+#define vi vector<int>
+#define vlli vector<long long int>
+#define pii pair<int,int>
+int main()
+{
+	//freopen("input.txt","r",stdin);
+    //freopen("output.txt","w",stdout);
+	int t,i,j,k;
+	si(t);
+	while(t--)
+	{
+		string str;
+		cin>>str;
+		si(k);
+		int len=str.size();
+		vi cnt(26,0);
+		int maxi=0,mini=10000000;
+		for(i=0;i<len;i++)
+		{
+			cnt[str[i]-'a']++;
+		}
+		vi a;
+		for(i=0;i<26;i++)
+		{
+			if(cnt[i]!=0)
+			{
+				a.pb(cnt[i]);
+			}
+		}
+		sort(a.begin(),a.end());
+		int sz=a.size();
+		mini=a[0];maxi=a[sz-1];
+		int ans=0;
+		for(i=sz-1;i>=0;i--)
+		{
+			if(a[i]>mini+k)
+				ans+=(a[i]-mini-k);
+		}
+		int minans=ans;
+		int prev=0;
+		for(i=0;i<sz-1;i++)
+		{
+			ans=prev+a[i];
+			prev=ans;
+			for(j=sz-1;j>i;j--)
+			{
+				if(a[j]>a[i+1]+k)
+					ans+=(a[j]-a[i+1]-k);
+			}
+			minans=min(minans,ans);
+		}
+		cout<<minans<<endl;
+	}	
+	return 0;
+}

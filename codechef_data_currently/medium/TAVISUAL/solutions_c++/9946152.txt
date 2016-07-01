@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,c,q;
+        cin>>n>>c>>q;
+        int x=c;
+
+        while(q--)
+        {
+            int l,r;
+            cin>>l>>r;
+            if(l<=x && x<=r)
+            x=l+r-x;
+        }
+        cout<<x<<endl;
+    }
+}

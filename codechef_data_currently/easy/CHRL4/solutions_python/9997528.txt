@@ -1,0 +1,10 @@
+mod=10**9+7
+n,k=map(int,raw_input().split())
+li=list(map(int,raw_input().split()))
+dp=[0]*n
+dp[0]=li[0]
+for i in xrange(1,k):
+    dp[i]=(dp[0]*li[i])
+for i in xrange(k,n):
+    dp[i]=(li[i]*min(dp[i-k:i]))
+print dp[n-1]%mod

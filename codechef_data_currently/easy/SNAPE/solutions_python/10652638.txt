@@ -1,0 +1,8 @@
+T=int(raw_input())
+for i in range(T):
+
+    B,LB=map(int,raw_input().split())
+
+    ma=(B*B+LB*LB)**0.5
+    mi=(LB*LB-B*B)**0.5
+    print mi,ma

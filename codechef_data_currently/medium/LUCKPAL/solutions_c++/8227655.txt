@@ -1,0 +1,151 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,i,j,len,mini,start,check,op,a,b,flag,c,k;
+    char s[1001],st[1001],ans[1001];
+    char refr[]={'l','u','c','k','y'};
+    cin>>t;
+    while(t--)
+    {
+        c=0;
+        mini=2000;
+        cin>>s;
+        len=strlen(s);
+        if(len<9)
+        {
+            printf("unlucky
+");
+        }
+        else
+        {
+            for(i=0;i<=len-5;i++)
+            {
+                flag=1;
+                op=0;
+                start=i;
+                for(j=0;j<len;j++)
+                {
+                    if((j<start)||(j>start+4))
+                    {
+                        ans[j]=s[j];
+                    }
+                    else
+                    {
+                        check=j-start;
+                        ans[j]=refr[check];
+                        if(ans[j]!=s[j])
+                            op++;
+                    }
+                }
+                //printf("string 2 be checked %s
+",ans);
+                a=start;
+                b=start+4;
+                for(k=0,j=len-1;k<j;)
+                {
+                    if(ans[k]!=ans[j])
+                    {
+                        if((k<a)&&(j>b))
+                        {
+                            op++;
+                            //printf("%d hi1
+",i);
+                            if(ans[k]>ans[j])
+                            {
+                                ans[k]=ans[j];
+                            }
+                            else
+                            {
+                                ans[j]=ans[k];
+                            }
+                        }
+                        else if((k<a)&&(j>=a)&&(j<=b))
+                        {
+                           // printf("hi2 ");
+                            op++;
+                            ans[k]=ans[j];
+                        }
+                        else if((k>=a)&&(k<=b)&&(j>b))
+                        {
+                           // printf("hi3 ");
+                            op++;
+                            ans[j]=ans[k];
+                        }
+                        else if((k>b)&&(j>b))
+                        {
+                             op++;
+                            //printf("%d hi1
+",i);
+                            if(ans[k]>ans[j])
+                            {
+                                ans[k]=ans[j];
+                            }
+                            else
+                            {
+                                ans[j]=ans[k];
+                            }
+
+                        }
+                        else if((k<a)&&(j<a))
+                        {
+                             op++;
+                            //printf("%d hi1
+",i);
+                            if(ans[k]>ans[j])
+                            {
+                                ans[k]=ans[j];
+                            }
+                            else
+                            {
+                                ans[j]=ans[k];
+                            }
+                        }
+                        else
+                        {
+                            flag=0;
+                            break;
+                        }
+                    }
+                    k++;
+                    j--;
+                }
+                   // printf("
+");
+                    if(flag)
+                    {
+                        c++;
+                        if(c==1)
+                        {
+                            mini=op;
+                            for(k=0;k<len;k++)
+                                st[k]=ans[k];
+                        }
+                        else
+                        {
+                            if(op<mini)
+                            {
+                                mini=op;
+                                for(k=0;k<len;k++)
+                                    st[k]=ans[k];
+                            }
+                            else if(op==mini)
+                            {
+                                check=strcmp(st,ans);
+                                if(check>0)
+                                {
+                                    for(k=0;k<len;k++)
+                                    st[k]=ans[k];
+                                }
+                            }
+                        }
+                    }
+                }
+            for(i=0;i<len;i++)
+                printf("%c",st[i]);
+            printf(" %d
+",mini);
+        }
+    }
+    return 0;
+}

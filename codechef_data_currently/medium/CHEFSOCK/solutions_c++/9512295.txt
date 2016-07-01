@@ -1,0 +1,19 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{  int j,s,n,t,g;
+  cin>>j>>s>>n;
+  t=n-j;
+  if(t>0)
+  {
+      g=t/s;
+      if(g%2==0)
+        cout<<"Lucky Chef";
+      else
+        cout<<"Unlucky Chef";
+  }
+  else
+    cout<<"Lucky Chef";
+  return 0;
+}

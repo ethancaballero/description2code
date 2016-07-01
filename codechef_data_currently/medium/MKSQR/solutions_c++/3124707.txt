@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+	int T,i,n,positive,negative,x,y;
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d",&n);
+		positive = negative = 0;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d%d",&x,&y);
+			if(x-y>0)
+			positive++;
+			else
+			negative++;
+		}
+		if(positive >0 && negative >0)
+			printf("YES
+");
+		else
+			printf("NO
+");
+	}
+	return 0;
+}

@@ -1,0 +1,17 @@
+tests = int(raw_input())
+for _ in range(tests):
+	n = int(raw_input())
+	q = raw_input()
+	a = raw_input()
+	w = map(int,raw_input().split())
+	sum_ = 0
+	for i in range(n):
+		if q[i] == a[i]:
+			sum_ += 1
+			
+			
+	if sum_ == n:
+		print w[n]
+	else:
+		print max(w[:sum_ + 1])
+		

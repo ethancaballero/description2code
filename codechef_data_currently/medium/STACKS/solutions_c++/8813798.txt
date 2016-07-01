@@ -1,0 +1,68 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+
+typedef unsigned long long ull;
+
+int bs(ull top[], int n, ull a)
+{
+	int l=0, r=n-1;
+	int ans = n;
+	while(l<=r)
+	{
+		ull m = l + (r-l)/2;
+		if( top[m]>a )
+		{
+			ans = m;
+			r = m-1;
+		}
+		else
+			l = m+1;
+	}
+	return ans;
+}
+
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while(t--)
+	{
+		int n;
+		scanf("%d", &n);
+		int cnt=0;
+		ull a, top[n];
+		for(int i=0; i<n; i++)
+			top[i]=-1;
+		scanf("%lld", &a);
+		top[cnt++]=a;
+		for(int i=1; i<n; i++)
+		{
+			scanf("%lld", &a);
+			int id = bs(top, n, a);
+			top[id] = a;
+			if( id == cnt )
+				cnt++;
+			/*for(int j=0; j<cnt; j++)
+			{
+				if( a<top[j] )
+				{
+					top[j]=a;
+					break;
+				}
+				else if( a>top[cnt-j] )
+				{
+					j=cnt-j;
+				}
+			}
+			if( a>top[cnt-1] )
+				top[cnt++]=a;*/
+		}
+		printf("%d ", cnt);
+		for(int i=0; i<cnt; i++)
+			printf("%d ", top[i]);
+		printf("
+");
+	}
+	return 0;
+}

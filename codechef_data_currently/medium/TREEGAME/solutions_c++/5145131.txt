@@ -1,0 +1,137 @@
+#include<cstdio>
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+
+using namespace std;
+#define maxn 100005
+typedef pair<int,int> ii;
+
+int n,depth[maxn],parent[maxn],visited[maxn],count1,moves,status[maxn];
+vector<int> v1[maxn];
+queue<int> roots , roots1;
+priority_queue<ii , vector<ii> , less<ii> > leaf;
+
+void dfs(int node)
+{
+	visited[node]=1;
+	for(int i=0;i<v1[node].size();i++)
+	{
+		int child = v1[node][i];
+		if(visited[v1[node][i]]==0)
+		{
+			parent[child]=node;
+			depth[v1[node][i]] = depth[parent[child]]+1;
+			dfs(v1[node][i]);
+		}
+	}
+	/*if(parent[node]!=-1 && v1[node].size()==1)
+	leaf.push(ii(depth[node],node));
+	if(parent[node]==-1 && v1[node].size()==0)
+	leaf.push(ii(depth[node],node));*/
+	leaf.push(ii(depth[node],node));
+}
+
+void alice()
+{
+	while(!roots.empty())
+	{
+		
+	  int elem = roots.front();
+		if(status[elem]!=-1)
+		{
+			count1++;
+			roots.pop();
+			status[elem]=-1;
+			//cout<<"alice"<<" "<<elem<<" ";
+			for(int i=0;i<v1[elem].size();i++)
+			{
+				//if(v1[elem][i]!=elem)
+				//{
+					if(status[v1[elem][i]]!=-1)
+					roots1.push(v1[elem][i]);
+				//}
+			}
+		}
+		else
+		roots.pop();
+	}
+	while(!roots1.empty())
+	{
+		int elem = roots1.front();
+		roots.push(elem);
+		roots1.pop();
+	}
+	moves++;
+	//cout<<endl;
+	return;
+}
+
+void bob()
+{
+	pair<int,int> top1;
+	top1 = leaf.top();
+	while(status[top1.second]==-1)
+	{
+	  leaf.pop();
+		top1=leaf.top();
+	}
+	leaf.pop();
+	status[top1.second]=-1;
+	//cout<<"bob"<<" "<<top1.second<<endl;
+	//if(parent[top1.second]!=-1 && status[parent[top1.second]]!=-1)
+	//leaf.push(ii(depth[parent[top1.second]],parent[top1.second]));
+	count1++;
+	moves++;
+	return;
+}
+
+int main()
+{
+	int tc;
+	scanf("%d",&tc);
+	while(tc--)
+	{
+		for(int i=0;i<maxn;i++)
+		{
+			v1[i].clear();
+			depth[i]=0;
+			parent[i]=-1;
+			visited[i]=0;
+			status[i]=0;
+			
+		}
+		while(!leaf.empty())
+		leaf.pop();
+		while(!roots.empty())
+		roots.pop();
+	
+		scanf("%d",&n);
+		int src , dest;
+		for(int i=1;i<n;i++)
+		{
+			scanf("%d %d",&src,&dest);
+			v1[src-1].push_back(dest-1);
+			v1[dest-1].push_back(src-1);	
+		}
+		depth[0]=0;
+		parent[0]=-1;
+		visited[0]=1;
+		dfs(0);
+	  count1=0,moves=0;
+		int u=0;
+		roots.push(0);
+		while(count1<n)
+		{
+			if(u==0)
+			alice();
+			else
+			bob();
+			u = u^1;
+		}
+		printf("%d
+",moves);
+	}
+	return 0;
+}

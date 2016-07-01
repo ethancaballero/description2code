@@ -1,0 +1,16 @@
+val1 = raw_input()
+output = list()
+t = int(val1)
+for i in range(t) :
+	num = list()
+	final = list()
+	val2 = raw_input()
+	n = int(val2)
+	val2 = raw_input()
+	stri = val2.split()
+	for j in range(n) :
+		num.append(int(stri[j]))
+	final = set(num)
+	output.append(len(final))
+for i in range(t) :
+	print output[i]

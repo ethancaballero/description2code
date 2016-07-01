@@ -1,0 +1,38 @@
+//transform
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        char a[401];
+        char b[401];
+        int i;
+        int top=-1;
+        scanf("%s",a);
+        for(i=0;a[i]!=0;i++)
+        {
+            if(a[i]=='(')
+                continue;
+            else if(a[i]==')')
+            {
+                cout<<b[top];
+                top--;
+            }
+            else if(a[i]>='a' && a[i]<='z')
+            {
+                cout<<a[i];
+            }
+            else
+            {
+                top++;
+                b[top]=a[i];
+            }
+        }
+        cout<<endl;
+
+    }
+    return 0;
+}

@@ -1,0 +1,36 @@
+import sys
+
+def main():
+    s4=0
+    s7=0
+    res=0
+    c=[0]*100001
+    np=[0]*100001
+    for i in range(100001):
+        j=i
+        n4=0
+        n7=0
+        while j>0:
+            r=j%10
+            if r==4:
+                n4+=1
+            if r==7:
+                n7+=1
+            j=int(j/10)
+        s4+=n4
+        s7+=n7
+        S=s4-s7
+        res += c[S]
+        c[S]+=1
+        np[i] = res
+    t=int(raw_input())
+    while t>0:
+        n=int(raw_input())
+        print(np[n])
+        t-=1
+    
+
+
+if __name__ == '__main__':
+    main()
+    sys.exit()

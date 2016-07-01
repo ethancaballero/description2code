@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pii pair< double , int >
+struct comp
+{
+	bool operator() (const pii &a , const pii &b)
+	{
+		return a.first>b.first;
+	}
+};
+const long long MOD=1E9+7;
+priority_queue< pii , vector<pii> , comp > pq;
+long long int a[100005];
+long long int cost[100005];
+int main(){
+	int n,k;
+	scanf("%d %d", &n,&k);
+ 	for(int i=1;i<=n;i++)
+	{
+		scanf("%lld",&a[i]);
+	}
+	cost[n]=a[n];
+	pq.push(make_pair(log(a[n]),n));
+	for(int i=n-1;i>=1;i--){
+		while(i+k<pq.top().second) 
+			pq.pop();
+		double reduced_cost=log(a[i])+pq.top().first;
+		cost[i]=(cost[pq.top().second]*a[i])%MOD;
+		pq.push(make_pair(reduced_cost,i));
+	}
+ 
+	printf("%d
+", cost[1]%MOD);
+	return 0;
+} 

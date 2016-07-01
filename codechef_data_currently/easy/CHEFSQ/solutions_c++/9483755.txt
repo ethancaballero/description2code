@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
+bool presenceOfSubsequence(int a[],int,int b[],int );
+void merge(int arr[], int l, int m, int r);
+void mergeSort(int arr[], int l, int r);
+int main()
+{
+    int T,N,Favourite,count;
+    //char string[1000000];
+    
+    scanf("%d",&T);
+    
+    while(T--){
+      //  balance=0;
+       // maxBalance=0;
+      // commonPresent=0;
+    
+        //commonNotPresent=0;
+        count=0;
+        scanf("%d",&N);
+     ///   length=(int)strlen(string);
+      
+        
+       
+        int * a=(int *)malloc(sizeof(int)*N);
+        
+        
+        for (int  i=0; i<N; i++) {
+            scanf("%d",&a[i]);
+        }
+        scanf("%d",&Favourite);
+        int * b=(int*)malloc(sizeof(int)*Favourite);
+        
+      //  mergeSort(a,0,N-1);
+        for (int i=0; i<Favourite;i++) {
+            scanf("%d",&b[i]);
+            //printf("(");
+        }
+        mergeSort(a, 0, N-1);
+        mergeSort(b, 0, Favourite-1);
+        
+        for (int i=0,j=0;i<N;) {
+            if (a[i]<b[j]) {
+                i++;
+            }
+            else if (a[i]==b[j]){
+                count++;
+                i++;
+                j++;
+            }
+            else
+                break;
+            if (j==Favourite) {
+                break;
+            }
+            
+                
+                
+        }
+        if (count==Favourite) {
+            printf("Yes");
+            
+        }
+        else
+            printf("No");
+        
+        
+     //   printf("%ld",count);
+        
+        printf("
+");
+        
+        
+    }
+    
+    // your code goes here
+    
+    return 0;
+}
+void merge(int arr[], int l, int m, int r)
+{
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+    
+    /* create temp arrays */
+    int L[n1], R[n2];
+    
+    /* Copy data to temp arrays L[] and R[] */
+    for(i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for(j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+    
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0;
+    j = 0;
+    k = l;
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    
+    /* Copy the remaining elements of L[], if there are any */
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    
+    /* Copy the remaining elements of R[], if there are any */
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+/* l is for left index and r is right index of the sub-array
+ of arr to be sorted */
+void mergeSort(int arr[], int l, int r)
+{
+    if (l < r)
+    {
+        int m = l+(r-l)/2; //Same as (l+r)/2, but avoids overflow for large l and h
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+        merge(arr, l, m, r);
+    }
+}
+//bool presenceOfSubsequence(int a[],int N,int b[],int F){
+//    for (int i=0,j=0; i< N ;) {
+//        if (a[i]==b[j]) {
+//            return presenceOfSubsequence(a, N,b,F);
+//        }
+//    }
+//        return true;
+//}

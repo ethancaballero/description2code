@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define max(a,b) ((a>b)?a:b)
+#define min(a,b) ((a<b)?a:b)
+#define s(x) int(x); scanf("%d",&x);
+#define s1(x) scanf("%d",&(x));
+#define FOR(I,N) for(int I=0;I<(N);I++)
+#define FORR(I,A,B) for(int I=(A);I<(B);I++)
+#define RS(x) scanf("%s",(x));
+#define pb push_back
+#define mp make_pair
+#define F_ first
+#define S_ second
+int main()
+{
+	s(t);
+	while(t--)
+	{	
+		s(n);s(m);
+		
+		int N=2*n+2;
+		vector<vector<int > >rG(N,vector<int>(N,0));
+		for(int i=0;i<n;i++)
+			rG[0][i+1]=rG[n+i+1][N-1]=1;
+		FOR(i,m)
+		{
+			s(a);s(b);
+			if(a!=b)rG[a][n+b]=1;
+		}
+		int f=0;
+		while(true)
+		{
+			queue<int>q;
+			q.push(0);
+			vector<int>vis(N,-1);
+			vis[0]=0;
+			while(!q.empty())
+			{
+				for(int i=0;i<N;i++)
+				{
+					if(rG[q.front()][i]>0 && vis[i]==-1)
+					{	
+						//printf("%d %d
+",i,q.front());
+						vis[i]=q.front();q.push(i);}
+
+				}
+				q.pop();
+
+			}
+			if(vis[N-1]==-1)
+				break;
+			f++;
+			int x=N-1;
+			while(x>0)
+			{
+				//printf("@%d %d
+",x,vis[x]);
+				rG[vis[x]][x]--;
+				rG[x][vis[x]]++;
+				x=vis[x];
+			}
+		}
+		printf("%d
+",n-f);
+
+
+	}
+	return 0;
+}

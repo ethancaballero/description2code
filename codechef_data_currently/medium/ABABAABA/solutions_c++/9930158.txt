@@ -1,0 +1,56 @@
+#include<cstdio>
+#include<map>
+#include<cmath>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,flag,j,i;
+    long long int n;
+    string s;
+    scanf("%d",&t);
+    while(t--)
+    {
+        flag=0;
+        std::map<string,int> m;
+        std::map<string,int>::iterator it;
+        cin>>s;
+        n=pow(2,s.length());
+        for(i=1;i<n;i++)
+        {
+            string a ="";
+            for(j=0;j<s.length();j++)
+            {
+                if(i & (1<<j))
+
+                   a+=s[j];
+
+
+            }
+
+            m[a]++;
+        }
+
+        for(it=m.begin();it!=m.end();it++)
+            if(it->second==2)
+        {
+            flag=1;
+            cout<<it->first<<endl;
+            break;
+
+
+        }
+
+         if(flag==0)
+            printf("-1
+");
+
+
+    }
+
+
+
+
+
+
+}

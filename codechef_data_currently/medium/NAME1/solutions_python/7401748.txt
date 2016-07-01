@@ -1,0 +1,21 @@
+def f(s):
+	a=[0]*26
+	for c in s:
+		if (c>='a' and c<='z'):
+			a[ord(c)-97]+=1
+	return a
+def comp(a,b):
+	for i in range(26):
+		if (a[i]<b[i]):
+			return "NO"
+	return "YES"
+t=int(raw_input())
+for asd in range(t):
+	s=raw_input()
+	a=f(s)
+	n=int(raw_input())
+	c=""
+	for ass in range(n):
+		c+=raw_input()
+	b=f(c)
+	print comp(a,b)

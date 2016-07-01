@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,n,m,k,i,j,max,maxb,bal;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;max=1;
+        for(i=0;i<2*n;i++) cin>>j;
+        for(i=2;i<=n;i++)
+            max=max^i; cout<<max<<endl;
+    }
+}

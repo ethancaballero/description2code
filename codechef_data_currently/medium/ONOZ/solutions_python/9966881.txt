@@ -1,0 +1,10 @@
+T = int(raw_input())
+for _ in xrange(T):
+    H, M = map(int, raw_input().split())
+    count = 0
+    for i in xrange(H):
+        for j in xrange(M):
+            k = str(i)+str(j)
+            if max(k) == min(k):
+                count += 1
+    print count

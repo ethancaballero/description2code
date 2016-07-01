@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+int n,x,no;
+string s,win;
+bool nobody=false;
+//map<int,string> STP;
+//map<int,int> MTP;
+    //map<int,string> STP;
+pair<int,string> P[10001];
+/*void solve(int n)
+{
+
+    string s1;
+    int x1;
+    int mx=0;
+for(int i=0;i<n;i++)
+{
+    x1=P[i].first;
+    s1=P[i].second;
+    if(!MTP[x1])
+    {
+        STP[x1]=s1;
+    }
+    mx=max(x1,mx);
+    MTP[x1]++;
+}
+int i;
+for(i=1;i<=mx;i++)
+{
+    if(MTP[i]==1)
+    {
+        cout<<STP[i]<<endl;
+        break;
+    }
+}
+if(i>mx)
+{
+    cout<<"Nobody wins."<<endl;
+}
+return;
+}*/
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int tt,to;
+    cin>>tt;
+    while(tt--)
+    {
+    cin>>n;
+    for(int i=0;i<n;i++){
+    cin>>s>>x;
+    P[i]=make_pair(x,s);}
+    sort(P,P+n);
+    int i=0;
+    for(;i<n;)
+    {
+        int j=i;
+        while(j<n&&P[i].first==P[j].first)++j;
+        if(j-i==1)
+            break;
+        i=j;
+    }
+    if(i<n)
+    {
+        cout<<P[i].second<<endl;
+    }
+    else
+        cout<<"Nobody wins."<<endl;
+    }
+    return 0;
+}

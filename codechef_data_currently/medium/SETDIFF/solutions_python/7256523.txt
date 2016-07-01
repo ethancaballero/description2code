@@ -1,0 +1,18 @@
+def solve(group):
+	group.sort()
+	total = 0
+	lastDiff = 0
+	power = 1
+	for i in range(0, len(group)):
+		lastDiff += group[len(group) - (i + 1)] - group[i]
+		total += lastDiff * power
+		power *= 2
+	total %= 1000000007
+	return total
+
+
+t = int(raw_input())
+for i in range(t):
+	N = int(raw_input())
+	group1 = map(int, raw_input().split())
+	print solve(group1)

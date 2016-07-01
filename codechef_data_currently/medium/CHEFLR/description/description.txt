@@ -1,0 +1,47 @@
+  Chef has a nice complete binary tree in his garden. Complete means that each node has exactly two sons, so the tree is infinite. Yesterday he had enumerated the nodes of the tree in such a way: 
+
+Let's call the nodes' level a number of nodes that occur on the way to this node from the root, including this node. This way, only the root has the level equal to 1, while only its two sons has the level equal to 2.
+Then, let's take all the nodes with the odd level and enumerate them with consecutive odd numbers, starting from the smallest levels and the leftmost nodes, going to the rightmost nodes and the highest levels.
+Then, let's take all the nodes with the even level and enumerate them with consecutive even numbers, starting from the smallest levels and the leftmost nodes, going to the rightmost nodes and the highest levels.
+For the better understanding there is an example: 
+
+
+                             1
+                        \/           \
+                  2                   4
+                \/   \                \/       \
+             3       5           7        9
+            \/ \      \/  \          \/  \       \/  \
+           6  8 10 12      14 16   18 20 
+Here you can see the visualization of the process. For example, in odd levels, the root was enumerated first, then, there were enumerated roots' left sons' sons and roots' right sons' sons.
+You are given the string of symbols, let's call it S. Each symbol is either l or r. Naturally, this sequence denotes some path from the root, where l means going to the left son and r means going to the right son.
+Please, help Chef to determine the number of the last node in this path.
+Input
+The first line contains single integer T number of test cases.
+Each of next T lines contain a string S consisting only of the symbols l and r.
+
+Output
+Per each line output the number of the last node in the path, described by S, modulo 109+7.
+Constraints
+
+1 \u2264 |T| \u2264 5
+1 \u2264 |S| \u2264 10^5
+Remember that the tree is infinite, so each path described by appropriate S is a correct one.
+
+
+Example
+Input:
+4
+lrl
+rll
+r
+lllr
+Output:
+10
+14
+4
+13
+
+
+Explanation
+See the example in the statement for better understanding the samples.

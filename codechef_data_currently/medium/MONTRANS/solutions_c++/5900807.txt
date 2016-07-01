@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+int c ;
+int mxstep=0;
+long long  mx =0 ;
+int func(int x,int y,int num)
+{
+    if(num>=10000)return mxstep ;
+    if(100*x+y > mx){
+        mx = 100*x + y ;
+        mxstep=num ;
+    }
+    int ans =0 ;
+    if(y>=c)
+        return func(y-c,x,num+1) ;
+    else
+    {
+        if(x>0) return func(100+y-c,x-1,num+1) ;
+        else return mxstep ;
+    }
+}
+main()
+{
+    int test ;
+    scanf("%d",&test);
+    while(test--)
+    {
+        mx =0 ;
+        mxstep=0;
+        int a,b;
+        scanf("%d%d%d",&a,&b,&c);
+        printf("%d
+",func(a,b,0));
+    }
+}

@@ -1,0 +1,37 @@
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+int mini(int a,int b)
+{
+    return(a>b?b:a);
+}
+int val(int a ,int b)
+{
+    int sum=0;
+    //cout<<a<<b<<"hhh";
+    if(a&1)
+        sum+=2*a+1;
+    else
+        sum+=2*a;
+    if(b&1)
+        sum+=2*b-1;
+    else
+        sum+=2*b;
+        return sum;
+}
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+    int x,y,z,ans;
+    cin>>x>>y;
+    x=abs(x);
+    y=abs(y);
+    z=mini(x,y);
+    ans= (2*z+val(x-z,y-z));
+    cout<<ans<<endl;
+}
+return 0;
+}

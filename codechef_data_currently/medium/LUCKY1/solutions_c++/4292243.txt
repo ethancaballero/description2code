@@ -1,0 +1,81 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <cctype>
+#include <cassert>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#define max(a,b) a>b?a:b
+#define min(a,b) a<b?a:b
+
+using namespace std;
+
+long long int t , n;
+long long int sum4[100001] , sum7[100001] , cnt4[100001] , cnt7[100001] , diff[100001] , ans[100001];
+
+int main()
+{
+    long long int i , j , k , a , b , c , four , seven;
+    sum4[0] = sum7[0] = cnt4[0] = cnt7[0] = 0;
+    diff[0] = 1;
+    for(i = 1; i <= 10000; i++) {
+          diff[i] = 0;
+    }
+    ans[0] = 0;
+    for(i = 1; i <= 100000; i++) {
+          a = i;
+          four = seven = 0;
+          /*while(a != 0) {
+                  b = a%10;
+                  if(b == 4) {
+                       four++;
+                  } else if(b == 7) {
+                       seven++;
+                  }
+                  a = a/10;
+          }*/
+          b = a%10;
+          if(b == 4) {
+               four = cnt4[i/10] + 1;
+               seven = cnt7[i/10];
+          } else if(b == 7) {
+               four = cnt4[i/10];
+               seven = cnt7[i/10] + 1;
+          } else {
+               four = cnt4[i/10];
+               seven = cnt7[i/10];
+          }
+          cnt4[i] = four , cnt7[i] = seven;
+          sum4[i] = cnt4[i] + sum4[i-1] , sum7[i] = cnt7[i] + sum7[i-1];
+          b = sum4[i] - sum7[i];
+          ans[i] = diff[b] + ans[i-1];
+          diff[b]++;
+    }    
+    scanf("%lld" , &t);
+    for(i = 1; i <= t; i++) {
+          scanf("%lld" , &n);
+          printf("%lld
+" , ans[n]);
+    }
+    //system("pause");
+    return 0;
+}

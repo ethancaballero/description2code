@@ -1,0 +1,44 @@
+#include <iostream>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+#define rep(i,n) for(int i=0; i<n; i++)
+#define rrep(i,n) for(int i=n; i>=0; i--)
+#define pb(v,no) v.push_back(no);
+#define vi	vector<int>  
+#define vii	vector<vector<int> >  
+
+void solve(){
+	int n;
+	cin >> n;
+	vii v;
+	v.resize(n);
+	rep(i,n){
+		int n1, n2, n3;
+		cin >> n1 >> n2 >> n3;
+		pb(v[i], n1);
+		pb(v[i], n2);
+		pb(v[i], n3);
+
+	}
+	int cur=0;
+	rep(i,n){
+		while(!(cur<=v[i][0])){
+			v[i][0]+=v[i][2];
+		}
+		cur += (v[i][0]-cur);
+		cur += v[i][1];
+	}
+	cout << cur <<endl;
+}
+main(){
+	int t;
+	cin >> t;
+
+//	string w;
+//	getline(cin , w);
+	while(t--){
+		solve();
+	}
+}

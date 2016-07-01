@@ -1,0 +1,47 @@
+#include <iostream>
+
+using namespace std;
+
+void constraints(int a,int mini ,int maxi ){
+    if(a<mini|| a>maxi){
+        cout <<"The number "<<a<<" exceed the constraints "<<mini<<" and "<<maxi<<endl;
+    }
+}
+
+
+int main() {
+    int T;
+    cin >>T;
+    constraints(T,1,5);
+    for(int a=0;a<T;a++){
+        int n;
+        cin >>n;
+        constraints(n,1,100);
+        int L[n];
+        int R[n];
+        for(int b=0;b<n;b++){
+            int c=0;
+            cin >> c;
+            L[b]=c;
+            constraints(c,1,100);
+        }
+        for(int b=0;b<n;b++){
+            int c=0;
+            cin >> c;
+            R[b]=c;
+            constraints(c,1,100);
+        }
+        int minindex=1;
+        int maxR=R[0];
+        int maxval=0;
+        for(int b=0;b<n;b++){
+            int val=L[b]*R[b];
+            if(val>=maxval && R[b]>maxR){
+                maxR=R[b];
+                minindex=(b+1);
+                maxval=val;
+            }
+        }
+        cout << minindex << endl;
+    }
+}

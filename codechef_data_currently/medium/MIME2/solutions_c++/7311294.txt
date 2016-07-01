@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	int n,q;
+	cin>>n>>q;
+	string a[109],b[109],c[109];
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+		cin>>b[i];
+		// cout<<a[i]<<endl;
+		// cout<<b[i];
+	}
+	for(int i=0;i<q;i++)
+	{
+		cin>>c[i];
+		for(int j=c[i].size();j>=0;j--)
+		{
+			if(c[i][j]=='.')
+			{
+				c[i]=c[i].substr(j+1);
+				break;
+			}
+			if(j==0)
+				c[i]="";
+
+		}
+		// cout<<c[i]<<endl;
+	}
+	string ans;
+	int flag=0;
+		for(int i=0;i<q;i++)
+		{
+			flag=0;
+			for(int j=0;j<n;j++)
+			{
+				
+				if(c[i].compare(a[j])==0)
+				{
+					cout<<b[j]<<endl;
+					flag=1;
+					
+				}
+			}
+			if(flag==0)
+				cout<<"unknown"<<endl;
+		}
+		// cout<<c[i]<<endl;
+	
+
+
+	return 0;
+}

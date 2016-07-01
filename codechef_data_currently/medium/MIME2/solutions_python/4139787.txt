@@ -1,0 +1,21 @@
+n,q= map(int,raw_input().strip().split())
+tags=[]
+mean=[]
+while n:
+	ta = raw_input().strip().split()
+	tags.append(ta[0])
+	mean.append(ta[1])
+	n-=1
+while q:
+	ta = raw_input().strip()
+	if ta[len(ta)-1]=='.' or '.' not in ta:
+		ans='unknown'
+	else:
+		ans='unknown'
+		ta = ta.split('.')
+		for k in xrange(len(tags)):
+			if tags[k]==ta[len(ta)-1]:
+				ans=mean[k]
+				break
+	print ans
+	q-=1

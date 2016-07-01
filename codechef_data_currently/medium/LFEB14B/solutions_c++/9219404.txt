@@ -1,0 +1,39 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+int main()
+{
+	int t,p=1;
+	cin>>t;long int num;
+	
+	while(p<=t)
+	{
+		p++;
+		cin>>num;
+		int max=0,count=0;
+		long int a[num];
+		for(int i=0;i<num;i++)
+		{
+			cin>>a[i];
+			if(a[i]==max)
+			{
+				
+				count++;
+			}
+			else if(a[i]>max)
+			{
+              max=a[i];
+              count=1;
+			}
+			
+		}
+		cout<<pow(2,count)-1<<endl;
+		
+	}
+	
+	
+}

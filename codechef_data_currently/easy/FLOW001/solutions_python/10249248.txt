@@ -1,0 +1,4 @@
+test=input()
+for i in range(test):
+	k=map(int,raw_input().split())
+	print k[0]+k[1] 

@@ -1,0 +1,24 @@
+#!/bin/python
+s=raw_input()
+i=0
+leng=len(s)
+count=0
+ans=0
+buf=0
+nxt=0
+while(i<leng):
+	if(s[i].isdigit()==True):
+		buf=buf*10+int(s[i])
+	else:
+		count=count+1
+		if(count==1):
+			nxt=i+1
+			buf=buf*10+9
+	i=i+1
+	if(buf>ans):
+		ans=buf
+	if(count==2):
+		i=nxt
+		count=0
+		buf=0
+print ans

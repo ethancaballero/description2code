@@ -1,0 +1,30 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+int main(){
+std::ios::sync_with_stdio(false);
+int t,n;
+cin>>t;
+while(t--){
+    cin>>n;
+    int m;
+    int nsq=n*n;
+    int x[nsq+1],y[nsq+1];
+    long int cx,cy,c,ans=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin>>m;
+            x[m]=i;
+            y[m]=j;
+        }
+    }
+    for(int i=1;i<
+    nsq;i++){
+        cx=abs(x[i+1]-x[i]);
+        cy=abs(y[i+1]-y[i]);
+        c=cx+cy;
+        ans+=c;
+    }
+    cout<<ans<<endl;
+}
+}

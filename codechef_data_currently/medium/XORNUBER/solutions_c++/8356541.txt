@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+int main()
+{
+	int t;
+	cin>>t;
+	
+	while(t--)
+	{
+		
+		ll n;
+		cin>>n;
+		
+		ll x= n+1;
+		int i=0;
+		if( !( x&(x-1)) )
+		{
+			ll val;
+			if(n==1)
+			{
+				val=2;
+			}
+		else
+		{
+			
+			while(n>0)
+			{
+				i++;
+				n=n>>1;
+			}
+		i=i-1;
+		
+		 val=1<<i;
+		val--;
+     	}
+		cout<<val<<endl;
+		
+		}
+		else
+		cout<<"-1"<<endl;
+		
+		//	cout<<"  "<<i<<endl;
+		
+		
+		
+	}
+	
+	return 0;
+}

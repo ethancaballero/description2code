@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+long int sumt(int arr[100][100],long int sum[100][100],int i,int j,int t)
+{
+    long int t1,t2;
+    if(i==t)
+        return 0;
+    if(sum[i][j]!=-1)
+        return sum[i][j];
+    else
+    {
+        t1=arr[i][j]+sumt(arr,sum,i+1,j,t);
+        t2=arr[i][j]+sumt(arr,sum,i+1,j+1,t);
+        sum[i][j]=t1>t2?t1:t2;
+        return sum[i][j];
+    }
+}
+int main()
+{
+    int n,t,arr[100][100];
+    long int sum[100][100];
+    cin>>n;
+    while(n--)
+    {
+        memset(sum,-1,sizeof(sum));
+        cin>>t;
+        for(int i=0;i<t;i++)
+        {
+            for(int j=0;j<i+1;j++)
+            {
+                cin>>arr[i][j];
+            }
+        }
+        cout<<sumt(arr,sum,0,0,t)<<endl;
+    }
+    return 0;
+}

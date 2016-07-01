@@ -1,0 +1,25 @@
+#include<cstdio>
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while(t--)
+    {
+        int g;
+        scanf("%d", &g);
+        while(g--)
+        {
+            int n, i, q, out;
+            scanf("%d %d %d", &i, &n, &q);
+            if( i == q )
+            {
+                printf("%d
+", n/2);
+            }
+            else
+                printf("%d
+", (n+1)/2);
+        }
+    }
+    return 0;
+}

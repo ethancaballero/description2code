@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(void) {
+	int n;
+	while(1){
+	    scanf("%d",&n);
+	    if(n==0)
+	        break;
+	    int a[n],i,j,k,cnt=0;
+	    for(i=0;i<n;i++){
+	        scanf("%d",&a[i]);
+	    }
+	    sort(a,a+n);
+	    for(i=n-1;i>=2;i--){
+	        j=i-1;
+	        k=0;
+	        while(k<j){
+	            if(a[i]>a[j]+a[k]){
+	                cnt+=j-k;
+	                k++;
+	            }
+	            else
+	                j--;
+	        }
+	        }
+	    printf("%d
+",cnt);
+	}
+	return 0;
+}

@@ -1,0 +1,26 @@
+#Subtraction Game 1
+
+#Euclid's algorithm for GCD
+
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a%b)
+
+T = int(raw_input())
+
+while(T):
+    T = T - 1
+
+    N = int(raw_input())
+    A = [int(x) for x in raw_input().split()]
+
+    if len(set(A)) == 1:
+        print A[0]
+    else:
+        x = list(set(A))
+        res = x[0]
+        for i in range(1, len(x)):
+            res = gcd(res, x[i])
+        print res
+            

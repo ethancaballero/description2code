@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int t,a,b,i,s;
+	scanf("%lld",&t);
+	for(i=0;i<t;i++)
+	{
+		s = 0;
+		scanf("%lld %lld",&a,&b);
+		s = a + b;
+		printf("%lld
+",s);
+	}
+	return 0;
+}

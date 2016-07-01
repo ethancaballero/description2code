@@ -1,0 +1,7 @@
+a = input()
+for i in xrange(a):
+    b = raw_input()
+    b = b.split()
+    c = int(b[0])
+    d = int(b[1])
+    print 2*c*d-c-d

@@ -1,0 +1,22 @@
+for t in xrange(int(raw_input())):
+	n, k, m = map(int,raw_input().split())
+	a = map(int,raw_input().split())
+	b = map(int,raw_input().split())
+	y = sorted(map(int,(raw_input()+" "+raw_input()).split()), reverse = True)
+	x = []
+	for i in xrange(n):
+		x.append(a[i]-b[i])
+	x = sorted(x, reverse = True)
+	left = sum(x)
+	i = 0
+	j = 0
+	lx = n
+	ly = k + m
+	while (i<lx and j<ly):
+		if (x[i]>=y[j]):
+			left -= y[j]
+			i += 1
+			j += 1
+		else:
+			j += 1
+	print left

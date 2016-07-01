@@ -1,0 +1,53 @@
+T=int(raw_input())
+for i in xrange(T):
+	[N,M]=map(int,raw_input().split())
+	Nr=[[0]]
+	Dr=[[1]]
+	dic={}
+	totalcost={}
+	F_len={}
+	for j in xrange(N):
+		[C,P]=map(int,raw_input().split())
+		if C in dic:
+			dic[C].append(P)
+			totalcost[C]+=P
+			F_len[C]=2*F_len[C]+1
+		else:
+			dic[C]=[P]
+			totalcost[C]=P
+			F_len[C]=1
+	colors=dic.keys()
+	#print colors
+	for j in colors:
+		totalcost[j]*=((1+F_len[j])/2)
+	for j in xrange(1,len(colors)+1):
+		
+		#print Dr[j-1][0]*(1+F_len[colors[j-1]])
+		Dtemp=[Dr[j-1][0]*(1+F_len[colors[j-1]])]
+		for k in xrange(1,j):
+			Dtemp.append(Dr[j-1][k]+F_len[colors[j-1]]*Dr[j-1][k-1])
+			
+		k=j
+		Dtemp.append(0+F_len[colors[j-1]]*Dr[j-1][k-1])
+		
+		
+		Dr.append(Dtemp)
+		
+		#print str(j)+" : "+str(Dtemp)
+	for j in xrange(1,len(colors)+1):
+		#Ntemp=[Nr[j-1][0]*(1+totalcost[colors[j-1]])]
+		Ntemp=[]
+		for k in xrange(1,j):
+			Ntemp.append(Nr[j-1][k]+totalcost[colors[j-1]]*Dr[j-1][k-1]+F_len[colors[j-1]]*Nr[j-1][k-1])
+		k=j
+		Ntemp.append(0+totalcost[colors[j-1]]*Dr[j-1][k-1]+F_len[colors[j-1]]*Nr[j-1][k-1])
+		#print totalcost[colors[j-1]],Nr[j-1][k-1],colors[j-1],j
+		Ntemp.insert(0,Ntemp[0])
+		Nr.append(Ntemp)
+	print "%.10f" %(1.0*Nr[-1][M]/Dr[-1][M])	
+	"""for j in xrange(len(colors)+1):
+		print str(j)+" : "+str(Dr[j])
+	for j in xrange(len(colors)+1):
+		print str(j)+" : "+str(Nr[j])"""
+	"""for j in xrange(len(colors)):
+		print j,colors[j],totalcost[colors[j]]"""

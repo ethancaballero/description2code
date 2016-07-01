@@ -1,0 +1,48 @@
+#include <iostream>
+#include<vector>
+#include<stdio.h>
+#include<climits>
+using namespace std;
+vector <int> vi;
+int main()
+{
+        int t, n, num, min1=INT_MAX, min2, i1;
+
+        scanf("%d", &t);
+
+        while(t--){
+              scanf("%d", &n);
+
+                for(int i = 0; i<n; i++){
+                        scanf("%d", &num);
+                        vi.push_back(num);
+                }
+
+                if (vi[0] >= vi[1]){
+                        min1 = vi[1];
+                        min2 = vi[0];
+                        i1 = 1;
+                }
+                else{
+                        min1 = vi[0];
+                        min2 = vi[1];
+                        i1 = 0;
+                }
+                for(int i =1; i<n; i++){
+
+                        if(min1 > vi[i]){
+                                min1 = vi[i];
+                                i1 = i;
+                        }
+
+                        if(min2 > vi[i] && i != i1){
+                                min2 = vi[i];
+                        }
+                }
+                printf("%d
+", min1+min2);
+                vi.clear();
+
+        }
+    return 0;
+}

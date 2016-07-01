@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string.h>
+#include <cstring>
+using namespace std;
+
+void stringer();
+
+int main()
+{
+    int t,i;
+    cin >> t;
+    cin.ignore();
+    for (i=0;i<t;i++)
+    {
+        stringer();
+    }
+    return 0;
+}
+
+void stringer()
+{
+    int i,j,k=0;
+    string a,b;
+    getline(cin,a);
+    getline(cin,b);
+    int x,y;
+    x=a.length();
+    y=b.length();
+    for (i=0;i<x;i++)
+    {
+        for (j=0;j<y;j++)
+        {
+            if (a[i]==b[j])
+            {
+                k=1;
+                break;
+            }
+        }
+    }
+
+    if (k==1) cout << "Yes" << endl;
+    if (k==0) cout << "No" << endl;
+}

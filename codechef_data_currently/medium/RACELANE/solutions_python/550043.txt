@@ -1,0 +1,36 @@
+# CodeChef
+# Practice
+# Easy
+# Painting Racing Lanes
+
+ntc = int(raw_input())
+
+for cti in range(ntc):
+    tl = [0] * 500
+    bc = int(raw_input())
+
+    for bi in range(bc):
+        sv, ev, lv = map(int, raw_input().split())
+        lm = 1 << lv
+        
+        for cm in range(sv - 1, ev):
+            tl[cm] |= lm
+
+    res = 0
+
+    for cm in range(500):
+        ct = tl[cm]
+        of = True
+
+        for ti in range(9):
+            tm = 3 << ti
+
+            if ct & tm == tm:
+                of = False
+                break
+
+        if of:
+            res += 1
+
+    print res
+

@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   {
+     int n,m;
+     cin>>n>>m;
+     int a[n+1];
+     for(int i=0;i<=n;i++)
+     a[i]=1;
+     a[0]=0;
+     for(int i=0;i<m;i++)
+     {
+      int t;
+      cin>>t;
+      a[t]=0; 
+     }
+
+     bool turn=1;
+     for(int i=0;i<=n;i++)
+     {
+       if(a[i]&&turn)
+       {
+        turn=0;
+        cout<<i<<" ";
+        a[i]=0;
+       }
+       if(a[i]&&!turn)
+        turn=1;
+   
+     }
+     cout<<endl;
+     
+     
+      turn=1;
+     for(int i=0;i<=n;i++)
+     {
+       if(a[i]&&turn)
+       {
+        turn=0;
+        cout<<i<<" ";
+       }
+       if(a[i]&&!turn)
+        turn=1;
+   
+     }
+     cout<<endl;
+ 
+ 
+   }
+
+
+}

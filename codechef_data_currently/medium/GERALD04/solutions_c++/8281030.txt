@@ -1,0 +1,43 @@
+	#include<iostream>
+	#include<stdio.h>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			float dist,t1h=0,t1m=0,t2h=0,t2m=0;
+			char a[6];
+			cin>>a;
+			for(int i=0;i<2;i++)
+				t1h=t1h*10+(a[i]-48);
+			for(int i=3;i<5;i++)
+				t1m=t1m*10+(a[i]-48);
+			cin>>a;
+			for(int i=0;i<2;i++)
+				t2h=t2h*10+(a[i]-48);
+			for(int i=3;i<5;i++)
+				t2m=t2m*10+(a[i]-48);
+			float timleft=(t1h-t2h)*60+(t1m-t2m);
+			cin>>dist;
+			if(timleft>=0)
+			{
+				printf("%0.1f ",dist+timleft);
+				if(2*dist<=timleft)
+					printf("%0.1f
+",timleft);
+				else
+					printf("%0.1f
+",(2*dist+timleft)/2);
+			}
+			else
+			{
+				printf("%0.1f %0.1f
+",dist,dist );
+			}		
+			t--;
+				
+
+		}	
+	}

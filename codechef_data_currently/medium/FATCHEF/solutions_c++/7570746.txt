@@ -1,0 +1,79 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MOD 1000000009
+int main()
+{
+	int t,i;
+	scanf("%d",&t);
+    while(t--)
+    {
+    	int n,m,Mark;
+    	
+    	scanf("%d %d", &n, &m);
+		
+		int Record[m+1],Fences[n+1];
+		for(i=0; i<=n; i++)
+					Fences[i]=0;
+    	Mark=m;
+    	while(Mark--)
+    	{
+    		char c;
+    		int ind;
+    		getchar();
+    		scanf("%c", &c);
+    		
+    		scanf("%d", &ind);
+    		
+    		//printf("%d %d %d
+", ind, c, (int)(c-'A'+1));
+    		Fences[ind]=(int)(c-'A'+1);
+    	}
+    	long long ans=1,ctr=0;
+    	int last=0,first=1;;
+    	
+    	
+    	if(m==1)
+    			ans=1;
+    			
+    	else		
+    	{
+    		int k=1;
+    		while (Fences[k]==0)
+    							++k;
+    		first = k;
+    		
+    		for(i=first; i<=n; i++)
+			{
+				if (Fences[i]!=0)
+				{
+					if (Fences[i]!=last)
+					{
+						ans = ((ans%MOD)*((ctr+1)%MOD))%MOD;
+						ctr=0;
+						last=Fences[i];
+						//printf("%lld			", ans);
+					}
+					else
+					{
+						ans = (ans*1)%MOD;
+						ctr = 0;
+					}
+				}
+				
+				else
+				{
+					ctr++;
+				}
+				//printf("%d	 %lld
+", ctr, ans);
+		
+			}
+		}
+		//cout<<endl;
+		ans = ans%MOD;
+		printf("%lld
+", ans%MOD);
+		
+    }
+    return 0;
+}

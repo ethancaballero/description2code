@@ -1,0 +1,11 @@
+T = int(raw_input())
+while T:
+    L = [i for i in raw_input().split()]
+    d = {pos: color for pos,color in zip(list('FKLRTB'),L)}
+    possible_pos = ['FBL','RBK','FRB','KLB','FLT','FRT','RKT','LKT']
+    for position in possible_pos:
+        for i in range(2):
+            if d[position[i]] != d[position[i+1]]: break
+        else: print 'YES'; break
+    else: print 'NO'
+    T -= 1

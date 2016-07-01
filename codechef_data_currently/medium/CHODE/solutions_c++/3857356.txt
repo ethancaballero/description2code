@@ -1,0 +1,123 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <cstdio>
+#include <vector>
+using namespace std;
+
+struct crypt{
+	int sym;
+	int freq;
+	int flag;
+
+};
+bool compare(const struct crypt &lhs, const struct crypt &rhs)
+{
+	return (lhs.freq<rhs.freq)||((lhs.freq==rhs.freq)&&(lhs.sym<rhs.sym));
+}
+int main()
+{
+	int t,n;
+	int i;
+
+	
+	//int a[26]={0};
+
+	cin>>t;
+	for(i=0;i<t;i++)
+	{
+		string text_freq;
+		string crypt_freq;
+
+		cin>>text_freq;
+		//cout<<text_freq<<endl;
+		cin.get();
+		getline(cin,crypt_freq);
+		struct crypt a[26];
+		
+
+		int siz=crypt_freq.size();
+		char *ans= (char*)malloc(siz*sizeof(char));
+		for(int j=0;j<26;j++)
+		{
+			a[j].sym=j;
+			a[j].freq=0;
+			a[j].flag=0;
+
+		}
+
+		for(int j=0;j<siz;j++)
+		{
+			if(crypt_freq[j]>=97&&crypt_freq[j]<123)
+				{
+					// cout<<int(crypt_freq[j]);
+					int temp=int(crypt_freq[j])-97;
+					a[temp].freq++;
+				}
+			else if(crypt_freq[j]>=65&&crypt_freq[j]<91)
+			{
+					int temp=int(crypt_freq[j])-65;
+					// cout<<temp<<",";
+					a[temp].freq++;
+					a[temp].flag=1;
+			}
+			else{
+
+			}
+		}
+		//cout<<endl;
+		sort(a,a+26,compare);
+
+		/*for(int j=0;j<26;j++)
+		{
+			cout<<a[j].sym<<" ,"<<a[j].freq;
+		}*/
+		int idx=0;
+		for(int j=0;j<siz;j++)
+		{
+			int temp=0;
+			if(crypt_freq[j]>=97&&crypt_freq[j]<123)
+				{
+					temp=int(crypt_freq[j])-97;
+					for(int p=0;p<26;p++)
+					{
+						//<<a[p].sym<<endl;
+						//count++;
+						if(a[p].sym==temp)
+							{
+
+								ans[idx]=text_freq[p];
+								idx++;
+								break;
+							}
+					}
+				}
+			else if(crypt_freq[j]>=65&&crypt_freq[j]<91)
+			{
+				 temp=int(crypt_freq[j])-65;
+				 for(int p=0;p<26;p++)
+				{
+					if(a[p].sym==temp)
+						{
+							ans[idx]=char(text_freq[p]-32);
+							idx++;
+							break;
+						}
+				}
+				}
+			else{
+				ans[idx]=crypt_freq[j];
+				idx++;
+				}
+			
+		}
+		for(int idx=0;idx<siz;idx++)
+		{
+			cout<<ans[idx];
+		}
+		cout<<endl;
+	}
+
+	return 0; 
+
+}

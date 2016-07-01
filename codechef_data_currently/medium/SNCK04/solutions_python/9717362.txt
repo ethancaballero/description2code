@@ -1,0 +1,22 @@
+import sys
+
+LIMIT = 10**6+1
+euler_tot = [0]*LIMIT
+def calc() :
+    for i in range(2,LIMIT) :
+        euler_tot[i] = i
+    for i in range(2,LIMIT) :
+        if euler_tot[i] == i :
+            for j in range(i,LIMIT,i) :
+                euler_tot[j] /= i
+                euler_tot[j] *= (i-1)
+
+dp = [0]*LIMIT
+def solve() :
+    for i in range(2,LIMIT) :
+        dp[i] += dp[i-1]
+        dp[i] += euler_tot[i]
+calc()
+solve()
+for __ in range(input()) :
+    print dp[input()]

@@ -1,0 +1,12 @@
+#!/usr/bin/python
+for i in range(input()):
+	L={}
+	for i in range(input()):
+		key=input()
+		if key in L:
+			L[key]+=1
+		else:
+			L[key]=1
+	result=[x for x,y in L.items() if y%2==1]
+	for i in result:
+		print i

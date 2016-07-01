@@ -1,0 +1,29 @@
+from sys import stdin as ip
+for _ in xrange(int(ip.readline())):
+    s=ip.readline().strip().split()[0]
+    l=len(s)
+    i=0
+    j=0
+    st=[]
+    op=['+','-','*','/','^']
+    ans=''
+    while i<len(s):
+        if s[i]=='(':
+            j=i+1
+            while s[j]=='(':
+                j+=1
+            ans+=s[j]
+            j+=1
+            if s[j] in op:
+                st.append(s[j])
+            i=j+1
+        elif s[i]==')':
+            ans+=st.pop()
+            i+=1
+        elif s[i] in op:
+            st.append(s[i])
+            i+=1
+        else:
+            ans+=s[i]
+            i+=1
+    print ans

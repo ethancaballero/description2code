@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+int track[10][501] ;
+
+int main(){
+
+	int T ;
+	int B ;
+	int S,E,L ;
+
+	scanf("%d",&T) ;
+
+	int index ;
+
+	int i ;
+
+	int count ;
+
+	while(T--){
+	
+		scanf("%d",&B) ;
+
+		count = 500 ;
+
+		for(index=0;index<B;index++){
+		
+			scanf("%d %d %d",&S,&E,&L) ;
+
+			for(i=S;i<=E;i++)
+				track[L][i] = 1 ;
+		
+		}
+		
+		for(index=1;index<=500;index++){
+		
+			if((track[0][index]&&track[1][index])||(track[1][index]&&track[2][index])||(track[2][index]&&track[3][index])||(track[3][index]&&track[4][index])||(track[4][index]&&track[5][index])||(track[5][index]&&track[6][index])||(track[6][index]&&track[7][index])||(track[7][index]&&track[8][index])||(track[8][index]&&track[9][index]))
+				count-- ;
+		}
+		
+		printf("%d
+",count) ;
+
+		for(index=0;index<10;index++)
+			for(i=1;i<=500;i++)
+				track[index][i] = 0 ;
+	}
+
+
+}

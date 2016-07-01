@@ -1,0 +1,30 @@
+def fn():
+    n,k = map(int,raw_input().split())
+    
+    l = []
+    
+    for i in range(1001):
+        l.append(0)
+    
+    a = map(int,raw_input().split())
+    
+    for i in a:
+        l[i-1] += 1
+        
+    g = t = tc = 0
+    
+    for i in range(1000,-1,-1):
+        if l[i] == 1:
+            g += 1
+            tc = (g-1)/k + 1
+        else:
+            t += tc
+            
+    print t
+    
+    
+
+t = int(raw_input())
+
+for i in range(t):
+    fn()

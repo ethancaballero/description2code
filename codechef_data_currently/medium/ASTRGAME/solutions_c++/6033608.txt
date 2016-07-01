@@ -1,0 +1,151 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define getcx getchar
+#define maxn 35
+#define F(i,p,n) for(i=p;i<n;i++)
+#define I(i,p,q) for(i=p;i>=q;i--)
+#define S(x) scanf("%d",&x)
+#define Ss(x) scanf("%s",x)
+#define P(x) printf("%d
+",x)
+#define Ps(x) printf("%d ",x)
+#define LL long long int
+#define pii pair<int,int>
+char s[maxn],c[maxn];
+int dp[maxn][maxn],sub[maxn][maxn],cnt,len,m;
+struct trie
+{
+    int next,fin;
+}tr[26][maxn*maxn];
+int rec(int s,int e)
+{
+    //printf("s=%d e=%d
+",s,e);
+    if(s>e)
+    {
+        //printf("s=%d e=%d ret=0
+",s,e);
+        return 0;
+    }
+    if(dp[s][e]!=-1)
+    {
+        //printf("s=%d e=%d ret=%d
+",s,e,dp[s][e]);
+        return dp[s][e];
+    }
+    int i,j;
+    vector<int> v;
+    F(i,s,e+1)
+    {
+        F(j,i,e+1)
+        {
+            if(sub[i][j])
+            {
+                int cal=rec(s,i-1)^rec(j+1,e),num;
+                v.push_back(cal);
+            }
+        }
+    }
+    sort(v.begin(),v.end());
+    int r=0;
+    F(i,0,v.size())
+    {
+
+        if(v[i]!=r)
+            break;
+        if(i==v.size()-1||v[i]!=v[i+1])
+            r++;
+    }
+    dp[s][e]=r;
+    //printf("s=%d e=%d ret=%d
+",s,e,dp[s][e]);
+    return dp[s][e];
+}
+int main()
+{
+    int i,j,k,n,t;
+    S(t);
+    while(t--)
+    {
+        cnt=1;
+        memset(dp,-1,sizeof(dp));
+        Ss(c);
+        S(m);
+        len=strlen(c);
+        F(i,0,26)
+        {
+            F(j,0,32*m)
+            tr[i][j].next=tr[i][j].fin=0;
+        }
+        F(i,0,m)
+        {
+            Ss(s);
+            int l=strlen(s);
+            int cur=0;
+            F(j,0,l)
+            {
+                if(j==l-1)
+                    tr[s[j]-'a'][cur].fin=1;
+                if(tr[s[j]-'a'][cur].next)
+                    cur=tr[s[j]-'a'][cur].next;
+                else
+                {
+
+                    tr[s[j]-'a'][cur].next=cnt;
+                    cur=cnt++;
+                }
+            }
+        }
+        /*printf("cnt=%d
+",cnt);
+        printf("trie :
+");
+        F(i,0,26)
+        {
+            printf("%c.",'a'+i);
+            F(j,0,cnt)
+            {
+                printf("(%d,%d)",tr[i][j].next,tr[i][j].fin);
+            }
+            printf("
+");
+        }*/
+        F(i,0,len)
+        {
+            F(j,i,len)
+            {
+                int cur=0,st=0;
+                F(k,i,j+1)
+                {
+
+                    if(!tr[c[k]-'a'][cur].next)
+                        break;
+                    else
+                    {
+                        if(k==j&&tr[c[k]-'a'][cur].fin)
+                            st=1;
+                        cur=tr[c[k]-'a'][cur].next;
+                    }
+                }
+                sub[i][j]=st;
+            }
+        }
+        /*printf("sub :
+");
+        F(i,0,len)
+        {
+            F(j,0,len)
+            printf("%d ",sub[i][j]);
+            printf("
+");
+        }*/
+        int res=rec(0,len-1);
+        if(res)
+            printf("Teddy
+");
+        else
+            printf("Tracy
+");
+    }
+    return 0;
+}

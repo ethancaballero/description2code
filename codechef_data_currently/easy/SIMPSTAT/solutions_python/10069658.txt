@@ -1,0 +1,6 @@
+t=int(raw_input())
+for i in range(1,t+1):
+        n,k=map(int,(raw_input()).split(' '))
+        l2=map(int,(raw_input()).split(' '))
+        l2.sort()
+        print '%.6f' % (sum(l2[k:n-k])/(n-2*k*1.0))

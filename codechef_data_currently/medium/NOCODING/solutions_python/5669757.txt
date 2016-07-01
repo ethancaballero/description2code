@@ -1,0 +1,11 @@
+import sys
+
+for i in range(int(sys.stdin.readline())):
+    data=sys.stdin.readline().strip()
+    count=2
+    for i in range(len(data)-1):
+        count=count + (ord(data[i+1])-ord(data[i])+26)%26 + 1
+    if count<=len(data)*11:
+        print 'YES'
+    else:
+        print 'NO'

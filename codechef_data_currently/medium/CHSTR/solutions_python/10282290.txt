@@ -1,0 +1,44 @@
+fact=[1,1]
+length = 2
+def substr(string):
+    str=len(string)
+    for i in xrange(1,str+1):
+        for j in xrange(str-i+1):
+        	yield string[j:i+j]
+ 
+def main():
+    t = input()
+    global length,fact
+    for i in xrange(t):
+        len_str, num_of_q = map(int,raw_input().split())
+        if length <= len_str:
+            for x in xrange(length,len_str+1):
+                fact += [(fact[x-1]*x)%((10**9)+7)]
+            length = len_str+1
+                
+        lisp=list(substr(raw_input()))
+        key_value={}
+        for x in lisp:
+            try :
+                key_value[x] += 1
+            except :
+                key_value[x] = 1
+        lisp = key_value.values()
+        lisp.sort(reverse = True)
+        list_length = len(lisp)
+        answer={}
+        for x in xrange(num_of_q):
+            result=0
+            l = input()
+            j = 0;
+            try :
+                print answer[l]
+            except:
+                while( j < list_length and lisp[j] >= l):
+                    result += (fact[lisp[j]]/(fact[l]*fact[lisp[j]-l]))%1000000007
+                    j+=1
+                answer[l] = result
+                print result
+ 
+
+main()

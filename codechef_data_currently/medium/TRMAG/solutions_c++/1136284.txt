@@ -1,0 +1,45 @@
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+
+int main()
+{
+    int test,totalPages,numOfTorn,i,actualTotalPages,sum,num,numOfBlank;
+
+    double ans;
+
+    cin >> test;
+
+    while(test--)
+    {
+        sum = 0;
+        cin >> totalPages;
+
+        sum = totalPages*(totalPages + 1);
+        sum = sum >> 1;
+
+        cin >> numOfBlank;
+
+        for(i=0;i<numOfBlank;i++)
+        {
+            cin >> num;
+            sum -= num;
+        }
+
+        cin >> numOfTorn;
+
+//        cout << sum << endl;
+
+        actualTotalPages = (totalPages + 1) >> 1;
+
+//        cout << numOfTorn << endl;
+
+        ans = sum*(1 - ((double)(numOfTorn))/actualTotalPages);
+
+        printf("%.4lf
+",ans);
+    }
+
+    return 0;
+}

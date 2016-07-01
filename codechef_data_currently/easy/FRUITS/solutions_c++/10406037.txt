@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int M = 0,N = 0,K = 0,T,apples,oranges,goldCoins;
+    scanf("%d",&T);
+    while (T--) {
+        scanf("%d%d%d",&N,&M,&K);
+        apples = N;
+        oranges = M;
+        goldCoins = K;
+        
+    
+    while (K) {
+        if (N>M){
+            M++;
+            K--;
+            }
+        else if (M>N){
+            N++;
+            K--;
+        }
+        else{
+                printf("0
+");
+                break;
+            }
+        
+        }
+    if (K == 0) {
+            printf("%d
+",abs(N-M));
+        }
+    }
+//    printf("
+");
+
+    return 0;
+}

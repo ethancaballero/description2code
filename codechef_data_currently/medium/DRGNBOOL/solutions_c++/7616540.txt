@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int t,n,m,c,l,count;
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+		int hash1[101]={0};
+		int hash2[101]={0};
+		count=0;
+		cin>>n>>m;
+		for(int j=0;j<n;j++)
+		{
+			cin>>c>>l;
+			hash1[l]+=c;
+		}
+		for(int j=0;j<m;j++)
+		{
+			cin>>c>>l;
+			hash2[l]+=c;
+		}
+		
+		for(int j=1;j<=100;j++)
+		{
+			if(hash1[j]<hash2[j] && hash1[j]!=0)
+			count+=hash2[j]-hash1[j];
+		}
+		
+		cout<<count<<"
+";
+	}
+	
+	
+	return 0;
+}

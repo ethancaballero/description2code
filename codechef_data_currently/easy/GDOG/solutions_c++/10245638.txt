@@ -1,0 +1,27 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k;
+        cin>>n>>k;
+        int a[k];
+        for(int i=1;i<=k;i++)
+        {
+            a[i]=n%i;
+        }
+       int max=0;
+       for(int i=1;i<=k;i++)
+       {
+           if(a[i]>=max)
+           {
+               max=a[i];
+           }
+       }
+        cout<<max<<endl;
+    }
+}

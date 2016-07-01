@@ -1,0 +1,44 @@
+intv_new = []
+def bsearch(lo, hi, key):
+	global intv_new
+	mid = 0
+	while hi >= lo:
+		mid = (hi + lo)/2
+		if key[0] < intv_new[mid][0]:
+			hi = mid-1
+		elif key[1] > intv_new[mid][1]:
+			lo = mid+1
+		elif key[0] >= intv_new[mid][0] and key[1] <= intv_new[mid][1]:
+			return True
+	return False
+
+t = input()
+while t != 0:
+	t -=1 
+	fg = False
+	perm,intv,l,r = [],[],0,0
+	intv_new = []
+	nt = ()
+	n,m = map(int, raw_input().strip().split()) 
+	perm = map(int, raw_input().strip().split()) 
+	for _ in xrange(m):
+		l,r = map(int,raw_input().strip().split()) 
+		intv.append((l,r))
+	intv = sorted(intv)
+	prev = intv[0] 
+	for i in intv[1:]:
+		#left matches,or right.. merge them..
+		if prev[1] == i[0]+1 or prev[1] >= i[0]:
+			prev = (prev[0],max(i[1],prev[1]))
+		#else add to new intv list
+		else:
+			intv_new.append(prev)
+			prev = i 
+	intv_new.append(prev)
+	for i in xrange(n):
+		if not i+1 == perm[i] and i+1 < perm[i] and not bsearch(0,len(intv_new)-1,(min(i+1,perm[i]),max(i+1,perm[i]))):
+			print "Impossible"
+			fg = True 
+			break
+	if not fg:
+		print "Possible"

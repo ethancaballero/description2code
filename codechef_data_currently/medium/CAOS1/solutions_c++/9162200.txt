@@ -1,0 +1,41 @@
+	#include<iostream>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int r,c;
+			cin>>r>>c;
+			char arr[55][55];
+			for(int i=0;i<r;i++)
+				cin>>arr[i];
+			int count=0;
+			for(int i=0;i<r;i++)
+			{
+				int cnt;
+				for(int j=0;j<c;j++)
+				{
+					cnt=0;
+					if(arr[i][j]=='^')
+					{
+
+						if(i-2>=0 && arr[i-1][j]=='^' && arr[i-2][j]=='^')
+							cnt++;
+						if(i+2<r && arr[i+1][j]=='^' && arr[i+2][j]=='^')
+							cnt++;
+						if(j-2>=0 && arr[i][j-1]=='^' && arr[i][j-2]=='^')
+							cnt++;
+						if(j+2<c && arr[i][j+1]=='^' && arr[i][j+2]=='^')
+							cnt++;
+					}	
+
+					if(cnt==4)
+						count++;
+				}	
+			}	
+			cout<<count<<endl;
+			t--;
+		}
+	}

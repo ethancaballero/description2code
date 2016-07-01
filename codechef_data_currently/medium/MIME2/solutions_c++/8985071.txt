@@ -1,0 +1,44 @@
+#include<iostream>
+#include<string>
+#include<map>
+using namespace std;
+
+int main()
+{
+   string s1,s2,s3;
+   int n,q;
+   cin>>n>>q;
+   map<string,string>ob;
+
+   while(n--)
+   {
+       cin>>s1>>s2;
+       ob[s1]=s2;
+   }
+   while(q--)
+   {
+       cin>>s3;
+       int pos=s3.rfind('.');
+       if(pos==string::npos)
+       {
+           cout<<"unknown
+";
+       }
+       else
+       {
+             string s4;
+            s4=s3.substr(pos+1);
+            if(ob.count(s4)>0)
+            {
+                cout<<ob[s4]<<endl;
+            }
+            else
+            {
+                cout<<"unknown"<<endl;
+            }
+
+       }
+
+   }
+    return 0;
+}

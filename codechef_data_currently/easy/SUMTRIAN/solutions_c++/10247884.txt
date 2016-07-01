@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int x[101][101],dp[101][101];
+int n,t;
+ 
+int solve (int i, int j) {
+ 
+    if (i == n) return x[i][j];
+    if ( dp[i][j] != -1 ) return dp[i][j];
+ 
+    return dp[i][j] = x[i][j] + max( solve(i+1,j) , solve(i+1, j+1) );
+}
+ 
+int main () {
+ 
+    cin >> t;
+ 
+    while (t--) {
+        cin >> n;
+ 
+        for (int i=1; i<=n; i++)
+        for (int j=1; j<=i; j++) {
+            cin >> x[i][j];
+            dp[i][j] = -1;
+        }
+ 
+        cout << solve(1,1) << endl;
+    }
+}

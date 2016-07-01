@@ -1,0 +1,116 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<stack>
+#include<queue>
+#include<algorithm>
+#define all(c) c.begin(),c.end()
+#define tr(c,it) for(typeof(c.begin()) it=c.begin();it!=c.end();it++)
+#define sz(c) c.size()
+#define pb push_back
+#define mp make_pair
+#define inf 1000001
+//#define gc() getchar_unlocked()
+//#define pc(x) putchar_unlocked(x)
+#define ll long long int
+using namespace std;
+ 
+ 
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int,int> pii;
+typedef map<int,int> mii;
+ 
+ 
+ 
+/*static inline int fastio()
+{
+    int x=0;
+    char c=gc();
+    while(c<'0'||c>'9')
+    {
+        c=gc();
+    }
+    while(c>='0'&&c<='9')
+    {
+        x=(x<<1)+(x<<3)+c-'0';
+        c=gc();
+    }
+    return x;
+}
+ 
+ 
+static inline void fastWrite(zx)
+{
+  char s[15];
+  int i=0;
+  do
+  {
+      s[i++]=x%10+'0';
+      x/=10;
+  }while(x);
+  --i;
+  while(i>=0)
+  {
+      pc(s[i--]);
+  }
+  pc('
+');
+ 
+} */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int T;
+    int N;
+    int M;
+    char s[51][51];
+    cin>>T;
+    while(T--)
+    {
+        cin>>N;
+        cin>>M;
+        int i,j;
+        for(i=0;i<N;i++)
+        {
+            cin>>s[i];
+        }
+        int cnt=0;
+        for(i=0;i<N;i++)
+        {
+            for(j=0;j<M;j++)
+            {
+ 
+                for(int k=2;k<51;k++)
+                {
+ 
+                    if(i+k-1<N&&j+k-1<M)
+                    {
+                     char a=s[i][j];
+                     char b=s[i+k-1][j];
+                     char c=s[i][j+k-1];
+                     char d=s[i+k-1][j+k-1];
+                     if(a==b&&b==c&&c==d)
+                        cnt++;
+                    }
+                    else
+                        break;
+                }
+            }
+        }
+        cout<<cnt<<endl;
+    }
+    return 0;
+}

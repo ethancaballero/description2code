@@ -1,0 +1,26 @@
+#include<iostream>
+#include<iomanip>
+#include<cstdio>
+using namespace std;
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   {
+     float dt,ds,d;
+     cin>>dt;
+     cin>>ds;
+     cin>>d;
+     if(d>=ds+dt)
+     cout<<d-ds-dt;
+     else if(ds>=d+dt)
+     cout<<ds-d-dt;
+     else if(dt>=d+ds)
+     cout<<dt-d-ds;
+     else
+     cout<<"0";
+     cout<<"
+";
+   }
+}

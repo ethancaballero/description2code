@@ -1,0 +1,43 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,m,n;
+     char d;
+   // char d;
+    string s,b;
+    int p;
+    int i,j,k;
+    scanf("%d",&t);
+    while(t--)
+    {
+        cin>>s;
+        char d='z';
+        n=s.length();
+       b="";
+       m=0;
+        scanf("%d",&k);
+        for(i=0;i<k;i++)
+        {
+              d='{';
+            for(j=m;j<=n-k+i;j++)
+            {
+                if(s[j]<d)
+                {
+                     d=s[j];
+                     p=j;
+                }
+
+
+            }
+            b+=d;
+            m=p+1;
+        }
+
+
+    cout<<b<<endl;
+
+
+    }
+}

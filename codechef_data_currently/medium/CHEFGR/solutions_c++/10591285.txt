@@ -1,0 +1,38 @@
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,m;
+		scanf("%d%d",&n,&m);
+		int a[n];
+		for (int i = 0; i < n; ++i)
+		{
+			scanf("%d",a+i);
+		}
+		int min_sum = 0;
+		int mi=a[0];
+		for (int i = 0; i < n; ++i)
+		{
+			if(mi<a[i])
+				mi=a[i];
+		}
+		for (int i = 0; i < n; ++i)
+		{
+			min_sum+=mi-a[i];
+		}
+		if((m-min_sum)%n==0)
+			printf("Yes
+");
+		else
+			printf("No
+");
+	}
+	return 0;
+}

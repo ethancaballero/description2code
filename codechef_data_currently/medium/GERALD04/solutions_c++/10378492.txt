@@ -1,0 +1,32 @@
+#include<stdio.h>
+int main() 
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+	    char t1[7],t2[7];
+	    int dist;
+	    scanf("%s %s",t1,t2);
+	    scanf("%d",&dist);
+	    int time1,time2;
+	    time1=((t1[0]-'0')*10+(t1[1]-'0'))*60 + (t1[3]-'0')*10 + (t1[4]-'0');
+	    time2=((t2[0]-'0')*10+(t2[1]-'0'))*60 + (t2[3]-'0')*10 + (t2[4]-'0');
+	    float ans2;
+	    int ans1;
+	    ans1=time1-time2+dist;
+	    if(2*dist<=time1-time2)
+	    {
+	        ans2=time1-time2;
+	    }
+	    else
+	    {
+	        ans2=(time1-time2)/2.0 + dist;
+	    }
+	    printf("%d.0 %.1f
+",ans1,ans2);
+	    
+	    
+	}
+	return 0;
+}

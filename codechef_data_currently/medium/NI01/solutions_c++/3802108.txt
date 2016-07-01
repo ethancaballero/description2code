@@ -1,0 +1,126 @@
+#include <iostream>
+#include <vector>
+#include<stdio.h>
+
+using namespace std;
+
+class Car
+{
+    public:
+    bool waiting;
+    int counter;
+    Car(){}
+    Car(int p)
+    {
+        waiting = true;
+        counter = p;
+    }
+};
+class Park
+{
+    public:
+        vector<Car> cars;
+        int peopleWaiting;
+        int peopleWandering;
+        int completed;
+        
+        int p,r;
+        int rCurrent;
+        
+    Park(int numCars,int wand, int wait, int P, int R)
+    {
+        Car temp(P);
+        for(int i = 0;i<numCars;i++)
+        {
+            cars.push_back(temp);
+        }
+        peopleWaiting = wait;
+        peopleWandering = wand;
+        completed = 0;
+
+        p = P;
+        r = R;
+        
+        rCurrent = r;
+        
+    }
+    void update()
+    {
+        rCurrent-=1;
+        if(rCurrent == 0)
+        {
+            rCurrent = r;
+            if(peopleWandering != 0)
+            {
+                peopleWaiting++;
+                peopleWandering--;
+            }    
+        }
+    
+        for(int i = 0;i<cars.size();i++)
+        {
+            if(cars[i].waiting == false)
+            {
+                cars[i].counter--;
+                if(cars[i].counter == 0)
+                {
+                    cars[i].counter = p;
+                    cars[i].waiting = true;
+                    completed++;
+                }
+            }
+            if(cars[i].waiting == true)
+            {
+                if(peopleWaiting != 0)
+                {
+                    cars[i].waiting = false;
+                    peopleWaiting--;
+                }
+            }
+            
+        }
+    }
+    
+    int waitingCars()
+    {
+        int count = 0;
+        for(int i = 0;i<cars.size();i++)
+        {
+            if(cars[i].waiting == true)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    void printState()
+    {
+        //cout << "Waiting Cars: " << waitingCars() << endl;
+        //cout << "Completed: " << completed << endl;
+        //cout << "Wandering: " << peopleWandering << endl;
+        //cout << "Waiting: " << peopleWaiting << endl;
+        printf("%d %d %d %d
+",waitingCars(),completed,peopleWandering,peopleWaiting); 
+    }
+};
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    for(int j = 0;j<t;j++)
+    {
+        int n,wand,wait,p,r,k;
+        scanf("%d%d%d%d%d%d",&n,&wand,&wait,&p,&r,&k);
+        Park park(n,wand,wait,p,r);
+        for(int i = 0;i<k;i++)
+        {
+            park.update();
+        }
+        park.printState();
+    }
+    
+    return 0;
+    
+}

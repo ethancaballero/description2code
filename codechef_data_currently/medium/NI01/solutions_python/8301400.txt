@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+
+#ifndef ONLINE_JUDGE
+#define gc getchar
+#else
+#define gc getchar_unlocked
+#endif // ONLINE_JUDGE
+ 
+using namespace std;
+typedef long long int lli;
+ 
+inline long long int scanint(){
+    char c = gc();
+    long long int x = 0;
+    while(c<'0'||c>'9'){
+        c=gc();
+    }
+    while(c>='0'&&c<='9'){
+        x=(x<<1)+(x<<3)+c-'0';
+        c=gc();
+    }
+    return x;
+}
+
+
+int main()
+{
+
+	lli t, p,r,k,TP,wanP ,waiP,PC,TB,BWan,i,departed[100011];
+
+	t = scanint();
+
+	while(t--)
+	{
+		TB  = scanint();
+		wanP = scanint();
+		waiP=scanint();
+		p = scanint();
+		r =scanint();
+		k = scanint();
+		PC =0;
+		BWan =0;
+		TP = waiP+wanP;
+
+		for(i=0;i<=k;i++)
+		{
+			if(i!=0)
+			{
+				if(i%r == 0)
+				{
+					if(wanP>0)
+					{
+						waiP++;
+						wanP--;
+					}
+				}
+			}
+
+			
+				
+
+			    departed[i] = min(TB -BWan ,waiP);
+				BWan +=  departed[i];
+				waiP -= departed[i];
+
+				if(i+1>=p && i!=k)
+				{
+					BWan -= departed[i+1-p] ;
+					PC += departed[i+1-p];
+				}
+				
+			
+		}
+
+		printf("%lld %lld %lld %lld
+",TB-BWan,PC,wanP,waiP);
+
+	}
+
+	return 0;
+}

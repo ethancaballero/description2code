@@ -1,0 +1,12 @@
+# cook your code
+for testcases in xrange(int(raw_input() ) ) :
+    n = int(raw_input())
+    L = map(int, raw_input().split())
+    L = sorted(L, reverse = True)
+    ans = 0
+    for i in xrange(0, n, 4) :
+        ans += L[i]
+        ans += L[i+1] if i+1 < n else 0
+    print ans
+    
+    

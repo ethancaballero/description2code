@@ -1,0 +1,16 @@
+tst = input()
+for t in range(tst):
+	n = input()
+	if(360%n == 0):
+		a = 'y'
+	else:
+		a = 'n'
+	if(n<=360):
+		b = 'y'
+	else:
+		b = 'n'
+	if(n<=26):
+		c = 'y'
+	else:
+		c = 'n'
+	print a,b,c

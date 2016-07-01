@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        long long array[3];
+        cin>>array[0]>>array[1]>>array[2];
+        sort(array,array+3);
+        long long product=array[0]%1000000007;
+        product=(product*((array[1]-1)%1000000007))%1000000007;
+        product=(product*((array[2]-2)%1000000007))%1000000007;
+        cout<<product<<endl;
+    }
+}

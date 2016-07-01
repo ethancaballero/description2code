@@ -1,0 +1,114 @@
+#include <stdio.h>
+#include <algorithm>
+#include <deque>
+#include <iostream>
+#include <math.h>
+ 
+using namespace std;
+ 
+#define mod 1000000007
+#define mid(a,b) ((a)+((b-a)/2))
+#define minn 1000000007
+typedef long long ll;
+ 
+int A[10000001];
+int B[10000001];
+ 
+int main()
+{
+    int n,k,q,a,b,c,d,e,f,r,s,t,m,l1,la,lc,lm,d1,da,dc,dm,D,i,j,temp,prod;
+    long long sum;
+    scanf("%d",&n);
+    scanf("%d",&k);
+    scanf("%d",&q);
+    scanf("%d",&a);
+    scanf("%d",&b);
+    scanf("%d",&c);
+    scanf("%d",&d);
+    scanf("%d",&e);
+    scanf("%d",&f);
+    scanf("%d",&r);
+    scanf("%d",&s);
+    scanf("%d",&t);
+    scanf("%d",&m);
+    scanf("%d",&A[0]);
+    scanf("%d",&l1);
+    scanf("%d",&la);
+    scanf("%d",&lc);
+    scanf("%d",&lm);
+    scanf("%d",&d1);
+    scanf("%d",&da);
+    scanf("%d",&dc);
+    scanf("%d",&dm);
+    t=t%s;
+    a=a%m;
+    b=b%m;
+    c=c%m;
+    d=d%m;
+    e=e%m;
+    f=f%m;
+    A[0]=A[0]%m;
+    temp=( ll(t) * ll(t) )%s;
+    for(i=1;i<n;i++)
+    {
+        if(temp<=r)
+        {
+            A[i]=( ll( ( ll(a) * ll( ( ll( A[i-1] ) * ll( A[i-1] ) )%m ) )%m ) + ll( ( ll( ( ll(b) * ll( A[i-1] ) )%m ) + ll(c) )%m) )%m;
+        }
+        else
+        {
+            A[i]=( ll( ( ll(d) * ll( ( ll( A[i-1] ) * ll( A[i-1] ) )%m ) )%m ) + ll( ( ll( ( ll(e) * ll( A[i-1] ) )%m ) + ll(f) )%m) )%m;
+        }
+        temp=( ll( temp%s ) * ll(t) )%s;
+    }
+    //Minumum contigious k-sized sub-arrays code reference : http://www.geeksforgeeks.org/maximum-of-all-subarrays-of-size-k/
+    deque<int> Q(k);
+    for(i=0;i<k;i++)
+    {
+        while ((!Q.empty())&&(A[i]<=A[Q.back()]))
+        {
+            Q.pop_back();
+        }
+        Q.push_back(i);
+    }
+    j=0;
+    for(i=k;i<n;i++)
+    {
+        B[j++]=A[Q.front()];
+ 
+        while((!Q.empty())&&(Q.front()<=i-k))
+        {
+            Q.pop_front(); 
+        }
+        while ((!Q.empty())&&(A[i]<=A[Q.back()]))
+        {
+            Q.pop_back();  
+        } 
+        Q.push_back(i);
+    }
+    B[j++]=A[Q.front()];
+    sum=0;
+    prod=1;
+    la=la%lm;
+    da=da%dm;
+    lc=lc%lm;
+    dc=dc%dm;
+    l1=l1%lm;
+    d1=d1%dm;
+    for(i=0;i<q;i++)
+    {
+        l1=( ll( ( ll(la) * ll(( l1 )) )%lm ) + ll(lc) )%lm;
+        d1=( ll( ( ll(da) * ll(( d1 )) )%dm ) + ll(dc) )%dm;
+        D=min(l1+k+d1,n);
+        // cout<<"l1 and D "<<l1<<" "<<D<<"
+";
+        temp=min(B[l1],B[D-k]);
+        sum+=temp;
+        prod=( ll(prod%mod) * ll(temp%mod) )%mod;
+        // printf("We chose %d
+",temp);
+    }
+    printf("%lld %d
+",sum,prod);
+    return 0;       
+} 

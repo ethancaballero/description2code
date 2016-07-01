@@ -1,0 +1,51 @@
+#include <iostream>
+#include <math.h>
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+using namespace std;
+
+long long Base[10]={1,10,100,1000,10000,100000,1000000,10000000,100000000,1000000000};
+
+void first(long long n,int k){
+	long long mod = Base[k-1];
+	long double x = ( (long) n )*log10l(n*1.0);
+	x = pow(10,x-(int)x);
+	long long result = x*mod;
+	
+	cout<< result << " " ;
+}
+
+void last(long long n,int k){
+	long long mod = Base[k];
+	long long result = 1;
+	long long temp = (long) n ;
+	while(n > 0){
+		if(n&1)
+			result = (result*temp) % mod;
+
+		temp = (temp * temp )% mod;	
+		n >>= 1 ;	
+	}
+	
+	for(mod/=10;mod > result &&  mod >1;mod/=10){
+		cout<< "0" ;
+	}
+	cout<< result << endl;
+	
+}
+
+int main(int argc, char *argv[]) {
+	long long int N;
+	int K;
+	int T;
+	
+	cin >> T;
+	
+	while(T--){
+		cin >> N >> K ;
+		first(N,K);
+		last(N,K);
+	}
+	
+	return 0;
+}

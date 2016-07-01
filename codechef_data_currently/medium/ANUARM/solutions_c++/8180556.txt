@@ -1,0 +1,31 @@
+#include<iostream>
+#include<stdlib.h>
+
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m,max1,min,i,temp;
+		cin>>n>>m;
+		int a[n];
+		for(i=0,min=1000000,max1=-1;i<m;i++)
+		{
+			cin>>temp;
+			if(max1<temp)
+			max1=temp;
+			if(min>temp)
+			min=temp;
+		}
+		for(i=0;i<n;i++)
+		{
+			a[i]=max(max1-i,i-min);
+		}
+		for(i=0;i<n;i++)
+		cout<<a[i]<<" ";
+		cout<<endl;
+	}
+	return 0;
+}

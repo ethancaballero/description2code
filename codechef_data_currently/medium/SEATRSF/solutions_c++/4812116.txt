@@ -1,0 +1,53 @@
+/* Template the Final Chapter Light --- Fimbulvetr version 0.1 */
+/* In this blizzard, I will find peace. */
+
+# define LOCAL
+# include <cstring>
+# include <cstdio>
+# include <algorithm>
+# include <vector>
+# include <string>
+# include <set>
+# include <map>
+using namespace std;
+
+# define REP( i, n ) for ( int i = 1; i <= n; i ++ )
+# define REP_0( i, n ) for ( int i = 0; i < n; i ++ )
+# define REP_0N( i, n ) for ( int i = 0; i <= n; i ++ )
+# define REP_S( i, ss ) for ( char *i = ss; *i; i ++ )
+# define REP_G( i, u ) for ( int i = pos[ u ]; i; i = g[ i ].frt )
+# define FOR( i, a, b ) for ( int i = a; i <= b; i ++ )
+# define DWN( i, a, b ) for ( int i = b; i >= a; i -- )
+# define RST( a ) memset ( a, 0, sizeof ( a ) )
+# define CLR( a, x ) memset ( a, x, sizeof ( a ) )
+# define CPY( a, b ) memcpy ( a, b, sizeof ( a ) )
+typedef long long LL;
+const int inf = 1 << 30;
+
+# define MOD 1000000007
+LL n, m, r, k;
+int q0;
+LL Pow ( LL a, LL p )
+{
+	LL ret = 1;
+	REP_0 ( i, 63 )
+	{
+		if ( ( 1LL << i ) & p ) ret = ( ret * a ) % MOD;
+		a = ( a * a ) % MOD;
+	}
+	return ret;
+}
+int main ()
+{
+	//freopen ( "SEATRSF.in", "r", stdin );
+	for ( scanf ( "%d", &q0 ); q0; q0 -- )
+	{
+		scanf ( "%lld%lld%lld%lld", &n, &m, &r, &k );
+		if ( ( m - r ) < 0 || ( n == 1 && r != 0 ) ) { printf ( "0
+" ); continue; }
+		LL t = ( ( ( Pow ( r + 1, n ) + Pow ( r - 1, n ) ) % MOD - ( Pow ( r, n ) * 2 ) % MOD + MOD ) % MOD ) * ( m - r ) % MOD;
+		printf ( "%lld
+", t );
+	}
+	return 0;
+}

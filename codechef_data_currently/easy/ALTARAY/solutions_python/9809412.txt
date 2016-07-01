@@ -1,0 +1,22 @@
+def get_sign(number):
+    return '+' if number > 0 else '-'
+
+
+for _ in xrange(input()):
+    n = input()
+    l = map(int, raw_input().split())
+    i = 0
+    while i < len(l) - 1:
+        count = 1
+        if get_sign(l[i]) == get_sign(l[i+1]):
+            print count,
+            i += 1
+        else:
+            while i < len(l) - 1 and get_sign(l[i]) != get_sign(l[i+1]):
+                count += 1
+                i += 1
+            else:
+                for j in range(count,1,-1):
+                    print j,
+    print 1,
+    print ""

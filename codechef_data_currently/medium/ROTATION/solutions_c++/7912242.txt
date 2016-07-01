@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+int input()
+{
+    int n=0;
+    char c=getchar_unlocked();
+    while(c < '0' || c >'9') {c=getchar_unlocked();}
+    while(c>='0' && c<='9')
+    {
+        n=(n<<3)+(n<<1)+c-'0';
+        c=getchar_unlocked();
+    }
+    return n;
+}
+
+int main(){
+	int N,M,count,pos;
+	char d;
+	int* A;
+	N = input();
+	A = new int[N];
+	M = input();
+	for(int i = 0; i < N; i++){
+		A[i] = input();
+	}
+	count = 0;
+	while(M--){
+		d = getchar_unlocked();
+		//cin >> d;
+		//cout << d << endl;
+		pos = input();
+		if(d == 'C'){
+			count = (count+pos)%N;
+		}
+		else if(d == 'A'){
+			count = (count+N-pos)%N;
+		}
+		else{
+			cout << A[(pos+count-1)%N] << endl;
+		}
+	}
+	
+}
+

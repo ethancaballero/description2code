@@ -1,0 +1,118 @@
+#include <iostream>
+#include <algorithm>
+#include <stdio.h>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+#include <set>
+#include <map>
+#include <ctime>
+#include <queue>
+#include <vector>
+#include <stack>
+#include <list>
+#include <cmath>
+using namespace std;
+typedef vector<int> vi;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef vector<vi> vvi;
+typedef long long int lli;
+
+#define wez(n) int (n); scanf("%d",&(n));
+#define wez2(n,m) int (n),(m); scanf("%d %d",&(n),&(m));
+#define wez3(n,m,k) int (n),(m),(k); scanf("%d %d %d",&(n),&(m),&(k));
+#define debug(vari) cout<<#vari<<" = "<<(vari)<<endl;
+#define TESTS wez(testow)while(testow--)
+#define modfun 1000000007
+#define pb push_back
+#define mp make_pair
+#define sz(a) int((a).size())
+#define INF 2147483647
+#define REP(x,a,b) for(int (x) = (a);(x)<=(b);(x)++)
+#define rep(x,n)   for(int (x)=0;(x)<(n);(x)++)
+#define all(c) (c).begin(),(c).end()
+#define tr(c,i) for(typeof((c).begin() i = (c).begin();!= (c).end(); i++) 
+#define present(c,x) ((c).find(x) != (c).end()) 
+#define cpresent(c,x) (find(all(c),x) != (c).end()) 
+using namespace std;
+/*
+inline long int inp( )
+{
+long int n=0;
+long int ch=getchar_unlocked();
+while(!(ch >= '0' && ch <= '9') )ch=getchar_unlocked();
+while( ch >= '0' && ch <= '9' )
+n = (n<<3)+(n<<1) + ch-'0', ch=getchar_unlocked();
+return n;
+}
+*/
+int main()
+{
+	TESTS
+	{
+		char dire,dira[2015];
+		int xa[2015],ya[2015],i,xe,n,ye;
+		float time=(float)INF;
+		cin>>xe>>ye>>dire>>n;
+		for(i=0;i<n;i++)
+		{
+			cin>>xa[i]>>ya[i]>>dira[i];
+		}
+		if(dire=='U')
+		{
+			rep(i,n)
+			{
+				if(dira[i]=='D'&&ya[i]>ye&&xa[i]==xe)
+					time=min(time,((float)(ya[i]-ye))/2);
+				else if(dira[i]=='R'&&((xe-xa[i])==(ya[i]-ye))&&(ya[i]-ye)>0)
+					time=min(time,(float)(ya[i]-ye));
+				else if(dira[i]=='L'&&((xa[i]-xe)==(ya[i]-ye))&&(ya[i]-ye)>0)
+					time=min(time,(float)(ya[i]-ye));
+			}
+		}
+		else if(dire=='D')
+		{
+			rep(i,n)
+			{
+				if(dira[i]=='U'&&ya[i]<ye&&xa[i]==xe)
+					time=min(time,((float)(ye-ya[i]))/2);
+				else if(dira[i]=='R'&&((xe-xa[i])==(ye-ya[i]))&&(ye-ya[i])>0)
+					time=min(time,(float)(ye-ya[i]));
+				else if(dira[i]=='L'&&((xa[i]-xe)==(ye-ya[i]))&&(ye-ya[i])>0)
+					time=min(time,(float)(ye-ya[i]));
+			}
+		}
+		else if(dire=='L')
+		{
+			rep(i,n)
+			{
+				if(dira[i]=='R'&&xa[i]<xe&&ya[i]==ye)
+					time=min(time,((float)(xe-xa[i]))/2);
+				else if(dira[i]=='U'&&(ye-ya[i])==(xe-xa[i])&&(xe-xa[i])>0)
+					time=min(time,(float)(xe-xa[i]));
+				else if(dira[i]=='D'&&(ya[i]-ye)==(xe-xa[i])&&(xe-xa[i])>0)
+					time=min(time,(float)(xe-xa[i]));
+			}
+		}
+		else
+		{
+			rep(i,n)
+			{
+				if(dira[i]=='L'&&xa[i]>xe&&ya[i]==ye)
+					time=min(time,((float)(xa[i]-xe))/2);
+				else if(dira[i]=='U'&&(ye-ya[i])==(xa[i]-xe)&&(xa[i]-xe)>0)
+					time=min(time,(float)(xa[i]-xe));
+				else if(dira[i]=='D'&&(ya[i]-ye)==(xa[i]-xe)&&(xa[i]-xe)>0)
+					time=min(time,(float)(xa[i]-xe));
+			}
+		}
+		if(time!=(float)INF)
+			printf("%.1f
+",time);
+		else
+			printf("SAFE
+");
+	}
+	return 0;
+}

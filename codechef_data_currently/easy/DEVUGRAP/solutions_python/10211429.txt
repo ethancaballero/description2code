@@ -1,0 +1,18 @@
+for i in range(int(raw_input())):
+    first=long(str(raw_input()).split()[1])
+    second= str(raw_input()).split()
+    count=0
+    for x in second:
+        maxx=int(x)%int(first)
+        if int(x)<int(first):
+            maxx=maxx=int(first)-int(x)
+        elif maxx>(first/2):
+            maxx=first-maxx
+        count=count+maxx
+    print count
+
+#Output:
+#4
+#14
+#4
+#66

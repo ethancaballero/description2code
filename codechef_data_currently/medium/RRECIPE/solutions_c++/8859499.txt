@@ -1,0 +1,87 @@
+/* Author : Anurag El Dorado */
+
+/* Libraries */
+#include <bits/stdc++.h>
+#include <time.h>
+#include <math.h>
+using namespace std;
+
+//MACRO DEFINITIONS
+/* Data Types */
+#define lld long long int
+#define llu unsigned long long int
+
+/* Input */
+#define sd(var) scanf("%d", &var)
+#define slld(var) scanf("%lld", &var)
+#define sllu(var) scanf("%llu", &var)
+
+/* Output */
+#define print_arr(a, n) cout << #a << " : "; for (int I = 0; I < n; I++) { cout << a[I] << " "; } cout << endl;	//Array till n elements
+#define print_v(v) 	cout << #v << " : "; for (long long int I = 0; I != v.size(); I++) { cout << v[I] << " "; } cout << endl;	//Vector
+#define p2d(a, r, c) cout << #a << endl; for (int I = 0; I < r; I++) {	for (int J = 0; J < c; J++) {	cout << a[I][J] << " ";	} cout << endl;	} cout << endl;
+
+/* File Input */
+#define FILE_INPUT freopen("input.txt", "r", stdin);
+
+/* File Output */
+#define FILE_OUtPUT freopen("output.txt", "w", stdin);
+
+//Single Variables
+#define pr(x) cout << x << endl;
+#define pdln(x) printf("%d
+", x);	//printf with new line
+#define pd(x) printf("%d ", x);	//printf without new line
+
+/* Output and Debugging */
+#define deb(x) cout << #x << " = " << x << endl;
+#define debb(x, y) cout << #x << " = " << x << "	" << #y << " = " << y << endl;
+#define debbb(x, y, z) cout << #x << " = " << x << "	" << #y << " = " << y << "	" << #z << " = " << z << endl;
+
+/* MOD  value*/
+#define MOD 10000009
+
+/* Timing */
+#define TIMEIT cout << "TIME VARIABLE REINITIALISED
+"; clock_t start_time_ = clock();
+#define TIMEUP cout << "Time: " << (clock() - start_time_) / (double)(CLOCKS_PER_SEC) << "s" << endl;
+
+int main() {
+	
+//	FILE_INPUT;
+
+	lld i, j, k;
+	lld count, sum;
+	lld n, m, p, t;
+	vector<lld> v;
+	lld maxi, mini;
+	lld tc;
+	string s, r;
+	lld lens, lenr;
+	
+	cin >> tc;
+	
+	while (tc--) {
+		cin >> s;
+		
+		lens = s.length();
+		
+		count = 1;
+		
+		for (i = 0, j = lens - 1; i <= j; i++, j--) {
+			if (s[i] == '?' && s[j] == '?') {
+				count = (count * 26) % MOD;
+			} else if (s[i] == '?' || s[j] == '?') {
+				
+			} else if (s[i] != s[j]) {
+				count *= 0;
+			}
+//			deb(count);
+		}
+		
+		cout << count << endl;
+
+	}
+
+	return 0;
+}

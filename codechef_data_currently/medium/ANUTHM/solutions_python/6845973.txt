@@ -1,0 +1,10 @@
+import sys
+import math 
+t = int(raw_input())
+for i in range(0,t):
+    b = raw_input().split()
+    m = int(b[0])
+    n = int(b[1])
+
+    ans = (m * n) - ((m -1) * (n-1))
+    print ans

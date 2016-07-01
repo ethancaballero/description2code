@@ -1,0 +1,31 @@
+n = int(raw_input())
+l = map(int, raw_input().strip().split())
+org = l[:]
+out = []
+
+def walk(num):
+        return org[num-1]
+
+while l :
+        route = []
+        current = l[0]
+        l.remove(current)
+        start = org.index(current) + 1
+        route.append(start)
+        route.append(current)
+        if start == current:
+                out.append(route)
+        else:
+                next = walk(current)
+
+                while next != start:
+                        route.append(next)
+                        l.remove(next)
+                        next = walk(next)
+                route.append(next)
+                out.append(route)
+                l.remove(next)
+
+print len(out)
+for i in out:
+        print " ".join([str(j) for j in i])

@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<math.h>
+ 
+int main()
+{
+	int n,m,i,j,index,B1,B2,temp;
+	int count[10]={0},a[100000]={0};
+ 	char num[100000];
+        scanf("%d%d",&n,&m);
+	scanf("%s",num);
+	for(i=0 ; i<n ; i++)
+	{
+		count[num[i]-48]++;
+		for(j=0 ; j<10 ; j++)
+		{
+			if((num[i]-48) > j)
+				a[i]=a[i]+(((num[i]-48)-j)*count[j]);
+			else
+				a[i]=a[i]+((j-(num[i]-48))*count[j]);
+		}
+	}
+	for(i=0 ; i<m ; i++)
+	{
+		scanf("%d",&index);
+		printf("%d
+",a[index-1]);
+	}
+	return 0;
+} 

@@ -1,0 +1,61 @@
+#include<iostream>
+#include<algorithm>
+#include<set>
+ 
+using namespace std;
+
+struct item{
+	int start;
+	int end;
+};
+
+bool cal(struct item a, struct item b) {
+	if(a.start > b.start) {
+		return false;
+	} else if(a.start < b.start) {
+		return true;
+	} else if(a.start == b.start) {
+		if(a.end > b.end) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+}
+ 
+int main() {
+    int i,j,k,l,m,n,t;
+    cin >> t;
+    char c[200000];
+    struct item I[40];
+    while(t--) {
+               cin >> n >> k;
+	       int cas = 1;
+	       for(i = 0; i < n; i++) {
+	       		if(cas) {
+	       			c[i] = '(';
+			} else {
+				c[i] = ')';
+			}
+			cas = 1 - cas;
+	       }
+	       for(i = 0; i < k; i++) {
+	       		cin >> I[i].start >> I[i].end;
+	       }
+	       sort(I , I + k, cal);
+	       int check = 1;
+	       for(i = 0; i < k; i++) {
+	       		for(j = I[i].start; j <= I[i].end; j++) {
+				if(check) {
+					c[j] = '(';
+				} else {
+					c[j] = ')';
+				}
+				check = 1 - check;	
+			}
+	       }
+	       cout << c << endl;
+	       
+    }
+    return 0;
+}

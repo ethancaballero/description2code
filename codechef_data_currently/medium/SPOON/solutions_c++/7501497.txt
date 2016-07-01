@@ -1,0 +1,45 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <ctype.h>
+    int main()
+    {
+       int t,i,j,flag,r,c;
+       char a[101][101];
+       scanf("%d",&t);
+       while(t--)
+       {
+           scanf("%d%d",&r,&c);
+           flag=0;
+           for(i=0;i<r;i++)
+           {
+                    scanf("%s",a[i]);
+                    for(j=0;j<c;j++)
+                        a[i][j]=tolower(a[i][j]);
+           }
+           for(i=0;(i<=r-5)&&(flag!=1);i++)
+           {
+               for(j=0;(j<c)&&(flag!=1);j++)
+               {
+                       if(a[i][j]=='s'&&a[i+1][j]=='p'&&a[i+2][j]=='o'&&a[i+3][j]=='o'&&a[i+4][j]=='n')
+                            flag=1;
+               }
+           }
+           for(i=0;(i<r)&&(flag!=1);i++)
+           {
+               for(j=0;(j<=c-5)&&(flag!=1);j++)
+                {
+                       if(a[i][j]=='s'&&a[i][j+1]=='p'&&a[i][j+2]=='o'&&a[i][j+3]=='o'&&a[i][j+4]=='n')
+                            flag=1;
+               }
+     
+           }
+      if(flag==1)
+            printf("There is a spoon!
+");
+     else
+            printf("There is indeed no spoon!
+");
+       }
+        return 0;
+    }
+     

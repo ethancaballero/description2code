@@ -1,0 +1,54 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+#include<cstdio>
+#include<math.h>
+#include<algorithm>
+#define gc getchar_unlocked()
+using namespace std;
+
+void fastin(unsigned long long int &x)
+{
+    register int a=gc;
+    x=0;
+    for(;(a<48 || a>57);a=gc);
+    for(;(a>47 && a<58);a=gc)
+        x=(x<<1)+(x<<3)+a-48;
+}
+unsigned long long gcd(unsigned long long a,unsigned long long b)
+{
+    if(b==0)
+        return a;
+    else return gcd(b,a%b);
+}
+int main()
+{
+int t;
+unsigned long long a,b,c,d,k,count;
+unsigned long long ab,cd,i=1,prd;
+scanf("%d",&t);
+while(t--)
+{count=0;
+    fastin(a);fastin(b);fastin(c);fastin(d);fastin(k);
+    ab=gcd(a,b);cd=gcd(c,d);
+    
+   	if(ab!=cd)
+    {
+    unsigned long long s=ab/gcd(ab,cd);
+    unsigned long long r=k/s;
+    count=(r/cd);
+    }
+    else
+   	count=(k/ab);
+    
+printf("%llu
+",2*count+1);
+
+i=1;
+}
+
+
+
+
+return 0;
+}

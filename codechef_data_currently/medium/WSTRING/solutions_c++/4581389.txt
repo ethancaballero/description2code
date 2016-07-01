@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+#define INF 123456789
+using namespace std;
+
+int ar[10002][26];
+void solve()
+{
+	char* st = new char[100002];
+	scanf("%s",st);
+	string s = st;
+	memset(ar,0,sizeof(ar));
+	int len = s.length();
+	int count = 0;
+	vector <int> ans;
+	
+	for(int i=0;i<len;i++)
+	{
+		for(int j=0;j<26 && i>0;j++)
+		{
+			ar[i][j] = ar[i-1][j];
+		}
+		if(s[i]=='#')
+		{
+			count++;
+			ans.push_back(i);
+			continue;
+		}
+		ar[i][s[i]-'a']++;
+	}
+	if(count<3)
+	{
+		printf("0
+");
+		return;
+	}
+	int final = 0;
+	for(int i=0;i<ans.size()-2;i++)
+	{
+		//int index = idx[i];
+		int maxChar1 = -1;
+		for(int j=0;j<26;j++)
+		{
+			//cout<<ar[ans[i]][j]<<endl;
+			maxChar1 = max(ar[ans[i]][j],maxChar1);
+		}
+		int maxChar2 = -1;
+		for(int j=0;j<26;j++)
+		{
+			maxChar2 = max(ar[ans[i+1]][j]-ar[ans[i]][j],maxChar2);
+		}
+		int maxChar3 = -1;
+		for(int j=0;j<26;j++)
+		{
+			maxChar3 = max(ar[ans[i+2]][j]-ar[ans[i+1]][j],maxChar3);
+		}
+		int maxChar4 = -1;
+		for(int j=0;j<26;j++)
+		{
+			maxChar4 = max(ar[len-1][j]-ar[ans[i+2]][j],maxChar4);
+		}
+		if(maxChar1<1 || maxChar2<1 || maxChar3<1 || maxChar4<1)
+		{
+			continue;
+		}
+		//cout<<maxChar1<<" "<<maxChar2<<" "<<maxChar3<<" "<<maxChar4<<endl;
+		final = max(final,maxChar1+1+maxChar2+1+maxChar3+1+maxChar4);
+	}
+	printf("%d
+",final);
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		solve();
+	}
+}

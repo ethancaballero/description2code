@@ -1,0 +1,85 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stdlib.h>
+#include <map>
+#include <stack>
+#include <set>
+
+using namespace std;
+
+typedef vector<int> vi;
+typedef vector<vi > vii;
+typedef long long int ll;
+typedef pair<int, int> pii;
+typedef vector<pii > vpii;
+typedef vector<string> vs;
+
+bool isLetter(char a)
+{
+    if((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z'))
+        return true;
+    return false;
+}
+
+bool isCapital(char a)
+{
+    if(a >= 'A' && a <= 'Z')
+        return true;
+    return false;
+}
+
+int main()
+{
+    #ifndef ONLINE_JUDGE
+    freopen("CHODE.txt", "r", stdin);
+//    freopen("a.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+    int t;
+    string freq, encrpt, blankline;
+    scanf("%d", &t);
+    while(t--)
+    {
+        cin >> freq;
+        getline(std::cin, blankline);
+        getline(std::cin, encrpt);
+//        cout << "freq : " << freq << " encrpt : " << encrpt << endl;
+        int letter_freq[26] = {0};
+        char decrpt_ar[26];
+        vector<pair<int, char> >fv;
+        for(int i=0; i<encrpt.size(); i++)
+        {
+            if(isCapital(encrpt[i]))
+                letter_freq[encrpt[i]-'A']++;
+            else
+                letter_freq[encrpt[i]-'a']++;
+        }
+        for(int i=0; i<26; i++)
+            fv.push_back(make_pair(letter_freq[i], char('a'+i)));
+        sort(fv.begin(), fv.end());
+        for(int i=0; i<26; i++)
+        {
+            decrpt_ar[fv[i].second-'a'] = freq[i];
+        }
+        for(int i=0; i<encrpt.size(); i++)
+        {
+            if(isLetter(encrpt[i]))
+            {
+                if(isCapital(encrpt[i]))
+                {
+                    printf("%c", decrpt_ar[encrpt[i]-'A']-'a'+'A');
+                }
+                else
+                    printf("%c", decrpt_ar[encrpt[i]-'a']);
+            }
+            else
+                printf("%c", encrpt[i]);
+        }
+        printf("
+");
+    }
+	return 0;
+}

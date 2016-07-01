@@ -1,0 +1,200 @@
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+#include <cstdio>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <string>
+#include <utility>
+#include <vector>
+#include <cassert>
+#include <ctime>
+#include <stdlib.h>
+using namespace std;
+
+typedef unsigned long long uint64;
+typedef short int sint;
+
+char g_sInputBuffer[1024];
+char * g_sInputBufferPtr = g_sInputBuffer;
+unsigned int g_iInputBufferLength = 0;
+
+inline int IsDigit( char c ) { return ((c >= '0') && (c <= '9')); }
+
+inline char InputReadChar( void )
+{
+	if( g_iInputBufferLength == 0 )
+	{
+		g_sInputBufferPtr = g_sInputBuffer;
+		g_iInputBufferLength = fread(g_sInputBuffer, 1, sizeof(g_sInputBuffer), stdin);
+		if( g_iInputBufferLength == 0 ) return 0;
+	}
+
+	g_iInputBufferLength--;
+	return *g_sInputBufferPtr++;
+}
+
+int InputReadTextInt( void )
+{
+	char c;
+	while( !IsDigit(c = InputReadChar()) );	// Skip blanks
+
+	int iResult = 0;
+	do
+	{
+		iResult *= 10;
+		iResult += (c - '0');
+		c = InputReadChar();
+	} while( IsDigit(c) );
+	return iResult;
+}
+
+
+inline int scanInt()
+{
+    register int retVar=0,d;
+    while ((d=getchar())<'0');
+    do
+    {
+        retVar=(retVar<<3)+(retVar<<1)+d-'0';
+    }
+    while ((d=getchar())>='0');
+    return retVar;
+}
+
+
+
+int main()
+{
+  //freopen("in.txt","r",stdin);
+  //freopen("mysoln.txt","w",stdout);
+    int arr[501][501],m,n,k,T;
+    //int maxim[500][500][2];
+    int*** maxim;
+    maxim = (int ***)malloc(501 * sizeof(int**));
+    for(int i=0;i<501;i++) {
+        maxim[i] = (int **)malloc(501 * sizeof(int*));
+        for(int j=0;j<501;j++)
+            maxim[i][j] = (int *)malloc(2 * sizeof(int));
+    }
+    T = scanInt();
+    for(int t=1;t<=T;t++) {
+        m = scanInt();
+        n = scanInt();
+        k = scanInt();
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+                arr[i][j] = scanInt();
+        for(int j=0;j<n;j++) {
+            maxim[m-k][j][0] = 0;
+            maxim[m-k][j][1] = 0;
+            for(int i=m-1;i>=m-k;i--) {
+                if(arr[i][j] > maxim[m-k][j][0]) {
+                    maxim[m-k][j][0] = arr[i][j];
+                    maxim[m-k][j][1] = 1;
+                }
+                else if(arr[i][j] == maxim[m-k][j][0]) {
+                    ++maxim[m-k][j][1];
+                }
+            }
+            for(int i=m-k-1;i>=0;i--) {
+                if(arr[i][j] > maxim[i+1][j][0]) {
+                    maxim[i][j][0] = arr[i][j];
+                    maxim[i][j][1] = 1;
+                }
+                else if(arr[i][j] == maxim[i+1][j][0]) {
+                    if(maxim[i+1][j][0] == arr[i+k][j]) {
+                        maxim[i][j][0] = maxim[i+1][j][0];
+                        maxim[i][j][1] = maxim[i+1][j][1];
+                    }
+                    else {
+                        maxim[i][j][0] = maxim[i+1][j][0];
+                        maxim[i][j][1] = maxim[i+1][j][1] + 1;
+                    }
+                }
+                else {
+                    if(maxim[i+1][j][0] == arr[i+k][j]) {
+                        maxim[i][j][0] = maxim[i+1][j][0];
+                        maxim[i][j][1] = maxim[i+1][j][1] - 1;
+                        if(maxim[i][j][1] == 0) {
+                            maxim[i][j][0] = 0;
+                            for(int l=i;l<i+k;l++) {
+                                if(maxim[i][j][0] < arr[l][j]) {
+                                    maxim[i][j][0] = arr[l][j];
+                                    maxim[i][j][1] = 1;
+                                }
+                                else if(maxim[i][j][0] == arr[l][j]) {
+                                    ++maxim[i][j][1];
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        maxim[i][j][0] = maxim[i+1][j][0];
+                        maxim[i][j][1] = maxim[i+1][j][1];
+                    }
+                }
+            }
+        }
+        cout<<"Case "<<t<<":"<<endl;
+        for(int i=0;i<=m-k;i++) {
+            int max_res,max_count;
+            max_res=maxim[i][0][0];max_count=maxim[i][0][1];
+            for(int j=1;j<k;j++) {
+                if(max_res < maxim[i][j][0]) {
+                    max_res = maxim[i][j][0];
+                    max_count = maxim[i][j][1];
+                }
+                else if(max_res == maxim[i][j][0]) {
+                    max_count += maxim[i][j][1];
+                }
+            }
+            cout<<max_res;
+            if(max_count != 1) {
+                cout<<"("<<max_count<<")";
+            }
+            cout<<" ";
+            for(int j=1;j<=n-k;j++) {
+                if(maxim[i][j+k-1][0] > max_res) {
+                    max_res = maxim[i][j+k-1][0];
+                    max_count = maxim[i][j+k-1][1];
+                }
+                else if(maxim[i][j+k-1][0] < max_res) {
+                    if(maxim[i][j-1][0] == max_res) {
+                        max_count -= maxim[i][j-1][1];
+                        if(max_count == 0) {
+                            max_res = 0;
+                            for(int l=j;l<j+k;l++) {
+                                if(max_res < maxim[i][l][0]) {
+                                    max_res = maxim[i][l][0];
+                                    max_count = maxim[i][l][1];
+                                }
+                                else if(max_res == maxim[i][l][0]) {
+                                    max_count +=  maxim[i][l][1];
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    if(maxim[i][j-1][0] == max_res) {
+                        max_count += maxim[i][j+k-1][1];
+                        max_count -= maxim[i][j-1][1];
+                    }
+                    if(maxim[i][j-1][0] != max_res) {
+                        max_count += maxim[i][j+k-1][1];
+                    }
+                }
+                cout<<max_res;
+                if(max_count != 1) {
+                    cout<<"("<<max_count<<")";
+                }
+                cout<<" ";
+            }
+            cout<<endl;
+        }
+        cout<<endl;
+    }
+    return 0;
+}

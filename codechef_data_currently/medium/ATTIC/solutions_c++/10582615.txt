@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	long long int t;
+	cin>>t;
+	while(t--)
+	{
+		char p[1000020];
+		scanf("%s",p);
+		long long int q=strlen(p);
+		long long int	max=0,r=0;
+		for(long long int i=1;i<q-1;i++)
+		{
+		
+			if(p[i]=='.')
+			{
+			
+				long long int count=0;
+				while(p[i]=='.')
+				{
+					
+					count++;
+					i++;
+				}
+				if(max<count)
+				{
+					max=count;
+					r++;
+				}
+			}
+			
+			
+		}
+		cout<<r<<endl;
+	}
+}

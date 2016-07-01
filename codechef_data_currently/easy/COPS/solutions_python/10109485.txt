@@ -1,0 +1,18 @@
+t = input()
+for i in range(t):
+    houses = []
+    for j in range(101):
+        houses.append(0)
+    M,x,y = map(int,raw_input().split())
+    p = map(int,raw_input().split())
+    for k in p:
+        houses_coverd = x*y
+        min_value = max(k-houses_coverd,1)
+        max_value = min(k+houses_coverd,100)
+        l = min_value
+        while(l<=max_value):
+            houses[l]=1
+            l +=1
+            if(houses.count(0)-1 == 0):
+                break;
+    print houses.count(0)-1    

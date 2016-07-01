@@ -1,0 +1,20 @@
+t = int(raw_input())
+gcd = lambda x,y: gcd(y, x%y) if y else x
+def prime(z):
+    if z%2==0:
+        return 2
+    m = int(z**0.5)
+    for i in range(3, m+1, 2):
+        if z%i==0:
+            return i
+    return z
+while t:
+    n = int(raw_input())
+    array = map(int, raw_input().split())
+    ans = array[0]
+    for i in array:
+        ans = gcd(ans, i)
+        if ans == 1:
+            break
+    print prime(ans) if ans!=1 else -1
+    t-=1

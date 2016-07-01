@@ -1,0 +1,22 @@
+t = int(input())
+while t:
+    num = int(input())
+    num_str = str(num)
+    length = len(num_str)
+    list = [None]*length
+    count=0
+    deduction = 1
+    check = 0
+    for i in num_str:
+        list[count]=i
+        count=count+1
+    for i in range(0,int(length/2)):
+        if(list[i]!=list[length-deduction]):
+            check = 1
+            break
+        deduction = deduction+1
+    if(check==0):
+        print "wins"
+    else:
+        print "losses"
+    t=t-1

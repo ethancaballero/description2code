@@ -1,0 +1,15 @@
+t=input()
+ans=[]
+for x in range(t):
+    prime=True
+    num = input()
+    for i in range(2,num):
+        if num%i==0:
+            prime=False
+            break
+    if prime==True:
+        ans.append('yes')
+    else:
+        ans.append('no')
+for x in range(t):
+    print ans[x]

@@ -1,0 +1,66 @@
+/*
+jai shree ram _/\_
+A hacker from NITP
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define mod 1000000007
+typedef set<string> ss;
+typedef vector<int> vs;
+typedef map<int,char> msi;
+typedef pair<int,int> pa;
+
+int level[10004],maxl,ans;
+vs adj[10004];
+void dfs(int n,int l,int p)
+{
+	level[l]++;
+	if(l>maxl)
+	maxl=l;
+	int s=adj[n].size();
+	for(int i=0;i<s;i++)
+	{
+		if(adj[n][i]!=p)
+		dfs(adj[n][i],l+1,n);
+	}
+}
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+       int n,a,b,i,j;
+       memset(level,0,sizeof(level));
+        scanf("%d",&n);
+        for(i=0;i<=n;i++)
+        adj[i].clear();
+        for(i=0;i<n-1;i++)
+        {
+            scanf("%d%d",&a,&b);
+            adj[a].push_back(b);
+            adj[b].push_back(a);
+        }
+        maxl=0;
+        dfs(1,0,-1);
+        i=0; j=maxl;
+        ans=0;
+        while(i<=j)
+        {
+        	i++;
+        	ans++;
+        	if(i<=j)
+        	{
+        		if(level[j]==1)j--;
+        		else
+        		level[j]--;
+        		ans++;
+        	}
+        }
+        cout<<ans<<"
+";
+    }
+	return 0;
+}

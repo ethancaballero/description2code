@@ -1,0 +1,23 @@
+n=int(raw_input())
+
+def fact(k):
+
+	if k == 0:
+		return 1
+	elif k==1:
+		return 1
+	else :
+		fat=k*fact(k-1)
+		return fat
+	return 0
+
+a = []
+for i in range(n):
+	t=int(raw_input())
+	#a.append(t)
+	k=fact(t)
+	a.append(k)
+
+for i,val in enumerate(a):
+	print val
+	

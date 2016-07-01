@@ -1,0 +1,25 @@
+import sys
+from fractions import gcd
+
+[cases] = sys.stdin.readline().split()
+
+for i in range(int(cases)):
+
+	[num] = sys.stdin.readline().split()
+
+	ary = sys.stdin.readline().split()
+
+	for i in range(len(ary)):
+		ary[i] = long(ary[i])
+
+	maxSubSize = 0
+	
+	curGCD = ary[0]
+
+	for i in range(1, len(ary)):
+		curGCD = gcd(curGCD, ary[i])
+
+	if curGCD == 1:
+		print len(ary)
+	else:
+		print -1

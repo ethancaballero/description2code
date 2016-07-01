@@ -1,0 +1,6 @@
+t = int(raw_input())
+lister = []
+for i in range(t):
+     s = raw_input()
+     lister = map(int,s.split())
+     print sum(lister)

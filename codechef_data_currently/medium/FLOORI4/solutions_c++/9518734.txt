@@ -1,0 +1,55 @@
+#include <iostream>
+ 
+typedef unsigned long long int ull;
+ 
+using namespace std;
+ull N = 0, M = 0, mod = 30*M;
+ull A[100001];
+ull calcTerm(ull a)
+{
+	ull trm = (a * (a + 1)) % mod;
+	trm = (trm * (2 * a + 1)) % mod;
+	ull tmp = (3 * a*a + 3 * a - 1) % mod;
+	trm = (trm * tmp) % mod;
+	trm /= 30;
+	return trm;
+}
+ 
+ull answer1()
+{
+	//cout << "Hello" << endl;
+	ull term, sum = 0, x, indx = 0, i;
+	for (i = 1; i*i <= N; i++)
+	{
+		if (i != N / i)
+		{
+			A[indx++] = N / i;
+		}
+		
+		term = (i * i) % M;
+		term = (term * term) % M;
+		sum = (sum + term * (N/i)) % M;
+	}
+	ull prev = calcTerm(i - 1);
+	while (indx--)
+	{
+		ull tmp1 = A[indx];
+		ull next = calcTerm(tmp1 % mod);
+		sum = (sum + ((next - prev + M) % M) * (N / tmp1)) % M;
+		prev = next;
+	}
+	return sum;
+}
+ 
+int main(void)
+{
+	int T;
+	cin >> T;
+	for (size_t i = 0; i < T; i++)
+	{
+		cin >> N >> M;
+		mod = 30 * M;
+		cout << answer1() << endl;
+	}
+	return 0;
+} 

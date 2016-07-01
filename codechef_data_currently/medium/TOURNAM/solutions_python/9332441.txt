@@ -1,0 +1,52 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   {
+       long n,m,p;
+       cin>>n>>m>>p;
+       int ar[m];
+       double br[m];
+       for(int i=0;i<m;i++)
+       {  long y;
+       cin>>y;
+       ar[i]=y-1;
+       }
+       sort(ar+0,ar+m);
+       for(int i=0;i<m;i++)
+       br[i]=1;
+       for(int j=1;j<n;j=j*2)
+       {
+           for(int i=0;i<m;i++)
+             ar[i]=ar[i]/2;
+             int k=0;
+            for(int i=0;i<m;i++)
+            {
+             if(ar[i]==ar[i+1]&& m!=1&&i!=m-1)
+              {    ar[i-k]=ar[i];
+                  br[i-k]=br[i]*br[i+1]+br[i]*(1-br[i+1])*p*0.01+br[i+1]*(1-br[i])*p*0.01;
+                   i++;k++;
+              }
+              else
+              {
+                  ar[i-k]=ar[i];
+                  br[i-k]=br[i]*p*0.01;
+              }
+
+            } m=m-k;
+            //cout<<br[0]<<"\m";
+
+       }
+      printf("%4.6f
+",100*br[0]);
+
+   }
+
+return 0;
+}

@@ -1,0 +1,11 @@
+for _ in range(int(raw_input())):
+    N, A, B = map(int, str(raw_input()).split())
+    A = bin(A)[2:]
+    A = '0' * (N-len(A)) + A
+    B = bin(B)[2:]
+    B = '0' * (N-len(B)) + B
+    x1, y1 = A.count('1'), A.count('0')
+    x2, y2 = B.count('1'), B.count('0')
+    c = min(x1, y2) + min(x2, y1)
+    s = '1'*c + '0' * (N - c)
+    print int(s, 2)

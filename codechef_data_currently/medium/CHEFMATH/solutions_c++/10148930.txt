@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define fi first
+#define se second
+ll mpow(ll a, ll n,ll mod)
+{ll ret=1;ll b=a;while(n) {if(n&1)
+    ret=(ret*b)%mod;b=(b*b)%mod;n>>=1;}
+return (ll)ret;
+}
+using namespace std;
+#define sd(x) scanf("%d",&x)
+#define pd(x) printf("%d",x)
+#define mem(x,a) memset(x,a,sizeof(x))
+#define pii pair<int,int>
+#define mp make_pair
+#define pb push_back
+#define all(v) v.begin(),v.end()
+#define N (int)1e5+5
+using namespace std;
+map<pair<pii,int>,ll> dp;
+ll fibo[101],mod=1e9+7;
+int x,k;
+void go(){
+    mem(fibo,0);
+    fibo[1]=1;fibo[2]=2;
+    for(int i=3;i<=43;i++){
+        fibo[i]=fibo[i-1]+fibo[i-2];
+    }
+}
+ll getans(int i,ll dig,ll sum){
+    if(dig==0){
+        if(sum==0)
+            return 1;
+        else
+            return 0;
+    }
+    else if(sum==0||i==0){
+        return 0;
+    }
+    if(dp.find(mp(mp(i,dig),sum))!=dp.end())
+        return dp[mp(mp(i,dig),sum)];
+    ll ret=getans(i-1,dig,sum);
+    if(sum>=fibo[i]&&sum<=dig*fibo[i]){
+        ret+=getans(i,dig-1,sum-fibo[i]);
+        if(ret>=mod)
+            ret-=mod;
+    }
+    return dp[mp(mp(i,dig),sum)]=ret;
+}
+void solve(){
+    sd(x);sd(k);
+    dp.clear();
+    cout<<getans(43,k,x)<<endl;
+}
+int main(){
+   //freopen("input.IN","r",stdin);
+   //freopen("out.txt","w",stdout);
+   int t=1;
+   go();
+   scanf("%d",&t);
+   for(int i=1;i<=t;i++){
+       //printf("Case #%d: ",i);
+       solve();
+   }
+   return 0;
+}

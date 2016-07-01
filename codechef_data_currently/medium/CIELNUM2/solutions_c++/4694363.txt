@@ -1,0 +1,36 @@
+#include<cstring>
+#include<stdio.h>
+#include<iostream>
+#include<iomanip>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int t;
+    char str[2000];
+    gets(str);
+    int count=0;
+    t=atoi(str);
+    while(t--)
+    {
+        gets(str);
+        int temp1=0,temp2=0,temp3=0,temp4=0;
+        int l=strlen(str)-1,i;
+        for(i=l;;i--)if(str[i]==' ')break;
+        i++;
+        int x=atoi(str+i);
+        while(x!=0)
+        {
+            int d=x%10;
+            if(d==8)temp1++;
+            else if(d==5)temp2++;
+            else if(d==3)temp3++;
+            else temp4++;
+            x/=10;
+        }
+        if(temp4==0&&temp1>=temp2&&temp2>=temp3)count++;
+    }
+    printf("%d
+",count);
+	return 0;
+}

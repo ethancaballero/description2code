@@ -1,0 +1,21 @@
+rs = []
+c = int(raw_input())
+while c > 0:
+    n = int(raw_input())
+    row = 0
+    res = []
+    while n > 0:
+        res.insert(row, map(int, raw_input().split()))
+        row += 1
+        n -= 1
+    for i in range(len(res)-2, -1, -1):
+        for j in range(0, len(res[i])):
+            if ((res[i+1][j] + res[i][j]) > (res[i+1][j+1] + res[i][j])):
+                res[i][j] = res[i+1][j] + res[i][j]
+            else:
+                res[i][j] = res[i+1][j+1] + res[i][j]
+    rs.append(res[0][0])
+    c -= 1
+
+for i in rs:
+    print i

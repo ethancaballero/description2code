@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+unsigned long long int hcf(unsigned long long int a, unsigned long long int b){
+    if(a%b == 0)
+        return b;
+    else
+        return hcf(b,a%b);
+}
+unsigned long long int lcm(unsigned long long int a, unsigned long long int b){
+    unsigned long long int prod = a * b;
+    unsigned long long int gcd = hcf(a,b);
+    return prod/gcd;
+}
+int main(){
+    int T;
+    unsigned long long int A,B,C,D,K;
+    cin>>T;
+    while(T--){
+		cin>>A>>B>>C>>D>>K;
+	    unsigned long long int minchef1steps = hcf(A,B);
+	    unsigned long long int minchef2steps = hcf(C,D);
+	    unsigned long long int mincomsteps = minchef1steps / (hcf(minchef1steps, minchef2steps));
+	    unsigned long long int temp;
+	    temp = K / mincomsteps;
+	    mincomsteps = temp / minchef2steps;
+	    //unsigned long long int stepcount = 1;
+	    unsigned long long int stepcount = mincomsteps;
+		cout<<(stepcount*2) + 1<<endl;
+	}
+    return 0;
+}

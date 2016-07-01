@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	int s;
+	cin>>s;
+	int a[s];
+	for(int i=0;i<s;i++)
+		cin>>a[i];
+	int f;
+	cin>>f;
+	int b[f];
+	for(int i=0;i<f;i++)
+		cin>>b[i];
+	int cnt=0,p=0;
+	for(int i=0;i<s&&p<f;i++)
+	{
+		if(a[i]==b[p])
+		{
+			cnt++;
+			p++;
+		}
+	}
+	if(cnt==f)
+		cout<<"Yes"<<endl;
+	else
+		cout<<"No"<<endl;
+	}
+	return 0;
+}

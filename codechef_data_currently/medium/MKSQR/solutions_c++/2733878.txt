@@ -1,0 +1,30 @@
+#include<iostream>
+#include<cstdio>
+//include<conio.h>
+using namespace std;
+int main()
+{
+int t,x,y,p,q,n;
+cin>>t;
+while(t--)
+{
+        cin>>n;
+        p=0,q=0;
+        for(int i=0;i<n;i++)
+        {
+            scanf("%d%d",&x,&y);
+            if(x>y)
+                p++;
+            if(x<y)
+                q++;
+        }
+        if(p==0 || q==0)
+            cout<<"NO
+";
+        else
+            cout<<"YES
+";
+    }
+    //getch();
+    return 0;
+}

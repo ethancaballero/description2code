@@ -1,0 +1,30 @@
+#include<stdio.h>
+int main()
+{
+ int t,b,i,j,s,e,l,a[501][10],count;
+ scanf("%d",&t);
+ while(t--)
+ {
+  scanf("%d",&b);
+  for(i=0;i<501;i++)
+	for(j=0;j<10;j++)
+	 a[i][j]=0;
+  while(b--)
+  {
+	scanf("%d %d %d",&s,&e,&l);
+	for(i=s;i<=e;i++)
+	 a[i][l]=1;
+  }
+  count=500;
+  for(i=1;i<=500;i++)
+	for(j=0;j<9;j++)
+	 if(a[i][j]==1 && a[i][j+1]==1)
+	 {
+	  count--;
+	  break;
+	 }
+  printf("%d
+",count);
+ }
+ return 0;
+}

@@ -1,0 +1,21 @@
+# cook your code here
+n=int(raw_input())
+a=map(int,raw_input().split())
+l=[]
+for i in range(n):
+    if a[i]==-1:
+        continue
+    s=str(i+1)+" "
+    t=a[i]-1
+    a[i]=-1
+    while a[t]!=-1:
+        s+=str(t+1)+" "
+        j=a[t]-1
+        a[t]=-1
+        t=j
+    s+=str(t+1)
+    l.append(s)
+length=len(l)
+print length
+for i in range(length):
+    print l[i]

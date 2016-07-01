@@ -1,0 +1,7 @@
+for _ in range(input()):
+	s=raw_input().strip()
+	c=0
+	for i in s:
+		if i=='4' or i=='7':
+			c+=1
+	print len(s)-c		

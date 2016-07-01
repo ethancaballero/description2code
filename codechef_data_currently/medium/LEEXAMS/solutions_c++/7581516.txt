@@ -1,0 +1,70 @@
+#include<iostream>
+using namespace std;
+class node
+{
+   public:
+   int id;
+   double P;
+   node *next;
+};
+node *nodes[17];
+int T,N,A,B,P;
+bool visited[17];
+double dfs(int data)
+{
+   double ans;
+   if(data>16)
+   {
+      int i;
+      for(i=1;i<=N&&visited[i];i++);
+      if(i==N+1)
+         return 1;
+      return 0;
+   }
+   if(nodes[data]==NULL)
+      return dfs(data+1);
+   node *temp;
+   for(ans=dfs(data+1),temp=nodes[data];temp!=NULL;temp=temp->next)
+   {
+      if(visited[temp->id])
+         continue;
+      visited[temp->id]=true;
+      ans+=(temp->P)*dfs(data+1);
+      visited[temp->id]=false;
+   }
+   return ans;
+}
+int main()
+{
+   int i;
+   cin>>T;
+   while(T--)
+   {
+      cin>>N;
+      for(i=0;i<17;i++)
+      {
+         nodes[i]=NULL;
+         visited[i]=false;
+      }
+      for(i=1;i<=N;i++)
+      {
+         cin>>P>>A>>B;
+         node *temp=new node;
+         temp->P=P/100.0;
+         temp->next=nodes[A];
+         temp->id=i;
+         nodes[A]=temp;
+         temp=new node;
+         temp->P=1-P/100.0;
+         temp->id=i;
+         temp->next=nodes[B];
+         nodes[B]=temp;
+      }
+      if(N<=16)
+         cout<<dfs(1)<<endl;
+      else
+         cout<<0<<endl;
+   }
+
+   return 0;
+}

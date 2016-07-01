@@ -1,0 +1,12 @@
+#include<bits/stdc++.h>
+using namespace std;
+main()
+{
+	ios_base::sync_with_stdio(0);
+	long long int j,s,m;
+	cin>>j>>s>>m;
+	if(((m-j)/s)%2==0)
+	cout<<"Lucky Chef";
+	else
+	cout<<"Unlucky Chef";
+}

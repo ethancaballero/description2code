@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+
+        int t;
+        cin>>t;
+        while(t--)
+        {
+            char s[100001];
+            cin>>s;
+            long  int l=strlen(s);
+            int flag=0;
+            int i,j;
+
+            for( i=0,j=l-1;i<(l/2);i++,j--)
+            {
+                    if(s[i]!=s[j])
+                    {
+                        flag=-1;
+                        break;
+                    }
+
+            }
+            if(flag==0)
+            {
+                cout<<"YES"<<endl;
+                continue;
+            }
+
+             for(;i<l/2;i++,j--)
+             {
+                 if(s[i+1]!=s[j] && flag!=1)
+                 {
+                     if(flag==2)
+                        break;
+                    flag=1;
+
+
+                 }
+                 if(s[i]!=s[j-1] && flag!=2)
+                 {
+                     if(flag==1)
+                        break;
+                     flag=2;
+
+                 }
+
+
+             }
+             if(flag==-1 || i>=l/2)
+                cout<<"YES"<<endl;
+             else
+                cout<<"NO"<<endl;
+
+
+
+
+
+
+        }
+
+
+}

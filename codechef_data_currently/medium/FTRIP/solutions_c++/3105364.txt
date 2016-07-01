@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+double ncr[1000][1000];
+void comb()
+{
+ // fill (ncr,0.0);
+  for(int i=0;i<1000;i++)
+  {
+    for(int  j  =0; j<1000;j++)
+      ncr[i][j] = 0;
+  }
+  for(int i=0;i<1000;i++)
+  {
+      ncr[i][0] = ncr[i][i] = 1.0;
+      for(int j=1;j<i;j++)
+      {
+	ncr[i][j] = ncr[i-1][j]+ncr[i-1][j-1];
+      }
+    }
+  }
+
+int main()
+{
+  int t;
+  cin >> t;
+  comb();
+  while(t--)
+  {
+    int s,n,m,k;
+    cin >> s >> n >> m >> k;
+    double ans = 0.0;
+    //cout << min(m-1,n-1);
+    for(int i=k;i<=min(m-1,n-1);i++)
+    {
+      //cout << "#"<<endl;
+      //cout << m-1 << " " << i << " " <<ncr[m-1][i] << ncr[s-m][n-i-1] << endl;
+      ans += ncr[m-1][i]*ncr[s-m][n-i-1];
+    }
+    
+    double den = ncr[s-1][n-1];
+    printf("%.9f
+",(ans/den));
+  }
+    return 0;
+}

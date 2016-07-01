@@ -1,0 +1,74 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  cieldist.cpp
+ *
+ *    Description:  Mandar
+ *
+ *        Version:  1.0
+ *        Created:  Monday 23 November 2015 10:18:39  IST
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  YOUR NAME (), 
+ *   Organization:  
+ *
+ * =====================================================================================
+ */
+
+
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <string>
+#include <queue>
+#include <algorithm>
+#include <map>
+#include <set>
+#include <cassert>
+#include <cmath>
+
+#define si(n) scanf("%d",&n)
+#define sd(n) scanf("%lf",&n)
+#define sl(n) scanf("%lld",&n)
+#define ss(str) scanf("%s",str)
+#define FOR(i,a,b) for(int i = a; i<b; i++)
+#define pb push_back
+#define mp make_pair
+
+typedef long long int ll;
+typedef unsigned long long int ull;
+
+using namespace std;
+
+int main()
+{
+    int t;
+    si(t);
+
+    while(t--)
+    {
+        double ds,dt,d;
+
+        sd(ds);
+        sd(dt);
+        sd(d);
+
+        if((d - dt) > ds)
+            printf("%lf
+",(d - dt -ds));
+        else if(dt > d + ds)
+            printf("%lf
+",(dt - d-ds));
+        else if(ds > d + dt)
+            printf("%lf
+",(ds - d-dt));
+        else
+            printf("0.0
+");
+
+    }
+    
+    return 0;
+}
+

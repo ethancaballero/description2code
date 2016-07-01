@@ -1,0 +1,53 @@
+#include <iostream>       
+#include <stack>
+#include <string.h>
+#define s(n) scanf("%d",&n)
+#define ss(n) scanf(" %s",n)
+using namespace std;
+struct node
+{
+       int num;
+       char name[20];
+};
+int main ()
+{
+	int n,x;
+	char wrd[20];
+  	s(n);
+  	stack<node> mystack;
+ 	stack<int> min;
+ 	for (int i=1;i<=n;i++) 
+  	{
+  		s(x);
+		if(x==0)
+		{
+			ss(wrd);
+			continue;
+		}
+		else if(x!=-1)
+  		{
+  			ss(wrd);
+  			node y;
+	        y.num=x;
+	        strcpy(y.name,wrd);
+  			mystack.push(y);
+  			if(min.empty() || x<=min.top())
+  			{
+	        	min.push(x);
+  			}
+  			continue;
+  		}
+  		int c=0;
+  		while(mystack.top().num!=min.top())
+  		{
+  			mystack.pop();
+  			c++;
+  		}
+  		printf("%d %s
+",c,mystack.top().name);
+  		mystack.pop();
+  		min.pop();
+ 	}
+	return 0;
+}
+ 

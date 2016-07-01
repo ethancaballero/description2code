@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ull unsigned long long
+#define pii pair<int,ull>
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while (t--) {
+		int n;
+		scanf("%d",&n);
+		map<int,int> mp;
+		vector<pii> len;
+		for (int i = 0; i < n; i++) {
+			int b,l;
+			scanf("%d%d",&b,&l);
+			if(mp.count(b) > 0){
+				int x = mp[b];
+				len[x].second += l;
+				len[x].first = min(len[x].first,l);
+			}
+			else {
+				len.push_back(pii(l,l));
+				mp[b] = len.size()-1;
+			}
+		}
+		sort(len.begin(),len.end());
+		ull ans = 0;
+		for (int i = 0; i < len.size(); i++) {
+			ans += (ull)len[i].first*(i+1);
+			ans += (len[i].second-len[i].first)*len.size();
+		}
+		printf("%llu
+",ans);
+	}
+	return 0;
+}

@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+int main(){
+	int t,i,l,flag,gflag,j,amit;
+	char s[10000][5];
+	cin>>t;
+	for(i=0;i<t*t;++i)
+		cin>>s[i];
+	amit=0;
+	
+	for(i=0;i<t;++i){
+		gflag=0;
+	 
+
+	   for(j=0;j<t;++j){
+	   	 flag=0;
+	   	 for(l=0;l<t;++l){
+	   	 	if(s[i*t+l][0]!=s[j*t+l][0])
+	   	 	{
+	   	 		flag=1;
+	   	 		break;
+	   	 	} 
+	   	 }
+	   	 if(!((flag && s[i*t+j][0]=='N') || (flag==0 && s[i*t+j][0]=='Y')))
+	   	 	gflag=1;
+	   }
+	   if(gflag==0)
+	   {
+	   	amit=1;
+	   	for(j=0;j<t;++j)
+	   		cout<<s[i*t+j]<<endl;
+
+	   	break;
+	   }
+	}
+
+	if(amit==0){
+		for(j=0;j<t;++j)
+			cout<<"NO"<<endl;
+	}
+	
+
+	return 0;
+}

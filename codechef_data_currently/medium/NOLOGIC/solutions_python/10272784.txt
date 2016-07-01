@@ -1,0 +1,38 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<vector>
+//#include<algorithm>
+using namespace std;
+int main(){
+   int t,i;
+   cin>>t;
+   cin.get();
+   while(t--){
+      string s;
+      getline(cin,s);
+      vector <bool> used(26,false);
+      int sl=s.length();
+      for(i=0;i<sl;i++){
+          if(s[i]>='a'&& s[i]<='z')
+          used[s[i]-'a']=true;
+          if(s[i]>='A'&& s[i]<='Z')
+          used[s[i]-'A']=true;
+          
+      }
+      bool impossible=true;
+       for(char c='a';c<='z';c++){
+           if(!used[c-'a']){
+               cout<<c;
+           
+           impossible=false;
+           break;
+       }}
+       if(impossible)
+       cout<<"~";
+       cout<<endl;
+       
+       
+   }
+    return 0;
+}

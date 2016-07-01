@@ -1,0 +1,38 @@
+import copy
+t=int(raw_input().rstrip())
+while t:
+    s = raw_input().rstrip()
+    if len(s)<=8:
+        print "unlucky"
+    else:
+        length = len(s)
+        initialCount = 0
+        palindrome = ''
+        changes = [0]*length
+        for i in range(length):
+            if s[i]>s[length-1-i]:
+                initialCount+=1
+                changes[i]=1
+            palindrome += min(s[i], s[length-1-i])
+        minimum = 999999
+        answer = ''
+        for i in range(length-4):
+            if not (i in range((length+1)/2-4, length/2)):
+                count = 0
+                for j in range(i, i+5):
+                    count+=(s[j]!="lucky"[j-i])
+                    if j!=length-1-j:
+                        count+=(s[length-1-j]!="lucky"[j-i])
+                count+=initialCount-sum(changes[i:i+5])-sum(changes[length-i-5:length-i])
+                if minimum >= count:
+                    newString = list(copy.copy(palindrome))
+                    for j in range(i, i+5):
+                        newString[length-1-j] = newString[j]="lucky"[j-i]
+                    newString = "".join(newString)
+                    if minimum == count:
+                        answer = min(answer, newString)
+                    else:
+                        minimum = count
+                        answer = newString
+        print answer, minimum
+    t-=1

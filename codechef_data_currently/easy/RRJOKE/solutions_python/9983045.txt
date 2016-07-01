@@ -1,0 +1,10 @@
+for t in range(int(raw_input())):
+    k=int(raw_input())
+    for i in range(k):
+        raw_input()
+    n=k%4
+    if n==1:print 1
+    elif n==2:print k+1
+    elif n==3:print 0
+    elif n==0: print k
+    

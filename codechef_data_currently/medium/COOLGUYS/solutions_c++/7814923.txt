@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+#define ll long long int
+ll n;
+ll scanInt()
+{
+    ll x=0;
+    char c=getchar_unlocked();
+    while(c<'0'||c>'9')c=getchar_unlocked();
+    while(c>='0'&&c<='9')
+    {
+        x=x*10+c-'0';
+        c=getchar_unlocked();
+    }
+    return x;
+}
+ 
+void print(ll x)
+{
+    char s[21];
+    int LEN=0;
+    do
+    {
+        s[LEN++]=x%10+'0';
+        x/=10;
+    }while(x);
+    --LEN;
+    while(LEN>=0)
+    {
+        putchar_unlocked(s[LEN--]);
+    }
+    //putchar_unlocked('
+');
+}
+ 
+ll gcd(ll x,ll y)
+{
+    return(!y?x:gcd(y,x%y));
+}
+ll getUp(ll n)
+{
+    ll to=(ll)(sqrt(n));
+    ll res=0;
+    for(int i=1;i<=to;i++)
+        res+=(n/i);
+    res<<=1;
+    return res-to*to;
+}
+void solve(ll n)
+{
+    ll up=getUp(n);
+    ll down=n*n;
+    //cout<<up<<" "<<down<<endl;
+    ll g=gcd(up,down);
+    up/=g;down/=g;
+    print(up);
+    putchar_unlocked('/');
+    print(down);
+    putchar_unlocked('
+');
+    return;
+}
+int main()
+{
+ios_base::sync_with_stdio(false);
+cin.tie(0);
+ll tt=scanInt();
+while(tt--)
+{
+    n=scanInt();
+    solve(n);
+}
+return 0;
+}

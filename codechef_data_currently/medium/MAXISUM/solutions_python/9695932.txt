@@ -1,0 +1,11 @@
+for i in range(input()):
+    [N,K] = map(int,raw_input().split())
+    A     = map(int,raw_input().split())
+    B     = map(int,raw_input().split())
+    
+    ans = 0
+    for i in range(N):
+        ans = ans+A[i]*B[i]
+        
+    ans = ans + K * max(abs(min(B)) , abs(max(B)))
+    print ans

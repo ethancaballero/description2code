@@ -1,0 +1,84 @@
+#include <queue>
+#include <cstdio>
+#include <climits>
+#include<iostream>
+
+
+  long long edges[2504][2504];
+
+using namespace std;
+const int INF = 2000000000;
+typedef pair<long long,long long> PII;
+
+
+long long  minDistance(long long  dist[], bool sptSet[],long long n)
+{
+   // Initialize min value
+   long long min = INT_MAX, min_index;
+ 
+   for (long long v = 0; v < n+2; v++)
+     if (sptSet[v] == false && dist[v] <= min)
+         min = dist[v], min_index = v;
+ 
+   return min_index;
+}
+
+int main(){
+  
+  long long t,n;
+  scanf("%lld",&t);
+ while(t--)
+  {
+  vector < pair<long long ,long long > > vertex;
+  	scanf("%lld",&n);
+  	long long a,b;
+  	for(long long i=0;i<n+2;i++)
+  	{
+  		scanf("%lld %lld",&a,&b);
+  		vertex.push_back(make_pair(a,b));
+  	}
+  
+  for(long long i=0;i<(n+2);i++)
+  {
+  	for(long long j=0;j<(n+2);j++)
+  	{
+  		edges[i][j] = (vertex[i].first - vertex[j].first)*(vertex[i].first - vertex[j].first)+(vertex[i].second - vertex[j].second)*(vertex[i].second - vertex[j].second);
+  	}
+  	
+  }
+  long long src = n;
+  long long dist[2502];     // The output array.  dist[i] will hold the shortest
+                      // distance from src to i
+     bool sptSet[2502]; // sptSet[i] will true if vertex i is included in shortest
+                     // path tree or shortest distance from src to i is finalized
+ 
+     // Initialize all distances as INFINITE and stpSet[] as false
+     for (long long i = 0; i < n+2; i++)
+        dist[i] = INT_MAX, sptSet[i] = false;
+ 
+     // Distance of source vertex from itself is always 0
+     dist[src] = 0;
+ 
+     // Find shortest path for all vertices
+     for (long long  count = 0; count < n+1; count++)
+     {
+       // Pick the minimum distance vertex from the set of vertices not
+       // yet processed. u is always equal to src in first iteration.
+       long long u = minDistance(dist, sptSet,n);
+ 
+       // Mark the picked vertex as processed
+       sptSet[u] = true;
+       // Update dist value of the adjacent vertices of the picked vertex.
+       for (long long v = 0; v < n+2; v++)
+ 
+         // Update dist[v] only if is not in sptSet, there is an edge from 
+         // u to v, and total weight of path from src to  v through u is 
+         // smaller than current value of dist[v]
+         if (!sptSet[v] && edges[u][v] && dist[u] != INT_MAX 
+                                       && dist[u]+edges[u][v] < dist[v])
+            dist[v] = dist[u] + edges[u][v];
+     }
+     cout<<dist[n+1]<<endl;
+}
+  return 0;
+}

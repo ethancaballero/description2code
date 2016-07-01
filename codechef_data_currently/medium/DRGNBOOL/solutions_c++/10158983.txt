@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+int main() {
+ int level[10];
+ int soi[101] ;
+ int sof[101] ;
+ int result;
+
+ int n;
+ int s,f,k,v;
+ cin>>n;
+ while(n--)
+ {
+      for(int i=0;i<=100;i++)
+ {
+     soi[i]=0;
+     sof[i]=0;
+ }
+     result =0;
+     cin>>s>>f;
+     while(s--)
+     {
+         cin>>v>>k;
+         sof[k] += v;
+     }
+     while(f--)
+     {
+         cin>>v>>k;
+         soi[k] += v;
+     }
+     for(int i=0;i<=100;i++)
+     {
+         if(sof[i]>0)
+         sof[i]=sof[i]-soi[i];
+     }
+     for(int i=0;i<=100;i++)
+     {
+         if(sof[i]<0)  
+         result = result + (0-sof[i]);
+         //cout<<i<<" "<<sof[i]<<endl;
+         
+     }
+     cout<<result<<endl;
+     
+ }
+	return 0;
+}

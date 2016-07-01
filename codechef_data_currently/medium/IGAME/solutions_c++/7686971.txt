@@ -1,0 +1,108 @@
+#include <cstdio>
+#include <cctype>
+#include <cstring>
+#include <set>
+ 
+using namespace std;
+ 
+const int BUFSIZE = 4096;
+const char ZEROCHAR = '0';
+ 
+char r_buffer[BUFSIZE];
+int r_bufpos = BUFSIZE;
+ 
+char w_buffer[BUFSIZE];
+int w_bufpos = 0;
+ 
+int readint()
+{
+    int n;
+    for (; r_bufpos < BUFSIZE && !isdigit(r_buffer[r_bufpos]); r_bufpos++);
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE && !isdigit(r_buffer[r_bufpos]); r_bufpos++);
+    }
+    n = 0;
+    for (; r_bufpos < BUFSIZE && isdigit(r_buffer[r_bufpos]); r_bufpos++)
+        n = 10 * n + r_buffer[r_bufpos] - ZEROCHAR;
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE && isdigit(r_buffer[r_bufpos]); r_bufpos++)
+            n = 10 * n + r_buffer[r_bufpos] - ZEROCHAR;
+    }
+    return n;
+}
+ 
+void writestr(const char* str)
+{
+    for (int i=0; i < strlen(str); i++)
+    {
+        if (w_bufpos == BUFSIZE)
+        {
+            fwrite(w_buffer, 1, BUFSIZE, stdout);
+            w_bufpos = 0;
+        }
+        w_buffer[w_bufpos++] = *(str + i);
+    }
+}
+ 
+const int MAXSIZE = 1001;
+/*
+ (m, n) is losing position -> GRID[m][n] = true -> Bob wins
+ */
+int grid[MAXSIZE];
+bool used[MAXSIZE];
+ 
+void initgrid()
+{
+    int gap = 2;
+    set<int> cache;
+    grid[1] = 2;
+    used[1] = true;
+    for (int i=3; i+gap < MAXSIZE; i++)
+        if (!used[i])
+        {   
+            grid[i] = i+gap;
+            used[i] = used[i+gap] = true;
+            gap += 1;
+        }
+}
+ 
+int main()
+{
+    int T;
+    int m, n, p, q, t;
+ 
+    initgrid();
+ 
+    T = readint();
+    for(; T > 0; T--)
+    {
+        m = readint();
+        n = readint();
+        p = readint();
+        q = readint();
+        m = m - p;
+        n = n - q;
+        if (m > n)
+        {
+            t = m;
+            m = n;
+            n = t;
+        }
+            
+        if (grid[m] == n)
+            writestr("Bob
+");
+        else
+            writestr("Alice
+");
+    }
+    fwrite(w_buffer, 1, w_bufpos, stdout);
+    fflush(stdout);
+    return 0;
+}

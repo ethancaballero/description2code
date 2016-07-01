@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+int n, a[100020];
+int ans, one, need;
+
+int main() {
+	scanf("%d", &n);
+	one = 0;
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &a[i]);
+		need += a[i] - 1;
+	}
+	if (need <= n) {
+		ans = n;
+	} else {
+		ans = n + (need - n + 1) / 2;
+	}
+	printf("%d
+", ans);
+	return 0;
+}

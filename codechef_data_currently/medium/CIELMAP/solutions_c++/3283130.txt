@@ -1,0 +1,133 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <map>
+#include <cmath>
+#include <cstring>
+#include <ctime>
+#include <sstream>
+#include <stack>
+#include <queue>
+
+#define PB push_back
+#define MP make_pair
+#define all(v) v.begin(), v.end()
+#define For(i, a, b) for (int i = a; i < b; i++)
+#define Rfor(i, b, a) for (int i = b; i > a; i--)
+#define Si(a) scanf("%d", &(a))
+#define Sl(a) scanf("%lld", &(a))
+#define SZ size()
+#define F first
+#define S second
+#define B begin()
+#define E end()
+
+#define MOD 1000000007
+
+using namespace std;
+
+typedef unsigned long long int ull;
+typedef long long int lli;
+typedef vector<int> VI;
+typedef pair<int, int> pii;
+
+template <typename T>
+T power(T a, int n, int mod)
+{
+	T res = 1;
+	while (n) {
+		if (n % 2 == 1) res = (res * a) % mod;
+		n /= 2;
+		a = (a * a) % mod;
+	}
+	return res;
+}
+
+//inline
+bool crossProd(pii a, pii b, pii c)
+{
+	pii v1 = MP(0,0);
+	v1.F = c.F - a.F;
+	v1.S = c.S - a.S;
+
+	pii v2 = MP(0,0);
+	v2.F = b.F - a.F;
+	v2.S = b.S - a.S;
+
+	//double d = (b.F - a.F) * (c.S - a.S) - (c.F - a.F) * (b.S - a.S);
+	double d = (v1.F * v2.S) - (v2.F * v1.S);
+	return (d < 0.0 ? 1 : 0);
+}
+
+//inline
+double dist(pii a, pii b)
+{
+	return (pow(a.F-b.F, 2) + pow(a.S-b.S, 2));
+}
+
+int main()
+{
+	int t;
+	int n;
+	int a, b;
+	double mx = -1;
+	vector <pii> p;
+
+	cin >> t;
+	while (t--) {
+		Si(n);
+		p.clear();
+		For (i, 0, n) {
+			Si(a);
+			Si(b);
+			p.PB(MP(a, b));
+		}
+		mx = -1;
+		if (n == 4) {
+			For (i, 0, 24) {
+				next_permutation(p.B, p.E);
+				bool d1 = crossProd(p[0], p[1], p[2]);
+				bool d2 = crossProd(p[0], p[1], p[3]);
+				if (d1 == d2) {
+					mx = max(mx, dist(p[0], p[1]));
+				}
+			}
+			/*
+			For (i, 0, 4) {
+				For (k, (i+1), 4) {
+					int j = k%4;
+					bool d1 = crossProd(p[i], p[j], p[(j+1)%4]);
+					bool d2 = crossProd(p[i], p[j], p[(j+2)%4]);
+					cout << p[i].F << "," << p[i].S << "  ";
+					cout << p[j].F << "," << p[j].S << "  ";
+					cout << p[(j+1)%4].F << "," << p[(j+1)%4].S << "  =  " << d1 << endl;
+
+					cout << p[i].F << "," << p[i].S << "  ";
+					cout << p[j].F << "," << p[j].S << "  ";
+					cout << p[(j+2)%4].F << "," << p[(j+2)%4].S << "  =  " << d2 << endl;
+					
+					if (d1 == d2) {
+						mx = max(mx, dist(p[i], p[j]));
+					}
+				}
+			}
+			*/
+		}
+		else {
+			For (i, 0, n) {
+				For (j, (i+1), n) {
+					mx = max(mx, dist(p[i], p[j]));
+					//cout << mx << " " << dist(p[i], p[j]) << endl;
+				}
+			}
+		}
+		printf("%.8f
+", sqrt(mx));
+	}
+
+
+	return 0;
+}

@@ -1,0 +1,134 @@
+#include <stdio.h>
+#include <map>
+#include <queue>
+#include <deque>
+#define MOD 1000000007
+using namespace std;
+#define MAX_CITIES 10001
+
+std::vector<long long int> Neighbours[MAX_CITIES];
+long long int final;
+//struct City{
+//	vector<int> neighbours;
+//	int parent;
+//	long int size ;
+//	long int id;
+//	long int importance;
+//
+//	City(){
+//		size = 1;
+//		parent = -1;
+//		importance = 1;
+//	}
+//};
+
+
+
+long long int DFS(long long int city,long long int parent){
+	long long int size =1;
+
+	vector<long long int> & oNeighbours = Neighbours[city];
+	vector<long long int>::const_iterator it = oNeighbours.begin();
+	vector<long long int>::const_iterator it_end = oNeighbours.end();
+
+	for(; it!=it_end; it++){
+
+		if((*it)!=parent) {
+			long long int nSize = DFS((*it),city);
+			long long int tmp = ((city*size)%MOD);
+			final+= ((tmp*nSize*2)%MOD);
+			final%=MOD;
+			size += nSize;
+		}
+
+
+	}
+	final+=city;
+	final%=MOD;
+	return size;
+}
+int main(){
+
+	int t;
+	scanf("%d",&t);
+	int i;
+	for(i = 0; i<t ;i++){
+		//		map<int,city> map;
+		int N;
+		scanf("%d",&N);
+		if(N==0){
+			printf("%d
+",0);
+			continue;
+		}
+		if(N==1){
+			printf("%d
+",1);
+			continue;
+		}
+		for( int iCity = 1; iCity <= N; iCity++ ){
+			Neighbours[iCity].clear();
+		}
+		int j;
+		for(j = 0; j<N-1; j++){
+			long long int city1, city2;
+			scanf("%lli %lli",&city1,&city2);
+			Neighbours[city2].push_back(city1);
+			Neighbours[city1].push_back(city2);
+
+		}
+		final = 0;
+		DFS(1,-1);
+		//		queue<city*> citys;
+		//		citys.push(&map[1]);
+		//		int parent = -1;
+		//		deque<city*> AllCitys;
+		//		while(!citys.empty()){
+		//			parent = citys.front()->parent;
+		//			city* c = citys.front();
+		//			citys.pop();
+		//			AllCitys.push_back(c);
+		//			int k;
+		//			for(k = 0;k<c->neighbours.size();k++){
+		//				int d = c->neighbours[k];
+		//				if(d!=parent){
+		//					map[d].parent = c->id;
+		//					citys.push(&map[d]);
+		//
+		//				}
+		//			}
+
+		//	}
+
+		//		while(!AllCitys.empty()){
+		//			city* c = AllCitys.back();
+		//			AllCitys.pop_back();
+		//			c->importance=(c->importance*c->id);
+		//			total=(total+c->importance);
+		//			if(c->parent!=-1){
+		//				map[c->parent].importance = (map[c->parent].importance +(2*map[c->parent].size*(c->size)));
+		//				map[c->parent].size+=c->size;
+		//			}
+		//
+		//
+		//		}
+
+
+		//		for(k = 1; k<=N;k++){
+		//			long int result = 0; long int partial_sum = 1;
+		//			int l;
+		//			for(l = 0;l<map[k].sons.size();l++){
+		//				result = (result + partial_sum * map[map[k].sons[l]].size)%MOD;
+		//				partial_sum= (partial_sum+ map[map[k].sons[l]].size)%MOD;
+		//			}
+		//			result*=2;
+		//			result++;
+		//			total+=result*k;
+		//
+		//		}
+		printf("%lli
+",final);
+
+	}
+
+}

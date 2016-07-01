@@ -1,0 +1,10 @@
+def sol(n):
+    if n>=0:
+        return ((n+3)*(n+2)*(n+1))/6
+    else:
+        return 0
+
+
+for _ in range(input()):
+    n,a,b,c= map(int,raw_input().split())
+    print  sol(n)-sol(n-a-1)-sol(n-b-1)-sol(n-c-1)+sol(n-a-b-2)+sol(n-b-c-2)+sol(n-a-c-2)-sol(n-a-b-c-3)

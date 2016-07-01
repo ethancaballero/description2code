@@ -1,0 +1,84 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<cmath>
+
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        long long int num;
+        int quo=0;
+        scanf("%lld",&num);
+        if(num>=100)
+        {
+            quo+=num/100;
+            num=num%100;
+             if(num==0)
+             {
+                 printf("%d
+",quo);
+             }
+        }
+        if(num>=50)
+             {
+                 quo+=num/50;
+                 num=num%50;
+                 if(num==0)
+                 {
+                     printf("%d
+",quo);
+                 }
+             }
+
+        if(num>=10)
+        {
+                  quo+=num/10;
+                   num=num%10;
+                   if(num==0)
+                    {
+                     printf("%d
+",quo);
+                    }
+        }
+        if(num>=5)
+        {
+                   quo+=num/5;
+                   num=num%5;
+                   if(num==0)
+                    {
+                     printf("%d
+",quo);
+                    }
+        }
+        if(num>=2)
+        {
+                   quo+=num/2;
+                   num=num%2;
+                   if(num==0)
+                   {
+                     printf("%d
+",quo);
+                   }
+        }
+        if(num>=1)
+        {
+                quo+=num/1;
+                   num=num%1;
+                   if(num==0)
+                   {
+                     printf("%d
+",quo);
+                   }
+        }
+    }
+
+
+
+    return 0;
+}
+

@@ -1,0 +1,20 @@
+w=raw_input().split()
+k=int(w[0])
+n=int(w[1])
+l=[]
+for i in xrange(k):
+    l.append(raw_input())
+flag=0
+for i in xrange(n):
+    x=raw_input()
+    for j in l:
+        if len(x)>=47:
+            print 'Good'
+            break
+        if j in x:
+            print 'Good'
+            break
+    else:
+        print 'Bad'
+    
+    

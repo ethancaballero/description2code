@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define LIM 100000
+int a[102],b[102],c[102];
+float r[102];
+float cal(float p,int n)
+{
+	if(r[n]!=-1)
+		return r[n];
+	if(a[n]==1)
+		r[n]=1-(1-cal(p,b[n]))*(1-cal(p,c[n]));
+	else if(a[n]==2)
+		r[n]= cal(p,b[n])*cal(p,c[n]);
+	else
+		r[n]=p;
+	return r[n];
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n;
+		scanf("%d",&n);
+		int i,j;
+		for(i=1;i<=n;i++)
+		{
+			scanf("%d",&a[i]);
+			if(a[i]!=0)
+				scanf("%d%d",&b[i],&c[i]);
+		}
+		float res,k,lt=0,rt=1;
+		for(j=1;j<43;j++)
+		{
+			for(i=1;i<=n;i++)
+				r[i]=-1;
+			k=(lt+rt)/2;
+			res=cal(k,n);
+			if(res==0.5)
+				break;
+			else if(res>0.5)
+				rt=k;
+			else
+				lt=k;
+		}
+		printf("%.5f
+", k);
+	}
+	return 0;
+}

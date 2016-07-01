@@ -1,0 +1,20 @@
+def GI(): return int(raw_input())
+def GIS(): return map(int, raw_input().split())
+
+def main():
+    for i in xrange(GI()):
+        N, M = GIS()
+        X = range(M+1, N+1) + range(1, M+1)
+        C = [0] * (N+1)
+        n = 1
+        c = 0
+        while not C[n]:
+            C[n] = 1
+            n = X[n-1]
+            c += 1
+        if c == N:
+            print 'Yes'
+        else:
+            print 'No %i' % c
+
+main()

@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#define mod 1000000007LL
+using namespace std;
+typedef long long ll;
+
+string s;
+ll dp[1024];
+ll P[1024][1024];
+
+void build(){
+    int n = (int)s.length();
+    for (int i=0; i<n; i++){
+        P[i][i] = 1;
+    }
+    for (int L=2; L<=n; L++){
+        for (int st=0; st+L-1<n; st++){
+            int en = st+L-1;
+            if (L==2){
+                P[st][en]=(s[st]==s[en]);
+            }
+            else {
+                P[st][en]=(P[st+1][en-1]and(s[st]==s[en]));
+            }
+        }
+    }
+}
+
+ll isPalin(int l, int r){
+    return P[l][r];
+}
+
+int main(){
+    #ifndef ONLINE_JUDGE
+        freopen("in.txt","r",stdin);
+    #endif // ONLINE_JUDGE
+    cin>>s;
+    build();
+    int n = (int)s.length();
+    dp[0] = 1LL;
+    for (int i=1; i<n; i++){
+        for (int j=0; j<i; j++){
+            dp[i] += (dp[j]*isPalin(j+1,i));
+            dp[i]%=mod;
+        }
+        dp[i]+=isPalin(0,i);
+        dp[i]%=mod;
+    }
+    cout<<dp[n-1]<<endl;
+}

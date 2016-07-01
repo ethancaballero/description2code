@@ -1,0 +1,45 @@
+//Abhay
+//solved
+//23022016
+//WRONG ANSWER
+#include<stdio.h>
+#include <iostream>
+using namespace std ;
+inline void take(long long &a)
+{ 
+	a=0;
+	long long k;
+	while (1)
+	{
+		k=getchar_unlocked();
+		if (k<'0'||k>'9')
+		break;
+		a=k-48+a*10;
+	} 
+}
+int main () 
+{
+	int t, n, d, k, c;long long a;
+	scanf ("%d",&t);
+	while (t--) 
+	{
+		c=d=0;
+		scanf ("%d",&n);
+		getchar_unlocked();
+		k=n;
+		while (n--) 
+		{
+			//scanf ("%d",&a);
+			take(a);
+			if (a==1||a==0){ c++ ;continue ;}
+			if (a==2) d++;
+		}
+		c=k-c;
+		c--;
+		d--;
+		a=(long long)(c)*((long long)(c)+1)/2;
+		a-=(long long)(d)*((long long)(d)+1)/2;
+	printf ("%lld
+",a);
+	}
+}

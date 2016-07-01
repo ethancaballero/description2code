@@ -1,0 +1,61 @@
+// After reading a solution
+
+
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <cstdio>
+#include <vector>
+#include <cstdlib>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+
+{
+
+    long long int i,temp,ans,c,n,arr[100000];
+    int t;
+    cin>>t;
+    while(t--)
+    {   cin>>n;
+        cin>>arr[0];
+        temp=1;ans=arr[0];
+        for(i=1;i<n;i++)
+        {
+            cin>>arr[i];
+            if(arr[i]==ans)
+                temp++;
+            else
+                temp--;
+            if(temp==0)
+            {
+                temp=1;
+                ans=arr[i];
+            }
+        }
+        c=0;
+        for(i=0;i<n;i++)
+        {
+            if(arr[i]==ans)
+                c++;
+        }
+        if(c<=(n+1)/2)
+            cout<<(n+1)/2<<endl;
+        else
+        cout<<c<<endl;
+    }
+
+return 0;
+
+}

@@ -1,0 +1,20 @@
+import sys
+
+n, d = map(int, sys.stdin.readline().split())
+
+l = []
+for i in range(n):
+	l.append(int(sys.stdin.readline()))
+
+l.sort(reverse=True, key=int)
+
+i = 0
+num = 0
+while i < n-1:
+	if l[i] - l[i+1] <= d:
+		num += 1
+		i += 2
+	else:
+		i += 1
+
+print num

@@ -1,0 +1,24 @@
+## Codechef
+## Chef and his sequence
+## 2016.02.25
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    ns = int(raw_input())  # the number of elements in a sequence
+    seq = map(int,raw_input().strip().split())
+
+    nss = int(raw_input())  # the number of elements in a subsequence
+    subseq = map(int,raw_input().strip().split())
+    isSub = True
+
+    for i in xrange(nss):
+        if subseq[i] not in seq:
+            isSub = False
+            break
+
+        else:
+            pass
+
+    print "Yes" if isSub else "No"
+    

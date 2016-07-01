@@ -1,0 +1,19 @@
+import itertools
+t = input()
+for _ in xrange(t):
+    n, m = map(int, raw_input().split())
+    notes = []
+    for i in xrange(n):
+        notes.append(input())
+    b = False
+    for j in xrange(n):
+        for i in itertools.combinations(notes, j + 1):
+#            print i
+            if sum(i) == m:
+                print "Yes"
+                b = True
+                break
+        if b:
+            break
+    if not b:
+        print "No"

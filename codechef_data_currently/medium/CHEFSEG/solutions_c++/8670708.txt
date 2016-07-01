@@ -1,0 +1,30 @@
+#include <iostream>
+#include<math.h>
+//#include<conio.h>
+using namespace std;
+long int t;
+//long int x;
+ 
+int main() {
+	// your code goes here
+	scanf("%ld",&t);
+	while(t--)
+	{
+	 unsigned long long int x, k,temp,sq;
+     double ans;
+	 scanf("%lld %llu",&x,&k);
+	 //i=2;
+	  //cin>>x>>k;
+	  temp=(floor)(log(k)/log(2));
+	  temp=(unsigned long int)pow(2,temp);
+	  //cout<<temp<<endl;
+	  sq=temp*2;
+	  
+	  ans=(double)((double)(x)/sq*(double)((k-temp)*2+1));
+	  printf("%f
+",ans);
+	 
+	 }
+    //getch();
+	return 0;
+}

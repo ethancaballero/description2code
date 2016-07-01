@@ -1,0 +1,50 @@
+
+
+def checkTopRight(x, y):
+	if x > 0:
+		if x % 2 == 1:
+			if y >= -x + 1:
+				if y <= x + 1:
+					return True
+	return False
+
+def checkTopLeft(x, y):
+	if x < 0:
+		if x % 2 == 0:
+			if y >= x:
+				if y <= -x:
+					return True
+	return False
+
+def checkBottomRight(x, y):
+	if y > 0:
+		if y % 2 == 0:
+			if x >= -y:
+				if x < y:
+					return True
+	return False
+
+def checkBottomLeft(x, y):
+	if y <= 0: 
+		if y % 2 == 0:
+			if x >= y: 
+				if x <= -y + 1:
+					return True
+	return False
+
+		
+dataLength = input()
+for line in range(dataLength):
+	x, y = [int(i) for i in raw_input().split()]    
+	if(checkTopLeft(x, y) is True):
+		print "YES"
+	elif(checkTopRight(x, y) is True):
+		print "YES"
+	elif(checkBottomLeft(x, y) is True):
+		print "YES"
+	elif(checkBottomRight(x, y) is True):
+		print "YES"
+	else:
+		print "NO"
+
+

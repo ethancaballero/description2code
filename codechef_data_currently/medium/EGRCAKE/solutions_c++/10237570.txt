@@ -1,0 +1,31 @@
+#include<iostream>
+#include<cstdio>
+long long int gcd(long long int a,long long int b)
+{
+       long long int t;
+       while(a)
+       {
+              t=a;
+              a=b%a;
+              b=t;
+       }
+       return b;
+}
+int main()
+{
+       int T;
+       long long int n,m,k;
+       scanf("%d",&T);
+       while(T--)
+       {
+              scanf("%lld%lld",&n,&m);
+              k=gcd(n,m);
+              if(k==1)
+                     printf("Yes
+");
+              else
+                     printf("No %lld
+",n/k);
+       }
+       return 0;
+}

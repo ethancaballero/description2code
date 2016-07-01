@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+#define mod 1000000007
+#define gc getchar
+using namespace std;
+typedef long long int ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll t,n,g,x,c,i;
+    vector<ll> a(1000005);
+    a[1]=1;
+    a[2]=2;
+    for(i=3;i<=1000002;i++)
+    {
+        a[i]=a[i-1]+a[i-2];
+        a[i]%=mod;
+    }
+    t=read_int();
+    while(t--)
+    {
+        n=read_int();
+        g=read_int();
+        ll c=0;
+        ll x=a[n];
+        while(x)
+        {
+            c+=x&1;
+            x=x>>1;
+        }
+        if(c==g)
+            printf("CORRECT
+");
+        else
+            printf("INCORRECT
+");
+    }
+    return 0;
+}

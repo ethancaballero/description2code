@@ -1,0 +1,83 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+#define pb push_back
+int arr[100005];
+int sz[100005];
+vector<int> v[100005];
+vector< long long int > ans;
+vector<int > vals;
+int value;
+int root(int a)
+{
+    while(arr[a]!=a)
+    {
+        a = arr[a];
+        arr[a] = arr[arr[a]];//path compression
+    }
+    return a;
+}
+void unio(int i,int j)
+{
+    int x = root(i);
+    int y = root(j);
+    if(sz[x]<sz[y])
+    {
+      arr[x] = y;
+      sz[y] = sz[y]+sz[x];
+    }
+    else
+    {
+        arr[y] = x;
+        sz[x] = sz[x]+sz[y];
+    }
+}
+int main()
+{int c,d;
+    int t;int n,m;
+  vals.pb(1723923);
+        scanf("%d%d",&n,&m);
+        for(int i=1;i<=n;i++)
+            {arr[i] = i; sz[i] = 1;}
+            for(int j=1;j<=m;j++)
+            {
+                scanf("%d%d",&c,&d);
+                unio(c,d);
+            }
+            for(int j=1;j<=n;j++)
+            {
+                scanf("%d",&value);
+                vals.pb(value);
+            }
+            for(int i=1;i<=n;i++)
+                v[root(i)].pb(i);
+       int ctr=0;
+            for(int i=1;i<=n;i++)
+            {
+                if(v[i].size()!=0)
+                { int j;//cout<<i;
+                 ctr++;
+                 for(j=0;j<v[i].size();j++)
+                 {
+                   if(vals[v[i][j]]>=0) break;
+                 }
+                 if(j==v[i].size()&&ctr!=1){printf("-1
+");return 0;}
+                 int mi = vals[v[i][j]];
+                 for(int k=j+1;k<v[i].size();k++)
+                 {
+                     if(mi>vals[v[i][k]]&&vals[v[i][k]]>=0)
+                        mi = vals[v[i][k]];
+                 }
+                 ans.pb((long long int)mi);
+               }
+            }
+          sort(ans.begin(),ans.end());
+     long long fin=0ll;
+    fin+=((long long int)(ans.size()-1))*(ans[0]);
+    for(int i =1;i<ans.size();i++)
+        fin+=ans[i];
+        printf("%lld
+",fin);
+    return 0;
+}

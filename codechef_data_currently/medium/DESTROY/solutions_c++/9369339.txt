@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+int arr[50004];
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n,i;
+        priority_queue<int>P;
+        scanf("%d",&n);
+        for(i=0;i<n;i++)
+            scanf("%d",&arr[i]);
+        sort(arr,arr+n);
+        arr[n]=-1;
+        int c=1;
+        for(i=1;i<=n;i++)
+        {
+            if(arr[i]==arr[i-1])
+               c++;
+            else{
+                P.push(c);
+                c=1;
+            }
+        }
+        int sum=0;
+        while(!P.empty()){
+            int x=P.top();
+            P.pop();
+            if(P.empty()){
+                sum+=x;
+                break;
+            }
+            int y=P.top();
+            P.pop();
+            sum++;
+            x--;
+            y--;
+            if(x>0)
+                P.push(x);
+            if(y>0)
+                P.push(y);
+            //P.push(abs(x-y));
+        }
+        printf("%d
+",sum);
+    }
+    return 0;
+}
+ 

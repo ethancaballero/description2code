@@ -1,0 +1,10 @@
+t = input()
+for _ in xrange(t):
+    x, y, k, n = map(int, raw_input().split())
+    ans = "UnluckyChef"
+    for i in xrange(n):
+        p, c = map(int, raw_input().split())
+        if y + p >= x and c <= k:
+            ans = "LuckyChef"
+    print ans
+        

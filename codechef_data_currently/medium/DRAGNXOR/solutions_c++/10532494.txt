@@ -1,0 +1,37 @@
+#include <iostream>
+#include <bitset>
+#include <cstdio>
+
+using namespace std;
+
+int main() {
+  int t, n;
+  long long a, b;
+  scanf("%d", &t);
+
+  for (int i = 0; i < t; ++i) {
+    scanf("%d %lld %lld", &n, &a, &b);
+
+    std::bitset<32> x(a);
+    std::bitset<32> y(b);
+
+    int cnt_x_1 = 0, cnt_x_0 = 0;
+    for(int j = 0; j < x.size(); ++j) {
+      if (x.test(j)) ++cnt_x_1;
+    }
+    cnt_x_0 = n - cnt_x_1;
+
+    int cnt_y_1 = 0, cnt_y_0 = 0;
+    for(int j = 0; j < y.size(); ++j) {
+      if (y.test(j)) ++cnt_y_1;
+    }
+    cnt_y_0 = n - cnt_y_1;
+
+    int tot_1 = std::min(cnt_x_0, cnt_y_1) + std::min(cnt_x_1, cnt_y_0);
+
+    printf("%d
+", ((1 << tot_1) - 1) << (n - tot_1));
+  }
+  
+  return 0;
+}

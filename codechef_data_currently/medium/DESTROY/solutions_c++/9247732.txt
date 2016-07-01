@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+int main()
+{
+    ll t,n,result,i,arr[50000],ctr;
+	scanf("%lld",&t);
+	while(t--)
+	{
+        scanf("%lld",&n);
+        for(i = 0; i < n; i++)
+        {
+            scanf("%lld",&arr[i]);
+        }
+        sort(arr,arr+n);
+        ctr=1;
+        result=1;
+        for(i=1;i<n;++i)
+        {
+            if(arr[i]==arr[i-1])
+            {
+                ++ctr;
+            }
+            else
+            {
+                result=max(ctr,result);
+                ctr=1;
+            }
+        }
+        result=max(ctr,result);
+        if(result<((n+1)/2))
+        {
+            printf("%lld
+",(n+1)/2);
+        }
+        else
+        {
+            printf("%lld
+",result);
+        }
+	}
+    return 0;
+}

@@ -1,0 +1,16 @@
+t=raw_input()
+for i in range(int(t)):
+	n,k=raw_input().split()
+	N=int(n)
+	K=int(k)
+	if K!=0:
+		num=[]
+		for x in raw_input().split():
+			num.append(int(x))
+	N=(N*(N+1)/2)+1
+	if N%2==0:
+		print 'Mom' 
+	else:
+	    print 'Chef'		
+	
+	

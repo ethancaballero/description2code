@@ -1,0 +1,8 @@
+#https://www.codechef.com/problems/SNAPE
+#Snape and Ladder 
+from math import sqrt as sq
+t=input()
+while t!=0:
+	t-=1
+	b, ls =map(int,raw_input().split())
+	print sq((ls**2)-(b**2)), sq((b**2)+(ls**2))

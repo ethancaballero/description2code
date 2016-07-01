@@ -1,0 +1,13 @@
+import sys
+
+def solve_test_case():
+    n = int(sys.stdin.readline())
+    a = [int(x) for x in sys.stdin.readline().split()]
+    s = sum(a)/(n-1)
+    output = [str(s - x) for x in a]
+    print ' '.join(output)
+
+
+test_cases = int(sys.stdin.readline())
+for i in range(test_cases):
+    solve_test_case()

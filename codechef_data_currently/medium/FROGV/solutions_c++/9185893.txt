@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+typedef long long int ll;
+pair<ll, ll> P;
+vector<pair<ll, ll> > V;
+vector<pair<ll, ll> > ::iterator it;
+
+int main()
+{
+    ll N, K, M, val, x, y;
+    cin>>N>>K>>M;
+    ll A[N+1], max_dist[N+1];
+    for (ll i=0; i<N; i++)
+    {
+        cin>>A[i];
+        P=make_pair(A[i], i);
+        V.push_back(P);
+    }
+    sort(V.begin(), V.end());
+    it=V.end()-1;
+    max_dist[it->second]=it->first+K;
+    for(; it>=V.begin(); it--)
+    {
+        if (((it+1)->first)-it->first<=K)
+            max_dist[it->second]=max_dist[(it+1)->second];
+        else
+            max_dist[it->second]=it->first+K;
+    }
+    while(M--)
+    {
+        cin>>x>>y;
+        if(max_dist[x-1]==max_dist[y-1])
+            cout<<"Yes"<<endl;
+        else
+            cout<<"No"<<endl;
+    }
+    return 0;
+}

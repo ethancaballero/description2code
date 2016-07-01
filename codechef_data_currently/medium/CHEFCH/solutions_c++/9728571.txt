@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<string.h>
+void solve()
+{
+int i , p=0 , n=0, len;
+char s[10000], t[10000];
+scanf("%s",s);
+len= strlen(s);
+for(i=0; i<len ; i++)
+{
+	if( i%2 == 0)
+	t[i]='-';
+	else
+	t[i]='+';
+ 
+}
+for(i=0; i<len ; i++)
+{
+		if(s[i] == t[i])
+	n++;
+}
+for(i=0; i<len ; i++)
+{
+if( i%2 == 0)
+	t[i]='+';
+	else
+	t[i]='-';
+ 
+}
+for(i=0; i<len ; i++)
+{
+		if(s[i] == t[i])
+	p++;
+}
+if( p < n)
+{
+	printf("%d
+",p);
+}
+	else
+	printf("%d
+",n);
+	}
+int main()
+{
+    long int T;
+    scanf("%ld",&T);
+    if(T<=7)
+    {
+    while(T--)
+         solve();
+}
+    return 0;
+} 

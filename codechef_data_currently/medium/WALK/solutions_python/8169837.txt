@@ -1,0 +1,9 @@
+t=int(raw_input())
+for _ in range(t):
+    n=int(raw_input())
+    n=map(int,raw_input().split())
+    for i in range(len(n)):
+        n[i]=n[i]+i
+    x=max(n)
+    #z=len(n)-n[::-1].index(x)-1
+    print x

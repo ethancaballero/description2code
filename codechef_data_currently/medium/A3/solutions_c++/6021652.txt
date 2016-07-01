@@ -1,0 +1,87 @@
+#include <iostream>
+#include <cstdio>
+ 
+using namespace std;
+ 
+#define LET(x,a) __typeof(a) x(a)
+#define IFOR(i,a,b) for(LET(i,a);i!=(b);++i)
+#define EACH(it,v) IFOR(it,v.begin(),v.end())
+#define FOR(i,a,b) for(int i=(int)(a) ; i < (int)(b);++i)
+#define REP(i,n) FOR(i,0,n)
+#define PB push_back
+#define MP make_pair
+#define EPS 1e-9
+#define INF 2000000000
+ 
+typedef struct nodal
+{
+int cnt;
+struct nodal *left;
+struct nodal *right;
+}node;
+ 
+node memTank[7400000];
+int taken;
+ 
+node *insert(node *root,int start,int end,int s,int e){
+if(root==NULL){
+root=&memTank[taken++];
+root->cnt=0;root->left=NULL;root->right=NULL;
+}
+if(s==start && e==end){
+(root->cnt)++;
+return root;
+}
+int mid=(start+end)/2;
+if(mid>=s)root->left=insert(root->left,start,mid,s,min(e,mid));
+if(e>mid)root->right=insert(root->right,mid+1,end,max(s,mid+1),e);
+return root;
+}
+int FindMax(node *root){
+if(!root)return 0;
+int ans=root->cnt,tmp=root->cnt;
+if(root->left)ans=max(ans,tmp+FindMax(root->left));
+if(root->right)ans=max(ans,tmp+FindMax(root->right));
+return ans;
+}
+int main(){
+int t;cin>>t;
+while(t--){
+int n;scanf("%d",&n);
+int start=1,end=1000000000;
+taken=0;
+node *root=NULL;
+REP(i,n){
+char ch;int l;
+scanf(" %c%d",&ch,&l);
+string ans;cin>>ans;
+//cout << ch << " " << l << " " << ans << endl;
+int rep=((ans=="Yes")?1:0);
+if(!rep && ch!='='){
+if(ch=='<'){
+l--;
+ch='>';
+}
+else {
+l++;
+ch='<';
+}
+}
+if(ch=='<'){
+if(l-1>=start)root=insert(root,start,end,start,l-1);
+}
+else if(ch=='>'){
+if(l+1<=end)root=insert(root,start,end,l+1,end);
+}
+else {
+if(rep==1)root=insert(root,start,end,l,l);
+else{
+if(l-1>=start)root=insert(root,start,end,start,l-1);
+if(l+1<=end)root=insert(root,start,end,l+1,end);
+}
+}
+}
+cout<<n-FindMax(root)<<endl;
+}
+return 0;
+}

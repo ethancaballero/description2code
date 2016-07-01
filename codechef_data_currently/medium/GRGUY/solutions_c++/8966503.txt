@@ -1,0 +1,84 @@
+
+#include <iostream>
+
+#include <string>
+
+using namespace std;
+
+int main() {	
+		long long int T,i,flag,jump1,jump2,jump;
+		string s1,s2;
+		cin>>T;
+		while (T--)
+		{flag=jump1=jump2=0;
+		cin>>s1>>s2;
+		for (i=0;i<s1.length();i++)
+			{ if (jump1%2==0)
+				{
+					if (s1[i]=='#')	
+					{
+						if (s2[i]=='#')
+							{flag++;}
+						else
+						{jump1++; }	
+					}
+				
+				}
+			else 	
+				{ 	if (s2[i]=='#')	
+					{
+						if (s1[i]=='#')
+							{flag++;}
+						else
+						{jump1++; }	
+					}
+			
+				}	
+			}
+			
+		if (s1[0]=='#')
+		{jump1-=1;}
+		
+		
+		
+			for (i=0;i<s1.length();i++)
+			{ if (jump2%2!=0)
+				{
+					if (s1[i]=='#')	
+					{
+						if (s2[i]=='#')
+							{flag++;}
+						else
+						{jump2++; }	
+					}
+				
+				}
+			else 	
+				{ 	if (s2[i]=='#')	
+					{
+						if (s1[i]=='#')
+							{flag++;}
+						else
+						{jump2++; }	
+					}
+			
+				}	
+			}
+			
+		if (s2[0]=='#')
+		{jump2-=1;}
+		
+		
+		if (jump2<jump1)
+		jump=jump2;
+		else
+		jump=jump1;
+		
+		if (flag==0)
+			{cout<<"Yes"<<endl<<jump<<endl;}
+		else {cout<<"No"<<endl;}
+	
+		}
+	
+    return 0;
+}

@@ -1,0 +1,82 @@
+     
+from sys import stdin
+     
+letter = {'T':10, 'J':11, 'Q':12, 'K':13, 'A':14}
+suit = {'H':0, 'C':1, 'S':2, 'D':3}
+     
+def GetTrueValue(x):
+    try:
+        x = int(x)
+        return x
+    except:
+        return letter[x]
+     
+def IdentifyHand(y, s):
+    triple = False
+    pair = 0
+    flush = 0
+    straight = 0
+    four = False
+     
+    flush = max(s) == 5
+     
+    last = False
+    for i, c in enumerate(y):
+        if straight != 5:
+            if not last and c == 1:
+                last = True
+                straight += 1
+            elif last and c == 1:
+                straight += 1
+            else:
+                last = False
+                straight = 0
+     
+        if  c == 4:
+            four = True
+        elif c == 3:
+            triple = True
+        elif c == 2 and i != 1:
+            pair += 1
+     
+    if flush and straight == 5 and y[10] == 1 and y[14] == 1:
+        return 'royal flush'
+    elif flush and straight == 5:
+        return 'straight flush'
+    elif straight == 5:
+        return 'straight'
+    elif four:
+        return 'four of a kind'
+    elif triple and pair == 1:
+        return 'full house'
+    elif flush:
+        return 'flush'
+    elif triple:
+        return 'three of a kind'
+    elif pair == 2:
+        return 'two pairs'
+    elif pair == 1:
+        return 'pair'
+    else:
+        return 'high card'
+    
+if __name__ == '__main__':
+    cases = int(stdin.readline())
+     
+    while cases > 0:
+        cases -= 1
+        y = stdin.readline().strip().split()
+        s = [0] * 4
+        lst = [0] * 15
+     
+        for y1 in y:
+            s1, s2 = y1[:-1], y1[-1:]
+        
+            lst[GetTrueValue(s1)] += 1
+            s[suit[s2]] += 1
+     
+            if s1 == 'A':
+                lst[1] += 1
+     
+        print IdentifyHand(lst, s)
+

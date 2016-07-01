@@ -1,0 +1,81 @@
+#include <string>
+#include <vector>
+#include <cstring>
+#include <cmath>
+#include <utility>
+#include <algorithm>
+#include <set>
+#include <map>
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <sstream>
+#include <list>
+
+#define SZ(a) int((a).size())
+#define PB push_back
+#define ALL(c) (c).begin(),(c).end()
+#define PRESENT(c,x) ((c).find(x) != (c).end())
+#define CPRESENT(c,x) (find(ALL(c),x) != (c).end()) 
+
+#define MAX 100010
+
+using namespace std;
+
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef pair<int,int> II;
+
+typedef long long LL;
+
+int n, m, q, p, r, k;
+
+void solve() {
+  int waitcar=0, comp=0, wand=0, waitpass=0, time=0;
+  list<int> cars;
+  waitcar = n;
+  wand = m;
+  waitpass = q;
+  while (time != k+1) {
+    if (time%r == 0 && time != 0 && wand > 0) {
+      waitpass++;
+      wand--;
+    }
+    list<int>::iterator it;
+    bool exit=false;
+    while (!exit && !cars.empty()) {
+      for (it = cars.begin(); it != cars.end(); it++) {
+	if (time-*it < p) {
+	  exit = true;
+	  break;
+	}
+	else {
+	  cars.erase(it);
+	  waitcar++;
+	  comp++;
+	  break;
+	}
+      }
+    }
+    if (waitpass > 0 && waitcar > 0) {
+      while (waitcar > 0 && waitpass > 0) {
+	cars.push_back(time);
+	waitpass--;
+	waitcar--;
+      }
+    }
+    time++;
+  }
+  printf ("%d %d %d %d
+", waitcar, comp, wand, waitpass);
+}
+
+int main () {
+  int t;
+  scanf("%d", &t);
+  for (int i=0; i<t; i++) {
+    scanf("%d %d %d %d %d %d", &n, &m, &q, &p, &r, &k);
+    solve();
+  }
+  return 0;
+}

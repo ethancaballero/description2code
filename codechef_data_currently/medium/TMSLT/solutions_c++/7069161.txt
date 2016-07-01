@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+#define M 1000000
+int main()
+{
+	long long int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int n,a,b,c,d,i,x1;
+		cin>>n>>a>>b>>c>>d;
+		long long int s[1000000]={0};
+		long long int ans=0;
+		x1=d;
+		s[x1]++;
+		//max=d;
+	    for(i=1;i<n;i++)
+	    {
+	        x1=(a*x1*x1+b*x1+c)%M;
+	        if(s[x1]==0)
+	        s[x1]=1;
+	        else
+	        s[x1]=0;
+	        //if(max<x1)
+	        //max=x1;
+	    }
+	    x1=0;
+		for(i=999999;i>=0;i--)
+		{
+			if(s[i]==1)
+			{
+				if(x1%2==0)
+		    	ans+=i;
+		    	else
+		    	ans-=i;
+		    	x1++;
+		    }
+		}
+		cout<<ans<<endl;
+	}
+	return 0;
+}

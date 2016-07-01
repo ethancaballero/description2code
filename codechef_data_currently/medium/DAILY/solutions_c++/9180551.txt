@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int combo (int n, int r){
+    int m = 1;
+    for(int i = 0;i<r;i++){
+        m = m*(n-i)/(i+1);
+    }
+    return m;
+}
+
+long long power (int n){
+    long long r = 1;
+    for(int i = 1 ; i<=n ;i++)
+        r=r*10;
+    return r;
+}
+
+int main()
+{
+    //ifstream cin ("a.txt");
+    int t,n;
+    cin>>t>>n;
+    string ar[n];
+
+    for(int i =0 ;i <n ;i++){
+        cin>>ar[i];
+    }
+    int ans =0;
+
+    for(int i = 0 ;i < n ;i++){
+        int count = 0;
+        for(int j = 0 ; j < 9 ;j++){
+            //cout<<j*4<<" ";
+            if(ar[i][j*4] !='1')
+            count++;
+            //cout<<j*4+1<<" ";
+            if(ar[i][j*4+1]!='1')
+            count++;
+            //cout<<j*4+2<<" ";
+            if(ar[i][j*4+2]!='1')
+            count++;
+            //cout<<j*4+3<<" ";
+            if(ar[i][j*4+3]!='1')
+            count++;
+            //cout<<53 - 2*j<<" ";
+            if(ar[i][53 - 2*j]!='1')
+            count++;
+            //cout<<53 - 2*j - 1<<endl;
+            if(ar[i][53 - 2*j - 1]!='1')
+            count++;
+        ans+=combo(count,t);
+        count=0;
+        }
+    }
+    cout<<ans;
+}

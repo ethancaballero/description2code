@@ -1,0 +1,7 @@
+for i in range(input()):
+    x = input()
+    a = map(int, raw_input().split())
+    a.sort()
+    if a[0]==1: print '-1'
+    else: print sum(a[1:])+2
+            

@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,n,m;
+    float f;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+        f=n+m-1;
+        printf("%f
+",f);
+    }
+    return 0;
+}

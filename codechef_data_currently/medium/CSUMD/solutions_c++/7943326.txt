@@ -1,0 +1,86 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+#define ll  long long int
+ 
+ 
+void matmult(ll  a[][2],ll  b[][2],ll c[][2])//multiply matrix a and b. put result in c
+{
+    int i,j,k;
+    for(i=0;i<2;i++)
+    {
+        for(j=0;j<2;j++)
+        {
+            c[i][j]=0;
+            for(k=0;k<2;k++)
+            {
+                c[i][j]+=(a[i][k]*b[k][j]);
+                c[i][j]=c[i][j]%mod;
+            }
+        }
+    }
+ 
+}
+void matpow(ll Z[][2],ll n,ll ans[][2])
+//find ( Z^n )% M and return result in ans
+{
+ 
+    ll temp[2][2];
+    //assign ans= the identity matrix
+    ans[0][0]=1;
+    ans[1][0]=0;
+    ans[0][1]=0;
+    ans[1][1]=1;
+    int i,j;
+    while(n>0)
+    {
+        if(n&1)
+        {
+            matmult(ans,Z,temp);
+            for(i=0;i<2;i++)
+                for(j=0;j<2;j++)
+                    ans[i][j]=temp[i][j];
+        }
+        matmult(Z,Z,temp);
+        for(i=0;i<2;i++)
+            for(j=0;j<2;j++)
+                Z[i][j]=temp[i][j];
+ 
+        n=n/2;
+    }
+    return;
+}
+ 
+ 
+int main()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+    int t;
+    cin>>t;
+ 
+    while(t--)
+    {
+        ll n;
+        ll M[2][2]={{2,2},{1,0}},ans[2][2]={{0,0},{0,0}},res=0;
+        cin>>n;
+        if(n<4)
+        {
+            if(n==1)    res=1;
+            else if(n==2)   res=3;
+            else if(n==3)   res=8;
+            cout<<res<<"
+";
+        }
+        else
+        {
+            matpow(M,n-2,ans);
+            res=(ans[0][0]*3)%mod;
+            res+=ans[0][1];
+            res=res%mod;
+            cout<<res<<"
+";
+        }
+    }
+    return 0;
+} 

@@ -1,0 +1,39 @@
+#include <cstdio>
+using namespace std;
+ 
+int B[100][100][100],X,Y,Z;
+ 
+int main()
+{
+int T;
+scanf("%d", &T);
+while(T--)
+{
+scanf("%d %d %d", &X, &Y, &Z);
+for(int i = 0; i < X; i++)
+for(int j = 0; j < Y; j++)
+for(int k = 0; k < Z; k++)
+scanf("%d", &B[i][j][k]);
+for(int i = X-1; i >= 1; i--)
+for(int j = Y-1; j >= 0; j--)
+for(int k = Z-1; k >= 0; k--)
+B[i][j][k] -= B[i-1][j][k];
+for(int i = X-1; i >= 0; i--)
+for(int j = Y-1; j >= 1; j--)
+for(int k = Z-1; k >= 0; k--)
+B[i][j][k] -= B[i][j-1][k];
+for(int i = X-1; i >= 0; i--)
+for(int j = Y-1; j >= 0; j--)
+for(int k = Z-1; k >= 1; k--)
+B[i][j][k] -= B[i][j][k-1];
+for(int i = 0; i < X; i++)
+for(int j = 0; j < Y; j++)
+{
+for(int k = 0; k < Z; k++)
+printf("%d ", B[i][j][k]);
+printf("
+");
+}
+}
+return 0;
+}

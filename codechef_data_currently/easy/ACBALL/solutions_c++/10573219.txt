@@ -1,0 +1,26 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int n,i,j,p;
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		string x,y;
+		cin>>x>>y;
+		for(j=0;j<x.length();j++)
+		{
+			if(x[j]==y[j])
+			{
+				if(x[j]=='B')
+				cout<<"W";
+				else if(x[j]=='W')
+				cout<<"B";
+			}
+			else
+			cout<<"B";
+		}
+		cout<<endl;
+	}
+}

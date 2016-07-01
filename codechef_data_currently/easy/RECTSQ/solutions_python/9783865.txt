@@ -1,0 +1,14 @@
+from fractions import gcd
+t = int(raw_input())
+
+while t:
+
+	line = raw_input().split()
+	m = int(line[0])
+	n = int(line[1])
+
+	print (m*n)/(gcd(m,n)**2)
+
+
+
+	t -= 1

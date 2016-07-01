@@ -1,0 +1,57 @@
+	#include<iostream>
+	#include<algorithm>
+	#include<stdio.h>
+	using namespace std;
+	
+	char chess[1005][1005];
+	int n;
+	int a[1005][1005];
+	int recurssion(int row,int col)
+	{
+		if(row>=0 && row<n && col>=0 && col<n)
+		{
+			if(a[row][col]!=-1)
+				return a[row][col];
+			else if(chess[row][col]=='P')
+			{
+				 a[row][col]=1+max(recurssion(row+2,col+1),max(recurssion(row+1,col+2),max(recurssion(row-2,col+1),recurssion(row-1,col+2))));
+					
+			}	
+			else
+				a[row][col]= max(recurssion(row+2,col+1),max(recurssion(row+1,col+2),max(recurssion(row-2,col+1),recurssion(row-1,col+2))));
+			return a[row][col];
+		}	
+		else 
+			return 0;
+	}
+
+	int main()
+	{
+		
+		int t;
+		cin>>t;
+		
+		while(t>0)
+		{
+			cin>>n;
+			
+			int c,r;
+			for(int i=0;i<n;i++)
+			{
+				scanf("%s",chess[i]);
+				for(int j=0;j<n;j++)
+				{
+					if(chess[i][j]=='K')
+					{
+						r=i;
+						c=j;
+					}
+					a[i][j]=-1;
+				}
+			}
+
+			int count=recurssion(r,c);
+			cout<<count<<endl;
+			t--;
+		}	
+	}

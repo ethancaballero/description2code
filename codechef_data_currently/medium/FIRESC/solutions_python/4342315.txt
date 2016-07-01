@@ -1,0 +1,195 @@
+#!/usr/bin/python
+# coding=utf8
+import sys
+import math
+from time import time
+from itertools import permutations, combinations
+import collections
+import functools
+from fractions import gcd, Fraction
+import string
+import random
+import bisect
+
+
+class timed(object):
+    def __init__(self, func):
+        self.func = func
+    def __call__(self, *args):
+        t1 = time()
+        ret = self.func(*args)
+        dif_time = time() - t1
+        print "%s: returned %s in %f seconds" % (self.func.__name__, ret, dif_time)
+        return ret
+
+
+def comp(f1, f2, *args):
+    t1 = time()
+    r1 = f1(*args) if f1 is not None else None
+    t2 = time()
+    r2 = f2(*args) if f2 is not None else None
+    t3 = time()
+    res = "%5s: %s in %f
+%5s: %s in %f" % (f1.__name__ if f1 is not None else None, r1, t2 - t1, f2.__name__ if f2 is not None else None, r2, t3 - t2)
+    if r1 != r2:
+        dr = "!! DIFFERENT RESULTS !!"
+        res = dr + "
+" + res + "
+" + dr
+    print res
+
+
+def alg(nb_employees, relations):
+    # read aech relation and check if one of them is alreayd in a friend group,
+    # else create a new friend group
+    group_per_employee = {}  # dict with relation [employees_id] = group
+    groups = []  # list of groups (0-based index)
+    for f1, f2 in relations:
+        f1group = group_per_employee.get(f1)
+        f2group = group_per_employee.get(f2)
+        if f1group is None and f2group is None:
+            # create new group
+            group_id = len(groups)
+            groups.append([f1, f2])
+            group_per_employee[f1] = group_per_employee[f2] = group_id
+        elif f1group is None:
+            groups[f2group].append(f1)
+            group_per_employee[f1] = f2group
+        elif f2group is None:
+            groups[f1group].append(f2)
+            group_per_employee[f2] = f1group
+        elif f2group != f1group:
+            # merge
+            groups[f1group] += groups[f2group]
+            for i in groups[f2group]:
+                group_per_employee[i] = f1group
+            groups[f2group] = []
+
+    # number of employees without friends
+    remis = filter(lambda a: a not in group_per_employee, xrange(1, nb_employees + 1))
+    #print remis
+    #print remis
+    #print group_per_employee
+    #print groups
+    # clean groups
+    groups = [a for a in groups if len(a) != 0]
+    #print groups
+
+    # find length of all disjoint graphs and mutliply all the lengths together
+    return "%d %d" % (len(remis) + len(groups), reduce(lambda a, b: (a * len(b)) % 1000000007, groups, 1))
+
+
+def alg3(nb_employees, relations):
+    # read aech relation and check if one of them is alreayd in a friend group,
+    # else create a new friend group
+    adj_list = [set() for _ in xrange(nb_employees)]  # list of groups (0-based index)
+    for f1, f2 in relations:
+        adj_list[f1 - 1].add(f2 - 1)
+        adj_list[f2 - 1].add(f1 - 1)
+
+    #dfs(graph, 'A') # {'E', 'D', 'F', 'A', 'C', 'B'}
+    def dfs(graph, start):
+        visited, stack = set(), [start]
+        while stack:
+            vertex = stack.pop()
+            if vertex not in visited:
+                visited.add(vertex)
+                stack.extend(graph[vertex] - visited)
+        return visited
+
+    # bfs(graph, 'A') # {'B', 'C', 'A', 'F', 'D', 'E'}
+    def bfs(graph, start):
+        visited, queue = set(), [start]
+        while queue:
+            vertex = queue.pop(0)
+            if vertex not in visited:
+                visited.add(vertex)
+                queue.extend(graph[vertex] - visited)
+        return visited
+
+    to_visit = set(xrange(nb_employees))
+    result = 1
+    nb_groups = 0
+    while len(to_visit) > 0:
+        start = to_visit.pop()
+        group = dfs(adj_list, start)
+        #print "start=%d group=%s" % (start, group)
+        to_visit -= group
+        nb_groups += 1
+        result = (result * len(group)) % 1000000007
+
+    return "%d %d" % (nb_groups, result)
+
+
+def alg2(nb_employees, relations):
+    # read aech relation and check if one of them is alreayd in a friend group,
+    # else create a new friend group
+    adj_list = [set() for _ in xrange(nb_employees)]  # list of groups (0-based index)
+    for f1, f2 in relations:
+        adj_list[f1 - 1].add(f2 - 1)
+        adj_list[f2 - 1].add(f1 - 1)
+
+    # bfs(graph, 'A') # {'B', 'C', 'A', 'F', 'D', 'E'}
+    def bfs(graph, start):
+        visited, queue = set(), [start]
+        while queue:
+            vertex = queue.pop(0)
+            if vertex not in visited:
+                visited.add(vertex)
+                queue.extend(graph[vertex] - visited)
+        return visited
+         #check bfs dfs...
+    to_visit = set(xrange(nb_employees))
+    result = 1
+    nb_groups = 0
+    while len(to_visit) > 0:
+        start = to_visit.pop()
+        group = bfs(adj_list, start)
+        #print "start=%d group=%s" % (start, group)
+        to_visit -= group
+        nb_groups += 1
+        result = (result * len(group)) % 1000000007
+
+    return "%d %d" % (nb_groups, result)
+
+
+    ## number of employees without friends
+    #remis = filter(lambda a: a not in group_per_employee, xrange(1, nb_employees + 1))
+    ##print remis
+    ##print remis
+    ##print group_per_employee
+    ##print groups
+    ## clean groups
+    #groups = [a for a in groups if len(a) != 0]
+    ##print groups
+
+    ## find length of all disjoint graphs and mutliply all the lengths together
+    #return "%d %d" % (len(remis) + len(groups), reduce(lambda a, b: (a * len(b)) % 1000000007, groups, 1))
+
+
+def main():
+    #sys.exit(0)
+    import cProfile
+    random.seed(0)
+    #cProfile.runctx('comp(alg3, alg, 100000, [(random.randint(1, 100000), random.randint(1, 100000)) for _ in xrange(64000)])', globals(), locals())
+    #timed(alg3)(100000, [(random.randint(1, 100000), random.randint(1, 100000)) for _ in xrange(100000)])
+    #print alg(100000, [(random.randint(1, 100000), random.randint(1, 100000)) for _ in xrange(100000)])
+    data = sys.stdin
+    nb = int(data.readline())
+    #a, b = map(int,data.readline().split())
+    for icase in xrange(nb):
+        nb_employees, nb_relations = map(int, data.readline().split())  # int
+        relations = []
+        for i in xrange(nb_relations):
+            f1, f2 = sorted(map(int, data.readline().split()))
+            relations.append((f1, f2))
+        #L = map(float, data.readline().split())  # float
+        #L = data.readline().split()  # string
+        #s = data.readline().strip()
+        #i = int(data.readline().strip())
+        res = alg3(nb_employees, relations)
+        print res
+
+
+if __name__ == "__main__":
+    main()

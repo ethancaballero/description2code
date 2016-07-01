@@ -1,0 +1,70 @@
+/*******************karan*****************************/
+// max(mod(a),mod(b)) is different from mod(max(a,b))
+#include<stdio.h>
+#include<assert.h>
+#include<math.h>
+#define S(a,x) scanf("%"#a,&x)  //#a expands to "a" we use this bcoz, arguments are not replaced within quoted strings
+#define PS(a,x) printf("%"#a" ",x)  //print with space
+#define PN(a,x) printf("%"#a"
+",x)  //print with newline
+#define FOR(i,a,b) for( i=a;i<b;i++)
+#define REP(i,n) FOR(i,0,n)
+#define Max(a, b) ((a>b)?a:b)
+#define MAXN 33000  //2^15
+#define MOD 1000000007
+#define TC int t; S(d,t); while(t--)
+int a[MAXN];
+double log_val[MAXN];
+char use_index[MAXN];
+unsigned int h;
+unsigned int n;
+inline long long func(unsigned int index) //should return < MOD at each instance
+{
+    if(!use_index[index])
+        return -1;
+    unsigned int c2 = (index+1) << 1 ;
+    unsigned int c1 = c2-1;
+    if(c1>=n) //if a leaf, invalid childs
+        return a[index]; //less then MOD, constraint
+    long long pL = func(c1);
+    long long pR = func(c2);
+    long long ret = Max(pL, pR) * a[index];
+    return ret%MOD;
+}
+ 
+inline double create_path(unsigned int index) //should return < MOD at each instance
+{
+    unsigned int c2 = (index+1) << 1 ;
+    unsigned int c1 = c2-1; //left
+    if(c1>=n) //if a leaf, invalid childs
+        return log_val[index]; //less then MOD, constraint
+    double pL = create_path(c1);
+    double pR = create_path(c2);
+    if(pL > pR) //use pl
+    {
+        use_index[c2] = 0;
+        return pL + log_val[index];
+    }
+    else
+    {
+        use_index[c1] = 0;
+        return pR + log_val[index];
+    }
+}
+int main()
+{
+	int i;
+	while(S(u,h) && h)
+	{
+        n = (1<<h)-1; //2^h-1
+        REP(i,n)
+        {
+            S(d,a[i]);
+            log_val[i] = log(a[i]);
+            use_index[i] = 1;
+        }
+        create_path(0); //O(nlogn)
+        PN(lld,func(0)); //O(logn)
+	}
+	return 0;
+}

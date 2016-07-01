@@ -1,0 +1,57 @@
+#include<iostream>
+#include<cstring>
+#include<string>
+#include<cstdio>
+using namespace std;
+
+int main()
+{
+  int t;
+//  cout << '#'-'a' << endl;
+  scanf("%d",&t);
+  while(t--)
+  {
+    string s;
+    cin >> s;
+    s = "#" + s;
+    int n = s.length(), c1=0, c2=0,i,j;
+
+    int dp[2001][29][29];
+    memset(dp,0,sizeof(dp));
+    int x;
+
+    for(i=1;i<=26;i++)
+      for(j=1;j<=26;j++)
+        dp[0][i][j] = 0;
+
+    for(i=1;i<n;i++)
+    {
+    for(c1=1;c1<=26;c1++)
+    {
+      for(c2=1;c2<=26;c2++)
+      {
+        dp[i][c1][c2] = max(dp[i][c1][c2], dp[i-1][c1][c2]);
+        x = s[i]-'a'+1;
+
+        if(x >= c1)
+          dp[i][x][c2] = max(dp[i][x][c2], dp[i-1][c1][c2] + 1);
+        
+        if(x <= c2)
+          dp[i][c1][x] = max(dp[i][c1][x], dp[i-1][c1][c2] + 1);
+      }
+    }
+    }
+
+    int max = -10000000;
+    for(i=1;i<=26;i++)
+    {
+      for(j=1;j<=26;j++)
+      {
+        if(dp[n-1][i][j] > max)
+          max = dp[n-1][i][j];
+      }
+    }
+    cout << max << endl;
+  }
+return 0;
+}

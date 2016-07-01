@@ -1,0 +1,16 @@
+# cook your code here
+#O(n)
+# from math import sqrt
+t = int(raw_input())
+for i in range(t):
+    a = int(raw_input())
+    b = a
+    rev = 0
+    while b > 0:
+        d = b % 10 
+        rev = rev * 10 + d
+        b = b / 10
+    if rev == a :
+        print "wins"
+    else :
+        print "losses"

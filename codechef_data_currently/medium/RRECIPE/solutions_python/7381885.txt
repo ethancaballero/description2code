@@ -1,0 +1,12 @@
+t=int(raw_input())
+for asd in range(t):
+	s=raw_input().strip()
+	count=1
+	for i in xrange( int((len(s)+1)/2)):
+		c1, c2 = s[i], s[-i-1]
+		if c1 == '?' and c2 == '?':
+			count*=26
+			count%=10000009
+		elif c1 != '?' and c2 != '?' and c1 != c2:
+			count=0
+	print count

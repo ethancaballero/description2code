@@ -1,0 +1,58 @@
+#include "stdio.h"
+
+bool canAdd(int w3, int w5, int w8, int left)
+{
+	if (w3>w5)
+		w5 =w3;
+
+	if (w5>w8)
+		w8 = w5;
+	return w3+w5+w8<=left;
+}
+
+char buff[200];
+int total = 50000;
+
+void gen(int left, int w3, int w5, int w8, char *p, int n)
+{
+	if (0 == total)
+		return;
+
+	if (left==0)
+	{
+		*p=0;
+
+		puts(buff);
+		--total;
+		return;
+	}
+
+	if (canAdd(w3+1, w5,w8,n))
+	{
+		*p='3';
+		gen(left-1,w3+1,w5,w8,p+1,n);
+	}
+
+	if (canAdd(w3, w5+1,w8,n))
+	{
+		*p='5';
+		gen(left-1,w3,w5+1,w8,p+1, n);
+	}
+
+	if (canAdd(w3, w5,w8+1,n))
+	{
+		*p='8';
+		gen(left-1,w3,w5,w8+1,p+1, n);
+	}
+}
+
+int main()
+{
+	int n=0;
+	while (total)
+	{
+		++n;
+		gen(n,0,0,0,buff, n);
+	}
+	return 0;
+}

@@ -1,0 +1,11 @@
+counter = int(raw_input())
+
+while counter> 0 :
+    counter = counter  -1
+    base = int(raw_input())
+    if base < 1500:
+        print '{0:g}'.format(0.1*base + 0.9*base + base) 
+    else:
+        hra = 500
+        da = 0.98 * base
+        print  '{0:g}'.format(base + hra + da)

@@ -1,0 +1,23 @@
+import sys
+
+num = int(sys.stdin.readline().rstrip())
+while num != 0:
+	line = sys.stdin.readline().rstrip().split()
+	rate = float(line[0])
+	num_minutes = int(line[1])
+	num_plans = int(line[2])
+	orig_price = rate * num_minutes
+	cur_plan,min_plan = 0,0
+	while num_plans != 0:
+		cur_plan += 1
+		line = sys.stdin.readline().rstrip().split()
+		validity = int(line[0])
+		reduced_rate = float(line[1])
+		price = int(line[2])
+		new_price = ((num_minutes * reduced_rate * validity) + price) / validity
+		if new_price < orig_price: 
+			min_plan = cur_plan
+			orig_price = new_price
+		num_plans -= 1
+	print min_plan
+	num -= 1

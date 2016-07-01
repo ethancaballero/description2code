@@ -1,0 +1,42 @@
+import heapq
+
+
+Graph = []
+N = 0
+def dijkstras():
+    Q = []
+    visitedCount = [0]*N
+    dist = [float("inf")]*N
+    heapq.heappush(Q, tuple([0, 0]) )
+    dist[0] = 0
+    visitedCount[0] = 1
+    while len(Q) > 0:
+        curDist, curNode = heapq.heappop(Q)
+        for (nextNode, weight) in Graph[curNode]:
+            nextDist = curDist + weight
+            if nextDist == dist[nextNode]:
+                visitedCount[nextNode] += visitedCount[curNode]
+            elif nextDist < dist[nextNode]:
+                visitedCount[nextNode] = visitedCount[curNode]
+                dist[nextNode] = nextDist
+                heapq.heappush(Q, (nextDist, nextNode))
+
+    return visitedCount[N-1]
+
+def main():
+    global N
+    global Graph
+    T = int(raw_input())
+    for test in xrange(T):
+        N, M = tuple( map(int, raw_input().split()) )
+        Graph = []
+        for x in xrange(N): Graph.append([])
+        for edge in xrange(M):
+            Ai, Bi, Ci = tuple( map(int, raw_input().split()) )
+            Graph[Ai-1].append((Bi-1, Ci))
+            Graph[Bi-1].append((Ai-1, Ci))
+
+        print dijkstras()
+
+if __name__ == "__main__":
+    main()

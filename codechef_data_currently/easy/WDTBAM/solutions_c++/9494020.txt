@@ -1,0 +1,36 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+
+    int t;cin>>t;
+    while(t--)
+    {
+        int n,m;long long ans;cin>>n;
+        char a[n],b[n];
+        cin>>a>>b;
+        long long q[n+1];
+        for(int i=0;i<=n;i++)
+            cin>>q[i];
+        int c=0;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]==b[i])
+                c++;
+        }
+        if(c==0)
+            ans=q[0];
+            else if(c==n)
+                ans=q[n];
+        else{
+                 m=q[c];
+        for(int i=c-1;i>=0;i--)
+        {
+            if(m<q[i])
+            m=q[i];
+        }
+        ans=m;
+    }
+    cout<<ans<<endl;
+}
+}

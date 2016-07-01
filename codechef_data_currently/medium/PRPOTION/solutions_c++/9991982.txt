@@ -1,0 +1,174 @@
+//#define _CRT_SECURE_NO_DEPRECATE
+#include <iostream>
+using namespace std;
+
+int findMax(int arr[], int size){
+	int temp = -1;
+	for (int i = 0; i < size; i++){
+		if (arr[i] > temp)
+			temp = arr[i];
+	}
+
+	return temp;
+}
+
+void update(int arr[], int size){
+	for (int i = 0; i < size; i++){
+		arr[i] /= 2;
+	}
+}
+
+void swap(int *a, int *b){
+	int t = *a;
+	*a = *b;
+	*b = t;
+}
+
+int partition(int arr[], int l, int r){
+	int i = l - 1;
+	int pivot = arr[r];
+	for (int j = l; j < r; j++){
+		if (arr[j] < arr[r]){
+			i++;
+			swap(&arr[i], &arr[j]);
+		}
+	}
+	swap(&arr[i + 1], &arr[r]);
+	return (i + 1);
+}
+
+void quickSort(int arr[], int l, int r){
+	if (l < r){
+		int pivot = partition(arr, l, r);
+		quickSort(arr, l, pivot - 1);
+		quickSort(arr, pivot + 1, r);
+	}
+}
+
+int main()
+{
+	int T;
+	//freopen("input.txt", "r", stdin);
+	cin >> T;
+	while (T > 0){
+		T--;
+
+		int R, G, B, M;
+		cin >> R >> G >> B >> M;
+		int t;
+		int* arrR = new int[R];
+		int* arrG = new int[G];
+		int* arrB = new int[B];
+
+
+
+
+		for (int i = 0; i < R; i++){
+			cin >> arrR[i];
+		}
+		for (int i = 0; i < G; i++){
+			cin >> arrG[i];
+		}
+		for (int i = 0; i < B; i++){
+			cin >> arrB[i];
+		}
+		int m = -1;
+		
+		for (int i = 0; i < M+1; i++){
+			quickSort(arrR, 0, R-1);
+			quickSort(arrG, 0, G-1);
+			quickSort(arrB, 0, B-1);
+
+			int rmax = findMax(arrR, R);
+			int gmax = findMax(arrG, G);
+			int bmax = findMax(arrB, B);
+
+			m = rmax;
+			(m < gmax) && (m = gmax); //these are not conditional statements.
+			(m < bmax) && (m = bmax); //these are just boolean expressions.
+
+			if (m == rmax)
+				update(arrR, R);
+			else if (m == gmax)
+				update(arrG, G);
+			else
+				update(arrB, B);
+		}
+		cout << m << endl;
+
+		/*int* tempR = new int[101];
+		//assume input are sorted
+		if (R <= M){
+			for (int i = 0; i < R; i++){
+				tempR[i] = arrR[i];
+			}
+		}
+		else {
+			int k = 0;
+			for (int i = (R - M - 1); i < R; i++){
+				tempR[k++] = arrR[i];
+			}
+		}
+
+
+		int* tempG = new int[101];
+		//assume input are sorted
+		if (G <= M){
+			for (int i = 0; i < G; i++){
+				tempG[i] = arrG[i];
+			}
+		}
+		else {
+			int k = 0;
+			for (int i = (G - M - 1); i < G; i++){
+				tempG[k++] = arrG[i];
+			}
+		}
+
+		int* tempB = new int[101];
+		//assume input are sorted
+		if (B <= M){
+			for (int i = 0; i < B; i++){
+				tempB[i] = arrB[i];
+			}
+		}
+		else {
+			int k = 0;
+			for (int i = (B - M - 1); i < B; i++){
+				tempB[k++] = arrB[i];
+			}
+		}
+		//int maxR = R, maxG = G, maxB = B;
+
+		for (int i = 0; i < M; i++){
+			//compare between three array
+			int rmax = findMax(tempR, R);
+			int gmax = findMax(tempG, G); 
+			int bmax = findMax(tempB, B);
+
+			int m = rmax;
+			(m < gmax) && (m = gmax); //these are not conditional statements.
+			(m < bmax) && (m = bmax); //these are just boolean expressions.
+
+			if (m == rmax)
+				update(tempR, R);
+			else if (m == gmax)
+				update(tempG, G);
+			else
+				update(tempB, B);
+		}
+
+
+		//final
+		//compare between three array
+		int rmax = findMax(tempR, R);
+		int gmax = findMax(tempG, G);
+		int bmax = findMax(tempB, B);
+
+		int m = rmax;
+		(m < gmax) && (m = gmax); //these are not conditional statements.
+		(m < bmax) && (m = bmax); //these are just boolean expressions.
+		cout << m << endl;*/
+	}
+	return 0;
+}

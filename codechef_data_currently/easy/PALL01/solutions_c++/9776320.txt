@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+int reverse(int p)
+{
+int res=0;
+while(p!=0)
+{
+    res=res*10+(p%10);
+    p=p/10;
+}
+return res;
+}
+int main()
+{
+int num,k,res,t;
+cin>>t;
+while(t)
+{
+    cin>>num;
+if(num==reverse(num))
+{
+cout<<"wins"<<endl;
+}
+else
+cout<<"losses"<<endl;
+t--;
+}
+    return 0;
+}

@@ -1,0 +1,14 @@
+test = int(raw_input())
+while(test > 0):
+	test -= 1
+	n, k = map(int, raw_input().split())
+	grapes = map(int, raw_input().split())
+	operations = 0
+	for i in grapes:
+		if(i < k):
+			operations += k-i
+		elif(i%k < k/2.0):
+			operations += i%k
+		else:
+			operations += (k-i%k)
+	print operations

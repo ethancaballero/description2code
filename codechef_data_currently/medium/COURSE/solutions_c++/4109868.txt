@@ -1,0 +1,69 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+using namespace std;
+
+#define maxn 505
+double w[maxn][maxn], x[maxn], y[maxn], d[maxn];
+int parent[maxn];
+bool visited[maxn];
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        double r1, r2;
+        int n;
+        cin >> r1 >> r2;
+        cin >> n;
+        for(int i=1;i<=n;++i) cin >> x[i] >> y[i];
+
+        // creating a weighted adjacent matrix
+        for(int i=1;i<=n;++i) {
+            for(int j=i+1;j<=n;++j)
+                w[i][j] = w[j][i] =
+                    sqrt((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]));
+            w[i][n+1] = w[n+1][i] = sqrt(x[i]*x[i]+y[i]*y[i])-r1;
+            w[i][n+2] = w[n+2][i] = r2-sqrt(x[i]*x[i]+y[i]*y[i]);
+        }
+        w[n+1][n+2] = w[n+2][n+1] = r2-r1;
+
+        // prim's algo
+        int s = n+2;
+        memset(visited,0,sizeof(visited));
+        visited[s] = true;
+        for(int i=1;i<=s;++i) {
+            d[i] = w[s][i];
+            parent[i] = s;
+        }
+        while(true) {
+            int x = 0;
+
+            // finding the minimum edge
+            for(int i=1;i<=s;++i)
+                if (!visited[i] && (x==0 || d[i]<d[x]))
+                    x = i;
+
+            if(!x) break;
+
+            visited[x] = true; // edge is set
+
+            // finding for a smaller edge to an unvisited node (if possible)
+            for(int i=1;i<=s;++i)
+                if (!visited[i] && w[x][i]<d[i]) {
+                    d[i] = w[x][i];
+                    parent[i] = x;
+                }
+        }
+
+        // answer is the maximum edge in the MST
+        // because this edge is never larger than the removed edge between the nodes
+        double ans = 0;
+        for(int i=n+1; i!=n+2; i=parent[i])
+            ans = max(ans,w[parent[i]][i]);
+        printf("%.3f
+",ans);
+    }
+    return 0;
+}

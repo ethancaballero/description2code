@@ -1,0 +1,12 @@
+# idea is to store all the possible xor values
+# 
+for _ in xrange(int(raw_input())):
+	n, k = map(int, raw_input().split())
+	a = map(int, raw_input().split())
+	S = set([0])
+	for i in a:
+		for j in list(S):
+			S.add(i^j)
+
+	
+	print max(k^i for i in S)

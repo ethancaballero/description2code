@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+#define INF 10000
+#define inp(x) scanf("%d",&x)
+#define print(x) printf("%d",x)
+
+using namespace std;
+int main()
+{
+    int T,N,M,x,y;
+    int adj[102][102];
+    inp(T);
+    while(T--)
+    {
+        inp(N); inp(M);
+        
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(i==j)
+                {
+                    adj[i][j]=1;
+                    continue;
+                }
+                adj[i][j]=INF;
+            }
+        }
+        
+        while(M--)
+        {
+            inp(x); inp(y);
+            adj[x][y]=1;
+            adj[y][x]=1;
+        }
+        
+        for(int k=0;k<N;k++)
+        {
+            for(int i=0;i<N;i++)
+            {
+                for(int j=0;j<N;j++)
+                {
+                    adj[i][j]=min(adj[i][j],adj[i][k]+adj[k][j]);
+                }
+            }
+        }
+        
+        inp(M);
+        while(M--)
+        {
+            inp(x); inp(y);
+            if(adj[x][y]==INF) printf("NO
+");
+            else printf("YO
+");
+        }
+    }
+    
+    return 0;
+}

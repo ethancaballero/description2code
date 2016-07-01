@@ -1,0 +1,23 @@
+import sys
+
+cases = int(sys.stdin.readline().rstrip())
+
+for _dummy in range(cases):
+	line1 = sys.stdin.readline().rstrip().split()
+	line2 = sys.stdin.readline().rstrip().split()
+	todo = int(line1[0])
+	done = int(line1[1])
+	donelist = [int(i) for i in line2]
+	todolist = []
+	for i in range(1, todo + 1):
+		if i not in donelist:
+			todolist.append(i)
+	chef = ''
+	ass = ''
+	for i in range(len(todolist)):
+		if i % 2 == 0:
+			chef += str(todolist[i]) + ' '
+		else:
+			ass += str(todolist[i]) + ' '
+	print chef
+	print ass

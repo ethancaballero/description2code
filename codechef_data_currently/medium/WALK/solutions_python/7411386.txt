@@ -1,0 +1,7 @@
+for i in range(input()):
+    n=input()
+    a=[]
+    a=raw_input().split()
+    for i in range(n):
+        a[i]=int(a[i])+i
+    print max(a)

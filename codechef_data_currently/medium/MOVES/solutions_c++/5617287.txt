@@ -1,0 +1,89 @@
+#include<stdio.h>
+#define MOD 1000000007
+#define max 5000
+long long int cr[5001];
+long long int inv[5001];
+typedef long long int lint;
+typedef long long int lli;
+
+ long long invMod( long long a,  long long p) {
+    long long fnew = 1, old = 0, q = p, r, h;
+    int pos = 0;
+    while (a > 0) {
+        r = q%a;
+        q = q/a;
+        h = q*fnew + old;
+        old = fnew;
+        fnew = h;
+        q = a;
+        a = r;
+        pos = !pos;
+    }
+    return (pos ? old : (p - old))%MOD;
+}
+
+/*
+lint invMod(lint a,lint b,lint c)
+{
+lint ans=1,x=a;
+while(b){
+if(b&1) ans=(ans*x)%c;
+x=(x*x)%c;
+b>>=1;
+}
+return (int)ans;
+}
+*/
+/*
+int compute()
+{
+	int i;
+	cr[0]=1;
+	for(i=1;i<5000;i++)cr[i]=(cr[i-1]*i)%MOD;
+	inv[4999]=invMod(4999,MOD-2,MOD);
+	
+	for(i=4998;i>=0;i--)inv[i]=(inv[i+1]*(i+1))%MOD;
+	
+return 0;
+};*/
+
+void compute()
+{
+ int i;
+ cr[0]=1;
+ for(i=1;i<5000;i++)cr[i]=(cr[i-1]*i)%MOD;
+   	inv[4999]=invMod(cr[max-1],MOD);
+ for(i=max-2;i>=0;i--)
+ 	inv[i]=(inv[i+1]*(i+1))%MOD;
+}
+
+/*
+long long int comp(int n, int r)
+{
+	return( ((cr[n]*inv[r])%MOD)*inv[n-r] )%MOD;
+};
+*/
+lint comp(int n,int r)
+{
+	lint val;
+	val=(((cr[n]*inv[n-r])%MOD)*inv[r])%MOD;
+	return val;
+}
+
+
+int main()
+{compute();
+ int N=1,k;
+ lli output;
+ //printf("%lld",invMod(5,6));
+ while(N!=0)
+ 	{
+ 		scanf("%d%d",&N,&k);
+ 	if(N!=0)
+ 		{output=comp(N-2,(k/2))*comp(N-2,(k-1)/2);
+ 		output=output*2;
+ 		printf("%d
+",output%MOD);}
+ 	}
+ 	return 0;
+} 

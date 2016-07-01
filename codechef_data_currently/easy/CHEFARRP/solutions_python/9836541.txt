@@ -1,0 +1,13 @@
+for i in range(int(raw_input())):
+    n = int(raw_input())
+    l = map(int, raw_input().split())
+    c = 0
+    for k in range(n):
+        s = 0
+        p = 1
+        for j in range(k, n):
+            s += l[j]
+            p *= l[j]
+            if s == p:
+                c += 1
+    print c

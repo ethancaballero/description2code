@@ -1,0 +1,4 @@
+tests = int(raw_input())
+for t in range(tests):
+	n = int(raw_input())
+	print '%d' % (n/2+1)

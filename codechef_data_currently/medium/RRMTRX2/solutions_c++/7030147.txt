@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+#define M 10000007
+class matrix{
+	long long int n,m;
+	public:
+		matrix()
+		{
+			long long int i,j,k,ans=1;
+			cin>>n>>m;
+			int ar[m];
+			for(i=0;i<n;i++)
+			{
+				for(j=0;j<m;j++)
+				{
+					cin>>k;
+					if(i==0)
+					ar[j]=k;
+					else
+					ar[j]+=k;
+				}
+		   }
+		   for(i=0;i<m;i++)
+		   {   
+			    ans*=ar[i];
+				ans%=M;
+		   }
+			ans=(ans+M)%M;
+			cout<<ans<<endl;
+		}
+};
+int main()
+{
+	
+		matrix m;
+	
+	return 0;
+}

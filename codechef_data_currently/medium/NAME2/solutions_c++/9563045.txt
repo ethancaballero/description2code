@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+int valid(string a,string b)
+{
+	int i=b.length()-1,j=a.length()-1;
+	while(i>=0&&j>=0)
+	{
+	if(a[j]==b[i])
+	{
+		j--;
+		i--;
+	}
+	else
+	i--;
+	}
+	if(j<0)
+	return 1;
+	else 
+	return 0;
+}
+int main()
+{
+	int t,f;
+	string a,b;
+	cin>>t;
+	while(t--)
+	{
+		cin>>a>>b;
+		if(a.length()<=b.length())
+		f=valid(a,b);
+		else
+		f=valid(b,a);
+		if(f==1)
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+	}
+	return 0;
+}

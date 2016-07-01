@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef pair< int , int > pii;
+typedef long long LL;
+#define fr first
+#define se second
+#define EPS 1e-8
+#define INF 10000*10000*10000LL
+stringstream ss;
+#define two(x) ( 1LL<<x )
+LL mod = 1000000007LL;
+
+/**************************Code****************************/
+
+int a[128][128];
+
+int main()
+{
+	int t, n;
+	scanf( "%d", &t );
+	while( t -- )
+	{
+		scanf( "%d", &n );
+		for( int i = 2 ; i <= n ; i ++ )
+			a[i][0] = a[0][i] = -100000000;
+		for( int i = 1 ; i <= n ; i ++ )
+			for( int j = 1 ; j <= n ; j ++ )
+			{
+				scanf( "%d", &a[i][j] );
+				a[i][j] = a[i][j] + max( a[i-1][j], a[i][j-1] );
+			}
+		if( a[n][n] < 0 )
+			puts( "Bad Judges" );
+		else
+			printf( "%.10lf
+", a[n][n] * 1. / (n+n-3) );
+	}
+	return 0;
+}

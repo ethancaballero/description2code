@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+#define vi vector<int>
+#define vvi vector< vi >
+#define pii pair<int,int>
+#define pb push_back
+#define mp make_pair
+#define all(c) c.begin(),c.end()
+#define rall(c) c.rbegin(),c.rend() 
+#define sz(c) c.size()
+#define tr(c,it)  for(typeof(c.begin()) it=c.begin();it!=c.end();it++)  
+#define max(a,b) (a>b?a:b)
+#define min(a,b) (a<b?a:b)
+#define present(c,x) find(all(c),x)!=c.end()
+#define cpresent(c,x) c.find(x)!=c.end()  
+#define permute(c) next_permutation(all(c))
+#define MOD 1000000007
+#define MAX 100005 
+using namespace std;
+class comp{
+	 public:
+	 bool operator()(const pii &a,const pii &b){
+	 	  return a.second>b.second;
+	 }
+};
+long long dist[MAX];
+bool marked[MAX];
+vector<pii >adj[MAX];
+int main(){
+     //freopen("input_file_name.in","r",stdin);
+     //freopen("output_file_name.out","w",stdout);
+     long long N,M,i;
+	 priority_queue<pii, vector<pii>, comp> pq;
+	 cin>>N>>M;
+	 for(i=1;i<=N;i++)
+	   dist[i]=99999999;
+	 for(i=0;i<M;i++){
+	 	  long long x,y;
+	 	  cin>>x>>y;
+	 	  adj[x].pb(mp(y,0));
+	 	  adj[y].pb(mp(x,1)); 		   	 	  
+	 }   
+	 dist[1]=0;
+	 pq.push(mp(1,0));
+	 while(!pq.empty()){
+	 	  long long u=pq.top().first;
+	 	  //cout<<u<<" "<<dist[u]<<endl;
+	 	  pq.pop();
+	 	  if(u==N){
+	 	  	   cout<<dist[u];
+	 	  	   return 0;
+	 	  }
+	 	  //cout<<"Hello
+";
+	 	  long long sz=adj[u].size();
+	 	  if(!marked[u]){
+	 	      for(i=0;i<sz;i++){
+	 	  	     long long v=adj[u][i].first;
+	 	  	     long long w=adj[u][i].second;
+	 	         if(!marked[v]&&(dist[u]+w<dist[v])){
+	 	           	  dist[v]=dist[u]+w;
+	 	           	  pq.push(mp(v,dist[v]));
+	 	          } 
+	 		  }
+	 	  }
+	 	  marked[u]=true;
+	 }
+	 cout<<"-1";
+     return 0;
+}

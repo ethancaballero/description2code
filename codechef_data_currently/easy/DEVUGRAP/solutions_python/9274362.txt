@@ -1,0 +1,12 @@
+a=int(raw_input())
+for i in range(a):
+    b,c=[int(x) for x in raw_input().split()]
+    d=[int(x) for x in raw_input().split()]
+    z=0
+    for x in d:
+        if x<c:
+            z+=c-x%c
+        else:
+            z+=min(x%c,c-x%c)
+    print z
+            

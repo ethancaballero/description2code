@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+#define maxn 100000+3
+using namespace std;
+
+char s[maxn];
+int n, k;
+bool visited[maxn];
+void solve() {
+	int len = strlen(s);
+	int val = 0;
+	int flips = 0;
+	int ans =0;
+	memset(visited, false, sizeof(visited));
+	
+	for(int i=0; i<len; i++) {
+		if(s[i] == 'R') {
+			val = 0;
+		} else {
+			val = 1;
+		}
+		
+		if(i >= k) {
+			flips -= visited[i-k];
+		}
+		val = (val+flips)%2;
+		if(val == 0) {
+			ans++;
+			visited[i]^=1;
+			flips++;
+		} else {
+			visited[i] = 0;
+		}
+	}
+	cout<<ans<<"
+";
+}
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--) {
+		cin>>n>>k;
+		cin>>s;
+		solve();
+	}
+	return 0;
+}

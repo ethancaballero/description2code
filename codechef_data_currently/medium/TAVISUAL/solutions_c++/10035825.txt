@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,n,a,b,c,q,l,r;
+	cin>>t;
+	while(t-->0)
+	{
+		cin>>n>>c>>q;
+		for(int i=0;i<q;i++)
+		{
+			cin>>l>>r;
+			if((l<=c&& c<=r))
+			{a=c-l;
+			b=r-a;
+			c=b;
+			}
+        }//end of for
+		cout<<c<<endl;
+	}//end of while
+	
+	// your code goes here
+	return 0;
+}

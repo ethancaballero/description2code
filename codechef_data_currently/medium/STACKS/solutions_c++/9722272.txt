@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int top[100000] = {0};
+
+int search(int a,int size)
+{
+	int l,h,i,m;
+	i = size;
+	l = 0;
+	h = size - 1;
+	while(l<=h)
+	{
+		m = (l+h)/2;
+		if(a<top[m])
+		{
+			i = m;
+			h = m-1;
+		}
+		else
+		{
+			l = m+1;
+		}
+	}
+	return i;
+}
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,i;
+		cin>>n;
+		int size=0,a;
+		while(n--)
+		{
+			cin>>a;
+			i = search(a,size);
+			if(i==size)
+			{
+				top[i] = a;
+				size++;
+			}
+			else
+				top[i] = a;
+		}
+		cout<<size<<" ";
+		for(i=0;i<size;i++)
+			cout<<top[i]<<" ";
+		cout<<endl;
+	}
+	return 0;
+}

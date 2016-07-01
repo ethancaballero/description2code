@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+#define D 1000000007
+#define gcd __gcd
+#define getcx getchar
+#define pc putchar
+#define get(x) scanf("%d",&x)
+#define getl(x) scanf("%lld",&x)
+#define print(x) printf("%d
+",x)
+#define printl(x) printf("%lld
+",x)
+#define bitcount __builtin_popcount
+using namespace std;
+typedef long long ll;
+int main()
+{
+        int n; get(n);
+        int x1,x2,x3,y1,y2,y3;
+        int min_area,min_index=1,max_area,max_index=1,area;
+        scanf("%d%d%d%d%d%d",&x1,&y1,&x2,&y2,&x3,&y3);
+        area = abs(x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2));
+        min_area = max_area = area;
+        for(int i=2;i<=n;i++)
+        {
+            scanf("%d%d%d%d%d%d",&x1,&y1,&x2,&y2,&x3,&y3);
+            area = abs(x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2));
+            if(area<=min_area)
+            {
+                min_area = area;
+                min_index = i;
+            }
+            if(area>=max_area)
+            {
+                max_area = area;
+                max_index = i;
+            }
+        }
+        cout << min_index << " " << max_index << endl;
+        //print(ans);
+    return 0;
+}

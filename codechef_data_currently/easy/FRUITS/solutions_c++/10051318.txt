@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	int test, i,j,num,n,m,k,flag;
+	int arr[500];
+	
+	cin>>test;
+	while(test--)
+	{
+		flag = 0;
+		cin>>n;
+		cin>>m;
+		cin>>k;
+		
+		for(i = 0 ; i < k ; i++)
+		   {
+		   	   if(n < m && k > 0)
+		   	     {
+		   	        n++;
+				 	
+				 }
+		   	    if(m < n && k > 0)
+		   	    {
+	                 m++;
+						   	    	
+    			 }
+    			 
+    			if(m == n)
+				  {
+				     break;  
+				  } 
+		   	  
+		   	 
+		   }
+		   
+		   cout << abs(m-n)<<endl; 
+		
+	}
+	
+	
+}

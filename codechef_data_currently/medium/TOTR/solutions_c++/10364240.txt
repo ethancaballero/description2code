@@ -1,0 +1,222 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<cmath>
+
+using namespace std;
+
+int main()
+
+{
+    int t;
+    char str[30];
+    scanf("%d %s",&t,&str);
+    while(t--)
+    {
+        char ans[1000];
+        scanf("%s",&ans);
+        int k=0;
+        int len=strlen(ans);
+        char check[len];
+
+        for(int i=0;i<len;i++)
+        {
+            if(ans[i]=='a' || ans[i]=='A')
+            {
+                if(ans[i]=='a')
+                   check[k++]=str[0];
+                 else
+                    check[k++]=toupper(str[0]);
+            }
+            else if(ans[i]=='b' || ans[i]=='B')
+            {
+                 if(ans[i]=='b')
+                   check[k++]=str[1];
+                 else
+                    check[k++]=toupper(str[1]);
+            }
+            else if(ans[i]=='c' || ans[i]=='C')
+            {
+                if(ans[i]=='c')
+                   check[k++]=str[2];
+                 else
+                    check[k++]=toupper(str[2]);
+            }
+            else if(ans[i]=='d' || ans[i]=='D')
+            {
+                if(ans[i]=='d')
+                   check[k++]=str[3];
+                 else
+                    check[k++]=toupper(str[3]);
+            }
+            else if(ans[i]=='e' || ans[i]=='E')
+            {
+                if(ans[i]=='e')
+                   check[k++]=str[4];
+                 else
+                    check[k++]=toupper(str[4]);
+            }
+            else if(ans[i]=='f' || ans[i]=='F')
+            {
+                if(ans[i]=='f')
+                   check[k++]=str[5];
+                 else
+                    check[k++]=toupper(str[5]);
+            }
+            else if(ans[i]=='g' || ans[i]=='G')
+            {
+                if(ans[i]=='g')
+                   check[k++]=str[6];
+                 else
+                    check[k++]=toupper(str[6]);
+            }
+            else if(ans[i]=='h' || ans[i]=='H')
+            {
+                if(ans[i]=='h')
+                   check[k++]=str[7];
+                 else
+                    check[k++]=toupper(str[7]);
+            }
+            else if(ans[i]=='i' || ans[i]=='I')
+            {
+                if(ans[i]=='i')
+                   check[k++]=str[8];
+                 else
+                    check[k++]=toupper(str[8]);
+            }
+            else if(ans[i]=='j' || ans[i]=='J')
+            {
+                if(ans[i]=='j')
+                   check[k++]=str[9];
+                 else
+                    check[k++]=toupper(str[9]);
+            }
+            else if(ans[i]=='k' || ans[i]=='K')
+            {
+                if(ans[i]=='k')
+                   check[k++]=str[10];
+                 else
+                    check[k++]=toupper(str[10]);
+            }
+            else if(ans[i]=='l' || ans[i]=='L')
+            {
+                if(ans[i]=='l')
+                   check[k++]=str[11];
+                 else
+                    check[k++]=toupper(str[11]);
+            }
+            else if(ans[i]=='m' || ans[i]=='M')
+            {
+                if(ans[i]=='m')
+                   check[k++]=str[12];
+                 else
+                    check[k++]=toupper(str[12]);
+            }
+            else if(ans[i]=='n' || ans[i]=='N')
+            {
+                if(ans[i]=='n')
+                   check[k++]=str[13];
+                 else
+                    check[k++]=toupper(str[13]);
+            }
+            else if(ans[i]=='o' || ans[i]=='O')
+            {
+                if(ans[i]=='o')
+                   check[k++]=str[14];
+                 else
+                    check[k++]=toupper(str[14]);
+            }
+            else if(ans[i]=='p' || ans[i]=='P')
+            {
+                if(ans[i]=='p')
+                   check[k++]=str[15];
+                 else
+                    check[k++]=toupper(str[15]);
+            }
+            else if(ans[i]=='q' || ans[i]=='Q')
+            {
+                if(ans[i]=='q')
+                   check[k++]=str[16];
+                 else
+                    check[k++]=toupper(str[16]);
+            }
+            else if(ans[i]=='r' || ans[i]=='R')
+            {
+                if(ans[i]=='r')
+                   check[k++]=str[17];
+                 else
+                    check[k++]=toupper(str[17]);
+            }
+            else if(ans[i]=='s' || ans[i]=='S')
+            {
+                if(ans[i]=='s')
+                   check[k++]=str[18];
+                 else
+                    check[k++]=toupper(str[18]);
+            }
+            else if(ans[i]=='t' || ans[i]=='T')
+            {
+                if(ans[i]=='t')
+                   check[k++]=str[19];
+                 else
+                    check[k++]=toupper(str[19]);
+            }
+            else if(ans[i]=='u' || ans[i]=='U')
+            {
+                if(ans[i]=='u')
+                   check[k++]=str[20];
+                 else
+                    check[k++]=toupper(str[20]);
+            }
+            else if(ans[i]=='v' || ans[i]=='V')
+            {
+                if(ans[i]=='v')
+                   check[k++]=str[21];
+                 else
+                    check[k++]=toupper(str[21]);
+            }
+            else if(ans[i]=='w' || ans[i]=='W')
+            {
+                if(ans[i]=='w')
+                   check[k++]=str[22];
+                 else
+                    check[k++]=toupper(str[22]);
+            }
+            else if(ans[i]=='x' || ans[i]=='X')
+            {
+                if(ans[i]=='x')
+                   check[k++]=str[23];
+                 else
+                    check[k++]=toupper(str[23]);
+            }
+            else if(ans[i]=='y' || ans[i]=='Y')
+            {
+                if(ans[i]=='y')
+                   check[k++]=str[24];
+                 else
+                    check[k++]=toupper(str[24]);
+            }
+            else if(ans[i]=='z' || ans[i]=='Z')
+            {
+                if(ans[i]=='z')
+                   check[k++]=str[25];
+                 else
+                    check[k++]=toupper(str[25]);
+            }
+            else
+                check[k++]=ans[i];
+        }
+        for(int i=0;i<k;i++)
+        {
+            if(check[i]=='_')
+                printf(" ");
+            else
+                printf("%c",check[i]);
+        }
+
+        printf("
+");
+    }
+    return 0;
+}

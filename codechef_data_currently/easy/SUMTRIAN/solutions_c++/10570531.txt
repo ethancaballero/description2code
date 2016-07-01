@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define for0(i,n) for(__typeof(n) i = 0; i < n ; i++) 
+int t , n , d;
+int a[100][100];
+int ans[100][100];
+int f(int i , int j)
+{
+	if(i >=n || j >= n)
+		return 0;
+	if(ans[i][j] != -1)
+		return ans[i][j];
+	ans[i][j] = a[i][j] + max(f(i+1 , j) , f(i+1 , j+1));
+		return ans[i][j];
+}
+int main(int argc, char const *argv[])
+{ cin>>t;
+  while(t--)
+  { cin>>n;
+  	for0(i, n)
+  	{ for0(j , i+1)
+  		{   cin>>d;
+  			a[i][j] = d;
+  			ans[i][j] = -1;
+  		}
+  	}
+  	cout<<f(0,0)<<endl;
+  }
+  return 0;
+} 

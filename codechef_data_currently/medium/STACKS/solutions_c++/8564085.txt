@@ -1,0 +1,38 @@
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int t,n,ub,sz;
+    scanf("%d",&t);
+    vector<int> vec;
+    while(t--)
+    {
+        vec.clear();
+        scanf("%d",&n);
+        int temp;
+        scanf("%d",&temp);
+        vec.push_back(temp);
+        for(int i=1;i<n;i++)
+        {
+            scanf("%d",&temp);
+            sz=vec.size();
+            if(vec[sz-1]<=temp)
+               vec.push_back(temp);
+            else
+            {
+            vector<int>:: iterator ub=upper_bound(vec.begin(),vec.end(),temp);
+              *ub=temp;
+            }
+        }
+        sz=vec.size();
+        printf("%d ",sz);
+        for(int i=0;i<sz;i++) printf("%d ",vec[i]);
+        printf("
+");
+    }
+    return 0;
+}

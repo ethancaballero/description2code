@@ -1,0 +1,9 @@
+from fractions import gcd
+for _ in range(input()):
+    n=input()
+    a=map(int,raw_input().split())
+    temp1=a[0]
+    for i in range(1,len(a)):
+        temp=gcd(a[i],a[i-1])
+        temp1=gcd(temp,temp1)
+    print temp1

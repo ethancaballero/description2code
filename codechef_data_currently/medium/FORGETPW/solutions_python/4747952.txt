@@ -1,0 +1,54 @@
+def get_rules(num_rules):
+    """
+    Read the input for num_rules times.
+    Return - Dictionary with keys mapping
+             to values.
+    """
+    rules = {}
+    for _ in xrange(num_rules):
+        key, val = raw_input().split()
+        rules[key] = val
+    return rules
+ 
+def decode_pass(password, rules):
+    """
+    Decode the password by replacing the
+    keys with their values (if they exist)
+    else retain the key.
+    """
+    return "".join([rules.get(char, char) for char in password])
+ 
+def filter_pass(password):
+    """
+    Filter the password by stripping all 0s.
+    Strip the '.' from right, if needed.
+    """
+    if '.' in password:
+    	password = password.strip('0')
+    else:
+    	password = password.lstrip('0')
+ 
+    if len(password) and password[-1] == '.':
+    	password = password[:-1]
+ 
+    if len(password) == 0:
+    	password = '0'
+ 
+    return password
+ 
+def main():
+    """
+    Running function.
+    """
+    num_testcases = int(raw_input())
+ 
+    for _ in xrange(num_testcases):
+        num_rules = int(raw_input())
+        rules = get_rules(num_rules)
+        real_pass = decode_pass(raw_input(), rules)
+        real_pass = filter_pass(real_pass)
+        print real_pass
+ 
+ 
+if __name__ == "__main__":
+    main()

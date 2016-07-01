@@ -1,0 +1,12 @@
+from sys import stdin
+t=int(stdin.readline())
+for i in range(0,t):
+	i,j=map(int,stdin.readline().split())
+	ans=0
+	while i!=j:
+		if i>j:
+			i/=2
+		else:
+			j/=2
+		ans+=1
+	print ans

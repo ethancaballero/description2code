@@ -1,0 +1,55 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+   int t,r,g,b,m;
+   scanf("%d",&t);
+   while(t--)
+   {
+      scanf("%d%d%d%d",&r,&g,&b,&m);
+      int red[101],green[101],blue[101];
+      for(int i=0; i<r; i++)
+        scanf("%d",&red[i]);
+      for(int i=0; i<g; i++)
+        scanf("%d",&green[i]);
+      for(int i=0; i<b; i++)
+        scanf("%d",&blue[i]);
+
+      for(int i=1; i<=m; i++)
+      {
+          int max_r=0, max_g=0, max_b=0;
+          for(int i=0; i<r; i++)
+            max_r = max(max_r,red[i]);
+          for(int i=0; i<g; i++)
+            max_g = max(max_g,green[i]);
+          for(int i=0; i<b; i++)
+            max_b = max(max_b,blue[i]);
+          if(max_r >= max_g && max_r >= max_b)
+          {
+              for(int i=0; i<r; i++)
+                red[i] /=2;
+          }
+          else if(max_g >= max_r && max_g >= max_b)
+          {
+              for(int i=0; i<g; i++)
+                green[i] /=2;
+          }
+          else
+          {
+              for(int i=0; i<b; i++)
+                blue[i] /= 2;
+          }
+      }
+      int max_r=0,max_b=0,max_g=0;
+      for(int i=0; i<r; i++)
+        max_r = max(max_r,red[i]);
+      for(int i=0; i<g; i++)
+        max_g = max(max_g,green[i]);
+      for(int i=0; i<b; i++)
+        max_b = max(max_b,blue[i]);
+      printf("%d
+",max(max_r, max(max_g,max_b)));
+   }
+   return 0;
+}

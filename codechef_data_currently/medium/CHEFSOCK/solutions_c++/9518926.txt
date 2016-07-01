@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+	int jcost,scost,money;
+	cin>>jcost>>scost>>money;
+	money=money-jcost;
+	int socks=money/scost;
+	if(socks%2==0)
+		cout<<"Lucky Chef"<<endl;
+	else
+		cout<<"Unlucky Chef"<<endl;
+	
+	return 0;
+
+
+}
+
+

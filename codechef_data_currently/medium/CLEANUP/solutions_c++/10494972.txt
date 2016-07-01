@@ -1,0 +1,44 @@
+#include<stdio.h>
+using namespace std;
+int main(){
+    int t;
+    scanf("%d",&t);
+    for(int j=0;j<t;j++){
+        int n,m;
+        scanf("%d %d",&n,&m);
+        int arr[n];
+        for(int i=0;i<n;i++){
+            arr[i]=0;
+        }
+        for(int i=0;i<m;i++){
+            int t;
+            scanf("%d",&t);
+            arr[t-1]=1;
+        }
+        int cur=0;
+        int f[n],s[n],x=0,y=0;
+        for(int i=0;i<n;i++){
+            if(!arr[i]){
+                if(cur%2==1){
+                    s[y++]=i+1;
+                }
+                else
+                {
+                    f[x++]=i+1;
+                }
+                cur++;
+            }
+        }
+        for(int i=0;i<x;i++){
+            printf("%d ",f[i]);
+        }
+        printf("
+");
+        for(int i=0;i<y;i++){
+            printf("%d ",s[i]);
+        }
+        printf("
+");
+    }
+    
+}

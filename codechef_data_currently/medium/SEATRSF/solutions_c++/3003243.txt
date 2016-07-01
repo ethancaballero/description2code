@@ -1,0 +1,52 @@
+     # include<stdio.h>
+     	#include <ctype.h>
+#include <stdlib.h>
+    # define mod 1000000007
+    typedef long long ll;
+using namespace std;    
+	ll n, m, q, k;
+
+
+ll readint() {
+ll cc = getchar_unlocked(), ret = 0;
+for (; cc < '0' || cc > '9';)
+cc = getchar_unlocked();
+for (; cc >= '0' && cc <= '9';) {
+ret = ret * 10 + cc - '0';
+cc = getchar_unlocked();
+}
+return ret;
+}
+    ll modpow(long long int b,long long int e)
+    {
+    int rem,x=1;
+    while(e!=0)
+    {
+    rem=e%2;
+    e=e/2;
+    if(rem==1)
+    x=(x*b)%mod;
+    b=(b*b)%mod;
+    }
+    return x;
+    }
+    void solve()
+    {
+    ll ans;
+    if(m <= q) { printf("0
+"); return; }
+    ans = (modpow(q + 1, n) + modpow(q - 1, n) - 2 * modpow(q, n) + 2 * mod) % mod;
+    ans = ((m - q) * ans) % mod;
+    printf("%lld
+", ans);
+    }
+    int main() {
+    ll test;
+    test=readint();
+    while(test--)
+    {
+    n=readint();m=readint();q=readint();k=readint();
+    solve();
+    }
+    return 0;
+    } 

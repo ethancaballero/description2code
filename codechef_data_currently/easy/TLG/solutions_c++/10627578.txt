@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    int pl1[t],pl2[t],rs1=0,rs2=0,flag=0,result=0;
+    for(int i=0;i<t;i++)
+       {
+         cin>>pl1[i]>>pl2[i];
+         rs1+=pl1[i];
+         rs2+=pl2[i];
+          if(rs1>rs2&&rs1-rs2>result)
+          {
+            result=rs1-rs2;
+            flag=1;
+          }
+          else if(rs2>rs1&&rs2-rs1>result)
+          {
+              result=rs2-rs1;
+              flag=2;
+          }
+       }
+
+  cout<<flag<<' '<<result;
+    return 0;
+}

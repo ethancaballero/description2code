@@ -1,0 +1,23 @@
+def gcd(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd(b,a%b)
+t=input()
+while t>0:
+    n,m=map(int,raw_input().split())
+    rv=m+1
+    if m==0:
+        if n==1:
+            print 'Yes'
+        else:
+            print 'No 1'
+    elif m==1:
+        print 'Yes'
+    else:
+        res=n/gcd(n,m)
+        if res<n:
+            print 'No',res
+        else:
+            print 'Yes'
+    t-=1

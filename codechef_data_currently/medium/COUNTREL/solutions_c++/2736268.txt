@@ -1,0 +1,45 @@
+#include<stdio.h>
+#define max 100000007
+#define mul 50000004
+long long int power(long long int a,long long int n);
+main()
+{
+      long long int n,t,r1,r2,a,b,c;
+      scanf("%lld",&t);
+      for(;t--;)
+      {// r1=(((b+1-2*a)%max)*mul)%max;
+              scanf("%lld",&n);
+              a=power(2,n);
+              b=power(3,n);
+              c=power(4,n);
+              
+              r1=(b+1)%max;
+              r1=(r1-(2*a)%max)%max;
+              r1=r1<0?r1+max:r1;
+              r1=(r1*mul)%max;
+              
+              r2=(c-1)%max;
+              r2=r2<0?r2+max:r2;
+              r2=(r2+(3*a)%max)%max;
+              r2=(r2-(3*b)%max)%max;
+              r2=r2<0?r2+max:r2;
+              r2=(r2*mul)%max;
+              
+              //r2=(((c+3*a-3*b-1)%max)*mul)%max; 
+              
+              printf("%lld %lld
+",r1,r2);
+      }
+      return 0;     
+}      
+long long int power(long long int a,long long int n)
+{
+         if(n==0)
+         return 1;
+         long long int p;
+         p=power(a,n/2);
+         p=(p*p)%max;
+         if(n%2==0)
+         return p;
+         return (p*a)%max;
+} 

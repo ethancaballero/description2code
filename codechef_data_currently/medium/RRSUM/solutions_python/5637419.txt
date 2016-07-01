@@ -1,0 +1,15 @@
+import sys
+
+n, m = map(int, sys.stdin.readline().rstrip().split(' '))
+for _ in xrange(m):
+    k = int(raw_input())
+    if k <= n:
+        print 0
+    elif k > 3 * n:
+        print 0
+    elif k > n and k <= 2 * n:
+        d = k - n
+        print d - 1
+    elif k > 2 * n:
+        d = 3 * n - k
+        print(d + 1)

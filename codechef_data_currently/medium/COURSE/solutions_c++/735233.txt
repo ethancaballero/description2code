@@ -1,0 +1,125 @@
+#include <cstdio>
+#include <queue>
+#include <cctype>
+#include <limits>
+#include <cmath>
+#include <functional>
+
+using namespace std;
+
+const int BUFSIZE = 4096;
+const char MINUS = '-';
+const char ZEROCHAR = '0';
+
+char r_buffer[BUFSIZE];
+int r_bufpos = BUFSIZE;
+
+int readint()
+{
+    int sign = 1;
+    int n = 0;
+    for (; r_bufpos < BUFSIZE && r_buffer[r_bufpos] != MINUS &&
+         !isdigit(r_buffer[r_bufpos]); r_bufpos++);
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE && r_buffer[r_bufpos] != MINUS &&
+             !isdigit(r_buffer[r_bufpos]); r_bufpos++);
+    }
+    if (r_buffer[r_bufpos] == MINUS)
+    {
+        sign = -1;
+        r_bufpos += 1;
+    }
+    for (; r_bufpos < BUFSIZE && isdigit(r_buffer[r_bufpos]); r_bufpos++)
+        n = 10 * n + r_buffer[r_bufpos] - ZEROCHAR;
+    if (r_bufpos == BUFSIZE)
+    {
+        r_bufpos = 0;
+        fread(r_buffer, 1, BUFSIZE, stdin);
+        for (; r_bufpos < BUFSIZE && isdigit(r_buffer[r_bufpos]); r_bufpos++)
+            n = 10 * n + r_buffer[r_bufpos] - ZEROCHAR;
+    }
+    return sign * n;
+}
+
+const int MAXSIZE = 502;
+
+double key[MAXSIZE];
+bool known[MAXSIZE];
+
+int px[MAXSIZE];
+int py[MAXSIZE];
+
+int main()
+{
+    int T, r, R, N, x, y;
+    double max, d;
+    T = readint();
+    for (; T > 0; T--)
+    {
+        priority_queue<pair<double, int>, vector<pair<double, int> >,
+                greater<pair<double, int> > > pq;
+
+        r = readint();
+        R = readint();
+        N = readint();
+        for (int i=1; i<=N; i++)
+        {
+            px[i] = readint();
+            py[i] = readint();
+        }
+
+        for(int i=0; i<=N+1; i++)
+        {
+            key[i] = numeric_limits<double>::max();
+            known[i] = false;
+        }
+
+        max = numeric_limits<double>::min();
+        pq.push(make_pair(0.0, 0));
+        key[0] = 0.0;
+
+        while (!pq.empty())
+        {
+            pair<double, int> p = pq.top();
+            pq.pop();
+            if (!known[p.second])
+            {
+                if (p.first > max)
+                    max = p.first;
+                known[p.second] = true;
+                if (p.second == N+1)
+                    break;
+                for (int i=0; i<=N+1; i++)
+                {
+                    if (!known[i])
+                    {
+                        double d;
+                        if (p.second == 0 && i == N + 1)
+                            d = R - r;
+                        else if (p.second == 0)
+                            d = sqrt(pow(px[i],2.0)
+                                    + pow(py[i],2.0)) - r;
+                        else if (i == N+1)
+                            d = R - sqrt(pow(px[p.second],2.0)
+                                    + pow(py[p.second],2.0));
+                        else
+                            d = sqrt(pow(px[p.second]-px[i], 2.0)
+                                + pow(py[p.second]-py[i], 2.0));
+
+                        if (key[i] > d)
+                        {
+                            key[i] = d;
+                            pq.push(make_pair(key[i], i));
+                        }
+                    }
+                }
+            }
+        }
+        printf("%.3lf
+", max);
+    }
+    return 0;
+}

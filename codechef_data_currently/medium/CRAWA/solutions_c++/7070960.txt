@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int x,y;
+		long long int temp=1;
+		cin>>x>>y;
+		if(x==0)
+		{
+			if(y<0)
+			y=-y;
+			if(y%2==0)
+			temp=0;
+		}
+		else if(y==0)
+		{
+			if(x>0&&x%2!=0)
+			temp=0;
+			else if(x<0)
+			{
+		    	x=-x;
+		    	if(x%2==0)
+	     		temp=0;
+	    	}
+		}
+		else if(x>0&&y>0)
+		{
+		    if(x%2!=0)
+		    {
+		    if(y<=(x+1))
+		      temp=0;
+		    else if(y%2==0)
+		      temp=0;
+		    }
+		    if(x%2==0&&y%2==0&&y>=(x+2))
+		    temp=0;
+		}
+		else if(x>0&&y<0)
+		{
+			y=-y;
+			if(x==1&&y%2==0)
+			  temp=0;
+			else if(x%2!=0&&x!=1)
+		    {
+		    if(y<=x-1)
+		      temp=0;
+		    else if(y%2==0)
+		      temp=0;
+		    }
+		    if(x%2==0&&y%2==0&&y>=x)
+		    temp=0;
+		}
+		else 
+		{
+		     x=-x;
+		     y=y>0?y:-y;
+			if(x%2==0)
+		    {
+		     if(y<=x)
+		      temp=0;
+		     else if(y%2==0)
+		      temp=0;
+		    }
+		    if(x%2!=0&&y%2==0&&y>=(x+1))
+		    temp=0;
+		}
+		if(temp==0)
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+	}
+	return 0;
+}

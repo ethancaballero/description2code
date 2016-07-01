@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main(){
+
+	int t,i,l1,l2;
+	string a,b;
+	bool x[26], bb;
+	char c;
+	cin>>t;
+
+	while(t>0){
+
+		bb = false;
+		cin>>a>>b;
+		l1 = a.length();
+		l2 = b.length();
+
+		for(i=0;i<26;i++){
+			x[i] = false;
+		}
+
+		for(i=0; i<l1; i++){
+			x[a[i]-97] = true;
+		}
+
+		for(i=0; i<l2; i++){
+			c = b[i];
+			if(x[c-97]){
+				cout<<"Yes"<<endl;
+				bb = true;
+				t--;
+				break;
+			}
+		}
+
+		if(bb)
+			continue;
+
+		cout<<"No"<<endl;
+
+
+		t--;
+
+	}
+	
+	return 0;
+}		

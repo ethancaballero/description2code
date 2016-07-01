@@ -1,0 +1,17 @@
+tc = int(raw_input())
+for i in xrange(tc):
+	s = raw_input()
+	r = raw_input()
+	flag = False
+	if len(r) != len(s):
+		print "No"
+	else:
+	 	for j in xrange(len(r)):
+			if r[j] == s[j] or (r[j] == "?" or s[j] == "?"):
+				pass
+			else:
+				flag = True
+	if flag:
+	  print "No"
+	else:
+	  print "Yes"

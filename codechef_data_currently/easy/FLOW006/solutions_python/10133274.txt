@@ -1,0 +1,4 @@
+T= int(raw_input()) # number of cases
+ 
+for i in range(T):
+    print sum(map(int, str(raw_input()))) #int()

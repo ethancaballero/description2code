@@ -1,0 +1,10 @@
+#!/usr/bin/python
+Table={
+	'B':'BattleShip',
+	'C':'Cruiser',
+	'D':'Destroyer',
+	'F':'Frigate'
+}
+for i in range(input()):
+	print Table[raw_input().upper()]
+

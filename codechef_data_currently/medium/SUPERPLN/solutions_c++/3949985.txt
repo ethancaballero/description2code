@@ -1,0 +1,85 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <functional>
+#include <utility>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+ 
+#define LL long long
+#define vi vector<int>
+#define pb push_back
+#define sz size
+#define all(x) (x).begin(),(x).end()
+#define it iterator
+#define REP(i,a,b) for(int i=(a);i<(b);i++)
+#define REPX(i,a,b,c) for(int i=(a);i<(b);i+=(c))
+#define DEP(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define REX(i,x) for(__typeof((x).begin()) i=(x).begin(); i!=(x).end();i++)
+#define pii pair<int,int>
+#define mp make_pair
+#define fi first
+#define se second
+#define st string
+#define ffo find_first_of
+#define su substr
+#define vs vector<st>
+#define ub upper_bound
+#define lb lower_bound
+#define vli vector<list<int> >
+#define ni next_int
+#define gu getchar_unlocked
+#define mpp map<pii,pii >
+#define ub upper_bound
+#define lb lower_bound
+#define MAX 10010
+#define INF 100010
+using namespace std;
+mpp val[MAX];
+int func(int a,int b,int s,int t)
+{
+	int res=0; mpp::it i;
+	while(1)
+	{
+	 if(a==b && s<=t) return res;
+     i=val[a].lb(mp(s,-INF));
+     //printf("%d %d %d %d
+",a,i->fi.fi,i->fi.se,i->se.fi);
+     if(i==val[a].end() || i->se.se) return -1; //no more valid flights/cycle
+     res++;
+     s=i->fi.se; 
+     a=i->se.fi; i->se.se=1;
+	}
+	return -1;
+}
+int main()
+{
+	int tc; scanf("%d",&tc);
+	REP(k,0,tc)
+	{
+		int n,a,b,s,t; scanf("%d",&n);
+		REP(i,1,MAX) val[i].clear();
+		REP(i,0,n)
+		{
+			scanf("%d %d %d %d",&a,&s,&b,&t);
+			val[a][mp(s,t)]=mp(b,0); 
+		}
+		scanf("%d %d %d %d",&a,&s,&b,&t);
+		int j=func(a,b,s,t);
+		if(j==-1) printf("No
+");
+		else printf("Yes %d
+",j);
+		
+	}
+	return 0;
+}

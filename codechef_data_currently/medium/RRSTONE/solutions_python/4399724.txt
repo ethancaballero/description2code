@@ -1,0 +1,23 @@
+import sys
+itr = sys.stdin.readline()
+a , b  = [int(s) for s in itr.split()]
+arr = sys.stdin.readline()
+arr = [int(s) for s in arr.split()]
+if b==0: 
+	print ' '.join(str(e) for e in arr)
+else:
+	if b%2==0:
+		ma = max(arr)
+		for i in xrange(a):
+			arr[i] = ma - arr[i]
+		ma = max(arr)
+		for i in xrange(a):
+			arr[i] = ma - arr[i]
+		arr = ' '.join(str(e) for e in arr)
+		print arr	
+	else:
+		ma = max(arr)
+		for i in xrange(a):
+			arr[i] = ma - arr[i]
+		arr = ' '.join(str(e) for e in arr)
+		print arr	

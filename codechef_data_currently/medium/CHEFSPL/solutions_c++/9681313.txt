@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N = 1000006;
+
+char s[N];
+
+bool Double_String(){
+    int sz = strlen(s);
+    int j = sz / 2;
+
+    for(int i=0;i<(sz/2);i++,j++){
+        if(s[i] != s[j]) return false;
+    }
+    return true;
+}
+
+bool is_substring(int a,int b,int c,int d){
+    int j = c;
+    for(int i=a;i<=b;i++){
+        while(j <= d && s[i] != s[j]) j++;
+        if(j > d) return false;
+        j++;
+    }
+    return true;
+}
+
+bool Solve(){
+    int n = strlen(s);
+    bool good = false;
+
+    if(n % 2 == 0){
+        if(Double_String()) return true;
+        else return false;
+    }else if(n > 1){
+        int h = n/2;
+        if(is_substring(0,h-1,h,n-1) || is_substring(h+1,n-1,0,h)) return true;
+        else return false;
+    }
+    return good;
+}
+
+int main(){
+    int test; scanf("%d",&test);
+    while(test--){
+        scanf("%s",s);
+        if(Solve()) puts("YES");
+        else puts("NO");
+    }
+    return 0;
+}

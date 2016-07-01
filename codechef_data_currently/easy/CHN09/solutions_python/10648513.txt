@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+class balloons
+{
+      public static void main (String[] args) throws IOException
+      {
+           BufferedReader ob = new BufferedReader (new InputStreamReader (System.in));
+           int test = Integer.parseInt (ob.readLine ());
+           String str[] = new String [test];
+           int i,a,b,len,j;
+           for (i = 0; i < test; i++)
+           {
+                str[i] = ob.readLine();
+           }
+           for (i = 0; i < test; i++)
+           {
+                len = str [i].length ();
+                a = 0;
+                b = 0;
+                for (j = 0; j < len; j++)
+                {
+                     if (str [i].charAt (j) == 'a')
+                         a++;
+                     else
+                         b++;
+                }
+                System.out.println (a < b ? a : b);
+           }
+      }
+}

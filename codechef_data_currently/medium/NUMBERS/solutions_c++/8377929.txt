@@ -1,0 +1,50 @@
+	#include<iostream>
+	#include<map>
+	#include<stdio.h>
+ 	using namespace std;
+	
+
+	int main()
+	{
+		int t;
+		scanf("%d",&t);
+		while(t>0)
+		{
+			int n;
+			scanf("%d",&n);
+			multimap<int ,string> mymap;
+			string a;
+			int num;
+			for(int i=0;i<n;i++)
+			{
+				cin>>a;
+				scanf("%d",&num);
+				mymap.insert(make_pair(num,a));
+			}	
+			multimap<int,string>::iterator it=mymap.begin();
+			int count;
+			while(1==1)
+			{	
+				num=it->first;
+				a=it->second;
+				count=1;
+				it++;
+				while(mymap.end()!=it && it->first==num )  			
+				{
+					
+					it++;
+					count++;
+				}
+				if(count==1 || it==mymap.end())
+					break;
+			}	
+			if(it==mymap.end())
+				printf("Nobody wins.
+");
+			else 
+				printf("%s
+",a.c_str());
+			t--;
+		}	
+		return 0;
+	}

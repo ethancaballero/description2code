@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		 int k,i,temp,rem;
+		 cin>>k;
+		 rem=103993%33102;
+		 cout<<3;
+		 if(k>0)
+		 cout<<".";
+		 for(i=1;i<=k;i++)
+		 {
+		 	rem=rem*10;
+		 	temp=rem/33102;
+		 	rem=rem%33102;
+		 	cout<<temp;
+		 }		
+		 cout<<endl;
+	}
+	return 0;
+	
+}

@@ -1,0 +1,20 @@
+T=int(raw_input())
+
+for _ in range(0,T):
+    N=int(raw_input())
+    A=list(map(int,raw_input().split()))
+    tin=0
+    lin=0
+    
+    for i in range(0,N):
+        for j in range(i+1,N):
+            if(A[i]>A[j]):
+                tin+=1
+    for i in range(0,N-1):
+        if(A[i]>A[i+1]):
+            lin+=1
+            
+    if(tin == lin):
+        print "YES"
+    else:
+        print "NO"

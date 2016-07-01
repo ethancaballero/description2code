@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#define mod 1000000007
+#define ll long long int
+using namespace std;
+main()
+{
+	int t;
+	double h,s,a,b,z,x1,x2,d,max,max1;
+	cin>>t;
+	while(t--)
+	{
+		cin>>h>>s;
+        z=sqrt(pow(h,2)+4*s);
+		d=sqrt(pow(h,2)-4*s);
+	    if(d>=0)
+		{
+		   	x1=(z+d)/2;
+		   	x2=(z-d)/2;
+		   	a=(x1>x2)?x1:x2;
+		   	b=(2*s)/a;
+		   	max=(a>b)?a:b;
+		   	max1=(a<b)?a:b;
+		   	printf("%0.6f %0.6f %0.6f",max1,max,h);
+		   	cout<<endl;
+		}
+		else
+		{
+		   cout<<"-1"<<endl;	
+		     
+		}   
+    }
+}

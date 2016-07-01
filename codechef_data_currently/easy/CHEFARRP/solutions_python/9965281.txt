@@ -1,0 +1,13 @@
+T=input()
+for i in range(T):
+    N=input()
+    A=raw_input().split()
+    A=[int(x) for x in A]
+    c=0
+
+    for i in range(0,N):
+        for j in range(i,N):
+            if sum(A[i:j+1])==reduce(lambda x,y:x*y,A[i:j+1]):
+                c=c+1
+
+    print c

@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{    int t;
+    cin>>t;
+while(t--)
+{
+
+
+    long long int a,b,c,d;
+    cin>>a>>b;
+    if(b==0)
+    {
+        c=0;
+        d=a;
+    }   
+    else
+    {
+        
+    
+    c=a/b;
+    d=a%b;
+    }
+    cout<<c<<" "<<d<<endl;
+
+}
+ return 0;
+}

@@ -1,0 +1,68 @@
+    #include<stdio.h>
+    #include<string.h>
+    #include<stdlib.h>
+    int digit(int num)
+    {
+      int dig,test;
+      int threeCount, fiveCount, eightCount;
+      test = num;
+      threeCount = 0;
+      fiveCount = 0;
+      eightCount = 0;
+      while(num != 0)
+        {
+          dig = num%10;
+          num = num/10;
+          if(dig==5)
+    	{
+    	  fiveCount++;
+    	}
+          else if(dig == 3)
+    	{
+    	  threeCount++;
+    	}
+          else if(dig == 8)
+    	{
+    	  eightCount++;
+    	}
+          else
+    	{
+    	  return(0);
+    	}
+        }
+      if(eightCount>=fiveCount && fiveCount>=threeCount)
+        {
+          return(1);
+        }
+      return(0);
+    }
+     
+    int main()
+    {
+      int testCases,i,number,solution;
+      char str[1000];
+      gets(str);
+      testCases = atoi(str);
+      solution = 0;
+      while(testCases--)
+        {
+          number = 0;
+          gets(str);
+          for(i=strlen(str)-1;;i--)
+    	{
+    	  if(str[i]==' ')
+    	    {
+    	      break;
+    	    }
+    	}
+          number = atoi(str+i+1);
+          if(digit(number))
+    	{
+    	  solution++;
+    	}
+        }
+      printf("%d
+",solution);
+      return(0);
+    }
+     

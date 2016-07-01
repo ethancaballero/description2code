@@ -1,0 +1,19 @@
+# cook your code here
+test_cases = input()
+for test_case in range(test_cases):
+    m = input()
+    mat = []
+    counter = 0
+    for i in range(m):
+        o = map(int, raw_input().split())
+        mat.append(o)
+    dic = {}
+    for i in range(m):
+        for j in range(m):
+            dic[mat[i][j]] = (i,j)
+    x,y = dic[1]
+    for i in range(2,(m**2)+1):
+        a,b = dic[i]
+        counter += abs(a-x) + abs(b-y)
+        x,y = a,b
+    print(counter)

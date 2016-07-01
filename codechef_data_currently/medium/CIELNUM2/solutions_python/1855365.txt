@@ -1,0 +1,15 @@
+if __name__ == '__main__':
+	t = int(raw_input ())
+	yes = 0
+	for i in range (0, t):
+		h = [0]*10
+		s = raw_input ().split()
+		n = s[len(s)-1]
+		for d in n:
+			h[int(d)] = h[int(d)] + 1
+		flag = 1
+		c = h[8] >= h[5] >= h[3]
+		c = c and (h[0] == h[1] == h[2] == h[4] == h[6] == h[7] == h[9])
+		if c:
+			yes = yes + 1
+	print yes

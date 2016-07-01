@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{int T,a[200],n,m,temp,x;
+scanf("%d",&T);
+while(T--)
+{scanf("%d",&n);
+temp=0;
+m=1;a[0]=1;
+for(int i=1;i<=n;i++)
+{  for(int j=0;j<m;j++)
+      {x=a[j]*i+temp;
+      a[j]=x%10;
+      temp=x/10;
+      }
+      while(temp>0)
+      {a[m]=temp%10;
+      temp=temp/10;
+      m++;
+      }
+ }
+ for(int k=m-1;k>=0;k--)
+ printf("%d",a[k]);
+ printf("
+");}
+ return 0;
+ }     

@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool v[30][20005];
+bool ok[30][30];
+
+vector<int> s;
+
+bool verify(int k) {
+	for(int i=0; i<s.size(); i++)
+		if(!ok[k][s[i]]) {
+			return false;
+		}
+	return true;
+}
+
+int solve(int n, int k) {
+	if(k==n)
+		return 0;
+	
+	int rsp = solve(n, k+1);
+	
+	if(verify(k)) {
+		s.push_back(k);
+		rsp = max(rsp, solve(n, k+1) + 1);
+		s.pop_back();
+	}
+	
+	return rsp;
+}
+
+int main() {
+	
+	int n, m;
+	scanf(" %d %d", &n, &m);
+	
+	for(int i=0; i<m; i++) {
+		int a;
+		scanf(" %d", &a);
+		
+		for(int j=0; j<a; j++) {
+			int b;
+			scanf(" %d", &b);
+			v[i][b-1] = true;
+		}
+	}
+	
+	for(int i=0; i<m; i++) {
+		for(int j=i+1; j<m; j++) {
+			ok[i][j] = true;
+			ok[j][i] = true;
+			for(int k=0; k<=n; k++) {
+				if(v[i][k] & v[j][k]) {
+					ok[i][j] = false;
+					ok[j][i] = false;
+				}
+			}
+		}
+	}
+	
+	printf("%d
+", solve(m, 0));
+	
+	return 0;
+}

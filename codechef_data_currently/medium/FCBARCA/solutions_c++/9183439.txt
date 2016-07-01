@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define sd(x) scanf("%d",&x)
+#define sfd(x) scanf("%d",&x)
+#define sfld(x) scanf("%lld",&x
+#define pf printf
+
+#define LL long long
+#define ll long long
+#define LD long double
+#define ld long double
+#define PB push_back
+#define pb push_back
+#define MP make_pair
+#define mp make_pair
+#define F first
+#define S second
+
+#define pii pair<int,int>
+#define vi vector<int>
+#define fr(i,n) for( int i=0; i<=n; i++)
+#define frm(i,m,n) for(int i=m; i<=n; i++)
+#define N 1000000007
+
+int main(){
+
+	int t; cin>>t;
+
+	while(t--){
+
+		int n,k; cin>>n>>k;
+
+		int dp[n+1][k+1];
+
+		memset(dp,0,sizeof(dp));
+
+		for(int i=1;i<k+1;i++) dp[1][i]=1;
+
+		for(int i=2;i<=n;i++){
+
+			for(int j=0;j<k+1;j++){
+
+				for(int l=0;l<k+1;l++){
+
+					if(j!=l) dp[i][j]=(dp[i][j]+dp[i-1][l])%N;
+				}
+			}
+		}
+
+		cout<<dp[n][0]<<"
+";
+	}
+}

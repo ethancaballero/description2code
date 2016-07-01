@@ -1,0 +1,36 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+    //cout << "Hello world!" << endl;
+    long long int tst,n,d=1,i;
+    scanf("%lld",&tst);
+    while(tst--)
+    {
+        scanf("%lld",&n);
+        long long int fib[101];
+         fib[0]=0;
+         fib[1]=1;
+         fib[2]=1;
+         for(i=3;i<101;i++)
+            fib[i]=fib[i-1]+fib[i-2];
+          //for(i=0;i<101;i++)
+            //  printf("%lld ",fib[i]);
+        for(i=0;;i++)
+        {
+            if(fib[i]>n)
+            {
+                printf("%d
+",i-2);
+                break;
+
+            }
+
+        }
+
+
+    }
+    return 0;
+}

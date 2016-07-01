@@ -1,0 +1,65 @@
+#include<iostream>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+bool comp(int a,int b)
+{
+	return a>b;
+}
+int main()
+{
+//    int t;
+//    cin>>t;
+//    while(t--)
+//    {
+//    	string s;
+//    	cin>>s;
+//    	long long int count=0;
+//    	for(int i=0;i<s.size();i++)
+//    	{
+//    		if(s.at(i)!='4'&&s.at(i)!='7')
+//    		count++;
+//		}
+//		cout<<count<<"
+";
+//    	
+//	}
+    int n,k;
+    cin>>k>>n;
+    char str[51][51];
+    
+    	for(int i=0;i<k;i++)
+    	{
+    		cin>>str[i];
+		//	fflush(stdin);		
+		}
+	    char check[51];
+	    for(int i=0;i<n;i++)
+	    {
+	    	int flag=0;
+	    	cin>>check;
+	    	if(strlen(check)>=47)
+	    	flag=1;
+	    	else
+	    	{
+	    	for(int j=0;j<k;j++)
+	    	{
+	    		if(strstr(check,str[j]))
+	    		{
+	    			flag=1;
+	    			break;
+				}
+			}
+		}
+			if(flag)
+			cout<<"Good
+";
+			else
+			cout<<"Bad
+";
+		}
+	
+		
+		
+	
+}

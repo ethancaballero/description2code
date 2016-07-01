@@ -1,0 +1,17 @@
+from sys import *
+def GCD(a,b):
+	if(a%b):
+		return GCD(b,a%b)
+	return b
+
+t=input()
+for i in range(t):
+	s=raw_input().split()
+	a,b,c,d,k=s
+	g1=GCD(long(a),long(b))
+	g2=GCD(long(c),long(d))
+	l=g1*g2/GCD(g1,g2)
+	ans=1+2*(long(k)/l)
+	print ans
+
+exit(0)

@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+struct v
+{
+	ll j;
+	ll val;
+};
+bool comp(v a, v b)
+{
+	return a.val>b.val;
+}
+static int b[2001][2001];
+static int c[2001][2001];
+int main()
+{
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+		ll n,m,k;
+		scanf("%lld %lld %lld",&n,&m,&k);
+		ll a[n];
+	
+		for(ll i=0;i<n;i++)
+		scanf("%lld",&a[i]);
+		
+		v maxi[n];
+		for(ll i=0;i<n;i++)
+		{
+			for(ll j=0;j<m;j++)
+			scanf("%d",&b[i][j]);
+		}
+		for(ll i=0;i<n;i++)
+		{
+			for(ll j=0;j<m;j++)
+			scanf("%d",&c[i][j]);
+		}
+		for(ll i=0;i<n;i++)
+		{
+			int mn=INT_MIN;
+			for(ll j=0;j<m;j++)
+			{
+				ll d;
+				
+			    d=(b[i][j]-c[i][j]-b[i][a[i]-1]);
+			    
+				if(mn<d)
+				mn=d;
+				
+			}
+			maxi[i].val=mn;
+			maxi[i].j=i;
+			
+		}
+		sort(maxi,maxi+n,comp);
+		bool mark[n];
+		memset(mark,0,sizeof(mark));
+		ll total=0;
+		for(ll i=0;i<k;i++)
+		{
+			if(maxi[i].val<=0)
+			break;
+			mark[maxi[i].j]=true;
+			total+= maxi[i].val+b[maxi[i].j][a[maxi[i].j]-1];
+			
+			
+		}
+		for(ll i=0;i<n;i++)
+		{
+			if(!mark[i])
+			total+=b[i][a[i]-1];
+		}
+		printf("%lld
+",total);
+	}
+	return 0;
+}

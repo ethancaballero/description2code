@@ -1,0 +1,11 @@
+import math
+
+t= input()
+while(t!=0):
+    a = input()
+    a = math.sqrt(1+(4*a*2))
+    a = (a-1)/2
+    a = math.floor(a)
+    a = int (a)
+    print a
+    t -= 1

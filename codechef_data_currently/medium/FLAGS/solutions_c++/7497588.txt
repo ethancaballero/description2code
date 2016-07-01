@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int ans,t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        ans=0;
+        if(n>=2)
+        {
+            ans=ans+2*n*(n-1)*(n-1);
+        }
+        if(n>=3)
+        {
+            ans=ans+2*n*(n-1)*(n-2)*(n-2)+n*(n-1)*(n-2);
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}

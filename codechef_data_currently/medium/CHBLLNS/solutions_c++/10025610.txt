@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	
+	int t;
+cin>>t;
+	while(t--)
+	{
+	long  long int arr[3],i,j,flag,temp,sto=0,k,min;
+		for(i=0;i<3;i++)
+		cin>>arr[i];
+		cin>>k;
+		temp=k-1;
+		//flag=0;
+		if(k==1)
+		{
+			cout<<1<<endl;
+			continue;
+		}
+	sort(arr,arr+3);
+	if(k<=arr[0])
+		cout<<(k-1)*3+1<<endl;
+		else
+		{
+	     //sort(arr,arr+3);
+	     min=arr[0];
+	    sto=sto+min*3;
+	    k=k-min;
+	    if(k==1)
+	    sto+=1;
+	    else
+	    {
+	    	
+	    	arr[1]-=min;
+	    	arr[2]-=min;
+	    	arr[0]-=min;
+	    	if(k<=arr[1])
+	    	sto=sto+(k-1)*2+1;
+	    	else
+	    	{
+	    		 sto += arr[1]*2;
+                       sto += (k-arr[1]);
+	    	}
+	    	
+	    	
+	   	
+	    }
+	     
+		 cout<<sto<<endl;	
+			
+			
+			
+		}
+		
+	}
+	return 0;
+}

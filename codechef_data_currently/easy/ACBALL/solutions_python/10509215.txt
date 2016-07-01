@@ -1,0 +1,21 @@
+test = input()
+for i in range(test):
+    x = raw_input().upper()
+    y = raw_input().upper()
+    x1 = []
+    y1 = []
+    z = []
+    for i in x:
+        x1.append(i)
+    for j in y:
+        y1.append(j)
+    for i in range(len(x1)):
+        if(x1[i] == y1[i]):
+            if(x1[i] == 'W'):
+                z.append('B')
+            else:
+                z.append('W')
+        else:
+            z.append('B')
+    print "".join(z)
+        

@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <algorithm>
+#define ll long long
+
+int main()
+{   ll t,i;
+    cin>>t;
+    vector<ll> z;
+    while(t--)
+    {   ll n;
+        cin>>n;
+        z.push_back(n);
+    }
+    sort(z.begin(),z.end());
+    for(i=0;i<z.size();i++)
+        cout<<z[i]<<"
+";
+    return 0;
+}

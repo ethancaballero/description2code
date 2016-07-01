@@ -1,0 +1,22 @@
+#!/usr/bin/python
+import sys
+import math
+def ch(n):
+	while n:
+		d=n%10
+		if d==4 or d==7:
+			return 1
+		else:
+			n/=10
+	return 0
+t=int(sys.stdin.readline())
+while t:
+	n=int(sys.stdin.readline())
+	ct=0
+	q=int(math.sqrt(n))+1
+	for  i in xrange(1,q):
+		if n%i==0:
+			ct+=ch(i)+(0 if (i*i==n) else ch(n/i))
+		i+=1
+	print ct
+	t-=1	

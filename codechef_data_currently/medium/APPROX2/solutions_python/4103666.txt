@@ -1,0 +1,29 @@
+t = input()
+while(t>0):
+	a = map(int,raw_input().split())
+	n = a[0]
+	k = a[1]
+	arr = map(int,raw_input().split())
+	i = 0
+	j = 0
+	temp = 98765432123456789
+	count = 0
+
+	for i in range(0,n-1):
+		for j in range(i+1,n):
+			if(arr[i]+arr[j] > k):
+				x = arr[i]+arr[j]-k
+			else:
+				x = k-arr[i]-arr[j]
+			if(x < temp):
+				temp = x
+	for i in range(0,n-1):
+		for j in range(i+1,n):
+			if(arr[i]+arr[j] > k):
+				x = arr[i]+arr[j]-k
+			else:
+				x = k-arr[i]-arr[j]
+			if(x == temp):
+				count += 1
+	print temp,count
+	t = t-1

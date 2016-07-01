@@ -1,0 +1,58 @@
+# include<iostream>
+# include<cmath>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    int a[10][500];
+    for(int q=0;q<t;q++)
+    {
+        int n;
+        cin>>n;
+        //int a[10][500];
+        for(int i=0;i<10;i++)
+        {
+            for(int j=0;j<500;j++)
+            {
+                a[i][j]=0;
+            }
+        }
+        int s,e,l;
+        for(int i=0;i<n;i++)
+        {
+                  cin>>s>>e>>l;
+                  for(int j=s;j<=e;j++)
+                  {
+                      a[l][j]=1;
+                  }
+        }
+        int count=0;
+        for(int i=0;i<500;i++)
+        {
+            int len=0;
+            int flag=0;
+            while(flag==0&&len<=8)
+            {
+                if(a[len][i]==1&&a[len+1][i]==1)
+                {
+                    flag=1;
+                    break;
+                }
+                else
+                {
+                    len++;
+                }
+            }
+            if(flag==1)
+            {
+                count++;
+            }
+        }
+        cout<<500-count<<endl;                    
+    }    
+            
+//system("pause");
+return 0;
+}
+

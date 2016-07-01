@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<math.h>
+
+
+long long int ref[300000][4];
+
+int main()
+{
+	ref[0][0]=3;
+	ref[1][0]=5;
+	ref[2][0]=8;
+	
+	ref[0][1]=1;ref[0][2]=0;ref[0][3]=0;
+	ref[1][2]=1;ref[1][1]=0;ref[1][3]=0;
+	ref[2][3]=1;ref[2][2]=0;ref[2][1]=0;
+
+	printf("%d
+",ref[2][0]);
+	
+	int m=0,n=2,i=3;
+	long long int pow_x=1;
+	long long mul;
+	
+	
+	
+	int count=1;
+	
+	while(count<50000)
+	{
+		
+		long long M=1;
+		for(int I=1;I<=pow_x;I++)
+		M=M*10;
+		
+	for(int x=1;x<=3;x++)
+	{
+		if(x==1)mul=3;
+		else if(x==2)mul=5;
+		else mul=8;
+		for(int y=m;y<=n;y++)
+		{
+			ref[i][0]=mul*M+ref[y][0];
+			ref[i][1]=ref[y][1];
+			ref[i][2]=ref[y][2];
+			ref[i][3]=ref[y][3];
+			ref[i][x]++;
+			//printf("%lld %d %lld %lld %lld
+",ref[i][0],i,ref[i][1],ref[i][2],ref[i][3]);
+			
+			if(ref[i][3]>=ref[i][2]&&ref[i][2]>=ref[i][1])
+			{
+				count++;
+				printf("%lld
+",ref[i][0]);
+			}
+			
+			i++;
+			if(count==50000)break;
+		}
+	}
+	m=n+1;
+	n=i-1;
+	pow_x++;
+	}
+
+}

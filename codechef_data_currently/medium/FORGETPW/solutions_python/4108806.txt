@@ -1,0 +1,42 @@
+import sys
+import string
+
+def solve():
+	n = int(sys.stdin.readline())
+	c = ""
+	p = ""
+	for i in range(n):
+		rule = sys.stdin.readline().split()
+		c = c+ rule[0]
+		p = p + rule[1]
+		
+	trans = string.maketrans(c,p)
+	en = raw_input()
+	en = en.translate(trans)
+	ans = ""
+	
+	for i in range(len(en)):
+		if en[i] != '0':
+			ans = en[i:]
+			break
+	dec = False
+	for ch in ans:
+		if ch == '.':
+			dec = True
+			break
+	if dec:
+		end = len(ans)
+		while ans[end-1] == '0':
+			end = end - 1
+		if ans[end-1] == '.':
+			end = end - 1
+		ans = ans[:end]
+	if len(ans) == 0:
+		ans = "0"
+	print ans
+	
+def main():
+	t = int(sys.stdin.readline())
+	for i in range(t):
+		solve()
+main()

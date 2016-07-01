@@ -1,0 +1,46 @@
+ 
+Recently, chef Ciel often hears about lucky numbers.
+
+
+
+
+
+
+Everybody knows that lucky numbers are positive integers
+whose decimal representation contains only the lucky digits 4 and 7.
+For example, numbers 47, 744, 4 are lucky and 5, 17, 467 are not.
+
+
+
+
+
+
+Ciel decides to make Ciel numbers.
+As you know, Ciel likes the digit 8 very much.
+And then, Ciel likes the digits 5 and 3.
+So Ciel defines Ciel numbers as the positive integers k such that d(k, 8) \u2265 d(k, 5) \u2265 d(k, 3) and d(k, i) = 0 for all i = 0, 1, 2, 4, 6, 7, 9,
+where d(k, i) denotes the number of the digit i in the decimal representation of the integer k.
+For example, the first few Ciel numbers are 8, 58, 85, 88, 358, 385, 538, 583, 588, 835, 853, 858, 885, 888, ....
+
+
+
+Ciel would like to know about Ciel numbers.
+Your task is to find the first 50000 Ciel numbers.
+
+
+Input
+
+This problem has no inputs.
+
+
+Output
+
+Print the first 50000 Ciel numbers in order of increasing.
+
+
+Sample Output
+8
+58
+85
+88
+... (49996 lines)

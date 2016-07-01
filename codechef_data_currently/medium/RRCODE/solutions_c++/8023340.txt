@@ -1,0 +1,42 @@
+#include<string.h>
+#include<stdio.h>
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        char op[5];
+        int i,n,k,ans,j;
+        scanf("%d%d%d",&n,&k,&ans);
+        int a[n];
+        for(i=0;i<n;i++)
+            scanf("%d",&a[i]);
+        scanf("%s",op);
+        if(k){
+        if(!strcmp(op,"OR"))
+        {
+            for(j=0;j<n;j++)
+                ans=ans|a[j];
+        }
+        else if(!strcmp(op,"AND"))
+        {
+            for(j=0;j<n;j++)
+                ans=ans&a[j];
+        }
+        else if(!strcmp(op,"XOR"))
+        {
+            if(k%2)
+            {
+                for(j=0;j<n;j++)
+                    ans=ans^a[j];
+            }
+         //   else
+         //       ans=ans^0;
+        }
+        }
+        printf("%d
+",ans);
+    }
+    return 0;
+}

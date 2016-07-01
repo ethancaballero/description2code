@@ -1,0 +1,33 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#define F(i,x,y) for(i=x;i<y;i++)
+#define S(n) scanf("%lld",&n)
+#define s(n) scanf("%d",&n)
+#define P(n) printf("%lld
+",n)
+#define p(n) printf("%d
+",n)
+#define LLI long long int
+#define R return 0
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,k,i; s(n);
+		LLI a[n],x;
+		F(i,0,n) S(a[i]);
+		s(k);
+		x=a[k-1];
+		//cout<<x<<endl;
+		sort(a,a+n);
+		F(i,0,n){
+			if(a[i]==x)
+			break;
+		}
+		p(i+1);
+	}
+	R;
+}

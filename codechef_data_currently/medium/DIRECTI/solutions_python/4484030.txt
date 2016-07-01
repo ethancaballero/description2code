@@ -1,0 +1,40 @@
+import sys
+
+n = input()
+
+while n>0:
+	t=[]
+	x = input()
+	i=x
+	while i > 0 :
+		t.append(raw_input())
+		i-=1
+		
+	while (i+1) < x:
+		if t[i][0] == "L":
+			if t[i+1][0] == "L":
+				t[i] = t[i].replace("Left","Right",1)
+		elif t[i][0] == "R":
+			if t[i+1][0] == "R":
+				t[i] = t[i].replace("Right","Left",1)
+		elif t[i][0] == "B":
+			if t[i+1][0] == "L":
+				t[i] = t[i].replace("Begin","Right")
+			else:
+				t[i] = t[i].replace("Begin","Left",1)
+	
+		i+=1
+		
+		
+	if t[i][0] == "L":
+		t[i] = t[i].replace("Left","Begin",1)
+	else:
+		t[i] = t[i].replace("Right","Begin",1)
+	
+	while i >= 0:
+		print t[i]
+		i-=1
+		
+	print
+	
+	n-=1

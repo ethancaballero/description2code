@@ -1,0 +1,17 @@
+t=input()
+player=0
+lead=0
+n1,n2=0,0
+for i in range(0,t,1):
+    p1,p2=map(int,raw_input().split())
+    n1=n1+p1
+    n2=n2+p2
+    if((n1-n2)>0):
+        if((n1-n2)>lead):
+            lead=n1-n2
+            player=1
+    else:
+        if((n2-n1)>lead):
+            lead=n2-n1
+            player=2
+print player,lead            

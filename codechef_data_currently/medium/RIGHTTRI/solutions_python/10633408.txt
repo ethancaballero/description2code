@@ -1,0 +1,20 @@
+import math
+t=int(raw_input())
+s=[]
+for lol in range(t):
+    a=[]
+    s=raw_input().split()
+    H=float(s[0])
+    S=float(s[1])
+    if (H*H)-(4*S)<0:
+        print "-1"
+        continue
+    lmb=H*H
+    B=(lmb+(math.sqrt(lmb+(4*S))*math.sqrt(lmb-(4*S))))/2.0
+    B=math.sqrt(B)
+    A=(2*S)/B
+    a.append(A)
+    a.append(B)
+    a.append(H)
+    a.sort()
+    print (str(a[0])+" "+str(a[1])+" "+str(a[2]))

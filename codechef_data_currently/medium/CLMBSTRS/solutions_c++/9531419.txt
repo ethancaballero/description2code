@@ -1,0 +1,35 @@
+#include <stdlib.h>
+#include<stdio.h>
+#include<math.h>
+ 
+int main() 
+{
+ long long int n;
+    
+    long long int a[1000001]={0},i,j,k,t;
+    a[0]=1;
+    a[1]=1;
+    for(i=2;i<=1000000;i++)
+    {a[i]=a[i-2]+a[i-1];
+        a[i]=a[i]%1000000007;
+    } 
+    scanf("%lld",&t);
+    while(t--)
+    {long long int n,ans=0,k,g;
+        scanf("%lld %lld",&n,&g);
+      k=a[n];
+     while(k)
+    {if(k%2==1)
+         ans++;
+     k=k/2;
+     }
+     if(ans==g)
+         {printf("CORRECT
+");
+         }
+     else
+         printf("INCORRECT
+");
+    }    
+    }
+ 

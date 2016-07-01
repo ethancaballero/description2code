@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+char a[5005];
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%s",a);
+        int n=strlen(a);
+        int A=0,B=0,i;
+        for(i=0;i<n;i++)
+        {
+            if(a[i]=='A')
+               A++;
+            else
+               B++;
+        }
+        if(A==2)
+          printf("A
+");
+        else
+        if(B==2)
+          printf("B
+");
+        else
+          printf("-1
+");
+    }
+    return 0;
+}

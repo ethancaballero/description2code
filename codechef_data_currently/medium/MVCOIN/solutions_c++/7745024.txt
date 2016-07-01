@@ -1,0 +1,102 @@
+#include <bits/stdc++.h>
+
+#define rep(i,n) for(i=1;i<=n;i++)
+#define Rep(i,n) for(i=0;i<n;i++)
+#define For(i,a,b) for(i=a;i<=b;i++)
+
+#define pb(x) push_back(x)
+#define sz(x) x.size()
+
+#define mem(ara,val) memset(ara,val,sizeof(ara))
+#define eps 1e-9
+
+#define si(x) scanf("%d",&x)
+#define sii(x,y) scanf("%d %d",&x,&y)
+#define siii(x,y,z) scanf("%d %d %d",&x,&y,&z)
+#define sl(x) scanf("%lld",&x)
+#define sll(x,y) scanf("%lld %lld",&x,&y)
+#define slll(x,y,z) scanf("%lld %lld %lld",&x,&y,&z)
+#define ss(ch) scanf("%s",ch)
+#define pi(x) printf("%d",x)
+#define pii(x,y) printf("%d %d",x,y)
+#define piii(x,y,z) printf("%d %d %d",x,y,z)
+#define pl(x) printf("%lld",x)
+#define pll(x,y) printf("%lld %lld",x,y)
+#define plll(x,y,z) printf("%lld %lld %lld",x,y,z)
+#define ps(ch) printf("%s",ch)
+#define Afridi 0
+#define NL printf("
+")
+#define debug(x) printf("wow  %d !!
+",x)
+#define Max 1000000
+#define INF INT_MAX
+
+typedef long long LL;
+typedef unsigned long long ULL;
+
+using namespace std;
+
+LL n,k,ara[1005];
+
+int main()
+{
+    LL i,j,x,t,T;
+    sl(T);
+    rep(t,T)
+    {
+        mem(ara,0);
+        sll(n,k);
+        ara[0] = 1;
+        rep(i,n)
+        {
+            sl(x);
+            ara[x] = 1;
+        }
+        LL last = 1000,tot = 0;
+        while(1)
+        {
+            LL idx1,idx2,idx3;
+            for(i=last; i>=0; i--)
+            {
+                if(ara[i])
+                {
+                    idx1 = i;
+                    break;
+                }
+            }
+            idx2 = 0;
+            for(i=idx1-1; i>=0; i--)
+            {
+                if(ara[i] == 0)
+                {
+                    idx2 = i+1;
+                    break;
+                }
+            }
+            if(idx2 == 0)break;
+            LL len = idx1 - idx2 + 1;
+            LL val = len/k;
+            if(len % k)val++;
+            for(i=idx2-1; i>=0; i--)
+            {
+                if(ara[i])
+                {
+                    idx3 = i;
+                    break;
+                }
+            }
+            LL baki = idx2 - idx3 - 1;
+            //printf("idx1 %d idx2 %d idx3 %d
+",idx1,idx2,idx3);
+            tot += (baki * val);
+            last = idx3 + len;
+            for(i=idx3; i<=last; i++)ara[i] = 1;
+            //for(i=0;i<=last;i++)printf(" %d",ara[i]);
+            //NL;
+        }
+        pl(tot);
+        NL;
+    }
+    return 0;
+}

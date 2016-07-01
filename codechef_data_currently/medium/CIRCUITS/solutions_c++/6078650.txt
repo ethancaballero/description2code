@@ -1,0 +1,42 @@
+    #include<stdio.h>
+    struct node
+    {
+    	int indx ,a ,b;
+    };
+    int main()
+    {
+    int N , T , i;
+    node data[101];
+    double result[101] , low=0 , hi=1 , p=0.50000;
+    scanf("%i",&T);
+    while(T--)
+    {
+    	low =0;hi=1;p=0.50000;
+    scanf("
+%i",&N);
+    for(i=1;i<=N;i++)
+    {
+    scanf("%i",&data[i].indx);
+    if(data[i].indx!=0)
+    {
+    scanf("%i %i",&data[i].a,&data[i].b);
+    }
+    }
+    while(1)
+    {
+    for(i=1;i<=N;i++)
+    {
+    if(data[i].indx==0)result[i]=p;
+    else if(data[i].indx==1)result[i]=1-(1-(result[data[i].a]))*(1-(result[data[i].b]));
+    else result[i]=result[data[i].a]*result[data[i].b];
+    }
+    if((result[N]-0.5)*(result[N]-0.5)<=(1e-7*0.5)*(1e-7*0.5))break;
+    else if(result[N]<0.5)
+    {low=p;p=(low+hi)/2;}
+    else
+    {hi=p;p=(low+hi)/2;}
+    }
+    printf("%.5f
+",p);
+    }
+    } 

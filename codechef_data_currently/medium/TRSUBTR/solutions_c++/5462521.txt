@@ -1,0 +1,169 @@
+#include<cstdio>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int n;
+vector<int> age;
+vector<int> par;
+vector<vector<int> > ch;
+vector<int> rep;
+int ind;
+
+int nq;
+vector<int> ageq;
+vector<int> parq;
+vector<vector<int> > chq;
+vector<int> repq;
+int indq;
+
+typedef vector<int> VI;
+
+void dfs(int x)
+{
+	if(x==-1)return;
+	rep[ind++]=101;
+	rep[ind++]=age[x];
+	rep[ind++]=102;
+	dfs(ch[x][0]);
+	rep[ind++]=103;
+	rep[ind++]=104;
+	dfs(ch[x][1]);
+	rep[ind++]=105;
+	rep[ind++]=106;
+}
+
+void dfsq(int x)
+{
+	if(x==-1)return;
+	repq[indq++]=101;
+	repq[indq++]=ageq[x];
+	repq[indq++]=102;
+	dfsq(chq[x][0]);
+	repq[indq++]=103;
+	repq[indq++]=104;
+	dfsq(chq[x][1]);
+	repq[indq++]=105;
+	repq[indq++]=106;
+}
+
+
+
+bool match()
+{
+
+	VI t = VI(repq.size());  
+	int i = 2, j = 0;
+	t[0] = -1; t[1] = 0;
+
+	while(i < (int)repq.size())
+	{
+		if(repq[i-1] == repq[j]) { t[i] = j+1; i++; j++; }
+		else if(j > 0) j = t[j];
+		else { t[i] = 0; i++; }
+	}
+
+	int m = 0;
+	i = 0;
+	while(m+i < (int)rep.size())
+	{
+		if(repq[i] == rep[m+i])
+		{
+			i++;
+			if(i == (int)repq.size()) return true;
+		}
+		else
+		{
+			m += i-t[i];
+			if(i > 0) i = t[i];
+		}
+	}  
+	return false;
+
+}
+
+int main()
+{
+	scanf("%d",&n);
+	age.resize(n);
+	par.resize(n);
+	ch.resize(n);
+	rep.resize(7*n);
+	for(int i=0;i<n;++i)
+	{
+		age[i]=0;
+		par[i]=-1;
+		ch[i].resize(2);
+		ch[i][0]=-1;
+		ch[i][1]=-1;
+
+	}
+	for(int i=0;i<n;++i)scanf("%d",&age[i]);
+	for(int i=0;i<n-1;++i)
+	{
+		int x,y;
+		char m[5];
+		scanf("%d%d%s",&x,&y,m);
+		y--;
+		x--;
+		par[y]=x;
+		if(m[0]=='M')
+		{
+			ch[x][0]=y;	
+		}
+		else
+		{
+			ch[x][1]=y;
+		}
+	}
+	int root=0;
+	while(par[root]!=-1)root=par[root];
+	ind=0;
+	dfs(root);
+	int q;
+	scanf("%d",&q);
+	for(int pot=0;pot<q;++pot)
+	{
+
+		scanf("%d",&nq);
+		ageq.resize(nq);
+		parq.resize(nq);
+		chq.resize(nq);
+		repq.resize(7*nq);
+		for(int i=0;i<nq;++i)
+		{
+			ageq[i]=0;
+			parq[i]=-1;
+			chq[i].resize(2);
+			chq[i][0]=-1;
+			chq[i][1]=-1;
+
+		}
+		for(int i=0;i<nq;++i)scanf("%d",&ageq[i]);
+		for(int i=0;i<nq-1;++i)
+		{
+			int x,y;
+			char m[5];
+			scanf("%d%d%s",&x,&y,m);
+			y--;
+			x--;
+			parq[y]=x;
+			if(m[0]=='M')
+			{
+				chq[x][0]=y;
+			}
+			else
+			{
+				chq[x][1]=y;
+			}
+		}
+		int root=0;
+		while(parq[root]!=-1)root=parq[root];
+		indq=0;
+		dfsq(root);
+		if(match())printf("YES
+");
+		else printf("NO
+");
+	}
+	return 0;
+}

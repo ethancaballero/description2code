@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t,k,ans,temp,i,j,num,vis[65537];
+	string str;
+	cin>>t;
+	while(t--)
+	{   memset(vis,0,sizeof(vis));
+		cin>>k>>str;
+		num=pow(2.0,k);
+
+		for(i=1;i<num-1;++i)
+        {   if(!vis[i])
+            {ans=0;
+            temp=i;
+            for(j=k-1;j>=0;--j)
+            {   int st=(temp&1);
+                temp>>=1;
+                st<<=j;
+                ans|=st;
+            }
+            vis[ans]=1;
+            swap(str[i],str[ans]);
+            }
+        }
+        cout<<str<<endl;
+	}
+	return 0;
+}

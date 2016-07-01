@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+
+int main() {
+	int i, k, s;
+	scanf("%d%d%d", &i, &k, &s);
+	
+	int ai, bi;
+	scanf("%d%d", &ai, &bi);
+	
+	double a = ai, b = bi;
+	if ((i&1) != (k&1)) {
+		i++;
+		a = sqrt(2.0) * ((ai + bi) - sqrt(3.0) * (ai - bi));
+		b = sqrt(2.0) * ((ai - bi) + sqrt(3.0) * (ai + bi));
+	}
+	double ans = (a + b) * pow(2.0, 2*(k-i) - s);
+	printf("%.10f
+", ans);
+	return 0;
+}

@@ -1,0 +1,17 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+    int a,n,k,i;
+  //  while(j--)
+   {
+    cin>>a>>n>>k;
+    cout<<a%(n+1);
+    for(i=2;i<=k;++i)
+    {
+        cout<<" "<<(int)(a/pow(n+1,i-1))%(n+1);
+    }
+   }
+   return 0;
+}

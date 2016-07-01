@@ -1,0 +1,39 @@
+#include <iostream>
+#define mod 1000000007
+typedef long long ll;
+using namespace std;
+ll ex(ll a, ll b){
+  ll result = 1;
+
+  while (b){
+    if (b%2==1){
+      result= (result*a)%mod;
+    }
+    b /= 2;
+    a= (a*a)%mod;
+  }
+
+  return result;
+}
+int main() {
+int t;
+cin>>t;
+ while(t--)
+ {
+ 	ll n,tmp,m,p=0,i;
+ 	cin>>n;
+ 	if(n==1)
+ 	{
+ 	cout<<2<<endl;
+ 	continue;
+     }
+ 	if(n%2!=0)
+ 	{
+ 		p=(4*(ex(2,(n-1)/2)-1))%mod;
+ 	}
+ 	else
+ 	p=(ex(2,n/2)+(2*(2*(ex(2,(n/2)-1)-1))))%mod;
+ 	cout<<p+2<<endl;
+ }
+	return 0;
+}

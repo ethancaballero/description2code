@@ -1,0 +1,27 @@
+#include <cstdio>
+#define mod 1000000007
+
+int sum, n, m, table[1000005][6], i, j;
+
+int func (int n) {
+	if (n < 6) return 0;
+	return table[n - 6 + 5][5];
+}
+
+int main () {
+	scanf("%d", &n);
+	//precomputation
+	table[0][0] = 1;
+	for(i = 1; i <= n; i++) 
+	for(j = 1, table[i][0] = 1; j <= 5; j++) 
+	table[i][j] = (table[i - 1][j - 1] + table[i - 1][j]) % mod;
+	
+	for(i = 1; i <= n; i++) 
+	if ((n - i) % 2 == 0)
+	sum = (sum + func((n - i) / 2)) % mod;
+	
+	printf("%d
+",sum);
+
+	return 0;
+}

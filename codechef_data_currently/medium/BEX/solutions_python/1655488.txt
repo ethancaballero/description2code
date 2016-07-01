@@ -1,0 +1,17 @@
+def main() :
+  n = int(raw_input())
+  ll = []
+  bookcnt = 0
+  for i in range(n) :
+    str = raw_input()
+    if "-1" in str :
+      print "%d %s" % (bookcnt-ll[-1][2],ll[-1][1])
+      bookcnt = ll[-1][2]-1
+      del ll[-1]
+    else:
+      (d,bookname) = str.split()
+      d = int(d)
+      if d == 0 : continue
+      bookcnt += 1
+      if (not ll) or (d <= ll[-1][0]) : ll.append([d,bookname,bookcnt]) 
+main() 

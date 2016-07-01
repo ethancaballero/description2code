@@ -1,0 +1,22 @@
+for cases in xrange(int(raw_input())):
+    n = int(raw_input())
+    l = raw_input().strip().split()
+    l.sort(key=len)
+    ans = ''
+    t = 0
+    for i in xrange(0,len(l[0])):
+        for j in xrange(i+1,len(l[0])+1):
+            st = l[0][i:j]
+            f = True
+            for k in l[1:]:
+                if st not in k:
+                    f = False
+                    break
+            if f:
+                #print "st = ",st
+                if len(st) > len(ans):   ans = st
+                elif len(st) == len(ans) and ans > st:  ans = st
+    print ans
+                
+    
+        

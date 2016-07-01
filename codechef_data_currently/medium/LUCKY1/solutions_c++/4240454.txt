@@ -1,0 +1,59 @@
+#include<iostream>
+#include<map>
+#include<vector>
+#include<cstring>
+#include<cmath>
+#include<algorithm>
+#include<cstdio>
+#include<fstream>
+using namespace std;
+#define abs(x) ((x)>0?(x):-(x))
+#define M 100000
+#define lld signed long long int
+#define pp pop_back()
+#define ps(x) push_back(x)
+#define tkint(n) scanf("%d",&n)
+#define tkchar(ch) scanf("%c",&ch)
+#define tklong(n) scanf("%I64d",&n)
+lld pa4[M+5],pa7[M+5],ans[M+5];
+map<lld,lld>mp;
+int nof(int x,int p)
+{
+	int an=0;
+	while(x!=0)
+	{
+		if(x%10==p)++an;
+		x/=10;
+	}
+	return an;
+}
+void process()
+{
+	pa4[0]=pa7[0]=0;
+	for(int i=1;i<=M;++i)
+	{
+		pa4[i]=pa4[i-1]+nof(i,4);
+		pa7[i]=pa7[i-1]+nof(i,7);
+	}
+}
+void create()
+{
+	mp[0]++;
+	for(int i=1;i<=M;++i)
+	{
+		ans[i]=ans[i-1]+mp[pa4[i]-pa7[i]];
+		mp[pa4[i]-pa7[i]]++;
+	}
+}
+int main()
+{
+	process();
+	create();
+	int t,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		cout<<ans[n]<<endl;
+	}
+}

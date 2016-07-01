@@ -1,0 +1,39 @@
+def xor(a=0,b=0):
+    
+    return a^b 
+def use(a):
+    global s,max
+    ans=0
+    for i in range(len(a)):
+        
+        ans=xor(a[i],ans)
+    s=xor(ans,k)        
+    if s>max:
+        max=s    
+def powerset(seq):
+    if len(seq) <= 1:
+        yield seq
+        yield []
+    else:
+        for item in powerset(seq[1:]):
+            yield [seq[0]]+item
+            yield item
+t=int(raw_input())
+if 1<=t<=10:
+    while(t>0):
+        global max
+        
+        t-=1
+        inp=raw_input().split()
+        n=int(inp[0])
+        k=int(inp[1])
+        if k>=1 and 1<=n<=1000:
+            max=xor(k)
+            b=raw_input().split()
+            for i in range(len(b)):
+                b[i]=int(b[i])
+            
+            a=powerset(b)
+            for i in a:
+                use(i)
+            print max

@@ -1,0 +1,101 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <stdlib.h>
+#include <math.h>
+#include <set>
+#include <assert.h>
+#include <cstring>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <map>
+#include <time.h>
+#include <climits>
+
+using namespace std;
+
+#define FOR(i,a,b) for(int i=a;i<b;++i)
+#define FORR(i,a,b) for(int i=a;i>=b;--i)
+#define FORC(it,container) for(typeof(container.begin()) it=container.begin();it!=container.end();++it)
+#define INT(x) scanf("%d",&x)
+#define LLD(x) scanf("%lld",&x)
+#define STR(x) scanf("%s",x)
+#define CHAR(x) scanf("%c",&x)
+#define PINT(x) printf("%d
+",x)
+#define PLLD(x) printf("%lld
+",x)
+#define CLR(x) memset(x,0,sizeof(x));
+#define F first
+#define S second
+#define PB push_back
+
+const int INF = INT_MAX;
+const int MAX = 100000;
+const int MOD = 1e7 + 7;
+
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef pair<int,int> PII;
+typedef map<int,int> MII;
+typedef vector<pair<int,int> > VPII;
+typedef vector<int> VI;
+typedef vector<char> VC;
+typedef vector<LL> VLL;
+typedef vector<VI> VVI;
+typedef vector<VLL> VVL;
+typedef set<int> SI;
+typedef set<char> SC;
+
+double prob[MAX+5][2];  // 0 --> no carry , 1 --> carry
+double ans[MAX+5][2];
+
+int main()
+{
+prob[1][0] = 0.55;
+prob[1][1] = 0.45;
+
+ans[1][0] = 0.55;
+ans[1][1] = 0.45;
+
+	// probability of carry over at position x 
+	// = probability of carry over at position x-1 * 0.55 + 
+	//   probability of no carry over at position x-1 * 0.45
+	// exp number of carry overs = sum them up 
+	// 
+
+FOR(i,2,MAX+1)
+{
+	prob[i][1] = prob[i-1][1]*0.55 + prob[i-1][0]*0.45;
+	prob[i][0] = prob[i-1][1]*0.45 + prob[i-1][0]*0.55;	
+
+	ans[i][1] = prob[i][1] + ans[i-1][1];
+	ans[i][0] = prob[i][0] + ans[i-1][0];	
+
+}
+int test = 1;
+
+INT(test);
+
+
+while(test--)
+{
+	int n; INT(n);
+
+	//cout<<" prob = "<<prob[n][1]<<" 0 = "<<prob[n][0]<<endl;
+
+	//cout<<" ans = "<<ans[n][1]<<" 0 = "<<ans[n][0]<<endl;
+
+	cout<<setprecision(20)<<ans[n][1]<<endl;
+	
+	//printf("%0.9lf
+",ans[n][1]);	
+
+}
+return 0;
+
+}

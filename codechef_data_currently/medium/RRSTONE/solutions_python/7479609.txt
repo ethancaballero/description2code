@@ -1,0 +1,15 @@
+w=raw_input().split()
+n=int(w[0])
+k=int(w[1])
+l=list(map(int,raw_input().split()))
+a=max(l)
+b=min(l)
+if k==0:
+    for i in l:
+        print i,
+elif k%2==0:
+    for i in l:
+        print i-b,
+else:
+    for i in l:
+        print a-i,

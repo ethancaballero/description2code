@@ -1,0 +1,15 @@
+import math
+def parseIntList(str):
+ return [long(x) for x in str.split()]
+def printBS(li):
+ s=[str(i) for i in li]
+ print " ".join(s)
+n=input()
+li=parseIntList(raw_input())
+s=sum(li)*2
+if s==n*(n+1):
+ print 'YES'
+else:
+ print 'NO'
+  
+ 

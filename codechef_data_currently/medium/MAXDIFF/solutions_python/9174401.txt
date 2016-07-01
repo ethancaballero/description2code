@@ -1,0 +1,11 @@
+T = int(raw_input())
+for t in range(T):
+	c = 0
+	N, K = map(int, raw_input().split())
+	a = map(int, raw_input().strip().split(' '))
+	if N - K < K:
+		K = N - K
+	a.sort()
+	for i in range(K):
+		c += a[i]
+	print sum(a[K:]) - c

@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define N 101000
+int Mn[N * 4], se[N * 4];
+int a[N], val[N];
+#define inf 10000
+ 
+void build(int st, int en, int id) {
+    Mn[id] = se[id] = inf;
+    if(st == en) return ;
+    int mid = (st + en) >> 1;
+    build(st, mid, id * 2);
+    build(mid + 1, en, id * 2 + 1);
+}
+ 
+void update(int id, int va) {
+    se[id] = min(se[id], va);
+    Mn[id] = min(Mn[id], va);
+}
+void push_down(int id) {
+    int l = id * 2;
+    int r = id * 2 + 1;
+    update(l, se[id]);
+    update(r, se[id]);
+}
+ 
+void add(int l, int r, int st, int en, int id, int va) {
+    if(l > en || r < st) return ;
+    if(l <= st && en <= r) {
+        update(id, va);
+        return ;
+    }
+    push_down(id);
+    int mid = (st + en) >> 1;
+    add(l, r, st, mid, id * 2, va);
+    add(l, r, mid + 1, en, id * 2 + 1, va);
+}
+ 
+int calc(int l, int st, int en, int id) {
+    if(st == en) return Mn[id];
+    int mid = (st + en) >> 1;
+    push_down(id);
+    if(mid >= l) return calc(l, st, mid, id * 2);
+    return calc(l, mid + 1, en, id * 2 + 1);
+}
+typedef long long ll;
+ 
+ll f[600], g[600];
+ 
+int main() {
+    //freopen("1.in", "r", stdin);
+    int T, n, m, K, l, r, c;
+    for(scanf("%d", &T); T --;) {
+        scanf("%d%d%d", &n, &K, &m);
+        ll sum = 0;
+        for(int i = 1; i <= n; i ++) scanf("%d", &val[i]), sum += val[i];
+        build(1, n, 1);
+        for(int i = 0; i < m; i ++) {
+            scanf("%d%d%d", &l, &r, &c);
+            add(l, r, 1, n, 1, c);
+        }
+        for(int i = 1; i <= n; i ++) a[i] = calc(i, 1, n, 1);
+        for(int i = 0; i <= K; i ++) f[i] = 0;
+        for(int i = 1; i <= n; i ++) if(val[i] < 0 && a[i] <= K) {
+        	for(int j= 0; j <= K; j ++) g[j] = 0;
+            for(int j = 0; j <= K - a[i]; j ++) g[j + a[i]] = f[j] - val[i];
+            for(int j = 0; j <= K; j ++) f[j] = max(f[j], g[j]);
+        }
+        ll mn = 0;
+        for(int i = 0; i <= K; i ++) mn = max(mn, f[i]);
+        sum += mn;
+        printf("%lld
+", sum);
+    }
+    return 0;
+}

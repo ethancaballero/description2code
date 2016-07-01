@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,max,len,i,r,b,g;
+	string s,a;
+	cin>>t;
+	cin>>a;
+	while(t--)
+	{
+		cin>>s;
+		r=0,b=0,g=0;
+		len=s.length();
+		for(i=0;i<len;i++)
+		{
+			if(s[i]=='R')
+			r++;
+			else if(s[i]=='B')
+			b++;
+			else
+			g++;
+		}
+		max=r>b?(r>g?r:g):(b>g?b:g);
+		cout<<len-max<<endl;
+		cin>>a;
+	}	
+	return 0;
+}

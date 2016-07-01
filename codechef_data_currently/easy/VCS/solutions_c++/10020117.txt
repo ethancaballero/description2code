@@ -1,0 +1,33 @@
+# include<iostream>
+using namespace std;
+int main()
+{
+	int t,m,k,n,i,c,d;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m>>k;
+		int a[102]={0},x;
+		while(m--)
+		{
+			cin>>x;
+			a[x]++;
+		}
+		while(k--)
+		{
+			cin>>x;
+			a[x]++;
+		}
+		c=0;
+		d=0;
+		for(i=0;i<=n;i++)
+		{
+			if(a[i]==2)
+				c++;
+			else if(a[i]==1)
+				d++;
+		}
+		cout<<c<<" "<<n-(c+d)<<endl;
+	}
+	return 0;
+}

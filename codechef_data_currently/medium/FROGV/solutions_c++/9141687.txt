@@ -1,0 +1,71 @@
+
+#include <algorithm>
+#include <functional>
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+#include <vector>
+#include<map>
+#define MAX 100006
+
+using namespace std;
+typedef long long int LLD;
+typedef long int LD;
+typedef int I;
+map<LD,LD> hashM;
+map<LD,LD>::iterator it;
+
+
+int main(){
+I n,k,p,i,j;
+
+cin>>n>>k>>p;
+LD x;
+vector<LD> pos(n+1),co(n);
+
+for(i=1;i<=n;i++)
+{
+    cin>>pos[i];
+    co[i-1]=pos[i];
+}
+
+sort(co.begin(),co.end());
+
+
+LD head=co[0];
+hashM[co[0]]=head;
+
+for(i=1;i<n;i++)
+{
+    if(co[i]-co[i-1]<=k)
+        hashM[co[i]]=head;
+    else
+        {
+            head=co[i];//update head
+            hashM[co[i]]=head;
+        }
+
+}
+
+//for(it=hashM.begin();it!=hashM.end();it++){
+//    cout<<it->first<<"->"<<it->second<<endl;
+//}
+int a,b;LD e1,e2,par1,par2;
+for(i=0;i<p;i++){
+    cin>>a>>b;
+    e1=pos[a];
+    e2=pos[b];
+    par1=hashM[e1];
+    par2=hashM[e2];
+
+    //cout<<"P:"<<par1<<endl;
+    //cout<<"p: "<<par2<<endl;
+    if(par1==par2)
+        cout<<"Yes"<<endl;
+    else
+        cout<<"No"<<endl;
+}
+return 0;
+}

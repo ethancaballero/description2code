@@ -1,0 +1,100 @@
+/*
+* Author: Ikshu Bhalla
+* Language: C++
+*/
+#include<bits/stdc++.h>
+#define mp(x,y) make_pair(x,y)
+#define pb(x) push_back(x)
+#define vi vector<int>
+#define vs vector<string>
+#define vvi vector<vector<int> >
+#define vpii vector<pair<int,int> >
+#define fori(s,e) for(i=s;i<=e;i++)
+#define forj(s,e) for(j=s;j<=e;j++)
+#define fork(s,e) for(k=s;k<=e;k++)
+#define rep(i,s,e) for(int i=s;i<=e;i++)
+#define tr(container, it) for(typeof(container.begin()) it = container.begin(); it != container.end(); it++)
+#define ull unsigned long long
+#define ll long long
+#define imax INT_MAX
+#define imin INT_MIN
+#define sz(x) (int)x.size()
+#define ln(s) s.length()
+#define ppb pop_back
+#define max(a,b) (a)>(b)?(a):(b)
+#define min(a,b) (a)<(b)?(a):(b)
+#define all(x) x.begin(),x.end()
+#define mem(x,y) memset(x,y,sizeof(x));
+#define pii pair<int,int>
+#define psi pair<string,int>
+#define in(c,x) scanf("%"#c,&x)
+#define out(c,x) printf("%"#c" ",x)
+#define aa first
+#define bb second
+#define Endl endl
+#define pi 3.14159265358979323846264338327950
+#define eps 1E-9
+using namespace std;
+int readint()
+{
+    int t=0;
+    char c,ch;
+    ch=getchar();
+    if (ch=='-') c=getchar();
+    else c=ch;
+    while(c<'0' || c>'9')
+        c=getchar();
+    while(c>='0' && c<='9')
+    {
+        t=(t<<3)+(t<<1)+c-'0';
+        c=getchar();
+    }
+    if (ch=='-' ) return -t;
+    else return t;
+}
+//int vis[10010], lev[10010];
+void dfs(vvi &v, int x, vi &vis, int level,vi &l)
+{
+    int i;
+    if (vis[x]) return;
+    else l[x]=level;
+    vis[x]=1;
+    fori(0,sz(v[x])-1)
+    {
+        dfs(v, v[x][i], vis, level+1, l);
+    }
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    int i,j,k,t,n,m;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        vvi v(n);
+        fori(0,n-2)
+        {
+            int x,y;
+            cin>>x>>y;
+            x--,y--;
+            v[x].pb(y);
+            v[y].pb(x);
+        }
+        vi vis(n,0), lev(n,0);
+        dfs(v,0,vis,1,lev);
+        sort(all(lev));
+        int l=0,r=sz(lev)-1;
+        int ans=0;
+        while(l<=r)
+        {
+            ans++;
+            int h=lev[l];
+            while(l<=r&&lev[l]==h) l++;
+            if (l<=r) ans++,r--;
+        }
+        cout<<ans<<Endl;
+    }
+    return 0;
+}
+ 

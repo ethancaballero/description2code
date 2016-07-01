@@ -1,0 +1,13 @@
+a=int(raw_input())
+for i in range(a):
+    b,c=[int(x) for x  in raw_input().split(":")]
+    d,e=[int(x) for x  in raw_input().split(":")]
+    f=float(raw_input())
+    g=float(b*60+c)
+    h=float(d*60+e)
+    if (g)>=((h+2*f)):
+        print g-h+f,(g-h)
+    else:
+        print g-h+f,(2*f-(g-h))/2+(g-h)
+        
+    

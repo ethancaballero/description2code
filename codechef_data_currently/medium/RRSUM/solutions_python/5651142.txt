@@ -1,0 +1,5 @@
+import sys
+n,m=map(int, raw_input().split())
+t = (n<<1)+1
+print '
+'.join(str(max(0,n - abs(int(q)-t))) for q in sys.stdin.read().split())

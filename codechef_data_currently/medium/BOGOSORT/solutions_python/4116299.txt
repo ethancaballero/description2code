@@ -1,0 +1,59 @@
+import sys
+from fractions import Fraction
+
+T = {1: 1, 2: 2}
+P = {2: 2, 3: 3}
+
+
+def calc_P(n):
+    # m = last digit = limit first streak
+    result = Fraction(0)
+    acc_coef = Fraction(1)
+    coef = Fraction(1, n - 1)
+    for m in range(1, n):
+        index = m - 1
+        result += (
+            T[n - index] *
+            coef * acc_coef *
+            (1 + Fraction(
+                (n - 2 - index) ** 2,
+                (n - 1 - index)
+            ))
+        )
+        acc_coef *= Fraction(1, n - 1 - index)
+    return result
+
+
+for n in range(3, 151):
+    gg = Fraction(1, n * (n - 1))
+    bg = Fraction(n - 2, n * (n - 1))
+    bb = Fraction(1, n) + Fraction((n - 2) * (n - 2), n * (n - 1))
+
+    T[n] = (
+        1 +
+        2 * bg * P[n - 1] +
+        gg * (T[n - 2] - 1)
+    ) * Fraction(1, 1 - bb)
+
+    P[n] = P[n - 1] * Fraction(n - 2, n - 1)
+    P[n] += T[n] * ( 1 + Fraction( (n - 2) ** 2, n - 1 ) )
+    P[n] *= Fraction(1, n - 1)
+    #assert P[n] == calc_P(n)
+    if 0 and n > 5:
+        n -= 1
+        pn1 = calc_P(n + 1)
+        test = calc_P(n) * Fraction(n - 1, n)
+        test += T[n + 1] * ( 1 + Fraction( (n - 1) ** 2, n ) )
+        test *= Fraction(1, n)
+        print test == pn1
+
+
+    if n == 10:
+        assert T[n] == Fraction(877318, 35343)
+
+#print "ready"
+n = int(sys.stdin.readline().strip())
+for _ in range(n):
+    n = int(sys.stdin.readline().strip())
+    print T[n]
+

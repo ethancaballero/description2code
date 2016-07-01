@@ -1,0 +1,169 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define MOD 1000000007
+#define INF 0x3f3f3f3f
+using namespace std;
+ll fact[100005],cnt[30];
+
+ll mod_expo(ll base,ll expo)
+{
+    if(expo==0)
+        return 1;
+    if(expo%2==0)
+    {
+        ll y=mod_expo(base,expo/2);
+        return (y*y)%MOD;
+    }
+    return (base*mod_expo(base,expo-1))%MOD;
+}
+
+void pre()
+{
+    fact[0]=1;
+    for(int i=1;i<=100000;i++)
+    {
+        fact[i]=fact[i-1]*i;
+        fact[i]%=MOD;
+    }
+}
+
+ll tot_permut(int n)
+{
+    ll ret=fact[n];
+    //cout<<ret<<endl;
+    for(int i=0;i<26;i++)
+    {
+        ret*=mod_expo(fact[cnt[i]],MOD-2);
+        //cout<<i<<" ";
+        //cout<<mod_expo(fact[cnt[i]],MOD-2)<<endl;
+        ret%=MOD;
+    }
+    return ret;
+}
+
+ll one_swap()
+{
+    ll ret=0;
+    for(int i=0;i<26;i++)
+    {
+        for(int j=i+1;j<26;j++)
+        {
+            ret+=(cnt[i]*cnt[j])%MOD;
+            ret%=MOD;
+        }
+    }
+    return ret;
+}
+
+ll overlapping_swap()
+{
+    ll ret=0;
+    for(int i=0;i<26;i++)
+    {
+        for(int j=i+1;j<26;j++)
+        {
+            for(int k=j+1;k<26;k++)
+            {
+                ret+=(2*((((cnt[i]*cnt[j])%MOD)*cnt[k])%MOD))%MOD;
+                ret%=MOD;
+            }
+        }
+    }
+    return ret;
+}
+
+ll distinct()
+{
+    ll ret=0;
+    for(int i=0;i<26;i++)
+    {
+        for(int j=i+1;j<26;j++)
+        {
+            for(int k=j+1;k<26;k++)
+            {
+                for(int l=k+1;l<26;l++)
+                {
+                    ret+=(3*((((cnt[i]*cnt[j])%MOD)*((cnt[k]*cnt[l])%MOD))%MOD))%MOD;
+                    ret%=MOD;
+                }
+            }
+        }
+    }
+    return ret;
+}
+
+ll one_common()
+{
+    ll ret=0;
+    for(int i=0;i<26;i++)
+    {
+        for(int j=0;j<26;j++)
+        {
+            if(i!=j)
+            {
+                for(int k=j+1;k<26;k++)
+                {
+                    if(i!=k)
+                    {
+                        ret+=(((cnt[i]*(cnt[i]-1))%MOD)*((cnt[j]*cnt[k])%MOD))%MOD;
+                        ret%=MOD;
+                    }
+                }
+            }
+        }
+    }
+    return ret;
+}
+
+ll two_common()
+{
+    ll ret=0;
+    for(int i=0;i<26;i++)
+    {
+        for(int j=i+1;j<26;j++)
+        {
+            ret+=((((cnt[i]*(cnt[i]-1))/2)%MOD)*(((cnt[j]*(cnt[j]-1))/2)%MOD))%MOD;
+            ret%=MOD;
+        }
+    }
+    return ret;
+}
+
+ll disjoint_swap()
+{
+    return (distinct()+one_common()+two_common())%MOD;
+}
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    pre();
+    while(t--)
+    {
+        memset(cnt,0,sizeof(cnt));
+        string s;
+        cin>>s;
+        for(int i=0;i<s.length();i++)
+        {
+            cnt[s[i]-'a']++;
+        }
+        ll tot=tot_permut(s.length());
+        //cout<<tot<<endl;
+        ll similar=1;
+        similar+=one_swap();
+        //cout<<one_swap()<<endl;
+        similar%=MOD;
+        similar+=overlapping_swap();
+        //cout<<overlapping_swap()<<endl;
+        similar%=MOD;
+        similar+=disjoint_swap();
+        //cout<<disjoint_swap()<<endl;
+        similar%=MOD;
+        ll ans=tot*((tot-similar+MOD)%MOD);
+        ans%=MOD;
+        printf("%lld
+",ans);
+    }
+    return 0;
+}

@@ -1,0 +1,20 @@
+MOD_VAL = 1000000007
+t = int(raw_input())
+while(t > 0):
+    t -= 1
+    sum = ans = 0
+    n = int(raw_input())+1
+    x = raw_input().split(" ")
+    for i in range(0, n):
+        val = int(x[i])
+        if(i==0):
+            sum += val
+        else:
+            prev_sum = sum
+            sum = (sum+(val*(2**(i-1))))
+            ans = 2*(ans+((val*prev_sum)))
+            ans %= MOD_VAL
+            sum %= MOD_VAL
+    print(ans)
+    print("
+")

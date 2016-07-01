@@ -1,0 +1,16 @@
+#!/usr/bin/python
+t=int(raw_input())
+for i in range(t):
+	lens=int(raw_input())
+	seq=map(int, raw_input().split())
+	lenf=int(raw_input())
+	fseq=map(int, raw_input().split())
+	flag=0
+	for num in fseq:
+		if num not in seq:
+			flag=1
+			break
+	if flag==1:
+		print 'No'
+	else:
+		print 'Yes'

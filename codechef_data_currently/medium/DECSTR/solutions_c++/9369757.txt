@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+		int n,i,p,q;
+		cin>>n;
+		char a;
+		p=n/25;
+		q=n%25;
+		for(i=0;i<=q;i++){
+			if(q==0)
+				break;
+			a=(97+q-i);
+			cout<<a;
+		}
+		for(i=0;i<p;i++)
+			cout<<"zyxwvutsrqponmlkjihgfedcba";
+		cout<<"
+";
+	}
+	return 0;
+}

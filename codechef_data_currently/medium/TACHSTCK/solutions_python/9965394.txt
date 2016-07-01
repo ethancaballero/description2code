@@ -1,0 +1,19 @@
+N,D = map(int,raw_input().split())
+l = []
+h = N
+while N:
+    l.append(input())
+    N-=1
+l.sort()
+i = 0
+cnt = 0
+
+while i < h-1:
+    
+    if l[i+1] - l[i] <= D:
+        cnt+=1
+        i = i+2
+    else:
+        i = i+1
+print cnt    
+    

@@ -1,0 +1,4 @@
+(a,n,k) = map(int,raw_input().split())
+for i in range(k):
+    x = a/(n+1)**i
+    print x%(n+1), 

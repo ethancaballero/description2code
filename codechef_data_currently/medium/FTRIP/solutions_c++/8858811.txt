@@ -1,0 +1,49 @@
+#include <math.h> // for sqrt
+#include <stdio.h> // for scanf , printf
+//#include <string.h> // for memset
+//~ #include <iostream> // for cout
+//using namespace std;
+# define limit 1000
+int N,S,M,K,T;
+int i,j,l,r;
+long double arr[1+limit][1+limit],sum,Dr;
+int main()
+{	
+	arr[0][0]=1.0;
+	for(i=1;i<=limit;i++)
+	{
+		arr[i][0]=1;
+		arr[i][i]=1;
+		for(j=1;j<i;j++)
+			arr[i][j]=arr[i-1][j]+arr[i-1][j-1];
+	}
+	//printf("%.7Lf
+",arr[1000][500]);
+	scanf("%d",&T);
+	while(T-->0)
+	{
+		scanf("%d%d%d%d",&S,&N,&M,&K);
+		Dr=arr[S-1][N-1];// denominator
+		sum=0;
+		l=K;
+		if(l<N-1-S+M)
+			l=N-1-S+M;
+		r=N-1;
+		if(r>M-1)
+			r=M-1;
+		for(i=l;i<=r;i++)
+		{
+			sum+=arr[M-1][i]/Dr*arr[S-M][N-i-1];
+			//printf("%d %Ld %Ld %Ld %Lf
+",i,(long long)arr[M-1][i],(long long)arr[S-M][N-i-1],(long long)Dr,sum);
+		}
+
+			printf("%.7Lf
+",sum);	
+	}			
+	return 0;				
+}
+
+
+
+

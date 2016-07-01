@@ -1,0 +1,97 @@
+#include <vector>
+#include <string>
+#include <cstring>
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+#include <queue>
+#include <stack>
+#include <set>
+#include <map>
+#include <ctime>
+using namespace std;
+#define FOR(i,a,b) for(int i=a; i<=b; i++)
+#define REP(i,a,b) for(int i=a; i>=b; i--)
+#define FORAD(i,u) for(int i=0; i < (int)u.size(),i++)
+#define BUG(x) cout << x << endl
+#define ll long long
+#define fi first
+#define sd second
+#define pb push_back
+#define two(i) 1 << i
+#define sz(x) (int)x.size()
+#define e 1e-12
+#define bit(s,i) ((s >> (i-1)) & 1)
+#define Nmax 100100
+const double pi = acos(-1);
+typedef vector<int> vi ;
+typedef pair<int,int> pii ;
+
+ll n;
+int m;
+
+int buf(ll n) {
+    int res = 0;
+    FOR(i, 1, n) {
+        int x = (ll)i * i % m;
+        x = (ll)x * x % m;
+        res = (res + x) % m;
+    }
+    return res;
+}
+
+int buff_cal() {
+    int res = 0;
+    FOR(i, 1, n) {
+        int x = (ll)i * i % m;
+        x = (ll)x * x % m;
+        res = (res + (ll)x * (n/i)) % m;
+    }
+    return res;
+}
+
+
+int cal(ll n) {
+    int m_30 = 30 * m;
+    int x = n % m_30;
+    int x5 = x * 6, x4 = x * 15, x3 = x * 10, x1 = x;
+    FOR(i, 1, 4) x5 = (ll) x5 * x % m_30;
+    FOR(i, 1, 3) x4 = (ll) x4 * x % m_30;
+    FOR(i, 1, 2) x3 = (ll) x3 * x % m_30;
+    //cout << x5 << ' ' << x4 << ' ' << x3 << ' ' << x1 << endl;
+    return ((x5 + x4 + x3 - x1 + m_30) % m_30)/30;
+}
+
+void solve() {
+    int sum = 0;
+    FOR(i, 1, trunc(sqrt(n))) {
+        int x = (ll)i * i % m;
+        x = (ll)x * x % m;
+        sum = (sum + (ll)(n/i) * x) % m;
+
+    }
+    long long u = trunc(sqrt(n)) + 1;
+    while (u <= n) {
+        long long v = n /(n/u);
+      //  cout << u << ' ' << v << endl;
+        int x = (cal(v) - cal(u- 1) + m) % m;
+        sum = (sum + (n/u) * x) % m;
+        u = v + 1;
+    }
+    cout << sum << endl;
+}
+
+int main() {
+    // freopen("","r",stdin);
+    // freopen("","w",stdout);
+    int test;
+    cin >> test;
+    while (test--){
+        cin >> n >> m;
+        solve();
+        //cout << buff_cal() << endl;
+        //cout << cal(n) << ' ' << buf(n) << endl;
+    }
+     return 0;
+}

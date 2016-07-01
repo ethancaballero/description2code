@@ -1,0 +1,139 @@
+#include<stdio.h>
+#include<algorithm>
+
+using namespace std;
+
+struct point
+{long int xco,yco;
+};
+
+bool howto(point p1,point p2)
+{return (p1.xco<p2.xco || (p1.xco==p2.xco && p1.yco<=p2.yco));
+}
+
+int N;
+point points[2000];
+
+bool isin(long int x,long int y,int i,int j)
+{
+	int mid=(i+j)/2;
+	if (i>=j)
+	{return false;
+	}
+	else if(points[mid].xco==x && points[mid].yco==y)
+	{return true;
+	}
+	else if (i==mid) 
+	{
+		return false;
+	}
+	else if (points[mid].xco<x || (points[mid].xco==x && points[mid].yco<y))
+	{
+		return isin(x,y,mid+1,j);
+	}
+	else
+	{
+		return isin(x,y,i,mid);
+	}
+}
+
+int calculate(void)
+{
+	bool two=false,one=false;
+	for (int i=0;i<N-1;i++)
+	{
+		long int x1=points[i].xco,y1=points[i].yco;
+		for(int j=i+1;j<N;j++)
+		{
+			long int x2=points[j].xco,y2=points[j].yco;
+			if (x1!=x2 || y1!=y2)
+			{
+				two=true;
+					point test[6][2];
+					int numtest=0;
+					if (abs(x1-y1+y2)<=1000000 && abs(y1+x1-x2)<=1000000)
+					{test[numtest][1].xco=x1-y1+y2;test[numtest][1].yco=y1+x1-x2;test[numtest][0].xco=1;numtest++;
+					}
+					if (abs(x1+y1-y2)<=1000000 && abs(y1-x1+x2)<=1000000)
+					{test[numtest][1].xco=x1+y1-y2;test[numtest][1].yco=y1-x1+x2;test[numtest][0].xco=1;numtest++;
+					}
+					if (abs(x2-y1+y2)<=1000000 && abs(y2+x1-x2)<=1000000)
+					{test[numtest][1].xco=x2-y1+y2;test[numtest][1].yco=y2+x1-x2;test[numtest][0].xco=2;numtest++;
+					}
+					if (abs(x2+y1-y2)<=1000000 && abs(y2-x1+x2)<=1000000)
+					{test[numtest][1].xco=x2+y1-y2;test[numtest][1].yco=y2-x1+x2;test[numtest][0].xco=2;numtest++;
+					}
+					if ((x1+x2+y1-y2)%2==0 && (y1+y2+x1-x2)%2==0)
+					{
+						if (abs((x1+x2-y1+y2)/2)<=1000000 && abs((y1+y2+x1-x2)/2)<=1000000)
+						{test[numtest][1].xco=(x1+x2-y1+y2)/2;test[numtest][1].yco=(y1+y2+x1-x2)/2;test[numtest][0].xco=0;numtest++;}
+						if (abs((x1+x2+y1-y2)/2)<=1000000 && abs((y1+y2-x1+x2)/2)<=1000000)
+						{test[numtest][1].xco=(x1+x2+y1-y2)/2;test[numtest][1].yco=(y1+y2-x1+x2)/2;test[numtest][0].xco=0;numtest++;}
+					}
+					
+					for (int k=0;k<numtest;k++)
+					{
+						//printf("%ld %ld %ld %ld %ld %ld
+",x1,y1,x2,y2,test[k][1].xco,test[k][1].yco);
+						if (isin(test[k][1].xco,test[k][1].yco,j+1,N))
+						{one=true;
+						 point check;
+						 switch(test[k][0].xco)
+						 {
+						 	case 0:check.xco=x1+x2-test[k][1].xco;
+						 			check.yco=y1+y2-test[k][1].yco;
+						 			break;
+						 	case 1:check.xco=x2+test[k][1].xco-x1;
+						 		   check.yco=y2+test[k][1].yco-y1;
+						 		   break;
+						 	case 2:check.xco=x1+test[k][1].xco-x2;
+						 			check.yco=y1+test[k][1].yco-y2;
+						 			break;
+						 }
+						 //printf("%ld %ld
+",check.xco,check.yco);
+						 if (isin(check.xco,check.yco,j+1,N))
+						 {return 0;
+						 }
+						 break;
+						}
+					}
+			}
+		}
+	}
+	
+	if (one)
+	{return 1;
+	}
+	else if (two)
+	{return 2;
+	}
+	else
+	{return 3;
+	}
+}
+
+main()
+{
+	
+	scanf("%d",&N);
+	for (int i=0;i<N;i++)
+	{
+		scanf("%ld %ld",&points[i].xco,&points[i].yco);
+	}
+	sort(points,points+N,howto);
+	if (N==0)
+	{printf("4
+");
+	}
+	else if (N==1)
+	{printf("3
+");
+	}
+	else
+	{int npoints=calculate();
+	 printf("%d
+",npoints);
+	}
+	
+}

@@ -1,0 +1,16 @@
+import sys
+
+test_cases = int(sys.stdin.readline())
+
+def solve_test_case():
+    n = int(sys.stdin.readline())
+    i = 1
+    result = 0
+    while i < n+1:
+        if (n % i == 0):
+            result += i
+        i = i+1
+    print result
+
+for i in range(test_cases):
+    solve_test_case()

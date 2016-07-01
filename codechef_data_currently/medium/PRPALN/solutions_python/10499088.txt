@@ -1,0 +1,22 @@
+# cook your code here
+import sys
+sys.setrecursionlimit(100001)
+def isPallindrome(a, i, j, c = 1) :
+    if(c < 0 or i >= len(a) or j < 0 or j < i) : 
+        return False
+    if(i == j) :
+        return True
+    if(j-i == 1) :
+        return (a[j] == a[i]) or (a[j] != a[i] and c == 1)
+    if(a[i] != a[j]) :
+        return isPallindrome(a, i, j-1, c-1) or isPallindrome(a, i+1, j, c-1);
+    else :
+        return isPallindrome(a, i+1, j-1, c)
+
+ans = {True:"YES", False:"NO"}
+n = int(raw_input())
+while(n > 0) :
+    n -= 1
+    palln = raw_input()
+    print ans[isPallindrome(palln, 0, len(palln)-1)]
+    

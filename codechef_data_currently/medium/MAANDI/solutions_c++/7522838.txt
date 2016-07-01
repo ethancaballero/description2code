@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+bool valid(ll n)
+{
+	while(n)
+	{
+		ll k=n%10;
+		n/=10;
+		if(k==4 || k==7)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		ll n;
+		cin>>n;
+		ll i=1;ll count=0;
+		while(i*i<=n)
+		{
+			if(n%i==0)
+			{
+				if(valid(i))
+				{
+					count++;
+				}
+				ll y=n/i;
+				if(y!=i && valid(y))
+				{
+					count++;
+				}
+			}
+			i++;
+		}
+		cout<<count<<"
+";
+	}
+	return 0;
+}

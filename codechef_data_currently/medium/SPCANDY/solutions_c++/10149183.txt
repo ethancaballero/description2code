@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+  long long t,n,k;
+  cin>>t;
+  while(t--)
+  {
+    cin>>n>>k;
+    if(k==0)
+    cout<<"0"<<" "<<n<<"
+";
+    else
+    cout<<n/k<<" "<<n%k<<"
+";
+  }
+  return 0;
+}

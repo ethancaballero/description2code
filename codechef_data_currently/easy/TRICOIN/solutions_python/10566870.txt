@@ -1,0 +1,18 @@
+import numpy
+cases=int(raw_input())
+counter=0
+while(counter<cases):
+    numberofcoins=int(raw_input()) #Input The Number Of Coins
+    rows=1
+    coins=0
+
+    while(coins<=numberofcoins):
+        coins=coins+rows
+        if(coins>numberofcoins):
+            coins=numberofcoins+1
+        else:
+            rows=rows+1
+
+    rows=rows-1
+    print rows
+    counter=counter+1

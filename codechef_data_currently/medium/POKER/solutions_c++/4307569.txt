@@ -1,0 +1,220 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+//	freopen("test1.txt","r",stdin);
+//	freopen("output.txt","w",stdout);
+
+	int t;
+	cin>>t;
+	
+	
+
+	while(t--)
+	{		
+		vector <pair<int,char> > v;
+		int i;
+		for(i=0;i<5;i++)
+		{
+			char ch,ch2;
+			int num;
+			cin>>ch>>ch2;
+			
+			if(ch=='A')
+			num=1;
+			else if(ch=='T')
+			num=10;
+			else if(ch=='J')
+			num=11;
+			else if(ch=='Q')
+			num=12;
+			else if(ch=='K')
+			num=13;
+			else
+			{
+				num=ch-'0';	
+			}
+			v.push_back(make_pair(num,ch2));
+		
+			cin.ignore();
+		}
+		
+		sort(v.begin(),v.end());
+
+		int a[5];
+		char b[5];
+		for(i=0;i<5;i++)
+		{
+			a[i]=v[i].first;
+			b[i]=v[i].second;
+//			cout<<a[i]<<" "<<b[i]<<" "<<v[i].first<<" "<<v[i].second<<endl;
+			
+		}
+		
+		int rf=0;
+		int sf=0;
+		int fok=0;
+		int fh=0;
+		int fl=0;
+		int st=0;
+		int tok=0;
+		int tp=0;
+		int pa=0;
+		
+		int f=0;		
+		//flush
+		if(b[1]==b[0]&&b[2]==b[0]&&b[3]==b[0]&&b[4]==b[0])
+		{
+			fl=1;
+			f=1;
+		}
+		else
+		{
+			f=0;
+		}
+		
+//		cout<<"f is "<<f<<endl;
+
+		// royal flush
+		if(a[0]==1&&a[1]==10&&a[2]==11&&a[3]==12&&a[4]==13)
+		{
+			if(f==1)
+			{
+				rf=1;
+			}	
+			else
+			{
+				st=1;
+			}
+		}
+		
+		int m=0;
+		// straight flush
+		if(a[1]==a[0]+1&&a[2]==a[1]+1&&a[3]==a[2]+1&&a[4]==a[3]+1)
+		{
+			if(f==1)
+			{
+				sf=1;
+			}
+			else
+			{
+				st=1;
+			}
+		}
+		//four of a kind
+		if(a[0]==a[2]||a[1]==a[4])
+		{
+			fok=1;
+		}	
+		
+		//full house
+		if(a[0]==a[2])
+		{
+			if(a[3]==a[4])
+			{
+				fh=1;
+			}
+			else
+			{
+				tok=1;
+			}
+		}
+		if(a[2]==a[4])
+		{
+			if(a[0]==a[1])
+			{
+				fh=1;
+			}
+			else
+			tok=1;
+		}
+		
+		// three of a kind
+		if(a[0]==a[2])
+		{
+			tok=1;
+		}
+		if(a[2]==a[4])
+		{
+			tok=1;
+		}
+		if(a[1]==a[3])
+		tok=1;
+		
+		if(a[0]==a[1])
+		{
+			if(a[2]==a[3]||a[3]==a[4])
+			{
+				tp=1;
+			}
+			else
+			{
+				pa=1;
+			}
+		}
+		if(a[1]==a[2])
+		{
+			if(a[3]==a[4])
+			{
+				tp=1;
+			}
+			else
+			{
+				pa=1;
+			}
+		}
+		//pair
+		if(a[2]==a[3])
+		{
+			pa=1;
+		}
+		
+		if(a[3]==a[4])
+		pa=1;
+		
+		if(rf==1)
+		{
+			cout<<"royal flush"<<endl;
+		}
+		else if(sf==1)
+		{
+			cout<<"straight flush"<<endl;
+		}
+		else if(fok==1)
+		{
+			cout<<"four of a kind"<<endl;
+		}
+		else if(fh==1)
+		{
+			cout<<"full house"<<endl;
+		}
+		else if(fl==1)
+		{
+			cout<<"flush"<<endl;
+		}
+		else if(st==1)
+		{
+			cout<<"straight"<<endl;
+		}
+		else if(tok==1)
+		{
+			cout<<"three of a kind"<<endl;
+		}
+		else if(tp==1)
+		{
+			cout<<"two pairs"<<endl;
+		}
+		else if(pa==1)
+		{
+			cout<<"pair"<<endl;
+		}
+		else
+		{
+			cout<<"high card"<<endl;
+		}
+	}	
+}

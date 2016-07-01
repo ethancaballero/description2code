@@ -1,0 +1,73 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+    //cout << "Hello world!" << endl;
+    int tst;
+    int x,i,n,ans,k;
+    scanf("%d",&tst);
+    while(tst--)
+    {
+        scanf("%d %d %d",&n,&k,&ans);
+        int a[n+1];char str[4];
+         for(i=1;i<=n;i++)
+            {
+                scanf("%d",&a[i]);
+
+            }
+         scanf("%s",str);
+         if(k==0)
+            printf("%d
+",ans);
+         else
+         {
+
+         if(str[0]=='X')
+         {
+             //cout<<"he";
+             if(k%2==0)
+                 printf("%d
+",ans);
+              else
+              {
+                  x=a[1];
+                  for(i=2;i<=n;i++)
+                  {
+                      x=x^a[i];
+                  }
+                   printf("%d
+",ans^x);
+              }
+         }
+         else if (str[0]=='O')
+         {
+             //for()
+             x=a[1];
+             for(i=2;i<=n;i++)
+               {
+                   x=x|a[i];
+                  // cout<<" x; "<<x;
+
+               }
+               printf("%d
+",ans|x);
+
+         }
+         else
+            {
+                  x=a[1];
+             for(i=2;i<=n;i++)
+                 x=x&a[i];
+                printf("%d
+",ans&x);
+            }
+         }
+
+
+         }
+
+
+    return 0;
+}

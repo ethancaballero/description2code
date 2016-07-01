@@ -1,0 +1,32 @@
+# Lead Game
+# Practice : Beginner (7)
+# CodeChef
+
+# Aditya Vamsikrishna
+# 30th June 2016
+
+# 
+import numpy as np
+import math
+
+n = int(raw_input())
+Leads = np.zeros(n)
+s1 = 0
+s2 = 0
+
+for i in range(n):
+	p1,p2 = raw_input().split()
+	p1,p2 = (int(p1),int(p2))
+	s1 += p1
+	s2 += p2
+	Leads[i] = s1 - s2
+
+minLead = min(Leads)
+maxLead = max(Leads)
+
+if math.fabs(minLead) > math.fabs(maxLead):
+	print int(2),
+	print int(math.fabs(minLead))
+else:
+	print int(1),
+	print int(math.fabs(maxLead))

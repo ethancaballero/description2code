@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define MOD 1000000007
+
+int main()
+{
+    int i,j,k;
+    int t,n;
+    int x;
+    vector<int> a(100002);
+
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+
+        for(i=0;i<n;i++)
+        {
+            scanf("%d",&a[i]);
+        }
+
+        //now, the gcd
+        x=0;
+
+        for(i=0;i<n;i++)
+        {
+            x=__gcd(x,a[i]);
+
+            if(x==1)
+                break;
+        }
+
+        if(x==1)
+            cout<<n;
+        else
+            cout<<-1;
+
+        cout<<endl;
+    }
+
+    return 0;
+}

@@ -1,0 +1,11 @@
+for t in range(int(raw_input())):
+    n,m=map(int,raw_input().split())
+    a=map(int,raw_input().split())
+    s=min(a)
+    l=max(a)
+    for i in range(n):
+        if abs(i-s)>abs(i-l):
+            print abs(i-s),
+        else:
+            print abs(i-l),
+ 

@@ -1,0 +1,119 @@
+#include<algorithm>
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<fstream>
+#include<iomanip>
+#include<bitset>
+#include<deque>
+#include<queue>
+#include<string>
+#include<map>
+#include<cstring>
+#include<sstream>
+#include<cmath>
+#include<ctime>
+using namespace std;
+
+string cities[50];
+
+int search(string city, int N)
+{
+	for (int i = 0; i < N; i++)
+	{
+		if (cities[i] == city)
+			return i;
+	}
+	return -1;
+}
+
+int main()
+{
+	int N;
+	scanf("%d
+", &N);
+	for (int i = 0; i < N-1; i++)
+		getline(cin, cities[i], ' ');
+	getline(cin, cities[N-1], '
+');
+	int M;
+	scanf("%d
+", &M);
+	int roads[N][N];
+	memset(roads, -1, sizeof(roads));
+	for (int i = 0; i < M; i++)
+	{
+		string city;
+		getline(cin, city, ' ');
+		int a = search(city, N);
+		getline(cin, city, ' ');
+		int b = search(city, N);
+		int d;
+		scanf("%d
+", &d);
+		roads[a][b] = d;
+	}
+	int T;
+	scanf("%d
+", &T);
+	for (int t = 0; t < T; t++)
+	{
+		int K;
+		scanf("%d ", &K);
+		string arr[K];
+		bool b = true;
+		for (int i = 0; i < K; i++)
+		{
+			if (i == K-1)
+				getline(cin, arr[i], '
+');
+			else
+				getline(cin, arr[i], ' ');
+		}
+		int length = 0;
+		int index[K];
+		for (int i = 0; i < K; i++)
+		{
+			index[i] = search(arr[i], N);
+			if (index[i] == -1)
+			{
+				b = false;
+				break;
+			}
+			for (int j = 0; j < i; j++)
+			{
+				if (index[j] == index[i])
+				{
+					b = false;
+					break;
+				}
+			}
+		}
+		if (!b)
+		{
+			printf("ERROR
+");
+			continue;
+		}
+		else
+		{
+			for (int i = 1; i < K; i++)
+			{
+				if (roads[index[i-1]][index[i]] != -1)
+					length += roads[index[i-1]][index[i]];
+				else
+				{
+					b = false;
+					break;
+				}
+			}
+			if (!b)
+				printf("ERROR
+");
+			else
+				printf("%d
+", length);
+		}
+	}
+	return 0;
+}

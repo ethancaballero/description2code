@@ -1,0 +1,24 @@
+
+def main():
+
+        cases = int(raw_input())
+
+        for i in range(cases):
+
+                k, S = raw_input().split()
+                k = int(k)
+
+                max_len = 2**k
+                solution = [None]*(max_len)
+
+                for j in range(max_len):
+                        binIdx = bin(j)[2:]
+
+                        if(len(binIdx) < k):
+                                binIdx = "0"*(k-len(binIdx)) + binIdx
+                        newIdx = int(binIdx[::-1],2)
+                        solution[newIdx] = S[j]
+
+                print "".join(solution)
+
+main()

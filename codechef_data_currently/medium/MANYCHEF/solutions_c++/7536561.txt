@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N=2123;
+char s[N];
+
+int main() {
+    int test;
+    scanf("%d", &test);
+    while(test--) {
+        scanf("%s", s);
+        int len=strlen(s);
+        for(int i=0;i<len/2;i++) {
+            swap(s[i], s[len-i-1]);
+        }
+        for(int i=0;i<(len-3);i++) {
+            bool ok=((s[i]=='F' || s[i]=='?') &&
+                     (s[i+1]=='E' || s[i+1]=='?') &&
+                     (s[i+2]=='H' || s[i+2]=='?') &&
+                     (s[i+3]=='C' || s[i+3]=='?'));
+            if(ok) {
+                s[i]='F';
+                s[i+1]='E';
+                s[i+2]='H';
+                s[i+3]='C';
+            }
+        }
+        for(int i=0;i<len;i++) {
+            if(s[i]=='?') {
+                s[i]='A';
+            }
+        }
+        for(int i=0;i<len/2;i++) {
+            swap(s[i], s[len-i-1]);
+        }
+        puts(s);
+    }
+}

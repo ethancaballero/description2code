@@ -1,0 +1,16 @@
+for i in range(int(raw_input())):
+	i=1
+	s=raw_input()
+	for j in range(len(s)):
+		t=j+1
+		if(s[j] == 'l'):
+			if(t%2 == 0):
+				i = 2*i - 1
+			else:
+				i = 2*i 
+		if(s[j] == 'r'):		
+			if(t%2 == 0):
+				i = i*2 + 1
+			else:
+				i = i*2 + 2
+	print i % 1000000007 

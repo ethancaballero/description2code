@@ -1,0 +1,12 @@
+n,d=map(int,raw_input().split())
+l=[]
+for i in xrange(n):
+    l.append(int(raw_input()))
+l.sort()
+c=0
+for i in xrange(n-1):
+    if ((l[i+1]-l[i])<=d and l[i+1]!=0 and l[i]!=0):
+        c+=1
+        l[i+1]=0
+        l[i]=0
+print c            

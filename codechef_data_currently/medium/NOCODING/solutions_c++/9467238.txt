@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+
+    int t;
+    cin>>t;
+    while(t--){
+        string str;
+        cin>>str;
+        int l =str.length();
+        int i=0,c=2;
+        for(i=1;i<l;i++){
+
+            if(str[i-1]>str[i]){
+                c+=(90-(int)str[i-1]) + ((int)str[i]-64);
+
+            }
+            else{
+                c+=(int)str[i]-(int)str[i-1];
+            }
+            c++;
+        }
+
+        if(c<=11*l){
+        cout<<"YES"<<endl;
+        }
+
+        else{
+         cout<<"NO"<<endl;
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,18 @@
+#include<iostream>
+using namespace std;
+int main(){
+int t,x,y,z,sum,flag;
+cin>>t;
+while(t--){
+    cin>>x>>y;
+    sum=x+y;
+    for(int i=sum+1;true;i++){
+        flag=0;
+        for(int j=2;j<=i/2;j++){
+            if((i%j)==0) {flag=1;break;}
+        }
+        if(flag==0) {z=i;break;}
+    }
+    cout<<z-sum<<endl;
+}
+}

@@ -1,0 +1,14 @@
+import math
+N = input()
+s = sum(map(int, raw_input().strip().split()))
+a = math.sqrt((8*s)+1)
+add = 0
+if a.is_integer() and a > 1:
+        for i in range(N+1):
+                add += i
+        if s == add:
+                print 'YES'
+        else:
+                print 'NO'
+else:
+        print 'NO'

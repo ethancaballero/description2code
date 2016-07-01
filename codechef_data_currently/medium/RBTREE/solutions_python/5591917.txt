@@ -1,0 +1,101 @@
+root_node_color = 0
+color_map = {0: "Black", 1: "Red"}
+
+def parent(x):
+	return x >> 1
+
+
+def traverse(start, to):
+	path, p = [], start
+	while p != to:
+		path += [p]
+		p = parent(p)
+	path += [p]
+	return path
+
+
+def get_lca(x_path, y_path):
+	y_path_map = {}
+	for i in xrange(len(y_path)):
+		y_path_map[y_path[i]] = i
+
+	for i in xrange(len(x_path)):
+		p = x_path[i]
+		if p in y_path_map:
+			return i, y_path_map[p]
+	return -1, -1
+
+
+def get_color(x):
+	global root_node_color
+	path = traverse(x, 1)
+	color = 1-root_node_color
+	for p in path[::-1]:
+		color = 1-color
+	return color 
+
+
+def _get_colored_nodes(x, y, color):
+	# print "Searching for {} nodes...".format(color_map[color])
+	x_path = traverse(x, 1)
+	y_path = traverse(y, 1)
+	# print "x_path={}
+y_path={}".format(x_path, y_path)
+
+	lca, l = get_lca(x_path, y_path)
+	lca_color = get_color(x_path[lca])
+	# print "lca={}
+lca_color={}|{}".format(x_path[lca], lca_color, color_map[lca_color])
+
+	colored_nodes = 0
+	a = lca if lca_color == color else lca - 1
+	b = l - 2 if lca_color == color else l - 1
+
+	for j in xrange(a, -1, -2):
+		colored_nodes += 1
+	for j in xrange(b, -1, -2):
+		colored_nodes += 1
+
+	return colored_nodes
+
+
+def solve_query(q, x=None, y=None):
+	global root_node_color
+	if q == 'Qi':
+		root_node_color = 1 - root_node_color
+	elif q == 'Qb':
+		assert x is not None and y is not None
+		return _get_colored_nodes(x, y, 0)
+	elif q == 'Qr':
+		assert x is not None and y is not None
+		return _get_colored_nodes(x, y, 1)
+	return None
+	
+
+# # solve_query("Qi", state)
+# print solve_query("Qb", 5000, 5000)
+# print solve_query("Qr", 4000, 5000)
+
+# solve_query("Qi")
+# print solve_query("Qb", 5000, 5000)
+# print solve_query("Qr", 5000, 5000)
+
+
+
+def main():
+	T = int(raw_input())
+	for t in xrange(T):
+		q = raw_input()
+		if q.startswith("Qi"):
+			solve_query("Qi")
+		else:
+			q = q.strip().split()
+			print solve_query(q[0], int(q[1]), int(q[2]))
+			# if r is not None:
+				# output += [str(r)]
+				# print r
+	# print "
+".join(output)
+
+if __name__ == '__main__':
+	main()

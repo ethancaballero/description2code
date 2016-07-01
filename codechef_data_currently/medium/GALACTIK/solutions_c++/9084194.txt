@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long 
+vector <ll> adj[100002],min_vector;
+bool visited[100002];
+ll pos_min,tax[100002],cc;
+
+
+void dfs(ll node)
+{
+    visited[node]=true;
+    
+    if(tax[node]>=0)
+    pos_min=min(pos_min,tax[node]);
+     
+     ll i;
+     for(i=0;i<adj[node].size();i++)
+        if(!visited[adj[node][i]])
+        dfs(adj[node][i]);
+}
+
+int main()
+{
+ll n,m,i,x,y;
+cin>>n>>m;
+
+while(m--)
+{
+    cin>>x>>y;
+    adj[x].push_back(y);
+    adj[y].push_back(x);
+}
+
+for(i=1;i<=n;i++)
+    cin>>tax[i];
+
+for(i=1;i<=n;i++)
+{
+    if(!visited[i])
+    {
+        pos_min=INT_MAX;
+        cc++;
+        dfs(i);
+        min_vector.push_back(pos_min);
+    }
+}
+if(cc==1)
+{
+    cout<<"0";
+    return 0;
+}
+sort(min_vector.begin(),min_vector.end());
+
+ll sum=0;
+
+for(i=0;i<min_vector.size();i++)
+{
+    if(min_vector[i]==INT_MAX)
+    {
+        cout<<"-1
+";
+        return 0;
+    }
+    sum+=min_vector[i];
+}
+
+sum-=min_vector[0];
+
+cout<<min_vector[0]*(cc-1)+sum;
+
+return 0;
+}

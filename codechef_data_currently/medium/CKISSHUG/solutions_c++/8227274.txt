@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define mod 1000000007
+ll power(ll a,ll b)
+{
+    if(b==0)
+        return 1;
+    if(b==1)
+        return a;
+    ll temp=power(a,b/2);
+    temp=(temp*temp)%mod;
+    if(b&1)
+        temp=(temp*a)%mod;
+    return temp;
+}
+int main()
+{
+    ll t,n;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        scanf("%lld",&n);
+        if(n%2)
+        {
+            printf("%lld
+",power(2,(n+3)/2)-2);
+        }
+        else
+        {
+            printf("%lld
+",(3*power(2,n/2)-2)%mod);
+        }
+    }
+    return 0;
+}

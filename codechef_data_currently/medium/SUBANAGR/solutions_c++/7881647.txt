@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll int
+int dp[101][26];
+int main()
+{
+    ll n,t;
+    memset(dp,0,sizeof(dp));
+    cin>>n;
+    string s;
+    for(int i=0;i<n;i++)
+    {
+        cin>>s;
+        int l=s.length();
+        for(int j=0;j<l;j++) dp[i][s[j]-'a']++;
+    }
+    int ans[26];
+    for(int i=0;i<26;i++)
+    {
+        ans[i]=0;
+        int count=500;
+        for(int j=0;j<n;j++)
+        {
+           count=min(dp[j][i],count);
+        }
+        ans[i]=count;
+    }
+    int flag=0;
+    for(int i=0;i<26;i++)
+    {
+        for(int j=0;j<ans[i];j++)
+        {
+            cout<<char(i+'a'); flag=1;
+        }
+    }
+    if(!flag) puts("no such string");
+    return 0;
+}

@@ -1,0 +1,43 @@
+	#include<iostream>
+	#include<stdio.h>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			long long int n,k;
+			cin>>n>>k;
+			int a[100005];
+			for(int i=0;i<n;i++)
+				cin>>a[i];
+			long long int reamingpiece=0;
+			long long int breads=0;
+			for(int i=0;i<n;i++)
+			{
+				if(reamingpiece>=a[i])
+				{
+				
+					reamingpiece=reamingpiece-a[i];
+					if(reamingpiece!=0)
+						reamingpiece--;
+				}
+				else
+				{
+					a[i]-=reamingpiece;
+					breads+=a[i]/k;
+					reamingpiece=0;
+					if(a[i]%k!=0)
+					{
+						breads+=1;
+						reamingpiece=k-(a[i]%k);
+						if(reamingpiece!=0)
+							reamingpiece--;
+					}
+				}	
+			}
+			cout<<breads<<endl;
+			t--;
+		}	
+	}

@@ -1,0 +1,19 @@
+# cook your code here
+n,k=map(int,raw_input().split())
+a=map(int,raw_input().split())
+if k==0:
+    for i in range(len(a)):
+        print a[i],
+    exit()
+m=max(a)
+for j in range(len(a)):
+            a[j]=m-a[j]
+if k%2!=0:
+    for i in range(len(a)):
+        print a[i],
+        
+else:
+        m=max(a)
+        for j in range(len(a)):
+            a[j]=m-a[j]
+            print a[j], 

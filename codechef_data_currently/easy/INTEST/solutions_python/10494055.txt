@@ -1,0 +1,13 @@
+import sys
+
+lstInput =  raw_input().split()
+iLineCount = int(lstInput[0])
+iDivisibleBy = int(lstInput[1])
+iTotal = 0
+for line in xrange(iLineCount):
+	if  int(raw_input()) % iDivisibleBy == 0:
+		iTotal = iTotal + 1
+
+print iTotal
+
+sys.exit()

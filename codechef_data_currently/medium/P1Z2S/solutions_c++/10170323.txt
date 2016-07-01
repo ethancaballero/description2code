@@ -1,0 +1,19 @@
+#include<iostream>
+#include<math.h>
+#include<string.h>
+using namespace std;
+int main()
+{
+   long long int t;
+   cin>>t;
+   long long int n=t;
+   long long int sum=0;
+   while(t--)
+   {
+        long int x;
+        cin>>x;
+        sum=sum+x;
+	}
+	cout<<max(n,(sum+1)/2)<<"
+";
+}

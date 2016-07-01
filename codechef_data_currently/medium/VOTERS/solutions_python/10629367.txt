@@ -1,0 +1,20 @@
+from sys import stdin
+ 
+def merge(v):
+    T, last = [0], -1
+    v.sort()
+    for i in range(len(v) - 1):
+        if v[i] == last: continue
+        if v[i] == v[i+1]:
+           T.append(v[i])
+           T[0] += 1
+           last = v[i]
+    return T
+ 
+def main():
+    n = sum(map(int, raw_input().split()))
+    v = map(int, stdin.readlines())
+    x = merge(v)
+    for i in x: print i
+ 
+main() 

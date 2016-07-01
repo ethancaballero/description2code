@@ -1,0 +1,19 @@
+import sys
+t,T=0,int(sys.stdin.readline())
+for t in range(T):
+	ans=0
+	n,m=map(int,sys.stdin.readline().split())
+	p=map(int,sys.stdin.readline().split())
+	a=[]
+	for i in range(n):
+		l=map(int,sys.stdin.readline().split())
+		new=[l[0]]
+		new.extend(sorted(l[1:]))
+		a.append(new)
+	for i in p:
+		if(a[i][0]==0):
+			continue
+		else:
+			a[i][0]-=1
+			ans+=a[i].pop()
+	print ans

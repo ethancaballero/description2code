@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int main()
+{  float func(float x);
+  int n,x=0;
+  float number=0,guess=0,height=0;
+   cin>>n;
+     while(n--)
+     {
+        cin>>number;
+        height= func(number);
+        if(((height*height) + height)/2 >= number)
+        {  //cout<<height;
+           x= height;
+         }
+         else
+         {//cout<<height;
+          x=height ;
+          x=x;
+         }
+         cout<<x<<endl;
+      }
+    return 0 ;
+  }
+  float func(float num) 
+  { float guess= num /2;
+     while(!(((guess*guess + guess)/2 - num) >= -0.000000001 && ((guess*guess + guess)/2 - num)<= 0.000000001 ))
+     {
+          guess=((guess-1)+ ((2*num)/guess))/2 ;
+     }
+     return guess;
+  }        

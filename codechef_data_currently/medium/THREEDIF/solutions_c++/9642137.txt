@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+# define m 1000000007
+int main()
+{
+    long long t,i;
+    cin>>t;
+    long long arr[3];
+    while(t--)
+    {
+        for(i=0;i<3;i++)
+            cin>>arr[i];
+        sort(arr,arr+3);
+        cout<<((arr[0])%m*((arr[1]-1)%m)%m*((arr[2]-2)%m))%m<<"
+";
+    }
+}

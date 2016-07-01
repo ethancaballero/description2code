@@ -1,0 +1,6 @@
+for _ in range(input()):
+	n=input()
+	n=int((bin(n))[2:])
+	p=n*2
+	m=1000000007
+	print pow(2,p,m)

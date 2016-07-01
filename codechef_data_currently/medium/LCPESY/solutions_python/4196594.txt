@@ -1,0 +1,16 @@
+ch=input()
+while(ch):
+	dic={}
+	ct=0
+	for i in (raw_input()):
+		if i in dic:
+			dic[i]+=1
+		else:
+			dic[i]=1
+	for i in (raw_input()):
+		if dic.get(i)>0:
+			ct+=1
+			dic[i]-=1
+	
+	print ct		
+	ch=ch-1

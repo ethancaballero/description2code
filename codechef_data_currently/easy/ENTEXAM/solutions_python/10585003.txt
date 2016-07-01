@@ -1,0 +1,17 @@
+t=int(raw_input())
+for a in range(t):
+    s=map(int,raw_input().split())
+    p=[]
+    for x in range(s[0]-1):
+        r=map(int,raw_input().split())
+        p.append(sum(r))
+    r=map(int,raw_input().split())
+    k=sum(r)
+    p.sort(reverse=True)
+    counts=p[s[1]-1]+1-k
+    if k>p[s[1]-1]:
+        print 0
+    elif counts<=s[3]:
+        print( counts)
+    else:
+        print("Impossible") 

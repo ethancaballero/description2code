@@ -1,0 +1,25 @@
+f = {}
+f[0] = 1
+for i in xrange(1,1001):
+  f[i] = f[i-1]*i
+  
+def choose(n, k):
+    if 0 <= k <= n:
+        return float(f[n]/f[n-k]/f[k])
+    else:
+        return 0
+        
+t = input()
+  
+while(t>0):
+ ans = 0.000000
+ s,n,m,k=map(int,raw_input().split())
+ if(n-1<m-1):
+     lim=n-1
+ else:
+     lim=m-1
+ for i in xrange(k,lim+1):
+   ans += choose(s-m,n-i-1) * choose(m-1,i)
+ ans = float(ans/choose(s-1,n-1))
+ print "%f"%ans
+ t = t-1

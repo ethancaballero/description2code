@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+
+int main()
+	{
+	int x[10000],y[10000],n,i,j;
+	i=0,j=0;
+	cin>>n;
+	for(i=0;i<n;i++)
+		{
+		cin>>x[i]>>y[i];
+		}
+	for(j=0;j<n;j++)
+		{
+		cout<<x[j]%y[j]<<"
+";
+		}
+
+	}

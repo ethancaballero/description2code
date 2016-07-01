@@ -1,0 +1,20 @@
+n = int(input())
+stack = []
+input_expr = ""
+output_expr = ""
+k = ""
+
+for i in range(n):
+    input_expr = raw_input()
+    for j in input_expr:
+        if j == '(':
+            continue
+        elif j == '+' or j == '-' or j == '*' or j == '/' or j == '^':
+            stack.append(j)
+        elif j == ')':
+            k = stack.pop()
+            output_expr += k
+        else:
+            output_expr += j
+    print output_expr
+    output_expr = ""

@@ -1,0 +1,150 @@
+#include<iostream>
+#include<algorithm>
+#include<stdio.h>
+#include<string.h>
+
+using namespace std;
+
+int getRank(int *arr)
+{
+    int a[14], i, j;
+    memset(a, 0, sizeof(int)*14);
+
+    for(i = 0; i < 5; i++)
+    {
+        a[arr[i]]++;
+    }
+    for(i = 1; i < 14; i++)
+    {
+        if(a[i] == 4)
+            return 4;
+    }
+
+    for(i = 0; i < 14; i++)
+    {
+        if(a[i] == 3)
+        {
+            for(j = 0; j < 14; j++)
+            {
+                if(a[j] == 2)
+                    return 3;
+            }
+            return 2;
+        }
+    }
+
+    for(i = 0; i < 14; i++)
+    {
+        if(a[i] == 2)
+        {
+            for(j = i+1; j < 14; j++)
+            {
+                if(a[j] == 2)
+                    return 1;
+            }
+            return -1;
+        }
+    }
+
+
+}
+
+int main()
+{
+    char ch, str[15];
+    int arr[5], t, i, cc, cs, cd, che, c, r;
+    cin>>t;
+    gets(&ch);
+
+    while(t--)
+    {
+        c = cc = che = cd = cs =  0;
+        cin.getline(str,sizeof(char)*15);
+        //cout<<str<<"
+";
+        for(i = 0; i < 15; i = i+3)
+        {
+            ch = str[i];
+            //cout<<ch<<"
+";
+            if(ch == 'A')
+                arr[c++] = 1;
+            else if(ch == 'T')
+                arr[c++] = 10;
+            else if(ch == 'J')
+                arr[c++] = 11;
+            else if(ch == 'Q')
+                arr[c++] = 12;
+            else if(ch == 'K')
+                arr[c++] = 13;
+            else
+                arr[c++] = (int)ch - 48;
+
+            ch = str[i+1];
+            switch(ch)
+            {
+                case 'S': cs++; break;
+                case 'H': che++; break;
+                case 'D': cd++; break;
+                case 'C': cc++; break;
+            }
+            //ch = getchar();
+        }
+        //cout<<che<<"
+";
+        sort(arr, arr+5);
+        if((che == 5 || cs == 5 || cd == 5 || cc == 5) && arr[0] == 1 && arr[1] == 10 && arr[2] == 11 && arr[3] == 12 && arr[4] == 13)
+        {
+            cout<<"royal flush
+";
+        }
+        else if((che == 5 || cs == 5 || cd == 5 || cc == 5) && arr[1] == arr[0]+1 && arr[2] == arr[1]+1 && arr[3] == arr[2]+1 && arr[4] == arr[3]+1)
+        {
+            cout<<"straight flush
+";
+        }
+        else if((r = getRank(arr)) == 4)
+        {
+            cout<<"four of a kind
+";
+        }
+        else if(r == 3)
+        {
+            cout<<"full house
+";
+        }
+        else if(che == 5 || cs == 5 || cd == 5 || cc == 5)
+        {
+            cout<<"flush
+";
+        }
+        else if((arr[1] == arr[0]+1 && arr[2] == arr[1]+1 && arr[3] == arr[2]+1 && arr[4] == arr[3]+1) || (arr[0] == 1 && arr[1] == 10 && arr[2] == arr[1]+1 && arr[3] == arr[2]+1 && arr[4] == arr[3]+1))
+        {
+            cout<<"straight
+";
+        }
+        else if(r == 2)
+        {
+            cout<<"three of a kind
+";
+        }
+        else if(r == 1)
+        {
+            cout<<"two pairs
+";
+        }
+        else if(r == -1)
+        {
+            cout<<"pair
+";
+        }
+        else
+        {
+            cout<<"high card
+";
+        }
+
+    }
+
+    return 0;
+}

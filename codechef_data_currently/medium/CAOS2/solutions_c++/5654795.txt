@@ -1,0 +1,128 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+
+long long prime(int no)
+{
+	long long ctr=0;
+	int arr[]={2 ,3, 5, 7 ,11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 
+127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241};
+
+	for(int i=0;arr[i]<=no;i++)
+	ctr++;
+
+return ctr;
+}
+
+int main()
+{
+	int t;
+		
+	char s[505];
+	scanf("%d",&t);
+	
+	while(t--)
+	{
+		long long ans=0;
+		int n,m;
+		scanf("%d %d",&n,&m);
+		
+		char arr[n+1][m+1];
+		
+		for(int i=1;i<=n;i++)
+		{
+			scanf("%s",s);
+			for(int j=1;j<=m;j++)
+				arr[i][j]=s[j-1];
+		}
+	
+		int l[505][505]={0};
+		int r[505][505]={0};
+		int b[505][505]={0};
+		int t[505][505]={0};
+		
+		for(int i=1;i<=m;i++)
+		{
+			if(arr[1][i]=='^')
+			{
+			//l[1][i]=l[1][i-1]+1;
+			t[1][i]=1;
+			}
+		
+			int j=m-i+1;
+			if(arr[n][j]=='^')
+			{
+			//r[n][j]=r[n][j+1]+1;
+			b[n][j]=1;
+			}
+		}
+		
+		for(int i=1;i<=n;i++)
+		{
+			if(arr[i][1]=='^')
+			{
+			l[i][1]=1;
+			//t[i][1]=t[i-1][1]+1;
+			}
+			
+			int j=n-i+1;
+			if(arr[j][m]=='^')
+			{
+			r[j][m]=1;
+			//b[j][m]=b[j+1][m]+1;
+			}
+		}
+			
+		for(int i=2;i<=(n-1);i++)
+		{
+			for(int j=2;j<=(m-1);j++)
+			{	
+				if(arr[i][j]=='^')
+				{
+					l[i][j]=l[i][j-1]+1;
+					t[i][j]=t[i-1][j]+1;
+				}
+					
+				else
+				t[i][j]=l[i][j]=0;
+			
+			}
+		}
+				
+		for(int i=n-1;i>=2;i--)
+		{
+			for(int j=m-1;j>=2;j--)
+			{	
+				if(arr[i][j]=='^')
+				{	
+					r[i][j]=r[i][j+1]+1;
+					b[i][j]=b[i+1][j]+1;
+					
+				}
+					
+				else
+				r[i][j]=b[i][j]=0;
+					
+			}
+		}
+					
+		for(int i=3;i<=(n-2);i++)
+		{
+			for(int j=3;j<=(m-2);j++)
+			{	
+					if(arr[i][j]=='^')
+					{			
+					int mn;
+					mn= min(r[i][j+1], min(l[i][j-1], min(t[i-1][j],b[i+1][j])));
+					ans+=prime(mn);
+					}
+			}
+		}
+		
+		
+		printf("%lld
+",ans);
+	}
+return 0;
+}	

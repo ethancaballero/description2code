@@ -1,0 +1,33 @@
+'''
+Created on 11-Dec-2015
+
+@author: Lenovo
+'''
+MAXN=100001
+DP = []
+def initialize_twodlist(foo):    
+    new = []
+    for i in range (0, MAXN):
+        for j in range (0, 7):
+            new.append(foo)
+        DP.append(new)
+        new = []
+
+initialize_twodlist(0)
+
+A=[0]*MAXN
+
+for i in xrange(2,MAXN):
+    if A[i]==0:
+        for j in xrange(i,MAXN,i):
+            A[j]+=1
+#    print i, A[i]
+
+for i in xrange(2,MAXN):
+    for j in xrange(1,7):
+        DP[i][j]=DP[i-1][j]+ (1 if A[i]==j else 0)
+        
+         
+for _ in xrange(input()):
+    a,b,k=map(int, raw_input().split())
+    print DP[b][k]-DP[a-1][k]

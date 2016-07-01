@@ -1,0 +1,18 @@
+from collections import Counter
+t = int(raw_input())
+while(t):
+    t-=1
+    a,b = raw_input().lower().split()
+    n = a+b
+    parents = dict(Counter(n))
+    c = int(raw_input())
+    child = ''
+    for i in range(c):
+        child += raw_input()
+    child = dict(Counter(child))
+    f=0
+    for key in child:
+        if key not in parents or parents[key]<child[key]:
+            f=1
+            break
+    print "NO" if f==1 else "YES"

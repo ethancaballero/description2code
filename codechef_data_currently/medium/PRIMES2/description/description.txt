@@ -1,0 +1,29 @@
+ Chef has been exploring prime numbers lately, and has recently made a conjecture resembling
+one of Goldbach's conjectures.
+Chef's conjecture is that any odd number greater than 61 can be expressed as the sum of
+a prime, a square of a prime, and a cube of a prime.
+He wants you to help verify his conjecture for small numbers.
+Note: negative numbers are never considered to be prime, nor are 0 and 1.
+
+Input
+Input will consist of a series of odd numbers greater than 61 and less than 106, 
+one per line, terminated by the number 0 on a line by itself.
+There will be at most 1000 lines.
+
+Output
+For each odd number in the input, print 3 primes P1, P2, P3 on a line,
+where P1 + P22 + P33 is equal to the number from the input.
+If no such primes exist, print "0 0 0" instead (quotes for clarity).
+If there are multiple triplets of primes that satisfy the equation, print any such triplet.
+
+Sample Input
+81
+85
+155
+0
+
+
+Sample Output
+5 7 3
+73 2 2
+5 5 5

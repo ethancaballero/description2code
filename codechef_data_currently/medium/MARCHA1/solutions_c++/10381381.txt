@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m;
+		cin>>n>>m;
+		int a[25],b[25]={0};
+		int i,j,flag=0;
+		
+		for(i=0;i<n;i++)
+			cin>>a[i];
+		for(i=1;i<pow(2,n);i++)
+		{
+			int r,temp = i,in=n-1,sum = 0;
+			while(temp>0)
+			{
+				r = temp%2;
+				temp = temp/2;
+				b[in] = r;
+				in--;
+			}
+			/*
+			for(j=0;j<n;j++)
+				cout<<b[j]<<" ";
+			*/
+			
+			
+			for(j=0;j<n;j++)
+			{
+				if(b[j]==1)
+					sum = sum + a[j];
+			}
+//			cout<<"	"<<sum<<endl;
+//			cout<<endl;
+			if(sum==m)
+			{
+				flag = 1;
+				break;
+			}
+		}
+		if(flag==0)
+			cout<<"No"<<endl;
+		else
+			cout<<"Yes"<<endl;
+	}
+	return 0;
+}
+
+/*
+1
+5 3
+1 1 1 1 1
+*/

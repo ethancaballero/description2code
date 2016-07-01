@@ -1,0 +1,28 @@
+cases = int(raw_input())
+ 
+for _ in xrange(cases):
+    A, B, C = map(int, raw_input().split())
+ 
+    maxValue = A * 100 + B
+    maxSteps = 0
+    steps = 0
+ 
+    while steps < 10000:
+        if B < C:
+            A -= 1
+            B = 100 + B - C
+        else:
+            B -= C
+ 
+        if A < 0:
+            break
+ 
+        B, A = A, B
+        steps += 1
+ 
+        value = A * 100 + B
+        if value > maxValue:
+            maxValue = value
+            maxSteps = steps
+ 
+    print maxSteps

@@ -1,0 +1,14 @@
+test_cases = int(input())
+def output(x):
+    result = 0
+    if(x/2 < 2):
+        return result
+    while(x/2 >= 2):
+        result += x/2 - 1
+        x = x - 2
+    return result
+while(test_cases > 0):
+    base = int(input())
+    result = output(base)
+    print result
+    test_cases = test_cases - 1

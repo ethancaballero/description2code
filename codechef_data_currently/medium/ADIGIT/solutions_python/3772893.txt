@@ -1,0 +1,27 @@
+import sys
+
+n,m=map(int,sys.stdin.readline().split(' '))
+arr=[int(k) for k in sys.stdin.readline().rstrip()]
+occr=[[0]*n for x in xrange(10)]
+occr[arr[0]][0]+=1
+
+for i in xrange(1,n):
+	for j in xrange(10):
+		occr[j][i]=occr[j][i-1]
+		if arr[i]==j: 
+			occr[j][i]=1+occr[j][i-1]
+	
+for _ in xrange(m):
+	x=int(sys.stdin.readline())
+	if x==1:
+		print 0
+		continue
+	a=arr[x-1]
+	ans=0
+	for i in xrange(a):
+		if occr[i][x-2]!=0:
+			ans+=(a-i)*occr[i][x-2]
+	for j in xrange(a+1,10):
+		if occr[j][x-2]!=0:
+			ans+=(j-a)*occr[j][x-2]
+	print ans

@@ -1,0 +1,9 @@
+def ERROR():
+	t = int(raw_input())
+	while t:
+		s = raw_input()
+		if '010' in s or '101' in s: print 'Good'
+		else: print 'Bad'
+		t-=1
+if __name__ == '__main__':
+	ERROR()

@@ -1,0 +1,23 @@
+#include <cstdio>
+using namespace std;
+
+int main()
+{
+    int t,n,f,sum,temp,m;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        sum = (n*(n+1))/2;
+        if(n%2==1)  n++;
+        scanf("%d",&f);
+        while(f--)
+        {
+            scanf("%d",&temp);
+            sum-=temp;
+        }
+        scanf("%d",&m);
+        printf("%0.4lf
+",((double)(n-2*m)/n)*sum);
+    }
+}

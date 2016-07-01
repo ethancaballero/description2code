@@ -1,0 +1,9 @@
+t=input()
+while t>0:
+    sum=0
+    n=input()
+    while n>0:
+        sum= sum+n%10
+        n=n/10
+    print sum
+    t= t-1

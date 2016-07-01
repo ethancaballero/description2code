@@ -1,0 +1,150 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	ios::sync_with_stdio(false);
+	int t;
+	cin>>t;
+
+	string input;
+	int arr[2][26],k;
+
+
+	while(t--)
+	{
+		int hash[26] = {0};
+		cin>>input;
+		cin>>k;
+		int size = input.size();
+		for(int i = 0;i<size;i++)
+		{
+			hash[int(input[i])-97]++;
+		}
+		
+		sort(hash,hash+26);
+		int cur=0,j=-1;
+		for(int i = 0;i<26;i++)
+		{
+			if(hash[i]!=0)
+			{
+				if(hash[i]!=cur)
+				{
+					j++;
+					arr[0][j] = hash[i];
+					arr[1][j] = 1;
+					cur = hash[i];
+				}
+				else if(hash[i]==cur)
+				{
+					arr[1][j]++;
+				}
+				
+			}
+
+		}
+		/*for(int i = 0;i<=j;i++)
+		{
+			cout<<arr[0][i]<<" : "<<arr[1][i]<<endl;
+		}*/
+		int answer = 10000000;
+		int current;
+
+		for(int i =0;i<=j;i++)
+		{
+			current =0;
+			for(int y=0;y<i;y++)
+			{
+				current += arr[0][y]*arr[1][y];
+			}
+			for(int x=i+1;x<=j;x++)
+			{
+				if(arr[0][x]-arr[0][i]>k)
+				{
+					current += arr[1][x]*(arr[0][x]-arr[0][i]-k);
+				}
+
+			}
+			if (current<answer)
+				answer = current;
+		}
+		cout<<answer<<endl;
+
+
+
+
+
+
+
+
+
+
+
+
+		/*int ans = 0;
+		int min = 0, max = j, cur_range, req_range = k, range_diff;
+		while(1)
+		{
+			cur_range = arr[0][max] - arr[0][min];
+			range_diff = cur_range - req_range;
+			if(range_diff>0)
+			{
+				if(range_diff<arr[0][max] - arr[0][max-1])
+				{
+					if(range_diff*arr[1][max]<arr[0][min]*arr[1][min])
+					{
+						ans += range_diff*arr[1][max];
+						arr[0][max] -= range_diff;
+					}
+					else
+					{
+						ans += arr[0][min]*arr[1][min];
+						min++;
+					}
+				}
+				else
+				{
+					if(arr[0][min]*arr[1][min]<(arr[0][max]-arr[0][max-1])*arr[1][max])
+					{
+						ans += arr[0][min]*arr[1][min];
+						min++;
+					}
+					else
+					{
+						ans += (arr[0][max]-arr[0][max-1])*arr[1][max];
+						arr[1][max-1] += arr[1][max];
+						max--;
+					}
+				}
+			}
+			else
+				break;
+		}
+		cout<<ans<<endl;*/
+
+		/*for(int i = 0;i<=j;i++)
+		{
+			cout<<arr[0][i]<<" : "<<arr[1][i]<<endl;
+		}*/
+
+
+
+
+		
+		
+		
+
+		
+		//test
+		/*for(int i = 0;i<26;i++)
+		{
+			if(hash[i]!=0)
+			
+			cout<<char(97+i)<<":"<<hash[i]<<endl;
+		}*/
+		//test
+
+	}
+
+		
+	return 0;
+}

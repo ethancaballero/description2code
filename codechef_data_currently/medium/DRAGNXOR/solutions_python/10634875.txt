@@ -1,0 +1,17 @@
+T = int(raw_input())
+def setbits(A):
+    sb = 0
+    while A:
+        if A % 2 == 1: sb += 1
+        A >>= 1
+    return sb
+while T:
+    N,A,B = map(int,raw_input().split())
+    sb1,sb2 = setbits(A),setbits(B)
+    tsb = sb1 + sb2
+    if tsb <= N: print 2 ** (N - tsb) * (2 ** tsb - 1)
+    else:
+        tsb1 = 2*N - tsb
+        print 2 ** (N - tsb1) * (2 ** tsb1 - 1)
+    T -= 1
+        

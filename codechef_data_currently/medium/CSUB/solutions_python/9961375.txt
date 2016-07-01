@@ -1,0 +1,6 @@
+test = int(raw_input())
+for i in range(test):
+	n = int(raw_input())
+	s = raw_input()
+	o = s.count('1')
+	print o*(o+1)/2

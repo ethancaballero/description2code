@@ -1,0 +1,47 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<cstdlib>
+#include<vector>
+#include<cstring>
+using namespace std;
+
+
+int main()
+{
+	int t,i;
+	int c1,c2,c3,c4,c5,c6,c7,c8;
+	scanf("%d",&t);
+	string str;
+	while(t--)
+	{
+	c1=c2=c3=c4=c5=c6=c7=c8=0;
+	vector<string>arr;
+	for(i=0;i<6;i++)
+	{
+	cin>>str;
+	arr.push_back(str);
+	}
+	
+	
+	if(arr[0]==arr[5] && arr[5]==arr[3] && arr[0]==arr[3]) c1++;
+	if(arr[1]==arr[5] && arr[5]==arr[3] && arr[1]==arr[3]) c2++;
+	if(arr[1]==arr[4] && arr[4]==arr[3] && arr[1]==arr[3])c3++;
+	if(arr[1]==arr[2] && arr[2]==arr[4] && arr[4]==arr[1]) c4++;
+	if(arr[0]==arr[2] && arr[2]==arr[4] && arr[4]==arr[0])c5++;
+	if(arr[1]==arr[2] && arr[2]==arr[5] && arr[5]==arr[1]) c6++;
+	if(arr[0]==arr[3] && arr[3]==arr[4] && arr[4]==arr[0]) c7++;
+	if(arr[0]==arr[5] && arr[5]==arr[2] && arr[2]==arr[0]) c8++;
+	
+	
+	if(c1==1 || c2==1 || c3==1  || c4==1  || c5==1  || c6==1  || c7==1  || c8==1 )
+	printf("YES
+");
+	else
+	printf("NO
+");
+	}
+	return 0;
+	}
+	
+	

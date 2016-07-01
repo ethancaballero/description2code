@@ -1,0 +1,9 @@
+testCases = int(raw_input())
+for x in xrange(testCases):
+	num = int(raw_input())
+	zeroes = 0
+	y = 5
+	while num / y >= 1:
+		zeroes += num / y
+		y *= 5
+	print zeroes

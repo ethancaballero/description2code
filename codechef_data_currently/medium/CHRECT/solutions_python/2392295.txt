@@ -1,0 +1,19 @@
+t = raw_input()
+t = int(t)
+for i in range(0,t):
+    n,m,k = raw_input().split()
+    n = int(n)
+    m = int(m)
+    k = int(k)  
+    if n==1:
+        if m==1 or m==2:
+            print 0
+        else:
+            print k
+    elif m==1:
+        if n==1 or n==2:
+            print 0
+        else:
+            print k 
+    else:
+        print (k+1)/2

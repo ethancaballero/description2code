@@ -1,0 +1,22 @@
+test = int(raw_input().strip())
+while test:
+	n = int(raw_input().strip())
+	dire=[]
+	road=[]
+	while n:
+		ins = raw_input().strip()
+		if ins[0]=='B':
+			road.append(ins[9:])
+		elif ins[0]=='R':
+			dire.append('Left')
+			road.append(ins[9:])
+		elif ins[0]=='L':
+			dire.append('Right')
+			road.append(ins[8:])
+		n-=1
+	print 'Begin on '+road[len(road)-1]
+	road.pop()
+	for i in xrange(len(road)):
+		print dire[len(dire)-i-1]+' on '+road[len(dire)-i-1]
+	test-=1
+	

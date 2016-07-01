@@ -1,0 +1,42 @@
+from sys import stdin,stdout
+def printBS(li):
+ print " ".join([str(x) for x in li])
+def listInput():
+ return map(int,stdin.readline().split())
+cases=input()
+for case in xrange(cases):
+ n=input()
+ no=0
+ mapping={}
+ revmap={}
+ count=[0]*n
+ adjList={i:[] for i in xrange(n)}
+ for i in xrange(n-1):
+  a,b,w=stdin.readline().strip().split()
+  if a not in mapping:
+   mapping[a]=no
+   revmap[no]=a
+   no+=1
+  if b not in mapping:
+   mapping[b]=no
+   revmap[no]=b
+   no+=1
+  count[mapping[a]]+=1
+  count[mapping[b]]+=1
+  adjList[mapping[a]]=(mapping[b],int(w[:-1]))
+ s=0
+ #print adjList
+ for i in xrange(n):
+  if count[i]==1 and adjList[i]:
+   s=i
+   break
+ i=s
+ output=""
+ cost=0
+ while adjList[i]:
+  output=output+"%s %s %d$
+"%(revmap[i],revmap[adjList[i][0]],adjList[i][1])
+  cost+=adjList[i][1]
+  i=adjList[i][0]
+ stdout.write(output)
+ print str(cost)+"$"

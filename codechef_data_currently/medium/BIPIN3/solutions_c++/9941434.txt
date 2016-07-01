@@ -1,0 +1,38 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+using namespace std;
+long long int mod=1000000007;
+int fast_pow(long long base, long long n)
+{
+    if(n==0)
+       return 1;
+    if(n==1)
+    return base;
+    long long halfn=fast_pow(base,n/2);
+    if(n%2==0)
+        return ( halfn * halfn ) % mod;
+    else
+        return ( ( ( halfn * halfn ) % mod ) * base ) % mod;
+}
+ 
+int main() {
+    long long int t,n,k,i,ans;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld%lld",&n,&k);
+		ans=k;
+		ans=((ans)*(fast_pow(k-1,n-1)%mod))%mod;
+	/*	for(i=1; i<n; i++)
+        {
+            ans=((ans%mod)*((k-1)%mod))%mod;
+        }
+    */
+        printf("%lld
+",ans%mod);
+	}
+	return 0;
+}
+ 

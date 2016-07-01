@@ -1,0 +1,17 @@
+import sys
+import math
+t = int(sys.stdin.readline())
+while t>0:
+	s=[]
+	d=0
+	sys.stdin.readline()
+	n = int(sys.stdin.readline())
+	for i in xrange(n):
+		a = map(int,str(sys.stdin.readline()).split())
+		s.append(a)
+	s.sort(key=lambda x: (x[0],-x[1]))
+	for i in xrange(n-1):
+		d+=((s[i+1][0] - s[i][0])**2 + (s[i+1][1] - s[i][1])**2)**0.5
+	print "%0.2f"%d	
+	t-=1	
+	

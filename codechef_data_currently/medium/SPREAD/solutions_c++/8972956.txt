@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//freopen("input.txt","r",stdin);
+//freopen("output.txt","w",stdout);
+#define bitcount    __builtin_popcountll
+#define sd(x) scanf("%d",&x)
+#define slld(x) scanf("%lld",&x)
+#define ss(x) scanf("%s",x)
+#define pf(x,y) printf("x",y)
+#define pb push_back
+long long int BIT[1000005],n;
+void update(long long int x, long long int val)
+{
+      for(; x <= n; x += x&-x)
+        BIT[x] += val;
+}
+
+long long int query(long long int x)
+{
+     long long int sum = 0;
+     for(; x > 0; x -= x&-x)
+        sum += BIT[x];
+     return sum;
+}
+
+int main()
+{
+    long long int m,v;
+    slld(n);
+    slld(m);
+    slld(v);
+
+    while(m--)
+    {
+        char c;
+        c=getchar();
+        while(!(c=='Q'||c=='S'))
+			c=getchar();
+        if(c=='S')
+        {
+            long long int u,v;
+            long long k;
+            slld(u);slld(v);slld(k);
+
+            update(u,k);
+            update(v+1,-1*k);
+
+        }
+        else
+        {
+            long long int p;
+            slld(p);
+
+            printf("%lld
+",v+query(p));
+        }
+
+    }
+
+
+	return 0;
+}

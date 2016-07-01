@@ -1,0 +1,18 @@
+for i in range(input()):
+    a, b = raw_input().split(" ")
+    a = int(a)
+    points = 0
+    for i in range(a):
+        inp = raw_input()
+        if inp=="TOP_CONTRIBUTOR":
+            points+=300
+        elif inp=="CONTEST_HOSTED":
+            points+=50
+        else:
+            x , y = inp.split(" ")
+            y = int(y)
+            if x=="CONTEST_WON":
+                points += 300 + (20-y if y<=20 else 0)
+            else:
+                points += y
+    print points/200 if b=="INDIAN" else points/400

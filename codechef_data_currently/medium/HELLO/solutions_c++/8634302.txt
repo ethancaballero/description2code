@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		float d,u,n,m,r,c,a[100001];
+		cin>>d>>u>>n;
+		for (int i = 1; i <= n; ++i)
+		{
+		    cin>>m>>r>>c;
+		    a[i]=(((c)+(r*u*m))/m);
+		    //cout<<"a"<<a[i]<<endl;
+		}
+		float e=a[1],flag=0.0;
+		for (int i = 1; i <=n; ++i)
+		{
+			e=min(a[i],e);
+		}
+		//cout<<"e"<<e;
+		for (int i = 1; i <=n; ++i)
+		{
+			if (e==a[i] && e<(u*d))
+			{
+				cout<<i<<endl;
+				flag=0;
+				break;
+			}
+			else
+			{
+			    flag=1;
+			}
+		}
+		if (flag)
+		{
+			cout<<"0"<<endl;
+		}
+	}
+	return 0;
+}

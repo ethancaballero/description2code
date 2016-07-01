@@ -1,0 +1,27 @@
+n=raw_input().split()
+m=int(n[1])
+n=int(n[0])
+chef={}
+chef_country={}
+country={}
+ch_list=[]
+co_list=[]
+for i in xrange(n):
+	string=raw_input().split()
+	chef[string[0]]=0
+	chef_country[string[0]]=string[1]
+	country[string[1]]=0
+for i in xrange(m):
+    string=raw_input()
+    chef[string]+=1
+    country[chef_country[string]]+=1
+ch_max=max(chef.values())
+co_max=max(country.values())
+for x in chef.keys():
+	if chef[x]==ch_max:
+		ch_list+=[x]
+for x in country.keys():
+	if country[x]==co_max:
+		co_list+=[x]
+print min(co_list)
+print min(ch_list)

@@ -1,0 +1,18 @@
+t=int(raw_input())
+while t:
+	t=t-1
+	p=int(raw_input())
+	x=0
+	y=1
+	a=1
+	while 1:
+		if(x>=p):
+			if x==p:
+				print "YES"
+				break
+			print "NO"
+			break
+		else :
+			te=x
+			x=x+y
+			y=te

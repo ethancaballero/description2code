@@ -1,0 +1,38 @@
+#include <cstdio>
+#define FOR(i,m,n) for(i=m;i<n;i++)
+
+using namespace std;
+
+int B[100][100][100],a,rem;
+int sum(int i,int j,int k)
+{
+    if(i<0 || j<0 || k<0) return 0;
+    else return B[i][j][k];
+}
+
+int main()
+{
+    int i,t,j,k,l,x,y,z;
+
+    scanf("%i",&t);
+
+    FOR(i,0,t)
+    {
+            scanf("%i%i%i",&x,&y,&z);
+            FOR(j,0,x)
+                      FOR(k,0,y)
+                       {
+                           FOR(l,0,z)
+                        {
+                            scanf("%i",&B[j][k][l]);
+                            rem = sum(j-1,k-1,l-1) + sum(j,k-1,l) + sum(j-1,k,l) + sum(j,k,l-1)- sum(j,k-1,l-1) - sum(j-1,k-1,l) - sum(j-1,k,l-1);
+                            a= sum(j,k,l)-rem;
+                            printf("%i ",a);
+                        }
+                        printf("
+");
+                       }
+    }
+
+    return 0;
+}

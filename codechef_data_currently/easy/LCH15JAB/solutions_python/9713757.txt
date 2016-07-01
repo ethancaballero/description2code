@@ -1,0 +1,41 @@
+import sys
+
+def incrementValue(obj, key):
+    try:
+        obj[key] += 1
+    except:
+        obj[key] = 1
+    return obj
+
+def getValue(obj, key):
+    val = 0
+    try:
+        val = obj[key]
+    except:
+        val = 0
+    return val
+
+def nbCharEqOthers(s):
+    obj = {}
+    found = False
+    for x in s:
+        obj = incrementValue(obj, x)
+    for key in obj.keys():
+        nbChar = getValue(obj, key)
+        nbOthers = 0
+        for x in obj.keys():
+            if x != key:
+                nbOthers += obj[x]
+        if (nbChar == nbOthers):
+            found = True
+            break
+    return (found) and "YES" or "NO"
+    
+
+nbTests = int(raw_input())
+tests = []
+for i in range(nbTests):
+    tests.append(raw_input())
+
+for test in tests:
+    print nbCharEqOthers(test)

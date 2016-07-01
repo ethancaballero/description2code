@@ -1,0 +1,42 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+const int NMAX = 1e5 + 5;
+
+int n, i_o;
+long long m, k, a[NMAX], b[NMAX], S, minTime, maxTime, Bmax;
+
+int main() {
+
+    cin >> n >> m >> k;
+    
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+    }
+    
+    for (int i = 1; i <= n; i++) {
+        b[i] = 1 + (m - a[i])/k;
+        S += b[i];
+    }
+    
+    for (int i = 1; i <= n; i++) {
+        if (b[i] > Bmax) {
+            Bmax = b[i];
+            i_o  = i;
+        }
+    }
+    
+    minTime = (S - Bmax + 1)/2;
+    
+    for (int i = 1; i <= n; i++) {
+        if (i == i_o) continue;
+        minTime = max(minTime, b[i]);
+    }
+    
+    maxTime = min(S/2, S - b[i_o]);
+    
+    cout << (maxTime - minTime + 1)%(1000000007);
+
+}

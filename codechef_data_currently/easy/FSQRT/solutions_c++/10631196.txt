@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define FOR(i,n) for (int i = 0; i < (int)(n); ++i)
+#define mod 1000000007
+#define bigger(a,b) (a>b?a:b)
+#define smaller(a,b) (a<b?a:b)
+#define mem(A,g) memset(A,g,sizeof(A))
+#define gc getchar_unlocked
+#define positive(a) (bigger(a,-a))
+#define INF std::numeric_limits<int>::max();
+int merge(int A[],int start,int mid,int end)
+{
+	int n1 = (mid-start+1);
+	int n2 = end - mid;
+	int L[n1+1],R[n2+1];
+	for(int i=1;i<=n1;i++)
+	{
+		int y = start+i-1;
+		L[i] = A[y];
+	}
+	for(int j=1;j<=n2;j++)
+	{
+		int y = mid+j;
+		R[j] = A[y];
+	}
+	L[n1+1] = INF;
+	R[n2+1] = INF;
+	int i = 1;
+	int j = 1;
+	for(int k = start;k<=end;k++)
+	{
+		if(L[i]<=R[j])
+		{
+			A[k] = L[i];
+			i++;
+		}
+		else
+		{
+			A[k] = R[j];
+			j++;
+		}
+	}
+ }
+int mergesort(int A[],int starting,int ending)
+{
+if(starting < ending)
+{
+    int mid = starting + ((ending - starting)/2);
+	mergesort(A,starting,mid);
+	mergesort(A,mid+1,ending);
+	merge(A,starting,mid,ending);
+}
+}
+int solve(int n)
+{
+	if(n==1 || n==0)
+	{
+		return n;
+	}
+	else
+	{
+		for(int i=1;i<=(n/2)+1;i++)
+		{
+			if(i*i>n)
+			{
+				return i-1;
+			}
+		}
+	}
+}
+void scanint(int &x)
+{
+register int c = gc();
+x = 0;
+for(;(c<48 || c>57);c = gc());
+for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
+int main() {
+ios_base::sync_with_stdio(false); cin.tie(0);
+int t;
+cin>>t;
+while(t--){
+int n;
+cin>>n;
+cout<<solve(n)<<"
+";
+}
+return 0;
+}

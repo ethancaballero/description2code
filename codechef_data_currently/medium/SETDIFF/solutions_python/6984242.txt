@@ -1,0 +1,26 @@
+p=[1]
+M = 1000000007
+for i in range(1,100000):
+	x=p[i-1]*2
+	p.append(x%M)
+for i in range(input()):
+	n=int(raw_input())
+	
+	ar=map(int,raw_input().split())
+ 		
+ 	ar.sort(reverse=True)
+	
+	
+	sum=0
+	for j in range(0,n/2):
+		
+		u=p[n-j-1]-1
+		m=(ar[j]-ar[n-j-1])%M
+		if j==0:
+			sum=((sum%M)+((m)*(u))%M)%M	
+			continue
+		
+		y=p[j]-1
+		sum=((sum%M)-(((m)*(y))%M)+((m)*(u))%M)%M
+ 
+	print sum		

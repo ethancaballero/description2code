@@ -1,0 +1,198 @@
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <vector>
+#include <bitset>
+ 
+using namespace std;
+ 
+struct chef {
+	int morChef;
+	int eveChef;
+	int childCount;
+};
+ 
+inline int scanInt() {
+	register int c, retVar = 0;
+ 
+	// Strip whitespace
+	while ((c = getchar()) <= ' ');
+	// Read numbers and add it into retVar one by one
+	do {
+		retVar = (retVar << 1) + (retVar << 3) + c - '0';
+	} while ((c = getchar()) > ' ');
+ 
+	return retVar;
+}
+ 
+namespace Internal {
+	chef *srcTree_i;
+	char *srcAges_i;
+	chef *queryTree_i;
+	char *queryTreeAges_i;
+	int queryNode_i;
+ 
+	bool checkEqual_internal(int srcNode, int queryNode) {
+		if (srcNode == -1 && queryNode == -1) {
+			return true;
+		}
+		else if (srcNode == -1 || queryNode == -1) {
+			return false;
+		}
+ 
+		return (srcAges_i[srcNode] == queryTreeAges_i[queryNode] &&
+			checkEqual_internal(srcTree_i[srcNode].eveChef, queryTree_i[queryNode].eveChef) &&
+			checkEqual_internal(srcTree_i[srcNode].morChef, queryTree_i[queryNode].morChef));
+	}
+ 
+	chef *countTree_i;
+ 
+	int childCount(int node) {
+		if (countTree_i[node].childCount != -1) {
+			return countTree_i[node].childCount;
+		}
+ 
+		int returnCount = 0;
+ 
+		if (countTree_i[node].eveChef != -1) {
+			returnCount += 1 + childCount(countTree_i[node].eveChef);
+		}
+		if (countTree_i[node].morChef != -1){
+			returnCount += 1 + childCount(countTree_i[node].morChef);
+		}
+ 
+		return (countTree_i[node].childCount = returnCount);
+	}
+}
+ 
+bool IsEqualSubTree(chef *srcTree, char *srcAges, int srcNode,
+	chef *queryTree, char *queryTreeAges, int queryNode) {
+	Internal::srcTree_i = srcTree;
+	Internal::srcAges_i = srcAges;
+	Internal::queryTree_i = queryTree;
+	Internal::queryTreeAges_i = queryTreeAges;
+ 
+	return Internal::checkEqual_internal(srcNode, queryNode);
+}
+ 
+int GetChildCount(chef *srcTree, int srcNode) {
+	Internal::countTree_i = srcTree;
+ 
+	return Internal::childCount(srcNode);
+}
+ 
+static chef mainTree[100001];
+static char mainTreeAges[100001];
+static chef queryTree[1001];
+static char queryTreeAges[1001];
+ 
+int main(void)
+{
+	// Set eveChef and morChef as -1 for all chefs
+	memset(mainTree, -1, sizeof(mainTree));
+ 
+	int N = scanInt();
+	// A vector to cache the main tree nodes by their ages
+	// this will help since we'll only need to query the subtree on these nodes.
+	std::vector<int> treeNodesForAge[101];
+ 
+	// Read age
+	for (int index = 0; index < N; ++index) {
+		int age = scanInt();
+ 
+		mainTreeAges[index] = age;
+		treeNodesForAge[age].push_back(index);
+	}
+ 
+	// Read other data
+	for (int index = N - 1; index > 0; --index) {
+		int seniorChef = scanInt() - 1;
+		int reportChef = scanInt() - 1;
+		char reportingTime = getchar();
+ 
+		if (reportingTime == 'M') {
+			mainTree[seniorChef].morChef = reportChef;
+		}
+		else {
+			mainTree[seniorChef].eveChef = reportChef;
+		}
+	}
+ 
+	int Q = scanInt();
+ 
+	while (Q-- > 0) {
+		// Assume there is a tree present till the time we've read the nodes of the tree to query
+		bool subTreePresent = true;
+		int M = scanInt();
+ 
+		memset(queryTree, -1, sizeof(queryTree));
+ 
+		// Read age
+		for (int index = 0; index < M; ++index) {
+			int age = scanInt();
+ 
+			queryTreeAges[index] = age;
+			if (treeNodesForAge[age].size() == 0) {
+				subTreePresent = false;
+				// skip additional data
+				while (++index < M) {
+					scanInt();
+				}
+				break;
+			}
+		}
+		if (subTreePresent) {
+			char nodeHasParent[1001] = { 0 };
+ 
+			// Read other data
+			for (int index = M - 1; index > 0; --index) {
+				int seniorChef = scanInt() - 1;
+				int reportChef = scanInt() - 1;
+				char reportingTime = getchar();
+ 
+				if (reportingTime == 'M') {
+					queryTree[seniorChef].morChef = reportChef;
+				}
+				else {
+					queryTree[seniorChef].eveChef = reportChef;
+				}
+				nodeHasParent[reportChef] = 1;
+			}
+ 
+			// Set it as not present unless we find an equal sub tree
+			subTreePresent = false;
+ 
+			int rootNode = (int)((char *)memchr(nodeHasParent, 0, M) - (char *)nodeHasParent);
+			int queryNodeCount = GetChildCount(queryTree, rootNode);
+			vector<int> &matchingSrcNodes = treeNodesForAge[queryTreeAges[rootNode]];
+ 
+			for (int index = 0, count = matchingSrcNodes.size(); index < count; ++index) {
+				if (queryNodeCount == GetChildCount(mainTree, matchingSrcNodes[index]) &&
+					IsEqualSubTree(mainTree, mainTreeAges, matchingSrcNodes[index],
+						queryTree, queryTreeAges, rootNode)) {
+					subTreePresent = true;
+					break;
+				}
+			}
+		}
+		else {
+			// skip other data
+			for (int index = M - 1; index > 0; --index) {
+				scanInt();
+				scanInt();
+				getchar();
+			}
+		}
+ 
+		if (subTreePresent) {
+			printf("YES
+");
+		}
+		else {
+			printf("NO
+");
+		}
+	}
+ 
+	return 0;
+}  

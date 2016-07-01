@@ -1,0 +1,29 @@
+import sys, math
+T=int(sys.stdin.readline())
+while(T):
+	sys.stdin.readline()
+	N=int(sys.stdin.readline())
+	P=[]
+	for n in range(N):
+		P.append(map(int,sys.stdin.readline().split()))
+	ans,pre,f,maxi=0,0,0,0
+	P.sort()
+	new,maxi,mini,x,leng=[],0,10000,P[0][0],0
+	for p in P:
+		if(p[0]!=x):
+			leng+=1			
+			new.append([x,maxi,mini])
+			ans+=maxi-mini
+			maxi=0
+			mini=10000
+			x=p[0]
+		if(maxi<p[1]):
+			maxi=p[1]
+		if(mini>p[1]):
+			mini=p[1]
+	new.append([x,maxi,mini])
+	ans+=maxi-mini
+	for n in range(1,leng+1):
+		ans+=math.sqrt(math.pow(new[n][0]-new[n-1][0],2)+math.pow(new[n][1]-new[n-1][2],2)) 
+	print "%0.2f" %ans
+	T-=1

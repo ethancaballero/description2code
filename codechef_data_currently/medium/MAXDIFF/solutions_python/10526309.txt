@@ -1,0 +1,11 @@
+for _ in range(input()):
+    n,k = map(int,raw_input().split())
+    items = map(int,raw_input().split())
+    items.sort()
+    if k <= n/2:
+        kid = items[:k]
+        dad = items[k:]
+    else:
+        kid = items[:n-k]
+        dad = items[n-k:]
+    print sum(dad) - sum(kid)

@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+
+
+int main ()
+	{
+		int t,n;
+		cin>>t;
+		
+		//long long int k;
+		int i;
+	
+		for(i=0;i<t;i++)	//Number of test cases loop
+			{
+				cin>>n;
+				int j,a[n][2],noofcases=0,l,m,z;
+				
+				double probeach=0;
+				probeach=(float)(1.0f*6.0f)/(n*(n-1)*(n-2)*(n-3));//calculatetotalcases
+				//cout<<probeach<<endl;
+				
+				for (j=0;j<n;j++) // The i-th test case loop & its calculations
+					{
+						cin>>a[j][1]>>a[j][2];	
+					}			
+		
+				for (j=0;j<n;j++)
+					{
+						for (l=j+1;l<n;l++)
+						{
+							for (m=l+1;m<n;m++) 
+								{
+									double cx,cy,circumradius=0;
+		
+	
+			
+											double tbx,tby,tcx,tcy,ddash,c1,c2;
+											tbx=-a[l][1]+a[j][1];
+											tby=-a[l][2]+a[j][2];
+											tcx=-a[m][1]+a[j][1];
+											tcy=-a[m][2]+a[j][2];
+											ddash=2.0f*(tbx*tcy-tby*tcx);
+											c1=a[j][1]*a[j][1]-a[l][1]*a[l][1]+a[j][2]*a[j][2]-a[l][2]*a[l][2];
+											c2=a[j][1]*a[j][1]-a[m][1]*a[m][1]+a[j][2]*a[j][2]-a[m][2]*a[m][2];
+											if (fabs(ddash)<=(1e-7)) continue;
+											
+												cx=((tcy*(c1)-tby*(c2)))/(ddash);
+												cy=((tbx*(c2)-tcx*(c1)))/(ddash);
+											
+											//cx=cx+(float)a[j][1];
+											//cy=cy+(float)a[j][2];
+											circumradius=(cx-a[j][1])*(cx-a[j][1])+(cy-a[j][2])*(cy-a[j][2]);
+											
+									for (z=0;z<n;z++)
+										{
+											
+											if(z!=j && z!=l && z!=m && (((cx-a[z][1])*(cx-a[z][1])+(cy-a[z][2])*(cy-a[z][2]))<=(circumradius+(1e-7)))) 
+											{
+												noofcases++;
+												//cout<<a[j][1]<<'	'<<a[j][2]<<'	'<<a[l][1]<<'	'<<a[l][2]<<'	'<<a[m][1]<<'	'<<a[m][2]<<'	'<<a[z][1]<<'	'<<a[z][2]<<'	'<<cx<<'	'<<cy<<'	'<<circumradius<<'
+';
+											}
+										}
+								}
+
+						}
+						
+					}
+				cout<<(probeach*noofcases)<<endl;
+
+			}
+			return 0;
+	}
+//End	

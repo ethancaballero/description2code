@@ -1,0 +1,6 @@
+t=int(raw_input())
+num=10**9+7
+for i in xrange(t):
+    n,k=map(int,raw_input().split())
+    ans=(k*(k-1)**(n-1))%num
+    print ans

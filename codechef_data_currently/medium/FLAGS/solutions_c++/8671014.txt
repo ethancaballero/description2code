@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+main()
+{
+long int t;
+cin>>t;
+for(long int z=0;z<t;z++)
+{ long long  n;
+cin>>n;
+long long int a=0;
+a=2*n*(n-1)*(n-1)+n*(n-1)*(n-2)+2*n*(n-1)*(n-2)*(n-2);
+cout<<a<<endl;
+}
+}

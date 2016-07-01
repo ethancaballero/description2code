@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int gcd(int X , int Y)
+{
+  if ( Y == 0 )
+    return X;
+  else if ( Y == 1 )
+    return 1;
+  else
+    return gcd(Y,X%Y);
+
+}
+int main()
+{
+        int T;
+        int N,M;
+        scanf("%d",&T);
+        while (T--)
+        {
+                scanf("%d %d",&N,&M);
+                if ( M == 0 && N != 1 ) {  printf("No 1
+"); continue;}
+                int no_of_elements = N / gcd(N,M);
+                if ( no_of_elements == N )
+                  printf("Yes
+");
+                else
+                  printf("No %d
+", no_of_elements);
+
+        }
+        return 0;
+}

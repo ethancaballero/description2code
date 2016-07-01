@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,c,q,n,newpos,p,l,r,i;
+    cin>>t;
+    while(t--)
+    {
+       cin>>n>>c>>q;
+       p=c;
+       for(i=0;i<q;i++)
+       {
+           cin>>l>>r;
+           if(p>=l&&p<=r)
+           p=l+r-p;
+       }
+
+        cout<<p<<endl;
+    }
+
+    return 0;
+}

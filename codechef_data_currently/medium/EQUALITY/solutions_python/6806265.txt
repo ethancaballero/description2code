@@ -1,0 +1,10 @@
+# your code goes here
+for x in range(int(raw_input())):
+ n=int(raw_input())
+ l=map(int,raw_input().split(' '))
+ s=0;
+ for c in l:
+  s+=c
+ s=int(s/(n-1))
+ for v in range(n):
+  print s-l[v],

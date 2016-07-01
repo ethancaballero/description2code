@@ -1,0 +1,145 @@
+#include<stdio.h>
+ 
+ 
+#ifndef ONLINE_JUDGE
+inline int getchar_unlocked() { return getchar(); }
+inline void putchar_unlocked(char a) { putchar(a); }
+#endif
+ 
+inline void fastRead( int *a)
+    {
+        register char c=0;
+            while (c<33)
+            {
+            c=getchar_unlocked();
+            }
+        *a=0;
+        while (c>33)
+        {
+        *a=*a*10+c-48;
+        c=getchar_unlocked();
+        }
+    }
+inline void fastWrite(int a)
+    {
+    char snum[12];
+    register int i=0;
+    do
+    {
+    snum[i++]=a%10+48;
+    a=a/10;
+    }while(a!=0);
+    --i;
+    while(i>=0)
+    putchar_unlocked(snum[i--]);
+    putchar_unlocked('
+');
+    }
+int special(char str[],int N)
+{
+    int inv1,inv2,i;
+            inv1=0;
+            inv2=0;
+            for(i=0;i<N;i++){
+                if(str[i]=='1'&&i%2==0){
+                    inv1++;
+                }
+                if(str[i]=='0'&&i%2!=0){
+                    inv1++;
+                }
+                if(str[i]=='0'&&i%2==0){
+                    inv2++;
+                }
+                if(str[i]=='1'&&i%2!=0){
+                    inv2++;
+                }
+            }
+            if(inv2<inv1){
+                printf("%d
+",inv2);
+                for(i=0;i<N;i++){
+                    if(i%2==0){
+                        printf("1");
+                    }
+                    else
+                        printf("0");
+                }
+                printf("
+");
+ 
+ 
+}
+else{
+                printf("%d
+",inv1);
+                for(i=0;i<N;i++){
+                    if(i%2==0){
+                        printf("0");
+                    }
+                    else
+                        printf("1");
+                }
+                printf("
+");
+            }
+}
+int main()
+{
+    int i,j,k,x,z,y,len;
+    int result,flips;
+    int test,K,N;
+    char str[1000000];
+    fastRead(&test);
+    for(k=0;k<test;k++)
+    {
+        fastRead(&N);
+        fastRead(&K);
+        scanf("%s",str);
+        len = 1;
+        result=0;
+        if(K==1)
+        {
+            special(str,N);
+            continue;
+        }
+        for(i=0;i<N-1;i++)
+        {
+            while(str[i]==str[i+1] && i!=N-1)
+             {
+                 len++;
+                 i++;
+             }
+ 
+             if(len>K)
+             {
+                 flips=len/(K+1);
+                 result=result+flips;
+                 j=i-len+1;
+                 while(flips>0)
+                 {
+                     j=j+K;
+                     if(j==i)
+                        j--;
+                     if(str[j]=='0')
+                     {
+                         str[j]='1';
+                         j++;
+                     }
+                     else
+                     {
+                         str[j]='0';
+                         j++;
+                     }
+                     flips--;
+                 }
+             }
+             len=1;
+ 
+        }
+ 
+        fastWrite(result);
+        printf("%s
+",str);
+    }
+ 
+}

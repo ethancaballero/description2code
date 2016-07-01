@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main()
+{
+    ll x,y,k,n,t,i,p,c,s;
+    cin>>t;
+    while(t--)
+    {
+        cin>>x>>y>>k>>n;
+        x=x-y;
+        s=0;
+        for(i=0;i<n;i++)
+        {
+            cin>>p>>c;
+            if(p>=x && c<=k)
+                s=1;
+        }
+        if(s==1)
+            cout<<"LuckyChef
+";
+        else
+            cout<<"UnluckyChef
+";
+    }
+    return 0;
+}

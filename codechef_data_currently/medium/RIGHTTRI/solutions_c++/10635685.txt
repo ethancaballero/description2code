@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+#include<math.h>
+int main() {
+int t;
+scanf("%d",&t);
+while(t--)
+{
+    double r1,r2,h,ar,apb,amb,a,b;
+    cin>>h;
+    cin>>ar;
+    apb=sqrt(h*h+(4*ar));
+    if((h*h-(4*ar))>=0)
+    {
+    amb=sqrt(h*h-(4*ar));
+    //printf("%f %f",apb,amb);
+    a=(apb+amb)/2;
+    b=(apb-amb)/2;
+   if(a>b)
+    {
+    r1=b;
+    r2=a;
+    }
+   else
+    {
+    r1=a;
+   r2=b;
+    }
+    printf("%lf %lf %lf
+",r1,r2,h);
+    }
+    else
+    cout<<"-1"<<endl;
+}
+}

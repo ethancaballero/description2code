@@ -1,0 +1,38 @@
+import sys
+
+t = input()
+for k in range(t):
+	i,j = map(int, sys.stdin.readline().split())
+	ilist = []
+	jlist = []
+	di = 0
+	dj = 0
+	ilist.append((i,di))
+	jlist.append((j,dj))
+	while i>1:
+		if(i%2==0):
+			i = i/2
+		else:
+			i = (i-1)/2
+		di+=1
+		ilist.append((i,di))
+	while j>1:
+		if(j%2==0):
+			j = j/2
+		else:
+			j = (j-1)/2
+		dj+=1
+		jlist.append((j,dj))
+	m = []
+	p = 0
+	q = 0
+	while p<len(ilist) and q<len(jlist):
+		if(ilist[p][0]==jlist[q][0]):
+			m.append(ilist[p][1]+jlist[q][1])
+			p+=1
+			q+=1
+		elif(ilist[p][0]<jlist[q][0]):
+			q+=1
+		else:
+			p+=1
+	print min(m)

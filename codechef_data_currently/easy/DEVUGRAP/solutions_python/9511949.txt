@@ -1,0 +1,27 @@
+##Codechef
+##Devu and Grapes
+##2016.02.29
+
+testCase = int(raw_input())
+
+for i in xrange(testCase):
+
+    firstInput = map(int,raw_input().strip().split())
+    nb = firstInput[0]  ## the number of baskets
+    gcd = firstInput[1]  ## Greatest common divisor
+
+    secondInput = map(int, raw_input().strip().split())
+
+    count = 0
+
+    for i in xrange(nb):
+        if secondInput[i] <= gcd:
+            count += (gcd - secondInput[i])
+
+        else:
+            if secondInput[i] % gcd <= gcd/2:
+                count += secondInput[i] % gcd
+            else:
+                count += gcd - (secondInput[i] % gcd)
+                
+    print count

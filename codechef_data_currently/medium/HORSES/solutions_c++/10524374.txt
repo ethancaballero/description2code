@@ -1,0 +1,65 @@
+#include<stdlib.h>
+#include<stdio.h>
+
+void quickSort(long long int *arr, int left, int right) {
+    int i = left, j = right;
+    int tmp;
+    int pivot = arr[(left + right) / 2];
+    
+    /* partition */
+    while (i <= j) {
+        while (arr[i] < pivot)
+            i++;
+        while (arr[j] > pivot)
+            j--;
+        if (i <= j) {
+            tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+            i++;
+            j--;
+        }
+    };
+    
+    /* recursion */
+    if (left < j)
+        quickSort(arr, left, j);
+    if (i < right)
+        quickSort(arr, i, right);
+}
+
+int main()
+{
+    long long int *arr;
+    int k,t,n,i,j;
+    long long int min_diff,diff;
+    scanf("%d",&t);
+
+    
+    for(i=0; i<t; i++)
+    {
+        scanf("%d",&n);
+        arr=(long long int*)malloc(sizeof(long long int)*n);
+        
+        for(j=0; j<n; j++)
+        {
+            scanf("%lld",&arr[j]);
+        }
+        min_diff=1000000000;
+        
+      quickSort(arr,0,n-1);
+        
+       for(k=0; k<n-1; k++)
+        { diff = arr[k+1]-arr[k];
+                if(diff<min_diff)
+                    min_diff=diff;
+                
+        }
+        
+        printf("%lld
+",min_diff);
+        
+        
+    }
+    return 0;
+}

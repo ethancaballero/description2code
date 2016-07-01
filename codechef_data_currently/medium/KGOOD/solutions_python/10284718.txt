@@ -1,0 +1,33 @@
+def KGood_Check(freq, k):
+    counter = 100001
+    cnt = 0
+    length = len(freq)
+    for i in xrange(length):
+        tcount = 0
+        for j in xrange(length):
+            if freq[j] < freq[i]:
+                tcount += freq[j]
+            elif freq[j] > freq[i]+k:
+                tcount += freq[j]-(freq[i]+k)
+
+        if counter > tcount:
+            counter = tcount
+    return counter
+
+def frequency_count(w):
+    char = {}
+    for i in xrange(len(w)):
+        if char.has_key(w[i]):
+            char[w[i]] = char.get(w[i]) + 1
+        else:
+            char[w[i]] = 1
+    s = char.values()
+    s.sort()
+    return s
+
+for i in xrange(input()):
+    s = raw_input()
+    w, k = s.strip().split()
+    k = int(k)
+    freq = frequency_count(w)
+    print KGood_Check(freq, k)

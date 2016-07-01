@@ -1,0 +1,35 @@
+  Chef loves squares! You are given N points with integers coordinates, Chef asks you to find out how many points he should add to these set of N points, so that one could create at least one square having its vertices from the points of the resulting set. Note that the square created need not to be parallel to the axis.
+Input
+The first line contains singe integer N. 
+Each of next N lines contains two integers Xi and Yi denotine the coordinates of i-th point. 
+Output
+In a single line print single integer - the minimal number of points Chef need to paint to receive at least one square. 
+Constraints
+
+0 \u2264 N \u2264 2000
+-10^6 \u2264 Xi, Yi \u2264 10^6
+There are NO coincided points
+
+Example
+Input:
+3
+0 0
+2 2
+3 3
+
+Output:
+2
+
+Input:
+5
+0 0
+100 100
+200 200
+100 0
+0 100
+
+Output:
+0
+Explanation
+For the first example Chef can add points (2, 0), (0, 2) or (2, 3), (3, 2)
+For the second example Chef already has square (0, 0), (100, 0), (0, 100), (100, 100). 

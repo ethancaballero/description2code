@@ -1,0 +1,17 @@
+cases=input()
+for i in range(0,cases):
+    poss=0
+    n=input()
+    lst=raw_input()
+    lst=lst.split()
+    for k in range(0,n):
+        b=False
+        if k!=n-1:
+            if lst[k]!=lst[k+1]:
+                b=True
+                poss=poss+1
+        if k!=0 and b==False:
+            if lst[k]!=lst[k-1]:
+                poss=poss+1
+    print poss
+            

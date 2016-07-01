@@ -1,0 +1,18 @@
+try:
+  import psyco
+  psyco.full()
+except ImportError:
+  pass
+t = int(raw_input())
+while t:
+    n = int(raw_input())
+    leaves = map(int, raw_input().split())
+    if leaves == [1]:
+        print "Yes"
+    else:
+        stems = 0
+        while n!=1 and not stems+leaves[n-1]&1:
+            stems=(stems+leaves[n-1])>>1
+            n-=1
+        print "Yes" if n==1 and stems==1 else "No"
+    t-=1

@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int a=0;
+		int p[10][501]={0};
+		int b;
+		cin>>b;
+		while(b--)
+		{
+			int s,e,l;
+			cin>>s>>e>>l;
+			for(int i=s;i<=e;i++)
+				p[l][i]=1;
+		}
+		for(int i=0;i<501;i++)
+		{
+			for(int j=0;j<10;j++)
+			{
+				if(j==9)
+				{
+					if(p[j][i]==1&&p[j-1][i]==1)
+					{
+						a++;
+						break;
+					}
+				}
+				else
+				{
+					if(p[j][i]==1&&p[j+1][i]==1)
+					{
+						a++;
+						break;
+					}
+				}
+			}
+		}
+		cout<<500-a<<"
+";
+	}
+}

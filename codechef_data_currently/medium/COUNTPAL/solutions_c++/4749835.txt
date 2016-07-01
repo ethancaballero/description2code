@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int mod = 1e9+7;
+
+string s;
+int cachePali[1003][1003], cacheCount[1003];
+
+int isPali(int i, int j) {
+	if(i >= j)
+		return 1;
+	if(s[i] != s[j])
+		return 0;
+	if(cachePali[i][j] != -1)
+		return cachePali[i][j];
+		
+	return cachePali[i][j] = isPali(i+1, j-1);
+}
+
+int count(int i) {
+	if(i < 0)
+		return 1;
+	if(cacheCount[i] != -1)
+		return cacheCount[i];
+	
+	int ans = 0;
+	
+	for(int j=i; j>=0; j--) {
+		if(isPali(j, i))
+			ans = (ans + count(j-1))%mod;
+	}
+	
+	// for(int j=0; j<=i; j++)
+	// 	if(isPali(j, i))
+	// 		ans = (ans + count(j-1))%mod;
+	
+	return cacheCount[i] = ans;
+}
+
+int main() {
+	cin>>s;
+	
+	int i, j;
+	
+	memset(cacheCount, -1, sizeof(cacheCount));
+	
+	for(i=0; i<1002; i++)
+		for(j=0; j<1002; j++)
+			cachePali[i][j] = -1;
+	
+	cout<<count(s.size()-1);
+	
+	return 0;
+}

@@ -1,0 +1,26 @@
+import sys
+
+try:
+    import psyco
+    psyco.full()
+except ImportError:
+    pass
+
+t=int(sys.stdin.next())
+for j in range(0,t):
+    length=int(sys.stdin.next())
+    flag=1
+    l=map(int,sys.stdin.next().split())
+    total=l[length-1]
+    i=length-1
+    for k in range(length):
+        if (i>0 and total%2!=0) or (i==0 and total!=1):
+            flag=0
+            break
+        i-=1
+        total=(total/2)+l[i]
+    if flag==1:
+        print "Yes"
+    elif flag==0:
+        print "No"
+

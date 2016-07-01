@@ -1,0 +1,17 @@
+n=input()
+for i in range(n):
+    p=input()
+    x=raw_input()
+    l=x.split()
+    for n in range(len(l)):
+        l[n]=int(l[n])
+        
+    l.sort()
+    
+    small=(l[1])-(l[0])
+    for j in range(1,len(l)):
+        if j<len(l)-2:
+           diff=(l[j+1])-(l[j])
+           if abs(diff)<small:
+               small=diff
+    print small        

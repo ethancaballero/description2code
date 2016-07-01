@@ -1,0 +1,17 @@
+def _print(a):
+    for x in a:
+        print x,
+n,k = map(int,raw_input().split()) #taking input
+a = map(int,raw_input().split())
+if k==0: _print(a)
+else:
+    l,M = len(a),max(a)
+    for i in range(l):
+        a[i] = M-a[i]
+    k -= 1
+    M = max(a)
+    if k%2 == 0: _print(a)
+    else:
+        for i in range(l):
+            a[i] = M-a[i]
+        _print(a)

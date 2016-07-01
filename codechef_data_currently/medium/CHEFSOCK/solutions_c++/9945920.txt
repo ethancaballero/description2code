@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int j,s,m;
+    cin>>j>>s>>m;
+    int val = m-j;
+    int pair = val/s;
+    if(pair%2==0){
+        cout<<"Lucky Chef"<<endl;
+    }else{
+        cout<< "Unlucky Chef"<<endl;
+    }
+
+    return 0;
+}

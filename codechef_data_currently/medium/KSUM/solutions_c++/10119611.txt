@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+// #include "testlib.h"	
+using namespace std ;
+
+#define ft first
+#define sd second
+#define pb push_back
+#define all(x) x.begin(),x.end()
+
+#define ll long long int
+#define vi vector<int>
+#define vii vector<pair<int,int> >
+#define pii pair<int,int>
+#define plii pair<pair<ll, int>, int>
+#define piii pair<pii, int>
+#define viii vector<pair<pii, int> >
+#define vl vector<ll>
+#define vll vector<pair<ll,ll> >
+#define pll pair<ll,ll>
+#define pli pair<ll,int>
+#define mp make_pair
+#define ms(x, v) memset(x, v, sizeof x)
+
+#define sc1(x) scanf("%d",&x)
+#define sc2(x,y) scanf("%d%d",&x,&y)
+#define sc3(x,y,z) scanf("%d%d%d",&x,&y,&z)
+
+#define scll1(x) scanf("%lld",&x)
+#define scll2(x,y) scanf("%lld%lld",&x,&y)
+#define scll3(x,y,z) scanf("%lld%lld%lld",&x,&y,&z)
+
+#define pr1(x) printf("%d
+",x)
+#define pr2(x,y) printf("%d %d
+",x,y)
+#define pr3(x,y,z) printf("%d %d %d
+",x,y,z)
+
+#define prll1(x) printf("%lld
+",x)
+#define prll2(x,y) printf("%lld %lld
+",x,y)
+#define prll3(x,y,z) printf("%lld %lld %lld
+",x,y,z)
+
+#define pr_vec(v) for(int i=0;i<v.size();i++) cout << v[i] << " " ;
+
+#define f_in(st) freopen(st,"r",stdin)
+#define f_out(st) freopen(st,"w",stdout)
+
+#define fr(i, a, b) for(i=a; i<=b; i++)
+#define fb(i, a, b) for(i=a; i>=b; i--)
+#define ASST(x, l, r) assert( x <= r && x >= l )
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+const int maxn = 105000;
+int A[ maxn ];
+int dp[ maxn ];
+void solve() {
+	int n, k;
+	cin >> n >> k;
+	multiset<pair<ll, pii> > s;
+	ll sum = 0;
+	dp[0]=0;
+	for(int i=1; i<=n; i++) {
+		cin >> A[i];
+		dp[i]= A[i]+dp[i-1];
+		s.insert(mp(dp[i], mp(1, i)));
+	}
+	//s.insert(mp(sum, mp(1, n)));
+	while( k -- && !s.empty() ) {
+		pair<ll, pii> top = *s.rbegin();
+		cout << top.ft <<" ";
+		s.erase( top );
+		int l = top.sd.ft;
+		int r = top.sd.sd;
+		if( l != r ) {
+			s.insert(mp(top.ft-A[l], mp(l+1, r)));
+			//s.insert(mp(top.ft-A[r], mp(l, r-1)));
+		}
+	}
+}
+
+int main() {
+	solve();
+	return 0;
+}

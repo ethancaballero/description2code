@@ -1,0 +1,47 @@
+// LUCIFER <3 SLS <3
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char b[151111];
+pair <int, char> p[1111][26];
+
+#define pb push_back
+#define mp make_pair
+
+int main()
+{
+    int t, i, k = 0, p1;
+    char a[100], mrk[26];
+    gets(a);
+    t = atoi(a);
+    while (t--) {
+        gets(a);
+        gets(b);
+        p1 = strlen(b);
+        for (i = 0; i < p1; i++) {
+            if (b[i] > 96 && b[i] < 123)
+                p[k][b[i]-97].first++;
+            else if (b[i] > 64 && b[i] < 91)
+                p[k][b[i]-65].first++;
+        }
+        for (i = 0; i < 26; i++)
+            p[k][i].second = (char)(i+97);
+        sort(p[k], p[k]+26);
+        for (i = 25; i >= 0; i--)
+            mrk[p[k][i].second-97] = a[i];
+        for (i = 0; i < p1; i++) {
+            if (b[i] > 96 && b[i] < 123)
+                putchar(mrk[b[i]-97]);
+            else if (b[i] > 64 && b[i] < 91)
+                putchar((char)(mrk[b[i]-65]-32));
+            else
+                putchar(b[i]);
+        }
+        putchar('
+');
+        k++;
+    }
+    return 0;
+}

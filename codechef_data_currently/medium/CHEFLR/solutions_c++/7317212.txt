@@ -1,0 +1,39 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<cmath>
+#include<vector>
+#include<queue>
+#define mod 1000000007ll
+using namespace std;
+int T,n;
+char S[100005];
+int main()
+{
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("
+%[^
+]",S);
+		n=strlen(S);
+		long long res=1;
+		for(int i=0;i<n;i++)
+		if(S[i]=='l')
+		{
+			if(i&1)res=2*res-1;
+			else res=2*res;
+			res=(res+mod)%mod;
+		}
+		else if(S[i]=='r')
+		{
+			if(i&1)res=res*2+1;
+			else res=2*res+2;
+			res=(res+mod)%mod;
+		}
+		cout<<res<<"
+";
+	}
+	return 0;
+}

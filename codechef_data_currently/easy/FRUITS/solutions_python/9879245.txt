@@ -1,0 +1,36 @@
+def main():
+	t=input()
+	lt=[]
+	for i in range(t):
+		n,m,k=raw_input().split()
+		n,m,k=int(n),int(m),int(k)
+
+		if(n==m):
+			lt.append(0)
+		else:
+		   if(n>m):
+				d=n-m
+				j=0
+				flag=0
+				while(j<k):
+					m=m+1
+					if(n==m):
+						break
+					j=j+1
+				lt.append(n-m)		
+		   else:
+				d=m-n
+				j=0
+				flag=0
+				while(j<k):
+					n=n+1
+					if(n==m):
+						break
+					j=j+1
+			
+				lt.append(m-n)		
+	for i in range(t):
+		print lt[i]
+
+if __name__ == '__main__':
+	main()

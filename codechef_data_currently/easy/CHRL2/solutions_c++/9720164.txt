@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t,count1,i,j,c_count,h_count,e_count,f_count;
+    string ch;
+    //cin>>t;
+     //while(t--)
+         cin>>ch;
+         i=0;
+         j=0;
+         c_count=0;
+         h_count=0;
+         e_count=0;
+         f_count=0;
+         count1=0;
+         while(ch[j])
+         {
+             if(ch[j]=='C'){
+
+                 c_count++;
+             }
+            else if(ch[j]=='H' && h_count<c_count){
+
+                 h_count++;
+            }
+            else if(ch[j]=='E' && e_count<h_count){
+
+                 e_count++;
+            }
+            else if(ch[j]=='F' && f_count<e_count){
+
+                 f_count++;
+            }
+             j++;
+         }
+         cout<<f_count;
+
+}

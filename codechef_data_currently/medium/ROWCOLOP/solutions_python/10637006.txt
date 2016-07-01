@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+int main()
+{
+	int i,n,q,rows[314160]={}, cols[314160]={}, in, x, rl=0, cl=0;
+	char operation[7];
+	scanf("%d %d",&n,&q);
+	for (i=0;i<q;i++)
+	{
+		scanf("%s %d %d",operation, &in, &x);
+		if (operation[0]=='R')
+			rows[in]+=x;
+		else
+			cols[in]+=x;
+	}	
+	for (i=0;i<n;i++)
+	{
+		if (rows[i]>rl)
+			rl=rows[i];
+		if (cols[i]>cl)
+			cl=cols[i];
+	}
+	printf("%d
+",rl+cl);
+	return 0;
+}

@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<iostream>
+#include<string>
+#include<vector>
+ 
+using namespace std;
+ 
+int main()
+{
+    int T,n,x;
+    string s;
+ 
+    scanf("%d",&T);
+    for(int i=0;i<T;i++)
+    {
+        scanf("%d",&n);
+        vector <int> P(n);
+        cin >> s;
+        for(int j=0;j<n;j++)
+            P[j]=s.at(j)-'0';
+        x=n;
+        for(int k=0;k<n;k++)
+        {
+            if(P[k]==1)
+                x--;
+            else if(k+1<n && P[k+1]==1)
+                x--;
+            else if(k-1>=0 && P[k-1]==1)
+                x--;
+        }
+        printf("%d
+",x);
+        P.clear();
+    }
+    return 0;
+}

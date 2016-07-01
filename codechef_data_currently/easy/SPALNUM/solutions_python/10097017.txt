@@ -1,0 +1,10 @@
+t = input()
+while(t>0):
+    t -= 1
+    l,r = map(int,raw_input().split())
+    sum = 0
+    for i in range(l,r+1):
+        str_i = str(i)
+        if str_i == str_i[::-1]:
+            sum+=i
+    print sum

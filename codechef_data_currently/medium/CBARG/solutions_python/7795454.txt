@@ -1,0 +1,15 @@
+t=int(input())
+for x in xrange(t):
+	curr_allocated=0
+	total_allocation=0
+	n=int(input())
+	m=raw_input().split()
+	for x in xrange(n):
+		m[x]=int(m[x])
+	for x in m:
+		if curr_allocated >= x:
+			curr_allocated=x
+		else:
+			total_allocation+=x-curr_allocated
+			curr_allocated=x
+	print total_allocation

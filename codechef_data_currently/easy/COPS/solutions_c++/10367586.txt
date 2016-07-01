@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int arr[101];
+int brr[10];
+int x,y,rng,c,i,j,t,M;
+cin>>t;
+cout<<"
+";
+while(t)
+{
+c=0;
+for(i=0;i<=100;i++)
+arr[i]=0;
+cin>>M>>x>>y;
+cout<<"
+";
+rng=x*y;
+for(i=0;i<M;i++)
+cin>>brr[i];
+
+for(i=0;i<M;i++)
+{
+for(j=brr[i];j<=brr[i]+rng;j++)
+{
+if(j>100)
+break;
+else
+arr[j]=1;
+}
+for(j=brr[i]-1;j>=brr[i]-rng;j--)
+{
+if(j<=0)
+break;
+else
+arr[j]=1;
+}
+}
+for(i=1;i<=100;i++)
+if(arr[i]==0)
+c++;
+cout<<"
+"<<c<<"
+";
+t--;
+}
+return 0;
+}

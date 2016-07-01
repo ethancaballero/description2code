@@ -1,0 +1,13 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int tc; cin>>tc;
+	int n;
+	while(tc--){
+		cin>>n;
+		while(n--)
+		cout<<(char)(n%26+'a');
+		cout<<endl;
+	}
+}

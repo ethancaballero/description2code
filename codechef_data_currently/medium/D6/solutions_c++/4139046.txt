@@ -1,0 +1,68 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t,n,i,j,side,a,b,x[502],y[502],c,d;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		int p[101][101]={0},count=0;
+		for(i=0;i<n;i++)
+		{
+			cin>>a>>b;
+			x[i]=a+50;
+			y[i]=b+50;
+			p[x[i]][y[i]]=1;
+		}
+		for(i=0;i<n-1;i++)
+		{
+			a=x[i];
+			b=y[i];
+			for(j=i+1;j<n;j++)
+			{
+				c=x[j];
+				d=y[j];
+				if(b==d)
+				{
+					side=(a>c?a-c:c-a);
+					if((b+side)<101){
+					if(p[a][b+side]==1 && p[c][b+side]==1)
+					count++;
+				}
+				}
+				else if(a<c && b>d)
+				{
+					if((b+c-a)<101 && (a+b-d)<101)
+					{
+						if(p[a+b-d][b+c-a]==1)
+						{
+							if((c+b-d)<101 && (d+c-a)<101)
+							{
+								if(p[c+b-d][d+c-a]==1)
+								count++;
+							}
+						}
+					}
+				}
+				else if(c<a && d>b)
+				{
+					if((c+d-b)<101 && (d+a-c)<101)
+					{
+						if(p[c+d-b][d+a-c]==1)
+						{
+							if((a+d-b)<101 && (b+a-c)<101)
+							{
+								if(p[a+d-b][b+a-c]==1)
+								count++;
+							}
+						}
+					}
+				}
+			}
+		}
+		cout<<count<<"
+";
+	}
+	return 0;
+}

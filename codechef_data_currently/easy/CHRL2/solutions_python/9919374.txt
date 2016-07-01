@@ -1,0 +1,18 @@
+s = raw_input()
+indexes = [0, 0, 0, 0]
+for c in s:
+    if c == 'C':
+        indexes[0] += 1
+    elif c == 'H':
+        if indexes[0] > 0:
+            indexes[0] -= 1
+            indexes[1] += 1
+    elif c == 'E':
+        if indexes[1] > 0:
+            indexes[1] -= 1
+            indexes[2] += 1
+    else:
+        if indexes[2] > 0:
+            indexes[2] -= 1
+            indexes[3] += 1
+print indexes[3]

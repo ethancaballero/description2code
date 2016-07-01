@@ -1,0 +1,8 @@
+
+T=int(raw_input())
+for i in range(T):
+	n=int(raw_input())
+	a=map(int,raw_input().split())
+	k=int(raw_input())
+	x=a[k-1];a.sort();
+	print a.index(x)+1;

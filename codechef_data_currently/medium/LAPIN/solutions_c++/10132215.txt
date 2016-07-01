@@ -1,0 +1,63 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int func(char a[1050],char b[1050],int l);
+int main()
+{ 
+ int t,i,l[150];
+ char s[150][1050],a[150][1050],b[150][1025];
+ cin>>t;
+ for(i=0;i<t;i++)
+ cin>>s[i];
+ for(i=0;i<t;i++)
+ {
+     l[i]=strlen(s[i]);
+    strncpy(a[i],s[i],l[i]/2);
+    if(l[i]%2==0)
+    strncpy(b[i],s[i]+(l[i]/2),l[i]/2);
+    else
+    strncpy(b[i],s[i]+(l[i]/2)+1,l[i]/2);
+ }
+ for(i=0;i<t;i++)
+ {
+    func(a[i],b[i],l[i]);
+ }
+ return 0;
+ }
+ int func(char a[1050],char b[1050],int l)
+ {
+  char i,j,temp;
+  for(i=0;i<l/2;i++)
+  {
+     for(j=0;j<(l/2)-i-1;j++)
+     {
+       if(a[j]>a[j+1])
+       {
+       temp=a[j];
+       a[j]=a[j+1];
+       a[j+1]=temp;
+
+	}
+     }
+  }
+     for(i=0;i<l/2;i++)
+  {
+     for(j=0;j<(l/2)-i-1;j++)
+     {
+       if(b[j]>b[j+1])
+       {
+       temp=b[j];
+       b[j]=b[j+1];
+       b[j+1]=temp;
+
+	}
+     }
+  }
+  if(strcmp(a,b)==0)
+  cout<<"YES
+" ;
+  else
+  cout<<"NO
+";
+  return 0;
+ }

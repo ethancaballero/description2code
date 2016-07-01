@@ -1,0 +1,34 @@
+#include<iostream>
+#include<cstdio>
+#define FOR(i,l,n) for(int i=l;i<n;i++)
+double power(double n,int i) {
+    if(i==0) {
+        return 1.0;
+    }
+    double a = power(n, i/2);
+    if (i%2) {
+        return a*a*n;
+    } else {
+        return a*a;
+    }
+}
+using namespace std;
+int main() {
+    int m,t;
+    double p;
+    scanf("%d", &t);
+    FOR(i,0,t) {
+        scanf("%d %lf", &m, &p);
+        double a=power(p, m);
+        if (m%2) {
+            double b=(1.0+a)/(1.0+p);      
+            printf("%lf %lf
+", 1000000000.0*b, 1000000000.0*(1.0-b)); 
+        } else {
+            double b=(1.0-a)/(1.0+p);      
+            printf("%lf %lf
+", 1000000000.0*b, 1000000000.0*(1.0-b)); 
+        }
+    }
+    return 0;
+}

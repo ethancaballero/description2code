@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+
+bool reach[1000000];
+int seq[1009];
+
+int main() {
+  int t, a, b, n, c, t1, t2, t3, y;
+  cin >> t;
+  while(t--) {
+    cin >> a >> b >> n;
+    t1 = n*n;
+    for(int i=0;i<t1;++i) reach[i] = true;
+    y = 0;
+    for(int i=0;i<n;++i) {
+      for(++y;!reach[y];++y);
+      seq[i] = y;
+      printf("%d ",y);
+      for(int j=0;j<=i;++j) {
+	int z = a*seq[i]-b*seq[j];
+	if(y<z) reach[z] = false;
+	z = a*seq[j]-b*seq[i];
+	if(y<z) reach[z] = false;
+      }
+    }
+    cout << endl;
+  }
+  return 0;
+}

@@ -1,0 +1,20 @@
+def is_subsequence(str1, str2):
+	j = 0
+	for i in range(len(str1)):
+		if j == len(str2):
+			break
+		#print str1[i], str2[j]
+		if str1[i] == str2[j]:
+			j += 1
+		i += 1
+	if j == len(str2):
+		return True
+	return False
+
+t = int(raw_input())
+for i in range(t):
+	str1, str2 = raw_input().split()
+	if is_subsequence(str1,str2) or is_subsequence(str2,str1):
+		print "YES"
+	else:
+		print "NO"

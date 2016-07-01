@@ -1,0 +1,12 @@
+# cook your code here
+from fractions import gcd
+for testcases in xrange(int(raw_input().strip() ) ) :
+    n = int(raw_input())
+    Arr = map(int, raw_input().strip().split())
+    if n == 1:
+        print Arr[0]
+        continue
+    g = gcd(Arr[0], Arr[1])
+    for i in xrange(1, n):
+        g = gcd(g, Arr[i])
+    print g

@@ -1,0 +1,7 @@
+values=[]
+for i in range(int(raw_input())):
+        values.append(int(input()))
+
+values.sort()
+for i in range(len(values)):
+        print values[i]

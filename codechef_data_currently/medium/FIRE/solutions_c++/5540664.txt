@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define MOD 100000007
+#define sd(n) scanf("%lld",&n);
+#define pd(n) printf("%lld
+",n);
+ll mpow(ll a, ll n)
+{ll ret=1;ll b=a;while(n) {if(n&1)
+    ret=(ret*b);b=(b*b);n>>=1;}
+return (ll)ret;
+}
+using namespace std;
+#define pi acos(-1.0)
+#define MAX 1000001
+#define  pii pair<int,int>
+int vis[10002],s[10002];
+int graph[10002][4],cnt[10003];
+    int t,i,j;
+bool sol(int x)
+{
+    int ret=0,h=0;
+    if(vis[x]==i)
+        return false;
+    if(s[x]==i)
+        return true;
+    vis[x]=i;
+    for( h=0;h<cnt[x];h++)
+    {
+        ret+=sol(graph[x][h]);
+        if(ret==2)
+            return true;
+    }
+    return false;
+
+}
+int main()
+{
+    cin>>t;
+    for(i=1;i<=t;i++)
+    {
+        int n,p,y;
+        cin>>n>>y>>p;
+        for(j=1;j<=n;j++)
+        {
+
+            cin>>cnt[j];
+            for(int m=0;m<cnt[j];m++)
+            {
+            cin>>graph[j][m];
+            }
+
+        }
+        for(j=0;j<p;j++)
+        {
+            int q;
+            cin>>q;
+           s[q]=i;
+        }
+        if(!sol(y))
+             cout<<"yes"<<endl;
+             else
+                cout<<"no"<<endl;
+   }
+return 0;
+}

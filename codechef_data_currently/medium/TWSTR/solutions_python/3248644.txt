@@ -1,0 +1,27 @@
+n1=input()
+n=n1
+a=[]
+b=[]
+while(n1):
+    n1=n1-1
+    x=raw_input()
+    u,v=x.split()
+    v=int(v)
+    a.append(u)
+    b.append(v)
+q=input()
+while(q):
+    q=q-1
+    x=raw_input()
+    s=""
+    mx_p=-10**9-10
+    for i in range(0,n):
+        
+        if((x==a[i][0:len(x)]) and (b[i]>mx_p)):
+            mx_p=b[i]
+            s=a[i]
+    if(s!=""):
+        print s
+    else:
+        print "NO"
+            

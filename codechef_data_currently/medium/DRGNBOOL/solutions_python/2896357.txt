@@ -1,0 +1,28 @@
+t=input()
+while(t):
+    t-=1
+    power=0
+    list = map(int, raw_input().split())
+    n,m = list[0], list[-1]
+    del list
+    soints=[]
+    sofloats=[]
+    levels=[]
+    for i in xrange(n):
+        soints.append(map(int, raw_input().split()))
+        if soints[-1][-1] not in levels:
+            levels.append(soints[-1][-1])
+    for i in range(m):
+        sofloats.append(map(int, raw_input().split()))
+    for l in levels:
+        intpow,floatpow=0,0
+        for x in range(len(soints)):
+            if soints[x][-1] == l:
+                intpow+=soints[x][0]
+        for y in range(len(sofloats)):
+            if sofloats[y][-1] == l:
+                floatpow+=sofloats[y][0]
+        if(intpow < floatpow):
+            power+=(floatpow - intpow)
+    print power
+    del n,m,power,levels,sofloats,soints

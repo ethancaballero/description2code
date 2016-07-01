@@ -1,0 +1,9 @@
+N = int(raw_input())
+M = map(int,raw_input().split())
+s=0
+for i in M:
+        s = s + i
+if s == N*(N+1)/2 :
+        print 'YES'
+else:
+        print 'NO'

@@ -1,0 +1,38 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+int main(){
+	int t,n,scale,j,k,keys,ans,loop;
+	string s;
+	cin>>t;
+	for(int i=0;i<t;i++){
+		cin>>s;
+		cin>>n;
+		j=0;
+		scale=0;
+		ans=0;
+		loop=0;
+		keys=12*n;
+		while(loop<s.size()){
+			loop++;
+		
+			if(s[j]=='T')
+				scale=scale+2;
+			else if(s[j]=='S')
+				scale++;
+			j++;
+		}
+		k=scale+1;
+		while(k<=keys){
+			ans=ans+keys-k+1;
+			k=k+scale;
+		}
+		cout<<ans<<endl;
+		
+	}
+	
+	
+	
+}

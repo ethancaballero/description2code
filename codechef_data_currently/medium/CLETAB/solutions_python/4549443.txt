@@ -1,0 +1,113 @@
+from heapq import *
+import itertools
+
+pq = []                         # list of entries arranged in a heap
+entry_finder = {}               # mapping of tasks to entries
+REMOVED = '<removed-task>'      # placeholder for a removed task
+counter = itertools.count()     # unique sequence count
+
+
+def init():
+    global pq
+    global entry_finder
+    pq = []
+    entry_finder = {}
+
+
+def add_task(task, priority=0):
+    'Add a new task or update the priority of an existing task'
+    if task in entry_finder:
+        remove_task(task)
+    count = next(counter)
+    entry = [priority, count, task]
+    entry_finder[task] = entry
+    heappush(pq, entry)
+
+
+def remove_task(task):
+    'Mark an existing task as REMOVED.  Raise KeyError if not found.'
+    entry = entry_finder.pop(task)
+    entry[-1] = REMOVED
+
+
+def pop_task():
+    'Remove and return the lowest priority task. Raise KeyError if empty.'
+    while pq:
+        priority, count, task = heappop(pq)
+        if task is not REMOVED:
+            del entry_finder[task]
+            return task
+    raise KeyError('pop from an empty priority queue')
+
+
+def next_pos(cust, s, orders):
+    for i in xrange(s, len(orders)):
+        o = orders[i]
+        if cust == o:
+            return len(orders) - i - 1
+    return -1
+
+
+def solve(N, orders):
+    init()
+    free = N
+    customer_table = set()
+    clean_count = 0
+    s = 0
+
+    for i, o in enumerate(orders):
+        if not free:
+            s = i
+            break
+
+        if o not in customer_table:
+            customer_table.add(o)
+            clean_count += 1
+            free -= 1
+            #add_task(o, priority=next_pos(o, i + 1, orders))
+            #heappush(farthest, (next_pos(o, i + 1, orders), o))
+        add_task(o, priority=next_pos(o, i + 1, orders))
+
+    for i in xrange(s, len(orders)):
+        o = orders[i]
+        #print pq, customer_table, o
+        if o not in customer_table:
+            # d, f = heappop(farthest)
+            f = pop_task()
+            customer_table.remove(f)
+            customer_table.add(o)
+            # add_task(o, priority=next_pos(o, i + 1, orders))
+            # heappush(farthest, (next_pos(o, i + 1, orders), o))
+            clean_count += 1
+        add_task(o, priority=next_pos(o, i + 1, orders))
+
+    return clean_count
+
+
+assert solve(1, [1]) == 1
+assert solve(1, [1, 1]) == 1
+assert solve(2, [1, 1]) == 1
+assert solve(2, [1, 2]) == 2
+assert solve(1, [1, 1, 2, 2]) == 2
+assert solve(1, [1, 1, 1, 1]) == 1
+assert solve(2, [1, 1, 1, 1]) == 1
+assert solve(2, [1, 1, 2, 1]) == 2
+assert solve(4, [1, 2, 3, 4]) == 4
+assert solve(1, [1, 2, 1, 2]) == 4
+assert solve(4, [1, 2, 1, 3, 1]) == 3
+assert solve(4, [1, 2, 1, 3, 1, 1, 1]) == 3
+assert solve(1, range(100)) == 100
+assert solve(4, [1, 2, 3, 4, 5, 1, 1]) == 5
+assert solve(4, [1, 2, 3, 4, 5, 1, 1, 1, 1]) == 5
+assert solve(2, [1, 2, 3, 2, 3, 1, 1, 1, 1]) == 4
+assert solve(1, [1]) == 1
+assert solve(2, [1, 1, 1]) == 1
+assert solve(4, [1, 2, 3, 4, 1, 2, 3, 4]) == 4
+assert solve(3, [1, 2, 3, 4, 5, 1, 1, 1]) == 5
+assert solve(2, [1, 2, 2, 1, 2, 2, 1, 1]) == 2
+
+
+for _ in xrange(int(raw_input())):
+    N, M = map(int, raw_input().split())
+    orders = map(int, raw_input().split())
+    print solve(N, orders)

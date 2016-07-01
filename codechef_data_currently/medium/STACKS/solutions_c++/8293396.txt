@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+inline void fast( int &x) {
+    int c = getchar_unlocked();
+    x = 0;
+    int neg = 0;
+    
+    for(; ((c<48 || c>57) && c != '-'); c = getchar_unlocked());
+    
+    if(c=='-') {
+        neg = 1;
+        c = getchar_unlocked();
+    }
+    
+    for(; c>47 && c<58 ; c = getchar_unlocked()) {
+        x = (x<<1) + (x<<3) + c - 48;
+    }
+    
+    if(neg)
+        x = -x;
+}
+int main()
+{
+    multiset<int> myset;
+    multiset<int>::iterator it;
+    int t,n,i,a;
+    fast(t);
+    while(t--)
+    {
+        myset.clear();
+        fast(n);
+        fast(a);
+    //    scanf("%d",&n);
+      //  scanf("%d",&a);
+        myset.insert(a);
+        for(i=1;i<n;i++)
+        {
+                fast(a);
+        //    scanf("%d",&a);
+            it=myset.upper_bound(a);
+            myset.insert(a);
+            if(it!=myset.end())
+            myset.erase(it);
+        }
+        printf("%d ",myset.size());
+        for(it=myset.begin();it!=myset.end();it++)
+        {
+            printf("%d ",*it);
+        }
+        printf("
+");
+    }
+    return 0;
+}

@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+#define maxn 10001
+int queue[2 * maxn];
+int zero[maxn];
+bool visited[maxn];
+int zsize, size;
+
+int main() {
+    int t, n, ui, vi, i, j, x, turn, p;
+    cin >> t;
+    while(t--) {
+        vector<int> adj[maxn];
+        cin >> n;
+
+        for(i=1;i<n;++i) {
+            visited[i] = false;
+            cin >> ui >> vi;
+            adj[ui].push_back(vi);
+            adj[vi].push_back(ui);
+        }
+        visited[n] = false;
+
+        // bfs
+        size = 0;
+        zsize = 0;
+        queue[size++] = 0;
+        zero[zsize++] = 0;
+        queue[size++] = 1;
+        zero[zsize++] = size;
+        queue[size++] = 0; // 0 is level-terminator
+        visited[1] = true;
+
+        for(int z=1;z<zsize;++z) {
+            bool flag = false;
+            for(i=zero[z-1]+1;i<zero[z];++i) {
+                for(vector<int>::iterator it=adj[queue[i]].begin(); it!=adj[queue[i]].end(); ++it) {
+                    if (!visited[*it]) {
+                        visited[*it] = true;
+                        queue[size++] = *it;
+                        flag = true;
+                    }
+                }
+            }
+            if (!flag) break;
+            zero[zsize++] = size;
+            queue[size++] = 0;
+        }
+
+        i = 0;
+        j = zero[zsize-1] - 1;
+        turn = 0;
+        p = 1;
+        x = 1;
+        while(i<j) {
+            ++turn;
+            if (p) {
+                i = zero[x++];
+            } else {
+                --j;
+                if (queue[j] == 0) --j;
+            }
+            p = p^1;
+        }
+
+        cout << turn << endl;
+    }
+    return 0;
+}

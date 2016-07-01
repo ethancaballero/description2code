@@ -1,0 +1,32 @@
+#include<cstdio>
+#include<algorithm>
+int gcd(int a, int b)
+{
+	if (a%b)
+		return gcd(b, a%b);
+	return b;
+}
+using namespace std;
+int main()
+{
+	int t, n;
+	scanf("%d", &t);
+	while (t--)
+	{
+		scanf("%d", &n);
+		int g = 0, k = n;
+		int h;
+		while (n--)
+		{
+			scanf("%d", &h);
+			g = gcd(g, h);
+		}
+		if (g == 1)
+			printf("%d
+", k);
+		else
+			printf("-1
+");
+	}
+	return 0;
+}

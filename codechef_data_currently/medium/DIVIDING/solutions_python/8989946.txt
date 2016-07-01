@@ -1,0 +1,10 @@
+import sys
+
+no_of_candidates = int(sys.stdin.readline())
+tickets = map(int, sys.stdin.readline().split())
+ticket_sum = 0
+required_sum = (no_of_candidates * (no_of_candidates + 1))/2
+for i in range(0, no_of_candidates):
+    ticket_sum += tickets[i]
+if ticket_sum == required_sum: print "YES"
+else: print "NO"

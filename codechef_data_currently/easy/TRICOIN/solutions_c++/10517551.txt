@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {   long long int n,i=1,sum=0;
+        cin>>n;
+        while(n-sum>=(i))
+        {
+            sum=sum+i;
+            i++;
+
+        }
+       ;
+        cout<<--i<<endl;
+
+    }
+    return 0;
+}

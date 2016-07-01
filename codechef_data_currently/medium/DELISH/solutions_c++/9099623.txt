@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+long long int max(long long int a,long long int b)
+{
+  if (a>b)
+  return a;
+  else
+  return b;
+}
+long long int min(long long int a,long long int b)
+{
+  if (a<b)
+  return a;
+  else
+  return b;
+}
+
+int main()
+{
+  int t;
+  cin>>t;
+  while(t--)
+  {
+
+  long long int ltdp[100000][2],rtdp[100000][2],a[100000];
+  long long int n,i,x=0;
+
+  cin>>n;
+  for(i=0;i<n;++i)
+  scanf("%lld",&a[i]);
+
+   ltdp[0][0]=a[0];
+   ltdp[0][1]=a[0];
+   rtdp[n-1][0]=a[n-1];
+   rtdp[n-1][1]=a[n-1];
+  for(i=1;i<n;++i)
+  {
+    ltdp[i][0]=max(ltdp[i-1][0],0)+a[i];
+    ltdp[i][1]=min(ltdp[i-1][1],0)+a[i];
+  }
+
+  for(i=n-2;i>=0;i--)
+  {
+    rtdp[i][0]=max(rtdp[i+1][0],0)+a[i];
+    rtdp[i][1]=min(rtdp[i+1][1],0)+a[i];
+  }
+  for(i=0;i<n-1;++i)
+  {
+    x=max(x,abs(ltdp[i][0]-rtdp[i+1][1]));
+    x=max(x,abs(ltdp[i][1]-rtdp[i+1][0]));
+  }
+  cout<<x<<endl;
+  }
+  return 0;
+}

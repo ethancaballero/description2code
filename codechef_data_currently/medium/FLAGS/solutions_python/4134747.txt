@@ -1,0 +1,9 @@
+test = int(raw_input())
+for i in range(test):
+    n = int(raw_input())
+    if n <= 1:
+        print 0
+    elif n == 2:
+        print 4
+    else:
+        print 2*n*(n-1)*(n-1) + n*(n-1)*(n-2) +  2*n*(n-1)*(n-2)*(n-2)

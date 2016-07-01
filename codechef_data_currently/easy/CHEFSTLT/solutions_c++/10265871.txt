@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		string s,t;
+		cin>>s>>t;
+		int size=s.length();
+		int mn=0,mx=0;
+		for(int i=0;i<size;i++)
+		{
+			if(s[i]=='?'&&t[i]=='?')
+			{
+				mx++;
+			}
+			else if(s[i]=='?'||t[i]=='?')
+			{
+				mx++;
+			}
+			else if(s[i]!=t[i])
+			{
+				mn++;
+				mx++;
+			}
+		}
+		cout<<mn<<" "<<mx<<endl;
+	}
+	return 0;
+}

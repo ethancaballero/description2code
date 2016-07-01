@@ -1,0 +1,103 @@
+//Author: Aman Choudhary
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <cmath>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <climits>
+#include <map>
+#include <cassert>
+#define mod  1000000007
+#define PHI 1000000006
+#define ull unsigned long long
+#define ill long long int
+#define pii pair<long long int,int>
+#define pb(x) push_back(x)
+#define F(i,a,n) for(i=(a);i<(n);++i)
+#define FD(i,a,n) for(i=(a);i>=(n);--i)
+#define FE(it,x) for(it=x.begin();it!=x.end();++it)
+#define V(x) vector<x>
+#define S(x) scanf("%d",&x)
+#define S1(x) scanf("%llu",&x)
+#define MAX 100001
+#define NIL 0
+#define INF (1<<28)
+using namespace std;
+
+int n;
+ill a[20009];
+ill b[20009];
+int s[20009];
+ill ans[10009];
+int nn;
+
+void process()
+{
+    set <pii> ss;
+    int i;
+    F (i, 0, n) {
+
+   //     pii pp(a[i]+b[i], i);
+        ss.insert(pii(a[i]+b[0], i));
+    }
+
+    nn = 0;
+    while (nn  < min(10009, n*n)) {
+          //  cout << nn << endl;
+        pii pp = *(ss.begin());
+        ss.erase(ss.begin());
+        ans[nn++] = pp.first;
+        s[pp.second]++;
+        int x = pp.second;
+        if (s[x] != n) {
+            ss.insert(pii(a[x]+b[s[x]], x));
+        }
+    }
+}
+
+int main()
+{
+  //  freopen ("input.txt", "r", stdin);
+
+    int t;
+    S (t);
+    while (t--) {
+        S (n);
+        int q;
+        S (q);
+        int i;
+        F (i, 0, n) S1 (a[i]);
+        F (i, 0, n) S1 (b[i]);
+        sort (a,a+n);
+        sort (b,b+n);
+        memset (s, 0, sizeof(s));
+
+        process();
+        //cout << "ASDA" << endl;
+        while (q--) {
+            int x;
+            S (x);
+            x--;
+            printf ("%lld
+", ans[x]);
+        }
+
+    }
+
+    return 0;
+}

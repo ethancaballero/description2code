@@ -1,0 +1,12 @@
+for i in xrange(int(raw_input())):
+    num_train = int(raw_input())
+    time = 0
+    for i in xrange(num_train):
+        start, duration, freq = map(int, raw_input().split())
+        if time < start:
+            time += start-time
+        wait = (time - start)%freq
+        if wait:
+            time += freq-wait
+        time += duration
+    print time

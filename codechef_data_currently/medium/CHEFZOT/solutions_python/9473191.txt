@@ -1,0 +1,16 @@
+n=int(raw_input())
+a=map(int, raw_input().split())
+#print a
+ctr=0
+max=0
+for i in range(0,n):
+    if(a[i]==0):
+        if(ctr>max):
+            max=ctr
+        ctr=0
+    else:
+        ctr=ctr+1
+        if(ctr>max):
+            max=ctr
+    #print ctr,max,"<"
+print max    

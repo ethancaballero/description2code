@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+float dist (int a,int b,int c,int d)
+{
+    return (sqrt(((c-a)*(c-a))+((d-b)*(d-b))));
+}
+int main()
+{
+    int r;
+    int t;
+    cin>>t;
+    float a,b,c;
+    int x1,x2,x3,y1,y2,y3;
+    while(t--)
+    {
+        cin>>r;
+        cin>>x1>>y1>>x2>>y2>>x3>>y3;
+        a=dist(x1,y1,x2,y2);
+        b=dist(x2,y2,x3,y3);
+        c=dist(x3,y3,x1,y1);
+        if((a<=r)&&(b<=r)||(b<=r)&&(c<=r) || (c<=r)&&(a<=r) )
+        cout<<"yes";
+        else cout<<"no";
+        cout<<endl;
+    }
+        return 0;
+}

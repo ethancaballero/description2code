@@ -1,0 +1,22 @@
+md = 1000000007
+a = []
+ans = []
+sm = []
+n,b = map(int, raw_input().split())
+a.append(0)
+for i in range(n):
+	temp = int(raw_input())
+	a.append(temp)
+q = int(raw_input())
+for i in range(n+2):
+	ans.append(0)
+	sm.append(0)
+ans[b] = 1
+sm[b] = 1
+for i in range(b-1,0,-1):
+	ans[i] = (sm[i+1] - sm[i+a[i]+1])%md
+	sm[i] = (sm[i+1] + ans[i])%md
+for i in range(q):
+	s = int(raw_input())
+	print ans[s]
+

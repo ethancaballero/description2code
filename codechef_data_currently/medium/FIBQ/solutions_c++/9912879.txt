@@ -1,0 +1,155 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+struct node{
+	long long x;
+	long long y;
+};
+ 
+//void po(long long int F[2][2],long long int n);
+ 
+ 
+//long long fib(long long n)
+//{
+  //long long F[2][2] = {{1,1},{1,0}};
+  //if (n == 0)
+   // return 0;
+  //po(F, n-1);
+  //return F[0][0]%mod;
+//}
+  
+//void mul(long long int F[2][2], long long int M[2][2])
+//{
+  //long long x =  ((F[0][0]*M[0][0])%mod + (F[0][1]*M[1][0])%mod)%mod;
+ // long long y =  ((F[0][0]*M[0][1])%mod + (F[0][1]*M[1][1])%mod)%mod;
+//  long long z =  ((F[1][0]*M[0][0])%mod + (F[1][1]*M[1][0])%mod)%mod;
+ // long long w =  ((F[1][0]*M[0][1])%mod + (F[1][1]*M[1][1])%mod)%mod;
+ 
+//  F[0][0] = x%mod;
+ //8 F[0][1] = y%mod;
+ // F[1][0] = z%mod;
+ // F[1][1] = w%mod;
+//}
+ struct node z;
+ long long fib(long long int n)
+{
+    if(n == 0)
+    {
+        z.x = 0;
+        z.y = 1;
+        return z.x;
+    }
+    fib((n/2));
+    long long a = z.x;             
+        long long b = z.y;             
+    long long c = 2*b - a;
+    if(c < 0)
+        c += mod;
+    c = (a * c) % mod;      
+    long long d = (a*a + b*b) % mod;  
+    if(n%2 == 0)
+    {
+        z.x = c;
+        z.y = d;
+    }
+    else
+    {
+        z.x = d;
+        z.y = c+d;
+    }
+    return z.x;
+}
+long long a[500000]; 
+struct node seg[500000];
+void construct(long long pos,long long low,long long high)
+{
+	if(low==high)
+	{
+		seg[pos].x=fib(a[low])%mod;
+		seg[pos].y=fib(a[low]-1)%mod;
+		return;
+	}
+	
+	long long mid=(low+high)/2;
+	
+	construct(2*pos+1,low,mid);
+	construct(2*pos+2,mid+1,high);
+	
+	seg[pos].x=(seg[2*pos+1].x+seg[2*pos+2].x+seg[2*pos+1].x*(seg[2*pos+2].x+seg[2*pos+2].y)+seg[2*pos+1].y*seg[2*pos+2].x)%mod;
+	seg[pos].y=(seg[2*pos+1].y+seg[2*pos+2].y+seg[2*pos+1].x*seg[2*pos+2].x+seg[2*pos+1].y*seg[2*pos+2].y)%mod;
+	
+}
+struct node d;
+struct node query(long long low,long long high,long long qlow,long long qhigh,long long pos)
+{
+	if(qlow<=low&&qhigh>=high)
+	return seg[pos];
+	
+	 if(qlow>high||qhigh<low)
+	{
+		d.x=0;
+		d.y=0;
+		return d;
+	}
+	
+	long long mid=(low+high)/2;struct node a,b,c;
+	
+	a=query(low,mid,qlow,qhigh,2*pos+1);
+	b=query(mid+1,high,qlow,qhigh,2*pos+2);
+		if(b.x==0&&b.y==0)
+	return a;
+	if(a.x==0&&a.y==0)
+	return b;
+	c.x=(a.x+b.x+(a.x*(b.x+b.y)+a.y*b.x))%mod;
+	c.y=(a.y+b.y+a.x*b.x+a.y*b.y)%mod;
+	return c;
+	
+}
+void compute(long long low,long long high,long long l,long long r,long long pos)
+{
+	if(low==l&&high==l)
+	{
+		seg[pos].x=fib(r)%mod;
+		seg[pos].y=fib(r-1)%mod;
+		return;
+	}
+	if(low>l||high<l)
+	return;
+	if(low==high)
+	return;
+	long long mid=(low+high)/2;
+	compute(low,mid,l,r,2*pos+1);
+	compute(mid+1,high,l,r,2*pos+2);
+ 
+	seg[pos].x=(seg[2*pos+1].x+seg[2*pos+2].x+seg[2*pos+1].x*(seg[2*pos+2].x+seg[2*pos+2].y)+seg[2*pos+1].y*seg[2*pos+2].x)%mod;
+	seg[pos].y=(seg[2*pos+1].y+seg[2*pos+2].y+seg[2*pos+1].x*seg[2*pos+2].x+seg[2*pos+1].y*seg[2*pos+2].y)%mod;	
+}
+int main() {
+	long long n,m,i,j,y,l,r;
+	char ch;
+	scanf("%lld %lld",&n,&m);
+	for(i=0;i<n;i++) scanf("%lld",&a[i]);
+	construct(0,0,n-1);
+	/*for(i=0;i<2*n-1;i++)
+	{
+		printf("%lld ",seg[i].x);
+	}*/
+	//cout<<endl;
+	for(j=0;j<m;j++)
+	{
+		cin>>ch;
+		scanf("%lld %lld",&l,&r);
+		if(ch=='Q') 
+		{
+			struct node g;
+			g=query(0,n-1,l-1,r-1,0);
+			 printf("%lld
+",g.x);
+		}
+		if(ch=='C')
+		{
+			compute(0,n-1,l-1,r,0);
+		}
+	}
+	return 0;
+} 

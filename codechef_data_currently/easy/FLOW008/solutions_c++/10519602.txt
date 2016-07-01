@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	long long int t,n,i;
+	scanf("%lld",&t);
+	for(i=0;i<t;i++)
+	{
+		scanf("%lld",&n);
+		if(n >=10)
+		{
+			printf("-1
+");
+		}
+		else 
+		{
+			printf("What an obedient servant you are!
+");
+		}
+	}
+	return 0;
+}

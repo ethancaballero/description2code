@@ -1,0 +1,103 @@
+//Template
+
+// By Anudeep :)
+//Includes
+#include <vector> 
+#include <queue>
+#include <map> 
+#include <set>
+#include <utility> //Pair
+#include <algorithm>
+#include <sstream> // istringstream>> ostring stream<<
+#include <iostream> 
+#include <iomanip> 
+//setbase - cout << setbase (16); cout << 100 << endl; Prints 64
+//setfill -   cout << setfill ('x') << setw (5); cout << 77 << endl; prints xxx77
+//setprecision - cout << setprecision (4) << f << endl; Prints x.xxxx
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <limits>
+using namespace std;
+
+//M lazy ;)
+typedef long long ll;
+typedef vector <int> vi;
+typedef pair< int ,int > pii;
+typedef istringstream iss;
+typedef ostringstream oss;
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define ln length()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define fu(i,a,n) for(int i=a;i<=n;i++)
+#define fd(i,n,a) for(int i=n;i>=a;i--)
+#define all(a)  a.begin(),a.end() 
+#define ESP (1e-9)
+
+#define gi(n) scanf("%d",&n)
+#define gl(n) cin >> n
+#define pi(n) printf("%d",n)
+#define pl(n) cout << n
+#define ps printf(" ")
+#define pn printf("
+")
+#define dg(n,s); printf("%s %d",s,n)
+#define imax numeric_limits<int>::max()
+#define imin numeric_limits<int>::min()
+#define lmax numeric_limits<ll>::max()
+#define lmin numeric_limits<ll>::min()
+
+void assert(bool f) {
+	if(!f) { int a = 0; cout << 10/a << endl; }
+}
+
+int main() {
+	int t;
+	cin >> t;
+	assert(1<=t && t<=1000);
+
+	while(t--) {
+		int k; string s;
+		cin >> k >> s;
+		assert(1<=k && k<=10);
+		assert(1<=s.ln && s.ln<=100);
+		rep(i,s.ln) assert( s[i]=='?' || (s[i]>='0' && s[i]<'0'+k));
+
+		//Input testing done. Main Code follows
+		//Greedy!
+		if(s.ln==1) {
+			if(s[0]=='?') s[0]='0';
+			cout << s << endl;
+			continue;
+		}
+		if(k==1) { cout << "NO" << endl; continue; }
+		if(k==2) {
+			if(s.ln&1) { cout << "NO" << endl; continue; }
+			string cur = s; bool ok = 1;
+			rep(i,s.ln) if(s[i]=='?') s[i] = '0' + (i&1); else if(s[i] != '0'+(i&1)) ok = 0;
+			if(ok) { cout << s << endl; continue; }
+			s = cur; ok = 1;
+			rep(i,s.ln) if(s[i]=='?') s[i] = '0' + !(i&1); else if(s[i] != '0'+ !(i&1)) ok = 0;
+			if(ok) { cout << s << endl; continue; }
+			cout << "NO" << endl;
+			continue;
+		}
+
+		bool valid = 1;
+		rep(i,s.ln) if(s[i]=='?') {
+			//Need to fill this position. Try every possibility
+			fu(c, '0', '2') if(s[(i-1+s.ln)%s.ln] != c && s[(i+1)%s.ln] != c) { s[i] = c; break; }
+		}
+		//Its already filled, just check if its valid.
+		else if((s[i] == s[(i-1+s.ln)%s.ln] || s[i] == s[(i+1)%s.ln])) valid = 0;
+
+		cout << (valid?s:"NO") << endl;
+	}
+	return 0;
+}

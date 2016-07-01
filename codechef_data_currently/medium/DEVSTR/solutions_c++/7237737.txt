@@ -1,0 +1,143 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		long long n,k;
+		scanf("%lld %lld",&n,&k);
+		char a[100005];
+		scanf("%s",a);
+		long long i,j,m,l;
+		long long int co=1;
+		long long ans=0;
+		if(k!=1&&k!=n){
+		for(i=1;i<n;i++)
+		{
+			if(a[i]==a[i-1])
+			{
+				m=i-1;
+				co=1;
+				while(a[m+1]==a[m])
+				{
+					m++;
+					co++;
+				}
+				if(co>k)
+				{
+					long long int h=(co/(k+1));
+					//printf("%d
+",h);
+					int count=0;
+					ans+=h;
+					if(co%(k+1)==0)
+					{
+						if(a[m-1]=='0')
+						a[m-1]='1';
+						else
+						a[m-1]='0';
+					
+						for(l=i-1+k;l<m-k;l+=(k+1))
+						{
+							if(a[l]=='0')
+							a[l]='1';
+							else
+							a[l]='0';
+							count++;
+							//if(count==h-1)
+							//break;
+						}	
+					}
+					else
+					{
+						for(l=i-1+k;l<=(m-1);l+=(k+1))
+						{
+							if(a[l]=='0')
+							a[l]='1';
+							else
+							a[l]='0';
+							count++;
+							//if(count==h)
+							//break;
+						}
+					}
+				}
+				i=m;
+			}
+			else
+			{
+				co=1;
+			}
+		}
+		printf("%lld
+",ans);
+		printf("%s
+",a);}
+		else if(k==1&&k!=n)
+		{
+			char b[100005];
+			char c[100005];
+			for(i=0;i<n;i++)
+			{
+				if(i%2==0)
+				{
+					b[i]='1';
+					c[i]='0';
+				}
+				else
+				{
+					b[i]='0';
+					c[i]='1';
+				}
+			}
+			long long int a1=0;
+			long long int a2=0;
+			for(i=0;i<n;i++)
+			{
+				if(a[i]==b[i])
+				continue;
+				else
+				a1++;
+			}
+			for(i=0;i<n;i++)
+			{
+				if(a[i]==c[i])
+				continue;
+				else
+				a2++;
+			}
+			if(a1<a2)
+			{
+				printf("%lld
+",a1);
+				for(i=0;i<n;i++)
+				printf("%c",b[i]);
+				printf("
+");
+			}
+			else
+			{
+				printf("%lld
+",a2);
+				for(i=0;i<n;i++)
+				printf("%c",c[i]);
+				printf("
+");
+			}
+		}
+		else if(k==n)
+		{
+			printf("0
+");
+			/*if(a[n-1]=='0')
+			a[n-1]='1';
+			else
+			a[n-1]='0';*/
+			printf("%s
+",a);
+		}
+	}
+	return 0;
+} 

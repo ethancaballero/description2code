@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+int main()
+{
+      int t;
+      long long int ans,a[3],M=1000000007;
+      scanf("%d",&t);
+      while(t--)
+      {
+            scanf("%lld%lld%lld",&a[0],&a[1],&a[2]);
+            std::sort(a,a+3);
+            a[0]%=M;
+            a[1]=(a[1]-1)%M;
+            a[2]=(a[2]-2)%M;
+            ans=((a[0]*a[1])%M);
+            ans=(ans*a[2]%M)%M;
+            printf("%lld
+",ans);
+      }
+}

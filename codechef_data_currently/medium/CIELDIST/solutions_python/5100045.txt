@@ -1,0 +1,19 @@
+import sys
+
+T = int(sys.stdin.readline())
+for i in range(T):
+    temp = sys.stdin.readline()
+    temp = temp.split(' ')
+    D1 = int(temp[0])
+    D2 = int(temp[1])
+    D = int(temp[2])
+    cal = D - D1 - D2
+    ans = cal
+    if ans < 0:
+        if (D + D2) < D1:
+            ans = D1 - D - D2
+        elif (D + D1) < D2:
+            ans = D2 - D - D1
+        else:
+            ans = 0
+    print ans

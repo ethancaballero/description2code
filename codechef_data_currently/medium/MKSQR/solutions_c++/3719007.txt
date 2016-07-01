@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstdio>
+#include<algorithm>
+
+using namespace std;
+
+int main(){
+int t, n, x, y,p,m;
+scanf("%d",&t);
+while(t--)
+    {
+  p=0;m=0;
+scanf("%d",&n);
+while(n--)
+{
+ scanf("%d%d",&x,&y);
+ if(x>y)
+   p++;
+else
+    m++;
+}
+if(p==0||m==0)
+  printf("NO
+");
+else
+  printf("YES
+");
+
+}
+}

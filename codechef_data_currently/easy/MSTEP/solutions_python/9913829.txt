@@ -1,0 +1,17 @@
+t = input()
+for _ in xrange(t):
+    n = input()
+    loc = {}
+    for i in xrange(n):
+        row = map(int, raw_input().split())
+        k = 0
+        for j in row:
+            loc[j] = i, k
+            k += 1
+    steps = 0
+    r, c = loc[1]
+    for i in xrange(2, n * n + 1):
+        rw, cl = loc[i]
+        steps += abs(r - rw) + abs(c - cl)
+        r, c = rw, cl
+    print steps

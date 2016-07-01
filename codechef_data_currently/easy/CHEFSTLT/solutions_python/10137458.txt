@@ -1,0 +1,29 @@
+def main():
+	t=input()
+	lt=[]
+	lt1=[]
+	for j in range(t):
+		a=raw_input()
+		b=raw_input()
+		l=len(a)
+		m1=0
+		m2=0
+		for i in range(l):
+			if(a[i]!='?' and b[i]!='?'):
+				if(a[i]!=b[i]):
+					m1=m1+1
+		lt.append(m1)
+
+		for i in range(l):
+			if(a[i]=='?' and b[i]=='?'):
+				m2=m2+1
+			else:
+				if(a[i]!=b[i]):
+					m2=m2+1
+		lt1.append(m2)
+
+	for i in range(t):
+		print lt[i],lt1[i]
+
+if __name__ == '__main__':
+	main()

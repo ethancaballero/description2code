@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+
+
+int main(){
+       int numbers;
+       cin>>numbers;
+       int i=0;
+       while(i<numbers){
+            int n;
+            cin>>n;
+            char a[100];
+            for(int i=0;i<n;i++){
+                  cin>>a[i];}
+            int j=0;
+            while(j<n){
+                 if(a[j]=='Y'){
+                      cout<<"NOT  INDIAN"<<endl;
+                      break;}
+                 else if(a[j]=='I'){
+                       cout<<"INDIAN"<<endl;
+                       break;}
+                 else{
+                      j=j+1;}}
+            if(j==n){
+               cout<<"NOT SURE"<<endl;} 
+            i=i+1;}  }    
+                  

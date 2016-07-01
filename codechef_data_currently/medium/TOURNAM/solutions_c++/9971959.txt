@@ -1,0 +1,90 @@
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+class TennisTournament {
+	
+	private static void run(long n, BigDecimal p, List<Long> originalPositions) {
+		MathContext ctx = new MathContext(9);
+		
+		Map<Long, BigDecimal> round = new HashMap<Long, BigDecimal>();
+		
+		Collection<Long> positions = originalPositions;
+		for (long position : originalPositions) {
+			round.put(position, BigDecimal.ONE);
+		}
+
+		for (long k = lg(n); k > 0; k--) {
+			Map<Long, BigDecimal> nextRound = new HashMap<Long, BigDecimal>();
+
+			for (long position : positions) {
+				long nextPosition = (long) Math.ceil(position / 2.0);
+
+				if (nextRound.containsKey(nextPosition)) {
+					long previousPosition = 2 * nextPosition;
+					if(previousPosition == position) {
+						previousPosition = position - 1;
+					}
+					
+					BigDecimal left = round.get(previousPosition);
+					BigDecimal right = round.get(position);
+					
+					BigDecimal f1 = p.multiply(right, ctx).multiply(BigDecimal.ONE.subtract(left, ctx),ctx);
+					BigDecimal f2 = p.multiply(left, ctx).multiply(BigDecimal.ONE.subtract(right, ctx),ctx);
+					BigDecimal f3 = left.multiply(right, ctx);
+					BigDecimal value = f1.add(f2, ctx).add(f3, ctx);
+							
+					nextRound.put(nextPosition, value);
+				} else {
+					BigDecimal value = p.multiply(round.get(position), ctx);
+					nextRound.put(nextPosition, value);
+				}
+			}
+
+			round = nextRound;
+			positions = nextRound.keySet();
+		}
+
+		if (round.size() == 0 || !round.containsKey(1L)) {
+			System.out.println(0);
+		} else {
+			System.out.println(round.get(1L).multiply(new BigDecimal(100), ctx));
+		}
+
+	}
+
+	private static long lg(long number) {
+		long log = 0;
+
+		while (number > 1) {
+			number = number >> 1;
+			log++;
+		}
+
+		return log;
+	}
+
+	
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		long testCases = scanner.nextLong();
+		for (long i = 0; i < testCases; i++) {
+			long N = scanner.nextLong();
+			int M = scanner.nextInt();
+			long P = scanner.nextLong();
+			List<Long> positions = new ArrayList<Long>(M);
+			
+			for (long j = 0; j < M; j++) {
+				positions.add(scanner.nextLong());
+			}
+			
+			run(N, new BigDecimal(P).divide(new BigDecimal(100), new MathContext(16)), positions);
+		}
+		scanner.close();
+	}
+}

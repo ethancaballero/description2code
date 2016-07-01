@@ -1,0 +1,13 @@
+from sys import stdin,stdout
+t = int(stdin.readline())
+for _ in xrange(t):
+	n = int(stdin.readline())
+	x = 0
+	for i in xrange(1,n+1):
+		a,b = map(int,stdin.readline().split())
+		if x == 0:
+			x = i
+		else:
+			x ^= i
+	stdout.write(str(x)+"
+")

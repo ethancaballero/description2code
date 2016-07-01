@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+
+#define MP           make_pair
+#define PB           push_back
+#define SZ(a)        ((int)a.size())
+#define LENGTH(a)    ((int)a.length())
+#define ALL(a)       a.begin(), a.end()
+#define REP(i, n)    for(int i = 0; i < n; i++)
+#define INC(i, a, b) for(int i = a; i <= b; i++)
+#define DEC(i, a, b) for(int i = a; i >= b; i--)
+#define CLEAR(a, b)  memset(a, b, sizeof a)
+#define X            first
+#define Y            second
+#define si(a)        scanf("%d", &a)
+#define ss(a)        scanf("%s", a)
+#define sll(a)       scanf("%lld", &a)
+
+using namespace std;
+
+typedef long long          LL;
+typedef unsigned long long ULL;
+typedef vector<int>        VI;
+typedef pair<int, int>     II;
+typedef vector<II>         VII;
+
+const double PI  = acos(-1.0);
+const double EPS = 1e-9;
+const int    inf = 1000000000;
+const LL     INF = ((LL)inf)*inf;
+
+class UnionFind {
+private:
+	VI p, rank, setSize;
+	int numSets;
+public:
+	UnionFind(int n) {
+		setSize.assign(n, 1);
+		numSets = n;
+		rank.assign(n, 0);
+		p.assign(n, 0);
+		REP(i, n) p[i] = i;
+	};
+	int findSet(int n) {
+		return (p[n] == n ? n : (p[n] = findSet(p[n])));
+	}
+	bool isSameSet(int i, int j) {
+		return findSet(i) == findSet(j);
+	}
+	void unionSet(int i, int j) {
+		if(isSameSet(i, j)) return;
+		numSets--;
+		int x = findSet(i), y = findSet(j);
+		if(rank[x] > rank[y]) {
+			p[y] = x;
+			setSize[x] += setSize[y];
+		} else {
+			p[x] = y;
+			setSize[y] += setSize[x];
+			if(rank[x] == rank[y]) rank[y]++;
+		}
+	}
+	int numDisjointSets() {return numSets;}
+	int sizeOfSet(int i) {return setSize[findSet(i)];}
+};
+
+#define LIM 1000100
+char inp[LIM];
+
+int main(int argc, char const *argv[])
+{
+	int tcase; si(tcase);
+	while(tcase--) {
+		int n, m;
+		si(n); si(m);
+		ss(inp);
+		assert(strlen(inp) == n);
+		UnionFind cur(n+1);
+		typedef pair<LL, II> Iii;
+		priority_queue<Iii, vector<Iii>, greater<Iii> > krus;
+		LL cost = 0;
+		REP(i, n) if(inp[i] == 'R') cur.unionSet(0, i+1);
+		REP(i, m) {
+			int u, v, temp;
+			si(u); si(v); si(temp);
+			if(temp < 0) {
+				cost += temp;
+				cur.unionSet(u, v);
+			}
+			else krus.push(MP((LL)temp, MP(u, v)));
+		}
+		while(!krus.empty()) {
+			Iii cc = krus.top();
+			krus.pop();
+			if(cur.isSameSet(cc.Y.X, cc.Y.Y)) continue;
+			cost += cc.X;
+			cur.unionSet(cc.Y.X, cc.Y.Y);
+		}
+		printf("%lld
+", cost);
+
+	}
+	return 0;
+}

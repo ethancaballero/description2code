@@ -1,0 +1,32 @@
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+
+long long int bhargava(long long int num)
+{
+    while(num%10==0)
+    {
+        num/=10;
+    }
+    return num%10;
+}
+
+
+int main()
+{
+    long long int t=1,num,n;
+    //scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%lld",&n);
+        for(int i=1;i<=n;i++)
+        {
+            scanf("%lld",&num);
+            while(bhargava(num)==5)
+                num*=4;
+            printf("%lld
+",num);
+        }
+    }
+    return 0;
+}

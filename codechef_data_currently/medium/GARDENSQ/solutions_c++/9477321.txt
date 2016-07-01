@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+    int n,m,i,j,k,cnt=0;
+    cin>>n>>m;
+    char a[n][m+1];
+    for(i=0;i<n;i++)
+      cin>>a[i];
+    for(i=0;i<n;i++)
+        for(j=0;j<m;j++)
+            for(k=1;k+j<m&&k+i<n;k++)
+            {
+                if(a[i][j]==a[i+k][j]&&a[i][j]==a[i][j+k]&&a[i][j]==a[i+k][j+k])
+                    cnt++;
+            }
+                cout<<cnt<<endl;
+}
+return 0;
+}

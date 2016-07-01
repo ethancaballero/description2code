@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    long long int n,i,l,d,s,c,j,q;
+	cin>>n;
+	for(i=0;i<n;i++)
+{
+
+		cin>>l>>d>>s>>c;
+        q=s;
+		for(j=1;j<d;j++)
+		{
+			q=q*(1+c);
+			if(q>=l)
+			break;	
+		}
+		if(q>=l)
+		cout<<"ALIVE AND KICKING"<<endl;
+		else
+		cout<<"DEAD AND ROTTING"<<endl;
+		
+	}
+}
+

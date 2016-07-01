@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+ 
+int main() {
+ 
+	int t;
+	cin>>t;
+	unsigned long long int t1,t2,T1,T2;
+	double prob;
+	for(int i=0;i<t;i++)
+	{
+		cin>>T1>>T2>>t1>>t2;
+ 
+	//	if(t1+t2==0){cout<<0.0<<endl;continue}
+		if(T1<=t2&&T2<=t1)
+		{
+			cout<<1.0<<endl;continue;
+		}
+ 
+		if(t1>=T2)
+		{
+			prob=T1*T2;
+		}
+		else if(T1+t1>=T2)
+		{
+			prob=T1*T2-1/2.0*(T2-t1)*(T2-t1);
+		}
+		else
+		{
+			prob=T1*T2-(1/2.0*T1*T1+(T2-T1-t1)*T1);
+		}
+ 
+		if(t2>=T1)
+		{}
+		else if(T2+t2>=T1)
+		{
+			prob-=1/2.0*(T1-t2)*(T1-t2);
+		}
+		else
+		{
+			prob-=(1/2.0*T2*T2+(T1-T2-t2)*T2);
+		}
+		cout<<prob/T1/T2<<endl;
+	}
+ 
+	return 0;
+} 

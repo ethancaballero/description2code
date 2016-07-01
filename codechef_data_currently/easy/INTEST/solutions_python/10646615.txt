@@ -1,0 +1,8 @@
+input_begin = raw_input().split()
+n, k = int(input_begin[0]), int(input_begin[1])
+div_by_k = 0
+for i in range(n):
+  t = int(raw_input())
+  if not t % k:
+    div_by_k += 1
+print div_by_k

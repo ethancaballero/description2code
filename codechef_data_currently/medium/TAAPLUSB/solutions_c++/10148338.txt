@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main()
+{
+    ll t,n,i;
+    vector<double> x(100000),ans(100000);
+    x[0]=0.45;
+    ans[0]=0.45;
+    for(i=1;i<100000;i++)
+    {
+        x[i]=0.45+0.1*x[i-1];
+        ans[i]=ans[i-1]+x[i];
+    }
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        cout<<setprecision(14)<<ans[n-1]<<endl;
+    }
+    return 0;
+}

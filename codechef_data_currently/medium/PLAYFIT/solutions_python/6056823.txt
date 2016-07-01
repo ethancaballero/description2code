@@ -1,0 +1,16 @@
+t=input()
+while t:
+	t-=1
+	n=input()
+	num=map(int,raw_input().split())
+	mini=1000001
+	max_diff=0
+	for i in num:
+		if i<mini:
+			mini=i
+		elif i>mini and i-mini>max_diff:
+			max_diff=i-mini
+	if max_diff==0:
+		print 'UNFIT'
+	else:
+		print max_diff

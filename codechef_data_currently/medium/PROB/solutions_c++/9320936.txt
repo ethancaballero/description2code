@@ -1,0 +1,20 @@
+    #include<stdio.h>
+     
+    int main()
+    {
+      int t;
+      long long int t1,t2,t3,t4;
+      double res;
+      scanf("%d",&t);
+      while(t--)
+      {
+      	scanf("%lld%lld%lld%lld",&t1,&t2,&t3,&t4);
+      	res=((double)(t1))/(t1+t2);
+      	printf("%0.9f
+",res);
+      
+      }	
+    	
+     
+    	return 0;
+    } 

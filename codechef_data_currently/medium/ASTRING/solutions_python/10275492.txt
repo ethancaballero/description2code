@@ -1,0 +1,30 @@
+def main():
+    T=int(raw_input())
+    for i in range(T):
+        S=raw_input()
+        k=int(raw_input())
+        ans=""
+        min='z'
+        last=-1
+        arr=[[0 for x in range(2)] for y in range(len(S))]
+        for j in range(len(S)):
+            arr[j][0]=S[j]
+            arr[j][1]=j
+        for j in range(len(S)):
+            for m in range(len(S)-1):
+                if arr[m][0]>arr[m+1][0]:
+                    temp=arr[m][0]
+                    temp1=arr[m][1]
+                    arr[m][0]=arr[m+1][0]
+                    arr[m][1]=arr[m+1][1]
+                    arr[m+1][0]=temp
+                    arr[m+1][1]=temp1
+        count=0
+        for j in range(k):
+            for m in range(0,len(arr)):
+                if arr[m][1]>=last+1 and arr[m][1]<len(S)-(k-j)+1:
+                    ans+=arr[m][0]
+                    last=arr[m][1]
+                    break
+        print ans
+main()

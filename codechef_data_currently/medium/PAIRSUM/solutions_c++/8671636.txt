@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+int readInt () {
+	bool minus = false;
+	int result = 0;
+	char ch;
+	ch = getchar();
+	while (true) {
+		if (ch == '-') break;
+		if (ch >= '0' && ch <= '9') break;
+		ch = getchar();
+	}
+	if (ch == '-') minus = true; else result = ch-'0';
+	while (true) {
+		ch = getchar();
+		if (ch < '0' || ch > '9') break;
+		result = result*10 + (ch - '0');
+	}
+	if (minus)
+		return -result;
+	else
+		return result;
+}
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int a[200];
+	for (int i = 0; i < n; ++i)
+	{
+		scanf("%d",&a[i]);
+	}
+	map<int, int> x;
+	int ans = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		for(int j = i + 1; j < n; ++j)
+		{
+			int y = a[i] + a[j];
+			++x[y];
+			if (x[y] > ans) ans = x[y];
+		}
+	}
+	printf("%d",2*ans);
+} 

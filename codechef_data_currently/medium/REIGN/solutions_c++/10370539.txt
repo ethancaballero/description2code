@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll int dp1[1000003];
+ll int arr[1000003];
+ll int dp2[1000003];
+ll max(ll a,ll b)
+{
+    if(a>b)
+        return a;
+    return b;
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k,i;
+        cin>>n>>k;
+        for(i=1;i<=n;i++)
+        {
+            scanf("%lld",&arr[i]);
+        }
+        dp1[n+1]=INT_MIN;
+        dp2[n+1]=INT_MIN;
+
+        for(i=1;i<=n;i++)
+        {
+            dp1[i]=max(dp1[i-1]+arr[i],arr[i]);
+        }
+        for(i=n;i>=1;i--)
+        {
+            dp2[i]=max(dp2[i+1]+arr[i],arr[i]);
+        }
+
+        for(i=n;i>=1;i--)
+        {
+            dp2[i]=max(dp2[i],dp2[i+1]);
+        }
+        ll maxi=INT_MIN;
+        for(i=1;i<=(n-k-1);i++)
+        {
+            maxi=max(maxi,dp1[i]+dp2[i+k+1]);
+        }
+     cout<<maxi<<endl;
+
+
+
+    }
+
+
+}

@@ -1,0 +1,80 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <utility>
+#include <map>
+#include <set>
+#include <string>
+#include <cstring>
+#include <queue>
+#define rf freopen("in.in", "r", stdin)
+#define wf freopen("out.out", "w", stdout)
+#define rep(i, s, n) for(int i=int(s); i<=int(n); ++i)
+using namespace std;
+const int mx = 1e5 + 10, mod = 1e9+7;
+
+int n, m;
+int buying[1111][1111], selling[1111][1111];
+long double dp[1111][1111][2];
+long long d;
+
+int main()
+{
+	//rf;// wf;
+	ios::sync_with_stdio(0);
+
+	cin >> n >> m >> d;
+	for(int i = 0; i<n; ++i)
+	{
+		for(int j = 0; j<m; ++j)
+			cin >> selling[j][i] >> buying[j][i];
+	}
+
+	for(int i = 0; i<n; ++i)
+		dp[0][i][0] = d,
+		dp[0][i][1] = 0;
+
+	for(int t = 1; t <= m; ++t)
+	{
+		for(int i = 0; i<n; ++i)
+		{
+			dp[t][i][0] = dp[t-1][i][0];
+			dp[t][i][1] = dp[t-1][i][1];
+
+			
+			dp[t][i][0] = max(dp[t][i][0], dp[t-1][i][1]*buying[t-1][i]);
+			dp[t][i][1] = max(dp[t][i][1], dp[t-1][i][0]/selling[t-1][i]);
+			
+			for(int dis = 1; dis <= 1; ++dis)
+			{
+				if(i+dis < n)
+				{
+					dp[t][i][0] = max(dp[t][i][0], dp[t-dis][i+dis][0]);
+					dp[t][i][1] = max(dp[t][i][1], dp[t-dis][i+dis][1]);
+				}
+				if(i-dis >= 0)
+				{
+					dp[t][i][0] = max(dp[t][i][0], dp[t-dis][i-dis][0]);
+					dp[t][i][1] = max(dp[t][i][1], dp[t-dis][i-dis][1]);
+
+					// dp[t][i][0] = max(dp[t][i][0], dp[t-1][i][1]*buying[t-1][i]);
+					// dp[t][i][1] = max(dp[t][i][1], dp[t-1][i][0]/selling[t-1][i]);
+				}
+			}
+		}
+	}
+
+	long double ans = 0;
+	for(int i = 0; i<n; ++i)
+		ans = max(ans, dp[m][i][0]);
+
+	if(ans > 1e18)
+		printf("Quintillionnaire
+");
+	else
+		printf("%.7Lf
+", ans);
+	return 0;
+}

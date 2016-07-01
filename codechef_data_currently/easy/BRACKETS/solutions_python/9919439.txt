@@ -1,0 +1,13 @@
+t = input()
+for _ in xrange(t):
+    s = raw_input()
+    max_bal = 0
+    bal = 0
+    for c in s:
+        if c == '(':
+            bal += 1
+        elif c == ')':
+            bal -= 1
+        max_bal = max(bal, max_bal)
+    ans = max_bal * '(' + max_bal * ')'
+    print ans

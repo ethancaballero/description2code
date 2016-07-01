@@ -1,0 +1,81 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	long long int test,m,i,x,y,z,a[105],b[105],c[105],R,G,B,w[3];
+	cin>>test;
+	while(test--)
+	{
+		cin>>R>>G>>B>>m;
+		for(i=0;i<R;++i)
+		cin>>a[i];
+		for(i=0;i<G;++i)
+		cin>>b[i];
+		for(i=0;i<B;++i)
+		cin>>c[i];
+		
+		/*x=a[0];
+		for(i=0;i<R;++i)
+		{
+			if(a[i]>x)
+			x=a[i];
+		}
+		y=b[0];
+		for(i=0;i<G;++i)
+		{
+			if(b[i]>x)
+			y=b[i];
+		}
+		z=c[0];
+		for(i=0;i<B;++i)
+		{
+			if(c[i]>z)
+			z=c[i];
+		}*/
+		sort(a,a+R);
+        sort(b,b+G);
+        sort(c,c+B);
+        w[0]=a[R-1];
+        w[1]=b[G-1];
+        w[2]=c[B-1];
+		//w[0]=x;
+		//w[1]=y;
+		//w[z]=z;
+		 while(m--)
+        {
+ 	    sort(w,w+3);
+            w[2]/=2;
+        }
+        sort(w,w+3);
+        printf("%lld
+",w[2]);
+		/*while(m--)
+		{
+			if(x>=y && x>=z)
+			x/=2;
+			else if(y>=x && y>=z)
+			y/=2;
+			else
+			z/=2;
+		}*/
+		/*if(x>=y && x>=z)
+		cout<<x<<"
+";
+		else if(y>=x && y>=z)
+		cout<<y<<"
+";
+		else
+		cout<<z<<"
+";*/
+		/* if(x>=y&&x>=z)
+                        printf("%lld
+",x);
+            else if(y>=x&&y>=z)
+                        printf("%lld
+",y);
+            else printf("%lld
+",z);*/
+	}
+	return 0;
+}

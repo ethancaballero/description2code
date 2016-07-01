@@ -1,0 +1,24 @@
+t=input()
+while t>0:
+    t=t-1
+    a,b=map(int,raw_input().split())
+    m=map(int,raw_input().split())
+    m.sort()
+    c=[]
+    asi=[]
+    j=1
+    for i in range(0,a):
+        if j not in m:
+            c.append(j)
+        j=j+1
+    for i in range(0,(a-b)):
+        if i%2==0:
+            print c[i],
+    print " "
+    for i in range(0,(a-b)):
+        if i%2!=0:
+            print c[i],
+    print " "
+    
+
+            

@@ -1,0 +1,113 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll mod;
+int prm[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+ll multiply(ll a,ll b)
+{
+	a=a%mod;
+	b=b%mod;
+	long double res=a;
+	res*=b;
+	ll c=(ll)(res/mod);
+	a*=b;
+	a-=c*mod;
+	a=a%mod;
+	if(a<0)
+		a+=mod;
+	return a;
+}
+ll power(ll a,ll b)
+{
+	ll ans=1;
+	while(b)
+	{
+		if(b&1)
+		{
+			ans=multiply(ans,a);
+		}
+		a=multiply(a,a);
+		b=b>>1;
+	}
+	return ans;
+}
+bool miller_rabin(ll n)
+{
+	if(n<2)
+		return false;
+	if((n!=2)&&(!(n&1)))
+		return false;
+	ll i,j,a,x;
+	for(i=0;i<25;i++)
+	{
+		if(n==prm[i])
+			return true;
+		if(n%prm[i]==0)
+		{
+			return false;
+		}
+	}
+	ll count=0,s=n-1,flag;
+	while(!(s&1))
+	{
+		s/=2;
+		count++;
+	}
+	ll iteration=3;
+	for(i=0;i<iteration;i++)
+	{
+		a=rand()%(n-1)+1;
+		mod=n;
+		x=power(a,s);
+		if((x==1)||(x==n-1))
+		{
+			continue;
+		}
+		flag=0;
+		for(j=1;j<count;j++)
+		{
+			x=multiply(x,x);
+			if(x==1)
+				return false;
+			if(x==n-1)
+			{
+				flag=1;
+				break;
+			}
+		}
+		if(flag)
+			continue;
+		return false;
+	}
+	return true;
+}
+int main()
+{
+	ll t,n;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld",&n);
+		if(n<4)
+		{
+			printf("%lld
+",n);
+		}
+		else
+		{
+			if(!(n&1))
+				n--;
+			while(1)
+			{
+				if(miller_rabin(n))
+				{
+					printf("%lld
+",n);
+					break;
+				}
+				n-=2;
+			}
+		}
+	}
+	return 0;
+}

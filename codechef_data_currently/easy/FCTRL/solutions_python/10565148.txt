@@ -1,0 +1,12 @@
+def Z(n):
+	fives = 0
+	p = 1
+	while 5**p<=n:
+		fives += n/(5**p)
+		p += 1
+	return fives	
+
+T = int(raw_input())
+for i in range(0,T):
+	N = raw_input()
+	print Z(int(N))

@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t,a,ans;
+	cin>>t;
+	while(t--){
+		ans=0;
+		cin>>a;
+		if(a>2001){
+			for(int i=2001;i<a;i++){
+				if((i%4==0 && i%100!=0) || (i%400==0))
+					ans = (ans+2)%7;
+				else
+					ans = (ans+1)%7;
+			}
+		}else{
+			for(int i=a;i<2001;i++){
+				if((i%4==0 && i%100!=0) || (i%400==0))
+					ans = (ans+5)%7;
+				else
+					ans = (ans+6)%7;
+			}
+		}
+	switch(ans){
+		case 0: cout<<"monday"<<endl;break;
+		case 1: cout<<"tuesday"<<endl;break;
+		case 2: cout<<"wednesday"<<endl;break;
+		case 3: cout<<"thursday"<<endl;break;
+		case 4: cout<<"friday"<<endl;break;
+		case 5: cout<<"saturday"<<endl;break;
+		case 6: cout<<"sunday"<<endl;break;
+	}
+		
+		
+	}
+	return 0;
+}

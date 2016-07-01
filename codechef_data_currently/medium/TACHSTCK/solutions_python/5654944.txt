@@ -1,0 +1,16 @@
+n, d = map(int , raw_input().split())
+a= []
+for _ in xrange(n):
+    a.append(input())
+
+a.sort()
+p = i = 0
+while i< n-1:
+    if a[i+1] - a[i] <= d:
+        p += 1
+        i += 2
+    else:
+        i += 1
+
+print p
+        

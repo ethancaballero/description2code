@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long n,count=0;
+        cin>>n;
+        for(int i=1;i<=n;i++)
+        {
+                if(n>0)
+                    n-=i;
+                    count++;
+        }
+        cout<<count<<endl;
+    }
+}

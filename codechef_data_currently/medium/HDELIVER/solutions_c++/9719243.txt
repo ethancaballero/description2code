@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+ 
+int main()
+{
+int t,n,m,a,b,i,j,k,q;
+int arr[110][110];
+scanf("%d",&t);
+while(t--)
+ {
+ scanf("%d",&n);
+ scanf("%d",&m);
+ for(i=0;i<=n;i++)
+   for(j=0;j<=n;j++)
+    arr[i][j]=0;
+ 
+ while(m--)
+  {
+   scanf("%d",&a);
+   scanf("%d",&b);
+   arr[a][b]=arr[b][a]=1;
+  }
+ for(k=0;k<n;k++)
+  {
+    for(i=0;i<=n;i++)
+     for(j=0;j<=n;j++)
+      if(arr[i][k]==1 && arr[k][j]==1)
+       { arr[i][j]=1; arr[j][i]=1; }
+  }
+ scanf("%d",&q);
+ while(q--)
+  {
+   scanf("%d",&a);
+   scanf("%d",&b);
+   if((a==b) | (arr[a][b]==1 && arr[b][a]==1))
+    printf("YO
+");
+   else
+    printf("NO
+");
+  }
+ }
+return 0;
+} 

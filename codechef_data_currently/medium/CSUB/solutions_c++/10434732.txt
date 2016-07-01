@@ -1,0 +1,32 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+ 
+int main()
+{
+   unsigned long long int t=0,n,i,c=0;
+    unsigned long long int z=0;
+    cin>>t;
+ 
+    while(t--)
+    {
+        z=0;c=0;
+        cin>>n;
+        string a;
+        cin>>a;
+ 
+        for(i=0;i<n;++i)
+         {
+             if(a[i]=='1')
+                ++c;
+         }
+ 
+        z=(c*(c+1))/2;
+        cout<<z<<endl;
+ 
+    }
+    return 0;
+ 
+ 
+}
+ 

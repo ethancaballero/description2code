@@ -1,0 +1,15 @@
+def f(b):
+	if b<=3:
+		return 0
+	else:
+		return (b/2-1) + f(b-2)
+a = [0]*10005
+for i in range(4,10001):
+	a[i] = i/2-1
+	a[i] += a[i-2]
+
+t=input()
+while t:
+	t-=1
+	n=input()
+	print a[n]

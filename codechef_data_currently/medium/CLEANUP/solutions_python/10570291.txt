@@ -1,0 +1,17 @@
+t = int(raw_input())
+for _ in xrange(t):
+    n, m = map(int, raw_input().split())
+    finished_jobs = set(map(int, raw_input().split()))
+    chef = []
+    assistant = []
+    ischeftask = True
+    for i in xrange(1, n+1):
+        if i in finished_jobs:
+            continue
+        if ischeftask:
+            chef.append(i)
+        else:
+            assistant.append(i)
+        ischeftask = not ischeftask
+    print " ".join(map(str, chef))
+    print " ".join(map(str,assistant))

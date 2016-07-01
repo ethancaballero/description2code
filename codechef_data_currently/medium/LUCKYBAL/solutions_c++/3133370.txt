@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string s;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        cin >> s;
+        s = "#"+s;
+        int len = s.length();
+        long long ans=0;
+        int last4 = 0;
+        char c;
+        for(int i=1;i<len;++i) {
+            if(s[i]=='4') {
+                ans += i;
+                last4 = i;
+            } else {
+                ans += last4;
+            }
+        }
+        cout << ans << endl;
+    }
+    return 0;
+}

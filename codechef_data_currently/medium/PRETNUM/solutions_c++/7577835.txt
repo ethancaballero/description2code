@@ -1,0 +1,116 @@
+//copied
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <stdbool.h>
+#include <math.h>
+
+#define SZ 1000010
+#define SZ1 100010
+#define sq(x) ((x)*(x))
+ 
+const long long inf = 1LL<<28;
+const long long mod = 1LL;
+ 
+bool prime[SZ];
+long long arr[SZ1];
+long long sszz;
+bool segment[SZ];
+ 
+void sieve()
+{
+	long long i, j ,k;
+	prime[0] = prime[1] = 1;
+ 
+	for(i=4; i<SZ; i+=2)
+		prime[i] = 1;
+
+	k = sqrt(SZ)+1;
+ 
+	for(i=3; i<=k; i+=2)
+		if(!prime[i])
+		for(j=i*i; j<SZ; j+=i<<1)
+			prime[j] = 1; 
+
+	arr[sszz++] = 2;
+ 
+	for(i=3; i<SZ; i+=2)
+		if(!prime[i])
+			arr[sszz++] = i;
+}
+ 
+ 
+long long segmented_sieve(long long a, long long b)
+{
+	long long i, cnt = (a<=2 && 2<=b)? 1 : 0;
+	long long j, k;
+	
+	if(b<2) return 0;
+	if(a<3) a = 3;
+	if(a%2==0) a++;
+ 
+	memset(segment, 0, sizeof(bool)*(b-a+2));
+ 
+	for(i=0; sq(arr[i])<=b; i++)
+	{
+		j = arr[i] * ( (a+arr[i]-1) / arr[i] );
+			if(j%2==0) j += arr[i];
+			for(k=arr[i]<<1; j<=b; j+=k)
+				if(j!=arr[i])
+					segment[j-a] = 1;
+	}
+	for(i=0; i<=b-a; i+=2)
+		if(!segment[i])
+			cnt++;
+	return cnt;
+}
+ 
+long long nod(long long n)
+{
+	long long i, j, ans;
+	ans = 1LL;
+
+	for(i=0; i<sszz && n!=1 && arr[i]<=n; i++)
+	{
+		if(n%arr[i] == 0)
+		{
+			j = 0;
+			while(n%arr[i] == 0)
+			{
+				j++;
+				n /= arr[i];
+			}
+			ans *= (j+1LL);
+		}
+	}
+ 
+	if(n != 1)
+		ans <<= 1LL;
+	return ans;
+}
+
+int main()
+{
+	sieve();
+
+	long long t, l, r, i, j, k, ans;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld %lld",&l,&r);
+		ans = segmented_sieve(l, r);
+		k = sqrt(l);
+		for(i=k;; i++)
+		{
+			if(i*i > r) break;
+			if(i*i >= l)
+			{
+				if(!prime[ nod(i*i) ])
+				ans++;
+			}
+		}
+		printf("%lld
+",ans);
+	}
+	return 0;
+}

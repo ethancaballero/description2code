@@ -1,0 +1,36 @@
+//
+//  main.cpp
+//  practice
+//
+//  Created by Grover Harsh on 16/06/16.
+//  Copyright © 2016 harsh. All rights reserved.
+//
+
+#include <iostream>
+#include<stdio.h>
+
+
+int main(){
+    int t,n,arr[50];
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d",&n);
+        for(int i=0; i<n; i++)
+            scanf("%d",&arr[i]);
+        int cnt = 0, prod, sm;
+        for(int i=0; i<n; i++)
+        {
+            prod = 1;
+            sm  = 0;
+            for(int j=i; j<n; j++){
+                prod *= arr[j];
+                sm += arr[j];
+                if(prod == sm)
+                    cnt++;
+            }
+        }
+        printf("%d
+",cnt);
+    }
+    return 0;
+}

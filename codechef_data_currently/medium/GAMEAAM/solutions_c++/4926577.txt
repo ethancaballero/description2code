@@ -1,0 +1,43 @@
+#include <iostream>
+
+using namespace std;
+
+int absolute(int a){
+	return a > 0? a : -a;
+}
+
+int main(){
+
+	int t;
+	int n;
+	int ans[100];
+	cin >> t;
+
+	for(int i = 0; i < t; i++){
+
+		cin >> n;
+		int answer = 0;
+		for(int j = 0; j < n; j++){
+			int x, y;
+			cin >> x;
+			cin >> y;
+
+			answer^=absolute((int)((double)x/y - (double)y/x));
+
+		}
+		if(answer)
+			ans[i] = 1;
+		else
+			ans[i] = 0;
+	}
+
+	for(int i = 0; i < t; i++){
+
+		if(ans[i])
+			cout << "YES
+";
+		else
+			cout << "NO
+";
+	}
+}

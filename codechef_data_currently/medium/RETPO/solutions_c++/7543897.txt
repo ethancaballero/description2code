@@ -1,0 +1,35 @@
+// URL : https://www.codechef.com/problems/RETPO
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	int tc;
+	cin >> tc;
+	while(tc--)
+	{
+		long long x, y, mn, ans;
+		cin >> x >> y;
+		x = (long long)abs((float)x);
+		y = (long long)abs((float)y);
+		
+		mn = min(x, y);
+		ans = 2 * mn;
+		x -= mn;
+		y -= mn;
+		if(x == 0 && y != 0)
+		{
+			ans += (2 * y - y % 2);
+		}
+		if(y == 0 && x != 0)
+		{
+			ans += (2 * x + x % 2);
+		}
+		cout << ans << endl;
+	}	
+	
+	return 0;
+}

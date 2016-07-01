@@ -1,0 +1,8 @@
+for _ in range(input()):
+	g=input()
+	for _ in range(g):
+		i,n,q=map(int, raw_input().split())
+		if(i!=q and n%2==1):
+			print n/2+1
+		else:
+			print n/2

@@ -1,0 +1,22 @@
+t=int(raw_input())
+for we in range(t):
+	n=int(raw_input())
+	s=[]
+	for sd in range(n):
+		x=raw_input()
+		s.append(x)
+	temp=n-1
+	temp=s[temp]
+	pos=temp.find(" ")
+	last=temp[:pos]
+	print "Begin"+temp[pos:]
+	for i in range(1,n):
+		temp=n-1-i
+		temp=s[temp]
+		pos=temp.find(" ")
+		if (last=="Right"):
+			last="Left"
+		else:
+			last="Right"
+		print last+temp[pos:]
+		last=temp[:pos]

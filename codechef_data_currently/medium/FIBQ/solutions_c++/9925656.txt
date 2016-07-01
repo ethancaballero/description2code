@@ -1,0 +1,142 @@
+#include <bits/stdc++.h>
+#define filein(t) freopen(t, "r", stdin)
+#define fileout(t) freopen(t, "w", stdout)
+#define mp make_pair
+#define f first
+#define s second
+#define N 100005
+#define NN 705
+#define BIT(i, j) ((j >> i) & 1)
+#define ll long long
+#define oo 1000000007
+#define ln 1000000001
+#define cs 137
+#define Line pair < pair <ll, ll>, ll >
+#define Pi pair < Pa, Pa >
+#define Pa pair < ll, int >
+
+using namespace std;
+
+typedef ll Matrix[2][2];
+Matrix BASE, Total, D;
+int n, m, a[N];
+
+struct DATA
+{
+    ll G1, G2, G3;
+};
+
+DATA Empty, C[4*N];
+
+void MUL(Matrix &P, Matrix &Q)
+{
+    Matrix W;
+    memset(W, 0, sizeof(W));
+    for(int i=0; i<=1; i++)
+        for(int j=0; j<=1; j++)
+            for(int k=0; k<=1; k++)
+                W[i][j] =(W[i][j] + P[i][k] * Q[k][j] % oo) % oo;
+    for(int i=0; i<=1; i++)
+        for(int j=0; j<=1; j++)
+            P[i][j] = W[i][j];
+}
+
+int Fi(int x)
+{
+    if(x == 0)  return 0;
+    if(x <= 2)  return 1;
+    x -= 2;
+    BASE[0][0] = 0;
+    BASE[0][1] = BASE[1][1] = BASE[1][0] = 1;
+    Total[0][0] = Total[1][1] = 1;
+    Total[0][1] = Total[1][0] = 0;
+    //BASE = POW(BASE, n-2);
+    while(x)
+    {
+        if(x % 2)
+            MUL(Total, BASE);
+        x /= 2;
+        MUL(BASE, BASE);
+    }
+    memset(D, 0, sizeof(D));
+    D[0][0] = 1;
+    D[0][1] = 1;
+    MUL(D, Total);
+    return D[0][1];
+}
+
+DATA MERGE(DATA L, DATA R)
+{
+    DATA New;
+    New.G1 = (L.G2 * R.G2 + L.G1 * R.G1 + L.G1 + R.G1) % oo;
+    New.G2 = (L.G2 * R.G3 + L.G1 * R.G2 + L.G2 + R.G2) % oo;
+    New.G3 = (L.G3 * R.G3 + L.G2 * R.G2 + L.G3 + R.G3) % oo;
+    return New;
+}
+
+void BUILD(int node, int l, int r)
+{
+    if(l == r)
+    {
+        C[node].G1 = Fi(a[l]-1);
+        C[node].G2 = Fi(a[l]);
+        C[node].G3 = Fi(a[l]+1);
+        return;
+    }
+    int g = (l + r) / 2;
+    BUILD(2*node, l, g);
+    BUILD(2*node+1, g+1, r);
+    C[node] = MERGE(C[2*node], C[2*node+1]);
+}
+
+void CHANGE(int node, int l, int r, int pos, int Val)
+{
+    if(l > pos || r < pos)  return;
+    if(l == r)
+    {
+        C[node].G1 = Fi(Val-1);
+        C[node].G2 = Fi(Val);
+        C[node].G3 = Fi(Val+1);
+        return;
+    }
+    int g = (l + r) / 2;
+    CHANGE(2*node, l, g, pos, Val);
+    CHANGE(2*node+1, g+1, r, pos, Val);
+    C[node] = MERGE(C[2*node], C[2*node+1]);
+}
+
+DATA GET(int node, int l, int r, int d, int c)
+{
+    if(d > r || l > c)  return Empty;
+    if(d <= l && r <= c)
+        return C[node];
+    int g = (l + r) / 2;
+    return MERGE(GET(node*2, l, g, d, c), GET(node*2+1, g+1, r, d, c));
+}
+
+int main()
+{
+    //filein("FIBO.inp"); fileout("FIBO.out");
+    char type;
+    Empty.G1 = Empty.G2 = Empty.G3 = 0;
+    int x, y, l, r;
+    cin >> n >> m;
+    for(int i=1; i<=n; i++)
+        scanf("%d", &a[i]);
+    BUILD(1, 1, n);
+    for(int i=1; i<=m; i++)
+    {
+        cin >> type;
+        if(type == 'C')
+        {
+            scanf("%d%d", &x, &y);
+            CHANGE(1, 1, n, x, y);
+        }
+        else
+        {
+            scanf("%d%d", &l, &r);
+            printf("%lld
+", GET(1, 1, n, l, r).G2);
+        }
+    }
+}

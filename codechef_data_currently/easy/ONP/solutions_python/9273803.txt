@@ -1,0 +1,17 @@
+def rpn():
+    t = "%+-/^*"
+    for i in range(int(raw_input())):
+        s = []
+        p = []
+        for i in raw_input():
+            if i == "(":
+                continue
+            elif i == ")":
+                s.append(p.pop())
+            elif i in t:
+                p.append(i)
+            else:
+                s.append(i)
+        print ''.join(s)
+                
+rpn()  

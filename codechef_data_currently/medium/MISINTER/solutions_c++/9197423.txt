@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long lli;
+bool mark[100005];
+#define mod 1000000007
+
+int main()
+{
+
+    int t;
+    scanf("%d",&t);
+
+    while(t--)
+    {
+        for(int i=0;i<100005;i++)mark[i]=false;
+
+        int n;
+        scanf("%d",&n);
+
+        int ctr=0,st=1,hf=n/2,i,mapped,idx;
+
+        while(true)
+        {
+           for( i=st;i<=n;i++)
+           {
+               if(mark[i]==false)
+               {
+                   ctr++;
+                   idx=i;
+                   mark[i]=true;
+                   while(true)
+                   {
+                       if(idx<=hf)
+                         mapped=2*idx;
+                       else mapped=2*(idx-hf)-1;
+                       if(mark[mapped]==true)break;
+                       else
+                       {
+                           idx=mapped;
+                           mark[mapped]=true;
+                       }
+                   }
+                   st=i+1;
+                   break;
+               }
+           }
+           if(i==n+1)break;
+        }
+        lli ans=26;
+        for( i=1;i<ctr;i++)
+        {
+            ans=(ans%mod*26)%mod;
+        }
+        printf("%lld
+",ans);
+    }
+    return 0;
+}

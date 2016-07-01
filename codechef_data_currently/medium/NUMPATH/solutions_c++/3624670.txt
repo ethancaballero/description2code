@@ -1,0 +1,91 @@
+#include <algorithm>
+#include <bitset>
+#include <cassert>
+#include <cctype>
+#include <climits>
+#include <cmath>
+#include <cstddef>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
+#include <complex>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <limits>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <string>
+#include <utility>
+#include <valarray>
+#include <vector>
+ 
+using namespace std;
+ 
+namespace NUMPATH {
+const int mod = 1000000007;
+int t[200001], dp[200001];
+int bit[200001];
+int N, B;
+ 
+int get(int l, int r) {
+  int res = 0;
+  for (int i = r; i > 0; i -= i & -i)
+    if ((res += bit[i]) >= mod)
+      res -= mod;
+  for (int i = l - 1; i > 0; i -= i & -i)
+    if ((res -= bit[i]) < 0)
+      res += mod;
+  return res;
+}
+ 
+void update(int pos, int val) {
+  for (int i = pos; i <= N; i += i & -i)
+    if ((bit[i] += val) >= mod)
+      bit[i] -= mod;
+}
+ 
+void solve(int test_num) {
+  scanf("%d %d", &N, &B);
+  for (int i = 1; i <= N; i++)
+    scanf("%d", t + i);
+  memset(bit, 0, sizeof(bit));
+  dp[B] = 1;
+  update(B, 1);
+  for (int i = B - 1; i > 0; i--) {
+    dp[i] = get(i + 1, i + t[i]);
+    update(i, dp[i]);
+  }
+  int Q;
+  scanf("%d", &Q);
+  while (Q--) {
+    int x;
+    scanf("%d", &x);
+    printf("%d
+", dp[x]);
+  }
+}
+ 
+void solve() {
+#ifdef AZN
+  freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
+  freopen("azn.txt", "w", stderr);
+#endif
+  solve(1);
+}
+}
+ 
+int main() {
+  NUMPATH::solve();
+  return 0;
+}
+ 

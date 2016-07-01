@@ -1,0 +1,22 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int t,a,b,c=0;
+    cin>>t;
+    while(t-->0)
+    {
+        cin>>a>>b;
+        c=0;
+        while(a!=b)
+        {
+            if(a>b) a/=2;
+            else b/=2;
+            c++;
+        }
+        cout<<c<<endl;
+    }
+    return 0;
+
+}

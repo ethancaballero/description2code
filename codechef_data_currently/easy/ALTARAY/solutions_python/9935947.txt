@@ -1,0 +1,31 @@
+#!/usr/bin/python
+
+T = int(raw_input())
+
+def sign(e):
+    return 1 if e>0 else -1
+
+def solve():
+    n = raw_input()
+    a = raw_input()
+    a = a.split()
+    a = [int(e) for e in a]
+    a = [sign(e) for e in a]
+    a.reverse()
+    ans = []
+
+    prev = 0
+    n    = 0
+    for e in a:
+        if e!=prev:
+            n = n + 1
+        else:
+            n = 1
+        ans.append(n)
+        prev = e
+    ans.reverse()
+    ans = [str(e) for e in ans]
+    print ' '.join(ans)
+    
+for t in range(1, T+1):
+    solve()

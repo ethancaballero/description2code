@@ -1,0 +1,44 @@
+#include<iostream>
+//#include<conio.h>
+#include<cmath>
+using namespace std;
+int main()
+{
+//clrscr();
+int T,N,p[5],x;
+long num=0;
+cin>>T;
+long *result=new long[T];
+for(int i=0;i<T;i++)
+{ num=0;
+  cin>>N;
+  for(int j=0;j<5;j++)
+   {
+     if(N/10!=0)
+      {
+	p[j]=N%10;
+	N/=10;
+	x=j;
+      }
+     else
+      break;
+
+
+   }
+
+   p[x+1]=N;
+   for(int k=x+1;k>=0;k--)
+    num+=(p[k]*pow(10,(x+1-k)));
+    result[i]=num;
+}
+for(int l=0;l<T;l++)
+ {
+  cout<<"
+"<<result[l];
+
+  }
+
+
+//getch();
+return 0;
+}

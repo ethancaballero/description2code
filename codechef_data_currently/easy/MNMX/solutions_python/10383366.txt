@@ -1,0 +1,11 @@
+
+
+t=input()
+
+for i in range(0,t) :
+	n=input()
+	lis=list(raw_input().split())
+	for j in range(0,n):
+		lis[j]=int(lis[j])
+	lis.sort()
+	print lis[0]*(n-1)

@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,m,t,temp=0;
+	cin>>n>>m;
+	char c;
+	int *a=new int[n];
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+	while(m--)
+	{
+		cin>>c>>t;
+		if(c=='R')
+		{
+			
+			cout<<a[((t+temp)-1)%n]<<endl;
+		}
+		else if(c=='C')
+		{
+			 temp=(temp+t)%n;
+			
+		}
+		else if(c=='A')
+		{
+			temp=(temp+(n-t))%n;
+		}
+			
+	}
+	
+	return 0;
+}

@@ -1,0 +1,49 @@
+#include <iostream>
+
+using namespace std;
+
+void constraint(int a, int l, int h){
+    if(a<l || a>h){
+        cout << "Error! constraints exceeded ,start again"<< endl;;
+    }
+}
+
+int main() {
+	int T;
+	cin >> T;
+	constraint(T,1,10);
+	for(int z=0;z<T;z++){
+        int N;
+        cin >> N;
+        constraint(N,1,10000);
+
+        int timings[N];
+        int intervalsgiven[N];
+        int realintervals[N];
+
+        cin >> timings[0];
+        constraint(timings[0],1,1000000000);
+        realintervals[0]=timings[0];
+
+        for(int a=1;a<N;a++){
+            cin >> timings[a];
+            realintervals[a]=timings[a]-timings[a-1];
+        }
+
+        for(int a=0;a<N;a++){
+            cin >> intervalsgiven[a];
+            constraint(intervalsgiven[a],1,1000000000);
+        }
+
+        int count=0;
+
+        for(int a=0;a<N;a++){
+            if(realintervals[a]>=intervalsgiven[a]){
+                count++;
+            }
+
+        }
+        cout << count << endl;
+	}
+return 0;
+}

@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+#define ll long double
+using namespace std;
+int main(){
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		ll h,s;
+		scanf("%Lf%Lf",&h,&s);
+		ll val1,val2;
+		val1=(ll)sqrt(h*h+4*s)+(ll)sqrt(h*h-4*s);
+		val2=(ll)sqrt(h*h+4*s)-(ll)sqrt(h*h-4*s);
+		//printf("The values of val1 and val2 are %Lf and %Lf
+",val1,val2);
+		val1/=2;
+		val2/=2;
+		if(val1+val2>h && val1+h>val2 && val2+h>val1){
+			if(val1>=val2)
+				printf("%Lf %Lf %Lf
+",val2,val1,h);
+			else
+				printf("%Lf %Lf %Lf
+",val1,val2,h);
+		}
+		else
+			printf("-1
+");
+	}
+	return 0;
+}

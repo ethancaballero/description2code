@@ -1,0 +1,54 @@
+#include <iostream>
+#include<algorithm>
+#include<set>
+
+using namespace std;
+
+int main() {
+	long long int i,c;
+
+set<char> myset1,myset2;
+    set<char>::iterator it;
+	
+
+  	string s1,s2;
+	cin>>c;
+	while(c--)
+	{
+
+ myset1.clear();
+   myset2.clear();
+
+
+
+
+	   cin>>s1>>s2;
+
+	   sort(s1.begin(),s1.end());
+       sort(s2.begin(),s2.end());
+
+       if(s1==s2)
+         cout<<"YES"<<endl;
+       else
+       {
+           for(i=0;i<s1.size();i++)
+           {
+             myset1.insert(s1[i]);
+           }
+
+           for(i=0;i<s2.size();i++)
+           {
+             myset2.insert(s2[i]);
+           }
+
+
+           if(myset1==myset2)
+            cout<<"NO"<<endl;
+           else
+             cout<<"YES"<<endl;
+
+
+       }
+	}
+	return 0;
+}

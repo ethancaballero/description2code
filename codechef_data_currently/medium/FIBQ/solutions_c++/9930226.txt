@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+#define ff(i, a, b) for(int i = (a), _b = (b); i <= _b; i++)
+#define bs 1000000007
+using namespace std;
+
+typedef long long llong;
+
+struct node { int val, valt1, valc1, l, r; };
+
+const int N = 100005;
+
+int n, m, a[N], leaf[N];
+node t[4*N], ans, tmp;
+int low, high;
+map <int, int> f;
+map <int, int> :: iterator it;
+///======================================================================================
+int fibo(int n) {
+	if (n <= 0) return 0;
+	if (n <= 2) return 1;
+	it = f.find(n);
+	if (it != f.end()) return it->second;
+	int F, B, A;
+	B = (n >> 1);  A = n - B;
+	F = (1LL*fibo(A) * 1LL*fibo(B+1) + 1LL*fibo(A-1)*fibo(B)) % bs;
+	return f[n] = F;
+}
+///======================================================================================
+void combine(struct node* T, const struct node& A, const struct node& B)
+{
+      T->val = (1LL*A.val + 1LL*B.val + 1LL*A.valt1*B.val + 1LL*A.val*B.valc1) % bs;
+      T->valt1 = (1LL*A.valt1 + 1LL*B.valt1 + 1LL*A.valt1*B.valt1 + 1LL*A.val*B.val) % bs;
+      T->valc1 = (1LL*A.valc1 + 1LL*B.valc1 + 1LL*A.val*B.val + 1LL*A.valc1*B.valc1) % bs;
+}
+///======================================================================================
+void build(int k, int low, int high)
+{
+      t[k].l = low, t[k].r = high;
+      if (low == high)
+      {
+            leaf[low] = k;
+            t[k].val = fibo(a[low]);
+            t[k].valt1 = fibo(a[low]-1);
+            t[k].valc1 = fibo(a[low]+1);
+            return;
+      }
+      build(2*k, low, (low+high)/2), build(2*k+1, (low+high)/2+1, high);
+      combine(&t[k], t[2*k], t[2*k+1]);
+}
+///======================================================================================
+void update(int k, int value)
+{
+      t[k].val = fibo(value), t[k].valt1 = fibo(value-1), t[k].valc1 = fibo(value+1);
+      k >>= 1;
+      while (k)
+      {
+            combine(&t[k], t[k*2], t[k*2+1]);
+            k >>= 1;
+      }
+}
+///======================================================================================
+void get(int k)
+{
+      if (low <= t[k].l && t[k].r <= high)
+      {
+            tmp = ans;
+            combine(&ans, tmp, t[k]);
+            return;
+      }
+      if (low <= t[2*k].r) get(2*k);
+      if (high >= t[2*k+1].l) get(2*k+1);
+}
+///======================================================================================
+int main()
+{
+      //freopen("a.txt", "r", stdin);
+      //freopen("b.txt", "w", stdout);
+
+      scanf("%d %d", &n, &m);
+      ff(i, 1, n) scanf("%d", &a[i]);
+
+      build(1, 1, n);
+
+	char ch;
+	while (m--)
+      {
+            scanf(" %c", &ch);
+		if (ch == 'Q')
+		{
+			scanf("%d %d", &low, &high);
+			ans.val = ans.valt1 = ans.valc1 = 0;
+			get(1);
+			printf("%d
+", ans.val);
+		}
+            else
+            {
+			int X, Y;
+			scanf("%d %d", &X, &Y);
+			update(leaf[X], Y);
+		}
+	}
+}

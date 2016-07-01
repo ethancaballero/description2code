@@ -1,0 +1,51 @@
+#include <cstdio>
+ 
+#define si(a) scanf("%d", &a)
+#define sia(arr) scanf("%d", &arr[i])
+#define sfa(arr) scanf("%f", &arr[i])
+#define for_range(i, n) for(int i=0;i<n;i++)
+#define for_rev_range(i, start, stop) for(int i=start;i>=stop;i--)
+#define max(a, b) a>b?a:b
+#define MAX_FLAGS 10000
+#define probability_by_abra(j, i) ((dp[j-flag[i]]*prob[i])+(dp[j]*(1-prob[i])))
+#define probability_by_kadabra(j, i) dp[j]*(1-prob[i])
+using namespace std;
+ 
+int main() {
+	int t, rem_flags, curr_flag_sum, req_flags;
+	int n;
+	si(t);
+	while(t--) {
+		si(n);
+		int flag[n], tot_flags =0; float prob[n];
+		float dp[MAX_FLAGS]={0};
+		for_range(i, n) {
+			sia(flag);
+			tot_flags += flag[i];
+		}
+		for_range(i, n) {
+			sfa(prob);
+			prob[i] /= 100.0;
+		}
+		dp[0] = 1.0;
+		curr_flag_sum = 0;
+		rem_flags = tot_flags;
+		req_flags = max(tot_flags/2, (tot_flags+1)/2);
+		for_range(i, n) {
+			int k = max(0, req_flags - rem_flags);
+			curr_flag_sum += flag[i];
+			rem_flags -= flag[i];
+			int start = max(flag[i], k);
+			for_rev_range(j, curr_flag_sum, start)
+				dp[j] = probability_by_abra(j, i);
+			for_rev_range(j, start-1, k)
+				dp[j] = probability_by_kadabra(j, i);
+		}
+		float probability=0.0;
+		for(int i=req_flags;i<=tot_flags;i++)
+			probability += dp[i];
+		printf("%f
+", probability);
+	}
+	return 0;
+} 

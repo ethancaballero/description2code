@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,num,round,soldier,rd,i;
+    scanf("%d",&t);
+    while(t--)
+    {   int summin=100001,summax=-1;
+        scanf("%d%d",&num,&rd);
+        while(rd--){
+            cin>>soldier;
+            summin=min(summin,soldier);
+            summax=max(summax,soldier);
+        }
+        for(i=0;i<num;++i)
+        cout<<max(abs(summax-i),abs(summin-i))<<" ";
+        printf("
+");
+
+    }
+ return 0;
+}

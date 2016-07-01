@@ -1,0 +1,41 @@
+#include<iostream>
+#include<map>
+#include<algorithm>
+#include<string.h>
+
+using namespace std;
+
+map<int, string, greater<int> > mp;
+map<int, string, greater<int> >::iterator it;
+
+int main()
+{
+    int N, Q, Priority;
+    string STR, STR1, STR2;
+    cin>>N;
+    for (int i=0; i<N; i++)
+    {
+        cin>>STR>>Priority;
+        mp.insert(pair< int, string>(Priority, STR));
+    }
+    cin>>Q;
+    for (int i=0; i<Q; i++)
+    {
+        cin>>STR1;
+        int len=STR1.size();
+        for (it=mp.begin(); it!=mp.end(); it++)
+        {
+
+            STR2=it->second.substr(0,len);
+
+            if (STR2==STR1)
+            {
+                cout<<it->second<<endl;
+                break;
+            }
+        }
+        if (it==mp.end())
+            cout<<"NO"<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main()
+{
+    int t,pg,n,x,b;
+    double sum;
+    cin>>t;
+    while(t--)
+    {
+        cin>>pg;
+        sum=(pg*(pg+1))/2;
+        if(pg%2)
+            pg++;
+        cin>>n;
+        while(n--)
+        {
+            cin>>x;
+            sum=sum-(x*1.0);
+        }
+        cin>>b;
+        if(pg==0)
+            printf("%0.4f
+",0);
+        else
+            printf("%0.4f
+",sum-(sum*2*b)/pg);
+    }
+    return 0;
+}

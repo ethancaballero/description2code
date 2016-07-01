@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	string s;
+	int t,ans[100005];
+	cin>>t;
+	int a[10][10];
+	char b[10];
+	for(int i=0;i<5;i++)
+	{
+		b[i]=b[i+5]='A'+i;
+	}
+	memset(a,0,sizeof(a));
+	for(int i=0;i<5;i++)
+	{
+		a[i][i+5]=1;
+		a[i+5][i]=1;
+		if(i<4)
+		{
+			a[i][i+1]=1;
+			a[i+1][i]=1;
+		}
+	}
+	a[0][4]=a[4][0]=1;
+	a[5][7]=a[7][5]=a[5][8]=a[8][5]=1;
+	a[6][9]=a[6][8]=a[9][6]=a[8][6]=1;
+	a[9][7]=a[7][9]=1;
+	while(t--)
+	{
+		cin>>s;
+
+		int prev=s[0]-'A', flag=1;
+		ans[0]=prev;
+		for(int i=1;i<s.length();i++)
+		{
+			flag=0;
+			for(int j=0;j<10;j++)
+			{
+				if(j!=prev && a[prev][j]==1 && s[i]==b[j])
+				{
+					flag=1;
+					prev=j;
+					ans[i]=prev;
+					break;
+				}
+			}
+			if(flag==0)break;
+		}
+		if(flag==0)
+		{
+			prev=s[0]-'A'+5;
+			ans[0]=prev;
+			for(int i=1;i<s.length();i++)
+			{
+				flag=0;
+				for(int j=0;j<10;j++)
+				{
+					if(j!=prev && a[prev][j]==1 && s[i]==b[j])
+					{
+						flag=1;
+						prev=j;
+						ans[i]=prev;
+						break;
+					}
+				}
+				if(flag==0)break;
+			}
+		}
+		if(flag==0)cout<<-1;
+		else
+		for(int i=0;i<s.length();i++)cout<<ans[i];
+		cout<<endl;
+	}
+
+	return 0;
+}

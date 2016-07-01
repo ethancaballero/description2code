@@ -1,0 +1,115 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct node
+{
+	int x;
+	int y;
+	bool operator<(node B) const
+    	{
+		if(x > B.x)
+			return false;
+		else if ( x < B.x)
+			return true;
+		else
+			return (y < B.y);
+	
+    	}
+	bool operator==(node B) const
+	{
+		 return(x==B.x)&&(y==B.y);
+	}
+	bool operator>(node B) const
+    	{
+		if(x > B.x)
+			return true;
+		else if ( x < B.x)
+			return false;
+		else
+			return (y > B.y);
+	
+    	}
+};
+int main()
+{
+	int t,n,m,i,j,color,temp;
+	long long num,denom;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d%d",&n,&m);
+		struct node input[n];
+		for (i = 0; i < n; ++i)
+		{
+			scanf("%d%d",&(input[i].x),&(input[i].y));
+		}
+		sort(input,input+n);
+		color = 0;
+		temp = 0;
+		for (i = 0; i < n; ++i)
+		{
+			if(temp != (input[i]).x)
+			{
+				color++;
+				temp = (input[i]).x;
+			}
+		}
+
+		long long int colors_num[color];
+		long long int colors_cost[color];
+		 memset(colors_cost,0,sizeof(colors_cost));
+		 memset(colors_num,0,sizeof(colors_num));
+		temp = (input[0]).x;
+		j = 0;
+		for (i = 0; i < n ; ++i)
+		{
+			if(temp != (input[i]).x)
+			{
+				j++;
+			}
+			colors_num[j]++;
+			colors_cost[j] += (input[i]).y;
+			temp = (input[i]).x;
+		}
+		long long DP_denom[color+1][color+1];
+		long long DP_nom[color+1][color+1];
+		for(i = 0;i<=color;i++)
+		{
+			for (j = 0; j <= color; ++j)
+			{
+				if(j == 0)
+					DP_denom[i][j] = 0;
+				if(i == 0)
+					DP_denom[i][j] = 1;
+
+				DP_nom[i][j] = 0;
+			}
+		}
+		for(i = 1;i<=color;i++)
+		{
+			for (j = 1; j <= color; ++j)
+			{
+				if(i > j)
+				{
+					DP_denom[i][j] = 0;
+					DP_nom[i][j] = 0;
+				}
+				else
+				{
+					DP_denom[i][j] = (DP_denom[i-1][j-1])*(pow(2,(colors_num[j-1])) - 1) +  DP_denom[i][j-1];
+					DP_nom[i][j] = DP_nom[i-1][j-1]*(pow(2,(colors_num[j-1])) - 1) + DP_denom[i-1][j-1]*colors_cost[j-1]*(pow(2,(colors_num[j-1])-1)) + DP_nom[i][j-1];
+				}
+			}
+		}
+		
+		num = 0;
+		denom = 0;
+		for (i = m; i <= color; ++i)
+		{
+			num += DP_nom[i][color];
+			denom += DP_denom[i][color];
+		}
+		printf("%0.8lf
+",(double)(num)/(denom));
+	}
+	return 0;
+}

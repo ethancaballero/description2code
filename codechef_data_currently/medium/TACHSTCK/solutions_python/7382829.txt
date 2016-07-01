@@ -1,0 +1,14 @@
+n,d=map(int,raw_input().split())
+l=[]
+for asd in range(n):
+	l.append(int(raw_input()))
+l=sorted(l)
+i=0;
+count=0
+while (i<len(l)-1):
+	if (l[i+1]-l[i]<=d):
+		i+=2
+		count+=1
+	else:
+		i+=1
+print count

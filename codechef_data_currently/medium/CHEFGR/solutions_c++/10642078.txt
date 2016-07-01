@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+main()
+{
+    ll t,n,m,sum,i;
+    cin>>t;
+    while(t--)
+    {
+        i=0;
+    cin>>n>>m;
+    vector<ll>A(n);
+    sum=0;
+    while(i<n && cin>>A[i++] && (sum+=A[i-1]));
+    if((sum+m)%n==0)cout<<"Yes
+";
+        else cout<<"No
+";
+    }
+}

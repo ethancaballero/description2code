@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+
+long long int A[300000], S[300000], ans[300000];
+
+int main()
+    {
+        int N, B, Q, i, query;
+        cin>>N>>B;
+
+        for(i = 1; i<=N; i++)
+           cin>>A[i];
+        S[B] = 1;
+        ans[B+1] = 0;
+        ans[B] = 1;
+
+        for(i = B-1; i>=1; i--)
+          {
+              ans[i] = S[i+1] - S[i+A[i]+1];
+              ans[i] = ans[i]%mod;
+              if(ans[i]<0)
+                 ans[i] += mod;
+              S[i] = S[i+1] + ans[i];
+              S[i] = S[i]%mod;
+          }
+        cin>>Q;
+        for(i = 0; i<Q; i++)
+          {
+              cin>>query;
+              cout<<ans[query]<<"
+";
+          }
+        return 0;
+    }

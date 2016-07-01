@@ -1,0 +1,6 @@
+testCases = int(raw_input())
+for x in xrange(testCases):
+	raw_input()
+	ary = map(int, raw_input().split())
+	ary.sort()
+	print ary[0] + ary [1]

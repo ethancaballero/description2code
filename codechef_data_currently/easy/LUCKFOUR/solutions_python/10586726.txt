@@ -1,0 +1,11 @@
+def countFour(n):
+	count=0
+	for i in str(n):
+		if i=='4':		
+			count+=1
+	return count
+	
+T=int(raw_input())
+for i in range(T):
+	n=int(raw_input())
+	print countFour(n)	

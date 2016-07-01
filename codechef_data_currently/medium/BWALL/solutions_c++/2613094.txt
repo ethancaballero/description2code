@@ -1,0 +1,76 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+vector<vector<long long int> > matrix_pow(vector<vector<long long int> >& matrix, long long int k);
+vector<vector<long long int> > multiply(vector<vector<long long int> >a, vector<vector<long long int> >b);
+int main()
+{
+    int cases;
+    cin >> cases;
+    
+    vector< vector<long long int> > matrix(4, vector<long long int>(4));
+    int a[4][4] = {{1,4,2,0},{1,0,0,0},{0,1,0,0},{0,0,1,0}};
+    for(int i =0;i<4;i++)
+    {
+        matrix[i].assign(a[i],a[i]+4);
+    }
+    
+    for(int t=0;t<cases;t++)
+    {
+        long long int result;
+        vector<vector<long long int> > temp(4,vector<long long int>(4));
+        long long int n;
+        cin >> n;
+        if(n==1)
+        {
+            result = 1;
+        }
+        if(n==2)
+        {
+            result = 5;
+        }
+        if(n==3)
+        {
+            result = 11;
+        }
+        else if(n>3){
+            temp = matrix_pow(matrix,n-3);
+            result = ((temp[0][0]*11)%1000000007 + (temp[0][1]*5)%1000000007 + temp[0][2]*1 + temp[0][3]*1)%1000000007;
+        }
+        cout << result%1000000007<<endl;
+    }
+}
+
+vector<vector<long long int> > matrix_pow(vector<vector<long long int> >& matrix, long long int k)
+{
+    if(k==1)
+    {
+        return matrix;
+    }
+    if(k&1) // K is odd
+    {
+        return multiply(matrix,matrix_pow(matrix,k-1));
+    }
+    vector<vector<long long int> > temp(4,vector<long long int>(4));
+    temp = matrix_pow(matrix,k/2);
+    temp = multiply(temp,temp);
+    return temp;
+}
+
+vector<vector<long long int> > multiply(vector<vector<long long int> >a, vector<vector<long long int> >b)
+{
+    vector<vector<long long int> > temp(4,vector<long long int>(4));
+    for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<4;j++)
+        {
+            temp[i][j] = 0;
+            for(int k=0;k<4;k++)
+            {
+                temp[i][j] =  ((temp[i][j] % 1000000007) + ((a[i][k]%1000000007)*(b[k][j]%1000000007))%1000000007)%1000000007;
+            }
+        }
+    }
+    return temp;
+}

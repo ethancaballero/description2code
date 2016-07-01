@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define D 1000000007
+typedef long long ll;
+#define MAX 100005
+ll power[MAX];
+int main() 
+{
+    power[0]=1;
+    for(int i=1;i<MAX;i++) power[i] = (power[i-1]*2)%D;
+	int t; cin >> t;
+	while(t--)
+	{
+	    int n; cin >> n; int a[n],cnt=1;
+	    for(int i=0;i<n;i++) cin >> a[i]; sort(a,a+n);
+	    for(int i=n-2;i>=0;i--)
+	        if(a[i]!=a[i+1])
+	            break;
+	        else
+	            cnt++;
+	    ll finalans = (power[cnt]-1+D)%D;
+	    cout << finalans << endl;
+	}
+	return 0;
+}

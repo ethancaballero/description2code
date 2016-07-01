@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int t,n,j=1,k=0,temp=0,x=0,i;
+    int s[200],m;
+    cin>>t;
+    while(t--)
+    {
+     for(i=0;i<200;i++)
+     {
+         s[i]=0;
+     }
+     cin>>n;
+     s[0]=1;
+     m=1; j=1;
+     while(j<=n)
+     {   k=0;
+         temp=0;
+
+
+         while(k<m)
+         {
+             x=s[k]*j+temp;
+             s[k]=x%10;
+             temp=x/10;
+             k++;
+         }
+
+         while(temp>0)
+         {
+             s[m]=temp%10;
+             temp=temp/10;
+             m=m+1;
+         }
+        j++;
+     }
+
+     m=m-1;
+     while(m>=0)
+     {
+         cout<<s[m];
+         m--;
+     }
+     cout<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,21 @@
+#include<stdio.h>
+#define p(n) printf("%d
+",n);
+#define s(n) scanf("%d",&n);
+int main()
+{
+int t;
+s(t)
+while(t--)
+{
+int n;
+s(n)
+if(n%4==1)
+printf("ALICE
+");
+else
+printf("BOB
+");
+}
+return 0;
+}

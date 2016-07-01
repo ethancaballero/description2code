@@ -1,0 +1,25 @@
+l=[[0]*110]*110;
+n=int(input());
+for i in range(0,n):
+	l[i]=raw_input();
+s = l[0]; # take the 1st string
+x=[];
+f=0;
+for ch in s:
+	for j in range(1,n):
+		if((ch in l[j])):
+			s=list(l[j]);
+			index = s.index(ch);
+			del(s[index]);
+			l[j]=s;
+		else:
+			f=1;
+			break;
+	if(f==0):
+		x.append(ch);
+	f=0;
+if not x:
+	print "no such string";
+else:
+	x.sort();
+	print ''.join(x);

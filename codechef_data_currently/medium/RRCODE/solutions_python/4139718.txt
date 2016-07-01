@@ -1,0 +1,21 @@
+test = int(raw_input().strip())
+while test:
+	n,j,ans = map(int,raw_input().strip().split())
+	ls = map(int,raw_input().strip().split())
+	op = raw_input().strip()
+	if j:
+		if op=='AND':
+			for k in xrange(n):
+				ans&=ls[k]
+				if ans==0:
+					break
+		elif op=='OR':
+			for k in xrange(n):
+				ans|=ls[k]
+		else:
+			if j%2:
+				for k in xrange(n):
+					ans^=ls[k]
+	print ans
+	test-=1
+	

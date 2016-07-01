@@ -1,0 +1,4 @@
+for n in range(int(raw_input())):
+     i,j,m = map(int, raw_input().split())
+     k = int(raw_input())
+     print min(k-1,i) + min(k-1,j) + min(k-1,m) + 1

@@ -1,0 +1,60 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+#include<string>
+#include<cstring>
+#include<vector>
+using namespace std;
+int t,n,m,a,b,broj_ponavljanja;
+int mod=1e9+7;
+int posecen[100005],niz[100005];
+long long sol;
+vector<int>v[100005];
+void DFS(int x){
+  posecen[x]=broj_ponavljanja;
+  int len=v[x].size();
+  for(int i=0;i<len;i++){
+    if(!posecen[v[x][i]]){
+        DFS(v[x][i]);
+    }
+  }
+}
+int main () {
+   cin >>t;
+   while(t--){
+        sol=1;
+        broj_ponavljanja=0;
+      scanf("%d %d",&n,&m);
+      for(int i=1;i<=m;i++){
+        scanf("%d %d",&a,&b);
+        v[a].push_back(b);
+        v[b].push_back(a);
+      }
+      for(int i=1;i<=n;i++){
+         if(!posecen[i]){
+           broj_ponavljanja++;
+           DFS(i);
+         }
+      }
+        //int p=0;
+      for(int i=1;i<=n;i++){
+           niz[posecen[i]]++;
+        }
+        for(int i=1;i<=broj_ponavljanja;i++){
+            sol=sol*niz[i]%mod;
+        }
+    cout <<broj_ponavljanja<<" "<<sol<<endl;
+    for(int i=1;i<=n;i++){
+        v[i].clear();
+    }
+    for(int i=1;i<=n;i++){
+        posecen[i]=0;
+    }
+    for(int i=1;i<=broj_ponavljanja;i++){
+        niz[i]=0;
+    }
+  }
+
+ return 0;
+}

@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int tc; cin >> tc;
+  while (tc--) {
+    string s; cin >> s;
+    int* ar = (int*) malloc(sizeof(int) * 26);
+    for (int i = 0; i < 26; ++i) ar[i] = 0;
+    for (int i = 0; i < s.length() / 2; ++i)
+      ar[s[i] - 'a']++;
+    for (int i = s.length() / 2 + s.length() % 2; i < s.length(); ++i)
+      ar[s[i] - 'a']--;
+    int c = 0;
+    for (int i = 0; i < 26; ++i)
+      c += ar[i] != 0;
+    cout << (c ? "NO" : "YES") << endl;
+  } 
+
+  return 0;
+}

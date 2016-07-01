@@ -1,0 +1,8 @@
+t=input()
+while t:
+	t-=1
+	input()
+	a=[int(x) for x in raw_input().split()]
+	for i in xrange(len(a)):
+		a[i]+=i
+	print (max(a))

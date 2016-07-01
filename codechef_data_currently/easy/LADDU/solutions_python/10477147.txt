@@ -1,0 +1,26 @@
+testCase = input();
+for i in range(testCase):
+	laddus = 0
+	act,origin = raw_input().split()
+	if origin == "INDIAN":
+		fact = 200
+	else:
+		fact = 400
+	act = int(act)
+	for j in range(act):
+		c = raw_input().split()
+		if c[0] == "CONTEST_WON":
+			rank = int(c[1])
+			if rank >=20:
+				laddus += 300
+			else:
+				laddus += 320 - rank
+		elif c[0] == "TOP_CONTRIBUTOR":
+			laddus += 300
+		elif c[0] == "BUG_FOUND":
+			severity = int(c[1])
+			laddus += severity
+		else:
+			laddus += 50
+	answer = laddus/fact
+	print answer 

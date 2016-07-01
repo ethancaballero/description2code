@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# para todos os test cases...
+for li_T in xrange(int(raw_input())):
+
+    # N
+    li_N = int(raw_input())
+                        
+    # Ao...An
+    lst_A = map(int, raw_input().split())
+
+    # Bo...Bn
+    lst_B = map(int, raw_input().split())
+
+    # inicia total
+    l_tot = 0
+
+    # primeito caso
+    if lst_A[0] >= lst_B[0]:
+        # incrementa total
+        l_tot += 1
+
+    # para todos os casos seguintes...
+    for l_ndx in xrange(li_N):
+        # vai dar tempo de cozinhar ?
+        if (lst_A[l_ndx] - lst_A[l_ndx - 1]) >= lst_B[l_ndx]:
+            # incrementa total
+            l_tot += 1
+
+    # resultado
+    print l_tot

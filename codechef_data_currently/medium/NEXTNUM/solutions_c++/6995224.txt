@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin >> t;
+
+	long long int fact[18] = {0};
+	fact[0] = 1;
+	for(int i = 1; i < 18; i++) {
+		fact[i] = i * fact[i-1];
+	}
+	for(int i = 0; i < t; i++) {
+		string s;
+		cin >> s;
+		int n = s.size();
+		int a[10] = {0};
+		for(int j = 0; j < n; j++) {
+			a[s[j] - '0']++;
+		}
+
+		int b[10] = {0};
+		b[0] = a[0];
+
+		for(int j = 1; j < 10; j++) {
+			b[j] = a[j] + b[j-1];
+		}
+
+		long long int count = 0;
+
+		for(int j = 0; j < n; j++) {
+			if(s[j] - '0' != 0) {
+				int l = b[(s[j] - '0')-1];
+				for(int k = 0; k < s[j] - '0'; k++) {
+					long long int pp = fact[n-j-1];
+					if(a[k] != 0 ) {
+						for(int p = 0; p < 10; p++) {
+							if(p != k) {
+								pp = pp/fact[a[p]];
+							}else {
+								pp = pp/fact[a[p]-1];
+							}
+						}
+						count = count + pp;
+					}
+				}
+
+				b[s[j] - '0']--;
+				a[s[j] - '0']--;
+				for(int k = (s[j] - '0')+1; k < 10;  k++) {
+					b[k]--;
+				}
+			}else {
+				b[0]--;
+				a[0]--;
+				for(int k = 1; k < 10; k++) {
+					b[k]--;
+				}
+			}
+		}
+
+		count = count + 1;
+		cout << count << endl;
+
+	}
+
+	return 0;
+}

@@ -1,0 +1,33 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+	int a,n,k,cham[100]={0},i,flag=1,b=0;
+	cin>>a>>n>>k;
+	for(i=0;i<a;i++)
+	{
+	    flag=1;
+	    b=0;
+	    while(flag)
+	    {
+	        if(cham[b]==n)
+	        {
+	            cham[b]=0;
+	            b++;
+	        }
+	        else
+	        {
+	            cham[b]+=1;
+	            flag=0;
+	        }
+	    }
+	}
+	for(i=0;i<k;i++)
+	{
+	    cout<<cham[i]<<" ";
+	}
+	cout<<endl;
+	return 0;
+}

@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <cstdio>
+using namespace std;
+ const int maxn=(5*100000)+5;;
+bool isanswer[maxn];
+bool isprime[maxn];
+int main()
+{
+    for(int i=1;i<=maxn;i++)
+        isanswer[i]=false;
+    for(int i=1;i<=maxn;i++)
+        isprime[i]=true;
+    isprime[0]=false;isprime[1]=false;
+    for(int i=2;i*i<=maxn;i++){
+        if(isprime[i]==true){
+            for(int j=i*i;j<=maxn;j+=i){
+                isprime[j]=false;
+            }
+        }
+    }
+    for(int i=1;i<=maxn;i++){
+        if(isprime[i]==true && (i%4)==1)
+            for(int j=i;j<=maxn;j+=i)
+            isanswer[j]=true;
+    }
+
+
+   int t;
+   scanf("%d",&t);
+   while(t--){
+    int n;
+    scanf("%d",&n);
+    if(isanswer[n]==true)
+        printf("YES
+");
+    else
+        printf("NO
+");
+   }
+    return 0;
+}

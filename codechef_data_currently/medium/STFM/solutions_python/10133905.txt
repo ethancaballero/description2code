@@ -1,0 +1,47 @@
+def series(maxx,m):
+    global seriesSum
+    seriesSum=[1]
+    for i in range(1,maxx+2):
+        seriesSum.append((seriesSum[i-1]*i%m)%m)
+        
+n,m=map(int,raw_input().split())
+arr=map(long,raw_input().split())
+
+final=0
+
+maxx=max(arr)
+
+if maxx<=1000000:
+    series(maxx,m)
+else:
+    series(1000000,m)
+
+for num in arr:
+    if num%2:
+        first=second=num
+        third=(num+1)/2
+    else:
+        first=num+1
+        second=num
+        third=num/2
+
+    ans=(first%m*second%m*third%m)%m
+
+    if num+1>=m:
+        ans+=-1
+    else:
+        ans=(ans%m+seriesSum[num+1]%m-1)%m
+
+    final=(final%m+ans%m)%m
+
+print final%m
+    
+        
+
+    
+
+    
+        
+    
+
+

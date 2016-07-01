@@ -1,0 +1,22 @@
+t = input()
+
+for i in range(t):
+    s1 = raw_input()
+    s2 = raw_input()
+    l1 = len(s1)
+    l2 = len(s2)
+    flag = 0
+    if(l1 == l2):
+        for j in range(l1):
+            if s1[j] == '?' or s2[j] == '?':
+                flag = 1
+                continue
+            elif s1[j] == s2[j]:
+                flag = 1
+            else:
+                flag = 0
+                break
+    if flag:
+        print "Yes"
+    else:
+        print "No"

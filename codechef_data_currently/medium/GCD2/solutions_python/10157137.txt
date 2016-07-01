@@ -1,0 +1,10 @@
+a = input()
+def gcd(a,b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a%b)
+
+for b in range(a):
+    d = raw_input().split()
+    print gcd(int(d[0]), int(d[1]))

@@ -1,0 +1,61 @@
+#include<stdio.h>
+struct t_node
+{
+	int age;
+	t_node *M;
+	t_node *E;
+	t_node(){M=E=NULL;}
+};
+bool sameTree(t_node *T,t_node *O)
+{
+	if(T==NULL&&O==NULL)return 1;
+	else if(T!=NULL&&O!=NULL)
+	   return((T->age==O->age)&&sameTree(T->M,O->M)&&sameTree(T->E,O->E));
+	else return 0;   
+}
+int main()
+{
+	t_node T[100001],*lef,*rig;
+	int N,M,Q,x,y;
+	bool ans;
+	char time;
+	scanf("%i",&N);
+	for(int i=1;i<=N;i++)
+	{
+	    scanf("%i",&T[i].age);
+    }
+	for(int i=1;i<=N-1;i++)
+	{
+		scanf("%i %i %c",&x,&y,&time);
+		if(time=='M')T[x].M=&T[y];
+		else T[x].E=&T[y];
+	}
+	scanf("%i",&Q);
+	while(Q--)
+	{
+		ans=0;
+		scanf("%i",&M);
+		t_node O[1001];
+		for(int i=1;i<=M;i++)
+		{
+			scanf("%i",&O[i].age);
+		}
+		for(int i=1;i<=M-1;i++)
+		{
+			scanf("%i %i %c",&x,&y,&time);
+		    if(time=='M')O[x].M=&O[y];
+    		else O[x].E=&O[y];
+		}
+		for(int i=1;i<=N;i++)
+		{
+			if(sameTree(&T[i],&O[1])==1)
+			{
+				ans=1;
+				break;
+			}
+		}
+		printf("%s
+",ans==1?"YES":"NO");
+	}
+	return 0;
+}

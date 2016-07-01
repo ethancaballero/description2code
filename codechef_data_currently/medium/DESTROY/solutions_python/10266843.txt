@@ -1,0 +1,28 @@
+# Author : Avikalp Srivastava
+
+T = int(raw_input(''))
+while T > 0:
+	T -= 1
+	N = int(raw_input(''))
+	A_str = raw_input('')
+	A = [x for x in A_str.split()]
+	if len(A) == 1:
+		print '1'
+		continue
+	A.sort()
+	y = 2
+	x = len(A)-1
+	mid = 1 + ((x-1) / y)
+	median = A[mid]
+	count = 0
+	for item in A:
+		if item == median:
+			count += 1
+	if count >= (len(A)/2 + 1):
+		print count
+	else:
+		if len(A)%2 == 0:
+			print len(A)/2
+		else:
+			print (len(A)/2 + 1)
+	del A[:]

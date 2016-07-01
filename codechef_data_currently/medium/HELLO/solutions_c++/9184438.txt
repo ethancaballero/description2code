@@ -1,0 +1,38 @@
+#include<cstdio>
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main()
+{
+    float d,u,cr,cc,mm;
+    int n,i,p,t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%f %f %d",&d,&u,&n);
+        mm=0;
+        float m[n],r[n],c[n];
+        for(i=0;i<n;i++)
+        {
+             scanf("%f %f %f",&m[i],&r[i],&c[i]);
+
+
+        }
+        cr=d*u;
+        p=0;
+        for(i=0;i<n;i++)
+        {
+            cc=(c[i]/m[i])+(u*r[i]);
+            if(cc<cr)
+                {
+                    cr=cc;
+                    p=i+1;
+                }
+
+
+        }
+        printf("%d
+",p);
+
+    }
+}

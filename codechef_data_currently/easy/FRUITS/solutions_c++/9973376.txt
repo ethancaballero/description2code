@@ -1,0 +1,29 @@
+#include<stdio.h>
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,m,k,diff;
+		scanf("%d%d%d",&n,&m,&k);
+		diff = n-m;
+		if(diff<0)
+			diff = -diff;
+//		printf("%d
+",diff);
+		if(diff <= k)
+			printf("0
+");
+		else
+		{
+			if(n<m)
+				printf("%d
+",m-(n+k));
+			else
+				printf("%d
+",n-(m+k));
+		}
+	}
+	return 0;
+}

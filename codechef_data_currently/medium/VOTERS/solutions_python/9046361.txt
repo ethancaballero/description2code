@@ -1,0 +1,28 @@
+import itertools
+
+
+n1, n2, n3 = map(int, raw_input().split())
+a1 = []
+a2 = []
+a3 = []
+
+for i in xrange(n1):
+    a1.append(int(raw_input()))
+for i in xrange(n2):
+    a2.append(int(raw_input()))
+for i in xrange(n3):
+    a3.append(int(raw_input()))
+  
+ans = []  
+ans.append(list(set(a1).intersection(a2)))
+ans.append(list(set(a2).intersection(a3)))
+ans.append(list(set(a3).intersection(a1)))
+
+
+
+a = list(set((itertools.chain(*ans))))
+a.sort()
+
+print len(a)
+for i in a:
+    print i

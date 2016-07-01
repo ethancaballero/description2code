@@ -1,0 +1,6 @@
+import sys
+
+t = input()
+for k in range(t):
+	ds, dt, d = map(int, sys.stdin.readline().split())
+	print max([0, d-ds-dt, ds-dt-d, dt-ds-d])

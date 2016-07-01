@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	/* code */
+	ios_base::sync_with_stdio(false);
+	int T,x=0;
+	int N,r,g,b,max,trial=0,ans[100032];
+	char df;
+	cin>>T;
+	while(T--){
+		r=0;
+		g=0;
+		b=0;
+		trial=0;
+		cin>>N;
+		string S;
+		for(int i=0;i<N;++i){
+			cin>>S[i];
+			if(S[i]=='R')
+				r++;
+			else if(S[i]=='G')
+				g++;
+			else if(S[i]=='B')
+				b++;
+		}
+		max=r;
+		df='R';
+		if(g>max){
+			max=g;
+			df='G';
+		}
+		if(b>max){
+			max=b;
+			df='B';
+		}
+			if(df=='R'){
+				for(int i=0;i<N;++i){
+					if (S[i]!='R')
+						trial++;
+				}
+			}
+			else if(df=='G'){
+				for(int i=0;i<N;++i){
+					if (S[i]!='G')
+						trial++;
+				}
+			}
+			else if(df=='B'){
+				for(int i=0;i<N;++i){
+					if (S[i]!='B')
+						trial++;
+				}
+			}
+		ans[x]=trial;
+		x++;
+	}
+	for (int j = 0; j < x; ++j)
+	{
+		cout<<ans[j]<<'
+';
+	}
+	return 0;
+}

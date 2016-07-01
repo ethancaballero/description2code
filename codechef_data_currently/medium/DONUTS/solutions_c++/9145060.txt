@@ -1,0 +1,66 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+#define gc getchar_unlocked
+inline int fast_input()
+{
+	char t;
+	int x=0;
+	int neg=0;
+	t=gc();
+	while((t<48 || t>57) && t!='-')
+		t=gc();
+	if(t=='-')
+		neg=1;
+	else
+	{
+		while(t>=48 && t<=57)
+		{
+			x=(x<<3)+(x<<1)+t-48;
+			t=gc();
+		}
+	}
+	if(neg)
+		x=-x;
+	return x;
+}
+
+int main() {
+ long int n;
+ int t,m,i;
+ cin>>t;
+while(t--)
+{
+        n=fast_input();
+        m = fast_input();
+        int arr[m];
+        for(i=0;i<=m-1;i++)
+          arr[i]=fast_input();
+        sort(arr,arr+m);
+        long long int i,j,cut;
+        i=0;
+        cut=0;
+        j=m-1;
+        while(i<j)
+        {
+            if(arr[i]>0)
+            {
+                arr[j-1]=arr[j]+arr[j-1]+1;
+                arr[i]--;
+                cut++;
+                if(arr[j-1]==n)
+                {
+                    break;
+                }
+                j--;
+            }
+            else if(arr[i]<=0)
+            {
+                i++;
+            }
+        }
+        cout<<cut<<"
+";
+    }
+}

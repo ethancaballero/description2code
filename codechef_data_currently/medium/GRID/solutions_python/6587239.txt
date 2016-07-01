@@ -1,0 +1,34 @@
+from fractions import gcd
+for i in range(input()):
+	n = input()
+	arr=[]
+	dp=[[-2 for i in range(n)] for j in range(n)]
+	for c in range(n):
+		arr.append(list(raw_input()))
+		for j in range(n-1,-1,-1):
+			if arr[c][j]=='.':
+				dp[c][j]+=1
+			else:
+				break
+	# for i in dp:
+	# 	print i
+	for i in range(n):
+		for j in range(n-1,-1,-1):
+			if arr[j][i]=='.':
+				dp[j][i]+=1
+			else:
+				break
+	# for i in dp:
+	# 	print i
+	c=0
+	for i in range(n):
+		for j in range(n):
+			if dp[i][j]==0:
+				c=c+1
+	print c
+
+
+
+
+
+	

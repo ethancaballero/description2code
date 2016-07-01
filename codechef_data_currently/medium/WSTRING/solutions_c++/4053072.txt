@@ -1,0 +1,125 @@
+#include <bits/stdc++.h>
+		
+using namespace std;
+#define ff first
+#define ss second
+#define pb push_back
+#define mp make_pair
+typedef unsigned long long ull;
+typedef long long int lli;
+typedef unsigned int ui;
+typedef pair<int, int> pii;
+typedef vector<int> vi;
+typedef long double ld;
+#define var(a,b)  __typeof(b) a = b
+#define rep(i,n)  for(int i = 0; (i) < (n); ++i)
+#define rept(i,a,b) for(var(i,a); i < (b); ++i)
+#define tr(v,it)  for(var(it,v.begin());it!=v.end();++it)
+#define fill(a,val) memset(a,val,sizeof(a))
+#define gi(n) scanf("%d",&n);
+#define all(v) v.begin(),v.end()
+#define iinp() input<int>()
+#define linp() input<lli>()
+#define uinp() input<ull>()
+
+#define get getchar_unlocked
+
+//fast function to scan various integer data types
+template <typename T>
+inline T input() {
+	T n = 0;
+	int s = 1;
+	char p = get();
+
+	while((p < '0' || p > '9') && p != EOF && p != '-')
+		p = get();
+
+	if(p == '-'){ s = -1, p = get(); }
+
+	while(p >= '0' && p <= '9') {
+		n = (n << 3) + (n << 1) + (p - '0');
+		p = get();
+	}
+	return n*s;
+}
+
+int main(int argc, char** argv) {
+#ifdef LOCAL
+    freopen("in", "r", stdin);
+#endif
+
+    ios_base::sync_with_stdio(false);
+
+    int t;
+    cin >> t;
+
+    while(t--) {
+    	string s;
+    	cin >> s;
+    	int hashcount = 0;
+    	int hashpos[10009], globalleft[10009], globalright[10009], local[10009];
+    	int a[26], b[26];
+    	int globalmax = 0, localmax = 0;
+
+    	memset(a, 0, sizeof(a));
+    	memset(b, 0, sizeof(b));
+
+    	rep(i, s.length()) {
+    		if(s[i] == '#') {
+    			hashpos[hashcount] = i;
+    			globalleft[hashcount] = globalmax;
+    			local[hashcount] = localmax;
+    			hashcount++;
+    			memset(b, 0, sizeof(b));
+    			localmax = 0;
+    		}
+    		else {
+    			a[s[i]-'a']++;
+    			b[s[i]-'a']++;
+    			if(a[s[i]-'a'] > globalmax)
+    				globalmax = a[s[i]-'a'];
+    			if(b[s[i]-'a'] > localmax)
+    				localmax = b[s[i]-'a'];
+    		}	
+    	}
+    	memset(a, 0, sizeof(a));
+    	//cout << "hey"<< a[20] << endl; 
+    	int x = 1;
+    	globalmax = 0;
+    	for(int i = s.length()-1; i>=0; i--) {
+    		if(s[i] == '#') {
+    			globalright[hashcount-x] = globalmax;
+    			x++;
+    		}
+    		else {
+    			a[s[i]-'a']++;
+    			if(a[s[i]-'a'] > globalmax)
+    				globalmax = a[s[i]-'a'];
+    		}
+    	}
+
+    	int max = 0;
+    	int sum = 0;
+    	int p, q,r,k;
+    	for(int i = 0; i < hashcount-2; i++) {
+    		p = globalleft[i];
+    		q = local[i+1];
+    		r = local[i+2];
+    		k = globalright[i+2];
+    		//cout << p << " " << q << " " << r << " " << k << endl;
+    		if(p != 0 && q != 0 && r != 0 && k != 0) {
+    			sum = p + q + r + k + 3;
+    			//cout << sum << endl;
+    			if(sum > max)
+    				max = sum;
+    		}
+    	}
+    	//cout << hashcount << "hash";
+    	cout << max << endl;
+
+
+    }
+
+
+	return 0;
+}

@@ -1,0 +1,54 @@
+## Observations
+## 1. Definitions
+##      Let C(k) be the value we are trying to calculate -- i.e. the number of pairs (L,R) with 1 <= L <= R <= N with the F4(L) + ... + F4(R) = F7(L) + ... + F7(R)
+##      Let S4(k) = F4(1) + F4(2) + ... + F4(k)
+##      Let S7(k) = F7(1) + F7(2) + ... + F7(k)
+##      Let D(k)  = S4(k) - S7(k)
+##      Then note S4(R) - S4(L-1) = F4(L) + F4(L+1) + ... + F4(R)
+##      Then note S7(R) - S7(L-1) = F7(L) + F7(L+1) + ... + F7(R)
+##      So F4(L) + F4(L+1) + ... + F4(R) == F7(L) + F7(L+1) + ... + F7(R) if and only if
+##         S4(R) - S4(L-1) == S7(R) - S7(L-1), which happens if and only i
+##         S4(R) - S7(R) == S4(L-1) - S7(L-1), which is the same as D(R) == D(L-1)
+## 2. Furthermore, for a given k, we note C(k) = C(k-1) + {number of non-negative integers r <= k with D(r) = D(k)} 
+## 2. D(k) can be calculated inductively as D(k-1) + F4(k) - F7(k)
+## 3. Finally, we don't need to keep all the D(k) around, but merely the size of the equivalence classes under D(k).
+##    That is, we just need to keep a record of how many numbers have a given value of D(k)
+## 4. The max value that D(k) should take over 0 <= k <= 100000 is at 55555 (and others).  Here we have seen
+##    1 more 4 in the 1s place
+##    10 more 4s in the 10s place
+##    100 more 4s in the 100s place,
+##    1000 more 4s in the 1000s place,
+##    10000 more 4s in the 10000s place.
+##    Meaning the max value of D(k) we need to keep track of is 11111
+
+import sys
+filein = sys.stdin
+##filein = open ("lucky1.in","r")
+filell = filein.readlines()
+f = filell.__iter__()
+outbuf = []
+
+def main() :
+    t = int(f.next())
+
+    ## Ok, so we precalculate this
+    c = [0] * 100001
+    dcount = [0] * 11113
+    dcount[0] = 2
+    c[1] = 1
+    d = 0
+    for i in xrange (2,100001) :
+        numstr = str(i)
+        for cc in numstr :
+            if cc == '4' : d += 1
+            if cc == '7' : d -= 1
+        c[i] = c[i-1] + dcount[d]
+        dcount[d] += 1
+        
+    ## Now we just read and print
+    for tt in xrange(t) :
+        n = int(f.next())
+        outbuf.append(str(c[n]))
+    print "
+".join(outbuf)
+main()

@@ -1,0 +1,44 @@
+#include<iostream>
+#include<set>
+#include<map>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<stack>
+using namespace std;
+
+typedef unsigned long long int ull;
+typedef long long int ll;
+
+#define pb push_back
+#define mp make_pair
+#define S second
+#define F first
+#define all(c) (c).begin(), (c).end()
+#define vectorIterate(v) for(auto it=v.begin(); it!=v.end();it++)
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);	
+	ull t;
+	cin>>t;
+	while(t--)
+	{
+		ull n, s;
+		cin>>n>>s;
+		ull ts=n*(n+1)/2;
+		ull tn=n, ct=0;
+		while(tn>=0)
+		{
+			if((tn*(tn+1)/2)+ct<=s)
+			{
+				cout<<ct<<endl;
+				break;
+			}
+			tn--;
+			ct++;
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	long long int t,x,y,l,i,j,s,k;
+	cin>>t;
+	while(t--)
+	{
+	    cin>>x>>y;
+	    s=x+y;
+	    for(i=1;;i++)
+	    {
+	        l=0;
+	        k=s+i;
+	        for(j=2;j<=k/2;j++)
+	        {
+	            if(k%j==0)
+	            {
+	            l=1;
+	            break;
+	            }
+	        }
+	        if(l==0)
+	        {
+	        cout<<i<<endl;
+	        break;
+	        }
+	    }
+	}
+	return 0;
+}

@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+typedef long long ll;
+
+ll inp(ll x)
+{
+	ll i,max,temp;
+	scanf("%lld",&max);
+	for(i=1;i<x;i++)
+	{
+		scanf("%lld",&temp);
+		if(temp>max) max=temp;
+	}
+	return max;
+}
+int main()
+{
+	ll t,r,g,b,m,maxi,max1,max2,max3;
+	scanf("%lld",&t);
+	while(t--)
+	{
+		scanf("%lld %lld %lld %lld",&r,&g,&b,&m);
+		max1=inp(r);
+		max2=inp(g);
+		max3=inp(b);
+		while(m--)
+		{
+			maxi=max(max1,max(max2,max3));
+			if(maxi==max1) max1/=2;
+			else if(maxi==max2) max2/=2;
+			else if(maxi==max3) max3/=2;
+		}
+		printf("%lld
+",max(max1,max(max2,max3)));
+	}
+	return 0;
+}

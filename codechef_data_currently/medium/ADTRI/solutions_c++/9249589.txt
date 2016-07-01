@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<long long>v(10000000);
+inline long long scan()
+{
+    long long  n=0;
+    char ch=getchar();
+
+    while (ch<'0'||ch>'9')
+    ch=getchar();
+
+    while (ch>='0'&&ch<='9')
+    {
+        n=n*10+ch-'0';
+        ch=getchar();
+    }
+    return n;
+}
+void sieve()
+{
+    long long i,j;
+    for(i=2;i<10000000;i++)
+    {
+        if(v[i]==0)
+        {
+            if((i-1)%4==0)
+            {
+                for(j=i;j<10000000;j=j+i)
+                {
+                    v[j]=2;
+                }
+            }
+            else
+            {
+                for(j=i;j<10000000;j=j+i)
+                {
+                    if(v[j]!=2)
+                        v[j]=1;
+                }
+            }
+        }
+    }
+}
+int main()
+{
+    sieve();
+    long long t,n;
+    t=scan();
+    while(t--)
+    {
+        n=scan();
+        if(v[n]==2)
+            cout<<"YES"<<"
+";
+        else
+            cout<<"NO"<<"
+";
+    }
+}

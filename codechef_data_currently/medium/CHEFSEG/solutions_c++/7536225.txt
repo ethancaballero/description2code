@@ -1,0 +1,75 @@
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <utility>
+#include <queue>
+#include <cmath>
+#include <functional>
+using namespace std;
+
+
+// did not AC for last 60 points
+// although I have the sam complexity as described in solution
+
+
+long long N,M;
+int T;
+
+
+inline void _scanf( long long &n )
+{
+    n = 0;
+    int ch = getchar_unlocked(); long long sign = 1;
+    while( ch < '0' || ch > '9' )
+    {
+        if(ch == '-')
+            sign = -1;
+        ch = getchar_unlocked();
+    }
+    while( ch >= '0' && ch <= '9' )
+        n = (n << 3) + (n << 1) + ch - '0', ch = getchar_unlocked();
+    n = n * sign;
+}
+
+
+/*
+    #include<sys/time.h>
+    typedef unsigned long long timestamp_t;
+
+    static timestamp_t
+    get_timestamp ()
+    {
+      struct timeval now;
+      gettimeofday (&now, NULL);
+      return  now.tv_usec + (timestamp_t)now.tv_sec * 1000000;
+    }
+
+    timestamp_t t0 = get_timestamp();
+
+*/
+
+int main() {
+    //freopen("in.txt", "r", stdin);
+    scanf("%d", &T);
+    while(T--) {
+        //scanf("%d%d", &N, &M);
+        _scanf(N);
+        _scanf(M);
+        int pot = 1;
+        while(pot <=  M)
+            pot = pot << 1;
+
+        double num = ((2 * (M - (pot >> 1)) + 1.0) / pot ) * N;
+        printf("%.7f
+", num);
+    }
+
+    //timestamp_t t1 = get_timestamp();
+    //double secs = (t1 - t0) / 1000000.0L;
+   // printf("%lf", secs);
+    return 0;
+}

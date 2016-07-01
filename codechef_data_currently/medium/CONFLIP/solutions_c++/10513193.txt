@@ -1,0 +1,31 @@
+#include<cstdio>
+using namespace std;
+int main()
+{
+	int t,g,i,q;
+	long int n;
+	scanf("%d",&t); //no of test cases
+	while(t--)
+	{
+		scanf("%d",&g);   //no of games played by elephant
+		while(g--)
+		{
+			scanf(" %d %d %d",&i,&n,&q) ;  //i->initial state of coins, n->no of coins and rounds,q->guess showing head or tail
+			if(n%2==0 || i==q)
+			{
+			    printf("%d
+",(n/2));
+			}
+			
+			else
+			{
+				printf("%d
+",(n/2) + 1 );
+			}
+			
+		}
+	}
+ //fflush(stdin);
+ //getchar();
+ return 0;
+}

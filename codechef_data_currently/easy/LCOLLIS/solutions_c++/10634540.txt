@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+ int t,n,m,one=0,s=0;
+ long int col=0;
+cin>>t;
+while(s<t)
+{
+//cout<<"enter n";
+cin>>n;
+//cout<<"enter m";
+cin>>m;
+char a[n][m];
+for(int i=0;i<n;i=i+1)
+{ //for(int j=0;j<m;j=j+1)
+   cin>>a[i];
+   //cout<<"
+";
+}
+for(int i=0;i<m;i=i+1)
+{
+   for(int j=0;j<n;j=j+1)
+     {if(a[j][i]=='1')
+      one=one+1;
+     }
+     if(one>=2)
+      col=col+one*(one-1)/2;
+     one =0;
+
+}
+cout<<col<<"
+";
+s=s+1;
+col=0;
+}
+return 0;
+}

@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+#define MOD 1000000007
+typedef long long ll;
+
+ll DP[100][100];
+
+int main()
+{
+    ll n, ans;
+    ll A[100];
+    cin>>n;
+    for(int i=0;i<n;i++)
+        cin>>A[i];
+    for(int step=1;step<n;step++)
+    {
+        for(int i=0;i<n-step;i++)
+        {
+            int j=i+step;
+            DP[i][j] = DP[i][j-1];
+            for(int k=i;k<j;k++)
+                if(A[k]<0 && A[k]==-A[j])
+                {
+                    if(k==0)
+                        DP[i][j] = (DP[i][j] + ((DP[k+1][j-1]+1)%MOD))%MOD;
+                    else
+                        DP[i][j] = (DP[i][j] + (( (DP[i][k-1]+1) * (DP[k+1][j-1]+1) )%MOD))%MOD;
+                }
+        }
+    }
+    ans = (DP[0][n-1] + 1)%MOD; 
+    cout<<ans<<endl;
+    return 0;
+}

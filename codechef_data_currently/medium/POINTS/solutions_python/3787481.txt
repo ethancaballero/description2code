@@ -1,0 +1,26 @@
+def compare(a,b):
+	x = cmp(a[0],b[0])
+	if not x:
+		return cmp(b[1],a[1])
+	return x
+
+def calc_dist(a,b):
+	return ((a[0]-b[0])**2+(a[1]-b[1])**2)**0.5
+
+t = int(raw_input())
+
+while t>0:
+	t-=1
+	blank_line = raw_input()
+	n = int(raw_input())
+	points = []
+	for x in xrange(n):
+		points.append(map(int, raw_input().split()))
+	
+	points.sort(compare)
+	dist = 0
+	for p in xrange(n-1):
+		p0 = points[p]
+		p1 = points[p+1]
+		dist += calc_dist(p0,p1)
+	print "%.2f" % dist

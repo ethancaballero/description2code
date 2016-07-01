@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long long int n,sum=0;
+		cin>>n;
+		long long int a[n];
+		for(int i=0;i<n;i++)
+		{
+			cin>>a[i];
+			sum=sum+a[i];
+		}
+		long long int k=sum/(n-1);
+		long long int ans;
+		for(int i=0;i<n-1;i++)
+		{
+			ans=k-a[i];
+			cout<<ans<<" ";
+		}
+		ans=k-a[n-1];
+		 cout<<ans<<endl;
+	}
+	return 0;
+}

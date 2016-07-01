@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+#include <string>
+#include <cstdio>
+#include <vector>
+#include <map>
+#include <stack>
+#define MOD 1000000007
+using namespace std; 
+struct mat {
+	int vals[3][3];
+	mat(){
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++)
+				vals[i][j] = i==j;
+	}
+};
+mat operator *(const mat &lhs, const mat &rhs){
+	mat res;
+	for(int i=0;i<3;i++)
+		for(int j=0;j<3;j++){
+			long long sum = 0;
+			for(int k=0;k<3;k++)
+				sum+=(long long) lhs.vals[i][k]*rhs.vals[k][j];
+			res.vals[i][j] = sum%MOD;
+		}
+	return res;
+}
+mat pow(const mat &base,int exp){
+	mat res;
+	mat sq(base);
+	for(;exp;exp>>=1){
+		if(exp&1)
+			res=res*sq;
+		sq=sq*sq;
+	}
+	return res;
+}
+int m[3][3] = {
+	1,4,2,
+	1,0,0,
+	0,1,0
+};
+int solve(int n){
+	mat base;
+	for(int i=0;i<3;i++)
+		for(int j=0;j<3;j++)
+			base.vals[i][j] = m[i][j];
+	return pow(base,n).vals[0][0];
+}
+int main()
+{
+	int T;
+	scanf("%d",&T);
+	while(T--)
+	{
+		int N;
+		scanf("%d",&N);
+		printf("%d
+",solve(N));
+	}
+	return 0;
+ 
+ 
+}

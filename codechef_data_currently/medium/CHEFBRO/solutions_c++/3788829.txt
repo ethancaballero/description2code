@@ -1,0 +1,48 @@
+//tutorial
+#include<stdio.h>
+int main()
+{
+    int g[1005][1005],i,j,count;
+    for(i=1;i<=1000;i++)
+    {
+        for(j=1;j<=1000;j++)
+        {
+            if(i==1 && j==1){g[i][j]=0;continue;}//base condition
+            int mex[10]={0};
+            if(i-1>0)
+				mex[g[i-1][j]]=1;
+			if(i-2>0)
+				mex[g[i-2][j]]=1;
+			if(i-1>0 && j-1>0)
+				mex[g[i-1][j-1]]=1;
+			if(i-2>0 && j-2>0)
+				mex[g[i-2][j-2]]=1;
+			if(j-1>0)
+				mex[g[i][j-1]]=1;
+			if(j-2>0)
+				mex[g[i][j-2]]=1;
+            count=0;
+            while(mex[count])count++;
+            g[i][j]=count;//mex value
+        }
+    }
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int C,n,m,ans=0;
+        scanf("%d",&C);
+        while(C--)
+        {
+            scanf("%d %d",&n,&m);
+            ans=ans^g[n][m];
+        }
+       if(ans)
+			printf("MasterChef
+");
+		else
+			printf("Football
+");
+    }
+    return 0;
+}

@@ -1,0 +1,34 @@
+def fits(S, i):
+    # i == startIndex
+    if i - 3 < 0:
+        return False
+    return (S[i] == '?' or S[i] == 'F')         and (S[i - 1] == '?' or S[i - 1] == 'E')         and (S[i - 2] == '?' or S[i - 2] == 'H')         and (S[i - 3] == '?' or S[i - 3] == 'C')
+
+
+def compute(S):
+    i = len(S) - 1
+    while i >= 0:
+        c = S[i]
+        if c == '?' or c == 'F':
+            # check if CHEF fits in
+            if fits(S, i):
+                S[i] = 'F'
+                S[i - 1] = 'E'
+                S[i - 2] = 'H'
+                S[i - 3] = 'C'
+                i -= 4
+            else:
+                if (S[i] == '?'):
+                    S[i] = 'A'
+                i -= 1
+        else:
+            i -= 1
+
+    return ''.join(S)
+
+
+cases = int(raw_input())
+
+for _ in xrange(cases):
+    S = raw_input()
+    print compute([c for c in S])

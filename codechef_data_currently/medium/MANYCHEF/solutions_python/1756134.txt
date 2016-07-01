@@ -1,0 +1,13 @@
+t = int(raw_input())
+for i in range(t):
+    s = raw_input()
+    key = 'CHEF'
+    x = len(s) - 1
+    while x > 2:
+        if (s[x] == '?' or s[x] == 'F') and (s[x-1] == 'E' or s[x-1] == '?') and (s[x-2] == 'H' or s[x-2] == '?') and (s[x-3] == 'C' or s[x-3] == '?'):
+            s = s[:x-3] + key + s[x+1:]
+            x = x - 4
+        else:
+            x = x - 1
+    s = s.replace('?', 'A')
+    print s

@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n;
+	long max2=0,a,b,c;
+	cin>>n;
+	while(n)
+	{
+		cin>>a>>b>>c;
+		if((a<b&&a>c)||(a<c&&a>b))
+		{
+			max2=a;
+		}
+		else if((b<a&&b>c)||(b<c&&b>a))
+		{
+			max2=b;
+		}
+		else if((c<a&&c>b)||(c<b&&c>a))
+		{
+			max2=c;
+		}
+		cout<<max2<<endl;
+		n--;
+	}
+	return 0;
+}

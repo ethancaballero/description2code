@@ -1,0 +1,14 @@
+__author__ = "Devajit Asem"
+__prog__   = "MCHAIRS"
+
+import sys
+
+def main():
+    mod = 1000000007
+    t = int(sys.stdin.readline())
+    for i in range(t):
+        n = int(sys.stdin.readline())
+        print pow(2,n,mod)-1
+
+if __name__ == "__main__":
+		main()

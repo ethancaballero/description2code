@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		double l,b,h,s;
+		scanf("%lf %lf",&h,&s);
+		s=s*2;
+		if(((h*h)-(2*s))<0)
+		{
+			printf("-1
+");
+			continue;
+		}
+		l=(h*h)+(sqrt((h*h)-(2*s))*sqrt((h*h)+(2*s)));
+		l=sqrt(l/2);
+		b=s/l;
+		if(l>b)
+		{
+			double t=l;
+			l=b;
+			b=t;
+		}
+		printf("%lf %lf %lf
+",l,b,h);
+	}
+	return 0;
+}

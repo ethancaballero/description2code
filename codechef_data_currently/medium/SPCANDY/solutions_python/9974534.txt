@@ -1,0 +1,6 @@
+for i in range(int(raw_input())):
+    n,k=map(int,raw_input().split())
+    if k!=0:
+        print n/k,n%k
+    else:
+        print 0,n

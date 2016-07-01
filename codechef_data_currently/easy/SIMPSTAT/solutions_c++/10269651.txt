@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <utility>
+#include <map>
+#include <set>
+#include <string>
+#include <cstring>
+#include <queue>
+#define rf freopen("in.in", "r", stdin)
+#define wf freopen("out.out", "w", stdout)
+#define rep(i, s, n) for(int i=int(s); i<=int(n); ++i)
+using namespace std;
+const int mx = 1e5 + 10, mod = 1e9+7;
+
+double input[mx];
+int n, t, k;
+
+int main()
+{
+	//rf;// wf;
+	ios::sync_with_stdio(0);
+
+	cin >> t;
+	while(t--)
+	{
+		cin >> n >> k;
+		rep(i, 1, n)
+			cin >> input[i];
+
+		sort(input+1, input+n+1);
+		
+		long double ans = 0;
+		rep(i, k+1, n-k)
+			ans += input[i];
+
+		ans /= (n-2*k);
+		printf("%.7Lf
+", ans);
+	}
+	return 0;
+}

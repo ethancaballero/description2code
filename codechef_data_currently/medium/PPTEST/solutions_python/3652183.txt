@@ -1,0 +1,23 @@
+cases = int(raw_input())
+ 
+for _ in xrange(cases):
+    N,W = map(int,raw_input().split())
+    contained = [-999]
+    points = [-999]
+    time = [-999]
+    o = [[0]*(W+1) for _ in xrange(N+1)]
+    for _ in xrange(N):
+        C,P,T = map(int, raw_input().split())
+        contained.append(C)
+        points.append(P)
+        time.append(T)
+ 
+    for i in xrange(1, N+1):
+        for j in xrange(1, W+1):
+            t = j - time[i]
+            if t < 0:
+                o[i][j] = o[i-1][j]
+            else:
+                o[i][j] = max(o[i-1][j], o[i-1][t] + (contained[i] * points[i]))
+ 
+    print o[N][W]

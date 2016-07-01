@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+#define mod 1000000000
+using namespace std;
+long long dp[4001][4001];
+long long dp2[2001];
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    long i,j;
+    for (int i = 0; i <= 4000; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            if(j<=2000)
+            {
+                if (j == 0 || j == i)
+                    dp[i][j] = 1;
+                else
+                {
+                    dp[i][j] = (dp[i-1][j-1] + dp[i-1][j])%mod;
+                }
+            }
+        }
+    }
+    while(t--)
+    {
+        int n,m;
+        scanf("%d%d",&n,&m);
+        long i,j;
+        for(i=0;i<n;i++)
+            dp2[i]=1;
+        long n1,r1=m-1;
+        long long val;
+        for(i=1;i<=m;i++)
+        {
+            n1=i+m-1;
+            val=dp[n1][r1]%mod;
+            dp2[0]=((dp2[0]%mod)+(val))%mod;
+            for(j=1;j<n;j++)
+            {
+                dp2[j]=((dp2[j]%mod)+((val)*(dp2[j-1]%mod))%mod)%mod;
+            }
+        }
+        cout<<dp2[n-1]<<endl;
+    }
+    return 0;
+}

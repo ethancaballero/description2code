@@ -1,0 +1,44 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <queue>
+#include <math.h>
+#include <limits.h>
+#include <cstdlib>
+#include <string.h>
+#include <vector>
+#include <map>
+#include <stack>
+using namespace std;
+//prankuragarwal
+#define ll         long long
+#define S(x)       scanf("%d", &x)
+#define Sl(x)      scanf("%lld", &x)
+#define Sd(x)      scanf("%lf", &x)
+#define P(x)       printf("%d
+", x)
+#define Pl(x)      printf("%lld
+", x)
+#define Pd(x)      printf("%lf
+", x)
+#define Pblank()   printf(" ")
+#define mem(x,y)   memset(x,y,sizeof(x))
+#define F(x,y,z,i) for (x = y; x < z; x = x + i)
+#define mod 1000000007
+map<ll int, ll int>m;
+
+int main() {
+	ll int t;
+	Sl(t);
+	while(t--)
+	{
+		ll int x;
+		ll int y;
+		Sl(x); Sl(y);
+		if ((x % 2  == 1) && (y % 2 == 1))
+			cout << "Vanka" << endl;
+		else
+			cout << "Tuzik" << endl;;	
+	}
+	return 0;
+} 

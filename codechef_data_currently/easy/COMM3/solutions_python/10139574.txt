@@ -1,0 +1,26 @@
+from math import sqrt
+
+def dist(x1,y1,x2,y2):
+	a=(abs(x1-x2))**2
+	b=(abs(y1-y2))**2
+	return sqrt(a+b)
+
+for testcases in xrange(int(raw_input())):
+	r=int(raw_input())
+	x=[]
+	y=[]
+	c=0
+	for i in xrange(3):
+		a,b=map(int,raw_input().split())
+		x.append(a)
+		y.append(b)
+	if dist(x[0],y[0],x[1],y[1]) <= r:
+		c+=1
+	if dist(x[1],y[1],x[2],y[2]) <= r:
+		c+=1
+	if dist(x[0],y[0],x[2],y[2]) <= r:
+		c+=1
+	if c>=2:
+		print 'yes'
+	else:
+		print 'no'

@@ -1,0 +1,28 @@
+n=int(raw_input())
+matrix=[]
+for i in range(n):
+	a=raw_input()
+	matrix.append(a.split())
+str2=raw_input().split()
+str=str2[0]
+c=0
+def count(i,j,matrix,str1):
+	c=0
+	if len(str1)==0:
+		return 1
+	
+	if (i+1!=n and j+1!=n and str1[0]==matrix[i+1][j+1]):
+		c+=count(i+1,j+1,matrix,str1[1:])
+	if (i+1!=n and j-1!=-1 and str1[0]==matrix[i+1][j-1]):
+		c+=count(i+1,j-1,matrix,str1[1:])
+	if (i-1!=-1 and j+1!=n and str1[0]==matrix[i-1][j+1]):
+		c+=count(i-1,j+1,matrix,str1[1:])
+	if (i-1!=-1 and j-1!=-1 and str1[0]==matrix[i-1][j-1]):
+		c+=count(i-1,j-1,matrix,str1[1:])			
+	return c		
+
+for i in range(n):
+	for j in range(n):
+		if matrix[i][j]==str[0]:
+			c=c+count(i,j,matrix,str[1:])
+print c					

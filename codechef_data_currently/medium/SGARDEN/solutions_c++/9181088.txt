@@ -1,0 +1,101 @@
+	#include<iostream>
+	#include<vector>
+	#include<math.h>
+	#include<algorithm>
+	#define mod 1000000007
+	using namespace std;
+	long long int modular(long long int base,long long int power)
+	{
+		long long int result=1;
+		while(power>0)
+		{
+			if(power%2==1)
+				result=(result*base)%mod;
+			base=(base*base)%mod;
+			power/=2;
+		}	
+		return result;
+	}	
+	int main()
+	{
+		int t;
+		cin>>t;
+		
+		int isprime[100005]={0};
+		vector<int> prime;
+		for(int i=2;i<=350;i++)
+		{
+			if(isprime[i]==0)
+			{
+				for(int j=i*i;j<=100000;j+=(i<<1))
+				{
+					isprime[j]=-1;
+				}
+			}	
+		}	
+		prime.push_back(2);
+		for(int i=3;i<=100000;i=i+2)
+		{
+			if(isprime[i]==0)
+			{
+				prime.push_back(i);
+			}	
+		}
+		while(t>0)
+		{
+			int n;
+			cin>>n;
+			int arr[100005];
+			int freq[100005]={0};
+			int visited[100005]={0};
+			for(int i=0;i<100005;i++)
+			{
+				visited[i]=0;
+				freq[i]=0;
+			}	
+			for(int i=1;i<=n;i++)
+				cin>>arr[i];
+			vector<int > v;
+			int count=0;
+			for(int i=1;i<=n;i++)
+			{
+				if(visited[i]==0)
+				{
+					count=0;
+					while(visited[i]==0)
+					{
+						count++;
+						visited[i]=1;
+						i=arr[i];
+					}	
+					v.push_back(count);
+				}	
+			}	
+			int flag;
+			for(int j=0;j<prime.size();j++)
+			{
+				flag=0;
+				for(int i=0;i<v.size();i++)
+				{
+					int cnt=0;
+					while(v[i]%prime[j]==0)
+					{
+						cnt++;
+						v[i]=v[i]/prime[j];
+					}
+					freq[j]=max(freq[j],cnt);
+					if(v[i]>prime[j])
+						flag=1;
+				}
+				if(flag==0)
+					break;
+			}	
+			long long int result=1;
+			for(int i=0;i<prime.size();i++)
+			{
+				result=(result*modular(prime[i],freq[i]))%mod;
+			}	
+			cout<<result<<endl;
+			t--;
+		}	
+	}

@@ -1,0 +1,25 @@
+def solve(k, answer, operator, a):
+	for i in range(k):
+		for x in range(len(a)):
+			if operator == "XOR":
+				answer = answer ^ a[x]
+			if operator == "AND":
+				answer = answer & a[x]
+			if operator == "OR":
+				answer = answer | a[x]
+	return answer
+
+def solveFast(k, ans, operator, a):
+	if operator == "XOR":
+		k = k % 2
+	else:
+		k = min(k, 1)
+	return solve(k, ans, operator, a)
+
+
+num = int(raw_input())
+for i in range(num):
+	n1, k1, ans = map(int, raw_input().split())
+	a1 = map(int, raw_input().split())
+	op1 = raw_input().rstrip()
+	print solveFast(k1, ans, op1, a1)

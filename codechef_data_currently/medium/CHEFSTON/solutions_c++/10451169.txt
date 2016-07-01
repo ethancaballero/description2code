@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+short t;
+long long ans,maxs,profit,time;
+int k,num,i;
+cin>>t;
+while(t--)
+{
+maxs=-1;
+cin>>num>>k;
+long long stone[num];
+for(i=0;i<num;++i)
+{
+ cin>>time;
+ stone[i]=k/time;
+}
+for(i=0;i<num;++i)
+{
+cin>>profit;
+ans=stone[i]*profit;
+maxs=max(maxs,ans);
+}
+cout<<maxs<<endl;
+}
+return 0;
+}

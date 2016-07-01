@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+#include <iostream>
+using namespace std;
+ 
+ 
+#define size 7007
+long long  fact[size];
+int main() {
+	long long n,m,res,ans,i,value;
+	scanf("%lld%lld",&n,&m);
+	
+	long long *a;
+	a=(long long *)malloc(n*sizeof(long long));
+	for(i=0;i<n;i++)
+	scanf("%lld",&a[i]);
+	fact[0]=1;
+	fact[1]=1;
+	for(i=2;i<=7002;i++)
+	fact[i]=(fact[i-1]*i)%m;
+	
+	
+	res=0;
+	
+	
+	for(i=0;i<n;i++)
+	{
+ 
+		if(!(a[i]&1))
+		{
+		ans = (a[i]/2)%m;
+            ans = (ans*(a[i]%m))%m*((a[i]+1)%m);
+		}
+		else
+		{ans = ((a[i]+1)/2)%m;
+            ans = (ans*(a[i]%m))%m*(a[i]%m);
+			//value=(a[i]/2)%m;
+			//ans+=((((value%m)*(a[i]%m))%m)*((a[i]+1)%m))%m;
+		}
+		ans--;
+		if(ans<0)
+		ans+=m;
+		if(a[i]<m)
+		{
+			ans+=fact[a[i]+1];
+			ans%=m;
+		}
+		res=(res+ans)%m;
+		
+	}
+	
+	
+	
+	printf("%lld
+",res);
+	
+	
+	return 0;
+} 

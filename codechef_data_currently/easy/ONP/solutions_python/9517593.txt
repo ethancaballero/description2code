@@ -1,0 +1,23 @@
+def extract_operand(expr):
+    if expr[0] == '(':
+        return convert_to_rpn_recurse(expr)
+    else:
+        return expr[0], expr[1:]
+
+def extract_operator(expr):
+    return expr[0], expr[1:]
+
+def convert_to_rpn_recurse(expr):
+    expr = expr[1:]
+    lhs, expr = extract_operand(expr)
+    op, expr = extract_operator(expr)
+    rhs, expr = extract_operand(expr)
+    expr = expr[1:]
+    return lhs + rhs + op, expr
+
+def convert_to_rpn(expr):
+    return convert_to_rpn_recurse(expr)[0]
+
+T = int(input())
+for t in range(T):
+    print(convert_to_rpn(raw_input()))

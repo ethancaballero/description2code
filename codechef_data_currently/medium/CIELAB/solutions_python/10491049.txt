@@ -1,0 +1,10 @@
+lis=list(raw_input().split())
+lis[0]=int(lis[0])
+lis[1]=int(lis[1])
+
+ans=lis[0]-lis[1]
+
+if ans%10==9:
+	print ans-1
+else :
+	print ans+1

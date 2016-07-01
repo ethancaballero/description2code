@@ -1,0 +1,29 @@
+import sys
+
+def main():
+  n_books = 0
+  min_q = []
+
+  for (a, s) in actions():
+    if a == -1:
+      _, n, s = min_q.pop()
+      print (n_books-n), s
+
+      n_books = n-1
+    elif a > 0:
+      n_books += 1
+      if (not min_q) or (a <= min_q[-1][0]):
+        min_q.append((a, n_books, s))
+
+def actions(cin = sys.stdin):
+  n = int(cin.next())
+  for _ in xrange(n):
+    ss = cin.next()
+    if ss[0] == '-':
+      yield (-1, "")
+    else:
+      ss = ss.split()
+      yield (int(ss[0]), ss[1])
+
+if __name__ == "__main__": sys.exit(main())
+

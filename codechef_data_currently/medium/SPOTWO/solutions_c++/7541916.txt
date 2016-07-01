@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long mod=1e9+7;
+
+long long pw(long long a, unsigned long long p)
+{
+    if(p==0)
+        return 1;
+    if(p>1000000007)
+        p%=1000000006;
+    if(p%2)
+    {
+        int ret=pw(a,p/2);
+        return ((((ret%mod)*(ret%mod))%mod)*a)%mod;
+    }
+    else
+    {
+        int ret=pw(a,p/2);
+        return ((ret%mod)*(ret%mod))%mod;
+    }
+}
+
+unsigned long long dow[20], dah[20];
+
+int main()
+{
+    dow[0]=dah[0]=1;
+    for(int i=1; i<20; i++)
+        dow[i]=dow[i-1]*2, dah[i]=dah[i-1]*10;
+    int T; cin>>T;
+    while(T--)
+    {
+        int n; cin>>n;
+        unsigned long long p=0;
+        for(int i=0; i<20; i++)
+        {
+            p+=((n&dow[i])!=0)*dah[i];
+            //cout<<dah[i]<<" ";
+        }
+        long long ans=pw(2,p);
+        cout<<(ans*ans)%mod<<endl;
+    }
+}

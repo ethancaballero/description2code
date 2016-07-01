@@ -1,0 +1,50 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#define ll long long
+using namespace std;
+
+ll BIT[1000005], n,m,c,a,g,h,value;
+char ch;
+
+void update(ll x, ll val)
+{
+      for(; x <= n; x += x&-x)
+        BIT[x] += val;
+}
+ll query(ll x)
+{
+     ll sum = 0;
+     for(; x > 0; x -= x&-x)
+        sum += BIT[x];
+     return sum;
+}
+
+int main() {
+	// your code goes here
+	
+	memset(BIT,0,sizeof BIT);
+	
+	scanf("%lld %lld %lld",&n,&m,&c);
+	
+	
+	for(ll i=1;i<=m;i++){
+		scanf(" %c",&ch);
+		
+		if(ch=='S'){
+			scanf("%lld %lld %lld",&g,&h,&value);
+			update(g,value);
+			value *= -1;
+			update(h+1,value);
+		} else {
+			scanf("%lld",&g);
+			ll ans = query(g);
+			ans += c;
+			printf("%lld
+",ans);
+		}
+		
+	}
+	
+	return 0;
+}

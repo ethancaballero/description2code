@@ -1,0 +1,93 @@
+#include<iostream>
+#include<stdio.h>
+#include<vector>
+#include<string>
+using namespace std;
+#define MAXX 100
+
+bool isequal(bool S[MAXX][MAXX],int i,int j,int T)
+{
+	for(int k=0;k<T;k++)
+	{
+		if(S[i][k]!=S[j][k])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+bool isoutput(bool S[MAXX][MAXX],int T,int i)
+{
+	for(int p=0;p<T;p++)
+	{
+		if(S[i][p] == false)
+		{
+			if(isequal(S,p,i,T))
+			{
+				return false;
+			}
+		}
+		else if(S[i][p] == true)
+		{
+			if(!isequal(S,p,i,T))
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+void print_output(bool S[MAXX][MAXX],int T,int i)
+{
+	for(int k=0;k<T;k++)
+	{
+		if(S[i][k])
+		{
+			cout<<"YES"<<endl;
+		}
+		else
+		{
+			cout<<"NO"<<endl;
+		}
+	}
+}
+int main()
+{
+	int T;
+	cin>>T;
+	bool S[MAXX][MAXX];
+	string temp;
+	for(int i=0;i<T;i++)
+	{
+		for(int j=0;j<T;j++)
+		{
+			cin>>temp;
+			if(temp.compare("YES") == 0)
+			{
+				S[i][j]=true;
+			}
+			else if(temp.compare("NO") == 0)
+			{
+				S[i][j]=false;
+			}
+		}
+	}
+	int flag=0;
+	for(int i=0;i<T;i++)
+	{
+		if(isoutput(S,T,i))
+		{
+			
+			print_output(S,T,i);
+			flag=1;
+			break;
+		}
+	}
+	if(flag==0)
+	{	
+		for(int i=0;i<T;i++)
+		{
+			cout<<"NO"<<endl;
+		}
+	}
+}

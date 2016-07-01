@@ -1,0 +1,46 @@
+#include <iostream>
+#include <stdio.h>
+#include <cstring>
+#define ll long long int
+#define li long int
+
+using namespace std;
+
+int main()
+{
+	int t;
+	cin >> t;
+	while(t--)
+	{
+		int activities, denum, laddus = 0;		char indian[15];
+		scanf("%d %s", &activities, indian);
+		if(!strcmp(indian,"INDIAN"))
+			denum = 200;
+		else
+			denum = 400;
+
+		while(activities--){
+			
+			char s[20];
+			scanf("%s", s);
+			if(!strcmp(s,"CONTEST_WON")){
+				int rank;
+				scanf("%d", &rank);
+				(rank < 20) ? rank = 20 - rank : rank = 0;
+				laddus += 300 + rank;
+			}
+			else if(!strcmp(s,"TOP_CONTRIBUTOR")){
+				laddus += 300;
+			}
+			else if(!strcmp(s,"BUG_FOUND")){
+				int severity;
+				scanf("%d", &severity);
+				laddus += severity;
+			}
+			else if(!strcmp(s,"CONTEST_HOSTED")){
+				laddus += 50;
+			}
+		}
+		cout << laddus/denum << endl;
+	}
+}

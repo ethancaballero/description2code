@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+    using  namespace std;
+    int a[101];
+    int main()
+    {
+        int t,i,n,sum,min,op;
+        cin>>t;
+        while(t--)
+        {
+            min=10001;
+            sum=0;
+            op=0;
+            cin>>n;
+            for(i=0;i<n;i++)
+
+               {
+                cin>>a[i];
+                sum+=a[i];
+                if(a[i]<min)
+                    min=a[i];
+               }
+                op=sum - (n*min);
+
+            cout<<op<<"
+";
+        }
+
+        return 0;
+    }

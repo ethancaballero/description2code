@@ -1,0 +1,19 @@
+import sys
+ 
+ 
+ 
+def cal():
+    i=int(raw_input())
+    while i>0:
+        i=i-1
+        n=int(raw_input())
+        q=''
+        t=0
+        q=bin(n)
+        q=q[2:]
+        
+        print (pow(2,2*int((int(q)))%1000000006,1000000007)) 
+ 
+ 
+ 
+cal() 

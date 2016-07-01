@@ -1,0 +1,136 @@
+//Shakim :D
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <queue>
+#include <algorithm>
+#include <vector>
+#include <cstring>
+#include <stack>
+#include <utility>
+#include <map>
+#include <set>
+#include <string>
+using namespace std;
+typedef long long LL;
+#define IT iterator
+#define getcx getchar
+#define INF (int(1e9))
+#define INFL (LL(1e18))
+#define pii pair< int,int >
+#define piii pair< pii , int >
+#define temp 0
+#define wait 1
+#define perm 2
+struct cmp
+{
+    bool operator()(const pii &a,const pii &b)
+    {
+        return a.first>b.first;
+    }
+};
+struct myclass {
+  bool operator() (const pii &a,const pii &b)
+  {
+        return a.first>b.first;
+  }
+} myobject;
+#define in2(n,m) scanf("%d %d",&n,&m);
+#define in3(x,y,z) scanf("%d %d %d",&x,&y,&z);
+#define mod 1000000007
+inline void in(int &n)
+{
+    n=0; int ch = getcx(); int sign = 1;
+    while(ch < '0' || ch > '9') { if(ch == '-') sign=-1; ch = getcx(); }
+    while(ch >= '0' && ch <= '9') { n = (n << 3) + (n << 1) + ch - '0', ch = getcx(); }
+    n = n * sign;
+}
+int a[200005];
+long long int ans[200005];
+long long int memo[800005];
+long long int query(int node,int s,int e,int l,int r)
+{
+    if(s>=l && e<=r)
+    {
+        return memo[node];
+    }
+
+    if(s>r || e<l)
+        return 0;
+
+    int mid=(s+e)/2;
+    long long int p1=query(2*node,s,mid,l,r);
+    long long int p2=query(2*node+1,mid+1,e,l,r);
+
+    return p1+p2;
+
+}
+void update(int node,int s,int e,int idx,long long int val)
+{
+    if(s==e && e==idx)
+    {
+        memo[node]=val;
+        if(memo[node]>=mod)
+            memo[node]%=mod;
+        return ;
+    }
+    if(idx<s || idx>e)
+        return ;
+
+    int mid=(s+e)/2;
+    update(2*node,s,mid,idx,val);
+    update(2*node+1,mid+1,e,idx,val);
+
+    memo[node]=memo[2*node]+memo[2*node+1];
+    if(memo[node]>=mod)
+        memo[node]%=mod;
+
+    return ;
+}
+int main()
+{
+    int n,B,i,lim,j,x,q;
+    in(n);
+    in(B);
+    for(i=1; i<=n; i++)
+    {
+        in(a[i]);
+    }
+    update(1,1,n,B,1);
+    for(i=B-1; i>=1; i--)
+    {
+        if(a[i]==0)
+            continue;
+
+        lim=min(i+a[i],B);
+
+        //This will lead the complexity to O(N^2);
+        /*for(j=i+1; j<=lim; j++)
+        {
+            if(ans[j] || j==B)
+                ans[i]++;
+        }*/
+
+
+
+        //Thats why we should use segment tree
+        ans[i]=query(1,1,n,i+1,lim);
+        if(ans[i]>=mod)
+            ans[i]%=mod;
+
+        if(ans[i])
+            update(1,1,n,i,ans[i]);
+
+        //printf("i is %d l and r is %d %d %d
+",i,i+1,lim,ans[i]);
+    }
+    in(q);
+    while(q--)
+    {
+        in(x);
+        printf("%lld
+",ans[x]);
+    }
+    return 0;
+}

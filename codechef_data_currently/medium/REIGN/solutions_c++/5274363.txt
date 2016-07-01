@@ -1,0 +1,60 @@
+#include<iostream>
+#define INF (1<<31)
+using namespace std;
+long long  a[100005];
+long long dp1[100005];
+long long dp2[100005];
+
+int main()
+{
+	int t,n,k,i,j;
+	long long ans;
+	scanf("%d",&t);
+	
+	while(t--)
+	{
+		scanf("%d%d",&n,&k);
+		
+		for(i=1;i<=n;i++)
+		{
+			scanf("%lld",&a[i]);
+		}
+		
+		dp1[1]=a[1];
+		
+		for(i=2;i<=n;i++)
+		{
+			dp1[i]=max(dp1[i-1]+a[i],a[i]);
+		}
+		
+		
+		dp2[n]=a[n];
+		
+		for(i=n-1;i>=1;i--)
+		{
+			dp2[i]=max(dp2[i+1]+a[i],a[i]);
+		}
+		
+		
+		for(i=2;i<=n;i++)
+		{
+			dp1[i]=max(dp1[i],dp1[i-1]);
+		}
+		
+		for(i=n-1;i>=1;i--)
+		{
+			dp2[i]=max(dp2[i],dp2[i+1]);
+		}
+		
+		ans=-INF;
+		for(j=2;j+k-1<=n-1;j++)
+		{
+			int s=j-1;
+			int e=j+k;
+			ans=max(ans,dp1[s]+dp2[e]);
+		}
+		printf("%lld
+",ans);
+	}
+	return 0;
+}

@@ -1,0 +1,9 @@
+import sys
+
+num = int(sys.stdin.readline().rstrip())
+mod = 1000000007
+while num != 0:
+	n = int(sys.stdin.readline().rstrip())
+	result = pow(2,n,mod) - 1 
+	print result
+	num -= 1

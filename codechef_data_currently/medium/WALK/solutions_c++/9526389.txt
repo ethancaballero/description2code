@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		long int n,w[100000],max;
+		cin>>n;
+		for(int i=0;i<n;i++)
+		cin>>w[i];
+		max=w[0];
+		for(int i=1;i<n;i++)
+		if(w[i]+i>max)
+		max=w[i]+i;
+		cout<<max<<endl;
+	}
+}

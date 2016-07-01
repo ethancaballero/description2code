@@ -1,0 +1,35 @@
+def gcd(a, b):
+    if (b == 0):
+        return a
+    else:
+        return gcd(b, a % b)
+ 
+ 
+def lcm(a,b):
+    temp = (a * b) / gcd(a,b)
+    return temp
+ 
+ 
+ 
+n = int(raw_input())
+count_list=[]
+for k in xrange(n):
+    a= int(raw_input())
+    b=map(int,raw_input().split())
+    skip={}
+    c=[]
+    for i in xrange(a):
+        if i+1 not in skip:
+            j=b[i]
+            count=1
+            while (j!=i+1) :
+                if j not in skip:
+                    skip[j]=j
+                count+=1
+                j=b[j-1]              
+            c.append(count)
+ 
+    r=reduce(lcm, c)
+    count_list.append(r % (1000000007))
+for i in xrange(n):
+    print count_list[i] 

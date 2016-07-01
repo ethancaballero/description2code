@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define MAX 1000000
+#define MOD 1000000007
+#define vint vector <int>
+#define vpint vector <pair<int,int> >
+#define pb push_back
+#define ms(x,v) memset(x,v,sizeof x)
+#define pr_arr(i,x,size) for(i=0;i<size;i++) cout<<x[i]<<" "
+#define ff(i,a,b) for(i=a;i<=b;i++)
+#define fb(i,a,b) for(i=a;i>=b;i--)
+#define gc() getchar_unlocked()
+#define gprint(i) cout<<"Case #"<<i<<": "
+using namespace std;
+
+template<class T>
+void scanint(T &x)
+{
+    register T c = gc();
+    x = 0;
+    T neg = 0;
+    for(;((c<48 || c>57) && c != '-');c = gc());
+    if(c=='-') {neg=1;c=gc();}
+    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+    if(neg) x=-x;
+}
+
+long long power(long long base,long long p)
+{
+    long long temp=1;
+    while(p>1)
+    {
+        if(p%2!=0)
+            temp=(1LL*(base*temp)%MOD);
+        base=(1LL*(base*base)%MOD);
+        p/=2;
+    }
+    long long ans=(1LL*(base*temp)%MOD);
+    return ans;
+}
+
+int flag=0;
+int u,v,ans=0;
+
+void calc_r()
+{
+	int usum=0,vsum=0;
+	while(u!=v)
+	{
+		if(u>v)
+		{
+			usum+=!((int)log2(u)%2 ^ !(flag%2));
+			u/=2;
+		}
+		if(v>u)
+		{
+			vsum+=!((int)log2(v)%2 ^ !(flag%2));
+			v/=2;
+		}
+	}
+	ans=vsum+usum;
+	ans+=!((int)log2(v)%2 ^ !(flag%2));
+}
+
+void calc_b()
+{
+	int usum=0,vsum=0;
+	while(u!=v)
+	{
+		if(u>v)
+		{
+			usum+=((int)log2(u)%2 ^ !(flag%2));
+			u/=2;
+		}
+		if(v>u)
+		{
+			vsum+=((int)log2(v)%2 ^ !(flag%2));
+			v/=2;
+		}
+	}
+	ans=vsum+usum;
+	ans+=((int)log2(v)%2 ^ !(flag%2));
+}
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	int q;
+	cin>>q;
+	while(q--)
+	{
+		char ch[3];
+		cin>>ch;
+		if(ch[1]=='i')
+		{
+			flag++;
+		}
+		if(ch[1]=='r')
+		{
+			cin>>u>>v;
+			calc_r();
+			cout<<ans<<"
+";
+		}
+		if(ch[1]=='b')
+		{
+			cin>>u>>v;
+			calc_b();
+			cout<<ans<<"
+";
+		}
+	}
+	return 0;
+}

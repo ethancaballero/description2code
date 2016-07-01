@@ -1,0 +1,11 @@
+for t in range(int(raw_input())):
+    n=int(raw_input())
+    a=raw_input()
+    b=raw_input()
+    w=map(int,raw_input().split())
+    ans=0
+    for i in range(n):
+        if b[i]==a[i]:ans+=1
+    if ans==n:print w[-1]
+    else:print max(w[:ans+1])
+            

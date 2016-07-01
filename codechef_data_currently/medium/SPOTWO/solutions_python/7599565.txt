@@ -1,0 +1,8 @@
+mod=1000000007
+from sys import stdin
+t=int(stdin.readline())
+for i in range(0,t):
+	n=int(stdin.readline())
+	k=bin(n)
+	k=int(k[2:])
+	print pow(2,k*2,mod)

@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	ios_base::sync_with_stdio(false);
+	int t,n,m;
+	int notes[20];
+	cin>>t;
+	while(t--){
+		cin>>n>>m;
+		for(int i=0;i<n;i++){
+			cin>>notes[i];
+		}
+		bool result[m+1][n+1];
+		for(int i=0;i<n+1;i++){
+			result[0][i]=true;
+		}
+		for(int j=1; j<m+1;j++){
+			result[j][0]=false;
+		}
+		
+		for(int i=1;i<m+1;i++){
+			for(int j=1;j<n+1;j++){
+				result[i][j]= result[i][j-1];
+				if (i >= notes[j-1])
+           			result[i][j] = result[i][j] || result[i - notes[j-1]][j-1];
+			}
+		}
+		if(result[m][n])
+			cout<<"Yes
+";
+		else
+			cout<<"No
+";
+	}
+	return 0;
+}

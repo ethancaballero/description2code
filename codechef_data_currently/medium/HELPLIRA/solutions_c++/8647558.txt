@@ -1,0 +1,42 @@
+#include <iostream>
+#include<cmath>
+#include<map>
+#include<vector>
+
+using namespace std;
+
+int main() {
+
+    long long int n;
+
+vector<int> v;
+
+    map<long long int,long long int> m1;
+    map<long long int,long long int> ::iterator it;
+
+
+    cin>>n;
+    long long int area[n];
+
+    long long int i,x1,y1,x2,y2,x3,y3;
+
+    for(i=0;i<n;i++)
+    {
+        cin>>x1>>y1>>x2>>y2>>x3>>y3;
+
+      area[i]=fabs(x1*(y2-y3)+x3*(y1-y2)+x2*(y3-y1));
+      area[i]/=2;
+
+   m1[area[i]]=i+1;
+
+    }
+
+    for(it=m1.begin();it!=m1.end();it++)
+    {
+        v.push_back(it->second);
+    }
+
+   cout<<v.front()<<" "<<v.back();
+
+	return 0;
+}

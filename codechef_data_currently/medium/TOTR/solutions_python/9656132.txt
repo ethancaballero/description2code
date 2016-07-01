@@ -1,0 +1,25 @@
+#fatch testcases and byteandianmapping
+dd=raw_input().split()
+noTestCases=int(dd[0])
+byteMap = dd[1]
+j=0
+
+dictMap = {}
+for i in range(65,91):
+	dictMap[chr(i)] = byteMap[i-65].upper()
+	j+=1
+j=0
+for i in range(97,123):
+	dictMap[chr(i)] = byteMap[i-97].lower()
+	j+=1
+dictMap["_"] = " "
+dictMap["."] = "."
+dictMap[","] = ","
+dictMap["!"] = "!"
+dictMap["?"] = "?"
+for TC in range(0,noTestCases):
+	inrStr=  raw_input()
+	oStr=""
+	for inChar in inrStr:
+		oStr+= dictMap[inChar]
+	print oStr

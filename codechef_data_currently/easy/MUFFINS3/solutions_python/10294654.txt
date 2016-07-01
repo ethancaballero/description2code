@@ -1,0 +1,7 @@
+n=int(input())
+res=[]
+for i in range(n):
+    p=int(input())
+    res.append((p/2)+1)
+for i in range(n):
+    print res[i]

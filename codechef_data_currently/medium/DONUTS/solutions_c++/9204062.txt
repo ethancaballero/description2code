@@ -1,0 +1,42 @@
+	#include<iostream>
+	#include<algorithm>
+	#include<stdio.h>
+	using namespace std;
+	int main()
+	{
+		int t;
+		cin>>t;
+		while(t>0)
+		{
+			int n,m;
+			cin>>n>>m;
+			int a[100005];
+			int flag=0;
+			for(int i=0;i<m;i++)
+			{
+				scanf("%d",&a[i]);
+				if(a[i]>0)
+					flag=1;
+			}	
+			if(flag==0)
+				cout<<m/2<<endl;
+			int sum=0;
+			int i;
+			sort(a,a+m);
+			for(i=1;i<=m;i++)
+			{
+				sum+=a[i-1];
+				if(sum>=m-i-1)
+				{
+					break;
+				}	
+			}	
+			if(sum==m-i-1)
+				cout<<m-i-1<<endl;	
+			else
+			{
+				cout<<m-i<<endl;
+			}	
+			t--;
+		}	
+	}	

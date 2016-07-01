@@ -1,0 +1,19 @@
+#coded by biraj patel
+testCases=int(raw_input())
+while testCases>0 :
+    totalPages=int(raw_input())
+    inputArray=raw_input().split()
+    _missingPages=int(inputArray[0])
+    sum=((totalPages)*(totalPages+1))/2
+    for i in range (1,_missingPages+1):
+        sum-=int(inputArray[i])
+    totalTorn=int(raw_input())				
+    if totalPages==0:
+        print "%.4f" % 0
+        testCases-=1
+        continue
+    j=(totalPages+1)/2;
+    probability=(j-totalTorn)/(j*1.0);
+    finalAnswer=sum*probability;											
+    print "%.4f" % finalAnswer
+    testCases-=1;

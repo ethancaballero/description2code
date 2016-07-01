@@ -1,0 +1,19 @@
+x = int(raw_input())
+qq = []
+for q in range(x):
+    n = int(raw_input())
+    t = []
+    for i in range(n):
+        t.append(map(int,raw_input().split()))
+    for i in range(len(t)-2,-1,-1):
+        for j in range(i+1):
+            if t[i+1][j] >= t[i+1][j+1]:
+                t[i][j]+= t[i+1][j]
+            else :
+                t[i][j]+= t[i+1][j+1]
+    qq.append(t[0][0])
+
+for i in range(len(qq)):
+    print qq[i]
+            
+        

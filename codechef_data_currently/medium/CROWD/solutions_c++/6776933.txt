@@ -1,0 +1,84 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+long long powmod(long long base,long long expo,long long mod) {
+	if(expo==0) {
+		return 1;
+	}
+	long long temp=powmod(base,expo/2,mod)%mod;
+	temp=(temp*temp)%mod;
+	if(expo%2) {//odd expo
+		temp=(temp*base)%mod;
+	}
+	return temp;
+}
+
+void matmul(ll a[][3],ll b[][3],ll c[][3],ll M) {
+	for(ll i=0;i<3;i++) {
+		for(ll j=0;j<3;j++) {
+			c[i][j]=0;
+			for(ll k=0;k<3;k++) {
+				c[i][j]+=a[i][k]*b[k][j];
+				c[i][j]=c[i][j]%M;
+			}
+		}
+	}
+}
+void matpow(ll z[][3],ll n,ll ans[][3],ll M) {
+	//initialising ans as an identity matrix
+	for(ll i=0;i<3;i++) {
+		for(ll j=0;j<3;j++) {
+			ans[i][j]=0;
+		}
+	}
+	for(ll i=0;i<3;i++) {
+		ans[i][i]=1;
+	}
+	ll temp[3][3];
+	while(n>0) {
+		if(n&1){
+			matmul(z,ans,temp,M);
+			for(ll i=0;i<3;i++) {
+				for(ll j=0;j<3;j++) {
+					ans[i][j]=temp[i][j];
+				}
+			}
+		}
+		matmul(z,z,temp,M);
+		for(ll i=0;i<3;i++) {
+			for(ll j=0;j<3;j++) {
+				z[i][j]=temp[i][j];
+			}
+		}
+		n=n/2;
+	}
+}
+ll findfibo(ll n,ll M){
+	ll fib=0;
+	ll z[3][3]={{1,1,1},{1,0,0},{0,1,0}},result[3][3];
+	if(n>2) {
+		matpow(z,n-2,result,M);
+		fib=(((4*result[0][0])%M)+((2*result[0][1])%M)+(result[0][2]%M))%M;
+		return fib;
+	}
+	else if(n==2){
+		return 4;
+	}
+	else if(n==1) {
+		return 2;
+	}
+	else 
+		return 1;
+}
+int main() { 
+	ll t,n;
+	scanf("%lld",&t);
+	while(t--) {
+		scanf("%lld",&n);
+		ll y=2*1000000007;
+		ll x=powmod(2,n,1000000007)%1000000007;
+		printf("%lld
+",(y+x-findfibo(n,1000000007))%1000000007);
+	}
+	return 0;
+}

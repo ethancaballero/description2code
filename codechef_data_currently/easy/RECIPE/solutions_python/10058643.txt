@@ -1,0 +1,11 @@
+#https://www.codechef.com/problems/RECIPE
+#Cutting Recipes 
+
+from fractions import gcd
+t=input()
+while t!=0:
+	n= map(int, raw_input().split())[1:]
+	t-=1
+	x=reduce(gcd, n)
+	for i in n:
+		print i/x,

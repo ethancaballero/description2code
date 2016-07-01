@@ -1,0 +1,142 @@
+#ifdef DEBUG
+#include<debug.h>
+#else
+#define db(...) {}
+#define dbt(...) {}
+#define pprintf(...) {}
+#endif
+ 
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define ASSERT(f)       if(!(f)){fprintf(stdout,"Line-->%d  Assertion failed: %s
+",__LINE__,#f);exit(1);}
+#define MOD             1000000007LL
+#define ABS(x)          ((x)<0?-(x):(x))
+#define SQR(x)          ((x)*(x))
+#define CUBE(x)         ((x)*(x)*(x))
+#define pnl             printf("
+");
+#define REP(i,n)        for(__typeof(n) i=0;i<(n);i++)
+#define FOR(i,a,b)      for(__typeof(b) i=(a);i<(b);++i)
+#define FORE(i,a,b)     for(__typeof(b) i=(a);i<=(b);++i)
+#define FORD(i,a,b,d)   for(__typeof(b) i=(a);i<(b);i+=(d))
+#define FORR(i,n,e)     for(__typeof(n) i=(n);i>=(e);--i)
+#define FORRD(i,n,e,d)  for(__typeof(n) i=(n);i>=(e);i-=(d))
+#define FOREACH(i,s)    for(__typeof((s).begin()) i=(s).begin();i!=(s).end();i++)
+#define UNIQUE(v)       sort(ALL(v)),v.erase(unique(ALL(v)),v.end())
+#define FILL(a,b)       memset(a,b,sizeof(a))
+#define ALL(v)          (v).begin(), (v).end()
+#define RALL(v)         (v).rbegin(), (v).rend()
+#define checkbit(n,b)   (((n)>>(b))&1)
+#define PB push_back
+#define MP make_pair
+#define XX first
+#define YY second
+typedef long long LL;
+typedef unsigned long long ULL;
+typedef vector<int> VI;
+typedef pair<int, int> PII;
+typedef vector<PII> VPII;
+#define SIZE 100005
+int N, M, x, y;
+map<PII, bool> hashh;
+struct Edge {
+        int to, weight;
+        Edge(int to, int weight = 1) :
+                to(to), weight(weight) {
+        }
+};
+ 
+class Graph {
+        int N;
+        vector<list<Edge> > adj;
+        // 0 based indexing
+    public:
+        Graph(int n) {
+            N = n;
+            adj.resize(N);
+        }
+ 
+        void addEdge(int from, int to, int weight = 1) {
+            adj[from].push_back(Edge(to, weight));
+        }
+ 
+        ~Graph() {
+            for (int i = 0; i < adj.size(); i++) {
+                adj[i].clear();
+            }
+            adj.clear();
+        }
+ 
+        void dijkstra(int src, vector<int>&dis) {
+            dis.clear();
+            dis.resize(N, MOD);
+            vector<bool> visited(N, false);
+            //for the purpose of priority queue, using sets
+            set<pair<int, int> > pq;
+            dis[src] = 0;
+            pq.insert(make_pair(0, src));
+            list<Edge>::iterator it;
+            while (!pq.empty()) {
+                pair<int, int> p = *(pq.begin());
+                pq.erase(pq.begin());
+                int d = p.first;
+                int v = p.second;
+                if (visited[v]) {
+                    continue;
+                }
+                visited[v] = true;
+                for (it = adj[v].begin(); it != adj[v].end(); it++) {
+                    int newDis = d + it->weight;
+                    if (newDis < dis[it->to]) {
+                        dis[it->to] = newDis;
+                        pq.insert(make_pair(newDis, it->to));
+                    }
+                }
+            }
+ 
+        }
+};
+void solve(int cx) {
+    scanf("%d %d", &N, &M);
+    db(N, M);
+    Graph g(N + 1);
+    REP(i, M)
+    {
+        scanf("%d %d", &x, &y);
+        db(x, y);
+        if (x == y) {
+            continue; //no need to account for self loops
+        }
+        PII xx = MP(x, y);
+        if (hashh.find(xx) != hashh.end()) {
+            continue; //already one similar connection
+        }
+        hashh[xx] = true;
+        g.addEdge(x, y, 0);
+        g.addEdge(y, x, 10); //adding cost 10 to reverse edges
+    }
+    VI dis;
+    g.dijkstra(1, dis);
+    db(dis);
+    if (dis[N] == MOD) {
+        dis[N] = -1;
+    } else {
+        dis[N] /= 10; //accomodating for reverse edges
+    }
+    printf("%d
+", dis[N]);
+}
+int main() {
+#ifdef LOCAL
+    IO; TE tt("main");
+#endif
+    int T = 1;
+    //SD(T);
+    FORE(i, 1, T)
+    {
+        solve(i);
+    }
+    return 0;
+}

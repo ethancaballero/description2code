@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	long long i,m,n,temp,c;
+	while (t--) {
+		cin>>n;
+		/*for (i = n; i >= 1; i--) {
+			temp = (i*(i+1))/2;
+			if (temp <= n) {
+				m = i;
+				break;
+			}
+
+		}
+		cout<<m<<endl;*/
+		for (i = 1; i <= n; i++) {
+			temp = i*(i+1);
+			if (temp > 2*n) {
+				m = i;
+				break;
+			}
+		}
+		cout<<i-1<<endl;
+	}
+}

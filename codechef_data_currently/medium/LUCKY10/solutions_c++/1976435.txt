@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<string.h>
+main()
+{
+int a[15]={0},t,i;
+int b[15]={0};
+int l,u=0,v=0,p,q,r,s;
+char a1[20002],a2[20002];
+scanf("%d",&t);
+while(t--)
+{
+ u=0;v=0;
+ scanf("%s",a1);
+ l=strlen(a1);
+ for(i=0;i<l;i++)
+ a[a1[i]-48]++;
+ scanf("%s",a2);
+ for(i=0;i<l;i++)
+ b[a2[i]-48]++;
+ p=a[7];
+ q=a[4];
+ r=b[7];
+ s=b[4];
+ for(i=6;i>=0;i--)
+ {
+   while(b[i]>0&&p>0&&i!=4)
+   {
+    p--;
+    u++;
+    b[i]--;
+   }
+   while(a[i]>0&&r>0&&i!=4)
+   {
+    r--;
+    u++;
+    a[i]--;
+   }
+ }
+ while(p>0&&s>0)
+ {
+     i=4;
+     p--;
+     b[i]--;
+     u++;
+     s--;
+ }
+ while(r>0&&q>0)
+ {
+     i=4;
+     r--;
+     u++;
+     a[i]--;
+     q--;
+ }
+ q=a[4];
+ s=b[4];
+ while(p>0&&r>0)
+ {
+     p--;
+     r--;
+     u++;
+ }
+  for(i=3;i>=0;i--)
+ {
+   while(b[i]>0&&q>0)
+   {
+    q--;
+    v++;
+    b[i]--;
+   }
+   while(a[i]>0&&s>0)
+   {
+    s--;
+    v++;
+    a[i]--;
+   }
+ }
+ while(q>0&&s>0)
+ {
+     q--;
+     s--;
+     v++;
+ }
+  for(i=0;i<u;i++)
+  printf("7");
+  for(i=0;i<v;i++)
+  printf("4");
+  printf("
+");
+  for(i=0;i<12;i++)
+  a[i]=b[i]=0;
+}
+return 0;
+}

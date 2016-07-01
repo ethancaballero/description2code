@@ -1,0 +1,70 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <set>
+#include <vector>
+#include <string.h>
+#include <stdio.h>
+#include <string.h>
+
+using namespace std;
+typedef long long ll;
+typedef long double ld;
+#define PAUSE system("pause")
+const int maxn = 1e2 + 2;
+const ll mod = 1e9 + 7;
+
+int n;
+int flag[maxn];
+ld prob[maxn];
+ld dp[maxn][maxn*maxn];
+
+int main()
+{
+
+	int t;
+	cin >> t;
+
+	while(t--)
+	{
+		cin >> n;
+		int sum = 0;
+		for(int i = 1; i <= n ;i++)
+			cin >> flag[i],sum+= flag[i];
+		for(int i = 1; i <= n; i++)
+			cin >> prob[i],prob[i]/=100.0;
+
+		dp[1][flag[1]] = prob[1];
+		if(prob[1] != 1)
+			dp[1][0] = (1 - prob[1]);
+
+		for(int l = 2; l <= n; l++)
+		{
+			for(int j = flag[l]; j <= sum; j++)
+			{
+				if(prob[l] == 1)
+					dp[l][j] += dp[l - 1][j - flag[l]];
+				else if(prob[l] == 0)
+					dp[l][j - flag[l]] += dp[l - 1][j - flag[l]]*(1 -prob[l]);
+				else
+				{
+
+					dp[l][j] += dp[l - 1][j - flag[l]]*prob[l];
+					dp[l][j - flag[l]] += dp[l - 1][j - flag[l]]*(1 -prob[l]);
+				}
+			}
+		}
+		ld res = 0;
+		for(int i = (sum + 1)/2; i <= sum; i++)
+		{
+			res += dp[n][i];
+		}
+		//cout.precision(7);
+		cout <<  res << endl;
+		memset(dp,0,sizeof(dp));
+	}
+
+
+	return 0;
+
+}

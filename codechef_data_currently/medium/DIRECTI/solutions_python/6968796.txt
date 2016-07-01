@@ -1,0 +1,32 @@
+t=int(input())
+for a in range(0,t):
+    n=int(input())
+    lis=[]
+    for i in range(0,n):
+	str1=raw_input()
+	str1=str(str1)
+	lis.append(str1)
+    for i in range(n-1,-1,-1):
+	#print lis[i]
+	str1=lis[i]
+	if i==n-1:
+		if 'Left' in str1:
+		    str1=str1.replace("Left","Begin")
+		    temp="Right"
+		elif 'Right' in str1:
+		    str1=str1.replace("Right","Begin")
+		    temp="Left"
+		lis[i]=str1;
+	elif 'Begin' in str1:
+		str1=str1.replace("Begin",temp)
+		lis[i]=str1
+	else:
+		if 'Left' in str1:
+		    str1=str1.replace("Left",temp)
+		    temp="Right"
+		elif 'Right' in str1:
+		    str1=str1.replace("Right",temp)
+		    temp="Left"
+		lis[i]=str1;
+    for i in range(n-1,-1,-1):
+	print lis[i] 

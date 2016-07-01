@@ -1,0 +1,87 @@
+# include <iostream>
+# include <queue>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+ 
+int c[70][70], a[70][70], row[4]={-1, 1, 0, 0}, col[4]={0, 0, -1, 1};
+ int N,M;
+struct node{
+int a;
+int b;
+};
+ 
+struct compare{
+bool operator()(node p, node q) {
+return c[p.a][p.b]>c[q.a][q.b];
+}
+};
+ 
+ int shortest_path(int x, int y)
+{
+int i, f, d;
+node p, q;
+priority_queue <node, vector <node>, compare> pq;
+p.a=0;
+p.b=0;
+memset(c, 0x3f3f3f3f, sizeof c);// INITAIL SET INFINITE TO  ALL C ARRAY
+
+
+c[0][0]=a[0][0];
+pq.push(p);
+while(!pq.empty()) {
+p=pq.top();
+pq.pop();
+if (p.a==x && p.b==y) {
+return c[x][y];
+}
+for (i=0; i<4; i++) {
+f=p.a+row[i];
+d=p.b+col[i];
+if (f>=0 && f<N && d>=0 && d<M) {
+if (c[p.a][p.b]+a[f][d]<c[f][d]) {
+c[f][d]=c[p.a][p.b]+a[f][d];
+q.a=f;
+q.b=d;
+pq.push(q);
+}
+}
+}
+}
+}
+ 
+int getinput()
+{
+int n=0;
+char c;
+while(!isdigit(c=getchar()));
+while(isdigit(c)) {
+n=n*10+c-'0';
+c=getchar();
+}
+return n;
+} 
+ 
+int main()
+{
+int i, j, x, y,time , limit;
+N=getinput();
+M=getinput();
+for (i=0; i<N; i++) 
+for (j=0; j<M; j++) 
+scanf("%d",&a[i][j]);
+
+x=getinput();
+y=getinput();
+time=getinput();
+limit= shortest_path(x-1, y-1);
+if (limit<= time) {
+printf("YES 
+  %d
+", time-limit);
+}
+else {
+printf("NO");
+}
+return 0;
+}

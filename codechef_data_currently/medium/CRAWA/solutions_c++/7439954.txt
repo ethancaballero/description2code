@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	long long int x,y,test;
+	cin>>test;
+	while(test--)
+	{
+		cin>>x>>y;
+		int flag=0;
+		if (x>0 && x%2==1 && y>=-x+1 && y<=x+1)		
+			flag=1;
+		else if (x < 0 && x % 2 == 0 && y >= x && y <= -x)			
+			flag=1;
+		else if (y > 0 && y % 2 == 0 && x >= -y && x < y)			
+			flag=1;
+		else if (y <= 0 && y % 2 == 0 && x >= y && x <= -y + 1)		
+			flag=1;		
+		if(flag)
+		cout<<"YES
+";
+		else
+		cout<<"NO
+";
+	}
+	return 0;
+}

@@ -1,0 +1,90 @@
+#include <cstdio>
+#include <vector>
+#include <algorithm>
+using namespace std;
+#define REP(i,a,b) for (int i=a; i<b; ++i)
+typedef long long ll;
+typedef vector<ll> vl;
+typedef vector<vl> vll;
+const int LIMn=15,MOD=1000000007;
+int TT,K,arr[LIMn];
+ll N,arrV[LIMn];
+vector<vector<ll> > T;
+vll mMult(const vll &l,const vll &r) {
+	vll ans=vll(l.size(),vl(l.size()));
+	REP(i,0,ans.size()) REP(j,0,ans.size()) REP(k,0,ans.size()) {
+		ans[i][j]=(ans[i][j]+l[i][k]*r[k][j])%MOD;
+	}
+	return ans;
+}
+
+int main() {
+	//freopen("test.txt","r",stdin);
+	scanf("%d",&TT);
+	while (TT--) {
+		scanf("%lld%d",&N,&K);
+		for (int i=0; i<K; ++i) scanf("%d",&arr[i]);
+		int maxK=*max_element(arr,arr+K);
+		T=vector<vector<ll> > (maxK,vector<ll>(maxK));
+		REP(i,0,maxK) {
+			arrV[i]=(i?0:1);
+			REP(j,0,K) if (i>=arr[j]) arrV[i]+=arrV[i-arr[j]];
+		}
+		REP(i,1,maxK) T[i-1][i]=1;
+		REP(i,0,K) ++T[maxK-1][maxK-arr[i]];
+		if (N<maxK) printf("%lld
+",arrV[N]);
+		else {
+			ll p=N;
+			bool f=1;
+			vector<vector<ll> > m=T;
+			while (p) {
+				if (p&1) {
+					if (f) {
+						m=T; f=0;
+					} else {
+						m=mMult(m,T);
+					}
+				}
+				//REP(i,0,maxK) REP(j,0,maxK) printf("%d%c",T[i][j],(j==maxK-1)?'
+':' ');
+				T=mMult(T,T);
+				p>>=1;
+			}
+			ll ans=0;
+		//	REP(i,0,maxK) REP(j,0,maxK) printf("%d%c",m[i][j],(i==maxK-1)?'
+':' ');
+			REP(i,0,maxK) ans=(ans+arrV[i]*m[0][i])%MOD;
+			printf("%lld
+",ans);
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

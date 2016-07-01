@@ -1,0 +1,26 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n,m;
+	cin>>n>>m;
+	int a[n];
+	for(int i=0;i<n;i++) cin>>a[i];
+	int begin=0;
+	while(m--)
+	{
+		char c;
+		int d;
+		cin>>c>>d;
+		
+		if(c=='R')
+		printf("%d
+",a[(begin+d-1)%n]);
+		else if(c=='C')
+		begin=(begin+d)%n;
+		else begin=(begin+n-d)%n;
+	}
+return 0;	
+}

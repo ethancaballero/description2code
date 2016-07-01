@@ -1,0 +1,10 @@
+import sys
+
+for index, line in enumerate(sys.stdin):
+	if index == 0:
+		testcases = int(line)
+	else:
+		if index % 2 == 0:
+			attractiveness_list = line.split()
+			my_list = [int(item)+index for index,item in enumerate(attractiveness_list)]
+			print max(my_list)

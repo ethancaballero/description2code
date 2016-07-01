@@ -1,0 +1,9 @@
+t = int(raw_input())
+for i in range (t):
+    n = int(raw_input())
+    if n == 1:
+        print 2
+    elif n & (n+1) == 0:
+        print n/2
+    else:
+        print -1

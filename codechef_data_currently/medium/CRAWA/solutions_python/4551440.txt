@@ -1,0 +1,16 @@
+m = input()
+
+for i in range(m):
+	l = [int(i) for i in raw_input().split()]
+	x = l[0]
+	y = l[1]
+	if x>0 and x%2==1 and y>=-x+1 and y <= x+1:
+		print "YES"
+	elif x<0 and x%2==0 and y>=x and y<=-x:
+		print "YES"
+	elif y>0 and y%2==0 and x>=-y and x<y:
+		print "YES"
+	elif y<=0 and y%2 == 0 and x>=y and x<= -y+1:
+		print "YES"
+	else:
+		print "NO"

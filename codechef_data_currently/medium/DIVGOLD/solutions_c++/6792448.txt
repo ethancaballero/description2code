@@ -1,0 +1,63 @@
+//THEM THAT STICK TO IT OUT, ARE THEM THAT WIN
+//The closer you think you're, the less you will actually see.
+#include "bits/stdc++.h"
+#define sd(n) scanf("%d", &(n))
+#define rep(i, x, n) for (int i = x, _n = (n); i < _n; ++i)
+#define repV(i, v) for (i = v.begin(); i != v.end(); i++)
+#define SZ(c) (int)(c).size()
+#define lcm(a,b) (a*(b/__gcd(a,b)))
+#define VI vector<int>
+#define all(c) (c).begin(), (c).end()
+#define pb push_back
+#define mii map<int, int>
+#define pii pair<int, int>
+#define pip pair<int, pii>
+#define F first
+#define S second
+#define mp make_pair
+#define lli long long int
+#define CLR(p) memset(p, 0, sizeof(p))
+#define SET(p) memset(p, -1, sizeof(p))
+#define INF 0x3f3f3f3f
+using namespace std;
+
+const int MOD = 1e9+7;
+const int MAX = 100010;
+
+string s;
+
+string modify(int x, int y)
+{
+	string tmp = s;
+	string z = "";
+	z += s[x];
+	tmp.erase(tmp.begin() + x);
+
+	tmp.insert(y, z);
+	return tmp;
+}
+
+int main()
+{
+	int t, n;
+	sd(t);
+	while(t--)
+	{
+		sd(n);
+		cin >> s;
+
+		string ans = s;
+
+		rep(i, 0, n)
+			rep(j, 0, n)
+			{
+				string tmp = modify(i, j);
+	//			cout << tmp << endl;
+				ans = min(ans, tmp);
+			}
+
+		cout << ans << endl;
+	}
+    return 0;
+}    
+

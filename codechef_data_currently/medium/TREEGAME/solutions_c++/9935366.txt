@@ -1,0 +1,100 @@
+
+using namespace std;
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#define ll long long
+#define input freopen("input.in","r",stdin);
+#define output freopen("output.out","w",stdout);
+#define e printf("
+");
+#define all(it,v) for(it=(v).begin();it!=(v).end();it++)
+#define rep(i,a,b) for(int i=a;i<=b;i++)
+#define pii pair<ll,ll>
+typedef vector<vector<ll> > mat;
+const ll mx=100001;
+const ll mod=1000000007;
+const ll inf=0x3f3f3f3f;
+int depth[10001];
+bool vis[10001];
+vector<int> v[10001];
+int m;
+void dfs(int u,int d)
+{
+	vis[u]=true;
+	depth[d]++;
+	m=max(m,d);
+	rep(i,0,v[u].size()-1)
+	{
+		int w=v[u][i];
+		  if(!vis[w])
+		 dfs(w,d+1);
+	}
+	vis[u]=false;
+}
+void solve()
+{
+	memset(depth,0,sizeof depth);
+    m=0;
+	int n,k,x,y,l=0,r=0,t=0,ct=0;
+	cin>>n;
+	if(n==1)
+	{
+		cout<<1;
+		e
+		return ;
+	}
+	 rep(i,1,n)
+	   v[i].clear();
+	 rep(i,1,n-1)
+	 {
+	 	cin>>x>>y;
+	 	v[x].push_back(y);
+	 	v[y].push_back(x);
+	 }   
+	 dfs(1,0);
+	 	r=m;
+	 while(l<=r)
+	 {
+        if(t%2==0)
+        {
+        	ct++;l++;
+        }
+        else
+        {
+        	depth[r]--;
+        	if(!depth[r])
+        		 r--;
+        	ct++;	
+        }
+        t++;
+	 }
+	 cout<<ct;
+	 e
+}
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   	solve();
+   return 0;
+}

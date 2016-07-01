@@ -1,0 +1,34 @@
+#include<stdlib.h>
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n,i,m=-1,k;
+    cin>>n;
+    int ar[n];
+    int a[n];
+    int s1=0;
+    int s2=0;
+    for(i=0;i<n;i++)
+    {
+        cin>>ar[i];
+        cin>>a[i];
+        s1+=ar[i];
+        s2+=a[i];
+        if(m<abs(s1-s2))
+        {
+            if(s1>s2)
+            {
+                k=1;
+                m=s1-s2;
+            }
+            else
+            {
+                k=2;
+                m=s2-s1;
+            }
+        }
+    }
+    cout<<k<<" "<<m;
+    return 0;
+}

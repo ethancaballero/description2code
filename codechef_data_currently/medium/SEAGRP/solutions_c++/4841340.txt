@@ -1,0 +1,70 @@
+#include<iostream>
+using namespace std;
+
+int a[105][105];
+
+int check(int b[],int n)
+{
+	
+	for(int i=0;i<n;i++)
+	{
+		
+		if(b[i]==0)
+		{
+			
+			for(int j=0;j<n;j++)
+			{
+			if((a[i][j])&&(b[j]==0))
+			{
+				b[i]=b[j]=1;
+				if(check(b,n))
+				return true;
+				b[i]=b[j]=0;
+				
+			}	
+				
+			}
+			
+			return false;
+		}
+	
+		
+	}
+	
+		return true;
+}
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m;
+		cin>>n>>m;
+		
+		int b[n];
+		for(int i=0;i<n;i++)
+		b[i]=0;
+		for(int i=0;i<105;i++)
+		{
+			for(int j=0;j<105;j++)
+			a[i][j]=0;
+		}
+		
+		int u,v;
+		for(int i=0;i<m;i++)
+		{
+			cin>>u>>v;
+			a[u-1][v-1]=1;
+			a[v-1][u-1]=1;
+		}
+		
+		if(check(b,n))
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+		
+	}
+	
+}

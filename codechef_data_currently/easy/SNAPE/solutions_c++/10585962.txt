@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	std::ios_base::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		float ls,bl,ans,ans2;
+		cin>>ls>>bl;
+		ans=ls*ls-bl*bl;
+		ans2=ls*ls+bl*bl;
+		ans=sqrt(abs(ans));
+		cout<<ans<<" "<<sqrt(ans2)<<"
+";
+	}
+	return 0;
+}

@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+  
+int main() 
+{
+    string s;
+    cin>>s;
+  
+  int count[4]={0};
+      for(int i=0;i<s.size();i++)
+	  {
+	  	char ch=s[i];
+          switch(ch){
+              case 'C':
+                  count[0]++;
+                  break;
+              case 'H':
+                  if(count[1]<count[0])
+                  count[1]++;
+                  break;
+              case 'E':
+                  if(count[2]<count[1])
+                      count[2]++;
+                  break;
+              case 'F':
+                   if(count[3]<count[2])
+                       count[3]++;
+          }
+      }
+     cout<<count[3];
+ 
+    return 0;
+} 

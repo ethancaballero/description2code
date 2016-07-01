@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int con(string s)
+{
+	int ans=0;
+	int l=1;
+	for(int i=s.length()-2;i>=0;i--)
+	{
+		int t=s[i]-48;
+		t*=l;
+		l*=10;
+		ans+=t;
+	}
+	return ans;
+}
+
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		string s1,s2,s3;
+		map<string,pair<string,int> >m1;
+		map<string,bool>m2;
+		cin>>n;
+		for(int i=0;i<n-1;i++)
+		{
+			cin>>s1>>s2>>s3;
+			int z=con(s3);
+			m1[s1]=make_pair(s2,z);
+			m2[s2]=true;
+		}
+		string s;
+		map<string, pair<string,int> >::iterator iter;
+		for(iter=m1.begin();iter!=m1.end();iter++)
+		{
+			if(!m2[iter->first])
+			{
+				s=iter->first;
+				break;
+			}
+		}
+		int tot=0;
+		int i=0;
+		while(i!=n-1)
+		{
+			cout<<s<<" "<<m1[s].first<<" "<<m1[s].second<<"$
+";
+			tot+=m1[s].second;
+			s=m1[s].first;
+			i++;
+		}
+		cout<<tot<<"$
+";
+	}
+	return 0;
+}

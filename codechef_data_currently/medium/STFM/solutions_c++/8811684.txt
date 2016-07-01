@@ -1,0 +1,36 @@
+#include<stdio.h>
+//#include<conio.h>
+#include<algorithm>
+using namespace std;
+#define mod 1000000007
+#define N 100005
+int dp[10000007];
+int main()
+{
+	int fact=1,a[N],n,m,i;
+	long long int p,sum=0;
+	scanf("%d%d",&n,&m);
+	for(i=0;i<n;i++)
+	{
+		scanf("%lld",&p);
+		p=p%m;
+		a[i]=p;
+	}
+	sort(a,a+n);
+	dp[0]=0;
+	for(i=1;i<=a[n-1];i++)
+	{
+		fact*=i;
+		dp[i]=dp[i-1]+i*fact;
+		dp[i]%=m;
+	}
+	for(i=0;i<n;i++)
+	{
+		sum+=dp[a[i]];
+		sum+=(a[i]*a[i]*(a[i]+1))>>1;
+		sum=sum%m;
+	}
+	printf("%lld
+",sum);
+//	_getche();
+}

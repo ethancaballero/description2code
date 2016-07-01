@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+	int t;
+	cin>>t;
+	while(t--) {
+		int n,k;
+		cin>>n>>k;
+		int a[n];
+		int cnt;
+		for(int i=0;i<n;i++) {
+			cin>>a[i];
+		}
+		bool flag=false;
+		for(int i=0;i<n;i++) {cnt=0;
+			for(int j=i;j<n;j++) {
+				if(a[j]%2==0) cnt++;
+				if(cnt==k) {
+				flag=true ;break;
+			}
+		}
+			
+		}
+		flag? cout<<"YES
+":cout<<"NO
+";
+	}
+}

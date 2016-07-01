@@ -1,0 +1,12 @@
+#Sum of palindromic numbers 
+#https://www.codechef.com/problems/SPALNUM
+t=input()
+while t!=0:
+	t-=1
+	l, r =map(int, raw_input().split())
+	sum=0
+	for i in range(l,r+1):
+		i=str(i)
+		if i==i[::-1]:
+			sum+=int(i)
+	print sum

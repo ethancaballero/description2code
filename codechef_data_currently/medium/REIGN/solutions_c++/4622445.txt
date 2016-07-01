@@ -1,0 +1,56 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+
+    int t,i,j;
+    long int n,k;
+    int a[100000];
+    long long int lmax[100000],rmax[100000],curmax,bestmax,opt;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>k;
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+          bestmax=a[0];
+                curmax=0;
+
+        for(i=0;i<n;i++)
+        {
+            if(curmax<0)
+            curmax=0;
+            curmax+=a[i];
+            if(curmax>bestmax)
+                bestmax=curmax;
+            lmax[i]=bestmax;
+
+
+        }
+        bestmax=a[n-1];
+        curmax=0;
+        for(i=n-1;i>=0;i--)
+        {
+          if(curmax<0)
+                curmax=0;
+        curmax+=a[i];
+        if(curmax>bestmax)
+            bestmax=curmax;
+        rmax[i]=bestmax;
+        }
+    opt=lmax[0]+rmax[k+1];
+        int z=n-2-k;
+        for(i=1;i<=z;i++)
+        {
+            j=i+k+1;
+            if((lmax[i]+rmax[j])>opt)
+                opt=lmax[i]+rmax[j];
+        }
+        cout<<opt<<endl;
+    }
+    return 0;
+}

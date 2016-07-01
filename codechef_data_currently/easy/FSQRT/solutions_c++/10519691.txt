@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+#include<math.h>
+using namespace std;
+int main()
+{
+	int t , n,s,i;
+	scanf("%d",&t);
+	for(i=0;i<t;i++)
+	{
+		scanf("%d",&n);
+		s = sqrt(n);
+		printf("%d
+",s);
+	}
+	return 0;
+}

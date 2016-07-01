@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+int arr[10001];
+int parent[10001];
+int findop(int p)
+{
+    int x=p;
+   while(parent[x]!=x)
+    x=parent[x];
+    parent[p]=x;
+    return parent[p];
+}
+int main()
+{
+    int t,n,q,op,x,y,px,py,num;
+    scanf("%d",&t);
+    while(t--)
+    {
+        cin>>n;
+        for(int i=1;i<=n;i++)
+        {
+            scanf("%d",&arr[i]);
+            parent[i]=i;
+        }
+        scanf("%d",&q);
+        while(q--)
+        {
+            scanf("%d",&op);
+            if(op==0)
+            {
+                scanf("%d%d",&x,&y);
+                 px=findop(x);
+                py=findop(y);
+                if(px==py)
+                {
+                    printf("Invalid query!
+");
+                    continue;
+                }
+                if(arr[px]==arr[py])continue;
+                if(arr[px]>arr[py])
+                {
+                    parent[py]=px;
+                }
+                else
+                {
+                    parent[px]=py;
+                }
+            }
+            else
+            {
+                scanf("%d",&num);
+                printf("%d
+",findop(num));
+            }
+        }
+    }
+     return 0;
+}

@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    long int n,cur=0,maxm=0;
+    cin>>n;
+    int a;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>a;
+        if(a!=0)
+            cur++;
+        else
+        {
+            maxm=max(cur,maxm);
+            cur=0;
+        }
+    }
+    maxm=max(cur,maxm);
+    cout<<maxm<<"
+";
+    return 0;
+}

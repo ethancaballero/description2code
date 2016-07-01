@@ -1,0 +1,9 @@
+test = input()
+while test:
+    test -= 1
+    a,b = map(int,raw_input().split())
+    if a&1 and b&1:
+        print "Vanka"
+    else:
+        print "Tuzik"
+    

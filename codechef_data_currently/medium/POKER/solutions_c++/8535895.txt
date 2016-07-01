@@ -1,0 +1,269 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int check_royal_flush(int *suits, int *_rank)
+{
+    if((_rank[1] == 1) &&(_rank[10] == 1) && (_rank[11] == 1) && (_rank[12] == 1) && (_rank[13] == 1))
+    {
+        for(int i=0; i<4; i++)
+            if(suits[i] == 5)
+            return 1;
+    }
+    return 0;
+}
+int check_straight_flush(int *suits, int *_rank)
+{
+    int i,j;
+    for(i=0; i<4 ;i++)
+        if(suits[i] == 5)
+          break;
+    if(i == 4)
+        return 0;
+    for(i=1;i<=13; i++)
+        if(_rank[i] == 1)
+          break;
+    for(j = i+1; j<=i+4; j++)
+        if(_rank[j] == 0)
+          break;
+    if(j == i+5)
+        return 1;
+    return 0;
+}
+int check_four_of_a_kind(int *suits, int *_rank)
+{
+    int i;
+    for(i=1; i<=13; i++)
+        if(_rank[i] == 4)
+          break;
+    if(i <= 13)
+        return 1;
+    return 0;
+}
+int check_full_house(int *suits, int *_rank)
+{
+    int i;
+    for(i=1; i<=13; i++)
+        if(_rank[i] == 3)
+          break;
+    if(i == 14)
+        return 0;
+    for(i=1; i<=13; i++)
+        if(_rank[i] == 2)
+          break;
+    if(i == 14)
+        return 0;
+    return 1;
+}
+int check_flush(int *suits, int *_rank)
+{
+    int i=0;
+    for(i=0 ;i<4; i++)
+        if(suits[i] == 5)
+        break;
+    if(i == 4)
+        return 0;
+    return 1;
+}
+int check_straight(int *suits, int *_rank)
+{
+    int i,j;
+    for(i=1;i<=13; i++)
+        if(_rank[i] == 1)
+          break;
+    for(j = i+1; j<=i+4; j++)
+        if(_rank[j] == 0)
+          break;
+    if(j == i+5)
+        return 1;
+    return 0;
+}
+int check_three_of_a_kind(int *suits, int *_rank)
+{
+    int i;
+    for(i=1; i<=13; i++)
+        if(_rank[i] == 3)
+          break;
+    if(i <= 13)
+        return 1;
+    return 0;
+}
+int check_two_pairs(int *suits, int *_rank)
+{
+    int i,j;
+    for(i=1; i<=13; i++)
+        if(_rank[i]==2)
+        break;
+    for(j = i+1; j<=13; j++)
+        if(_rank[j] == 2)
+        break;
+    if(j <= 13)
+        return 1;
+    return 0;
+
+}
+int check_pair(int *suits, int *_rank)
+{
+    int i;
+    for(i=1; i<=13; i++)
+        if(_rank[i]==2)
+        break;
+    if(i <= 13)
+        return 1;
+    return 0;
+}
+int main()
+{
+    int t;
+    char cards[5][3];
+    scanf("%d",&t);
+    while(t--)
+    {
+        getchar();
+        for(int i=0; i<5; i++)
+            scanf("%s",cards[i]);
+//        for(int i=0 ;i<5; i++)
+//            printf("%s ",cards[i]);
+//        printf("
+");
+        int suits[4] = {0}, _rank[14] = {0};
+        for(int i=0 ;i<5; i++)
+        {
+            switch(cards[i][1])
+            {
+            case 'S':
+                suits[0]++;
+                break;
+            case 'H':
+                suits[1]++;
+                break;
+            case 'D':
+                suits[2]++;
+                break;
+            case 'C':
+                suits[3]++;
+                break;
+            }
+
+            switch(cards[i][0])
+            {
+            case 'A':
+                _rank[1]++;
+                break;
+            case '2':
+                _rank[2]++;
+                break;
+            case '3':
+                _rank[3]++;
+                break;
+            case '4':
+                _rank[4]++;
+                break;
+            case '5':
+                _rank[5]++;
+                break;
+            case '6':
+                _rank[6]++;
+                break;
+            case '7':
+                _rank[7]++;
+                break;
+            case '8':
+                _rank[8]++;
+                break;
+            case '9':
+                _rank[9]++;
+                break;
+            case 'T':
+                _rank[10]++;
+                break;
+            case 'J':
+                _rank[11]++;
+                break;
+            case 'Q':
+                _rank[12]++;
+                break;
+            case 'K':
+                _rank[13]++;
+                break;
+            }
+        }
+//        printf("suits:
+");
+//        for(int i=0 ;i<4; i++)
+//            printf("%d ",suits[i]);
+//        printf("
+rank:
+");
+//        for(int i=1; i<=13;i++)
+//            printf("%d ",_rank[i]);
+//        printf("
+");
+        int chk = check_royal_flush(suits,_rank);
+        if(chk == 1)
+        {
+            printf("royal flush
+");
+            continue;
+        }
+        chk = check_straight_flush(suits,_rank);
+        if(chk == 1)
+        {
+            printf("straight flush
+");
+            continue;
+        }
+        chk = check_four_of_a_kind(suits,_rank);
+        if(chk == 1)
+        {
+            printf("four of a kind
+");
+            continue;
+        }
+        chk = check_full_house(suits,_rank);
+        if(chk == 1)
+        {
+            printf("full house
+");
+            continue;
+        }
+        chk = check_flush(suits,_rank);
+        if(chk == 1)
+        {
+            printf("flush
+");
+            continue;
+        }
+        chk = check_straight(suits,_rank);
+        if(chk == 1)
+        {
+            printf("straight
+");
+            continue;
+        }
+        chk = check_three_of_a_kind(suits,_rank);
+        if(chk == 1)
+        {
+            printf("three of a kind
+");
+            continue;
+        }
+        chk = check_two_pairs(suits,_rank);
+        if(chk == 1)
+        {
+            printf("two pairs
+");
+            continue;
+        }
+        chk = check_pair(suits,_rank);
+        if(chk == 1)
+        {
+            printf("pair
+");
+            continue;
+        }
+        printf("high card
+");
+
+    }
+   return 0;
+}

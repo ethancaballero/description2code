@@ -1,0 +1,23 @@
+    #include <bits/stdc++.h>
+    using namespace std;
+     
+    int t, n, pc, nc, x, y, f;
+     
+    int main(){
+    scanf("%d",&t);
+    while(t--){
+    scanf("%d",&n);
+    pc=nc=f=0;
+    while(n--){
+    scanf("%d %d",&x,&y);
+    if(x==y) f=1;
+    else if(x-y>0) pc++;
+    else nc++;
+    }
+    if(f==1 || (pc>0 && nc>0)) printf("YES
+");
+    else printf("NO
+");
+    }
+    return 0;
+    } 

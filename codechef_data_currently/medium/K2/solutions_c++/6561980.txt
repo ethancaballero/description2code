@@ -1,0 +1,63 @@
+#include <cstdio>
+    #include <cstdlib>
+    #include <algorithm>
+     
+    using namespace std;
+     
+    typedef long long int ll;
+     
+    int main()
+    {
+    int T;
+    scanf("%d",&T);
+    while(T--)
+    {
+    ll N;
+    scanf("%lld",&N);
+    if(N <= 3)
+    {
+    printf("2
+");
+    continue;
+    }
+    ll B = N-1;
+    //check for more than 3 digits
+    for(ll i=2; i*i*i<N; i++)
+    {
+    ll m = N;
+    int n = 0, A[100];
+    while(m)
+    {
+    A[n++] = (int)(m%i);
+    m/=i;
+    }
+    int f = 1;
+    for(int p=0,q=n-1;p<q && f;p++,q--) if(A[p]!=A[q]) f=0;
+    if(f) { B = i; break;}
+    }
+    if(B == N-1)
+    {
+    //check for exactly 3 digits
+    ll lo = 2;
+    while(lo*lo*lo <= N) lo++;
+    while(lo*lo < N)
+    {
+    ll m = N;
+    int a = (int)(m%lo); m/=lo;
+    int b = (int)(m%lo); m/=lo;
+    int c = (int)m;
+    if(a == c) { B = lo; break;}
+    lo++;
+    }
+    }
+    if(B == N-1)
+    {
+    for(ll i=2;i*i<N;i++)
+    if(N%i == 0 && i+1 < N/i) B = min(B,(N/i) - 1);
+    }
+    printf("%lld
+",B);
+    }
+    return 0;
+    }
+ 

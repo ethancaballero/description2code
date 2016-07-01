@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define pb push_back
+vector<int>g[20];
+vector<int>co[20];
+int paths[200];
+
+void dfs(int sou, int des, vector<int>&visited, int cost)
+{
+    if(sou == des) {
+        paths[cost]++;
+        return;
+    }
+    visited[sou] = 1;
+    int sz = g[sou].size();
+    for(int i = 0; i < sz; i++) {
+        if(!visited[g[sou][i]]) {
+            dfs(g[sou][i], des, visited, cost + co[sou][i]);
+        }
+    }
+    visited[sou] = 0;
+    return;
+}
+
+int main() 
+{
+    int t;
+    scanf("%d", &t);
+    while(t--) {
+        //clearing step
+        for(int i = 0; i < 20; i++) g[i].clear();
+        for(int i = 0; i < 20; i++) co[i].clear();
+        memset(paths, 0, sizeof(paths));
+        
+        int n, m;
+        scanf("%d%d", &n, &m);
+        for(int i = 0; i < m; i++) {
+            int u, v, c;
+            scanf("%d%d%d", &u, &v, &c);
+            g[u].pb(v);g[v].pb(u);
+            co[u].pb(c); co[v].pb(c);
+        }
+        vector<int>visited(n + 1, 0);
+        dfs(1, n, visited, 0);
+        int ans = 0;
+        for(int i = 0; i < 200; i++) {
+            if(paths[i] != 0) {
+                ans = paths[i];
+                break;
+            }
+        }
+        (ans == 0) ? puts("0") : printf("%d
+", ans);
+    }
+    return 0;
+}

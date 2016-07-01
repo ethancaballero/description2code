@@ -1,0 +1,24 @@
+t = int(input())
+for i in range(t):
+    a,b,c=raw_input().split()
+    a = int(a)
+    b = int(b)
+    c = int(c)
+    maxV = a*100+b
+    step = 0
+    result = 0
+    temp = maxV
+    while(c<=temp and step < 10000):
+        if b < c:
+            a = a-1
+            b = b+100
+        b=b-c
+        temp = a
+        a = b
+        b = temp
+        temp = a*100+b
+        step = step + 1
+        if maxV < temp:
+            maxV = temp
+            result = step
+    print result

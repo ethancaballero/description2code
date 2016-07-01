@@ -1,0 +1,69 @@
+#include <iostream>
+#include <math.h>
+#include <memory.h>
+#include <vector>
+#include <stdio.h>
+
+using namespace std;
+
+int n,a[55][2];
+double ans,p[55];
+
+
+void back(int depth,int occ[],vector<int> vec)
+ {
+     if(depth == n+1)
+      {
+        double tmp = 1.0;  
+        for(int i=0;i<vec.size();i++)    
+         {
+             if(vec[i] == 0)
+              tmp *= p[i+1];
+             else
+              tmp *= (1-p[i+1]);
+         }
+        ans += tmp; 
+        return;
+      }
+      
+      for(int i=0;i<=1;i++)
+       {
+           int x = a[depth][i];
+           if(occ[x] == 1) continue;
+           occ[x] = 1;
+           vec.push_back(i);
+           back(depth+1,occ,vec);
+           vec.pop_back();
+           occ[x] = 0;
+       }
+      
+      
+      
+ }
+
+int main() {
+	// your code goes here
+	
+	int test;
+	cin>>test;
+	while(test--)
+	 {
+	    
+	     cin>>n;
+	     for(int i=1;i<=n;i++)
+	      {
+	          cin>>p[i]>>a[i][0]>>a[i][1];
+	          p[i] /= 100.0;
+	      }
+	      ans = 0;
+	      int occ[20];
+	      memset(occ,0,sizeof occ);
+	      vector<int> vec;
+	      if(n<=16)
+	       back(1,occ,vec);
+	      printf("%.9lf
+",ans);
+	 }
+	
+	return 0;
+}

@@ -1,0 +1,25 @@
+T = input()
+for i in xrange(T):
+	activity, origin = raw_input().split(" ")
+	activity_list = []
+	for i in xrange(int(activity)):
+		activity_list.append(raw_input())
+	total_ladoo = 0
+	for i in activity_list:
+		if "CONTEST_WON" in i:
+			rank = int(i.split(" ")[1])
+			if rank <= 20 and rank > 0:
+				total_ladoo += 300+(20-rank)
+			else:
+				total_ladoo += 300
+		elif "TOP_CONTRIBUTOR" in i:
+			total_ladoo += 300
+		elif "BUG_FOUND" in i:
+			num = int(i.split(" ")[1])
+			total_ladoo += num
+		elif "CONTEST_HOSTED" in i:
+			total_ladoo += 50
+	if origin == "INDIAN":
+		print total_ladoo/200
+	else:
+		print total_ladoo/ 400

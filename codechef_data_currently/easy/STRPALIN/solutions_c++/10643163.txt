@@ -1,0 +1,43 @@
+        #include<iostream>
+        #include<string>
+        using namespace std;
+        int main()
+        {
+           int n=0,x,y,count=0;;
+           int alength,blength;
+           string A,B;
+             cin>> n;
+               while(n--)
+                {
+                  cin>>A;
+                  cin>>B;
+                  //cout<<A<<"  "<<B;
+                  alength = A.length();
+                  blength = B.length();
+                 // cout<<A<<" "<<B;
+                  for(x=0;x<alength;x++)
+                    {
+                     for(y=0;y <blength;y++)
+                     {
+                        if(A[x]== B[y])
+                         {
+                           count++;
+                           break;
+                         } 
+                         
+                      }
+                      if(count==1)
+                       break;
+                     }
+                     // cout<<alength<<" "<<blength;
+                     if(count==1)
+                     {
+                       cout<<"Yes"<<endl;
+                     }
+                     else
+                     cout<<"No"<<endl;
+                     
+                     count=0;
+                }
+                   return 0 ;
+          }                     

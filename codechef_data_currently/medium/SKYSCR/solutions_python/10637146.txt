@@ -1,0 +1,8 @@
+t =  input()
+while(t>0):
+    l = list(map(int, raw_input().split()))
+    n = l[0]
+    m = l[1]
+    
+    print abs(n-m)
+    t-=1

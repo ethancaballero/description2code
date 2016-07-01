@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+#define LENGTH(x1, y1, x2, y2) (sqrt(((x1 - x2)*(x1 - x2)) + ((y1 - y2)*(y1 - y2))))
+#define AREA(s, a, b, c) (sqrt(s * (s - a) * (s - b) * (s - c)))
+
+using namespace std;
+
+vector< pair<double, int> > array;
+
+int main() {
+    int n;
+    double x1, y1, x2, y2, x3, y3;
+    cin >> n;
+    for(int i = 0; i < n; i ++) {
+        cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+        double a = LENGTH(x1, y1, x2, y2);
+        double b = LENGTH(x2, y2, x3, y3);
+        double c = LENGTH(x3, y3, x1, y1);
+
+        double s = (a + b + c) / 2;
+
+        double area = AREA(s, a, b, c);
+
+        array.push_back(make_pair(area, i + 1));
+    }
+
+    double min = array[0].first;
+    double max = array[0].first;
+    int min_index = 1;
+    int max_index = 1;
+    for(int i = 1; i < n; i ++) {
+        if(array[i].first <= min) {
+            min = array[i].first;
+            min_index = i + 1;
+        }
+        if(array[i].first >= max) {
+            max = array[i].first;
+            max_index = i + 1;
+        }
+    }
+    cout << min_index << " " << max_index;
+
+    return 0;
+}

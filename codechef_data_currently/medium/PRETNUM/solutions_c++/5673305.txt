@@ -1,0 +1,110 @@
+#include<iostream>
+#include<vector>
+#include<string.h>
+#include<stdio.h>
+#include<climits>
+#include<map>
+#include<math.h>
+#include<set>
+#include<algorithm>
+#define LL long long int
+#define P(N) printf("%d
+",N);
+#define S(N) scanf("%d",&N);
+#define SL(N) scanf("%lld",&N);
+#define pb push_back
+#define mp make_pair
+#define pnl printf("
+");
+#define FOR(i,a,b) for (i=a;i<=b;i++)
+#define mem(a,val) memset(a,val,sizeof(a))
+using namespace std;
+int gcd(int a, int b){ int temp; while(b>0)	{ temp= b; b=a%b; a=temp;}	return a;}
+const int lim= 1000100;
+bool isprime[1000102];
+vector<int>primes;
+void sieve()
+{
+    int i,j;
+    int slim= sqrt(lim);
+    for(i=2;i<=slim;i++)
+    {
+        if(!isprime[i])//i is prime
+        {
+            for(j=i*i;j<=lim;j+=i)
+                isprime[j]=true;
+        }
+    }
+    for(i=2;i<=lim;i++){ if(!isprime[i]) {primes.pb(i); }}
+    return;
+}
+vector<LL>vec;
+int seg_sieve(LL L, LL R)
+{
+    int siz= primes.size();
+    int i,j;
+    LL st;
+    memset(isprime,true,sizeof(isprime));
+    int cnt=0;
+    for(i=0;i<siz;i++)
+    {
+        if(L%primes[i]==0)st=L;
+        else st=L-L%primes[i]+primes[i];
+        if(st==primes[i])st=2*primes[i];
+        while(st<=R)
+        {
+          //  cout<<st<<" ";
+            isprime[st-L]=false;
+            st+=primes[i];
+        }
+        if(primes[i]>R)break;
+      //  pnl
+    }
+    for(LL i=L;i<=R;i++)
+        if(isprime[i-L]){
+            cnt++;
+           // cout<<i<<" ";
+        }
+    return cnt;
+}
+void precompute()
+{
+    int siz= primes.size();
+    LL num,x; int y,j,len;
+    for(int i=0;i<siz;i++)
+    {
+        x= primes[i];
+        for(j=1;;j++)
+        {
+            y=primes[j];y--;
+            len= y*log10(x);
+            if(len>13)break;
+            num= pow(x,y);
+            vec.pb(num);
+        }
+    }
+    sort(vec.begin(),vec.end());
+   // for(int i=0;i<100;i++)cout<<vec[i]<<" ";
+    return;
+}
+int main()
+{
+       #ifndef ONLINE_JUDGE
+            //freopen("C:\Users\hp pc\Desktop\input.txt", "r", stdin);
+      #endif
+      int i,j,t,ans;
+      S(t);
+      LL N,M;
+      sieve();
+      precompute();
+      while(t--)
+      {
+            SL(N) SL(M)
+            if(N==1)N++;
+            ans= upper_bound(vec.begin(),vec.end(),M)-lower_bound(vec.begin(),vec.end(),N);
+            //P(ans)
+            ans+=seg_sieve(N,M);
+            P(ans)
+      }
+return 0;
+}

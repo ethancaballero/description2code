@@ -1,0 +1,24 @@
+import operator
+import collections
+
+n, m = [int(u) for u in raw_input().split()]
+country = {}
+vote = {}
+cv = {}
+for i in range(n):
+	ch, cn = raw_input().split()
+	country[ch] = cn
+	vote[ch] = 0
+	cv[cn] = 0
+for i in range(m):
+	ch = raw_input()
+	vote[ch] += 1
+	cv[country[ch]] += 1
+
+l = sorted(sorted(vote, reverse=False), key=vote.get, reverse=True)
+l1 = sorted(sorted(cv, reverse=False), key=cv.get, reverse=True)
+
+print l1[0]
+print l[0]
+
+

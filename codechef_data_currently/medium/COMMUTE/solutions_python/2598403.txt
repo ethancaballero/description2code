@@ -1,0 +1,25 @@
+import sys
+n = int(sys.stdin.readline())
+
+for i in range(0,n):
+    ti = 0
+    m = int(sys.stdin.readline())
+    li = sys.stdin.readline().split()
+    x = int(li[0])
+    t = int(li[1])
+    f = int(li[2])
+    ti = x + t
+    for j in range(1,m):
+        lis = sys.stdin.readline().split()
+        x1 = int(lis[0])
+        t1 = int(lis[1])
+        f1 = int(lis[2])
+        if x1 >= ti:
+            ti += (x1-ti)
+        else:
+            mod = (ti-x1) % f1
+            if mod != 0:
+                ti += f1 - mod
+        ti += t1
+            
+    print ti

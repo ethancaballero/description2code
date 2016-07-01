@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool not_prime[200005];
+
+void sieve ();
+bool is_prime_sieve(int a);
+
+
+int main ()
+{
+
+    sieve ();
+    int test,n;
+    cin>>test;
+
+    while(test--)
+    {
+        cin>>n;
+        int y = is_prime_sieve(n);
+        if(y==true)
+        {
+            cout<<"yes"<<endl;
+        }
+        else
+            cout<<"no"<<endl;
+    }
+    return 0;
+}
+
+void sieve ()
+{
+    int i,j;
+    not_prime[0] = 1;
+    not_prime[1] = 1;
+    for (i=4;i<200002;i+=2)
+    {
+        not_prime[i] = 1;
+    }
+    for (i=3;i<=sqrt(200002);i+=2)
+    {
+        for (j=i*i;j<200002;j+=(i+i))
+        {
+            not_prime[j] = 1;
+        }
+    }
+    return;
+}
+bool is_prime_sieve(int a)
+{
+    if (not_prime[a]==1) return false;
+    else return true;
+}
+
+
+

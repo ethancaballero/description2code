@@ -1,0 +1,20 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<cmath>
+using namespace std;
+
+int main()
+
+{
+    long long int n;
+    scanf("%lld",&n);
+    if(n%6==0 || n%6==1 || n%6==3)
+        printf("yes
+");
+    else
+        printf("no
+");
+    return 0;
+}

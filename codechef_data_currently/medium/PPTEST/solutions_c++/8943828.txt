@@ -1,0 +1,46 @@
+    #include<iostream>
+    #include<algorithm>
+    using namespace std;
+    int main()
+    {
+        int cas;
+        cin>>cas;
+        
+        while(cas>0)
+        {
+            
+            int n,w;
+            cin>>n>>w;
+            
+            int a[105][105];
+            int c[105],p[105],t[105];
+            
+            for(int i=1;i<=n;i++)
+            {
+                cin>>c[i]>>p[i]>>t[i];
+            }    
+
+            for(int j=0;j<=w;j++)
+                a[0][j]=0;
+        
+            for(int i=0;i<=n;i++)
+                a[i][0]=0;
+        
+            for(int i=1;i<=n;i++)
+            {
+                for(int j=1;j<=w;j++)
+                {
+                    if(j>=t[i])
+                        a[i][j]=max(a[i-1][j-t[i]]+c[i]*p[i],a[i-1][j]);
+                    else
+                        a[i][j]=a[i-1][j];
+
+                } 
+            }  
+            
+            cout<<a[n][w]<<endl;
+            cas--;
+
+
+        } 
+    }

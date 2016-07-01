@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,time=0,xi,li,fi;
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+            cin>>xi>>li>>fi;
+            if(xi>=time)
+                {time=time+(xi-time);}
+            else
+                {
+                if((time-xi)%fi!=0)
+                time=time+fi-((time-xi)%fi);
+                }
+            time=time+li;
+        }
+        cout<<time<<"
+";
+    }
+    return 0;
+}

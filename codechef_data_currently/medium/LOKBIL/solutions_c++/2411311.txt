@@ -1,0 +1,65 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <sstream>
+#include <cstdio>
+#include <cstring>
+#include <climits>
+#include <cassert>
+ 
+using namespace std;
+ 
+char buf[1<<20];
+int a[1024][1024];
+ 
+int main() 
+{
+    int T;
+    cin.getline(buf,1<<20);
+    sscanf(buf, "%d", &T);
+    while(T--) 
+    {
+        int N;
+        cin.getline(buf,1<<20);
+        sscanf(buf, "%d", &N);
+        for(int i = 0; i < N; i++) for(int j = 0; j < N; j++) a[i][j] = 1024;
+        
+        for(int i = 0; i < N; i++) 
+        {
+            cin.getline(buf,1<<20);
+            istringstream in(buf);
+            int j;
+            while(in >> j) 
+            {
+                if(j != i) a[i][j-1] = a[j-1][i] = 1;
+            }
+        }
+        
+        for(int k = 0; k < N; k++)
+            for(int i = 0; i < N; i++)
+                for(int j = 0; j < N; j++) if(j != i)
+                    a[i][j] = min(a[i][j], a[i][k]+a[k][j]);
+        
+        double mi = 1024;
+        int fr = -1;
+        for(int i = 0; i < N; i++) 
+        {
+            double su = 0;
+            for(int j = 0; j < N; j++) 
+              if(j != i) 
+              {
+                assert(a[i][j] < 1024);
+                su += a[i][j];
+              }
+            su /= N;
+            if(su < mi-1e-9) 
+            {
+                mi = su;
+                fr = i;
+            }
+        }
+        printf("%d %.6lf
+",fr+1,mi);
+    }
+    return 0;
+}

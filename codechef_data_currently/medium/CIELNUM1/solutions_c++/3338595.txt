@@ -1,0 +1,56 @@
+/**
+http://www.codechef.com/problems/CIELNUM1
+*/
+/**
+
+*/
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <set>
+#include <map>
+#include <stack>
+
+using namespace std;
+#define N 1000005
+#define ll long long
+
+ll res[50000],q[N];
+/**
+q3,q5,q8 contains the information regarding the no of 3's , 5's and 8's present in the
+    number contained in q[] array.And the index of corresponding values in q[] and
+    q3[],q5[],q8[] array are maintained by q_p (q pointer) and q_size( size till the point
+    elements are inserted into the queue.)
+*/
+int q3[N],q5[N],q8[N],q_p,q_size;
+
+int main()
+{
+    int i,j,k,n;
+    q_p=0;q_size=0;
+
+    q3[q_p+q_size]=1;q5[q_p+q_size]=0;q8[q_p+q_size]=0;q[q_p+q_size++]=3;
+    q3[q_p+q_size]=0;q5[q_p+q_size]=1;q8[q_p+q_size]=0;q[q_p+q_size++]=5;
+    q3[q_p+q_size]=0;q5[q_p+q_size]=0;q8[q_p+q_size]=1;q[q_p+q_size++]=8;
+
+    n=0;
+    while(n<50000)
+    {
+      i=q3[q_p];j=q5[q_p];k=q8[q_p];
+      long long num=q[q_p++];q_size--;
+      if(i<=j&&j<=k)
+      {
+          res[n++]=num;
+       }
+        q3[q_p+q_size]=i+1;q5[q_p+q_size]=j;q8[q_p+q_size]=k;q[q_p+q_size++]=10*num+3;
+        q3[q_p+q_size]=i;q5[q_p+q_size]=j+1;q8[q_p+q_size]=k;q[q_p+q_size++]=10*num+5;
+        q3[q_p+q_size]=i;q5[q_p+q_size]=j;q8[q_p+q_size]=k+1;q[q_p+q_size++]=10*num+8;
+    }
+    for(i=0;i<n;i++)
+    {
+        printf("%lld
+",res[i]);
+    }
+
+    return 0;
+}

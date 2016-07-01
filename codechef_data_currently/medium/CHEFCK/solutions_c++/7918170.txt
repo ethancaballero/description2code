@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+#define gc getchar_unlocked
+#define MOD 1000000007
+long long read_int()
+{
+    char c=gc();
+    while(c<'0' || c>'9')
+        c=gc();
+    long long r=0;
+    while(c>='0' && c<='9')
+    {
+        r=(r<<3)+(r<<1)+c-48;
+        c=gc();
+    }
+    return r;
+}
+int sparse[24][10000000];
+int main()
+{
+    long long n=read_int();
+    long long k=read_int();
+    long long q=read_int();
+    long long a,b,c,d,e,f,r,tmp,s,t,m,l1,la,lc,lm,d1,da,dc,dm;
+    a=read_int();b=read_int();c=read_int();d=read_int();
+    e=read_int();f=read_int();r=read_int();s=read_int();
+    t=read_int();m=read_int();tmp=read_int();
+    long long temp=t,x,i,j;
+    //int sparse[24][n];
+    long long tmp2;
+    sparse[0][0]=tmp;
+    for(x=1;x<n;x++)
+    {
+        temp=temp*t;
+        if(temp>=s)
+            temp%=s;
+        if(temp<=r)
+        {
+            tmp2=a*tmp*tmp+b*tmp+c;
+            if(tmp2>=m)
+            	tmp2%=m;
+//            A[x]=a*A[x-1]*A[x-1]+b*A[x-1]+c;
+//            A[x]%=m;
+            sparse[0][x]=tmp2;
+        }
+        else
+        {
+            tmp2=d*tmp*tmp+e*tmp+f;
+            if(tmp2>=m)
+            	tmp2%=m;
+//            A[x]=d*A[x-1]*A[x-1]+e*A[x-1]+f;
+//            A[x]%=m;
+            sparse[0][x]=tmp2;
+        }
+        tmp=tmp2;
+    }
+    int k1=log2l(2*k);
+    if(k1>23)
+        k1=23;
+    for(j=1;j<=k1;j++)
+    {
+        for(i=0;i+(1<<j)-1<n;i++)
+        {
+            if(sparse[j-1][i]<=sparse[j-1][i+(1<<(j-1))])
+                sparse[j][i]=sparse[j-1][i];
+            else
+                sparse[j][i]=sparse[j-1][i+(1<<(j-1))];
+        }
+    }
+    l1=read_int();la=read_int();lc=read_int();lm=read_int();
+    d1=read_int();da=read_int();dc=read_int();dm=read_int();
+    long long R,sum=0,mul=1,mn,m1;
+    for(i=1;i<=q;i++)
+    {
+        l1=la*l1+lc;
+        if(l1>=lm)
+        	l1%=lm;
+        d1=da*d1+dc;
+        if(d1>=dm)
+        	d1%=dm;
+        R=l1+k+d1>n?n:l1+k+d1;
+        //R=min(l1+k+d1,n);
+        R--;
+        m1=31-__builtin_clz(R-l1+1);
+        mn=sparse[m1][l1]<sparse[m1][R-(1<<m1)+1]?sparse[m1][l1]:sparse[m1][R-(1<<m1)+1];
+        //long long mn=min(sparse[m][l1],sparse[m][R-(1<<m)+1]);
+        sum+=mn;
+        mul*=mn;
+        if(mul>=MOD)
+        	mul%=MOD;
+    }
+    printf("%lld %lld
+",sum,mul);
+    return 0;
+}

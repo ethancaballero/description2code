@@ -1,0 +1,30 @@
+  Mike is fond of collecting stamps. He has a lot of rare and unusual ones in his collection. Unfortunately, a few days ago he was fired from his well-paid job.
+But he doesn't complain about that, he acts! That's why Mike picked up N stamps from his collection and is going to sell them. He has already placed an announcement on the Internet and got M offers. Each offer can be described as a set of stamps, that the buyer wants to buy. Now Mike needs your help to choose a set of offers, that he should accept. 
+He can't accept offers partially. Also, as far as Mike has the only copy of each stamp, he can sell one stamp to at most one buyer.
+Of course, Mike wants to maximize the number of accepted offers. Help him!
+
+Input
+
+The first line contains two integer N and M, denoting the number of the stamps and the number of the offers.
+The next M lines contain the descriptions of the offers. The (i+1)'th line of the input contains the description of the i'th offer and corresponds to the following pattern: Ki Ai,  1 Ai,  2, ..., Ai,     Ki. Ki - is the number of the stamps, which the i'th buyer wants to buy, Ai - is the list of the stamps sorted in the ascending order.
+\u00a0
+Output
+Output should contain the only integer, denoting the maximal number of the offers, that Mike can accept.
+\u00a0
+Constraints
+1 \u2264 N \u2264 20,000
+1 \u2264 M \u2264 20
+1 \u2264 Ki
+\u00a0
+Example
+Input:
+4 3
+2 1 2
+2 2 3
+2 3 4
+
+Output:
+2
+\u00a0
+Explanation
+In the example test Mike should accept the first and the third offer.

@@ -1,0 +1,41 @@
+output = list()
+prime = list()
+val = raw_input()
+t = int(val)
+for i in range(t) :
+	nums = list()
+	counter = 0
+	string1 = raw_input()
+	nums = string1.split()
+	a1 = int(nums[0])
+	b1 = int(nums[1])
+	if a1>b1 :
+		a = a1
+		b = b1
+	else :
+		a = b1
+		b = a1	
+	c = a
+	d = b
+	lev1 = 0
+	lev2 = 0
+	while c > 0:
+		c = c/2
+		lev1 = lev1 + 1
+	while d > 0:
+		d = d/2
+		lev2 = lev2 + 1
+	diff = lev1 - lev2
+	while diff > 0 :
+		a = a/2
+		diff = diff - 1
+		counter = counter + 1
+	while True :
+		if a == b :
+			break
+		a = a/2
+		b = b/2
+		counter = counter + 2
+	output.append(counter)
+for i in range(t) :
+	print output[i]

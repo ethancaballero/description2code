@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+#define gc getchar
+typedef long long int ll;
+using namespace std;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll n,x,b,i,j,k;
+    n=read_int();
+    while(n!=0)
+    {
+        ll a[n];
+        for(i=0;i<n;i++)
+        {
+            a[i]=read_int();
+        }
+        sort(a,a+n);
+        ll natri=0;
+        for(i=n-1;i>1;i--)
+        {
+            j=0;
+            k=i-1;
+            while(j<k)
+            {
+                if(a[j]+a[k]<a[i])
+                {
+                    natri+=(k-j);
+                    j++;
+                }
+                else
+                    k--;
+            }
+        }
+        printf("%lld
+",natri);
+        n=read_int();
+    }
+    return 0;
+}

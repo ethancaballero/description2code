@@ -1,0 +1,24 @@
+def test():
+    #Movie Weekend
+    matches = input()
+    for _ in range(matches):
+        matrix = []
+        n = int(raw_input())
+        length = map(int,raw_input().split())
+        rate = map(int,raw_input().split())
+
+        position = 0
+        max_favor = length[position]*rate[position]
+        for index in range(1,n):
+            if max_favor < length[index]*rate[index]:
+                max_favor = length[index]*rate[index]
+                position = index
+            elif max_favor == length[index]*rate[index]:
+                if rate[index] > rate[position]:
+                    position = index
+  
+        print position+1
+
+   
+
+test()

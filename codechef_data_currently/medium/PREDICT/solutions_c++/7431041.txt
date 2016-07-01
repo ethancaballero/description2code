@@ -1,0 +1,103 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<cstring>
+#include<cmath>
+#include<set>
+#include<map>
+#include<string>
+#include<algorithm>
+#define all(c) c.begin(),c.end()
+using namespace std;
+int main()
+{
+    int t;
+    double ans,a,cal;
+    cin>>t;
+    while(t--)
+    {
+        cin>>a;
+        if(a>=0.5)
+        {
+            cal=(10000+(1-a)*10000*(2*a-1));
+            printf("%lf
+",cal);
+        }
+        else
+        {
+            cal=(10000+a*10000*(2*(1-a)-1));
+            printf("%lf
+",cal);
+        }
+    }
+    return 0;
+}
+/*
+#include<stdio.h>
+#include<stdlib.h>
+#include <malloc.h>
+#define GETCHAR getchar()
+int getInt()
+{
+	char ch = GETCHAR;
+	char c;
+	if(ch=='-')
+		c = GETCHAR;
+	else
+		c = ch;
+
+
+	int t = 0;
+	while(c<='9' && c>='0')
+	{
+		t=t*10+c-'0';
+		c = GETCHAR;
+	}
+
+	if(ch=='-')
+		return (-t);
+	else return t;
+}
+double getDouble()
+{
+	char c;
+	c = GETCHAR;
+	int t = 0;
+	while(c<='9' && c>='0')
+	{
+		t=t*10+c-'0';
+		c = GETCHAR;
+	}
+	int d=0,i=1;
+	if(c=='.')
+	{
+		c = GETCHAR;
+		while(c<='9' && c>='0')
+		{
+			i*=10;
+			d=d*10+c-'0';
+			c = GETCHAR;
+
+		}
+	}
+
+	 return (double)t + ((double)d)/i;
+}
+int main()
+{
+    int t;
+    double max,pa;
+    t=getInt();
+    while(t)
+    {
+        pa=getDouble();
+        if(pa<0.5)
+			max=10000*(pa - 2*pa*pa + (double)1);
+		else
+			max=10000*pa*((double)3 - 2*pa);
+        printf("%lf
+",max);
+        t--;
+    }
+    return 0 ;
+}*/

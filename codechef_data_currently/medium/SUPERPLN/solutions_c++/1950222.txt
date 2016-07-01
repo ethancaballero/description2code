@@ -1,0 +1,96 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct flight
+{
+	int dep;
+	int arr;
+	int city;
+	bool taken;
+
+	flight(int d, int a, int c) {
+		dep = d;
+		arr = a;
+		city = c;
+		taken = false;
+	}
+};
+
+typedef vector<flight> schedule;
+
+schedule s[10000];
+
+bool flight_cmp(flight const& f1, flight const& f2) {
+	return f1.dep < f2.dep;
+}
+
+bool flight_val_cmp(flight const& f1, int val) {
+	return f1.dep < val;
+}
+
+int find_flight(int from_city, int start_at, int to_city, int no_later_than) {
+	int city = from_city;
+	int val = start_at;
+	int num_hops = 0;
+	while (city != to_city || val > no_later_than) {
+		vector<flight>::iterator low = lower_bound(s[city].begin(), s[city].end(), val, flight_val_cmp);
+		if (low == s[city].end())
+			return -1;
+		if (low->taken)
+			return -1;
+		low->taken = true;
+		city = low->city;
+		val = low->arr;
+		num_hops++;
+	}
+	return num_hops;
+}
+
+int main(int argc, char const *argv[])
+{
+	int t, n, c1, t1, c2, t2;
+	cin >> t;
+	for (int i = 0; i < t; i++) {
+		for (int j = 0; j < 10000; j++) {
+			s[j].clear();
+		}
+		cin >> n;
+		int c_max = 0;
+		for (int j = 0; j < n; j++) {
+			cin >> c1 >> t1 >> c2 >> t2;
+			c1--;
+			c2--;
+			s[c1].push_back(flight(t1, t2, c2));
+			if (c_max < c1)
+				c_max = c1;
+			if (c_max < c2)
+				c_max = c2;
+		}
+		cin >> c1 >> t1 >> c2 >> t2;
+		c1--;
+		c2--;
+
+		if (c_max < c1)
+			c_max = c1;
+		if (c_max < c2)
+			c_max = c2;
+		int num_c = c_max + 1;
+
+		for (int j = 0; j < num_c; j++) {
+			if (s[j].size() > 0) {
+				sort(s[j].begin(), s[j].end(), flight_cmp);
+			}
+		}
+
+		int num_hops = find_flight(c1, t1, c2, t2);
+		if (num_hops >= 0)
+			cout << "Yes " << num_hops << endl;
+		else
+			cout << "No" << endl;
+	}
+
+	return 0;
+}

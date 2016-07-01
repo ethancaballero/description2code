@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int cnt[10005][26];
+
+int cal(int i, int j) {
+    int res = 0;
+    for(int in=0;in<26;++in) res = max(res,cnt[j][in]-cnt[i][in]);
+    if(res==0) return -1000000;
+    return res;
+}
+
+int main() {
+    int t;
+    string s;
+    cin >> t;
+    while(t--) {
+        cin >> s;
+        int len = s.length();
+        s='#'+s;
+        vector<int> pos;
+        for(int i=0;i<26;++i) cnt[0][i] = 0;
+        for(int i=1;i<=len;++i) {
+            for(int j=0;j<26;++j) cnt[i][j] = cnt[i-1][j];
+            if(s[i]!='#') ++cnt[i][s[i]-'a'];
+            else pos.push_back(i);
+        }
+        int l=pos.size()-2;
+        int res = 0;
+        for(int i=0;i<l;++i) {
+            res = max(res,3+cal(0,pos[i])+cal(pos[i],pos[i+1])+cal(pos[i+1],pos[i+2])+cal(pos[i+2],len));
+        }
+        cout << res << endl;
+    }
+    return 0;
+}

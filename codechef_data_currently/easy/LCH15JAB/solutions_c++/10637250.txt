@@ -1,0 +1,38 @@
+#include<algorithm>
+#include<string.h>
+#include<stdio.h>
+#include <iostream>
+using namespace std;
+ 
+ 
+int main() {
+string ch;
+long long int i,j,k=1,f=0,t,l;
+cin>>t;
+while(t--)
+{
+cin>>ch;
+l=ch.length();
+ 
+
+for(i=0;i<l;i++)
+{for(j=0;j<l;j++)
+{
+if(ch[i]==ch[j])
+{k++;}
+ 
+}
+k--;
+if(l-k==k)
+{f=1;
+}
+k=1;}
+if(f==1)
+cout<<"YES"<<endl;
+else
+cout<<"NO"<<endl;
+ 
+f=0;
+k=1;
+}	return 0;
+} 

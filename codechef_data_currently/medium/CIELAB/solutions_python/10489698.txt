@@ -1,0 +1,8 @@
+m,n = map(int,raw_input().split())
+sol=m-n
+temp=sol%10
+if temp<9:
+    sol=sol+1
+else:
+    sol=sol-1
+print sol

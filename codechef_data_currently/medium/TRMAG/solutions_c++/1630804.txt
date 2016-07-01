@@ -1,0 +1,41 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+int main() 
+{
+    int t,nop,r,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&nop);
+        int sum=((nop+1)*nop)/2;
+        int b;
+        scanf("%d",&b);
+        for(int i=1;i<=b;i++)
+            {
+                int temp;
+                scanf("%d",&temp);
+                sum-=temp;
+            }
+        scanf("%d",&r);
+        n=(nop+1)/2;
+        if(n==0)
+            printf("0.0000
+");
+        else
+        {
+        double ans=((n-r)/(double)n)*sum;
+        if(ans<0)
+            printf("%0.0000
+");
+        else
+        {
+        cout.precision(4);
+        printf("%0.4f
+",ans);
+        }
+        }
+    }
+    return 0;
+}

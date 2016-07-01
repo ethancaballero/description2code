@@ -1,0 +1,30 @@
+def test2():
+    matches = input()
+    result = []
+    for _ in range(matches):
+        get_cops = raw_input().split()
+        range_search = int(get_cops[1])*int(get_cops[2])
+        get_location = raw_input().split()
+        cop_location = []
+        for index in range(int(get_cops[0])):
+            cop_location.append(int(get_location[index]))
+
+        houses = set(range(1,101))
+        total  = set([])
+        for cop in cop_location:
+            begin = 0
+            end = 101
+            if cop - range_search >= 0:
+                begin = cop - range_search 
+
+            if cop + range_search < 100:
+                end = cop + range_search
+            tmp = set(range(begin,end+1))            
+            total = total.union(tmp)
+        result.append(len(list(houses-total)))
+
+    for e in result:
+        print e
+
+test2()
+           

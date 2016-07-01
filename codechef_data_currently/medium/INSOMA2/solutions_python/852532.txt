@@ -1,0 +1,100 @@
+# codechef easy - exploding search - insoma2.py
+
+n = int(raw_input())
+##n = 5
+
+empty = [' ']*(n+2)
+grid = [ empty ]
+
+
+inp = [
+    "B X A X X",
+"X A X X X",
+"X B B X X",
+"X A X A X",
+"X X B X X"]
+
+for nn in xrange(n):
+    line = [' '] + raw_input().split() + [' ']
+    ##line = [' '] + inp[nn].split() + [' ']
+    
+    grid.append( line )
+grid.append(empty)
+
+##for line in grid:
+##    print line
+
+# using buffer around grid to save work with edge effects
+
+target = raw_input().strip()
+##target = "ABA"
+
+"""
+initialize:
+
+k=1
+set score[x][y] =1 if grid[x][y] = target[0], 0 otherwise
+
+This will always represent the number of strings of length k that end
+   at x,y
+
+for each iteration
+   k+=1
+   for each x,y
+       score1[x][y] = 0
+       for each adjacent square to x,y
+           score1[x][y] += score[x][y]
+
+
+"""
+
+# create score arrays filled with zero
+score = []
+score1 = []
+for nn in xrange(n+2):
+    score.append( [0]*(n+2) )
+    score1.append( [0]*(n+2) )
+
+# initialize score
+k=0
+for x in xrange(1,n+1):
+    for y in xrange(1,n+1):
+        if target[k]==grid[x][y]:
+            score[x][y] = 1
+
+##print
+##for line in score:
+##    print line
+##print
+
+
+# at start of each iteration k, score[] is valid for k-length strings,
+#     score1 will be k+1 level score being constructed
+
+# note : they only want diagonals, not verts/horiz
+
+for k in xrange(1,len(target)):
+    for x in xrange(1,n+1):
+        for y in xrange(1,n+1):
+            score1[x][y] = 0
+            if target[k]==grid[x][y]:
+                for x1 in xrange(x-1,x+2,2):
+                    for y1 in xrange(y-1,y+2,2):
+                        score1[x][y] += score[x1][y1]
+    # now score1 is complete, make it the new score
+    t= score
+    score = score1
+    score1 = t            # don't need these values, but need structure
+##    print
+##    for line in score:
+##        print line
+##    print    
+
+print sum(map(sum, score))
+                        
+
+
+
+
+
+    

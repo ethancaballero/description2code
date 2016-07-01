@@ -1,0 +1,9 @@
+t=int(raw_input())
+for i in range(0,t):
+	lis=list(map(int,raw_input().split()))
+	if lis[0]>lis[1]:
+		print '>'
+	elif lis[0]<lis[1]:
+		print '<'
+	else:
+		print '='

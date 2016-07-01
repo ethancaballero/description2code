@@ -1,0 +1,18 @@
+k,n=map(int,raw_input().split())
+l=[]
+for asd in range (k):
+	s=raw_input()
+	l.append(s)
+for asd in range (n):
+	s=raw_input()
+	flag=0
+	if (len(s)>=47):
+		flag=1
+	for x in (l):
+		if (s.find(x)>=0):
+			flag=1
+			break
+	if (flag==0):
+		print "Bad"
+	else:
+		print "Good"

@@ -1,0 +1,21 @@
+def max_area(lst):
+	lst = sorted(lst)
+	A = []
+	i = 0
+	while i < len(lst):
+		if i + 1 < len(lst) and lst[i] == lst[i+1]:
+			A.append(lst[i])
+			i = i + 2
+		else:
+			i = i + 1
+
+	if len(A) >= 2:
+		return A[-1]*A[-2]	
+	else:
+		return -1	
+
+t = int(raw_input())
+for i in range(t):
+	n = int(raw_input())
+	A = map(int, raw_input().split())
+	print max_area(A)

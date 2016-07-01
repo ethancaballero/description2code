@@ -1,0 +1,74 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main(){
+	int k;
+	cin>>k;
+	for(int p=0;p<k;p++){
+	int a[2][100001];
+	memset(a[0],0,sizeof(a[0]));
+	memset(a[1],0,sizeof(a[1]));
+	char s0[100001],s1[100001];
+	cin>>s0;
+	cin>>s1;
+	int x=0;
+	int ans=1;
+	for(;;){
+		
+		if(s0[x]!='#'&&s0[x]!='.')
+			break;
+		if(s0[x]=='#'){
+		a[0][x]=1;
+		}else if(s0[x]=='.'){
+		a[0][x]=0;
+		}
+		if(s1[x]=='#'){
+		a[1][x]=1;
+		}else if(s1[x]=='.'){
+		a[1][x]=0;
+		}
+		if(a[0][x]==1&&a[1][x]==1){
+		ans=0;
+		break;
+		}
+		x++;
+
+	}
+	if(ans){
+		int t[2]={-1,-1},line;
+		for(int i=0;i<2;i++){
+			line=i;
+			if(a[i][0]!=1){
+				t[i]=0;
+			for(int j=0;j<x-1;j++){
+				if(a[line][j+1]==1){
+				if(line==0)
+					line=1;
+				else
+					line=0;
+				//j++;
+				t[i]++;
+				}
+			}
+			}
+		}
+		cout<<"Yes
+";
+		if(t[0]<t[1]&&t[0]!=-1){
+		cout<<t[0]<<"
+";
+		}
+		else  if(t[1]!=-1)
+		cout<<t[1]<<"
+";
+		else
+		cout<<t[0]<<"
+";
+	
+	}else
+	cout<<"No
+";
+	}
+
+	return 0;
+}

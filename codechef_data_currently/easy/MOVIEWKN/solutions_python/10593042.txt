@@ -1,0 +1,26 @@
+
+t = int(raw_input())
+
+
+
+for i in range(t):
+    n=int(raw_input())
+    l=map(int,raw_input().split())
+    r=map(int,raw_input().split())
+    choice=0;
+    index=0;   
+        
+    
+
+    for m in range(n):
+        if l[m]*r[m]>choice:
+            choice=l[m]*r[m]
+            index=m;
+        if l[m]*r[m]==choice:
+            if(r[m]>r[index]):
+                index=m
+    print index+1
+            
+
+
+    

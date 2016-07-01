@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    int T;
+    cin >>T;
+    while(T--)
+    {
+        string str;
+        cin >> str;
+        if (str.length() == 0)
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            char ch = str[0];
+            int count =2;
+            for (int i=1;i<str.length(); i++)
+            {
+                int diff= str[i]-ch;
+				if (ch > str[i])
+                {
+                    diff = 26- (ch-str[i]);
+                }
+                count = count + diff + 1;
+                ch = str[i];
+            }
+            if (count <= 11*str.length())
+                cout << "YES" << endl;
+            else cout << "NO" << endl;
+        }
+    }
+}

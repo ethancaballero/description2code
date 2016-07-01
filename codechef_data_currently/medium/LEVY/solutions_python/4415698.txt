@@ -1,0 +1,190 @@
+import math
+
+#sgn(x) defines the sign function.
+sgn = lambda x: -1 if x < 0 else 0 if x == 0 else 1
+
+
+#gcd1(u, v) returns gcd(u, v) using the Euclidean Algorithm.
+def gcd1(u, v): 
+	while u:
+		u, v = v % u, u
+	return abs(v)
+
+#gcd2(u, v) returns gcd(u, v) using the Binary GCD Algorithm.
+def gcd2(u, v): 
+	k = 0
+	while u:
+		if u % 2 == 0:
+			if v % 2 == 0:
+				u, v = u/2, v/2
+				k = k + 1
+			else:
+				u = u/2
+		else:
+			if v % 2 == 0:
+				v = v/2
+			else:
+				u, v = v % u, u
+	return (2**k)*abs(v)
+
+#extendedgcd(u, v) returns (x, y, gcd(u, v)) such that u*x + v*y = gcd(u, v). It uses the Extended Euclidean Algorithm.	
+def extendedgcd(u, v): 
+	x, y = 0, 1
+	lastx, lasty = 1, 0
+	su = sgn(u)
+	sv = sgn(v)
+	u = abs(u)
+	v = abs(v)
+	while v:
+		quotient = u/v
+		(u, v) = (v, u % v)
+		(x, lastx) = (lastx - quotient*x, x)
+		(y, lasty) = (lasty - quotient*y, y)
+	lastx, lasty = lastx*su, lasty*sv
+	return lastx, lasty, u
+
+#inv(x, m) returns u such that x*u = 1 (mod m). If x and m are not coprime, it raises an error.
+def inv(x, m):
+	if gcd2(x, m) > 1:
+		raise Exception("The given numbers are not coprime.")
+	else:
+		u, v = bezout(x, m)
+		if u < 0:
+			return m + u
+		else:
+			return u
+
+#sieve(n) returns the list of all (positive) primes less than n in ascending order. Note: If n is a prime, the list will not contain n.
+def sieve(n):
+	if n < 2:
+		return []
+	elif n < 4:
+		return [2]
+	n, correction = n-n%6+6, 2-(n%6>1)
+	b = [True] * (n/3)
+	for i in xrange(1,int(n**0.5)/3+1):
+		if b[i]:
+			k = 3*i + 1 | 1
+			b[ (k**2)/3 :: 2*k] = [False]*((n/6 - (k**2)/6 - 1)/k + 1)
+			b[k*(k-2*(i & 1) + 4)/3 :: 2*k] = [False]*((n/6 - k*(k - 2*(i&1) + 4)/6 - 1)/k + 1)
+	return [2,3] + [3*i+1|1 for i in xrange(1, n/3 - correction) if b[i]]
+
+#prime(n) returns True is n is prime, else False. It uses an optimized deterministic version of Miller-Rabin primality test.
+def prime(n):
+	n = abs(n)
+	if n < 2:
+		return False
+	elif n == 3:
+		return True
+	elif n % 2 == 0:
+		return 2 == n
+	else:
+		d = n - 1
+		n1 = d
+		s = 0
+		while d % 2 == 0:
+			d = d / 2
+			s = s + 1
+		if n < 1373653:
+			l = [2, 3]
+		elif n < 9080191:
+			l = [31, 73]
+		elif n < 4759123141:
+			l = [2, 7, 61]
+		elif n < 2152302898747:
+			l = [2, 3, 5, 7, 11]
+		elif n < 3474749660383:
+			l = [2, 3, 5, 7, 11, 13]
+		elif n < 341550071728321:
+			l = [2, 3, 5, 7, 11, 13, 17]
+		else:
+			up = int(2*((math.log(n))**2)) + 1
+			l = [i for i in xrange(2, min(n-1, up))]
+		def check(y):
+			x = pow(a, d, n)
+			if x == 1:
+				return True
+			if x == n1:
+				return True
+			for r in xrange(1, s):
+				x = pow(x, 2, n)
+				if x == 1:
+					return False
+				if x == n1:
+					return True
+			return False
+		for a in l:
+			if check(a) == False:
+				return False
+		return True
+
+#pi(x) returns the number of primes less than or equal to x.
+def pi(x):
+	x = int(x+1)
+	return len(sieve(x))
+
+#fib(n) returns the nth Fibonacci number given f(0) = 0, f(1) = 1 and f(n) = f(n-1) + f(n-2) for n > 1.
+def fib(n):
+	def fib2(m):
+		if m == 0:
+			return (0, 1)
+		else:
+			a, b = fib2(m/2)
+			c = a * (2 * b - a)
+			d = b * b + a * a
+			if m % 2 == 0:
+				return (c, d)
+			else:
+				return (d, c + d)
+	a, b = fib2(n)
+	return a
+
+#polyn(s, n) returns the nth s-gonal number.
+def polyn(s, n):
+	return ((s-2)*n**2 - (s-4)*n)/2
+
+#legendre1(a, p) returns 1 if a is a quadratic residue, 0 if p divides a, else -1. If p is not a prime, it raises an exception. This implementatin uses Gauss's lemma.
+def legendre1(a, p):
+	if p == 2:
+		raise Exception("The second argument is not an odd prime.")
+	elif prime(p):
+		a = a % p
+		if a == 0:
+			return 0
+		else:
+			p2 = p/2
+			bit = True
+			s = 0
+			for k in xrange(1, p2 + 1):
+				s = (s + a) % p
+				if s > p2:
+					bit = not bit
+			if bit:
+				return 1
+			else:
+				return -1
+	else:
+		raise Exception("The second argument is not an odd prime.")
+
+#legendre2(a, p) returns 1 if a is a quadratic residue, 0 if p divides a, else -1. If p is not a prime, it raises an exception. This implementatin uses the fact that legendre2(a, p) = pow(a, (p-1)/2, p)
+def legendre2(a, p):
+	if p == 2:
+		raise Exception("The second argument is not an odd prime.")
+	elif prime(p):
+		return pow(a, (p-1)/2, p)
+	else:
+		raise Exception("The second argument is not an odd prime.")
+
+l = sieve(10000)
+
+val = [0 for _ in xrange(10001)]
+
+for p in l:
+	for q in l:
+		n = p + 2*q
+		if n < 10001:
+			val[n] = val[n] + 1
+
+for _ in xrange(int(raw_input())):
+	n = int(raw_input())
+	print val[n]

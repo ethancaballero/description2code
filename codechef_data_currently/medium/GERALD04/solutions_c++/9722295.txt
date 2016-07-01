@@ -1,0 +1,25 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int h1,h2,m1,m2,d,t1;
+		float ans2,ans1;
+		char c;
+		cin>>h1>>c>>m1;
+		cin>>h2>>c>>m2;
+		cin>>d;
+		t1=60*h1+m1-60*h2-m2;
+		if(t1>=2*d)
+		ans2=t1;
+		else
+		ans2=d+(t1*1.0/2);
+		ans1=t1+d;
+		printf("%.1f %.1f
+",ans1,ans2);
+	}
+}

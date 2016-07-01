@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define SIZE 10001
+int prime[SIZE];
+void sieve()
+{
+	int i,j;
+	for(i=3;i<sqrt(SIZE);i+=2)
+	{
+		if(prime[i])
+		{
+			for(j=i*i;j<SIZE;j+=i)
+				prime[j]=0;
+		}
+	}
+}
+int main()
+{
+
+	int a[SIZE]={};
+	int i,j;
+	for(i=0;i<SIZE;i++)
+		prime[i]=1;
+	sieve();
+	a[6]++;
+	for(j=3;j<SIZE && 2*j+2<SIZE;j+=2)
+	{
+		if(prime[j])
+			a[2*j+2]++;
+	}
+	for(i=3;i<SIZE && i+4<SIZE;i+=2)
+	{
+		if(prime[i])
+			a[i+4]++;
+	}
+	for(i=3;i<SIZE;i+=2)
+	{
+		if(prime[i])
+		{
+			for(j=3;j<SIZE && i+2*j<SIZE;j+=2)
+			{
+				if(prime[j] )
+					a[i+2*j]++;
+			}
+		}
+	}
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n;
+		scanf("%d",&n);
+		printf("%d
+", a[n]);
+	}
+	return 0;
+}

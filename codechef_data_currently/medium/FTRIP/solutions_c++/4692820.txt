@@ -1,0 +1,66 @@
+#include <iostream>
+#include <stdio.h>
+
+typedef long long LL;
+
+using namespace std;
+
+int gcd(int a,int b)
+{
+	if(b==0) return a;
+	else return gcd(b,a%b);
+}
+
+double pre[1005][1005];
+
+
+
+int main()
+{
+
+for(int i=0;i<=1000;++i)
+{
+	pre[i][i]=1;  pre[i][0]=1;
+	pre[i][i-1] = i;   pre[i][1] = i;
+}
+
+for(int i=1;i<=1000;++i)
+{
+	for(int j=1;j<i;++j)
+	{
+		pre[i][j] = pre[i-1][j] + pre[i-1][j-1];
+	
+	}
+}
+
+
+
+int test;
+cin>>test;
+
+while(test>0)
+{
+
+--test;
+
+int s,n,m,k;
+cin>>s>>n>>m>>k;
+
+double q = pre[s-1][n-1];
+double p=0;
+for(int i=k;i<=min(n-1,m-1);++i)
+{
+	p +=  pre[m-1][i] * pre[s-m][n-i-1]; 
+}
+
+
+double ans = p/q;
+
+printf("%0.6f
+",ans);
+
+
+}
+
+return 0;
+}

@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+int n;
+cin>>n;
+long int a[n];
+long int ct1=0,ct2=0,ct;
+long long int num;
+for(int i=0;i<n;i++)cin>>a[i];
+for(int i=0;i<n;i++)
+{
+num=a[i];ct1=0,ct2=0;
+while(num%5==0){ct1++;num /=5;}
+num = a[i];
+while(num%10==0){ct2++;num /=10;}
+//cout<<ct1<<" ---- "<<ct2<<endl;
+ct1 -=ct2;
+ct = (ct1%2==0)? ct1/2 : (ct1/2) +1;
+num = a[i];
+while( ct--)num *=4;
+cout<<num<<endl;
+}
+return 0;
+}

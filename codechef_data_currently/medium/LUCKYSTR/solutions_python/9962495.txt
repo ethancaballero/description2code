@@ -1,0 +1,12 @@
+K,N = map(int, raw_input().strip().split())
+lstr = [raw_input() for _ in xrange(K)]
+for _ in xrange(N):
+        str = raw_input()
+        stat = False
+        if len(str) > 46:
+                stat = True
+        for i in lstr:
+                if i in str:
+                        stat = True
+                        break
+        print 'Good' if stat else 'Bad'

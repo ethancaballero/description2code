@@ -1,0 +1,10 @@
+#https://www.codechef.com/problems/FLOW015
+#Gregorian Calendar 
+day={0:'saturday',1:'sunday',2:'monday',3:'tuesday',4:'wednesday',5:'thursday',6:'friday'}
+t=input()
+while t!=0:
+	t-=1
+	y = input()-1
+	n = (1)+(2*13)+(3*(13+1)/5)+y+(y/4)-(y/100)+(y/400)+2
+	n=n%7
+	print day[n]

@@ -1,0 +1,78 @@
+#include <iostream>
+#include <math.h>
+
+#define MAX_N 30
+
+void num2bit(int ,int[]); 
+int numof1(int[]);
+int bit2int(int []);
+
+int main(){
+	int bit1[MAX_N];
+	int bit2[MAX_N];
+	int xored[MAX_N];
+	int a,b;
+	int T,N;
+	int n1,n2;
+	int result;
+	std::cin>>T;
+
+	for (int i=0;i<T;i++){
+		std::cin>>N>>a>>b;
+		
+		std::fill(bit1,bit1+MAX_N,0 );
+		std::fill(bit2,bit2+MAX_N,0);
+		
+		num2bit(a,bit1);
+		num2bit(b,bit2);
+		
+		n1=numof1(bit1);
+		n2=numof1(bit2);
+		
+		std::fill(bit1,bit1+MAX_N,0 );
+		std::fill(bit2,bit2+MAX_N,0);
+		std::fill(xored,xored+MAX_N,0);
+		
+		result =0;
+		if (n1+n2<=N){
+			for (int k=N-1;k>=N-(n1+n2);k--){
+				result += pow(2,k);
+			}
+		}else {
+			for (int k=N-1;k>=N-(2*N-n1-n2);k--){
+				result+=pow(2,k);
+			}
+		}
+		
+		std::cout<<result<<"
+";
+		
+	}
+
+}
+
+
+int numof1(int bit []){
+	int num=0;
+	for( int i=0;i<MAX_N;i++){
+		if(bit[i]==1){
+			num++;
+		}
+	}
+	return num;
+}
+
+void num2bit(int a, int bit[]){
+
+	int temp=a;
+	int pos=-1;
+	int mod;
+	
+	while(temp!=0){
+		mod=temp%2;
+		pos++;
+		temp=(temp-mod)/2;
+		bit[pos]=mod;	
+	}
+	
+}

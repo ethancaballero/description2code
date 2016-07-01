@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int A[100000];
+int main(){
+    int N;
+    while(scanf("%d",&N) && N != 0){
+        for(int i = 1;i <= N; ++i){
+            scanf("%d",&A[i]);
+        }
+        sort(A + 1, A + N + 1);
+        int ans = 0;
+        for(int i = N;i >= 1;--i){
+            int k = i - 1;
+            int j = 1;
+            while(j < k){
+                if(A[j] + A[k] < A[i]){
+                    ans += k - j;
+                    j += 1;
+                }
+                else
+                    k -= 1;
+            }
+        }
+        printf("%d
+",ans);
+    }
+    return 0;
+ }

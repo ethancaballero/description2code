@@ -1,0 +1,33 @@
+  Chef Al Gorithm was reading a book about climate and oceans when he encountered the word \u201cglaciological\u201d. He thought it was quite curious, because it has the following interesting property: For every two letters in the word, if the first appears x times and the second appears y times, then |x - y| \u2264 1.
+Chef Al was happy about this and called such words 1-good words. He also generalized the concept: He said a word was K-good if for every two letters in the word, if the first appears x times and the second appears y times, then |x - y| \u2264 K.
+Now, the Chef likes K-good words a lot and so was wondering: Given some word w, how many letters does he have to remove to make it K-good?
+Input
+The first line of the input contains an integer T denoting the number of test cases. The description of T test cases follows.
+Each test case consists of a single line containing two things: a word w and an integer K, separated by a space.
+Output
+For each test case, output a single line containing a single integer: the minimum number of letters he has to remove to make the word K-good.
+Constraints
+
+1 \u2264 T \u2264 30
+1 \u2264 |w| \u2264 105
+0 \u2264 K \u2264 105
+w contains only lowercase English letters.
+
+Example
+Input:
+4
+glaciological 1
+teammate 0
+possessions 3
+defenselessness 3
+
+Output:
+0
+0
+1
+2
+Explanation
+Example case 1. The word \u201cglaciological\u201d is already 1-good, so the Chef doesn't have to remove any letter.
+Example case 2. Similarly, \u201cteammate\u201d is already 0-good.
+Example case 3. The word \u201cpossessions\u201d is 4-good. To make it 3-good, the Chef can remove the last s to make \u201cpossession\u201d.
+Example case 4. The word \u201cdefenselessness\u201d is 4-good. To make it 3-good, Chef Al can remove an s and an e to make, for example, \u201cdefenslesness\u201d. Note that the word doesn't have to be a valid English word.

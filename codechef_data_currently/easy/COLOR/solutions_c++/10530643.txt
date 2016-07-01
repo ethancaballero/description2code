@@ -1,0 +1,18 @@
+#include<iostream>
+#include<algorithm>
+#include<string>
+using namespace std;
+int main (){int t,r,b,g;
+string s;
+int long n;
+cin>>t;
+while (t--){  cin>>n;
+cin>>s;
+r=count(s.begin(),s.end(),'R');
+b=count (s.begin(),s.end(),'B');
+g=count(s.begin(),s.end(),'G');
+int long a[]={r,b,g};
+    sort(a ,a+3);
+    cout<<a[0]+a[1]<<endl;
+}
+return 0;}

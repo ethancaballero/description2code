@@ -1,0 +1,28 @@
+import sys
+
+cases = int(sys.stdin.readline().rstrip())
+
+for _dummy in range(cases):
+	line1 = sys.stdin.readline().rstrip().split()
+	line2 = sys.stdin.readline().rstrip().split()
+	todo = int(line1[0])
+	done = int(line1[1])
+	donelist = [int(i) for i in line2]
+	todolist = range(1, todo + 1)
+	for i in range(done):
+		todolist.remove(donelist[i])
+	chef = ''
+	ass = ''
+	while True:
+		if len(todolist) > 0:
+			chef += str(todolist[0]) + ' '
+			del todolist[0]
+		else:
+			break
+		if len(todolist) > 0:
+			ass += str(todolist[0]) + ' '
+			del todolist[0]
+		else:
+			break
+	print chef
+	print ass

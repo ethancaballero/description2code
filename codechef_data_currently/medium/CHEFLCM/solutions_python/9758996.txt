@@ -1,0 +1,13 @@
+for t in xrange(int(raw_input())):
+	n = int(raw_input())
+	i = 1
+	s = 0
+	while (i*i<=n):
+		if (n%i==0):
+			temp = n/i
+			if (i != temp):
+				s += (i+temp)
+			else:
+				s += i
+		i += 1
+	print s

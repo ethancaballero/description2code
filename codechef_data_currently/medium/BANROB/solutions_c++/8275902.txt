@@ -1,0 +1,42 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+double power(double x, int y)
+{
+    double temp;
+    if( y == 0)
+       return 1;
+    temp = power(x, y/2);
+    if (y%2 == 0)
+        return temp*temp;
+    else
+    {
+        if(y > 0)
+            return x*temp*temp;
+        else
+            return (temp*temp)/x;
+    }
+}
+int main()
+{
+    int t;
+    double p,a,b;
+    double temp;
+    long long int m;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%lld %lf",&m,&p);
+        if(m%2 == 0)
+            temp = (1 - power(p,m))/(1 + p);
+        else
+            temp = (1 + power(p,m))/(1 + p);
+//        printf("%0.14lf
+",temp);
+        a = 1000000000*temp;
+        b = 1000000000*(1-temp);
+        printf("%0.14lf %0.14lf
+",a,b);
+    }
+    return 0;
+}

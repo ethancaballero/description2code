@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int main(){
+long long int t,n,m;
+cin>>t;
+while(t--){
+cin>>n>>m;
+//cout<<abs(n-m)<<endl;
+if(n>m){
+cout<<n-m<<endl;
+}
+else{
+cout<<m-n<<endl;
+}
+} 
+}

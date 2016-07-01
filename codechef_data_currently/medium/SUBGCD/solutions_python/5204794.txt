@@ -1,0 +1,13 @@
+import sys
+from fractions import gcd
+
+for cases in xrange(int(sys.stdin.readline())):
+    n = int(sys.stdin.readline())
+    l = list(map(int,sys.stdin.readline().split()))
+    g = l[0]
+    for i in l[1:]:
+        g = gcd(g,i)
+        if g == 1:
+            break
+    if g == 1:  print n
+    else:   print -1

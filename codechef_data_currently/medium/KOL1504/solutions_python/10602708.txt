@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+class check
+{
+	public static void main(String[] args) throws Exception
+	{
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	int t=Integer.parseInt(br.readLine());
+	for(int i=0;i<t;i++)
+	{
+		String str[]=br.readLine().split(" ");
+		int n=Integer.parseInt(str[0]);
+		int d=Integer.parseInt(str[1]);
+		String str1=br.readLine();
+		String str2=br.readLine();
+		char ch1[]=str1.toCharArray();
+		char ch2[]=str2.toCharArray();
+		int ar[]=new int[26];
+		int b[]=new int[26];
+		for(int j=0;j<ch1.length;j++)
+		{	
+			int x=(int) ch1[j]-97;
+			int y=(int) ch2[j]-97;
+			ar[x]=ar[x]+(j%d);
+			ar[y]=ar[y]-(j%d);
+			b[x]++;
+			b[y]--;
+			
+		}
+		boolean s=true;
+		for(int j=0;j<26;j++)
+		{
+			if(ar[j]!=0||b[j]!=0)
+			{
+				s=false;
+				break;
+			}
+		}
+		if(s)
+			System.out.println("Yes");
+		else
+			System.out.println("No");
+	}
+	}
+}

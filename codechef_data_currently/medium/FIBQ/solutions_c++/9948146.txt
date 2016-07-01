@@ -1,0 +1,154 @@
+#include <iostream>
+#include <map>
+#define mod 1000000007
+#define ll long long int
+
+using namespace std;
+struct tree
+{
+  ll a;
+  ll b;
+  ll c;
+
+
+}st[1000005];
+
+ll a[100005];
+map <ll,ll> f;
+ll fib(int n)
+{
+     if (n<=0)
+        return 0;
+
+	if (n==1 || n==2)
+	 return 1;
+
+	if (f[n])
+	  return f[n];
+
+	ll b=n/2;
+	ll a=n-b;
+
+	f[n]= ((fib(a)*fib(b+1))%mod + (fib(a-1)*fib(b))%mod)%mod;
+    return f[n];
+}
+void construct_st(ll index,ll l,ll r,ll a[])
+{
+
+	 if (l==r)
+	 {
+	 	   st[index].a=fib(a[l]);
+	 	   st[index].b=fib(a[l]-1);
+	 	   st[index].c=fib(a[l]+1);
+
+	 	   return;
+	 }
+
+	 ll m=(l+r)/2;
+
+	 construct_st(2*index+1,l,m,a);
+	 construct_st(2*index+2,m+1,r,a);
+
+	 st[index].a=(st[2*index+1].a+st[2*index+2].a+st[2*index+1].a*st[2*index+2].c
+	                        +st[2*index+1].b*st[2*index+2].a)%mod;
+
+	 st[index].b=(st[2*index+1].b+st[2*index+2].b+st[2*index+1].a*st[2*index+2].a
+	                        +st[2*index+1].b*st[2*index+2].b)%mod;
+
+	 st[index].c=(st[2*index+1].c+st[2*index+2].c+st[2*index+1].c*st[2*index+2].c
+	                        +st[2*index+1].a*st[2*index+2].a)%mod;
+
+
+}
+
+int query(ll x,ll index,ll val,ll l,ll r)
+{
+	   if (l==r)
+	   {
+	   	   if (l==x){
+
+
+	   	    st[index].a=fib(val);
+	        st[index].b=fib(val-1);
+	        st[index].c=fib(val+1);
+
+	   	    return 1;}
+
+	   	    else
+	   	    return 0;
+	   }
+
+
+	 ll m=(l+r)/2;
+	 int ls=query(x,2*index+1,val,l,m);
+	 int rs=query(x,2*index+2,val,m+1,r);
+
+     //cout<<index<<" "<<ls<<" "<<rs<<endl;
+	 if (ls || rs){
+	 st[index].a=(st[2*index+1].a+st[2*index+2].a+st[2*index+1].a*st[2*index+2].c
+	                        +st[2*index+1].b*st[2*index+2].a)%mod;
+
+	 st[index].b=(st[2*index+1].b+st[2*index+2].b+st[2*index+1].a*st[2*index+2].a
+	                        +st[2*index+1].b*st[2*index+2].b)%mod;
+
+	 st[index].c=(st[2*index+1].c+st[2*index+2].c+st[2*index+1].c*st[2*index+2].c
+	                        +st[2*index+1].a*st[2*index+2].a)%mod;
+
+	return 1;
+	 }
+
+	 return 0;
+}
+
+struct tree query2(ll index,ll l,ll r,ll ql,ll qr)
+{
+	if (ql==l && qr==r)
+	return st[index];
+
+	ll mid=(l+r)/2;
+	if (qr<=mid)
+	 return query2(2*index+1,l,mid,ql,qr);
+
+	else if (ql>mid)
+	 return query2(2*index+2,mid+1,r,ql,qr);
+
+	 else
+	  {
+	  	struct tree m=query2(2*index+1,l,mid,ql,mid);
+	  	struct tree n=query2(2*index+2,mid+1,r,mid+1,qr);
+
+	  	struct tree o;
+	  	o.a=(m.a+n.a+m.a*n.c+m.b*n.a)%mod;
+	  	o.b=(m.b+n.b+m.a*n.a+m.b*n.b)%mod;
+	  	o.c=(m.c+n.c+m.c*n.c+m.a*n.a)%mod;
+
+	  	return o;
+
+	  }
+
+
+}
+int main(void)
+{
+	ll n,q;
+	cin>>n>>q;
+
+
+	for (ll i=0;i<n;i++)
+	  cin>>a[i];
+
+	construct_st(0,0,n-1,a);
+    //cout<<st[0].a<<" "<<st[0].b<<" "<<st[0].c;
+	while (q--)
+	{
+	      char c;ll ql;ll qr;
+		  cin>>c>>ql>>qr;
+
+          if (c=='C')
+		    query(ql-1,0,qr,0,n-1);
+
+		   else
+		    cout<<query2(0,0,n-1,ql-1,qr-1).a<<endl;
+	}
+	return 0;
+}

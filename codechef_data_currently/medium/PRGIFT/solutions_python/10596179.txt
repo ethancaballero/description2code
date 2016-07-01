@@ -1,0 +1,31 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+
+    int t,n,k;
+
+    cin>>t;
+
+    while(t--){
+
+        cin>>n>>k;
+
+        int a[n],count=0,flag=0;
+
+        for(int i = 0 ; i < n ; i++){
+
+            cin>>a[i];
+
+            if(a[i]%2 == 0)count++;
+        }
+
+        if(count<k || (count==n && k == 0))cout<<"NO"<<endl;
+        else cout<<"YES"<<endl;
+    }
+
+    return 0;
+}

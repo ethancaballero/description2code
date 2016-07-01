@@ -1,0 +1,68 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main() {
+	int t,l1,l2,i,j,i1,i2;
+	char a[26000],b[26000];
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%s %s",&a,&b);
+		l1=strlen(a);
+		l2=strlen(b);
+		i1=0;
+		i2=0;
+		if(l1<l2)
+		{
+			while(i2!=l2)
+			{
+				if(a[i1]!=b[i2])
+				{
+					i2++;
+				}
+				else
+				{
+					i1++;
+					i2++;
+				}
+			}
+			if(i1!=l1)
+			{
+				printf("NO
+");
+			}
+			else
+			{
+				printf("YES
+");
+			}
+		}
+		else
+		{
+			while(i1!=l1)
+			{
+				if(a[i1]!=b[i2])
+				{
+					i1++;
+				}
+				else
+				{
+					i1++;
+					i2++;
+				}
+			}
+			if(i2!=l2)
+			{
+				printf("NO
+");
+			}
+			else
+			{
+				printf("YES
+");
+			}
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+int gcd(int x, int y)
+	{
+		if(y==0)
+		{
+         return x;
+        }
+        if(x==0)
+        {
+        	return y;
+        }
+        if(x>y)
+     	return gcd(y, x%y); 
+     else 
+       	return gcd(x, y%x); 
+    
+	}
+int main()
+{
+	int t,a,b,z,g,l;
+	cin>>t;
+	while(t--)
+	{
+	 cin>>a>>b;
+	  g=gcd(a,b);
+      z=a*b;
+      cout<<g<<" "<<z/g<<endl;
+	 }
+return 0;	
+}
+
+	

@@ -1,0 +1,12 @@
+if __name__ == '__main__':
+  tests = int(raw_input())
+  for _ in xrange(tests):
+    noi = int(raw_input())
+    qty = map(int, raw_input().strip().split())
+    qty.sort()
+    minq = qty[0]
+    if minq < 2:
+      print -1
+    else:
+      asum = sum(qty[1:])
+      print asum + 2

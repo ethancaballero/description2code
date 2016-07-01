@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int t,num,sum=0;
+    cin>>t;
+    while(t--)
+    {
+        cin>>num;
+        sum=(num*(num+1))/2+num;
+        cout<<sum<<endl;
+
+
+    }
+
+
+
+
+
+
+
+    return 0;
+}

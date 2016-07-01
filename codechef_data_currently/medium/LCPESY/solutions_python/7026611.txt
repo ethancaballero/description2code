@@ -1,0 +1,11 @@
+
+import sys
+length = int(sys.stdin.readline())
+for i in range(length):
+    count = 0
+    data = raw_input()
+    vals = raw_input()
+    for j in set(data):
+        if j in vals:
+            count += min(data.count(j),vals.count(j))
+    print count

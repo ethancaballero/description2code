@@ -1,0 +1,27 @@
+#include <iostream>
+//#include <math.h>
+using namespace std;
+ 
+int main()
+{
+   long long a,b,c,d;
+   int t;
+   scanf("%d",&t);
+   while(t--){
+       scanf("%lld %lld",&a,&b);
+      // int c,d;
+       
+       if(b!=0){
+       c=a/b;
+       d=a%b;
+       }
+       else{
+         c=0;
+         d=a;
+       }
+       
+       printf("%lld %lld 
+",c,d);
+       
+    }
+}

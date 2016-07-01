@@ -1,0 +1,10 @@
+for _ in xrange(input()):
+	p=0
+	t=0
+	input()
+	l=map(int,raw_input().split())
+	for x in l:
+		if x>p:
+			t+=x-p
+		p=x
+	print t

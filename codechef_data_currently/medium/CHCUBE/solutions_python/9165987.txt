@@ -1,0 +1,19 @@
+# cook your code here
+t = int(raw_input())
+while t>0:
+    flag=False
+    ip = raw_input().split()
+    for i in range(0,2):
+        for j in range(2,4):
+            for k in range(4,6):
+                if ip[i]==ip[j] and ip[j]==ip[k]:
+                    flag=True
+                    print "YES"
+                    break
+            if flag:
+                break
+        if flag:
+            break
+    if not flag:
+        print "NO"
+    t-=1

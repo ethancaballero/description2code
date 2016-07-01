@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int d,i;
+        cin>>d;
+        int exd=0;
+        if(d>2001)
+        {
+            for(i=2001;i<d;i++)
+            {
+                if((i%100!=0 && i%4==0)||(i%400)==0)
+                    exd+=366;
+                else
+                    exd+=365;
+            }
+            exd+=1;
+            exd%=7;
+        }
+        if(d<=2001)
+        {
+            for(i=d;i<2001;i++)
+            {
+                if((i%100!=0 && i%4==0)||(i%400)==0)
+                    exd+=366;
+                else
+                    exd+=365;
+            }
+            exd%=7;
+            exd=1-exd;
+            if(exd<0) exd+=7;
+        }
+        switch(exd)
+        {
+            case 0:cout<<"sunday
+";break;
+            case 1:cout<<"monday
+";break;
+            case 2:cout<<"tuesday
+";break;
+            case 3:cout<<"wednesday
+";break;
+            case 4:cout<<"thursday
+";break;
+            case 5:cout<<"friday
+";break;
+            case 6:cout<<"saturday
+";break;
+            default:;
+        }
+    }
+    return 0;
+}

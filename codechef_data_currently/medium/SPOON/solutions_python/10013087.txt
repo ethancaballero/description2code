@@ -1,0 +1,22 @@
+for _ in xrange(input()):
+        row,col = map(int, raw_input().strip().split())
+        r = []
+        c = []
+        flag = 0
+        for i in xrange(row):
+                r.append(raw_input().lower())
+        if row < 5 and col < 5:
+                print 'There is indeed no spoon!'
+                continue
+        for j in range(col):
+                c.append("".join([i[j] for i in r]))
+        for i in r:
+                if 'spoon' in i:
+                        flag = 1
+                        break
+        if not flag:
+                for i in c:
+                        if 'spoon' in i:
+                                flag = 1
+                                break
+        print 'There is a spoon!' if flag else 'There is indeed no spoon!'

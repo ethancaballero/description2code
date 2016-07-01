@@ -1,0 +1,8 @@
+for i in range(0,int(raw_input())):
+	n,k = map(int,raw_input().split())
+	max = 0
+	k+=1
+	for j in range(2,k):
+		if n % j > max:
+			max = n % j
+	print max

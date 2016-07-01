@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int i,j,k,m,n,t,temp,l;
+	char A[55],B[55],C[55];
+	scanf("%d",&t);
+	while(t--)
+	{
+                scanf("%d",&l);
+		scanf(" %s",A);
+		strcpy(C,A);
+		for(i=0;i<l;i++)
+		{
+			temp=A[i];
+			for(j=0;j<l;j++)
+			{
+				strcpy(B,A);
+				if(j>i)
+				{
+					for(k=i;k<j;k++)
+						B[k]=B[k+1];
+
+					B[k]=temp;
+				}
+
+				if(j<i)
+				{
+					for(k=i;k>j;k--)
+						B[k]=B[k-1];
+
+					B[k]=temp;
+				}
+				if(strcmp(B,C)<0)
+					strcpy(C,B);
+			}
+		}
+		printf("%s
+",C);
+	}
+}

@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n;
+        scanf("%d",&n);
+        int tm=0;
+        while(n--)
+        {
+            int a,b,c,x;
+            scanf("%d%d%d",&a,&b,&c);
+           // cout<<tm<<" ";
+
+            if(tm<=a)
+            {
+                tm=a+b;
+            }
+            else
+            {
+
+                if((tm-a)%c!=0)
+                {
+                    while((tm-a)%c!=0) tm++;
+                }
+                tm+=b;
+            }
+        }
+        cout<<tm<<endl;
+    }
+}

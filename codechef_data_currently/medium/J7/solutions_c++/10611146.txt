@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		float p,s;
+		scanf("%f %f",&p,&s );
+		float a1 = p + sqrt(p*p - 24*s);
+		float a2 = p - sqrt(p*p - 24*s);
+		a1/=12;
+		a2/=12;
+	float	b1=(p/4-2*a1);
+	float	b2=(p/4-2*a2);
+		float v1= a1*a1*b1;
+		float v2 = a2*a2*b2;
+		if(v1<v2)v1=v2;
+		printf("%.2f
+",v1);
+	}
+	return 0;
+}

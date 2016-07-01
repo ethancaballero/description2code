@@ -1,0 +1,39 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+int grundy[10005];
+int mex[10005];
+void init()
+{
+    grundy[0]=grundy[1]=0;
+    for(int i=2;i<=10000;i++)
+    {
+        memset(mex,0,sizeof(mex));
+        
+        for(int x=0,y=i-2;x<=y;x++,y--)
+            mex[grundy[x]^grundy[y]]=1;
+        
+        int g;
+        for(g=0;mex[g];g++);
+        grundy[i]=g;
+    }
+}
+int main()
+{
+    init();
+    int tc;
+    cin>>tc;
+    while(tc--)
+    {
+        int n;
+        cin>>n;
+        if(grundy[n])
+            cout<<"Arjuna
+";
+        else
+            cout<<"Bhima
+";
+    }
+    return 0;
+}

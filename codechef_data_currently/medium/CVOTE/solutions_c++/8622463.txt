@@ -1,0 +1,58 @@
+	#include<iostream>
+	#include<map>
+	using namespace std;
+	int main()
+	{
+		int n,m;
+		cin>>n>>m;
+		map<string,string> mymap;
+		string a,b;
+		for(int i=0;i<n;i++)
+		{
+			cin>>a>>b;
+			mymap.insert(make_pair(a,b));
+		}
+		map<string,int> mymap2;
+		for(int i=0;i<m;i++)
+		{
+			cin>>a;
+			map<string,int >::iterator it=mymap2.find(a);
+			if(it==mymap2.end())
+			{
+				mymap2.insert(make_pair(a,1));
+			}	
+			else
+				it->second++;
+		}	
+
+		int max=0;
+		map<string,int> country;
+
+		for(map<string,int >::iterator it1=mymap2.begin();it1!=mymap2.end();it1++)
+		{
+			map<string,string>::iterator it=mymap.find(it1->first);
+			map<string,int>::iterator it2=country.find(it->second);
+			if(it2==country.end())
+			{
+				country.insert(make_pair(it->second,it1->second));
+			}	
+			else
+				(it2->second)=(it2->second)+(it1->second);
+			if(it1->second >max)
+			{
+				a=it1->first;
+				max=it1->second;
+			}
+		}	
+		 max=0;
+
+		for(map<string,int >::iterator it3=country.begin();it3!=country.end();it3++)
+		{
+			if(it3->second>max)
+			{
+				b=it3->first;
+				max=it3->second;
+			}	
+		}	
+		cout<<b<<endl<<a<<endl;
+	}

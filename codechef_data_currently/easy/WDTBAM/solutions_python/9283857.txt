@@ -1,0 +1,18 @@
+t = int(raw_input())
+for i in range(t):
+	qlen = int(raw_input())
+	q = list(raw_input())
+	a = list(raw_input())
+	p = [int(x) for x in raw_input().split()]
+
+	if( len(set(p)) == 1) :
+		print p[0]
+	else:
+		correct_count = 0
+		for j in range(qlen):
+			if q[j] == a[j]:
+				correct_count +=1
+		if correct_count == qlen:
+			print p[-1]
+		else:
+			print max(p[0:correct_count+1])

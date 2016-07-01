@@ -1,0 +1,82 @@
+/**
+ * @Author : sabry_ragab
+ * Problem: UVa 357 - Let Me Count The Ways
+ * time(0.03)
+ */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+
+const double eps = 1e-10;
+const int dx[] = { 1, 0, -1, 0, -1, -1, 1, 1 }; //first 4 are top - down - left - right
+const int dy[] = { 0, 1, 0, -1, -1, 1, -1, 1 };
+const double PI = M_PI;
+const int OO = INT_MAX;
+
+#define SZ(x)          (int)x.size()
+#define ALL(x)         (x).begin(),(x).end()
+#define ALLR(x)        (x).rbegin(),(x).rend()
+#define PB( x )         push_back(x)
+#define MP(x , y)       make_pair(x,y)
+#define rep(i,st,en)    for(int i=st ; i< en; i++)
+#define repR(i,st,en)   for(int i=st;i>=en ; i--)
+#define fill(v, d)       memset(v, d, sizeof(v))
+
+/**************************************************************/
+
+ll getCumulativeSum(ll left, ll right){
+	ll largeValue = (right*(right+1)) / 2;
+	ll smallValue = ( (left - 1)*(left) ) / 2;
+	return largeValue - smallValue;
+}
+/***************************************************************/
+int main() {
+
+//freopen("input.txt" , "rt",stdin) ;
+//freopen("output.txt", "wt", stdout);
+
+	int nTest;
+	cin >> nTest;
+
+	while(nTest--){
+
+		ll left, right;
+		cin >> left >> right;
+
+		const ll mod = 1000000007;
+		ll result = 0;
+		ll low = 0, high = 0;
+
+		rep(i, 1, 12){
+
+			low = high + 1;
+			high = low * 10 - 1;
+
+
+			if(low > right){
+				break;
+			}
+
+			if(high < left){
+				continue;
+			}
+
+			ll L = max(left, low);
+			ll R = min(right, high);
+
+			result += getCumulativeSum(L, R) * (ll)i;
+			result %= mod;
+
+		}
+
+		cout << result << '
+';
+
+}
+//--------------------------------------------------------//
+	return 0;
+}

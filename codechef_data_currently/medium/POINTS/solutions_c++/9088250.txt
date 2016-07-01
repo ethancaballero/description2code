@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cmath>
+#include <cstring>
+#include <iomanip>
+#include <cstdio>
+
+#define UNINIT_MAX -1
+#define UNINIT_MIN 10001
+#define _S 10001
+#define Y_MIN 0
+#define Y_MAX 1
+
+int main(){
+	std::ios_base::sync_with_stdio(false);
+	int test_cases;
+	int no_of_points;
+	int x_axis[_S][2];
+	int prev_x;
+	std::cin >> test_cases;
+	double dist;
+	while(test_cases--){
+		memset(x_axis, -1, sizeof(x_axis));
+		dist = 0;
+		//getchar();
+		std::cin >> no_of_points;
+		for(int i = 0; i < no_of_points; i++){
+			int a, b;
+			std::cin >> a >> b;
+			if(x_axis[a][Y_MIN] == -1){
+				x_axis[a][Y_MIN] = b;
+				x_axis[a][Y_MAX] = b;
+			}
+			else if(x_axis[a][Y_MIN] > b)x_axis[a][Y_MIN] = b;
+			else if(x_axis[a][Y_MAX] < b)x_axis[a][Y_MAX] = b;
+		}
+		prev_x = 0;
+		while(x_axis[prev_x][Y_MIN] ==  -1)prev_x++;
+		dist += (x_axis[prev_x][Y_MAX] - x_axis[prev_x][Y_MIN]);
+		for(int i = prev_x + 1; i < _S; i++){
+			if(x_axis[i][Y_MIN] != -1){
+				dist += sqrt((i - prev_x)*(i - prev_x)+(x_axis[prev_x][Y_MIN] - x_axis[i][Y_MAX])*(x_axis[prev_x][Y_MIN] - x_axis[i][Y_MAX]));
+				//std::cout << "dist = " << dist << " Curpt = (" << i << " " << prev_x << " " << x_axis[i][Y_MIN] << " " << x_axis[i][Y_MAX] << " " << x_axis[prev_x][Y_MIN] << " " << x_axis[prev_x][Y_MAX] << std::endl;
+				prev_x = i;
+				dist += (x_axis[prev_x][Y_MAX] - x_axis[prev_x][Y_MIN]);
+			}
+		}
+		//std::cout << std::setprecision(2) << dist << std::endl;
+		printf("%0.2lf
+",dist);
+	}
+	return 0;
+}

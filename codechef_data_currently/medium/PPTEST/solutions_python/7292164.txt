@@ -1,0 +1,29 @@
+test_cases = int(raw_input())
+output=[]
+for i in range(0,test_cases):
+	val = map(int,raw_input().split())
+	n = val[0]
+	w = val[1]
+	t= []
+	value = []
+	table=[]
+	for i in range(0,n):
+		l = map(int,raw_input().split())
+		c = l[0]
+		p = l[1]
+		t.append(l[2])
+		value.append(c* p)
+		table.append([0]*(w+1))
+	table.append([0]*(w+1))
+	for row in range(1,n+1):
+		for col in range(1,w+1):
+			original_value = table[row-1][col]
+			new_value = 0
+			if t[row-1] <= col:
+				new_value = value[row-1] + table[row-1][col-t[row-1]] 
+			if original_value < new_value:
+				original_value = new_value
+			table[row][col] = original_value
+	output.append(table[n][w])
+for i in output:
+	print i

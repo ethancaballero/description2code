@@ -1,0 +1,23 @@
+
+t = int(raw_input())
+for i in xrange(t):
+	n = int(raw_input())
+	cities = {}
+	f = set()
+	t = set()
+	start = None
+	for j in xrange(n-1):
+		a,b,c = raw_input().split()
+		c = int(c[:-1]);
+		cities[a] = (b, c)
+		f.add(a)
+		t.add(b)
+		#cities[b].append((a, c))
+	cost = 0
+	curr = (f.difference(t)).pop()
+	while curr in cities:
+		b, c = cities[curr]
+		print curr,b,str(c)+"$"
+		cost += c
+		curr = b
+	print str(cost)+"$"

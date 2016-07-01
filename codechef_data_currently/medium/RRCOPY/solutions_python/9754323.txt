@@ -1,0 +1,4 @@
+#Python, making stuff easier since 25 years. <VigzMv/>
+for i in range(int(raw_input())):
+    raw_input()
+    print len(set(raw_input().split())) 

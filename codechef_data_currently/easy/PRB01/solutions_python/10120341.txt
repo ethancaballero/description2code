@@ -1,0 +1,22 @@
+t = int(raw_input())
+arr = list()
+for i in xrange(100001):
+	arr.append(i)
+i = 2
+while i<100001:
+#	print "i is :",i
+	if arr[i] != 0:
+		j = 2*i;
+		while(j<100001):
+		#	print "arr[j] is :",arr[j]
+		#	raw_input()
+			arr[j] = 0
+			j += i;
+	i += 1
+while t:
+	n = int(raw_input())
+	if arr[n] != 0:
+		print "yes"
+	else:
+		print "no"
+	t -= 1

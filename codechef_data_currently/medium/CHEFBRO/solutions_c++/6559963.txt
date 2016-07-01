@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <set>
+using namespace std;
+#define MAX 1005
+
+int grundy[MAX][MAX];
+
+void pre()
+{
+	for (int i = 0; i < MAX; i++) {
+		for (int j = 0; j < MAX; j++) {
+			set<int>myset;
+			if (i - 1>0)          myset.insert(grundy[i - 1][j]);
+			if (i - 2>0)          myset.insert(grundy[i - 2][j]);
+			if (j - 1>0)          myset.insert(grundy[i][j - 1]);
+			if (j - 2>0)          myset.insert(grundy[i][j - 2]);
+			if (i - 1>0 && j - 1>0)  myset.insert(grundy[i - 1][j - 1]);
+			if (i - 2>0 && j - 2>0)  myset.insert(grundy[i - 2][j - 2]);
+			int ret = 0;
+			while (myset.find(ret) != myset.end()) ret++;
+			cout << ret << endl;
+			grundy[i][j] = ret;
+		}
+	}
+}
+
+int main()
+{
+	//pre();
+	int t;
+	cin >> t;
+	while (t--) {
+		int c;
+		cin >> c;
+		int ans = 0;
+		for (int i = 0; i < c; i++) {
+			int n, m;
+			cin >> n >> m;
+			ans ^= (n + m - 2) % 3;
+		}
+		(ans) ? puts("MasterChef") : puts("Football");
+	}
+	return 0;
+}

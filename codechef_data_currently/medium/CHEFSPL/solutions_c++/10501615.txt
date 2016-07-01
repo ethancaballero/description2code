@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int str[27];
+vector<int> ind;
+
+string check(string s){
+    int j = s.length()/2;
+    int count = 0;
+    for(int i = 0; i < s.length()/2; i++){
+        if(s[i] == s[j]) count++;
+        j++;
+    }
+    if(count == s.length()/2) return"YES";
+    else{return "NO";}
+}
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        for(int i = 0; i <= 27; i++) str[i] = 0;
+        string s;
+        cin >> s;
+        if(s.length()%2 == 0) cout << check(s) << endl;
+        else{
+            if(s.length() == 1){
+                cout << "NO" << endl;
+            }else{
+                int i = 0, j = (s.length()+1)/2;
+                int flag = 1;
+                while(j < s.length() && i < s.length()/2){
+                    if(s[i] != s[j]) flag = 0;
+                    i++; j++;
+                }
+                if(flag) cout << "YES" << endl;
+                else{
+                    flag = 0;
+                    i = 0, j = (s.length()+1)/2;
+                    while(i <= s.length()/2 && j < s.length()){
+                        if(s[i] != s[j]) i++;
+                        else{i++; j++;}
+                    }
+                    if(j == s.length()) flag = 1;
+                    if(flag) cout << "YES" << endl;
+                    else{
+                        flag = 0;
+                        i = 0, j = (s.length())/2;
+                        while(i < s.length()/2 && j < s.length()){
+                            if(s[i] != s[j]) j++;
+                            else{i++; j++;}
+                        }
+                        if(i == s.length()/2) flag = 1;
+                        if(flag) cout << "YES" << endl;
+                        else{cout << "NO" << endl;}
+                    }
+                }
+            }
+        }
+    }
+}

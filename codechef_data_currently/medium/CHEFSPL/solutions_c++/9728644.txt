@@ -1,0 +1,140 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<set>
+#include<map>
+#include<vector>
+#include<queue>
+#include<utility>
+#include<cmath>
+#include<cstring>
+#include<string>
+#include<stack>
+#include<deque>
+#include<functional>
+#include<climits>
+#define ll long long
+#define pp pair<int,int>
+#define ppl pair<ll,ll>
+#define fi first
+#define se second
+#define tcase int t; scanf("%d",&t);
+#define For(i,a,b) for(i = a; i < b; i++)
+#define pb push_back
+#define pq priority_queue
+#define ve vector
+#define lb lower_bound
+#define ub upper_bound
+#define bs binary_search
+using namespace std;
+
+char c[1000005],c1[1000005],c2[1000005];
+
+bool check(ll x)
+{
+  ll i,j,fl = 1;
+  For(i,0,x)
+    {
+      if(c1[i] != c2[i])
+	{
+	  fl = 0; break;
+	}
+    }
+
+  if(fl) return true;
+  else return false;
+}
+
+
+int main()
+{
+
+  tcase
+  while(t--)
+    {
+      ll i,j,k,x,y,z,fl,sum,count,n;
+      scanf("%s",c);
+      n = strlen(c);
+
+      if(n%2 == 0)
+	{
+	  x = n/2;
+	  For(i,0,x) c1[i] = c[i];
+	  For(i,x,n) c2[i-x] = c[i];
+	  if(check(x)) printf("YES
+");
+	  else printf("NO
+");
+	}
+
+      else
+	{
+	  if(n == 1) {printf("NO
+"); continue;}
+	  /*sum = 0;
+	  x = n/2;
+	  For(i,0,n)
+	    {
+	      j = 0; fl = 0; y = 0;
+	      while(j < x)
+		{
+		  if(y == i) {fl = 1; y++; continue;}
+		  else {c1[j] = c[y]; j++; y++;}
+		}
+
+	      if(fl == 0) k = x;
+	      else k = x+1;
+
+	      j = k;
+	      while(j < n)
+		{
+		  if(y == i) {y++; continue;}
+		  else {c2[j-k] = c[y]; y++; j++;}
+		}
+	      if(check(x)) sum = 1;
+	      
+	    }
+	  if(sum) printf("YES
+");
+	  else printf("NO
+");*/
+
+	  sum = 0;
+	  x = n/2;
+
+	  For(i,0,x+1) c1[i] = c[i];
+	  For(i,x+1,n) c2[i-x-1] = c[i];
+
+	  fl = 0; i = 0; j = 0;
+	  while(i <= x && j < x)
+	    {
+	      if(c1[i] == c2[j]) {i++; j++; continue;}
+	      else if(c1[i] != c2[j] && fl == 0) {i++; fl = 1; continue;}
+	      else if(c1[i] != c2[j] && fl == 1) {fl = 2; break;}
+	    }
+
+	  if(fl == 0 || fl == 1) {printf("YES
+"); continue;}
+
+
+	  For(i,0,x) c1[i] = c[i];
+	  For(i,x,n) c2[i-x] = c[i];
+
+	  fl = 0; i = 0; j = 0;
+	  while(i < x && j <= x)
+	    {
+	      if(c1[i] == c2[j]) {i++; j++; continue;}
+	      else if(c1[i] != c2[j] && fl == 0) {j++; fl = 1; continue;}
+	      else if(c1[i] != c2[j] && fl == 1) {fl = 2; break;}
+	    }
+
+	  if(fl == 0 || fl == 1) {printf("YES
+"); continue;}
+	  else {printf("NO
+"); continue;}
+	  
+
+	}
+    }
+  return 0;
+}

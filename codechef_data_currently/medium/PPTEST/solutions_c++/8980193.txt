@@ -1,0 +1,33 @@
+#include<stdio.h>
+int sol[102][102];
+int main()
+{
+    int tst,n,w,t[102],p[102],i,j,a;
+    scanf("%d",&tst);
+    while(tst--)
+    {
+        scanf("%d%d",&n,&w);
+        for(i=1;i<=n;i++)
+        {
+            scanf("%d%d%d",&p[i],&a,&t[i]);
+            p[i]*=a;
+        }
+   //     for(i=0;i<n;i++) printf("%d %d
+",p[i],t[i]);
+        for(i=0;i<=n;i++)
+        {
+            for(j=0;j<=w;j++)
+            {
+                if(i==0||j==0) sol[i][j]=0;
+                else sol[i][j]=sol[i-1][j];
+                if(i>0&&t[i]<=j&&(sol[i][j]<(sol[i-1][j-t[i]]+p[i])))
+                {
+                    sol[i][j]=sol[i-1][j-t[i]]+p[i];
+                }
+            }
+        }
+        printf("%d
+",sol[n][w]);
+    }
+    return 0;
+}

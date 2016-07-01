@@ -1,0 +1,18 @@
+#include"stdio.h"
+#include"algorithm"
+int main() {
+    int N;
+    scanf("%d", &N);
+    int A[N], x;
+    for(int i=0; i<N; i++)
+        scanf("%d", &A[i]);
+    scanf("%d", &x);
+    std::sort(A, A+N);
+    long long cost=0, m = 0;
+    if(x<N and A[x]<0)
+        cost -= (m=A[x])*x;
+    for(int i=0; i<N and i<x; i++)
+        cost += (m-A[i]);
+    printf("%lld
+", cost);
+}

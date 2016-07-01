@@ -1,0 +1,68 @@
+#include<cstdio>
+#include<iostream>
+#define ll long long
+using namespace std;
+int readint()
+{
+    int cc = getc(stdin);
+    for (;cc < '0' || cc > '9';)  cc = getc(stdin);
+    int ret = 0;
+    for (;cc >= '0' && cc <= '9';)
+    {
+        ret = ret * 10 + cc - '0';
+        cc = getc(stdin);
+    }
+    return ret;
+}
+ll rep_sqr(int base,int exp,int mod)
+{
+	ll res = 1;
+	while(exp!=0)
+	{
+		if(exp%2==1)	res = (res*base)%mod;
+		base =  ((ll)base*base)%mod;
+		exp/=2;
+	}
+	return res%mod;
+}
+int main()
+{
+	int p[] = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+	int n = readint();
+	int *arr = new int[n+1];
+	for(int i=1;i<n+1;i++)
+		arr[i] = readint();
+	int **cf = new int*[n+1];
+	for(int i=0;i<n+1;i++)
+		cf[i] = new int[25];
+	for(int i=0;i<n+1;i++)
+		for(int j=0;j<25;j++)
+			cf[i][j] = 0;
+	for(int i=1;i<n+1;i++)
+	{
+		int t = arr[i];
+		for(int j=0;j<25;j++)
+		{
+			cf[i][j]+=cf[i-1][j];
+			while(t%p[j]==0)
+			{
+				t/=p[j];
+				cf[i][j]++; 
+			}
+		}
+	}
+	int q = readint();
+	while(q--)
+	{
+		int l = readint(),r = readint(),m = readint();
+		ll result = 1;
+		for(int j=0;j<25;j++)
+		{
+			int exp = cf[r][j]-cf[l-1][j];
+			result = (result*rep_sqr(p[j],exp,m))%m;
+		}
+		printf("%d
+",result);
+	}
+	return 0;
+}

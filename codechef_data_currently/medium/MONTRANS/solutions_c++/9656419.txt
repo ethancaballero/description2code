@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int A, B, C;
+		cin >> A >> B >> C;
+		int limit = 1e4 + 20;
+		int maxM = A;
+		int cents = B;
+		int dis = 0;
+		for(int i = 1;i <= limit;++i){
+			if(C > B && A > 0){
+				B += 100;
+				A -= 1;
+			}
+			if(B >= C){
+				B -= C;
+				int temp = B;
+				B = A;
+				A = temp;
+			}
+			if(A + B/100 > maxM + cents/100){
+				maxM = A;
+				cents = B;
+				dis = i;
+			} else if(A + B/100 == maxM + cents/100 && B%100 > cents%100){
+				maxM = A;
+				cents = B;
+				dis = i;
+			}
+		}
+		cout << dis << "
+";
+	}
+	return 0;
+}

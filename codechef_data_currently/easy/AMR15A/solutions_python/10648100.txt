@@ -1,0 +1,19 @@
+N=int(raw_input())
+
+even_count=0
+odd_count=0
+
+a=raw_input()
+a=a.split(" ")
+
+for i in a:
+	i=int(i)
+	if i&1:
+		odd_count+=1
+	else:
+		even_count+=1
+
+if even_count>odd_count:
+	print "READY FOR BATTLE"
+else:
+	print "NOT READY"				

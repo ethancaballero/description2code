@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef unsigned long long ull;
+int main(){
+	int tc;
+	ull l,r;
+	scanf("%d",&tc);
+	while(tc--){
+		int res=0;
+		scanf("%llu%llu",&l,&r);
+		ull v=2;
+		while(v<=r){
+			ull c=v;
+			while(c<=r){
+				if(l<=c&&c<=r) res++;
+				c*=3;
+			}
+			v*=2;
+		}
+		if(l==1) res++;
+		printf("%d
+", res);
+	}
+}

@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define s(a) scanf("%lld",&a)
+
+using namespace std;
+
+#define matrix vector<vector<ll> >
+ll mod=1000000007;
+
+void multiply(ll a[3][3],ll b[3][3])
+{
+    ll i,j,w;
+    ll t[3][3];
+    t[0][0]=(a[0][0]*b[0][0]+a[0][1]*b[1][0]+a[0][2]*b[2][0])%mod;
+    t[0][1]=(a[0][0]*b[0][1]+a[0][1]*b[1][1]+a[0][2]*b[2][1])%mod;
+    t[0][2]=(a[0][0]*b[0][2]+a[0][1]*b[1][2]+a[0][2]*b[2][2])%mod;
+    t[1][0]=(a[1][0]*b[0][0]+a[1][1]*b[1][0]+a[1][2]*b[2][0])%mod;
+    t[1][1]=(a[1][0]*b[0][1]+a[1][1]*b[1][1]+a[1][2]*b[2][1])%mod;
+    t[1][2]=(a[1][0]*b[0][2]+a[1][1]*b[1][2]+a[1][2]*b[2][2])%mod;
+    t[2][0]=(a[2][0]*b[0][0]+a[2][1]*b[1][0]+a[2][2]*b[2][0])%mod;
+    t[2][1]=(a[2][0]*b[0][1]+a[2][1]*b[1][1]+a[2][2]*b[2][1])%mod;
+    t[2][2]=(a[2][0]*b[0][2]+a[2][1]*b[1][2]+a[2][2]*b[2][2])%mod;
+    for(i=0;i<3;i++) {
+        for(j=0;j<3;j++) {
+            a[i][j]=t[i][j];
+        }
+    }
+}
+
+void power(ll a[3][3],ll p,ll k)
+{
+    if(p==1) return;
+    ll b[3][3]={{1,1,1},{1,0,0},{0,1,0}};
+    power(a,p/2,k);
+    multiply(a,a);
+    if(p%2==1) multiply(a,b);
+}
+
+
+ll poww(ll a,ll b)
+{
+    if(b==0) return 1;
+    if(b==1) return a;
+    ll k=poww(a,b/2);
+    if(b%2==0) return (k*k)%mod;
+    return (((k*k)%mod)*a)%mod;
+}
+
+int main()
+{
+    ll t,n,k,i,j,x,ans;
+    //freopen("inp.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+
+    s(t);
+    while(t--) {
+        ans=0;
+        s(n);
+        ans=poww(2,n);
+        ll mm[3][3]={{1,1,1},{1,0,0},{0,1,0}};
+
+        power(mm,n,3);
+        ans=ans-(4*mm[2][0]+2*mm[2][1]+mm[2][2])%mod;
+        if(ans<0) ans+=mod;
+        printf("%lld
+",ans);
+    }
+    return 0;
+}

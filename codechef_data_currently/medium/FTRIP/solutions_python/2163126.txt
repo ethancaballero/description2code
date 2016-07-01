@@ -1,0 +1,38 @@
+def choose(nn, kk):
+    if ((0 <= kk) and (kk <= nn)):
+        #ntok = 1
+        #ktok = 1
+        klim = min(kk, nn-kk)+1
+        res = 1
+        nnn = nn
+        for rr in xrange(1, klim):
+            res *= nnn
+            res /= rr
+            nnn -= 1
+        return res
+    else:
+        return 0
+
+ttt = int(raw_input())
+#while (t>0):
+for tt in xrange(0, ttt):
+  #t = t-1
+  a = raw_input()
+  aa = a.split()
+  s= int(aa[0])
+  n= int(aa[1])
+  m= int(aa[2])
+  k= int(aa[3])
+  #s,n,m,k = [int(iii) for iii in a.split(' ')]
+  ans = 0
+  for ii in xrange(k, n):
+    #if( k > m-1 ):
+    #  break
+    if ((s-m) <  (n-ii-1)):
+        continue
+    if ( ii > m-1):
+        break
+    ans +=  choose(s-m,n-ii-1) * choose(m-1,ii)
+  res = ans/float(choose(s-1,n-1))
+  print "%.7f" % res
+

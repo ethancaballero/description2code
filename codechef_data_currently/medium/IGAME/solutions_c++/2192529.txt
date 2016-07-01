@@ -1,0 +1,46 @@
+//Success is a just a state of mind
+#include<stdio.h>
+#include<string.h>
+#define max 1500
+int grid[max][max]={0};
+//1 for win for bob
+//2 for win for alice
+//0 for uncalculated position
+void precompute()
+{
+    memset(grid,0,sizeof(grid));
+    int i,j,k,l;
+    for(i=0;i<max;i++)
+        for(j=0;j<max;j++)
+        {
+            if(grid[i][j]==0)
+            {
+                grid[i][j]=1;
+                for(k=j+1;k<max;k++)
+                    grid[i][k]=2;
+                for(k=i+1;k<max;k++)
+                    grid[k][j]=2;
+                for(k=i+1,l=j+1;k<max && l<max;k++,l++)
+                    grid[k][l]=2;
+            }
+        }
+}
+int main()
+{
+    precompute();
+    int t,m,n,p,q;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d %d %d %d",&m,&n,&p,&q);
+        m-=p;//shifting co-ords  to origin
+        n-=q;
+        if(grid[m][n]==1)
+            printf("Bob
+");
+        else
+            printf("Alice
+");
+    }
+    return 0;
+}

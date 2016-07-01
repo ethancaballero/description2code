@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef pair< int , int > pii;
+typedef long long LL;
+#define fr first
+#define se second
+#define EPS 1e-8
+#define INF 10000*10000*10000LL
+stringstream ss;
+#define two(x) ( 1LL<<x )
+LL mod = 1000000007LL;
+
+/**************************Code****************************/
+
+int ok( char a, char b, char c, char d )
+{
+	return ( ( a == 'C' || a == '?' ) && ( b == 'H' || b == '?' ) 
+			&& ( c == 'E' || c == '?' ) && ( d == 'F' || d == '?' ) );
+}
+
+int main()
+{
+	int t;
+	scanf( "%d", &t );
+	while( t -- )
+	{
+		string s;
+		cin >> s;
+		for( int i = s.size() - 4 ; i >= 0 ; i -- )
+			if( ok( s[i], s[i+1], s[i+2], s[i+3] ) )
+				s[i] = 'C', s[i+1] = 'H', s[i+2] = 'E', s[i+3] = 'F';
+		for( int i = 0 ; i < s.size() ; i ++ )
+			if( s[i] == '?' )
+				s[i] = 'A';
+		cout << s << endl;
+	}
+	return 0;
+}

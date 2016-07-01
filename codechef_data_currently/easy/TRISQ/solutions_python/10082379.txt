@@ -1,0 +1,9 @@
+t = input()
+for i in range(t):
+    b = input()
+    n = int(b/2)-1
+    sum = int((n*(n+1))/2)
+    if(sum < 0):
+        print 0
+    else:
+        print sum

@@ -1,0 +1,23 @@
+def gcd(a, b):
+    if b > a:
+        return gcd(b, a)
+
+    if a % b == 0:
+        return b
+
+    return gcd(b, a % b)        
+  
+T = int(raw_input())
+result = []
+for inputs in range (T):
+    L = map(int, raw_input().split())
+    L = L[1:]
+    lcm = reduce(gcd, L)
+    for elements in L:
+        elements = elements/lcm
+        result.append(elements)
+        
+    print " ".join(map(str, result))
+    result = []
+    print 
+    

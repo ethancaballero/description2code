@@ -1,0 +1,42 @@
+#include<cstdio>
+#ifndef ONLINE_JUDGE
+#define gc getchar
+#endif
+  #include<iostream>
+  using namespace std;
+  int main(){
+    int T;
+    scanf("%d",&T);
+	//T=readInt();
+   while(T--){
+      int N;
+       scanf("%d",&N);
+      //N=readInt();
+      char Q[N+1];
+      char C[N+1];
+      scanf("%s",Q);
+      scanf("%s",C);
+      int W[N+1];
+      for(int i=0;i<=N;++i){
+        scanf("%d",&W[i]);
+			//W[i]=readInt();
+      }
+      int max=0;
+      for(int i=0;i<N;++i){
+        if(C[i]==Q[i]){
+          max++;
+        }
+      }
+      int max_W=0;
+      if(max!=N)
+		for(int i=0;i<=max;++i){
+          if(max_W<W[i]){
+            max_W=W[i];
+          }
+        }
+        else
+          max_W=W[N];
+          printf("%d
+",max_W);
+        }
+} 

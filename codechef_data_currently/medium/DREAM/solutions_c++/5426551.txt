@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <cmath>
+#include <list>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cassert>
+#include <climits>
+#include <functional>
+#include <bitset>
+#include <math.h>
+
+#define pb push_back
+#define all(x) x.begin(),x.end()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define print(x) cout<<x<<endl;
+#define input(x) cin>>x;
+#define SWAP(a, b)  a ^= b; b ^= a; a ^= b; 
+#define MOD 1000000007
+#define max(a,b) a < b ? b : a
+
+using namespace std;
+
+struct Meal {
+    long long time;
+    int index;
+    
+    Meal(long long f, int i){
+        time = f;
+        index = i;
+    }
+    
+    bool operator < (const  Meal& m) const {
+        if(time == m.time)
+            return index < m.index;
+        return time < m.time;
+    }
+};
+
+int main(){
+    long long n, time, count=0;
+    int k, i, start;
+    vector <Meal> meals;
+    cin >> n >> k;
+    for(i=0;i<n;i++){
+        cin >> time;
+        meals.pb(Meal(time, i));
+    }
+    sort(meals.begin(), meals.end());
+    
+    i = 0;
+    while(i<n){
+       start = meals[i].index;
+       while(meals[i].time == meals[i+1].time && (meals[i+1].index-start) < k){
+           i++;
+           if(i >= n)
+               break;
+           
+       }
+       i++;
+       count++;
+    }
+    cout << count;
+    return 0;
+}
+

@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int n;
+int minDistance(int dist[], int visit[])
+{
+
+    int min = INT_MAX;
+    int pos;
+
+    for (int v = 0; v < n; v++) {
+        if (visit[v] == 0 && dist[v] <= min) {
+            min = dist[v];
+            pos = v;
+        }
+    }
+
+   return pos;
+}
+
+
+int main()
+{
+    int test;
+    cin >> test;
+    while (test--) {
+
+        cin >> n;
+        vector<int> v[n];
+        string str;
+        getchar();
+        int arr[n][n];
+	memset(arr,0,sizeof(arr));
+        for (int i = 0; i < n; i++) {
+            getline(cin,str);
+            stringstream ss;
+            ss << str;
+            int a;
+            while (ss >> a) {
+                v[i].push_back(a-1);
+                arr[i][a-1] = 1;
+            }
+        }
+
+        int sz = v[0].size();
+       //	pos = 1;
+       /* for (int i = 1; i < n; i++) {
+        //    cout << v[i].size() << " ";
+            if (v[i].size() > sz) {
+                sz = v[i].size();
+                pos = i+1;
+            }
+        }*/
+
+        queue<int> q;
+        int ans = INT_MAX;
+	int pos = 0;
+        for (int i = 0; i < n; i++) {
+            q.push(i);
+
+            bool visit[n];
+            for (int j = 0; j < n; j++) {
+                visit[j] = false;
+            }
+        //    int ans = INT_MAX;
+            int dis[n];
+//	    int pos = i;
+            for (int j = 0; j < n; j++) {
+                dis[j] = 0;
+            }
+            visit[i] = true;
+            int cnt = 0;
+            while (!q.empty()) {
+                int t = q.front();
+                q.pop();
+                for (int j = 0; j < n; j++) {
+                    if (visit[j] == false && arr[t][j] == 1) {
+			//cout << t << " " << j << endl;
+                        q.push(j);
+                        dis[j] = dis[t]+1;
+                        visit[j] = true;
+                    }
+                }
+		visit[t] = true;
+            }
+
+            int total = 0;
+            for (int j = 0; j < n; j++) {
+            //    cout << dis[j] << " ";
+                total += dis[j];
+            }
+           // cout << endl;
+  //          cout << i << " " << total << " " << endl;;
+           // ans = total;
+            if (total < ans) {
+                ans = total;
+                pos = i;
+            }
+        }
+//        cout << endl << pos << " " << ans << endl;
+        double an = (double)(1.0*ans)/n;
+        printf("%d %lf
+", pos + 1, an);
+    }
+    return 0;
+}

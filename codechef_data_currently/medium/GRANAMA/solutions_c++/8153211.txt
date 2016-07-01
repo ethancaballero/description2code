@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+#define gc getchar
+#define mod 1000000007
+using namespace std;
+typedef unsigned long long int ll;
+ll read_int() {
+char c = gc();
+while(c<'0' || c>'9') c = gc();
+ll ret = 0;
+while(c>='0' && c<='9') {
+ret = 10 * ret + c - 48;
+c = gc();
+}
+return ret;
+}
+int main()
+{
+    ll t,i,j,n1,n2;
+    char r[1005],s[1005];
+    int a[26],b[26];
+    cin>>t;
+    while(t--)
+    {
+        cin>>r>>s;
+        memset(a,0,sizeof(a));
+        memset(b,0,sizeof(b));
+        n1=strlen(r);
+        n2=strlen(s);
+        for(i=0;i<n1;i++)
+        {
+            a[r[i]-97]++;
+        }
+        for(i=0;i<n2;i++)
+        {
+            b[s[i]-97]++;
+        }
+        ll f=1,g=1;
+        for(i=0;i<26;i++)
+        {
+            if(a[i]==0 && b[i]!=0)
+            {
+                f=0;
+                break;
+            }
+            else if(a[i]!=0 && b[i]==0)
+            {
+                f=0;
+                break;
+            }
+        }
+        bool chef;
+        if(f==0)
+            chef=false;
+        else
+            chef==true;
+        for(i=0;i<26;i++)
+        {
+            if(a[i]!=b[i])
+            {
+                g=0;
+                break;
+            }
+        }
+        if((f==0&&g==0) || (f==1&&g==1) )
+            cout<<"YES
+";
+        else
+            cout<<"NO
+";
+    }
+    return 0;
+}

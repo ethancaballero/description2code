@@ -1,0 +1,5 @@
+mod = 10**9+7
+for __ in range(input()) :
+    n = input()
+    bin_num = int(bin(n)[2:])
+    print pow(pow(2,bin_num,mod),2,mod)

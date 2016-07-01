@@ -1,0 +1,82 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+#define gc getchar_unlocked
+int fcin(){register int c = gc();int x = 0;for(;(c<48 || c>57);c = gc());for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}return x;}
+ 
+ 
+inline void fastwrite(int a){
+register char c;
+char snum[20];
+int i=0;
+do{
+snum[i++]=a%10+48;
+a=a/10;
+}while(a!=0);
+i=i-1;
+while(i>=0)
+putchar_unlocked(snum[i--]);
+putchar_unlocked('
+');
+}
+ 
+int actual[1001],points[1001][1001],cost[1001][1001];
+ 
+int main()
+{
+int t;
+int n,m,k;
+ 
+scanf("%d",&t);
+while(t--)
+{
+    n=fcin();
+    m=fcin();
+    k=fcin();
+    int i;
+ 
+ 
+    for(i=1;i<=n;i++)
+        {  actual[i]=fcin();  }
+ 
+    int j;
+        for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=m;j++)
+            points[i][j]=fcin();
+    }
+ 
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=m;j++)
+           cost[i][j]=fcin();
+    }
+    int gain[1001];
+    for(i=1;i<=n;i++)
+    {
+        gain[i]=0;
+        for(j=1;j<=m;j++)
+        {
+            gain[i]=max(gain[i],points[i][j]-points[i][actual[i]]-cost[i][j]);
+        }
+    }
+    sort(gain+1,gain+n+1);
+    int ans=0;
+    for(i=1;i<=n;i++)
+    {
+        ans+=points[i][actual[i]];
+    }
+ 
+    while(k--)
+    {
+        ans+=gain[n--];
+    }
+fastwrite(ans);
+ans=0;
+}
+ 
+ 
+return 0;
+}
+ 

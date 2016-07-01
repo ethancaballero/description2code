@@ -1,0 +1,21 @@
+t=int(raw_input())
+while(t):
+	t-=1
+	n=int(raw_input())
+	arr=map(int,raw_input().strip().split(" "))
+	m=arr[0]
+	i=1
+	cnt=1
+	
+	while i < n:
+		if arr[i]==m:
+			cnt+=1
+			i+=1
+		else:
+			cnt-=1
+			if cnt==0:
+				m=arr[i]
+				cnt+=1
+			i+=1
+ 
+	print (n+1)/2 if arr.count(m) <= (n+1)/2 else arr.count(m) 	 

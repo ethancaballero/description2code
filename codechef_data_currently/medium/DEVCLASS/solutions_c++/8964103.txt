@@ -1,0 +1,87 @@
+#include<iostream>
+#include<vector>
+#include<climits>
+#include<algorithm>
+#include<string>
+#include<cstdio>
+#include<climits>
+#include<cstdlib>
+#include<cmath>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int type;
+        cin>>type;
+        string str;
+        cin>>str;
+        string GB = "G", BG = "B";
+
+        int len = str.size(), i, bswaps = 0, gswaps = 0;
+        long long int price = -1;
+        vector<int> arr1, arr2, arr3, arr4;
+        for(i=1;i<len;i++){
+            if(GB[i-1] == 'G')
+                GB += 'B';
+            else
+            if(GB[i-1] == 'B')
+                GB += 'G';
+            if(BG[i-1] == 'B')
+                BG += 'G';
+            else
+            if(BG[i-1] == 'G')
+                BG += 'B';
+        }
+
+        for(i=0;i<len;i++){
+            if(str[i] != GB[i]){
+                if(str[i] == 'B' && GB[i] == 'G')
+                    {bswaps++;arr1.push_back(i);}
+                else
+                if(str[i] == 'G' && GB[i] == 'B')
+                    {gswaps++;arr2.push_back(i);}
+            }
+        }
+       // cout<<bswaps<<" "<<gswaps<<endl;
+        if((bswaps == gswaps)){
+            //price = bswaps;
+            if(price == -1)
+                price = 0;
+
+                     sort(arr1.begin(), arr1.end());
+                     sort(arr2.begin(), arr2.end());
+                     for(i=0;i<bswaps;i++){
+                        price = price + pow(abs(arr2[i] - arr1[i]), type);
+
+            }
+        }
+
+        bswaps = gswaps = 0;
+         for(i=0;i<len;i++){
+            if(str[i] != BG[i]){
+                if(str[i] == 'B' && BG[i] == 'G')
+                    {bswaps++;arr3.push_back(i);}
+                else
+                if(str[i] == 'G' && BG[i] == 'B')
+                    {gswaps++;arr4.push_back(i);}
+            }
+        }
+       // cout<<bswaps<<" "<<gswaps;
+        if((bswaps == gswaps)){
+
+                long long int temp = 0;
+                sort(arr3.begin(), arr3.end());
+                sort(arr4.begin(), arr4.end());
+                for(i=0;i<bswaps;i++){
+                    temp = temp + pow(abs(arr4[i] - arr3[i]), type);
+                }
+                if(temp < price || price== -1)
+                    price = temp;
+        }
+
+
+        cout<<price<<endl;
+    }
+}

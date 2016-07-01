@@ -1,0 +1,22 @@
+#include<cstdio>
+using namespace std;
+int main()
+{
+	int n, c, q, t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		scanf("%d %d %d", &n, &c, &q);
+		while (q--)
+		{
+			int l, r;
+			scanf("%d %d", &l, &r);
+			if (l <= c&&c <= r)
+			{
+				c = r - (c - l);
+			}
+		}
+		printf("%d
+", c);
+	}
+}

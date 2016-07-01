@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool isSubsetSum(int set[], int n, int sum)
+{
+  
+   if (sum == 0)
+     return true;
+   if (n == 0 && sum != 0)
+     return false;
+ 
+  
+   if (set[n-1] > sum)
+     return isSubsetSum(set, n-1, sum);
+ 
+   return isSubsetSum(set, n-1, sum) || isSubsetSum(set, n-1, sum-set[n-1]);
+}
+
+int main(){
+	int t,m,n,i,j;
+	scanf("%d",&t);
+	for(i=0;i<t;i++)
+	{
+		scanf("%d%d",&m,&n);
+		int set[m];
+		for(j=0;j<m;j++)
+			scanf("%d",&set[j]);
+		 if (isSubsetSum(set , m , n) == true)
+			cout << "Yes
+";
+		else
+			cout<< "No
+";
+	}
+return 0;
+}

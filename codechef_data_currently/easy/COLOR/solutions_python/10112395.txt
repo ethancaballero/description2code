@@ -1,0 +1,18 @@
+# cook your code here
+#O(n)
+# from math import sqrt
+t=int(raw_input())
+for i in range(t):
+    raw_input()
+    l = list(raw_input())
+    lc = [0]*3
+    lg = len(l)
+    for j in range(lg):
+        if(l[j]=='R'):
+            lc[0] += 1
+        elif(l[j]=='G'):
+            lc[1] += 1
+        else:
+            lc[2] += 1
+    lc.sort()
+    print lg-int(lc[2])

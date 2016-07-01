@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long n,m;
+struct data{
+	long long permut ; 
+	long long sum ; 
+};
+vector <long long > C[50];
+struct data memo[50][50][50][2];
+bool stat[50][50][50][2];
+struct data func(long long pos1,long long colors,long long pos2,bool hai){
+	if(stat[pos1][colors][pos2][hai]){
+		return memo[pos1][colors][pos2][hai];
+	}
+	stat[pos1][colors][pos2][hai]=true;
+	if(pos1>=40){
+		struct data R;
+		if(colors>=m){
+			R.permut=1;
+			R.sum=0;
+			memo[pos1][colors][pos2][hai]=R;
+			return R;
+		}else{
+			R.permut=0;
+			memo[pos1][colors][pos2][hai]=R;
+			return R;
+		}
+	}
+	if(pos2>=C[pos1].size()){
+		memo[pos1][colors][pos2][hai]=func(pos1+1,colors,0,false);
+		return memo[pos1][colors][pos2][hai];
+	}
+	struct data ans1,ans2,ret;
+	ret.permut=0;
+	if(hai){
+		ans1=func(pos1,colors,pos2+1,true);
+		if(ans1.permut){
+			ret.permut=2*ans1.permut;
+			ret.sum=2*ans1.sum+ans1.permut*C[pos1][pos2];
+		}
+		memo[pos1][colors][pos2][hai]=ret;
+		return ret;
+	}else{
+		ret.permut=0;
+		ret.sum=0;
+		ans1=func(pos1,colors+1,pos2+1,true);
+		ans2=func(pos1,colors,pos2+1,false);
+		if(ans1.permut){
+			ret.permut=ans1.permut;
+			ret.sum=ans1.sum+ans1.permut*C[pos1][pos2];
+		}
+		if(ans2.permut){
+			ret.permut=ans2.permut+ret.permut;
+			ret.sum=ret.sum+ans2.sum;
+		}
+		memo[pos1][colors][pos2][hai]=ret;
+		return ret;
+	}
+}
+int main(){
+	long long t;cin >> t ; 
+	while(t--){
+		cin >> n >>  m ;
+		for(int i=0;i<=40;i++){
+			C[i].clear();
+		}
+		for(int i=0;i<n;i++){
+			long long a,b;
+			cin >> a >> b ; 
+			C[a-1].push_back(b);
+		}
+		for(int i=0;i<50;i++){
+			for(int ii=0;ii<50;ii++){
+				for(int iii=0;iii<50;iii++){
+					for(int iiii=0;iiii<=1;iiii++){
+						stat[i][ii][iii][iiii]=false;
+					}
+				}
+			}
+		}
+		struct data answer=func(0,0,0,0);
+		printf("%0.9f
+",((answer.sum*1.0)/(answer.permut*1.0)));
+	}
+	return 0;
+}
+
+
+
+

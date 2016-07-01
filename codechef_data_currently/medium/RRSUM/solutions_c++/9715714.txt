@@ -1,0 +1,61 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+using namespace std;
+ 
+inline long long int read_int()
+	{
+		long long int ret = 0;
+		int c = getchar_unlocked();
+		
+		while(c<'0' || c>'9')
+			c = getchar_unlocked();
+		while(c>='0' && c<='9')
+		{
+			ret = (ret<<3) + (ret<<1) + c - '0';
+			c = getchar_unlocked();
+		}
+	        return ret;
+	}
+	 
+inline void write_int (int n)
+	{
+		int n2=n;
+		int i=20;
+		char output_buffer[20];
+		do
+		{
+			output_buffer[--i]=(n2%10)+'0';
+			n2/=10;
+		}while(n2);
+		do
+		{
+			putchar_unlocked(output_buffer[i]);
+		}while(++i<20);
+	}
+ 
+ 
+int main(){
+ 
+    long long int n,m;
+    long long int i,j,k;
+    //scanf("%lld %lld",&n,&m);
+    n = read_int();
+    m = read_int();
+ 
+    for(i = 0 ; i < m ; i++){
+       // scanf("%lld",&k);
+       	k = read_int();
+ 
+        if( (k <= n + 1) || (k >= n*3 + 1) )
+            printf("0
+");
+        else{
+            write_int(n - abs(k - n - n - 1));
+            putchar_unlocked('
+');
+        }
+    }
+ return 0;
+}
+ 

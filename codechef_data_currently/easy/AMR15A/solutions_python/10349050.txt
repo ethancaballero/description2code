@@ -1,0 +1,17 @@
+def main():
+    s=input()
+    w=raw_input()
+    q=w.split()
+    e=0
+    o=0
+    for i in q:
+        if int(i)%2==0:
+            e+=1
+        else:
+            o+=1
+    if e>o:
+        print "READY FOR BATTLE"
+    else:
+        print "NOT READY"
+main()
+        

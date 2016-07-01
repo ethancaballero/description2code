@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	ios::sync_with_stdio(false);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int x,y,k,n,pl;
+		cin>>x>>y>>k>>n;
+		pl=x-y;
+		int i,pi,ci;
+		int flag=0;
+		for(i=0;i<n;i++)
+		{
+			cin>>pi>>ci;
+			if(!flag&&pi>=pl&&ci<=k)
+			flag=1;
+		}
+		if(flag==1)
+		cout<<"LuckyChef
+";
+		else
+		cout<<"UnluckyChef
+";
+		
+	}
+}

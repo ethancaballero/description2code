@@ -1,0 +1,45 @@
+    #include<iostream>
+    #include<map>
+    using namespace std;
+    const int N = 100001;
+    typedef long long LOL;
+    LOL four[N],seven[N];
+    LOL ans[N];
+    //LOL Sn[N];
+    map<LOL,LOL> mp;
+    int main(void)
+    {
+    	mp[0]=1;
+    	four[0] = 0;
+    	seven[0] = 0;
+    	ans[0] = 0;
+    	//Sn[0]=0;
+		for(int i=1;i<=100000;i++)
+		{
+    		int u=i;
+    		
+    		four[i]=four[i-1];
+    		seven[i]=seven[i-1];
+    		ans[i]=ans[i-1];
+    		while(u!=0)
+			{
+    			if(u%10==4) 
+					four[i]++;
+    			if(u%10==7) 
+					seven[i]++;
+    			u/=10;
+    		}
+    		//Sn[i] = four[i] - seven[i];
+    		ans[i]+=mp[four[i]-seven[i]];
+    		mp[four[i]-seven[i]]++;
+    	}
+    	int T,n;
+    	scanf("%d",&T);
+    	while(T--)
+		{
+    		scanf("%d",&n);
+    		printf("%lld
+",ans[n]);
+    	}
+    	return 0;
+	}

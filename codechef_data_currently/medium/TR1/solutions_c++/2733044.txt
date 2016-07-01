@@ -1,0 +1,86 @@
+/*	Template by
+	Ashwin Kumar
+	IIT Delhi */
+#include<algorithm>		//min(), max(), reverse(), sort(), next_permutation(), prev_permutation(), swap()
+						//make_heap(), pop_heap(), push_heap(), sort_heap()
+#include<iostream>
+#include<cassert>		//assert()
+#include<cmath>			//cos(in radians), sin(), tan(), acos(), asin(), atan(), modf(break into frac and inte parts)
+						//log(), log10(), log2(), pow(), sqrt(), cbrt(), ceil(), floor(), fmod(), abs()  
+#include<cstdio>		//fclose(), fopen(), fprintf(), fscanf(), printf(), scanf(), gets(), puts()
+#include<cstdlib>		//srand(time(NULL)), rand(), itoa(), malloc(), free()
+#include<cstring>		//memcpy(), strcpy(), strcat(), strcmp(), memset(), strlen(), strtok(), strrchr()
+#include<sstream>
+#include<string>		//to_string(any numerical value), stoi(), stoll()
+#include<ctime>   
+#include<deque>			//iterators: begin(), end(), rbegin(), rend()
+						//access:	 operator[], at(), front(), back() 
+						//modifiers: push_back(), push_front(), pop_back(), pop_front(), erase(), clear()
+#include<list>			//begin(), end(), push_back(), pop_back()
+#include<map>			//begin(), end(), rbegin(), rend(), operator[], at(), clear(), find()
+						//priority_queue:  top(), push(), pop()
+#include<queue>			//front(), back(), push(), pop()
+#include<set>			//begin(), end(), rbegin(), rend(), insert(), erase(), clear(), find()
+#include<stack>			//top(), push(), pop()
+#include<vector>		//iterators: begin(), end(), rbegin(), rend()
+						//access:	 operator[], at(), front(), back()
+						//modifiers: push_back(), pop_back(), erase(), clear() 
+using namespace std;
+ 
+typedef long long LL;
+typedef pair<int, int> pii;
+#define MAX 10000
+#define INF 1000000000000LL
+#define MOD 1000000007
+
+vector<int> adj[MAX];
+
+pii dfs(int node, int parent)
+{
+	bool isLeaf = 1;
+	LL ans = 0;
+	LL tmp1 = 0;
+	LL tmp2 = 0;
+	for (int i = 0; i < adj[node].size(); i++)
+	{
+		if (adj[node][i] != parent)
+		{
+			pii p = dfs(adj[node][i], node);
+			ans = (ans+(LL)p.first)%MOD;
+			tmp1 = (tmp1+p.second)%MOD;
+			tmp2 = (tmp2+((LL)p.second*(LL)p.second))%MOD;
+			isLeaf = 0;
+		}
+	}
+	if (isLeaf)
+		return pii(node+1, 1);
+	LL tmp = (tmp1*tmp1)%MOD;
+	tmp = (tmp+MOD-tmp2)%MOD;
+	tmp = (tmp+2*tmp1+1)%MOD;
+	tmp = (tmp*(LL)(node+1))%MOD;
+	ans = (ans+tmp)%MOD;
+	return pii((int)ans, (int)tmp1+1);
+}
+
+int main()
+{
+	int T;
+	scanf("%d", &T);
+	for (int t = 0; t < T; t++)
+	{
+		int N;
+		scanf("%d", &N);
+		for (int i = 0; i < N; i++)
+			adj[i].clear();
+		for (int i = 0; i < N-1; i++)
+		{
+			int a, b;
+			scanf("%d %d", &a, &b);
+			adj[a-1].push_back(b-1);
+			adj[b-1].push_back(a-1);
+		}
+		printf("%d
+", dfs(0, -1).first);
+	}
+	return 0;
+}

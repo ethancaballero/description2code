@@ -1,0 +1,37 @@
+def least_bit_set(x):
+    return x & (-x)
+
+def eliminate(values):
+    values = list(values)
+    i = 0
+    while True:
+        values = [v for v in values if v > 0]
+        if i >= len(values):
+            return values
+        j = i
+        for k in range(i + 1, len(values)):
+            if least_bit_set(values[k]) < least_bit_set(values[j]):
+                j = k
+        values[i], values[j] = (values[j], values[i])
+        for k in range(i + 1, len(values)):
+            if least_bit_set(values[k]) == least_bit_set(values[i]):
+                values[k] ^= values[i]
+        i += 1
+    return values
+
+def in_span(x, eliminated_values):
+    for y in eliminated_values:
+        if least_bit_set(y) & x != 0:
+            x ^= y
+    return x == 0
+
+for _ in xrange(int(raw_input())):
+  n, k = map(int, raw_input().split())
+  values = map(int, raw_input().split())
+  eliminated_values = eliminate(values)
+  res = k
+  for target in xrange(1023, 0, -1):
+    if in_span(target ^ k, eliminated_values):
+      res = target
+      break
+  print res

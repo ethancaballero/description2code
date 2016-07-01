@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+int main()
+{
+	int t;
+	char s[100][100];
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,m,cnt=0,k;
+		scanf("%d %d ",&n,&m);
+		for (int i = 0; i < n; i++)
+		{
+		
+				scanf("%s",s[i]);
+		}
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+			{
+				for (int k = 1;k+i<n && k+j<m; k++)
+				{
+					if((s[i][j]==s[i][k+j]) && (s[i][j]==s[i+k][j]) && (s[i][j]==s[k+i][k+j]))
+					{
+						cnt++;
+					}
+				}
+			}
+		}
+		printf("%d
+",cnt );
+	}
+	return 0;
+}

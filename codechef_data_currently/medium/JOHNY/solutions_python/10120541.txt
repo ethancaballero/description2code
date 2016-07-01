@@ -1,0 +1,9 @@
+t=input()
+while t>0:
+    t=t-1
+    a=input()
+    m=map(int,raw_input().split())
+    b=input()
+    b=m[b-1]
+    m.sort()
+    print m.index(b)+1

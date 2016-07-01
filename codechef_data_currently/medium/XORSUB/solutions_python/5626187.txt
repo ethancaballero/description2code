@@ -1,0 +1,66 @@
+import copy
+y=[]
+
+def powerset(s):
+    global y
+    y=[]
+    x=[]
+    s=list(set(s))
+    add(x,0,s)
+    y.append([])
+    
+
+def add(temp,key,s):
+    
+    for i in range (len(s[key:])):
+
+        b=copy.copy(temp)
+        
+        b.append(s[key+i])
+
+        
+        y.append(b)
+
+        add(b,key+i+1,s)
+
+        
+
+
+
+
+t=input()
+
+for i in range(t):
+    a=raw_input()
+    a=a.split()
+    n=int(a[0])
+    k=int(a[1])
+    a=raw_input()
+    a=a.split()
+
+    for i in range(len(a)):
+        a[i]=int(a[i])
+    powerset(a)
+    tempx=-1
+    
+    for i in range(len(y)):
+        xor=k
+        for j in (y[i]):
+            xor=xor^j
+            
+        if xor>tempx:
+            tempx=xor
+            
+
+    print tempx
+
+       
+            
+            
+    
+    
+    
+
+
+    
+    

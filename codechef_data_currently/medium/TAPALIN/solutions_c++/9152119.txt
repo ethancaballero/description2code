@@ -1,0 +1,165 @@
+#include<iostream>
+#include<math.h>
+#define mod 1000000007
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int n;
+        cin>>n;
+        if (n==1)
+        {
+            cout<<26<<'
+';
+            continue;
+        }
+        else if (n==2)
+        {
+            cout<<52<<'
+';
+            continue;
+        }
+
+
+
+        else if (n%2==0)
+        {
+            long long int ceiln=n/2;
+            long long int a=26;
+            long long int b=26;
+            long long int c=0;
+            long long int d=1;
+
+            long long int resulta=1;
+            long long int resultb=0;
+            long long int resultc=1;
+            long long int resultd=0;
+            long long int number=ceiln-1;
+
+            long long int tempa,tempb,tempc,tempd;
+
+            while(number>0)
+            {
+                if (number%2==0)
+                {
+
+                    tempa=((a*a)%mod+(b*c)%mod)%mod;
+                    tempb=((a*b)%mod+(b*d)%mod)%mod;
+                    tempc=((c*a)%mod+(d*c)%mod)%mod;
+                    tempd=((c*b)%mod+(d*d)%mod)%mod;
+                    a=tempa;
+                    b=tempb;
+                    c=tempc;
+                    d=tempd;
+                    number=number/2;
+                }
+                else
+                {
+                    tempa=((resulta*a)%mod+(resultb*c)%mod)%mod;
+                    tempb=((resulta*b)%mod+(resultb*d)%mod)%mod;
+                    tempc=((resultc*a)%mod+(resultd*c)%mod)%mod;
+                    tempd=((resultc*b)%mod+(resultd*d)%mod)%mod;
+                    resulta=tempa;
+                    resultb=tempb;
+                    resultc=tempc;
+                    resultd=tempd;
+                    number=number-1;
+
+                }
+            }
+
+            long long int result=0;
+            result = ((resulta*26)%mod +(resultb%mod))%mod;
+            result=(result*2)%mod;
+            cout<<result<<'
+';
+
+
+        }
+
+        else if (n%2==1)
+        {
+            long long int floorn=n/2;
+            long long int a=26;
+            long long int b=26;
+            long long int c=0;
+            long long int d=1;
+
+            long long int resulta=1;
+            long long int resultb=0;
+            long long int resultc=1;
+            long long int resultd=0;
+            long long int number=floorn-1;
+
+            long long int tempa,tempb,tempc,tempd;
+
+            while(number>0)
+            {
+                if (number%2==0)
+                {
+
+                    tempa=((a*a)%mod+(b*c)%mod)%mod;
+                    tempb=((a*b)%mod+(b*d)%mod)%mod;
+                    tempc=((c*a)%mod+(d*c)%mod)%mod;
+                    tempd=((c*b)%mod+(d*d)%mod)%mod;
+                    a=tempa;
+                    b=tempb;
+                    c=tempc;
+                    d=tempd;
+                    number=number/2;
+                }
+                else
+                {
+                    tempa=((resulta*a)%mod+(resultb*c)%mod)%mod;
+                    tempb=((resulta*b)%mod+(resultb*d)%mod)%mod;
+                    tempc=((resultc*a)%mod+(resultd*c)%mod)%mod;
+                    tempd=((resultc*b)%mod+(resultd*d)%mod)%mod;
+                    resulta=tempa;
+                    resultb=tempb;
+                    resultc=tempc;
+                    resultd=tempd;
+                    number=number-1;
+
+                }
+            }
+
+            long long int result=0;
+            result = ((resulta*26)%mod +(resultb%mod))%mod;
+
+            result=(result*2)%mod;
+
+            long long int ceiln=(n/2)+1;
+
+            long long int res=1;
+            long long int base = 26;
+
+            while(ceiln!=0)
+            {
+                if (ceiln%2==0)
+                {
+                    base = (base *base)%mod;
+                    ceiln/=2;
+
+                }
+                else
+                {
+                    res=(res*base)%mod;
+                    ceiln=ceiln-1;
+                }
+
+            }
+            result=(result+res)%mod;
+            cout<<result<<'
+';
+
+        }
+
+
+
+
+    }
+    return 0;
+}

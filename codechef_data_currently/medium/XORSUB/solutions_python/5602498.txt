@@ -1,0 +1,24 @@
+from itertools import chain, combinations
+
+def powerset(iterable):
+    s = list(iterable)
+    return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
+
+def subsets(s):
+    return map(list, powerset(s))
+t = int(raw_input())
+while t:
+    t-=1
+    (n, m) = map(int, raw_input().split(' '))
+    a = map(int, raw_input().split(' '))
+    cnt = 0^m
+    b = 0
+    for i in subsets(a):
+        if len(i) > 0:
+            b = 0
+            for j in i:
+                b = b^j
+            b = b^m
+            if b > cnt:
+                cnt = b
+    print cnt

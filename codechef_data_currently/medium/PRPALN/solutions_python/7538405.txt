@@ -1,0 +1,19 @@
+for asd in range(int(raw_input())):
+	s=raw_input()
+	l=len(s)
+	flag=0
+	x=l/2+1
+	for i in range (x):
+		t=s[:i]+s[i+1:]
+		if (t==t[::-1]):
+			flag=1
+			break
+		temp=l-i-1
+		u=s[:temp]+s[temp+1:]
+		if (u==u[::-1]):
+			flag=1
+			break
+	if (flag):
+		print "YES"
+	else:
+		print "NO"

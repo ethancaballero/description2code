@@ -1,0 +1,10 @@
+n = int(raw_input())
+import sys
+for _ in xrange(n):
+    raw_input()
+    n = 1.0
+    for l in map(int, raw_input().split()):
+        n = (n - l) * 2
+    print "No" if n else "Yes"
+
+    

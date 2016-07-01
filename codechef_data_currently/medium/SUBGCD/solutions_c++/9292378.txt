@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+vector<ll> arr(100001);
+int main()
+{
+    ll test,i,j,num,gcd;
+    scanf("%lld",&test);
+    while(test--)
+    {
+        scanf("%lld",&num);
+        for(ll i=1;i<=num;i++)
+            scanf("%lld",&arr[i]);
+        gcd=__gcd(arr[1],arr[2]);
+        if(gcd!=1)
+        {
+            for(ll i=3;i<=num;i++)
+            {
+                gcd=__gcd(gcd,arr[i]);
+                if(gcd==1)
+                    break;
+            }
+        }
+        if(gcd==1)
+            printf("%lld
+",num);
+        else
+        {
+            num=-1;
+            printf("%lld
+",num);
+        }
+    }
+}

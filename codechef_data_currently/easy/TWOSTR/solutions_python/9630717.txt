@@ -1,0 +1,16 @@
+def yesOrno(stringX, stringY):
+    for i in xrange(len(stringX)):
+        if stringX[i] != '?' and stringY[i] != '?' and stringX[i] != stringY[i]:
+            return 'No'
+        else:
+            pass
+    return 'Yes'
+
+
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    stringX = raw_input()
+    stringY = raw_input()
+
+    print yesOrno(stringX,stringY)

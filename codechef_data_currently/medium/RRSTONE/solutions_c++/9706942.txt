@@ -1,0 +1,58 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+#define rep(i,n) for(int i=0; i<n; i++)
+#define rrep(i,n) for(int i=n; i>=0; i--)
+#define pb(v,no) v.push_back(no);
+#define v(i)	vector< i >  
+#define vii	vector<vector<int> >  
+
+void solve(){
+	long long n, k;
+	cin >> n >> k;
+	long long max=-1, min=99999;
+	cin >> min;
+	max=min;
+	
+	v(long long) v;
+	pb(v,min);
+	rep(i, n-1){
+		long long no;
+		cin >> no;
+		pb(v,no);
+		
+		if(no>max)
+		max=no;
+		
+		if(no<min)
+		min=no;
+		
+	}
+	if(k==0){
+		rep(i, n){
+			cout << v[i] << " " ;
+		}
+	}
+	else if(k&1){
+		rep(i, n){
+			cout << max-v[i] << " " ;
+		}
+	}
+	else{
+		rep(i, n){
+			cout << v[i]-min << " " ;
+		}
+	}
+	
+}
+main(){
+//	int t;
+//	cin >> t;
+
+//	string w;
+//	getline(cin , w);
+//	while(t--){
+		solve();
+//	}
+}

@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,a,b,c,result;
+		cin>>n;
+		while(n--)
+		{
+			cin>>a>>b>>c;
+			result=b/2;
+			if(b%2!=0)
+			{
+				if(a==1)
+				{
+					if(c==1)
+						cout<<result<<endl;
+					else
+						cout<<(b-result)<<endl;
+				}
+				else
+				{
+					if(c==2)
+						cout<<result<<endl;
+					else
+						cout<<(b-result)<<endl;
+				}				
+			}
+			else
+				cout<<result<<endl;	
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,162 @@
+//package augustchallenge;
+//import node;
+//import nodecomparator;
+
+import java.io.*;
+import java.util.*;
+ class KGPSUMERS {
+public static void main(String[] args) throws Exception
+{
+	KGPSUMERS kg=new KGPSUMERS();
+	Scanner sc=new Scanner(System.in);
+	int t=sc.nextInt();
+	while(t-->0)
+	{
+		int n=sc.nextInt();
+		int[] x=new int[n+2];
+		int[] y=new int[n+2];
+		for(int i=1;i<=n;i++)
+		{
+			x[i]=sc.nextInt();
+			y[i]=sc.nextInt();
+		}
+		x[0]=sc.nextInt();
+		y[0]=sc.nextInt();
+		x[n+1]=sc.nextInt();
+		y[n+1]=sc.nextInt();
+		long[][] dist=new long[n+2][n+2];
+		for(int i=0;i<n+2;i++)
+		{
+			for(int j=i+1;j<n+2;j++)
+			{
+				long mm=(x[j]-x[i])*1l*(x[j]-x[i])+(y[j]-y[i])*1l*(y[j]-y[i]);
+				dist[i][j]=mm;
+				dist[j][i]=mm;
+			}
+		}
+	
+		Dijkstra dk=new Dijkstra();
+		//System.out.println(dd[n+1]);
+		dk.dijk(0, n+1, dist);
+		System.out.println(dk.funcdistance(0,n+1));
+		
+	}
+}
+
+
+}
+class Dijkstra{
+	 private static long INFY = Long.MAX_VALUE;
+	  
+	    private long[] distance;
+	    private int[] pre;
+
+	    public long funcdistance(int s, int d) {
+	        	        return distance[d];
+	    }
+	    public void dijk(int s, int d, long[][]dist2) {
+	        int V = dist2.length;
+
+	        distance = new long[V];
+	        pre = new int[V];
+	        for (int v = 0; v < V; v++) distance[v] = INFY;
+	        for (int v = 0; v < V; v++) pre[v] = -1;
+
+	        Indexer pq = new Indexer(V);
+	        for (int v = 0; v < V; v++) pq.insert(v, distance[v]);
+
+
+	        distance[s] = 0;
+	        pre[s] = s;
+	        pq.chng(s, distance[s]);
+
+
+	        while (!pq.isEmty()) {
+	            int v = pq.deleteMin();
+	            if (pre[v] == -1) break;
+
+
+	            for(int i=0;i<V;i++) {
+	                int w = i;
+	                if (distance[v] +dist2[v][w] < distance[w]) {
+	                    distance[w] = distance[v] + dist2[v][w];
+	                    pq.chng(w, distance[w]);
+	                    pre[w] = v;
+
+	                }
+	            }
+	        }
+	    }	    
+}
+
+class Indexer {
+    private int N;              
+    private int[] ab;           
+    private int[] ba;           
+    private long[] prior;  
+ 
+    public Indexer(int NMAX) {
+        ab = new int[NMAX + 1];
+        ba = new int[NMAX + 1];
+        prior = new long[NMAX + 1]; 
+        N = 0;
+    }
+ 
+    public boolean isEmty() { return N == 0; }
+ 
+    
+    public void insert(int k, long value) {
+        N++;
+        ba[k] = N;
+        ab[N] = k;
+        prior[k] = value;
+        doUpFix(ab, N);
+    }
+ 
+    
+    public int deleteMin() { 
+        exch(ab[1], ab[N]); 
+        doDownFix(ab, 1, --N); 
+        return ab[N+1]; 
+    }
+ 
+    
+    public void chng(int k, long value) {
+        prior[k] = value;
+        doUpFix(ab, ba[k]);
+        doDownFix(ab, ba[k], N);
+    }
+ 
+ 
+   
+    private boolean gr8r(int i, int j) {
+        return prior[i] > prior[j];
+    }
+ 
+    private void exch(int i, int j) {
+        int t = ba[i]; ba[i] = ba[j]; ba[j] = t;
+        ab[ba[i]] = i; ab[ba[j]] = j;
+    }
+ 
+ 
+   
+    private void doUpFix(int[] a, int k)  {
+        while (k > 1 && gr8r(a[k/2], a[k])) {
+            exch(a[k], a[k/2]);
+            k = k/2;
+        }
+    }
+ 
+    private void doDownFix(int[] a, int k, int N) {
+        int j;
+        while (2*k <= N) {
+            j = 2*k;
+            if (j < N && gr8r(a[j], a[j+1])) j++;
+            if (!gr8r(a[k], a[j])) break;
+            exch(a[k], a[j]);
+            k = j;
+        }
+    }
+ 
+ 
+}

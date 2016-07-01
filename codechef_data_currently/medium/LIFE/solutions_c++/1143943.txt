@@ -1,0 +1,187 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+int main(int argc, char **argv) {
+    int t,size,state,count;
+    char input[52];
+    scanf("%d",&t);
+    int zero[4][3]={{1,0,1},{0,0,0},{0,1,1},{1,1,0}};
+    int one[4][3]={{0,1,0},{1,1,1},{1,0,0},{0,0,1}};
+    //printf("%d",one[0][2]);
+    for (int j=0;j<t;j++)
+    {
+      state=0;
+      count=0;
+      scanf("%s",input);
+      size=strlen(input);
+      int numinput[52],numoutput[52],result[52];
+      
+      for (int i=0;i<size;i++)
+      {
+	numinput[i]=input[i]-'0';
+	numoutput[i]=0;
+	//printf("%d",numinput[i]);
+      }
+      while (state<=3)
+      {
+	for (int i=0;i<size;i++)
+	{
+	  if (i==0)
+	  {
+	      if (numinput[i]==0)
+	      {
+		numoutput[size-1]=zero[state][0];
+		numoutput[0]=zero[state][1];
+		numoutput[1]=zero[state][2];
+	      }
+	      if (numinput[i]==1)
+	      {
+		numoutput[size-1]=one[state][0];
+		numoutput[0]=one[state][1];
+		numoutput[1]=one[state][2];
+	      }
+	  }
+	  else if (i==size-1)
+	  {
+	    //printf("Hello");
+	    int temp;
+	    if (numinput[i]!=numoutput[i])
+	    {
+	      temp=numoutput[i-1]^1;
+	      //printf("not equal %d",temp);
+	    }
+	    else{
+	      temp=numoutput[i-1]^0;
+	      //printf("equal %d %d",temp,numoutput[i-1]);
+	    }
+	    if (temp==numoutput[0])
+	    {
+	      numoutput[0]=temp;
+	      if (count>0)
+	      {
+		printf("Multiple solutions
+");
+		
+		state=4;
+		break;
+	      }
+	      for (int k=0;k<size;k++)
+	      {
+		result[k]=numoutput[k];
+		//printf("%d",numoutput[k]);
+	      }
+	      count++;
+	     //printf("count %d",count);
+	      state++;
+	      if (count==1 && state==4)
+	      {
+		for (int k=0;k<size;k++)
+		{
+		  printf("%d",result[k]);
+		}
+		printf("
+");
+	      }
+	      //printf("State %d",state);
+	      
+	    }
+	    else{
+	      
+	      if (state==3)
+	      {
+		if (count==1)
+		{
+		  for (int k=0;k<size;k++)
+		  {
+		    printf("%d",result[k]);
+		  }
+		  printf("
+");
+		  state++;
+		  break;
+		}
+		//printf("count %d",count);
+		printf("No solution
+");
+		//printf("count %d",count);
+		state++;
+		break;
+	      }
+	      else{
+		//printf("count %d",count);
+		state++;
+		break;
+	      }
+	    }
+	    
+	  }
+	  else if (i==size-2)
+	  {
+	    int temp;
+	    if (numinput[i]!=numoutput[i])
+	    {
+	      temp=numoutput[i-1]^1;
+	      //printf("not equal %d",temp);
+	    }
+	    else{
+	      temp=numoutput[i-1]^0;
+	      //printf("equal %d %d",temp,numoutput[i-1]);
+	    }
+	    if (temp==numoutput[i+1])
+	    {
+	      numoutput[i+1]=temp;
+	      
+	      /*for (int k=0;k<size;k++)
+	      {
+		printf("%d",numoutput[k]);
+	      }
+	      count++;
+	      printf("State %d",state);
+	      state=4;
+	      break;*/
+	    }
+	    else{
+	      
+	      if (state==3)
+	      {
+		if (count==1)
+		{
+		  for (int k=0;k<size;k++)
+		  {
+		    printf("%d",result[k]);
+		  }
+		  printf("
+");
+		  state++;
+		  break;
+		}
+		printf("No solution
+");
+		state++;
+		break;
+	      }
+	      else{
+		state++;
+		break;
+	      }
+	    }
+	    
+	  }
+	  else{
+	    if (numinput[i]!=numoutput[i])
+	    {
+	      numoutput[i+1]=numoutput[i-1]^1;
+	      //printf("added %d",numoutput[i+1]);
+	    }
+	    else{
+	      numoutput[i+1]=numoutput[i-1]^0;
+	      //printf("added %d",numoutput[i+1]);
+	    }
+	  }
+	}
+      }
+      //printf("No solution
+");
+    }
+    return 0;
+}

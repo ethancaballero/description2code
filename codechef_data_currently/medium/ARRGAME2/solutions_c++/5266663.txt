@@ -1,0 +1,121 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+
+int quicksort(long a[], int i, int j )
+{	
+	if(i>j)
+	{	return 0;
+	}
+	long pivot=a[i];
+	int frst=i;int last=j;int pos=-1;
+	i++;
+	while(j>=i)
+	{	if(a[j]>pivot)
+		{	j--;
+		}
+		else 
+		{	int swap = a[i];
+			a[i]=a[j];
+			a[j]=swap;
+			i++;
+		}
+
+	}
+	i--;
+	a[frst]=a[i];
+	a[i]=pivot;
+	i--;
+	j++;
+	quicksort(a,frst,i);
+	quicksort(a,j,last);
+}
+
+long  long solve(long chef[], long girl[], int n)
+{	int i = 0 ;
+	int j = 0;
+	long long  kiss=0;
+	int need3=0;
+	int need4=0;
+	int need1=0;
+	int need2=0;
+	while(girl[j]<=4&&j<n)
+	{	if(girl[j]==1)
+		{	need1++;
+		}
+		else if(girl[j]==2)
+		{	need2++;
+		}
+		else if(girl[j]==3)
+		{	need3++;
+		}
+		else if(girl[j]==4)
+		{	need4++;
+		}
+		j++;
+	}
+//	cout<<j<<endl;
+//	cout<<need1<<need2<<need3<<need4<<"j"<<j<<endl;
+//	cout<<kiss<<endl;
+	for(;i<n;i++)
+	{	if(chef[i]==1)
+		{	continue;
+		}
+		else if(chef[i]==2)
+		{	kiss+=n-need3-need2-need4;
+//			cout<<5<<kiss<<endl;
+		}
+		else if(chef[i]==3)
+		{	kiss+=n-need3;
+//			cout<<4<<kiss<<endl;
+		}
+		else if(chef[i]==4)
+		{	kiss+=n-need3-need2-need4;
+//			cout<<3<<kiss<<endl;
+		}
+		else
+		{	while(chef[i]>=girl[j]&&j<n)
+			{	j++;
+			}
+//			cout<<kiss<<6<<endl;
+			kiss+=n-j+need1;
+//			cout<<kiss<<endl;
+		}
+		
+//		cout<<i<<"i"<<endl;
+	}
+	return kiss;
+}
+
+int main()
+{	int test;
+	scanf("%i",&test);
+	while(test>0)
+	{	int n;
+		scanf("%i",&n);
+		long chef[n];
+		long girl[n];
+		for(int i =0; i<n ;i++)
+		{	scanf("%lu",&chef[i]);
+		} 
+		for( int i = 0; i<n;i++)
+		{	scanf("%lu",&girl[i]);
+		}
+
+//		quicksort(chef,0,n-1);
+//		quicksort(girl,0,n-1);
+		sort(chef,chef+n);
+		sort(girl,girl+n);
+//		for(int i = 0 ; i < n ; i++)
+//		{	cout<<girl[i]<<" ";
+//		}
+//		cout<<endl;
+		double expect=0.0;
+		long  long numb = solve(chef,girl,n);
+		expect = (numb)/double(n);
+		printf("%.6f
+",expect);
+		test--;
+	}
+}

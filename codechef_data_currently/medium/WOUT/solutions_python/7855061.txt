@@ -1,0 +1,11 @@
+for cas in xrange(input()):
+    n, h = map(int, raw_input().strip().split())
+    row = [0]*(n+2)
+    for i in xrange(n):
+        a, b = map(int, raw_input().strip().split())
+        row[a+1] -= 1
+        row[b+2] += 1
+    row[0] = n
+    for i in xrange(n): row[i+1] += row[i]
+    for i in xrange(n): row[i+1] += row[i]
+    print min(row[i] - row[i-h] for i in xrange(h,n+1))

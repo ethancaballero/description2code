@@ -1,0 +1,26 @@
+T=int(raw_input(""))
+
+for i in range(0,T):
+
+    L=[]
+    num=raw_input("")
+    nk=num.split()
+    n=int(nk[0])
+    k=int(nk[1])
+    q=raw_input("")
+    q2=q.split()
+    for i in q2:
+        p=int(i)
+        L.append(p)
+    for i in range(k):
+        ma=max(L)
+        mi=min(L)
+        L.remove(mi)
+        L.remove(ma)
+
+    length=len(L)
+    sum=0.0
+    for i in L:
+        sum+=i
+    average=float(sum/length)
+    print '%.6f' % average

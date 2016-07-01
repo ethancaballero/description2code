@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+#define INF 100000000
+using namespace std;
+int a[100005];
+struct node{
+	/* data */
+	int l,r,c;
+};
+bool cmp(node n1, node n2){
+	if(n1.c<n2.c)return true;
+	else if(n1.c==n2.c){
+		return (n1.l<n2.l);
+	}
+	else return false;
+}
+long long dp[100005][501];
+node A[100005];
+int C[100005];
+int R[100005];
+int main(){
+	int t,n,k,m;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d %d", &n, &k, &m);
+		long long sum=0;
+		for(int i=0; i<n; i++){
+			scanf("%d", &a[i]);
+			sum+=(long long)a[i];
+		}
+			for(int i=0; i<m; i++){
+				scanf("%d %d %d", &A[i].l, &A[i].r, &A[i].c);
+			}
+			sort(A, A+m, cmp);
+						for(int i=0; i<=n; i++)C[i]=INF,R[i]=0;
+						for(int i=0; i<m; i++){
+				int t1=A[i].l,t2=A[i].r,t3=A[i].c;
+				while(t1<=t2){
+					if(C[t1]==INF){
+						C[t1]=t3;
+						R[t1]=t2+1;
+						t1++;
+					}else{
+						t1=R[t1];
+					}
+				}
+			}
+						long long ans=0;
+			for(int i=1; i<=n; i++){
+				for(int j=1; j<=k; j++){
+					if(a[i-1]>=0)dp[i][j]=dp[i-1][j];
+					else{
+						if(j-C[i]>=0)dp[i][j]=min(dp[i-1][j-C[i]]+a[i-1], dp[i-1][j]);
+						else dp[i][j]=dp[i-1][j];
+					}
+					ans=min(ans, dp[i][j]);
+				}
+			}
+		long long final=sum-(long long)ans;
+		printf("%lld
+", final);
+	}
+	return 0;
+}

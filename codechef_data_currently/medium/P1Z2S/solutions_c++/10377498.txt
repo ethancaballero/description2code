@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+
+    int n;cin>>n;
+        int r=0;int x[n];r=n;int c=r;int t=1;int sum=0;
+        for(int i=0;i<n;i++ )
+        { cin>>x[i];
+        sum=sum+x[i];
+        }
+        sum=sum-n;
+        if(sum>n)
+           {
+
+           sum=sum-n;
+        r=r+sum/2+sum%2;}
+
+           /* x[i]--;}
+        while(t==1){
+            int t1=0;
+            for(int i=0;i<n;i++)
+            {
+                if(x[i]!=0)
+                {
+                    t1=1;
+                    if(c>0)
+                    {
+                        if(x[i]>=c)
+                        {
+                            x[i]=x[i]-c;
+                            c=0;
+                        }
+                        else
+                        {
+                            c=c-x[i];
+                            x[i]=0;
+                        }
+                    }
+
+                }
+            }
+            if(t1==1) {
+                for (int i = 0; i < n; i++) {
+                    if (x[i] != 0)
+                    { c++;r++;}
+                }
+            }
+            t=t1;
+            t1=0;
+        }*/
+
+
+        cout<<(r)<<endl;
+}

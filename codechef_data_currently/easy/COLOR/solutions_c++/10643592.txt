@@ -1,0 +1,39 @@
+#include<iostream>
+#include<string>
+ using namespace std ;
+  int main()
+  {  int new1[200];
+      int counting(int x,int y,int z);
+     int n ,g;
+     long alength,x,count=0;;
+     string A;
+      cin>> n;
+       while(n--)
+       {
+          cin>>alength;
+          cin>>A;
+          for(x=0;x<200;x++)
+          { 
+             new1[x]=0;
+           }  
+          for(x=0;x<alength;x++)
+          {
+             g= A[x];
+            new1[g]+=1;
+            
+          }
+          count = counting(new1['R'],new1['G'],new1['B']);    
+          cout<<count<<endl;
+          count=0;
+        }
+     return 0;
+   }
+   int counting(int x,int y, int z)  
+   {
+      if( x>=y && x>=z)
+      return y+z;
+      else if(y>=x &&y>=z)
+      return x+z;
+      else if(z>=x && z>=y)
+      return x+y;
+   }         

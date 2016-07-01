@@ -1,0 +1,75 @@
+/**
+LINK:::
+*/
+/**
+INPUT:
+3
+abc
+cbazyzabc
+ddaabbaacc
+
+OUTPUT:
+3
+6
+10
+*/
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <set>
+using namespace std;
+#define N 2002
+int dp[N][27][27];
+char s[N];
+
+int strlenn(char *s)
+{
+	int i=0;
+	while(s[i++]);
+	return i-1;
+}
+
+int main()
+{
+	//printf("
+Driver of LWS is running ...
+");
+	int i,j,k,t,n,ans;
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%s",s);
+		n=strlenn(s);
+		//printf("
+Len:%d
+",n);
+		for(i=0;i<=n;i++)
+		{
+		  for(j=0;j<27;j++)
+			  for(k=0;k<27;k++)
+				  dp[i][j][k]=0;
+		}
+		for(i=1;i<=n;i++)
+		{
+		  int x=s[i-1]-'a';	
+		  for(j=0;j<27;j++)
+			  for(k=0;k<27;k++)
+		  {
+			dp[i][j][k]=max(dp[i][j][k],dp[i-1][j][k]);
+		    if(x>=j) 
+				dp[i][x][k]=max(dp[i][x][k],dp[i-1][j][k]+1);
+			if(x<=k) 
+				dp[i][j][x]=max(dp[i][j][x],dp[i-1][j][k]+1);
+		  }
+		}
+		int ans=0;
+		for(j=0;j<27;j++)
+			  for(k=0;k<27;k++)
+	    {
+		    ans=max(ans,dp[n][j][k]);	  
+	     }
+			  printf("%d
+",ans);
+	}
+      return 0;
+}

@@ -1,0 +1,16 @@
+def getDist2( pt1, pt2 ):
+    x1, y1 = pt1[0], pt1[1]
+    x2, y2 = pt2[0], pt2[1]
+    return ((x1- x2)**2 + (y1- y2)**2 )
+
+count = 0
+for testcases in xrange(int(raw_input() ) ) :
+    x1, y1, x2, y2, x3, y3 = map(int, raw_input().split() )
+    A = (x1, y1) 
+    B = (x2, y2)
+    C = (x3, y3)
+    Dist2 = [ getDist2(A, B), getDist2(B, C), getDist2(C, A) ]
+    Dist2 = sorted(Dist2)
+    #print Dist2
+    count += 1 if ( Dist2[2] == (Dist2[0] + Dist2[1]) ) else 0
+print count

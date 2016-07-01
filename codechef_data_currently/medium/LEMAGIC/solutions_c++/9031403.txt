@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+#define MOD 1000000007
+int dp[100][100][2][2][10];
+int A[100][100];
+char S[101];
+const int D = 10;
+int main()
+{
+	#ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+    #endif
+    int T,N,M;
+    scanf("%d",&T);
+    while(T--) {
+        scanf("%d%d",&N,&M);
+        for(int i = 0; i < N; i++) {
+            scanf("%s",S);
+            for(int j = 0; j < M; j++) {
+                A[i][j] = S[j] - '0';
+            }
+        }
+        int ans = 0;
+        for(int p = 1; p < D; p++) {
+            for(int i = 0; i < N; i++) {
+                for(int j = 0; j < M; j++) {
+                    for(int x = 0; x < 2; x++) {
+                        for(int y = 0; y < 2; y++) {
+                            for(int d = 0; d < D; d++) {
+                                dp[i][j][x][y][d] = 0;
+                                /*** This is without applying any addition operation
+                                     dp[i][j][x][y][d] denotes the longest path up to position [i][j] which ends in digit d or more ***/
+                                if(i > 0) dp[i][j][x][y][d] = max(dp[i][j][x][y][d],max(dp[i-1][j][0][y][d],dp[i-1][j][1][y][d]));
+                                if(j > 0) dp[i][j][x][y][d] = max(dp[i][j][x][y][d],max(dp[i][j-1][x][0][d],dp[i][j-1][x][1][d]));
+                            }
+                            /*** Consider that we apply the addtion operation taking into account the values of x and y***/
+                            int v = (A[i][j] + x*p + y*p) % D;
+                            if(dp[i][j][x][y][v] == 0)
+                                dp[i][j][x][y][v] = 1;
+                            if(i > 0) dp[i][j][x][y][v] = max(dp[i][j][x][y][v],max(dp[i-1][j][0][y][v],dp[i-1][j][1][y][v]) + 1);
+                            if(j > 0) dp[i][j][x][y][v] = max(dp[i][j][x][y][v],max(dp[i][j-1][x][0][v],dp[i][j-1][x][1][v]) + 1);
+                            /*** This value can act as max value for all d not greater that v ***/
+                            for(int d = 0; d < v; d++) {
+                                dp[i][j][x][y][d] = max(dp[i][j][x][y][d],dp[i][j][x][y][v]);
+                            }
+                        }
+                    }
+                }
+            }
+            //cout << "p : " << p;
+            for(int x = 0; x < 2; x++) {
+                for(int y = 0; y < 2; y++) {
+                    ans = max(ans,dp[N-1][M-1][x][y][0]);
+                }
+            }
+            //cout << " ans : " << ans << "
+";
+        }
+        printf("%d
+",ans);
+    }
+    #ifndef ONLINE_JUDGE
+    cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.
+";
+    #endif
+    return 0;
+}
+

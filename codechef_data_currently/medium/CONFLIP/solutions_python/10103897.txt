@@ -1,0 +1,6 @@
+for _ in range(int(raw_input().strip())):
+    games = int(raw_input().strip())
+    for _ in range(games):
+        i, n , q = map(int, raw_input().strip().split())
+        if i  == q: print n - (n + 1) / 2
+        else: print (n + 1) / 2

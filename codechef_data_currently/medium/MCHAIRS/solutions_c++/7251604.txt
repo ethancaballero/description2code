@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<vector>
+#include<algorithm>
+#include<numeric>
+#include<stack>
+#include<queue>
+#include<deque>
+#include<bitset>
+#include<cmath>
+#include<list>
+#include<set>
+#include<map>
+#define vi vector<int>
+#define vvi vector< vi >
+#define pii pair<int,int>
+#define pb push_back
+#define mp make_pair
+#define all(c) c.begin(),c.end() 
+#define sz(c) c.size()
+#define tr(c,it)  for(typeof(c.begin()) it=c.begin();it!=c.end();it++)  
+#define max(a,b) (a>b?a:b)
+#define min(a,b) (a<b?a:b)
+#define abs(a)  (a>=0?a:-a)
+#define present(c,x) find(all(c),x)!=c.end()
+#define cpresent(c,x) c.find(x)!=c.end()  
+#define permute(c) next_permutation(all(c))
+#define MOD 1000000007
+using namespace std;
+int main(){   
+    long long T,N;
+    scanf("%lld",&T);
+    while(T--){
+    	scanf("%lld",&N);
+    	long long x=1,y=2,b=N;
+    	while(b){
+    		if(b%2!=0)
+    		    x=(x*y)%MOD;
+    		y=(y*y)%MOD;
+			b/=2;    
+    	}
+    	printf("%lld
+",(x-1+MOD)%MOD);
+    }
+	return 0;
+}

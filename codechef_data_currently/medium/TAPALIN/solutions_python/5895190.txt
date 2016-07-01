@@ -1,0 +1,25 @@
+import sys 
+f = sys.stdin
+M = 1000000007
+def power(a,b,mod):
+	res = 1
+	while b:
+		if b&1 :
+			res = res * a % mod
+		b /= 2
+		a = a * a % mod 
+	return res 
+
+T=int(f.readline())
+while T:
+	N =int(f.readline())
+	ans = 0 
+	M = 25*M
+	X = ((((power(26,(N+1)/2,M)-1) % M + M ) % M) * 52 ) % M
+	M /= 25		
+	if N&1 :	
+		ans = ( (X / 25 - power(26,(N+1)/2,M)) % M + M ) % M   
+	else :
+		ans = X / 25 
+	print ans % M 
+	T -= 1

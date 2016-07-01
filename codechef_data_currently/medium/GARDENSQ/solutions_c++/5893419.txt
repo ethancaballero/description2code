@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+	int nLines;
+	cin >> nLines;
+	stringstream ss("");
+
+	for(int i = 0; i < nLines; ++i)
+	{
+		int x, y;
+		cin >> x >> y;
+
+		vector< vector<char> > garden(x);
+		for(int row = 0; row < x; ++row)
+		{
+			for(int col = 0; col < y; ++col)
+			{
+				char inspectChar;
+				cin >> inspectChar;
+				garden[row].push_back(inspectChar);
+			}
+		}
+
+		int beauty = 0;
+		for(int row = 0; row < x; ++row)
+		{
+			for(int col = 0; col < y; ++col)
+			{
+				char inspectChar = garden[row][col];
+				for(int nextPlace = col + 1; nextPlace < y; ++nextPlace)
+				{
+					if(garden[row][nextPlace] == inspectChar)
+					{
+						int dist = nextPlace - col;
+						if(dist + row < x)
+						{
+							if(garden[row + dist][col] == inspectChar
+								&& garden[row + dist][nextPlace] == inspectChar)
+							{
+								beauty++;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		ss << beauty << endl;
+	}
+
+	cout << ss.str();
+
+	return 0;
+}

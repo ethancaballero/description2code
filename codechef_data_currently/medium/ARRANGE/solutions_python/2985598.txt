@@ -1,0 +1,24 @@
+def invertbits(k, N):
+    R = 0
+    while (N > 0):
+        R <<= 1
+        R |= N & 1
+        k -= 1
+        N >>= 1
+
+    R <<= k
+    return R
+
+cases = int(raw_input())
+for c in xrange(0, cases):
+    i = raw_input().split(" ")
+    bits = int(i[0])
+    message = i[1]
+    
+    new_message = [None] * len(message)
+
+    for index, char in enumerate(message):
+        new_message[invertbits(bits, index)] = char
+
+    print "".join(new_message)
+    

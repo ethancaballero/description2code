@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define PB push_back
+#define mod 1000000007
+
+typedef vector<int> VI;
+typedef long long int LL;
+VI v[100000];
+bool vis[100000];
+LL size=0;
+void dfs(int n)	//a simple depth-first search
+{
+	vis[n]=true;
+	size++;
+	for(int i=0;i<v[n].size();++i)
+		if(!vis[v[n][i]])
+			dfs(v[n][i]);
+	return;
+}
+
+int main(){
+
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int a,b,n,m,ans=0,i;
+		LL num=1;
+		scanf("%d%d",&n,&m);
+
+		memset(vis,0,sizeof(vis));
+		for(i=0;i<n;++i)
+			v[i].clear();
+
+		for(i=0;i<m;++i)
+		{
+			scanf("%d%d",&a,&b);
+
+			a--;
+			b--;
+			v[a].PB(b);
+			v[b].PB(a);
+		}
+
+		for(i=0;i<n;++i)
+		{
+			if(!vis[i])	//if a vertex is not visited, do a dfs on it
+			{
+				size=0;
+				ans++;	//number of connected components so far
+				dfs(i);	//number of ways to choose a captain for each connected component = C(size,1) = size => total ways = product of no. of ways of each component
+				num=(num*size)%mod;
+			}
+		}
+		printf("%d %lld
+",ans,num);
+	}
+
+	return 0;
+}

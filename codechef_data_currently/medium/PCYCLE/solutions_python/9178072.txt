@@ -1,0 +1,40 @@
+n = int(raw_input())
+# a = list(raw_input().split(" "))
+a = [int(x) for x in raw_input().strip().split(" ")]
+a.insert(0,"")
+# print a
+visited = [0]
+visited = visited*(n+1)
+c,numc = 0,0
+ans = []
+start = 1
+while start <= n:
+	i = start
+	while i <= n and visited[i]:
+		i += 1
+	if i == n+1:
+		break
+
+	curr = [i,a[i]]
+	visited[i] = 1
+	start = i+1
+	i = a[i]
+	visited[i] = 1
+	
+	while(curr[-1] != curr[0]):
+		curr.append(a[i])
+		i = a[i]
+		visited[i] = 1
+
+	# print "visited ",
+	# for x in visited:
+	# 	print x,
+
+	numc += 1
+	ans.append(curr)
+print numc
+for curr in ans:
+	for val in curr:
+		print val,
+	print
+

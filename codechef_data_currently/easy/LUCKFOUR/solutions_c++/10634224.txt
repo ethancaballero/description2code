@@ -1,0 +1,22 @@
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+        int t,num, sum;
+
+        scanf("%d", &t);
+        while(t--){
+                scanf("%d", &num);
+                sum = 0;
+                while(num){
+                        if(num%10 == 4) sum ++;
+                        num /= 10;
+                }
+
+                printf("%d
+", sum);
+        }
+    return 0;
+}

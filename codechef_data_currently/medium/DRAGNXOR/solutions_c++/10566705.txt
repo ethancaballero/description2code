@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+//	freopen("input.txt","r",stdin);
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,a,b,l1=0,l2=0;
+		cin>>n>>a>>b;
+		int e[30]={0},sum=0;
+		for(int i=0;i<n;i++)
+		{
+			if(a%2==1)
+				l1++;
+			if(b%2==1)
+				l2++;
+			a=a/2;
+			b=b/2;	
+			//cout<<c[i]<<endl;	
+			//cout<<d[i]<<endl;
+		}
+//		cout<<l1<<" "<<l2<<endl;
+		if(l1+l2>n)
+		{
+			for(int i=0;i<2*n-l1-l2;i++)
+				e[n-i-1]=1;
+		}
+		else
+		{
+			for(int i=0;i<l1+l2;i++)
+				e[n-1-i]=1;
+		}
+		for(int i=0;i<n;i++)
+		{
+			if(e[i]==1)
+				sum=sum+pow(2,i);
+//			cout<<e[i]<<endl;	
+		}
+		cout<<sum<<endl;
+	}
+	return 0;
+}

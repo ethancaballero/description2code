@@ -1,0 +1,19 @@
+t=int(raw_input())
+while t>0:
+    n=int(raw_input())
+    goals=map(int,raw_input().split())
+    m=goals[0];
+    diff=0;
+    res=0;
+    for i in range(1,n):
+        if(m<goals[i]):
+            diff=goals[i]-m
+            if(res<diff):
+                res=diff
+        elif(m>goals[i]):
+            m=goals[i]
+    if(res==0):
+        print"UNFIT"
+    else:
+        print res
+    t=t-1

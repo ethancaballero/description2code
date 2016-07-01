@@ -1,0 +1,21 @@
+n=input()
+dicti={}
+for i in range(n):
+	a=raw_input()
+	a=a.split()
+	dicti[a[0]]=int(a[1])
+maxi=-100000000000000000000000
+m=input()
+j=0
+for j in range(m):
+	check=raw_input()
+	lencheck=len(check)
+	ans="NO"
+	maxi=-1000000000000000000000
+	for dkey,dvalue in dicti.iteritems():
+		if(dvalue>maxi and dkey[0:lencheck]==check):
+			maxi=dvalue
+			ans=dkey
+	print ans
+
+

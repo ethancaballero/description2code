@@ -1,0 +1,70 @@
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+#define MXN 30004
+#define MXK 2022
+#define INF 1000000009
+
+int n, k1, k2, k3;
+int A[MXN], minPrefSums[MXK], bestAns[MXK];
+int curAns[MXK], temp[MXK];
+
+void merge(int *a,int an,int *b,int bn)
+{
+	int ap = 1, bp = 1, tp = 0;
+	while(tp<k3 && ap<=an && bp<=bn)   //limits lie witihn k3 and we are noti nterested beyond
+	{
+		if(a[ap]>b[bp]) temp[++tp] = a[ap++];
+		else temp[++tp] = b[bp++];
+	}
+	while(tp<k3 && ap<=an) temp[++tp] = a[ap++];
+	while(tp<k3 && bp<=bn) temp[++tp] = b[bp++];
+	for(int i=1;i<=tp;i++) a[i] = temp[i];
+}
+
+void solve()
+{
+	int p1 = 1, p2 = 0, f, sum = 0;
+	minPrefSums[1] = 0;
+	
+	for(int i=0;i<n;i++)
+	{
+		sum+=A[i];  //sum holds value of sum to the current index of array
+		
+		//hold the ans for the index j at the current inex j
+	 	for(int j=1;j<=p1;j++) curAns[j] = sum - minPrefSums[j];
+		
+		
+		merge(bestAns,p2,curAns,p1);//merge the current and best and to hthe best ans
+		//sorted in the ascending order...the entire array must be sorted in the ascending order
+		
+		
+		p2 = min(k3,p2+p1);
+
+		for(f=p1+1;f>1 && sum<minPrefSums[f-1];f--) minPrefSums[f] = minPrefSums[f-1];
+		
+		
+		minPrefSums[f] = sum;
+		
+		p1 = min(k3,p1+1);
+	}
+}
+
+int main()
+{
+	int kases;
+
+	for(scanf("%d",&kases);kases--;)
+	{
+		scanf("%d %d %d %d",&n,&k1,&k2,&k3);
+		for(int i=0;i<n;i++) scanf("%d",&A[i]);
+		solve();
+		printf("%d %d %d
+",bestAns[k1],bestAns[k2],bestAns[k3]);
+	}
+	
+	return 0;
+}

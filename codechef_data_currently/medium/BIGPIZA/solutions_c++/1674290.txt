@@ -1,0 +1,53 @@
+#include<algorithm>
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<fstream>
+#include<iomanip>
+#include<bitset>
+#include<deque>
+#include<string>
+#include<map>
+#include<cstring>
+#include<sstream>
+#include<cmath>
+using namespace std;
+
+#define MAX 10000
+int grundy[MAX+1];
+bool vis[MAX+1];
+
+void precalc()
+{
+	grundy[0] = grundy[1] = 0;
+	for (int i = 2; i <= MAX; i++)
+	{
+		memset(vis, 0, sizeof(vis));
+		for (int j = 0; j <= i/2-1; j++)
+			vis[grundy[j]^grundy[i-2-j]] = true;
+		int r = 0;
+		while (vis[r])
+			r++;
+		grundy[i] = r;
+	}
+}
+
+
+int main()
+{
+	precalc();
+	int T;
+	scanf("%d", &T);
+	for (int t = 0; t < T; t++)
+	{
+		int N;
+		scanf("%d", &N);
+		if (grundy[N] == 0)
+			printf("Bhima
+");
+		else
+			printf("Arjuna
+");
+	}
+	return 0;
+}

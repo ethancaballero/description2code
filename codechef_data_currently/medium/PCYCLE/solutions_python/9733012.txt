@@ -1,0 +1,35 @@
+## CodeChef
+## The Best Box
+## 2016.03.25
+
+def permutations(l, n):
+    index = 0
+    copy = n[:]
+    bigSet = []
+    while copy != []:
+        newSet = []
+        i = min(copy)
+        newSet.append(i)
+##        copy.remove(i)   ## for debugging
+##        print newSet  ## for debugging
+        while newSet[0] != newSet[-1] or len(newSet) == 1:
+##            print n[i-1]  ## for debugging
+            newSet.append(n[i-1])
+            copy.remove(n[i-1])
+##            print newSet  ## for debugging
+            i = n[i-1]
+        bigSet.append(newSet)
+##        print bigSet  ## for debugging
+
+    return bigSet
+
+length = int(raw_input())
+numbers = map(int,raw_input().strip().split())
+
+newArr = permutations(length, numbers)
+print len(newArr)
+for i in xrange(len(newArr)):
+    for j in xrange(len(newArr[i])):
+        print newArr[i][j],
+    print
+

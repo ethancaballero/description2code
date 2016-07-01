@@ -1,0 +1,7 @@
+t = input()
+for _ in xrange(t):
+    a, b = map(int, raw_input().split())
+    tempa, tempb = a, b
+    while tempb != 0:
+        tempa, tempb = tempb, tempa % tempb
+    print (a * b) / (tempa * tempa)

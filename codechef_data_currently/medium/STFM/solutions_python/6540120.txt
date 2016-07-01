@@ -1,0 +1,17 @@
+from math import factorial
+def func(n,prev):
+    ans=0
+    for i in range(prev+1,n+1):
+        ans=ans+i*factorial(i)
+    return ans
+n,m=map(int,raw_input().split())
+li=raw_input()
+l1=li.split()
+l1.sort()
+res=n*func(int(l1[0]),0)
+res=res+(((int(l1[0])**2)*(int(l1[0])+1))/2)
+for i in range(1,len(l1)):
+    res=res+func(int(l1[i]),int(l1[0]))
+    res=res+(((int(l1[i])**2)*(int(l1[i])+1))/2)
+res=res%m
+print res

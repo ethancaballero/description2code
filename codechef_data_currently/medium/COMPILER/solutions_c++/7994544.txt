@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+int main()
+{
+	int t;
+	long int i,l,ans,tempans,top;
+	char s[1000001],ch;
+	scanf("%d",&t);
+	while(t--)
+	{
+		ch=getchar();
+		top=0;
+		tempans=0;
+		ans=0;
+		scanf("%s",s);
+		l=strlen(s);
+		for(i=0;i<l;++i)
+		{
+			if(s[i]=='<')
+				++top;
+			else
+			{
+				if(top==0)
+					break;
+				if(top>0)
+				{
+					tempans+=2;
+					--top;
+				}
+				if(top==0)
+				{
+					ans+=tempans;
+					tempans=0;
+				}
+			}
+		}
+		printf("%ld
+",ans);
+	}
+	return 0;
+}

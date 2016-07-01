@@ -1,0 +1,10 @@
+from sys import stdin
+t=int(stdin.readline())
+for i in range(0,t):
+	n=int(stdin.readline())
+	s=raw_input()
+	ans=0
+	for i in range(0,n):
+		if s[i]=='1':
+			ans+=1
+	print (ans*(ans-1))/2+ans

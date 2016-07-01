@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	cin>>t; 
+	while(t--)
+	{
+		int n; cin>>n;
+		map <int,int> mp; 
+		map <int,int> :: iterator it;
+		int x;
+		for(int i=0;i<n;i++)
+		{
+			cin>>x;
+			mp[x]++;
+		}
+		int count=-1;
+		for(it=mp.begin();it!=mp.end();++it)
+		   count=max(count,it->second);
+		int ans;
+		if(2*count<=n)
+		 {
+			 if(n&1) ans=(n+1)/2;
+			 else
+			 ans=n/2;
+	     }
+	     else
+	     {
+			 ans=n-count;
+			 ans+=n-2*ans;
+		 }
+		 cout<<ans<<endl;
+	 }
+ return 0;
+}

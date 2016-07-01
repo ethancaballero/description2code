@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+#define MOD 1000000007
+typedef long long int lli;
+long long int power(lli a,lli b)
+{
+	lli temp;
+	if (b==0)
+		return 1;
+	if (b==1)
+		return a;
+	temp = power(a,b/2);
+	if (b%2==0)
+		temp = (temp*temp)%MOD;
+	else
+		temp=(temp*temp*a)%MOD;
+	return temp;
+}
+int main()
+{
+	int t,i;
+	lli sum,n;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n;
+		sum = 0;
+		if(n%2==1)
+		{
+			sum = (power(2,(n+1)/2)-1)%MOD;
+			sum = (2*sum)%MOD;
+		}
+		if(n%2==0)
+		{
+			sum = (power(2,n/2)-1)%MOD;
+			sum = (sum*2)%MOD;
+			sum = (sum+power(2,n/2)%MOD)%MOD;
+		}
+		cout<<sum<<endl;
+	}
+	return 0;
+}

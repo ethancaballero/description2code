@@ -1,0 +1,98 @@
+#### CodeChef
+#### Number Game Revisited
+#### 2016.03.28 Time flies so fast...
+##
+##def primeSubtraction(n):
+##    if n % 4 == 1:
+##        return 'ALICE'
+##    else:
+##        return 'BOB'
+##    
+##
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    num = int(raw_input())
+##    print primeSubtraction(num)
+
+## CodeChef
+## Lucky lucky number
+## 2016.03.28
+    
+
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    num = int(raw_input())
+
+#### CodeChef
+#### Chef and Feedback
+#### 2016.03.29
+##
+##def goodOrbad(n):
+##    if '010' in n or '101' in n:
+##        return 'Good'
+##    else:
+##        return 'Bad'
+##
+##testCases = int(raw_input())
+##
+##for i in xrange(testCases):
+##    string = raw_input()
+##    print goodOrbad(string)
+
+##def dotProduct(a1,b1,a2,b2,a3,b3):
+##    c1 = a2-a1
+##    d1 = a3-a1
+##    c2 = b2-b1
+##    d2 = b3-b1
+##    dot = c1* c2 + d1 * d2
+##    if dot == 0:
+##        return True
+##    else:
+##        return False
+##
+##testCases = int(raw_input())
+##rightAng = 0
+##for i in xrange(testCases):
+##    x1,y1,x2,y2,x3,y3 = map(int, raw_input().strip().split())
+##    
+##    if dotProduct(x1,y1,x2,y2,x3,y3) or dotProduct(x3,y3,x1,y1,x2,y2) or dotProduct(x2,y2,x3,y3,x1,y1):
+##        rightAng += 1
+##
+##print rightAng
+
+##def squareDis(a1,b1,a2,b2):
+##    return (a1-a2)**2 + (b1-b2)**2
+##
+##testCases = int(raw_input())
+##rightAngle = 0
+##for i in xrange(testCases):
+##    x1,y1,x2,y2,x3,y3 = map(int,raw_input().strip().split())
+##    a = squareDis(x1,y1,x2,y2)
+##    b = squareDis(x2,y2,x3,y3)
+##    c = squareDis(x3,y3,x1,y1)
+##    triList = [a,b,c]
+##    h = max(a,b,c)
+##    triList.remove(h)
+##    if h == triList[0] + triList[1]:
+##        rightAngle += 1
+##print rightAngle
+
+## CodeChef
+## Arranging Cup-cakes
+## 2016.03.29
+
+
+import math
+testCases = int(raw_input())
+
+for i in xrange(testCases):
+    cupcake = int(raw_input())
+    cupcakeList = []
+    for j in xrange(1, int(math.sqrt(cupcake))+ 1):
+        if cupcake % j == 0 :
+            cupcakeList.append(abs(cupcake/j - j))
+
+    print min(cupcakeList)
+            

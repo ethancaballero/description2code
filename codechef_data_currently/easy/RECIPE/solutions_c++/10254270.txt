@@ -1,0 +1,68 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+ 
+ 
+int main()
+ 
+{
+ 
+ int t,i,j,k,gcd=1,min;
+ 
+ int a[50];
+ 
+ int n;
+ 
+ cin>>t;
+ 
+ cout<<endl;
+ 
+ for(i=0;i<t;i++)
+ 
+ {
+ 
+  cin>>n;
+ 
+  for(j=0;j<n;j++)
+ 
+  cin>>a[j];
+  
+  min=a[0];
+  for(j=1;j<n;j++)
+  {
+  if(a[j]<min)
+  min=a[j];
+  }
+ 
+  
+  for(j=1;j<=min;j++)
+ 
+  {
+    int flag=0;
+   for(k=0;k<n;k++)
+   if(a[k]%j!=0)
+ 
+    flag=1;
+   if(flag==0)
+ 
+   gcd=j;
+ 
+  }
+ 
+ for(j=0;j<n;j++)
+ 
+a[j]=a[j]/gcd;
+for(j=0;j<n;j++)
+ 
+cout<<a[j]<<' ';
+
+
+
+ 
+ cout<<endl;
+ 
+ }
+ return 0;
+} 
+ 

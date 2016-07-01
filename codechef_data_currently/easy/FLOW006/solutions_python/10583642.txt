@@ -1,0 +1,10 @@
+t=int(raw_input())
+while(t>0):
+	n=[]
+	a=raw_input()
+	n=list(a)
+	n=map(int,list(n))
+	print sum(n)
+	t-=1
+			
+	

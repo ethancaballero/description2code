@@ -1,0 +1,33 @@
+#include<iostream>
+const int L=100000007,inv2=50000004;
+using namespace std;
+long long modulo_exponent(int e,long long n)
+{
+long long x=e;long long temp=1;
+	if (n==0) return 1;
+if (n%2==0)
+{
+temp = modulo_exponent(e,n/2);
+return (temp*temp)%L;
+}
+return (modulo_exponent(e,n-1)*e)%L;
+}
+int main()
+{
+int t;long long n;long long t1;long long t2;long long r1;long long r2;
+scanf("%d",&t);
+while(t--)
+{
+scanf("%lld",&n);
+t2=modulo_exponent(3,n);
+t1=modulo_exponent(2,n-1);
+r1=( ((t2+1)*inv2)%L - (2*t1)%L + L )%L;
+r2=( (t1*(2*t1+3))%L - ((3*t2+1)*inv2)%L + L )%L;
+printf("%lld %lld
+",r1,r2);
+//printf("%lld
+",temp1);
+}
+cin.get();
+cin.get();
+}

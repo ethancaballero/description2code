@@ -1,0 +1,13 @@
+def f(s):
+    bal=0
+    maxbal=0
+    for i in range(len(s)):
+        if s[i] == '(':bal+=1
+        if s[i] == ')':bal-=1
+        maxbal=max(maxbal,bal)
+    return maxbal
+
+for _ in range(int(raw_input())):
+    a=raw_input()
+    n=f(a)
+    print '('*n+')'*n

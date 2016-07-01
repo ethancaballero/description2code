@@ -1,0 +1,84 @@
+#include <cstring>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <memory.h>
+#include <cassert>
+
+using namespace std;
+
+#define a HELLO_VECTOR
+
+#define FILENAME ""
+#define INPUT_FILE FILENAME "in"
+#define OUTPUT_FILE FILENAME "out"
+
+const int N = 200010;
+
+int a[N];
+int from[N], to[N];
+pair <int, int> b[N];
+
+int main() {
+  int tt;
+  scanf("%d", &tt);
+  while (tt--) {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    for (int i = 1; i <= n; i++) {
+      scanf("%d", a + i);
+    }
+    for (int i = 0; i < m; i++) {
+      scanf("%d %d", &b[i].first, &b[i].second);
+    }
+    sort(b, b + m);
+
+      int j = 0;
+      for (int i = 1; i < m; i++) {
+        if (b[i].first <= b[j].second) {
+          if (b[i].second > b[j].second) {
+            b[j].second = b[i].second;
+          }
+        } else {
+          j++;
+          b[j] = b[i];
+        }
+      }
+      m = j + 1;
+
+    for (int i = 1; i <= n; i++) {
+      from[i] = to[i] = i;
+    }
+    for (int i = 0; i < m; i++) {
+      for (int j = b[i].first; j <= b[i].second; j++) {
+        from[j] = b[i].first;
+        to[j] = b[i].second;
+      }
+    }
+    bool ok = true;
+    for (int i = 1; i <= n; i++) {
+      if (from[i] <= a[i] && a[i] <= to[i]) {
+        continue;
+      }
+      ok = false;
+      break;
+    }
+    puts(ok ? "Possible" : "Impossible");
+  }
+  return 0;
+}

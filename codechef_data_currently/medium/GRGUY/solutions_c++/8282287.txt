@@ -1,0 +1,81 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int t,i,l,c,k,m;
+	string l1,l2,l3;
+	cin>>t;
+	while(t--)
+	{
+		c=0;
+		k=0,m=0;
+		cin>>l1>>l2;
+		l=l1.length();
+		for(i=0;i<l;i++)
+		{
+			if(l1[i]=='#'&&l2[i]=='#')
+			{
+				printf("No
+");
+				k=1;
+				break;
+			}
+			else
+			if(l1[i]=='#')
+			{
+				m=2;
+				l3=l2;
+				i++;
+				break;
+			}
+			else
+			if(l2[i]=='#')
+			{
+				m=1;
+				l3=l1;
+				i++;
+				break;
+			}
+		}
+		if(k==0)
+		for(;i<l;i++)
+		{
+			if(l3[i]=='#')
+			{
+				c++;
+				if(m==1)
+				{
+					if(l2[i]=='#')
+					{
+						printf("No
+");
+						k=1;
+						break;	
+					}
+					l3=l2;
+					m=2;
+				}
+				else
+				if(m==2)
+				{
+					if(l1[i]=='#')
+					{
+						printf("No
+");
+						k=1;
+						break;	
+					}
+					l3=l1;
+					m=1;
+				}
+			}
+		}
+		if(k==0)
+		{
+			printf("Yes
+%d
+",c);
+		}
+	}
+}

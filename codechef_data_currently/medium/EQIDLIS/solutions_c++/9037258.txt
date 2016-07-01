@@ -1,0 +1,102 @@
+/* METHOD 1 (by set)
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t,n,i,ans,cal1,cal2,sum,val,num;
+	scanf("%d",&t);
+	while(t--)
+	{
+		ans=sum=0;
+		scanf("%d",&n);
+		multiset<int> s;
+		multiset<int>::iterator it1,it2;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&num);
+			s.insert(num);
+			sum+=num;
+		}
+		if(n>1)
+		{
+			if(sum%n==0)
+			{
+				val=sum/n;	
+				while(1)
+				{
+					it1=s.begin();
+					it2=s.end();
+					it2--;
+					cal1=(*it2);
+					cal2=(*it1);
+					if(cal1==cal2)
+					{
+						if(cal1==val)
+							break;
+					}
+					cal1=(ceil)(((double)cal1-cal2)/2);
+					cal2+=cal1;
+					cal1=(*it2)-cal1;
+					s.erase(it1);
+					s.erase(it2);
+						s.insert(cal1);
+						s.insert(cal2);
+						ans++;
+				}
+			}
+			else
+				ans=-1;
+		}
+		printf("%d
+",ans);
+	}
+}*/
+// METHOD 2 (by two pointers)
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int i,t,n,ans,j,sum,d;
+	scanf("%d",&t);
+	while(t--)
+	{
+		ans=sum=0;
+		scanf("%d",&n);
+		vector<int> v(3001);
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&j);
+			sum+=j;
+			v[j]++;
+		}
+		if(n>1)
+		{
+			if(sum%n)
+			{
+				ans=-1;
+			}
+			else
+			{
+				sum/=n;
+				for(i=0,j=n;(i<sum)||(j>sum);)
+				{
+					while((i<sum)&&(!v[i]))
+						i++;
+					while((j>sum)&&(!v[j]))
+						j--;
+					d=(j-i+1)/2;
+					if(!d)
+						break;
+					v[i+d]++;
+					v[j-d]++;
+					v[i]--;
+					v[j]--;
+					ans++;
+				}
+			}
+		}
+			printf("%d
+",ans);
+	}
+	return 0;
+}

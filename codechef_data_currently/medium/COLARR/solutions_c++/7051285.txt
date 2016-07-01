@@ -1,0 +1,91 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<climits>
+//#include<pair>
+using namespace std;
+int a[1011],pro[1011][1011],cost[1011][1011],chan[1011];
+bool done[1011],done3[1011];
+int main()
+{
+int t;
+scanf("%d",&t);
+while(t--)
+{
+int n,m,k;
+scanf("%d %d %d",&n,&m,&k);
+int ans=0;
+//int a[n+1],done[n+1],done3[n+1],ans=0;
+for(int i=0;i<n;i++)
+scanf("%d",&a[i]),done[i]=0,done3[i]=0;
+//int pro[n][m],cost[n][m];
+for(int i=0;i<n;i++)
+{
+for(int j=0;j<m;j++)
+scanf("%d",&pro[i][j]);
+}
+for(int i=0;i<n;i++)
+{
+for(int j=0;j<m;j++)
+scanf("%d",&cost[i][j]);
+}
+//int chan[n+1];
+for(int i=0;i<n;i++)
+{
+int inc=INT_MIN;
+for(int j=0;j<m;j++)
+{
+if(inc<pro[i][j]-pro[i][a[i]-1]-cost[i][j])
+inc=pro[i][j]-pro[i][a[i]-1]-cost[i][j];
+}
+chan[i]=inc;
+}
+/*for(int i=0;i<n;i++)
+{
+int ans=pro[i][a[i]-1];
+for(int j=0;j<m;j++)
+{
+if(pro[i][j]-cost[i][j]>ans)
+ans=pro[i][j]-cost[i][j];
+}
+if(ans==pro[i][a[i]-1])
+done[i]=0;
+else
+done[i]=1;
+chan[i]=ans;
+}*/
+//for(int i=0;i<n;i++)
+//cout<<chan[i]<<" ";
+//cout<<endl;
+int ans2=0;
+sort(chan,chan+n);
+for(int i=n-1;i>=0 && i>=n-k && chan[i]>0;i--)
+ans2+=chan[i];
+for(int i=0;i<n;i++)
+ans2+=pro[i][a[i]-1];
+/*vector< pair<int,int> > chan2;
+int l=0,ans2=0;
+for(int i=0;i<n;i++)
+{
+if(done[i]==1)
+chan2.push_back(make_pair(chan[i],i));
+}
+sort(chan2.begin(),chan2.end());
+//cout<<"l="<<l<<endl;
+l=chan2.size();
+//cout<<"l="<<l<<endl;
+//for(int i=0;i<l;i++)
+//cout<<chan2[i].second<<" "<<chan2[i].first<<endl;
+for(int i=l-1;i>=0 && i>=l-k;i--)
+ans2+=chan2[i].first,done3[chan2[i].second]=1;
+for(int i=0;i<n;i++)
+{
+if(done3[i]==0)
+ans2+=pro[i][a[i]-1];
+}*/
+printf("%d
+",ans2);
+}
+return 0;
+}

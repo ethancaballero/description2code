@@ -1,0 +1,66 @@
+#include<iostream>
+#include<cstring>
+#include<iomanip>
+#include<cstdio>
+using namespace std;
+int main()
+{
+    int A[51],B[51];
+    double P[51];
+    bool visited[51];
+    int t,i,j,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(i=0;i<n;i++)
+           {
+
+           cin>>P[i]>>A[i]>>B[i];
+           P[i]=P[i]/100;}
+
+        if(n>16)
+        {
+            cout<<"0.000000"<<endl;
+            continue;
+        }
+   double sum=0;
+        for(i=0;i<(1<<n);i++)
+        { memset(visited,0,sizeof(visited));
+        double prob=1;
+          for(j=0;j<n;j++)
+          {
+              if(i&(1<<j))
+              {  if(visited[A[j]]==0)
+                  {prob=prob*((double)P[j]);
+                  visited[A[j]]=1;}
+                  else
+                  {
+                      prob=0;
+                      break;
+                  }
+
+              }
+              else
+              {if(visited[B[j]]==0)
+                  {prob=prob*((double)(1-P[j]));
+                  visited[B[j]]=1;}
+                  else
+                  {
+                      prob=0;
+                      break;
+                  }
+
+              }}
+              sum=sum+prob;
+          }
+
+          //cout<<setprecision(8);
+          //cout<<fixed;
+          printf("%0.8lf
+",sum);}
+
+
+
+    return 0;
+}

@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+#define INF 10000
+#define MAX 100005
+#define lli long long
+
+using namespace std;
+
+int n,k;
+int cost[MAX];
+int cnt[502];
+lli A[MAX];
+vector <int> l[MAX],r[MAX];
+int vis[MAX][502];
+lli dp[MAX][502];
+set <int> s;
+int tc;
+
+//Code for FAST INPUT :)
+template <typename T>
+inline void fi(T *a)
+{
+    register char c=0;
+    while (c<33) c=getchar_unlocked();
+    *a=0;
+    int tmp = 0;
+    while (c>33)
+    {
+        if ( c == 45 ) tmp = 1;
+        else *a=*a*10+c-'0';
+        c=getchar_unlocked();
+    }
+    if ( tmp == 1 ) *a = 0-(*a);
+}
+
+lli f(int idx, int left)
+{
+	if ( idx == n ) return 0LL;
+	if ( vis[idx][left] == tc ) return dp[idx][left];
+	vis[idx][left] = tc;
+	lli ans = A[idx] + f(idx+1, left);
+	if ( A[idx] < 0 && left - cost[idx] >= 0 ) ans = max(ans, f(idx+1, left - cost[idx]));
+	dp[idx][left] = ans;
+	return ans;
+}
+
+int main()
+{
+	int t,m,x,y,z;
+	
+	fi(&t);
+	
+	for ( tc = 1; tc <= t; tc++ ) {
+		
+		fi(&n), fi(&k), fi(&m);
+		
+		for ( int i = 0; i < n; i++ ) l[i].clear() ,r[i].clear(), cost[i] = INF;
+		for ( int i = 0; i <= k; i++ ) cnt[i] = 0;
+		s.clear();
+		
+		for ( int i = 0; i < n; i++ ) fi(&A[i]);
+		
+		for ( int i = 0; i < m; i++ ) {
+			fi(&x), fi(&y), fi(&z);
+			x--, y--;
+			l[x].push_back(z);
+			r[y].push_back(z);
+		}
+		
+		
+		for ( int i = 0; i < n; i++ ) {
+			for ( int j = 0; j < l[i].size(); j++ ) {
+				s.insert(l[i][j]);
+				cnt[l[i][j]]++;
+			}
+			if ( !s.empty() ) cost[i] = *(s.begin());
+			for ( int j = 0; j < r[i].size(); j++ ) {
+				cnt[r[i][j]]--;
+				if ( cnt[r[i][j]] == 0 ) s.erase(s.find(r[i][j])); 
+			}
+		}
+		
+		lli ans = f(0,k);
+		
+		printf("%lld
+", ans);
+	}
+	return 0;
+}

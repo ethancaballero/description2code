@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+  int t;
+  cin>>t;
+  long int x,y;
+  while(t--)
+  {
+     cin>>x>>y;
+     if(x==0&&y==0)
+     {
+       cout<<"YES
+";
+       continue;
+     }
+     bool f = false;
+     if(x>0&&x%2==1)
+     {
+        if(-(x-1)<=y&&y<=(x+1))
+        f = true;
+     }
+
+     if(x<0&&x%2==0)
+     {
+       if(x<=y&&y<=-x)
+       f = true;
+     }
+
+     if(y>=0&&y%2==0)
+     {
+       if(-y<=x&&x<=y-1)
+       f = true;
+     }
+
+     if(y<0&&y%2==0)
+     {
+       if(y<=x&&x<=1-y)
+       f = true;
+     }
+     if(f)
+     cout<<"YES
+";
+     else
+     cout<<"NO
+";
+  }
+  return 0;
+}

@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int tc;
+    cin>>tc;
+    while(tc--){
+        int n,sm;
+        cin>>n>>sm;
+        int a[n]={0};
+        int mi = 101;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+            sum+=a[i];
+            mi = min(mi,a[i]);
+        }
+        int nos = sum/sm;
+        int ne = (sum-mi)/(sm);
+        if(nos==ne){
+            cout<<"-1"<<endl;
+        }
+        else{
+            cout<<sum/sm<<endl;
+        }
+
+    }
+}

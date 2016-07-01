@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+#define vi vector<int>
+using namespace std;
+int main()
+{
+	int n,m,p,i,j;
+	scanf("%d%d%d",&n,&m,&p);
+	vector<int> a[n+2];
+	for(i=0;i<p;i++)
+	{
+		int x,y;
+		scanf("%d%d",&x,&y);
+		a[x].push_back(y);
+	}
+	int arr[m+2];
+	for(i=1;i<=m;i++)
+	{
+		arr[i]=i;
+	}
+	for(i=1;i<=n;i++)	
+	{
+		vi::iterator it;
+		for(it=a[i].begin();it!=a[i].end();it++)
+		arr[*it]++;
+		int f=0;
+		for(it=a[i].begin();it!=a[i].end();it++)
+		{
+			if((*it)<m&&arr[(*it)]>arr[(*it)+1])
+				f=1;
+		}
+		if(f)
+			printf("-1
+");
+		else
+			printf("%d
+",arr[m]-arr[1]);
+		for(it=a[i].begin();it!=a[i].end();it++)
+			arr[*it]--;
+	}
+return 0;
+}
+	

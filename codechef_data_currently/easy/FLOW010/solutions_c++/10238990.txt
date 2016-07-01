@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int t;
+	char x;
+	cin >> t;
+	while(t--)
+	{
+		cin >> x;
+		
+		if(x == 'b' || x == 'B')
+			cout << "BattleShip
+";
+		else if(x == 'c' || x =='C')
+			cout << "Cruiser
+";
+		
+		else if(x == 'd'|| x=='D')
+			cout << "Destroyer
+";
+		
+		else if(x == 'f' || x== 'F')
+			cout << "Frigate
+";
+		
+		
+		
+	}
+	return 0;
+}

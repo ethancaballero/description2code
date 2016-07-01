@@ -1,0 +1,16 @@
+from math import sqrt
+t=int(raw_input())
+ar1={}
+ar2=[]
+for i in range(t):
+    x1,y1,x2,y2,x3,y3=map(int,raw_input().split())
+    a=sqrt(((x1-x2)**2)+((y1-y2)**2))
+    b=sqrt(((x3-x2)**2)+((y3-y2)**2))
+    c=sqrt(((x1-x3)**2)+((y1-y3)**2))
+    s=(a+b+c)/2
+    area=sqrt(s*(s-a)*(s-b)*(s-c))
+    ar1[area]=i+1
+    ar2.append(area)
+    ar2.sort()
+    
+print ar1[ar2[0]],ar1[ar2[-1]]

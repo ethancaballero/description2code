@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+
+using namespace std;
+
+void solve()
+{
+    int x,y;
+    int moves = 0;
+    cin>>x>>y;
+    x = abs(x);
+    y = abs(y);
+
+    int min_ = min(x,y);
+    moves = 2*min_;
+    x -= min_;
+    y -= min_;
+
+    if(x>y)
+    {
+        if((x-y)%2==0)
+        {
+            moves += 2*(x);
+        }
+        else
+        {
+            moves = moves + 2*(x-1) + 3;
+        }
+    }
+    else if(y>x)
+    {
+        if((y-x)%2==0)
+        {
+            moves += 2*(y);
+        }
+        else
+        {
+            moves = moves + 2*(y-1) + 1;
+        }
+    }
+
+    cout<<moves<<"
+";
+
+}
+
+int main()
+{
+    int T;
+    cin>>T;
+    for(int i=0;i<T;i++)
+    {
+        solve();
+    }
+    return 0;
+}

@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main()
+{
+    ll t;
+    scanf("%lld",&t);
+   // cin>>t;
+    while(t--)
+    {
+        ll n;
+        scanf("%lld",&n);
+       // cin>>n;
+        ll a[n],count01=0,count2=0;
+        for(ll i=0;i<n;i++)
+        {
+            scanf("%lld",&a[i]);
+          // cin>>a[i];
+           if(a[i]==0||a[i]==1)
+            count01++;
+           if(a[i]==2)
+              count2++;
+        }
+        ll x = n -(count01);
+        ll pairs = ((x*(x-1))/2)-((count2*(count2-1))/2);
+        printf("%lld
+",pairs);
+        //cout<<pairs<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int n,m,t,i;
+cin>>t;
+while(t--)
+{
+cin>>n>>m;
+if(m==n)
+m=0;
+int a[n],b[n];
+int k=m;
+for(i=0;i<n-m;i++)
+{
+a[i]=k;
+k++;
+b[i]=0;
+}
+k=0;
+for(;i<n;i++)
+{a[i]=k;
+k++;
+b[i]=0;
+}
+//cout<<"enter"<<endl;
+//Now we have distributed
+int pos=0,sum=0;
+while(1)
+{
+if(b[pos]==1)
+{
+break;
+}
+b[pos]=1;
+pos=a[pos];
+sum++;
+}
+if(sum!=n)
+cout<<"No "<<sum<<endl;
+else
+cout<<"Yes"<<endl;
+}
+return 0;
+}

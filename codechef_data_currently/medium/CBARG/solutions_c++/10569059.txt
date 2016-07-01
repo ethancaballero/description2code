@@ -1,0 +1,32 @@
+#include<iostream>
+
+using namespace std;
+#define LL long long int
+#define sc(x) scanf("%d",&x)
+#define pff(x) printf("%lld
+",x)
+
+int main(){
+int t,n,inp,a;
+LL ans;
+
+	sc(t);
+
+	while(t--) {
+	sc(n);
+	sc(a);
+	ans=a;
+	n-=1;
+		while(n--) {
+			sc(inp);
+			a=inp-a;
+			if(a>0){
+				ans+=a;
+			}
+		a=inp;
+		}
+	pff(ans);
+	}
+return 0;
+
+}

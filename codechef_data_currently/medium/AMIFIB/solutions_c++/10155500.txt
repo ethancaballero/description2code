@@ -1,0 +1,67 @@
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<string.h>
+
+using namespace std;
+
+int compare(int S[], int N[], int len) {
+	int i = 0;
+	while(i<len) {
+		if(S[i] < N[i])
+			return 1;
+		if(S[i] > N[i])
+			return -1;
+		if(S[i] == N[i])
+			++i;
+	}
+	return 0;
+}
+
+
+int main() {
+	int T, len;
+	cin>>T;
+	while(T--) {
+		string A;
+		cin>>A;
+		if(A.compare("0") == 0) {
+			cout<<"YES"<<endl;
+			continue;
+		}
+
+		len = A.length();
+		int N[len];
+		int i, f;
+
+		for(i = 0; i<len; ++i)
+			N[i] = A[i] - '0';
+		
+		int X[len], Y[len], S[len], carry;
+		for(i = 0; i<len; ++i)
+			X[i] = Y[i] = S[i] = 0;
+		X[len-1] = 0;
+		Y[len-1] = 1;
+		S[len-1] = 1;
+
+
+		f = compare(S, N, len);
+		while(f>0) {
+			memcpy(X, Y, len*sizeof(int));
+			memcpy(Y, S, len*sizeof(int));
+			carry = 0;
+			for(i=len-1; i>=0; --i) {
+				S[i] = (X[i] + Y[i] + carry)%10;
+				carry = (X[i] + Y[i] +carry)/10;
+
+			}
+			f = compare(S, N, len);
+		}
+
+		if(f == 0)
+			cout<<"YES"<<endl;
+		else 
+			cout<<"NO"<<endl;
+		
+	}
+}

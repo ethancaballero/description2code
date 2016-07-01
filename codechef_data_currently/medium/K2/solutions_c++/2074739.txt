@@ -1,0 +1,71 @@
+#include <iostream>
+#include <math.h>
+ 
+using namespace std;
+ 
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    for(int i=0; i<t; i++){
+            long long n,temp;
+            scanf("%lld",&n);
+            long long p=0;
+                     if(n==1){
+                              printf("%d
+",2);
+                              goto lab;
+                     }
+                     if(n==2){
+                              printf("%d
+",3);
+                              goto lab;
+                     }
+                     if(n==4){
+                              printf("%d
+",3);
+                              goto lab;
+                     }
+            for(long long j=2;j<=sqrt(n)+1e-8;j++){
+                     temp=n;
+                     int v[100000];
+                     int cnt=0;
+                     while(temp!=0){
+                                 int rem=temp%j;
+                                 v[cnt]=rem;
+                                 cnt++;
+                                 temp=temp/j;
+                     }
+                     int flag=0;
+                     for(int k=0; k<cnt/2; k++){
+                             if(v[k]!=v[cnt-1-k]){
+                                                         flag=1;
+                                                         break;
+                             }
+                     }
+                     if(flag==0){
+                                 printf("%d
+",j);
+                                 goto lab;
+                     }
+                     if(n%j==0){
+                                long long t=n/j-1;
+                                if(t!=j){
+                                         p=t;
+                                }
+                     }
+            }
+            if(p){
+                  printf("%d
+",p);
+            }
+            else{
+                 printf("%ld
+",n-1);
+            }
+            lab:;
+    }
+    //system("pause");
+    return 0;
+}
+                                

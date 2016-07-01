@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+class KOL1504{
+    public static void main(String args[])throws Exception{
+        Reader re = new Reader(System.in);
+        PrintWriter pw = new PrintWriter(System.out);
+        int T = re.nextInt();
+        while(T-->0){
+            int N = re.nextInt();
+            int D = re.nextInt();
+            String A = re.next();
+            String B = re.next();
+            int flag = 1;
+            for(int i=0, m=Math.min(N, D); i<m; i++){
+                char A1[] = new char[26];
+                char B1[] = new char[26];
+                for(int j=i; j<N; j+=D){
+                    A1[A.charAt(j)-'a']++;
+                    B1[B.charAt(j)-'a']++;
+                }
+                if(!Arrays.equals(A1, B1)){
+                    flag = 0;
+                    break;
+                }
+            }
+            if(flag==1)
+                pw.println("Yes");
+            else
+                pw.println("No");
+        }
+        pw.close();
+    }
+}
+
+class Reader{
+    BufferedReader br;
+    StringTokenizer st;
+    Reader(InputStream in) throws Exception{
+        br = new BufferedReader(new InputStreamReader(in));
+        st = new StringTokenizer("");
+    }
+
+    String next() throws Exception{
+        while(!st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    int nextInt() throws Exception{
+        return Integer.parseInt(next());
+    }
+}

@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    long long int t,i,j,ctr=0;
+    cin>>t;
+    while(t--)
+    {
+        cin>>i>>j;
+        ctr=0;
+        while(i!=j)
+        {
+            if(i>j)
+            {
+                i=i/2;
+                ++ctr;
+            }
+            else
+            {
+                j=j/2;
+                ++ctr;
+            }
+        }
+        cout<<ctr<<"
+";
+    }
+    return 0;
+}

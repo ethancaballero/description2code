@@ -1,0 +1,10 @@
+mod=1000000007
+n=long(raw_input())
+if n<13:
+	print 0
+else:
+	n=(n-13)/2+6
+	ans=n*(n-1)*(n-2)*(n-3)*(n-4)*(n-5)
+	ans/=720
+	ans%=mod
+	print ans

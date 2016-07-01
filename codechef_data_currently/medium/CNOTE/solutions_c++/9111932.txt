@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long t,x,y,k,n,p,c;
+    cin>>t;
+    while(t--)
+    {
+        int flag=0;
+        cin>>x>>y>>k>>n;
+       long req_pg=x-y;
+        while(n--)
+        {
+            cin>>p>>c;
+            if(req_pg<=p && k>=c)
+            {
+                flag=1;
+            }
+        }
+        if(flag==1)
+            cout<<"LuckyChef"<<endl;
+        else
+            cout<<"UnluckyChef"<<endl;
+    }
+    return 0;
+}

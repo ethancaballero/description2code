@@ -1,0 +1,5 @@
+test=input()
+while test:
+    test-=1
+    n,m=map(int,raw_input().split())
+    print "%.6f"%(n+m-1)

@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+ int t;
+ cin>>t;
+ while(t--)
+ {
+   int a,b,c,i,j,k,m=INT_MIN,rem_index=0,mony;
+   cin>>a>>b>>c;
+   m=a*100+b;
+   for(i=1;i<=1000;i++)
+   {
+     mony=a*100+b;
+     mony=mony-c;
+     a=mony%100;
+     b=mony/100;
+     if(a*100+b>m)
+     {
+      m=a*100+b;
+      rem_index=i;
+     }
+ 
+     if(a*100+b<c)
+        break;
+ 
+   }
+   cout<<rem_index<<endl;
+ }
+return 0;
+}

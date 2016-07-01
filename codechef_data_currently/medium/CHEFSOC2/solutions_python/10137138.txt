@@ -1,0 +1,45 @@
+def getinput(number):
+    temp = raw_input()
+    temp = temp.split()
+    if number == 1:
+        return int(temp[0])
+    if number==2:
+        return int(temp[0]),int(temp[1])
+    if number == 3:
+        return int(temp[0]),int(temp[1]),int(temp[2])
+
+MOD = 1000000007
+
+no_of_cases = getinput(1)
+
+for i in range(no_of_cases):
+    number_of_dogs,no_of_passes,initial = getinput(3)
+    strength_list = raw_input()
+    strength_list = strength_list.split()
+    for temp in range(no_of_passes):
+        strength_list[temp]=int(strength_list[temp])
+
+    prev_list = [0]*number_of_dogs;
+    next_list = [0]*number_of_dogs;
+    next_list[initial-1]=1
+    pass_number=0
+   # print "Prev List :",prev_list
+    while (pass_number < no_of_passes):
+        for it in range(number_of_dogs):
+            prev_list[it]=next_list[it];
+        for i in range(number_of_dogs):
+            result=0
+            right_pass = i+strength_list[pass_number];
+            left_pass = i-strength_list[pass_number];
+            if left_pass>=0:
+                result+=prev_list[left_pass]
+            if right_pass<number_of_dogs:
+                result+=prev_list[right_pass]
+
+            next_list[i]=result%MOD;
+        #print "Prev List :",prev_list
+        pass_number+=1
+
+
+    #print tally
+    print ' '.join(map(str,next_list[0:]))

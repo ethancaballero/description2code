@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;
+	cin >> t;
+	while (t--){
+		int n;
+		cin >> n;
+		for (int i = 1; i <= 2*n; i++) {
+			int x;
+			cin >> x;
+		}
+		int ans = 0;
+		// Since we don't need to calculate the distance we didnt stored that.
+		// All we need to calculate is the permutation of point numbers and XOR is Commutative
+		for (int i = 1; i <= n; i++) {
+			ans ^= i;
+		}
+		cout << ans << endl;
+	}
+	return 0;
+
+}

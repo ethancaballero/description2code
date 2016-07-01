@@ -1,0 +1,17 @@
+# your code goes here
+from sys import stdin, stdout
+N = 10**5 + 10
+s = [1] * (N)
+s[0] = 0
+for i in range(3, N, 2):
+	for j in range(i, N, i):
+		s[j] += i
+t = int(stdin.readline())
+while t:
+	t -= 1
+	l, r = map(int, stdin.readline().strip().split(' '))
+	sumi = 0
+	for i in range(l, r+1):
+		sumi += s[i]
+	stdout.write(str(sumi) + '
+')

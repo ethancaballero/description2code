@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pb push_back
+
+int main()
+{
+   //freopen("input.txt","r",stdin);
+ ll a,b,c;
+ cin>>a>>b>>c;
+ c-=a;
+ c/=b;
+ if(c%2==1||c<0)
+    cout<<"Unlucky Chef"<<endl;
+else cout<<"Lucky Chef"<<endl;
+
+}

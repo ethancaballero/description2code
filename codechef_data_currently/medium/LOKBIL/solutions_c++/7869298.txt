@@ -1,0 +1,97 @@
+#include<iostream>
+int gr[110][110];
+using namespace std;
+int bfs(int,int);
+int main()
+{
+	int groups;
+	cin>>groups;
+	while(groups--)
+	{
+		int no_friends;
+		cin>>no_friends;
+		for(int j=1;j<=no_friends;j++)
+		{
+			int k=0;
+			char ch=' ';
+			while(1)
+			{
+				scanf("%d%c",&gr[j][k++],&ch);
+				if(ch!=' ')
+				break;	
+			}
+			gr[j][k]=0;			
+		}
+		/*for(int i=1;i<=no_friends;i++)
+		{
+			int j=0;
+			while(gr[i][j]!=0)
+			{
+				cout<<gr[i][j]<<" ";
+				j++;
+			}
+			cout<<"
+";
+		}*/
+		int ans=0,pos=1;
+		ans = bfs(1,no_friends);
+		for(int i=2;i<=no_friends;i++)
+		{
+			int temp = bfs(i,no_friends);
+			if(temp< ans)
+			{
+				ans= temp;
+				pos =i;
+			}
+		}
+		float aa = (float)ans/no_friends;
+		printf("%d %f
+",pos,aa);
+	
+	}
+	return 0;
+}
+ 
+int bfs(int start,int n)
+{
+	
+	int ans=0,q[110],dist[n+10],status[n+10],front ,rear , i,j;
+	for(i=1;i<=n;i++)
+	{
+		status[i]=1;
+		dist[i]=0;
+	}
+	
+	front=rear=-1;
+	q[++rear]=start;
+	front++;
+	status[start]=2;
+	while(front<=rear)
+	{
+		int curr_node = q[front++];
+		status[curr_node]=3;
+		j=0;
+		while(gr[curr_node][j]!=0)
+		{
+			int curr_neighbour = gr[curr_node][j];
+			if(status[curr_neighbour]==1)
+			{
+				status[curr_neighbour]=2;
+				dist[curr_neighbour] = dist[curr_node]+1;
+				q[++rear]=curr_neighbour;
+				
+			}
+			j++;
+		}
+		
+	}
+	for(i=1;i<=n;i++)
+	{
+		//cout<<dist[i]<<" ";
+		ans+= dist[i];
+	}
+	//cout<<"
+";
+	return ans;
+	
+}

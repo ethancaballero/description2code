@@ -1,0 +1,24 @@
+for _ in range(int(raw_input())):
+    s=list(raw_input())
+    s1c=list(s)
+    s2c=list(s)
+    n=len(s)
+    flag=0
+    for i in range(n/2):
+        if s[i]!=s[n-1-i]:
+            del s1c[i]
+            if s1c==s1c[::-1]:
+                print "YES"
+                flag=1
+                break
+            del s2c[n-1-i]
+            if s2c==s2c[::-1]:
+                print "YES"
+                flag=1
+                break
+            print "NO"
+            flag=1
+            break
+    if flag==0:
+        print "YES"
+        

@@ -1,0 +1,85 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define inf 99999999
+#define temp 0
+#define perm 1
+#define mp(a,b) make_pair(a,b)
+ll euc(int x1,int y1,int x2,int y2)
+{
+	return ((ll)x1-x2)*((ll)x1-x2)+((ll)y1-y2)*((ll)y1-y2);
+}
+
+ll d[1000001];
+int state[1000001];
+void reset(int n)
+{
+	int i;
+	for (i=0;i<=n+2;i++)
+	{
+		d[i]=inf;
+		state[i]=temp;
+	}
+}
+int dest;int n;
+pair<int,int>tree[2402];
+void dijkstra(int start)
+{
+	reset(n);
+	pair<int,int> p;
+	int current,size,i,u,v;
+	priority_queue< pair<int,int>,vector<pair<int,int> >,greater<pair<int,int> > >pq;
+	pq.push(mp(0,start));
+	d[start]=0;
+	while(!pq.empty())
+	{
+		p=pq.top();
+		pq.pop();
+		current=p.second;
+		if(state[current])
+			continue;
+		state[current]=perm;
+		if(current==dest)
+			return;	
+
+		for(i=0;i<=n+1;++i)
+		{
+			ll dek=euc(tree[current].first,tree[current].second,tree[i].first,tree[i].second);		
+			if(!state[i]&&(d[current]+dek<d[i]))
+			{
+				d[i]=d[current]+dek;
+				pq.push(mp(d[i],i));
+				//printf("n:%d  dest:%d Node %d and dis :%lld
+",n,dest,i,d[i]);
+			}
+		}
+		
+	}
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while (t--)
+	{
+		
+		scanf("%d",&n);
+		int i,j;
+		for (i=1;i<=n;i++)
+		{
+			int x,y;
+			scanf("%d%d",&x,&y);
+			tree[i].first=x;
+			tree[i].second=y;
+		}
+		dest=n+1;
+		scanf("%d%d",&tree[0].first,&tree[0].second);
+		scanf("%d%d",&tree[n+1].first,&tree[n+1].second);
+		dijkstra(0);
+		ll ans=d[dest];
+		printf("%lld
+",ans);
+	}
+	return 0;
+}	

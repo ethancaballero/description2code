@@ -1,0 +1,40 @@
+    #include<stdio.h>
+    long read()
+    {
+    long l=0;
+    char c=getchar();
+    while(c>='0'&&c<='9')
+    {
+    l=(l<<3)+(l<<1)+c-'0';
+    c=getchar();
+    }
+    return l;
+    }
+    int main()
+    {
+    int t,n,m,a,b;
+    long s;
+    scanf("%d",&t);
+    while(t--)
+    {
+        s=0;
+    scanf("%d %d",&n,&m);
+    int c[100]={0};
+    int f[100]={0};
+    while(n--)
+    {
+    scanf("%d %d",&a,&b);
+    c[b-1]+=a;
+    }
+    while(m--)
+    {
+    scanf("%d %d",&a,&b);
+    f[b-1]+=a;
+    }
+    for(n=0;n<100;++n)
+    s+=(f[n]-c[n])>0?f[n]-c[n]:0;
+    printf("%ld
+",s);
+    }
+    return 0;
+    } 

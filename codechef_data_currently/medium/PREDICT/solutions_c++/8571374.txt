@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	int T;
+	double p;
+	scanf("%d", &T);
+	while(T--){
+		cin >> p;
+		if(p > 0.5){
+			printf("%.6f
+",((3*p)*10000 - 2*p*p*10000));
+		}
+		else{
+			printf("%.6f
+",(10000*(p+1) - 2*p*p*10000));		
+		}
+	}
+}

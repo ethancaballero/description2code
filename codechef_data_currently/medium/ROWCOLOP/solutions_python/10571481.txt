@@ -1,0 +1,33 @@
+#include<iostream>
+#include<string>
+using namespace std;
+long long int row[1000000],col[1000000];
+int main()
+{
+	string s;
+	long long int n,q,a,x,i,rm,cm;
+	for(i=0;i<1000000;i++)
+	{
+		row[i] = 0;
+		col[i] = 0;
+	}
+	rm=0;
+	cm=0;
+	cin >> n >> q;
+	while(q--)
+	{
+		cin >> s >> a >> x;
+		if(s[0] == 'R')
+		{
+			row[a] += x;
+			if(row[a] > rm) rm = row[a];
+		}
+		else if(s[0] == 'C')
+		{
+			col[a] += x;
+			if(col[a] > cm) cm = col[a];
+		}
+	}
+	cout << rm+cm << endl;
+	return(0);
+}
