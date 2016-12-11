@@ -1,0 +1,3 @@
+First run get_problem_names.py and test_unlock.py and run.py
+
+I think hackereath_turnt_remain.py was the main one to run.
