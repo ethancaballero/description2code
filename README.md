@@ -10,7 +10,14 @@ https://github.com/openai/requests-for-research/pull/5
 
 Very messy code that was used for scraping codechef, codeforces, hackerearth, & topcoder in 2016 is located in `description2code/scrapers` folder. Hackerearth & Topcoder programming challenge data was abandoned for reason I can't remember.
 
-# Notes on usage of dataset that download link contains
+## License
+I don't "own" the data scraped. Codechef and CodeForces or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_preferences/data_licenses of Codechef and CodeForces and their users are.
+ 
+I'm fine with you using this dataset and scraping code however you want, **as long as you cite this repo if you use the dataset for (ml) research.**
+
+
+
+# Notes about dataset that download link contains
 
 ## CodeChef
 * Contains curriculum of problems increasing as easy < medium < hard < harder < hardest
@@ -28,10 +35,3 @@ Very messy code that was used for scraping codechef, codeforces, hackerearth, & 
 * Train on multiple solutions provided for each problem to help your model generalize.
 * Use several sample input/output from samples folder to reward model for generating code that passes all possible test cases.
 * versions of collected solution source codes are Python 2 and C++ 4.3.2
-
-
-
-## License
-I don't "own" the data scraped. Codechef and CodeForces or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_preferences/data_licenses of Codechef and CodeForces and their users are.
- 
-I'm fine with you using this dataset and scraping code however you want, **as long as you cite this repo if you use the dataset for (ml) research.**
