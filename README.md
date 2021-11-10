@@ -7,7 +7,7 @@ Story of dataset creation:
 https://github.com/openai/requests-for-research/pull/5
 
 
-# Notes on usage
+# Notes on usage of dataset that download link contains
 
 ## CodeChef
 * Contains curriculum of problems increasing as easy < medium < hard < harder < hardest
