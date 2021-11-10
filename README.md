@@ -19,7 +19,7 @@ https://github.com/openai/requests-for-research/pull/5
 * samples folders contain several input/output samples that could be used to reward model when it generates code that correctly processes sample input into sample output. Several input/output examples are contained in each samples folder to prevent model from overfitting to generated code that could only correctly process a single sample input to sample output.  
 * 'description_annotated.txt' is version of description that annotates tokens (with dagger (U+2020) and double_dagger (U+2021) at beginning and end of token(s) respectively) that are meant to be program variables.
 
-#General Usage
+## General Usage
 * description folder contains input for model; solutions_* (c++ or python depending on what you want to train on) contains target output for model.
 * Use Example Input(s)/Output(s) near bottom of 'description.txt' to test whether generated code is correct.
 * Train on multiple solutions provided for each problem to help your model generalize.
