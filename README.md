@@ -32,5 +32,6 @@ Very messy code that was used for scraping codechef, codeforces, hackerearth, & 
 
 
 ## License
-I don't "own" the data scraped. Codechef and CodeForces or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_preferences/data_licenses of Codechef and CodeForces and their users are. 
+I don't "own" the data scraped. Codechef and CodeForces or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_preferences/data_licenses of Codechef and CodeForces and their users are.
+ 
 I'm fine with you using this dataset and scraping code however you want.
