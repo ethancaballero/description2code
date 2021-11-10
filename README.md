@@ -11,10 +11,20 @@ https://github.com/openai/requests-for-research/pull/5
 Very messy code that was used for scraping codechef, codeforces, hackerearth, & topcoder in 2016 is located in `description2code/scrapers` folder. Hackerearth & Topcoder programming challenge data was abandoned for reason I can't remember.
 
 ## License
-I don't "own" the data scraped. Codechef and CodeForces or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_preferences/data_licenses of Codechef and CodeForces and their users are.
- 
-I'm fine with you using this dataset and scraping code however you want, **⚠️ as long as you cite this repo if you use the dataset (or scrapers) for (ml) research. ⚠️**
+I don't "own" the data scraped. Codechef and CodeForces or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_preferences/data_licenses of Codechef and CodeForces and their users are. I'm fine with you using this dataset and scraping code however you want. 
 
+## Citation
+**⚠️ If you find this dataset (or scrapers) useful please cite us in your work ⚠️**:
+```
+@misc{Caballero_Description2Code_Dataset_2016,
+author = {Caballero, Ethan and OpenAI, . and Sutskever, Ilya},
+doi = {10.5281/zenodo.5664031},
+month = {8},
+title = {{Description2Code Dataset}},
+url = {https://github.com/ethancaballero/description2code},
+year = {2016}
+}
+```
 
 
 # Notes about dataset that download link contains
