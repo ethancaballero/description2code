@@ -6,6 +6,7 @@ authors:
   given-names: "Ethan"
   orcid: "https://orcid.org/0000-0000-0000-0000"
 - family-names: "OpenAI"
+  given-names: "."
   orcid: "https://orcid.org/0000-0000-0000-0000"
 - family-names: "Sutskever"
   given-names: "Ilya"
