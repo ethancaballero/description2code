@@ -16,6 +16,14 @@ I don't "own" the data scraped. CodeChef and CodeForces and HackerEarth or their
 ## Citation
 **⚠️ If you find this dataset (or scrapers) useful, please cite us in your work ⚠️; BibTex to use:**
 ```
+@misc{Caballero_Description2Code_Dataset_2016,
+author = {Caballero, Ethan and OpenAI, . and Sutskever, Ilya},
+doi = {10.5281/zenodo.5665051},
+month = {8},
+title = {{Description2Code Dataset}},
+url = {https://github.com/ethancaballero/description2code},
+year = {2016}
+}
 ```
 
 # Notes about dataset that download link contains
