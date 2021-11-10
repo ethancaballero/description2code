@@ -8,7 +8,7 @@ https://www.dropbox.com/s/zwj6u4caehf54s0/description2code_current.zip
 Story of dataset creation:
 https://github.com/openai/requests-for-research/pull/5
 
-Very messy code that was used for scraping Codechef, Codeforces, Hackerearth, & Topcoder in 2016 is located in `description2code/scrapers` folder of this repo. I don't remember why Topcoder isn't included in the dataset.
+Very messy code that was used for scraping Codechef, Codeforces, Hackerearth, & Topcoder in 2016 is located in `scrapers` folder of this repo. I don't remember why Topcoder isn't included in the dataset.
 
 ## License
 I don't "own" the data scraped. CodeChef and CodeForces and HackerEarth or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_rights/data_licenses of CodeChef and CodeForces and HackerEarth and their users are. I'm fine with you using this dataset and scraping code however you want.
