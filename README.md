@@ -1,5 +1,7 @@
 # Description2Code dataset and (very messy) scrapers
 
+Description2Code is dataset of ~5300 programming challenges scraped from Codechef and CodeForces in 2016.
+
 Link to download dataset:
 https://docs.google.com/uc?id=0Bz3fihKG133ceWNFQTQ5S0xhZUk&export=download
 
