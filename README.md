@@ -28,3 +28,8 @@ Very messy code that was used for scraping codechef, codeforces, hackerearth, & 
 * Train on multiple solutions provided for each problem to help your model generalize.
 * Use several sample input/output from samples folder to reward model for generating code that passes all possible test cases.
 * versions of collected solution source codes are Python 2 and C++ 4.3.2
+
+
+
+## License
+I don't "own" the data scraped. Codechef and CodeForces technically own it. I don't know what Codechef and CodeForces legal_preferences/data_licenses are. I'm fine with you using the data and code however you want.
