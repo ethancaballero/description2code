@@ -36,7 +36,7 @@ I don't "own" the data scraped. CodeChef and CodeForces and HackerEarth or their
 * '_tags.txt' contains list of the difficulty of and which types of algorithmic techniques are needed to solve each problem; could be used to benchmark which types of problems your model is/isn't capable of solving or possibly as a supervision signal.
 * 2435 total
 
-##General Usage
+## General Usage
 * description folder contains input for model; solutions_* (c++ or python depending on what you want to train on) contains target output for model.
 * Use Example Input(s)/Output(s) near bottom of 'description.txt' to test whether generated code is correct.
 * Train on multiple solutions provided for each problem to help your model generalize.
