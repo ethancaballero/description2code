@@ -1,6 +1,0 @@
-tc = int(raw_input())
-while tc > 0:
-    tc = tc - 1
-    a = map(int, raw_input().split())
-    a = sorted(a)
-    print a[1]

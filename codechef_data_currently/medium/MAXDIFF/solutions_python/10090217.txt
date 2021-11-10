@@ -1,6 +1,0 @@
-test_case = int(raw_input())
-for t in range(test_case):
-	n , k = map(int, raw_input().split())
-	weights = map(int, raw_input().split())
-	weights.sort()
-	print max(abs(sum(weights[:k]) - sum(weights[k:])), abs(sum(weights[:n-k])- sum(weights[ n-k :])))

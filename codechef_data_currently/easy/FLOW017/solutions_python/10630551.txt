@@ -1,6 +1,0 @@
-T=int(raw_input())
-for i in range(T):
-
-    q=map(int,raw_input().split())
-    q.sort()
-    print q.pop(1)

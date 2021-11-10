@@ -1,8 +1,0 @@
-a=input()
-for i in range(a):
-	b=raw_input()
-	c=b[::-1]
-	if b == c:
-		print "wins"
-	else:
-		print "losses"

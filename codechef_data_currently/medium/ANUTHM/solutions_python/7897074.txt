@@ -1,9 +1,0 @@
-for _ in range(int(raw_input())):
-    n, m = map(int, str(raw_input()).split())
-    if n == 1:
-        a = m
-    elif m == 1:
-        a = n
-    else:
-        a = m + n - 1
-    print '%.6f' % a

@@ -1,6 +1,0 @@
-for i in range(int(raw_input())):
-    a=int(raw_input())
-    if a<1500:
-        print '%g' %(a+a)
-    else:
-        print '%g' %(a+500+.98*a)

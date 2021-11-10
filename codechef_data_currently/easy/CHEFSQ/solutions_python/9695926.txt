@@ -1,6 +1,0 @@
-for _ in xrange(int(raw_input())):
-    raw_input()
-    s = map(int, raw_input().split())
-    raw_input()
-    f = set(map(int, raw_input().split()))
-    print "Yes" if f.issubset(s) else "No"

@@ -1,5 +1,0 @@
-t=int(raw_input())
-while t>0:
-    t1,t2,t3,t4=map(float,raw_input().split())
-    print t1/(t1+t2)
-    t-=1

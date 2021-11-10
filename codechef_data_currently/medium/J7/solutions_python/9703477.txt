@@ -1,7 +1,0 @@
-# cook your code here
-import math
-for _ in xrange(input()):
-    P,S = map(int,raw_input().split())
-    l = (P- math.sqrt(P*P - 24*S))/12.0 
-    h = P/4.0 - 2*l
-    print round(l*l*h,2)

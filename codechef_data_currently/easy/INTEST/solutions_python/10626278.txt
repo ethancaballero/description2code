@@ -1,9 +1,0 @@
-noOfInputs, divisor = raw_input().split()
-noOfInputs = int(noOfInputs)
-divisor = int(divisor)
-noOfInputsDivisible = 0
-for x in range(noOfInputs):
-    varInput = int(raw_input())
-    if varInput % divisor == 0:
-        noOfInputsDivisible += 1
-print noOfInputsDivisible

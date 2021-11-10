@@ -1,5 +1,0 @@
-for _ in range(int(input())):
-    t,a=map(int,raw_input().split())
-    w=list(map(int,raw_input().split()))
-    w.sort()    
-    print max(sum(w[a:])-sum(w[:a]),sum(w[t-a:])-sum(w[:t-a]))

@@ -1,7 +1,0 @@
-import sys
-t=int(raw_input())
-while(t!=0):
-			n=int(sys.stdin.readline())
-			print (pow(2,2*int((int(bin(n)[2:])))%1000000006,1000000007)) 
-			t=t-1
-								

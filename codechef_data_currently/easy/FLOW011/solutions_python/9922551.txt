@@ -1,7 +1,0 @@
-t = input()
-for _ in xrange(t):
-    s = input()
-    if s < 1500:
-        print "{0:g}".format(2 * s)
-    else:
-        print "{0:g}".format(s + 500 + 0.98 * s)

@@ -1,7 +1,0 @@
-mod=1000000007
-t=input()
-
-while t:
-    n=input()
-    print (pow(3,n,mod)+3*pow(-1,n))%mod
-    t-=1

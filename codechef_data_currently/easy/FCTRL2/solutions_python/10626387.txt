@@ -1,5 +1,0 @@
-import math
-noOfVars = int(raw_input())
-for x in range(noOfVars):
-    var = int(raw_input())
-    print math.factorial(var)

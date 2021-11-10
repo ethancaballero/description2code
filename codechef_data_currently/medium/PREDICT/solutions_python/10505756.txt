@@ -1,6 +1,0 @@
-for t in xrange(int(raw_input())):
-    PA = float(raw_input())
-    if(PA >= 0.5):
-        print (10000 + 10000 * (1 - PA) * (2 * PA - 1))
-    else:
-        print (10000 + 10000 * PA * (1 - 2 * PA))

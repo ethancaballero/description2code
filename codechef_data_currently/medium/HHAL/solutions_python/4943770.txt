@@ -1,9 +1,0 @@
-t=int(input())
-while t>0:
-    h=raw_input().rstrip()
-    r=h[::-1]
-    if h==r:
-        print 1
-    else:
-        print 2
-    t=t-1

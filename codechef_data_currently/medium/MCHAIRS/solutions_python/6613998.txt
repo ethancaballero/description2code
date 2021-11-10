@@ -1,6 +1,0 @@
-import math
-
-cases = int(raw_input())
-for x in range(cases):
-	n = int(raw_input())
-	print (pow(2, n, 1000000007) - 1)

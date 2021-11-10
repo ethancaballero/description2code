@@ -1,9 +1,0 @@
-t = int(input())
-for i in range(t):
-    n,k = map(int, raw_input().split())
-    a = map(int, raw_input().split())
-    a.sort()
-    if k==0:
-        print("%.6f" % (sum(a) / float(len(a))))
-    else:
-        print("%.6f" % (sum(a[k:-k]) / float(len(a[k:-k]))))

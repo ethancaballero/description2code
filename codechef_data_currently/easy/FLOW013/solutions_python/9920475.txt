@@ -1,4 +1,0 @@
-t = input()
-for _ in xrange(t):
-    a, b, c = map(int, raw_input().split())
-    print "YES" if a + b + c == 180 else "NO"

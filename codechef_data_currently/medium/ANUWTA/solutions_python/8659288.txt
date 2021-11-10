@@ -1,5 +1,0 @@
-t=input()
-while t:
-    t=t-1
-    n=input()
-    print (((n+1)*(n+2))/2)-1

@@ -1,9 +1,0 @@
-MOD=1000000007
-t=input()
-while t:
-	t-=1
-	n=input()
-	a=bin(n)
-	b=int(a[2:])
-	a=pow(2,b,MOD)
-	print pow(a,2,MOD)

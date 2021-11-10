@@ -1,7 +1,0 @@
-t = input()
-for i in range(t):
-    n = map(int,raw_input().split(' '))
-    max_value = max(n)
-    n.remove(max_value)
-    max_value_2 = max(n)
-    print max_value_2

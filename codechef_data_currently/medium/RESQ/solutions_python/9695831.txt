@@ -1,8 +1,0 @@
-from math import sqrt
-for _ in range(int(input())):
-    num=int(input())
-    a=int(sqrt(num))
-    while(num%a != 0):
-        a-=1
-    b=num/a
-    print b-a

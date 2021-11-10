@@ -1,6 +1,0 @@
-from sys import stdin
-
-for trial in xrange(int(stdin.readline())):
-    N = int(stdin.readline())
-    s, MOD = 0, 1000000007
-    print 26 if N==1 else (26*280000002*(pow(26,N/2,MOD)+pow(26,(N+1)/2,MOD)-2))%MOD

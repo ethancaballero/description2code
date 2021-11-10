@@ -1,7 +1,0 @@
-test_case = int(raw_input())
-for t in range(test_case):
-	feedback = raw_input()
-	if feedback.find('101') >= 0 or feedback.find('010') >= 0:
-		print 'Good'
-	else:
-		print 'Bad'

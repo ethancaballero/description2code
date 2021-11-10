@@ -1,5 +1,0 @@
-mod=10**9+7
-t=input()
-for _ in xrange(t):
-    n=input()
-    print (pow(2,(2*int(bin(n)[2:]))%1000000006,1000000007)) 

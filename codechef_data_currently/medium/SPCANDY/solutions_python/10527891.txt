@@ -1,8 +1,0 @@
-for _ in range(input()):
-    arr = map(int,raw_input().split())
-    a=[]
-    if arr[1]==0:
-        a=a+[arr[1],arr[0]]
-    else:
-        a=a+[arr[0]/arr[1],arr[0]%arr[1]]
-    print ' '.join(map(str,a))

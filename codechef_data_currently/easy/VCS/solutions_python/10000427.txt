@@ -1,9 +1,0 @@
-import math
-T= int(raw_input()) # number of cases
- 
-for i in range(T):
-    N=str(raw_input()).split(" ")[0]
-    U=set(range(1,int(N)+1))
-    A=set(map(int,str(raw_input()).split(" ")))
-    B=set(map(int,str(raw_input()).split(" ")))
-    print str(len(A&B))+" "+ str(len(U-(A|B)))

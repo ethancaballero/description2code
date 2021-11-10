@@ -1,7 +1,0 @@
-T=int(raw_input())
-i=1;
-while i<=T:
-    n=int(raw_input())
-    value=(pow(3,n,1000000007)+(3*pow(-1,n,1000000007)))%1000000007;
-    print value
-    i=i+1

@@ -1,3 +1,0 @@
-for _ in xrange(int(raw_input())):
-    m,n=map(int, raw_input().split())
-    print '%.6f' % (m+n-1)

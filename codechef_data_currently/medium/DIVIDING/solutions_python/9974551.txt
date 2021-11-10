@@ -1,9 +1,0 @@
-n=int(raw_input())
-s=0
-n=map(int,raw_input().split())
-for i in n:
-    s+=i
-if s==(len(n)*(len(n)+1))/2:
-    print "YES"
-else:
-    print "NO"

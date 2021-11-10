@@ -1,7 +1,0 @@
-from fractions import gcd
-
-t = int(input())
-for test in xrange(t):
-    a,b = map(int,raw_input().split())
-    g = gcd(a,b)
-    print (a/g)*(b/g)

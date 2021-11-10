@@ -1,8 +1,0 @@
-for t in range(int(raw_input())):
-    n,m,k=map(int,raw_input().split())
-    set1=set(map(int,raw_input().split()))
-    set2=set(map(int,raw_input().split()))
-    a=len(set1.intersection(set2))
-    setbaap=set(range(1,n+1))
-    b=len(setbaap.difference(set1.union(set2)))
-    print a,b    

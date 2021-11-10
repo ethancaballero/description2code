@@ -1,8 +1,0 @@
-for _ in range(input()):
-    n= int(raw_input())
-    apples= map(int,raw_input().split())
-    time =[]
-    for i in range(n):
-        if apples[i] not in time:
-            time.append(apples[i])
-    print len(time)

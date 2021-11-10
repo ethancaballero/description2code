@@ -1,9 +1,0 @@
-initialinput = raw_input().split()
-withdraw = int(initialinput[0])
-total = float(initialinput[1])
- 
-if withdraw%5==0 and total>=(withdraw+0.5):
-	output1 = total - withdraw - 0.5
-	print "%.2f" %output1
-else:
-	print "%.2f" %total

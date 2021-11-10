@@ -1,6 +1,0 @@
-﻿t=int(raw_input())
-while t>0:
-    t-=1
-    size=int(raw_input())
-    a=map(int,raw_input().split())
-    print size*(size-1)/2

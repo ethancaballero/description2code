@@ -1,9 +1,0 @@
-import math
-t = int(raw_input())
-for i in range(t):
-    n = float(raw_input())
-    ans = (math.log((n*2.2360679775) + 0.5)/math.log(1.61803398875))-1
-    if ans - int(ans) > 0.9999999:
-        print int(math.ceil(ans))
-    else:
-        print int(ans)

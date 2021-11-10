@@ -1,6 +1,0 @@
-t = input()
-for _ in xrange(t):
-    n, m, k = map(int, raw_input().split())
-    ignored = set(raw_input().split())
-    tracked = set(raw_input().split())
-    print len(ignored & tracked), n - len((ignored | tracked))

@@ -1,3 +1,0 @@
-for _ in range(input()):
-        n = list(raw_input().strip())
-        print len(n) - n.count('4') - n.count('7')

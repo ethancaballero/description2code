@@ -1,5 +1,0 @@
-for _ in xrange(input()):
-    quantity, price = map(float, raw_input().split())
-    expense = quantity * price
-    expense1 = expense - (expense * 0.1)
-    print "%.6f" % expense1 if quantity > 1000 else "%.6f" % expense

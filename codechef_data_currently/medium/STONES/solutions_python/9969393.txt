@@ -1,8 +1,0 @@
-for _ in range(input()):
-	j=raw_input().strip()
-	s=raw_input().strip()
-	count=0
-	for c in s:
-		if c in j:
-			count=count+1
-	print count

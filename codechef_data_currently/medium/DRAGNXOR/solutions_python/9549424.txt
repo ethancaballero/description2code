@@ -1,6 +1,0 @@
-tst = input()
-for t in range(tst):
-	n, a, b = map(int, raw_input().split())
-	a1 = bin(a).count('1')
-	b1 = bin(b).count('1')
-	print 2**n-2**(abs(n-a1-b1))

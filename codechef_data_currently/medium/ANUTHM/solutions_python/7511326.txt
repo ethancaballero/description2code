@@ -1,6 +1,0 @@
-from sys import stdin
-t=int(stdin.readline())
-for i in range(0,t):
-	a,b=map(int,stdin.readline().split())
-	k=a+b-1
-	print "%.6f"%k

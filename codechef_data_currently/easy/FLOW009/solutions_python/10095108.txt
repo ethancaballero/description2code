@@ -1,8 +1,0 @@
-tc = int(raw_input())
-while tc > 0:
-    tc = tc - 1
-    q, p = map(int, raw_input().split())
-    if q < 1001:
-        print "%.6f" % (p * q)
-    else:
-        print "%.6f" % (0.9 * p * q)

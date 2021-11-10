@@ -1,9 +1,0 @@
-def sum(n):
-    return n*(n+1)/2
-t=int(raw_input())
-while(t>0):
-    n=int(raw_input())
-    l=raw_input()
-    s=sum(n-1)
-    print s
-    t-=1

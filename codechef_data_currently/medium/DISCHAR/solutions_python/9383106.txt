@@ -1,3 +1,0 @@
-for _ in range(input()):
-	s=raw_input()
-	print len(set(s))

@@ -1,6 +1,0 @@
-testCases = int(raw_input())
-for x in xrange(testCases):
-	num = raw_input()
-	first = num[:1]
-	last = num[-1:]
-	print int(first) + int(last)

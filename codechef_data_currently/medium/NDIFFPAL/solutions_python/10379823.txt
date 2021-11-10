@@ -1,3 +1,0 @@
-for cas in xrange(input()):
-    n = input()
-    print 'abc'*(n/3) + 'abc'[:n%3]

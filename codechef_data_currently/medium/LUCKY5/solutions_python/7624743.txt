@@ -1,4 +1,0 @@
-import sys
-for i in xrange(int(sys.stdin.readline())):
-	str = sys.stdin.readline().strip()
-	print len(str)-str.count('4')-str.count('7')

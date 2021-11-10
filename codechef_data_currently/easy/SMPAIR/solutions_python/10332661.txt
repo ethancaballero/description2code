@@ -1,9 +1,0 @@
-t = int(raw_input())
-j=0
-while j<t :
-    n = int(raw_input())
-    a = map(int,raw_input().split(' '))
-    if n>2 :
-        a.sort()
-    print a[0] + a[1]
-    j += 1

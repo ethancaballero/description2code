@@ -1,8 +1,0 @@
-for i in range(int(raw_input())):
-    c=0
-    a=raw_input()
-    b=raw_input()
-    for j in b:
-        if j in a:
-            c+=1
-    print c

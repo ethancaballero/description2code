@@ -1,6 +1,0 @@
-T=int(raw_input())
-
-for i in range(T):
-	n=list(raw_input())
-	sum=int(n[0])+int(n[-1])
-	print sum

@@ -1,6 +1,0 @@
-for i in range(int(raw_input())):
-    x,y = map(int,raw_input().split())
-    a,b =x,y
-    while b:
-        a,b = b, a%b
-    print x*y/a**2

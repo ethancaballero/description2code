@@ -1,4 +1,0 @@
-from math import*
-for i in range(input()):
-	a = input()
-	print int(sqrt(a))

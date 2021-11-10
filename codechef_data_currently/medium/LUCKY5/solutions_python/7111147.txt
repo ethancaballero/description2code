@@ -1,3 +1,0 @@
-for _ in range(int(raw_input())):
-	txt=raw_input().strip()
-	print len(txt)-txt.count('4')-txt.count('7')

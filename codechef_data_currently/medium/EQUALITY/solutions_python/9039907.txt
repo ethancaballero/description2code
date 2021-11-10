@@ -1,8 +1,0 @@
-for testcases in xrange(int(raw_input())):
-    n = int(raw_input() )
-    A = map(int, raw_input().split() )
-    s = sum(A) / (n-1)
-    #print s
-    for i in xrange(n) :
-        print s-A[i],
-    print ''

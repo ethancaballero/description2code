@@ -1,9 +1,0 @@
-t=input()
-for i in range(t):
-    n1,n2=map(int,raw_input().split())
-    pr=n1*n2
-    if(n1>1000):
-        pr=float(pr*0.9)
-        print("%.6f"%pr)
-    else:
-        print("%.6f"%float(pr))

@@ -1,9 +1,0 @@
-test=input()
-for cases in range(test):
-	[d,u,n]=map(float, raw_input().split())
-	for i in range(int(n)):
-		[m,r,c]=map(float, raw_input().split())
-		if i==0:
-			x={d*u:0}
-		x.update({r*u+(c/m):i+1})
-	print x[min(x)]

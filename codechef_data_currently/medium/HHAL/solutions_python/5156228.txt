@@ -1,7 +1,0 @@
-t = input()
-for i in xrange(t):
-    h = raw_input()
-    if h == h[::-1]:
-        print '1'
-    else:
-        print '2'

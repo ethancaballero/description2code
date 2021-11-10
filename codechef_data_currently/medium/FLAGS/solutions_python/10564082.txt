@@ -1,5 +1,0 @@
-T = int(raw_input())
-while T:
-    n = int(raw_input())
-    print 2*n*pow(n-1,2) + n*(n-1)*(n-2) + 2*n*(n-1)*pow(n-2,2)
-    T -= 1

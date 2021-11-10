@@ -1,6 +1,0 @@
-import sys
-
-for __ in range(input()) :
-    n = input()
-    lists = [int(i) for i in sys.stdin.readline().split()]
-    print sum(lists) - n*min(lists)

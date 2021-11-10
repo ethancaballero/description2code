@@ -1,2 +1,0 @@
-print "
-".join("ALICE" if won else "BOB" for won in [True if n%4==1 else False for n in [input() for __ in range(input())]])

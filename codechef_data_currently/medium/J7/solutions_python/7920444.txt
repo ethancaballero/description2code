@@ -1,9 +1,0 @@
-import math 
-t = int(input())
-i = 0
-while i< t:
-    p,s = map(int ,raw_input().split())
-    b=(p-math.sqrt((p*p)-(24*s)))/12
-    v=(b*s)/2-(b*b*p)/4+(b*b*b);
-    print '%.2f'%v
-    i+=1

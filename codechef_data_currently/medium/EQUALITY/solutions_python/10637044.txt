@@ -1,8 +1,0 @@
-for _ in range(input()):
-    n = int(raw_input())
-    constant = map(int,raw_input().split())
-    total = sum(constant)/(n-1)
-    values = []
-    for i in range(n):
-        values.append(total-constant[i])
-    print ' '.join(map(str,values))

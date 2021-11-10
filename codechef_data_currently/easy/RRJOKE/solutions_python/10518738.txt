@@ -1,8 +1,0 @@
-for _ in range(input()):
-    n = input()
-    r = 0
-    while(n):
-        raw_input()
-        r^=n
-        n-=1
-    print r

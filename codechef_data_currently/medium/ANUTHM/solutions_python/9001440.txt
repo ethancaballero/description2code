@@ -1,3 +1,0 @@
-for _ in range(0,input()):
-    [a,b]=map(int,raw_input().strip().split())
-    print '{0:.6f}'.format(a*1.0+b-1.0)

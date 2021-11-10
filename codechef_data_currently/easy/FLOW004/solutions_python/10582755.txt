@@ -1,6 +1,0 @@
-t = input()
-while t :
-	n = raw_input()
-	s = int(n[0]) + int(n[-1])
-	print s
-	t -= 1

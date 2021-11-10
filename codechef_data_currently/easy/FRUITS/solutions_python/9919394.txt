@@ -1,4 +1,0 @@
-t = input()
-for _ in xrange(t):
-    a, o, k = map(int, raw_input().split())
-    print max(0, abs(a - o) - k)

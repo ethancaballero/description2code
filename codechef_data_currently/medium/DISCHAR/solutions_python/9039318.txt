@@ -1,4 +1,0 @@
-for testcases in xrange(int(raw_input() ) ) :
-    Str = raw_input()
-    distchar = set(Str)
-    print len(distchar)

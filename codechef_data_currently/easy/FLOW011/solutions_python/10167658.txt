@@ -1,9 +1,0 @@
-t = input()
-for i in range(t):
-    s = input()
-    s = float(s)
-    if s < 1500:
-        result = s + s / 10 + s * 0.9
-    else:
-        result = s + 500 + s * 0.98
-    print '{0:g}'.format(result)

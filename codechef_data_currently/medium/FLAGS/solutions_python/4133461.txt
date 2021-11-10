@@ -1,5 +1,0 @@
-T=input()
-while T:
-    T-=1
-    n=input()
-    print 2*(n-1)*n+5*(n-1)*(n-2)*n+2*n*(n-1)*(n-2)*(n-3)

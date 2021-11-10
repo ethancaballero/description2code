@@ -1,8 +1,0 @@
-t=int(input())
-while t>0:
-    a,b=map(int,raw_input().split())
-    if a%2==1 and b%2 ==1:
-        print "Vanka"
-    else:
-        print "Tuzik"
-    t-=1

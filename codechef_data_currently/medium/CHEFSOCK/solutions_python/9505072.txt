@@ -1,5 +1,0 @@
-jacketCost, sockCost, money = map(int,raw_input().split())
-if((money-jacketCost)//sockCost)%2==0:
-    print('Lucky Chef')
-else:
-    print('Unlucky Chef') 

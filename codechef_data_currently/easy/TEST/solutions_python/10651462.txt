@@ -1,7 +1,0 @@
-while 1:
-	n = raw_input()
-	if int(n) == 42:
-		break
-	
-	print n	
-		

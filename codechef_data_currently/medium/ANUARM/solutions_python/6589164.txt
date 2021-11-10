@@ -1,7 +1,0 @@
-for _ in range(input()):
-	n,m = map(int,raw_input().split())
-	arr = map(int,raw_input().split())
-	min_,max_ = min(arr),max(arr)
-	for i in range(n):
-		print max(abs(i-max_),abs(i-min_)),
-

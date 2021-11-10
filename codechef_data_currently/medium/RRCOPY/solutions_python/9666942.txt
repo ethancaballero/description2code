@@ -1,8 +1,0 @@
-cases = int(raw_input())
-for i in range(cases):
-    ans = []
-    count = 0
-    length = raw_input()
-    A = raw_input()
-    A = A.split()
-    print len(set(A))

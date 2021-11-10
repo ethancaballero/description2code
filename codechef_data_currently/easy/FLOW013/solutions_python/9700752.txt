@@ -1,7 +1,0 @@
-x=int(raw_input())
-for i in range (x):
-    a=map(int,raw_input().split())
-    if sum(a)==180:
-        print 'YES'
-    else:
-        print "NO"

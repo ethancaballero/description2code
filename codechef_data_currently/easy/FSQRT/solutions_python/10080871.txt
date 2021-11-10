@@ -1,5 +1,0 @@
-t = input()
-for i in range(t):
-    n = input()
-    root = int(n**0.5)
-    print root

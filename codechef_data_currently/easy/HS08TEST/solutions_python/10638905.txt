@@ -1,8 +1,0 @@
-s=raw_input() 
-s1=s.split(' ')
-w=int(s1[0])
-f=float(s1[1])
-temp=float(w)
-if w%5==0 and temp<=f-0.50:
-   f=f-w-0.50
-print f   

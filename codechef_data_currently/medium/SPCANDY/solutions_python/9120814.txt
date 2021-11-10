@@ -1,8 +1,0 @@
-# cook your code here
-for testcases in xrange(int(raw_input().strip() ) ) :
-    n, d = map(long, raw_input().strip().split() )
-    if d == 0:
-        print 0, n
-        continue
-    a, s = divmod(n,d)
-    print a, s 

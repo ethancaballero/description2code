@@ -1,9 +1,0 @@
-t = int(raw_input())
-j = 0
-while j<t :
-    a,b,c = map(int,raw_input().split())
-    if a!=0 and b!=0 and c!=0 and a+b+c==180 :
-        print 'YES'
-    else :
-        print 'NO'
-    j+=1        

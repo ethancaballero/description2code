@@ -1,6 +1,0 @@
-import sys
-t = int(sys.stdin.readline())
-while t>0:
-	m,n = map(int,str(sys.stdin.readline()).strip().split())
-	print '%.6f' %(n+m-1)
-	t-=1			 	

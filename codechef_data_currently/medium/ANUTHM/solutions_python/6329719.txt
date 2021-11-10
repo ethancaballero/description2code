@@ -1,7 +1,0 @@
-t=float(raw_input())
-while t:
-    n,m=raw_input().split()
-    n=float(n)
-    m=float(m)
-    print (n+m-1)
-    t-=1

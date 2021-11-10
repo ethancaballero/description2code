@@ -1,9 +1,0 @@
-n=int(raw_input())
-while n:
-	num=int(raw_input())
-	arr=[]
-	ctr=0
-	arr = map(int, raw_input().split())
-	ans=num*(num-1)/2
-	print ans
-	n-=1

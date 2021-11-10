@@ -1,3 +1,0 @@
-t=int(raw_input())
-for i in range(t):
-	print(pow(2,int(raw_input()),1000000007)-1)

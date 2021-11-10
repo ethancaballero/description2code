@@ -1,5 +1,0 @@
-r = input() % 6
-if r in [0, 1, 3]:
-        print 'yes'
-else:
-        print 'no'

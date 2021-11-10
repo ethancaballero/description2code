@@ -1,9 +1,0 @@
-t=raw_input().split()
-n=int(t[0])
-d=int(t[1])
-a=0
-for i in range(0,n):
-	x=int(raw_input())
-	if(x%d==0):
-		a=a+1
-print a

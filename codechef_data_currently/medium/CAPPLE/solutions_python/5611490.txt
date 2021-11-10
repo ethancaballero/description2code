@@ -1,7 +1,0 @@
-m = input()
-
-for i in range(m):
-	k = int(raw_input())
-	l = [int(i) for i in raw_input().split()]
-	l = set(l)
-	print len(l)

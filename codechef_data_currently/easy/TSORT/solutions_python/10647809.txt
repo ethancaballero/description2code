@@ -1,6 +1,0 @@
-t = int(raw_input())
-list = []
-while len(list) < t:
-  list.append(int(raw_input()))
-for n in sorted(list):
-  print n

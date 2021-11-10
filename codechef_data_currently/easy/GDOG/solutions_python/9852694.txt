@@ -1,8 +1,0 @@
-#!/usr/bin/python
-for i in range(input()):
-	x,y=map(int,raw_input().split())
-	MAX=0
-	for j in range(1,y+1):
-		if x%j>MAX:
-			MAX=x%j
-	print MAX

@@ -1,5 +1,0 @@
-t = input()
-while(t>0):
-	x = input()
-	print (x*(x+3))/2
-	t = t-1

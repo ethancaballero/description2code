@@ -1,5 +1,0 @@
-from sys import stdin
-t=int(stdin.readline())
-for i in range(0,t):
-	n=int(stdin.readline())
-	print n+((n+1)*n)/2

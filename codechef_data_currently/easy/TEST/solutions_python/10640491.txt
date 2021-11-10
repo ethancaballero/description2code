@@ -1,9 +1,0 @@
-while(1):
-    #pdb.set_trace()
-    i=raw_input()
-    if(int(i)==42):
-        break
-    else:
-        print(i)
-
-

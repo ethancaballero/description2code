@@ -1,7 +1,0 @@
-import sys
-
-num = int(sys.stdin.readline().rstrip())
-while num != 0:
-	nums = [float(s) for s in sys.stdin.readline().rstrip().split()]
-	print nums[0] / (nums[0] + nums[1])
-	num -= 1

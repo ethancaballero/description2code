@@ -1,7 +1,0 @@
-t = int(raw_input())
-while t:
-	arr = list()
-	arr = map(int,raw_input().split())
-	arr.sort()
-	print(arr[1])
-	t -= 1

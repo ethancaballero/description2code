@@ -1,8 +1,0 @@
-t=input()
-while t:
-	n,k=map(int,raw_input().split())
-	if k==0:
-		print 0,n
-	else:
-		print int(n/k),n%k
-	t=t-1

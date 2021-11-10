@@ -1,4 +1,0 @@
-T = int(raw_input())
-for _ in xrange(T):
-    N = input()
-    print len(set(raw_input().split()))

@@ -1,9 +1,0 @@
-import sys
-T=input()
-for i in xrange(T):
-    t1,t2,t3,t4=map(int, sys.stdin.readline().split())
-    t1 = float(t1)
-    t2 = float(t2)
-    t3 = float(t3)
-    t4 = float(t4)
-    print float(t1/(t1+t2))

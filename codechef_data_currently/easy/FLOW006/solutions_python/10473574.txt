@@ -1,9 +1,0 @@
-t=int(input())
-for i in range(t):
-    N=int(input())
-    sum=0
-    while N!=0:
-      A=N%10
-      sum=sum+A
-      N=N/10
-    print(sum)

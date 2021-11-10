@@ -1,3 +1,0 @@
-for _ in xrange(input()):
-    n = input()
-    print "%g" % (n + (0.1 * n) + (0.9 * n)) if n < 1500 else "%g" % (n + 500 + (0.98 * n))

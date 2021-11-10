@@ -1,6 +1,0 @@
-while(True):
-    inp = raw_input()
-    if(inp == '42'):
-        break
-    else:
-        print inp 

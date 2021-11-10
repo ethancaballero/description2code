@@ -1,9 +1,0 @@
-T = input()
-for t in range(T):
-	N = input()
-	if N==1:
-		print 2
-	elif (N&(N+1))==0:
-		print ((N+1)/2) - 1
-	else:
-		print -1  

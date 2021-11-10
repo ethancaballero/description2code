@@ -1,7 +1,0 @@
-import math
-t=int(raw_input())
-while(t>0):
-	n=int(raw_input())
-	n=math.sqrt(n)
-	print int(n)
-	t-=1 

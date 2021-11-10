@@ -1,3 +1,0 @@
-# cook your code here
-for _ in range(int(input())):
-    print list(map(int,raw_input())).count(4)

@@ -1,9 +1,0 @@
-from math import log
-for i in range(input()):
-	a, b = map(int, raw_input().split())
-	steps = 0
-	while(log(a, 2) != int(log(a, 2))):
-		a = a//2
-		steps += 1
-	steps += abs(int(log(a,2)-log(b,2)))
-	print steps

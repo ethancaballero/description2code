@@ -1,8 +1,0 @@
-t=int(raw_input())
-while(t>0):
-    t-=1
-    a=raw_input().split()
-    if(a[0]==a[2]==a[4]or a[0]==a[2]==a[5]or a[0]==a[3]==a[4]or a[0]==a[3]==a[5]or a[1]==a[2]==a[4]or a[1]==a[2]==a[5]or a[1]==a[3]==a[5]or a[1]==a[3]==a[4]):
-        print 'YES'
-    else:
-        print 'NO'     

@@ -1,8 +1,0 @@
-t = input()
-while t > 0:
-    cost = 0
-    no = input()
-    elements = map(int, raw_input().split())
-    elements.sort()
-    print elements[0]*(len(elements) - 1)
-    t -= 1

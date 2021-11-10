@@ -1,9 +1,0 @@
-n=int(input())
-while(n):
-	k=input()
-	fact=1
-	while(k):
-		fact=fact*k
-		k=k-1
-	n=n-1
-	print fact 

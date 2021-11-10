@@ -1,7 +1,0 @@
-
-T = int(raw_input(""))
-for t in xrange(0,T):
-	N = int(raw_input(""))
-	mylist = map(int,raw_input("").split())
-	res = N*(N+1)/2 - N
-	print res

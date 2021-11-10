@@ -1,7 +1,0 @@
-t = int(raw_input())
-while t:
-    num = raw_input()
-    total = 0
-    total = int(num[0]) + int(num[-1])
-    print total
-    t -= 1

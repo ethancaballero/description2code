@@ -1,7 +1,0 @@
-for t in range(input()):
-	n, c, q = map(int,raw_input().strip().split())
-	for i in range(q):
-			l, r = map(int,raw_input().strip().split())
-			if l<=c and r>=c:
-				c= l+r-c;
-	print c

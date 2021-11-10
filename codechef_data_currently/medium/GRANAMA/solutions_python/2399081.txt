@@ -1,9 +1,0 @@
-from sys import stdin
-
-for trial in xrange(int(stdin.readline())):
-    R,S = map(str,stdin.readline().strip().split())
-    sortedR,sortedS = sorted(R), sorted(S)
-    if set(sortedR)==set(sortedS):
-        print "YES" if sortedR==sortedS else "NO"
-    else:
-        print "YES"

@@ -1,9 +1,0 @@
-t=int(raw_input())
-while t:
-    n=int(raw_input())
-    a = sorted(map(int, raw_input().split()), reverse=True)
-    count=0
-    for i in range(1, n):
-        count+=(a[i-1]-a[i])*i;
-    print count
-    t-=1

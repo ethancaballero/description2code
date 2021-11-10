@@ -1,6 +1,0 @@
-T=int(raw_input())
-for i in range(T):
-    n=int(raw_input())
-    s=str(n)
-    tot=int(s[0])+int(s[-1])
-    print tot

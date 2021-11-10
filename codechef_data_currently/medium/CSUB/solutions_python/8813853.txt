@@ -1,8 +1,0 @@
-t=int(raw_input())
-while t>0:
-    x=int(raw_input())
-    s=raw_input()
-    l=list(s)
-    c=l.count('1')
-    print (c*(c+1)/2)
-    t=t-1        

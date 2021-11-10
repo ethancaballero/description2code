@@ -1,8 +1,0 @@
-T = input()
-for i in xrange(0,T):
-	N = input()
-	string = raw_input()
-	numberOfOnes = 0
-	numberOfOnes = string.count('1')
-	numberOfStrings = ((numberOfOnes)*(numberOfOnes+1))/2
-	print numberOfStrings

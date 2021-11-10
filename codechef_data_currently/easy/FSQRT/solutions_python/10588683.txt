@@ -1,8 +1,0 @@
-import math
-def sq(n):
-	s= math.sqrt(n)	
-	return int(s)
-T=int(raw_input())
-for i in range(T):
-		n=int(raw_input())
-		print sq(n)

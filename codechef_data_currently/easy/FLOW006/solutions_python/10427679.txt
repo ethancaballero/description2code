@@ -1,7 +1,0 @@
-t=input()
-for i in range(t):
-	a=raw_input()
-	r=0
-	for j in range(len(a)):
-		r=r+int(a[j])
-	print r

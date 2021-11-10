@@ -1,7 +1,0 @@
-t=input()
-for i in range(int(t)):
-    n=input()
-    if(str(n)==str(n)[::-1]):
-        print("wins")
-    else:
-        print("losses")

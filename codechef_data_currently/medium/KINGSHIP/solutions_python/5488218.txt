@@ -1,7 +1,0 @@
-t=int(input())
-while t>0:
-	t-=1
-	n=int(input())
-	ar=map(int,raw_input().split())
-	k=min(ar)
-	print((sum(ar)-k)*k)

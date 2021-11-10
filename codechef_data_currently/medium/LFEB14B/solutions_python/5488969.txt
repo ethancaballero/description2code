@@ -1,8 +1,0 @@
-mod=10**9+7
-t=input()
-for _ in xrange(t):
-    n=input()
-    a=map(int,raw_input().split())
-    m=max(a)
-    c=a.count(m)
-    print (pow(2,c)-1)%(mod)

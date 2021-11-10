@@ -1,5 +1,0 @@
-import math
-t=int(raw_input())
-for i in range(0,t):
-	n=int(raw_input())
-	print int((math.sqrt((8*n)+1)- 1)/2)

@@ -1,9 +1,0 @@
-#!/usr/bin/python
-
-count = int(raw_input())
-
-i = 1
-while i <= count:
-	s = raw_input()
-	print len(''.join(set(s)))
-	i = i + 1

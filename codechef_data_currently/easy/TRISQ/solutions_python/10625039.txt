@@ -1,3 +1,0 @@
-for _ in range (input()):
-    n= input()/2
-    print (n*(n-1))/2

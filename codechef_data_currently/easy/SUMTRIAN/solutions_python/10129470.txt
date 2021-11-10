@@ -1,8 +1,0 @@
-for _ in range(int(raw_input())):
-    n=int(raw_input())
-    lst=[map(int,raw_input().split()) for i in range(n)]
-    for i in range(n-2,-1,-1):
-        for j in range(i+1):
-            lst[i][j]+=max(lst[i+1][j+1],lst[i+1][j])
-    print lst[0][0]
-        

@@ -1,3 +1,0 @@
-count = input()
-for i in range(0,count):
-	print int(input()**0.5)

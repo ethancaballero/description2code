@@ -1,3 +1,0 @@
-for i in range(int(raw_input())):
-    a=int(raw_input())
-    print a*(a+1)/2 +a

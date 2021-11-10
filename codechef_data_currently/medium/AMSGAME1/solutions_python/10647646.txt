@@ -1,9 +1,0 @@
-from fractions import gcd
-n = input()
-for i in xrange(n):
-    q = input()
-    li = map(int, raw_input().split())
-    e = li[0]
-    for r in li:
-        e = gcd(r, e)
-    print e

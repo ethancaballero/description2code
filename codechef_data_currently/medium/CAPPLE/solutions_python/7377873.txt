@@ -1,6 +1,0 @@
-import sys
-T = int(sys.stdin.readline())
-for i in xrange(T) :
-	sys.stdin.readline()
-	print len(set([int(x) for x in sys.stdin.readline().split()]))
-	

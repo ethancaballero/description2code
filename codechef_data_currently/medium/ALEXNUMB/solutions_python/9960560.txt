@@ -1,4 +1,0 @@
-for _ in range(input()):
-        n = input()
-        raw_input()
-        print n*(n-1)/2

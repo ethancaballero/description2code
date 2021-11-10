@@ -1,4 +1,0 @@
-mod=10**9+7
-for _ in xrange(input()):
-    x=input()
-    print pow(2, x,mod)-1 

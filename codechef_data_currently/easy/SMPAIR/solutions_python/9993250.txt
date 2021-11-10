@@ -1,9 +1,0 @@
-#!/usr/bin/env/ python
-#The Smallest Pair
-#https://www.codechef.com/problems/SMPAIR
-t=input()
-while t!=0:
-	t-=1
-	input()
-	x=sorted(map(int,raw_input().split()))
-	print x[0]+x[1]

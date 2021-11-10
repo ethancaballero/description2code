@@ -1,6 +1,0 @@
-n = int(raw_input())
-stamp = map(int, raw_input().split())
-if sum(stamp[:]) == n*(n+1)/2:
-	print 'YES'
-else:
-	print 'NO'

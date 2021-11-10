@@ -1,7 +1,0 @@
-from fractions import gcd
-t = input()
-for i in range(t):
-    l,b = map(int,raw_input().split())
-    gcd_value = gcd(l,b)
-    lcm = int(l/gcd_value)*int(b/gcd_value)
-    print lcm

@@ -1,1 +1,0 @@
-print raw_input()

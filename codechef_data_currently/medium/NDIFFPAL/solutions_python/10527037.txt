@@ -1,5 +1,0 @@
-T=int(raw_input())
-while T:
-	T-=1
-	N=int(raw_input())
-	print "abc"*(N//3) + "abc"[:N%3]

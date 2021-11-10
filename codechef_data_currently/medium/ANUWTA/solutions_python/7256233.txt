@@ -1,5 +1,0 @@
-t=int(raw_input())
-while(t>0):
-    n=int(raw_input())
-    print (n**2+3*n)/2
-    t-=1

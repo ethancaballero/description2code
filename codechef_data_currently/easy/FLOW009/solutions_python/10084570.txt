@@ -1,9 +1,0 @@
-t = input()
-for i in range(t):
-    q,p = map(int,raw_input().split(' '))
-    expenses = 0
-    if(q>=1000):
-        expenses = 0.9*q*p
-    else:
-        expenses = 1.0*q*p
-    print("{0:.6f}".format(expenses))

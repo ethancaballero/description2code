@@ -1,8 +1,0 @@
-tc = int(raw_input())
-while tc > 0:
-    tc = tc - 1
-    s = raw_input()
-    if s == s[::-1]:
-        print "wins"
-    else:
-        print "losses"

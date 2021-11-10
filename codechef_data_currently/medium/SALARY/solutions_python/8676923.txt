@@ -1,7 +1,0 @@
-t = int(raw_input())
-for _ in range(t):
-    n = int(raw_input())
-    lst = map(int, raw_input().split())
-    mn =  min(lst)
-    s = sum(lst)
-    print s - n*mn

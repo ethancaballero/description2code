@@ -1,7 +1,0 @@
-#@vigzmv - Bob loses the game on 4n+1 input
-for i in range(0,int(raw_input())):
-	n = int(raw_input())
-	if n % 4 == 1:
-		print "ALICE"
-	else:
-		print "BOB"

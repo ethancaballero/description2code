@@ -1,8 +1,0 @@
-def main():
-	test = int(raw_input())
-	for t in range(test):
-		p = float(raw_input())
-		if p>=0.5 : print (2*p-1)*(1-p)*10000 + 10000
-		else: print (1-2*p)*p*10000 + 10000
-
-main()	

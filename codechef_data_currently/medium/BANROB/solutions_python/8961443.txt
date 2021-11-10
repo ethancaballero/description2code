@@ -1,8 +1,0 @@
-no_cases =int(raw_input())
-for i in range(no_cases):
-    m, p= raw_input().split(' ')
-    m= int(m)
-    p=float(p)
-    a= (10**9)*(1-(-p)**m)/(1+p)
-    b= (10**9)*(p+(-p)**m)/(1+p)
-    print a,b

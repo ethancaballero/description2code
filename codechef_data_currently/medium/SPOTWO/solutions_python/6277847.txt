@@ -1,8 +1,0 @@
-t=input()
-for i in xrange(t):
-    n=input()
-    line=bin(n)
-    p=int(line[2:])
-    ans=pow(2,p,1000000007)
-    ans=pow(ans,2,1000000007)
-    print ans

@@ -1,3 +1,0 @@
-t=int(raw_input())
-for i in range(t):
-	print raw_input("").count("4");

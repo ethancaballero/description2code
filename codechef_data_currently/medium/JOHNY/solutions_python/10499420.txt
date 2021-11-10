@@ -1,7 +1,0 @@
-for _ in xrange(input()):
-    n = input()
-    l = map(int, raw_input().split())
-    pos = input()
-    num = l[pos - 1]
-    l.sort()
-    print l.index(num) + 1

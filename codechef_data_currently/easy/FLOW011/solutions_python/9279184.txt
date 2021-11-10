@@ -1,3 +1,0 @@
-for i in range(int(raw_input())):
-	t = int(raw_input())
-	print "%g"%(t+0.1*t +0.9*t) if t<1500 else "%g"%(t + 500 + 0.98*t)

@@ -1,5 +1,0 @@
-T= int(raw_input()) # number of cases
- 
-for i in range(T):
-    B = int(raw_input()) #reads size of base
-    print str(bin(B%2048))[2:].count('1')+B/2048

@@ -1,6 +1,0 @@
-for _ in range(input()):
-        n,k = map(int, raw_input().strip().split())
-        a = map(int, raw_input().strip().split())
-        b = map(int, raw_input().strip().split())
-
-        print max([b[i]*(k/a[i]) for i in range(n)])

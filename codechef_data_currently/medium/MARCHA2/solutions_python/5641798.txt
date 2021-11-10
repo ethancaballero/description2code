@@ -1,9 +1,0 @@
-T=int(raw_input())
-for test in xrange(T):
-    n=int(raw_input())
-    a=map(int,raw_input().split())
-    now=1.0
-    for i in xrange(n):
-        now=(now-a[i])*2
-    print 'No' if now else 'Yes'
-

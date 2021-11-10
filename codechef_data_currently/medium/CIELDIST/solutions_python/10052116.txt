@@ -1,3 +1,0 @@
-for n in range(int(raw_input())):
-    i,j,k = map(int, raw_input().split())
-    print max(0, k - i -j, j - i - k, i - k-j)

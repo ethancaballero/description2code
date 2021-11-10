@@ -1,3 +1,0 @@
-for _ in range(input()):
-	n=input()
-	print (n*(n+1)/2)+n

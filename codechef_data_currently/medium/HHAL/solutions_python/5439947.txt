@@ -1,9 +1,0 @@
-t=input()
-while t > 0 :
-   H=raw_input()
-   S=H[::-1]
-   if S == H :
-      print("1")
-   else :
-      print("2")
-   t=t-1

@@ -1,8 +1,0 @@
-t = int(raw_input())
-for _ in xrange(t):
-    __, ball, q = map(int, raw_input().split())
-    for ___ in xrange(q):
-        i, ii = map(int, raw_input().split())
-        if ball >= i and ball <= ii:
-            ball = i - ball + ii
-    print ball

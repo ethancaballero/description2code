@@ -1,8 +1,0 @@
-t = int(raw_input())
-for i in xrange(t):
-    n,m,k = map(int,raw_input().strip().split())
-    a = abs(n-m) - k
-    if a < 0:
-        print 0
-    else:
-        print a

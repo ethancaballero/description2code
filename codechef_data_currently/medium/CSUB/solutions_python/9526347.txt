@@ -1,7 +1,0 @@
-t=input()
-while t:
-	n=input()
-	l=raw_input()
-	k=l.count("1")
-	print k*(k+1)/2
-	t=t-1

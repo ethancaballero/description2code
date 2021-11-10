@@ -1,8 +1,0 @@
-for t in range(int(raw_input())):
-	n = int(raw_input())
-	a = map(int,raw_input().split())
-	sum_x = sum(a)/(len(a)-1)
-	x = ""
-	for i in a:
-		x += "" + str(sum_x-i) + " "
-	print x

@@ -1,8 +1,0 @@
-#the luck is turning <VigzMv/>
-for i in range(0,int(raw_input())):
-    n=raw_input().strip()
-    c=0
-    for i in n:
-        if i not in ['4','7']:
-            c+=1
-    print c 

@@ -1,3 +1,0 @@
-for _ in range(input()):
-        input()
-        print len(set(map(int, raw_input().strip().split())))

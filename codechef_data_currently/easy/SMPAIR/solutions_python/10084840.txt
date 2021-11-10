@@ -1,8 +1,0 @@
-
-t=int(raw_input())
-for i in range(t):
-    x=raw_input()
-    l=map(int,raw_input().split())
-    l.sort()
-    x=int(l[1])+int(l[0])
-    print x

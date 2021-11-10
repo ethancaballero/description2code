@@ -1,8 +1,0 @@
-import sys
-from fractions import gcd
-for _ in xrange(int(sys.stdin.readline())):
-    li=list(map(int,sys.stdin.readline().split()))[1:]
-    g=reduce(gcd,li)
-    for i in li:
-        print i/g,
-    print

@@ -1,8 +1,0 @@
-I=lambda:int(raw_input())
-outp=''
-for _ in range(I()):
-	n=I()
-	n=n*(n+1)/2+n
-	outp+=str(n)+'
-'
-print outp

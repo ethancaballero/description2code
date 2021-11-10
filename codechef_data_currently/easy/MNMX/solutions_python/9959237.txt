@@ -1,3 +1,0 @@
-for test in xrange(input()):
-	n = input()
-	print min([int(x) for x in raw_input().split(' ')]) * (n - 1)

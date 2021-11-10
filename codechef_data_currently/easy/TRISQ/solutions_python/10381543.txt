@@ -1,9 +1,0 @@
-#!/usr/bin/python
-T=int(raw_input())
-for t in range(T):
-	num=int(raw_input())
-	if (num%2==0):
-		n=(num/2)-1
-	else:
-		n=(num-3)/2
-	print (n*(n+1))/2

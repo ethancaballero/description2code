@@ -1,9 +1,0 @@
-test_cases = input()
-for test_case in range(test_cases):
-    m = map(int,raw_input().split())
-    n = map(int,raw_input().split())
-    n.sort()
-    s = 0
-    for i in range(m[1], m[0]-m[1]):
-        s += n[i]
-    print(float(s)/(m[0]-m[1]*2))

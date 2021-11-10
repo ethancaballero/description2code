@@ -1,9 +1,0 @@
-n = int(raw_input())
-
-for i in range(n):
-	key = int(raw_input())
-	reverse = 0
-	while key:
-		reverse = reverse*10 + key%10
-		key /= 10
-	print reverse

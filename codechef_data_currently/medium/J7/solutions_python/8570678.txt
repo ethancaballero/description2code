@@ -1,6 +1,0 @@
-import math
-for _ in range(input()):
-    p,s=(int(x) for x in raw_input().split())
-    x=(p-math.sqrt(pow(p,2)-24*s))/12
-    vol=x*x*(p/4-2*x)
-    print "%.2f" %round(vol,2)

@@ -1,9 +1,0 @@
-t=int(raw_input())
-while(t):
-    n,s=raw_input().split()
-    n=int(n)
-    s=int(s)
-    x=(8.0*(s-n))+1
-    nth=int(((x**0.5)+1)/2.0)
-    print n-nth
-    t-=1

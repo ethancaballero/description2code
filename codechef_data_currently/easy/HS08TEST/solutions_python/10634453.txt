@@ -1,8 +1,0 @@
-x,y = raw_input().split()
-x = int(x)
-y = float(y)
-z = y-(x+0.50)
-if x%5==0 and z>=0 :
-	print z
-else :
-	print y

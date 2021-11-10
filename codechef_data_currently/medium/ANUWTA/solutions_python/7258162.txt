@@ -1,8 +1,0 @@
-m=list()
-x=input()
-for i in range(0,x,1):
-    a=input()
-    b=str((a*(a+3)/2))
-    m.append(b)
-for i in m:
-    print i

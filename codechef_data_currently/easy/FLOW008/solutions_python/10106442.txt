@@ -1,8 +1,0 @@
-t = int(raw_input())
-while t:
-	num = int(raw_input())
-	if num<10:
-		print "What an obedient servant you are!"
-	else:
-		print "-1"
-	t -= 1

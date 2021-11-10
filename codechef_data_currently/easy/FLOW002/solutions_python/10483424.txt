@@ -1,4 +1,0 @@
-testCases = int(raw_input())
-for x in xrange(testCases):
-	dividend, divisor = map(int,raw_input().split())
-	print dividend % divisor 

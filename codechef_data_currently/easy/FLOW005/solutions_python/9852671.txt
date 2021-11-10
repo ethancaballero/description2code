@@ -1,9 +1,0 @@
-notes=[100,50,10,5,2,1]
-t=input()
-for i in range(0,t):
-    no=input()
-    sum=0
-    for k in notes:
-        sum+=no/k
-        no=no%k
-    print sum

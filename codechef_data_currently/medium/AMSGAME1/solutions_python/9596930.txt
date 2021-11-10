@@ -1,8 +1,0 @@
-from fractions import gcd
-for t in range(int(raw_input())):
-    n=int(raw_input())
-    ans=0
-    N=map(int,raw_input().split())
-    for i in N:
-        ans=gcd(ans,i)
-    print ans

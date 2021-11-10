@@ -1,5 +1,0 @@
-for _ in xrange(input()):
-        n = input()
-        p = map(int, raw_input().strip().split())
-        p.sort()
-        print p[0] * sum(p[1:])

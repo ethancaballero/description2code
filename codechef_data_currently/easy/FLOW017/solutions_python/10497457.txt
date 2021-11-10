@@ -1,7 +1,0 @@
-t=input()
-for i in range(t):
-	l=map(int,raw_input().split())
-	a=max(l)
-	l.remove(a)
-	b=max(l)
-	print b

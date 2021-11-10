@@ -1,6 +1,0 @@
-import sys
-
-t = input()
-for _ in xrange(t):
-	n = input()
-	print pow(2,n,1000000007)-1

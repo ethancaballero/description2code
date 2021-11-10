@@ -1,5 +1,0 @@
-j,s,m = map(int,raw_input().split())
-if ((m-j)//s)%2==0:
-	print "Lucky Chef"
-else:
-	print "Unlucky Chef"

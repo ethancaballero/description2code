@@ -1,6 +1,0 @@
-for t in xrange(int(raw_input())):
-    N,K = map(int,raw_input().split())
-    if(K!=0):
-        print N/K, N%K
-    else:
-        print 0, N

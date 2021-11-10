@@ -1,7 +1,0 @@
-def NUMGAME2():
-	t = int(raw_input())
-	while t:
-		n = int(raw_input())
-		r = 'ALICE' if n % 4 == 1 else 'BOB'; print r; t-=1
-if __name__ == '__main__':
-	NUMGAME2()

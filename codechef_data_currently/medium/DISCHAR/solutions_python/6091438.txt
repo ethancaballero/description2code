@@ -1,6 +1,0 @@
-# cook your code here
-test = int(raw_input().strip())
-while test:
-    sk = raw_input().strip()
-    print len(set(sk))
-    test-=1

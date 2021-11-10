@@ -1,8 +1,0 @@
-from sys import stdin
-t=int(stdin.readline())
-for i in xrange(t):
-	n=int(stdin.readline())
-	if n%2==0:
-		print (pow(2,n/2+1,1000000007)+pow(2,n/2,1000000007)-2)%1000000007
-	else:
-		print (pow(2,(n+3)/2,1000000007)-2)%1000000007 

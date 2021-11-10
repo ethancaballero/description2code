@@ -1,8 +1,0 @@
-T = int(raw_input())
-for i in range(0,T):
-    N = int(raw_input())
-    F = 1
-    if N>0:
-        for j in range(1, N + 1):
-            F = F*j
-        print F

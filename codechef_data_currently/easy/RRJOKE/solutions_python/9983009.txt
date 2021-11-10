@@ -1,9 +1,0 @@
-for t in range(int(raw_input())):
-	n=int(raw_input())
-	for i in range(n):
-		raw_input()
-	xor=1
-	for i in range(2,n+1):
-		xor^=i
-	print xor
-	

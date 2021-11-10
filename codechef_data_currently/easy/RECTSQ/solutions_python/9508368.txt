@@ -1,9 +1,0 @@
-from fractions import gcd
-t=input()
-while t:
-	n,m=map(int,raw_input().split())
-	l=gcd(n,m)
-	p=n/l
-	q=m/l
-	print p*q
-	t=t-1

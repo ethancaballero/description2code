@@ -1,6 +1,0 @@
-t=input()
-while t:
-	n=input()
-	l=map(int,raw_input().split())
-	print n*(n-1)/2
-	t=t-1

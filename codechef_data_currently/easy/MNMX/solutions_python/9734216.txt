@@ -1,6 +1,0 @@
-#the Smallest survives the Crowd -VigMv
-for i in range(int(raw_input())):
-	n=int(raw_input())
-	a=map(int,raw_input().split())
-	a.sort()
-	print (a[0]*(n-1))  

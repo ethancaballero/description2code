@@ -1,9 +1,0 @@
-t=input()
-while t:
-    x,y,z=map(int,raw_input().split())
-    k=min(x,y);
-    l=min(y,z);
-    m=min(x,z);
-    o=min(x,y,z);
-    print(x*y*z-k*z-l*x-m*y+2*o)%(10**9+7);
-    t-=1

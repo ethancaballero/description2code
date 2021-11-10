@@ -1,5 +1,0 @@
-t = int(raw_input())
-j = 0
-while j<t :
-    print int((int(raw_input()))**0.5)
-    j+=1

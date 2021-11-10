@@ -1,5 +1,0 @@
-for testCases in range(input()):
-    probabilityA = input()
-    probabilityReq = min(probabilityA, 1.0 - probabilityA)
-    ans = 10000*2*(1-probabilityReq)*probabilityReq - 10000*probabilityReq + 10000
-    print '%.6f' % ans

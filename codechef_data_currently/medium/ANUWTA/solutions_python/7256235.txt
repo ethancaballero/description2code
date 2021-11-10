@@ -1,5 +1,0 @@
-t=input()
-while(t):
-	n=input()
-	print (n*n+3*n)/2
-	t-=1 

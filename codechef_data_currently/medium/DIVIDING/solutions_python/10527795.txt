@@ -1,7 +1,0 @@
-n=int(raw_input())
-arr = map(int,raw_input().split())
-arr2 = range(1,n+1)
-if sum(arr)==sum(arr2):
-    print "YES"
-else:
-    print "NO"

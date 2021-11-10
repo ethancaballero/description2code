@@ -1,5 +1,0 @@
-t=int(raw_input())
-for i in range(t):
-    n=int(raw_input())
-    a=raw_input().split()
-    print (n*(n-1))/2

@@ -1,7 +1,0 @@
-def checkOdd(n):
-    return True if n % 2 == 1 else False 
-
-p = ['Vanka', 'Tuzik']
-for testcases in xrange(int(raw_input() ) ) :
-    A, B = map(int, raw_input().split() )
-    print 'Vanka' if checkOdd(A) and checkOdd(B) else 'Tuzik'

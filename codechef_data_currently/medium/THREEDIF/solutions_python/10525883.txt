@@ -1,7 +1,0 @@
-t=int(raw_input())
-for i in range(t):
-    abc=list(map(int,raw_input().split()))
-    abc.sort()
-    #print abc
-    ans=abc[0]*(abc[1]-1)*(abc[2]-2)
-    print ans%1000000007

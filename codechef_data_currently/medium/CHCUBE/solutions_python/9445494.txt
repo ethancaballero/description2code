@@ -1,7 +1,0 @@
-testcases = int(raw_input())
-for _ in range(testcases):
-	colours = raw_input("")
-	colours = colours.split(" ") #changes the string into an array and adds "," in place of " "
-	if (colours[0] in colours[2:4] and colours[0] in colours[4:]) or (colours[1] in colours[2:4] and colours[1] in colours[4:]):
-		print "YES"
-	else: print "NO"

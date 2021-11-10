@@ -1,5 +1,0 @@
-for _ in range(int(raw_input())):
-  raw_input()
-  array = map(int, raw_input().split())
-  m = min(array)
-  print sum(m*i for i in array)-m*m

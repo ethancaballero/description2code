@@ -1,7 +1,0 @@
-N = input()
-A = []
-A = map(int,raw_input().split())
-if float(sum(A)) == N*(N+1)/2.0 :
-    print "YES"
-else:
-    print "NO"

@@ -1,5 +1,0 @@
-tst = input()
-for t in range(tst):
-	s = list(raw_input().strip())
-	print len(s)-s.count('4')-s.count('7')
-	

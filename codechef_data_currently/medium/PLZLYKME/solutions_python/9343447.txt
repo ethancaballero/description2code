@@ -1,9 +1,0 @@
-from math import log
-a=int(raw_input())
-for i in range(a):
-    l,d,s,c=[int(x) for  x in raw_input().split()]
-    if(log(l)<=log(s)+(d-1)*log(1+c)):
-        print "ALIVE AND KICKING"
-    else:
-        print "DEAD AND ROTTING"
-        

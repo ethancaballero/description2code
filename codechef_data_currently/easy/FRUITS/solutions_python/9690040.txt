@@ -1,8 +1,0 @@
-t = input()
-
-for i in range(t):
-    n, m, k = map(int, raw_input().split())
-    if k >= abs(n-m):
-        print "0"
-    else:
-        print max(n, m) - (min(n, m) + k)

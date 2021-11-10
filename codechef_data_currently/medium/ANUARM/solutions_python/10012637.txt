@@ -1,7 +1,0 @@
-for _ in xrange(input()):
-        n,m = map(int, raw_input().strip().split())
-        l = map(int, raw_input().strip().split())
-        mx = max(l)
-        mn = min(l)
-        out = [max(abs(mx-i), abs(i-mn)) for i in range(n)]
-        print " ".join(map(str,out))

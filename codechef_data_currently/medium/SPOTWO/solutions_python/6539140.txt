@@ -1,9 +1,0 @@
-def solve(n):
-	power = int(bin(n)[2:])
-	answer = pow(2, power, 1000000007)
-	return pow(answer, 2, 1000000007)
- 
-cases = int(raw_input())
-for x in range(0, cases):
-	n = int(raw_input())
-	print solve(n)

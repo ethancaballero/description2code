@@ -1,8 +1,0 @@
-def solution(n):
-	return n/2+1
-t=int(input())
-i=0
-while t>i:
-	n= int(input())
-	print solution(n)
-	i=i+1

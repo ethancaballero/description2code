@@ -1,6 +1,0 @@
-while 1:
-  data = input()
-  if(data == 42):
-    break
-  print data
-    

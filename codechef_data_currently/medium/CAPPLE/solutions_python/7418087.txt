@@ -1,9 +1,0 @@
-t=int(raw_input())
-for asd in range(t):
-	n=int(raw_input())
-	a=map(int,raw_input().split())
-	l=[]
-	for i in a:
-		if (i not in l):
-			l.append(i)
-	print len(l)

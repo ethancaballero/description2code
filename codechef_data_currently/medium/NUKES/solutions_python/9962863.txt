@@ -1,8 +1,0 @@
-def NUKES():
-	A,N,K = raw_input().split(); A,N,K = int(A),int(N),int(K)
-	C = [0 for i in range(K)]
-	for i in range(K):
-		C[i] = A % (N+1); A/=(N+1)
-	for i in range(K): print C[i],
-	print
-if __name__ == '__main__': NUKES()

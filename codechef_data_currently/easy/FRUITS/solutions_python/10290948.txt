@@ -1,6 +1,0 @@
-# cook your code here
-for i in xrange(int(raw_input())):
-    [n1,m1,k]=map(int,raw_input().split(" "))
-    n=min(n1,m1)
-    m=max(n1,m1)
-    print m-min(m,n+k)

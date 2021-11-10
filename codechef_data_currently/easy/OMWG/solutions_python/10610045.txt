@@ -1,6 +1,0 @@
-t = int(raw_input())
-
-while t:
-	n, m = map(int, (raw_input().split()))
-	print n*(m-1) + m*(n-1)
-	t = t-1

@@ -1,8 +1,0 @@
-T = input()
-for _ in range(T):
-	N = input()
-	a = []
-	trees = raw_input().split()
-        for tree in trees:
-        	a.append(int(tree))
-	print len(set(a))

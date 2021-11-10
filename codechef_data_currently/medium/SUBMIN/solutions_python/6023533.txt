@@ -1,9 +1,0 @@
-N = int(raw_input())
-A = map(int, raw_input().split(" "))
-min_list = []
-for i in xrange(N):
-    for j in xrange(i,N):
-        min_list.append(min(A[i:j+1]))
-for _ in xrange(int(raw_input())):
-    K = int(raw_input())
-    print min_list.count(K)

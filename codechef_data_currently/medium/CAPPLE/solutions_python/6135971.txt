@@ -1,9 +1,0 @@
-"""
-http://www.codechef.com/DEC14/problems/CAPPLE
-"""
-T = int(raw_input())
-for _ in xrange(T) :
-	N = int(raw_input())
-	L = map(int,raw_input().split())
-	print len(set(L))
-

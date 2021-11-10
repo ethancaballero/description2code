@@ -1,9 +1,0 @@
-# cook your code here
-t=int(raw_input())
-for i in range(t):
-    sum=0
-    x=raw_input().lower()
-    # l=map(int,raw_input().split())
-    # l.sort()
-    id = {"b":"BattleShip","c":"Cruiser","d":"Destroyer","f":"Frigate"}
-    print id.get(x)

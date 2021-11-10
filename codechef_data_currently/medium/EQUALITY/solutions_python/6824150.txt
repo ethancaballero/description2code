@@ -1,8 +1,0 @@
-for x in range(int(raw_input())):
-        lens = int(raw_input())
-        series = map(long,raw_input().split(" "))
-        avg = sum(series) / (lens -1)      
-        outs = []
-        for a in range(lens):
-                outs.append(str(avg - series[a]))
-        print " ".join(outs)    

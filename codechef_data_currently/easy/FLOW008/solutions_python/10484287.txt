@@ -1,7 +1,0 @@
-testCases = int(raw_input())
-for x in xrange(testCases):
-	num = int(raw_input())
-	if num < 10:
-		print "What an obedient servant you are!"
-	else:
-		print "-1"

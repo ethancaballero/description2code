@@ -1,5 +1,0 @@
-test_case = int(raw_input())
-for t in range(test_case):
-	n = int(raw_input())
-	array = map(int, raw_input().split())
-	print len(array)*(len(array)-1)/2

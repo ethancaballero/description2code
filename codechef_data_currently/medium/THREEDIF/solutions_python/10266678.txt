@@ -1,9 +1,0 @@
-test = int(raw_input())
-for _ in range(test):
-    a = map(int, raw_input().split())
-    a.sort()
-
-    ret = a[0] * (a[1] - 1) * (a[2] - 2)
-    ret %= 1000000007
-
-    print ret

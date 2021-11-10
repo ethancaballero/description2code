@@ -1,8 +1,0 @@
-
-for _ in range(int(input())):
-    num=int(raw_input())
-    
-    if(num%4 == 1):
-        print "ALICE"
-    else:
-        print "BOB"

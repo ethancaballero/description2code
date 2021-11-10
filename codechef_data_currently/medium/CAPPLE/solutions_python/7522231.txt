@@ -1,9 +1,0 @@
-from sys import stdin
-t=int(stdin.readline())
-for i in range(0,t):
-	n=int(stdin.readline())
-	l=map(int,stdin.readline().split())
-	s=set()
-	for x in l:
-		s.add(x)
-	print s.__len__()

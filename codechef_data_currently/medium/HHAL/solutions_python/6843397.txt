@@ -1,7 +1,0 @@
-t = int(raw_input())
-for tc in range(0, t):
-    s = raw_input()
-    if s == s[::-1]:
-        print 1
-    else:
-        print 2

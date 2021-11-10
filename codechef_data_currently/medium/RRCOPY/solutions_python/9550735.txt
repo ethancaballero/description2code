@@ -1,5 +1,0 @@
-tst = input()
-for t in range(tst):
-	n = input()
-	arr = map(int,raw_input().split())
-	print len(set(arr))

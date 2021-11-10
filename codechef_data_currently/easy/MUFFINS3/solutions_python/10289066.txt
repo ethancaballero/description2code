@@ -1,5 +1,0 @@
-t = input()
-while t:
-    n = input()
-    print int(n/2)+1
-    t -= 1

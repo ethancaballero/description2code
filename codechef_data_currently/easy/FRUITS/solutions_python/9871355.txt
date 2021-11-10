@@ -1,9 +1,0 @@
-#!/usr/bin/python
-for i in range(input()):
-	N,M,K=map(int,raw_input().split())
-	R=max(N,M)-min(N,M)
-	X=0
-	if K<R:
-		X=R-K
-	print X
-		

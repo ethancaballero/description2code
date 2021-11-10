@@ -1,8 +1,0 @@
-#!/usr/bin/python
-for i in range(input()):
-	basic=input()
-	if basic<1500:
-		gross=(basic+basic*0.1+basic*0.9)
-	else:
-		gross=(basic+500+basic*0.98)
-	print "%g" %gross

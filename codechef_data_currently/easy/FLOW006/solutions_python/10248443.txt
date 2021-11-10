@@ -1,8 +1,0 @@
-t = int(input())
-for i in range(t):
-    num = int(input())
-    count = 0
-    while (num != 0):
-        count += num % 10
-        num /= 10
-    print count

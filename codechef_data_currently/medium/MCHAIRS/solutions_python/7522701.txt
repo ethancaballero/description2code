@@ -1,6 +1,0 @@
-from sys import stdin
-mod=1000000007
-t=int(stdin.readline())
-for i in range(0,t):
-	n=int(stdin.readline())
-	print pow(2,n,mod)-1

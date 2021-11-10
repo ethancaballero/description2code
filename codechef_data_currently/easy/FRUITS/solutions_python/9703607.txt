@@ -1,9 +1,0 @@
-t=int(raw_input())
-while(t):
-	t-=1
-	n,m,k=map(int,raw_input().split())
-	ans=abs(n-m)
-	if k>=ans:
-		print 0
-	else:
-		print ans-k	

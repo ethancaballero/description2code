@@ -1,6 +1,0 @@
-t = int(input())
-associative = {'b':'BattleShip','c':'Cruiser','d':'Destroyer','f':'Frigate'}
-while t:
-    inp_user = str.lower(raw_input())
-    print (associative[inp_user])
-    t=t-1

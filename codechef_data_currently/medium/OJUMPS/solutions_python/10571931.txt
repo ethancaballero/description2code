@@ -1,7 +1,0 @@
-# your code goes here
-x = input()
-
-if x%6==0 or x%6==1 or x%6==3:
-	print "yes"
-else:
-	print "no"

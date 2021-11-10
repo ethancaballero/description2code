@@ -1,6 +1,0 @@
-for _ in xrange(input()):
-        n,k = map(int, raw_input().strip().split())
-        if k > 0:
-                print int(n/k),n%k
-        else:
-                print 0,n

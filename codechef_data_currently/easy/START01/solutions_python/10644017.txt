@@ -1,3 +1,0 @@
-T=raw_input()
-
-print T

@@ -1,9 +1,0 @@
-import sys
-import fractions
-t=int(sys.stdin.readline())
-for tc in xrange(t):
-    l,m=map(int,sys.stdin.readline().split())
-    gcd=fractions.gcd(l,m)
-    l/=gcd
-    m/=gcd
-    print l*m

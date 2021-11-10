@@ -1,7 +1,0 @@
-t = input()
-for i in range(t):
-    a1,a2,a3 = map(int,raw_input().split(' '))
-    if(a1>=1 and a2>=1 and a3>=1 and a1+a2+a3 ==180):
-        print "YES"
-    else:
-        print "NO"

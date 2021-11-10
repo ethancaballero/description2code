@@ -1,9 +1,0 @@
-t = int(raw_input())
-while t > 0:
-	a = set(raw_input())
-	b = set(raw_input())
-	if len(a & b) > 0:
-		print "Yes"
-	else:
-		print "No"
-	t -= 1

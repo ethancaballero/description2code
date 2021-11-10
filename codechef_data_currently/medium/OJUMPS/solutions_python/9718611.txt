@@ -1,5 +1,0 @@
-num=int(input())
-if(num%3==0 or num%6==1):
-    print "yes"
-else:
-    print "no"

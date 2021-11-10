@@ -1,6 +1,0 @@
-T=int(raw_input())
-
-for i in range(T):
-    n=raw_input()
-    print int(n[::-1])
-    

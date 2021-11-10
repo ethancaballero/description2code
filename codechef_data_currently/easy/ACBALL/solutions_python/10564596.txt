@@ -1,1 +1,0 @@
-for _ in range(int(raw_input())): print ''.join('B' if a=='W' or b=='W' else 'W' for a,b in zip(raw_input(),raw_input()) )

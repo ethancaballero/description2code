@@ -1,9 +1,0 @@
-import math
-t=input()
-while t>0:
-    t=t-1
-    a=input()
-    d=0
-    d=1+8*a
-    d=math.sqrt(d)
-    print int((d-1)/2)

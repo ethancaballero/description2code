@@ -1,5 +1,0 @@
-n=input()
-while(n>0):
-    n=n-1
-    Ds, Dt, D = map(float,raw_input().strip().split())
-    print max(0,Ds-Dt-D,Dt-Ds-D,D-Ds-Dt)

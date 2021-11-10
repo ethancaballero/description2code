@@ -1,6 +1,0 @@
-# cook your code here
-for testcases in xrange(int(raw_input().strip() ) ) :
-    n , k = map(int, raw_input().strip().split())
-    W = map(int, raw_input().strip().split())
-    W = sorted(W) if ( k < (n//2)+1 ) else sorted(W, reverse = True)
-    print abs(sum(W[k:]) - sum(W[:k]) ) 

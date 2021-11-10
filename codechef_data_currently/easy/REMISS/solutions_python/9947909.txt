@@ -1,4 +1,0 @@
-no_of_testcases = int(input())
-for each in range(no_of_testcases):
-    entry = map(int,raw_input().split())
-    print max(entry)," ",entry[0]+entry[1]

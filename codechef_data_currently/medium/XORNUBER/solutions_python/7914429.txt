@@ -1,8 +1,0 @@
-I = lambda : int(raw_input())
-t = I()
-dic = {2**x-1 : 2**(x-1)-1 for x in xrange(1,32)}
-dic[1] = 2
-for _ in xrange(t):
-    n = I()
-    if n in dic: print dic[n]
-    else: print -1

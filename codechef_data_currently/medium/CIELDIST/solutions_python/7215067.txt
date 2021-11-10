@@ -1,5 +1,0 @@
-R=lambda:map(int,raw_input().split())
-for _ in xrange(int(raw_input())):
-    A=[]
-    A=R()
-    print str(max(0,A[2]-A[1]-A[0],A[0]-A[1]-A[2],A[1]-A[0]-A[2]))

@@ -1,6 +1,0 @@
-# winning_probablity.py
-t=int(raw_input())
-for i in range(t):
-	a,b,c,d=raw_input().split()
-	c=int(a)*1.0/(int(b)+int(a))
-	print c

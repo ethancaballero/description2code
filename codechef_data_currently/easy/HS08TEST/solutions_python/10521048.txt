@@ -1,9 +1,0 @@
-userinput = map(float, raw_input().split())
-if userinput[0] % 5 == 0:
-    bal = userinput[1] - userinput[0] - 0.50
-    if bal > 0:
-        print '%.2f' % bal
-    else:
-        print '%.2f' % userinput[1]
-else:
-    print '%.2f' % userinput[1]

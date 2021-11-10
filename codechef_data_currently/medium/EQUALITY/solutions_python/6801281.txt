@@ -1,9 +1,0 @@
-for i in range(input()):
-    n = input()
-    arr = map(int,raw_input().split())
-    total = sum(arr)
-    for j in range(n):
-        value = total-((n-1)*arr[j])
-        value /= n-1
-        print value,
-    print 

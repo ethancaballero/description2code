@@ -1,8 +1,0 @@
-t = int(raw_input())
-alphabet =  "zyxwvutsrqponmlkjihgfedcba"
-num = len(alphabet) - 1
-for _ in xrange(t):
-    n = int(raw_input())
-    x, n = divmod(n, num)
-    print (alphabet[num - n:] if n != 0 else "")+ (alphabet * x)
- 

@@ -1,8 +1,0 @@
-for _ in range(input()):
-	n=input()
-	s=raw_input()[:n]
-	count=0
-	for i in xrange(n):
-		if((i>0 and s[i-1]=='1') or (s[i]=='1') or ( i<n-1 and s[i+1]=='1')):
-			count=count+1
-	print n-count

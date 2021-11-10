@@ -1,6 +1,0 @@
-t = int(raw_input())
-while t!=0:
-  a = raw_input()
-  l1 = a.split(' ') 
-  print int(l1[0])+int(l1[1])
-  t-=1

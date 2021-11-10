@@ -1,4 +1,0 @@
-def op(n):
-	return n
-n=raw_input()
-print op(n)

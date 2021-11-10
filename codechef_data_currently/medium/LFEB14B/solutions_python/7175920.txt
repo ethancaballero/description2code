@@ -1,9 +1,0 @@
-def test(bogus,data):
-    data=map(int,data.split())
-    return (2**data.count(max(data))-1)%(10**9+7)
-
-res=[]
-for a in range(input()):
-    res.append(test(input(),raw_input()))
-for a in res:
-    print a

@@ -1,9 +1,0 @@
-t=int(raw_input())
-while t:
-	t-=1
-	ops=0
-	txt=str(raw_input()).strip()
-	for letter in txt:
-		if letter!='4' and letter !='7':
-			ops+=1
-	print ops

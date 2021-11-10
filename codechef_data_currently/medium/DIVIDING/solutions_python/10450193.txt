@@ -1,4 +1,0 @@
-N = int(raw_input())
-L = [int(i) for i in raw_input().split()]
-if sum(L) == (N*(N+1))/2: print 'YES'
-else: print 'NO'

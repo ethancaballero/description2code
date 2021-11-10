@@ -1,9 +1,0 @@
-# cook your code here
-mod=1000000007
-t=int(raw_input())
-while(t):
-	t-=1
-	input()
-	a=map(int,raw_input().strip().split(" "))
-	c=a.count(max(a))
-	print (pow(2,c,mod)-1)%mod

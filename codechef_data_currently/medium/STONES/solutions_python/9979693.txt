@@ -1,8 +1,0 @@
-def STONES():
-	t = int(raw_input())
-	while t:
-		J = raw_input(); S = raw_input()
-		L = [i for i in S if i in J]
-		print len(L)
-		t-=1
-if __name__ == '__main__': STONES()

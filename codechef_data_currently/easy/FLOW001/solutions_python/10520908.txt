@@ -1,7 +1,0 @@
-q=int(raw_input())
-while q>0:
-	n,m=map(int,raw_input().split())
-	ans=n+m
-	print ans
-	q-=1
-	

@@ -1,9 +1,0 @@
-t=input()
-while(t):
-    s,p=map(int,raw_input().split())
-    if s%2 and p%2:
-        print "Vanka"
-    else:
-        print "Tuzik"
-    t=t-1
-    

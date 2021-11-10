@@ -1,6 +1,0 @@
-t = int(input())
-for i in range(t):
-    b, ls = map(int, raw_input().split())
-    min = pow(ls ** 2 - b ** 2, 0.5)
-    max = pow(b ** 2 + ls ** 2, 0.5)
-    print min, max

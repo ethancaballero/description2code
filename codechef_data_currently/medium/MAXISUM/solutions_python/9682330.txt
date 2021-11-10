@@ -1,7 +1,0 @@
-# /cc/2016/March/Long/MAXISUM
-
-for tc in xrange(input()):
-	n_nums, n_ops = map(long, raw_input().strip().split())
-	nums1 = map(long, raw_input().strip().split())
-	nums2 = map(long, raw_input().strip().split())
-	print sum(num1 * num2 for num1, num2 in zip(nums1, nums2)) + (n_ops * max(map(abs, nums2)))

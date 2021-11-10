@@ -1,8 +1,0 @@
-l=map(int,raw_input().split())
-s=abs(l[1]-l[0])
-r=s%10
-if(r==9):
-	s=s-1
-else:
-	s=s+1
-print s

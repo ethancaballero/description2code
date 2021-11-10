@@ -1,9 +1,0 @@
-count=0
-
-n, k = raw_input().split()
-n, k = [int(n), int(k)]
-for i in range (n):
-  t=int(raw_input())
-  if t%k==0:
-    count=count+1
-print count

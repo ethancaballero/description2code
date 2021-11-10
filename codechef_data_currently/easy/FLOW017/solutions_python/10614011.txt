@@ -1,7 +1,0 @@
-from sys import stdin,stdout
-t=int(input())
-for i in range (t):
-    a,b,c =map (int,stdin.readline().rstrip().split())
-    d= sorted([a,b,c])
-    e = d[1]
-    print (e)

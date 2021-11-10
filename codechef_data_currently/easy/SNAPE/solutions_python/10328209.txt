@@ -1,7 +1,0 @@
-t = int(raw_input())
-for i in xrange(t) :
-    a,b = raw_input().split(' ')
-    a,b = [int(a),int(b)]
-    min_l = float((b**2 - a**2) ** 0.5)
-    max_l = float((b**2 + a**2) ** 0.5)
-    print '%1.5f %1.5f' %(min_l,max_l)

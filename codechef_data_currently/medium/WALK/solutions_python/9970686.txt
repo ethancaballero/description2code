@@ -1,4 +1,0 @@
-for _ in xrange(input()):
-        N = input()
-        W = map(int, raw_input().strip().split())
-        print max([(i + W[i]) for i in range(N)])

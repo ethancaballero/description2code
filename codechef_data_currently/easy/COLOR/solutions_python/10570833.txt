@@ -1,6 +1,0 @@
-from collections import Counter
-
-for _ in xrange(input()):
-    s = input() == 0 or raw_input()
-    cnt = Counter(s)
-    print min(cnt['R']+cnt['G'], cnt['R']+cnt['B'], cnt['G']+cnt['B'])

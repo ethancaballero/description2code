@@ -1,3 +1,0 @@
-for _ in range(input()):
-  n = input()
-  print int(n**(.5))

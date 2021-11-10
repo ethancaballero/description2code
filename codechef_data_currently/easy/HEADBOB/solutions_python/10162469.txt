@@ -1,8 +1,0 @@
-for i in range(int(raw_input())):
-    raw_input()
-    second= str(raw_input()) # number of cases
-    if second.find("Y")>=0: print "NOT INDIAN"
-    elif second.find("I")>=0: print "INDIAN"
-    else: print "NOT SURE"
-            
-    

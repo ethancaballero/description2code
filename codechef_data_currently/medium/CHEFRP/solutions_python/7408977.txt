@@ -1,9 +1,0 @@
-import sys
-for _ in xrange(input()):
-	sys.stdin.readline()
-	a=map(int,sys.stdin.readline().split())
-	m=min(a)
-	if m<2:
-		print "-1"
-	else:
-		print str(sum(a)-m+2) 

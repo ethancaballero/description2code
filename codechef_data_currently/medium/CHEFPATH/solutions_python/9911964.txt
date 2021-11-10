@@ -1,6 +1,0 @@
-for t in xrange(int(raw_input())):
-	n, m = map(int, raw_input().split())
-	if (n%2==1 and m%2==1) or (n==1 and m!=2) or (m==1 and n!=2):
-		print "No"
-	else:
-		print "Yes"

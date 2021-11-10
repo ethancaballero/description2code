@@ -1,9 +1,0 @@
-T = int(raw_input())
-
-for t in xrange(T):
-    a,b,c = map(int, raw_input().strip().split(' '))
-    if a+b+c == 180 and min([a,b,c]) != 0:
-        print "YES"
-    else:
-        print "NO"
-

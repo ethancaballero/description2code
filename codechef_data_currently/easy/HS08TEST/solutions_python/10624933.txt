@@ -1,9 +1,0 @@
-withd, bal= raw_input().split()
-withd= int(withd)
-bal= float(bal)
-if withd % 5 != 0:
-    print bal
-elif withd + 0.5> bal:
-    print bal
-else:
-    print round(bal- withd-0.5 , 2)

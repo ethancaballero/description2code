@@ -1,6 +1,0 @@
-t = int(raw_input())
-for i in range(t):
-    n = int(raw_input())
-    result = 2
-    add = (n+1)*(n+2)/2 - 3;
-    print result+add

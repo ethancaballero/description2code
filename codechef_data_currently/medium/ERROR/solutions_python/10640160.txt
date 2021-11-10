@@ -1,7 +1,0 @@
-t=input()
-for i in range(0,t):
-	strn=raw_input()
-	if "010" in strn or "101" in strn:
-		print "Good"
-	else :
-		print "Bad"

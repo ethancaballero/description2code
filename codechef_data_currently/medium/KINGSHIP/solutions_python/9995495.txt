@@ -1,6 +1,0 @@
-for _ in xrange(input()):
-        n = input()
-        p = map(int, raw_input().strip().split())
-        p.sort()
-        min = p[0]
-        print sum([min*p[i] for i in range(1,n)])

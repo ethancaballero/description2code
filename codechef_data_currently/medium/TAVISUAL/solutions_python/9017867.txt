@@ -1,7 +1,0 @@
-for j in range(input()):
-	a,b,c=map(int,raw_input().split())
-	for i in range(c):
-		p,q=map(int,raw_input().split())
-		if b>=p and b<=q:
-			b=p+q-b
-	print b

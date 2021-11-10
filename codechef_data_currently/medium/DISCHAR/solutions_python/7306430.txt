@@ -1,8 +1,0 @@
-t = input()
-for test in xrange(t):
-    n = raw_input()
-    l = []
-    for letters in n:
-        if letters not in l:
-            l.append(letters)
-    print len(l)

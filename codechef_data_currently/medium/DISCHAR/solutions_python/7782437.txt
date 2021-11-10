@@ -1,5 +1,0 @@
-t=int(raw_input())
-for i in range(t):
-    s=raw_input()
-    tempset=set(s)
-    print len(tempset)

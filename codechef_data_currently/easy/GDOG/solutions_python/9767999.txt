@@ -1,6 +1,0 @@
-for i in range(int(raw_input())):
-    n,k=map(int,raw_input().split())
-    maxm=0
-    for i in range(1,k+1):
-        maxm=max(maxm,n%i)
-    print maxm

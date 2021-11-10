@@ -1,7 +1,0 @@
-n=input()
-n=n*(n+1)/2
-a=map(int,raw_input().split())
-if sum(a)==n:
-    print "YES"
-else:
-    print "NO"

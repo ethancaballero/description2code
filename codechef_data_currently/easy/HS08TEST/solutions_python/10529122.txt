@@ -1,6 +1,0 @@
-x,y=raw_input().strip().split()
-x=float(x)
-y=float(y)
-if x%5.00==0 and (x+0.50)<=y:
-    y=y-(x+0.50)
-print y

@@ -1,8 +1,0 @@
-n = int(raw_input())
-while n :
-	a = raw_input()
-	sum = 0
-	for i in range (len(a)) :
-		sum += int(a[i])
-	print sum
-	n -= 1

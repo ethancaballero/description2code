@@ -1,7 +1,0 @@
-b=int(raw_input())
-a=0
-while a<b:
-    i=raw_input()
-    sum=int(i[0])+int(i[len(i)-1])
-    print sum
-    a=a+1

@@ -1,6 +1,0 @@
-import math
-T= int(raw_input()) # number of cases
- 
-for i in range(T):
-    x,y=str(raw_input()).split() #reads size of base
-    print str(math.sqrt((int(y)*int(y))-(int(x)*int(x))))+" "+str(math.sqrt((int(y)*int(y))+(int(x)*int(x))))

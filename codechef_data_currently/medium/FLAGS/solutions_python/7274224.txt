@@ -1,5 +1,0 @@
-_=int(raw_input())
-while _>0:
-    n=int(raw_input())
-    print 2*n*(n-1)*(n-1) + n*(n-1)*(n-2) + 2*n*(n-1)*(n-2)*(n-2)
-    _-=1

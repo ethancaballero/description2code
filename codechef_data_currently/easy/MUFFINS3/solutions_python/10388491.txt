@@ -1,3 +1,0 @@
-cases = int(raw_input())
-for x in xrange(cases):
-	print (int(raw_input())/2) + 1

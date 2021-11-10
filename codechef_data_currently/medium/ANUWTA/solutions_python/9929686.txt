@@ -1,4 +1,0 @@
-tst = int(raw_input())
-for i in range(tst):
-	n = int(raw_input())
-	print n+n*(n+1)/2

@@ -1,7 +1,0 @@
-t = int(raw_input())
-for i in range(0,t):
-    split_array = raw_input().split(" ")
-    n = int(split_array[0])
-    k = int(split_array[1])
-    a = pow(k-1,n-1) * k
-    print a%1000000007

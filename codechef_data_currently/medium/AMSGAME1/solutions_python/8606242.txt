@@ -1,8 +1,0 @@
-from fractions import gcd
-for t in range(input()):
- n=int(raw_input())
- lst=map(int,raw_input().split())
- g=gcd(lst[0],lst[1])
- for i in range(2,n):
-  g=gcd(lst[i],g)
- print g

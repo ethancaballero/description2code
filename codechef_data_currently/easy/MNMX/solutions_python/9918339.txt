@@ -1,6 +1,0 @@
-t = input()
-for _ in xrange(t):
-    n = input()
-    array = map(int, raw_input().split())
-    m = min(array)
-    print (n - 1) * m

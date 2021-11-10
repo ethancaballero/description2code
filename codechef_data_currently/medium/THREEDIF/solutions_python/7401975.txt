@@ -1,4 +1,0 @@
-t=int(raw_input())
-for asd in range(t):
-	a,b,c=map(int,raw_input().split())
-	print (a*b*c-min(a,b)*c-min(b,c)*a-min(c,a)*b+2*min(a,b,c))%1000000007

@@ -1,7 +1,0 @@
-import math
-t=int(raw_input())
-for i in range(t):
-    n=int(raw_input())
-    a=int(bin(n)[2:])
-    ans=pow(pow(2,a,1000000007),2,1000000007)
-    print ans

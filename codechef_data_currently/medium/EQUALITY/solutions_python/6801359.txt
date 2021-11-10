@@ -1,9 +1,0 @@
-t=input()
-while t>0:
-    n=input()
-    a=map(int,raw_input().split())
-    x=sum(a)/(n-1)
-    for i in range(0,n):
-        print x-a[i],
-    print
-    t-=1

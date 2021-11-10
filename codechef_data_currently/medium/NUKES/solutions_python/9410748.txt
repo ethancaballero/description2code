@@ -1,5 +1,0 @@
-a, n, k = map(int, raw_input().split())
-n += 1
-for i in range(k):
-	print a%n
-	a = int(a/n)

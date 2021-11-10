@@ -1,7 +1,0 @@
-for t in range(input()):
-	s = raw_input().strip()
-	c = 0
-	for i in s:
-		if i != '4' and i != '7':
-			c+=1
-	print c

@@ -1,6 +1,0 @@
-# codeChef problem Code: ANUDTC
-for testcases in xrange( int( raw_input() ) ) :
-    N = int(raw_input() )
-    print 'y' if ( 360 % N == 0 ) else 'n', ' ', 
-    print 'y' if ( N < 361 ) else 'n', ' ',
-    print 'y' if ( ( (N * (N+1) ) / 2 ) < 361 ) else 'n'

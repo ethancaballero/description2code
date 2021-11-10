@@ -1,5 +1,0 @@
-d={'b':'BattleShip','B':'BattleShip','c':'Cruiser','C':'Cruiser','D':'Destroyer','d':'Destroyer','F':'Frigate','f':'Frigate'}
-t=eval(raw_input())
-for k in range(t):
-	h=raw_input()
-	print d[h]

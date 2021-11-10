@@ -1,6 +1,0 @@
-for i in range(int(raw_input())):
-    a=map(int,raw_input().split())
-    if a[0]<=1000:
-        print '%.6f' %(a[0]*a[1])
-    else:
-        print '%.6f' %((a[0]*a[1])*90.0/100)

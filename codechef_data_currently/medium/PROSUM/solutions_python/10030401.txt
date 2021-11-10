@@ -1,8 +1,0 @@
-for _ in xrange(input()):
-        n = input()
-        l = raw_input().strip().split()
-        o = l.count('1') + l.count('0')
-        t = l.count('2')
-        t = t*(t-1)/2
-        n -= o
-        print n*(n-1)/2 - t

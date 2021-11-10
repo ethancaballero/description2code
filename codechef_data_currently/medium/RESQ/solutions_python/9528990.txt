@@ -1,9 +1,0 @@
-test = input()
-from math import sqrt
-for t in range(test):
-	n = input()
-	m = int(sqrt(n))
-	while(n%m != 0):
-		m -= 1
-	print n/m-m;
-	

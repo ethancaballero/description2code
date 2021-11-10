@@ -1,9 +1,0 @@
-for _ in xrange(input()):
-    l = []
-    n = input()
-    s = raw_input()
-    l.append(s.count('R'))
-    l.append(s.count('G'))
-    l.append(s.count('B'))
-    l.remove(max(l))
-    print sum(l)

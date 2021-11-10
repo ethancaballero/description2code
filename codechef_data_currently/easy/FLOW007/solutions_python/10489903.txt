@@ -1,5 +1,0 @@
-t = int(raw_input())
-for x in range(t):
-	n = raw_input()
-	rev = n[::-1]
-	print int(rev) 

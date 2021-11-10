@@ -1,9 +1,0 @@
-t=input()
-for _ in xrange(t):
-	n=input()
-	a=map(int,raw_input().split())
-	m=min(a)
-	if m<2:
-		print "-1"
-	else:
-		print str(sum(a)-m+2)

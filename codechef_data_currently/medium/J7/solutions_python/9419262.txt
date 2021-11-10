@@ -1,8 +1,0 @@
-ts = input()
-for i in range(ts):
-	p, s = map(float, raw_input().split())
-	a, b = p/4.0, s/2.0
-	x = 9*a*b-2*a*a*a
-	y = 2*((a*a-3*b)**1.5)
-	print (x+y)/27
-	

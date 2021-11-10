@@ -1,3 +1,0 @@
-for i in range(int(raw_input())):
-    tra=str(raw_input()).split()
-    print int(tra[0])+int(tra[1])

@@ -1,6 +1,0 @@
-t = input()
-for i in range(t):
-     l=map(int,raw_input().split())
-     a=l[0]
-     b=l[1]
-     print a%b

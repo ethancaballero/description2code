@@ -1,8 +1,0 @@
-mod = 10**7 + 7
-n,m = [int(x) for x in raw_input().split()]
-v = [0 for i in range(m)]
-for _ in range(n):
-    row = [int (x) for x in raw_input().split()]
-    for i in range(m):
-        v[i] = (v[i]+row[i])%mod
-print reduce(lambda x,y:(x*y)%mod,v)

@@ -1,5 +1,0 @@
-test = int(raw_input().strip())
-while test:
-	ds,dt,d = map(float,raw_input().strip().split())
-	print max(0,d-ds-dt,ds-dt-d,dt-ds-d)
-	test-=1

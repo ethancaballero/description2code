@@ -1,8 +1,0 @@
-import sys
-t=int(sys.stdin.readline())
-for i in range(0,t):
-	n=int(sys.stdin.readline())
-	if n%4==1:
-		print "ALICE"
-	else:
-		print "BOB"

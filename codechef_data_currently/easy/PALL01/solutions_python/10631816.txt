@@ -1,7 +1,0 @@
-t= int(raw_input())
-for i in range(t):
-    x=str(raw_input())
-    if x==x[::-1]:
-        print "wins"
-    else:
-        print "losses" 

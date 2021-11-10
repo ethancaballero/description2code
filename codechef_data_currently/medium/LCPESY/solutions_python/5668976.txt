@@ -1,8 +1,0 @@
-for _ in range(int(raw_input())):
-  a,b = raw_input(), raw_input()
-  ans = 0
-  for j in [65, 97]:
-    for i in range(j, j+26):
-      current = chr(i)
-      ans+=min(a.count(current), b.count(current))
-  print ans + sum(min(a.count(chr(j+48)), b.count(chr(j+48))) for j in range(10))

@@ -1,9 +1,0 @@
-aaa=int(raw_input().strip())
-for asd in range(aaa):
-	t=int(raw_input().strip())
-	a=map(int,raw_input().strip().split())
-	z=a.count(0)
-	n=a.count(1)
-	x=a.count(2)
-	q=t-z-x-n
-	print q*x+(q*(q-1))/2

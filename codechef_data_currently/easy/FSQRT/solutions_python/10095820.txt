@@ -1,6 +1,0 @@
-tc = int(raw_input())
-while tc > 0:
-    tc = tc - 1
-    n = int(raw_input())
-    from math import sqrt
-    print int(sqrt(n))

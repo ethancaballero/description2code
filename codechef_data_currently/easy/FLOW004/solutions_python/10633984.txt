@@ -1,9 +1,0 @@
-t = int(input())
-
-while t:
-    sum = 0
-    a = int(input())
-    b = str(a)
-    sum = sum + int(b[0]) + int(b[len(b)-1])
-    print sum
-    t=t-1

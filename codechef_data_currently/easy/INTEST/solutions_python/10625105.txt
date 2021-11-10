@@ -1,9 +1,0 @@
-n, k= raw_input().split()
-n= int(n)
-k= int(k)
-flag= 0
-for i in range(n):
-    num = int(raw_input())
-    if num%k == 0:
-        flag= flag+1
-print flag

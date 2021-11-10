@@ -1,4 +1,0 @@
-t = int(raw_input())
-for i in xrange(t) :
-    a = int(raw_input().strip())
-    print a/2 + 1

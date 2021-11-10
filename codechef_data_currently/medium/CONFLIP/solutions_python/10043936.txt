@@ -1,7 +1,0 @@
-for _ in range(int(raw_input())):
-    for oo in range(int(raw_input())):
-        i, j, k = map(int, raw_input().split())
-        if j%2 ==0 or i == k:
-            print j / 2
-        else:
-            print j/2 +1

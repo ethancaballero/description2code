@@ -1,9 +1,0 @@
-t = int(raw_input())
-for case in range(t):
-    n = int(raw_input())
-    A = [int(x) for x in raw_input().split()]
-    mini = min(A)
-    ans = 0
-    for i in A:
-        ans += i - mini
-    print ans

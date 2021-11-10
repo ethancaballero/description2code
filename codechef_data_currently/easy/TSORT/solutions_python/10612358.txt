@@ -1,7 +1,0 @@
-t=int(raw_input())
-our_list=[]
-for i in range(t):
-    our_list.append(raw_input())
-our_list.sort(key=int)
-for i in range(t):
-    print our_list[i]

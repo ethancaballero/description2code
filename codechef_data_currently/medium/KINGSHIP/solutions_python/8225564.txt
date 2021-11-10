@@ -1,8 +1,0 @@
-import sys
-
-t = input()
-for k in range(t):
-	n = input()
-	p = map(int, sys.stdin.readline().split())
-	m = min(p)
-	print m*(sum(p)-m)

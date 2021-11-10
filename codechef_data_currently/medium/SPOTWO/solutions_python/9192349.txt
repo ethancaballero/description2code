@@ -1,9 +1,0 @@
-import sys
-t=input()
-while t>0:
-	n=input()
-	k=bin(n)
-	j=int(k[2:])
-	j=pow(4,j,1000000007)
-	print int(j)
-	t=t-1

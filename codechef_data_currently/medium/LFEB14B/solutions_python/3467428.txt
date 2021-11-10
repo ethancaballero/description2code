@@ -1,7 +1,0 @@
-r=raw_input;t=int(r())
-for w in range(t):
- s=r();a=map(int,r().split());m=0;c=0
- for x in a:
-  if x==m:c=c+1
-  elif x>m:m=x;c=1
- print (2**c-1)%(10**9+7)

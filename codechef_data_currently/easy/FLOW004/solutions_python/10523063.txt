@@ -1,9 +1,0 @@
-t=input()
-ans=[]
-a=''
-for x in range(t):
-    a=raw_input()
-    ans.append(int(a[0])+int(a[-1]))
-for x in range(t):
-    print ans[x]
-    

@@ -1,8 +1,0 @@
-import sys
-from collections import Counter
-l=sys.stdin.readlines()
-cnt=0
-for i in range(2,len(l),2):
-	a=map(int,l[i].split())
-	#print a
-	print ((2**a.count(max(a)))-1)%(10**9 +7)

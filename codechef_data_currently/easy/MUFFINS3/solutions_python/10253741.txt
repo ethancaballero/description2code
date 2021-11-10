@@ -1,6 +1,0 @@
-t=int(raw_input())
-while(t>0):
-	n=int(raw_input())
-	x=(n/2)+1
-	print(x)
-	t=t-1

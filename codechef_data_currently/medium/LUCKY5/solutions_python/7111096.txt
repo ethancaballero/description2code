@@ -1,8 +1,0 @@
-t=int(raw_input())
-while t:
-	t-=1
-	txt=str(raw_input()).strip()
-	l=len(txt)
-	F=txt.count('4')
-	S=txt.count('7')
-	print l-F-S 

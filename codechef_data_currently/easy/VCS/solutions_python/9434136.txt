@@ -1,7 +1,0 @@
-t = int(raw_input())
-for i in xrange(t):
-    n,m,k = map(int,raw_input().strip().split())
-    f = range(1,n+1)
-    uf = set(map(int,raw_input().strip().split()))
-    tf = set(map(int,raw_input().strip().split()))
-    print len(uf.intersection(tf)),n-len(uf.union(tf))

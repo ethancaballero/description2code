@@ -1,7 +1,0 @@
-t=int(input())
-while t :
-	a=raw_input().split(' ')
-	a=map(int,a)
-	a.sort()
-	print(a[1])
-	t=t-1

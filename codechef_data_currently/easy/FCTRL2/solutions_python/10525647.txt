@@ -1,8 +1,0 @@
-# cook your code here
-t=input()
-for x in range(t):
-    n=input()
-    fact=1
-    for y in range(n):
-        fact*=y+1;
-    print fact

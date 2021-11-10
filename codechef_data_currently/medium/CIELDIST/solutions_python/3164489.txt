@@ -1,8 +1,0 @@
-import sys
-def dist(t):
-	for i in xrange(t):
-		l = map(float,sys.stdin.readline().split())
-		s = sum(l)
-		m = max(l)
-		print max(0,2*m-s)
-dist(int(sys.stdin.readline()))

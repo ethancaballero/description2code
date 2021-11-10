@@ -1,5 +1,0 @@
-from fractions import gcd
-for t in range(int(raw_input())):
-    n,m=map(int,raw_input().split())
-    a=gcd(n,m)
-    print (n/a)*(m/a)

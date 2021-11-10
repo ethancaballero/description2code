@@ -1,4 +1,0 @@
-t = int(input())
-for x in range(t):
-    a = map(int,raw_input().split())
-    print max(a)," ",a[0] + a[1] 

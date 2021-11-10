@@ -1,9 +1,0 @@
-lis=map(int,raw_input().split())
-p=lis[0]-lis[1]
-q=str(p)
-q=list(q)
-for i in range(1,10):
-	if q[0]!=str(i):
-		q[0]=str(i)
-		break
-print ('').join(q)

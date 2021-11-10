@@ -1,4 +1,0 @@
-for i in range(int(raw_input())):
-    n=map(float,raw_input().split())
-    prob=n[0]/(n[1]+n[0])
-    print prob

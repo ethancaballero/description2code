@@ -1,6 +1,0 @@
-while 1 :
-	i = raw_input()
-	if i == '42' :
-		break
-	else :
-		print i

@@ -1,5 +1,0 @@
-for i in range(int(raw_input())):
-    q,p=map(int,raw_input().split())
-    if q>1000:
-        q*=0.9
-    print "%.6f"%(q*p)

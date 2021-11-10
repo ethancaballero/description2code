@@ -1,2 +1,0 @@
-for i in range(int(raw_input())):
-    print sorted(map(int, str(raw_input()).split()))[1]

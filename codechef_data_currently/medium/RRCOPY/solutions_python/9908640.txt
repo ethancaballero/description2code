@@ -1,5 +1,0 @@
-for _ in range(int(raw_input())):
-    n=int(raw_input())
-    myset=set(map(int,raw_input().split()))
-    
-    print len(myset)    

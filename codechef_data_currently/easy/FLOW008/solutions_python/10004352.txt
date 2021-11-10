@@ -1,6 +1,0 @@
-for x in range(0,input()):
-	number = input()
-	if number < 10 :
-		print("What an obedient servant you are!")
-	else:
-		print("-1") 

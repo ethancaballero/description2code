@@ -1,8 +1,0 @@
-t =int(raw_input())
-l=[]
-for i in range(t):
-    n=int(raw_input())
-    l.append(n)
-l.sort()
-for i in l:
-    print i

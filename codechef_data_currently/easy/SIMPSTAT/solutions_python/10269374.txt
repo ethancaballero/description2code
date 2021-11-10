@@ -1,5 +1,0 @@
-for t in range(int(raw_input())):
-    n,k=map(int,raw_input().split())
-    arr=sorted(map(int,raw_input().split()))
-    ans=sum(arr[k:n-k])/float(n-2*k)
-    print "%.6f"%ans

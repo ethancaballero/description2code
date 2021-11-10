@@ -1,9 +1,0 @@
-def Factorial(n):
-	ans = n
-	for x in range(2,n):
-		ans *= x
-	return ans
- 
-T = raw_input()
-for j in range(0,int(T)):
-	print Factorial(int(raw_input()))

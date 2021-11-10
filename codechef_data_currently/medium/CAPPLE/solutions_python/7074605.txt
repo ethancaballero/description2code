@@ -1,5 +1,0 @@
-import sys
-
-for __ in range(input()) :
-    n = input()
-    print len(set(map(int,sys.stdin.readline().split())))

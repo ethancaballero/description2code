@@ -1,7 +1,0 @@
-for i in range(int(raw_input())):
-    x = map(int,raw_input().split())
-    y = map(int,raw_input().split())
-    z = map(int,raw_input().split())
-    t =[g for g in y  if g in z] 
-    o = y + [r for r in z if r not in y ]
-    print len(t) , x[0] - len(o)

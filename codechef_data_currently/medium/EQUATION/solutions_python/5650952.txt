@@ -1,9 +1,0 @@
-t=int(raw_input())
-f = lambda z:((z+1)*(z+2)*(z+3))/6 if z>=0 else 0
-while t:
-    n,a,b,c=map(int, raw_input().split())
-    a+=1
-    b+=1
-    c+=1
-    print f(n)-f(n-a)-f(n-b)-f(n-c)+f(n-a-b)+f(n-a-c)-f(n-a-b-c)+f(n-b-c)
-    t-=1

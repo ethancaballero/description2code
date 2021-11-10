@@ -1,9 +1,0 @@
-from sys import stdin
-
-for trial in xrange(int(stdin.readline())):
-    Ds,Dt,D = map(int,stdin.readline().split())
-    if Ds+Dt<=D: print D-Ds-Dt
-    else:
-        diff = abs(Dt-Ds)
-        if diff<=D: print 0
-        else: print diff-D

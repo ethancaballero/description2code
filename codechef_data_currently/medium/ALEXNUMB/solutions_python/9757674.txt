@@ -1,5 +1,0 @@
-#the elements don't matter <VigzMv/>
-for i in range(int(raw_input())):
-    n=int(raw_input())
-    N=raw_input()
-    print n*(n-1)/2 

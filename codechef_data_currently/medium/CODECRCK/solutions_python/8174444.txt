@@ -1,6 +1,0 @@
-# 5th question in long challenge. 5 line code :D
-i,k,s=map(int, raw_input().split()) 
-a,b=map(int, raw_input().split())
-k-=i
-if k%2:print 2 ** (2*(k-1)-s+1)*(2**0.5*a+6**0.5*b)
-else:print 2**(2*k-s)*(a+b);

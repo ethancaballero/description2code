@@ -1,7 +1,0 @@
-t=input()
-for i in range(0,t):
-    x=input()
-    if x%4==1:
-        print 'ALICE'
-    else:
-        print 'BOB'

@@ -1,5 +1,0 @@
-T= int(raw_input()) # number of cases
- 
-for i in range(T):
-    x=int(raw_input()) # number of cases
-    print (x/100)+(x%100/50)+(x%100%50/10)+(x%100%50%10/5)+(x%100%50%10%5/2+x%100%50%10%5%2)

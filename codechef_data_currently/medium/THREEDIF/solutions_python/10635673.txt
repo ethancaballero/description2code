@@ -1,6 +1,0 @@
-T = int(raw_input())
-M = int(1e9) + 7
-while T:
-    L = [int(i) for i in raw_input().split()]; L.sort()
-    print ((((L[0] % M) * ((L[1] - 1) % M)) % M) % M * ((L[2]-2) % M)) % M
-    T -= 1

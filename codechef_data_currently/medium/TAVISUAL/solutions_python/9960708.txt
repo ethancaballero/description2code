@@ -1,7 +1,0 @@
-for _ in range(input()):
-        N,C,Q = map(int, raw_input().split())
-        for _ in range(Q):
-                L,R = map(int, raw_input().split())
-                if C <= R and L <= C:
-                        C = L + R - C
-	print C

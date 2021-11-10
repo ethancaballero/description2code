@@ -1,4 +1,0 @@
-test_case = int(raw_input())
-for t in range(test_case):
-	n = raw_input().strip()
-	print len(n) - n.count('4') - n.count('7')

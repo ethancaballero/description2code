@@ -1,9 +1,0 @@
-T = int(raw_input())
-N = []
-for i in range(0, T):
-    N.append(int(raw_input()))
-for i in range(0, T):
-    if N[i]>0:
-        R = str(N[i])[::-1]
-        N1 =(int (R))
-        print N1

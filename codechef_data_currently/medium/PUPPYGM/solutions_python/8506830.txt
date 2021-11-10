@@ -1,8 +1,0 @@
-#!/usr/bin/python
-
-for _ in xrange(int(raw_input())):
-	a, b = map(int, raw_input().split())
-	if a%2 and b%2:
-		print 'Vanka'
-	else:
-		print 'Tuzik'

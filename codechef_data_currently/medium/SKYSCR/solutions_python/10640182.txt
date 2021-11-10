@@ -1,5 +1,0 @@
-t = int(raw_input())
-while(t):
-    s = map(int, raw_input().strip().split(" "))
-    print abs(s[0]-s[1])
-    t -= 1

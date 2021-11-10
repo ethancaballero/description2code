@@ -1,4 +1,0 @@
-t=input()
-for i in range(t):
-     a=raw_input()
-     print int(a[0])+int(a[::-1][0])

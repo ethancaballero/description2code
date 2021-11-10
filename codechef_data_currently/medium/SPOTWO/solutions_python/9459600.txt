@@ -1,4 +1,0 @@
-T = int(raw_input())
-for u in range(T):
-    N = int(raw_input())
-    print(pow(pow(2, int(bin(N)[2:]), 1000000007), 2, 1000000007))

@@ -1,7 +1,0 @@
-a=int(raw_input())
-for i in range(a):
-    b=int(raw_input())
-    c=raw_input()
-    d=c.count("1")
-    print d + d*(d-1)/2
-    

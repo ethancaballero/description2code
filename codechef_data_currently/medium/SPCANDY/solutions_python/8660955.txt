@@ -1,8 +1,0 @@
-for _ in range(input()):
-    n,k=(int(x) for x in raw_input().split())
-    if(k==0):
-        print '0',n
-    else:
-        c=n/k
-        d=n%k
-        print c,d

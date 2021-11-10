@@ -1,9 +1,0 @@
-for t in range(int(raw_input())):
-    n=int(raw_input())
-    a=map(int,raw_input().split())
-    c=len(a)
-    for i in range(n):
-        for j in range(i+2,n+1):
-            if a[i:j]==sorted(a[i:j]):
-                c+=1
-    print c

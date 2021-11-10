@@ -1,7 +1,0 @@
-t = int(raw_input())
-A = []
-for i in range(0,t):
-	A += [int(raw_input())]
-A.sort()
-for x in A:
-	print x

@@ -1,6 +1,0 @@
-for t in xrange(int(raw_input())):
-    n=int(raw_input())
-    
-    b=int(bin(n)[2:])*2
-    
-    print pow(2,b,1000000007)

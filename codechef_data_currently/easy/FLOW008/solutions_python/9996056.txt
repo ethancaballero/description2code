@@ -1,5 +1,0 @@
-T= int(raw_input()) # number of cases
- 
-for i in range(T):
-    print ("-1","What an obedient servant you are!")[int(raw_input())<10] #reads size of base
-    #print str(bin(B%2048))[2:].count('1')+B/2048

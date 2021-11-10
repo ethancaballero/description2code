@@ -1,7 +1,0 @@
-a=int(raw_input())
-r=a%6
-if r==0 or r==1 or r==3 or r==6 :
-	print "yes"
-else :
-	print "no"
-	

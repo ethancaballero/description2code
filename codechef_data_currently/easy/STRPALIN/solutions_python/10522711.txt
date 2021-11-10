@@ -1,8 +1,0 @@
-T = input()
-for i in xrange(T):
-	str1 = set(raw_input())
-	str2 = set(raw_input())
-	if len(str1 - str2) != len(str1):
-		print "Yes"
-	else:
-		print "No"

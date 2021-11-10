@@ -1,9 +1,0 @@
-test_case = int(raw_input())
-for t in range(test_case):
-	candle, k = map(int, raw_input().split())
-	if candle == 0:
-		print 0, 0
-	elif k == 0:
-		print 0, candle
-	else:
-		print candle//k , candle%k

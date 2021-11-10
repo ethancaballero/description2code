@@ -1,4 +1,0 @@
-t = input()
-for _ in xrange(t):
-    n, k = map(int, raw_input().split())
-    print max([n % i for i in xrange(1, k + 1)])

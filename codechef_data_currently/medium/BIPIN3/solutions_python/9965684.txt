@@ -1,7 +1,0 @@
-t=int(raw_input())
-mod = 1000000007
-while t>0:
-    t-=1
-    n,k=[int(a) for a in raw_input().split()]
-    ans = (k*pow(k-1,n-1,mod))%mod
-    print ans

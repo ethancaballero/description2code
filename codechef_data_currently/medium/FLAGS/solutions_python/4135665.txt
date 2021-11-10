@@ -1,8 +1,0 @@
-t=int(input())
-while(t>0):
-	n=int(raw_input())
-	s=2*n*(n-1)*(n-1)+n*(n-1)*(n-2)+2*n*(n-1)*(n-2)*(n-2)
-#	if(n==2):
-#		s-=n*(n-1)*(n-1)
-	print s
-	t-=1

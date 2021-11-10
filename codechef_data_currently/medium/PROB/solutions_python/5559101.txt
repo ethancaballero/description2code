@@ -1,4 +1,0 @@
-N = int(raw_input())
-for i in range(N):
-	T=map(float,raw_input().split(" "))
-	print T[0]/(T[0]+T[1])

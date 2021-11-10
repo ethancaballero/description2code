@@ -1,7 +1,0 @@
-test = input()
-for t in xrange(test):
-	n, k = map(int, raw_input().split())
-	if(k==0):	
-		print 0, n
-	else:
-		print int(n/k), n%k

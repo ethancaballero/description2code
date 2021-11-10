@@ -1,9 +1,0 @@
-for _ in range(int(raw_input())):
-    n = raw_input().strip()
-    l = len(n)
-    c = l / 2 if l % 2 == 0 else (l - 1) / 2
-    a, b = sorted(n[:c]), sorted(n[c:] if l % 2 == 0 else n[c + 1:])
-    if a == b:
-        print "YES"
-    else:
-        print "NO" 

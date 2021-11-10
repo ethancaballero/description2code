@@ -1,8 +1,0 @@
-test = input()
-for t in range(test):
-	n = input()
-	s = ''.join([chr(ord('a')+i%26) for i in range(n%25+1)])
-	if(n%25==0):
-	    s = ''
-	print s[::-1]+("abcdefghijklmnopqrstuvwxyz"[::-1])*(int(n/25))
-	

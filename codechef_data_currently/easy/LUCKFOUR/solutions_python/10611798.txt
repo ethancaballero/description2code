@@ -1,9 +1,0 @@
-T=int(input())
-
-for i in range(T):
-    n=int(input())
-    count=0
-    for i in str(n):
-        if i=='4':
-            count+=1
-    print count

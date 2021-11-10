@@ -1,8 +1,0 @@
-testcases = int(raw_input())
-for i in range(testcases):
-    totalsongs=int(raw_input())
-    songs = map(int,raw_input().split())
-    uncle=int(raw_input())
-    unclejohny=songs[uncle-1]
-    songs.sort()
-    print songs.index(unclejohny)+1

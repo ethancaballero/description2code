@@ -1,7 +1,0 @@
-t=input()
-while t:
-	t-=1
-	n=input()
-	a = map(int,raw_input().split())
-	a.sort()
-	print a[0]+a[1]

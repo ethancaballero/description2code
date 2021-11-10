@@ -1,8 +1,0 @@
-a = int(raw_input())
-while a>0:
-	a -= 1
-	r = raw_input().split()
-	b,c = r
-	e = int(b)
-	f = int(c)
-	print str(e+f-1)

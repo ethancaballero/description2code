@@ -1,6 +1,0 @@
-cases = int(raw_input())
-
-for case in xrange(cases):
-    a = set(raw_input().strip())
-    b = set(raw_input().strip())
-    print "Yes" if a&b else "No"

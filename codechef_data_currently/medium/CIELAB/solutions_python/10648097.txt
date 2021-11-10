@@ -1,9 +1,0 @@
-x = raw_input()
-t = []
-t = map(int,x.split())
-diff = t[0]-t[1]
-if diff%10==9:
-    diff-=1
-else:
-    diff+=1
-print diff

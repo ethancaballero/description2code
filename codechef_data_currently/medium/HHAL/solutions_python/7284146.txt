@@ -1,7 +1,0 @@
-tc = int(raw_input())
-for i in xrange(tc):
-	s = raw_input()
-	if s[::-1]==s:
-		print "1"
-	else:
-		print "2"

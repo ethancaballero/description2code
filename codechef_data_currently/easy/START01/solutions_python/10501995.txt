@@ -1,3 +1,0 @@
-a=int(input());
-
-print('%i'%a);
