@@ -8,6 +8,7 @@ https://docs.google.com/uc?id=0Bz3fihKG133ceWNFQTQ5S0xhZUk&export=download
 Story of dataset creation:
 https://github.com/openai/requests-for-research/pull/5
 
+Very messy code that was used for scraping codechef, codeforces, hackerearth, & topcoder in 2016 is located in `description2code/scrapers` folder.
 
 # Notes on usage of dataset that download link contains
 
