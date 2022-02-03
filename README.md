@@ -1,6 +1,7 @@
 # Description2Code dataset and (very messy) scrapers
 
 Description2Code is dataset of ~7764 programming challenges scraped from CodeChef, Codeforces, & Hackerearth in 2016.
+Each programing challenge in this dataset provides a problem description and multiple solutions and multiple test cases.
 
 Link to download dataset:
 https://www.dropbox.com/s/zwj6u4caehf54s0/description2code_current.zip
