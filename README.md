@@ -15,7 +15,7 @@ Very messy code that was used for scraping Codechef, Codeforces, Hackerearth, & 
 I don't "own" the data scraped. CodeChef and CodeForces and HackerEarth or their users or something technically own it (or maybe they don't; idk). I don't know what the legal_rights/data_licenses of CodeChef and CodeForces and HackerEarth and their users are. I'm fine with you using this dataset and scraping code however you want.
 
 ## Citation
-**⚠️ If you find this dataset (or scrapers) useful, please cite us in your work ⚠️; BibTex to use:**
+**If you find this dataset (or scrapers) useful, please cite us in your work ; BibTex to use:**
 ```
 @misc{Caballero_Description2Code_Dataset_2016,
 author = {Caballero, Ethan and OpenAI, . and Sutskever, Ilya},
